@@ -1,49 +1,37 @@
 ---
-id: 587d7790367417b2b2512aaf
-title: Make Links Navigable with HTML Access Keys
+id: 587d7788367417b2b2512aa3
+title: Make Screen Reader Navigation Easier with the footer Landmark
 challengeType: 0
-videoUrl: 'https://scrimba.com/c/cQvmaTp'
-forumTopicId: 301021
+videoUrl: 'https://scrimba.com/c/crVrDh8'
+forumTopicId: 301022
 ---
 
 # --description--
 
-HTML offers the `accesskey` attribute to specify a shortcut key to activate or bring focus to an element. This can make navigation more efficient for keyboard-only users.
-
-HTML5 allows this attribute to be used on any element, but it's particularly useful when it's used with interactive ones. This includes links, buttons, and form controls.
-
-Here's an example:
-
-`<button accesskey="b">Important Button</button>`
+Similar to `header` and `nav`, the `footer` element has a built-in landmark feature that allows assistive devices to quickly navigate to it. It's primarily used to contain copyright information or links to related documents that usually sit at the bottom of a page.
 
 # --instructions--
 
-Camper Cat wants the links around the two blog article titles to have keyboard shortcuts so his site's users can quickly navigate to the full story. Add an `accesskey` attribute to both links and set the first one to "g" (for Garfield) and the second one to "c" (for Chuck Norris).
+Camper Cat's training page is making good progress. Change the `div` he used to wrap his copyright information at the bottom of the page to a `footer` element.
 
 # --hints--
 
-Your code should add an `accesskey` attribute to the `a` tag with the `id` of "first".
+Your code should have one `footer` tag.
 
 ```js
-assert($('#first').attr('accesskey'));
+assert($('footer').length == 1);
 ```
 
-Your code should add an `accesskey` attribute to the `a` tag with the `id` of "second".
+Your code should not have any `div` tags.
 
 ```js
-assert($('#second').attr('accesskey'));
+assert($('div').length == 0);
 ```
 
-Your code should set the `accesskey` attribute on the `a` tag with the `id` of "first" to "g". Note that case matters.
+Your code should have an opening and closing `footer` tag.
 
 ```js
-assert($('#first').attr('accesskey') == 'g');
-```
-
-Your code should set the `accesskey` attribute on the `a` tag with the `id` of "second" to "c". Note that case matters.
-
-```js
-assert($('#second').attr('accesskey') == 'c');
+assert(code.match(/<footer>\s*&copy; 2018 Camper Cat\s*<\/footer>/g));
 ```
 
 # --seed--
@@ -53,25 +41,37 @@ assert($('#second').attr('accesskey') == 'c');
 ```html
 <body>
   <header>
-    <h1>Deep Thoughts with Master Camper Cat</h1>
+    <h1>Training</h1>
+    <nav>
+      <ul>
+        <li><a href="#stealth">Stealth &amp; Agility</a></li>
+        <li><a href="#combat">Combat</a></li>
+        <li><a href="#weapons">Weapons</a></li>
+      </ul>
+    </nav>
   </header>
-  <article>
+  <main>
+    <section id="stealth">
+      <h2>Stealth &amp; Agility Training</h2>
+      <article><h3>Climb foliage quickly using a minimum spanning tree approach</h3></article>
+      <article><h3>No training is NP-complete without parkour</h3></article>
+    </section>
+    <section id="combat">
+      <h2>Combat Training</h2>
+      <article><h3>Dispatch multiple enemies with multithreaded tactics</h3></article>
+      <article><h3>Goodbye world: 5 proven ways to knock out an opponent</h3></article>
+    </section>
+    <section id="weapons">
+      <h2>Weapons Training</h2>
+      <article><h3>Swords: the best tool to literally divide and conquer</h3></article>
+      <article><h3>Breadth-first or depth-first in multi-weapon training?</h3></article>
+    </section>
+  </main>
 
 
-    <h2><a id="first" href="#">The Garfield Files: Lasagna as Training Fuel?</a></h2>
+  <div>&copy; 2018 Camper Cat</div>
 
 
-    <p>The internet is littered with varying opinions on nutritional paradigms, from catnip paleo to hairball cleanses. But let's turn our attention to an often overlooked fitness fuel, and examine the protein-carb-NOM trifecta that is lasagna...</p>
-  </article>
-  <article>
-
-
-    <h2><a id="second" href="#">Is Chuck Norris a Cat Person?</a></h2>
-
-
-    <p>Chuck Norris is widely regarded as the premier martial artist on the planet, and it's a complete coincidence anyone who disagrees with this fact mysteriously disappears soon after. But the real question is, is he a cat person?...</p>
-  </article>
-  <footer>&copy; 2018 Camper Cat</footer>
 </body>
 ```
 
@@ -80,24 +80,36 @@ assert($('#second').attr('accesskey') == 'c');
 ```html
 <body>
   <header>
-    <h1>Deep Thoughts with Master Camper Cat</h1>
+    <h1>Training</h1>
+    <nav>
+      <ul>
+        <li><a href="#stealth">Stealth &amp; Agility</a></li>
+        <li><a href="#combat">Combat</a></li>
+        <li><a href="#weapons">Weapons</a></li>
+      </ul>
+    </nav>
   </header>
-  <article>
+  <main>
+    <section id="stealth">
+      <h2>Stealth &amp; Agility Training</h2>
+      <article><h3>Climb foliage quickly using a minimum spanning tree approach</h3></article>
+      <article><h3>No training is NP-complete without parkour</h3></article>
+    </section>
+    <section id="combat">
+      <h2>Combat Training</h2>
+      <article><h3>Dispatch multiple enemies with multithreaded tactics</h3></article>
+      <article><h3>Goodbye world: 5 proven ways to knock out an opponent</h3></article>
+    </section>
+    <section id="weapons">
+      <h2>Weapons Training</h2>
+      <article><h3>Swords: the best tool to literally divide and conquer</h3></article>
+      <article><h3>Breadth-first or depth-first in multi-weapon training?</h3></article>
+    </section>
+  </main>
 
 
-    <h2><a id="first" accesskey="g" href="#">The Garfield Files: Lasagna as Training Fuel?</a></h2>
-
-
-    <p>The internet is littered with varying opinions on nutritional paradigms, from catnip paleo to hairball cleanses. But let's turn our attention to an often overlooked fitness fuel, and examine the protein-carb-NOM trifecta that is lasagna...</p>
-  </article>
-  <article>
-
-
-    <h2><a id="second" accesskey="c" href="#">Is Chuck Norris a Cat Person?</a></h2>
-
-
-    <p>Chuck Norris is widely regarded as the premier martial artist on the planet, and it's a complete coincidence anyone who disagrees with this fact mysteriously disappears soon after. But the real question is, is he a cat person?...</p>
-  </article>
   <footer>&copy; 2018 Camper Cat</footer>
+
+
 </body>
 ```
