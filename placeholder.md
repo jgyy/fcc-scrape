@@ -1,25 +1,35 @@
 ---
-id: 587d7788367417b2b2512aa3
-title: Make Screen Reader Navigation Easier with the footer Landmark
+id: 587d7787367417b2b2512aa1
+title: Make Screen Reader Navigation Easier with the header Landmark
 challengeType: 0
-videoUrl: 'https://scrimba.com/c/crVrDh8'
-forumTopicId: 301022
+videoUrl: 'https://scrimba.com/c/cB76vtv'
+forumTopicId: 301023
 ---
 
 # --description--
 
-Similar to `header` and `nav`, the `footer` element has a built-in landmark feature that allows assistive devices to quickly navigate to it. It's primarily used to contain copyright information or links to related documents that usually sit at the bottom of a page.
+The next HTML5 element that adds semantic meaning and improves accessibility is the `header` tag. It's used to wrap introductory information or navigation links for its parent tag and works well around content that's repeated at the top on multiple pages.
+
+`header` shares the embedded landmark feature you saw with `main`, allowing assistive technologies to quickly navigate to that content.
+
+**Note:** The `header` is meant for use in the `body` tag of your HTML document. This is different than the `head` element, which contains the page's title, meta information, etc.
 
 # --instructions--
 
-Camper Cat's training page is making good progress. Change the `div` he used to wrap his copyright information at the bottom of the page to a `footer` element.
+Camper Cat is writing some great articles about ninja training, and wants to add a page for them to his site. Change the top `div` that currently contains the `h1` to a `header` tag instead.
 
 # --hints--
 
-Your code should have one `footer` tag.
+Your code should have one `header` tag.
 
 ```js
-assert($('footer').length == 1);
+assert($('header').length == 1);
+```
+
+Your `header` tags should wrap around the `h1`.
+
+```js
+assert($('header').children('h1').length == 1);
 ```
 
 Your code should not have any `div` tags.
@@ -28,10 +38,13 @@ Your code should not have any `div` tags.
 assert($('div').length == 0);
 ```
 
-Your code should have an opening and closing `footer` tag.
+Your `header` element should have a closing tag.
 
 ```js
-assert(code.match(/<footer>\s*&copy; 2018 Camper Cat\s*<\/footer>/g));
+assert(
+  code.match(/<\/header>/g) &&
+    code.match(/<\/header>/g).length === code.match(/<header>/g).length
+);
 ```
 
 # --seed--
@@ -40,16 +53,12 @@ assert(code.match(/<footer>\s*&copy; 2018 Camper Cat\s*<\/footer>/g));
 
 ```html
 <body>
-  <header>
-    <h1>Training</h1>
-    <nav>
-      <ul>
-        <li><a href="#stealth">Stealth &amp; Agility</a></li>
-        <li><a href="#combat">Combat</a></li>
-        <li><a href="#weapons">Weapons</a></li>
-      </ul>
-    </nav>
-  </header>
+
+  <div>
+    <h1>Training with Camper Cat</h1>
+  </div>
+
+
   <main>
     <section id="stealth">
       <h2>Stealth &amp; Agility Training</h2>
@@ -67,11 +76,6 @@ assert(code.match(/<footer>\s*&copy; 2018 Camper Cat\s*<\/footer>/g));
       <article><h3>Breadth-first or depth-first in multi-weapon training?</h3></article>
     </section>
   </main>
-
-
-  <div>&copy; 2018 Camper Cat</div>
-
-
 </body>
 ```
 
@@ -79,16 +83,12 @@ assert(code.match(/<footer>\s*&copy; 2018 Camper Cat\s*<\/footer>/g));
 
 ```html
 <body>
+
   <header>
-    <h1>Training</h1>
-    <nav>
-      <ul>
-        <li><a href="#stealth">Stealth &amp; Agility</a></li>
-        <li><a href="#combat">Combat</a></li>
-        <li><a href="#weapons">Weapons</a></li>
-      </ul>
-    </nav>
+    <h1>Training with Camper Cat</h1>
   </header>
+
+
   <main>
     <section id="stealth">
       <h2>Stealth &amp; Agility Training</h2>
@@ -106,10 +106,5 @@ assert(code.match(/<footer>\s*&copy; 2018 Camper Cat\s*<\/footer>/g));
       <article><h3>Breadth-first or depth-first in multi-weapon training?</h3></article>
     </section>
   </main>
-
-
-  <footer>&copy; 2018 Camper Cat</footer>
-
-
 </body>
 ```
