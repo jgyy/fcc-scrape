@@ -1,43 +1,37 @@
 ---
-id: 587d78a4367417b2b2512ad3
-title: Adjust the Color of Various Elements to Complementary Colors
+id: 587d7791367417b2b2512ab5
+title: Adjust the Height of an Element Using the height Property
 challengeType: 0
-videoUrl: 'https://scrimba.com/c/cWmPpud'
-forumTopicId: 301033
+videoUrl: 'https://scrimba.com/c/cEDaDTN'
+forumTopicId: 301034
 ---
 
 # --description--
 
-The Complementary Colors challenge showed that opposite colors on the color wheel can make each other appear more vibrant when placed side-by-side. However, the strong visual contrast can be jarring if it's overused on a website, and can sometimes make text harder to read if it's placed on a complementary-colored background. In practice, one of the colors is usually dominant and the complement is used to bring visual attention to certain content on the page.
+You can specify the height of an element using the `height` property in CSS, similar to the `width` property. Here's an example that changes the height of an image to 20px:
+
+```css
+img {
+  height: 20px;
+}
+```
 
 # --instructions--
 
-This page will use a shade of teal (`#09A7A1`) as the dominant color, and its orange (`#FF790E`) complement to visually highlight the sign-up buttons. Change the `background-color` of both the `header` and `footer` from black to the teal color. Then change the `h2` text `color` to teal as well. Finally, change the `background-color` of the `button` to the orange color.
+Add a `height` property to the `h4` tag and set it to 25px.
+
+**Note:** You may need to be at 100% zoom to pass the test on this challenge.
 
 # --hints--
 
-The `header` element should have a `background-color` of #09A7A1.
+Your code should change the `h4` `height` property to a value of 25 pixels.
 
 ```js
-assert($('header').css('background-color') == 'rgb(9, 167, 161)');
-```
-
-The `footer` element should have a `background-color` of #09A7A1.
-
-```js
-assert($('footer').css('background-color') == 'rgb(9, 167, 161)');
-```
-
-The `h2` element should have a `color` of #09A7A1.
-
-```js
-assert($('h2').css('color') == 'rgb(9, 167, 161)');
-```
-
-The `button` element should have a `background-color` of #FF790E.
-
-```js
-assert($('button').css('background-color') == 'rgb(255, 121, 14)');
+assert(
+  Math.round(document.querySelector('h4').getBoundingClientRect().height) ===
+    25 &&
+    /h4{\S*height:25px(;\S*}|})/.test($('style').text().replace(/\s/g, ''))
+);
 ```
 
 # --seed--
@@ -46,84 +40,78 @@ assert($('button').css('background-color') == 'rgb(255, 121, 14)');
 
 ```html
 <style>
-  body {
-    background-color: white;
+  h4 {
+    text-align: center;
+
   }
-  header {
-    background-color: black;
-    color: white;
-    padding: 0.25em;
+  p {
+    text-align: justify;
   }
-  h2 {
-    color: black;
+  .links {
+    margin-right: 20px;
+    text-align: left;
   }
-  button {
-    background-color: white;
+  .fullCard {
+    width: 245px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 10px 5px;
+    padding: 4px;
   }
-  footer {
-    background-color: black;
-    color: white;
-    padding: 0.5em;
+  .cardContent {
+    padding: 10px;
   }
 </style>
-<header>
-  <h1>Cooking with FCC!</h1>
-</header>
-<main>
-  <article>
-    <h2>Machine Learning in the Kitchen</h2>
-    <p>Join this two day workshop that walks through how to implement cutting-edge snack-getting algorithms with a command line interface. Coding usually involves writing exact instructions, but sometimes you need your computer to execute flexible commands, like <code>fetch Pringles</code>.</p>
-    <button>Sign Up</button>
-  </article>
-  <article>
-    <h2>Bisection Vegetable Chopping</h2>
-    <p>This week-long retreat will level-up your coding ninja skills to actual ninja skills. No longer is the humble bisection search limited to sorted arrays or coding interview questions, applying its concepts in the kitchen will have you chopping carrots in O(log n) time before you know it.</p>
-    <button>Sign Up</button>
-  </article>
-</main>
-<br>
-<footer>&copy; 2018 FCC Kitchen</footer>
+<div class="fullCard">
+  <div class="cardContent">
+    <div class="cardText">
+      <h4>Google</h4>
+      <p>Google was founded by Larry Page and Sergey Brin while they were Ph.D. students at Stanford University.</p>
+    </div>
+    <div class="cardLinks">
+      <a href="https://en.wikipedia.org/wiki/Larry_Page" target="_blank" class="links">Larry Page</a>
+      <a href="https://en.wikipedia.org/wiki/Sergey_Brin" target="_blank" class="links">Sergey Brin</a>
+    </div>
+  </div>
+</div>
 ```
 
 # --solutions--
 
 ```html
 <style>
-  body {
-    background-color: white;
+  h4 {
+    text-align: center;
+    height: 25px;
   }
-  header {
-    background-color: #09A7A1;
-    color: white;
-    padding: 0.25em;
+  p {
+    text-align: justify;
   }
-  h2 {
-    color: #09A7A1;
+  .links {
+    margin-right: 20px;
+    text-align: left;
   }
-  button {
-    background-color: #FF790E;
+  .fullCard {
+    width: 245px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 10px 5px;
+    padding: 4px;
   }
-  footer {
-    background-color: #09A7A1;
-    color: white;
-    padding: 0.5em;
+  .cardContent {
+    padding: 10px;
   }
 </style>
-<header>
-  <h1>Cooking with FCC!</h1>
-</header>
-<main>
-  <article>
-    <h2>Machine Learning in the Kitchen</h2>
-    <p>Join this two day workshop that walks through how to implement cutting-edge snack-getting algorithms with a command line interface. Coding usually involves writing exact instructions, but sometimes you need your computer to execute flexible commands, like <code>fetch Pringles</code>.</p>
-    <button>Sign Up</button>
-  </article>
-  <article>
-    <h2>Bisection Vegetable Chopping</h2>
-    <p>This week-long retreat will level-up your coding ninja skills to actual ninja skills. No longer is the humble bisection search limited to sorted arrays or coding interview questions, applying its concepts in the kitchen will have you chopping carrots in O(log n) time before you know it.</p>
-    <button>Sign Up</button>
-  </article>
-</main>
-<br>
-<footer>&copy; 2018 FCC Kitchen</footer>
+<div class="fullCard">
+  <div class="cardContent">
+    <div class="cardText">
+      <h4>Google</h4>
+      <p>Google was founded by Larry Page and Sergey Brin while they were Ph.D. students at Stanford University.</p>
+    </div>
+    <div class="cardLinks">
+      <a href="https://en.wikipedia.org/wiki/Larry_Page" target="_blank" class="links">Larry Page</a>
+      <a href="https://en.wikipedia.org/wiki/Sergey_Brin" target="_blank" class="links">Sergey Brin</a>
+    </div>
+  </div>
+</div>
 ```
