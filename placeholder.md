@@ -1,129 +1,91 @@
 ---
-id: 587d778c367417b2b2512aa9
-title: Standardize Times with the HTML5 datetime Attribute
+id: 587d774d367417b2b2512a9e
+title: Use Headings to Show Hierarchical Relationships of Content
 challengeType: 0
-videoUrl: 'https://scrimba.com/c/cmzMgtz'
-forumTopicId: 301025
+videoUrl: 'https://scrimba.com/c/cqVEktm'
+forumTopicId: 301026
 ---
 
 # --description--
 
-Continuing with the date theme, HTML5 also introduced the `time` element along with a `datetime` attribute to standardize times. This is an inline element that can wrap a date or time on a page. A valid format of that date is held by the `datetime` attribute. This is the value accessed by assistive devices. It helps avoid confusion by stating a standardized version of a time, even if it's written in an informal or colloquial manner in the text.
+Headings (`h1` through `h6` elements) are workhorse tags that help provide structure and labeling to your content. Screen readers can be set to read only the headings on a page so the user gets a summary. This means it is important for the heading tags in your markup to have semantic meaning and relate to each other, not be picked merely for their size values.
 
-Here's an example:
+*Semantic meaning* means that the tag you use around content indicates the type of information it contains.
 
-`<p>Master Camper Cat officiated the cage match between Goro and Scorpion <time datetime="2013-02-13">last Wednesday</time>, which ended in a draw.</p>`
+If you were writing a paper with an introduction, a body, and a conclusion, it wouldn't make much sense to put the conclusion as a subsection of the body in your outline. It should be its own section. Similarly, the heading tags in a webpage need to go in order and indicate the hierarchical relationships of your content.
+
+Headings with equal (or higher) rank start new implied sections, headings with lower rank start subsections of the previous one.
+
+As an example, a page with an `h2` element followed by several subsections labeled with `h4` tags would confuse a screen reader user. With six choices, it's tempting to use a tag because it looks better in a browser, but you can use CSS to edit the relative sizing.
+
+One final point, each page should always have one (and only one) `h1` element, which is the main subject of your content. This and the other headings are used in part by search engines to understand the topic of the page.
 
 # --instructions--
 
-Camper Cat's Mortal Kombat survey results are in! Wrap a `time` tag around the text "Thursday, September 15&lt;sup>th&lt;/sup>" and add a `datetime` attribute to it set to "2016-09-15".
+Camper Cat wants a page on his site dedicated to becoming a ninja. Help him fix the headings so his markup gives semantic meaning to the content, and shows the proper parent-child relationships of his sections. Change all the `h5` tags to the proper heading level to indicate they are subsections of the `h2` ones. Use `h3` tags for the purpose.
 
 # --hints--
 
-Your code should have a `p` element which includes the text `Thank you to everyone for responding to Master Camper Cat's survey.` and include a `time` element.
+Your code should have 6 `h3` tags.
 
 ```js
-assert(timeElement.length);
+assert($('h3').length === 6);
 ```
 
-Your added `time` tags should wrap around the text `Thursday, September 15<sup>th</sup>`.
+Your code should have 6 `h3` closing tags.
 
 ```js
-assert(
-  timeElement.length &&
-    $(timeElement).html().trim() === 'Thursday, September 15<sup>th</sup>'
-);
+assert((code.match(/\/h3/g) || []).length === 6);
 ```
 
-Your added `time` tag should have a `datetime` attribute that is not empty.
+Your code should not have any `h5` tags.
 
 ```js
-assert(datetimeAttr && datetimeAttr.length);
+assert($('h5').length === 0);
 ```
 
-Your added `datetime` attribute should be set to a value of `2016-09-15`.
+Your code should not have any `h5` closing tags.
 
 ```js
-assert(datetimeAttr === '2016-09-15');
+assert(/\/h5/.test(code) === false);
 ```
 
 # --seed--
 
-## --after-user-code--
-
-```html
-<script>
-const pElement = $("article > p")
-  .filter((_, elem) => $(elem).text().includes("Thank you to everyone for responding to Master Camper Cat's survey."));
-const timeElement = pElement[0] ? $(pElement[0]).find("time") : null;
-const datetimeAttr = $(timeElement).attr("datetime");
-</script>
-```
-
 ## --seed-contents--
 
 ```html
-<body>
-  <header>
-    <h1>Tournaments</h1>
-  </header>
-  <article>
-    <h2>Mortal Kombat Tournament Survey Results</h2>
+<h1>How to Become a Ninja</h1>
+<main>
+  <h2>Learn the Art of Moving Stealthily</h2>
+  <h5>How to Hide in Plain Sight</h5>
+  <h5>How to Climb a Wall</h5>
 
-    <!-- Only change code below this line -->
+  <h2>Learn the Art of Battle</h2>
+  <h5>How to Strengthen your Body</h5>
+  <h5>How to Fight like a Ninja</h5>
 
-    <p>Thank you to everyone for responding to Master Camper Cat's survey. The best day to host the vaunted Mortal Kombat tournament is Thursday, September 15<sup>th</sup>. May the best ninja win!</p>
-
-    <!-- Only change code above this line -->
-
-    <section>
-      <h3>Comments:</h3>
-      <article>
-        <p>Posted by: Sub-Zero on <time datetime="2016-08-13T20:01Z">August 13<sup>th</sup></time></p>
-        <p>Johnny Cage better be there, I'll finish him!</p>
-      </article>
-      <article>
-        <p>Posted by: Doge on <time datetime="2016-08-15T08:12Z">August 15<sup>th</sup></time></p>
-        <p>Wow, much combat, so mortal.</p>
-      </article>
-      <article>
-        <p>Posted by: The Grim Reaper on <time datetime="2016-08-16T00:00Z">August 16<sup>th</sup></time></p>
-        <p>Looks like I'll be busy that day.</p>
-      </article>
-    </section>
-  </article>
-  <footer>&copy; 2018 Camper Cat</footer>
-</body>
+  <h2>Learn the Art of Living with Honor</h2>
+  <h5>How to Breathe Properly</h5>
+  <h5>How to Simplify your Life</h5>
+</main>
 ```
 
 # --solutions--
 
 ```html
-<body>
-  <header>
-    <h1>Tournaments</h1>
-  </header>
-  <article>
-    <h2>Mortal Kombat Tournament Survey Results</h2>
+<h1>How to Become a Ninja</h1>
+<main>
+  <h2>Learn the Art of Moving Stealthily</h2>
+  <h3>How to Hide in Plain Sight</h3>
+  <h3>How to Climb a Wall</h3>
 
-    <p>Thank you to everyone for responding to Master Camper Cat's survey. The best day to host the vaunted Mortal Kombat tournament is <time datetime="2016-09-15">Thursday, September 15<sup>th</sup></time>. May the best ninja win!</p>
+  <h2>Learn the Art of Battle</h2>
+  <h3>How to Strengthen your Body</h3>
+  <h3>How to Fight like a Ninja</h3>
 
-    <section>
-      <h3>Comments:</h3>
-      <article>
-        <p>Posted by: Sub-Zero on <time datetime="2016-08-13T20:01Z">August 13<sup>th</sup></time></p>
-        <p>Johnny Cage better be there, I'll finish him!</p>
-      </article>
-      <article>
-        <p>Posted by: Doge on <time datetime="2016-08-15T08:12Z">August 15<sup>th</sup></time></p>
-        <p>Wow, much combat, so mortal.</p>
-      </article>
-      <article>
-        <p>Posted by: The Grim Reaper on <time datetime="2016-08-16T00:00Z">August 16<sup>th</sup></time></p>
-        <p>Looks like I'll be busy that day.</p>
-      </article>
-    </section>
-  </article>
-  <footer>&copy; 2018 Camper Cat</footer>
-</body>
+  <h2>Learn the Art of Living with Honor</h2>
+  <h3>How to Breathe Properly</h3>
+  <h3>How to Simplify your Life</h3>
+</main>
 ```
