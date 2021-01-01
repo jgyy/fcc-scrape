@@ -1,38 +1,60 @@
 ---
-id: 587d774e367417b2b2512aa0
-title: Wrap Content in the article Element
+id: 587d778b367417b2b2512aa7
+title: Wrap Radio Buttons in a fieldset Element for Better Accessibility
 challengeType: 0
-videoUrl: 'https://scrimba.com/c/cPp79S3'
-forumTopicId: 301029
+videoUrl: 'https://scrimba.com/c/cVJVefw'
+forumTopicId: 301030
 ---
 
 # --description--
 
-`article` is another one of the new HTML5 elements that adds semantic meaning to your markup. `article` is a sectioning element, and is used to wrap independent, self-contained content. The tag works well with blog entries, forum posts, or news articles.
+The next form topic covers accessibility of radio buttons. Each choice is given a `label` with a `for` attribute tying to the `id` of the corresponding item as covered in the last challenge. Since radio buttons often come in a group where the user must choose one, there's a way to semantically show the choices are part of a set.
 
-Determining whether content can stand alone is usually a judgement call, but there are a couple simple tests you can use. Ask yourself if you removed all surrounding context, would that content still make sense? Similarly for text, would the content hold up if it were in an RSS feed?
+The `fieldset` tag surrounds the entire grouping of radio buttons to achieve this. It often uses a `legend` tag to provide a description for the grouping, which is read by screen readers for each choice in the `fieldset` element.
 
-Remember that folks using assistive technologies rely on organized, semantically meaningful markup to better understand your work.
+The `fieldset` wrapper and `legend` tag are not necessary when the choices are self-explanatory, like a gender selection. Using a `label` with the `for` attribute for each radio button is sufficient.
 
-**Note about `section` and `div`**  
-The `section` element is also new with HTML5, and has a slightly different semantic meaning than `article`. An `article` is for standalone content, and a `section` is for grouping thematically related content. They can be used within each other, as needed. For example, if a book is the `article`, then each chapter is a `section`. When there's no relationship between groups of content, then use a `div`.
+Here's an example:
 
 ```html
-<div> - groups content
-<section> - groups related content
-<article> - groups independent, self-contained content
+<form>
+  <fieldset>
+    <legend>Choose one of these three items:</legend>
+    <input id="one" type="radio" name="items" value="one">
+    <label for="one">Choice One</label><br>
+    <input id="two" type="radio" name="items" value="two">
+    <label for="two">Choice Two</label><br>
+    <input id="three" type="radio" name="items" value="three">
+    <label for="three">Choice Three</label>
+  </fieldset>
+</form>
 ```
 
 # --instructions--
 
-Camper Cat used `article` tags to wrap the posts on his blog page, but he forgot to use them around the top one. Change the `div` tag to use an `article` tag instead.
+Camper Cat wants information about the ninja level of his users when they sign up for his email list. He's added a set of radio buttons and learned from our last lesson to use label tags with `for` attributes for each choice. Go Camper Cat! However, his code still needs some help. Change the `div` tag surrounding the radio buttons to a `fieldset` tag, and change the `p` tag inside it to a `legend`.
 
 # --hints--
 
-Your code should have three `article` tags.
+Your code should have a `fieldset` tag around the radio button set.
 
 ```js
-assert($('article').length == 3);
+assert($('fieldset').length == 1);
+```
+
+The `fieldset` element should have a closing tag.
+
+```js
+assert(
+  code.match(/<\/fieldset>/g) &&
+    code.match(/<\/fieldset>/g).length === code.match(/<fieldset>/g).length
+);
+```
+
+Your code should have a `legend` tag around the text asking what level ninja a user is.
+
+```js
+assert($('legend').length == 1);
 ```
 
 Your code should not have any `div` tags.
@@ -41,56 +63,102 @@ Your code should not have any `div` tags.
 assert($('div').length == 0);
 ```
 
+Your code should no longer have a `p` tag around the text asking what level ninja a user is.
+
+```js
+assert($('p').length == 4);
+```
+
 # --seed--
 
 ## --seed-contents--
 
 ```html
-<h1>Deep Thoughts with Master Camper Cat</h1>
-<main>
-  <div>
+<body>
+  <header>
+    <h1>Deep Thoughts with Master Camper Cat</h1>
+  </header>
+  <section>
+    <form>
+      <p>Sign up to receive Camper Cat's blog posts by email here!</p>
+      <label for="email">Email:</label>
+      <input type="text" id="email" name="email">
+
+
+      <!-- Only change code below this line -->
+      <div>
+        <p>What level ninja are you?</p>
+        <input id="newbie" type="radio" name="levels" value="newbie">
+        <label for="newbie">Newbie Kitten</label><br>
+        <input id="intermediate" type="radio" name="levels" value="intermediate">
+        <label for="intermediate">Developing Student</label><br>
+        <input id="master" type="radio" name="levels" value="master">
+        <label for="master">Master</label>
+      </div>
+      <!-- Only change code above this line -->
+
+
+      <input type="submit" name="submit" value="Submit">
+    </form>
+  </section>
+  <article>
     <h2>The Garfield Files: Lasagna as Training Fuel?</h2>
     <p>The internet is littered with varying opinions on nutritional paradigms, from catnip paleo to hairball cleanses. But let's turn our attention to an often overlooked fitness fuel, and examine the protein-carb-NOM trifecta that is lasagna...</p>
-  </div>
-
+  </article>
   <img src="samuraiSwords.jpeg" alt="">
-
   <article>
     <h2>Defeating your Foe: the Red Dot is Ours!</h2>
     <p>Felines the world over have been waging war on the most persistent of foes. This red nemesis combines both cunning stealth and lightning speed. But chin up, fellow fighters, our time for victory may soon be near...</p>
   </article>
-
   <img src="samuraiSwords.jpeg" alt="">
-
   <article>
     <h2>Is Chuck Norris a Cat Person?</h2>
     <p>Chuck Norris is widely regarded as the premier martial artist on the planet, and it's a complete coincidence anyone who disagrees with this fact mysteriously disappears soon after. But the real question is, is he a cat person?...</p>
   </article>
-</main>
+  <footer>&copy; 2018 Camper Cat</footer>
+</body>
 ```
 
 # --solutions--
 
 ```html
-<h1>Deep Thoughts with Master Camper Cat</h1>
-<main>
+<body>
+  <header>
+    <h1>Deep Thoughts with Master Camper Cat</h1>
+  </header>
+  <section>
+    <form>
+      <p>Sign up to receive Camper Cat's blog posts by email here!</p>
+      <label for="email">Email:</label>
+      <input type="text" id="email" name="email">
+
+      <fieldset>
+        <legend>What level ninja are you?</legend>
+        <input id="newbie" type="radio" name="levels" value="newbie">
+        <label for="newbie">Newbie Kitten</label><br>
+        <input id="intermediate" type="radio" name="levels" value="intermediate">
+        <label for="intermediate">Developing Student</label><br>
+        <input id="master" type="radio" name="levels" value="master">
+        <label for="master">Master</label>
+      </fieldset>
+
+      <input type="submit" name="submit" value="Submit">
+    </form>
+  </section>
   <article>
     <h2>The Garfield Files: Lasagna as Training Fuel?</h2>
     <p>The internet is littered with varying opinions on nutritional paradigms, from catnip paleo to hairball cleanses. But let's turn our attention to an often overlooked fitness fuel, and examine the protein-carb-NOM trifecta that is lasagna...</p>
   </article>
-
   <img src="samuraiSwords.jpeg" alt="">
-
   <article>
     <h2>Defeating your Foe: the Red Dot is Ours!</h2>
     <p>Felines the world over have been waging war on the most persistent of foes. This red nemesis combines both cunning stealth and lightning speed. But chin up, fellow fighters, our time for victory may soon be near...</p>
   </article>
-
   <img src="samuraiSwords.jpeg" alt="">
-
   <article>
     <h2>Is Chuck Norris a Cat Person?</h2>
     <p>Chuck Norris is widely regarded as the premier martial artist on the planet, and it's a complete coincidence anyone who disagrees with this fact mysteriously disappears soon after. But the real question is, is he a cat person?...</p>
   </article>
-</main>
+  <footer>&copy; 2018 Camper Cat</footer>
+</body>
 ```
