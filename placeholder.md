@@ -1,35 +1,33 @@
 ---
-id: 587d7787367417b2b2512aa1
-title: Make Screen Reader Navigation Easier with the header Landmark
+id: 587d7788367417b2b2512aa2
+title: Make Screen Reader Navigation Easier with the nav Landmark
 challengeType: 0
-videoUrl: 'https://scrimba.com/c/cB76vtv'
-forumTopicId: 301023
+videoUrl: 'https://scrimba.com/c/czVwWSv'
+forumTopicId: 301024
 ---
 
 # --description--
 
-The next HTML5 element that adds semantic meaning and improves accessibility is the `header` tag. It's used to wrap introductory information or navigation links for its parent tag and works well around content that's repeated at the top on multiple pages.
+The `nav` element is another HTML5 item with the embedded landmark feature for easy screen reader navigation. This tag is meant to wrap around the main navigation links in your page.
 
-`header` shares the embedded landmark feature you saw with `main`, allowing assistive technologies to quickly navigate to that content.
-
-**Note:** The `header` is meant for use in the `body` tag of your HTML document. This is different than the `head` element, which contains the page's title, meta information, etc.
+If there are repeated site links at the bottom of the page, it isn't necessary to markup those with a `nav` tag as well. Using a `footer` (covered in the next challenge) is sufficient.
 
 # --instructions--
 
-Camper Cat is writing some great articles about ninja training, and wants to add a page for them to his site. Change the top `div` that currently contains the `h1` to a `header` tag instead.
+Camper Cat included navigation links at the top of his training page, but wrapped them in a `div`. Change the `div` to a `nav` tag to improve the accessibility on his page.
 
 # --hints--
 
-Your code should have one `header` tag.
+Your code should have one `nav` tag.
 
 ```js
-assert($('header').length == 1);
+assert($('nav').length == 1);
 ```
 
-Your `header` tags should wrap around the `h1`.
+Your `nav` tags should wrap around the `ul` and its list items.
 
 ```js
-assert($('header').children('h1').length == 1);
+assert($('nav').children('ul').length == 1);
 ```
 
 Your code should not have any `div` tags.
@@ -38,12 +36,12 @@ Your code should not have any `div` tags.
 assert($('div').length == 0);
 ```
 
-Your `header` element should have a closing tag.
+Your `nav` element should have a closing tag.
 
 ```js
 assert(
-  code.match(/<\/header>/g) &&
-    code.match(/<\/header>/g).length === code.match(/<header>/g).length
+  code.match(/<\/nav>/g) &&
+    code.match(/<\/nav>/g).length === code.match(/<nav>/g).length
 );
 ```
 
@@ -53,12 +51,18 @@ assert(
 
 ```html
 <body>
-
-  <div>
+  <header>
     <h1>Training with Camper Cat</h1>
-  </div>
 
+    <div>
+      <ul>
+        <li><a href="#stealth">Stealth &amp; Agility</a></li>
+        <li><a href="#combat">Combat</a></li>
+        <li><a href="#weapons">Weapons</a></li>
+      </ul>
+    </div>
 
+  </header>
   <main>
     <section id="stealth">
       <h2>Stealth &amp; Agility Training</h2>
@@ -83,12 +87,18 @@ assert(
 
 ```html
 <body>
-
   <header>
     <h1>Training with Camper Cat</h1>
+
+    <nav>
+      <ul>
+        <li><a href="#stealth">Stealth &amp; Agility</a></li>
+        <li><a href="#combat">Combat</a></li>
+        <li><a href="#weapons">Weapons</a></li>
+      </ul>
+    </nav>
+
   </header>
-
-
   <main>
     <section id="stealth">
       <h2>Stealth &amp; Agility Training</h2>
