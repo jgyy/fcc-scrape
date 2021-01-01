@@ -1,37 +1,39 @@
 ---
-id: 587d774e367417b2b2512a9f
-title: Jump Straight to the Content Using the main Element
+id: 587d774c367417b2b2512a9d
+title: Know When Alt Text Should be Left Blank
 challengeType: 0
-videoUrl: 'https://scrimba.com/c/cPp7zuE'
-forumTopicId: 301018
+videoUrl: 'https://scrimba.com/c/cM9P4t2'
+forumTopicId: 301019
 ---
 
 # --description--
 
-HTML5 introduced a number of new elements that give developers more options while also incorporating accessibility features. These tags include `main`, `header`, `footer`, `nav`, `article`, and `section`, among others.
+In the last challenge, you learned that including an `alt` attribute when using `img` tags is mandatory. However, sometimes images are grouped with a caption already describing them, or are used for decoration only. In these cases `alt` text may seem redundant or unnecessary.
 
-By default, a browser renders these elements similarly to the humble `div`. However, using them where appropriate gives additional meaning in your markup. The tag name alone can indicate the type of information it contains, which adds semantic meaning to that content. Assistive technologies can access this information to provide better page summary or navigation options to their users.
+In situations when an image is already explained with text content, or does not add meaning to a page, the `img` still needs an `alt` attribute, but it can be set to an empty string. Here's an example:
 
-The `main` element is used to wrap (you guessed it) the main content, and there should be only one per page. It's meant to surround the information that's related to the central topic of your page. It's not meant to include items that repeat across pages, like navigation links or banners.
+`<img src="visualDecoration.jpeg" alt="">`
 
-The `main` tag also has an embedded landmark feature that assistive technology can use to quickly navigate to the main content. If you've ever seen a "Jump to Main Content" link at the top of a page, using a main tag automatically gives assistive devices that functionality.
+Background images usually fall under the 'decorative' label as well. However, they are typically applied with CSS rules, and therefore not part of the markup screen readers process.
+
+**Note:** For images with a caption, you may still want to include `alt` text, since it helps search engines catalog the content of the image.
 
 # --instructions--
 
-Camper Cat has some big ideas for his ninja weapons page. Help him set up his markup by adding opening and closing `main` tags between the `header` and `footer` (covered in other challenges). Keep the `main` tags empty for now.
+Camper Cat has coded a skeleton page for the blog part of his website. He's planning to add a visual break between his two articles with a decorative image of a samurai sword. Add an `alt` attribute to the `img` tag and set it to an empty string. (Note that the image `src` doesn't link to an actual file - don't worry that there are no swords showing in the display.)
 
 # --hints--
 
-Your code should have one `main` tag.
+Your `img` tag should have an `alt` attribute.
 
 ```js
-assert($('main').length == 1);
+assert(!($('img').attr('alt') == undefined));
 ```
 
-The `main` tags should be between the closing `header` tag and the opening `footer` tag.
+The `alt` attribute should be set to an empty string.
 
 ```js
-assert(code.match(/<\/header>\s*?<main>\s*?<\/main>/gi));
+assert($('img').attr('alt') == '');
 ```
 
 # --seed--
@@ -39,23 +41,33 @@ assert(code.match(/<\/header>\s*?<main>\s*?<\/main>/gi));
 ## --seed-contents--
 
 ```html
-<header>
-  <h1>Weapons of the Ninja</h1>
-</header>
+<h1>Deep Thoughts with Master Camper Cat</h1>
+<article>
+  <h2>Defeating your Foe: the Red Dot is Ours!</h2>
+  <p>To Come...</p>
+</article>
 
+<img src="samuraiSwords.jpeg">
 
-
-<footer></footer>
+<article>
+  <h2>Is Chuck Norris a Cat Person?</h2>
+  <p>To Come...</p>
+</article>
 ```
 
 # --solutions--
 
 ```html
-<header>
-  <h1>Weapons of the Ninja</h1>
-</header>
-<main>
+<h1>Deep Thoughts with Master Camper Cat</h1>
+<article>
+  <h2>Defeating your Foe: the Red Dot is Ours!</h2>
+  <p>To Come...</p>
+</article>
 
-</main>
-<footer></footer>
+<img src="samuraiSwords.jpeg" alt="">
+
+<article>
+  <h2>Is Chuck Norris a Cat Person?</h2>
+  <p>To Come...</p>
+</article>
 ```
