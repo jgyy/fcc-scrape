@@ -1,39 +1,65 @@
 ---
-id: 587d774c367417b2b2512a9d
-title: Know When Alt Text Should be Left Blank
+id: 587d778d367417b2b2512aaa
+title: Make Elements Only Visible to a Screen Reader by Using Custom CSS
 challengeType: 0
-videoUrl: 'https://scrimba.com/c/cM9P4t2'
-forumTopicId: 301019
+videoUrl: 'https://scrimba.com/c/cJ8QGkhJ'
+forumTopicId: 301020
 ---
 
 # --description--
 
-In the last challenge, you learned that including an `alt` attribute when using `img` tags is mandatory. However, sometimes images are grouped with a caption already describing them, or are used for decoration only. In these cases `alt` text may seem redundant or unnecessary.
+Have you noticed that all of the applied accessibility challenges so far haven't used any CSS? This is to show the importance of a logical document outline, and using semantically meaningful tags around your content before introducing the visual design aspect.
 
-In situations when an image is already explained with text content, or does not add meaning to a page, the `img` still needs an `alt` attribute, but it can be set to an empty string. Here's an example:
+However, CSS's magic can also improve accessibility on your page when you want to visually hide content meant only for screen readers. This happens when information is in a visual format (like a chart), but screen reader users need an alternative presentation (like a table) to access the data. CSS is used to position the screen reader-only elements off the visual area of the browser window.
 
-`<img src="visualDecoration.jpeg" alt="">`
+Here's an example of the CSS rules that accomplish this:
 
-Background images usually fall under the 'decorative' label as well. However, they are typically applied with CSS rules, and therefore not part of the markup screen readers process.
+```css
+.sr-only {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  top: auto;
+  overflow: hidden;
+}
+```
 
-**Note:** For images with a caption, you may still want to include `alt` text, since it helps search engines catalog the content of the image.
+**Note:** The following CSS approaches will NOT do the same thing:
+
+<ul>
+<li><code>display: none;</code> or <code>visibility: hidden;</code> hides content for everyone, including screen reader users</li>
+<li>Zero values for pixel sizes, such as <code>width: 0px; height: 0px;</code> removes that element from the flow of your document, meaning screen readers will ignore it</li>
+</ul>
 
 # --instructions--
 
-Camper Cat has coded a skeleton page for the blog part of his website. He's planning to add a visual break between his two articles with a decorative image of a samurai sword. Add an `alt` attribute to the `img` tag and set it to an empty string. (Note that the image `src` doesn't link to an actual file - don't worry that there are no swords showing in the display.)
+Camper Cat created a really cool stacked bar chart for his training page, and put the data into a table for his visually impaired users. The table already has an `sr-only` class, but the CSS rules aren't filled in yet. Give the `position` an absolute value, the `left` a -10000px value, and the `width` and `height` both 1px values.
 
 # --hints--
 
-Your `img` tag should have an `alt` attribute.
+Your code should set the `position` property of the `sr-only` class to a value of absolute.
 
 ```js
-assert(!($('img').attr('alt') == undefined));
+assert($('.sr-only').css('position') == 'absolute');
 ```
 
-The `alt` attribute should be set to an empty string.
+Your code should set the `left` property of the `sr-only` class to a value of -10000px.
 
 ```js
-assert($('img').attr('alt') == '');
+assert($('.sr-only').css('left') == '-10000px');
+```
+
+Your code should set the `width` property of the `sr-only` class to a value of 1 pixel.
+
+```js
+assert(code.match(/width:\s*?1px/gi));
+```
+
+Your code should set the `height` property of the `sr-only` class to a value of 1 pixel.
+
+```js
+assert(code.match(/height:\s*?1px/gi));
 ```
 
 # --seed--
@@ -41,33 +67,177 @@ assert($('img').attr('alt') == '');
 ## --seed-contents--
 
 ```html
-<h1>Deep Thoughts with Master Camper Cat</h1>
-<article>
-  <h2>Defeating your Foe: the Red Dot is Ours!</h2>
-  <p>To Come...</p>
-</article>
-
-<img src="samuraiSwords.jpeg">
-
-<article>
-  <h2>Is Chuck Norris a Cat Person?</h2>
-  <p>To Come...</p>
-</article>
+<head>
+  <style>
+  .sr-only {
+    position: ;
+    left: ;
+    width: ;
+    height: ;
+    top: auto;
+    overflow: hidden;
+  }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Training</h1>
+    <nav>
+      <ul>
+        <li><a href="#stealth">Stealth &amp; Agility</a></li>
+        <li><a href="#combat">Combat</a></li>
+        <li><a href="#weapons">Weapons</a></li>
+      </ul>
+    </nav>
+  </header>
+  <section>
+    <h2>Master Camper Cat's Beginner Three Week Training Program</h2>
+    <figure>
+      <!-- Stacked bar chart of weekly training -->
+      <p>[Stacked bar chart]</p>
+      <br />
+      <figcaption>Breakdown per week of time to spend training in stealth, combat, and weapons.</figcaption>
+    </figure>
+    <table class="sr-only">
+      <caption>Hours of Weekly Training in Stealth, Combat, and Weapons</caption>
+      <thead>
+        <tr>
+          <th></th>
+          <th scope="col">Stealth &amp; Agility</th>
+          <th scope="col">Combat</th>
+          <th scope="col">Weapons</th>
+          <th scope="col">Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">Week One</th>
+          <td>3</td>
+          <td>5</td>
+          <td>2</td>
+          <td>10</td>
+        </tr>
+        <tr>
+          <th scope="row">Week Two</th>
+          <td>4</td>
+          <td>5</td>
+          <td>3</td>
+          <td>12</td>
+        </tr>
+        <tr>
+          <th scope="row">Week Three</th>
+          <td>4</td>
+          <td>6</td>
+          <td>3</td>
+          <td>13</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+  <section id="stealth">
+    <h2>Stealth &amp; Agility Training</h2>
+    <article><h3>Climb foliage quickly using a minimum spanning tree approach</h3></article>
+    <article><h3>No training is NP-complete without parkour</h3></article>
+  </section>
+  <section id="combat">
+    <h2>Combat Training</h2>
+    <article><h3>Dispatch multiple enemies with multithreaded tactics</h3></article>
+    <article><h3>Goodbye, world: 5 proven ways to knock out an opponent</h3></article>
+  </section>
+  <section id="weapons">
+    <h2>Weapons Training</h2>
+    <article><h3>Swords: the best tool to literally divide and conquer</h3></article>
+    <article><h3>Breadth-first or depth-first in multi-weapon training?</h3></article>
+  </section>
+  <footer>&copy; 2018 Camper Cat</footer>
+</body>
 ```
 
 # --solutions--
 
 ```html
-<h1>Deep Thoughts with Master Camper Cat</h1>
-<article>
-  <h2>Defeating your Foe: the Red Dot is Ours!</h2>
-  <p>To Come...</p>
-</article>
-
-<img src="samuraiSwords.jpeg" alt="">
-
-<article>
-  <h2>Is Chuck Norris a Cat Person?</h2>
-  <p>To Come...</p>
-</article>
+<head>
+  <style>
+  .sr-only {
+    position: absolute;
+    left: -10000px;
+    width: 1px;
+    height: 1px;
+    top: auto;
+    overflow: hidden;
+  }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Training</h1>
+    <nav>
+      <ul>
+        <li><a href="#stealth">Stealth &amp; Agility</a></li>
+        <li><a href="#combat">Combat</a></li>
+        <li><a href="#weapons">Weapons</a></li>
+      </ul>
+    </nav>
+  </header>
+  <section>
+    <h2>Master Camper Cat's Beginner Three Week Training Program</h2>
+    <figure>
+      <!-- Stacked bar chart of weekly training -->
+      <p>[Stacked bar chart]</p>
+      <br />
+      <figcaption>Breakdown per week of time to spend training in stealth, combat, and weapons.</figcaption>
+    </figure>
+    <table class="sr-only">
+      <caption>Hours of Weekly Training in Stealth, Combat, and Weapons</caption>
+      <thead>
+        <tr>
+          <th></th>
+          <th scope="col">Stealth &amp; Agility</th>
+          <th scope="col">Combat</th>
+          <th scope="col">Weapons</th>
+          <th scope="col">Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">Week One</th>
+          <td>3</td>
+          <td>5</td>
+          <td>2</td>
+          <td>10</td>
+        </tr>
+        <tr>
+          <th scope="row">Week Two</th>
+          <td>4</td>
+          <td>5</td>
+          <td>3</td>
+          <td>12</td>
+        </tr>
+        <tr>
+          <th scope="row">Week Three</th>
+          <td>4</td>
+          <td>6</td>
+          <td>3</td>
+          <td>13</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+  <section id="stealth">
+    <h2>Stealth &amp; Agility Training</h2>
+    <article><h3>Climb foliage quickly using a minimum spanning tree approach</h3></article>
+    <article><h3>No training is NP-complete without parkour</h3></article>
+  </section>
+  <section id="combat">
+    <h2>Combat Training</h2>
+    <article><h3>Dispatch multiple enemies with multithreaded tactics</h3></article>
+    <article><h3>Goodbye, world: 5 proven ways to knock out an opponent</h3></article>
+  </section>
+  <section id="weapons">
+    <h2>Weapons Training</h2>
+    <article><h3>Swords: the best tool to literally divide and conquer</h3></article>
+    <article><h3>Breadth-first or depth-first in multi-weapon training?</h3></article>
+  </section>
+  <footer>&copy; 2018 Camper Cat</footer>
+</body>
 ```
