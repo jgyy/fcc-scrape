@@ -1,72 +1,54 @@
 ---
-id: 587d778b367417b2b2512aa7
-title: Wrap Radio Buttons in a fieldset Element for Better Accessibility
+id: 587d781b367417b2b2512abc
+title: Adjust the background-color Property of Text
 challengeType: 0
-videoUrl: 'https://scrimba.com/c/cVJVefw'
-forumTopicId: 301030
+videoUrl: 'https://scrimba.com/c/cEDqwA6'
+forumTopicId: 301032
 ---
 
 # --description--
 
-The next form topic covers accessibility of radio buttons. Each choice is given a `label` with a `for` attribute tying to the `id` of the corresponding item as covered in the last challenge. Since radio buttons often come in a group where the user must choose one, there's a way to semantically show the choices are part of a set.
+Instead of adjusting your overall background or the color of the text to make the foreground easily readable, you can add a `background-color` to the element holding the text you want to emphasize. This challenge uses `rgba()` instead of `hex` codes or normal `rgb()`.
 
-The `fieldset` tag surrounds the entire grouping of radio buttons to achieve this. It often uses a `legend` tag to provide a description for the grouping, which is read by screen readers for each choice in the `fieldset` element.
+<blockquote>rgba stands for:<br>  r = red<br>  g = green<br>  b = blue<br>  a = alpha/level of opacity</blockquote>
 
-The `fieldset` wrapper and `legend` tag are not necessary when the choices are self-explanatory, like a gender selection. Using a `label` with the `for` attribute for each radio button is sufficient.
+The RGB values can range from 0 to 255. The alpha value can range from 1, which is fully opaque or a solid color, to 0, which is fully transparent or clear. `rgba()` is great to use in this case, as it allows you to adjust the opacity. This means you don't have to completely block out the background.
 
-Here's an example:
-
-```html
-<form>
-  <fieldset>
-    <legend>Choose one of these three items:</legend>
-    <input id="one" type="radio" name="items" value="one">
-    <label for="one">Choice One</label><br>
-    <input id="two" type="radio" name="items" value="two">
-    <label for="two">Choice Two</label><br>
-    <input id="three" type="radio" name="items" value="three">
-    <label for="three">Choice Three</label>
-  </fieldset>
-</form>
-```
+You'll use `background-color: rgba(45, 45, 45, 0.1)` for this challenge. It produces a dark gray color that is nearly transparent given the low opacity value of 0.1.
 
 # --instructions--
 
-Camper Cat wants information about the ninja level of his users when they sign up for his email list. He's added a set of radio buttons and learned from our last lesson to use label tags with `for` attributes for each choice. Go Camper Cat! However, his code still needs some help. Change the `div` tag surrounding the radio buttons to a `fieldset` tag, and change the `p` tag inside it to a `legend`.
+To make the text stand out more, adjust the `background-color` of the `h4` element to the given `rgba()` value.
+
+Also for the `h4`, remove the `height` property and add `padding` of 10px.
 
 # --hints--
 
-Your code should have a `fieldset` tag around the radio button set.
-
-```js
-assert($('fieldset').length == 1);
-```
-
-The `fieldset` element should have a closing tag.
+Your code should add a `background-color` property to the `h4` element set to `rgba(45, 45, 45, 0.1)`.
 
 ```js
 assert(
-  code.match(/<\/fieldset>/g) &&
-    code.match(/<\/fieldset>/g).length === code.match(/<fieldset>/g).length
+  /(background-color|background):rgba\(45,45,45,0?\.1\)(;?}|;)/gi.test(
+    code.replace(/\s/g, '')
+  )
 );
 ```
 
-Your code should have a `legend` tag around the text asking what level ninja a user is.
+Your code should add a `padding` property to the `h4` element and set it to 10 pixels.
 
 ```js
-assert($('legend').length == 1);
+assert(
+  $('h4').css('padding-top') == '10px' &&
+    $('h4').css('padding-right') == '10px' &&
+    $('h4').css('padding-bottom') == '10px' &&
+    $('h4').css('padding-left') == '10px'
+);
 ```
 
-Your code should not have any `div` tags.
+The `height` property on the `h4` element should be removed.
 
 ```js
-assert($('div').length == 0);
-```
-
-Your code should no longer have a `p` tag around the text asking what level ninja a user is.
-
-```js
-assert($('p').length == 4);
+assert(!($('h4').css('height') == '25px'));
 ```
 
 # --seed--
@@ -74,91 +56,90 @@ assert($('p').length == 4);
 ## --seed-contents--
 
 ```html
-<body>
-  <header>
-    <h1>Deep Thoughts with Master Camper Cat</h1>
-  </header>
-  <section>
-    <form>
-      <p>Sign up to receive Camper Cat's blog posts by email here!</p>
-      <label for="email">Email:</label>
-      <input type="text" id="email" name="email">
+<style>
+  h4 {
+    text-align: center;
+    height: 25px;
 
 
-      <!-- Only change code below this line -->
-      <div>
-        <p>What level ninja are you?</p>
-        <input id="newbie" type="radio" name="levels" value="newbie">
-        <label for="newbie">Newbie Kitten</label><br>
-        <input id="intermediate" type="radio" name="levels" value="intermediate">
-        <label for="intermediate">Developing Student</label><br>
-        <input id="master" type="radio" name="levels" value="master">
-        <label for="master">Master</label>
-      </div>
-      <!-- Only change code above this line -->
-
-
-      <input type="submit" name="submit" value="Submit">
-    </form>
-  </section>
-  <article>
-    <h2>The Garfield Files: Lasagna as Training Fuel?</h2>
-    <p>The internet is littered with varying opinions on nutritional paradigms, from catnip paleo to hairball cleanses. But let's turn our attention to an often overlooked fitness fuel, and examine the protein-carb-NOM trifecta that is lasagna...</p>
-  </article>
-  <img src="samuraiSwords.jpeg" alt="">
-  <article>
-    <h2>Defeating your Foe: the Red Dot is Ours!</h2>
-    <p>Felines the world over have been waging war on the most persistent of foes. This red nemesis combines both cunning stealth and lightning speed. But chin up, fellow fighters, our time for victory may soon be near...</p>
-  </article>
-  <img src="samuraiSwords.jpeg" alt="">
-  <article>
-    <h2>Is Chuck Norris a Cat Person?</h2>
-    <p>Chuck Norris is widely regarded as the premier martial artist on the planet, and it's a complete coincidence anyone who disagrees with this fact mysteriously disappears soon after. But the real question is, is he a cat person?...</p>
-  </article>
-  <footer>&copy; 2018 Camper Cat</footer>
-</body>
+  }
+  p {
+    text-align: justify;
+  }
+  .links {
+    text-align: left;
+    color: black;
+  }
+  .fullCard {
+    width: 245px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 10px 5px;
+    padding: 4px;
+  }
+  .cardContent {
+    padding: 10px;
+  }
+  .cardText {
+    margin-bottom: 30px;
+  }
+</style>
+<div class="fullCard">
+  <div class="cardContent">
+    <div class="cardText">
+      <h4>Alphabet</h4>
+      <hr>
+      <p><em>Google was founded by Larry Page and Sergey Brin while they were <u>Ph.D. students</u> at <strong>Stanford University</strong>.</em></p>
+    </div>
+    <div class="cardLinks">
+      <a href="https://en.wikipedia.org/wiki/Larry_Page" target="_blank" class="links">Larry Page</a><br><br>
+      <a href="https://en.wikipedia.org/wiki/Sergey_Brin" target="_blank" class="links">Sergey Brin</a>
+    </div>
+  </div>
+</div>
 ```
 
 # --solutions--
 
 ```html
-<body>
-  <header>
-    <h1>Deep Thoughts with Master Camper Cat</h1>
-  </header>
-  <section>
-    <form>
-      <p>Sign up to receive Camper Cat's blog posts by email here!</p>
-      <label for="email">Email:</label>
-      <input type="text" id="email" name="email">
-
-      <fieldset>
-        <legend>What level ninja are you?</legend>
-        <input id="newbie" type="radio" name="levels" value="newbie">
-        <label for="newbie">Newbie Kitten</label><br>
-        <input id="intermediate" type="radio" name="levels" value="intermediate">
-        <label for="intermediate">Developing Student</label><br>
-        <input id="master" type="radio" name="levels" value="master">
-        <label for="master">Master</label>
-      </fieldset>
-
-      <input type="submit" name="submit" value="Submit">
-    </form>
-  </section>
-  <article>
-    <h2>The Garfield Files: Lasagna as Training Fuel?</h2>
-    <p>The internet is littered with varying opinions on nutritional paradigms, from catnip paleo to hairball cleanses. But let's turn our attention to an often overlooked fitness fuel, and examine the protein-carb-NOM trifecta that is lasagna...</p>
-  </article>
-  <img src="samuraiSwords.jpeg" alt="">
-  <article>
-    <h2>Defeating your Foe: the Red Dot is Ours!</h2>
-    <p>Felines the world over have been waging war on the most persistent of foes. This red nemesis combines both cunning stealth and lightning speed. But chin up, fellow fighters, our time for victory may soon be near...</p>
-  </article>
-  <img src="samuraiSwords.jpeg" alt="">
-  <article>
-    <h2>Is Chuck Norris a Cat Person?</h2>
-    <p>Chuck Norris is widely regarded as the premier martial artist on the planet, and it's a complete coincidence anyone who disagrees with this fact mysteriously disappears soon after. But the real question is, is he a cat person?...</p>
-  </article>
-  <footer>&copy; 2018 Camper Cat</footer>
-</body>
+<style>
+  h4 {
+    text-align: center;
+    padding: 10px;
+    background-color: rgba(45, 45, 45, 0.1);
+  }
+  p {
+    text-align: justify;
+  }
+  .links {
+    text-align: left;
+    color: black;
+  }
+  .fullCard {
+    width: 245px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 10px 5px;
+    padding: 4px;
+  }
+  .cardContent {
+    padding: 10px;
+  }
+  .cardText {
+    margin-bottom: 30px;
+  }
+</style>
+<div class="fullCard">
+  <div class="cardContent">
+    <div class="cardText">
+      <h4>Alphabet</h4>
+      <hr>
+      <p><em>Google was founded by Larry Page and Sergey Brin while they were <u>Ph.D. students</u> at <strong>Stanford University</strong>.</em></p>
+    </div>
+    <div class="cardLinks">
+      <a href="https://en.wikipedia.org/wiki/Larry_Page" target="_blank" class="links">Larry Page</a><br><br>
+      <a href="https://en.wikipedia.org/wiki/Sergey_Brin" target="_blank" class="links">Sergey Brin</a>
+    </div>
+  </div>
+</div>
 ```
