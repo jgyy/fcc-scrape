@@ -1,54 +1,43 @@
 ---
-id: 587d781b367417b2b2512abc
-title: Adjust the background-color Property of Text
+id: 587d78a4367417b2b2512ad3
+title: Adjust the Color of Various Elements to Complementary Colors
 challengeType: 0
-videoUrl: 'https://scrimba.com/c/cEDqwA6'
-forumTopicId: 301032
+videoUrl: 'https://scrimba.com/c/cWmPpud'
+forumTopicId: 301033
 ---
 
 # --description--
 
-Instead of adjusting your overall background or the color of the text to make the foreground easily readable, you can add a `background-color` to the element holding the text you want to emphasize. This challenge uses `rgba()` instead of `hex` codes or normal `rgb()`.
-
-<blockquote>rgba stands for:<br>  r = red<br>  g = green<br>  b = blue<br>  a = alpha/level of opacity</blockquote>
-
-The RGB values can range from 0 to 255. The alpha value can range from 1, which is fully opaque or a solid color, to 0, which is fully transparent or clear. `rgba()` is great to use in this case, as it allows you to adjust the opacity. This means you don't have to completely block out the background.
-
-You'll use `background-color: rgba(45, 45, 45, 0.1)` for this challenge. It produces a dark gray color that is nearly transparent given the low opacity value of 0.1.
+The Complementary Colors challenge showed that opposite colors on the color wheel can make each other appear more vibrant when placed side-by-side. However, the strong visual contrast can be jarring if it's overused on a website, and can sometimes make text harder to read if it's placed on a complementary-colored background. In practice, one of the colors is usually dominant and the complement is used to bring visual attention to certain content on the page.
 
 # --instructions--
 
-To make the text stand out more, adjust the `background-color` of the `h4` element to the given `rgba()` value.
-
-Also for the `h4`, remove the `height` property and add `padding` of 10px.
+This page will use a shade of teal (`#09A7A1`) as the dominant color, and its orange (`#FF790E`) complement to visually highlight the sign-up buttons. Change the `background-color` of both the `header` and `footer` from black to the teal color. Then change the `h2` text `color` to teal as well. Finally, change the `background-color` of the `button` to the orange color.
 
 # --hints--
 
-Your code should add a `background-color` property to the `h4` element set to `rgba(45, 45, 45, 0.1)`.
+The `header` element should have a `background-color` of #09A7A1.
 
 ```js
-assert(
-  /(background-color|background):rgba\(45,45,45,0?\.1\)(;?}|;)/gi.test(
-    code.replace(/\s/g, '')
-  )
-);
+assert($('header').css('background-color') == 'rgb(9, 167, 161)');
 ```
 
-Your code should add a `padding` property to the `h4` element and set it to 10 pixels.
+The `footer` element should have a `background-color` of #09A7A1.
 
 ```js
-assert(
-  $('h4').css('padding-top') == '10px' &&
-    $('h4').css('padding-right') == '10px' &&
-    $('h4').css('padding-bottom') == '10px' &&
-    $('h4').css('padding-left') == '10px'
-);
+assert($('footer').css('background-color') == 'rgb(9, 167, 161)');
 ```
 
-The `height` property on the `h4` element should be removed.
+The `h2` element should have a `color` of #09A7A1.
 
 ```js
-assert(!($('h4').css('height') == '25px'));
+assert($('h2').css('color') == 'rgb(9, 167, 161)');
+```
+
+The `button` element should have a `background-color` of #FF790E.
+
+```js
+assert($('button').css('background-color') == 'rgb(255, 121, 14)');
 ```
 
 # --seed--
@@ -57,89 +46,84 @@ assert(!($('h4').css('height') == '25px'));
 
 ```html
 <style>
-  h4 {
-    text-align: center;
-    height: 25px;
-
-
+  body {
+    background-color: white;
   }
-  p {
-    text-align: justify;
+  header {
+    background-color: black;
+    color: white;
+    padding: 0.25em;
   }
-  .links {
-    text-align: left;
+  h2 {
     color: black;
   }
-  .fullCard {
-    width: 245px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin: 10px 5px;
-    padding: 4px;
+  button {
+    background-color: white;
   }
-  .cardContent {
-    padding: 10px;
-  }
-  .cardText {
-    margin-bottom: 30px;
+  footer {
+    background-color: black;
+    color: white;
+    padding: 0.5em;
   }
 </style>
-<div class="fullCard">
-  <div class="cardContent">
-    <div class="cardText">
-      <h4>Alphabet</h4>
-      <hr>
-      <p><em>Google was founded by Larry Page and Sergey Brin while they were <u>Ph.D. students</u> at <strong>Stanford University</strong>.</em></p>
-    </div>
-    <div class="cardLinks">
-      <a href="https://en.wikipedia.org/wiki/Larry_Page" target="_blank" class="links">Larry Page</a><br><br>
-      <a href="https://en.wikipedia.org/wiki/Sergey_Brin" target="_blank" class="links">Sergey Brin</a>
-    </div>
-  </div>
-</div>
+<header>
+  <h1>Cooking with FCC!</h1>
+</header>
+<main>
+  <article>
+    <h2>Machine Learning in the Kitchen</h2>
+    <p>Join this two day workshop that walks through how to implement cutting-edge snack-getting algorithms with a command line interface. Coding usually involves writing exact instructions, but sometimes you need your computer to execute flexible commands, like <code>fetch Pringles</code>.</p>
+    <button>Sign Up</button>
+  </article>
+  <article>
+    <h2>Bisection Vegetable Chopping</h2>
+    <p>This week-long retreat will level-up your coding ninja skills to actual ninja skills. No longer is the humble bisection search limited to sorted arrays or coding interview questions, applying its concepts in the kitchen will have you chopping carrots in O(log n) time before you know it.</p>
+    <button>Sign Up</button>
+  </article>
+</main>
+<br>
+<footer>&copy; 2018 FCC Kitchen</footer>
 ```
 
 # --solutions--
 
 ```html
 <style>
-  h4 {
-    text-align: center;
-    padding: 10px;
-    background-color: rgba(45, 45, 45, 0.1);
+  body {
+    background-color: white;
   }
-  p {
-    text-align: justify;
+  header {
+    background-color: #09A7A1;
+    color: white;
+    padding: 0.25em;
   }
-  .links {
-    text-align: left;
-    color: black;
+  h2 {
+    color: #09A7A1;
   }
-  .fullCard {
-    width: 245px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin: 10px 5px;
-    padding: 4px;
+  button {
+    background-color: #FF790E;
   }
-  .cardContent {
-    padding: 10px;
-  }
-  .cardText {
-    margin-bottom: 30px;
+  footer {
+    background-color: #09A7A1;
+    color: white;
+    padding: 0.5em;
   }
 </style>
-<div class="fullCard">
-  <div class="cardContent">
-    <div class="cardText">
-      <h4>Alphabet</h4>
-      <hr>
-      <p><em>Google was founded by Larry Page and Sergey Brin while they were <u>Ph.D. students</u> at <strong>Stanford University</strong>.</em></p>
-    </div>
-    <div class="cardLinks">
-      <a href="https://en.wikipedia.org/wiki/Larry_Page" target="_blank" class="links">Larry Page</a><br><br>
-      <a href="https://en.wikipedia.org/wiki/Sergey_Brin" target="_blank" class="links">Sergey Brin</a>
-    </div>
-  </div>
-</div>
+<header>
+  <h1>Cooking with FCC!</h1>
+</header>
+<main>
+  <article>
+    <h2>Machine Learning in the Kitchen</h2>
+    <p>Join this two day workshop that walks through how to implement cutting-edge snack-getting algorithms with a command line interface. Coding usually involves writing exact instructions, but sometimes you need your computer to execute flexible commands, like <code>fetch Pringles</code>.</p>
+    <button>Sign Up</button>
+  </article>
+  <article>
+    <h2>Bisection Vegetable Chopping</h2>
+    <p>This week-long retreat will level-up your coding ninja skills to actual ninja skills. No longer is the humble bisection search limited to sorted arrays or coding interview questions, applying its concepts in the kitchen will have you chopping carrots in O(log n) time before you know it.</p>
+    <button>Sign Up</button>
+  </article>
+</main>
+<br>
+<footer>&copy; 2018 FCC Kitchen</footer>
 ```
