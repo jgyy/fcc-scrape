@@ -1,53 +1,37 @@
 ---
-id: 587d774d367417b2b2512a9e
-title: Use Headings to Show Hierarchical Relationships of Content
+id: 587d7790367417b2b2512ab0
+title: Use tabindex to Add Keyboard Focus to an Element
 challengeType: 0
-videoUrl: 'https://scrimba.com/c/cqVEktm'
-forumTopicId: 301026
+videoUrl: 'https://scrimba.com/c/cmzMDHW'
+forumTopicId: 301027
 ---
 
 # --description--
 
-Headings (`h1` through `h6` elements) are workhorse tags that help provide structure and labeling to your content. Screen readers can be set to read only the headings on a page so the user gets a summary. This means it is important for the heading tags in your markup to have semantic meaning and relate to each other, not be picked merely for their size values.
+The HTML `tabindex` attribute has three distinct functions relating to an element's keyboard focus. When it's on a tag, it indicates that element can be focused on. The value (an integer that's positive, negative, or zero) determines the behavior.
 
-*Semantic meaning* means that the tag you use around content indicates the type of information it contains.
+Certain elements, such as links and form controls, automatically receive keyboard focus when a user tabs through a page. It's in the same order as the elements come in the HTML source markup. This same functionality can be given to other elements, such as `div`, `span`, and `p`, by placing a `tabindex="0"` attribute on them. Here's an example:
 
-If you were writing a paper with an introduction, a body, and a conclusion, it wouldn't make much sense to put the conclusion as a subsection of the body in your outline. It should be its own section. Similarly, the heading tags in a webpage need to go in order and indicate the hierarchical relationships of your content.
+`<div tabindex="0">I need keyboard focus!</div>`
 
-Headings with equal (or higher) rank start new implied sections, headings with lower rank start subsections of the previous one.
-
-As an example, a page with an `h2` element followed by several subsections labeled with `h4` tags would confuse a screen reader user. With six choices, it's tempting to use a tag because it looks better in a browser, but you can use CSS to edit the relative sizing.
-
-One final point, each page should always have one (and only one) `h1` element, which is the main subject of your content. This and the other headings are used in part by search engines to understand the topic of the page.
+**Note:** A negative `tabindex` value (typically -1) indicates that an element is focusable, but is not reachable by the keyboard. This method is generally used to bring focus to content programmatically (like when a `div` used for a pop-up window is activated), and is beyond the scope of these challenges.
 
 # --instructions--
 
-Camper Cat wants a page on his site dedicated to becoming a ninja. Help him fix the headings so his markup gives semantic meaning to the content, and shows the proper parent-child relationships of his sections. Change all the `h5` tags to the proper heading level to indicate they are subsections of the `h2` ones. Use `h3` tags for the purpose.
+Camper Cat created a new survey to collect information about his users. He knows input fields automatically get keyboard focus, but he wants to make sure his keyboard users pause at the instructions while tabbing through the items. Add a `tabindex` attribute to the `p` tag and set its value to `"0"`. Bonus - using `tabindex` also enables the CSS pseudo-class `:focus` to work on the `p` tag.
 
 # --hints--
 
-Your code should have 6 `h3` tags.
+Your code should add a `tabindex` attribute to the `p` tag that holds the form instructions.
 
 ```js
-assert($('h3').length === 6);
+assert($('p').attr('tabindex'));
 ```
 
-Your code should have 6 `h3` closing tags.
+Your code should set the `tabindex` attribute on the `p` tag to a value of 0.
 
 ```js
-assert((code.match(/\/h3/g) || []).length === 6);
-```
-
-Your code should not have any `h5` tags.
-
-```js
-assert($('h5').length === 0);
-```
-
-Your code should not have any `h5` closing tags.
-
-```js
-assert(/\/h5/.test(code) === false);
+assert($('p').attr('tabindex') == '0');
 ```
 
 # --seed--
@@ -55,37 +39,103 @@ assert(/\/h5/.test(code) === false);
 ## --seed-contents--
 
 ```html
-<h1>How to Become a Ninja</h1>
-<main>
-  <h2>Learn the Art of Moving Stealthily</h2>
-  <h5>How to Hide in Plain Sight</h5>
-  <h5>How to Climb a Wall</h5>
+<head>
+  <style>
+  p:focus {
+    background-color: yellow;
+  }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Ninja Survey</h1>
+  </header>
+  <section>
+    <form>
 
-  <h2>Learn the Art of Battle</h2>
-  <h5>How to Strengthen your Body</h5>
-  <h5>How to Fight like a Ninja</h5>
 
-  <h2>Learn the Art of Living with Honor</h2>
-  <h5>How to Breathe Properly</h5>
-  <h5>How to Simplify your Life</h5>
-</main>
+      <p>Instructions: Fill in ALL your information then click <b>Submit</b></p>
+
+
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username"><br>
+      <fieldset>
+        <legend>What level ninja are you?</legend>
+        <input id="newbie" type="radio" name="levels" value="newbie">
+        <label for="newbie">Newbie Kitten</label><br>
+        <input id="intermediate" type="radio" name="levels" value="intermediate">
+        <label for="intermediate">Developing Student</label><br>
+        <input id="master" type="radio" name="levels" value="master">
+        <label for="master">9th Life Master</label>
+      </fieldset>
+      <br>
+      <fieldset>
+      <legend>Select your favorite weapons:</legend>
+      <input id="stars" type="checkbox" name="weapons" value="stars">
+      <label for="stars">Throwing Stars</label><br>
+      <input id="nunchucks" type="checkbox" name="weapons" value="nunchucks">
+      <label for="nunchucks">Nunchucks</label><br>
+      <input id="sai" type="checkbox" name="weapons" value="sai">
+      <label for="sai">Sai Set</label><br>
+      <input id="sword" type="checkbox" name="weapons" value="sword">
+      <label for="sword">Sword</label>
+      </fieldset>
+      <br>
+      <input type="submit" name="submit" value="Submit">
+    </form><br>
+  </section>
+  <footer>&copy; 2018 Camper Cat</footer>
+</body>
 ```
 
 # --solutions--
 
 ```html
-<h1>How to Become a Ninja</h1>
-<main>
-  <h2>Learn the Art of Moving Stealthily</h2>
-  <h3>How to Hide in Plain Sight</h3>
-  <h3>How to Climb a Wall</h3>
+<head>
+  <style>
+  p:focus {
+    background-color: yellow;
+  }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Ninja Survey</h1>
+  </header>
+  <section>
+    <form>
 
-  <h2>Learn the Art of Battle</h2>
-  <h3>How to Strengthen your Body</h3>
-  <h3>How to Fight like a Ninja</h3>
 
-  <h2>Learn the Art of Living with Honor</h2>
-  <h3>How to Breathe Properly</h3>
-  <h3>How to Simplify your Life</h3>
-</main>
+      <p tabindex="0">Instructions: Fill in ALL your information then click <b>Submit</b></p>
+
+
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username"><br>
+      <fieldset>
+        <legend>What level ninja are you?</legend>
+        <input id="newbie" type="radio" name="levels" value="newbie">
+        <label for="newbie">Newbie Kitten</label><br>
+        <input id="intermediate" type="radio" name="levels" value="intermediate">
+        <label for="intermediate">Developing Student</label><br>
+        <input id="master" type="radio" name="levels" value="master">
+        <label for="master">9th Life Master</label>
+      </fieldset>
+      <br>
+      <fieldset>
+      <legend>Select your favorite weapons:</legend>
+      <input id="stars" type="checkbox" name="weapons" value="stars">
+      <label for="stars">Throwing Stars</label><br>
+      <input id="nunchucks" type="checkbox" name="weapons" value="nunchucks">
+      <label for="nunchucks">Nunchucks</label><br>
+      <input id="sai" type="checkbox" name="weapons" value="sai">
+      <label for="sai">Sai Set</label><br>
+      <input id="sword" type="checkbox" name="weapons" value="sword">
+      <label for="sword">Sword</label>
+      </fieldset>
+      <br>
+      <input type="submit" name="submit" value="Submit">
+    </form><br>
+  </section>
+  <footer>&copy; 2018 Camper Cat</footer>
+</body>
 ```
