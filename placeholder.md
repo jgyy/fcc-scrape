@@ -1,37 +1,53 @@
 ---
-id: 587d7790367417b2b2512ab0
-title: Use tabindex to Add Keyboard Focus to an Element
+id: 587d7790367417b2b2512ab1
+title: Use tabindex to Specify the Order of Keyboard Focus for Several Elements
 challengeType: 0
-videoUrl: 'https://scrimba.com/c/cmzMDHW'
-forumTopicId: 301027
+videoUrl: 'https://scrimba.com/c/cmzRRcb'
+forumTopicId: 301028
 ---
 
 # --description--
 
-The HTML `tabindex` attribute has three distinct functions relating to an element's keyboard focus. When it's on a tag, it indicates that element can be focused on. The value (an integer that's positive, negative, or zero) determines the behavior.
+The `tabindex` attribute also specifies the exact tab order of elements. This is achieved when the value of the attribute is set to a positive number of 1 or higher.
 
-Certain elements, such as links and form controls, automatically receive keyboard focus when a user tabs through a page. It's in the same order as the elements come in the HTML source markup. This same functionality can be given to other elements, such as `div`, `span`, and `p`, by placing a `tabindex="0"` attribute on them. Here's an example:
+Setting a `tabindex="1"` will bring keyboard focus to that element first. Then it cycles through the sequence of specified `tabindex` values (2, 3, etc.), before moving to default and `tabindex="0"` items.
 
-`<div tabindex="0">I need keyboard focus!</div>`
+It's important to note that when the tab order is set this way, it overrides the default order (which uses the HTML source). This may confuse users who are expecting to start navigation from the top of the page. This technique may be necessary in some circumstances, but in terms of accessibility, take care before applying it.
 
-**Note:** A negative `tabindex` value (typically -1) indicates that an element is focusable, but is not reachable by the keyboard. This method is generally used to bring focus to content programmatically (like when a `div` used for a pop-up window is activated), and is beyond the scope of these challenges.
+Here's an example:
+
+`<div tabindex="1">I get keyboard focus, and I get it first!</div>`
+
+`<div tabindex="2">I get keyboard focus, and I get it second!</div>`
 
 # --instructions--
 
-Camper Cat created a new survey to collect information about his users. He knows input fields automatically get keyboard focus, but he wants to make sure his keyboard users pause at the instructions while tabbing through the items. Add a `tabindex` attribute to the `p` tag and set its value to `"0"`. Bonus - using `tabindex` also enables the CSS pseudo-class `:focus` to work on the `p` tag.
+Camper Cat has a search field on his Inspirational Quotes page that he plans to position in the upper right corner with CSS. He wants the search `input` and submit `input` form controls to be the first two items in the tab order. Add a `tabindex` attribute set to `"1"` to the search `input`, and a `tabindex` attribute set to `"2"` to the submit `input`.
 
 # --hints--
 
-Your code should add a `tabindex` attribute to the `p` tag that holds the form instructions.
+Your code should add a `tabindex` attribute to the search `input` tag.
 
 ```js
-assert($('p').attr('tabindex'));
+assert($('#search').attr('tabindex'));
 ```
 
-Your code should set the `tabindex` attribute on the `p` tag to a value of 0.
+Your code should add a `tabindex` attribute to the submit `input` tag.
 
 ```js
-assert($('p').attr('tabindex') == '0');
+assert($('#submit').attr('tabindex'));
+```
+
+Your code should set the `tabindex` attribute on the search `input` tag to a value of 1.
+
+```js
+assert($('#search').attr('tabindex') == '1');
+```
+
+Your code should set the `tabindex` attribute on the submit `input` tag to a value of 2.
+
+```js
+assert($('#submit').attr('tabindex') == '2');
 ```
 
 # --seed--
@@ -39,51 +55,35 @@ assert($('p').attr('tabindex') == '0');
 ## --seed-contents--
 
 ```html
-<head>
-  <style>
-  p:focus {
-    background-color: yellow;
-  }
-  </style>
-</head>
 <body>
   <header>
-    <h1>Ninja Survey</h1>
+    <h1>Even Deeper Thoughts with Master Camper Cat</h1>
+    <nav>
+      <ul>
+        <li><a href="">Home</a></li>
+        <li><a href="">Blog</a></li>
+        <li><a href="">Training</a></li>
+      </ul>
+    </nav>
   </header>
-  <section>
-    <form>
+  <form>
+    <label for="search">Search:</label>
 
 
-      <p>Instructions: Fill in ALL your information then click <b>Submit</b></p>
+    <input type="search" name="search" id="search">
+    <input type="submit" name="submit" value="Submit" id="submit">
 
 
-      <label for="username">Username:</label>
-      <input type="text" id="username" name="username"><br>
-      <fieldset>
-        <legend>What level ninja are you?</legend>
-        <input id="newbie" type="radio" name="levels" value="newbie">
-        <label for="newbie">Newbie Kitten</label><br>
-        <input id="intermediate" type="radio" name="levels" value="intermediate">
-        <label for="intermediate">Developing Student</label><br>
-        <input id="master" type="radio" name="levels" value="master">
-        <label for="master">9th Life Master</label>
-      </fieldset>
-      <br>
-      <fieldset>
-      <legend>Select your favorite weapons:</legend>
-      <input id="stars" type="checkbox" name="weapons" value="stars">
-      <label for="stars">Throwing Stars</label><br>
-      <input id="nunchucks" type="checkbox" name="weapons" value="nunchucks">
-      <label for="nunchucks">Nunchucks</label><br>
-      <input id="sai" type="checkbox" name="weapons" value="sai">
-      <label for="sai">Sai Set</label><br>
-      <input id="sword" type="checkbox" name="weapons" value="sword">
-      <label for="sword">Sword</label>
-      </fieldset>
-      <br>
-      <input type="submit" name="submit" value="Submit">
-    </form><br>
-  </section>
+  </form>
+  <h2>Inspirational Quotes</h2>
+  <blockquote>
+    <p>&ldquo;There's no Theory of Evolution, just a list of creatures I've allowed to live.&rdquo;<br>
+    - Chuck Norris</p>
+  </blockquote>
+  <blockquote>
+    <p>&ldquo;Wise men say forgiveness is divine, but never pay full price for late pizza.&rdquo;<br>
+    - TMNT</p>
+  </blockquote>
   <footer>&copy; 2018 Camper Cat</footer>
 </body>
 ```
@@ -91,51 +91,35 @@ assert($('p').attr('tabindex') == '0');
 # --solutions--
 
 ```html
-<head>
-  <style>
-  p:focus {
-    background-color: yellow;
-  }
-  </style>
-</head>
 <body>
   <header>
-    <h1>Ninja Survey</h1>
+    <h1>Even Deeper Thoughts with Master Camper Cat</h1>
+    <nav>
+      <ul>
+        <li><a href="">Home</a></li>
+        <li><a href="">Blog</a></li>
+        <li><a href="">Training</a></li>
+      </ul>
+    </nav>
   </header>
-  <section>
-    <form>
+  <form>
+    <label for="search">Search:</label>
 
 
-      <p tabindex="0">Instructions: Fill in ALL your information then click <b>Submit</b></p>
+    <input tabindex="1" type="search" name="search" id="search">
+    <input tabindex="2" type="submit" name="submit" value="Submit" id="submit">
 
 
-      <label for="username">Username:</label>
-      <input type="text" id="username" name="username"><br>
-      <fieldset>
-        <legend>What level ninja are you?</legend>
-        <input id="newbie" type="radio" name="levels" value="newbie">
-        <label for="newbie">Newbie Kitten</label><br>
-        <input id="intermediate" type="radio" name="levels" value="intermediate">
-        <label for="intermediate">Developing Student</label><br>
-        <input id="master" type="radio" name="levels" value="master">
-        <label for="master">9th Life Master</label>
-      </fieldset>
-      <br>
-      <fieldset>
-      <legend>Select your favorite weapons:</legend>
-      <input id="stars" type="checkbox" name="weapons" value="stars">
-      <label for="stars">Throwing Stars</label><br>
-      <input id="nunchucks" type="checkbox" name="weapons" value="nunchucks">
-      <label for="nunchucks">Nunchucks</label><br>
-      <input id="sai" type="checkbox" name="weapons" value="sai">
-      <label for="sai">Sai Set</label><br>
-      <input id="sword" type="checkbox" name="weapons" value="sword">
-      <label for="sword">Sword</label>
-      </fieldset>
-      <br>
-      <input type="submit" name="submit" value="Submit">
-    </form><br>
-  </section>
+  </form>
+  <h2>Inspirational Quotes</h2>
+  <blockquote>
+    <p>&ldquo;There's no Theory of Evolution, just a list of creatures I've allowed to live.&rdquo;<br>
+    - Chuck Norris</p>
+  </blockquote>
+  <blockquote>
+    <p>&ldquo;Wise men say forgiveness is divine, but never pay full price for late pizza.&rdquo;<br>
+    - TMNT</p>
+  </blockquote>
   <footer>&copy; 2018 Camper Cat</footer>
 </body>
 ```
