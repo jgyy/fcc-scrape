@@ -1,53 +1,44 @@
 ---
-id: 587d7790367417b2b2512ab1
-title: Use tabindex to Specify the Order of Keyboard Focus for Several Elements
+id: 587d774e367417b2b2512aa0
+title: Wrap Content in the article Element
 challengeType: 0
-videoUrl: 'https://scrimba.com/c/cmzRRcb'
-forumTopicId: 301028
+videoUrl: 'https://scrimba.com/c/cPp79S3'
+forumTopicId: 301029
 ---
 
 # --description--
 
-The `tabindex` attribute also specifies the exact tab order of elements. This is achieved when the value of the attribute is set to a positive number of 1 or higher.
+`article` is another one of the new HTML5 elements that adds semantic meaning to your markup. `article` is a sectioning element, and is used to wrap independent, self-contained content. The tag works well with blog entries, forum posts, or news articles.
 
-Setting a `tabindex="1"` will bring keyboard focus to that element first. Then it cycles through the sequence of specified `tabindex` values (2, 3, etc.), before moving to default and `tabindex="0"` items.
+Determining whether content can stand alone is usually a judgement call, but there are a couple simple tests you can use. Ask yourself if you removed all surrounding context, would that content still make sense? Similarly for text, would the content hold up if it were in an RSS feed?
 
-It's important to note that when the tab order is set this way, it overrides the default order (which uses the HTML source). This may confuse users who are expecting to start navigation from the top of the page. This technique may be necessary in some circumstances, but in terms of accessibility, take care before applying it.
+Remember that folks using assistive technologies rely on organized, semantically meaningful markup to better understand your work.
 
-Here's an example:
+**Note about `section` and `div`**  
+The `section` element is also new with HTML5, and has a slightly different semantic meaning than `article`. An `article` is for standalone content, and a `section` is for grouping thematically related content. They can be used within each other, as needed. For example, if a book is the `article`, then each chapter is a `section`. When there's no relationship between groups of content, then use a `div`.
 
-`<div tabindex="1">I get keyboard focus, and I get it first!</div>`
-
-`<div tabindex="2">I get keyboard focus, and I get it second!</div>`
+```html
+<div> - groups content
+<section> - groups related content
+<article> - groups independent, self-contained content
+```
 
 # --instructions--
 
-Camper Cat has a search field on his Inspirational Quotes page that he plans to position in the upper right corner with CSS. He wants the search `input` and submit `input` form controls to be the first two items in the tab order. Add a `tabindex` attribute set to `"1"` to the search `input`, and a `tabindex` attribute set to `"2"` to the submit `input`.
+Camper Cat used `article` tags to wrap the posts on his blog page, but he forgot to use them around the top one. Change the `div` tag to use an `article` tag instead.
 
 # --hints--
 
-Your code should add a `tabindex` attribute to the search `input` tag.
+Your code should have three `article` tags.
 
 ```js
-assert($('#search').attr('tabindex'));
+assert($('article').length == 3);
 ```
 
-Your code should add a `tabindex` attribute to the submit `input` tag.
+Your code should not have any `div` tags.
 
 ```js
-assert($('#submit').attr('tabindex'));
-```
-
-Your code should set the `tabindex` attribute on the search `input` tag to a value of 1.
-
-```js
-assert($('#search').attr('tabindex') == '1');
-```
-
-Your code should set the `tabindex` attribute on the submit `input` tag to a value of 2.
-
-```js
-assert($('#submit').attr('tabindex') == '2');
+assert($('div').length == 0);
 ```
 
 # --seed--
@@ -55,71 +46,51 @@ assert($('#submit').attr('tabindex') == '2');
 ## --seed-contents--
 
 ```html
-<body>
-  <header>
-    <h1>Even Deeper Thoughts with Master Camper Cat</h1>
-    <nav>
-      <ul>
-        <li><a href="">Home</a></li>
-        <li><a href="">Blog</a></li>
-        <li><a href="">Training</a></li>
-      </ul>
-    </nav>
-  </header>
-  <form>
-    <label for="search">Search:</label>
+<h1>Deep Thoughts with Master Camper Cat</h1>
+<main>
+  <div>
+    <h2>The Garfield Files: Lasagna as Training Fuel?</h2>
+    <p>The internet is littered with varying opinions on nutritional paradigms, from catnip paleo to hairball cleanses. But let's turn our attention to an often overlooked fitness fuel, and examine the protein-carb-NOM trifecta that is lasagna...</p>
+  </div>
 
+  <img src="samuraiSwords.jpeg" alt="">
 
-    <input type="search" name="search" id="search">
-    <input type="submit" name="submit" value="Submit" id="submit">
+  <article>
+    <h2>Defeating your Foe: the Red Dot is Ours!</h2>
+    <p>Felines the world over have been waging war on the most persistent of foes. This red nemesis combines both cunning stealth and lightning speed. But chin up, fellow fighters, our time for victory may soon be near...</p>
+  </article>
 
+  <img src="samuraiSwords.jpeg" alt="">
 
-  </form>
-  <h2>Inspirational Quotes</h2>
-  <blockquote>
-    <p>&ldquo;There's no Theory of Evolution, just a list of creatures I've allowed to live.&rdquo;<br>
-    - Chuck Norris</p>
-  </blockquote>
-  <blockquote>
-    <p>&ldquo;Wise men say forgiveness is divine, but never pay full price for late pizza.&rdquo;<br>
-    - TMNT</p>
-  </blockquote>
-  <footer>&copy; 2018 Camper Cat</footer>
-</body>
+  <article>
+    <h2>Is Chuck Norris a Cat Person?</h2>
+    <p>Chuck Norris is widely regarded as the premier martial artist on the planet, and it's a complete coincidence anyone who disagrees with this fact mysteriously disappears soon after. But the real question is, is he a cat person?...</p>
+  </article>
+</main>
 ```
 
 # --solutions--
 
 ```html
-<body>
-  <header>
-    <h1>Even Deeper Thoughts with Master Camper Cat</h1>
-    <nav>
-      <ul>
-        <li><a href="">Home</a></li>
-        <li><a href="">Blog</a></li>
-        <li><a href="">Training</a></li>
-      </ul>
-    </nav>
-  </header>
-  <form>
-    <label for="search">Search:</label>
+<h1>Deep Thoughts with Master Camper Cat</h1>
+<main>
+  <article>
+    <h2>The Garfield Files: Lasagna as Training Fuel?</h2>
+    <p>The internet is littered with varying opinions on nutritional paradigms, from catnip paleo to hairball cleanses. But let's turn our attention to an often overlooked fitness fuel, and examine the protein-carb-NOM trifecta that is lasagna...</p>
+  </article>
 
+  <img src="samuraiSwords.jpeg" alt="">
 
-    <input tabindex="1" type="search" name="search" id="search">
-    <input tabindex="2" type="submit" name="submit" value="Submit" id="submit">
+  <article>
+    <h2>Defeating your Foe: the Red Dot is Ours!</h2>
+    <p>Felines the world over have been waging war on the most persistent of foes. This red nemesis combines both cunning stealth and lightning speed. But chin up, fellow fighters, our time for victory may soon be near...</p>
+  </article>
 
+  <img src="samuraiSwords.jpeg" alt="">
 
-  </form>
-  <h2>Inspirational Quotes</h2>
-  <blockquote>
-    <p>&ldquo;There's no Theory of Evolution, just a list of creatures I've allowed to live.&rdquo;<br>
-    - Chuck Norris</p>
-  </blockquote>
-  <blockquote>
-    <p>&ldquo;Wise men say forgiveness is divine, but never pay full price for late pizza.&rdquo;<br>
-    - TMNT</p>
-  </blockquote>
-  <footer>&copy; 2018 Camper Cat</footer>
-</body>
+  <article>
+    <h2>Is Chuck Norris a Cat Person?</h2>
+    <p>Chuck Norris is widely regarded as the premier martial artist on the planet, and it's a complete coincidence anyone who disagrees with this fact mysteriously disappears soon after. But the real question is, is he a cat person?...</p>
+  </article>
+</main>
 ```
