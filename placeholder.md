@@ -1,79 +1,39 @@
 ---
-id: 587d78a7367417b2b2512adf
-title: Learn How the CSS @keyframes and animation Properties Work
+id: 587d781e367417b2b2512acb
+title: Lock an Element to its Parent with Absolute Positioning
 challengeType: 0
-videoUrl: 'https://scrimba.com/c/cakprhv'
-forumTopicId: 301059
+videoUrl: 'https://scrimba.com/c/cyLJ7c3'
+forumTopicId: 301060
 ---
 
 # --description--
 
-To animate an element, you need to know about the animation properties and the `@keyframes` rule. The animation properties control how the animation should behave and the `@keyframes` rule controls what happens during that animation. There are eight animation properties in total. This challenge will keep it simple and cover the two most important ones first:
+The next option for the CSS `position` property is `absolute`, which locks the element in place relative to its parent container. Unlike the `relative` position, this removes the element from the normal flow of the document, so surrounding items ignore it. The CSS offset properties (top or bottom and left or right) are used to adjust the position.
 
-`animation-name` sets the name of the animation, which is later used by `@keyframes` to tell CSS which rules go with which animations.
-
-`animation-duration` sets the length of time for the animation.
-
-`@keyframes` is how to specify exactly what happens within the animation over the duration. This is done by giving CSS properties for specific "frames" during the animation, with percentages ranging from 0% to 100%. If you compare this to a movie, the CSS properties for 0% is how the element displays in the opening scene. The CSS properties for 100% is how the element appears at the end, right before the credits roll. Then CSS applies the magic to transition the element over the given duration to act out the scene. Here's an example to illustrate the usage of `@keyframes` and the animation properties:
-
-```css
-#anim {
-  animation-name: colorful;
-  animation-duration: 3s;
-}
-
-@keyframes colorful {
-  0% {
-    background-color: blue;
-  }
-  100% {
-    background-color: yellow;
-  }
-}
-```
-
-For the element with the `anim` id, the code snippet above sets the `animation-name` to `colorful` and sets the `animation-duration` to 3 seconds. Then the `@keyframes` rule links to the animation properties with the name `colorful`. It sets the color to blue at the beginning of the animation (0%) which will transition to yellow by the end of the animation (100%). You aren't limited to only beginning-end transitions, you can set properties for the element for any percentage between 0% and 100%.
+One nuance with absolute positioning is that it will be locked relative to its closest *positioned* ancestor. If you forget to add a position rule to the parent item, (this is typically done using `position: relative;`), the browser will keep looking up the chain and ultimately default to the body tag.
 
 # --instructions--
 
-Create an animation for the element with the id `rect`, by setting the `animation-name` to rainbow and the `animation-duration` to 4 seconds. Next, declare a `@keyframes` rule, and set the `background-color` at the beginning of the animation (`0%`) to blue, the middle of the animation (`50%`) to green, and the end of the animation (`100%`) to yellow.
+Lock the `#searchbar` element to the top-right of its `section` parent by declaring its `position` as `absolute`. Give it `top` and `right` offsets of 50 pixels each.
 
 # --hints--
 
-The element with id of `rect` should have an `animation-name` property with a value of rainbow.
+The `#searchbar` element should have a `position` set to `absolute`.
 
 ```js
-assert($('#rect').css('animation-name') == 'rainbow');
+assert($('#searchbar').css('position') == 'absolute');
 ```
 
-The element with id of `rect` should have an `animation-duration` property with a value of 4s.
+Your code should use the `top` CSS offset of 50 pixels on the `#searchbar` element.
 
 ```js
-assert($('#rect').css('animation-duration') == '4s');
+assert($('#searchbar').css('top') == '50px');
 ```
 
-The `@keyframes` rule should use the `animation-name` of rainbow.
+Your code should use the `right` CSS offset of 50 pixels on the `#searchbar` element.
 
 ```js
-assert(code.match(/@keyframes\s+?rainbow\s*?{/g));
-```
-
-The `@keyframes` rule for rainbow should use a `background-color` of blue at 0%.
-
-```js
-assert(code.match(/0%\s*?{\s*?background-color:\s*?blue;\s*?}/gi));
-```
-
-The `@keyframes` rule for rainbow should use a `background-color` of green at 50%.
-
-```js
-assert(code.match(/50%\s*?{\s*?background-color:\s*?green;\s*?}/gi));
-```
-
-The `@keyframes` rule for rainbow should use a `background-color` of yellow at 100%.
-
-```js
-assert(code.match(/100%\s*?{\s*?background-color:\s*?yellow;\s*?}/gi));
+assert($('#searchbar').css('right') == '50px');
 ```
 
 # --seed--
@@ -82,54 +42,48 @@ assert(code.match(/100%\s*?{\s*?background-color:\s*?yellow;\s*?}/gi));
 
 ```html
 <style>
-  div {
-    height: 40px;
-    width: 70%;
-    background: black;
-    margin: 50px auto;
-    border-radius: 5px;
-  }
+  #searchbar {
 
-  #rect {
 
 
   }
-
-
-
-
+  section {
+    position: relative;
+  }
 </style>
-<div id="rect"></div>
+<body>
+  <h1>Welcome!</h1>
+  <section>
+    <form id="searchbar">
+      <label for="search">Search:</label>
+      <input type="search" id="search" name="search">
+      <input type="submit" name="submit" value="Go!">
+    </form>
+  </section>
+</body>
 ```
 
 # --solutions--
 
 ```html
 <style>
-  div {
-    height: 40px;
-    width: 70%;
-    background: black;
-    margin: 50px auto;
-    border-radius: 5px;
+  #searchbar {
+    position: absolute;
+    top: 50px;
+    right: 50px;
   }
-
-  #rect {
-    animation-name: rainbow;
-    animation-duration: 4s;
-  }
-
-  @keyframes rainbow {
-    0% {
-      background-color: blue;
-    }
-    50% {
-      background-color: green;
-    }
-    100% {
-      background-color: yellow;
-    }
+  section {
+    position: relative;
   }
 </style>
-<div id="rect"></div>
+<body>
+  <h1>Welcome!</h1>
+  <section>
+    <form id="searchbar">
+      <label for="search">Search:</label>
+      <input type="search" id="search" name="search">
+      <input type="submit" name="submit" value="Go!">
+    </form>
+  </section>
+</body>
 ```
