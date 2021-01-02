@@ -1,25 +1,35 @@
 ---
-id: 587d78a6367417b2b2512adc
-title: Use the CSS Transform Property skewY to Skew an Element Along the Y-Axis
+id: 587d78a5367417b2b2512ad9
+title: Use the CSS Transform scale Property to Change the Size of an Element
 challengeType: 0
-videoUrl: 'https://scrimba.com/c/c2MZ2uB'
-forumTopicId: 301075
+videoUrl: 'https://scrimba.com/c/c2MZVSg'
+forumTopicId: 301076
 ---
 
 # --description--
 
-Given that the `skewX()` function skews the selected element along the X-axis by a given degree, it is no surprise that the `skewY()` property skews an element along the Y (vertical) axis.
+To change the scale of an element, CSS has the `transform` property, along with its `scale()` function. The following code example doubles the size of all the paragraph elements on the page:
+
+```css
+p {
+  transform: scale(2);
+}
+```
 
 # --instructions--
 
-Skew the element with the id of `top` -10 degrees along the Y-axis by using the `transform` property.
+Increase the size of the element with the id of `ball2` to 1.5 times its original size.
 
 # --hints--
 
-The element with id `top` should be skewed by -10 degrees along its Y-axis.
+The `transform` property for `#ball2` should be set to scale it to 1.5 times its size.
 
 ```js
-assert(code.match(/#top\s*?{\s*?.*?\s*?transform:\s*?skewY\(-10deg\);/g));
+assert(
+  code.match(
+    /#ball2\s*?{\s*?left:\s*?65%;\s*?transform:\s*?scale\(1\.5\);\s*?}|#ball2\s*?{\s*?transform:\s*?scale\(1\.5\);\s*?left:\s*?65%;\s*?}/gi
+  )
+);
 ```
 
 # --seed--
@@ -28,43 +38,57 @@ assert(code.match(/#top\s*?{\s*?.*?\s*?transform:\s*?skewY\(-10deg\);/g));
 
 ```html
 <style>
-  div {
-    width: 70%;
-    height: 100px;
-    margin: 50px auto;
+  .ball {
+    width: 40px;
+    height: 40px;
+    margin: 50 auto;
+    position: fixed;
+    background: linear-gradient(
+      35deg,
+      #ccffff,
+      #ffcccc
+    );
+    border-radius: 50%;
   }
-  #top {
-    background-color: red;
+  #ball1 {
+    left: 20%;
+  }
+  #ball2 {
+    left: 65%;
 
   }
-  #bottom {
-    background-color: blue;
-    transform: skewX(24deg);
-  }
+
+
 </style>
 
-<div id="top"></div>
-<div id="bottom"></div>
+<div class="ball" id= "ball1"></div>
+<div class="ball" id= "ball2"></div>
 ```
 
 # --solutions--
 
 ```html
 <style>
-  div {
-    width: 70%;
-    height: 100px;
-    margin: 50px auto;
+  .ball {
+    width: 40px;
+    height: 40px;
+    margin: 50 auto;
+    position: fixed;
+    background: linear-gradient(
+      35deg,
+      #ccffff,
+      #ffcccc
+    );
+    border-radius: 50%;
   }
-  #top {
-    background-color: red;
-    transform: skewY(-10deg);
+  #ball1 {
+    left: 20%;
   }
-  #bottom {
-    background-color: blue;
-    transform: skewX(24deg);
+  #ball2 {
+    left: 65%;
+    transform: scale(1.5);
   }
 </style>
-<div id="top"></div>
-<div id="bottom"></div>
+<div class="ball" id= "ball1"></div>
+<div class="ball" id= "ball2"></div>
 ```
