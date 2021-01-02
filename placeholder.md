@@ -1,42 +1,41 @@
 ---
-id: 587d781e367417b2b2512ac9
-title: Change an Element's Relative Position
+id: 587d78a8367417b2b2512ae7
+title: Change Animation Timing with Keywords
 challengeType: 0
-videoUrl: 'https://scrimba.com/c/czVmMtZ'
-forumTopicId: 301044
+videoUrl: 'https://scrimba.com/c/cJKvwCM'
+forumTopicId: 301045
 ---
 
 # --description--
 
-CSS treats each HTML element as its own box, which is usually referred to as the <dfn>CSS Box Model</dfn>. Block-level items automatically start on a new line (think headings, paragraphs, and divs) while inline items sit within surrounding content (like images or spans). The default layout of elements in this way is called the <dfn>normal flow</dfn> of a document, but CSS offers the position property to override it.
+In CSS animations, the `animation-timing-function` property controls how quickly an animated element changes over the duration of the animation. If the animation is a car moving from point A to point B in a given time (your `animation-duration`), the `animation-timing-function` says how the car accelerates and decelerates over the course of the drive.
 
-When the position of an element is set to `relative`, it allows you to specify how CSS should move it *relative* to its current position in the normal flow of the page. It pairs with the CSS offset properties of `left` or `right`, and `top` or `bottom`. These say how many pixels, percentages, or ems to move the item *away* from where it is normally positioned. The following example moves the paragraph 10 pixels away from the bottom:
-
-```css
-p {
-  position: relative;
-  bottom: 10px;
-}
-```
-
-Changing an element's position to relative does not remove it from the normal flow - other elements around it still behave as if that item were in its default position. **Note:** Positioning gives you a lot of flexibility and power over the visual layout of a page. It's good to remember that no matter the position of elements, the underlying HTML markup should be organized and make sense when read from top to bottom. This is how users with visual impairments (who rely on assistive devices like screen readers) access your content.
+There are a number of predefined keywords available for popular options. For example, the default value is `ease`, which starts slow, speeds up in the middle, and then slows down again in the end. Other options include `ease-out`, which is quick in the beginning then slows down, `ease-in`, which is slow in the beginning, then speeds up at the end, or `linear`, which applies a constant animation speed throughout.
 
 # --instructions--
 
-Change the `position` of the `h2` to `relative`, and use a CSS offset to move it 15 pixels away from the `top` of where it sits in the normal flow. Notice there is no impact on the positions of the surrounding h1 and p elements.
+For the elements with id of `ball1` and `ball2`, add an `animation-timing-function` property to each, and set `#ball1` to `linear`, and `#ball2` to `ease-out`. Notice the difference between how the elements move during the animation but end together, since they share the same `animation-duration` of 2 seconds.
 
 # --hints--
 
-The `h2` element should have a `position` property set to `relative`.
+The value of the `animation-timing-function` property for the element with the id `ball1` should be linear.
 
 ```js
-assert($('h2').css('position') == 'relative');
+const ball1Animation = __helpers.removeWhiteSpace(
+  $('#ball1').css('animation-timing-function')
+);
+assert(ball1Animation == 'linear' || ball1Animation == 'cubic-bezier(0,0,1,1)');
 ```
 
-Your code should use a CSS offset to relatively position the `h2` 15px away from the `top` of where it normally sits.
+The value of the `animation-timing-function` property for the element with the id `ball2` should be ease-out.
 
 ```js
-assert($('h2').css('top') == '15px');
+const ball2Animation = __helpers.removeWhiteSpace(
+  $('#ball2').css('animation-timing-function')
+);
+assert(
+  ball2Animation == 'ease-out' || ball2Animation == 'cubic-bezier(0,0,0.58,1)'
+);
 ```
 
 # --seed--
@@ -45,30 +44,83 @@ assert($('h2').css('top') == '15px');
 
 ```html
 <style>
-  h2 {
 
+  .balls {
+    border-radius: 50%;
+    background: linear-gradient(
+      35deg,
+      #ccffff,
+      #ffcccc
+    );
+    position: fixed;
+    width: 50px;
+    height: 50px;
+    margin-top: 50px;
+    animation-name: bounce;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+  }
+  #ball1 {
+    left:27%;
 
   }
+  #ball2 {
+    left:56%;
+
+  }
+
+  @keyframes bounce {
+    0% {
+      top: 0px;
+    }
+    100% {
+      top: 249px;
+    }
+  }
+
 </style>
-<body>
-  <h1>On Being Well-Positioned</h1>
-  <h2>Move me!</h2>
-  <p>I still think the h2 is where it normally sits.</p>
-</body>
+
+<div class="balls" id="ball1"></div>
+<div class="balls" id="ball2"></div>
 ```
 
 # --solutions--
 
 ```html
 <style>
-  h2 {
-    position: relative;
-    top: 15px;
+  .balls {
+    border-radius: 50%;
+    background: linear-gradient(
+      35deg,
+      #ccffff,
+      #ffcccc
+    );
+    position: fixed;
+    width: 50px;
+    height: 50px;
+    margin-top: 50px;
+    animation-name: bounce;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+  }
+  #ball1 {
+    left:27%;
+    animation-timing-function: linear;
+  }
+  #ball2 {
+    left:56%;
+    animation-timing-function: ease-out;
+  }
+
+  @keyframes bounce {
+    0% {
+      top: 0px;
+    }
+    100% {
+      top: 249px;
+    }
   }
 </style>
-<body>
-  <h1>On Being Well-Positioned</h1>
-  <h2>Move me!</h2>
-  <p>I still think the h2 is where it normally sits.</p>
-</body>
+<div class="balls" id="ball1"></div>
+<div class="balls" id="ball2"></div>
 ```
