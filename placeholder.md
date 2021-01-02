@@ -1,35 +1,35 @@
 ---
-id: 587d78a5367417b2b2512ad9
-title: Use the CSS Transform scale Property to Change the Size of an Element
+id: 587d78a5367417b2b2512ada
+title: Use the CSS Transform scale Property to Scale an Element on Hover
 challengeType: 0
-videoUrl: 'https://scrimba.com/c/c2MZVSg'
-forumTopicId: 301076
+videoUrl: 'https://scrimba.com/c/cyLPJuM'
+forumTopicId: 301077
 ---
 
 # --description--
 
-To change the scale of an element, CSS has the `transform` property, along with its `scale()` function. The following code example doubles the size of all the paragraph elements on the page:
+The `transform` property has a variety of functions that let you scale, move, rotate, skew, etc., your elements. When used with pseudo-classes such as `:hover` that specify a certain state of an element, the `transform` property can easily add interactivity to your elements.
+
+Here's an example to scale the paragraph elements to 2.1 times their original size when a user hovers over them:
 
 ```css
-p {
-  transform: scale(2);
+p:hover {
+  transform: scale(2.1);
 }
 ```
 
+**Note:** Applying a transform to a `div` element will also affect any child elements contained in the div.
+
 # --instructions--
 
-Increase the size of the element with the id of `ball2` to 1.5 times its original size.
+Add a CSS rule for the `hover` state of the `div` and use the `transform` property to scale the `div` element to 1.1 times its original size when a user hovers over it.
 
 # --hints--
 
-The `transform` property for `#ball2` should be set to scale it to 1.5 times its size.
+The size of the `div` element should scale 1.1 times when the user hovers over it.
 
 ```js
-assert(
-  code.match(
-    /#ball2\s*?{\s*?left:\s*?65%;\s*?transform:\s*?scale\(1\.5\);\s*?}|#ball2\s*?{\s*?transform:\s*?scale\(1\.5\);\s*?left:\s*?65%;\s*?}/gi
-  )
-);
+assert(code.match(/div:hover\s*?{\s*?transform:\s*?scale\(1\.1\);/gi));
 ```
 
 # --seed--
@@ -38,57 +38,41 @@ assert(
 
 ```html
 <style>
-  .ball {
-    width: 40px;
-    height: 40px;
-    margin: 50 auto;
-    position: fixed;
+  div {
+    width: 70%;
+    height: 100px;
+    margin:  50px auto;
     background: linear-gradient(
-      35deg,
-      #ccffff,
-      #ffcccc
+      53deg,
+      #ccfffc,
+      #ffcccf
     );
-    border-radius: 50%;
   }
-  #ball1 {
-    left: 20%;
-  }
-  #ball2 {
-    left: 65%;
 
-  }
 
 
 </style>
 
-<div class="ball" id= "ball1"></div>
-<div class="ball" id= "ball2"></div>
+<div></div>
 ```
 
 # --solutions--
 
 ```html
 <style>
-  .ball {
-    width: 40px;
-    height: 40px;
-    margin: 50 auto;
-    position: fixed;
+  div {
+    width: 70%;
+    height: 100px;
+    margin:  50px auto;
     background: linear-gradient(
-      35deg,
-      #ccffff,
-      #ffcccc
+      53deg,
+      #ccfffc,
+      #ffcccf
     );
-    border-radius: 50%;
   }
-  #ball1 {
-    left: 20%;
-  }
-  #ball2 {
-    left: 65%;
-    transform: scale(1.5);
+  div:hover {
+    transform: scale(1.1);
   }
 </style>
-<div class="ball" id= "ball1"></div>
-<div class="ball" id= "ball2"></div>
+<div></div>
 ```
