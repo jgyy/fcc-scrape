@@ -1,56 +1,29 @@
 ---
-id: 587d78a7367417b2b2512ae1
-title: Create Movement Using CSS Animation
+id: 587d78a5367417b2b2512ad8
+title: Create Texture by Adding a Subtle Pattern as a Background Image
 challengeType: 0
-videoUrl: 'https://scrimba.com/c/c7amZfW'
-forumTopicId: 301051
+videoUrl: 'https://scrimba.com/c/cQdwJC8'
+forumTopicId: 301052
 ---
 
 # --description--
 
-When elements have a specified `position`, such as `fixed` or `relative`, the CSS offset properties `right`, `left`, `top`, and `bottom` can be used in animation rules to create movement.
-
-As shown in the example below, you can push the item downwards then upwards by setting the `top` property of the `50%` keyframe to 50px, but having it set to 0px for the first (`0%`) and the last (`100%`) keyframe.
-
-```css
-@keyframes rainbow {
-  0% {
-    background-color: blue;
-    top: 0px;
-  }
-  50% {
-    background-color: green;
-    top: 50px;
-  }
-  100% {
-    background-color: yellow;
-    top: 0px;
-  }
-}
-```
+One way to add texture and interest to a background and have it stand out more is to add a subtle pattern. The key is balance, as you don't want the background to stand out too much, and take away from the foreground. The `background` property supports the `url()` function in order to link to an image of the chosen texture or pattern. The link address is wrapped in quotes inside the parentheses.
 
 # --instructions--
 
-Add a horizontal motion to the `div` animation. Using the `left` offset property, add to the `@keyframes` rule so rainbow starts at 0 pixels at `0%`, moves to 25 pixels at `50%`, and ends at -25 pixels at `100%`. Don't replace the `top` property in the editor - the animation should have both vertical and horizontal motion.
+Using the url of `https://cdn-media-1.freecodecamp.org/imgr/MJAkxbh.png`, set the `background` of the whole page with the `body` selector.
 
 # --hints--
 
-The `@keyframes` rule for `0%` should use the `left` offset of 0px.
+Your `body` element should have a `background` property set to a `url()` with the given link.
 
 ```js
-assert(code.match(/[^50]0%\s*?{[\s\S]*?left:\s*?0px(;[\s\S]*?|\s*?)}/gi));
-```
-
-The `@keyframes` rule for `50%` should use the `left` offset of 25px.
-
-```js
-assert(code.match(/50%\s*?{[\s\S]*?left:\s*?25px(;[\s\S]*?|\s*?)}/gi));
-```
-
-The `@keyframes` rule for `100%` should use the `left` offset of -25px.
-
-```js
-assert(code.match(/100%\s*?{[\s\S]*?left:\s*?-25px(;[\s\S]*?|\s*?)}/gi));
+assert(
+  code.match(
+    /background:\s*?url\(\s*("|'|)https:\/\/cdn-media-1\.freecodecamp\.org\/imgr\/MJAkxbh\.png\1\s*\)/gi
+  )
+);
 ```
 
 # --seed--
@@ -59,77 +32,18 @@ assert(code.match(/100%\s*?{[\s\S]*?left:\s*?-25px(;[\s\S]*?|\s*?)}/gi));
 
 ```html
 <style>
-  div {
-    height: 40px;
-    width: 70%;
-    background: black;
-    margin: 50px auto;
-    border-radius: 5px;
-    position: relative;
-  }
+  body {
 
-  #rect {
-    animation-name: rainbow;
-    animation-duration: 4s;
-  }
-
-  @keyframes rainbow {
-    0% {
-      background-color: blue;
-      top: 0px;
-
-    }
-    50% {
-      background-color: green;
-      top: 50px;
-
-    }
-    100% {
-      background-color: yellow;
-      top: 0px;
-
-    }
   }
 </style>
-
-<div id="rect"></div>
 ```
 
 # --solutions--
 
 ```html
 <style>
-  div {
-    height: 40px;
-    width: 70%;
-    background: black;
-    margin: 50px auto;
-    border-radius: 5px;
-    position: relative;
-  }
-
-  #rect {
-    animation-name: rainbow;
-    animation-duration: 4s;
-  }
-
-  @keyframes rainbow {
-    0% {
-      background-color: blue;
-      top: 0px;
-      left: 0px;
-    }
-    50% {
-      background-color: green;
-      top: 50px;
-      left: 25px;
-    }
-    100% {
-      background-color: yellow;
-      top: 0px;
-      left: -25px;
-    }
+  body {
+    background: url("https://cdn-media-1.freecodecamp.org/imgr/MJAkxbh.png");
   }
 </style>
-<div id="rect"></div>
 ```
