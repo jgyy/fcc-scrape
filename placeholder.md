@@ -1,36 +1,42 @@
 ---
-id: 587d7791367417b2b2512ab5
-title: Adjust the Height of an Element Using the height Property
+id: 587d781d367417b2b2512ac8
+title: Adjust the Hover State of an Anchor Tag
 challengeType: 0
-videoUrl: 'https://scrimba.com/c/cEDaDTN'
-forumTopicId: 301034
+videoUrl: 'https://scrimba.com/c/cakRGcm'
+forumTopicId: 301035
 ---
 
 # --description--
 
-You can specify the height of an element using the `height` property in CSS, similar to the `width` property. Here's an example that changes the height of an image to 20px:
+This challenge will touch on the usage of pseudo-classes. A pseudo-class is a keyword that can be added to selectors, in order to select a specific state of the element.
+
+For example, the styling of an anchor tag can be changed for its hover state using the `:hover` pseudo-class selector. Here's the CSS to change the `color` of the anchor tag to red during its hover state:
 
 ```css
-img {
-  height: 20px;
+a:hover {
+  color: red;
 }
 ```
 
 # --instructions--
 
-Add a `height` property to the `h4` tag and set it to 25px.
-
-**Note:** You may need to be at 100% zoom to pass the test on this challenge.
+The code editor has a CSS rule to style all `a` tags black. Add a rule so that when the user hovers over the `a` tag, the `color` is blue.
 
 # --hints--
 
-Your code should change the `h4` `height` property to a value of 25 pixels.
+The anchor tag `color` should remain black, only add CSS rules for the `:hover` state.
+
+```js
+assert($('a').css('color') == 'rgb(0, 0, 0)');
+```
+
+The anchor tag should have a `color` of blue on hover.
 
 ```js
 assert(
-  Math.round(document.querySelector('h4').getBoundingClientRect().height) ===
-    25 &&
-    /h4{\S*height:25px(;\S*}|})/.test($('style').text().replace(/\s/g, ''))
+  code.match(
+    /a:hover\s*?{\s*?color:\s*?(blue|rgba\(\s*?0\s*?,\s*?0\s*?,\s*?255\s*?,\s*?1\s*?\)|#00F|rgb\(\s*?0\s*?,\s*?0\s*?,\s*?255\s*?\))\s*?;\s*?}/gi
+  )
 );
 ```
 
@@ -40,78 +46,26 @@ assert(
 
 ```html
 <style>
-  h4 {
-    text-align: center;
+  a {
+    color: #000;
+  }
 
-  }
-  p {
-    text-align: justify;
-  }
-  .links {
-    margin-right: 20px;
-    text-align: left;
-  }
-  .fullCard {
-    width: 245px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin: 10px 5px;
-    padding: 4px;
-  }
-  .cardContent {
-    padding: 10px;
-  }
+
+
 </style>
-<div class="fullCard">
-  <div class="cardContent">
-    <div class="cardText">
-      <h4>Google</h4>
-      <p>Google was founded by Larry Page and Sergey Brin while they were Ph.D. students at Stanford University.</p>
-    </div>
-    <div class="cardLinks">
-      <a href="https://en.wikipedia.org/wiki/Larry_Page" target="_blank" class="links">Larry Page</a>
-      <a href="https://en.wikipedia.org/wiki/Sergey_Brin" target="_blank" class="links">Sergey Brin</a>
-    </div>
-  </div>
-</div>
+<a href="https://freecatphotoapp.com/" target="_blank">CatPhotoApp</a>
 ```
 
 # --solutions--
 
 ```html
 <style>
-  h4 {
-    text-align: center;
-    height: 25px;
+  a {
+    color: #000;
   }
-  p {
-    text-align: justify;
-  }
-  .links {
-    margin-right: 20px;
-    text-align: left;
-  }
-  .fullCard {
-    width: 245px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin: 10px 5px;
-    padding: 4px;
-  }
-  .cardContent {
-    padding: 10px;
+  a:hover {
+    color: rgba(0,0,255,1);
   }
 </style>
-<div class="fullCard">
-  <div class="cardContent">
-    <div class="cardText">
-      <h4>Google</h4>
-      <p>Google was founded by Larry Page and Sergey Brin while they were Ph.D. students at Stanford University.</p>
-    </div>
-    <div class="cardLinks">
-      <a href="https://en.wikipedia.org/wiki/Larry_Page" target="_blank" class="links">Larry Page</a>
-      <a href="https://en.wikipedia.org/wiki/Sergey_Brin" target="_blank" class="links">Sergey Brin</a>
-    </div>
-  </div>
-</div>
+<a href="https://freecatphotoapp.com/" target="_blank">CatPhotoApp</a>
 ```
