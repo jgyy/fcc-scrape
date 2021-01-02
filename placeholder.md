@@ -1,33 +1,64 @@
 ---
-id: 587d781b367417b2b2512abb
-title: Create a Horizontal Line Using the hr Element
+id: 587d78a6367417b2b2512ade
+title: Create a More Complex Shape Using CSS and HTML
 challengeType: 0
-videoUrl: 'https://scrimba.com/c/c3bR8t7'
-forumTopicId: 301049
+videoUrl: 'https://scrimba.com/c/cPpz4fr'
+forumTopicId: 301050
 ---
 
 # --description--
 
-You can use the `hr` tag to add a horizontal line across the width of its containing element. This can be used to define a change in topic or to visually separate groups of content.
+One of the most popular shapes in the world is the heart shape, and in this challenge you'll create one using pure CSS. But first, you need to understand the `::before` and `::after` pseudo-elements. These pseudo-elements are used to add something before or after a selected element. In the following example, a `::before` pseudo-element is used to add a rectangle to an element with the class `heart`:
+
+```css
+.heart::before {
+  content: "";
+  background-color: yellow;
+  border-radius: 25%;
+  position: absolute;
+  height: 50px;
+  width: 70px;
+  top: -50px;
+  left: 5px;
+}
+```
+
+For the `::before` and `::after` pseudo-elements to function properly, they must have a defined `content` property. This property is usually used to add things like a photo or text to the selected element. When the `::before` and `::after` pseudo-elements are used to make shapes, the `content` property is still required, but it's set to an empty string. In the above example, the element with the class of `heart` has a `::before` pseudo-element that produces a yellow rectangle with `height` and `width` of 50px and 70px, respectively. This rectangle has round corners due to its 25% border radius and is positioned absolutely at 5px from the `left` and 50px above the `top` of the element.
 
 # --instructions--
 
-Add an `hr` tag underneath the `h4` which contains the card title.
+Transform the element on the screen to a heart. In the `heart::after` selector, change the `background-color` to pink and the `border-radius` to 50%.
 
-**Note:** In HTML, `hr` is a self-closing tag, and therefore doesn't need a separate closing tag.
+Next, target the element with the class `heart` (just `heart`) and fill in the `transform` property. Use the `rotate()` function with -45 degrees.
+
+Finally, in the `heart::before` selector, set its `content` property to an empty string.
 
 # --hints--
 
-Your code should add an `hr` tag to the markup.
+The `background-color` property of the `heart::after` selector should be pink.
 
 ```js
-assert($('hr').length == 1);
+assert(
+  code.match(/\.heart::after\s*?{\s*?background-color\s*?:\s*?pink\s*?;/gi)
+);
 ```
 
-The `hr` tag should come between the title and the paragraph.
+The `border-radius` of the `heart::after` selector should be 50%.
 
 ```js
-assert(code.match(/<\/h4>\s*?<hr(>|\s*?\/>)\s*?<p>/gi));
+assert(code.match(/border-radius\s*?:\s*?50%/gi).length == 2);
+```
+
+The `transform` property for the `heart` class should use a `rotate()` function set to -45 degrees.
+
+```js
+assert(code.match(/transform\s*?:\s*?rotate\(\s*?-45deg\s*?\)/gi));
+```
+
+The `content` of the `heart::before` selector should be an empty string.
+
+```js
+assert(code.match(/\.heart::before\s*?{\s*?content\s*?:\s*?("|')\1\s*?;/gi));
 ```
 
 # --seed--
@@ -36,86 +67,78 @@ assert(code.match(/<\/h4>\s*?<hr(>|\s*?\/>)\s*?<p>/gi));
 
 ```html
 <style>
-  h4 {
-    text-align: center;
-    height: 25px;
+  .heart {
+    position: absolute;
+    margin: auto;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: pink;
+    height: 50px;
+    width: 50px;
+    transform: ;
   }
-  p {
-    text-align: justify;
+  .heart::after {
+    background-color: blue;
+    content: "";
+    border-radius: 25%;
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    top: 0px;
+    left: 25px;
   }
-  .links {
-    text-align: left;
-    color: black;
-  }
-  .fullCard {
-    width: 245px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin: 10px 5px;
-    padding: 4px;
-  }
-  .cardContent {
-    padding: 10px;
-  }
-  .cardText {
-    margin-bottom: 30px;
+  .heart::before {
+    content: ;
+    background-color: pink;
+    border-radius: 50%;
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    top: -25px;
+    left: 0px;
   }
 </style>
-<div class="fullCard">
-  <div class="cardContent">
-    <div class="cardText">
-      <h4><s>Google</s>Alphabet</h4>
-
-      <p><em>Google was founded by Larry Page and Sergey Brin while they were <u>Ph.D. students</u> at <strong>Stanford University</strong>.</em></p>
-    </div>
-    <div class="cardLinks">
-      <a href="https://en.wikipedia.org/wiki/Larry_Page" target="_blank" class="links">Larry Page</a><br><br>
-      <a href="https://en.wikipedia.org/wiki/Sergey_Brin" target="_blank" class="links">Sergey Brin</a>
-    </div>
-  </div>
-</div>
+<div class="heart"></div>
 ```
 
 # --solutions--
 
 ```html
 <style>
-  h4 {
-    text-align: center;
-    height: 25px;
+  .heart {
+    position: absolute;
+    margin: auto;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: pink;
+    height: 50px;
+    width: 50px;
+    transform: rotate(-45deg);
   }
-  p {
-    text-align: justify;
+  .heart::after {
+    background-color: pink;
+    content: "";
+    border-radius: 50%;
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    top: 0px;
+    left: 25px;
   }
-  .links {
-    text-align: left;
-    color: black;
-  }
-  .fullCard {
-    width: 245px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin: 10px 5px;
-    padding: 4px;
-  }
-  .cardContent {
-    padding: 10px;
-  }
-  .cardText {
-    margin-bottom: 30px;
+  .heart::before {
+    content: "";
+    background-color: pink;
+    border-radius: 50%;
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    top: -25px;
+    left: 0px;
   }
 </style>
-<div class="fullCard">
-  <div class="cardContent">
-    <div class="cardText">
-      <h4><s>Google</s>Alphabet</h4>
-      <hr>
-      <p><em>Google was founded by Larry Page and Sergey Brin while they were <u>Ph.D. students</u> at <strong>Stanford University</strong>.</em></p>
-    </div>
-    <div class="cardLinks">
-      <a href="https://en.wikipedia.org/wiki/Larry_Page" target="_blank" class="links">Larry Page</a><br><br>
-      <a href="https://en.wikipedia.org/wiki/Sergey_Brin" target="_blank" class="links">Sergey Brin</a>
-    </div>
-  </div>
-</div>
+<div class="heart"></div>
 ```
