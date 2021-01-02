@@ -1,52 +1,33 @@
 ---
-id: 587d78a7367417b2b2512ae0
-title: Use CSS Animation to Change the Hover State of a Button
+id: 587d78a6367417b2b2512adb
+title: Use the CSS Transform Property skewX to Skew an Element Along the X-Axis
 challengeType: 0
-videoUrl: 'https://scrimba.com/c/cg4vZAa'
-forumTopicId: 301073
+videoUrl: 'https://scrimba.com/c/cyLP8Sr'
+forumTopicId: 301074
 ---
 
 # --description--
 
-You can use CSS `@keyframes` to change the color of a button in its hover state.
+The next function of the `transform` property is `skewX()`, which skews the selected element along its X (horizontal) axis by a given degree.
 
-Here's an example of changing the width of an image on hover:
+The following code skews the paragraph element by -32 degrees along the X-axis.
 
-```html
-<style>
-  img:hover {
-    animation-name: width;
-    animation-duration: 500ms;
-  }
-
-  @keyframes width {
-    100% {
-      width: 40px;
-    }
-  }
-</style>
-
-<img src="https://bit.ly/smallgooglelogo" alt="Google's Logo" />
+```css
+p {
+  transform: skewX(-32deg);
+}
 ```
 
 # --instructions--
 
-Note that `ms` stands for milliseconds, where 1000ms is equal to 1s.
-
-Use CSS `@keyframes` to change the `background-color` of the `button` element so it becomes `#4791d0` when a user hovers over it. The `@keyframes` rule should only have an entry for `100%`.
+Skew the element with the id of `bottom` by 24 degrees along the X-axis by using the `transform` property.
 
 # --hints--
 
-The @keyframes rule should use the `animation-name` background-color.
+The element with id `bottom` should be skewed by 24 degrees along its X-axis.
 
 ```js
-assert(code.match(/@keyframes\s+?background-color\s*?{/g));
-```
-
-There should be one rule under `@keyframes` that changes the `background-color` to `#4791d0` at 100%.
-
-```js
-assert(code.match(/100%\s*?{\s*?background-color:\s*?#4791d0;\s*?}/gi));
+assert(code.match(/#bottom\s*?{\s*?.*?\s*?transform:\s*?skewX\(24deg\);/g));
 ```
 
 # --seed--
@@ -55,45 +36,41 @@ assert(code.match(/100%\s*?{\s*?background-color:\s*?#4791d0;\s*?}/gi));
 
 ```html
 <style>
-  button {
-    border-radius: 5px;
-    color: white;
-    background-color: #0F5897;
-    padding: 5px 10px 8px 10px;
+  div {
+    width: 70%;
+    height: 100px;
+    margin:  50px auto;
   }
-
-  button:hover {
-    animation-name: background-color;
-    animation-duration: 500ms;
+  #top {
+    background-color: red;
   }
+  #bottom {
+    background-color: blue;
 
-
+  }
 </style>
 
-<button>Register</button>
+<div id="top"></div>
+<div id="bottom"></div>
 ```
 
 # --solutions--
 
 ```html
 <style>
-  button {
-    border-radius: 5px;
-    color: white;
-    background-color: #0F5897;
-    padding: 5px 10px 8px 10px;
+  div {
+    width: 70%;
+    height: 100px;
+    margin:  50px auto;
   }
-
-  button:hover {
-    animation-name: background-color;
-    animation-duration: 500ms;
+  #top {
+    background-color: red;
   }
-
-  @keyframes background-color {
-    100% {
-      background-color: #4791d0;
-    }
+  #bottom {
+    background-color: blue;
+    transform: skewX(24deg);
   }
 </style>
-<button>Register</button>
+<div id="top"></div>
+<div id="bottom"></div>
 ```
