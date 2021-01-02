@@ -1,41 +1,31 @@
 ---
-id: 587d7791367417b2b2512ab3
-title: Create Visual Balance Using the text-align Property
+id: 587d78a7367417b2b2512ae2
+title: Create Visual Direction by Fading an Element from Left to Right
 challengeType: 0
-videoUrl: 'https://scrimba.com/c/c3b4EAp'
-forumTopicId: 301053
+videoUrl: 'https://scrimba.com/c/cGJqqAE'
+forumTopicId: 301054
 ---
 
 # --description--
 
-This section of the curriculum focuses on Applied Visual Design. The first group of challenges build on the given card layout to show a number of core principles.
+For this challenge, you'll change the `opacity` of an animated element so it gradually fades as it reaches the right side of the screen.
 
-Text is often a large part of web content. CSS has several options for how to align it with the `text-align` property.
-
-`text-align: justify;` causes all lines of text except the last line to meet the left and right edges of the line box.
-
-`text-align: center;` centers the text
-
-`text-align: right;` right-aligns the text
-
-And `text-align: left;` (the default) left-aligns the text.
+In the displayed animation, the round element with the gradient background moves to the right by the 50% mark of the animation per the `@keyframes` rule.
 
 # --instructions--
 
-Align the `h4` tag's text, which says "Google", to the center. Then justify the paragraph tag which contains information about how Google was founded.
+Target the element with the id of `ball` and add the `opacity` property set to 0.1 at `50%`, so the element fades as it moves to the right.
 
 # --hints--
 
-Your code should use the text-align property on the `h4` tag to set it to center.
+The `keyframes` rule for fade should set the `opacity` property to 0.1 at 50%.
 
 ```js
-assert($('h4').css('text-align') == 'center');
-```
-
-Your code should use the text-align property on the `p` tag to set it to justify.
-
-```js
-assert($('p').css('text-align') == 'justify');
+assert(
+  code.match(
+    /@keyframes fade\s*?{\s*?50%\s*?{\s*?(?:left:\s*?60%;\s*?opacity:\s*?0?\.1;|opacity:\s*?0?\.1;\s*?left:\s*?60%;)/gi
+  )
+);
 ```
 
 # --seed--
@@ -44,74 +34,61 @@ assert($('p').css('text-align') == 'justify');
 
 ```html
 <style>
-  h4 {
 
+  #ball {
+    width: 70px;
+    height: 70px;
+    margin: 50px auto;
+    position: fixed;
+    left: 20%;
+    border-radius: 50%;
+    background: linear-gradient(
+      35deg,
+      #ccffff,
+      #ffcccc
+    );
+    animation-name: fade;
+    animation-duration: 3s;
   }
-  p {
 
-  }
-  .links {
-    margin-right: 20px;
+  @keyframes fade {
+    50% {
+      left: 60%;
 
+    }
   }
-  .fullCard {
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin: 10px 5px;
-    padding: 4px;
-  }
-  .cardContent {
-    padding: 10px;
-  }
+
 </style>
-<div class="fullCard">
-  <div class="cardContent">
-    <div class="cardText">
-      <h4>Google</h4>
-      <p>Google was founded by Larry Page and Sergey Brin while they were Ph.D. students at Stanford University.</p>
-    </div>
-    <div class="cardLinks">
-      <a href="https://en.wikipedia.org/wiki/Larry_Page" target="_blank" class="links">Larry Page</a>
-      <a href="https://en.wikipedia.org/wiki/Sergey_Brin" target="_blank" class="links">Sergey Brin</a>
-    </div>
-  </div>
-</div>
+
+<div id="ball"></div>
 ```
 
 # --solutions--
 
 ```html
 <style>
-  h4 {
-    text-align: center;
+  #ball {
+    width: 70px;
+    height: 70px;
+    margin: 50px auto;
+    position: fixed;
+    left: 20%;
+    border-radius: 50%;
+    background: linear-gradient(
+      35deg,
+      #ccffff,
+      #ffcccc
+    );
+    animation-name: fade;
+    animation-duration: 3s;
   }
-  p {
-    text-align: justify;
-  }
-  .links {
-    margin-right: 20px;
 
-  }
-  .fullCard {
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin: 10px 5px;
-    padding: 4px;
-  }
-  .cardContent {
-    padding: 10px;
+  @keyframes fade {
+    50% {
+      left: 60%;
+      opacity: 0.1;
+    }
   }
 </style>
-<div class="fullCard">
-  <div class="cardContent">
-    <div class="cardText">
-      <h4>Google</h4>
-      <p>Google was founded by Larry Page and Sergey Brin while they were Ph.D. students at Stanford University.</p>
-    </div>
-    <div class="cardLinks">
-      <a href="https://en.wikipedia.org/wiki/Larry_Page" target="_blank" class="links">Larry Page</a>
-      <a href="https://en.wikipedia.org/wiki/Sergey_Brin" target="_blank" class="links">Sergey Brin</a>
-    </div>
-  </div>
-</div>
+<div id="ball"></div>
 ```
