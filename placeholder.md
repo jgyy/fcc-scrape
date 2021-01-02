@@ -1,50 +1,47 @@
 ---
-id: 587d78a4367417b2b2512ad2
-title: Learn about Tertiary Colors
+id: 587d78a9367417b2b2512ae8
+title: Learn How Bezier Curves Work
 challengeType: 0
-forumTopicId: 301057
+videoUrl: 'https://scrimba.com/c/c9bDrs8'
+forumTopicId: 301058
 ---
 
 # --description--
 
-Computer monitors and device screens create different colors by combining amounts of red, green, and blue light. This is known as the RGB additive color model in modern color theory. Red (R), green (G), and blue (B) are called primary colors. Mixing two primary colors creates the secondary colors cyan (G + B), magenta (R + B) and yellow (R + G). You saw these colors in the Complementary Colors challenge. These secondary colors happen to be the complement to the primary color not used in their creation, and are opposite to that primary color on the color wheel. For example, magenta is made with red and blue, and is the complement to green.
+The last challenge introduced the `animation-timing-function` property and a few keywords that change the speed of an animation over its duration. CSS offers an option other than keywords that provides even finer control over how the animation plays out, through the use of Bezier curves.
 
-Tertiary colors are the result of combining a primary color with one of its secondary color neighbors. For example, within the RGB color model, red (primary) and yellow (secondary) make orange (tertiary). This adds six more colors to a simple color wheel for a total of twelve.
+In CSS animations, Bezier curves are used with the `cubic-bezier` function. The shape of the curve represents how the animation plays out. The curve lives on a 1 by 1 coordinate system. The X-axis of this coordinate system is the duration of the animation (think of it as a time scale), and the Y-axis is the change in the animation.
 
-There are various methods of selecting different colors that result in a harmonious combination in design. One example that can use tertiary colors is called the split-complementary color scheme. This scheme starts with a base color, then pairs it with the two colors that are adjacent to its complement. The three colors provide strong visual contrast in a design, but are more subtle than using two complementary colors.
+The `cubic-bezier` function consists of four main points that sit on this 1 by 1 grid: `p0`, `p1`, `p2`, and `p3`. `p0` and `p3` are set for you - they are the beginning and end points which are always located respectively at the origin (0, 0) and (1, 1). You set the x and y values for the other two points, and where you place them in the grid dictates the shape of the curve for the animation to follow. This is done in CSS by declaring the x and y values of the `p1` and `p2` "anchor" points in the form: `(x1, y1, x2, y2)`. Pulling it all together, here's an example of a Bezier curve in CSS code:
 
-Here are three colors created using the split-complement scheme:
+`animation-timing-function: cubic-bezier(0.25, 0.25, 0.75, 0.75);`
 
-<table class='table table-striped'><thead><tr><th>Color</th><th>Hex Code</th></tr></thead><thead></thead><tbody><tr><td>orange</td><td>#FF7F00</td></tr><tr><td>cyan</td><td>#00FFFF</td></tr><tr><td>raspberry</td><td>#FF007F</td></tr></tbody></table>
+In the example above, the x and y values are equivalent for each point (x1 = 0.25 = y1 and x2 = 0.75 = y2), which if you remember from geometry class, results in a line that extends from the origin to point (1, 1). This animation is a linear change of an element during the length of an animation, and is the same as using the `linear` keyword. In other words, it changes at a constant speed.
 
 # --instructions--
 
-Change the `background-color` property of the `orange`, `cyan`, and `raspberry` classes to their respective colors. Make sure to use the hex codes and not the color names.
+For the element with the id of `ball1`, change the value of the `animation-timing-function` property from `linear` to its equivalent `cubic-bezier` function value. Use the point values given in the example above.
 
 # --hints--
 
-The `div` element with class `orange` should have a `background-color` of orange.
+The value of the `animation-timing-function` property for the element with the id `ball1` should be the linear-equivalent cubic-bezier function.
 
 ```js
-assert($('.orange').css('background-color') == 'rgb(255, 127, 0)');
+assert(
+  $('#ball1').css('animation-timing-function') ==
+    'cubic-bezier(0.25, 0.25, 0.75, 0.75)'
+);
 ```
 
-The `div` element with class `cyan` should have a `background-color` of cyan.
+The value of the `animation-timing-function` property for the element with the id `ball2` should not change.
 
 ```js
-assert($('.cyan').css('background-color') == 'rgb(0, 255, 255)');
-```
-
-The `div` element with class `raspberry` should have a `background-color` of raspberry.
-
-```js
-assert($('.raspberry').css('background-color') == 'rgb(255, 0, 127)');
-```
-
-All `background-color` values for the color classes should be hex codes and not color names.
-
-```js
-assert(!/background-color:\s(orange|cyan|raspberry)/.test(code));
+const ball2Animation = __helpers.removeWhiteSpace(
+  $('#ball2').css('animation-timing-function')
+);
+assert(
+  ball2Animation == 'ease-out' || ball2Animation == 'cubic-bezier(0,0,0.58,1)'
+);
 ```
 
 # --seed--
@@ -53,61 +50,84 @@ assert(!/background-color:\s(orange|cyan|raspberry)/.test(code));
 
 ```html
 <style>
-  body {
-    background-color: #FFFFFF;
+
+  .balls{
+    border-radius: 50%;
+    background: linear-gradient(
+      35deg,
+      #ccffff,
+      #ffcccc
+    );
+    position: fixed;
+    width: 50px;
+    height: 50px;
+    margin-top: 50px;
+    animation-name: bounce;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+  }
+  #ball1 {
+    left: 27%;
+    animation-timing-function: linear;
+  }
+  #ball2 {
+    left: 56%;
+    animation-timing-function: ease-out;
   }
 
-  .orange {
-    background-color: #000000;
+  @keyframes bounce {
+    0% {
+      top: 0px;
+    }
+    100% {
+      top: 249px;
+    }
   }
 
-  .cyan {
-    background-color: #000000;
-  }
-
-  .raspberry {
-    background-color: #000000;
-  }
-
-  div {
-    height: 100px;
-    width: 100px;
-    margin-bottom: 5px;
-  }
 </style>
 
-<div class="orange"></div>
-<div class="cyan"></div>
-<div class="raspberry"></div>
+<div class="balls" id="ball1"></div>
+<div class="balls" id="ball2"></div>
 ```
 
 # --solutions--
 
 ```html
 <style>
-  body {
-    background-color: #FFFFFF;
+
+  .balls{
+    border-radius: 50%;
+    background: linear-gradient(
+      35deg,
+      #ccffff,
+      #ffcccc
+    );
+    position: fixed;
+    width: 50px;
+    height: 50px;
+    margin-top: 50px;
+    animation-name: bounce;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+  }
+  #ball1 {
+    left: 27%;
+    animation-timing-function: cubic-bezier(0.25, 0.25, 0.75, 0.75);
+  }
+  #ball2 {
+    left: 56%;
+    animation-timing-function: ease-out;
   }
 
-  .orange {
-    background-color: #FF7F00;
-  }
-
-  .cyan {
-    background-color: #00FFFF;
-  }
-
-  .raspberry {
-    background-color: #FF007F;
-  }
-
-  div {
-    height: 100px;
-    width: 100px;
-    margin-bottom: 5px;
+  @keyframes bounce {
+    0% {
+      top: 0px;
+    }
+    100% {
+      top: 249px;
+    }
   }
 </style>
-<div class="orange"></div>
-<div class="cyan"></div>
-<div class="raspberry"></div>
+<div class="balls" id="ball1"></div>
+<div class="balls" id="ball2"></div>
 ```
