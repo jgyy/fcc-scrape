@@ -1,35 +1,33 @@
 ---
-id: 587d781c367417b2b2512ac0
-title: Use the text-transform Property to Make Text Uppercase
+id: 587d781a367417b2b2512ab8
+title: Use the u Tag to Underline Text
 challengeType: 0
-videoUrl: 'https://scrimba.com/c/cvVZQSP'
-forumTopicId: 301081
+videoUrl: 'https://scrimba.com/c/cN6aQCL'
+forumTopicId: 301082
 ---
 
 # --description--
 
-The `text-transform` property in CSS is used to change the appearance of text. It's a convenient way to make sure text on a webpage appears consistently, without having to change the text content of the actual HTML elements.
-
-The following table shows how the different `text-transform`values change the example text "Transform me".
-
-<table class='table table-striped'><thead><tr><th>Value</th><th>Result</th></tr></thead><tbody><tr><td><code>lowercase</code></td><td>"transform me"</td></tr><tr><td><code>uppercase</code></td><td>"TRANSFORM ME"</td></tr><tr><td><code>capitalize</code></td><td>"Transform Me"</td></tr><tr><td><code>initial</code></td><td>Use the default value</td></tr><tr><td><code>inherit</code></td><td>Use the <code>text-transform</code> value from the parent element</td></tr><tr><td><code>none</code></td><td><strong>Default:</strong> Use the original text</td></tr></tbody></table>
+To underline text, you can use the `u` tag. This is often used to signify that a section of text is important, or something to remember. With the `u` tag, the browser applies the CSS of `text-decoration: underline;` to the element.
 
 # --instructions--
 
-Transform the text of the `h4` to be uppercase using the `text-transform` property.
+Wrap the `u` tag only around the text "Ph.D. students".
+
+**Note:** Try to avoid using the `u` tag when it could be confused for a link. Anchor tags also have a default underlined formatting.
 
 # --hints--
 
-The `h4` text should be uppercase.
+Your code should add a `u` tag to the markup.
 
 ```js
-assert($('h4').css('text-transform') === 'uppercase');
+assert($('u').length === 1);
 ```
 
-The original text of the h4 should not be changed.
+The `u` tag should wrap around the text `Ph.D. students`.
 
 ```js
-assert($('h4').text() !== $('h4').text().toUpperCase());
+assert($('u').text() === 'Ph.D. students');
 ```
 
 # --seed--
@@ -40,10 +38,7 @@ assert($('h4').text() !== $('h4').text().toUpperCase());
 <style>
   h4 {
     text-align: center;
-    background-color: rgba(45, 45, 45, 0.1);
-    padding: 10px;
-    font-size: 27px;
-
+    height: 25px;
   }
   p {
     text-align: justify;
@@ -51,10 +46,6 @@ assert($('h4').text() !== $('h4').text().toUpperCase());
   .links {
     text-align: left;
     color: black;
-    opacity: 0.7;
-  }
-  #thumbnail {
-    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
   }
   .fullCard {
     width: 245px;
@@ -70,12 +61,11 @@ assert($('h4').text() !== $('h4').text().toUpperCase());
     margin-bottom: 30px;
   }
 </style>
-<div class="fullCard" id="thumbnail">
+<div class="fullCard">
   <div class="cardContent">
     <div class="cardText">
-      <h4>Alphabet</h4>
-      <hr>
-      <p><em>Google was founded by Larry Page and Sergey Brin while they were <u>Ph.D. students</u> at <strong>Stanford University</strong>.</em></p>
+      <h4>Google</h4>
+      <p>Google was founded by Larry Page and Sergey Brin while they were Ph.D. students at <strong>Stanford University</strong>.</p>
     </div>
     <div class="cardLinks">
       <a href="https://en.wikipedia.org/wiki/Larry_Page" target="_blank" class="links">Larry Page</a><br><br>
@@ -91,10 +81,7 @@ assert($('h4').text() !== $('h4').text().toUpperCase());
 <style>
   h4 {
     text-align: center;
-    background-color: rgba(45, 45, 45, 0.1);
-    padding: 10px;
-    font-size: 27px;
-    text-transform: uppercase;
+    height: 25px;
   }
   p {
     text-align: justify;
@@ -102,10 +89,6 @@ assert($('h4').text() !== $('h4').text().toUpperCase());
   .links {
     text-align: left;
     color: black;
-    opacity: 0.7;
-  }
-  #thumbnail {
-    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
   }
   .fullCard {
     width: 245px;
@@ -121,12 +104,11 @@ assert($('h4').text() !== $('h4').text().toUpperCase());
     margin-bottom: 30px;
   }
 </style>
-<div class="fullCard" id="thumbnail">
+<div class="fullCard">
   <div class="cardContent">
     <div class="cardText">
-      <h4>Alphabet</h4>
-      <hr>
-      <p><em>Google was founded by Larry Page and Sergey Brin while they were <u>Ph.D. students</u> at <strong>Stanford University</strong>.</em></p>
+      <h4>Google</h4>
+      <p>Google was founded by Larry Page and Sergey Brin while they were <u>Ph.D. students</u> at <strong>Stanford University</strong>.</p>
     </div>
     <div class="cardLinks">
       <a href="https://en.wikipedia.org/wiki/Larry_Page" target="_blank" class="links">Larry Page</a><br><br>
