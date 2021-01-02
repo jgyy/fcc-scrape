@@ -1,65 +1,25 @@
 ---
-id: 587d78a4367417b2b2512ad4
-title: Adjust the Hue of a Color
+id: 587d781b367417b2b2512abd
+title: Adjust the Size of a Header Versus a Paragraph Tag
 challengeType: 0
-videoUrl: 'https://scrimba.com/c/cPp38TZ'
-forumTopicId: 301036
+videoUrl: 'https://scrimba.com/c/c3bRPTz'
+forumTopicId: 301037
 ---
 
 # --description--
 
-Colors have several characteristics including hue, saturation, and lightness. CSS3 introduced the `hsl()` property as an alternative way to pick a color by directly stating these characteristics.
-
-**Hue** is what people generally think of as 'color'. If you picture a spectrum of colors starting with red on the left, moving through green in the middle, and blue on right, the hue is where a color fits along this line. In `hsl()`, hue uses a color wheel concept instead of the spectrum, where the angle of the color on the circle is given as a value between 0 and 360.
-
-**Saturation** is the amount of gray in a color. A fully saturated color has no gray in it, and a minimally saturated color is almost completely gray. This is given as a percentage with 100% being fully saturated.
-
-**Lightness** is the amount of white or black in a color. A percentage is given ranging from 0% (black) to 100% (white), where 50% is the normal color.
-
-Here are a few examples of using `hsl()` with fully-saturated, normal lightness colors:
-
-<table class='table table-striped'><thead><tr><th>Color</th><th>HSL</th></tr></thead><tbody><tr><td>red</td><td>hsl(0, 100%, 50%)</td></tr><tr><td>yellow</td><td>hsl(60, 100%, 50%)</td></tr><tr><td>green</td><td>hsl(120, 100%, 50%)</td></tr><tr><td>cyan</td><td>hsl(180, 100%, 50%)</td></tr><tr><td>blue</td><td>hsl(240, 100%, 50%)</td></tr><tr><td>magenta</td><td>hsl(300, 100%, 50%)</td></tr></tbody></table>
+The font size of header tags (`h1` through `h6`) should generally be larger than the font size of paragraph tags. This makes it easier for the user to visually understand the layout and level of importance of everything on the page. You use the `font-size` property to adjust the size of the text in an element.
 
 # --instructions--
 
-Change the `background-color` of each `div` element based on the class names (`green`, `cyan`, or `blue`) using `hsl()`. All three should have full saturation and normal lightness.
+To make the heading significantly larger than the paragraph, change the `font-size` of the `h4` tag to 27 pixels.
 
 # --hints--
 
-Your code should use the `hsl()` property to declare the color green.
+Your code should add a `font-size` property to the `h4` element set to 27 pixels.
 
 ```js
-assert(code.match(/\.green\s*?{\s*?background-color:\s*?hsl/gi));
-```
-
-Your code should use the `hsl()` property to declare the color cyan.
-
-```js
-assert(code.match(/\.cyan\s*?{\s*?background-color:\s*?hsl/gi));
-```
-
-Your code should use the `hsl()` property to declare the color blue.
-
-```js
-assert(code.match(/\.blue\s*?{\s*?background-color:\s*?hsl/gi));
-```
-
-The `div` element with class `green` should have a `background-color` of green.
-
-```js
-assert($('.green').css('background-color') == 'rgb(0, 255, 0)');
-```
-
-The `div` element with class `cyan` should have a `background-color` of cyan.
-
-```js
-assert($('.cyan').css('background-color') == 'rgb(0, 255, 255)');
-```
-
-The `div` element with class `blue` should have a `background-color` of blue.
-
-```js
-assert($('.blue').css('background-color') == 'rgb(0, 0, 255)');
+assert($('h4').css('font-size') == '27px');
 ```
 
 # --seed--
@@ -68,61 +28,90 @@ assert($('.blue').css('background-color') == 'rgb(0, 0, 255)');
 
 ```html
 <style>
-  body {
-    background-color: #FFFFFF;
-  }
+  h4 {
+    text-align: center;
+    background-color: rgba(45, 45, 45, 0.1);
+    padding: 10px;
 
-  .green {
-    background-color: #000000;
   }
-
-  .cyan {
-    background-color: #000000;
+  p {
+    text-align: justify;
   }
-
-  .blue {
-    background-color: #000000;
+  .links {
+    text-align: left;
+    color: black;
   }
-
-  div {
-    display: inline-block;
-    height: 100px;
-    width: 100px;
+  .fullCard {
+    width: 245px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 10px 5px;
+    padding: 4px;
+  }
+  .cardContent {
+    padding: 10px;
+  }
+  .cardText {
+    margin-bottom: 30px;
   }
 </style>
-
-<div class="green"></div>
-<div class="cyan"></div>
-<div class="blue"></div>
+<div class="fullCard">
+  <div class="cardContent">
+    <div class="cardText">
+      <h4>Alphabet</h4>
+      <hr>
+      <p><em>Google was founded by Larry Page and Sergey Brin while they were <u>Ph.D. students</u> at <strong>Stanford University</strong>.</em></p>
+    </div>
+    <div class="cardLinks">
+      <a href="https://en.wikipedia.org/wiki/Larry_Page" target="_blank" class="links">Larry Page</a><br><br>
+      <a href="https://en.wikipedia.org/wiki/Sergey_Brin" target="_blank" class="links">Sergey Brin</a>
+    </div>
+  </div>
+</div>
 ```
 
 # --solutions--
 
 ```html
 <style>
-  body {
-    background-color: #FFFFFF;
+  h4 {
+    text-align: center;
+    background-color: rgba(45, 45, 45, 0.1);
+    padding: 10px;
+    font-size: 27px;
   }
-
-  .green {
-    background-color: hsl(120, 100%, 50%);
+  p {
+    text-align: justify;
   }
-
-  .cyan {
-    background-color:   hsl(180, 100%, 50%);
+  .links {
+    text-align: left;
+    color: black;
   }
-
-  .blue {
-    background-color: hsl(240, 100%, 50%);
+  .fullCard {
+    width: 245px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 10px 5px;
+    padding: 4px;
   }
-
-  div {
-    display: inline-block;
-    height: 100px;
-    width: 100px;
+  .cardContent {
+    padding: 10px;
+  }
+  .cardText {
+    margin-bottom: 30px;
   }
 </style>
-<div class="green"></div>
-<div class="cyan"></div>
-<div class="blue"></div>
+<div class="fullCard">
+  <div class="cardContent">
+    <div class="cardText">
+      <h4>Alphabet</h4>
+      <hr>
+      <p><em>Google was founded by Larry Page and Sergey Brin while they were <u>Ph.D. students</u> at <strong>Stanford University</strong>.</em></p>
+    </div>
+    <div class="cardLinks">
+      <a href="https://en.wikipedia.org/wiki/Larry_Page" target="_blank" class="links">Larry Page</a><br><br>
+      <a href="https://en.wikipedia.org/wiki/Sergey_Brin" target="_blank" class="links">Sergey Brin</a>
+    </div>
+  </div>
+</div>
 ```
