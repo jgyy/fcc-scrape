@@ -1,33 +1,36 @@
 ---
-id: 587d78a8367417b2b2512ae4
-title: Make a CSS Heartbeat using an Infinite Animation Count
+id: 587d78a9367417b2b2512aea
+title: Make Motion More Natural Using a Bezier Curve
 challengeType: 0
-videoUrl: 'https://scrimba.com/c/cDZpDUr'
-forumTopicId: 301062
+videoUrl: 'https://scrimba.com/c/c7akWUv'
+forumTopicId: 301063
 ---
 
 # --description--
 
-Here's one more continuous animation example with the `animation-iteration-count` property that uses the heart you designed in a previous challenge.
+This challenge animates an element to replicate the movement of a ball being juggled. Prior challenges covered the `linear` and `ease-out` cubic Bezier curves, however neither depicts the juggling movement accurately. You need to customize a Bezier curve for this.
 
-The one-second long heartbeat animation consists of two animated pieces. The `heart` elements (including the `:before` and `:after` pieces) are animated to change size using the `transform` property, and the background `div` is animated to change its color using the `background` property.
+The `animation-timing-function` automatically loops at every keyframe when the `animation-iteration-count` is set to infinite. Since there is a keyframe rule set in the middle of the animation duration (at `50%`), it results in two identical animation progressions at the upward and downward movement of the ball.
+
+The following cubic Bezier curve simulates a juggling movement:
+
+`cubic-bezier(0.3, 0.4, 0.5, 1.6);`
+
+Notice that the value of y2 is larger than 1. Although the cubic Bezier curve is mapped on a 1 by 1 coordinate system, and it can only accept x values from 0 to 1, the y value can be set to numbers larger than one. This results in a bouncing movement that is ideal for simulating the juggling ball.
 
 # --instructions--
 
-Keep the heart beating by adding the `animation-iteration-count` property for both the `back` class and the `heart` class and setting the value to infinite. The `heart:before` and `heart:after` selectors do not need any animation properties.
+Change value of the `animation-timing-function` of the element with the id of `green` to a `cubic-bezier` function with x1, y1, x2, y2 values set respectively to 0.311, 0.441, 0.444, 1.649.
 
 # --hints--
 
-The `animation-iteration-count` property for the `heart` class should have a value of infinite.
+The value of the `animation-timing-function` property for the element with the id `green` should be a `cubic-bezier` function with x1, y1, x2, y2 values as specified.
 
 ```js
-assert($('.heart').css('animation-iteration-count') == 'infinite');
-```
-
-The `animation-iteration-count` property for the `back` class should have a value of infinite.
-
-```js
-assert($('.back').css('animation-iteration-count') == 'infinite');
+assert(
+  $('#green').css('animation-timing-function') ==
+    'cubic-bezier(0.311, 0.441, 0.444, 1.649)'
+);
 ```
 
 # --seed--
@@ -36,145 +39,80 @@ assert($('.back').css('animation-iteration-count') == 'infinite');
 
 ```html
 <style>
-  .back {
+  .balls {
+    border-radius: 50%;
     position: fixed;
-    padding: 0;
-    margin: 0;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: white;
-    animation-name: backdiv;
-    animation-duration: 1s;
-
-  }
-
-  .heart {
-    position: absolute;
-    margin: auto;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background-color: pink;
-    height: 50px;
-    width: 50px;
-    transform: rotate(-45deg);
-    animation-name: beat;
-    animation-duration: 1s;
-
-  }
-  .heart:after {
-    background-color: pink;
-    content: "";
-    border-radius: 50%;
-    position: absolute;
     width: 50px;
     height: 50px;
-    top: 0px;
-    left: 25px;
+    top: 60%;
+    animation-name: jump;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
   }
-  .heart:before {
-    background-color: pink;
-    content: "";
-    border-radius: 50%;
-    position: absolute;
-    width: 50px;
-    height: 50px;
-    top: -25px;
-    left: 0px;
+  #red {
+    background: red;
+    left: 25%;
+    animation-timing-function: linear;
+  }
+  #blue {
+    background: blue;
+    left: 50%;
+    animation-timing-function: ease-out;
+  }
+  #green {
+    background: green;
+    left: 75%;
+    animation-timing-function: cubic-bezier(0.69, 0.1, 1, 0.1);
   }
 
-  @keyframes backdiv {
+  @keyframes jump {
     50% {
-      background: #ffe6f2;
+      top: 10%;
     }
   }
-
-  @keyframes beat {
-    0% {
-      transform: scale(1) rotate(-45deg);
-    }
-    50% {
-      transform: scale(0.6) rotate(-45deg);
-    }
-  }
-
 </style>
-<div class="back"></div>
-<div class="heart"></div>
+<div class="balls" id="red"></div>
+<div class="balls" id="blue"></div>
+<div class="balls" id="green"></div>
 ```
 
 # --solutions--
 
 ```html
 <style>
-  .back {
+  .balls {
+    border-radius: 50%;
     position: fixed;
-    padding: 0;
-    margin: 0;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: white;
-    animation-name: backdiv;
-    animation-duration: 1s;
+    width: 50px;
+    height: 50px;
+    top: 60%;
+    animation-name: jump;
+    animation-duration: 2s;
     animation-iteration-count: infinite;
   }
-
-  .heart {
-    position: absolute;
-    margin: auto;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background-color: pink;
-    height: 50px;
-    width: 50px;
-    transform: rotate(-45deg);
-    animation-name: beat;
-    animation-duration: 1s;
-    animation-iteration-count: infinite;
+  #red {
+    background: red;
+    left: 25%;
+    animation-timing-function: linear;
   }
-  .heart:after {
-    background-color: pink;
-    content: "";
-    border-radius: 50%;
-    position: absolute;
-    width: 50px;
-    height: 50px;
-    top: 0px;
-    left: 25px;
+  #blue {
+    background: blue;
+    left: 50%;
+    animation-timing-function: ease-out;
   }
-  .heart:before {
-    background-color: pink;
-    content: "";
-    border-radius: 50%;
-    position: absolute;
-    width: 50px;
-    height: 50px;
-    top: -25px;
-    left: 0px;
+  #green {
+    background: green;
+    left: 75%;
+    animation-timing-function: cubic-bezier(0.311, 0.441, 0.444, 1.649);
   }
 
-  @keyframes backdiv {
+  @keyframes jump {
     50% {
-      background: #ffe6f2;
-    }
-  }
-
-  @keyframes beat {
-    0% {
-      transform: scale(1) rotate(-45deg);
-    }
-    50% {
-      transform: scale(0.6) rotate(-45deg);
+      top: 10%;
     }
   }
 </style>
-<div class="back"></div>
-<div class="heart"></div>
+<div class="balls" id="red"></div>
+<div class="balls" id="blue"></div>
+<div class="balls" id="green"></div>
 ```
