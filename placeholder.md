@@ -1,29 +1,39 @@
 ---
-id: 587d78a8367417b2b2512ae3
-title: Animate Elements Continually Using an Infinite Animation Count
+id: 587d78a8367417b2b2512ae6
+title: Animate Multiple Elements at Variable Rates
 challengeType: 0
-videoUrl: 'https://scrimba.com/c/cVJDVfq'
-forumTopicId: 301041
+videoUrl: 'https://scrimba.com/c/cnpWZc9'
+forumTopicId: 301042
 ---
 
 # --description--
 
-The previous challenges covered how to use some of the animation properties and the `@keyframes` rule. Another animation property is the `animation-iteration-count`, which allows you to control how many times you would like to loop through the animation. Here's an example:
+In the previous challenge, you changed the animation rates for two similarly animated elements by altering their `@keyframes` rules. You can achieve the same goal by manipulating the `animation-duration` of multiple elements.
 
-`animation-iteration-count: 3;`
-
-In this case the animation will stop after running 3 times, but it's possible to make the animation run continuously by setting that value to infinite.
+In the animation running in the code editor, there are three "stars" in the sky that twinkle at the same rate on a continuous loop. To make them twinkle at different rates, you can set the `animation-duration` property to different values for each element.
 
 # --instructions--
 
-To keep the ball bouncing on the right on a continuous loop, change the `animation-iteration-count` property to `infinite`.
+Set the `animation-duration` of the elements with the classes `star-1`, `star-2`, and `star-3` to 1s, 0.9s, and 1.1s, respectively.
 
 # --hints--
 
-The `animation-iteration-count` property should have a value of infinite.
+The `animation-duration` property for the star with class `star-1` should remain at 1s.
 
 ```js
-assert($('#ball').css('animation-iteration-count') == 'infinite');
+assert($('.star-1').css('animation-duration') == '1s');
+```
+
+The `animation-duration` property for the star with class `star-2` should be 0.9s.
+
+```js
+assert($('.star-2').css('animation-duration') == '0.9s');
+```
+
+The `animation-duration` property for the star with class `star-3` should be 1.1s.
+
+```js
+assert($('.star-3').css('animation-duration') == '1.1s');
 ```
 
 # --seed--
@@ -32,73 +42,113 @@ assert($('#ball').css('animation-iteration-count') == 'infinite');
 
 ```html
 <style>
-
-  #ball {
-    width: 100px;
-    height: 100px;
-    margin: 50px auto;
-    position: relative;
+  .stars {
+    background-color: white;
+    height: 30px;
+    width: 30px;
     border-radius: 50%;
-    background: linear-gradient(
-      35deg,
-      #ccffff,
-      #ffcccc
-    );
-    animation-name: bounce;
-    animation-duration: 1s;
-    animation-iteration-count: 3;
+    animation-iteration-count: infinite;
   }
 
-  @keyframes bounce{
-    0% {
-      top: 0px;
+  .star-1 {
+    margin-top: 15%;
+    margin-left: 60%;
+    animation-duration: 1s;
+    animation-name: twinkle;
+  }
+
+  .star-2 {
+    margin-top: 25%;
+    margin-left: 25%;
+    animation-duration: 1s;
+    animation-name: twinkle;
+  }
+
+  .star-3 {
+    margin-top: 10%;
+    margin-left: 50%;
+    animation-duration: 1s;
+    animation-name: twinkle;
+  }
+
+  @keyframes twinkle {
+    20% {
+      transform: scale(0.5);
+      opacity: 0.5;
     }
-    50% {
-      top: 249px;
-      width: 130px;
-      height: 70px;
-    }
-    100% {
-      top: 0px;
-    }
+  }
+
+  #back {
+    position: fixed;
+    padding: 0;
+    margin: 0;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(black, #000099, #66c2ff, #ffcccc, #ffeee6);
   }
 </style>
-<div id="ball"></div>
+
+<div id="back"></div>
+<div class="star-1 stars"></div>
+<div class="star-2 stars"></div>
+<div class="star-3 stars"></div>
 ```
 
 # --solutions--
 
 ```html
 <style>
-  #ball {
-    width: 100px;
-    height: 100px;
-    margin: 50px auto;
-    position: relative;
+  .stars {
+    background-color: white;
+    height: 30px;
+    width: 30px;
     border-radius: 50%;
-    background: linear-gradient(
-      35deg,
-      #ccffff,
-      #ffcccc
-    );
-    animation-name: bounce;
-    animation-duration: 1s;
     animation-iteration-count: infinite;
   }
 
-  @keyframes bounce{
-    0% {
-      top: 0px;
-    }
-    50% {
-      top: 249px;
-      width: 130px;
-      height: 70px;
-    }
-    100% {
-      top: 0px;
+  .star-1 {
+    margin-top: 15%;
+    margin-left: 60%;
+    animation-duration: 1s;
+    animation-name: twinkle;
+  }
+
+  .star-2 {
+    margin-top: 25%;
+    margin-left: 25%;
+    animation-duration: 0.9s;
+    animation-name: twinkle;
+  }
+
+  .star-3 {
+    margin-top: 10%;
+    margin-left: 50%;
+    animation-duration: 1.1s;
+    animation-name: twinkle;
+  }
+
+  @keyframes twinkle {
+    20% {
+      transform: scale(0.5);
+      opacity: 0.5;
     }
   }
+
+  #back {
+    position: fixed;
+    padding: 0;
+    margin: 0;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(black, #000099, #66c2ff, #ffcccc, #ffeee6);
+  }
 </style>
-<div id="ball"></div>
+<div id="back"></div>
+<div class="star-1 stars"></div>
+<div class="star-2 stars"></div>
+<div class="star-3 stars"></div>
 ```
