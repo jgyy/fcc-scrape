@@ -1,45 +1,33 @@
 ---
-id: 587d78a6367417b2b2512add
-title: Create a Graphic Using CSS
+id: 587d781b367417b2b2512abb
+title: Create a Horizontal Line Using the hr Element
 challengeType: 0
-videoUrl: 'https://scrimba.com/c/cEDWPs6'
-forumTopicId: 301048
+videoUrl: 'https://scrimba.com/c/c3bR8t7'
+forumTopicId: 301049
 ---
 
 # --description--
 
-By manipulating different selectors and properties, you can make interesting shapes. One of the easier ones to try is a crescent moon shape. For this challenge you need to work with the `box-shadow` property that sets the shadow of an element, along with the `border-radius` property that controls the roundness of the element's corners.
-
-You will create a round, transparent object with a crisp shadow that is slightly offset to the side - the shadow is actually going to be the moon shape you see.
-
-In order to create a round object, the `border-radius` property should be set to a value of 50%.
-
-You may recall from an earlier challenge that the `box-shadow` property takes values for `offset-x`, `offset-y`, `blur-radius`, `spread-radius` and a color value in that order. The `blur-radius` and `spread-radius` values are optional.
+You can use the `hr` tag to add a horizontal line across the width of its containing element. This can be used to define a change in topic or to visually separate groups of content.
 
 # --instructions--
 
-Manipulate the square element in the editor to create the moon shape. First, change the `background-color` to transparent, then set the `border-radius` property to 50% to make the circular shape. Finally, change the `box-shadow` property to set the `offset-x` to 25px, the `offset-y` to 10px, `blur-radius` to 0, `spread-radius` to 0, and color to blue.
+Add an `hr` tag underneath the `h4` which contains the card title.
+
+**Note:** In HTML, `hr` is a self-closing tag, and therefore doesn't need a separate closing tag.
 
 # --hints--
 
-The value of the `background-color` property should be set to `transparent`.
+Your code should add an `hr` tag to the markup.
 
 ```js
-assert(code.match(/background-color:\s*?transparent;/gi));
+assert($('hr').length == 1);
 ```
 
-The value of the `border-radius` property should be set to `50%`.
+The `hr` tag should come between the title and the paragraph.
 
 ```js
-assert(code.match(/border-radius:\s*?50%;/gi));
-```
-
-The value of the `box-shadow` property should be set to 25px for `offset-x`, 10px for `offset-y`, 0 for `blur-radius`, 0 for `spread-radius`, and finally blue for the color.
-
-```js
-assert(
-  code.match(/box-shadow:\s*?25px\s+?10px\s+?0(px)?\s+?0(px)?\s+?blue\s*?;/gi)
-);
+assert(code.match(/<\/h4>\s*?<hr(>|\s*?\/>)\s*?<p>/gi));
 ```
 
 # --seed--
@@ -48,41 +36,86 @@ assert(
 
 ```html
 <style>
-  .center {
-    position: absolute;
-    margin: auto;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    width: 100px;
-    height: 100px;
-    background-color: blue;
-    border-radius: 0px;
-    box-shadow: 25px 10px 10px 10px green;
+  h4 {
+    text-align: center;
+    height: 25px;
   }
-
+  p {
+    text-align: justify;
+  }
+  .links {
+    text-align: left;
+    color: black;
+  }
+  .fullCard {
+    width: 245px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 10px 5px;
+    padding: 4px;
+  }
+  .cardContent {
+    padding: 10px;
+  }
+  .cardText {
+    margin-bottom: 30px;
+  }
 </style>
-<div class="center"></div>
+<div class="fullCard">
+  <div class="cardContent">
+    <div class="cardText">
+      <h4><s>Google</s>Alphabet</h4>
+
+      <p><em>Google was founded by Larry Page and Sergey Brin while they were <u>Ph.D. students</u> at <strong>Stanford University</strong>.</em></p>
+    </div>
+    <div class="cardLinks">
+      <a href="https://en.wikipedia.org/wiki/Larry_Page" target="_blank" class="links">Larry Page</a><br><br>
+      <a href="https://en.wikipedia.org/wiki/Sergey_Brin" target="_blank" class="links">Sergey Brin</a>
+    </div>
+  </div>
+</div>
 ```
 
 # --solutions--
 
 ```html
 <style>
-  .center {
-    position: absolute;
-    margin: auto;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    width: 100px;
-    height: 100px;
-    background-color: transparent;
-    border-radius: 50%;
-    box-shadow: 25px 10px 0 0 blue;
+  h4 {
+    text-align: center;
+    height: 25px;
+  }
+  p {
+    text-align: justify;
+  }
+  .links {
+    text-align: left;
+    color: black;
+  }
+  .fullCard {
+    width: 245px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 10px 5px;
+    padding: 4px;
+  }
+  .cardContent {
+    padding: 10px;
+  }
+  .cardText {
+    margin-bottom: 30px;
   }
 </style>
-<div class="center"></div>
+<div class="fullCard">
+  <div class="cardContent">
+    <div class="cardText">
+      <h4><s>Google</s>Alphabet</h4>
+      <hr>
+      <p><em>Google was founded by Larry Page and Sergey Brin while they were <u>Ph.D. students</u> at <strong>Stanford University</strong>.</em></p>
+    </div>
+    <div class="cardLinks">
+      <a href="https://en.wikipedia.org/wiki/Larry_Page" target="_blank" class="links">Larry Page</a><br><br>
+      <a href="https://en.wikipedia.org/wiki/Sergey_Brin" target="_blank" class="links">Sergey Brin</a>
+    </div>
+  </div>
+</div>
 ```
