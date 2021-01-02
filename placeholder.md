@@ -1,31 +1,65 @@
 ---
-id: 587d78a3367417b2b2512ace
-title: Push Elements Left or Right with the float Property
+id: 587d781c367417b2b2512ac2
+title: Set the font-size for Multiple Heading Elements
 challengeType: 0
-videoUrl: 'https://scrimba.com/c/c2MDqu2'
-forumTopicId: 301066
+videoUrl: 'https://scrimba.com/c/cPpQNT3'
+forumTopicId: 301067
 ---
 
 # --description--
 
-The next positioning tool does not actually use `position`, but sets the `float` property of an element. Floating elements are removed from the normal flow of a document and pushed to either the `left` or `right` of their containing parent element. It's commonly used with the `width` property to specify how much horizontal space the floated element requires.
+The `font-size` property is used to specify how large the text is in a given element. This rule can be used for multiple elements to create visual consistency of text on a page. In this challenge, you'll set the values for all `h1` through `h6` tags to balance the heading sizes.
 
 # --instructions--
 
-The given markup would work well as a two-column layout, with the `section` and `aside` elements next to each other. Give the `#left` item a `float` of `left` and the `#right` item a `float` of `right`.
+  <p>In the <code>style</code> tags, set the <code>font-size</code> of the:</p>
+
+  <ul>
+    <li><code>h1</code> tag to 68px.</li>
+    <li><code>h2</code> tag to 52px.</li>
+    <li><code>h3</code> tag to 40px.</li>
+    <li><code>h4</code> tag to 32px.</li>
+    <li><code>h5</code> tag to 21px.</li>
+    <li><code>h6</code> tag to 14px.</li>
+  </ul>
 
 # --hints--
 
-The element with id `left` should have a `float` value of `left`.
+Your code should set the `font-size` property for the `h1` tag to 68 pixels.
 
 ```js
-assert($('#left').css('float') == 'left');
+assert($('h1').css('font-size') == '68px');
 ```
 
-The element with id `right` should have a `float` value of `right`.
+Your code should set the `font-size` property for the `h2` tag to 52 pixels.
 
 ```js
-assert($('#right').css('float') == 'right');
+assert($('h2').css('font-size') == '52px');
+```
+
+Your code should set the `font-size` property for the `h3` tag to 40 pixels.
+
+```js
+assert($('h3').css('font-size') == '40px');
+```
+
+Your code should set the `font-size` property for the `h4` tag to 32 pixels.
+
+```js
+assert($('h4').css('font-size') == '32px');
+```
+
+Your code should set the `font-size` property for the `h5` tag to 21 pixels.
+
+```js
+assert($('h5').css('font-size') == '21px');
+```
+
+Your code should set the `font-size` property for the `h6` tag to 14 pixels.
+
+```js
+const regex = /h6\s*\{\s*font-size\s*:\s*14px\s*(;\s*\}|\})/i;
+assert.strictEqual(true, regex.test(code));
 ```
 
 # --seed--
@@ -33,67 +67,49 @@ assert($('#right').css('float') == 'right');
 ## --seed-contents--
 
 ```html
-<head>
-  <style>
-    #left {
+<style>
 
-      width: 50%;
-    }
-    #right {
 
-      width: 40%;
-    }
-    aside, section {
-      padding: 2px;
-      background-color: #ccc;
-    }
-  </style>
-</head>
-<body>
-  <header>
-    <h1>Welcome!</h1>
-  </header>
-  <section id="left">
-    <h2>Content</h2>
-    <p>Good stuff</p>
-  </section>
-  <aside id="right">
-    <h2>Sidebar</h2>
-    <p>Links</p>
-  </aside>
-</body>
+
+
+
+
+</style>
+<h1>This is h1 text</h1>
+<h2>This is h2 text</h2>
+<h3>This is h3 text</h3>
+<h4>This is h4 text</h4>
+<h5>This is h5 text</h5>
+<h6>This is h6 text</h6>
 ```
 
 # --solutions--
 
 ```html
-<head>
-  <style>
-    #left {
-      float: left;
-      width: 50%;
-    }
-    #right {
-      float: right;
-      width: 40%;
-    }
-    aside, section {
-      padding: 2px;
-      background-color: #ccc;
-    }
-  </style>
-</head>
-<body>
-  <header>
-    <h1>Welcome!</h1>
-  </header>
-  <section id="left">
-    <h2>Content</h2>
-    <p>Good stuff</p>
-  </section>
-  <aside id="right">
-    <h2>Sidebar</h2>
-    <p>Links</p>
-  </aside>
-</body>
+<style>
+  h1 {
+    font-size: 68px;
+  }
+  h2 {
+    font-size: 52px;
+  }
+  h3 {
+    font-size: 40px;
+  }
+  h4 {
+    font-size: 32px;
+  }
+  h5 {
+    font-size: 21px;
+  }
+  h6 {
+    font-size: 14px;
+  }
+</style>
+<h1>This is h1 text</h1>
+<h2>This is h2 text</h2>
+<h3>This is h3 text</h3>
+<h4>This is h4 text</h4>
+<h5>This is h5 text</h5>
+<h6>This is h6 text</h6>
 ```
