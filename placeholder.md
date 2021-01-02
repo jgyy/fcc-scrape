@@ -1,51 +1,65 @@
 ---
-id: 587d78a9367417b2b2512ae9
-title: Use a Bezier Curve to Move a Graphic
+id: 587d78a5367417b2b2512ad7
+title: Use a CSS Linear Gradient to Create a Striped Element
 challengeType: 0
-videoUrl: 'https://scrimba.com/c/c6bnRCK'
-forumTopicId: 301071
+videoUrl: 'https://scrimba.com/c/c6bmQh2'
+forumTopicId: 301072
 ---
 
 # --description--
 
-A previous challenge discussed the `ease-out` keyword that describes an animation change that speeds up first and then slows down at the end of the animation. On the right, the difference between the `ease-out` keyword (for the blue element) and `linear` keyword (for the red element) is demonstrated. Similar animation progressions to the `ease-out` keyword can be achieved by using a custom cubic Bezier curve function.
+The `repeating-linear-gradient()` function is very similar to `linear-gradient()` with the major difference that it repeats the specified gradient pattern. `repeating-linear-gradient()` accepts a variety of values, but for simplicity, you'll work with an angle value and color stop values in this challenge.
 
-In general, changing the `p1` and `p2` anchor points drives the creation of different Bezier curves, which controls how the animation progresses through time. Here's an example of a Bezier curve using values to mimic the ease-out style:
+The angle value is the direction of the gradient. Color stops are like width values that mark where a transition takes place, and are given with a percentage or a number of pixels.
 
-`animation-timing-function: cubic-bezier(0, 0, 0.58, 1);`
+In the example demonstrated in the code editor, the gradient starts with the color `yellow` at 0 pixels which blends into the second color `blue` at 40 pixels away from the start. Since the next color stop is also at 40 pixels, the gradient immediately changes to the third color `green`, which itself blends into the fourth color value `red` as that is 80 pixels away from the beginning of the gradient.
 
-Remember that all `cubic-bezier` functions start with `p0` at (0, 0) and end with `p3` at (1, 1). In this example, the curve moves faster through the Y-axis (starts at 0, goes to `p1` y value of 0, then goes to `p2` y value of 1) than it moves through the X-axis (0 to start, then 0 for `p1`, up to 0.58 for `p2`). As a result, the change in the animated element progresses faster than the time of the animation for that segment. Towards the end of the curve, the relationship between the change in x and y values reverses - the y value moves from 1 to 1 (no change), and the x values move from 0.58 to 1, making the animation changes progress slower compared to the animation duration.
+For this example, it helps to think about the color stops as pairs where every two colors blend together.
+
+`0px [yellow -- blend -- blue] 40px [green -- blend -- red] 80px`
+
+If every two color stop values are the same color, the blending isn't noticeable because it's between the same color, followed by a hard transition to the next color, so you end up with stripes.
 
 # --instructions--
 
-To see the effect of this Bezier curve in action, change the `animation-timing-function` of the element with id of `red` to a `cubic-bezier` function with x1, y1, x2, y2 values set respectively to 0, 0, 0.58, 1. This will make both elements progress through the animation similarly.
+Make stripes by changing the `repeating-linear-gradient()` to use a gradient angle of `45deg`, then set the first two color stops to `yellow`, and finally the second two color stops to `black`.
 
 # --hints--
 
-The value of the `animation-timing-function` property of the element with the id `red` should be a `cubic-bezier` function with x1, y1, x2, y2 values set respectively to 0, 0, 0.58, 1 .
+The angle of the `repeating-linear-gradient()` should be 45deg.
 
 ```js
-assert(
-  $('#red').css('animation-timing-function') == 'cubic-bezier(0, 0, 0.58, 1)'
-);
+assert(code.match(/background:\s*?repeating-linear-gradient\(\s*?45deg/gi));
 ```
 
-The element with the id `red` should no longer have the `animation-timing-function` property of linear.
+The angle of the `repeating-linear-gradient()` should no longer be 90deg
 
 ```js
-assert($('#red').css('animation-timing-function') !== 'linear');
+assert(!code.match(/90deg/gi));
 ```
 
-The value of the `animation-timing-function` property for the element with the id `blue` should not change.
+The color stop at 0 pixels should be `yellow`.
 
 ```js
-const blueBallAnimation = __helpers.removeWhiteSpace(
-  $('#blue').css('animation-timing-function')
-);
-assert(
-  blueBallAnimation == 'ease-out' ||
-    blueBallAnimation == 'cubic-bezier(0,0,0.58,1)'
-);
+assert(code.match(/yellow\s+?0(px)?/gi));
+```
+
+One color stop at 40 pixels should be `yellow`.
+
+```js
+assert(code.match(/yellow\s+?40px/gi));
+```
+
+The second color stop at 40 pixels should be `black`.
+
+```js
+assert(code.match(/yellow\s+?40px,\s*?black\s+?40px/gi));
+```
+
+The last color stop at 80 pixels should be `black`.
+
+```js
+assert(code.match(/black\s+?80px/gi));
 ```
 
 # --seed--
@@ -54,72 +68,43 @@ assert(
 
 ```html
 <style>
-  .balls{
-    border-radius: 50%;
-    position: fixed;
-    width: 50px;
-    height: 50px;
-    margin-top: 50px;
-    animation-name: bounce;
-    animation-duration: 2s;
-    animation-iteration-count: infinite;
+
+  div{
+    border-radius: 20px;
+    width: 70%;
+    height: 400px;
+    margin:  50 auto;
+    background: repeating-linear-gradient(
+      90deg,
+      yellow 0px,
+      blue 40px,
+      green 40px,
+      red 80px
+    );
   }
-  #red {
-    background: red;
-    left: 27%;
-    animation-timing-function: linear;
-  }
-  #blue {
-    background: blue;
-    left: 56%;
-    animation-timing-function: ease-out;
-  }
-  @keyframes bounce {
-    0% {
-      top: 0px;
-    }
-    100% {
-      top: 249px;
-    }
-  }
+
 </style>
-<div class="balls" id= "red"></div>
-<div class="balls" id= "blue"></div>
+
+<div></div>
 ```
 
 # --solutions--
 
 ```html
 <style>
-  .balls{
-    border-radius: 50%;
-    position: fixed;
-    width: 50px;
-    height: 50px;
-    margin-top: 50px;
-    animation-name: bounce;
-    animation-duration: 2s;
-    animation-iteration-count: infinite;
-  }
-  #red {
-    background: red;
-    left: 27%;
-    animation-timing-function: cubic-bezier(0, 0, 0.58, 1);
-  }
-  #blue {
-    background: blue;
-    left: 56%;
-    animation-timing-function: ease-out;
-  }
-  @keyframes bounce {
-    0% {
-      top: 0px;
-    }
-    100% {
-      top: 249px;
-    }
+  div{
+    border-radius: 20px;
+    width: 70%;
+    height: 400px;
+    margin:  50 auto;
+    background: repeating-linear-gradient(
+      45deg,
+      yellow 0px,
+      yellow 40px,
+      black 40px,
+      black 80px
+    );
   }
 </style>
-<div class="balls" id= "red"></div>
-<div class="balls" id= "blue"></div>
+<div></div>
 ```
