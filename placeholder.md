@@ -1,47 +1,79 @@
 ---
-id: 587d78a9367417b2b2512ae8
-title: Learn How Bezier Curves Work
+id: 587d78a7367417b2b2512adf
+title: Learn How the CSS @keyframes and animation Properties Work
 challengeType: 0
-videoUrl: 'https://scrimba.com/c/c9bDrs8'
-forumTopicId: 301058
+videoUrl: 'https://scrimba.com/c/cakprhv'
+forumTopicId: 301059
 ---
 
 # --description--
 
-The last challenge introduced the `animation-timing-function` property and a few keywords that change the speed of an animation over its duration. CSS offers an option other than keywords that provides even finer control over how the animation plays out, through the use of Bezier curves.
+To animate an element, you need to know about the animation properties and the `@keyframes` rule. The animation properties control how the animation should behave and the `@keyframes` rule controls what happens during that animation. There are eight animation properties in total. This challenge will keep it simple and cover the two most important ones first:
 
-In CSS animations, Bezier curves are used with the `cubic-bezier` function. The shape of the curve represents how the animation plays out. The curve lives on a 1 by 1 coordinate system. The X-axis of this coordinate system is the duration of the animation (think of it as a time scale), and the Y-axis is the change in the animation.
+`animation-name` sets the name of the animation, which is later used by `@keyframes` to tell CSS which rules go with which animations.
 
-The `cubic-bezier` function consists of four main points that sit on this 1 by 1 grid: `p0`, `p1`, `p2`, and `p3`. `p0` and `p3` are set for you - they are the beginning and end points which are always located respectively at the origin (0, 0) and (1, 1). You set the x and y values for the other two points, and where you place them in the grid dictates the shape of the curve for the animation to follow. This is done in CSS by declaring the x and y values of the `p1` and `p2` "anchor" points in the form: `(x1, y1, x2, y2)`. Pulling it all together, here's an example of a Bezier curve in CSS code:
+`animation-duration` sets the length of time for the animation.
 
-`animation-timing-function: cubic-bezier(0.25, 0.25, 0.75, 0.75);`
+`@keyframes` is how to specify exactly what happens within the animation over the duration. This is done by giving CSS properties for specific "frames" during the animation, with percentages ranging from 0% to 100%. If you compare this to a movie, the CSS properties for 0% is how the element displays in the opening scene. The CSS properties for 100% is how the element appears at the end, right before the credits roll. Then CSS applies the magic to transition the element over the given duration to act out the scene. Here's an example to illustrate the usage of `@keyframes` and the animation properties:
 
-In the example above, the x and y values are equivalent for each point (x1 = 0.25 = y1 and x2 = 0.75 = y2), which if you remember from geometry class, results in a line that extends from the origin to point (1, 1). This animation is a linear change of an element during the length of an animation, and is the same as using the `linear` keyword. In other words, it changes at a constant speed.
+```css
+#anim {
+  animation-name: colorful;
+  animation-duration: 3s;
+}
+
+@keyframes colorful {
+  0% {
+    background-color: blue;
+  }
+  100% {
+    background-color: yellow;
+  }
+}
+```
+
+For the element with the `anim` id, the code snippet above sets the `animation-name` to `colorful` and sets the `animation-duration` to 3 seconds. Then the `@keyframes` rule links to the animation properties with the name `colorful`. It sets the color to blue at the beginning of the animation (0%) which will transition to yellow by the end of the animation (100%). You aren't limited to only beginning-end transitions, you can set properties for the element for any percentage between 0% and 100%.
 
 # --instructions--
 
-For the element with the id of `ball1`, change the value of the `animation-timing-function` property from `linear` to its equivalent `cubic-bezier` function value. Use the point values given in the example above.
+Create an animation for the element with the id `rect`, by setting the `animation-name` to rainbow and the `animation-duration` to 4 seconds. Next, declare a `@keyframes` rule, and set the `background-color` at the beginning of the animation (`0%`) to blue, the middle of the animation (`50%`) to green, and the end of the animation (`100%`) to yellow.
 
 # --hints--
 
-The value of the `animation-timing-function` property for the element with the id `ball1` should be the linear-equivalent cubic-bezier function.
+The element with id of `rect` should have an `animation-name` property with a value of rainbow.
 
 ```js
-assert(
-  $('#ball1').css('animation-timing-function') ==
-    'cubic-bezier(0.25, 0.25, 0.75, 0.75)'
-);
+assert($('#rect').css('animation-name') == 'rainbow');
 ```
 
-The value of the `animation-timing-function` property for the element with the id `ball2` should not change.
+The element with id of `rect` should have an `animation-duration` property with a value of 4s.
 
 ```js
-const ball2Animation = __helpers.removeWhiteSpace(
-  $('#ball2').css('animation-timing-function')
-);
-assert(
-  ball2Animation == 'ease-out' || ball2Animation == 'cubic-bezier(0,0,0.58,1)'
-);
+assert($('#rect').css('animation-duration') == '4s');
+```
+
+The `@keyframes` rule should use the `animation-name` of rainbow.
+
+```js
+assert(code.match(/@keyframes\s+?rainbow\s*?{/g));
+```
+
+The `@keyframes` rule for rainbow should use a `background-color` of blue at 0%.
+
+```js
+assert(code.match(/0%\s*?{\s*?background-color:\s*?blue;\s*?}/gi));
+```
+
+The `@keyframes` rule for rainbow should use a `background-color` of green at 50%.
+
+```js
+assert(code.match(/50%\s*?{\s*?background-color:\s*?green;\s*?}/gi));
+```
+
+The `@keyframes` rule for rainbow should use a `background-color` of yellow at 100%.
+
+```js
+assert(code.match(/100%\s*?{\s*?background-color:\s*?yellow;\s*?}/gi));
 ```
 
 # --seed--
@@ -50,84 +82,54 @@ assert(
 
 ```html
 <style>
-
-  .balls{
-    border-radius: 50%;
-    background: linear-gradient(
-      35deg,
-      #ccffff,
-      #ffcccc
-    );
-    position: fixed;
-    width: 50px;
-    height: 50px;
-    margin-top: 50px;
-    animation-name: bounce;
-    animation-duration: 2s;
-    animation-iteration-count: infinite;
-  }
-  #ball1 {
-    left: 27%;
-    animation-timing-function: linear;
-  }
-  #ball2 {
-    left: 56%;
-    animation-timing-function: ease-out;
+  div {
+    height: 40px;
+    width: 70%;
+    background: black;
+    margin: 50px auto;
+    border-radius: 5px;
   }
 
-  @keyframes bounce {
-    0% {
-      top: 0px;
-    }
-    100% {
-      top: 249px;
-    }
+  #rect {
+
+
   }
+
+
+
 
 </style>
-
-<div class="balls" id="ball1"></div>
-<div class="balls" id="ball2"></div>
+<div id="rect"></div>
 ```
 
 # --solutions--
 
 ```html
 <style>
-
-  .balls{
-    border-radius: 50%;
-    background: linear-gradient(
-      35deg,
-      #ccffff,
-      #ffcccc
-    );
-    position: fixed;
-    width: 50px;
-    height: 50px;
-    margin-top: 50px;
-    animation-name: bounce;
-    animation-duration: 2s;
-    animation-iteration-count: infinite;
-  }
-  #ball1 {
-    left: 27%;
-    animation-timing-function: cubic-bezier(0.25, 0.25, 0.75, 0.75);
-  }
-  #ball2 {
-    left: 56%;
-    animation-timing-function: ease-out;
+  div {
+    height: 40px;
+    width: 70%;
+    background: black;
+    margin: 50px auto;
+    border-radius: 5px;
   }
 
-  @keyframes bounce {
+  #rect {
+    animation-name: rainbow;
+    animation-duration: 4s;
+  }
+
+  @keyframes rainbow {
     0% {
-      top: 0px;
+      background-color: blue;
+    }
+    50% {
+      background-color: green;
     }
     100% {
-      top: 249px;
+      background-color: yellow;
     }
   }
 </style>
-<div class="balls" id="ball1"></div>
-<div class="balls" id="ball2"></div>
+<div id="rect"></div>
 ```
