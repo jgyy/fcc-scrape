@@ -1,25 +1,39 @@
 ---
-id: 587d78a3367417b2b2512acf
-title: Change the Position of Overlapping Elements with the z-index Property
+id: 587d78a5367417b2b2512ad6
+title: Create a Gradual CSS Linear Gradient
 challengeType: 0
-videoUrl: 'https://scrimba.com/c/cM94aHk'
-forumTopicId: 301046
+videoUrl: 'https://scrimba.com/c/cg4dpt9'
+forumTopicId: 301047
 ---
 
 # --description--
 
-When elements are positioned to overlap (i.e. using `position: absolute | relative | fixed | sticky`), the element coming later in the HTML markup will, by default, appear on the top of the other elements. However, the `z-index` property can specify the order of how elements are stacked on top of one another. It must be an integer (i.e. a whole number and not a decimal), and higher values for the `z-index` property of an element move it higher in the stack than those with lower values.
+Applying a color on HTML elements is not limited to one flat hue. CSS provides the ability to use color transitions, otherwise known as gradients, on elements. This is accessed through the `background` property's `linear-gradient()` function. Here is the general syntax:
+
+`background: linear-gradient(gradient_direction, color 1, color 2, color 3, ...);`
+
+The first argument specifies the direction from which color transition starts - it can be stated as a degree, where `90deg` makes a horizontal gradient (from left to right) and `45deg` makes a diagonal gradient (from bottom left to top right). The following arguments specify the order of colors used in the gradient.
+
+Example:
+
+`background: linear-gradient(90deg, red, yellow, rgb(204, 204, 255));`
 
 # --instructions--
 
-Add a `z-index` property to the element with the class name of `first` (the red rectangle) and set it to a value of 2 so it covers the other element (blue rectangle).
+Use a `linear-gradient()` for the `div` element's `background`, and set it from a direction of 35 degrees to change the color from `#CCFFFF` to `#FFCCCC`.
 
 # --hints--
 
-The element with class `first` should have a `z-index` value of 2.
+The `div` element should have a `linear-gradient` `background` with the specified direction and colors.
 
 ```js
-assert($('.first').css('z-index') == '2');
+assert(
+  $('div')
+    .css('background-image')
+    .match(
+      /linear-gradient\(35deg, rgb\(204, 255, 255\), rgb\(255, 204, 204\)\)/gi
+    )
+);
 ```
 
 # --seed--
@@ -29,27 +43,16 @@ assert($('.first').css('z-index') == '2');
 ```html
 <style>
   div {
-    width: 60%;
-    height: 200px;
-    margin-top: 20px;
-  }
-
-  .first {
-    background-color: red;
-    position: absolute;
+    border-radius: 20px;
+    width: 70%;
+    height: 400px;
+    margin: 50px auto;
 
   }
-  .second {
-    background-color: blue;
-    position: absolute;
-    left: 40px;
-    top: 50px;
-    z-index: 1;
-  }
+
 </style>
 
-<div class="first"></div>
-<div class="second"></div>
+<div></div>
 ```
 
 # --solutions--
@@ -57,24 +60,12 @@ assert($('.first').css('z-index') == '2');
 ```html
 <style>
   div {
-    width: 60%;
-    height: 200px;
-    margin-top: 20px;
-  }
-
-  .first {
-    background-color: red;
-    position: absolute;
-    z-index: 2;
-  }
-  .second {
-    background-color: blue;
-    position: absolute;
-    left: 40px;
-    top: 50px;
-    z-index: 1;
+    border-radius: 20px;
+    width: 70%;
+    height: 400px;
+    margin: 50px auto;
+    background: linear-gradient(35deg, #CCFFFF, #FFCCCC);
   }
 </style>
-<div class="first"></div>
-<div class="second"></div>
+<div></div>
 ```
