@@ -1,39 +1,33 @@
 ---
-id: 587d781e367417b2b2512acb
-title: Lock an Element to its Parent with Absolute Positioning
+id: 587d78a8367417b2b2512ae4
+title: Make a CSS Heartbeat using an Infinite Animation Count
 challengeType: 0
-videoUrl: 'https://scrimba.com/c/cyLJ7c3'
-forumTopicId: 301060
+videoUrl: 'https://scrimba.com/c/cDZpDUr'
+forumTopicId: 301062
 ---
 
 # --description--
 
-The next option for the CSS `position` property is `absolute`, which locks the element in place relative to its parent container. Unlike the `relative` position, this removes the element from the normal flow of the document, so surrounding items ignore it. The CSS offset properties (top or bottom and left or right) are used to adjust the position.
+Here's one more continuous animation example with the `animation-iteration-count` property that uses the heart you designed in a previous challenge.
 
-One nuance with absolute positioning is that it will be locked relative to its closest *positioned* ancestor. If you forget to add a position rule to the parent item, (this is typically done using `position: relative;`), the browser will keep looking up the chain and ultimately default to the body tag.
+The one-second long heartbeat animation consists of two animated pieces. The `heart` elements (including the `:before` and `:after` pieces) are animated to change size using the `transform` property, and the background `div` is animated to change its color using the `background` property.
 
 # --instructions--
 
-Lock the `#searchbar` element to the top-right of its `section` parent by declaring its `position` as `absolute`. Give it `top` and `right` offsets of 50 pixels each.
+Keep the heart beating by adding the `animation-iteration-count` property for both the `back` class and the `heart` class and setting the value to infinite. The `heart:before` and `heart:after` selectors do not need any animation properties.
 
 # --hints--
 
-The `#searchbar` element should have a `position` set to `absolute`.
+The `animation-iteration-count` property for the `heart` class should have a value of infinite.
 
 ```js
-assert($('#searchbar').css('position') == 'absolute');
+assert($('.heart').css('animation-iteration-count') == 'infinite');
 ```
 
-Your code should use the `top` CSS offset of 50 pixels on the `#searchbar` element.
+The `animation-iteration-count` property for the `back` class should have a value of infinite.
 
 ```js
-assert($('#searchbar').css('top') == '50px');
-```
-
-Your code should use the `right` CSS offset of 50 pixels on the `#searchbar` element.
-
-```js
-assert($('#searchbar').css('right') == '50px');
+assert($('.back').css('animation-iteration-count') == 'infinite');
 ```
 
 # --seed--
@@ -42,48 +36,145 @@ assert($('#searchbar').css('right') == '50px');
 
 ```html
 <style>
-  #searchbar {
-
-
+  .back {
+    position: fixed;
+    padding: 0;
+    margin: 0;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: white;
+    animation-name: backdiv;
+    animation-duration: 1s;
 
   }
-  section {
-    position: relative;
+
+  .heart {
+    position: absolute;
+    margin: auto;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: pink;
+    height: 50px;
+    width: 50px;
+    transform: rotate(-45deg);
+    animation-name: beat;
+    animation-duration: 1s;
+
   }
+  .heart:after {
+    background-color: pink;
+    content: "";
+    border-radius: 50%;
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    top: 0px;
+    left: 25px;
+  }
+  .heart:before {
+    background-color: pink;
+    content: "";
+    border-radius: 50%;
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    top: -25px;
+    left: 0px;
+  }
+
+  @keyframes backdiv {
+    50% {
+      background: #ffe6f2;
+    }
+  }
+
+  @keyframes beat {
+    0% {
+      transform: scale(1) rotate(-45deg);
+    }
+    50% {
+      transform: scale(0.6) rotate(-45deg);
+    }
+  }
+
 </style>
-<body>
-  <h1>Welcome!</h1>
-  <section>
-    <form id="searchbar">
-      <label for="search">Search:</label>
-      <input type="search" id="search" name="search">
-      <input type="submit" name="submit" value="Go!">
-    </form>
-  </section>
-</body>
+<div class="back"></div>
+<div class="heart"></div>
 ```
 
 # --solutions--
 
 ```html
 <style>
-  #searchbar {
-    position: absolute;
-    top: 50px;
-    right: 50px;
+  .back {
+    position: fixed;
+    padding: 0;
+    margin: 0;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: white;
+    animation-name: backdiv;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
   }
-  section {
-    position: relative;
+
+  .heart {
+    position: absolute;
+    margin: auto;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: pink;
+    height: 50px;
+    width: 50px;
+    transform: rotate(-45deg);
+    animation-name: beat;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+  }
+  .heart:after {
+    background-color: pink;
+    content: "";
+    border-radius: 50%;
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    top: 0px;
+    left: 25px;
+  }
+  .heart:before {
+    background-color: pink;
+    content: "";
+    border-radius: 50%;
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    top: -25px;
+    left: 0px;
+  }
+
+  @keyframes backdiv {
+    50% {
+      background: #ffe6f2;
+    }
+  }
+
+  @keyframes beat {
+    0% {
+      transform: scale(1) rotate(-45deg);
+    }
+    50% {
+      transform: scale(0.6) rotate(-45deg);
+    }
   }
 </style>
-<body>
-  <h1>Welcome!</h1>
-  <section>
-    <form id="searchbar">
-      <label for="search">Search:</label>
-      <input type="search" id="search" name="search">
-      <input type="submit" name="submit" value="Go!">
-    </form>
-  </section>
-</body>
+<div class="back"></div>
+<div class="heart"></div>
 ```
