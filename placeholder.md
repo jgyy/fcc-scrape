@@ -1,33 +1,25 @@
 ---
-id: 587d78a6367417b2b2512adb
-title: Use the CSS Transform Property skewX to Skew an Element Along the X-Axis
+id: 587d78a6367417b2b2512adc
+title: Use the CSS Transform Property skewY to Skew an Element Along the Y-Axis
 challengeType: 0
-videoUrl: 'https://scrimba.com/c/cyLP8Sr'
-forumTopicId: 301074
+videoUrl: 'https://scrimba.com/c/c2MZ2uB'
+forumTopicId: 301075
 ---
 
 # --description--
 
-The next function of the `transform` property is `skewX()`, which skews the selected element along its X (horizontal) axis by a given degree.
-
-The following code skews the paragraph element by -32 degrees along the X-axis.
-
-```css
-p {
-  transform: skewX(-32deg);
-}
-```
+Given that the `skewX()` function skews the selected element along the X-axis by a given degree, it is no surprise that the `skewY()` property skews an element along the Y (vertical) axis.
 
 # --instructions--
 
-Skew the element with the id of `bottom` by 24 degrees along the X-axis by using the `transform` property.
+Skew the element with the id of `top` -10 degrees along the Y-axis by using the `transform` property.
 
 # --hints--
 
-The element with id `bottom` should be skewed by 24 degrees along its X-axis.
+The element with id `top` should be skewed by -10 degrees along its Y-axis.
 
 ```js
-assert(code.match(/#bottom\s*?{\s*?.*?\s*?transform:\s*?skewX\(24deg\);/g));
+assert(code.match(/#top\s*?{\s*?.*?\s*?transform:\s*?skewY\(-10deg\);/g));
 ```
 
 # --seed--
@@ -39,14 +31,15 @@ assert(code.match(/#bottom\s*?{\s*?.*?\s*?transform:\s*?skewX\(24deg\);/g));
   div {
     width: 70%;
     height: 100px;
-    margin:  50px auto;
+    margin: 50px auto;
   }
   #top {
     background-color: red;
+
   }
   #bottom {
     background-color: blue;
-
+    transform: skewX(24deg);
   }
 </style>
 
@@ -61,10 +54,11 @@ assert(code.match(/#bottom\s*?{\s*?.*?\s*?transform:\s*?skewX\(24deg\);/g));
   div {
     width: 70%;
     height: 100px;
-    margin:  50px auto;
+    margin: 50px auto;
   }
   #top {
     background-color: red;
+    transform: skewY(-10deg);
   }
   #bottom {
     background-color: blue;
