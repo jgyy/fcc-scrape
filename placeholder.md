@@ -1,35 +1,31 @@
 ---
-id: 587d78a5367417b2b2512ada
-title: Use the CSS Transform scale Property to Scale an Element on Hover
+id: 587d781a367417b2b2512ab9
+title: Use the em Tag to Italicize Text
 challengeType: 0
-videoUrl: 'https://scrimba.com/c/cyLPJuM'
-forumTopicId: 301077
+videoUrl: 'https://scrimba.com/c/cVJRBtp'
+forumTopicId: 301078
 ---
 
 # --description--
 
-The `transform` property has a variety of functions that let you scale, move, rotate, skew, etc., your elements. When used with pseudo-classes such as `:hover` that specify a certain state of an element, the `transform` property can easily add interactivity to your elements.
-
-Here's an example to scale the paragraph elements to 2.1 times their original size when a user hovers over them:
-
-```css
-p:hover {
-  transform: scale(2.1);
-}
-```
-
-**Note:** Applying a transform to a `div` element will also affect any child elements contained in the div.
+To emphasize text, you can use the `em` tag. This displays text as italicized, as the browser applies the CSS of `font-style: italic;` to the element.
 
 # --instructions--
 
-Add a CSS rule for the `hover` state of the `div` and use the `transform` property to scale the `div` element to 1.1 times its original size when a user hovers over it.
+Wrap an `em` tag around the contents of the paragraph tag to give it emphasis.
 
 # --hints--
 
-The size of the `div` element should scale 1.1 times when the user hovers over it.
+Your code should add an `em` tag to the markup.
 
 ```js
-assert(code.match(/div:hover\s*?{\s*?transform:\s*?scale\(1\.1\);/gi));
+assert($('em').length == 1);
+```
+
+The `em` tag should wrap around the contents of the `p` tag but not the `p` tag itself.
+
+```js
+assert($('p').children().length == 1 && $('em').children().length == 2);
 ```
 
 # --seed--
@@ -38,41 +34,84 @@ assert(code.match(/div:hover\s*?{\s*?transform:\s*?scale\(1\.1\);/gi));
 
 ```html
 <style>
-  div {
-    width: 70%;
-    height: 100px;
-    margin:  50px auto;
-    background: linear-gradient(
-      53deg,
-      #ccfffc,
-      #ffcccf
-    );
+  h4 {
+    text-align: center;
+    height: 25px;
   }
-
-
-
+  p {
+    text-align: justify;
+  }
+  .links {
+    text-align: left;
+    color: black;
+  }
+  .fullCard {
+    width: 245px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 10px 5px;
+    padding: 4px;
+  }
+  .cardContent {
+    padding: 10px;
+  }
+  .cardText {
+    margin-bottom: 30px;
+  }
 </style>
-
-<div></div>
+<div class="fullCard">
+  <div class="cardContent">
+    <div class="cardText">
+      <h4>Google</h4>
+      <p>Google was founded by Larry Page and Sergey Brin while they were <u>Ph.D. students</u> at <strong>Stanford University</strong>.</p>
+    </div>
+    <div class="cardLinks">
+      <a href="https://en.wikipedia.org/wiki/Larry_Page" target="_blank" class="links">Larry Page</a><br><br>
+      <a href="https://en.wikipedia.org/wiki/Sergey_Brin" target="_blank" class="links">Sergey Brin</a>
+    </div>
+  </div>
+</div>
 ```
 
 # --solutions--
 
 ```html
 <style>
-  div {
-    width: 70%;
-    height: 100px;
-    margin:  50px auto;
-    background: linear-gradient(
-      53deg,
-      #ccfffc,
-      #ffcccf
-    );
+  h4 {
+    text-align: center;
+    height: 25px;
   }
-  div:hover {
-    transform: scale(1.1);
+  p {
+    text-align: justify;
+  }
+  .links {
+    text-align: left;
+    color: black;
+  }
+  .fullCard {
+    width: 245px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 10px 5px;
+    padding: 4px;
+  }
+  .cardContent {
+    padding: 10px;
+  }
+  .cardText {
+    margin-bottom: 30px;
   }
 </style>
-<div></div>
+<div class="fullCard">
+  <div class="cardContent">
+    <div class="cardText">
+      <h4>Google</h4>
+      <p><em>Google was founded by Larry Page and Sergey Brin while they were <u>Ph.D. students</u> at <strong>Stanford University</strong>.</em></p>
+    </div>
+    <div class="cardLinks">
+      <a href="https://en.wikipedia.org/wiki/Larry_Page" target="_blank" class="links">Larry Page</a><br><br>
+      <a href="https://en.wikipedia.org/wiki/Sergey_Brin" target="_blank" class="links">Sergey Brin</a>
+    </div>
+  </div>
+</div>
 ```
