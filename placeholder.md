@@ -1,41 +1,35 @@
 ---
-id: 587d781a367417b2b2512ab7
-title: Use the strong Tag to Make Text Bold
+id: 587d781c367417b2b2512ac0
+title: Use the text-transform Property to Make Text Uppercase
 challengeType: 0
-videoUrl: 'https://scrimba.com/c/ceJNBSb'
-forumTopicId: 301080
+videoUrl: 'https://scrimba.com/c/cvVZQSP'
+forumTopicId: 301081
 ---
 
 # --description--
 
-To make text bold, you can use the `strong` tag. This is often used to draw attention to text and symbolize that it is important. With the `strong` tag, the browser applies the CSS of `font-weight: bold;` to the element.
+The `text-transform` property in CSS is used to change the appearance of text. It's a convenient way to make sure text on a webpage appears consistently, without having to change the text content of the actual HTML elements.
+
+The following table shows how the different `text-transform`values change the example text "Transform me".
+
+<table class='table table-striped'><thead><tr><th>Value</th><th>Result</th></tr></thead><tbody><tr><td><code>lowercase</code></td><td>"transform me"</td></tr><tr><td><code>uppercase</code></td><td>"TRANSFORM ME"</td></tr><tr><td><code>capitalize</code></td><td>"Transform Me"</td></tr><tr><td><code>initial</code></td><td>Use the default value</td></tr><tr><td><code>inherit</code></td><td>Use the <code>text-transform</code> value from the parent element</td></tr><tr><td><code>none</code></td><td><strong>Default:</strong> Use the original text</td></tr></tbody></table>
 
 # --instructions--
 
-Wrap a `strong` tag around "Stanford University" inside the `p` tag (do not include the period).
+Transform the text of the `h4` to be uppercase using the `text-transform` property.
 
 # --hints--
 
-Your code should add one `strong` tag to the markup.
+The `h4` text should be uppercase.
 
 ```js
-assert($('strong').length == 1);
+assert($('h4').css('text-transform') === 'uppercase');
 ```
 
-The `strong` tag should be inside the `p` tag.
+The original text of the h4 should not be changed.
 
 ```js
-assert($('p').children('strong').length == 1);
-```
-
-The `strong` tag should wrap around the words `Stanford University`.
-
-```js
-assert(
-  $('strong')
-    .text()
-    .match(/^Stanford University\.?$/gi)
-);
+assert($('h4').text() !== $('h4').text().toUpperCase());
 ```
 
 # --seed--
@@ -46,7 +40,10 @@ assert(
 <style>
   h4 {
     text-align: center;
-    height: 25px;
+    background-color: rgba(45, 45, 45, 0.1);
+    padding: 10px;
+    font-size: 27px;
+
   }
   p {
     text-align: justify;
@@ -54,6 +51,10 @@ assert(
   .links {
     text-align: left;
     color: black;
+    opacity: 0.7;
+  }
+  #thumbnail {
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
   }
   .fullCard {
     width: 245px;
@@ -69,11 +70,12 @@ assert(
     margin-bottom: 30px;
   }
 </style>
-<div class="fullCard">
+<div class="fullCard" id="thumbnail">
   <div class="cardContent">
     <div class="cardText">
-      <h4>Google</h4>
-      <p>Google was founded by Larry Page and Sergey Brin while they were Ph.D. students at Stanford University.</p>
+      <h4>Alphabet</h4>
+      <hr>
+      <p><em>Google was founded by Larry Page and Sergey Brin while they were <u>Ph.D. students</u> at <strong>Stanford University</strong>.</em></p>
     </div>
     <div class="cardLinks">
       <a href="https://en.wikipedia.org/wiki/Larry_Page" target="_blank" class="links">Larry Page</a><br><br>
@@ -89,7 +91,10 @@ assert(
 <style>
   h4 {
     text-align: center;
-    height: 25px;
+    background-color: rgba(45, 45, 45, 0.1);
+    padding: 10px;
+    font-size: 27px;
+    text-transform: uppercase;
   }
   p {
     text-align: justify;
@@ -97,6 +102,10 @@ assert(
   .links {
     text-align: left;
     color: black;
+    opacity: 0.7;
+  }
+  #thumbnail {
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
   }
   .fullCard {
     width: 245px;
@@ -112,11 +121,12 @@ assert(
     margin-bottom: 30px;
   }
 </style>
-<div class="fullCard">
+<div class="fullCard" id="thumbnail">
   <div class="cardContent">
     <div class="cardText">
-      <h4>Google</h4>
-      <p>Google was founded by Larry Page and Sergey Brin while they were Ph.D. students at <strong>Stanford University</strong>.</p>
+      <h4>Alphabet</h4>
+      <hr>
+      <p><em>Google was founded by Larry Page and Sergey Brin while they were <u>Ph.D. students</u> at <strong>Stanford University</strong>.</em></p>
     </div>
     <div class="cardLinks">
       <a href="https://en.wikipedia.org/wiki/Larry_Page" target="_blank" class="links">Larry Page</a><br><br>
