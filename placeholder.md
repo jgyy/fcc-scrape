@@ -1,25 +1,27 @@
 ---
-id: 587d781b367417b2b2512abd
-title: Adjust the Size of a Header Versus a Paragraph Tag
+id: 587d78a4367417b2b2512ad5
+title: Adjust the Tone of a Color
 challengeType: 0
-videoUrl: 'https://scrimba.com/c/c3bRPTz'
-forumTopicId: 301037
+videoUrl: 'https://scrimba.com/c/cEDJvT7'
+forumTopicId: 301038
 ---
 
 # --description--
 
-The font size of header tags (`h1` through `h6`) should generally be larger than the font size of paragraph tags. This makes it easier for the user to visually understand the layout and level of importance of everything on the page. You use the `font-size` property to adjust the size of the text in an element.
+The `hsl()` option in CSS also makes it easy to adjust the tone of a color. Mixing white with a pure hue creates a tint of that color, and adding black will make a shade. Alternatively, a tone is produced by adding gray or by both tinting and shading. Recall that the 's' and 'l' of `hsl()` stand for saturation and lightness, respectively. The saturation percent changes the amount of gray and the lightness percent determines how much white or black is in the color. This is useful when you have a base hue you like, but need different variations of it.
 
 # --instructions--
 
-To make the heading significantly larger than the paragraph, change the `font-size` of the `h4` tag to 27 pixels.
+All elements have a default `background-color` of `transparent`. Our `nav` element currently appears to have a `cyan` background, because the element behind it has a `background-color` set to `cyan`. Add a `background-color` to the `nav` element so it uses the same `cyan` hue, but has `80% saturation` and `25% lightness` values to change its tone and shade.
 
 # --hints--
 
-Your code should add a `font-size` property to the `h4` element set to 27 pixels.
+The `nav` element should have a `background-color` of the adjusted cyan tone using the `hsl()` property.
 
 ```js
-assert($('h4').css('font-size') == '27px');
+assert(
+  code.match(/nav\s*?{\s*?background-color:\s*?hsl\(180,\s*?80%,\s*?25%\)/gi)
+);
 ```
 
 # --seed--
@@ -28,90 +30,89 @@ assert($('h4').css('font-size') == '27px');
 
 ```html
 <style>
-  h4 {
-    text-align: center;
-    background-color: rgba(45, 45, 45, 0.1);
-    padding: 10px;
+  header {
+    background-color: hsl(180, 90%, 35%);
+    color: #FFFFFF;
+  }
+
+  nav {
 
   }
-  p {
-    text-align: justify;
+
+  h1 {
+    text-indent: 10px;
+    padding-top: 10px;
   }
-  .links {
-    text-align: left;
-    color: black;
+
+  nav ul {
+    margin: 0px;
+    padding: 5px 0px 5px 30px;
   }
-  .fullCard {
-    width: 245px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin: 10px 5px;
-    padding: 4px;
+
+  nav li {
+    display: inline;
+    margin-right: 20px;
   }
-  .cardContent {
-    padding: 10px;
-  }
-  .cardText {
-    margin-bottom: 30px;
+
+  a {
+    text-decoration: none;
+    color: inherit;
   }
 </style>
-<div class="fullCard">
-  <div class="cardContent">
-    <div class="cardText">
-      <h4>Alphabet</h4>
-      <hr>
-      <p><em>Google was founded by Larry Page and Sergey Brin while they were <u>Ph.D. students</u> at <strong>Stanford University</strong>.</em></p>
-    </div>
-    <div class="cardLinks">
-      <a href="https://en.wikipedia.org/wiki/Larry_Page" target="_blank" class="links">Larry Page</a><br><br>
-      <a href="https://en.wikipedia.org/wiki/Sergey_Brin" target="_blank" class="links">Sergey Brin</a>
-    </div>
-  </div>
-</div>
+
+<header>
+  <h1>Cooking with FCC!</h1>
+  <nav>
+    <ul>
+      <li><a href="#">Home</a></li>
+      <li><a href="#">Classes</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </nav>
+</header>
 ```
 
 # --solutions--
 
 ```html
 <style>
-  h4 {
-    text-align: center;
-    background-color: rgba(45, 45, 45, 0.1);
-    padding: 10px;
-    font-size: 27px;
+  header {
+    background-color: hsl(180, 90%, 35%);
+    color: #FFFFFF;
   }
-  p {
-    text-align: justify;
+
+  nav {
+    background-color: hsl(180, 80%, 25%);
   }
-  .links {
-    text-align: left;
-    color: black;
+
+  h1 {
+    text-indent: 10px;
+    padding-top: 10px;
   }
-  .fullCard {
-    width: 245px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin: 10px 5px;
-    padding: 4px;
+
+  nav ul {
+    margin: 0px;
+    padding: 5px 0px 5px 30px;
   }
-  .cardContent {
-    padding: 10px;
+
+  nav li {
+    display: inline;
+    margin-right: 20px;
   }
-  .cardText {
-    margin-bottom: 30px;
+
+  a {
+    text-decoration: none;
+    color: inherit;
   }
 </style>
-<div class="fullCard">
-  <div class="cardContent">
-    <div class="cardText">
-      <h4>Alphabet</h4>
-      <hr>
-      <p><em>Google was founded by Larry Page and Sergey Brin while they were <u>Ph.D. students</u> at <strong>Stanford University</strong>.</em></p>
-    </div>
-    <div class="cardLinks">
-      <a href="https://en.wikipedia.org/wiki/Larry_Page" target="_blank" class="links">Larry Page</a><br><br>
-      <a href="https://en.wikipedia.org/wiki/Sergey_Brin" target="_blank" class="links">Sergey Brin</a>
-    </div>
-  </div>
-</div>
+<header>
+  <h1>Cooking with FCC!</h1>
+  <nav>
+    <ul>
+      <li><a href="#">Home</a></li>
+      <li><a href="#">Classes</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </nav>
+</header>
 ```
