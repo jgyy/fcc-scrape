@@ -1,36 +1,27 @@
 ---
-id: 587d7791367417b2b2512ab4
-title: Adjust the Width of an Element Using the width Property
+id: 587d78a8367417b2b2512ae5
+title: Animate Elements at Variable Rates
 challengeType: 0
-videoUrl: 'https://scrimba.com/c/cvVLPtN'
-forumTopicId: 301039
+videoUrl: 'https://scrimba.com/c/cZ89WA4'
+forumTopicId: 301040
 ---
 
 # --description--
 
-You can specify the width of an element using the `width` property in CSS. Values can be given in relative length units (such as em), absolute length units (such as px), or as a percentage of its containing parent element. Here's an example that changes the width of an image to 220px:
+There are a variety of ways to alter the animation rates of similarly animated elements. So far, this has been achieved by applying an `animation-iteration-count` property and setting `@keyframes` rules.
 
-```css
-img {
-  width: 220px;
-}
-```
+To illustrate, the animation on the right consists of two "stars" that each decrease in size and opacity at the 20% mark in the `@keyframes` rule, which creates the twinkle animation. You can change the `@keyframes` rule for one of the elements so the stars twinkle at different rates.
 
 # --instructions--
 
-Add a `width` property to the entire card and set it to an absolute value of 245px. Use the `fullCard` class to select the element.
+Alter the animation rate for the element with the class name of `star-1` by changing its `@keyframes` rule to 50%.
 
 # --hints--
 
-Your code should change the `width` property of the card to 245 pixels by using the `fullCard` class selector.
+The `@keyframes` rule for the `star-1` class should be 50%.
 
 ```js
-const fullCard = code.match(/\.fullCard\s*{[\s\S]+?[^}]}/g);
-assert(
-  fullCard &&
-    /width\s*:\s*245px\s*(;|})/gi.test(fullCard[0]) &&
-    $('.fullCard').css('maxWidth') === 'none'
-);
+assert(code.match(/twinkle-1\s*?{\s*?50%/g));
 ```
 
 # --seed--
@@ -39,76 +30,111 @@ assert(
 
 ```html
 <style>
-  h4 {
-    text-align: center;
+  .stars {
+    background-color: white;
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    animation-iteration-count: infinite;
   }
-  p {
-    text-align: justify;
-  }
-  .links {
-    margin-right: 20px;
-    text-align: left;
-  }
-  .fullCard {
 
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin: 10px 5px;
-    padding: 4px;
+  .star-1 {
+    margin-top: 15%;
+    margin-left: 60%;
+    animation-name: twinkle-1;
+    animation-duration: 1s;
   }
-  .cardContent {
-    padding: 10px;
+
+  .star-2 {
+    margin-top: 25%;
+    margin-left: 25%;
+    animation-name: twinkle-2;
+    animation-duration: 1s;
+  }
+
+  @keyframes twinkle-1 {
+    20% {
+      transform: scale(0.5);
+      opacity: 0.5;
+    }
+  }
+
+  @keyframes twinkle-2 {
+    20% {
+      transform: scale(0.5);
+      opacity: 0.5;
+    }
+  }
+
+  #back {
+    position: fixed;
+    padding: 0;
+    margin: 0;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(black, #000099, #66c2ff, #ffcccc, #ffeee6);
   }
 </style>
-<div class="fullCard">
-  <div class="cardContent">
-    <div class="cardText">
-      <h4>Google</h4>
-      <p>Google was founded by Larry Page and Sergey Brin while they were Ph.D. students at Stanford University.</p>
-    </div>
-    <div class="cardLinks">
-      <a href="https://en.wikipedia.org/wiki/Larry_Page" target="_blank" class="links">Larry Page</a>
-      <a href="https://en.wikipedia.org/wiki/Sergey_Brin" target="_blank" class="links">Sergey Brin</a>
-    </div>
-  </div>
-</div>
+
+<div id="back"></div>
+<div class="star-1 stars"></div>
+<div class="star-2 stars"></div>
 ```
 
 # --solutions--
 
 ```html
 <style>
-  h4 {
-    text-align: center;
+  .stars {
+    background-color: white;
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    animation-iteration-count: infinite;
   }
-  p {
-    text-align: justify;
+
+  .star-1 {
+    margin-top: 15%;
+    margin-left: 60%;
+    animation-name: twinkle-1;
+    animation-duration: 1s;
   }
-  .links {
-    margin-right: 20px;
-    text-align: left;
+
+  .star-2 {
+    margin-top: 25%;
+    margin-left: 25%;
+    animation-name: twinkle-2;
+    animation-duration: 1s;
   }
-  .fullCard {
-    width: 245px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin: 10px 5px;
-    padding: 4px;
+
+  @keyframes twinkle-1 {
+    50% {
+      transform: scale(0.5);
+      opacity: 0.5;
+    }
   }
-  .cardContent {
-    padding: 10px;
+
+  @keyframes twinkle-2 {
+    20% {
+      transform: scale(0.5);
+      opacity: 0.5;
+    }
+  }
+
+  #back {
+    position: fixed;
+    padding: 0;
+    margin: 0;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(black, #000099, #66c2ff, #ffcccc, #ffeee6);
   }
 </style>
-<div class="fullCard">
-  <div class="cardContent">
-    <div class="cardText">
-      <h4>Google</h4>
-      <p>Google was founded by Larry Page and Sergey Brin while they were Ph.D. students at Stanford University.</p>
-    </div>
-    <div class="cardLinks">
-      <a href="https://en.wikipedia.org/wiki/Larry_Page" target="_blank" class="links">Larry Page</a>
-      <a href="https://en.wikipedia.org/wiki/Sergey_Brin" target="_blank" class="links">Sergey Brin</a>
-    </div>
-  </div>
-</div>
+<div id="back"></div>
+<div class="star-1 stars"></div>
+<div class="star-2 stars"></div>
 ```
