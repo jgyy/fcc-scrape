@@ -1,47 +1,40 @@
 ---
-id: 587d781b367417b2b2512aba
-title: Use the s Tag to Strikethrough Text
+id: 587d781a367417b2b2512ab7
+title: Use the strong Tag to Make Text Bold
 challengeType: 0
-videoUrl: ''
-forumTopicId: 301079
+videoUrl: 'https://scrimba.com/c/ceJNBSb'
+forumTopicId: 301080
 ---
 
 # --description--
 
-To strikethrough text, which is when a horizontal line cuts across the characters, you can use the `s` tag. It shows that a section of text is no longer valid. With the `s` tag, the browser applies the CSS of `text-decoration: line-through;` to the element.
+To make text bold, you can use the `strong` tag. This is often used to draw attention to text and symbolize that it is important. With the `strong` tag, the browser applies the CSS of `font-weight: bold;` to the element.
 
 # --instructions--
 
-Wrap the `s` tag around "Google" inside the `h4` tag and then add the word "Alphabet" beside it, which should not have the strikethrough formatting.
+Wrap a `strong` tag around "Stanford University" inside the `p` tag (do not include the period).
 
 # --hints--
 
-Your code should add one `s` tag to the markup.
+Your code should add one `strong` tag to the markup.
 
 ```js
-assert($('s').length == 1);
+assert($('strong').length == 1);
 ```
 
-A `s` tag should wrap around the Google text in the `h4` tag. It should not contain the word Alphabet.
+The `strong` tag should be inside the `p` tag.
+
+```js
+assert($('p').children('strong').length == 1);
+```
+
+The `strong` tag should wrap around the words `Stanford University`.
 
 ```js
 assert(
-  $('h4 > s')
+  $('strong')
     .text()
-    .match(/Google/gi) &&
-    !$('h4 > s')
-      .text()
-      .match(/Alphabet/gi)
-);
-```
-
-You should include the word "Alphabet" in the `h4` tag, without strikethrough formatting.
-
-```js
-assert(
-  $('h4')
-    .html()
-    .match(/Alphabet/gi)
+    .match(/^Stanford University\.?$/gi)
 );
 ```
 
@@ -80,7 +73,7 @@ assert(
   <div class="cardContent">
     <div class="cardText">
       <h4>Google</h4>
-      <p><em>Google was founded by Larry Page and Sergey Brin while they were <u>Ph.D. students</u> at <strong>Stanford University</strong>.</em></p>
+      <p>Google was founded by Larry Page and Sergey Brin while they were Ph.D. students at Stanford University.</p>
     </div>
     <div class="cardLinks">
       <a href="https://en.wikipedia.org/wiki/Larry_Page" target="_blank" class="links">Larry Page</a><br><br>
@@ -122,8 +115,8 @@ assert(
 <div class="fullCard">
   <div class="cardContent">
     <div class="cardText">
-      <h4><s>Google</s> Alphabet</h4>
-      <p><em>Google was founded by Larry Page and Sergey Brin while they were <u>Ph.D. students</u> at <strong>Stanford University</strong>.</em></p>
+      <h4>Google</h4>
+      <p>Google was founded by Larry Page and Sergey Brin while they were Ph.D. students at <strong>Stanford University</strong>.</p>
     </div>
     <div class="cardLinks">
       <a href="https://en.wikipedia.org/wiki/Larry_Page" target="_blank" class="links">Larry Page</a><br><br>
