@@ -1,39 +1,33 @@
 ---
-id: 58a7a6ebf9a6318348e2d5aa
-title: Modify Fill Mode of an Animation
+id: 587d781e367417b2b2512aca
+title: Move a Relatively Positioned Element with CSS Offsets
 challengeType: 0
-videoUrl: 'https://scrimba.com/c/cVJDmcE'
-forumTopicId: 301064
+videoUrl: 'https://scrimba.com/c/c9bQEA4'
+forumTopicId: 301065
 ---
 
 # --description--
 
-That's great, but it doesn't work right yet. Notice how the animation resets after `500ms` has passed, causing the button to revert back to the original color. You want the button to stay highlighted.
+The CSS offsets of `top` or `bottom`, and `left` or `right` tell the browser how far to offset an item relative to where it would sit in the normal flow of the document. You're offsetting an element away from a given spot, which moves the element away from the referenced side (effectively, the opposite direction). As you saw in the last challenge, using the top offset moved the `h2` downwards. Likewise, using a left offset moves an item to the right.
 
-This can be done by setting the `animation-fill-mode` property to `forwards`. The `animation-fill-mode` specifies the style applied to an element when the animation has finished. You can set it like so:
-
-`animation-fill-mode: forwards;`
+<img src='https://cdn-media-1.freecodecamp.org/imgr/eWWi3gZ.gif' alt=''>
 
 # --instructions--
 
-Set the `animation-fill-mode` property of `button:hover` to `forwards` so the button stays highlighted when a user hovers over it.
+Use CSS offsets to move the `h2` 15 pixels to the right and 10 pixels up.
 
 # --hints--
 
-`button:hover` should have a `animation-fill-mode` property with a value of `forwards`.
+Your code should use a CSS offset to relatively position the `h2` 10px upwards. In other words, move it 10px away from the `bottom` of where it normally sits.
 
 ```js
-assert(
-  code.match(
-    /button\s*?:\s*?hover\s*?{[\s\S]*animation-fill-mode\s*?:\s*?forwards\s*?;[\s\S]*}/gi
-  ) &&
-    code.match(
-      /button\s*?:\s*?hover\s*?{[\s\S]*animation-name\s*?:\s*?background-color\s*?;[\s\S]*}/gi
-    ) &&
-    code.match(
-      /button\s*?:\s*?hover\s*?{[\s\S]*animation-duration\s*?:\s*?500ms\s*?;[\s\S]*}/gi
-    )
-);
+assert($('h2').css('bottom') == '10px');
+```
+
+Your code should use a CSS offset to relatively position the `h2` 15px towards the right. In other words, move it 15px away from the `left` of where it normally sits.
+
+```js
+assert($('h2').css('left') == '15px');
 ```
 
 # --seed--
@@ -41,49 +35,37 @@ assert(
 ## --seed-contents--
 
 ```html
+<head>
 <style>
-  button {
-    border-radius: 5px;
-    color: white;
-    background-color: #0F5897;
-    padding: 5px 10px 8px 10px;
-  }
-  button:hover {
-    animation-name: background-color;
-    animation-duration: 500ms;
-    /* Only change code below this line */
+  h2 {
+    position: relative;
 
-    /* Only change code above this line */
-  }
-  @keyframes background-color {
-    100% {
-      background-color: #4791d0;
-    }
+
   }
 </style>
-<button>Register</button>
+</head>
+<body>
+  <h1>On Being Well-Positioned</h1>
+  <h2>Move me!</h2>
+  <p>I still think the h2 is where it normally sits.</p>
+</body>
 ```
 
 # --solutions--
 
 ```html
+<head>
 <style>
-  button {
-    border-radius: 5px;
-    color: white;
-    background-color: #0F5897;
-    padding: 5px 10px 8px 10px;
-  }
-  button:hover {
-    animation-name: background-color;
-    animation-duration: 500ms;
-    animation-fill-mode: forwards;
-  }
-  @keyframes background-color {
-    100% {
-      background-color: #4791d0;
-    }
+  h2 {
+    position: relative;
+    left: 15px;
+    bottom: 10px;
   }
 </style>
-<button>Register</button>
+</head>
+<body>
+  <h1>On Being Well-Positioned</h1>
+  <h2>Move me!</h2>
+  <p>I still think the h2 is where it normally sits.</p>
+</body>
 ```
