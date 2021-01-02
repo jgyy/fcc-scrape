@@ -1,26 +1,35 @@
 ---
-id: 587d78a4367417b2b2512ad5
-title: Adjust the Tone of a Color
+id: 587d7791367417b2b2512ab4
+title: Adjust the Width of an Element Using the width Property
 challengeType: 0
-videoUrl: 'https://scrimba.com/c/cEDJvT7'
-forumTopicId: 301038
+videoUrl: 'https://scrimba.com/c/cvVLPtN'
+forumTopicId: 301039
 ---
 
 # --description--
 
-The `hsl()` option in CSS also makes it easy to adjust the tone of a color. Mixing white with a pure hue creates a tint of that color, and adding black will make a shade. Alternatively, a tone is produced by adding gray or by both tinting and shading. Recall that the 's' and 'l' of `hsl()` stand for saturation and lightness, respectively. The saturation percent changes the amount of gray and the lightness percent determines how much white or black is in the color. This is useful when you have a base hue you like, but need different variations of it.
+You can specify the width of an element using the `width` property in CSS. Values can be given in relative length units (such as em), absolute length units (such as px), or as a percentage of its containing parent element. Here's an example that changes the width of an image to 220px:
+
+```css
+img {
+  width: 220px;
+}
+```
 
 # --instructions--
 
-All elements have a default `background-color` of `transparent`. Our `nav` element currently appears to have a `cyan` background, because the element behind it has a `background-color` set to `cyan`. Add a `background-color` to the `nav` element so it uses the same `cyan` hue, but has `80% saturation` and `25% lightness` values to change its tone and shade.
+Add a `width` property to the entire card and set it to an absolute value of 245px. Use the `fullCard` class to select the element.
 
 # --hints--
 
-The `nav` element should have a `background-color` of the adjusted cyan tone using the `hsl()` property.
+Your code should change the `width` property of the card to 245 pixels by using the `fullCard` class selector.
 
 ```js
+const fullCard = code.match(/\.fullCard\s*{[\s\S]+?[^}]}/g);
 assert(
-  code.match(/nav\s*?{\s*?background-color:\s*?hsl\(180,\s*?80%,\s*?25%\)/gi)
+  fullCard &&
+    /width\s*:\s*245px\s*(;|})/gi.test(fullCard[0]) &&
+    $('.fullCard').css('maxWidth') === 'none'
 );
 ```
 
@@ -30,89 +39,76 @@ assert(
 
 ```html
 <style>
-  header {
-    background-color: hsl(180, 90%, 35%);
-    color: #FFFFFF;
+  h4 {
+    text-align: center;
   }
-
-  nav {
-
+  p {
+    text-align: justify;
   }
-
-  h1 {
-    text-indent: 10px;
-    padding-top: 10px;
-  }
-
-  nav ul {
-    margin: 0px;
-    padding: 5px 0px 5px 30px;
-  }
-
-  nav li {
-    display: inline;
+  .links {
     margin-right: 20px;
+    text-align: left;
   }
+  .fullCard {
 
-  a {
-    text-decoration: none;
-    color: inherit;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 10px 5px;
+    padding: 4px;
+  }
+  .cardContent {
+    padding: 10px;
   }
 </style>
-
-<header>
-  <h1>Cooking with FCC!</h1>
-  <nav>
-    <ul>
-      <li><a href="#">Home</a></li>
-      <li><a href="#">Classes</a></li>
-      <li><a href="#">Contact</a></li>
-    </ul>
-  </nav>
-</header>
+<div class="fullCard">
+  <div class="cardContent">
+    <div class="cardText">
+      <h4>Google</h4>
+      <p>Google was founded by Larry Page and Sergey Brin while they were Ph.D. students at Stanford University.</p>
+    </div>
+    <div class="cardLinks">
+      <a href="https://en.wikipedia.org/wiki/Larry_Page" target="_blank" class="links">Larry Page</a>
+      <a href="https://en.wikipedia.org/wiki/Sergey_Brin" target="_blank" class="links">Sergey Brin</a>
+    </div>
+  </div>
+</div>
 ```
 
 # --solutions--
 
 ```html
 <style>
-  header {
-    background-color: hsl(180, 90%, 35%);
-    color: #FFFFFF;
+  h4 {
+    text-align: center;
   }
-
-  nav {
-    background-color: hsl(180, 80%, 25%);
+  p {
+    text-align: justify;
   }
-
-  h1 {
-    text-indent: 10px;
-    padding-top: 10px;
-  }
-
-  nav ul {
-    margin: 0px;
-    padding: 5px 0px 5px 30px;
-  }
-
-  nav li {
-    display: inline;
+  .links {
     margin-right: 20px;
+    text-align: left;
   }
-
-  a {
-    text-decoration: none;
-    color: inherit;
+  .fullCard {
+    width: 245px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 10px 5px;
+    padding: 4px;
+  }
+  .cardContent {
+    padding: 10px;
   }
 </style>
-<header>
-  <h1>Cooking with FCC!</h1>
-  <nav>
-    <ul>
-      <li><a href="#">Home</a></li>
-      <li><a href="#">Classes</a></li>
-      <li><a href="#">Contact</a></li>
-    </ul>
-  </nav>
-</header>
+<div class="fullCard">
+  <div class="cardContent">
+    <div class="cardText">
+      <h4>Google</h4>
+      <p>Google was founded by Larry Page and Sergey Brin while they were Ph.D. students at Stanford University.</p>
+    </div>
+    <div class="cardLinks">
+      <a href="https://en.wikipedia.org/wiki/Larry_Page" target="_blank" class="links">Larry Page</a>
+      <a href="https://en.wikipedia.org/wiki/Sergey_Brin" target="_blank" class="links">Sergey Brin</a>
+    </div>
+  </div>
+</div>
 ```
