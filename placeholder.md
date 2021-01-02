@@ -1,31 +1,48 @@
 ---
-id: 587d781a367417b2b2512ab9
-title: Use the em Tag to Italicize Text
+id: 587d781b367417b2b2512aba
+title: Use the s Tag to Strikethrough Text
 challengeType: 0
-videoUrl: 'https://scrimba.com/c/cVJRBtp'
-forumTopicId: 301078
+videoUrl: ''
+forumTopicId: 301079
 ---
 
 # --description--
 
-To emphasize text, you can use the `em` tag. This displays text as italicized, as the browser applies the CSS of `font-style: italic;` to the element.
+To strikethrough text, which is when a horizontal line cuts across the characters, you can use the `s` tag. It shows that a section of text is no longer valid. With the `s` tag, the browser applies the CSS of `text-decoration: line-through;` to the element.
 
 # --instructions--
 
-Wrap an `em` tag around the contents of the paragraph tag to give it emphasis.
+Wrap the `s` tag around "Google" inside the `h4` tag and then add the word "Alphabet" beside it, which should not have the strikethrough formatting.
 
 # --hints--
 
-Your code should add an `em` tag to the markup.
+Your code should add one `s` tag to the markup.
 
 ```js
-assert($('em').length == 1);
+assert($('s').length == 1);
 ```
 
-The `em` tag should wrap around the contents of the `p` tag but not the `p` tag itself.
+A `s` tag should wrap around the Google text in the `h4` tag. It should not contain the word Alphabet.
 
 ```js
-assert($('p').children().length == 1 && $('em').children().length == 2);
+assert(
+  $('h4 > s')
+    .text()
+    .match(/Google/gi) &&
+    !$('h4 > s')
+      .text()
+      .match(/Alphabet/gi)
+);
+```
+
+You should include the word "Alphabet" in the `h4` tag, without strikethrough formatting.
+
+```js
+assert(
+  $('h4')
+    .html()
+    .match(/Alphabet/gi)
+);
 ```
 
 # --seed--
@@ -63,7 +80,7 @@ assert($('p').children().length == 1 && $('em').children().length == 2);
   <div class="cardContent">
     <div class="cardText">
       <h4>Google</h4>
-      <p>Google was founded by Larry Page and Sergey Brin while they were <u>Ph.D. students</u> at <strong>Stanford University</strong>.</p>
+      <p><em>Google was founded by Larry Page and Sergey Brin while they were <u>Ph.D. students</u> at <strong>Stanford University</strong>.</em></p>
     </div>
     <div class="cardLinks">
       <a href="https://en.wikipedia.org/wiki/Larry_Page" target="_blank" class="links">Larry Page</a><br><br>
@@ -105,7 +122,7 @@ assert($('p').children().length == 1 && $('em').children().length == 2);
 <div class="fullCard">
   <div class="cardContent">
     <div class="cardText">
-      <h4>Google</h4>
+      <h4><s>Google</s> Alphabet</h4>
       <p><em>Google was founded by Larry Page and Sergey Brin while they were <u>Ph.D. students</u> at <strong>Stanford University</strong>.</em></p>
     </div>
     <div class="cardLinks">
