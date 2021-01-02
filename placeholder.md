@@ -1,27 +1,29 @@
 ---
-id: 587d78a8367417b2b2512ae5
-title: Animate Elements at Variable Rates
+id: 587d78a8367417b2b2512ae3
+title: Animate Elements Continually Using an Infinite Animation Count
 challengeType: 0
-videoUrl: 'https://scrimba.com/c/cZ89WA4'
-forumTopicId: 301040
+videoUrl: 'https://scrimba.com/c/cVJDVfq'
+forumTopicId: 301041
 ---
 
 # --description--
 
-There are a variety of ways to alter the animation rates of similarly animated elements. So far, this has been achieved by applying an `animation-iteration-count` property and setting `@keyframes` rules.
+The previous challenges covered how to use some of the animation properties and the `@keyframes` rule. Another animation property is the `animation-iteration-count`, which allows you to control how many times you would like to loop through the animation. Here's an example:
 
-To illustrate, the animation on the right consists of two "stars" that each decrease in size and opacity at the 20% mark in the `@keyframes` rule, which creates the twinkle animation. You can change the `@keyframes` rule for one of the elements so the stars twinkle at different rates.
+`animation-iteration-count: 3;`
+
+In this case the animation will stop after running 3 times, but it's possible to make the animation run continuously by setting that value to infinite.
 
 # --instructions--
 
-Alter the animation rate for the element with the class name of `star-1` by changing its `@keyframes` rule to 50%.
+To keep the ball bouncing on the right on a continuous loop, change the `animation-iteration-count` property to `infinite`.
 
 # --hints--
 
-The `@keyframes` rule for the `star-1` class should be 50%.
+The `animation-iteration-count` property should have a value of infinite.
 
 ```js
-assert(code.match(/twinkle-1\s*?{\s*?50%/g));
+assert($('#ball').css('animation-iteration-count') == 'infinite');
 ```
 
 # --seed--
@@ -30,111 +32,73 @@ assert(code.match(/twinkle-1\s*?{\s*?50%/g));
 
 ```html
 <style>
-  .stars {
-    background-color: white;
-    height: 30px;
-    width: 30px;
+
+  #ball {
+    width: 100px;
+    height: 100px;
+    margin: 50px auto;
+    position: relative;
     border-radius: 50%;
-    animation-iteration-count: infinite;
-  }
-
-  .star-1 {
-    margin-top: 15%;
-    margin-left: 60%;
-    animation-name: twinkle-1;
+    background: linear-gradient(
+      35deg,
+      #ccffff,
+      #ffcccc
+    );
+    animation-name: bounce;
     animation-duration: 1s;
+    animation-iteration-count: 3;
   }
 
-  .star-2 {
-    margin-top: 25%;
-    margin-left: 25%;
-    animation-name: twinkle-2;
-    animation-duration: 1s;
-  }
-
-  @keyframes twinkle-1 {
-    20% {
-      transform: scale(0.5);
-      opacity: 0.5;
+  @keyframes bounce{
+    0% {
+      top: 0px;
     }
-  }
-
-  @keyframes twinkle-2 {
-    20% {
-      transform: scale(0.5);
-      opacity: 0.5;
+    50% {
+      top: 249px;
+      width: 130px;
+      height: 70px;
     }
-  }
-
-  #back {
-    position: fixed;
-    padding: 0;
-    margin: 0;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(black, #000099, #66c2ff, #ffcccc, #ffeee6);
+    100% {
+      top: 0px;
+    }
   }
 </style>
-
-<div id="back"></div>
-<div class="star-1 stars"></div>
-<div class="star-2 stars"></div>
+<div id="ball"></div>
 ```
 
 # --solutions--
 
 ```html
 <style>
-  .stars {
-    background-color: white;
-    height: 30px;
-    width: 30px;
+  #ball {
+    width: 100px;
+    height: 100px;
+    margin: 50px auto;
+    position: relative;
     border-radius: 50%;
+    background: linear-gradient(
+      35deg,
+      #ccffff,
+      #ffcccc
+    );
+    animation-name: bounce;
+    animation-duration: 1s;
     animation-iteration-count: infinite;
   }
 
-  .star-1 {
-    margin-top: 15%;
-    margin-left: 60%;
-    animation-name: twinkle-1;
-    animation-duration: 1s;
-  }
-
-  .star-2 {
-    margin-top: 25%;
-    margin-left: 25%;
-    animation-name: twinkle-2;
-    animation-duration: 1s;
-  }
-
-  @keyframes twinkle-1 {
+  @keyframes bounce{
+    0% {
+      top: 0px;
+    }
     50% {
-      transform: scale(0.5);
-      opacity: 0.5;
+      top: 249px;
+      width: 130px;
+      height: 70px;
     }
-  }
-
-  @keyframes twinkle-2 {
-    20% {
-      transform: scale(0.5);
-      opacity: 0.5;
+    100% {
+      top: 0px;
     }
-  }
-
-  #back {
-    position: fixed;
-    padding: 0;
-    margin: 0;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(black, #000099, #66c2ff, #ffcccc, #ffeee6);
   }
 </style>
-<div id="back"></div>
-<div class="star-1 stars"></div>
-<div class="star-2 stars"></div>
+<div id="ball"></div>
 ```
