@@ -1,12 +1,12 @@
 ---
-id: 5f344fc1520b6719f2e35605
-title: Part 9
+id: 5f344fbc22624a2976425065
+title: Part 10
 challengeType: 0
 ---
 
 # --description--
 
-There will be two sections on the menu, one for coffees and one for desserts. Add a `section` element within the `main` element so you have a place to put all the coffees available.
+Create an `h2` element in the `section` element and give it the text `Coffees`.
 
 # --hints--
 
@@ -32,10 +32,12 @@ Test 1
       <h1>CAMPER CAFE</h1>
       <p>Est. 2020</p>
     </header>
---fcc-editable-region--
     <main>
-    </main>
 --fcc-editable-region--
+      <section>
+      </section>
+--fcc-editable-region--
+    </main>
   </body>
 <html>
 ```
