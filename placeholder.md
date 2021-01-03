@@ -1,12 +1,20 @@
 ---
-id: 5f356ed656a336993abd9f7c
-title: Part 26
+id: 5f356ed6199b0cdef1d2be8f
+title: Part 27
 challengeType: 0
 ---
 
 # --description--
 
-Next, you want to center the `div` horizontally. You can do this by setting its `margin-left` and `margin-right` properties to `auto`. Think of the margin as invisible space around an element. Using these two margin properties, center the `div` element within the `body` element.
+So far you have been using type selectors to style elements. A <dfn>class selector</dfn> is defined by a name with a dot directly in front it, like this:
+
+```css
+.class-name {
+  styles
+}
+```
+
+Change the existing `div` selector into a class selector by replacing `div` with a class named `menu`.
 
 # --hints--
 
@@ -60,6 +68,8 @@ h1, h2, p {
 div {
   width: 80%;
   background-color: burlywood;
+  margin-left: auto;
+  margin-right: auto;
 }
 --fcc-editable-region--
 ```
