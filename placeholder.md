@@ -1,12 +1,12 @@
 ---
-id: 5f34a1fd611d003edeafd681
-title: Part 20
+id: 5f356ed6cf6eab5f15f5cfe6
+title: Part 21
 challengeType: 0
 ---
 
 # --description--
 
-That brown background makes it hard to read the text. Change the `body` element's background color to be `burlywood` so it has some color but you are still be able to read the text.
+The `div` element is used mainly for design layout purposes unlike the other content elements you have used so far. Add a `div` element inside the `body` element and then move all the other elements inside the new `div`.
 
 # --hints--
 
@@ -29,6 +29,7 @@ Test 1
     <title>Camper Cafe Menu</title>
     <link href="styles.css" rel="stylesheet" type="text/css" />
   </head>
+--fcc-editable-region--
   <body>
     <header>
       <h1>CAMPER CAFE</h1>
@@ -40,15 +41,15 @@ Test 1
       </section>
     </main>
   </body>
+--fcc-editable-region--
 <html>
 ```
 
 ```css
---fcc-editable-region--
 body {
-  background-color: brown;
+  background-color: burlywood;
 }
---fcc-editable-region--
+
 h1, h2, p {
   text-align: center;
 }
