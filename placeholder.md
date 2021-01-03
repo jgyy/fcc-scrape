@@ -1,20 +1,12 @@
 ---
-id: 5f344f9c805cd193c33d829c
-title: Part 12
+id: 5f3477ae9675db8bb7655b30
+title: Part 13
 challengeType: 0
 ---
 
 # --description--
 
-You can add style to an element by specifying it in the `style` element and setting a property for it like this:
-
-```css
-element {
- property: value;
-}
-```
-
-Center your `h1` element by setting its `text-align` property to the value `center`.
+In the previous step, you used a <dfn>type selector</dfn> to style the `h1` element. Go ahead and center the `h2` and `p` elements with a new type selector for each one.
 
 # --hints--
 
@@ -36,6 +28,9 @@ Test 1
     <title>Camper Cafe Menu</title>
 --fcc-editable-region--
     <style>
+      h1 {
+        text-align: center;
+      }
     </style>
 --fcc-editable-region--
   </head>
