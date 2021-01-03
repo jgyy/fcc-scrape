@@ -1,12 +1,14 @@
 ---
-id: 5f356ed69db0a491745e2bb6
-title: Part 28
+id: 5f35e5c44359872a137bd98f
+title: Part 29
 challengeType: 0
 ---
 
 # --description--
 
-To apply the class's styling to the `div` element, add a `class` attribute to the `div` element's opening tag and set its value to `menu`.
+Since the cafe's main product for sale is coffee, you could use an image of coffee beans for the background of the page.
+
+Delete the comment and its contents inside the `body` type selector. Now add a `background-image` property and set its value to `url(https://tinyurl.com/coffee-beans-fcc)`.
 
 # --hints--
 
@@ -30,9 +32,7 @@ Test 1
     <link href="styles.css" rel="stylesheet" type="text/css" />
   </head>
   <body>
---fcc-editable-region--
-    <div>
---fcc-editable-region--
+    <div class="menu">
       <header>
         <h1>CAMPER CAFE</h1>
         <p>Est. 2020</p>
@@ -49,9 +49,11 @@ Test 1
 
 ```css
 body {
+--fcc-editable-region--
   /*
   background-color: burlywood;
   */
+--fcc-editable-region--
 }
 
 h1, h2, p {
