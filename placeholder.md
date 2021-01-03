@@ -1,12 +1,12 @@
 ---
-id: 5f35e5c4321f818cdc4bed30
-title: Part 30
+id: 5f3c866daec9a49519871816
+title: Part 31
 challengeType: 0
 ---
 
 # --description--
 
-It’s looking good. Time to start adding some menu items. Add an empty `article` element under the `Coffees` heading. It will contain a flavor and price of each coffee you currently offer.
+`article` elements commonly contain multiple elements that have related information. In this case, it will contain a coffee flavor and a price for that flavor. Nest two `p` elements inside your `article` element. The first one's text should be `French Vanilla`, and the second's text `3.00`.
 
 # --hints--
 
@@ -37,8 +37,10 @@ Test 1
       </header>
       <main>
         <section>
---fcc-editable-region--
           <h2>Coffees</h2>
+--fcc-editable-region--
+          <article>
+          </article>
 --fcc-editable-region--
         </section>
       </main>
