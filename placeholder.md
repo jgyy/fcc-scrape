@@ -1,12 +1,18 @@
 ---
-id: 5f3477cb2e27333b1ab2b955
-title: Part 17
+id: 5f3477cbcb6ba47918c1da92
+title: Part 18
 challengeType: 0
 ---
 
 # --description--
 
-Now you need to link the `styles.css` file so the styles will be applied again. Next a self-closing `link` element in the `head` element. Give it a `rel` attribute value `stylesheet`, a `type` attribute value of `text/css`, and an `href` attribute value of `styles.css`.
+So the styling of the page looks similar on mobile as it does on a desktop or laptop, you need to add a `meta` element with a special `content` attribute.
+
+Add the following within the `head` element:
+
+```html
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+```
 
 # --hints--
 
@@ -27,6 +33,7 @@ Test 1
   <head>
     <meta charset="utf-8" />
     <title>Camper Cafe Menu</title>
+    <link href="styles.css" rel="stylesheet" type="text/css" />
   </head>
 --fcc-editable-region--
   <body>
