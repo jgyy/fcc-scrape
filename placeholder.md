@@ -1,20 +1,12 @@
 ---
-id: 5f3477ae34c1239cafe128be
-title: Part 14
+id: 5f3477aefa51bfc29327200b
+title: Part 15
 challengeType: 0
 ---
 
 # --description--
 
-You now have three type selectors with the exact same styling. You can add the same group of styles to many elements by separating the selectors with commas like this:
-
-```css
-selector1, selector2 {
-  property: value;
-}
-```
-
-Use a single type selector to center the `h1`, `h2` and `p` elements at the same time.
+You have styled three elements by writing CSS inside the `style` tags. This works, but since there will many more styles, it's best to put all the styles in a separate file and link to it. Start by rewriting the styles you have created into the `styles.css` file. Make sure to exclude the opening and closing `style` tags.
 
 # --hints--
 
@@ -34,19 +26,11 @@ Test 1
   <head>
     <meta charset="utf-8" />
     <title>Camper Cafe Menu</title>
---fcc-editable-region--
     <style>
-      h1 {
-        text-align: center;
-      }
-      h2 {
-        text-align: center;
-      }
-      p {
+      h1, h2, p {
         text-align: center;
       }
     </style>
---fcc-editable-region--
   </head>
   <body>
     <header>
@@ -60,4 +44,10 @@ Test 1
     </main>
   </body>
 <html>
+```
+
+```css
+--fcc-editable-region--
+
+--fcc-editable-region--
 ```
