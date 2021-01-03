@@ -1,12 +1,18 @@
 ---
-id: 5f356ed63c7807a4f1e6d054
-title: Part 22
+id: 5f356ed60a5decd94ab66986
+title: Part 23
 challengeType: 0
 ---
 
 # --description--
 
-The goal now is to make the `div` not take up the entire width of the page. The CSS `width` property is perfect for this. Create a new type selector in the style sheet that gives your `div` element a width of `300px`.
+Comments in CSS look like this:
+
+```css
+/* comment here */
+```
+
+In your style sheet, comment out the the line containing the `background-color` property and value, so you can see the effect of only styling `div` element. This will make the background white again.
 
 # --hints--
 
@@ -46,13 +52,17 @@ Test 1
 ```
 
 ```css
---fcc-editable-region--
 body {
+--fcc-editable-region--
   background-color: burlywood;
+--fcc-editable-region--
 }
 
 h1, h2, p {
   text-align: center;
 }
---fcc-editable-region--
+
+div {
+  width: 300px;
+}
 ```
