@@ -1,14 +1,12 @@
 ---
-id: 5f33071498eb2472b87ddee4
-title: Part 1
+id: 5f3313e74582ad9d063e3a38
+title: Part 2
 challengeType: 0
 ---
 
 # --description--
 
-As you learned in the last few steps of the Cat Photo App, there is a basic structure need to start building your web page.
-
-Add the `<!DOCTYPE html>` and an `html` element.
+Add a `head` element within the `html` element, so you can add a `title` element. The title element's text should be `Camper Cafe Menu`.
 
 # --hints--
 
@@ -23,7 +21,10 @@ Test 1
 ## --seed-contents--
 
 ```html
+<!DOCTYPE html>
+<html>
 --fcc-editable-region--
 
 --fcc-editable-region--
+</html>
 ```
