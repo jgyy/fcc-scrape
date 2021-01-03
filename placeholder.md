@@ -1,12 +1,12 @@
 ---
-id: 5f33294a6af5e9188dbdb8f3
-title: Part 5
+id: 5f332a88dc25a0fd25c7687a
+title: Part 6
 challengeType: 0
 ---
 
 # --description--
 
-The name of the cafe is `Camper Cafe`. Add an `h1` element with the name of the cafe in capitalized letters to make it stand out.
+To let visitors know the cafe was founded in 2020, add a `p` element below the `h1` element with the text `Est. 2020`.
 
 # --hints--
 
@@ -27,9 +27,10 @@ Test 1
     <meta charset="utf-8" />
     <title>Camper Cafe Menu</title>
   </head>
---fcc-editable-region--
   <body>
-  </body>
 --fcc-editable-region--
+    <h1>CAMPER CAFE</h1>
+--fcc-editable-region--
+  </body>
 <html>
 ```
