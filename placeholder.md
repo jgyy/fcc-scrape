@@ -1,12 +1,12 @@
 ---
-id: 5f356ed6cf6eab5f15f5cfe6
-title: Part 21
+id: 5f356ed63c7807a4f1e6d054
+title: Part 22
 challengeType: 0
 ---
 
 # --description--
 
-The `div` element is used mainly for design layout purposes unlike the other content elements you have used so far. Add a `div` element inside the `body` element and then move all the other elements inside the new `div`.
+The goal now is to make the `div` not take up the entire width of the page. The CSS `width` property is perfect for this. Create a new type selector in the style sheet that gives your `div` element a width of `300px`.
 
 # --hints--
 
@@ -29,23 +29,24 @@ Test 1
     <title>Camper Cafe Menu</title>
     <link href="styles.css" rel="stylesheet" type="text/css" />
   </head>
---fcc-editable-region--
   <body>
-    <header>
-      <h1>CAMPER CAFE</h1>
-      <p>Est. 2020</p>
-    </header>
-    <main>
-      <section>
-        <h2>Coffees</h2>
-      </section>
-    </main>
+    <div>
+      <header>
+        <h1>CAMPER CAFE</h1>
+        <p>Est. 2020</p>
+      </header>
+      <main>
+        <section>
+          <h2>Coffees</h2>
+        </section>
+      </main>
+    </div>
   </body>
---fcc-editable-region--
 <html>
 ```
 
 ```css
+--fcc-editable-region--
 body {
   background-color: burlywood;
 }
@@ -53,4 +54,5 @@ body {
 h1, h2, p {
   text-align: center;
 }
+--fcc-editable-region--
 ```
