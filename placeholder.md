@@ -1,12 +1,12 @@
 ---
-id: 5f332b23c2045fb843337579
-title: Part 7
+id: 5f33310c1851c6c4da013250
+title: Part 8
 challengeType: 0
 ---
 
 # --description--
 
-Since the `p` element added in the previous step provides supplemental information about the cafe, nest both the `h1` and `p` elements in a `header` element.
+It's time to add some menu content. Add a `main` element below the existing `header` element. It will eventually contain pricing information about coffees and desserts offered by the cafe.
 
 # --hints--
 
@@ -29,8 +29,10 @@ Test 1
   </head>
   <body>
 --fcc-editable-region--
-    <h1>CAMPER CAFE</h1>
-    <p>Est. 2020</p>
+    <header>
+      <h1>CAMPER CAFE</h1>
+      <p>Est. 2020</p>
+    </header>
 --fcc-editable-region--
   </body>
 <html>
