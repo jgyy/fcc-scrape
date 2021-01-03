@@ -1,12 +1,12 @@
 ---
-id: 5f3477ae8466a9a3d2cc953c
-title: Part 16
+id: 5f3477cb2e27333b1ab2b955
+title: Part 17
 challengeType: 0
 ---
 
 # --description--
 
-Now that you have the CSS in the `styles.css` file, go ahead and remove the `style` element and all its content. Once it is removed, the text that as centered, will shift back to the left.
+Now you need to link the `styles.css` file so the styles will be applied again. Next a self-closing `link` element in the `head` element. Give it a `rel` attribute value `stylesheet`, a `type` attribute value of `text/css`, and an `href` attribute value of `styles.css`.
 
 # --hints--
 
@@ -27,11 +27,6 @@ Test 1
   <head>
     <meta charset="utf-8" />
     <title>Camper Cafe Menu</title>
-    <style>
-      h1, h2, p {
-        text-align: center;
-      }
-    </style>
   </head>
 --fcc-editable-region--
   <body>
