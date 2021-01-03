@@ -1,12 +1,14 @@
 ---
-id: 5f769702e6e33127d14aa120
-title: Part 36
+id: 5f3c866de7a5b784048f94b1
+title: Part 37
 challengeType: 0
 ---
 
 # --description--
 
-Now align the text to the `right` for the elements with the `price` class.
+That is kind of what you want, but now it would be nice if the flavor and price were on the same line. `p` elements are <dfn>block-level</dfn> elements, so they take up the entire width of their parent element.
+
+To get them on the same line, you need to apply some styling to the `p` elements, so they behave more like `inline` elements. Add a `class` attribute with the value `item` to first `article` element under the `Coffees` heading.
 
 # --hints--
 
@@ -37,11 +39,13 @@ Test 1
       </header>
       <main>
         <section>
+--fcc-editable-region--
           <h2>Coffees</h2>
           <article>
             <p class="flavor">French Vanilla</p>
             <p class="price">3.00</p>
           </article>
+--fcc-editable-region--
           <article>
             <p>Carmel Macchiato</p>
             <p>3.75</p>
@@ -85,7 +89,7 @@ h1, h2, p {
   text-align: left;
 }
 
---fcc-editable-region--
-
---fcc-editable-region--
+.price {
+  text-align: right;
+}
 ```
