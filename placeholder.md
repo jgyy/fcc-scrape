@@ -1,18 +1,12 @@
 ---
-id: 5f3c866dbf362f99b9a0c6d0
-title: Part 38
+id: 5f3c866d0fc037f7311b4ac8
+title: Part 39
 challengeType: 0
 ---
 
 # --description--
 
-The `p` elements are nested in an `article` elements with the class attribute of `item`. You can style all the `p` elements nested anywhere in elements with a class named `item` like this:
-
-```css
-.item p { }
-```
-
-Using the above selector, add a `display` property with value `inline-block` so the `p` elements behave more like `inline` elements.
+That's closer, but the price didn't stay over on the right. This is because `inline-block` elements only take up the width of their content. To spread them out, add a `width` property to the `flavor` and `price` class selectors that have a value of `50%` each.
 
 # --hints--
 
@@ -87,10 +81,11 @@ h1, h2, p {
   margin-right: auto;
 }
 
---fcc-editable-region--
+.item p {
+  display: inline-block;
+}
 
 --fcc-editable-region--
-
 .flavor {
   text-align: left;
 }
@@ -98,4 +93,5 @@ h1, h2, p {
 .price {
   text-align: right;
 }
+--fcc-editable-region--
 ```
