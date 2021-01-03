@@ -1,12 +1,12 @@
 ---
-id: 5f3cade9993019e26313fa8e
-title: Part 43
+id: 5f7691dafd882520797cd2f0
+title: Part 44
 challengeType: 0
 ---
 
 # --description--
 
-Now that you know it works, you can change the remaining `article` and `p` elements to match the first set. Start by adding the class `item` to the other `article` elements.
+Next, position the other `p` elements to be on the same line with no space between them.
 
 # --hints--
 
@@ -42,19 +42,19 @@ Test 1
             <p class="flavor">French Vanilla</p><p class="price">3.00</p>
           </article>
 --fcc-editable-region--
-          <article>
+          <article class="item">
             <p>Carmel Macchiato</p>
             <p>3.75</p>
           </article>
-          <article>
+          <article class="item">
             <p>Pumpkin Spice</p>
             <p>3.50</p>
           </article>
-          <article>
+          <article class="item">
             <p>Hazelnut</p>
             <p>4.00</p>
           </article>
-          <article>
+          <article class="item">
             <p>Mocha</p>
             <p>4.50</p>
           </article>
