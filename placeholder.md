@@ -1,12 +1,12 @@
 ---
-id: 5f3477cb303c5cb61b43aa9b
-title: Part 19
+id: 5f34a1fd611d003edeafd681
+title: Part 20
 challengeType: 0
 ---
 
 # --description--
 
-The text is centered again so the link to the CSS file is working. Add another style to the file that changes the `background-color` property to `brown` for the `body` element.
+That brown background makes it hard to read the text. Change the `body` element's background color to be `burlywood` so it has some color but you are still be able to read the text.
 
 # --hints--
 
@@ -45,8 +45,11 @@ Test 1
 
 ```css
 --fcc-editable-region--
+body {
+  background-color: brown;
+}
+--fcc-editable-region--
 h1, h2, p {
   text-align: center;
 }
---fcc-editable-region--
 ```
