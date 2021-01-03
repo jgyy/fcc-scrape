@@ -1,14 +1,14 @@
 ---
-id: 5f3c866dd0d0275f01d4d847
-title: Part 40
+id: 5f3cade9fa77275d9f4efe62
+title: Part 41
 challengeType: 0
 ---
 
 # --description--
 
-Well that did not work. Styling the `p` elements as `inline-block` and placing them on a separate lines in the code, creates an extra space to the right of the first `p` element, causing the second one to shift to the next line. One way to fix this is to make each `p`'s width a little less than `50%`.
+That worked, but there is still a little space on the right of the price.
 
-Change the `width` value to `49%` for each class to see what happens.
+You could keep trying various percentages for the widths. Instead, simply move the price `p` element to be on the same line and make sure there is no space between them.
 
 # --hints--
 
@@ -41,8 +41,10 @@ Test 1
         <section>
           <h2>Coffees</h2>
           <article class="item">
+--fcc-editable-region--
             <p class="flavor">French Vanilla</p>
             <p class="price">3.00</p>
+--fcc-editable-region--
           </article>
           <article>
             <p>Carmel Macchiato</p>
@@ -87,15 +89,13 @@ h1, h2, p {
   display: inline-block;
 }
 
---fcc-editable-region--
 .flavor {
   text-align: left;
-  width: 50%;
+  width: 49%;
 }
 
 .price {
   text-align: right;
-  width: 50%;
+  width: 49%;
 }
---fcc-editable-region--
 ```
