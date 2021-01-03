@@ -1,12 +1,12 @@
 ---
-id: 5f3cade94c6576e7f7b7953f
-title: Part 42
+id: 5f3cade9993019e26313fa8e
+title: Part 43
 challengeType: 0
 ---
 
 # --description--
 
-Now go ahead and change both the `flavor` and `price` class' widths to be `50%` again.
+Now that you know it works, you can change the remaining `article` and `p` elements to match the first set. Start by adding the class `item` to the other `article` elements.
 
 # --hints--
 
@@ -41,6 +41,7 @@ Test 1
           <article class="item">
             <p class="flavor">French Vanilla</p><p class="price">3.00</p>
           </article>
+--fcc-editable-region--
           <article>
             <p>Carmel Macchiato</p>
             <p>3.75</p>
@@ -57,6 +58,7 @@ Test 1
             <p>Mocha</p>
             <p>4.50</p>
           </article>
+--fcc-editable-region--
         </section>
       </main>
     </div>
@@ -84,15 +86,13 @@ h1, h2, p {
   display: inline-block;
 }
 
---fcc-editable-region--
 .flavor {
   text-align: left;
-  width: 49%;
+  width: 50%;
 }
 
 .price {
   text-align: right;
-  width: 49%;
+  width: 50%;
 }
---fcc-editable-region--
 ```
