@@ -1,14 +1,12 @@
 ---
-id: 5f3c866d28d7ad0de6470505
-title: Part 33
+id: 5f769541be494f25449b292f
+title: Part 34
 challengeType: 0
 ---
 
 # --description--
 
-The flavors and prices are currently stacked on top of each other and centered with their respectable `p` elements. It would be nice if the flavor was on the left and the price was on the right.
-
-Add the class name `flavor` to the `French Vanilla` `p` element.
+Using your new `flavor` class as a selector, set the `text-align` property's value to `left`.
 
 # --hints--
 
@@ -41,10 +39,8 @@ Test 1
         <section>
           <h2>Coffees</h2>
           <article>
---fcc-editable-region--
-            <p>French Vanilla</p>
+            <p class="flavor">French Vanilla</p>
             <p>3.00</p>
---fcc-editable-region--
           </article>
           <article>
             <p>Carmel Macchiato</p>
@@ -84,4 +80,8 @@ h1, h2, p {
   margin-left: auto;
   margin-right: auto;
 }
+
+--fcc-editable-region--
+
+--fcc-editable-region--
 ```
