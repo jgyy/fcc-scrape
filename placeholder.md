@@ -1,12 +1,12 @@
 ---
-id: 5f3477aefa51bfc29327200b
-title: Part 15
+id: 5f3477ae8466a9a3d2cc953c
+title: Part 16
 challengeType: 0
 ---
 
 # --description--
 
-You have styled three elements by writing CSS inside the `style` tags. This works, but since there will many more styles, it's best to put all the styles in a separate file and link to it. Start by rewriting the styles you have created into the `styles.css` file. Make sure to exclude the opening and closing `style` tags.
+Now that you have the CSS in the `styles.css` file, go ahead and remove the `style` element and all its content. Once it is removed, the text that as centered, will shift back to the left.
 
 # --hints--
 
@@ -23,6 +23,7 @@ Test 1
 ```html
 <!DOCTYPE html>
 <html>
+--fcc-editable-region--
   <head>
     <meta charset="utf-8" />
     <title>Camper Cafe Menu</title>
@@ -32,6 +33,7 @@ Test 1
       }
     </style>
   </head>
+--fcc-editable-region--
   <body>
     <header>
       <h1>CAMPER CAFE</h1>
@@ -47,7 +49,7 @@ Test 1
 ```
 
 ```css
---fcc-editable-region--
-
---fcc-editable-region--
+h1, h2, p {
+  text-align: center;
+}
 ```
