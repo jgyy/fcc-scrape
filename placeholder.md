@@ -1,12 +1,12 @@
 ---
-id: 5f356ed63e0fa262326eef05
-title: Part 24
+id: 5f356ed60785e1f3e9850b6e
+title: Part 25
 challengeType: 0
 ---
 
 # --description--
 
-Now make the background color of the `div` element to be `burlywood`.
+Now it's easy to see that the text is centered inside the `div` element. Currently, the width of the `div` element is specified in pixels (`px`). Change the `width` property's value to be `80%`, to make it is 80% the width of its parent element (`body`).
 
 # --hints--
 
@@ -55,10 +55,10 @@ body {
 h1, h2, p {
   text-align: center;
 }
-
 --fcc-editable-region--
 div {
   width: 300px;
+  background-color: burlywood;
 }
 --fcc-editable-region--
 ```
