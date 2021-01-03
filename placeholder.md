@@ -1,12 +1,12 @@
 ---
-id: 5f769541be494f25449b292f
-title: Part 34
+id: 5f76967fad478126d6552b0d
+title: Part 35
 challengeType: 0
 ---
 
 # --description--
 
-Using your new `flavor` class as a selector, set the `text-align` property's value to `left`.
+Next, you want to align the price to the right. Add a class named `price` to your `p` element that has `3.00` as its text.
 
 # --hints--
 
@@ -40,7 +40,9 @@ Test 1
           <h2>Coffees</h2>
           <article>
             <p class="flavor">French Vanilla</p>
+--fcc-editable-region--
             <p>3.00</p>
+--fcc-editable-region--
           </article>
           <article>
             <p>Carmel Macchiato</p>
@@ -81,7 +83,7 @@ h1, h2, p {
   margin-right: auto;
 }
 
---fcc-editable-region--
-
---fcc-editable-region--
+.flavor {
+  text-align: left;
+}
 ```
