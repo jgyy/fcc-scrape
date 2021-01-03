@@ -1,14 +1,12 @@
 ---
-id: 5f35e5c44359872a137bd98f
-title: Part 29
+id: 5f35e5c4321f818cdc4bed30
+title: Part 30
 challengeType: 0
 ---
 
 # --description--
 
-Since the cafe's main product for sale is coffee, you could use an image of coffee beans for the background of the page.
-
-Delete the comment and its contents inside the `body` type selector. Now add a `background-image` property and set its value to `url(https://tinyurl.com/coffee-beans-fcc)`.
+It’s looking good. Time to start adding some menu items. Add an empty `article` element under the `Coffees` heading. It will contain a flavor and price of each coffee you currently offer.
 
 # --hints--
 
@@ -39,7 +37,9 @@ Test 1
       </header>
       <main>
         <section>
+--fcc-editable-region--
           <h2>Coffees</h2>
+--fcc-editable-region--
         </section>
       </main>
     </div>
@@ -49,11 +49,7 @@ Test 1
 
 ```css
 body {
---fcc-editable-region--
-  /*
-  background-color: burlywood;
-  */
---fcc-editable-region--
+  background-image: url(https://tinyurl.com/coffee-beans-fcc);
 }
 
 h1, h2, p {
