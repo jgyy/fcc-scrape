@@ -1,18 +1,12 @@
 ---
-id: 5f356ed60a5decd94ab66986
-title: Part 23
+id: 5f356ed63e0fa262326eef05
+title: Part 24
 challengeType: 0
 ---
 
 # --description--
 
-Comments in CSS look like this:
-
-```css
-/* comment here */
-```
-
-In your style sheet, comment out the the line containing the `background-color` property and value, so you can see the effect of only styling `div` element. This will make the background white again.
+Now make the background color of the `div` element to be `burlywood`.
 
 # --hints--
 
@@ -53,16 +47,18 @@ Test 1
 
 ```css
 body {
---fcc-editable-region--
+  /*
   background-color: burlywood;
---fcc-editable-region--
+  */
 }
 
 h1, h2, p {
   text-align: center;
 }
 
+--fcc-editable-region--
 div {
   width: 300px;
 }
+--fcc-editable-region--
 ```
