@@ -1,12 +1,12 @@
 ---
-id: 5f332a88dc25a0fd25c7687a
-title: Part 6
+id: 5f332b23c2045fb843337579
+title: Part 7
 challengeType: 0
 ---
 
 # --description--
 
-To let visitors know the cafe was founded in 2020, add a `p` element below the `h1` element with the text `Est. 2020`.
+Since the `p` element added in the previous step provides supplemental information about the cafe, nest both the `h1` and `p` elements in a `header` element.
 
 # --hints--
 
@@ -30,6 +30,7 @@ Test 1
   <body>
 --fcc-editable-region--
     <h1>CAMPER CAFE</h1>
+    <p>Est. 2020</p>
 --fcc-editable-region--
   </body>
 <html>
