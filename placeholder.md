@@ -1,12 +1,12 @@
 ---
-id: 5f7691dafd882520797cd2f0
-title: Part 44
+id: 5f7692f7c5b3ce22a57788b6
+title: Part 45
 challengeType: 0
 ---
 
 # --description--
 
-Next, position the other `p` elements to be on the same line with no space between them.
+To complete the styling, add the applicable class names `flavor` and `price` to all the remaining `p` elements.
 
 # --hints--
 
@@ -43,20 +43,16 @@ Test 1
           </article>
 --fcc-editable-region--
           <article class="item">
-            <p>Carmel Macchiato</p>
-            <p>3.75</p>
+            <p>Carmel Macchiato</p><p>3.75</p>
           </article>
           <article class="item">
-            <p>Pumpkin Spice</p>
-            <p>3.50</p>
+            <p>Pumpkin Spice</p><p>3.50</p>
           </article>
           <article class="item">
-            <p>Hazelnut</p>
-            <p>4.00</p>
+            <p>Hazelnut</p><p>4.00</p>
           </article>
           <article class="item">
-            <p>Mocha</p>
-            <p>4.50</p>
+            <p>Mocha</p><p>4.50</p>
           </article>
 --fcc-editable-region--
         </section>
