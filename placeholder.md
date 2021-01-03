@@ -1,12 +1,12 @@
 ---
-id: 5f3ef6e0e0c3feaebcf647ad
-title: Part 48
+id: 5f3ef6e0819d4f23ca7285e6
+title: Part 49
 challengeType: 0
 ---
 
 # --description--
 
-Add an `h2` element in the new section add give it the text `Desserts`.
+Add an empty `article` element under the `Desserts` heading. Give it a `class` attribute with the value `item`.
 
 # --hints--
 
@@ -54,10 +54,11 @@ Test 1
             <p class="flavor">Mocha</p><p class="price">4.50</p>
           </article>
         </section>
---fcc-editable-region--
         <section>
-        </section>
 --fcc-editable-region--
+          <h2>Desserts</h2>
+--fcc-editable-region--
+        </section>
       </main>
     </div>
   </body>
