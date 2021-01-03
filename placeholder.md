@@ -1,12 +1,20 @@
 ---
-id: 5f3477ae9675db8bb7655b30
-title: Part 13
+id: 5f3477ae34c1239cafe128be
+title: Part 14
 challengeType: 0
 ---
 
 # --description--
 
-In the previous step, you used a <dfn>type selector</dfn> to style the `h1` element. Go ahead and center the `h2` and `p` elements with a new type selector for each one.
+You now have three type selectors with the exact same styling. You can add the same group of styles to many elements by separating the selectors with commas like this:
+
+```css
+selector1, selector2 {
+  property: value;
+}
+```
+
+Use a single type selector to center the `h1`, `h2` and `p` elements at the same time.
 
 # --hints--
 
@@ -29,6 +37,12 @@ Test 1
 --fcc-editable-region--
     <style>
       h1 {
+        text-align: center;
+      }
+      h2 {
+        text-align: center;
+      }
+      p {
         text-align: center;
       }
     </style>
