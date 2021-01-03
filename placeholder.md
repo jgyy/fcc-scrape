@@ -1,12 +1,20 @@
 ---
-id: 5f344fad8bf01691e71a30eb
-title: Part 11
+id: 5f344f9c805cd193c33d829c
+title: Part 12
 challengeType: 0
 ---
 
 # --description--
 
-Up until now, you have been limited regarding the presentation and appearance of the content you create. To start taking control, add a `style` element within the `head` element.
+You can add style to an element by specifying it in the `style` element and setting a property for it like this:
+
+```css
+element {
+ property: value;
+}
+```
+
+Center your `h1` element by setting its `text-align` property to the value `center`.
 
 # --hints--
 
@@ -23,10 +31,13 @@ Test 1
 ```html
 <!DOCTYPE html>
 <html>
---fcc-editable-region--
   <head>
     <meta charset="utf-8" />
     <title>Camper Cafe Menu</title>
+--fcc-editable-region--
+    <style>
+    </style>
+--fcc-editable-region--
   </head>
   <body>
     <header>
@@ -39,6 +50,5 @@ Test 1
       </section>
     </main>
   </body>
---fcc-editable-region--
 <html>
 ```
