@@ -1,12 +1,19 @@
 ---
-id: 5f3c866daec9a49519871816
-title: Part 31
+id: 5f3c866d5414453fc2d7b480
+title: Part 32
 challengeType: 0
 ---
 
 # --description--
 
-`article` elements commonly contain multiple elements that have related information. In this case, it will contain a coffee flavor and a price for that flavor. Nest two `p` elements inside your `article` element. The first one's text should be `French Vanilla`, and the second's text `3.00`.
+Starting below the existing coffee/price pair, add the following coffees and prices using an `article` element with two nested `p` elements inside each. As before, the first `p` element's text should contain the coffee flavor and the second `p` element's text should contain the price.
+
+```bash
+Carmel Macchiato 3.75
+Pumpkin Spice 3.50
+Hazelnut 4.00
+Mocah 4.50
+```
 
 # --hints--
 
@@ -40,6 +47,8 @@ Test 1
           <h2>Coffees</h2>
 --fcc-editable-region--
           <article>
+            <p>French Vanilla</p>
+            <p>3.00</p>
           </article>
 --fcc-editable-region--
         </section>
