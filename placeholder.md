@@ -1,12 +1,12 @@
 ---
-id: 5f356ed60785e1f3e9850b6e
-title: Part 25
+id: 5f356ed656a336993abd9f7c
+title: Part 26
 challengeType: 0
 ---
 
 # --description--
 
-Now it's easy to see that the text is centered inside the `div` element. Currently, the width of the `div` element is specified in pixels (`px`). Change the `width` property's value to be `80%`, to make it is 80% the width of its parent element (`body`).
+Next, you want to center the `div` horizontally. You can do this by setting its `margin-left` and `margin-right` properties to `auto`. Think of the margin as invisible space around an element. Using these two margin properties, center the `div` element within the `body` element.
 
 # --hints--
 
@@ -55,9 +55,10 @@ body {
 h1, h2, p {
   text-align: center;
 }
+
 --fcc-editable-region--
 div {
-  width: 300px;
+  width: 80%;
   background-color: burlywood;
 }
 --fcc-editable-region--
