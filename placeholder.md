@@ -1,19 +1,14 @@
 ---
-id: 5f3c866d5414453fc2d7b480
-title: Part 32
+id: 5f3c866d28d7ad0de6470505
+title: Part 33
 challengeType: 0
 ---
 
 # --description--
 
-Starting below the existing coffee/price pair, add the following coffees and prices using an `article` element with two nested `p` elements inside each. As before, the first `p` element's text should contain the coffee flavor and the second `p` element's text should contain the price.
+The flavors and prices are currently stacked on top of each other and centered with their respectable `p` elements. It would be nice if the flavor was on the left and the price was on the right.
 
-```bash
-Carmel Macchiato 3.75
-Pumpkin Spice 3.50
-Hazelnut 4.00
-Mocah 4.50
-```
+Add the class name `flavor` to the `French Vanilla` `p` element.
 
 # --hints--
 
@@ -45,12 +40,28 @@ Test 1
       <main>
         <section>
           <h2>Coffees</h2>
---fcc-editable-region--
           <article>
+--fcc-editable-region--
             <p>French Vanilla</p>
             <p>3.00</p>
-          </article>
 --fcc-editable-region--
+          </article>
+          <article>
+            <p>Carmel Macchiato</p>
+            <p>3.75</p>
+          </article>
+          <article>
+            <p>Pumpkin Spice</p>
+            <p>3.50</p>
+          </article>
+          <article>
+            <p>Hazelnut</p>
+            <p>4.00</p>
+          </article>
+          <article>
+            <p>Mocha</p>
+            <p>4.50</p>
+          </article>
         </section>
       </main>
     </div>
