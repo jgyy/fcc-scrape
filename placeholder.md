@@ -1,45 +1,70 @@
 ---
-id: bad87fed1348bd9aede07836
-title: Give a Background Color to a div Element
+id: bad87fee1348bd9aedf08807
+title: Import a Google Font
 challengeType: 0
-videoUrl: 'https://scrimba.com/c/cdRKMCk'
-forumTopicId: 18190
+videoUrl: 'https://scrimba.com/c/cM9MRsJ'
+forumTopicId: 18200
 ---
 
 # --description--
 
-You can set an element's background color with the `background-color` property.
+In addition to specifying common fonts that are found on most operating systems, we can also specify non-standard, custom web fonts for use on our website. There are many sources for web fonts on the Internet. For this example we will focus on the Google Fonts library.
 
-For example, if you wanted an element's background color to be `green`, you'd put this within your `style` element:
+[Google Fonts](https://fonts.google.com/) is a free library of web fonts that you can use in your CSS by referencing the font's URL.
 
-```css
-.green-background {
-  background-color: green;
-}
-```
+So, let's go ahead and import and apply a Google font (note that if Google is blocked in your country, you will need to skip this challenge).
+
+To import a Google Font, you can copy the font's URL from the Google Fonts library and then paste it in your HTML. For this challenge, we'll import the `Lobster` font. To do this, copy the following code snippet and paste it into the top of your code editor (before the opening `style` element):
+
+`<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css">`
+
+Now you can use the `Lobster` font in your CSS by using `Lobster` as the FAMILY_NAME as in the following example:  
+`font-family: FAMILY_NAME, GENERIC_NAME;`.
+
+The GENERIC_NAME is optional, and is a fallback font in case the other specified font is not available. This is covered in the next challenge.
+
+Family names are case-sensitive and need to be wrapped in quotes if there is a space in the name. For example, you need quotes to use the `"Open Sans"` font, but not to use the `Lobster` font.
 
 # --instructions--
 
-Create a class called `silver-background` with the `background-color` of silver. Assign this class to your `div` element.
+Import the Lobster font to your web page. Then, use an element selector to set `Lobster` as the `font-family` for your `h2` element.
 
 # --hints--
 
-Your`div` element should have the class `silver-background`.
+You should import the `Lobster` font.
 
 ```js
-assert($('div').hasClass('silver-background'));
+assert(new RegExp('googleapis', 'gi').test(code));
 ```
 
-Your `div` element should have a silver background.
+Your `h2` element should use the font `Lobster`.
 
 ```js
-assert($('div').css('background-color') === 'rgb(192, 192, 192)');
+assert(
+  $('h2')
+    .css('font-family')
+    .match(/lobster/i)
+);
 ```
 
-A class named `silver-background` should be defined within the `style` element and the value of `silver` should be assigned to the `background-color` property.
+You should only use an `h2` element selector to change the font.
 
 ```js
-assert(code.match(/\.silver-background\s*{\s*background-color:\s*silver;\s*}/));
+assert(
+  /\s*[^\.]h2\s*\{\s*font-family\:\s*(['"]?)Lobster\1\s*(;\s*\}|\})/gi.test(
+    code
+  )
+);
+```
+
+Your `p` element should still use the font `monospace`.
+
+```js
+assert(
+  $('p')
+    .css('font-family')
+    .match(/monospace/i)
+);
 ```
 
 # --seed--
@@ -47,30 +72,14 @@ assert(code.match(/\.silver-background\s*{\s*background-color:\s*silver;\s*}/));
 ## --seed-contents--
 
 ```html
-<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css">
 <style>
   .red-text {
     color: red;
   }
 
-  h2 {
-    font-family: Lobster, monospace;
-  }
-
   p {
     font-size: 16px;
     font-family: monospace;
-  }
-
-  .thick-green-border {
-    border-color: green;
-    border-width: 10px;
-    border-style: solid;
-    border-radius: 50%;
-  }
-
-  .smaller-image {
-    width: 100px;
   }
 </style>
 
@@ -78,7 +87,7 @@ assert(code.match(/\.silver-background\s*{\s*background-color:\s*silver;\s*}/));
 <main>
   <p class="red-text">Click here to view more <a href="#">cat photos</a>.</p>
 
-  <a href="#"><img class="smaller-image thick-green-border" src="https://bit.ly/fcc-relaxing-cat" alt="A cute orange cat lying on its back."></a>
+  <a href="#"><img src="https://bit.ly/fcc-relaxing-cat" alt="A cute orange cat lying on its back."></a>
 
   <div>
     <p>Things cats love:</p>
@@ -116,28 +125,13 @@ assert(code.match(/\.silver-background\s*{\s*background-color:\s*silver;\s*}/));
     color: red;
   }
 
-  h2 {
-    font-family: Lobster, monospace;
-  }
-
   p {
     font-size: 16px;
     font-family: monospace;
   }
 
-  .thick-green-border {
-    border-color: green;
-    border-width: 10px;
-    border-style: solid;
-    border-radius: 50%;
-  }
-
-  .smaller-image {
-    width: 100px;
-  }
-
-  .silver-background {
-    background-color: silver;
+  h2 {
+    font-family: Lobster;
   }
 </style>
 
@@ -145,9 +139,9 @@ assert(code.match(/\.silver-background\s*{\s*background-color:\s*silver;\s*}/));
 <main>
   <p class="red-text">Click here to view more <a href="#">cat photos</a>.</p>
 
-  <a href="#"><img class="smaller-image thick-green-border" src="https://bit.ly/fcc-relaxing-cat" alt="A cute orange cat lying on its back."></a>
+  <a href="#"><img src="https://bit.ly/fcc-relaxing-cat" alt="A cute orange cat lying on its back."></a>
 
-  <div class="silver-background">
+  <div>
     <p>Things cats love:</p>
     <ul>
       <li>cat nip</li>
