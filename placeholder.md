@@ -1,12 +1,12 @@
 ---
-id: 5f716ad029ee4053c7027a7a
-title: Part 50
+id: 5f7b87422a560036fd03ccff
+title: Part 51
 challengeType: 0
 ---
 
 # --description--
 
-Nest two `p` elements inside your `article` element. The first one's text should be `Donut`, and the second's text `1.50`. Put both of them on the same line making sure there is no space between them.
+For the two `p` elements you just added, add `dessert` as the value of the first `p` element's `class` attribute and the value `price` as the second `p` elements `class` attribute.
 
 # --hints--
 
@@ -56,10 +56,11 @@ Test 1
         </section>
         <section>
           <h2>Desserts</h2>
---fcc-editable-region--
           <article class="item">
-          </article>
 --fcc-editable-region--
+            <p>Donut</p><p>1.50</p>
+--fcc-editable-region--
+          </article>
         </section>
       </main>
     </div>
