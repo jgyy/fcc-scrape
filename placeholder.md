@@ -1,79 +1,44 @@
 ---
-id: bad87fee1348bd9aedf08805
-title: Use CSS Selectors to Style Elements
+id: bad87fee1348bd9aedf08726
+title: Use Hex Code for Specific Colors
 challengeType: 0
-videoUrl: 'https://scrimba.com/c/cJKMBT2'
-forumTopicId: 18349
+videoUrl: 'https://scrimba.com/c/c8W9mHM'
+forumTopicId: 18350
 ---
 
 # --description--
 
-With CSS, there are hundreds of CSS properties that you can use to change the way an element looks on your page.
+Did you know there are other ways to represent colors in CSS? One of these ways is called hexadecimal code, or hex code for short.
 
-When you entered `<h2 style="color: red;">CatPhotoApp</h2>`, you were styling that individual `h2` element with inline CSS, which stands for Cascading Style Sheets.
+We usually use <dfn>decimals</dfn>, or base 10 numbers, which use the symbols 0 to 9 for each digit. <dfn>Hexadecimals</dfn> (or <dfn>hex</dfn>) are base 16 numbers. This means it uses sixteen distinct symbols. Like decimals, the symbols 0-9 represent the values zero to nine. Then A,B,C,D,E,F represent the values ten to fifteen. Altogether, 0 to F can represent a digit in hexadecimal, giving us 16 total possible values. You can find more information about [hexadecimal numbers here](https://en.wikipedia.org/wiki/Hexadecimal).
 
-That's one way to specify the style of an element, but there's a better way to apply CSS.
+In CSS, we can use 6 hexadecimal digits to represent colors, two each for the red (R), green (G), and blue (B) components. For example, `#000000` is black and is also the lowest possible value. You can find more information about the [RGB color system here](https://en.wikipedia.org/wiki/RGB_color_model).
 
-At the top of your code, create a `style` block like this:
-
-```html
-<style>
-</style>
+```css
+body {
+  color: #000000;
+}
 ```
-
-Inside that style block, you can create a <dfn>CSS selector</dfn> for all `h2` elements. For example, if you wanted all `h2` elements to be red, you would add a style rule that looks like this:
-
-```html
-<style>
-  h2 {
-    color: red;
-  }
-</style>
-```
-
-Note that it's important to have both opening and closing curly braces (`{` and `}`) around each element's style rule(s). You also need to make sure that your element's style definition is between the opening and closing style tags. Finally, be sure to add a semicolon to the end of each of your element's style rules.
 
 # --instructions--
 
-Delete your `h2` element's style attribute, and instead create a CSS `style` block. Add the necessary CSS to turn all `h2` elements blue.
+Replace the word `black` in our `body` element's background-color with its hex code representation, `#000000`.
 
 # --hints--
 
-The style attribute should be removed from your `h2` element.
+Your `body` element should have the background-color of black.
 
 ```js
-assert(!$('h2').attr('style'));
+assert($('body').css('background-color') === 'rgb(0, 0, 0)');
 ```
 
-You should create a `style` element.
-
-```js
-assert($('style') && $('style').length >= 1);
-```
-
-Your `h2` element should be blue.
-
-```js
-assert($('h2').css('color') === 'rgb(0, 0, 255)');
-```
-
-Your stylesheet `h2` declaration should be valid with a semicolon and closing brace.
-
-```js
-assert(code.match(/h2\s*\{\s*color\s*:.*;\s*\}/g));
-```
-
-All your `style` elements should be valid and have closing tags.
+The `hex code` for the color black should be used instead of the word `black`.
 
 ```js
 assert(
-  code.match(/<\/style>/g) &&
-    code.match(/<\/style>/g).length ===
-      (
-        code.match(
-          /<style((\s)*((type|media|scoped|title|disabled)="[^"]*")?(\s)*)*>/g
-        ) || []
-      ).length
+  code.match(
+    /body\s*{(([\s\S]*;\s*?)|\s*?)background.*\s*:\s*?#000(000)?((\s*})|(;[\s\S]*?}))/gi
+  )
 );
 ```
 
@@ -82,76 +47,19 @@ assert(
 ## --seed-contents--
 
 ```html
-<h2 style="color: red;">CatPhotoApp</h2>
-<main>
-  <p>Click here to view more <a href="#">cat photos</a>.</p>
-
-  <a href="#"><img src="https://bit.ly/fcc-relaxing-cat" alt="A cute orange cat lying on its back."></a>
-
-  <div>
-    <p>Things cats love:</p>
-    <ul>
-      <li>cat nip</li>
-      <li>laser pointers</li>
-      <li>lasagna</li>
-    </ul>
-    <p>Top 3 things cats hate:</p>
-    <ol>
-      <li>flea treatment</li>
-      <li>thunder</li>
-      <li>other cats</li>
-    </ol>
-  </div>
-
-  <form action="https://freecatphotoapp.com/submit-cat-photo">
-    <label><input type="radio" name="indoor-outdoor" checked> Indoor</label>
-    <label><input type="radio" name="indoor-outdoor"> Outdoor</label><br>
-    <label><input type="checkbox" name="personality" checked> Loving</label>
-    <label><input type="checkbox" name="personality"> Lazy</label>
-    <label><input type="checkbox" name="personality"> Energetic</label><br>
-    <input type="text" placeholder="cat photo URL" required>
-    <button type="submit">Submit</button>
-  </form>
-</main>
+<style>
+  body {
+    background-color: black;
+  }
+</style>
 ```
 
 # --solutions--
 
 ```html
 <style>
-  h2 {
-    color: blue;
+  body {
+    background-color: #000000;
   }
 </style>
-<h2>CatPhotoApp</h2>
-<main>
-  <p>Click here to view more <a href="#">cat photos</a>.</p>
-
-  <a href="#"><img src="https://bit.ly/fcc-relaxing-cat" alt="A cute orange cat lying on its back."></a>
-
-  <div>
-    <p>Things cats love:</p>
-    <ul>
-      <li>cat nip</li>
-      <li>laser pointers</li>
-      <li>lasagna</li>
-    </ul>
-    <p>Top 3 things cats hate:</p>
-    <ol>
-      <li>flea treatment</li>
-      <li>thunder</li>
-      <li>other cats</li>
-    </ol>
-  </div>
-
-  <form action="https://freecatphotoapp.com/submit-cat-photo">
-    <label><input type="radio" name="indoor-outdoor" checked> Indoor</label>
-    <label><input type="radio" name="indoor-outdoor"> Outdoor</label><br>
-    <label><input type="checkbox" name="personality" checked> Loving</label>
-    <label><input type="checkbox" name="personality"> Lazy</label>
-    <label><input type="checkbox" name="personality"> Energetic</label><br>
-    <input type="text" placeholder="cat photo URL" required>
-    <button type="submit">Submit</button>
-  </form>
-</main>
 ```
