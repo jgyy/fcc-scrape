@@ -1,14 +1,12 @@
 ---
-id: 5f46e8284aae155c83015dee
-title: Part 90
+id: 5f475e1c7f71a61d913836c6
+title: Part 92
 challengeType: 0
 ---
 
 # --description--
 
-The menu looks good, but other than the coffee beans background image, it is mainly just text.
-
-Under the `Coffees` heading, add an image using the url `https://tinyurl.com/cafe-coffee-fcc`. Give the image an `alt` value of `coffee icon`.
+Add one last image under the `Desserts` heading using the url `https://tinyurl.com/cafe-pie-fcc`. Give the image an `alt` value of `pie icon`.
 
 # --hints--
 
@@ -40,9 +38,8 @@ Test 1
       <hr>
       <main>
         <section>
---fcc-editable-region--
           <h2>Coffees</h2>
---fcc-editable-region--
+          <img src="https://tinyurl.com/cafe-coffee-fcc" alt="coffee icon"/>
           <article class="item">
             <p class="flavor">French Vanilla</p><p class="price">3.00</p>
           </article>
@@ -60,7 +57,9 @@ Test 1
           </article>
         </section>
         <section>
+--fcc-editable-region--
           <h2>Desserts</h2>
+--fcc-editable-region--
           <article class="item">
             <p class="dessert">Donut</p><p class="price">1.50</p>
           </article>
@@ -121,6 +120,12 @@ h1, h2, p {
   max-width: 500px;
 }
 
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 hr {
   height: 2px;
   background-color: brown;
@@ -149,7 +154,7 @@ h1, h2 {
 
 .price {
   text-align: right;
-  width: 25%
+  width: 25%;
 }
 
 /* FOOTER */
