@@ -1,58 +1,71 @@
 ---
-id: bad87dee1348bd9aede07836
-title: Use an id Attribute to Style an Element
+id: 58c383d33e2e3259241f3076
+title: Use Attribute Selectors to Style Elements
 challengeType: 0
-videoUrl: 'https://scrimba.com/c/cakyZfL'
-forumTopicId: 18339
+videoUrl: 'https://scrimba.com/c/cnpymfJ'
+forumTopicId: 301092
 ---
 
 # --description--
 
-One cool thing about `id` attributes is that, like classes, you can style them using CSS.
+You have been adding `id` or `class` attributes to elements that you wish to specifically style. These are known as ID and class selectors. There are other CSS Selectors you can use to select custom groups of elements to style.
 
-However, an `id` is not reusable and should only be applied to one element. An `id` also has a higher specificity (importance) than a class so if both are applied to the same element and have conflicting styles, the styles of the `id` will be applied.
+Let's bring out CatPhotoApp again to practice using CSS Selectors.
 
-Here's an example of how you can take your element with the `id` attribute of `cat-photo-element` and give it the background color of green. In your `style` element:
+For this challenge, you will use the `[attr=value]` attribute selector to style the checkboxes in CatPhotoApp. This selector matches and styles elements with a specific attribute value. For example, the below code changes the margins of all elements with the attribute `type` and a corresponding value of `radio`:
 
 ```css
-#cat-photo-element {
-  background-color: green;
+[type='radio'] {
+  margin: 20px 0px 20px 0px;
 }
 ```
 
-Note that inside your `style` element, you always reference classes by putting a `.` in front of their names. You always reference ids by putting a `#` in front of their names.
-
 # --instructions--
 
-Try giving your form, which now has the `id` attribute of `cat-photo-form`, a green background.
+Using the `type` attribute selector, try to give the checkboxes in CatPhotoApp a top margin of 10px and a bottom margin of 15px.
 
 # --hints--
 
-Your `form` element should have the id of `cat-photo-form`.
-
-```js
-assert($('form').attr('id') === 'cat-photo-form');
-```
-
-Your `form` element should have the `background-color` of green.
-
-```js
-assert($('#cat-photo-form').css('background-color') === 'rgb(0, 128, 0)');
-```
-
-Your `form` element should have an `id` attribute.
+The `type` attribute selector should be used to select the checkboxes.
 
 ```js
 assert(
-  code.match(/<form.*cat-photo-form.*>/gi) &&
-    code.match(/<form.*cat-photo-form.*>/gi).length > 0
+  code.match(
+    /<style>[\s\S]*?\[\s*?type\s*?=\s*?("|')checkbox\1\s*?\]\s*?{[\s\S]*?}[\s\S]*?<\/style>/gi
+  )
 );
 ```
 
-You should not give your `form` any `class` or `style` attributes.
+The top margins of the checkboxes should be 10px.
 
 ```js
-assert(!code.match(/<form.*style.*>/gi) && !code.match(/<form.*class.*>/gi));
+assert(
+  (function () {
+    var count = 0;
+    $("[type='checkbox']").each(function () {
+      if ($(this).css('marginTop') === '10px') {
+        count++;
+      }
+    });
+    return count === 3;
+  })()
+);
+```
+
+The bottom margins of the checkboxes should be 15px.
+
+```js
+assert(
+  (function () {
+    var count = 0;
+    $("[type='checkbox']").each(function () {
+      if ($(this).css('marginBottom') === '15px') {
+        count++;
+      }
+    });
+    return count === 3;
+  })()
+);
 ```
 
 # --seed--
@@ -156,18 +169,18 @@ assert(!code.match(/<form.*style.*>/gi) && !code.match(/<form.*class.*>/gi));
   .silver-background {
     background-color: silver;
   }
-
-  #cat-photo-form {
-    background-color: green;
+  [type='checkbox'] {
+    margin-top: 10px;
+    margin-bottom: 15px;
   }
 </style>
 
 <h2 class="red-text">CatPhotoApp</h2>
 <main>
   <p class="red-text">Click here to view more <a href="#">cat photos</a>.</p>
-  
+
   <a href="#"><img class="smaller-image thick-green-border" src="https://bit.ly/fcc-relaxing-cat" alt="A cute orange cat lying on its back."></a>
-  
+
   <div class="silver-background">
     <p>Things cats love:</p>
     <ul>
