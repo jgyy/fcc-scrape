@@ -1,51 +1,55 @@
 ---
-id: bad87fee1348bd9aede08718
-title: Use RGB values to Color Elements
+id: bad87fee1348bd9aedd08830
+title: Add a Submit Button to a Form
 challengeType: 0
-videoUrl: 'https://scrimba.com/c/cRkp2fr'
-forumTopicId: 18369
+videoUrl: 'https://scrimba.com/p/pVMPUv/cp2Nkhz'
+forumTopicId: 16627
 ---
 
 # --description--
 
-Another way you can represent colors in CSS is by using `RGB` values.
+Let's add a `submit` button to your form. Clicking this button will send the data from your form to the URL you specified with your form's `action` attribute.
 
-The RGB value for black looks like this:
+Here's an example submit button:
 
-`rgb(0, 0, 0)`
-
-The RGB value for white looks like this:
-
-`rgb(255, 255, 255)`
-
-Instead of using six hexadecimal digits like you do with hex code, with `RGB` you specify the brightness of each color with a number between 0 and 255.
-
-If you do the math, the two digits for one color equal 16 times 16, which gives us 256 total values. So `RGB`, which starts counting from zero, has the exact same number of possible values as hex code.
-
-Here's an example of how you'd change the body background to orange using its RGB code.
-
-```css
-body {
-  background-color: rgb(255, 165, 0);
-}
-```
+`<button type="submit">this button submits the form</button>`
 
 # --instructions--
 
-Let's replace the hex code in our `body` element's background color with the RGB value for black: `rgb(0, 0, 0)`
+Add a button as the last element of your `form` element with a type of `submit`, and "Submit" as its text.
 
 # --hints--
 
-Your `body` element should have a black background.
+Your form should have a button inside it.
 
 ```js
-assert($('body').css('background-color') === 'rgb(0, 0, 0)');
+assert($('form').children('button').length > 0);
 ```
 
-You should use `rgb` to give your `body` element a color of black.
+Your submit button should have the attribute `type` set to `submit`.
 
 ```js
-assert(code.match(/rgb\s*\(\s*0\s*,\s*0\s*,\s*0\s*\)/gi));
+assert($('button').attr('type') === 'submit');
+```
+
+Your submit button should only have the text `Submit`.
+
+```js
+assert(
+  $('button')
+    .text()
+    .match(/^\s*submit\s*$/gi)
+);
+```
+
+Your `button` element should have a closing tag.
+
+```js
+assert(
+  code.match(/<\/button>/g) &&
+    code.match(/<button/g) &&
+    code.match(/<\/button>/g).length === code.match(/<button/g).length
+);
 ```
 
 # --seed--
@@ -53,19 +57,54 @@ assert(code.match(/rgb\s*\(\s*0\s*,\s*0\s*,\s*0\s*\)/gi));
 ## --seed-contents--
 
 ```html
-<style>
-  body {
-    background-color: #F00;
-  }
-</style>
+<h2>CatPhotoApp</h2>
+<main>
+  <p>Click here to view more <a href="#">cat photos</a>.</p>
+
+  <a href="#"><img src="https://bit.ly/fcc-relaxing-cat" alt="A cute orange cat lying on its back."></a>
+
+  <p>Things cats love:</p>
+  <ul>
+    <li>cat nip</li>
+    <li>laser pointers</li>
+    <li>lasagna</li>
+  </ul>
+  <p>Top 3 things cats hate:</p>
+  <ol>
+    <li>flea treatment</li>
+    <li>thunder</li>
+    <li>other cats</li>
+  </ol>
+  <form action="https://freecatphotoapp.com/submit-cat-photo">
+    <input type="text" placeholder="cat photo URL">
+  </form>
+</main>
 ```
 
 # --solutions--
 
 ```html
-<style>
-  body {
-    background-color: rgb(0, 0, 0);
-  }
-</style>
+<h2>CatPhotoApp</h2>
+<main>
+  <p>Click here to view more <a href="#">cat photos</a>.</p>
+
+  <a href="#"><img src="https://bit.ly/fcc-relaxing-cat" alt="A cute orange cat lying on its back."></a>
+
+  <p>Things cats love:</p>
+  <ul>
+    <li>cat nip</li>
+    <li>laser pointers</li>
+    <li>lasagna</li>
+  </ul>
+  <p>Top 3 things cats hate:</p>
+  <ol>
+    <li>flea treatment</li>
+    <li>thunder</li>
+    <li>other cats</li>
+  </ol>
+  <form action="https://freecatphotoapp.com/submit-cat-photo">
+    <input type="text" placeholder="cat photo URL">
+    <button type="submit">Submit</button>
+  </form>
+</main>
 ```
