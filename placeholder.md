@@ -1,14 +1,14 @@
 ---
-id: 5f45b0731d39e15d54df4dfc
-title: Part 81
+id: 5f45b25e7ec2405f166b9de1
+title: Part 82
 challengeType: 0
 ---
 
 # --description--
 
-The default color of link that has not yet been clicked on a page is typically blue. The default color of a link that has already been visited from a page is typically purple.
+You change properties of a link when the link has actually been visited by using a <dfn>pseudo-selector</dfn> that looks like `a:visited { propertyName: propertyValue; }`.
 
-To make the `footer` links the same color regardless if a link has been visited, use a type selector for the anchor element (`a`) and use the value `black` for the `color` property.
+Change the color of the footer `Visit our website` link to be `grey` when a user has visited the link.
 
 # --hints--
 
@@ -153,6 +153,11 @@ h1, h2 {
 footer {
   font-size: 14px;
 }
+
+a {
+  color: black;
+}
+
 --fcc-editable-region--
 
 --fcc-editable-region--
