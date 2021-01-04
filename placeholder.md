@@ -1,33 +1,47 @@
 ---
-id: bad87eee1348bd9aede07836
-title: Set the id of an Element
+id: bad87fee1348bd9acdf08812
+title: Size Your Images
 challengeType: 0
-videoUrl: 'https://scrimba.com/c/cN6MEc2'
-forumTopicId: 18279
+videoUrl: 'https://scrimba.com/c/cM9MmCP'
+forumTopicId: 18282
 ---
 
 # --description--
 
-In addition to classes, each HTML element can also have an `id` attribute.
+CSS has a property called `width` that controls an element's width. Just like with fonts, we'll use `px` (pixels) to specify the image's width.
 
-There are several benefits to using `id` attributes: You can use an `id` to style a single element and later you'll learn that you can use them to select and modify specific elements with JavaScript.
+For example, if we wanted to create a CSS class called `larger-image` that gave HTML elements a width of 500 pixels, we'd use:
 
-`id` attributes should be unique. Browsers won't enforce this, but it is a widely agreed upon best practice. So please don't give more than one element the same `id` attribute.
-
-Here's an example of how you give your `h2` element the id of `cat-photo-app`:
-
-`<h2 id="cat-photo-app">`
+```html
+<style>
+  .larger-image {
+    width: 500px;
+  }
+</style>
+```
 
 # --instructions--
 
-Give your `form` element the id `cat-photo-form`.
+Create a class called `smaller-image` and use it to resize the image so that it's only 100 pixels wide.
 
 # --hints--
 
-Your `form` element should have the id of `cat-photo-form`.
+Your `img` element should have the class `smaller-image`.
 
 ```js
-assert($('form').attr('id') === 'cat-photo-form');
+assert(
+  $("img[src='https://bit.ly/fcc-relaxing-cat']").attr('class') ===
+    'smaller-image'
+);
+```
+
+Your image should be 100 pixels wide.
+
+```js
+assert(
+  $('img').width() < 200 &&
+    code.match(/\.smaller-image\s*{\s*width\s*:\s*100px\s*(;\s*}|})/i)
+);
 ```
 
 # --seed--
@@ -49,30 +63,15 @@ assert($('form').attr('id') === 'cat-photo-form');
     font-size: 16px;
     font-family: monospace;
   }
-
-  .thick-green-border {
-    border-color: green;
-    border-width: 10px;
-    border-style: solid;
-    border-radius: 50%;
-  }
-
-  .smaller-image {
-    width: 100px;
-  }
-
-  .silver-background {
-    background-color: silver;
-  }
 </style>
 
 <h2 class="red-text">CatPhotoApp</h2>
 <main>
   <p class="red-text">Click here to view more <a href="#">cat photos</a>.</p>
 
-  <a href="#"><img class="smaller-image thick-green-border" src="https://bit.ly/fcc-relaxing-cat" alt="A cute orange cat lying on its back."></a>
+  <a href="#"><img src="https://bit.ly/fcc-relaxing-cat" alt="A cute orange cat lying on its back."></a>
 
-  <div class="silver-background">
+  <div>
     <p>Things cats love:</p>
     <ul>
       <li>cat nip</li>
@@ -117,29 +116,18 @@ assert($('form').attr('id') === 'cat-photo-form');
     font-family: monospace;
   }
 
-  .thick-green-border {
-    border-color: green;
-    border-width: 10px;
-    border-style: solid;
-    border-radius: 50%;
-  }
-
   .smaller-image {
     width: 100px;
-  }
-
-  .silver-background {
-    background-color: silver;
   }
 </style>
 
 <h2 class="red-text">CatPhotoApp</h2>
 <main>
   <p class="red-text">Click here to view more <a href="#">cat photos</a>.</p>
-
-  <a href="#"><img class="smaller-image thick-green-border" src="https://bit.ly/fcc-relaxing-cat" alt="A cute orange cat lying on its back."></a>
-
-  <div class="silver-background">
+  
+  <a href="#"><img class="smaller-image" src="https://bit.ly/fcc-relaxing-cat" alt="A cute orange cat lying on its back."></a>
+  
+  <div>
     <p>Things cats love:</p>
     <ul>
       <li>cat nip</li>
@@ -154,7 +142,7 @@ assert($('form').attr('id') === 'cat-photo-form');
     </ol>
   </div>
 
-  <form action="https://freecatphotoapp.com/submit-cat-photo" id="cat-photo-form">
+  <form action="https://freecatphotoapp.com/submit-cat-photo">
     <label><input type="radio" name="indoor-outdoor" checked> Indoor</label>
     <label><input type="radio" name="indoor-outdoor"> Outdoor</label><br>
     <label><input type="checkbox" name="personality" checked> Loving</label>
