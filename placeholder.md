@@ -1,43 +1,38 @@
 ---
-id: bad87fee1348bd9aedf08756
-title: Prioritize One Style Over Another
+id: bad87fee1348bd9aede08807
+title: Set the Font Family of an Element
 challengeType: 0
-videoUrl: 'https://scrimba.com/c/cZ8wnHv'
-forumTopicId: 18258
+videoUrl: 'https://scrimba.com/c/c3bvpCg'
+forumTopicId: 18278
 ---
 
 # --description--
 
-Sometimes your HTML elements will receive multiple styles that conflict with one another.
+You can set which font an element should use, by using the `font-family` property.
 
-For example, your `h1` element can't be both green and pink at the same time.
+For example, if you wanted to set your `h2` element's font to `sans-serif`, you would use the following CSS:
 
-Let's see what happens when we create a class that makes text pink, then apply it to an element. Will our class *override* the `body` element's `color: green;` CSS property?
+```css
+h2 {
+  font-family: sans-serif;
+}
+```
 
 # --instructions--
 
-Create a CSS class called `pink-text` that gives an element the color pink.
-
-Give your `h1` element the class of `pink-text`.
+Make all of your `p` elements use the `monospace` font.
 
 # --hints--
 
-Your `h1` element should have the class `pink-text`.
+Your `p` elements should use the font `monospace`.
 
 ```js
-assert($('h1').hasClass('pink-text'));
-```
-
-Your `<style>` should have a `pink-text` CSS class that changes the `color`.
-
-```js
-assert(code.match(/\.pink-text\s*\{\s*color\s*:\s*.+\s*;\s*\}/g));
-```
-
-Your `h1` element should be pink.
-
-```js
-assert($('h1').css('color') === 'rgb(255, 192, 203)');
+assert(
+  $('p')
+    .not('.red-text')
+    .css('font-family')
+    .match(/monospace/i)
+);
 ```
 
 # --seed--
@@ -46,27 +41,91 @@ assert($('h1').css('color') === 'rgb(255, 192, 203)');
 
 ```html
 <style>
-  body {
-    background-color: black;
-    font-family: monospace;
-    color: green;
+  .red-text {
+    color: red;
+  }
+
+  p {
+    font-size: 16px;
   }
 </style>
-<h1>Hello World!</h1>
+
+<h2 class="red-text">CatPhotoApp</h2>
+<main>
+  <p class="red-text">Click here to view more <a href="#">cat photos</a>.</p>
+
+  <a href="#"><img src="https://bit.ly/fcc-relaxing-cat" alt="A cute orange cat lying on its back."></a>
+
+  <div>
+    <p>Things cats love:</p>
+    <ul>
+      <li>cat nip</li>
+      <li>laser pointers</li>
+      <li>lasagna</li>
+    </ul>
+    <p>Top 3 things cats hate:</p>
+    <ol>
+      <li>flea treatment</li>
+      <li>thunder</li>
+      <li>other cats</li>
+    </ol>
+  </div>
+
+  <form action="https://freecatphotoapp.com/submit-cat-photo">
+    <label><input type="radio" name="indoor-outdoor" checked> Indoor</label>
+    <label><input type="radio" name="indoor-outdoor"> Outdoor</label><br>
+    <label><input type="checkbox" name="personality" checked> Loving</label>
+    <label><input type="checkbox" name="personality"> Lazy</label>
+    <label><input type="checkbox" name="personality"> Energetic</label><br>
+    <input type="text" placeholder="cat photo URL" required>
+    <button type="submit">Submit</button>
+  </form>
+</main>
 ```
 
 # --solutions--
 
 ```html
 <style>
-  body {
-    background-color: black;
-    font-family: monospace;
-    color: green;
+  .red-text {
+    color: red;
   }
-  .pink-text {
-    color: pink;
+
+  p {
+    font-size: 16px;
+    font-family: monospace;
   }
 </style>
-<h1 class="pink-text">Hello World!</h1>
+
+<h2 class="red-text">CatPhotoApp</h2>
+<main>
+  <p class="red-text">Click here to view more <a href="#">cat photos</a>.</p>
+  
+  <a href="#"><img src="https://bit.ly/fcc-relaxing-cat" alt="A cute orange cat lying on its back."></a>
+  
+  <div>
+    <p>Things cats love:</p>
+    <ul>
+      <li>cat nip</li>
+      <li>laser pointers</li>
+      <li>lasagna</li>
+    </ul>
+    <p>Top 3 things cats hate:</p>
+    <ol>
+      <li>flea treatment</li>
+      <li>thunder</li>
+      <li>other cats</li>
+    </ol>
+  </div>
+
+  <form action="https://freecatphotoapp.com/submit-cat-photo">
+    <label><input type="radio" name="indoor-outdoor" checked> Indoor</label>
+    <label><input type="radio" name="indoor-outdoor"> Outdoor</label><br>
+    <label><input type="checkbox" name="personality" checked> Loving</label>
+    <label><input type="checkbox" name="personality"> Lazy</label>
+    <label><input type="checkbox" name="personality"> Energetic</label><br>
+    <input type="text" placeholder="cat photo URL" required>
+    <button type="submit">Submit</button>
+  </form>
+</main>
 ```
