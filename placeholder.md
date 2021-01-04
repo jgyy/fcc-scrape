@@ -1,36 +1,24 @@
 ---
-id: bad87fee1348bd8aedf06756
-title: Override Class Declarations by Styling ID Attributes
+id: bad87fee1348bd9aedf06756
+title: Override Class Declarations with Inline Styles
 challengeType: 0
-videoUrl: 'https://scrimba.com/c/cRkpDhB'
-forumTopicId: 18251
+videoUrl: 'https://scrimba.com/c/cGJDRha'
+forumTopicId: 18252
 ---
 
 # --description--
 
-We just proved that browsers read CSS from top to bottom in order of their declaration. That means that, in the event of a conflict, the browser will use whichever CSS declaration came last. Notice that if we even had put `blue-text` before `pink-text` in our `h1` element's classes, it would still look at the declaration order and not the order of their use!
+So we've proven that id declarations override class declarations, regardless of where they are declared in your `style` element CSS.
 
-But we're not done yet. There are other ways that you can override CSS. Do you remember id attributes?
-
-Let's override your `pink-text` and `blue-text` classes, and make your `h1` element orange, by giving the `h1` element an id and then styling that id.
+There are other ways that you can override CSS. Do you remember inline styles?
 
 # --instructions--
 
-Give your `h1` element the `id` attribute of `orange-text`. Remember, id styles look like this:
+Use an inline style to try to make our `h1` element white. Remember, in line styles look like this:
 
-`<h1 id="orange-text">`
+`<h1 style="color: green;">`
 
 Leave the `blue-text` and `pink-text` classes on your `h1` element.
-
-Create a CSS declaration for your `orange-text` id in your `style` element. Here's an example of what this looks like:
-
-```css
-#brown-text {
-  color: brown;
-}
-```
-
-**Note:** It doesn't matter whether you declare this CSS above or below pink-text class, since id attribute will always take precedence.
 
 # --hints--
 
@@ -52,28 +40,16 @@ Your `h1` element should have the id of `orange-text`.
 assert($('h1').attr('id') === 'orange-text');
 ```
 
-There should be only one `h1` element.
+Your `h1` element should have an inline style.
 
 ```js
-assert($('h1').length === 1);
+assert(document.querySelector('h1[style]'));
 ```
 
-Your `orange-text` id should have a CSS declaration.
+Your `h1` element should be white.
 
 ```js
-assert(code.match(/#orange-text\s*{/gi));
-```
-
-Your `h1` should not have any `style` attributes.
-
-```js
-assert(!code.match(/<h1.*style.*>/gi));
-```
-
-Your `h1` element should be orange.
-
-```js
-assert($('h1').css('color') === 'rgb(255, 165, 0)');
+assert($('h1').css('color') === 'rgb(255, 255, 255)');
 ```
 
 # --seed--
@@ -87,6 +63,9 @@ assert($('h1').css('color') === 'rgb(255, 165, 0)');
     font-family: monospace;
     color: green;
   }
+  #orange-text {
+    color: orange;
+  }
   .pink-text {
     color: pink;
   }
@@ -94,7 +73,7 @@ assert($('h1').css('color') === 'rgb(255, 165, 0)');
     color: blue;
   }
 </style>
-<h1 class="pink-text blue-text">Hello World!</h1>
+<h1 id="orange-text" class="pink-text blue-text">Hello World!</h1>
 ```
 
 # --solutions--
@@ -106,15 +85,15 @@ assert($('h1').css('color') === 'rgb(255, 165, 0)');
     font-family: monospace;
     color: green;
   }
+  #orange-text {
+    color: orange;
+  }
   .pink-text {
     color: pink;
   }
   .blue-text {
     color: blue;
   }
-  #orange-text {
-    color: orange;
-  }
 </style>
-<h1 id="orange-text"  class="pink-text blue-text">Hello World!</h1>
+<h1 id="orange-text" class="pink-text blue-text" style="color: white">Hello World!</h1>
 ```
