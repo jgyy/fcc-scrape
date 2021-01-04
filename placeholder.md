@@ -1,33 +1,45 @@
 ---
-id: 5a9d726c424fe3d0e10cad11
-title: Create a custom CSS Variable
+id: bad87fed1348bd9aede07836
+title: Give a Background Color to a div Element
 challengeType: 0
-videoUrl: 'https://scrimba.com/c/cQd27Hr'
-forumTopicId: 301086
+videoUrl: 'https://scrimba.com/c/cdRKMCk'
+forumTopicId: 18190
 ---
 
 # --description--
 
-To create a CSS variable, you just need to give it a name with two hyphens in front of it and assign it a value like this:
+You can set an element's background color with the `background-color` property.
+
+For example, if you wanted an element's background color to be `green`, you'd put this within your `style` element:
 
 ```css
---penguin-skin: gray;
+.green-background {
+  background-color: green;
+}
 ```
-
-This will create a variable named `--penguin-skin` and assign it the value of `gray`. Now you can use that variable elsewhere in your CSS to change the value of other elements to gray.
 
 # --instructions--
 
-In the `penguin` class, create a variable name `--penguin-skin` and give it a value of `gray`.
+Create a class called `silver-background` with the `background-color` of silver. Assign this class to your `div` element.
 
 # --hints--
 
-`penguin` class should declare the `--penguin-skin` variable and assign it to `gray`.
+Your`div` element should have the class `silver-background`.
 
 ```js
-assert(
-  code.match(/\.penguin\s*\{[^{}]*?--penguin-skin\s*:\s*gr[ae]y\s*;[^{}]*?\}/gi)
-);
+assert($('div').hasClass('silver-background'));
+```
+
+Your `div` element should have a silver background.
+
+```js
+assert($('div').css('background-color') === 'rgb(192, 192, 192)');
+```
+
+A class named `silver-background` should be defined within the `style` element and the value of `silver` should be assigned to the `background-color` property.
+
+```js
+assert(code.match(/\.silver-background\s*{\s*background-color:\s*silver;\s*}/));
 ```
 
 # --seed--
@@ -35,206 +47,129 @@ assert(
 ## --seed-contents--
 
 ```html
+<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css">
 <style>
-  .penguin {
-    /* Only change code below this line */
-
-    /* Only change code above this line */
-    position: relative;
-    margin: auto;
-    display: block;
-    margin-top: 5%;
-    width: 300px;
-    height: 300px;
+  .red-text {
+    color: red;
   }
 
-  .penguin-top {
-    top: 10%;
-    left: 25%;
-    background: black;
-    width: 50%;
-    height: 45%;
-    border-radius: 70% 70% 60% 60%;
+  h2 {
+    font-family: Lobster, monospace;
   }
 
-  .penguin-bottom {
-    top: 40%;
-    left: 23.5%;
-    background: black;
-    width: 53%;
-    height: 45%;
-    border-radius: 70% 70% 100% 100%;
+  p {
+    font-size: 16px;
+    font-family: monospace;
   }
 
-  .right-hand {
-    top: 0%;
-    left: -5%;
-    background: black;
-    width: 30%;
-    height: 60%;
-    border-radius: 30% 30% 120% 30%;
-    transform: rotate(45deg);
-    z-index: -1;
-  }
-
-  .left-hand {
-    top: 0%;
-    left: 75%;
-    background: black;
-    width: 30%;
-    height: 60%;
-    border-radius: 30% 30% 30% 120%;
-    transform: rotate(-45deg);
-    z-index: -1;
-  }
-
-  .right-cheek {
-    top: 15%;
-    left: 35%;
-    background: white;
-    width: 60%;
-    height: 70%;
-    border-radius: 70% 70% 60% 60%;
-  }
-
-  .left-cheek {
-    top: 15%;
-    left: 5%;
-    background: white;
-    width: 60%;
-    height: 70%;
-    border-radius: 70% 70% 60% 60%;
-  }
-
-  .belly {
-    top: 60%;
-    left: 2.5%;
-    background: white;
-    width: 95%;
-    height: 100%;
-    border-radius: 120% 120% 100% 100%;
-  }
-
-  .right-feet {
-    top: 85%;
-    left: 60%;
-    background: orange;
-    width: 15%;
-    height: 30%;
-    border-radius: 50% 50% 50% 50%;
-    transform: rotate(-80deg);
-    z-index: -2222;
-  }
-
-  .left-feet {
-    top: 85%;
-    left: 25%;
-    background: orange;
-    width: 15%;
-    height: 30%;
-    border-radius: 50% 50% 50% 50%;
-    transform: rotate(80deg);
-    z-index: -2222;
-  }
-
-  .right-eye {
-    top: 45%;
-    left: 60%;
-    background: black;
-    width: 15%;
-    height: 17%;
+  .thick-green-border {
+    border-color: green;
+    border-width: 10px;
+    border-style: solid;
     border-radius: 50%;
   }
 
-  .left-eye {
-    top: 45%;
-    left: 25%;
-    background: black;
-    width: 15%;
-    height: 17%;
-    border-radius: 50%;
-  }
-
-  .sparkle {
-    top: 25%;
-    left: 15%;
-    background: white;
-    width: 35%;
-    height: 35%;
-    border-radius: 50%;
-  }
-
-  .blush-right {
-    top: 65%;
-    left: 15%;
-    background: pink;
-    width: 15%;
-    height: 10%;
-    border-radius: 50%;
-  }
-
-  .blush-left {
-    top: 65%;
-    left: 70%;
-    background: pink;
-    width: 15%;
-    height: 10%;
-    border-radius: 50%;
-  }
-
-  .beak-top {
-    top: 60%;
-    left: 40%;
-    background: orange;
-    width: 20%;
-    height: 10%;
-    border-radius: 50%;
-  }
-
-  .beak-bottom {
-    top: 65%;
-    left: 42%;
-    background: orange;
-    width: 16%;
-    height: 10%;
-    border-radius: 50%;
-  }
-
-  body {
-    background:#c6faf1;
-  }
-
-  .penguin * {
-    position: absolute;
+  .smaller-image {
+    width: 100px;
   }
 </style>
-<div class="penguin">
-  <div class="penguin-bottom">
-    <div class="right-hand"></div>
-    <div class="left-hand"></div>
-    <div class="right-feet"></div>
-    <div class="left-feet"></div>
+
+<h2 class="red-text">CatPhotoApp</h2>
+<main>
+  <p class="red-text">Click here to view more <a href="#">cat photos</a>.</p>
+
+  <a href="#"><img class="smaller-image thick-green-border" src="https://bit.ly/fcc-relaxing-cat" alt="A cute orange cat lying on its back."></a>
+
+  <div>
+    <p>Things cats love:</p>
+    <ul>
+      <li>cat nip</li>
+      <li>laser pointers</li>
+      <li>lasagna</li>
+    </ul>
+    <p>Top 3 things cats hate:</p>
+    <ol>
+      <li>flea treatment</li>
+      <li>thunder</li>
+      <li>other cats</li>
+    </ol>
   </div>
-  <div class="penguin-top">
-    <div class="right-cheek"></div>
-    <div class="left-cheek"></div>
-    <div class="belly"></div>
-    <div class="right-eye">
-      <div class="sparkle"></div>
-    </div>
-    <div class="left-eye">
-      <div class="sparkle"></div>
-    </div>
-    <div class="blush-right"></div>
-    <div class="blush-left"></div>
-    <div class="beak-top"></div>
-    <div class="beak-bottom"></div>
-  </div>
-</div>
+
+  <form action="https://freecatphotoapp.com/submit-cat-photo">
+    <label><input type="radio" name="indoor-outdoor" checked> Indoor</label>
+    <label><input type="radio" name="indoor-outdoor"> Outdoor</label><br>
+    <label><input type="checkbox" name="personality" checked> Loving</label>
+    <label><input type="checkbox" name="personality"> Lazy</label>
+    <label><input type="checkbox" name="personality"> Energetic</label><br>
+    <input type="text" placeholder="cat photo URL" required>
+    <button type="submit">Submit</button>
+  </form>
+</main>
 ```
 
 # --solutions--
 
 ```html
-<style>.penguin {--penguin-skin: gray;}</style>
+<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css">
+<style>
+  .red-text {
+    color: red;
+  }
+
+  h2 {
+    font-family: Lobster, monospace;
+  }
+
+  p {
+    font-size: 16px;
+    font-family: monospace;
+  }
+
+  .thick-green-border {
+    border-color: green;
+    border-width: 10px;
+    border-style: solid;
+    border-radius: 50%;
+  }
+
+  .smaller-image {
+    width: 100px;
+  }
+
+  .silver-background {
+    background-color: silver;
+  }
+</style>
+
+<h2 class="red-text">CatPhotoApp</h2>
+<main>
+  <p class="red-text">Click here to view more <a href="#">cat photos</a>.</p>
+
+  <a href="#"><img class="smaller-image thick-green-border" src="https://bit.ly/fcc-relaxing-cat" alt="A cute orange cat lying on its back."></a>
+
+  <div class="silver-background">
+    <p>Things cats love:</p>
+    <ul>
+      <li>cat nip</li>
+      <li>laser pointers</li>
+      <li>lasagna</li>
+    </ul>
+    <p>Top 3 things cats hate:</p>
+    <ol>
+      <li>flea treatment</li>
+      <li>thunder</li>
+      <li>other cats</li>
+    </ol>
+  </div>
+
+  <form action="https://freecatphotoapp.com/submit-cat-photo">
+    <label><input type="radio" name="indoor-outdoor" checked> Indoor</label>
+    <label><input type="radio" name="indoor-outdoor"> Outdoor</label><br>
+    <label><input type="checkbox" name="personality" checked> Loving</label>
+    <label><input type="checkbox" name="personality"> Lazy</label>
+    <label><input type="checkbox" name="personality"> Energetic</label><br>
+    <input type="text" placeholder="cat photo URL" required>
+    <button type="submit">Submit</button>
+  </form>
+</main>
 ```
