@@ -1,12 +1,14 @@
 ---
-id: 5f7b87422a560036fd03ccff
-title: Part 51
+id: 5f7b88d37b1f98386f04edc0
+title: Part 52
 challengeType: 0
 ---
 
 # --description--
 
-For the two `p` elements you just added, add `dessert` as the value of the first `p` element's `class` attribute and the value `price` as the second `p` elements `class` attribute.
+Something does not look right. You added the correct `class` attribute value to the `p` element with `Donunt` as its text, but you have not defined a selector for it.
+
+Since the `flavor` class selector already has the properties you want, just add the `dessert` class name to it.
 
 # --hints--
 
@@ -57,9 +59,7 @@ Test 1
         <section>
           <h2>Desserts</h2>
           <article class="item">
---fcc-editable-region--
-            <p>Donut</p><p>1.50</p>
---fcc-editable-region--
+            <p class="dessert">Donut</p><p class="price">1.50</p>
           </article>
         </section>
       </main>
@@ -88,10 +88,12 @@ h1, h2, p {
   display: inline-block;
 }
 
+--fcc-editable-region--
 .flavor {
   text-align: left;
   width: 75%;
 }
+--fcc-editable-region--
 
 .price {
   text-align: right;
