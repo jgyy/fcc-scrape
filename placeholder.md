@@ -1,34 +1,30 @@
 ---
-id: 5b7d72c338cd7e35b63f3e14
-title: Improve Compatibility with Browser Fallbacks
+id: 5a9d7295424fe3d0e10cad14
+title: Inherit CSS Variables
 challengeType: 0
-videoUrl: ''
-forumTopicId: 301087
+videoUrl: 'https://scrimba.com/c/cyLZZhZ'
+forumTopicId: 301088
 ---
 
 # --description--
 
-When working with CSS you will likely run into browser compatibility issues at some point. This is why it's important to provide browser fallbacks to avoid potential problems.
+When you create a variable, it is available for you to use inside the selector in which you create it. It also is available in any of that selector's descendants. This happens because CSS variables are inherited, just like ordinary properties.
 
-When your browser parses the CSS of a webpage, it ignores any properties that it doesn't recognize or support. For example, if you use a CSS variable to assign a background color on a site, Internet Explorer will ignore the background color because it does not support CSS variables. In that case, the browser will use whatever value it has for that property. If it can't find any other value set for that property, it will revert to the default value, which is typically not ideal.
+To make use of inheritance, CSS variables are often defined in the <dfn>:root</dfn> element.
 
-This means that if you do want to provide a browser fallback, it's as easy as providing another more widely supported value immediately before your declaration. That way an older browser will have something to fall back on, while a newer browser will just interpret whatever declaration comes later in the cascade.
+`:root` is a <dfn>pseudo-class</dfn> selector that matches the root element of the document, usually the `html` element. By creating your variables in `:root`, they will be available globally and can be accessed from any other selector in the style sheet.
 
 # --instructions--
 
-It looks like a variable is being used to set the background color of the `.red-box` class. Let's improve our browser compatibility by adding another `background` declaration right before the existing declaration and set its value to red.
+Define a variable named `--penguin-belly` in the `:root` selector and give it the value of `pink`. You can then see that the variable is inherited and that all the child elements which use it get pink backgrounds.
 
 # --hints--
 
-Your `.red-box` rule should include a fallback with the `background` set to red immediately before the existing `background` declaration.
+The `--penguin-belly` variable should be declared in the `:root` and assigned the value `pink`.
 
 ```js
 assert(
-  code
-    .replace(/\s/g, '')
-    .match(
-      /\.red-box{background:(red|#ff0000|#f00|rgb\(255,0,0\)|rgb\(100%,0%,0%\)|hsl\(0,100%,50%\));background:var\(--red-color\);height:200px;width:200px;}/gi
-    )
+  code.match(/:root\s*?{[\s\S]*--penguin-belly\s*?:\s*?pink\s*?;[\s\S]*}/gi)
 );
 ```
 
@@ -39,31 +35,209 @@ assert(
 ```html
 <style>
   :root {
-    --red-color: red;
-  }
-  .red-box {
+    /* Only change code below this line */
 
-    background: var(--red-color);
-    height: 200px;
-    width:200px;
+    /* Only change code above this line */
+  }
+
+  body {
+    background: var(--penguin-belly, #c6faf1);
+  }
+
+  .penguin {
+    --penguin-skin: gray;
+    --penguin-beak: orange;
+    position: relative;
+    margin: auto;
+    display: block;
+    margin-top: 5%;
+    width: 300px;
+    height: 300px;
+  }
+
+  .right-cheek {
+    top: 15%;
+    left: 35%;
+    background: var(--penguin-belly, white);
+    width: 60%;
+    height: 70%;
+    border-radius: 70% 70% 60% 60%;
+  }
+
+  .left-cheek {
+    top: 15%;
+    left: 5%;
+    background: var(--penguin-belly, white);
+    width: 60%;
+    height: 70%;
+    border-radius: 70% 70% 60% 60%;
+  }
+
+  .belly {
+    top: 60%;
+    left: 2.5%;
+    background: var(--penguin-belly, white);
+    width: 95%;
+    height: 100%;
+    border-radius: 120% 120% 100% 100%;
+  }
+
+  .penguin-top {
+    top: 10%;
+    left: 25%;
+    background: var(--penguin-skin, gray);
+    width: 50%;
+    height: 45%;
+    border-radius: 70% 70% 60% 60%;
+  }
+
+  .penguin-bottom {
+    top: 40%;
+    left: 23.5%;
+    background: var(--penguin-skin, gray);
+    width: 53%;
+    height: 45%;
+    border-radius: 70% 70% 100% 100%;
+  }
+
+  .right-hand {
+    top: 0%;
+    left: -5%;
+    background: var(--penguin-skin, gray);
+    width: 30%;
+    height: 60%;
+    border-radius: 30% 30% 120% 30%;
+    transform: rotate(45deg);
+    z-index: -1;
+  }
+
+  .left-hand {
+    top: 0%;
+    left: 75%;
+    background: var(--penguin-skin, gray);
+    width: 30%;
+    height: 60%;
+    border-radius: 30% 30% 30% 120%;
+    transform: rotate(-45deg);
+    z-index: -1;
+  }
+
+  .right-feet {
+    top: 85%;
+    left: 60%;
+    background: var(--penguin-beak, orange);
+    width: 15%;
+    height: 30%;
+    border-radius: 50% 50% 50% 50%;
+    transform: rotate(-80deg);
+    z-index: -2222;
+  }
+
+  .left-feet {
+    top: 85%;
+    left: 25%;
+    background: var(--penguin-beak, orange);
+    width: 15%;
+    height: 30%;
+    border-radius: 50% 50% 50% 50%;
+    transform: rotate(80deg);
+    z-index: -2222;
+  }
+
+  .right-eye {
+    top: 45%;
+    left: 60%;
+    background: black;
+    width: 15%;
+    height: 17%;
+    border-radius: 50%;
+  }
+
+  .left-eye {
+    top: 45%;
+    left: 25%;
+    background: black;
+    width: 15%;
+    height: 17%;
+    border-radius: 50%;
+  }
+
+  .sparkle {
+    top: 25%;
+    left: 15%;
+    background: white;
+    width: 35%;
+    height: 35%;
+    border-radius: 50%;
+  }
+
+  .blush-right {
+    top: 65%;
+    left: 15%;
+    background: pink;
+    width: 15%;
+    height: 10%;
+    border-radius: 50%;
+  }
+
+  .blush-left {
+    top: 65%;
+    left: 70%;
+    background: pink;
+    width: 15%;
+    height: 10%;
+    border-radius: 50%;
+  }
+
+  .beak-top {
+    top: 60%;
+    left: 40%;
+    background: var(--penguin-beak, orange);
+    width: 20%;
+    height: 10%;
+    border-radius: 50%;
+  }
+
+  .beak-bottom {
+    top: 65%;
+    left: 42%;
+    background: var(--penguin-beak, orange);
+    width: 16%;
+    height: 10%;
+    border-radius: 50%;
+  }
+
+  .penguin * {
+    position: absolute;
   }
 </style>
-<div class="red-box"></div>
+<div class="penguin">
+  <div class="penguin-bottom">
+    <div class="right-hand"></div>
+    <div class="left-hand"></div>
+    <div class="right-feet"></div>
+    <div class="left-feet"></div>
+  </div>
+  <div class="penguin-top">
+    <div class="right-cheek"></div>
+    <div class="left-cheek"></div>
+    <div class="belly"></div>
+    <div class="right-eye">
+      <div class="sparkle"></div>
+    </div>
+    <div class="left-eye">
+      <div class="sparkle"></div>
+    </div>
+    <div class="blush-right"></div>
+    <div class="blush-left"></div>
+    <div class="beak-top"></div>
+    <div class="beak-bottom"></div>
+  </div>
+</div>
 ```
 
 # --solutions--
 
 ```html
-<style>
-  :root {
-    --red-color: red;
-  }
-  .red-box {
-    background: red;
-    background: var(--red-color);
-    height: 200px;
-    width:200px;
-  }
-</style>
-<div class="red-box"></div>
+<style>:root {--penguin-belly: pink;}</style>
 ```
