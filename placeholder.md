@@ -1,14 +1,14 @@
 ---
-id: 5f3ef6e0086dc80481f8cb03
-title: Part 54
+id: 5f3ef6e0eaa7da26e3d34d78
+title: Part 55
 challengeType: 0
 ---
 
 # --description--
 
-Something does not look right. You added the correct `class` attribute to the `p` elements with dessert names, but you have not defined a selector for it.
+You can give your menu some space between the content and the sides with various `padding` properties.
 
-Since the `flavor` class selector already has the properties you want, just add the `dessert` class to it.
+Give the `menu` class a `padding-left` and a `padding-right` with the same value `20px`.
 
 # --hints--
 
@@ -86,23 +86,23 @@ h1, h2, p {
   text-align: center;
 }
 
+--fcc-editable-region--
 .menu {
   width: 80%;
   background-color: burlywood;
   margin-left: auto;
   margin-right: auto;
 }
+--fcc-editable-region--
 
 .item p {
   display: inline-block;
 }
 
---fcc-editable-region--
-.flavor {
+.flavor, .dessert {
   text-align: left;
   width: 75%;
 }
---fcc-editable-region--
 
 .price {
   text-align: right;
