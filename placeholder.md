@@ -1,14 +1,12 @@
 ---
-id: 5f3ef6e0f8c230bdd2349716
-title: Part 64
+id: 5f3ef6e07276f782bb46b93d
+title: Part 65
 challengeType: 0
 ---
 
 # --description--
 
-The `h1` and `h2` elements' text are set by default values of the user's browser.
-
-Add two new type selectors (`h1` and `h2`). Use the `font-size` property for both, but use the value `40px` for the `h1` and `30px` for the `h2`.
+Add a `footer` element below the `main` element, where you can some additional information.
 
 # --hints--
 
@@ -37,6 +35,7 @@ Test 1
         <h1>CAMPER CAFE</h1>
         <p class="established">Est. 2020</p>
       </header>
+--fcc-editable-region--
       <main>
         <section>
           <h2>Coffees</h2>
@@ -72,6 +71,7 @@ Test 1
           </article>
         </section>
       </main>
+--fcc-editable-region--
     </div>
   </body>
 <html>
@@ -83,9 +83,13 @@ body {
   font-family: sans-serif;
 }
 
---fcc-editable-region--
+h1 {
+  font-size: 40px;
+}
 
---fcc-editable-region--
+h2 {
+  font-size: 30px;
+}
 
 .established {
   font-style: italic;
