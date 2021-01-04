@@ -1,79 +1,56 @@
 ---
-id: bad87fee1348bd9aedf08805
-title: Use CSS Selectors to Style Elements
+id: bad87fee1348bd9aedf08826
+title: Use Clockwise Notation to Specify the Padding of an Element
 challengeType: 0
-videoUrl: 'https://scrimba.com/c/cJKMBT2'
-forumTopicId: 18349
+videoUrl: 'https://scrimba.com/c/cB7mBS9'
+forumTopicId: 18346
 ---
 
 # --description--
 
-With CSS, there are hundreds of CSS properties that you can use to change the way an element looks on your page.
+Instead of specifying an element's `padding-top`, `padding-right`, `padding-bottom`, and `padding-left` properties individually, you can specify them all in one line, like this:
 
-When you entered `<h2 style="color: red;">CatPhotoApp</h2>`, you were styling that individual `h2` element with inline CSS, which stands for Cascading Style Sheets.
+`padding: 10px 20px 10px 20px;`
 
-That's one way to specify the style of an element, but there's a better way to apply CSS.
-
-At the top of your code, create a `style` block like this:
-
-```html
-<style>
-</style>
-```
-
-Inside that style block, you can create a <dfn>CSS selector</dfn> for all `h2` elements. For example, if you wanted all `h2` elements to be red, you would add a style rule that looks like this:
-
-```html
-<style>
-  h2 {
-    color: red;
-  }
-</style>
-```
-
-Note that it's important to have both opening and closing curly braces (`{` and `}`) around each element's style rule(s). You also need to make sure that your element's style definition is between the opening and closing style tags. Finally, be sure to add a semicolon to the end of each of your element's style rules.
+These four values work like a clock: top, right, bottom, left, and will produce the exact same result as using the side-specific padding instructions.
 
 # --instructions--
 
-Delete your `h2` element's style attribute, and instead create a CSS `style` block. Add the necessary CSS to turn all `h2` elements blue.
+Use Clockwise Notation to give the ".blue-box" class a `padding` of `40px` on its top and left side, but only `20px` on its bottom and right side.
 
 # --hints--
 
-The style attribute should be removed from your `h2` element.
+Your `blue-box` class should give the top of elements `40px` of `padding`.
 
 ```js
-assert(!$('h2').attr('style'));
+assert($('.blue-box').css('padding-top') === '40px');
 ```
 
-You should create a `style` element.
+Your `blue-box` class should give the right of elements `20px` of `padding`.
 
 ```js
-assert($('style') && $('style').length >= 1);
+assert($('.blue-box').css('padding-right') === '20px');
 ```
 
-Your `h2` element should be blue.
+Your `blue-box` class should give the bottom of elements `20px` of `padding`.
 
 ```js
-assert($('h2').css('color') === 'rgb(0, 0, 255)');
+assert($('.blue-box').css('padding-bottom') === '20px');
 ```
 
-Your stylesheet `h2` declaration should be valid with a semicolon and closing brace.
+Your `blue-box` class should give the left of elements `40px` of `padding`.
 
 ```js
-assert(code.match(/h2\s*\{\s*color\s*:.*;\s*\}/g));
+assert($('.blue-box').css('padding-left') === '40px');
 ```
 
-All your `style` elements should be valid and have closing tags.
+You should use the clockwise notation to set the padding of `blue-box` class.
 
 ```js
 assert(
-  code.match(/<\/style>/g) &&
-    code.match(/<\/style>/g).length ===
-      (
-        code.match(
-          /<style((\s)*((type|media|scoped|title|disabled)="[^"]*")?(\s)*)*>/g
-        ) || []
-      ).length
+  /\.blue-box\s*{[\s\S]*padding[\s]*:\s*\d+px\s+\d+px\s+\d+px\s+\d+px(;\s*[^}]+\s*}|;?\s*})/.test(
+    __helpers.removeCssComments($('style').text())
+  )
 );
 ```
 
@@ -82,76 +59,80 @@ assert(
 ## --seed-contents--
 
 ```html
-<h2 style="color: red;">CatPhotoApp</h2>
-<main>
-  <p>Click here to view more <a href="#">cat photos</a>.</p>
+<style>
+  .injected-text {
+    margin-bottom: -25px;
+    text-align: center;
+  }
 
-  <a href="#"><img src="https://bit.ly/fcc-relaxing-cat" alt="A cute orange cat lying on its back."></a>
+  .box {
+    border-style: solid;
+    border-color: black;
+    border-width: 5px;
+    text-align: center;
+  }
 
-  <div>
-    <p>Things cats love:</p>
-    <ul>
-      <li>cat nip</li>
-      <li>laser pointers</li>
-      <li>lasagna</li>
-    </ul>
-    <p>Top 3 things cats hate:</p>
-    <ol>
-      <li>flea treatment</li>
-      <li>thunder</li>
-      <li>other cats</li>
-    </ol>
-  </div>
+  .yellow-box {
+    background-color: yellow;
+    padding: 20px 40px 20px 40px;
+  }
 
-  <form action="https://freecatphotoapp.com/submit-cat-photo">
-    <label><input type="radio" name="indoor-outdoor" checked> Indoor</label>
-    <label><input type="radio" name="indoor-outdoor"> Outdoor</label><br>
-    <label><input type="checkbox" name="personality" checked> Loving</label>
-    <label><input type="checkbox" name="personality"> Lazy</label>
-    <label><input type="checkbox" name="personality"> Energetic</label><br>
-    <input type="text" placeholder="cat photo URL" required>
-    <button type="submit">Submit</button>
-  </form>
-</main>
+  .red-box {
+    background-color: crimson;
+    color: #fff;
+    padding: 20px 40px 20px 40px;
+  }
+
+  .blue-box {
+    background-color: blue;
+    color: #fff;
+  }
+</style>
+<h5 class="injected-text">margin</h5>
+
+<div class="box yellow-box">
+  <h5 class="box red-box">padding</h5>
+  <h5 class="box blue-box">padding</h5>
+</div>
 ```
 
 # --solutions--
 
 ```html
 <style>
-  h2 {
-    color: blue;
+  .injected-text {
+    margin-bottom: -25px;
+    text-align: center;
+  }
+
+  .box {
+    border-style: solid;
+    border-color: black;
+    border-width: 5px;
+    text-align: center;
+  }
+
+  .yellow-box {
+    background-color: yellow;
+    padding: 20px 40px 20px 40px;
+  }
+
+  .red-box {
+    background-color: crimson;
+    color: #fff;
+    padding: 20px 40px 20px 40px;
+  }
+
+  .blue-box {
+    background-color: blue;
+    color: #fff;
+    padding: 40px 20px 20px 40px;
   }
 </style>
-<h2>CatPhotoApp</h2>
-<main>
-  <p>Click here to view more <a href="#">cat photos</a>.</p>
+<h5 class="injected-text">margin</h5>
 
-  <a href="#"><img src="https://bit.ly/fcc-relaxing-cat" alt="A cute orange cat lying on its back."></a>
-
-  <div>
-    <p>Things cats love:</p>
-    <ul>
-      <li>cat nip</li>
-      <li>laser pointers</li>
-      <li>lasagna</li>
-    </ul>
-    <p>Top 3 things cats hate:</p>
-    <ol>
-      <li>flea treatment</li>
-      <li>thunder</li>
-      <li>other cats</li>
-    </ol>
-  </div>
-
-  <form action="https://freecatphotoapp.com/submit-cat-photo">
-    <label><input type="radio" name="indoor-outdoor" checked> Indoor</label>
-    <label><input type="radio" name="indoor-outdoor"> Outdoor</label><br>
-    <label><input type="checkbox" name="personality" checked> Loving</label>
-    <label><input type="checkbox" name="personality"> Lazy</label>
-    <label><input type="checkbox" name="personality"> Energetic</label><br>
-    <input type="text" placeholder="cat photo URL" required>
-    <button type="submit">Submit</button>
-  </form>
-</main>
+<div class="box yellow-box">
+  <h5 class="box red-box">padding</h5>
+  <h5 class="box blue-box">padding</h5>
+</div>
 ```
