@@ -1,69 +1,34 @@
 ---
-id: bad87fee1348bd9aedf08807
-title: Import a Google Font
+id: 5b7d72c338cd7e35b63f3e14
+title: Improve Compatibility with Browser Fallbacks
 challengeType: 0
-videoUrl: 'https://scrimba.com/c/cM9MRsJ'
-forumTopicId: 18200
+videoUrl: ''
+forumTopicId: 301087
 ---
 
 # --description--
 
-In addition to specifying common fonts that are found on most operating systems, we can also specify non-standard, custom web fonts for use on our website. There are many sources for web fonts on the Internet. For this example we will focus on the Google Fonts library.
+When working with CSS you will likely run into browser compatibility issues at some point. This is why it's important to provide browser fallbacks to avoid potential problems.
 
-[Google Fonts](https://fonts.google.com/) is a free library of web fonts that you can use in your CSS by referencing the font's URL.
+When your browser parses the CSS of a webpage, it ignores any properties that it doesn't recognize or support. For example, if you use a CSS variable to assign a background color on a site, Internet Explorer will ignore the background color because it does not support CSS variables. In that case, the browser will use whatever value it has for that property. If it can't find any other value set for that property, it will revert to the default value, which is typically not ideal.
 
-So, let's go ahead and import and apply a Google font (note that if Google is blocked in your country, you will need to skip this challenge).
-
-To import a Google Font, you can copy the font's URL from the Google Fonts library and then paste it in your HTML. For this challenge, we'll import the `Lobster` font. To do this, copy the following code snippet and paste it into the top of your code editor (before the opening `style` element):
-
-`<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css">`
-
-Now you can use the `Lobster` font in your CSS by using `Lobster` as the FAMILY_NAME as in the following example:  
-`font-family: FAMILY_NAME, GENERIC_NAME;`.
-
-The GENERIC_NAME is optional, and is a fallback font in case the other specified font is not available. This is covered in the next challenge.
-
-Family names are case-sensitive and need to be wrapped in quotes if there is a space in the name. For example, you need quotes to use the `"Open Sans"` font, but not to use the `Lobster` font.
+This means that if you do want to provide a browser fallback, it's as easy as providing another more widely supported value immediately before your declaration. That way an older browser will have something to fall back on, while a newer browser will just interpret whatever declaration comes later in the cascade.
 
 # --instructions--
 
-Import the Lobster font to your web page. Then, use an element selector to set `Lobster` as the `font-family` for your `h2` element.
+It looks like a variable is being used to set the background color of the `.red-box` class. Let's improve our browser compatibility by adding another `background` declaration right before the existing declaration and set its value to red.
 
 # --hints--
 
-You should import the `Lobster` font.
-
-```js
-assert(new RegExp('googleapis', 'gi').test(code));
-```
-
-Your `h2` element should use the font `Lobster`.
+Your `.red-box` rule should include a fallback with the `background` set to red immediately before the existing `background` declaration.
 
 ```js
 assert(
-  $('h2')
-    .css('font-family')
-    .match(/lobster/i)
-);
-```
-
-You should only use an `h2` element selector to change the font.
-
-```js
-assert(
-  /\s*[^\.]h2\s*\{\s*font-family\:\s*(['"]?)Lobster\1\s*(;\s*\}|\})/gi.test(
-    code
-  )
-);
-```
-
-Your `p` element should still use the font `monospace`.
-
-```js
-assert(
-  $('p')
-    .css('font-family')
-    .match(/monospace/i)
+  code
+    .replace(/\s/g, '')
+    .match(
+      /\.red-box{background:(red|#ff0000|#f00|rgb\(255,0,0\)|rgb\(100%,0%,0%\)|hsl\(0,100%,50%\));background:var\(--red-color\);height:200px;width:200px;}/gi
+    )
 );
 ```
 
@@ -73,97 +38,32 @@ assert(
 
 ```html
 <style>
-  .red-text {
-    color: red;
+  :root {
+    --red-color: red;
   }
+  .red-box {
 
-  p {
-    font-size: 16px;
-    font-family: monospace;
+    background: var(--red-color);
+    height: 200px;
+    width:200px;
   }
 </style>
-
-<h2 class="red-text">CatPhotoApp</h2>
-<main>
-  <p class="red-text">Click here to view more <a href="#">cat photos</a>.</p>
-
-  <a href="#"><img src="https://bit.ly/fcc-relaxing-cat" alt="A cute orange cat lying on its back."></a>
-
-  <div>
-    <p>Things cats love:</p>
-    <ul>
-      <li>cat nip</li>
-      <li>laser pointers</li>
-      <li>lasagna</li>
-    </ul>
-    <p>Top 3 things cats hate:</p>
-    <ol>
-      <li>flea treatment</li>
-      <li>thunder</li>
-      <li>other cats</li>
-    </ol>
-  </div>
-
-  <form action="https://freecatphotoapp.com/submit-cat-photo">
-    <label><input type="radio" name="indoor-outdoor" checked> Indoor</label>
-    <label><input type="radio" name="indoor-outdoor"> Outdoor</label><br>
-    <label><input type="checkbox" name="personality" checked> Loving</label>
-    <label><input type="checkbox" name="personality"> Lazy</label>
-    <label><input type="checkbox" name="personality"> Energetic</label><br>
-    <input type="text" placeholder="cat photo URL" required>
-    <button type="submit">Submit</button>
-  </form>
-</main>
+<div class="red-box"></div>
 ```
 
 # --solutions--
 
 ```html
-<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css">
 <style>
-  .red-text {
-    color: red;
+  :root {
+    --red-color: red;
   }
-
-  p {
-    font-size: 16px;
-    font-family: monospace;
-  }
-
-  h2 {
-    font-family: Lobster;
+  .red-box {
+    background: red;
+    background: var(--red-color);
+    height: 200px;
+    width:200px;
   }
 </style>
-
-<h2 class="red-text">CatPhotoApp</h2>
-<main>
-  <p class="red-text">Click here to view more <a href="#">cat photos</a>.</p>
-
-  <a href="#"><img src="https://bit.ly/fcc-relaxing-cat" alt="A cute orange cat lying on its back."></a>
-
-  <div>
-    <p>Things cats love:</p>
-    <ul>
-      <li>cat nip</li>
-      <li>laser pointers</li>
-      <li>lasagna</li>
-    </ul>
-    <p>Top 3 things cats hate:</p>
-    <ol>
-      <li>flea treatment</li>
-      <li>thunder</li>
-      <li>other cats</li>
-    </ol>
-  </div>
-
-  <form action="https://freecatphotoapp.com/submit-cat-photo">
-    <label><input type="radio" name="indoor-outdoor" checked> Indoor</label>
-    <label><input type="radio" name="indoor-outdoor"> Outdoor</label><br>
-    <label><input type="checkbox" name="personality" checked> Loving</label>
-    <label><input type="checkbox" name="personality"> Lazy</label>
-    <label><input type="checkbox" name="personality"> Energetic</label><br>
-    <input type="text" placeholder="cat photo URL" required>
-    <button type="submit">Submit</button>
-  </form>
-</main>
+<div class="red-box"></div>
 ```
