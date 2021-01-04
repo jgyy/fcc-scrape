@@ -1,29 +1,35 @@
 ---
-id: bad87fee1348bd9aedf08822
-title: Adjust the Margin of an Element
+id: bad88fee1348bd9aedf08825
+title: Adjust the Padding of an Element
 challengeType: 0
-videoUrl: 'https://scrimba.com/c/cVJarHW'
-forumTopicId: 16654
+videoUrl: 'https://scrimba.com/c/cED8ZC2'
+forumTopicId: 301083
 ---
 
 # --description--
 
-An element's `margin` controls the amount of space between an element's `border` and surrounding elements.
+Now let's put our Cat Photo App away for a little while and learn more about styling HTML.
 
-Here, we can see that the blue box and the red box are nested within the yellow box. Note that the red box has a bigger `margin` than the blue box, making it appear smaller.
+You may have already noticed this, but all HTML elements are essentially little rectangles.
 
-When you increase the blue box's `margin`, it will increase the distance between its border and surrounding elements.
+Three important properties control the space that surrounds each HTML element: `padding`, `border`, and `margin`.
+
+An element's `padding` controls the amount of space between the element's content and its `border`.
+
+Here, we can see that the blue box and the red box are nested within the yellow box. Note that the red box has more `padding` than the blue box.
+
+When you increase the blue box's `padding`, it will increase the distance (`padding`) between the text and the border around it.
 
 # --instructions--
 
-Change the `margin` of the blue box to match that of the red box.
+Change the `padding` of your blue box to match that of your red box.
 
 # --hints--
 
-Your `blue-box` class should give elements `20px` of `margin`.
+Your `blue-box` class should give elements `20px` of `padding`.
 
 ```js
-assert($('.blue-box').css('margin-top') === '20px');
+assert($('.blue-box').css('padding-top') === '20px');
 ```
 
 # --seed--
@@ -53,14 +59,12 @@ assert($('.blue-box').css('margin-top') === '20px');
     background-color: crimson;
     color: #fff;
     padding: 20px;
-    margin: 20px;
   }
 
   .blue-box {
     background-color: blue;
     color: #fff;
-    padding: 20px;
-    margin: 10px;
+    padding: 10px;
   }
 </style>
 <h5 class="injected-text">margin</h5>
@@ -96,14 +100,12 @@ assert($('.blue-box').css('margin-top') === '20px');
     background-color: crimson;
     color: #fff;
     padding: 20px;
-    margin: 20px;
   }
 
   .blue-box {
     background-color: blue;
     color: #fff;
     padding: 20px;
-    margin: 20px;
   }
 </style>
 <h5 class="injected-text">margin</h5>
