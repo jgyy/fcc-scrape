@@ -1,31 +1,67 @@
 ---
-id: bad87fee1348bd9aedf08815
-title: Make Circular Images with a border-radius
+id: bad87fee1348bd9aedf07756
+title: Override All Other Styles by using Important
 challengeType: 0
-videoUrl: 'https://scrimba.com/c/c2MvrcB'
-forumTopicId: 18229
+videoUrl: 'https://scrimba.com/c/cm24rcp'
+forumTopicId: 18249
 ---
 
 # --description--
 
-In addition to pixels, you can also specify the `border-radius` using a percentage.
+Yay! We just proved that inline styles will override all the CSS declarations in your `style` element.
+
+But wait. There's one last way to override CSS. This is the most powerful method of all. But before we do it, let's talk about why you would ever want to override CSS.
+
+In many situations, you will use CSS libraries. These may accidentally override your own CSS. So when you absolutely need to be sure that an element has specific CSS, you can use `!important`
+
+Let's go all the way back to our `pink-text` class declaration. Remember that our `pink-text` class was overridden by subsequent class declarations, id declarations, and inline styles.
 
 # --instructions--
 
-Give your cat photo a `border-radius` of `50%`.
+Let's add the keyword `!important` to your pink-text element's color declaration to make 100% sure that your `h1` element will be pink.
+
+An example of how to do this is:
+
+`color: red !important;`
 
 # --hints--
 
-Your image should have a border radius of `50%`, making it perfectly circular.
+Your `h1` element should have the class `pink-text`.
 
 ```js
-assert(parseInt($('img').css('border-top-left-radius')) > 48);
+assert($('h1').hasClass('pink-text'));
 ```
 
-The `border-radius` value should use a percentage value of `50%`.
+Your `h1` element should have the class `blue-text`.
 
 ```js
-assert(code.match(/50%/g));
+assert($('h1').hasClass('blue-text'));
+```
+
+Your `h1` element should have the id of `orange-text`.
+
+```js
+assert($('h1').attr('id') === 'orange-text');
+```
+
+Your `h1` element should have the inline style of `color: white`.
+
+```js
+assert(code.match(/<h1.*style/gi) && code.match(/<h1.*style.*color\s*?:/gi));
+```
+
+Your `pink-text` class declaration should have the `!important` keyword to override all other declarations.
+
+```js
+assert(
+  code.match(/\.pink-text\s*?\{[\s\S]*?color:.*pink.*!important\s*;?[^\.]*\}/g)
+);
+```
+
+Your `h1` element should be pink.
+
+```js
+assert($('h1').css('color') === 'rgb(255, 192, 203)');
 ```
 
 # --seed--
@@ -33,126 +69,43 @@ assert(code.match(/50%/g));
 ## --seed-contents--
 
 ```html
-<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css">
 <style>
-  .red-text {
-    color: red;
-  }
-
-  h2 {
-    font-family: Lobster, monospace;
-  }
-
-  p {
-    font-size: 16px;
+  body {
+    background-color: black;
     font-family: monospace;
+    color: green;
   }
-
-  .thick-green-border {
-    border-color: green;
-    border-width: 10px;
-    border-style: solid;
-    border-radius: 10px;
+  #orange-text {
+    color: orange;
   }
-
-  .smaller-image {
-    width: 100px;
+  .pink-text {
+    color: pink;
+  }
+  .blue-text {
+    color: blue;
   }
 </style>
-
-<h2 class="red-text">CatPhotoApp</h2>
-<main>
-  <p class="red-text">Click here to view more <a href="#">cat photos</a>.</p>
-
-  <a href="#"><img class="smaller-image thick-green-border" src="https://bit.ly/fcc-relaxing-cat" alt="A cute orange cat lying on its back."></a>
-
-  <div>
-    <p>Things cats love:</p>
-    <ul>
-      <li>cat nip</li>
-      <li>laser pointers</li>
-      <li>lasagna</li>
-    </ul>
-    <p>Top 3 things cats hate:</p>
-    <ol>
-      <li>flea treatment</li>
-      <li>thunder</li>
-      <li>other cats</li>
-    </ol>
-  </div>
-
-  <form action="https://freecatphotoapp.com/submit-cat-photo">
-    <label><input type="radio" name="indoor-outdoor" checked> Indoor</label>
-    <label><input type="radio" name="indoor-outdoor"> Outdoor</label><br>
-    <label><input type="checkbox" name="personality" checked> Loving</label>
-    <label><input type="checkbox" name="personality"> Lazy</label>
-    <label><input type="checkbox" name="personality"> Energetic</label><br>
-    <input type="text" placeholder="cat photo URL" required>
-    <button type="submit">Submit</button>
-  </form>
-</main>
+<h1 id="orange-text" class="pink-text blue-text" style="color: white">Hello World!</h1>
 ```
 
 # --solutions--
 
 ```html
-<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css">
 <style>
-  .red-text {
-    color: red;
-  }
-
-  h2 {
-    font-family: Lobster, monospace;
-  }
-
-  p {
-    font-size: 16px;
+  body {
+    background-color: black;
     font-family: monospace;
+    color: green;
   }
-
-  .thick-green-border {
-    border-color: green;
-    border-width: 10px;
-    border-style: solid;
-    border-radius: 10px;
+  #orange-text {
+    color: orange;
   }
-
-  .smaller-image {
-    width: 100px;
-    border-radius: 50%;
+  .pink-text {
+    color: pink !important;
+  }
+  .blue-text {
+    color: blue;
   }
 </style>
-
-<h2 class="red-text">CatPhotoApp</h2>
-<main>
-  <p class="red-text">Click here to view more <a href="#">cat photos</a>.</p>
-
-  <a href="#"><img class="smaller-image thick-green-border" src="https://bit.ly/fcc-relaxing-cat" alt="A cute orange cat lying on its back."></a>
-
-  <div>
-    <p>Things cats love:</p>
-    <ul>
-      <li>cat nip</li>
-      <li>laser pointers</li>
-      <li>lasagna</li>
-    </ul>
-    <p>Top 3 things cats hate:</p>
-    <ol>
-      <li>flea treatment</li>
-      <li>thunder</li>
-      <li>other cats</li>
-    </ol>
-  </div>
-
-  <form action="https://freecatphotoapp.com/submit-cat-photo">
-    <label><input type="radio" name="indoor-outdoor" checked> Indoor</label>
-    <label><input type="radio" name="indoor-outdoor"> Outdoor</label><br>
-    <label><input type="checkbox" name="personality" checked> Loving</label>
-    <label><input type="checkbox" name="personality"> Lazy</label>
-    <label><input type="checkbox" name="personality"> Energetic</label><br>
-    <input type="text" placeholder="cat photo URL" required>
-    <button type="submit">Submit</button>
-  </form>
-</main>
+<h1 id="orange-text" class="pink-text blue-text" style="color: white">Hello World!</h1>
 ```
