@@ -1,48 +1,28 @@
 ---
-id: 5a9d7286424fe3d0e10cad13
-title: Attach a Fallback value to a CSS Variable
+id: 5a9d72a1424fe3d0e10cad15
+title: Change a variable for a specific area
 challengeType: 0
-videoUrl: 'https://scrimba.com/c/c6bDNfp'
-forumTopicId: 301084
+videoUrl: 'https://scrimba.com/c/cdRwbuW'
+forumTopicId: 301085
 ---
 
 # --description--
 
-When using your variable as a CSS property value, you can attach a fallback value that your browser will revert to if the given variable is invalid.
+When you create your variables in `:root` they will set the value of that variable for the whole page.
 
-**Note:** This fallback is not used to increase browser compatibility, and it will not work on IE browsers. Rather, it is used so that the browser has a color to display if it cannot find your variable.
-
-Here's how you do it:
-
-```css
-background: var(--penguin-skin, black);
-```
-
-This will set background to black if your variable wasn't set. Note that this can be useful for debugging.
+You can then over-write these variables by setting them again within a specific element.
 
 # --instructions--
 
-It looks like there is a problem with the variables supplied to the `.penguin-top` and `.penguin-bottom` classes. Rather than fix the typo, add a fallback value of `black` to the `background` property of the `.penguin-top` and `.penguin-bottom` classes.
+Change the value of `--penguin-belly` to `white` in the `penguin` class.
 
 # --hints--
 
-The fallback value of `black` should be used in the `background` property of the `penguin-top` class.
+The `penguin` class should reassign the `--penguin-belly` variable to `white`.
 
 ```js
 assert(
-  code.match(
-    /.penguin-top\s*?{[\s\S]*background\s*?:\s*?var\(\s*?--pengiun-skin\s*?,\s*?black\s*?\)\s*?;[\s\S]*}[\s\S]*.penguin-bottom\s{/gi
-  )
-);
-```
-
-The fallback value of `black` should be used in `background` property of the `penguin-bottom` class.
-
-```js
-assert(
-  code.match(
-    /.penguin-bottom\s*?{[\s\S]*background\s*?:\s*?var\(\s*?--pengiun-skin\s*?,\s*?black\s*?\)\s*?;[\s\S]*}/gi
-  )
+  code.match(/.penguin\s*?{[\s\S]*--penguin-belly\s*?:\s*?white\s*?;[\s\S]*}/gi)
 );
 ```
 
@@ -52,10 +32,20 @@ assert(
 
 ```html
 <style>
+  :root {
+    --penguin-skin: gray;
+    --penguin-belly: pink;
+    --penguin-beak: orange;
+  }
+
+  body {
+    background: var(--penguin-belly, #c6faf1);
+  }
+
   .penguin {
-    --penguin-skin: black;
-    --penguin-belly: gray;
-    --penguin-beak: yellow;
+    /* Only change code below this line */
+
+    /* Only change code above this line */
     position: relative;
     margin: auto;
     display: block;
@@ -64,14 +54,37 @@ assert(
     height: 300px;
   }
 
+  .right-cheek {
+    top: 15%;
+    left: 35%;
+    background: var(--penguin-belly, pink);
+    width: 60%;
+    height: 70%;
+    border-radius: 70% 70% 60% 60%;
+  }
+
+  .left-cheek {
+    top: 15%;
+    left: 5%;
+    background: var(--penguin-belly, pink);
+    width: 60%;
+    height: 70%;
+    border-radius: 70% 70% 60% 60%;
+  }
+
+  .belly {
+    top: 60%;
+    left: 2.5%;
+    background: var(--penguin-belly, pink);
+    width: 95%;
+    height: 100%;
+    border-radius: 120% 120% 100% 100%;
+  }
+
   .penguin-top {
     top: 10%;
     left: 25%;
-
-    /* Change code below this line */
-    background: var(--pengiun-skin);
-    /* Change code above this line */
-
+    background: var(--penguin-skin, gray);
     width: 50%;
     height: 45%;
     border-radius: 70% 70% 60% 60%;
@@ -80,11 +93,7 @@ assert(
   .penguin-bottom {
     top: 40%;
     left: 23.5%;
-
-    /* Change code below this line */
-    background: var(--pengiun-skin);
-    /* Change code above this line */
-
+    background: var(--penguin-skin, gray);
     width: 53%;
     height: 45%;
     border-radius: 70% 70% 100% 100%;
@@ -93,7 +102,7 @@ assert(
   .right-hand {
     top: 0%;
     left: -5%;
-    background: var(--penguin-skin, black);
+    background: var(--penguin-skin, gray);
     width: 30%;
     height: 60%;
     border-radius: 30% 30% 120% 30%;
@@ -104,39 +113,12 @@ assert(
   .left-hand {
     top: 0%;
     left: 75%;
-    background: var(--penguin-skin, black);
+    background: var(--penguin-skin, gray);
     width: 30%;
     height: 60%;
     border-radius: 30% 30% 30% 120%;
     transform: rotate(-45deg);
     z-index: -1;
-  }
-
-  .right-cheek {
-    top: 15%;
-    left: 35%;
-    background: var(--penguin-belly, white);
-    width: 60%;
-    height: 70%;
-    border-radius: 70% 70% 60% 60%;
-  }
-
-  .left-cheek {
-    top: 15%;
-    left: 5%;
-    background: var(--penguin-belly, white);
-    width: 60%;
-    height: 70%;
-    border-radius: 70% 70% 60% 60%;
-  }
-
-  .belly {
-    top: 60%;
-    left: 2.5%;
-    background: var(--penguin-belly, white);
-    width: 95%;
-    height: 100%;
-    border-radius: 120% 120% 100% 100%;
   }
 
   .right-feet {
@@ -224,10 +206,6 @@ assert(
     border-radius: 50%;
   }
 
-  body {
-    background: #c6faf1;
-  }
-
   .penguin * {
     position: absolute;
   }
@@ -261,11 +239,6 @@ assert(
 
 ```html
 <style>
-  .penguin-top {
-    background: var(--pengiun-skin, black);
-  }
-  .penguin-bottom {
-    background: var(--pengiun-skin, black);
-  }
+.penguin {--penguin-belly: white;}
 </style>
 ```
