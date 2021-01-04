@@ -1,14 +1,18 @@
 ---
-id: 5f7b88d37b1f98386f04edc0
-title: Part 52
+id: 5f716bee5838c354c728a7c5
+title: Part 53
 challengeType: 0
 ---
 
 # --description--
 
-Something does not look right. You added the correct `class` attribute value to the `p` element with `Donunt` as its text, but you have not defined a selector for it.
+Below the dessert you just added, add the rest of the desserts and prices using three more `article` elements, each with two nested `p` elements. Each element should have the correct dessert and price text, and all of them should have the correct classes.
 
-Since the `flavor` class selector already has the properties you want, just add the `dessert` class name to it.
+```bash
+Cherry Pie 2.75
+Cheesecake 3.00
+Cinammon Roll 2.50
+```
 
 # --hints--
 
@@ -58,9 +62,11 @@ Test 1
         </section>
         <section>
           <h2>Desserts</h2>
+--fcc-editable-region--
           <article class="item">
             <p class="dessert">Donut</p><p class="price">1.50</p>
           </article>
+--fcc-editable-region--
         </section>
       </main>
     </div>
@@ -88,12 +94,10 @@ h1, h2, p {
   display: inline-block;
 }
 
---fcc-editable-region--
-.flavor {
+.flavor, .dessert {
   text-align: left;
   width: 75%;
 }
---fcc-editable-region--
 
 .price {
   text-align: right;
