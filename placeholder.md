@@ -1,85 +1,31 @@
 ---
-id: bad87fee1348bd9aedf08746
-title: Inherit Styles from the Body Element
+id: bad87fee1348bd9aedf08815
+title: Make Circular Images with a border-radius
 challengeType: 0
-videoUrl: 'https://scrimba.com/c/c9bmdtR'
-forumTopicId: 18204
+videoUrl: 'https://scrimba.com/c/c2MvrcB'
+forumTopicId: 18229
 ---
 
 # --description--
 
-Now we've proven that every HTML page has a `body` element, and that its `body` element can also be styled with CSS.
-
-Remember, you can style your `body` element just like any other HTML element, and all your other elements will inherit your `body` element's styles.
+In addition to pixels, you can also specify the `border-radius` using a percentage.
 
 # --instructions--
 
-First, create a `h1` element with the text `Hello World`
-
-Then, let's give all elements on your page the color of `green` by adding `color: green;` to your `body` element's style declaration.
-
-Finally, give your `body` element the font-family of `monospace` by adding `font-family: monospace;` to your `body` element's style declaration.
+Give your cat photo a `border-radius` of `50%`.
 
 # --hints--
 
-You should create an `h1` element.
+Your image should have a border radius of `50%`, making it perfectly circular.
 
 ```js
-assert($('h1').length > 0);
+assert(parseInt($('img').css('border-top-left-radius')) > 48);
 ```
 
-Your `h1` element should have the text `Hello World`.
+The `border-radius` value should use a percentage value of `50%`.
 
 ```js
-assert(
-  $('h1').length > 0 &&
-    $('h1')
-      .text()
-      .match(/hello world/i)
-);
-```
-
-Your `h1` element should have a closing tag.
-
-```js
-assert(
-  code.match(/<\/h1>/g) &&
-    code.match(/<h1/g) &&
-    code.match(/<\/h1>/g).length === code.match(/<h1/g).length
-);
-```
-
-Your `body` element should have the `color` property of `green`.
-
-```js
-assert($('body').css('color') === 'rgb(0, 128, 0)');
-```
-
-Your `body` element should have the `font-family` property of `monospace`.
-
-```js
-assert(
-  $('body')
-    .css('font-family')
-    .match(/monospace/i)
-);
-```
-
-Your `h1` element should inherit the font `monospace` from your `body` element.
-
-```js
-assert(
-  $('h1').length > 0 &&
-    $('h1')
-      .css('font-family')
-      .match(/monospace/i)
-);
-```
-
-Your `h1` element should inherit the color green from your `body` element.
-
-```js
-assert($('h1').length > 0 && $('h1').css('color') === 'rgb(0, 128, 0)');
+assert(code.match(/50%/g));
 ```
 
 # --seed--
@@ -87,24 +33,126 @@ assert($('h1').length > 0 && $('h1').css('color') === 'rgb(0, 128, 0)');
 ## --seed-contents--
 
 ```html
+<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css">
 <style>
-  body {
-    background-color: black;
+  .red-text {
+    color: red;
   }
 
+  h2 {
+    font-family: Lobster, monospace;
+  }
+
+  p {
+    font-size: 16px;
+    font-family: monospace;
+  }
+
+  .thick-green-border {
+    border-color: green;
+    border-width: 10px;
+    border-style: solid;
+    border-radius: 10px;
+  }
+
+  .smaller-image {
+    width: 100px;
+  }
 </style>
+
+<h2 class="red-text">CatPhotoApp</h2>
+<main>
+  <p class="red-text">Click here to view more <a href="#">cat photos</a>.</p>
+
+  <a href="#"><img class="smaller-image thick-green-border" src="https://bit.ly/fcc-relaxing-cat" alt="A cute orange cat lying on its back."></a>
+
+  <div>
+    <p>Things cats love:</p>
+    <ul>
+      <li>cat nip</li>
+      <li>laser pointers</li>
+      <li>lasagna</li>
+    </ul>
+    <p>Top 3 things cats hate:</p>
+    <ol>
+      <li>flea treatment</li>
+      <li>thunder</li>
+      <li>other cats</li>
+    </ol>
+  </div>
+
+  <form action="https://freecatphotoapp.com/submit-cat-photo">
+    <label><input type="radio" name="indoor-outdoor" checked> Indoor</label>
+    <label><input type="radio" name="indoor-outdoor"> Outdoor</label><br>
+    <label><input type="checkbox" name="personality" checked> Loving</label>
+    <label><input type="checkbox" name="personality"> Lazy</label>
+    <label><input type="checkbox" name="personality"> Energetic</label><br>
+    <input type="text" placeholder="cat photo URL" required>
+    <button type="submit">Submit</button>
+  </form>
+</main>
 ```
 
 # --solutions--
 
 ```html
+<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css">
 <style>
-  body {
-    background-color: black;
-    font-family: monospace;
-    color: green;
+  .red-text {
+    color: red;
   }
 
+  h2 {
+    font-family: Lobster, monospace;
+  }
+
+  p {
+    font-size: 16px;
+    font-family: monospace;
+  }
+
+  .thick-green-border {
+    border-color: green;
+    border-width: 10px;
+    border-style: solid;
+    border-radius: 10px;
+  }
+
+  .smaller-image {
+    width: 100px;
+    border-radius: 50%;
+  }
 </style>
-<h1>Hello World!</h1>
+
+<h2 class="red-text">CatPhotoApp</h2>
+<main>
+  <p class="red-text">Click here to view more <a href="#">cat photos</a>.</p>
+
+  <a href="#"><img class="smaller-image thick-green-border" src="https://bit.ly/fcc-relaxing-cat" alt="A cute orange cat lying on its back."></a>
+
+  <div>
+    <p>Things cats love:</p>
+    <ul>
+      <li>cat nip</li>
+      <li>laser pointers</li>
+      <li>lasagna</li>
+    </ul>
+    <p>Top 3 things cats hate:</p>
+    <ol>
+      <li>flea treatment</li>
+      <li>thunder</li>
+      <li>other cats</li>
+    </ol>
+  </div>
+
+  <form action="https://freecatphotoapp.com/submit-cat-photo">
+    <label><input type="radio" name="indoor-outdoor" checked> Indoor</label>
+    <label><input type="radio" name="indoor-outdoor"> Outdoor</label><br>
+    <label><input type="checkbox" name="personality" checked> Loving</label>
+    <label><input type="checkbox" name="personality"> Lazy</label>
+    <label><input type="checkbox" name="personality"> Energetic</label><br>
+    <input type="text" placeholder="cat photo URL" required>
+    <button type="submit">Submit</button>
+  </form>
+</main>
 ```
