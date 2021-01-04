@@ -1,85 +1,51 @@
 ---
-id: bad82fee1348bd9aedf08721
-title: Use RGB to Mix Colors
+id: bad87fee1348bd9aede08718
+title: Use RGB values to Color Elements
 challengeType: 0
-videoUrl: 'https://scrimba.com/c/cm24JU6'
-forumTopicId: 18368
+videoUrl: 'https://scrimba.com/c/cRkp2fr'
+forumTopicId: 18369
 ---
 
 # --description--
 
-Just like with hex code, you can mix colors in RGB by using combinations of different values.
+Another way you can represent colors in CSS is by using `RGB` values.
+
+The RGB value for black looks like this:
+
+`rgb(0, 0, 0)`
+
+The RGB value for white looks like this:
+
+`rgb(255, 255, 255)`
+
+Instead of using six hexadecimal digits like you do with hex code, with `RGB` you specify the brightness of each color with a number between 0 and 255.
+
+If you do the math, the two digits for one color equal 16 times 16, which gives us 256 total values. So `RGB`, which starts counting from zero, has the exact same number of possible values as hex code.
+
+Here's an example of how you'd change the body background to orange using its RGB code.
+
+```css
+body {
+  background-color: rgb(255, 165, 0);
+}
+```
 
 # --instructions--
 
-Replace the hex codes in our `style` element with their correct RGB values.
-
-<table class='table table-striped'><tbody><tr><th>Color</th><th>RGB</th></tr><tr><td>Blue</td><td><code>rgb(0, 0, 255)</code></td></tr><tr><td>Red</td><td><code>rgb(255, 0, 0)</code></td></tr><tr><td>Orchid</td><td><code>rgb(218, 112, 214)</code></td></tr><tr><td>Sienna</td><td><code>rgb(160, 82, 45)</code></td></tr></tbody></table>
+Let's replace the hex code in our `body` element's background color with the RGB value for black: `rgb(0, 0, 0)`
 
 # --hints--
 
-Your `h1` element with the text `I am red!` should have the `color` red.
+Your `body` element should have a black background.
 
 ```js
-assert($('.red-text').css('color') === 'rgb(255, 0, 0)');
+assert($('body').css('background-color') === 'rgb(0, 0, 0)');
 ```
 
-You should use `rgb` for the color red.
+You should use `rgb` to give your `body` element a color of black.
 
 ```js
-assert(
-  code.match(
-    /\.red-text\s*?{\s*?color:\s*?rgb\(\s*?255\s*?,\s*?0\s*?,\s*?0\s*?\)\s*?;\s*?}/gi
-  )
-);
-```
-
-Your `h1` element with the text `I am orchid!` should have the `color` orchid.
-
-```js
-assert($('.orchid-text').css('color') === 'rgb(218, 112, 214)');
-```
-
-You should use `rgb` for the color orchid.
-
-```js
-assert(
-  code.match(
-    /\.orchid-text\s*?{\s*?color:\s*?rgb\(\s*?218\s*?,\s*?112\s*?,\s*?214\s*?\)\s*?;\s*?}/gi
-  )
-);
-```
-
-Your `h1` element with the text `I am blue!` should have the `color` blue.
-
-```js
-assert($('.blue-text').css('color') === 'rgb(0, 0, 255)');
-```
-
-You should use `rgb` for the color blue.
-
-```js
-assert(
-  code.match(
-    /\.blue-text\s*?{\s*?color:\s*?rgb\(\s*?0\s*?,\s*?0\s*?,\s*?255\s*?\)\s*?;\s*?}/gi
-  )
-);
-```
-
-Your `h1` element with the text `I am sienna!` should have the `color` sienna.
-
-```js
-assert($('.sienna-text').css('color') === 'rgb(160, 82, 45)');
-```
-
-You should use `rgb` for the color sienna.
-
-```js
-assert(
-  code.match(
-    /\.sienna-text\s*?{\s*?color:\s*?rgb\(\s*?160\s*?,\s*?82\s*?,\s*?45\s*?\)\s*?;\s*?}/gi
-  )
-);
+assert(code.match(/rgb\s*\(\s*0\s*,\s*0\s*,\s*0\s*\)/gi));
 ```
 
 # --seed--
@@ -88,52 +54,18 @@ assert(
 
 ```html
 <style>
-  .red-text {
-    color: #000000;
-  }
-  .orchid-text {
-    color: #000000;
-  }
-  .sienna-text {
-    color: #000000;
-  }
-  .blue-text {
-    color: #000000;
+  body {
+    background-color: #F00;
   }
 </style>
-
-<h1 class="red-text">I am red!</h1>
-
-<h1 class="orchid-text">I am orchid!</h1>
-
-<h1 class="sienna-text">I am sienna!</h1>
-
-<h1 class="blue-text">I am blue!</h1>
 ```
 
 # --solutions--
 
 ```html
 <style>
-  .red-text {
-    color: rgb(255, 0, 0);
-  }
-  .orchid-text {
-    color: rgb(218, 112, 214);
-  }
-  .sienna-text {
-    color: rgb(160, 82, 45);
-  }
-  .blue-text {
-    color:rgb(0, 0, 255);
+  body {
+    background-color: rgb(0, 0, 0);
   }
 </style>
-
-<h1 class="red-text">I am red!</h1>
-
-<h1 class="orchid-text">I am orchid!</h1>
-
-<h1 class="sienna-text">I am sienna!</h1>
-
-<h1 class="blue-text">I am blue!</h1>
 ```
