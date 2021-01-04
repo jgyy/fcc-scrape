@@ -1,42 +1,57 @@
 ---
-id: bad82fee1322bd9aedf08721
-title: Understand Absolute versus Relative Units
+id: bad87fee1348bd9aecf08806
+title: Use a CSS Class to Style an Element
 challengeType: 0
-videoUrl: 'https://scrimba.com/c/cN66JSL'
-forumTopicId: 301089
+videoUrl: 'https://scrimba.com/c/c2MvDtV'
+forumTopicId: 18337
 ---
 
 # --description--
 
-The last several challenges all set an element's margin or padding with pixels (`px`). Pixels are a type of length unit, which is what tells the browser how to size or space an item. In addition to `px`, CSS has a number of different length unit options that you can use.
+Classes are reusable styles that can be added to HTML elements.
 
-The two main types of length units are absolute and relative. Absolute units tie to physical units of length. For example, `in` and `mm` refer to inches and millimeters, respectively. Absolute length units approximate the actual measurement on a screen, but there are some differences depending on a screen's resolution.
+Here's an example CSS class declaration:
 
-Relative units, such as `em` or `rem`, are relative to another length value. For example, `em` is based on the size of an element's font. If you use it to set the `font-size` property itself, it's relative to the parent's `font-size`.
+```html
+<style>
+  .blue-text {
+    color: blue;
+  }
+</style>
+```
 
-**Note:** There are several relative unit options that are tied to the size of the viewport. They are covered in the Responsive Web Design Principles section.
+You can see that we've created a CSS class called `blue-text` within the `<style>` tag. You can apply a class to an HTML element like this: `<h2 class="blue-text">CatPhotoApp</h2>` Note that in your CSS `style` element, class names start with a period. In your HTML elements' class attribute, the class name does not include the period.
 
 # --instructions--
 
-Add a `padding` property to the element with class `red-box` and set it to `1.5em`.
+Inside your `style` element, change the `h2` selector to `.red-text` and update the color's value from `blue` to `red`.
+
+Give your `h2` element the `class` attribute with a value of `'red-text'`.
 
 # --hints--
 
-Your `red-box` class should have a `padding` property.
+Your `h2` element should be red.
 
 ```js
-assert(
-  $('.red-box').css('padding-top') != '0px' &&
-    $('.red-box').css('padding-right') != '0px' &&
-    $('.red-box').css('padding-bottom') != '0px' &&
-    $('.red-box').css('padding-left') != '0px'
-);
+assert($('h2').css('color') === 'rgb(255, 0, 0)');
 ```
 
-Your `red-box` class should give elements 1.5em of `padding`.
+Your `h2` element should have the class `red-text`.
 
 ```js
-assert(code.match(/\.red-box\s*?{[\s\S]*padding:\s*?1\.5em/gi));
+assert($('h2').hasClass('red-text'));
+```
+
+Your stylesheet should declare a `red-text` class and have its color set to red.
+
+```js
+assert(code.match(/\.red-text\s*\{\s*color\s*:\s*red;\s*\}/g));
+```
+
+You should not use inline style declarations like `style="color: red"` in your `h2` element.
+
+```js
+assert($('h2').attr('style') === undefined);
 ```
 
 # --seed--
@@ -45,78 +60,82 @@ assert(code.match(/\.red-box\s*?{[\s\S]*padding:\s*?1\.5em/gi));
 
 ```html
 <style>
-  .injected-text {
-    margin-bottom: -25px;
-    text-align: center;
-  }
-
-  .box {
-    border-style: solid;
-    border-color: black;
-    border-width: 5px;
-    text-align: center;
-  }
-
-  .yellow-box {
-    background-color: yellow;
-    padding: 20px 40px 20px 40px;
-  }
-
-  .red-box {
-    background-color: red;
-    margin: 20px 40px 20px 40px;
-
-  }
-
-  .green-box {
-    background-color: green;
-    margin: 20px 40px 20px 40px;
+  h2 {
+    color: blue;
   }
 </style>
-<h5 class="injected-text">margin</h5>
 
-<div class="box yellow-box">
-  <h5 class="box red-box">padding</h5>
-  <h5 class="box green-box">padding</h5>
-</div>
+<h2>CatPhotoApp</h2>
+<main>
+  <p>Click here to view more <a href="#">cat photos</a>.</p>
+
+  <a href="#"><img src="https://bit.ly/fcc-relaxing-cat" alt="A cute orange cat lying on its back."></a>
+
+  <div>
+    <p>Things cats love:</p>
+    <ul>
+      <li>cat nip</li>
+      <li>laser pointers</li>
+      <li>lasagna</li>
+    </ul>
+    <p>Top 3 things cats hate:</p>
+    <ol>
+      <li>flea treatment</li>
+      <li>thunder</li>
+      <li>other cats</li>
+    </ol>
+  </div>
+
+  <form action="https://freecatphotoapp.com/submit-cat-photo">
+    <label><input type="radio" name="indoor-outdoor" checked> Indoor</label>
+    <label><input type="radio" name="indoor-outdoor"> Outdoor</label><br>
+    <label><input type="checkbox" name="personality" checked> Loving</label>
+    <label><input type="checkbox" name="personality"> Lazy</label>
+    <label><input type="checkbox" name="personality"> Energetic</label><br>
+    <input type="text" placeholder="cat photo URL" required>
+    <button type="submit">Submit</button>
+  </form>
+</main>
 ```
 
 # --solutions--
 
 ```html
 <style>
-  .injected-text {
-    margin-bottom: -25px;
-    text-align: center;
-  }
-
-  .box {
-    border-style: solid;
-    border-color: black;
-    border-width: 5px;
-    text-align: center;
-  }
-
-  .yellow-box {
-    background-color: yellow;
-    padding: 20px 40px 20px 40px;
-  }
-
-  .red-box {
-    background-color: red;
-    margin: 20px 40px 20px 40px;
-    padding: 1.5em;
-  }
-
-  .green-box {
-    background-color: green;
-    margin: 20px 40px 20px 40px;
+  .red-text {
+    color: red;
   }
 </style>
-<h5 class="injected-text">margin</h5>
 
-<div class="box yellow-box">
-  <h5 class="box red-box">padding</h5>
-  <h5 class="box green-box">padding</h5>
-</div>
+<h2 class="red-text">CatPhotoApp</h2>
+<main>
+  <p>Click here to view more <a href="#">cat photos</a>.</p>
+  
+  <a href="#"><img src="https://bit.ly/fcc-relaxing-cat" alt="A cute orange cat lying on its back."></a>
+  
+  <div>
+    <p>Things cats love:</p>
+    <ul>
+      <li>cat nip</li>
+      <li>laser pointers</li>
+      <li>lasagna</li>
+    </ul>
+    <p>Top 3 things cats hate:</p>
+    <ol>
+      <li>flea treatment</li>
+      <li>thunder</li>
+      <li>other cats</li>
+    </ol>
+  </div>
+
+  <form action="https://freecatphotoapp.com/submit-cat-photo">
+    <label><input type="radio" name="indoor-outdoor" checked> Indoor</label>
+    <label><input type="radio" name="indoor-outdoor"> Outdoor</label><br>
+    <label><input type="checkbox" name="personality" checked> Loving</label>
+    <label><input type="checkbox" name="personality"> Lazy</label>
+    <label><input type="checkbox" name="personality"> Energetic</label><br>
+    <input type="text" placeholder="cat photo URL" required>
+    <button type="submit">Submit</button>
+  </form>
+</main>
 ```
