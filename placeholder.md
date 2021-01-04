@@ -1,29 +1,69 @@
 ---
-id: bad87fee1348bd9aedf08823
-title: Add a Negative Margin to an Element
+id: bad87fee1348bd9bedf08813
+title: Add Borders Around Your Elements
 challengeType: 0
-videoUrl: 'https://scrimba.com/c/cnpyGs3'
-forumTopicId: 16166
+videoUrl: 'https://scrimba.com/c/c2MvnHZ'
+forumTopicId: 16630
 ---
 
 # --description--
 
-An element's `margin` controls the amount of space between an element's `border` and surrounding elements.
+CSS borders have properties like `style`, `color` and `width`.
 
-If you set an element's `margin` to a negative value, the element will grow larger.
+For example, if we wanted to create a red, 5 pixel border around an HTML element, we could use this class:
+
+```html
+<style>
+  .thin-red-border {
+    border-color: red;
+    border-width: 5px;
+    border-style: solid;
+  }
+</style>
+```
 
 # --instructions--
 
-Try to set the `margin` to a negative value like the one for the red box.
+Create a class called `thick-green-border`. This class should add a 10px, solid, green border around an HTML element. Apply the class to your cat photo.
 
-Change the `margin` of the blue box to `-15px`, so it fills the entire horizontal width of the yellow box around it.
+Remember that you can apply multiple classes to an element using its `class` attribute, by separating each class name with a space. For example:
+
+`<img class="class1 class2">`
 
 # --hints--
 
-Your `blue-box` class should give elements `-15px` of `margin`.
+Your `img` element should have the class `smaller-image`.
 
 ```js
-assert($('.blue-box').css('margin-top') === '-15px');
+assert($('img').hasClass('smaller-image'));
+```
+
+Your `img` element should have the class `thick-green-border`.
+
+```js
+assert($('img').hasClass('thick-green-border'));
+```
+
+Your image should have a border width of `10px`.
+
+```js
+assert(
+  $('img').hasClass('thick-green-border') &&
+    parseInt($('img').css('border-top-width'), 10) >= 8 &&
+    parseInt($('img').css('border-top-width'), 10) <= 12
+);
+```
+
+Your image should have a border style of `solid`.
+
+```js
+assert($('img').css('border-right-style') === 'solid');
+```
+
+The border around your `img` element should be green.
+
+```js
+assert($('img').css('border-left-color') === 'rgb(0, 128, 0)');
 ```
 
 # --seed--
@@ -31,84 +71,117 @@ assert($('.blue-box').css('margin-top') === '-15px');
 ## --seed-contents--
 
 ```html
+<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css">
 <style>
-  .injected-text {
-    margin-bottom: -25px;
-    text-align: center;
+  .red-text {
+    color: red;
   }
 
-  .box {
-    border-style: solid;
-    border-color: black;
-    border-width: 5px;
-    text-align: center;
+  h2 {
+    font-family: Lobster, monospace;
   }
 
-  .yellow-box {
-    background-color: yellow;
-    padding: 10px;
+  p {
+    font-size: 16px;
+    font-family: monospace;
   }
 
-  .red-box {
-    background-color: crimson;
-    color: #fff;
-    padding: 20px;
-    margin: -15px;
-  }
-
-  .blue-box {
-    background-color: blue;
-    color: #fff;
-    padding: 20px;
-    margin: 20px;
+  .smaller-image {
+    width: 100px;
   }
 </style>
 
-<div class="box yellow-box">
-  <h5 class="box red-box">padding</h5>
-  <h5 class="box blue-box">padding</h5>
-</div>
+<h2 class="red-text">CatPhotoApp</h2>
+<main>
+  <p class="red-text">Click here to view more <a href="#">cat photos</a>.</p>
+
+  <a href="#"><img class="smaller-image" src="https://bit.ly/fcc-relaxing-cat" alt="A cute orange cat lying on its back."></a>
+
+  <div>
+    <p>Things cats love:</p>
+    <ul>
+      <li>cat nip</li>
+      <li>laser pointers</li>
+      <li>lasagna</li>
+    </ul>
+    <p>Top 3 things cats hate:</p>
+    <ol>
+      <li>flea treatment</li>
+      <li>thunder</li>
+      <li>other cats</li>
+    </ol>
+  </div>
+
+  <form action="https://freecatphotoapp.com/submit-cat-photo">
+    <label><input type="radio" name="indoor-outdoor" checked> Indoor</label>
+    <label><input type="radio" name="indoor-outdoor"> Outdoor</label><br>
+    <label><input type="checkbox" name="personality" checked> Loving</label>
+    <label><input type="checkbox" name="personality"> Lazy</label>
+    <label><input type="checkbox" name="personality"> Energetic</label><br>
+    <input type="text" placeholder="cat photo URL" required>
+    <button type="submit">Submit</button>
+  </form>
+</main>
 ```
 
 # --solutions--
 
 ```html
+<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css">
 <style>
-  .injected-text {
-    margin-bottom: -25px;
-    text-align: center;
+  .red-text {
+    color: red;
   }
 
-  .box {
+  h2 {
+    font-family: Lobster, monospace;
+  }
+
+  p {
+    font-size: 16px;
+    font-family: monospace;
+  }
+
+  .smaller-image {
+    width: 100px;
+  }
+
+  .thick-green-border {
+    border-width: 10px;
+    border-color: green;
     border-style: solid;
-    border-color: black;
-    border-width: 5px;
-    text-align: center;
-  }
-
-  .yellow-box {
-    background-color: yellow;
-    padding: 10px;
-  }
-
-  .red-box {
-    background-color: crimson;
-    color: #fff;
-    padding: 20px;
-    margin: -15px;
-  }
-
-  .blue-box {
-    background-color: blue;
-    color: #fff;
-    padding: 20px;
-    margin: 20px;
-    margin-top: -15px;
   }
 </style>
 
-<div class="box yellow-box">
-  <h5 class="box red-box">padding</h5>
-  <h5 class="box blue-box">padding</h5>
-</div>
+<h2 class="red-text">CatPhotoApp</h2>
+<main>
+  <p class="red-text">Click here to view more <a href="#">cat photos</a>.</p>
+
+  <a href="#"><img class="smaller-image thick-green-border" src="https://bit.ly/fcc-relaxing-cat" alt="A cute orange cat lying on its back."></a>
+
+  <div>
+    <p>Things cats love:</p>
+    <ul>
+      <li>cat nip</li>
+      <li>laser pointers</li>
+      <li>lasagna</li>
+    </ul>
+    <p>Top 3 things cats hate:</p>
+    <ol>
+      <li>flea treatment</li>
+      <li>thunder</li>
+      <li>other cats</li>
+    </ol>
+  </div>
+
+  <form action="https://freecatphotoapp.com/submit-cat-photo">
+    <label><input type="radio" name="indoor-outdoor" checked> Indoor</label>
+    <label><input type="radio" name="indoor-outdoor"> Outdoor</label><br>
+    <label><input type="checkbox" name="personality" checked> Loving</label>
+    <label><input type="checkbox" name="personality"> Lazy</label>
+    <label><input type="checkbox" name="personality"> Energetic</label><br>
+    <input type="text" placeholder="cat photo URL" required>
+    <button type="submit">Submit</button>
+  </form>
+</main>
 ```
