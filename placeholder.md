@@ -1,47 +1,31 @@
 ---
-id: bad87fee1348bd9aedf08803
-title: Change the Color of Text
+id: bad87fee1348bd9aedf08806
+title: Change the Font Size of an Element
 challengeType: 0
-videoUrl: 'https://scrimba.com/c/cRkVmSm'
-forumTopicId: 16775
+videoUrl: 'https://scrimba.com/c/c3bvDc8'
+forumTopicId: 16777
 ---
 
 # --description--
 
-Now let's change the color of some of our text.
+Font size is controlled by the `font-size` CSS property, like this:
 
-We can do this by changing the `style` of your `h2` element.
-
-The property that is responsible for the color of an element's text is the `color` style property.
-
-Here's how you would set your `h2` element's text color to blue:
-
-`<h2 style="color: blue;">CatPhotoApp</h2>`
-
-Note that it is a good practice to end inline `style` declarations with a `;` .
+```css
+h1 {
+  font-size: 30px;
+}
+```
 
 # --instructions--
 
-Change your `h2` element's style so that its text color is red.
+Inside the same `<style>` tag that contains your `red-text` class, create an entry for `p` elements and set the `font-size` to 16 pixels (`16px`).
 
 # --hints--
 
-Your `h2` element should have a `style` declaration.
+Between the `style` tags, give the `p` elements `font-size` of `16px`. Browser and Text zoom should be at 100%.
 
 ```js
-assert($('h2').attr('style'));
-```
-
-Your `h2` element should have color set to `red`.
-
-```js
-assert($('h2')[0].style.color === 'red');
-```
-
-Your `style` declaration should end with a `;` .
-
-```js
-assert($('h2').attr('style') && $('h2').attr('style').endsWith(';'));
+assert(code.match(/p\s*{\s*font-size\s*:\s*16\s*px\s*;\s*}/i));
 ```
 
 # --seed--
@@ -49,9 +33,15 @@ assert($('h2').attr('style') && $('h2').attr('style').endsWith(';'));
 ## --seed-contents--
 
 ```html
-<h2>CatPhotoApp</h2>
+<style>
+  .red-text {
+    color: red;
+  }
+</style>
+
+<h2 class="red-text">CatPhotoApp</h2>
 <main>
-  <p>Click here to view more <a href="#">cat photos</a>.</p>
+  <p class="red-text">Click here to view more <a href="#">cat photos</a>.</p>
 
   <a href="#"><img src="https://bit.ly/fcc-relaxing-cat" alt="A cute orange cat lying on its back."></a>
 
@@ -85,9 +75,18 @@ assert($('h2').attr('style') && $('h2').attr('style').endsWith(';'));
 # --solutions--
 
 ```html
-<h2 style="color: red;">CatPhotoApp</h2>
+<style>
+  .red-text {
+    color: red;
+  }
+  p {
+    font-size: 16px;
+  }
+</style>
+
+<h2 class="red-text">CatPhotoApp</h2>
 <main>
-  <p>Click here to view more <a href="#">cat photos</a>.</p>
+  <p class="red-text">Click here to view more <a href="#">cat photos</a>.</p>
 
   <a href="#"><img src="https://bit.ly/fcc-relaxing-cat" alt="A cute orange cat lying on its back."></a>
 
