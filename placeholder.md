@@ -1,63 +1,39 @@
 ---
-id: 5a9d727a424fe3d0e10cad12
-title: Use a custom CSS Variable
+id: 5a9d72ad424fe3d0e10cad16
+title: Use a media query to change a variable
 challengeType: 0
-videoUrl: 'https://scrimba.com/c/cM989ck'
-forumTopicId: 301090
+videoUrl: 'https://scrimba.com/c/cWmL8UP'
+forumTopicId: 301091
 ---
 
 # --description--
 
-After you create your variable, you can assign its value to other CSS properties by referencing the name you gave it.
+CSS Variables can simplify the way you use media queries.
 
-```css
-background: var(--penguin-skin);
-```
-
-This will change the background of whatever element you are targeting to gray because that is the value of the `--penguin-skin` variable. Note that styles will not be applied unless the variable names are an exact match.
+For instance, when your screen is smaller or larger than your media query break point, you can change the value of a variable, and it will apply its style wherever it is used.
 
 # --instructions--
 
-Apply the `--penguin-skin` variable to the `background` property of the `penguin-top`, `penguin-bottom`, `right-hand` and `left-hand` classes.
+In the `:root` selector of the `media query`, change it so `--penguin-size` is redefined and given a value of `200px`. Also, redefine `--penguin-skin` and give it a value of `black`. Then resize the preview to see this change in action.
 
 # --hints--
 
-The `--penguin-skin` variable should be applied to the `background` property of the `penguin-top` class.
+`:root` should reassign the `--penguin-size` variable to `200px`.
 
 ```js
 assert(
   code.match(
-    /.penguin-top\s*?{[\s\S]*background\s*?:\s*?var\s*?\(\s*?--penguin-skin\s*?\)\s*?;[\s\S]*}[\s\S]*.penguin-bottom\s{/gi
+    /media\s*?\(\s*?max-width\s*?:\s*?350px\s*?\)\s*?{[\s\S]*:root\s*?{[\s\S]*--penguin-size\s*?:\s*?200px\s*?;[\s\S]*}[\s\S]*}/gi
   )
 );
 ```
 
-The `--penguin-skin` variable should be applied to the `background` property of the `penguin-bottom` class.
+`:root` should reassign the `--penguin-skin` variable to `black`.
 
 ```js
 assert(
   code.match(
-    /.penguin-bottom\s*?{[\s\S]*background\s*?:\s*?var\s*?\(\s*?--penguin-skin\s*?\)\s*?;[\s\S]*}[\s\S]*.right-hand\s{/gi
-  )
-);
-```
-
-The `--penguin-skin` variable should be applied to the `background` property of the `right-hand` class.
-
-```js
-assert(
-  code.match(
-    /.right-hand\s*?{[\s\S]*background\s*?:\s*?var\s*?\(\s*?--penguin-skin\s*?\)\s*?;[\s\S]*}[\s\S]*.left-hand\s{/gi
-  )
-);
-```
-
-The `--penguin-skin` variable should be applied to the `background` property of the `left-hand` class.
-
-```js
-assert(
-  code.match(
-    /.left-hand\s*?{[\s\S]*background\s*?:\s*?var\s*?\(\s*?--penguin-skin\s*?\)\s*?;[\s\S]*}/gi
+    /media\s*?\(\s*?max-width\s*?:\s*?350px\s*?\)\s*?{[\s\S]*:root\s*?{[\s\S]*--penguin-skin\s*?:\s*?black\s*?;[\s\S]*}[\s\S]*}/gi
   )
 );
 ```
@@ -68,76 +44,34 @@ assert(
 
 ```html
 <style>
-  .penguin {
+  :root {
+    --penguin-size: 300px;
     --penguin-skin: gray;
+    --penguin-belly: white;
+    --penguin-beak: orange;
+  }
+
+  @media (max-width: 350px) {
+    :root {
+      /* Only change code below this line */
+
+      /* Only change code above this line */
+    }
+  }
+
+  .penguin {
     position: relative;
     margin: auto;
     display: block;
     margin-top: 5%;
-    width: 300px;
-    height: 300px;
-  }
-
-  .penguin-top {
-    top: 10%;
-    left: 25%;
-
-    /* Change code below this line */
-    background: black;
-    /* Change code above this line */
-
-    width: 50%;
-    height: 45%;
-    border-radius: 70% 70% 60% 60%;
-  }
-
-  .penguin-bottom {
-    top: 40%;
-    left: 23.5%;
-
-    /* Change code below this line */
-    background: black;
-    /* Change code above this line */
-
-    width: 53%;
-    height: 45%;
-    border-radius: 70% 70% 100% 100%;
-  }
-
-  .right-hand {
-    top: 0%;
-    left: -5%;
-
-    /* Change code below this line */
-    background: black;
-    /* Change code above this line */
-
-    width: 30%;
-    height: 60%;
-    border-radius: 30% 30% 120% 30%;
-    transform: rotate(45deg);
-    z-index: -1;
-  }
-
-  .left-hand {
-    top: 0%;
-    left: 75%;
-
-    /* Change code below this line */
-    background: black;
-    /* Change code above this line */
-
-    width: 30%;
-    height: 60%;
-    border-radius: 30% 30% 30% 120%;
-    transform: rotate(-45deg);
-    z-index: -1;
+    width: var(--penguin-size, 300px);
+    height: var(--penguin-size, 300px);
   }
 
   .right-cheek {
     top: 15%;
     left: 35%;
-    background: white;
+    background: var(--penguin-belly, white);
     width: 60%;
     height: 70%;
     border-radius: 70% 70% 60% 60%;
@@ -146,7 +80,7 @@ assert(
   .left-cheek {
     top: 15%;
     left: 5%;
-    background: white;
+    background: var(--penguin-belly, white);
     width: 60%;
     height: 70%;
     border-radius: 70% 70% 60% 60%;
@@ -155,16 +89,76 @@ assert(
   .belly {
     top: 60%;
     left: 2.5%;
-    background: white;
+    background: var(--penguin-belly, white);
     width: 95%;
     height: 100%;
     border-radius: 120% 120% 100% 100%;
   }
 
+  .penguin-top {
+    top: 10%;
+    left: 25%;
+    background: var(--penguin-skin, gray);
+    width: 50%;
+    height: 45%;
+    border-radius: 70% 70% 60% 60%;
+  }
+
+  .penguin-bottom {
+    top: 40%;
+    left: 23.5%;
+    background: var(--penguin-skin, gray);
+    width: 53%;
+    height: 45%;
+    border-radius: 70% 70% 100% 100%;
+  }
+
+  .right-hand {
+    top: 5%;
+    left: 25%;
+    background: var(--penguin-skin, black);
+    width: 30%;
+    height: 60%;
+    border-radius: 30% 30% 120% 30%;
+    transform: rotate(130deg);
+    z-index: -1;
+    animation-duration: 3s;
+    animation-name: wave;
+    animation-iteration-count: infinite;
+    transform-origin:0% 0%;
+    animation-timing-function: linear;
+  }
+
+  @keyframes wave {
+      10% {
+        transform: rotate(110deg);
+      }
+      20% {
+        transform: rotate(130deg);
+      }
+      30% {
+        transform: rotate(110deg);
+      }
+      40% {
+        transform: rotate(130deg);
+      }
+    }
+
+  .left-hand {
+    top: 0%;
+    left: 75%;
+    background: var(--penguin-skin, gray);
+    width: 30%;
+    height: 60%;
+    border-radius: 30% 30% 30% 120%;
+    transform: rotate(-45deg);
+    z-index: -1;
+  }
+
   .right-feet {
     top: 85%;
     left: 60%;
-    background: orange;
+    background: var(--penguin-beak, orange);
     width: 15%;
     height: 30%;
     border-radius: 50% 50% 50% 50%;
@@ -175,7 +169,7 @@ assert(
   .left-feet {
     top: 85%;
     left: 25%;
-    background: orange;
+    background: var(--penguin-beak, orange);
     width: 15%;
     height: 30%;
     border-radius: 50% 50% 50% 50%;
@@ -203,10 +197,10 @@ assert(
 
   .sparkle {
     top: 25%;
-    left: 15%;
+    left:-23%;
     background: white;
-    width: 35%;
-    height: 35%;
+    width: 150%;
+    height: 100%;
     border-radius: 50%;
   }
 
@@ -231,7 +225,7 @@ assert(
   .beak-top {
     top: 60%;
     left: 40%;
-    background: orange;
+    background: var(--penguin-beak, orange);
     width: 20%;
     height: 10%;
     border-radius: 50%;
@@ -240,7 +234,7 @@ assert(
   .beak-bottom {
     top: 65%;
     left: 42%;
-    background: orange;
+    background: var(--penguin-beak, orange);
     width: 16%;
     height: 10%;
     border-radius: 50%;
@@ -282,5 +276,5 @@ assert(
 # --solutions--
 
 ```html
-<style>.penguin-top {background: var(--penguin-skin);} .penguin-bottom {background: var(--penguin-skin);} .right-hand {background: var(--penguin-skin);} .left-hand {background: var(--penguin-skin);}</style>
+<style>@media (max-width: 350px) {:root {--penguin-size: 200px; --penguin-skin: black;}}</style>
 ```
