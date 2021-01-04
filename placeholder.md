@@ -1,45 +1,45 @@
 ---
-id: bad87fee1248bd9aedf08824
-title: Add Different Margins to Each Side of an Element
+id: bad87fee1348bd9aedf08824
+title: Add Different Padding to Each Side of an Element
 challengeType: 0
-videoUrl: 'https://scrimba.com/c/cg4RWh4'
-forumTopicId: 16633
+videoUrl: 'https://scrimba.com/c/cB7mwUw'
+forumTopicId: 16634
 ---
 
 # --description--
 
-Sometimes you will want to customize an element so that it has a different `margin` on each of its sides.
+Sometimes you will want to customize an element so that it has different amounts of `padding` on each of its sides.
 
-CSS allows you to control the `margin` of all four individual sides of an element with the `margin-top`, `margin-right`, `margin-bottom`, and `margin-left` properties.
+CSS allows you to control the `padding` of all four individual sides of an element with the `padding-top`, `padding-right`, `padding-bottom`, and `padding-left` properties.
 
 # --instructions--
 
-Give the blue box a `margin` of `40px` on its top and left side, but only `20px` on its bottom and right side.
+Give the blue box a `padding` of `40px` on its top and left side, but only `20px` on its bottom and right side.
 
 # --hints--
 
-Your `blue-box` class should give the top of elements `40px` of `margin`.
+Your `blue-box` class should give the top of the elements `40px` of `padding`.
 
 ```js
-assert($('.blue-box').css('margin-top') === '40px');
+assert($('.blue-box').css('padding-top') === '40px');
 ```
 
-Your `blue-box` class should give the right of elements `20px` of `margin`.
+Your `blue-box` class should give the right of the elements `20px` of `padding`.
 
 ```js
-assert($('.blue-box').css('margin-right') === '20px');
+assert($('.blue-box').css('padding-right') === '20px');
 ```
 
-Your `blue-box` class should give the bottom of elements `20px` of `margin`.
+Your `blue-box` class should give the bottom of the elements `20px` of `padding`.
 
 ```js
-assert($('.blue-box').css('margin-bottom') === '20px');
+assert($('.blue-box').css('padding-bottom') === '20px');
 ```
 
-Your `blue-box` class should give the left of elements `40px` of `margin`.
+Your `blue-box` class should give the left of the elements `40px` of `padding`.
 
 ```js
-assert($('.blue-box').css('margin-left') === '40px');
+assert($('.blue-box').css('padding-left') === '40px');
 ```
 
 # --seed--
@@ -68,10 +68,10 @@ assert($('.blue-box').css('margin-left') === '40px');
   .red-box {
     background-color: crimson;
     color: #fff;
-    margin-top: 40px;
-    margin-right: 20px;
-    margin-bottom: 20px;
-    margin-left: 40px;
+    padding-top: 40px;
+    padding-right: 20px;
+    padding-bottom: 20px;
+    padding-left: 40px;
   }
 
   .blue-box {
@@ -111,19 +111,19 @@ assert($('.blue-box').css('margin-left') === '40px');
   .red-box {
     background-color: crimson;
     color: #fff;
-    margin-top: 40px;
-    margin-right: 20px;
-    margin-bottom: 20px;
-    margin-left: 40px;
+    padding-top: 40px;
+    padding-right: 20px;
+    padding-bottom: 20px;
+    padding-left: 40px;
   }
 
   .blue-box {
     background-color: blue;
     color: #fff;
-    margin-top: 40px;
-    margin-right: 20px;
-    margin-bottom: 20px;
-    margin-left: 40px;
+    padding-top: 40px;
+    padding-right: 20px;
+    padding-bottom: 20px;
+    padding-left: 40px;
   }
 </style>
 <h5 class="injected-text">margin</h5>
