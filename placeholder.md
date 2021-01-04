@@ -1,41 +1,73 @@
 ---
-id: 5a9d72ad424fe3d0e10cad16
-title: Use a media query to change a variable
+id: bad87fee1348bd9aedf08719
+title: Use Abbreviated Hex Code
 challengeType: 0
-videoUrl: 'https://scrimba.com/c/cWmL8UP'
-forumTopicId: 301091
+videoUrl: 'https://scrimba.com/c/cRkpKAm'
+forumTopicId: 18338
 ---
 
 # --description--
 
-CSS Variables can simplify the way you use media queries.
+Many people feel overwhelmed by the possibilities of more than 16 million colors. And it's difficult to remember hex code. Fortunately, you can shorten it.
 
-For instance, when your screen is smaller or larger than your media query break point, you can change the value of a variable, and it will apply its style wherever it is used.
+For example, red's hex code `#FF0000` can be shortened to `#F00`. This shortened form gives one digit for red, one digit for green, and one digit for blue.
+
+This reduces the total number of possible colors to around 4,000. But browsers will interpret `#FF0000` and `#F00` as exactly the same color.
 
 # --instructions--
 
-In the `:root` selector of the `media query`, change it so `--penguin-size` is redefined and given a value of `200px`. Also, redefine `--penguin-skin` and give it a value of `black`. Then resize the preview to see this change in action.
+Go ahead, try using the abbreviated hex codes to color the correct elements.
+
+<table class='table table-striped'><tbody><tr><th>Color</th><th>Short Hex Code</th></tr><tr><td>Cyan</td><td><code>#0FF</code></td></tr><tr><td>Green</td><td><code>#0F0</code></td></tr><tr><td>Red</td><td><code>#F00</code></td></tr><tr><td>Fuchsia</td><td><code>#F0F</code></td></tr></tbody></table>
 
 # --hints--
 
-`:root` should reassign the `--penguin-size` variable to `200px`.
+Your `h1` element with the text `I am red!` should be given the `color` red.
 
 ```js
-assert(
-  code.match(
-    /media\s*?\(\s*?max-width\s*?:\s*?350px\s*?\)\s*?{[\s\S]*:root\s*?{[\s\S]*--penguin-size\s*?:\s*?200px\s*?;[\s\S]*}[\s\S]*}/gi
-  )
-);
+assert($('.red-text').css('color') === 'rgb(255, 0, 0)');
 ```
 
-`:root` should reassign the `--penguin-skin` variable to `black`.
+The abbreviated `hex code` for the color red should be used instead of the hex code `#FF0000`.
 
 ```js
-assert(
-  code.match(
-    /media\s*?\(\s*?max-width\s*?:\s*?350px\s*?\)\s*?{[\s\S]*:root\s*?{[\s\S]*--penguin-skin\s*?:\s*?black\s*?;[\s\S]*}[\s\S]*}/gi
-  )
-);
+assert(code.match(/\.red-text\s*?{\s*?color:\s*?#F00\s*?;\s*?}/gi));
+```
+
+Your `h1` element with the text `I am green!` should be given the `color` green.
+
+```js
+assert($('.green-text').css('color') === 'rgb(0, 255, 0)');
+```
+
+The abbreviated `hex code` for the color green should be used instead of the hex code `#00FF00`.
+
+```js
+assert(code.match(/\.green-text\s*?{\s*?color:\s*?#0F0\s*?;\s*?}/gi));
+```
+
+Your `h1` element with the text `I am cyan!` should be given the `color` cyan.
+
+```js
+assert($('.cyan-text').css('color') === 'rgb(0, 255, 255)');
+```
+
+The abbreviated `hex code` for the color cyan should be used instead of the hex code `#00FFFF`.
+
+```js
+assert(code.match(/\.cyan-text\s*?{\s*?color:\s*?#0FF\s*?;\s*?}/gi));
+```
+
+Your `h1` element with the text `I am fuchsia!` should be given the `color` fuchsia.
+
+```js
+assert($('.fuchsia-text').css('color') === 'rgb(255, 0, 255)');
+```
+
+The abbreviated `hex code` for the color fuchsia should be used instead of the hex code `#FF00FF`.
+
+```js
+assert(code.match(/\.fuchsia-text\s*?{\s*?color:\s*?#F0F\s*?;\s*?}/gi));
 ```
 
 # --seed--
@@ -44,237 +76,52 @@ assert(
 
 ```html
 <style>
-  :root {
-    --penguin-size: 300px;
-    --penguin-skin: gray;
-    --penguin-belly: white;
-    --penguin-beak: orange;
+  .red-text {
+    color: #000000;
   }
-
-  @media (max-width: 350px) {
-    :root {
-      /* Only change code below this line */
-
-      /* Only change code above this line */
-    }
+  .fuchsia-text {
+    color: #000000;
   }
-
-  .penguin {
-    position: relative;
-    margin: auto;
-    display: block;
-    margin-top: 5%;
-    width: var(--penguin-size, 300px);
-    height: var(--penguin-size, 300px);
+  .cyan-text {
+    color: #000000;
   }
-
-  .right-cheek {
-    top: 15%;
-    left: 35%;
-    background: var(--penguin-belly, white);
-    width: 60%;
-    height: 70%;
-    border-radius: 70% 70% 60% 60%;
-  }
-
-  .left-cheek {
-    top: 15%;
-    left: 5%;
-    background: var(--penguin-belly, white);
-    width: 60%;
-    height: 70%;
-    border-radius: 70% 70% 60% 60%;
-  }
-
-  .belly {
-    top: 60%;
-    left: 2.5%;
-    background: var(--penguin-belly, white);
-    width: 95%;
-    height: 100%;
-    border-radius: 120% 120% 100% 100%;
-  }
-
-  .penguin-top {
-    top: 10%;
-    left: 25%;
-    background: var(--penguin-skin, gray);
-    width: 50%;
-    height: 45%;
-    border-radius: 70% 70% 60% 60%;
-  }
-
-  .penguin-bottom {
-    top: 40%;
-    left: 23.5%;
-    background: var(--penguin-skin, gray);
-    width: 53%;
-    height: 45%;
-    border-radius: 70% 70% 100% 100%;
-  }
-
-  .right-hand {
-    top: 5%;
-    left: 25%;
-    background: var(--penguin-skin, black);
-    width: 30%;
-    height: 60%;
-    border-radius: 30% 30% 120% 30%;
-    transform: rotate(130deg);
-    z-index: -1;
-    animation-duration: 3s;
-    animation-name: wave;
-    animation-iteration-count: infinite;
-    transform-origin:0% 0%;
-    animation-timing-function: linear;
-  }
-
-  @keyframes wave {
-      10% {
-        transform: rotate(110deg);
-      }
-      20% {
-        transform: rotate(130deg);
-      }
-      30% {
-        transform: rotate(110deg);
-      }
-      40% {
-        transform: rotate(130deg);
-      }
-    }
-
-  .left-hand {
-    top: 0%;
-    left: 75%;
-    background: var(--penguin-skin, gray);
-    width: 30%;
-    height: 60%;
-    border-radius: 30% 30% 30% 120%;
-    transform: rotate(-45deg);
-    z-index: -1;
-  }
-
-  .right-feet {
-    top: 85%;
-    left: 60%;
-    background: var(--penguin-beak, orange);
-    width: 15%;
-    height: 30%;
-    border-radius: 50% 50% 50% 50%;
-    transform: rotate(-80deg);
-    z-index: -2222;
-  }
-
-  .left-feet {
-    top: 85%;
-    left: 25%;
-    background: var(--penguin-beak, orange);
-    width: 15%;
-    height: 30%;
-    border-radius: 50% 50% 50% 50%;
-    transform: rotate(80deg);
-    z-index: -2222;
-  }
-
-  .right-eye {
-    top: 45%;
-    left: 60%;
-    background: black;
-    width: 15%;
-    height: 17%;
-    border-radius: 50%;
-  }
-
-  .left-eye {
-    top: 45%;
-    left: 25%;
-    background: black;
-    width: 15%;
-    height: 17%;
-    border-radius: 50%;
-  }
-
-  .sparkle {
-    top: 25%;
-    left:-23%;
-    background: white;
-    width: 150%;
-    height: 100%;
-    border-radius: 50%;
-  }
-
-  .blush-right {
-    top: 65%;
-    left: 15%;
-    background: pink;
-    width: 15%;
-    height: 10%;
-    border-radius: 50%;
-  }
-
-  .blush-left {
-    top: 65%;
-    left: 70%;
-    background: pink;
-    width: 15%;
-    height: 10%;
-    border-radius: 50%;
-  }
-
-  .beak-top {
-    top: 60%;
-    left: 40%;
-    background: var(--penguin-beak, orange);
-    width: 20%;
-    height: 10%;
-    border-radius: 50%;
-  }
-
-  .beak-bottom {
-    top: 65%;
-    left: 42%;
-    background: var(--penguin-beak, orange);
-    width: 16%;
-    height: 10%;
-    border-radius: 50%;
-  }
-
-  body {
-    background:#c6faf1;
-  }
-
-  .penguin * {
-    position: absolute;
+  .green-text {
+    color: #000000;
   }
 </style>
-<div class="penguin">
-  <div class="penguin-bottom">
-    <div class="right-hand"></div>
-    <div class="left-hand"></div>
-    <div class="right-feet"></div>
-    <div class="left-feet"></div>
-  </div>
-  <div class="penguin-top">
-    <div class="right-cheek"></div>
-    <div class="left-cheek"></div>
-    <div class="belly"></div>
-    <div class="right-eye">
-      <div class="sparkle"></div>
-    </div>
-    <div class="left-eye">
-      <div class="sparkle"></div>
-    </div>
-    <div class="blush-right"></div>
-    <div class="blush-left"></div>
-    <div class="beak-top"></div>
-    <div class="beak-bottom"></div>
-  </div>
-</div>
+
+<h1 class="red-text">I am red!</h1>
+
+<h1 class="fuchsia-text">I am fuchsia!</h1>
+
+<h1 class="cyan-text">I am cyan!</h1>
+
+<h1 class="green-text">I am green!</h1>
 ```
 
 # --solutions--
 
 ```html
-<style>@media (max-width: 350px) {:root {--penguin-size: 200px; --penguin-skin: black;}}</style>
+<style>
+  .red-text {
+    color: #F00;
+  }
+  .fuchsia-text {
+    color: #F0F;
+  }
+  .cyan-text {
+    color: #0FF;
+  }
+  .green-text {
+    color: #0F0;
+  }
+</style>
+
+<h1 class="red-text">I am red!</h1>
+
+<h1 class="fuchsia-text">I am fuchsia!</h1>
+
+<h1 class="cyan-text">I am cyan!</h1>
+
+<h1 class="green-text">I am green!</h1>
 ```
