@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>Use Clockwise Notation to Specify the Padding of an Element</title>
+  <title>Use CSS Selectors to Style Elements</title>
   <style>
     html {
       line-height: 1.5;
@@ -213,102 +213,112 @@
 </head>
 <body>
 <header id="title-block-header">
-<h1 class="title">Use Clockwise Notation to Specify the Padding of an Element</h1>
+<h1 class="title">Use CSS Selectors to Style Elements</h1>
 </header>
 <h1 id="description">–description–</h1>
-<p>Instead of specifying an element’s <code>padding-top</code>, <code>padding-right</code>, <code>padding-bottom</code>, and <code>padding-left</code> properties individually, you can specify them all in one line, like this:</p>
-<p><code>padding: 10px 20px 10px 20px;</code></p>
-<p>These four values work like a clock: top, right, bottom, left, and will produce the exact same result as using the side-specific padding instructions.</p>
+<p>With CSS, there are hundreds of CSS properties that you can use to change the way an element looks on your page.</p>
+<p>When you entered <code>&lt;h2 style="color: red;"&gt;CatPhotoApp&lt;/h2&gt;</code>, you were styling that individual <code>h2</code> element with inline CSS, which stands for Cascading Style Sheets.</p>
+<p>That’s one way to specify the style of an element, but there’s a better way to apply CSS.</p>
+<p>At the top of your code, create a <code>style</code> block like this:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;style&gt;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/style&gt;</span></span></code></pre></div>
+<p>Inside that style block, you can create a <dfn>CSS selector</dfn> for all <code>h2</code> elements. For example, if you wanted all <code>h2</code> elements to be red, you would add a style rule that looks like this:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;style&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  h2 {</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">color</span>: <span class="cn">red</span><span class="op">;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/style&gt;</span></span></code></pre></div>
+<p>Note that it’s important to have both opening and closing curly braces (<code>{</code> and <code>}</code>) around each element’s style rule(s). You also need to make sure that your element’s style definition is between the opening and closing style tags. Finally, be sure to add a semicolon to the end of each of your element’s style rules.</p>
 <h1 id="instructions">–instructions–</h1>
-<p>Use Clockwise Notation to give the “.blue-box” class a <code>padding</code> of <code>40px</code> on its top and left side, but only <code>20px</code> on its bottom and right side.</p>
+<p>Delete your <code>h2</code> element’s style attribute, and instead create a CSS <code>style</code> block. Add the necessary CSS to turn all <code>h2</code> elements blue.</p>
 <h1 id="hints">–hints–</h1>
-<p>Your <code>blue-box</code> class should give the top of elements <code>40px</code> of <code>padding</code>.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">assert</span>(<span class="fu">$</span>(<span class="st">&#39;.blue-box&#39;</span>)<span class="op">.</span><span class="fu">css</span>(<span class="st">&#39;padding-top&#39;</span>) <span class="op">===</span> <span class="st">&#39;40px&#39;</span>)<span class="op">;</span></span></code></pre></div>
-<p>Your <code>blue-box</code> class should give the right of elements <code>20px</code> of <code>padding</code>.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">assert</span>(<span class="fu">$</span>(<span class="st">&#39;.blue-box&#39;</span>)<span class="op">.</span><span class="fu">css</span>(<span class="st">&#39;padding-right&#39;</span>) <span class="op">===</span> <span class="st">&#39;20px&#39;</span>)<span class="op">;</span></span></code></pre></div>
-<p>Your <code>blue-box</code> class should give the bottom of elements <code>20px</code> of <code>padding</code>.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">assert</span>(<span class="fu">$</span>(<span class="st">&#39;.blue-box&#39;</span>)<span class="op">.</span><span class="fu">css</span>(<span class="st">&#39;padding-bottom&#39;</span>) <span class="op">===</span> <span class="st">&#39;20px&#39;</span>)<span class="op">;</span></span></code></pre></div>
-<p>Your <code>blue-box</code> class should give the left of elements <code>40px</code> of <code>padding</code>.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">assert</span>(<span class="fu">$</span>(<span class="st">&#39;.blue-box&#39;</span>)<span class="op">.</span><span class="fu">css</span>(<span class="st">&#39;padding-left&#39;</span>) <span class="op">===</span> <span class="st">&#39;40px&#39;</span>)<span class="op">;</span></span></code></pre></div>
-<p>You should use the clockwise notation to set the padding of <code>blue-box</code> class.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">assert</span>(</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="ss">/</span><span class="sc">\.</span><span class="ss">blue-box</span><span class="sc">\s*</span><span class="ss">{</span><span class="sc">[\s\S]*</span><span class="ss">padding</span><span class="sc">[\s]*</span><span class="ss">:</span><span class="sc">\s*\d+</span><span class="ss">px</span><span class="sc">\s+\d+</span><span class="ss">px</span><span class="sc">\s+\d+</span><span class="ss">px</span><span class="sc">\s+\d+</span><span class="ss">px</span><span class="sc">(</span><span class="ss">;</span><span class="sc">\s*[^}]+\s*</span><span class="ss">}</span><span class="sc">|</span><span class="ss">;</span><span class="sc">?\s*</span><span class="ss">}</span><span class="sc">)</span><span class="ss">/</span><span class="op">.</span><span class="fu">test</span>(</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    __helpers<span class="op">.</span><span class="fu">removeCssComments</span>(<span class="fu">$</span>(<span class="st">&#39;style&#39;</span>)<span class="op">.</span><span class="fu">text</span>())</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>)<span class="op">;</span></span></code></pre></div>
+<p>The style attribute should be removed from your <code>h2</code> element.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">assert</span>(<span class="op">!</span><span class="fu">$</span>(<span class="st">&#39;h2&#39;</span>)<span class="op">.</span><span class="fu">attr</span>(<span class="st">&#39;style&#39;</span>))<span class="op">;</span></span></code></pre></div>
+<p>You should create a <code>style</code> element.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">assert</span>(<span class="fu">$</span>(<span class="st">&#39;style&#39;</span>) <span class="op">&amp;&amp;</span> <span class="fu">$</span>(<span class="st">&#39;style&#39;</span>)<span class="op">.</span><span class="at">length</span> <span class="op">&gt;=</span> <span class="dv">1</span>)<span class="op">;</span></span></code></pre></div>
+<p>Your <code>h2</code> element should be blue.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">assert</span>(<span class="fu">$</span>(<span class="st">&#39;h2&#39;</span>)<span class="op">.</span><span class="fu">css</span>(<span class="st">&#39;color&#39;</span>) <span class="op">===</span> <span class="st">&#39;rgb(0, 0, 255)&#39;</span>)<span class="op">;</span></span></code></pre></div>
+<p>Your stylesheet <code>h2</code> declaration should be valid with a semicolon and closing brace.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">assert</span>(code<span class="op">.</span><span class="fu">match</span>(<span class="ss">/h2</span><span class="sc">\s*\{\s*</span><span class="ss">color</span><span class="sc">\s*</span><span class="ss">:.</span><span class="sc">*</span><span class="ss">;</span><span class="sc">\s*\}</span><span class="ss">/g</span>))<span class="op">;</span></span></code></pre></div>
+<p>All your <code>style</code> elements should be valid and have closing tags.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">assert</span>(</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  code<span class="op">.</span><span class="fu">match</span>(<span class="ss">/&lt;</span><span class="sc">\/</span><span class="ss">style&gt;/g</span>) <span class="op">&amp;&amp;</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    code<span class="op">.</span><span class="fu">match</span>(<span class="ss">/&lt;</span><span class="sc">\/</span><span class="ss">style&gt;/g</span>)<span class="op">.</span><span class="at">length</span> <span class="op">===</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>      (</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>        code<span class="op">.</span><span class="fu">match</span>(</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>          <span class="ss">/&lt;style</span><span class="sc">((\s)*((</span><span class="ss">type</span><span class="sc">|</span><span class="ss">media</span><span class="sc">|</span><span class="ss">scoped</span><span class="sc">|</span><span class="ss">title</span><span class="sc">|</span><span class="ss">disabled</span><span class="sc">)</span><span class="ss">=&quot;</span><span class="sc">[^&quot;]*</span><span class="ss">&quot;</span><span class="sc">)?(\s)*)*</span><span class="ss">&gt;/g</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>        ) <span class="op">||</span> []</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>      )<span class="op">.</span><span class="at">length</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>)<span class="op">;</span></span></code></pre></div>
 <h1 id="seed">–seed–</h1>
 <h2 id="seed-contents">–seed-contents–</h2>
-<div class="sourceCode" id="cb6"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;style&gt;</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">.injected-text</span> {</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">margin-bottom</span>: <span class="dv">-25</span><span class="dt">px</span><span class="op">;</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">text-align</span>: <span class="dv">center</span><span class="op">;</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">.box</span> {</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">border-style</span>: <span class="dv">solid</span><span class="op">;</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">border-color</span>: <span class="cn">black</span><span class="op">;</span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">border-width</span>: <span class="dv">5</span><span class="dt">px</span><span class="op">;</span></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">text-align</span>: <span class="dv">center</span><span class="op">;</span></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">.yellow-box</span> {</span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>    <span class="kw">background-color</span>: <span class="cn">yellow</span><span class="op">;</span></span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>    <span class="kw">padding</span>: <span class="dv">20</span><span class="dt">px</span> <span class="dv">40</span><span class="dt">px</span> <span class="dv">20</span><span class="dt">px</span> <span class="dv">40</span><span class="dt">px</span><span class="op">;</span></span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">.red-box</span> {</span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>    <span class="kw">background-color</span>: <span class="cn">crimson</span><span class="op">;</span></span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>    <span class="kw">color</span>: <span class="cn">#fff</span><span class="op">;</span></span>
-<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>    <span class="kw">padding</span>: <span class="dv">20</span><span class="dt">px</span> <span class="dv">40</span><span class="dt">px</span> <span class="dv">20</span><span class="dt">px</span> <span class="dv">40</span><span class="dt">px</span><span class="op">;</span></span>
-<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">.blue-box</span> {</span>
-<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>    <span class="kw">background-color</span>: <span class="cn">blue</span><span class="op">;</span></span>
-<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>    <span class="kw">color</span>: <span class="cn">#fff</span><span class="op">;</span></span>
-<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/style&gt;</span></span>
-<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;h5</span><span class="ot"> class=</span><span class="st">&quot;injected-text&quot;</span><span class="kw">&gt;</span>margin<span class="kw">&lt;/h5&gt;</span></span>
-<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;box yellow-box&quot;</span><span class="kw">&gt;</span></span>
-<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;h5</span><span class="ot"> class=</span><span class="st">&quot;box red-box&quot;</span><span class="kw">&gt;</span>padding<span class="kw">&lt;/h5&gt;</span></span>
-<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;h5</span><span class="ot"> class=</span><span class="st">&quot;box blue-box&quot;</span><span class="kw">&gt;</span>padding<span class="kw">&lt;/h5&gt;</span></span>
-<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/div&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;h2</span><span class="ot"> style=</span><span class="st">&quot;color: red;&quot;</span><span class="kw">&gt;</span>CatPhotoApp<span class="kw">&lt;/h2&gt;</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;main&gt;</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;p&gt;</span>Click here to view more <span class="kw">&lt;a</span><span class="ot"> href=</span><span class="st">&quot;#&quot;</span><span class="kw">&gt;</span>cat photos<span class="kw">&lt;/a&gt;</span>.<span class="kw">&lt;/p&gt;</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;a</span><span class="ot"> href=</span><span class="st">&quot;#&quot;</span><span class="kw">&gt;&lt;img</span><span class="ot"> src=</span><span class="st">&quot;https://bit.ly/fcc-relaxing-cat&quot;</span><span class="ot"> alt=</span><span class="st">&quot;A cute orange cat lying on its back.&quot;</span><span class="kw">&gt;&lt;/a&gt;</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;div&gt;</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;p&gt;</span>Things cats love:<span class="kw">&lt;/p&gt;</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;ul&gt;</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;li&gt;</span>cat nip<span class="kw">&lt;/li&gt;</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;li&gt;</span>laser pointers<span class="kw">&lt;/li&gt;</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;li&gt;</span>lasagna<span class="kw">&lt;/li&gt;</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;/ul&gt;</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;p&gt;</span>Top 3 things cats hate:<span class="kw">&lt;/p&gt;</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;ol&gt;</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;li&gt;</span>flea treatment<span class="kw">&lt;/li&gt;</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;li&gt;</span>thunder<span class="kw">&lt;/li&gt;</span></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;li&gt;</span>other cats<span class="kw">&lt;/li&gt;</span></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;/ol&gt;</span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;/div&gt;</span></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;form</span><span class="ot"> action=</span><span class="st">&quot;https://freecatphotoapp.com/submit-cat-photo&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;label&gt;&lt;input</span><span class="ot"> type=</span><span class="st">&quot;radio&quot;</span><span class="ot"> name=</span><span class="st">&quot;indoor-outdoor&quot;</span><span class="ot"> checked</span><span class="kw">&gt;</span> Indoor<span class="kw">&lt;/label&gt;</span></span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;label&gt;&lt;input</span><span class="ot"> type=</span><span class="st">&quot;radio&quot;</span><span class="ot"> name=</span><span class="st">&quot;indoor-outdoor&quot;</span><span class="kw">&gt;</span> Outdoor<span class="kw">&lt;/label&gt;&lt;br&gt;</span></span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;label&gt;&lt;input</span><span class="ot"> type=</span><span class="st">&quot;checkbox&quot;</span><span class="ot"> name=</span><span class="st">&quot;personality&quot;</span><span class="ot"> checked</span><span class="kw">&gt;</span> Loving<span class="kw">&lt;/label&gt;</span></span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;label&gt;&lt;input</span><span class="ot"> type=</span><span class="st">&quot;checkbox&quot;</span><span class="ot"> name=</span><span class="st">&quot;personality&quot;</span><span class="kw">&gt;</span> Lazy<span class="kw">&lt;/label&gt;</span></span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;label&gt;&lt;input</span><span class="ot"> type=</span><span class="st">&quot;checkbox&quot;</span><span class="ot"> name=</span><span class="st">&quot;personality&quot;</span><span class="kw">&gt;</span> Energetic<span class="kw">&lt;/label&gt;&lt;br&gt;</span></span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;input</span><span class="ot"> type=</span><span class="st">&quot;text&quot;</span><span class="ot"> placeholder=</span><span class="st">&quot;cat photo URL&quot;</span><span class="ot"> required</span><span class="kw">&gt;</span></span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;button</span><span class="ot"> type=</span><span class="st">&quot;submit&quot;</span><span class="kw">&gt;</span>Submit<span class="kw">&lt;/button&gt;</span></span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;/form&gt;</span></span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/main&gt;</span></span></code></pre></div>
 <h1 id="solutions">–solutions–</h1>
-<div class="sourceCode" id="cb7"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;style&gt;</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">.injected-text</span> {</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">margin-bottom</span>: <span class="dv">-25</span><span class="dt">px</span><span class="op">;</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">text-align</span>: <span class="dv">center</span><span class="op">;</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">.box</span> {</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">border-style</span>: <span class="dv">solid</span><span class="op">;</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">border-color</span>: <span class="cn">black</span><span class="op">;</span></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">border-width</span>: <span class="dv">5</span><span class="dt">px</span><span class="op">;</span></span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">text-align</span>: <span class="dv">center</span><span class="op">;</span></span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">.yellow-box</span> {</span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>    <span class="kw">background-color</span>: <span class="cn">yellow</span><span class="op">;</span></span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>    <span class="kw">padding</span>: <span class="dv">20</span><span class="dt">px</span> <span class="dv">40</span><span class="dt">px</span> <span class="dv">20</span><span class="dt">px</span> <span class="dv">40</span><span class="dt">px</span><span class="op">;</span></span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">.red-box</span> {</span>
-<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>    <span class="kw">background-color</span>: <span class="cn">crimson</span><span class="op">;</span></span>
-<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>    <span class="kw">color</span>: <span class="cn">#fff</span><span class="op">;</span></span>
-<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>    <span class="kw">padding</span>: <span class="dv">20</span><span class="dt">px</span> <span class="dv">40</span><span class="dt">px</span> <span class="dv">20</span><span class="dt">px</span> <span class="dv">40</span><span class="dt">px</span><span class="op">;</span></span>
-<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">.blue-box</span> {</span>
-<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>    <span class="kw">background-color</span>: <span class="cn">blue</span><span class="op">;</span></span>
-<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>    <span class="kw">color</span>: <span class="cn">#fff</span><span class="op">;</span></span>
-<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>    <span class="kw">padding</span>: <span class="dv">40</span><span class="dt">px</span> <span class="dv">20</span><span class="dt">px</span> <span class="dv">20</span><span class="dt">px</span> <span class="dv">40</span><span class="dt">px</span><span class="op">;</span></span>
-<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/style&gt;</span></span>
-<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;h5</span><span class="ot"> class=</span><span class="st">&quot;injected-text&quot;</span><span class="kw">&gt;</span>margin<span class="kw">&lt;/h5&gt;</span></span>
-<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;box yellow-box&quot;</span><span class="kw">&gt;</span></span>
-<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;h5</span><span class="ot"> class=</span><span class="st">&quot;box red-box&quot;</span><span class="kw">&gt;</span>padding<span class="kw">&lt;/h5&gt;</span></span>
-<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;h5</span><span class="ot"> class=</span><span class="st">&quot;box blue-box&quot;</span><span class="kw">&gt;</span>padding<span class="kw">&lt;/h5&gt;</span></span>
-<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/div&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;style&gt;</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  h2 {</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">color</span>: <span class="cn">blue</span><span class="op">;</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/style&gt;</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;h2&gt;</span>CatPhotoApp<span class="kw">&lt;/h2&gt;</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;main&gt;</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;p&gt;</span>Click here to view more <span class="kw">&lt;a</span><span class="ot"> href=</span><span class="st">&quot;#&quot;</span><span class="kw">&gt;</span>cat photos<span class="kw">&lt;/a&gt;</span>.<span class="kw">&lt;/p&gt;</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;a</span><span class="ot"> href=</span><span class="st">&quot;#&quot;</span><span class="kw">&gt;&lt;img</span><span class="ot"> src=</span><span class="st">&quot;https://bit.ly/fcc-relaxing-cat&quot;</span><span class="ot"> alt=</span><span class="st">&quot;A cute orange cat lying on its back.&quot;</span><span class="kw">&gt;&lt;/a&gt;</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;div&gt;</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;p&gt;</span>Things cats love:<span class="kw">&lt;/p&gt;</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;ul&gt;</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;li&gt;</span>cat nip<span class="kw">&lt;/li&gt;</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;li&gt;</span>laser pointers<span class="kw">&lt;/li&gt;</span></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;li&gt;</span>lasagna<span class="kw">&lt;/li&gt;</span></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;/ul&gt;</span></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;p&gt;</span>Top 3 things cats hate:<span class="kw">&lt;/p&gt;</span></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;ol&gt;</span></span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;li&gt;</span>flea treatment<span class="kw">&lt;/li&gt;</span></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;li&gt;</span>thunder<span class="kw">&lt;/li&gt;</span></span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;li&gt;</span>other cats<span class="kw">&lt;/li&gt;</span></span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;/ol&gt;</span></span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;/div&gt;</span></span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;form</span><span class="ot"> action=</span><span class="st">&quot;https://freecatphotoapp.com/submit-cat-photo&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;label&gt;&lt;input</span><span class="ot"> type=</span><span class="st">&quot;radio&quot;</span><span class="ot"> name=</span><span class="st">&quot;indoor-outdoor&quot;</span><span class="ot"> checked</span><span class="kw">&gt;</span> Indoor<span class="kw">&lt;/label&gt;</span></span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;label&gt;&lt;input</span><span class="ot"> type=</span><span class="st">&quot;radio&quot;</span><span class="ot"> name=</span><span class="st">&quot;indoor-outdoor&quot;</span><span class="kw">&gt;</span> Outdoor<span class="kw">&lt;/label&gt;&lt;br&gt;</span></span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;label&gt;&lt;input</span><span class="ot"> type=</span><span class="st">&quot;checkbox&quot;</span><span class="ot"> name=</span><span class="st">&quot;personality&quot;</span><span class="ot"> checked</span><span class="kw">&gt;</span> Loving<span class="kw">&lt;/label&gt;</span></span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;label&gt;&lt;input</span><span class="ot"> type=</span><span class="st">&quot;checkbox&quot;</span><span class="ot"> name=</span><span class="st">&quot;personality&quot;</span><span class="kw">&gt;</span> Lazy<span class="kw">&lt;/label&gt;</span></span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;label&gt;&lt;input</span><span class="ot"> type=</span><span class="st">&quot;checkbox&quot;</span><span class="ot"> name=</span><span class="st">&quot;personality&quot;</span><span class="kw">&gt;</span> Energetic<span class="kw">&lt;/label&gt;&lt;br&gt;</span></span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;input</span><span class="ot"> type=</span><span class="st">&quot;text&quot;</span><span class="ot"> placeholder=</span><span class="st">&quot;cat photo URL&quot;</span><span class="ot"> required</span><span class="kw">&gt;</span></span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;button</span><span class="ot"> type=</span><span class="st">&quot;submit&quot;</span><span class="kw">&gt;</span>Submit<span class="kw">&lt;/button&gt;</span></span>
+<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;/form&gt;</span></span>
+<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/main&gt;</span></span></code></pre></div>
 </body>
 </html>
