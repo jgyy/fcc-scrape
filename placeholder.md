@@ -1,45 +1,38 @@
 ---
-id: bad87fee1348bd9aedf08824
-title: Add Different Padding to Each Side of an Element
+id: bad87fee1348bd9aedf08814
+title: Add Rounded Corners with border-radius
 challengeType: 0
-videoUrl: 'https://scrimba.com/c/cB7mwUw'
-forumTopicId: 16634
+videoUrl: 'https://scrimba.com/c/cbZm2hg'
+forumTopicId: 16649
 ---
 
 # --description--
 
-Sometimes you will want to customize an element so that it has different amounts of `padding` on each of its sides.
-
-CSS allows you to control the `padding` of all four individual sides of an element with the `padding-top`, `padding-right`, `padding-bottom`, and `padding-left` properties.
+Your cat photo currently has sharp corners. We can round out those corners with a CSS property called `border-radius`.
 
 # --instructions--
 
-Give the blue box a `padding` of `40px` on its top and left side, but only `20px` on its bottom and right side.
+You can specify a `border-radius` with pixels. Give your cat photo a `border-radius` of `10px`.
+
+**Note:** This challenge allows for multiple possible solutions. For example, you may add `border-radius` to either the `.thick-green-border` class or the `.smaller-image` class.
 
 # --hints--
 
-Your `blue-box` class should give the top of the elements `40px` of `padding`.
+Your image element should have the class "thick-green-border".
 
 ```js
-assert($('.blue-box').css('padding-top') === '40px');
+assert($('img').hasClass('thick-green-border'));
 ```
 
-Your `blue-box` class should give the right of the elements `20px` of `padding`.
+Your image should have a border radius of `10px`
 
 ```js
-assert($('.blue-box').css('padding-right') === '20px');
-```
-
-Your `blue-box` class should give the bottom of the elements `20px` of `padding`.
-
-```js
-assert($('.blue-box').css('padding-bottom') === '20px');
-```
-
-Your `blue-box` class should give the left of the elements `40px` of `padding`.
-
-```js
-assert($('.blue-box').css('padding-left') === '40px');
+assert(
+  $('img').css('border-top-left-radius') === '10px' &&
+    $('img').css('border-top-right-radius') === '10px' &&
+    $('img').css('border-bottom-left-radius') === '10px' &&
+    $('img').css('border-bottom-right-radius') === '10px'
+);
 ```
 
 # --seed--
@@ -47,89 +40,124 @@ assert($('.blue-box').css('padding-left') === '40px');
 ## --seed-contents--
 
 ```html
+<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css">
 <style>
-  .injected-text {
-    margin-bottom: -25px;
-    text-align: center;
+  .red-text {
+    color: red;
   }
 
-  .box {
+  h2 {
+    font-family: Lobster, monospace;
+  }
+
+  p {
+    font-size: 16px;
+    font-family: monospace;
+  }
+
+  .thick-green-border {
+    border-color: green;
+    border-width: 10px;
     border-style: solid;
-    border-color: black;
-    border-width: 5px;
-    text-align: center;
   }
 
-  .yellow-box {
-    background-color: yellow;
-    padding: 10px;
-  }
-
-  .red-box {
-    background-color: crimson;
-    color: #fff;
-    padding-top: 40px;
-    padding-right: 20px;
-    padding-bottom: 20px;
-    padding-left: 40px;
-  }
-
-  .blue-box {
-    background-color: blue;
-    color: #fff;
+  .smaller-image {
+    width: 100px;
   }
 </style>
-<h5 class="injected-text">margin</h5>
 
-<div class="box yellow-box">
-  <h5 class="box red-box">padding</h5>
-  <h5 class="box blue-box">padding</h5>
-</div>
+<h2 class="red-text">CatPhotoApp</h2>
+<main>
+  <p class="red-text">Click here to view more <a href="#">cat photos</a>.</p>
+
+  <a href="#"><img class="smaller-image thick-green-border" src="https://bit.ly/fcc-relaxing-cat" alt="A cute orange cat lying on its back."></a>
+
+  <div>
+    <p>Things cats love:</p>
+    <ul>
+      <li>cat nip</li>
+      <li>laser pointers</li>
+      <li>lasagna</li>
+    </ul>
+    <p>Top 3 things cats hate:</p>
+    <ol>
+      <li>flea treatment</li>
+      <li>thunder</li>
+      <li>other cats</li>
+    </ol>
+  </div>
+
+  <form action="https://freecatphotoapp.com/submit-cat-photo">
+    <label><input type="radio" name="indoor-outdoor" checked> Indoor</label>
+    <label><input type="radio" name="indoor-outdoor"> Outdoor</label><br>
+    <label><input type="checkbox" name="personality" checked> Loving</label>
+    <label><input type="checkbox" name="personality"> Lazy</label>
+    <label><input type="checkbox" name="personality"> Energetic</label><br>
+    <input type="text" placeholder="cat photo URL" required>
+    <button type="submit">Submit</button>
+  </form>
+</main>
 ```
 
 # --solutions--
 
 ```html
+<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css">
 <style>
-  .injected-text {
-    margin-bottom: -25px;
-    text-align: center;
+  .red-text {
+    color: red;
   }
 
-  .box {
+  h2 {
+    font-family: Lobster, monospace;
+  }
+
+  p {
+    font-size: 16px;
+    font-family: monospace;
+  }
+
+  .thick-green-border {
+    border-color: green;
+    border-width: 10px;
     border-style: solid;
-    border-color: black;
-    border-width: 5px;
-    text-align: center;
   }
 
-  .yellow-box {
-    background-color: yellow;
-    padding: 10px;
-  }
-
-  .red-box {
-    background-color: crimson;
-    color: #fff;
-    padding-top: 40px;
-    padding-right: 20px;
-    padding-bottom: 20px;
-    padding-left: 40px;
-  }
-
-  .blue-box {
-    background-color: blue;
-    color: #fff;
-    padding-top: 40px;
-    padding-right: 20px;
-    padding-bottom: 20px;
-    padding-left: 40px;
+  .smaller-image {
+    width: 100px;
+    border-radius: 10px;
   }
 </style>
-<h5 class="injected-text">margin</h5>
 
-<div class="box yellow-box">
-  <h5 class="box red-box">padding</h5>
-  <h5 class="box blue-box">padding</h5>
-</div>
+<h2 class="red-text">CatPhotoApp</h2>
+<main>
+  <p class="red-text">Click here to view more <a href="#">cat photos</a>.</p>
+
+  <a href="#"><img class="smaller-image thick-green-border" src="https://bit.ly/fcc-relaxing-cat" alt="A cute orange cat lying on its back."></a>
+
+  <div>
+    <p>Things cats love:</p>
+    <ul>
+      <li>cat nip</li>
+      <li>laser pointers</li>
+      <li>lasagna</li>
+    </ul>
+    <p>Top 3 things cats hate:</p>
+    <ol>
+      <li>flea treatment</li>
+      <li>thunder</li>
+      <li>other cats</li>
+    </ol>
+  </div>
+
+  <form action="https://freecatphotoapp.com/submit-cat-photo">
+    <label><input type="radio" name="indoor-outdoor" checked> Indoor</label>
+    <label><input type="radio" name="indoor-outdoor"> Outdoor</label><br>
+    <label><input type="checkbox" name="personality" checked> Loving</label>
+    <label><input type="checkbox" name="personality"> Lazy</label>
+    <label><input type="checkbox" name="personality"> Energetic</label><br>
+    <input type="text" placeholder="cat photo URL" required>
+    <button type="submit">Submit</button>
+  </form>
+</main>
 ```
