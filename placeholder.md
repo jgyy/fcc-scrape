@@ -1,70 +1,58 @@
 ---
-id: 58c383d33e2e3259241f3076
-title: Use Attribute Selectors to Style Elements
+id: bad87fee1348bd9afdf08726
+title: Use Clockwise Notation to Specify the Margin of an Element
 challengeType: 0
-videoUrl: 'https://scrimba.com/c/cnpymfJ'
-forumTopicId: 301092
+videoUrl: 'https://scrimba.com/c/cnpybAd'
+forumTopicId: 18345
 ---
 
 # --description--
 
-You have been adding `id` or `class` attributes to elements that you wish to specifically style. These are known as ID and class selectors. There are other CSS Selectors you can use to select custom groups of elements to style.
+Let's try this again, but with `margin` this time.
 
-Let's bring out CatPhotoApp again to practice using CSS Selectors.
+Instead of specifying an element's `margin-top`, `margin-right`, `margin-bottom`, and `margin-left` properties individually, you can specify them all in one line, like this:
 
-For this challenge, you will use the `[attr=value]` attribute selector to style the checkboxes in CatPhotoApp. This selector matches and styles elements with a specific attribute value. For example, the below code changes the margins of all elements with the attribute `type` and a corresponding value of `radio`:
+`margin: 10px 20px 10px 20px;`
 
-```css
-[type='radio'] {
-  margin: 20px 0px 20px 0px;
-}
-```
+These four values work like a clock: top, right, bottom, left, and will produce the exact same result as using the side-specific margin instructions.
 
 # --instructions--
 
-Using the `type` attribute selector, try to give the checkboxes in CatPhotoApp a top margin of 10px and a bottom margin of 15px.
+Use Clockwise Notation to give the element with the `blue-box` class a margin of `40px` on its top and left side, but only `20px` on its bottom and right side.
 
 # --hints--
 
-The `type` attribute selector should be used to select the checkboxes.
+Your `blue-box` class should give the top of elements `40px` of `margin`.
+
+```js
+assert($('.blue-box').css('margin-top') === '40px');
+```
+
+Your `blue-box` class should give the right of elements `20px` of `margin`.
+
+```js
+assert($('.blue-box').css('margin-right') === '20px');
+```
+
+Your `blue-box` class should give the bottom of elements `20px` of `margin`.
+
+```js
+assert($('.blue-box').css('margin-bottom') === '20px');
+```
+
+Your `blue-box` class should give the left of elements `40px` of `margin`.
+
+```js
+assert($('.blue-box').css('margin-left') === '40px');
+```
+
+You should use the clockwise notation to set the margin of `blue-box` class.
 
 ```js
 assert(
-  code.match(
-    /<style>[\s\S]*?\[\s*?type\s*?=\s*?("|')checkbox\1\s*?\]\s*?{[\s\S]*?}[\s\S]*?<\/style>/gi
+  /\.blue-box\s*{[\s\S]*margin[\s]*:\s*\d+px\s+\d+px\s+\d+px\s+\d+px(;\s*[^}]+\s*}|;?\s*})/.test(
+    __helpers.removeCssComments($('style').text())
   )
-);
-```
-
-The top margins of the checkboxes should be 10px.
-
-```js
-assert(
-  (function () {
-    var count = 0;
-    $("[type='checkbox']").each(function () {
-      if ($(this).css('marginTop') === '10px') {
-        count++;
-      }
-    });
-    return count === 3;
-  })()
-);
-```
-
-The bottom margins of the checkboxes should be 15px.
-
-```js
-assert(
-  (function () {
-    var count = 0;
-    $("[type='checkbox']").each(function () {
-      if ($(this).css('marginBottom') === '15px') {
-        count++;
-      }
-    });
-    return count === 3;
-  })()
 );
 ```
 
@@ -73,137 +61,80 @@ assert(
 ## --seed-contents--
 
 ```html
-<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css">
 <style>
-  .red-text {
-    color: red;
+  .injected-text {
+    margin-bottom: -25px;
+    text-align: center;
   }
 
-  h2 {
-    font-family: Lobster, monospace;
-  }
-
-  p {
-    font-size: 16px;
-    font-family: monospace;
-  }
-
-  .thick-green-border {
-    border-color: green;
-    border-width: 10px;
+  .box {
     border-style: solid;
-    border-radius: 50%;
+    border-color: black;
+    border-width: 5px;
+    text-align: center;
   }
 
-  .smaller-image {
-    width: 100px;
+  .yellow-box {
+    background-color: yellow;
+    padding: 20px 40px 20px 40px;
   }
 
-  .silver-background {
-    background-color: silver;
+  .red-box {
+    background-color: crimson;
+    color: #fff;
+    margin: 20px 40px 20px 40px;
+  }
+
+  .blue-box {
+    background-color: blue;
+    color: #fff;
   }
 </style>
+<h5 class="injected-text">margin</h5>
 
-<h2 class="red-text">CatPhotoApp</h2>
-<main>
-  <p class="red-text">Click here to view more <a href="#">cat photos</a>.</p>
-
-  <a href="#"><img class="smaller-image thick-green-border" src="https://bit.ly/fcc-relaxing-cat" alt="A cute orange cat lying on its back."></a>
-
-  <div class="silver-background">
-    <p>Things cats love:</p>
-    <ul>
-      <li>cat nip</li>
-      <li>laser pointers</li>
-      <li>lasagna</li>
-    </ul>
-    <p>Top 3 things cats hate:</p>
-    <ol>
-      <li>flea treatment</li>
-      <li>thunder</li>
-      <li>other cats</li>
-    </ol>
-  </div>
-
-  <form action="https://freecatphotoapp.com/submit-cat-photo" id="cat-photo-form">
-    <label><input type="radio" name="indoor-outdoor" checked> Indoor</label>
-    <label><input type="radio" name="indoor-outdoor"> Outdoor</label><br>
-    <label><input type="checkbox" name="personality" checked> Loving</label>
-    <label><input type="checkbox" name="personality"> Lazy</label>
-    <label><input type="checkbox" name="personality"> Energetic</label><br>
-    <input type="text" placeholder="cat photo URL" required>
-    <button type="submit">Submit</button>
-  </form>
-</main>
+<div class="box yellow-box">
+  <h5 class="box red-box">padding</h5>
+  <h5 class="box blue-box">padding</h5>
+</div>
 ```
 
 # --solutions--
 
 ```html
-<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css">
 <style>
-  .red-text {
-    color: red;
+  .injected-text {
+    margin-bottom: -25px;
+    text-align: center;
   }
 
-  h2 {
-    font-family: Lobster, monospace;
-  }
-
-  p {
-    font-size: 16px;
-    font-family: monospace;
-  }
-
-  .thick-green-border {
-    border-color: green;
-    border-width: 10px;
+  .box {
     border-style: solid;
-    border-radius: 50%;
+    border-color: black;
+    border-width: 5px;
+    text-align: center;
   }
 
-  .smaller-image {
-    width: 100px;
+  .yellow-box {
+    background-color: yellow;
+    padding: 20px 40px 20px 40px;
   }
 
-  .silver-background {
-    background-color: silver;
+  .red-box {
+    background-color: crimson;
+    color: #fff;
+    margin: 20px 40px 20px 40px;
   }
-  [type='checkbox'] {
-    margin-top: 10px;
-    margin-bottom: 15px;
+
+  .blue-box {
+    background-color: blue;
+    color: #fff;
+    margin: 40px 20px 20px 40px;
   }
 </style>
+<h5 class="injected-text">margin</h5>
 
-<h2 class="red-text">CatPhotoApp</h2>
-<main>
-  <p class="red-text">Click here to view more <a href="#">cat photos</a>.</p>
-
-  <a href="#"><img class="smaller-image thick-green-border" src="https://bit.ly/fcc-relaxing-cat" alt="A cute orange cat lying on its back."></a>
-
-  <div class="silver-background">
-    <p>Things cats love:</p>
-    <ul>
-      <li>cat nip</li>
-      <li>laser pointers</li>
-      <li>lasagna</li>
-    </ul>
-    <p>Top 3 things cats hate:</p>
-    <ol>
-      <li>flea treatment</li>
-      <li>thunder</li>
-      <li>other cats</li>
-    </ol>
-  </div>
-
-  <form action="https://freecatphotoapp.com/submit-cat-photo" id="cat-photo-form">
-    <label><input type="radio" name="indoor-outdoor" checked> Indoor</label>
-    <label><input type="radio" name="indoor-outdoor"> Outdoor</label><br>
-    <label><input type="checkbox" name="personality" checked> Loving</label>
-    <label><input type="checkbox" name="personality"> Lazy</label>
-    <label><input type="checkbox" name="personality"> Energetic</label><br>
-    <input type="text" placeholder="cat photo URL" required>
-    <button type="submit">Submit</button>
-  </form>
-</main>
+<div class="box yellow-box">
+  <h5 class="box red-box">padding</h5>
+  <h5 class="box blue-box">padding</h5>
+</div>
 ```
