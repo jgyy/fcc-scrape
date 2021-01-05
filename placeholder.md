@@ -1,29 +1,56 @@
 ---
-id: bad87fee1348bd9aedf08833
-title: Fill in the Blank with Placeholder Text
+id: bad87fee1348bd9aedf0887a
+title: Headline with the h2 Element
 challengeType: 0
-videoUrl: 'https://scrimba.com/p/pVMPUv/cgR7Dc7'
-forumTopicId: 18178
+videoUrl: 'https://scrimba.com/p/pVMPUv/cE8Gqf3'
+forumTopicId: 18196
 ---
 
 # --description--
 
-Web developers traditionally use <dfn>lorem ipsum text</dfn> as placeholder text. The lorem ipsum text is randomly scraped from a famous passage by Cicero of Ancient Rome.
+Over the next few lessons, we'll build an HTML5 cat photo web app piece-by-piece.
 
-Lorem ipsum text has been used as placeholder text by typesetters since the 16th century, and this tradition continues on the web.
+The `h2` element you will be adding in this step will add a level two heading to the web page.
 
-Well, 5 centuries is long enough. Since we're building a CatPhotoApp, let's use something called "kitty ipsum text".
+This element tells the browser about the structure of your website. `h1` elements are often used for main headings, while `h2` elements are generally used for subheadings. There are also `h3`, `h4`, `h5` and `h6` elements to indicate different levels of subheadings.
 
 # --instructions--
 
-Replace the text inside your `p` element with the first few words of this kitty ipsum text: `Kitty ipsum dolor sit amet, shed everywhere shed everywhere stretching attack your ankles chase the red dot, hairball run catnip eat the grass sniff.`
+Add an `h2` tag that says "CatPhotoApp" to create a second HTML element below your "Hello World" `h1` element.
 
 # --hints--
 
-Your `p` element should contain the first few words of the provided `kitty ipsum text`.
+You should create an `h2` element.
 
 ```js
-assert.isTrue(/Kitty(\s)+ipsum/gi.test($('p').text()));
+assert($('h2').length > 0);
+```
+
+Your `h2` element should have a closing tag.
+
+```js
+assert(
+  code.match(/<\/h2>/g) &&
+    code.match(/<\/h2>/g).length === code.match(/<h2>/g).length
+);
+```
+
+Your `h2` element should have the text `CatPhotoApp`.
+
+```js
+assert.isTrue(/cat(\s)?photo(\s)?app/gi.test($('h2').text()));
+```
+
+Your `h1` element should have the text `Hello World`.
+
+```js
+assert.isTrue(/hello(\s)+world/gi.test($('h1').text()));
+```
+
+Your `h1` element should be before your `h2` element.
+
+```js
+assert(code.match(/<h1>\s*?.*?\s*?<\/h1>\s*<h2>\s*?.*?\s*?<\/h2>/gi));
 ```
 
 # --seed--
@@ -32,18 +59,11 @@ assert.isTrue(/Kitty(\s)+ipsum/gi.test($('p').text()));
 
 ```html
 <h1>Hello World</h1>
-
-<h2>CatPhotoApp</h2>
-
-<p>Hello Paragraph</p>
 ```
 
 # --solutions--
 
 ```html
 <h1>Hello World</h1>
-
 <h2>CatPhotoApp</h2>
-
-<p>Kitty ipsum dolor sit amet, shed everywhere shed everywhere stretching attack your ankles chase the red dot, hairball run catnip eat the grass sniff</p>
 ```
