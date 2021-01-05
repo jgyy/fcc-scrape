@@ -1,111 +1,51 @@
 ---
-id: bad87fee1348bd9aede08817
-title: Nest an Anchor Element within a Paragraph
+id: bad87fee1348bd9aede08835
+title: Nest Many Elements within a Single div Element
 challengeType: 0
-videoUrl: 'https://scrimba.com/p/pVMPUv/cb6k8Cb'
-forumTopicId: 18244
+videoUrl: 'https://scrimba.com/p/pVMPUv/cNW4kC3'
+forumTopicId: 18246
 ---
 
 # --description--
 
-You can nest links within other text elements.
+The `div` element, also known as a division element, is a general purpose container for other elements.
 
-```html
-<p>
-  Here's a <a target="_blank" href="http://freecodecamp.org"> link to freecodecamp.org</a> for you to follow.
-</p>
-```
+The `div` element is probably the most commonly used HTML element of all.
 
-Let's break down the example: Normal text is wrapped in the `p` element:  
-`<p> Here's a ... for you to follow. </p>` Next is the *anchor* element `<a>` (which requires a closing tag `</a>`):  
-`<a> ... </a>` `target` is an anchor tag attribute that specifies where to open the link and the value `"_blank"` specifies to open the link in a new tab `href` is an anchor tag attribute that contains the URL address of the link:  
-`<a href="http://freecodecamp.org"> ... </a>` The text, **"link to freecodecamp.org"**, within the `a` element called `anchor text`, will display a link to click:  
-`<a href=" ... ">link to freecodecamp.org</a>` The final output of the example will look like this:  
-
-Here's a [link to freecodecamp.org](http://freecodecamp.org) for you to follow.
+Just like any other non-self-closing element, you can open a `div` element with `<div>` and close it on another line with `</div>`.
 
 # --instructions--
 
-Nest the existing `a` element within a new `p` element. The new paragraph should have text that says "View more cat photos", where "cat photos" is a link, and the rest is plain text.
+Nest your "Things cats love" and "Things cats hate" lists all within a single `div` element.
+
+Hint: Try putting your opening `div` tag above your "Things cats love" `p` element and your closing `div` tag after your closing `ol` tag so that both of your lists are within one `div`.
 
 # --hints--
 
-You should have an `a` element that links to "`https://freecatphotoapp.com`".
+Your `p` elements should be nested inside your `div` element.
+
+```js
+assert($('div').children('p').length > 1);
+```
+
+Your `ul` element should be nested inside your `div` element.
+
+```js
+assert($('div').children('ul').length > 0);
+```
+
+Your `ol` element should be nested inside your `div` element.
+
+```js
+assert($('div').children('ol').length > 0);
+```
+
+Your `div` element should have a closing tag.
 
 ```js
 assert(
-  $('a[href="https://freecatphotoapp.com"]').length > 0 ||
-    $('a[href="http://www.freecatphotoapp.com"]').length > 0
-);
-```
-
-Your `a` element should have the anchor text of "cat photos"
-
-```js
-assert(
-  $('a')
-    .text()
-    .match(/cat\sphotos/gi)
-);
-```
-
-You should create a new `p` element around your `a` element. There should be at least 3 total `p` tags in your HTML code.
-
-```js
-assert($('p') && $('p').length > 2);
-```
-
-Your `a` element should be nested within your new `p` element.
-
-```js
-assert(
-  $('a[href="https://freecatphotoapp.com"]').parent().is('p') ||
-    $('a[href="http://www.freecatphotoapp.com"]').parent().is('p')
-);
-```
-
-Your `p` element should have the text "View more " (with a space after it).
-
-```js
-assert(
-  $('a[href="https://freecatphotoapp.com"]')
-    .parent()
-    .text()
-    .match(/View\smore\s/gi) ||
-    $('a[href="http://www.freecatphotoapp.com"]')
-      .parent()
-      .text()
-      .match(/View\smore\s/gi)
-);
-```
-
-Your `a` element should <em>not</em> have the text "View more".
-
-```js
-assert(
-  !$('a')
-    .text()
-    .match(/View\smore/gi)
-);
-```
-
-Each of your `p` elements should have a closing tag.
-
-```js
-assert(
-  code.match(/<\/p>/g) &&
-    code.match(/<p/g) &&
-    code.match(/<\/p>/g).length === code.match(/<p/g).length
-);
-```
-
-Each of your `a` elements should have a closing tag.
-
-```js
-assert(
-  code.match(/<\/a>/g) &&
-    code.match(/<a/g) &&
-    code.match(/<\/a>/g).length === code.match(/<a/g).length
+  code.match(/<\/div>/g) &&
+    code.match(/<\/div>/g).length === code.match(/<div>/g).length
 );
 ```
 
@@ -116,13 +56,32 @@ assert(
 ```html
 <h2>CatPhotoApp</h2>
 <main>
+  <p>Click here to view more <a href="#">cat photos</a>.</p>
 
-  <a href="https://freecatphotoapp.com" target="_blank">cat photos</a>
+  <a href="#"><img src="https://bit.ly/fcc-relaxing-cat" alt="A cute orange cat lying on its back."></a>
 
-  <img src="https://bit.ly/fcc-relaxing-cat" alt="A cute orange cat lying on its back.">
+  <p>Things cats love:</p>
+  <ul>
+    <li>cat nip</li>
+    <li>laser pointers</li>
+    <li>lasagna</li>
+  </ul>
+  <p>Top 3 things cats hate:</p>
+  <ol>
+    <li>flea treatment</li>
+    <li>thunder</li>
+    <li>other cats</li>
+  </ol>
 
-  <p>Kitty ipsum dolor sit amet, shed everywhere shed everywhere stretching attack your ankles chase the red dot, hairball run catnip eat the grass sniff.</p>
-  <p>Purr jump eat the grass rip the couch scratched sunbathe, shed everywhere rip the couch sleep in the sink fluffy fur catnip scratched.</p>
+  <form action="https://freecatphotoapp.com/submit-cat-photo">
+    <label for="indoor"><input id="indoor" type="radio" name="indoor-outdoor" value="indoor" checked> Indoor</label>
+    <label for="outdoor"><input id="outdoor" type="radio" name="indoor-outdoor" value="outdoor"> Outdoor</label><br>
+    <label for="loving"><input id="loving" type="checkbox" name="personality" value="loving" checked> Loving</label>
+    <label for="lazy"><input id="lazy" type="checkbox" name="personality" value="lazy"> Lazy</label>
+    <label for="energetic"><input id="energetic" type="checkbox" name="personality" value="energetic"> Energetic</label><br>
+    <input type="text" placeholder="cat photo URL" required>
+    <button type="submit">Submit</button>
+  </form>
 </main>
 ```
 
@@ -131,11 +90,31 @@ assert(
 ```html
 <h2>CatPhotoApp</h2>
 <main>
-  <p>View more <a target="_blank" href="https://freecatphotoapp.com">cat photos</a></p>
-
-  <img src="https://bit.ly/fcc-relaxing-cat" alt="A cute orange cat lying on its back.">
-
-  <p>Kitty ipsum dolor sit amet, shed everywhere shed everywhere stretching attack your ankles chase the red dot, hairball run catnip eat the grass sniff.</p>
-  <p>Purr jump eat the grass rip the couch scratched sunbathe, shed everywhere rip the couch sleep in the sink fluffy fur catnip scratched.</p>
+  <p>Click here to view more <a href="#">cat photos</a>.</p>
+  
+  <a href="#"><img src="https://bit.ly/fcc-relaxing-cat" alt="A cute orange cat lying on its back."></a>
+  <div>
+    <p>Things cats love:</p>
+    <ul>
+      <li>cat nip</li>
+      <li>laser pointers</li>
+      <li>lasagna</li>
+    </ul>
+    <p>Top 3 things cats hate:</p>
+    <ol>
+      <li>flea treatment</li>
+      <li>thunder</li>
+      <li>other cats</li>
+    </ol>
+  </div>
+  <form action="https://freecatphotoapp.com/submit-cat-photo">
+    <label for="indoor"><input id="indoor" type="radio" name="indoor-outdoor" value="indoor" checked> Indoor</label>
+    <label for="outdoor"><input id="outdoor" type="radio" name="indoor-outdoor" value="outdoor"> Outdoor</label><br>
+    <label for="loving"><input id="loving" type="checkbox" name="personality" value="loving" checked> Loving</label>
+    <label for="lazy"><input id="lazy" type="checkbox" name="personality" value="lazy"> Lazy</label>
+    <label for="energetic"><input id="energetic" type="checkbox" name="personality" value="energetic"> Energetic</label><br>
+    <input type="text" placeholder="cat photo URL" required>
+    <button type="submit">Submit</button>
+  </form>
 </main>
 ```
