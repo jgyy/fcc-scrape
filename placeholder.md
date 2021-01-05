@@ -1,56 +1,46 @@
 ---
-id: bad87fee1348bd9aedf0887a
-title: Headline with the h2 Element
+id: bad87fee1348bd9aedf08801
+title: Inform with the Paragraph Element
 challengeType: 0
-videoUrl: 'https://scrimba.com/p/pVMPUv/cE8Gqf3'
-forumTopicId: 18196
+videoUrl: 'https://scrimba.com/p/pVMPUv/ceZ7DtN'
+forumTopicId: 18202
 ---
 
 # --description--
 
-Over the next few lessons, we'll build an HTML5 cat photo web app piece-by-piece.
+`p` elements are the preferred element for paragraph text on websites. `p` is short for "paragraph".
 
-The `h2` element you will be adding in this step will add a level two heading to the web page.
+You can create a paragraph element like this:
 
-This element tells the browser about the structure of your website. `h1` elements are often used for main headings, while `h2` elements are generally used for subheadings. There are also `h3`, `h4`, `h5` and `h6` elements to indicate different levels of subheadings.
+`<p>I'm a p tag!</p>`
 
 # --instructions--
 
-Add an `h2` tag that says "CatPhotoApp" to create a second HTML element below your "Hello World" `h1` element.
+Create a `p` element below your `h2` element, and give it the text "Hello Paragraph".
+
+**Note:** As a convention, all HTML tags are written in lowercase, for example `<p></p>` and not `<P></P>`.
 
 # --hints--
 
-You should create an `h2` element.
+Your code should have a valid `p` element.
 
 ```js
-assert($('h2').length > 0);
+assert($('p').length > 0);
 ```
 
-Your `h2` element should have a closing tag.
+Your `p` element should have the text `Hello Paragraph`.
+
+```js
+assert.isTrue(/hello(\s)+paragraph/gi.test($('p').text()));
+```
+
+Your `p` element should have a closing tag.
 
 ```js
 assert(
-  code.match(/<\/h2>/g) &&
-    code.match(/<\/h2>/g).length === code.match(/<h2>/g).length
+  code.match(/<\/p>/g) &&
+    code.match(/<\/p>/g).length === code.match(/<p/g).length
 );
-```
-
-Your `h2` element should have the text `CatPhotoApp`.
-
-```js
-assert.isTrue(/cat(\s)?photo(\s)?app/gi.test($('h2').text()));
-```
-
-Your `h1` element should have the text `Hello World`.
-
-```js
-assert.isTrue(/hello(\s)+world/gi.test($('h1').text()));
-```
-
-Your `h1` element should be before your `h2` element.
-
-```js
-assert(code.match(/<h1>\s*?.*?\s*?<\/h1>\s*<h2>\s*?.*?\s*?<\/h2>/gi));
 ```
 
 # --seed--
@@ -59,6 +49,7 @@ assert(code.match(/<h1>\s*?.*?\s*?<\/h1>\s*<h2>\s*?.*?\s*?<\/h2>/gi));
 
 ```html
 <h1>Hello World</h1>
+<h2>CatPhotoApp</h2>
 ```
 
 # --solutions--
@@ -66,4 +57,5 @@ assert(code.match(/<h1>\s*?.*?\s*?<\/h1>\s*<h2>\s*?.*?\s*?<\/h2>/gi));
 ```html
 <h1>Hello World</h1>
 <h2>CatPhotoApp</h2>
+<p>Hello Paragraph</p>
 ```
