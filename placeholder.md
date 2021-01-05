@@ -1,67 +1,55 @@
 ---
-id: bad87fee1348bd9aedf08812
-title: Add Images to Your Website
+id: bad87fee1348bd9aedf08830
+title: Add Placeholder Text to a Text Field
 challengeType: 0
-videoUrl: 'https://scrimba.com/p/pVMPUv/c8EbJf2'
-forumTopicId: 16640
+videoUrl: 'https://scrimba.com/p/pVMPUv/cKdJDhg'
+forumTopicId: 16647
 ---
 
 # --description--
 
-You can add images to your website by using the `img` element, and point to a specific image's URL using the `src` attribute.
+Placeholder text is what is displayed in your `input` element before your user has inputted anything.
 
-An example of this would be:
+You can create placeholder text like so:
 
-`<img src="https://www.freecatphotoapp.com/your-image.jpg">`
+`<input type="text" placeholder="this is placeholder text">`  
 
-Note that `img` elements are self-closing.
-
-All `img` elements **must** have an `alt` attribute. The text inside an `alt` attribute is used for screen readers to improve accessibility and is displayed if the image fails to load.
-
-**Note:** If the image is purely decorative, using an empty `alt` attribute is a best practice.
-
-Ideally the `alt` attribute should not contain special characters unless needed.
-
-Let's add an `alt` attribute to our `img` example above:
-
-`<img src="https://www.freecatphotoapp.com/your-image.jpg" alt="A business cat wearing a necktie.">`
+**Note:** Remember that `input` elements are self-closing.
 
 # --instructions--
 
-Let's try to add an image to our website:
-
-Within the existing `main` element, insert an `img` element before the existing `p` elements.
-
-Now set the `src` attribute so that it points to this url:
-
-`https://bit.ly/fcc-relaxing-cat`
-
-Finally, don't forget to give your `img` element an `alt` attribute with applicable text.
+Set the `placeholder` value of your text `input` to "cat photo URL".
 
 # --hints--
 
-Your page should have an image element.
+You should add a `placeholder` attribute to the existing text `input` element.
 
 ```js
-assert($('img').length);
+assert($('input[placeholder]').length > 0);
 ```
 
-Your image should have a `src` attribute that points to the kitten image.
-
-```js
-assert(/^https:\/\/bit\.ly\/fcc-relaxing-cat$/i.test($('img').attr('src')));
-```
-
-Your image element's `alt` attribute should not be empty.
+You should set the value of your placeholder attribute to `cat photo URL`.
 
 ```js
 assert(
-  $('img').attr('alt') &&
-    $('img').attr('alt').length &&
-    /<img\S*alt=(['"])(?!\1|>)\S+\1\S*\/?>/.test(
-      __helpers.removeWhiteSpace(code)
-    )
+  $('input') &&
+    $('input').attr('placeholder') &&
+    $('input')
+      .attr('placeholder')
+      .match(/cat\s+photo\s+URL/gi)
 );
+```
+
+The finished `input` element should not have a closing tag.
+
+```js
+assert(!code.match(/<input.*\/?>.*<\/input>/gi));
+```
+
+The finished `input` element should have valid syntax.
+
+```js
+assert($('input[type=text]').length > 0);
 ```
 
 # --seed--
@@ -71,10 +59,23 @@ assert(
 ```html
 <h2>CatPhotoApp</h2>
 <main>
+  <p>Click here to view more <a href="#">cat photos</a>.</p>
 
+  <a href="#"><img src="https://bit.ly/fcc-relaxing-cat" alt="A cute orange cat lying on its back."></a>
 
-  <p>Kitty ipsum dolor sit amet, shed everywhere shed everywhere stretching attack your ankles chase the red dot, hairball run catnip eat the grass sniff.</p>
-  <p>Purr jump eat the grass rip the couch scratched sunbathe, shed everywhere rip the couch sleep in the sink fluffy fur catnip scratched.</p>
+  <p>Things cats love:</p>
+  <ul>
+    <li>cat nip</li>
+    <li>laser pointers</li>
+    <li>lasagna</li>
+  </ul>
+  <p>Top 3 things cats hate:</p>
+  <ol>
+    <li>flea treatment</li>
+    <li>thunder</li>
+    <li>other cats</li>
+  </ol>
+  <input type="text">
 </main>
 ```
 
@@ -83,8 +84,22 @@ assert(
 ```html
 <h2>CatPhotoApp</h2>
 <main>
+  <p>Click here to view more <a href="#">cat photos</a>.</p>
+
   <a href="#"><img src="https://bit.ly/fcc-relaxing-cat" alt="A cute orange cat lying on its back."></a>
-  <p>Kitty ipsum dolor sit amet, shed everywhere shed everywhere stretching attack your ankles chase the red dot, hairball run catnip eat the grass sniff.</p>
-  <p>Purr jump eat the grass rip the couch scratched sunbathe, shed everywhere rip the couch sleep in the sink fluffy fur catnip scratched.</p>
+
+  <p>Things cats love:</p>
+  <ul>
+    <li>cat nip</li>
+    <li>laser pointers</li>
+    <li>lasagna</li>
+  </ul>
+  <p>Top 3 things cats hate:</p>
+  <ol>
+    <li>flea treatment</li>
+    <li>thunder</li>
+    <li>other cats</li>
+  </ol>
+  <input type="text" placeholder="cat photo URL">
 </main>
 ```
