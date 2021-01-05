@@ -1,46 +1,61 @@
 ---
-id: bad87fee1348bd9aedf08835
-title: Create a Set of Checkboxes
+id: bad87fee1348bd9aedf08834
+title: Create a Set of Radio Buttons
 challengeType: 0
-videoUrl: 'https://scrimba.com/p/pVMPUv/cqrkJsp'
-forumTopicId: 16821
+forumTopicId: 16822
 ---
 
 # --description--
 
-Forms commonly use <dfn>checkboxes</dfn> for questions that may have more than one answer.
+You can use <dfn>radio buttons</dfn> for questions where you want the user to only give you one answer out of multiple options.
 
-Checkboxes are a type of `input`.
+Radio buttons are a type of `input`.
 
-Each of your checkboxes can be nested within its own `label` element. By wrapping an `input` element inside of a `label` element it will automatically associate the checkbox input with the label element surrounding it.
+Each of your radio buttons can be nested within its own `label` element. By wrapping an `input` element inside of a `label` element it will automatically associate the radio button input with the label element surrounding it.
 
-All related checkbox inputs should have the same `name` attribute.
+All related radio buttons should have the same `name` attribute to create a radio button group. By creating a radio group, selecting any single radio button will automatically deselect the other buttons within the same group ensuring only one answer is provided by the user.
 
-It is considered best practice to explicitly define the relationship between a checkbox `input` and its corresponding `label` by setting the `for` attribute on the `label` element to match the `id` attribute of the associated `input` element.
+Here's an example of a radio button:
 
-Here's an example of a checkbox:
+```html
+<label> 
+  <input type="radio" name="indoor-outdoor">Indoor 
+</label>
+```
 
-`<label for="loving"><input id="loving" type="checkbox" name="personality"> Loving</label>`
+It is considered best practice to set a `for` attribute on the `label` element, with a value that matches the value of the `id` attribute of the `input` element. This allows assistive technologies to create a linked relationship between the label and the child `input` element. For example:
+
+```html
+<label for="indoor"> 
+  <input id="indoor" type="radio" name="indoor-outdoor">Indoor 
+</label>
+```
 
 # --instructions--
 
-Add to your form a set of three checkboxes. Each checkbox should be nested within its own `label` element. All three should share the `name` attribute of `personality`.
+Add a pair of radio buttons to your form, each nested in its own `label` element. One should have the option of `indoor` and the other should have the option of `outdoor`. Both should share the `name` attribute of `indoor-outdoor` to create a radio group.
 
 # --hints--
 
-Your page should have three checkbox elements.
+Your page should have two radio button elements.
 
 ```js
-assert($('input[type="checkbox"]').length > 2);
+assert($('input[type="radio"]').length > 1);
 ```
 
-Each of your three checkbox elements should be nested in its own `label` element.
+Your radio buttons should be given the `name` attribute of `indoor-outdoor`.
 
 ```js
-assert($('label > input[type="checkbox"]:only-child').length > 2);
+assert($('input[type="radio"]').filter("[name='indoor-outdoor']").length > 1);
 ```
 
-Make sure each of your `label` elements has a closing tag.
+Each of your two radio button elements should be nested in its own `label` element.
+
+```js
+assert($('label > input[type="radio"]:only-child').length > 1);
+```
+
+Each of your `label` elements should have a closing tag.
 
 ```js
 assert(
@@ -50,15 +65,27 @@ assert(
 );
 ```
 
-Your checkboxes should be given the `name` attribute of `personality`.
+One of your radio buttons should have the label `indoor`.
 
 ```js
 assert(
-  $('label > input[type="checkbox"]').filter('[name="personality"]').length > 2
+  $('label')
+    .text()
+    .match(/indoor/gi)
 );
 ```
 
-Each of your checkboxes should be added within the `form` tag.
+One of your radio buttons should have the label `outdoor`.
+
+```js
+assert(
+  $('label')
+    .text()
+    .match(/outdoor/gi)
+);
+```
+
+Each of your radio button elements should be added within the `form` tag.
 
 ```js
 assert($('label').parent().get(0).tagName.match('FORM'));
@@ -88,8 +115,6 @@ assert($('label').parent().get(0).tagName.match('FORM'));
     <li>other cats</li>
   </ol>
   <form action="https://freecatphotoapp.com/submit-cat-photo">
-    <label for="indoor"><input id="indoor" type="radio" name="indoor-outdoor"> Indoor</label>
-    <label for="outdoor"><input id="outdoor" type="radio" name="indoor-outdoor"> Outdoor</label><br>
     <input type="text" placeholder="cat photo URL" required>
     <button type="submit">Submit</button>
   </form>
@@ -102,9 +127,9 @@ assert($('label').parent().get(0).tagName.match('FORM'));
 <h2>CatPhotoApp</h2>
 <main>
   <p>Click here to view more <a href="#">cat photos</a>.</p>
-  
+
   <a href="#"><img src="https://bit.ly/fcc-relaxing-cat" alt="A cute orange cat lying on its back."></a>
-  
+
   <p>Things cats love:</p>
   <ul>
     <li>cat nip</li>
@@ -118,13 +143,8 @@ assert($('label').parent().get(0).tagName.match('FORM'));
     <li>other cats</li>
   </ol>
   <form action="https://freecatphotoapp.com/submit-cat-photo">
-    <label for="indoor"><input id="indoor" type="radio" name="indoor-outdoor"> Indoor</label>
+   <label for="indoor"><input id="indoor" type="radio" name="indoor-outdoor"> Indoor</label>
     <label for="outdoor"><input id="outdoor" type="radio" name="indoor-outdoor"> Outdoor</label><br>
-    <label for="playful"><input id="playful" type="checkbox" name="personality">Playful</label>
-    <label for="lazy"><input id="lazy" type="checkbox"
-name="personality">Lazy</label>
-    <label for="evil"><input id="evil" type="checkbox"
-name="personality">Evil</label><br>
     <input type="text" placeholder="cat photo URL" required>
     <button type="submit">Submit</button>
   </form>
