@@ -1,55 +1,70 @@
 ---
-id: bad87fee1348bd9aedf08804
-title: Comment out HTML
+id: bad87fee1348bd9aedf08827
+title: Create a Bulleted Unordered List
 challengeType: 0
-videoUrl: 'https://scrimba.com/p/pVMPUv/cGyGbca'
-forumTopicId: 16782
+videoUrl: 'https://scrimba.com/p/pVMPUv/cDKVPuv'
+forumTopicId: 16814
 ---
 
 # --description--
 
-Remember that in order to start a comment, you need to use `<!--` and to end a comment, you need to use `-->`
+HTML has a special element for creating <dfn>unordered lists</dfn>, or bullet point style lists.
 
-Here you'll need to end the comment before your `h2` element begins.
+Unordered lists start with an opening `<ul>` element, followed by any number of `<li>` elements. Finally, unordered lists close with a `</ul>`
+
+For example:
+
+```html
+<ul>
+  <li>milk</li>
+  <li>cheese</li>
+</ul>
+```
+
+would create a bullet point style list of "milk" and "cheese".
 
 # --instructions--
 
-Comment out your `h1` element and your `p` element, but not your `h2` element.
+Remove the last two `p` elements and create an unordered list of three things that cats love at the bottom of the page.
 
 # --hints--
 
-Your `h1` element should be commented out so that it is not visible on the page.
+Create a `ul` element.
 
 ```js
-assert($('h1').length === 0);
+assert($('ul').length > 0);
 ```
 
-Your `h2` element should not be commented out so that it is visible on the page.
+You should have three `li` elements within your `ul` element.
 
 ```js
-assert($('h2').length > 0);
+assert($('ul li').length > 2);
 ```
 
-Your `p` element should be commented out so that it is not visible on the page.
-
-```js
-assert($('p').length === 0);
-```
-
-Each of your comments should be closed with `-->`.
-
-```js
-assert(code.match(/[^fc]-->/g).length > 1);
-```
-
-You should not change the order of the `h1` `h2` or `p` in the code.
+Your `ul` element should have a closing tag.
 
 ```js
 assert(
-  code.match(/<([a-z0-9]){1,2}>/g)[0] === '<h1>' &&
-    code.match(/<([a-z0-9]){1,2}>/g)[1] === '<h2>' &&
-    code.match(/<([a-z0-9]){1,2}>/g)[2] === '<p>'
+  code.match(/<\/ul>/gi) &&
+    code.match(/<ul/gi) &&
+    code.match(/<\/ul>/gi).length === code.match(/<ul/gi).length
 );
+```
+
+Your `li` elements should have closing tags.
+
+```js
+assert(
+  code.match(/<\/li>/gi) &&
+    code.match(/<li[\s>]/gi) &&
+    code.match(/<\/li>/gi).length === code.match(/<li[\s>]/gi).length
+);
+```
+
+Your `li` elements should not contain an empty string or only white-space.
+
+```js
+assert($('ul li').filter((_, item) => !$(item).text().trim()).length === 0);
 ```
 
 # --seed--
@@ -57,19 +72,30 @@ assert(
 ## --seed-contents--
 
 ```html
-<!--
-<h1>Hello World</h1>
-
 <h2>CatPhotoApp</h2>
+<main>
+  <p>Click here to view more <a href="#">cat photos</a>.</p>
 
-<p>Kitty ipsum dolor sit amet, shed everywhere shed everywhere stretching attack your ankles chase the red dot, hairball run catnip eat the grass sniff.</p>
--->
+  <a href="#"><img src="https://bit.ly/fcc-relaxing-cat" alt="A cute orange cat lying on its back."></a>
+
+  <p>Kitty ipsum dolor sit amet, shed everywhere shed everywhere stretching attack your ankles chase the red dot, hairball run catnip eat the grass sniff.</p>
+  <p>Purr jump eat the grass rip the couch scratched sunbathe, shed everywhere rip the couch sleep in the sink fluffy fur catnip scratched.</p>
+</main>
 ```
 
 # --solutions--
 
 ```html
-<!--<h1>Hello World</h1>-->
 <h2>CatPhotoApp</h2>
-<!--<p>Kitty ipsum dolor sit amet, shed everywhere shed everywhere stretching attack your ankles chase the red dot, hairball run catnip eat the grass sniff.</p> -->
+<main>
+  <p>Click here to view more <a href="#">cat photos</a>.</p>
+
+  <a href="#"><img src="https://bit.ly/fcc-relaxing-cat" alt="A cute orange cat lying on its back."></a>
+
+  <ul>
+    <li>milk</li>
+    <li>mice</li>
+    <li>catnip</li>
+  </ul>
+</main>
 ```
