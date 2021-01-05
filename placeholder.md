@@ -1,112 +1,54 @@
 ---
-id: bad87fee1348bd9aedf08828
-title: Create an Ordered List
+id: 587d78aa367417b2b2512aed
+title: Declare the Doctype of an HTML Document
 challengeType: 0
-videoUrl: 'https://scrimba.com/p/pVMPUv/cQ3B8TM'
-forumTopicId: 16824
+videoUrl: 'https://scrimba.com/p/pVMPUv/cra98AJ'
+forumTopicId: 301095
 ---
 
 # --description--
 
-HTML has another special element for creating <dfn>ordered lists</dfn>, or numbered lists.
+The challenges so far have covered specific HTML elements and their uses. However, there are a few elements that give overall structure to your page, and should be included in every HTML document.
 
-Ordered lists start with an opening `<ol>` element, followed by any number of `<li>` elements. Finally, ordered lists are closed with the `</ol>` tag.
+At the top of your document, you need to tell the browser which version of HTML your page is using. HTML is an evolving language, and is updated regularly. Most major browsers support the latest specification, which is HTML5. However, older web pages may use previous versions of the language.
 
-For example:
+You tell the browser this information by adding the `<!DOCTYPE ...>` tag on the first line, where the `...` part is the version of HTML. For HTML5, you use `<!DOCTYPE html>`.
+
+The `!` and uppercase `DOCTYPE` is important, especially for older browsers. The `html` is not case sensitive.
+
+Next, the rest of your HTML code needs to be wrapped in `html` tags. The opening `<html>` goes directly below the `<!DOCTYPE html>` line, and the closing `</html>` goes at the end of the page.
+
+Here's an example of the page structure:
 
 ```html
-<ol>
-  <li>Garfield</li>
-  <li>Sylvester</li>
-</ol>
+<!DOCTYPE html>
+<html>
+  <!-- Your HTML code goes here -->
+</html>
 ```
-
-would create a numbered list of "Garfield" and "Sylvester".
 
 # --instructions--
 
-Create an ordered list of the top 3 things cats hate the most.
+Add a `DOCTYPE` tag for HTML5 to the top of the blank HTML document in the code editor. Under it, add opening and closing `html` tags, which wrap around an `h1` element. The heading can include any text.
 
 # --hints--
 
-You should have an ordered list for `Top 3 things cats hate:`
+Your code should include a `<!DOCTYPE html>` tag.
 
 ```js
-assert(/Top 3 things cats hate:/i.test($('ol').prev().text()));
+assert(code.match(/<!DOCTYPE\s+?html\s*?>/gi));
 ```
 
-You should have an unordered list for `Things cats love:`
+There should be one `html` element.
 
 ```js
-assert(/Things cats love:/i.test($('ul').prev().text()));
+assert($('html').length == 1);
 ```
 
-You should have only one `ul` element.
+The `html` tags should wrap around one `h1` element.
 
 ```js
-assert.equal($('ul').length, 1);
-```
-
-You should have only one `ol` element.
-
-```js
-assert.equal($('ol').length, 1);
-```
-
-You should have three `li` elements within your `ul` element.
-
-```js
-assert.equal($('ul li').length, 3);
-```
-
-You should have three `li` elements within your `ol` element.
-
-```js
-assert.equal($('ol li').length, 3);
-```
-
-Your `ul` element should have a closing tag.
-
-```js
-assert(
-  code.match(/<\/ul>/g) &&
-    code.match(/<\/ul>/g).length === code.match(/<ul>/g).length
-);
-```
-
-Your `ol` element should have a closing tag.
-
-```js
-assert(
-  code.match(/<\/ol>/g) &&
-    code.match(/<\/ol>/g).length === code.match(/<ol>/g).length
-);
-```
-
-Your `li` element should have a closing tag.
-
-```js
-assert(
-  code.match(/<\/li>/g) &&
-    code.match(/<li>/g) &&
-    code.match(/<\/li>/g).length === code.match(/<li>/g).length
-);
-```
-
-The `li` elements in your unordered list should not be empty.
-
-```js
-$('ul li').each((i, val) =>
-  assert(__helpers.removeWhiteSpace(val.textContent))
-);
-```
-
-The `li` elements in your ordered list should not be empty.
-
-```js
-$('ol li').each((i, val) =>
-  assert(!!__helpers.removeWhiteSpace(val.textContent))
-);
+assert(code.match(/<html>\s*?<h1>\s*?.*?\s*?<\/h1>\s*?<\/html>/gi));
 ```
 
 # --seed--
@@ -114,43 +56,13 @@ $('ol li').each((i, val) =>
 ## --seed-contents--
 
 ```html
-<h2>CatPhotoApp</h2>
-<main>
-  <p>Click here to view more <a href="#">cat photos</a>.</p>
-
-  <a href="#"><img src="https://bit.ly/fcc-relaxing-cat" alt="A cute orange cat lying on its back."></a>
-
-  <p>Things cats love:</p>
-  <ul>
-    <li>cat nip</li>
-    <li>laser pointers</li>
-    <li>lasagna</li>
-  </ul>
-  <p>Top 3 things cats hate:</p>
-
-</main>
 ```
 
 # --solutions--
 
 ```html
-<h2>CatPhotoApp</h2>
-<main>
-  <p>Click here to view more <a href="#">cat photos</a>.</p>
-
-  <a href="#"><img src="https://bit.ly/fcc-relaxing-cat" alt="A cute orange cat lying on its back."></a>
-
-  <p>Things cats love:</p>
-  <ul>
-    <li>cat nip</li>
-    <li>laser pointers</li>
-    <li>lasagna</li>
-  </ul>
-  <p>Top 3 things cats hate:</p>
-  <ol>
-    <li>hate 1</li>
-    <li>hate 2</li>
-    <li>hate 3</li>
-  </ol>
-</main>
+<!DOCTYPE html>
+<html>
+  <h1> Hello world </h1>
+</html>
 ```
