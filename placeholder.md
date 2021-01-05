@@ -1,55 +1,35 @@
 ---
-id: bad87fee1348bd9aedf08830
-title: Add Placeholder Text to a Text Field
+id: bad87fee1348bd9aedd08835
+title: Check Radio Buttons and Checkboxes by Default
 challengeType: 0
-videoUrl: 'https://scrimba.com/p/pVMPUv/cKdJDhg'
-forumTopicId: 16647
+videoUrl: 'https://scrimba.com/p/pVMPUv/cWk3Qh6'
+forumTopicId: 301094
 ---
 
 # --description--
 
-Placeholder text is what is displayed in your `input` element before your user has inputted anything.
+You can set a checkbox or radio button to be checked by default using the `checked` attribute.
 
-You can create placeholder text like so:
+To do this, just add the word "checked" to the inside of an input element. For example:
 
-`<input type="text" placeholder="this is placeholder text">`  
-
-**Note:** Remember that `input` elements are self-closing.
+`<input type="radio" name="test-name" checked>`
 
 # --instructions--
 
-Set the `placeholder` value of your text `input` to "cat photo URL".
+Set the first of your radio buttons and the first of your checkboxes to both be checked by default.
 
 # --hints--
 
-You should add a `placeholder` attribute to the existing text `input` element.
+Your first radio button on your form should be checked by default.
 
 ```js
-assert($('input[placeholder]').length > 0);
+assert($('input[type="radio"]').prop('checked'));
 ```
 
-You should set the value of your placeholder attribute to `cat photo URL`.
+Your first checkbox on your form should be checked by default.
 
 ```js
-assert(
-  $('input') &&
-    $('input').attr('placeholder') &&
-    $('input')
-      .attr('placeholder')
-      .match(/cat\s+photo\s+URL/gi)
-);
-```
-
-The finished `input` element should not have a closing tag.
-
-```js
-assert(!code.match(/<input.*\/?>.*<\/input>/gi));
-```
-
-The finished `input` element should have valid syntax.
-
-```js
-assert($('input[type=text]').length > 0);
+assert($('input[type="checkbox"]').prop('checked'));
 ```
 
 # --seed--
@@ -75,7 +55,15 @@ assert($('input[type=text]').length > 0);
     <li>thunder</li>
     <li>other cats</li>
   </ol>
-  <input type="text">
+  <form action="https://freecatphotoapp.com/submit-cat-photo">
+    <label for="indoor"><input id="indoor" type="radio" name="indoor-outdoor" value="indoor"> Indoor</label>
+    <label for="outdoor"><input id="outdoor" type="radio" name="indoor-outdoor" value="outdoor"> Outdoor</label><br>
+    <label for="loving"><input id="loving" type="checkbox" name="personality" value="loving"> Loving</label>
+    <label for="lazy"><input id="lazy" type="checkbox" name="personality" value="lazy"> Lazy</label>
+    <label for="energetic"><input id="energetic" type="checkbox" name="personality" value="energetic"> Energetic</label><br>
+    <input type="text" placeholder="cat photo URL" required>
+    <button type="submit">Submit</button>
+  </form>
 </main>
 ```
 
@@ -100,6 +88,14 @@ assert($('input[type=text]').length > 0);
     <li>thunder</li>
     <li>other cats</li>
   </ol>
-  <input type="text" placeholder="cat photo URL">
+  <form action="https://freecatphotoapp.com/submit-cat-photo">
+    <label for="indoor"><input id="indoor" type="radio" name="indoor-outdoor" value="indoor" checked> Indoor</label>
+    <label for="outdoor"><input id="outdoor" type="radio" name="indoor-outdoor" value="outdoor"> Outdoor</label><br>
+    <label for="loving"><input id="loving" type="checkbox" name="personality" value="loving" checked> Loving</label>
+    <label for="lazy"><input id="lazy" type="checkbox" name="personality" value="lazy"> Lazy</label>
+    <label for="energetic"><input id="energetic" type="checkbox" name="personality" value="energetic"> Energetic</label><br>
+    <input type="text" placeholder="cat photo URL" required>
+    <button type="submit">Submit</button>
+  </form>
 </main>
 ```
