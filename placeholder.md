@@ -1,49 +1,47 @@
 ---
-id: bad87fee1348bd9aedf08820
-title: Turn an Image into a Link
+id: bad87fee1348bd9aedf08802
+title: Uncomment HTML
 challengeType: 0
-videoUrl: 'https://scrimba.com/p/pVMPUv/cRdBnUr'
-forumTopicId: 18327
+videoUrl: 'https://scrimba.com/p/pVMPUv/cBmG9T7'
+forumTopicId: 18329
 ---
 
 # --description--
 
-You can make elements into links by nesting them within an `a` element.
+Commenting is a way that you can leave comments for other developers within your code without affecting the resulting output that is displayed to the end user.
 
-Nest your image within an `a` element. Here's an example:
+Commenting is also a convenient way to make code inactive without having to delete it entirely.
 
-`<a href="#"><img src="https://bit.ly/fcc-running-cats" alt="Three kittens running towards the camera."></a>`
-
-Remember to use `#` as your `a` element's `href` property in order to turn it into a dead link.
+Comments in HTML start with `<!--` and end with a `-->`
 
 # --instructions--
 
-Place the existing image element within an `a` (*anchor*) element.
-
-Once you've done this, hover over your image with your cursor. Your cursor's normal pointer should become the link clicking pointer. The photo is now a link.
+Uncomment your `h1`, `h2` and `p` elements.
 
 # --hints--
 
-The existing `img` element should be nested within an `a` element.
+Your `h1` element should be visible on the page by uncommenting it.
 
 ```js
-assert($('a').children('img').length > 0);
+assert($('h1').length > 0);
 ```
 
-Your `a` element should be a dead link with a `href` attribute set to `#`.
+Your `h2` element should be visible on the page by uncommenting it.
 
 ```js
-assert(new RegExp('#').test($('a').children('img').parent().attr('href')));
+assert($('h2').length > 0);
 ```
 
-Each of your `a` elements should have a closing tag.
+Your `p` element should be visible on the page by uncommenting it.
 
 ```js
-assert(
-  code.match(/<\/a>/g) &&
-    code.match(/<a/g) &&
-    code.match(/<\/a>/g).length === code.match(/<a/g).length
-);
+assert($('p').length > 0);
+```
+
+No trailing comment tags should be visible on the page (i.e. `-->`).
+
+```js
+assert(!$('*:contains("-->")')[1]);
 ```
 
 # --seed--
@@ -51,27 +49,21 @@ assert(
 ## --seed-contents--
 
 ```html
+<!--
+<h1>Hello World</h1>
+
 <h2>CatPhotoApp</h2>
-<main>
-  <p>Click here to view more <a href="#">cat photos</a>.</p>
 
-  <img src="https://bit.ly/fcc-relaxing-cat" alt="A cute orange cat lying on its back.">
-
-  <p>Kitty ipsum dolor sit amet, shed everywhere shed everywhere stretching attack your ankles chase the red dot, hairball run catnip eat the grass sniff.</p>
-  <p>Purr jump eat the grass rip the couch scratched sunbathe, shed everywhere rip the couch sleep in the sink fluffy fur catnip scratched.</p>
-</main>
+<p>Kitty ipsum dolor sit amet, shed everywhere shed everywhere stretching attack your ankles chase the red dot, hairball run catnip eat the grass sniff.</p>
+-->
 ```
 
 # --solutions--
 
 ```html
+<h1>Hello World</h1>
+
 <h2>CatPhotoApp</h2>
-<main>
-  <p>Click here to view more <a href="#">cat photos</a>.</p>
 
-  <a href="#"><img src="https://bit.ly/fcc-relaxing-cat" alt="A cute orange cat lying on its back."></a>
-
-  <p>Kitty ipsum dolor sit amet, shed everywhere shed everywhere stretching attack your ankles chase the red dot, hairball run catnip eat the grass sniff.</p>
-  <p>Purr jump eat the grass rip the couch scratched sunbathe, shed everywhere rip the couch sleep in the sink fluffy fur catnip scratched.</p>
-</main>
+<p>Kitty ipsum dolor sit amet, shed everywhere shed everywhere stretching attack your ankles chase the red dot, hairball run catnip eat the grass sniff.</p>
 ```
