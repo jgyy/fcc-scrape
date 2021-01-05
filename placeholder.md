@@ -1,47 +1,29 @@
 ---
-id: bad87fee1348bd9aedf08802
-title: Uncomment HTML
+id: bad87fee1348bd9aedc08830
+title: Use HTML5 to Require a Field
 challengeType: 0
-videoUrl: 'https://scrimba.com/p/pVMPUv/cBmG9T7'
-forumTopicId: 18329
+videoUrl: 'https://scrimba.com/p/pVMPUv/cMd4EcQ'
+forumTopicId: 18360
 ---
 
 # --description--
 
-Commenting is a way that you can leave comments for other developers within your code without affecting the resulting output that is displayed to the end user.
+You can require specific form fields so that your user will not be able to submit your form until he or she has filled them out.
 
-Commenting is also a convenient way to make code inactive without having to delete it entirely.
-
-Comments in HTML start with `<!--` and end with a `-->`
+For example, if you wanted to make a text input field required, you can just add the attribute `required` within your `input` element, like this: `<input type="text" required>`
 
 # --instructions--
 
-Uncomment your `h1`, `h2` and `p` elements.
+Make your text `input` a `required` field, so that your user can't submit the form without completing this field.
+
+Then try to submit the form without inputting any text. See how your HTML5 form notifies you that the field is required?
 
 # --hints--
 
-Your `h1` element should be visible on the page by uncommenting it.
+Your text `input` element should have the `required` attribute.
 
 ```js
-assert($('h1').length > 0);
-```
-
-Your `h2` element should be visible on the page by uncommenting it.
-
-```js
-assert($('h2').length > 0);
-```
-
-Your `p` element should be visible on the page by uncommenting it.
-
-```js
-assert($('p').length > 0);
-```
-
-No trailing comment tags should be visible on the page (i.e. `-->`).
-
-```js
-assert(!$('*:contains("-->")')[1]);
+assert($('input').prop('required'));
 ```
 
 # --seed--
@@ -49,21 +31,55 @@ assert(!$('*:contains("-->")')[1]);
 ## --seed-contents--
 
 ```html
-<!--
-<h1>Hello World</h1>
-
 <h2>CatPhotoApp</h2>
+<main>
+  <p>Click here to view more <a href="#">cat photos</a>.</p>
 
-<p>Kitty ipsum dolor sit amet, shed everywhere shed everywhere stretching attack your ankles chase the red dot, hairball run catnip eat the grass sniff.</p>
--->
+  <a href="#"><img src="https://bit.ly/fcc-relaxing-cat" alt="A cute orange cat lying on its back."></a>
+
+  <p>Things cats love:</p>
+  <ul>
+    <li>cat nip</li>
+    <li>laser pointers</li>
+    <li>lasagna</li>
+  </ul>
+  <p>Top 3 things cats hate:</p>
+  <ol>
+    <li>flea treatment</li>
+    <li>thunder</li>
+    <li>other cats</li>
+  </ol>
+  <form action="https://freecatphotoapp.com/submit-cat-photo">
+    <input type="text" placeholder="cat photo URL">
+    <button type="submit">Submit</button>
+  </form>
+</main>
 ```
 
 # --solutions--
 
 ```html
-<h1>Hello World</h1>
-
 <h2>CatPhotoApp</h2>
+<main>
+  <p>Click here to view more <a href="#">cat photos</a>.</p>
 
-<p>Kitty ipsum dolor sit amet, shed everywhere shed everywhere stretching attack your ankles chase the red dot, hairball run catnip eat the grass sniff.</p>
+  <a href="#"><img src="https://bit.ly/fcc-relaxing-cat" alt="A cute orange cat lying on its back."></a>
+
+  <p>Things cats love:</p>
+  <ul>
+    <li>cat nip</li>
+    <li>laser pointers</li>
+    <li>lasagna</li>
+  </ul>
+  <p>Top 3 things cats hate:</p>
+  <ol>
+    <li>flea treatment</li>
+    <li>thunder</li>
+    <li>other cats</li>
+  </ol>
+  <form action="https://freecatphotoapp.com/submit-cat-photo">
+    <input type="text" required placeholder="cat photo URL">
+    <button type="submit">Submit</button>
+  </form>
+</main>
 ```
