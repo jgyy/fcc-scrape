@@ -1,43 +1,49 @@
 ---
-id: bd7123c8c441eddfaeb5bdef
-title: Say Hello to HTML Elements
+id: bad87fee1348bd9aedf08820
+title: Turn an Image into a Link
 challengeType: 0
-videoUrl: 'https://scrimba.com/p/pVMPUv/cE8Gpt2'
-forumTopicId: 18276
+videoUrl: 'https://scrimba.com/p/pVMPUv/cRdBnUr'
+forumTopicId: 18327
 ---
 
 # --description--
 
-Welcome to freeCodeCamp's HTML coding challenges. These will walk you through web development step-by-step.
+You can make elements into links by nesting them within an `a` element.
 
-First, you'll start by building a simple web page using HTML. You can edit code in your code editor, which is embedded into this web page.
+Nest your image within an `a` element. Here's an example:
 
-Do you see the code in your code editor that says `<h1>Hello</h1>`? That's an HTML element.
+`<a href="#"><img src="https://bit.ly/fcc-running-cats" alt="Three kittens running towards the camera."></a>`
 
-Most HTML elements have an opening tag and a closing tag.
-
-Opening tags look like this:
-
-`<h1>`
-
-Closing tags look like this:
-
-`</h1>`
-
-The only difference between opening and closing tags is the forward slash after the opening bracket of a closing tag.
-
-Each challenge has tests you can run at any time by clicking the "Run tests" button. When you pass all tests, you'll be prompted to submit your solution and go to the next coding challenge.
+Remember to use `#` as your `a` element's `href` property in order to turn it into a dead link.
 
 # --instructions--
 
-To pass the test on this challenge, change your `h1` element's text to say "Hello World".
+Place the existing image element within an `a` (*anchor*) element.
+
+Once you've done this, hover over your image with your cursor. Your cursor's normal pointer should become the link clicking pointer. The photo is now a link.
 
 # --hints--
 
-Your `h1` element should have the text "Hello World".
+The existing `img` element should be nested within an `a` element.
 
 ```js
-assert.isTrue(/hello(\s)+world/gi.test($('h1').text()));
+assert($('a').children('img').length > 0);
+```
+
+Your `a` element should be a dead link with a `href` attribute set to `#`.
+
+```js
+assert(new RegExp('#').test($('a').children('img').parent().attr('href')));
+```
+
+Each of your `a` elements should have a closing tag.
+
+```js
+assert(
+  code.match(/<\/a>/g) &&
+    code.match(/<a/g) &&
+    code.match(/<\/a>/g).length === code.match(/<a/g).length
+);
 ```
 
 # --seed--
@@ -45,11 +51,27 @@ assert.isTrue(/hello(\s)+world/gi.test($('h1').text()));
 ## --seed-contents--
 
 ```html
-<h1>Hello</h1>
+<h2>CatPhotoApp</h2>
+<main>
+  <p>Click here to view more <a href="#">cat photos</a>.</p>
+
+  <img src="https://bit.ly/fcc-relaxing-cat" alt="A cute orange cat lying on its back.">
+
+  <p>Kitty ipsum dolor sit amet, shed everywhere shed everywhere stretching attack your ankles chase the red dot, hairball run catnip eat the grass sniff.</p>
+  <p>Purr jump eat the grass rip the couch scratched sunbathe, shed everywhere rip the couch sleep in the sink fluffy fur catnip scratched.</p>
+</main>
 ```
 
 # --solutions--
 
 ```html
-<h1>Hello World</h1>
+<h2>CatPhotoApp</h2>
+<main>
+  <p>Click here to view more <a href="#">cat photos</a>.</p>
+
+  <a href="#"><img src="https://bit.ly/fcc-relaxing-cat" alt="A cute orange cat lying on its back."></a>
+
+  <p>Kitty ipsum dolor sit amet, shed everywhere shed everywhere stretching attack your ankles chase the red dot, hairball run catnip eat the grass sniff.</p>
+  <p>Purr jump eat the grass rip the couch scratched sunbathe, shed everywhere rip the couch sleep in the sink fluffy fur catnip scratched.</p>
+</main>
 ```
