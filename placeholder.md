@@ -1,54 +1,66 @@
 ---
-id: bad87fee1348bd9aedd08830
-title: Add a Submit Button to a Form
+id: bad87fee1348bd9aedf08812
+title: Add Images to Your Website
 challengeType: 0
-videoUrl: 'https://scrimba.com/p/pVMPUv/cp2Nkhz'
-forumTopicId: 16627
+videoUrl: 'https://scrimba.com/p/pVMPUv/c8EbJf2'
+forumTopicId: 16640
 ---
 
 # --description--
 
-Let's add a `submit` button to your form. Clicking this button will send the data from your form to the URL you specified with your form's `action` attribute.
+You can add images to your website by using the `img` element, and point to a specific image's URL using the `src` attribute.
 
-Here's an example submit button:
+An example of this would be:
 
-`<button type="submit">this button submits the form</button>`
+`<img src="https://www.freecatphotoapp.com/your-image.jpg">`
+
+Note that `img` elements are self-closing.
+
+All `img` elements **must** have an `alt` attribute. The text inside an `alt` attribute is used for screen readers to improve accessibility and is displayed if the image fails to load.
+
+**Note:** If the image is purely decorative, using an empty `alt` attribute is a best practice.
+
+Ideally the `alt` attribute should not contain special characters unless needed.
+
+Let's add an `alt` attribute to our `img` example above:
+
+`<img src="https://www.freecatphotoapp.com/your-image.jpg" alt="A business cat wearing a necktie.">`
 
 # --instructions--
 
-Add a button as the last element of your `form` element with a type of `submit`, and "Submit" as its text.
+Let's try to add an image to our website:
+
+Within the existing `main` element, insert an `img` element before the existing `p` elements.
+
+Now set the `src` attribute so that it points to this url:
+
+`https://bit.ly/fcc-relaxing-cat`
+
+Finally, don't forget to give your `img` element an `alt` attribute with applicable text.
 
 # --hints--
 
-Your form should have a button inside it.
+Your page should have an image element.
 
 ```js
-assert($('form').children('button').length > 0);
+assert($('img').length);
 ```
 
-Your submit button should have the attribute `type` set to `submit`.
+Your image should have a `src` attribute that points to the kitten image.
 
 ```js
-assert($('button').attr('type') === 'submit');
+assert(/^https:\/\/bit\.ly\/fcc-relaxing-cat$/i.test($('img').attr('src')));
 ```
 
-Your submit button should only have the text `Submit`.
+Your image element's `alt` attribute should not be empty.
 
 ```js
 assert(
-  $('button')
-    .text()
-    .match(/^\s*submit\s*$/gi)
-);
-```
-
-Your `button` element should have a closing tag.
-
-```js
-assert(
-  code.match(/<\/button>/g) &&
-    code.match(/<button/g) &&
-    code.match(/<\/button>/g).length === code.match(/<button/g).length
+  $('img').attr('alt') &&
+    $('img').attr('alt').length &&
+    /<img\S*alt=(['"])(?!\1|>)\S+\1\S*\/?>/.test(
+      __helpers.removeWhiteSpace(code)
+    )
 );
 ```
 
@@ -59,25 +71,10 @@ assert(
 ```html
 <h2>CatPhotoApp</h2>
 <main>
-  <p>Click here to view more <a href="#">cat photos</a>.</p>
 
-  <a href="#"><img src="https://bit.ly/fcc-relaxing-cat" alt="A cute orange cat lying on its back."></a>
 
-  <p>Things cats love:</p>
-  <ul>
-    <li>cat nip</li>
-    <li>laser pointers</li>
-    <li>lasagna</li>
-  </ul>
-  <p>Top 3 things cats hate:</p>
-  <ol>
-    <li>flea treatment</li>
-    <li>thunder</li>
-    <li>other cats</li>
-  </ol>
-  <form action="https://freecatphotoapp.com/submit-cat-photo">
-    <input type="text" placeholder="cat photo URL">
-  </form>
+  <p>Kitty ipsum dolor sit amet, shed everywhere shed everywhere stretching attack your ankles chase the red dot, hairball run catnip eat the grass sniff.</p>
+  <p>Purr jump eat the grass rip the couch scratched sunbathe, shed everywhere rip the couch sleep in the sink fluffy fur catnip scratched.</p>
 </main>
 ```
 
@@ -86,25 +83,8 @@ assert(
 ```html
 <h2>CatPhotoApp</h2>
 <main>
-  <p>Click here to view more <a href="#">cat photos</a>.</p>
-
   <a href="#"><img src="https://bit.ly/fcc-relaxing-cat" alt="A cute orange cat lying on its back."></a>
-
-  <p>Things cats love:</p>
-  <ul>
-    <li>cat nip</li>
-    <li>laser pointers</li>
-    <li>lasagna</li>
-  </ul>
-  <p>Top 3 things cats hate:</p>
-  <ol>
-    <li>flea treatment</li>
-    <li>thunder</li>
-    <li>other cats</li>
-  </ol>
-  <form action="https://freecatphotoapp.com/submit-cat-photo">
-    <input type="text" placeholder="cat photo URL">
-    <button type="submit">Submit</button>
-  </form>
+  <p>Kitty ipsum dolor sit amet, shed everywhere shed everywhere stretching attack your ankles chase the red dot, hairball run catnip eat the grass sniff.</p>
+  <p>Purr jump eat the grass rip the couch scratched sunbathe, shed everywhere rip the couch sleep in the sink fluffy fur catnip scratched.</p>
 </main>
 ```
