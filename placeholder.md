@@ -1,50 +1,67 @@
 ---
-id: bad87fee1348bd9aede08830
-title: Create a Form Element
+id: bad87fee1348bd9aedf08835
+title: Create a Set of Checkboxes
 challengeType: 0
-forumTopicId: 16817
+videoUrl: 'https://scrimba.com/p/pVMPUv/cqrkJsp'
+forumTopicId: 16821
 ---
 
 # --description--
 
-You can build web forms that actually submit data to a server using nothing more than pure HTML. You can do this by specifying an action on your `form` element.
+Forms commonly use <dfn>checkboxes</dfn> for questions that may have more than one answer.
 
-For example:
+Checkboxes are a type of `input`.
 
-`<form action="/url-where-you-want-to-submit-form-data"></form>`
+Each of your checkboxes can be nested within its own `label` element. By wrapping an `input` element inside of a `label` element it will automatically associate the checkbox input with the label element surrounding it.
+
+All related checkbox inputs should have the same `name` attribute.
+
+It is considered best practice to explicitly define the relationship between a checkbox `input` and its corresponding `label` by setting the `for` attribute on the `label` element to match the `id` attribute of the associated `input` element.
+
+Here's an example of a checkbox:
+
+`<label for="loving"><input id="loving" type="checkbox" name="personality"> Loving</label>`
 
 # --instructions--
 
-Nest the existing input element inside a `form` element and assign `"https://freecatphotoapp.com/submit-cat-photo"` to the `action` attribute of the `form` element.
+Add to your form a set of three checkboxes. Each checkbox should be nested within its own `label` element. All three should share the `name` attribute of `personality`.
 
 # --hints--
 
-The existing `input` element should be nested within a `form` element.
+Your page should have three checkbox elements.
 
 ```js
-const inputElem = document.querySelector('form input');
+assert($('input[type="checkbox"]').length > 2);
+```
+
+Each of your three checkbox elements should be nested in its own `label` element.
+
+```js
+assert($('label > input[type="checkbox"]:only-child').length > 2);
+```
+
+Make sure each of your `label` elements has a closing tag.
+
+```js
 assert(
-  inputElem.getAttribute('type') === 'text' &&
-    inputElem.getAttribute('placeholder') === 'cat photo URL'
+  code.match(/<\/label>/g) &&
+    code.match(/<label/g) &&
+    code.match(/<\/label>/g).length === code.match(/<label/g).length
 );
 ```
 
-Your `form` should have an `action` attribute which is set to `https://freecatphotoapp.com/submit-cat-photo`
+Your checkboxes should be given the `name` attribute of `personality`.
 
 ```js
 assert(
-  $('form').attr('action') === 'https://freecatphotoapp.com/submit-cat-photo'
+  $('label > input[type="checkbox"]').filter('[name="personality"]').length > 2
 );
 ```
 
-Your `form` element should have well-formed open and close tags.
+Each of your checkboxes should be added within the `form` tag.
 
 ```js
-assert(
-  code.match(/<\/form>/g) &&
-    code.match(/<form [^<]*>/g) &&
-    code.match(/<\/form>/g).length === code.match(/<form [^<]*>/g).length
-);
+assert($('label').parent().get(0).tagName.match('FORM'));
 ```
 
 # --seed--
@@ -70,7 +87,12 @@ assert(
     <li>thunder</li>
     <li>other cats</li>
   </ol>
-  <input type="text" placeholder="cat photo URL">
+  <form action="https://freecatphotoapp.com/submit-cat-photo">
+    <label for="indoor"><input id="indoor" type="radio" name="indoor-outdoor"> Indoor</label>
+    <label for="outdoor"><input id="outdoor" type="radio" name="indoor-outdoor"> Outdoor</label><br>
+    <input type="text" placeholder="cat photo URL" required>
+    <button type="submit">Submit</button>
+  </form>
 </main>
 ```
 
@@ -80,9 +102,9 @@ assert(
 <h2>CatPhotoApp</h2>
 <main>
   <p>Click here to view more <a href="#">cat photos</a>.</p>
-
+  
   <a href="#"><img src="https://bit.ly/fcc-relaxing-cat" alt="A cute orange cat lying on its back."></a>
-
+  
   <p>Things cats love:</p>
   <ul>
     <li>cat nip</li>
@@ -96,7 +118,15 @@ assert(
     <li>other cats</li>
   </ol>
   <form action="https://freecatphotoapp.com/submit-cat-photo">
-    <input type="text" placeholder="cat photo URL">
+    <label for="indoor"><input id="indoor" type="radio" name="indoor-outdoor"> Indoor</label>
+    <label for="outdoor"><input id="outdoor" type="radio" name="indoor-outdoor"> Outdoor</label><br>
+    <label for="playful"><input id="playful" type="checkbox" name="personality">Playful</label>
+    <label for="lazy"><input id="lazy" type="checkbox"
+name="personality">Lazy</label>
+    <label for="evil"><input id="evil" type="checkbox"
+name="personality">Evil</label><br>
+    <input type="text" placeholder="cat photo URL" required>
+    <button type="submit">Submit</button>
   </form>
 </main>
 ```
