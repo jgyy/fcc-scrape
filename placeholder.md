@@ -1,70 +1,50 @@
 ---
-id: bad87fee1348bd9aedf08827
-title: Create a Bulleted Unordered List
+id: bad87fee1348bd9aede08830
+title: Create a Form Element
 challengeType: 0
-videoUrl: 'https://scrimba.com/p/pVMPUv/cDKVPuv'
-forumTopicId: 16814
+forumTopicId: 16817
 ---
 
 # --description--
 
-HTML has a special element for creating <dfn>unordered lists</dfn>, or bullet point style lists.
-
-Unordered lists start with an opening `<ul>` element, followed by any number of `<li>` elements. Finally, unordered lists close with a `</ul>`
+You can build web forms that actually submit data to a server using nothing more than pure HTML. You can do this by specifying an action on your `form` element.
 
 For example:
 
-```html
-<ul>
-  <li>milk</li>
-  <li>cheese</li>
-</ul>
-```
-
-would create a bullet point style list of "milk" and "cheese".
+`<form action="/url-where-you-want-to-submit-form-data"></form>`
 
 # --instructions--
 
-Remove the last two `p` elements and create an unordered list of three things that cats love at the bottom of the page.
+Nest the existing input element inside a `form` element and assign `"https://freecatphotoapp.com/submit-cat-photo"` to the `action` attribute of the `form` element.
 
 # --hints--
 
-Create a `ul` element.
+The existing `input` element should be nested within a `form` element.
 
 ```js
-assert($('ul').length > 0);
-```
-
-You should have three `li` elements within your `ul` element.
-
-```js
-assert($('ul li').length > 2);
-```
-
-Your `ul` element should have a closing tag.
-
-```js
+const inputElem = document.querySelector('form input');
 assert(
-  code.match(/<\/ul>/gi) &&
-    code.match(/<ul/gi) &&
-    code.match(/<\/ul>/gi).length === code.match(/<ul/gi).length
+  inputElem.getAttribute('type') === 'text' &&
+    inputElem.getAttribute('placeholder') === 'cat photo URL'
 );
 ```
 
-Your `li` elements should have closing tags.
+Your `form` should have an `action` attribute which is set to `https://freecatphotoapp.com/submit-cat-photo`
 
 ```js
 assert(
-  code.match(/<\/li>/gi) &&
-    code.match(/<li[\s>]/gi) &&
-    code.match(/<\/li>/gi).length === code.match(/<li[\s>]/gi).length
+  $('form').attr('action') === 'https://freecatphotoapp.com/submit-cat-photo'
 );
 ```
 
-Your `li` elements should not contain an empty string or only white-space.
+Your `form` element should have well-formed open and close tags.
 
 ```js
-assert($('ul li').filter((_, item) => !$(item).text().trim()).length === 0);
+assert(
+  code.match(/<\/form>/g) &&
+    code.match(/<form [^<]*>/g) &&
+    code.match(/<\/form>/g).length === code.match(/<form [^<]*>/g).length
+);
 ```
 
 # --seed--
@@ -78,8 +58,19 @@ assert($('ul li').filter((_, item) => !$(item).text().trim()).length === 0);
 
   <a href="#"><img src="https://bit.ly/fcc-relaxing-cat" alt="A cute orange cat lying on its back."></a>
 
-  <p>Kitty ipsum dolor sit amet, shed everywhere shed everywhere stretching attack your ankles chase the red dot, hairball run catnip eat the grass sniff.</p>
-  <p>Purr jump eat the grass rip the couch scratched sunbathe, shed everywhere rip the couch sleep in the sink fluffy fur catnip scratched.</p>
+  <p>Things cats love:</p>
+  <ul>
+    <li>cat nip</li>
+    <li>laser pointers</li>
+    <li>lasagna</li>
+  </ul>
+  <p>Top 3 things cats hate:</p>
+  <ol>
+    <li>flea treatment</li>
+    <li>thunder</li>
+    <li>other cats</li>
+  </ol>
+  <input type="text" placeholder="cat photo URL">
 </main>
 ```
 
@@ -92,10 +83,20 @@ assert($('ul li').filter((_, item) => !$(item).text().trim()).length === 0);
 
   <a href="#"><img src="https://bit.ly/fcc-relaxing-cat" alt="A cute orange cat lying on its back."></a>
 
+  <p>Things cats love:</p>
   <ul>
-    <li>milk</li>
-    <li>mice</li>
-    <li>catnip</li>
+    <li>cat nip</li>
+    <li>laser pointers</li>
+    <li>lasagna</li>
   </ul>
+  <p>Top 3 things cats hate:</p>
+  <ol>
+    <li>flea treatment</li>
+    <li>thunder</li>
+    <li>other cats</li>
+  </ol>
+  <form action="https://freecatphotoapp.com/submit-cat-photo">
+    <input type="text" placeholder="cat photo URL">
+  </form>
 </main>
 ```
