@@ -1,40 +1,43 @@
 ---
-id: bad87fee1348bd9aedf08801
-title: Inform with the Paragraph Element
+id: bad87fee1348bd9aecf08801
+title: Introduction to HTML5 Elements
 challengeType: 0
-videoUrl: 'https://scrimba.com/p/pVMPUv/ceZ7DtN'
-forumTopicId: 18202
+videoUrl: 'https://scrimba.com/p/pVMPUv/cBkZGpt7'
+forumTopicId: 301097
 ---
 
 # --description--
 
-`p` elements are the preferred element for paragraph text on websites. `p` is short for "paragraph".
+HTML5 introduces more descriptive HTML tags. These include `main`, `header`, `footer`, `nav`, `video`, `article`, `section` and others.
 
-You can create a paragraph element like this:
+These tags give a descriptive structure to your HTML, make your HTML easier to read, and help with Search Engine Optimization (SEO) and accessibility. The `main` HTML5 tag helps search engines and other developers find the main content of your page.
 
-`<p>I'm a p tag!</p>`
+Example usage, a `main` element with two child elements nested inside it:
+
+```html
+<main> 
+  <h1>Hello World</h1>
+  <p>Hello Paragraph</p>
+</main>
+```
+
+**Note:** Many of the new HTML5 tags and their benefits are covered in the Applied Accessibility section.
 
 # --instructions--
 
-Create a `p` element below your `h2` element, and give it the text "Hello Paragraph".
+Create a second `p` element after the existing `p` element with the following kitty ipsum text: `Purr jump eat the grass rip the couch scratched sunbathe, shed everywhere rip the couch sleep in the sink fluffy fur catnip scratched.`
 
-**Note:** As a convention, all HTML tags are written in lowercase, for example `<p></p>` and not `<P></P>`.
+Then, create a `main` element and nest the two `p` elements inside the `main` element.
 
 # --hints--
 
-Your code should have a valid `p` element.
+You should have 2 `p` elements with Kitty Ipsum text.
 
 ```js
-assert($('p').length > 0);
+assert($('p').length > 1);
 ```
 
-Your `p` element should have the text `Hello Paragraph`.
-
-```js
-assert.isTrue(/hello(\s)+paragraph/gi.test($('p').text()));
-```
-
-Your `p` element should have a closing tag.
+Each of your `p` elements should have a closing tag.
 
 ```js
 assert(
@@ -43,19 +46,52 @@ assert(
 );
 ```
 
+Your `p` element should contain the first few words of the provided additional `kitty ipsum text`.
+
+```js
+assert.isTrue(/Purr\s+jump\s+eat/gi.test($('p').text()));
+```
+
+Your code should have one `main` element.
+
+```js
+assert($('main').length === 1);
+```
+
+The `main` element should have two paragraph elements as children.
+
+```js
+assert($('main').children('p').length === 2);
+```
+
+The opening `main` tag should come before the first paragraph tag.
+
+```js
+assert(code.match(/<main>\s*?<p>/g));
+```
+
+The closing `main` tag should come after the second closing paragraph tag.
+
+```js
+assert(code.match(/<\/p>\s*?<\/main>/g));
+```
+
 # --seed--
 
 ## --seed-contents--
 
 ```html
-<h1>Hello World</h1>
 <h2>CatPhotoApp</h2>
+
+<p>Kitty ipsum dolor sit amet, shed everywhere shed everywhere stretching attack your ankles chase the red dot, hairball run catnip eat the grass sniff.</p>
 ```
 
 # --solutions--
 
 ```html
-<h1>Hello World</h1>
 <h2>CatPhotoApp</h2>
-<p>Hello Paragraph</p>
+<main>
+  <p>Kitty ipsum dolor sit amet, shed everywhere shed everywhere stretching attack your ankles chase the red dot, hairball run catnip eat the grass sniff.</p>
+  <p>Purr jump eat the grass rip the couch scratched sunbathe, shed everywhere rip the couch sleep in the sink fluffy fur catnip scratched.</p>
+</main>
 ```
