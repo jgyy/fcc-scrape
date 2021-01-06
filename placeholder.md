@@ -1,53 +1,56 @@
 ---
-id: 5f07fb1579dc934717801375
-title: Part 32
+id: 5ef9b03c81a63668521804d5
+title: Part 33
 challengeType: 0
 ---
 
 # --description--
 
-It is time to add a new section. Add a third `section` element below the second `section` element.
+Inside the third `section` element add an `h2` tag with the text `Cat Form`.
 
 # --hints--
 
-Your `section` element should have an opening tag. Opening tags have this syntax: `<elementName>`.
+Unable to find the third `section` element. You may have accidentally deleted it or the opening tag or closing tag.
 
 ```js
-assert(document.querySelectorAll('section').length >= 3);
+assert(
+  document.querySelectorAll('section').length === 3 &&
+    code.match(/<\/section>/g).length === 3
+);
 ```
 
-You should only add one opening `section` tag. Please remove any extras.
+Your `h2` element should have an opening tag and closing tag. You may be missing one or both of the required tags.
 
 ```js
-assert(document.querySelectorAll('section').length === 3);
+assert(
+  document.querySelectorAll('h2').length >= 3 &&
+    code.match(/<\/h2>/g).length >= 3
+);
 ```
 
-Your `section` element should have a closing tag. Closing tags have a `/` just after the `<` character.
+You should only add one `h2` element. Please remove any extras.
 
 ```js
-assert(code.match(/<\/section>/g).length >= 3);
+assert(document.querySelectorAll('h2').length === 3);
 ```
 
-You should only add one closing `section` tag. Please remove any extras.
+The new `h2` element should be located right above the third `section` element's closing tag.
 
 ```js
-assert(code.match(/<\/section>/g).length === 3);
+const thirdSection = document.querySelectorAll('section')[2];
+assert(thirdSection.lastElementChild.nodeName === 'H2');
 ```
 
-All of the `section` elements should be between the opening and closing tags of the `main` element.
+Your `h2` element's text should be `Cat Form`.
 
 ```js
-const childrenOfMain = [...document.querySelector('main').children];
-const sectionElemsFound = childrenOfMain.filter((child) => {
-  return child.nodeName === 'SECTION';
-});
-assert(sectionElemsFound.length === 3);
-```
-
-The last `section` element should have no content. Remove any HTML elements or text within the `section` element.
-
-```js
-assert($('main > section')[2].children.length === 0);
+const thirdSection = document.querySelectorAll('section')[2];
+assert(
+  thirdSection
+    .querySelector('h2')
+    .innerText.toLowerCase()
+    .replace(/\s+/g, ' ') === 'cat form'
+);
 ```
 
 # --seed--
@@ -60,34 +63,36 @@ assert($('main > section')[2].children.length === 0);
     <h1>CatPhotoApp</h1>
     <main>
       <section>
-      <h2>Cat Photos</h2>
-      <!-- TODO: Add link to cat photos -->
-      <p>Click here to view more <a target="_blank" href="https://freecatphotoapp.com">cat photos</a>.</p>
-      <a href="https://freecatphotoapp.com"><img src="https://bit.ly/fcc-relaxing-cat" alt="A cute orange cat lying on its back."></a>
+        <h2>Cat Photos</h2>
+        <!-- TODO: Add link to cat photos -->
+        <p>Click here to view more <a target="_blank" href="https://freecatphotoapp.com">cat photos</a>.</p>
+        <a href="https://freecatphotoapp.com"><img src="https://bit.ly/fcc-relaxing-cat" alt="A cute orange cat lying on its back."></a>
+      </section>
+      <section>
+        <h2>Cat Lists</h2>
+        <h3>Things cats love:</h3>
+        <ul>
+          <li>cat nip</li>
+          <li>laser pointers</li>
+          <li>lasagna</li>
+        </ul>
+        <figure>
+          <img src="https://bit.ly/fcc-lasagna" alt="A slice of lasagna on a plate.">
+          <figcaption>Cats <em>love</em> lasagna.</figcaption>  
+        </figure>
+        <h3>Top 3 things cats hate:</h3>
+        <ol>
+          <li>flea treatment</li>
+          <li>thunder</li>
+          <li>other cats</li>
+        </ol>
+        <figure>
+          <img src="https://bit.ly/fcc-cats" alt="Five cats looking around a field.">
+          <figcaption>Cats <strong>hate</strong> other cats.</figcaption>
+        </figure>
       </section>
 --fcc-editable-region--
       <section>
-      <h2>Cat Lists</h2>
-      <h3>Things cats love:</h3>
-      <ul>
-        <li>cat nip</li>
-        <li>laser pointers</li>
-        <li>lasagna</li>
-      </ul>
-      <figure>
-        <img src="https://bit.ly/fcc-lasagna" alt="A slice of lasagna on a plate.">
-        <figcaption>Cats <em>love</em> lasagna.</figcaption>  
-      </figure>
-      <h3>Top 3 things cats hate:</h3>
-      <ol>
-        <li>flea treatment</li>
-        <li>thunder</li>
-        <li>other cats</li>
-      </ol>
-      <figure>
-        <img src="https://bit.ly/fcc-cats" alt="Five cats looking around a field.">
-        <figcaption>Cats <strong>hate</strong> other cats.</figcaption>  
-      </figure>
       </section>
 --fcc-editable-region--
     </main>
