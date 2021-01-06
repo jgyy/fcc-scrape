@@ -1,14 +1,14 @@
 ---
-id: 5ef9b03c81a63668521804d7
-title: Part 35
+id: 5ef9b03c81a63668521804d8
+title: Part 36
 challengeType: 0
 ---
 
 # --description--
 
-The `action` attribute indicates where form data should be sent. For example, `<form action="/submit-url"></form>` tells the browser that the form data should be sent to the path `/submit-url`.
+The `input` element is allows you several ways to collect data from a web form. Like anchor (`a`) elements, `input` elements are <dfn>self-closing</dfn> and do not need closing tags.
 
-Add an `action` attribute with the value `https://freecatphotoapp.com/submit-cat-photo` to the `form` element.
+Nest an `input` element in the `form` element.
 
 # --hints--
 
@@ -23,43 +23,36 @@ assert(
 );
 ```
 
-Your `form` element nested in the last `section` element should be below the `h2` element. You have the `h2` element and the `form` element in the wrong order.
+Your `form` element's opening tag should only have an `action` attribute. Remove anything else you may have typed in it.
 
 ```js
-assert(document.querySelector('form').previousElementSibling.nodeName === 'H2');
+assert([...document.querySelector('form').attributes].length < 2);
 ```
 
-Your `form` element should have no content. Remove any HTML elements or text between the `form` element's tags.
+You should create an input element. Check the syntax.
 
 ```js
-assert($('form')[0].innerHTML.trim().length === 0);
+assert(document.querySelector('input'));
 ```
 
-Your `form` element does not have an `action` attribute. Check that there is a space after the opening tag's name and/or there are spaces before all attribute names.
+Your `input` element should have an opening tag, but not a closing tag.
 
 ```js
-const form = document.querySelector('form');
-assert(form.hasAttribute('action'));
+assert(document.querySelector('input') && !code.match(/<\/input\>/g));
 ```
 
-Your `form` element should have an `action` attribute with the value `https://freecatphotoapp.com/submit-cat-photo`.
+Your `input` element should be nested within the `form` element.
 
 ```js
-const form = document.querySelector('form');
-assert(
-  form
-    .getAttribute('action')
-    .match(/^https:\/\/freecatphotoapp\.com\/submit-cat-photo$/)
-);
+assert(document.querySelector('form > input'));
 ```
 
-Although you have set the `action` attribute to the correct URL, it is recommended to always surround the value of an attribute with quotation marks.
+Your `form` should only contain the `input` element. Remove any HTML elements or text between the `form` element's tags.
 
 ```js
 assert(
-  !/\<form\s+action\s*=\s*https:\/\/freecatphotoapp\.com\/submit-cat-photo/.test(
-    code
-  )
+  $('form')[0].children.length === 1 &&
+    $('form')[0].innerText.trim().length === 0
 );
 ```
 
@@ -104,7 +97,7 @@ assert(
       <section>
         <h2>Cat Form</h2>
 --fcc-editable-region--
-        <form>
+        <form action="https://freecatphotoapp.com/submit-cat-photo">
         </form>
 --fcc-editable-region--
       </section>
