@@ -1,46 +1,49 @@
 ---
-id: 5ef9b03c81a63668521804e1
-title: Part 49
+id: 5f0d48e7b435f13ab6550051
+title: Part 50
 challengeType: 0
 ---
 
 # --description--
 
-The `fieldset` element is used to group related inputs and labels together in a web form. `fieldset` elements are <dfn>block-level elements</dfn>, meaning that they appear on a new line.
+The `legend` element acts as a caption for the content in the `fieldset` element. It gives users context about what they should enter into that part of the form.
 
-Nest the `Indoor` and `Outdoor` radio buttons within a `fieldset` element, and don't forget to indent the buttons.
+Add a `legend` element with the text `Is your cat an indoor or outdoor cat?` above both of the radio buttons.
 
 # --hints--
 
-Both radio buttons should still be located between opening and closing `label` element tags.
+Your `legend` element should have an opening tag. Opening tags have the following syntax: `<elementName>`.
 
 ```js
-const labelChildNodes = [...$('label')].map((node) => [...node.childNodes]);
+assert(document.querySelector('legend'));
+```
+
+Your `legend` element should have a closing tag. Closing tags have a `/` just after the `<` character.
+
+```js
+assert(code.match(/<\/legend\>/));
+```
+
+Your `legend` element should be the first element right below `fieldset` element's opening tag and before the first radio button's opening `label` tag. It is not in the correct position.
+
+```js
+const fieldsetElem = document.querySelector('fieldset');
+const fieldsetElemChildren = fieldsetElem.children;
 assert(
-  labelChildNodes.filter((childNode) => childNode[0].nodeName === 'INPUT')
-    .length === 2
+  fieldsetElem.firstElementChild.nodeName === 'LEGEND' &&
+    fieldsetElemChildren[1].nodeName === 'LABEL' &&
+    fieldsetElemChildren[1].children[0].nodeName === 'INPUT' &&
+    fieldsetElemChildren[1].children[0].id === 'indoor'
 );
 ```
 
-Your `fieldset` element should have an opening tag. Opening tags have the following syntax: `<elementName>`.
+Your `legend` element's text should be `Is your cat an indoor or outdoor cat?`. You have either omitted the text, have a typo, or it is not between the `legend` element's opening and closing tags.
 
 ```js
-assert(document.querySelector('fieldset'));
-```
-
-Your `fieldset` element should have a closing tag. Closing tags have a `/` just after the `<` character.
-
-```js
-assert(code.match(/<\/fieldset\>/));
-```
-
-Both radio button and associated labels should be between the opening and closing tags of the `fieldset` element.
-
-```js
-const radioButtons = [...$('input[type="radio"]')];
-assert(
-  radioButtons.every((btn) => btn.parentNode.parentNode.nodeName === 'FIELDSET')
-);
+const extraSpacesRemoved = document
+  .querySelector('legend')
+  .innerText.replace(/\s+/g, ' ');
+assert(extraSpacesRemoved.match(/Is your cat an indoor or outdoor cat\??$/i));
 ```
 
 # --seed--
@@ -84,10 +87,12 @@ assert(
       <section>
         <h2>Cat Form</h2>
         <form action="https://freecatphotoapp.com/submit-cat-photo">
+          <fieldset>
 --fcc-editable-region--
-          <label><input id="indoor" type="radio" name="indoor-outdoor" value="indoor"> Indoor</label>
-          <label><input id="outdoor" type="radio" name="indoor-outdoor" value="outdoor"> Outdoor</label>
+            <label><input id="indoor" type="radio" name="indoor-outdoor" value="indoor"> Indoor</label>
+            <label><input id="outdoor" type="radio" name="indoor-outdoor" value="outdoor"> Outdoor</label>
 --fcc-editable-region--
+          </fieldset>
           <input type="text" name="catphotourl" placeholder="cat photo URL" required>
           <button type="submit">Submit</button>
         </form>
