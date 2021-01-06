@@ -1,34 +1,34 @@
 ---
-id: 5efada803cbd2bbdab94e332
-title: Part 28
+id: 5efae0543cbd2bbdab94e333
+title: Part 29
 challengeType: 0
 ---
 
 # --description--
 
-Inside the `figure` element you just added, nest an `img` element with a `src` attribute set to `https://bit.ly/fcc-cats`.
+To improve accessibility of the image you just added, add an `alt` attribute with the text `Five cats looking around a field.`
 
 # --hints--
 
-Your second `figure` element should have an opening tag. Opening tags have this syntax: `<elementName>`.
+Your `figure` element should have an opening tag. Opening tags have this syntax: `<elementName>`.
 
 ```js
 assert(document.querySelectorAll('figure').length === 2);
 ```
 
-Your second `figure` element should have a closing tag. Closing tags have a `/` just after the `<` character.
+Your `ol` element should have a closing tag. Closing tags have a `/` just after the `<` character.
 
 ```js
 assert(code.match(/<\/figure>/g).length === 2);
 ```
 
-There should be a second `figure` element right above the second `section` element's closing tag. You have them in the wrong order.
+There should be a `figure` element right above the last `section` element's closing tag.
 
 ```js
 assert($('main > section')[1].lastElementChild.nodeName === 'FIGURE');
 ```
 
-You should have a third `img` element nested in the `figure` element.
+The Cats `img` element should be nested in the `figure` element.
 
 ```js
 const catsImg = document.querySelectorAll('figure > img')[1];
@@ -38,20 +38,16 @@ assert(
 );
 ```
 
-The third image should have an `src` attribute set to `https://bit.ly/fcc-cats`.
+The Cats `img` element should have an `alt` attribute with the value `Five cats looking around a field.`
 
 ```js
 const catsImg = document.querySelectorAll('figure > img')[1];
 assert(
-  catsImg &&
-    catsImg.getAttribute('src').toLowerCase() === 'https://bit.ly/fcc-cats'
+  catsImg
+    .getAttribute('alt')
+    .replace(/\s+/g, ' ')
+    .match(/^Five cats looking around a field\.?$/i)
 );
-```
-
-Although you have set the new image's `src` to the correct URL, it is recommended to always surround the value of an attribute with quotation marks.
-
-```js
-assert(!/\<img\s+.+\s+src\s*=\s*https:\/\/bit\.ly\/fcc-cats/.test(code));
 ```
 
 # --seed--
@@ -79,7 +75,7 @@ assert(!/\<img\s+.+\s+src\s*=\s*https:\/\/bit\.ly\/fcc-cats/.test(code));
         </ul>
         <figure>
           <img src="https://bit.ly/fcc-lasagna" alt="A slice of lasagna on a plate.">
-          <figcaption>Cats <em>love</em> lasagna.</figcaption>
+          <figcaption>Cats <em>love</em> lasagna.</figcaption>  
         </figure>
         <h3>Top 3 things cats hate:</h3>
         <ol>
@@ -87,10 +83,11 @@ assert(!/\<img\s+.+\s+src\s*=\s*https:\/\/bit\.ly\/fcc-cats/.test(code));
           <li>thunder</li>
           <li>other cats</li>
         </ol>
---fcc-editable-region--
         <figure>
-        </figure>
 --fcc-editable-region--
+          <img src="https://bit.ly/fcc-cats">
+--fcc-editable-region--
+        </figure>
       </section>
     </main>
   </body>
