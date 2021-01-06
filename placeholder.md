@@ -1,40 +1,42 @@
 ---
-id: 5ef9b03c81a63668521804db
-title: Part 40
+id: 5ef9b03c81a63668521804da
+title: Part 41
 challengeType: 0
 ---
 
 # --description--
 
-To prevent a user from submitting your form when required information is missing, you need to add the `required` attribute to an `input` element. There's no need to set a value to the `required` attribute. Instead, just add the word `required` to the `input` element, making sure there is space between it and other attributes.
+Use the `button` element to create a clickable button. For example, `<button>Click Here</button>` creates a button with the text `Click Here`.
+
+Add a `button` element with the text `Submit` below the `input` element. Note the default behavior of clicking a form button with any attributes submits the form to the location specified in the form's `action` attribute.
 
 # --hints--
 
-You have either deleted your `input` element or it has invalid syntax. All attributes' values should be surrounded by quotation marks.
+Your `button` element should have an opening tag. Opening tags have this syntax: `<elementName>`.
 
 ```js
-assert($('input').length);
+assert(document.querySelector('button'));
 ```
 
-Your `form` should only contain the `input` element. Remove any HTML additional elements or text within the `form` element.
+Your `button` element should have a closing tag. Closing tags have a `/` just after the `<` character.
 
 ```js
-assert(
-  $('form')[0].children.length === 1 &&
-    $('form')[0].innerText.trim().length === 0
+assert(code.match(/<\/button\>/));
+```
+
+Your `button` element's text should be 'Submit'. You have either omitted the text or have a typo.
+
+```js
+assert(document.querySelector('button').innerText.toLowerCase() === 'submit');
+```
+
+Your `button` element should be below the `input` element. You have them in the wrong order.
+
+```js
+const collection = [...document.querySelectorAll('input, button')].map(
+  (node) => node.nodeName
 );
-```
-
-Your `input` element should have a `required` attribute. Remember, you just add the word `required` inside the `input` element's tag.
-
-```js
-assert($('input')[0].hasAttribute('required'));
-```
-
-A value should not be given to the `required` attribute.
-
-```js
-assert($('input')[0].getAttribute('required') === '');
+assert(collection.indexOf('INPUT') < collection.indexOf('BUTTON'));
 ```
 
 # --seed--
@@ -79,7 +81,7 @@ assert($('input')[0].getAttribute('required') === '');
         <h2>Cat Form</h2>
         <form action="https://freecatphotoapp.com/submit-cat-photo">
 --fcc-editable-region--
-          <input type="text" name="catphotourl" placeholder="cat photo URL">
+          <input type="text" name="catphotourl" placeholder="cat photo URL" required>
 --fcc-editable-region--
         </form>
       </section>
