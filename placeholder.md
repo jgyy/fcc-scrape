@@ -1,39 +1,50 @@
 ---
-id: 5ef9b03c81a63668521804e8
-title: Part 62
+id: 5ef9b03c81a63668521804e9
+title: Part 63
 challengeType: 0
 ---
 
 # --description--
 
-Nest a `p` element with the text `No Copyright - freeCodeCamp.org` within the `footer` element.
+Make the text `freeCodeCamp.org` into a link by enclosing it in an anchor (`a`) element. The `href` attribute should be set to `https://www.freecodecamp.org`.
 
 # --hints--
 
-You have either deleted the `footer` element or it is missing an opening tag or closing tag."
+Your anchor (`a`) element should be nested within the `footer` element. Make sure to added an opening tag and closing tag for the anchor (`a`) element.
 
 ```js
-assert(document.querySelector('footer') && code.match(/<\/footer>/));
+assert($('footer > p > a').length);
 ```
 
-Your `footer` element should have a `p` element. Make sure to added an opening tag and closing tag for the `p` element.
+Your anchor (`a`) element should have a closing tag. Closing tags have a `/` just after the `<` character.
 
 ```js
-assert(document.querySelector('footer > p'));
+const aElemClosingTags = code.match(/<\/a\>/g);
+assert(aElemClosingTags && aElemClosingTags.length === 3);
 ```
 
-Your `footer` element should have a closing tag. Closing tags have a `/` just after the `<` character.
+Your anchor (`a`) element should have an `href` attribute with the value `https://www.freecodecamp.org`. You may have omitted the attribute/value, or have a typo.
 
 ```js
-const pElemClosingTags = code.match(/<\/p\>/g);
-assert(pElemClosingTags && pElemClosingTags.length === 2);
+const nestedAnchor = $('footer > p > a')[0];
+assert(nestedAnchor.getAttribute('href') === 'https://www.freecodecamp.org');
 ```
 
-Your `p` element's text should be `No Copyright - freeCodeCamp.org`. You have either omitted the text, have a typo, or it is not between the `legend` element's opening and closing tags.
+The link's text should be `freeCodeCamp.org`. You have either omitted the text or have a typo.
 
 ```js
-const extraSpacesRemoved = $('footer > p')[0].innerText.replace(/\s+/g, ' ');
-assert(extraSpacesRemoved.match(/No Copyright - freeCodeCamp\.org$/i));
+const nestedAnchor = $('footer > p > a')[0];
+assert(
+  nestedAnchor.innerText.toLowerCase().replace(/\s+/g, ' ') ===
+    'freecodecamp.org'
+);
+```
+
+After nesting the anchor (`a`) element, the only `p` element content visible in the browser should be `No Copyright - freeCodeCamp.org`. Double check the text, spacing, or punctuation of both the `p` and nested anchor element.
+
+```js
+const pText = $('footer > p')[0].innerText.toLowerCase().replace(/\s+/g, ' ');
+assert(pText.match(/^no copyright - freecodecamp.org$/));
 ```
 
 # --seed--
@@ -93,10 +104,13 @@ assert(extraSpacesRemoved.match(/No Copyright - freeCodeCamp\.org$/i));
         </form>
       </section>
     </main>
---fcc-editable-region--
     <footer>
-    </footer>
+      <p>
 --fcc-editable-region--
+        No Copyright - freeCodeCamp.org
+--fcc-editable-region--
+      </p>
+    </footer>
   </body>
 </html>
 ```
