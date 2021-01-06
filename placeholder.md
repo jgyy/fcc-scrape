@@ -1,51 +1,36 @@
 ---
-id: 5ef9b03c81a63668521804dd
-title: Part 44
+id: 5ef9b03c81a63668521804df
+title: Part 45
 challengeType: 0
 ---
 
 # --description--
 
-`label` elements are used to help associate the text for an `input` element with the input element itself (especially for assistive technologies like screen readers). For example, `<label><input type="radio"> cat</label>` makes it so clicking the word `cat` also selects the corresponding radio button.
+The `id` attribute is used to identify specific HTML elements. Each `id` attribute's value must be unique all other `id` values for the entire page.
 
-Nest your `radio` button inside a `label` element.
+Add an `id` attribute with the value `indoor` to the radio button. When elements have multiple attributes, the order of the attributes doesn't matter.
 
 # --hints--
 
-You should make sure the radio button is still present.
-
-```js
-assert($('input[type="radio"]')[0]);
-```
-
-The text ` Indoor` should be located directly to the right of your `radio` button. Make sure there is a space between the element and the text. You have either omitted the text or have a typo.
-
-```js
-const radioInputElem = $('input')[0];
-assert(
-  radioInputElem.nextSibling.nodeValue.replace(/\s+/g, ' ').match(/ Indoor/i)
-);
-```
-
-Your `label` element should have an opening tag. Opening tags have this syntax: `<elementName>`.
-
-```js
-assert(document.querySelector('label'));
-```
-
-Your `label` element should have a closing tag. Closing tags have a `/` just after the `<` character.
-
-```js
-assert(code.match(/<\/label\>/));
-```
-
-Your radio button and its text should all be located between the opening and closing tags of the `label` element.
+Your radio button should still be located between the opening and closing tags of the `label` element.
 
 ```js
 const labelChildNodes = [...$('form > label')[0].childNodes];
 assert(
   labelChildNodes.filter((childNode) => childNode.nodeName === 'INPUT').length
 );
+```
+
+Your radio button should have an `id` attribute. Check that there is a space after the opening tag's name and/or there are spaces before all attribute names.
+
+```js
+assert($('input')[0].hasAttribute('id'));
+```
+
+Your radio element should have an `id` attribute with the value `indoor`. You have either omitted the value or have a typo. Remember that attribute values should be surrounded with quotation marks.
+
+```js
+assert($('input')[0].id.match(/^indoor$/));
 ```
 
 # --seed--
@@ -90,7 +75,7 @@ assert(
         <h2>Cat Form</h2>
         <form action="https://freecatphotoapp.com/submit-cat-photo">
 --fcc-editable-region--
-          <input type="radio"> Indoor
+          <label><input type="radio"> Indoor</label>
 --fcc-editable-region--
           <input type="text" name="catphotourl" placeholder="cat photo URL" required>
           <button type="submit">Submit</button>
