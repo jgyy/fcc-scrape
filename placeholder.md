@@ -1,14 +1,14 @@
 ---
-id: 5efc4f528d6a74d05e68af74
-title: Part 55
+id: 5efc518e8d6a74d05e68af75
+title: Part 56
 challengeType: 0
 ---
 
 # --description--
 
-There's another way to associate an `input` element's text with the element itself. You can nest the text within a `label` element and add a `for` attribute with the same value as the `input` element's `id` attribute.
+Add the `name` attribute with the value `personality` to the checkbox `input` element.
 
-Associate the text `Loving` with the checkbox by only nesting the text `Loving` in a `label` element and place it to the right side of the checkbox `input` element.
+While you won't notice this in the browser, doing this makes it easier for a server to process your web form, especially when there are multiple checkboxes.
 
 # --hints--
 
@@ -18,58 +18,20 @@ You should make sure the checkbox is still present.
 assert($('input[type="checkbox"]')[0]);
 ```
 
-Your checkbox should still have an `id` attribute with the value `loving`. You may have removed the attribute or changed its value.
+The checkbox `input` element does not have a `name` attribute. Check that there is a space after the opening tag's name.
 
 ```js
-assert($('input[type="checkbox"]')[0].id === 'loving');
+assert($('input[type="checkbox"]')[0].hasAttribute('name'));
 ```
 
-The text ` Loving` should no longer be located directly to the right of your checkbox. It should be wrapped in a `label` element.
-
-```js
-const checkboxInputElem = $('input[type="checkbox"]')[0];
-assert(
-  !checkboxInputElem.nextSibling.nodeValue
-    .replace(/\s+/g, ' ')
-    .match(/ Loving/i)
-);
-```
-
-You will need to add a new `label` element in which to nest the text `Loving`. Make sure it has both an opening and closing tag.
+The checkbox `input` element should have a `name` attribute with the value `personality`. You have either omitted the value or have a typo. Remember that attribute values should be surrounded with quotation marks.
 
 ```js
 assert(
-  document.querySelectorAll('label').length === 3 &&
-    code.match(/<\/label\>/g).length === 3
+  $('input[type="checkbox"]')[0]
+    .getAttribute('name')
+    .match(/^personality$/)
 );
-```
-
-The new `label` element should be located directly to the right of your checkbox. Make sure there is a space between the two elements.
-
-```js
-const checkboxInputElem = $('input[type="checkbox"]')[0];
-assert(checkboxInputElem.nextElementSibling.nodeName === 'LABEL');
-```
-
-The new `label` element does not have a `for` attribute. Check that there is a space after the opening tag's name.
-
-```js
-const labelElem = $('input[type="checkbox"]')[0].nextElementSibling;
-assert(labelElem.hasAttribute('for'));
-```
-
-The new `label` element should have a `for` attribute with the value `loving`. You have either omitted the value or have a typo. Remember that attribute values should be surrounded with quotation marks.
-
-```js
-const labelElem = $('input[type="checkbox"]')[0].nextElementSibling;
-assert(labelElem.getAttribute('for').match(/^loving$/));
-```
-
-The text `Loving` should be nested within the new `label` element. You have either omitted the text or have a typo.
-
-```js
-const labelElem = document.querySelector('label[for="loving"]');
-assert(labelElem.textContent.replace(/\s/g, '').match(/Loving/i));
 ```
 
 # --seed--
@@ -121,7 +83,7 @@ assert(labelElem.textContent.replace(/\s/g, '').match(/Loving/i));
           <fieldset>
             <legend>What's your cat's personality?</legend>
 --fcc-editable-region--
-            <input id="loving" type="checkbox"> Loving
+            <input id="loving" type="checkbox"> <label for="loving">Loving</label>
 --fcc-editable-region--
           </fieldset>
           <input type="text" name="catphotourl" placeholder="cat photo URL" required>
