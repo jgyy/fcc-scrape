@@ -1,22 +1,16 @@
 ---
-id: 5dc174fcf86c76b9248c6eb2
-title: Part 1
+id: 5dc1798ff86c76b9248c6eb3
+title: Part 2
 challengeType: 0
 ---
 
 # --description--
 
-HTML elements have opening tags like `<h1>` and closing tags like `</h1>`.
+The `h1` to `h6` heading elements are used to signify the importance of content below them. The lower the number, the higher the importance, so `h2` elements have less importance than `h1` elements. Only use one `h1` element per page and place lower importance headings below higher importance headings.
 
-Find the `h1` element and change the text between its opening and closing tags to say `CatPhotoApp`.
+Add an `h2` element below the `h1` element that says `Cat Photos`.
 
 # --hints--
-
-The text `CatPhotoApp` should be present in the code. You may want to check your spelling.
-
-```js
-assert(code.match(/catphotoapp/i));
-```
 
 Your `h1` element should have an opening tag. Opening tags have this syntax: `<elementName>`.
 
@@ -30,16 +24,45 @@ Your `h1` element should have a closing tag. Closing tags have a `/` just after 
 assert(code.match(/<\/h1\>/));
 ```
 
-You have more than one `h1` element. Remove the extra `h1` element.
+You should only have one `h1` element. Remove the extra.
 
 ```js
-assert(document.querySelectorAll('h1').length === 1);
+assert(
+  document.querySelector('h1') && document.querySelectorAll('h1').length === 1
+);
 ```
 
-Your `h1` element's text should be `CatPhotoApp`. You have either omitted the text, have a typo, or it is not between the `h1` element's opening and closing tags.
+Your `h1` element's text should be 'CatPhotoApp'. You have either omitted the text or have a typo.
 
 ```js
 assert(document.querySelector('h1').innerText.toLowerCase() === 'catphotoapp');
+```
+
+Your `h2` element should have an opening tag. Opening tags have this syntax: `<elementName>`.
+
+```js
+assert(document.querySelector('h2'));
+```
+
+Your `h2` element should have a closing tag. Closing tags have a `/` just after the `<` character.
+
+```js
+assert(code.match(/<\/h2\>/));
+```
+
+Your `h2` element's text should be 'Cat Photos'. Only place the text `Cat Photos` between the opening and closing `h2` tags.
+
+```js
+assert(document.querySelector('h2').innerText.toLowerCase() === 'cat photos');
+```
+
+Your `h2` element should be below the `h1` element. The `h1` element has greater importance and must be above the `h2` element.
+
+```js
+const collection = [...document.querySelectorAll('h1,h2')].map(
+  (node) => node.nodeName
+);
+assert(collection.indexOf('H1') < collection.indexOf('H2'));
 ```
 
 # --seed--
@@ -50,7 +73,7 @@ assert(document.querySelector('h1').innerText.toLowerCase() === 'catphotoapp');
 <html>
   <body>
 --fcc-editable-region--
-    <h1>Hello World</h1>
+    <h1>CatPhotoApp</h1>
 --fcc-editable-region--
   </body>
 </html>
