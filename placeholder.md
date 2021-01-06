@@ -1,43 +1,54 @@
 ---
-id: 5f1a89f1190aff21ae42105a
-title: Part 59
+id: 5ef9b03c81a63668521804e5
+title: Part 60
 challengeType: 0
 ---
 
 # --description--
 
-Like radio buttons, form data for selected checkboxes are `name` / `value` attribute pairs. While the `value` attribute is optional, it's best practice to include it with any checkboxes or radio buttons on the page.
+In order to make a checkbox checked or radio button selected by default, you need to add the `checked` attribute to it. There's no need to set a value to the `checked` attribute. Instead, just add the word `checked` to the `input` element, making sure there is space between it and other attributes.
 
-Add a `value` attribute to each checkbox. For convenience, set each checkbox's `value` attribute to the same value as its `id` attribute.
+Make the first radio button and the first checkbox selected by default.
 
 # --hints--
 
-All three checkboxes should have a `value` attribute. Check that there is a space after the opening tag's name and/or there are spaces before all attribute names.
+Make sure there still are two radio buttons and three checkboxes nested in their respective `fieldset` elements.
 
 ```js
-const checkboxes = [...document.querySelectorAll('input[type="checkbox"]')];
-assert(checkboxes.every((checkbox) => checkbox.hasAttribute('value')));
+assert(
+  $('input[type="radio"]').length === 2 &&
+    $('fieldset > input[type="checkbox"]').length === 3
+);
 ```
 
-The `value` attribute of the `Loving` checkbox should be set to `loving`. You have either omitted the value or have a typo. Remember that attribute values should be surrounded with quotation marks.
+The first radio button is missing the `checked` attribute.
 
 ```js
-const lovingCheckbox = document.querySelector('#loving');
-assert(lovingCheckbox.getAttribute('value').match(/^loving$/));
+assert($('input[type="radio"]')[0].hasAttribute('checked'));
 ```
 
-The `value` attribute of the `Lazy` checkbox should be set to `lazy`. You have either omitted the value or have a typo. Remember that attribute values should be surrounded with quotation marks.
+The second radio button should not have the `checked` attribute.
 
 ```js
-const lazyCheckbox = document.querySelector('#lazy');
-assert(lazyCheckbox.getAttribute('value').match(/^lazy$/));
+assert(!$('input[type="radio"]')[1].hasAttribute('checked'));
 ```
 
-The `value` attribute of the `Energetic` checkbox should be set to `energetic`. You have either omitted the value or have a typo. Remember that attribute values should be surrounded with quotation marks.
+The first checkbox is missing the `checked` attribute.
 
 ```js
-const energeticCheckbox = document.querySelector('#energetic');
-assert(energeticCheckbox.getAttribute('value').match(/^energetic$/));
+assert($('input[type="checkbox"]')[0].hasAttribute('checked'));
+```
+
+The second checkbox should not have the `checked` attribute.
+
+```js
+assert(!$('input[type="checkbox"]')[1].hasAttribute('checked'));
+```
+
+The third checkbox should not have the `checked` attribute.
+
+```js
+assert(!$('input[type="checkbox"]')[2].hasAttribute('checked'));
 ```
 
 # --seed--
@@ -89,9 +100,9 @@ assert(energeticCheckbox.getAttribute('value').match(/^energetic$/));
           </fieldset>
           <fieldset>
             <legend>What's your cat's personality?</legend>
-            <input id="loving" type="checkbox" name="personality"> <label for="loving">Loving</label>
-            <input id="lazy" type="checkbox" name="personality"> <label for="lazy">Lazy</label>
-            <input id="energetic" type="checkbox" name="personality"> <label for="energetic"> Energetic</label>
+            <input id="loving" type="checkbox" name="personality" value="loving"> <label for="loving">Loving</label>
+            <input id="lazy" type="checkbox" name="personality" value="lazy"> <label for="lazy">Lazy</label>
+            <input id="energetic" type="checkbox" name="personality" value="energetic"> <label for="energetic"> Energetic</label>
           </fieldset>
 --fcc-editable-region--
           <input type="text" name="catphotourl" placeholder="cat photo URL" required>
