@@ -1,71 +1,49 @@
 ---
-id: 5dfb6a35eacea3f48c6300b4
-title: Part 23
+id: 5ef9b03c81a63668521804d0
+title: Part 24
 challengeType: 0
 ---
 
 # --description--
 
-A figure caption (`figcaption`) element is used to add a caption to describe the image contained withing the `figure` element. For example, `<figcaption>A cute cat</figcaption>` adds the caption `A cute cat`.
-
-After the image nested in the `figure` element, add a `figcaption` element with the text `Cats love lasagna.`
+Emphasize the word `love` in the `figcaption` element by wrapping it in an emphasis (`em`) element.
 
 # --hints--
 
-The Lasagna `img` element should be nested in the `figure` element.
+Your emphasis (`em`) element should have an opening tag. Opening tags have this syntax: `<elementName>`.
+
+```js
+assert(document.querySelector('em'));
+```
+
+Your emphasis (`em`) element should have a closing tag. Closing tags have a `/` just after the `<` character.
+
+```js
+assert(code.match(/<\/em\>/));
+```
+
+You have either deleted the `figcaption` element or it is missing an opening or closing tag.
+
+```js
+assert(document.querySelector('figcaption') && code.match(/<\/figcaption\>/));
+```
+
+Your emphasis (`em`) element should surround the text `love`. You have either omitted the text or have a typo.
 
 ```js
 assert(
-  document.querySelector('figure > img') &&
-    document.querySelector('figure > img').getAttribute('src').toLowerCase() ===
-      'https://bit.ly/fcc-lasagna'
+  document.querySelector('figcaption > em').innerText.toLowerCase() === 'love'
 );
 ```
 
-Your `figcaption` element should have an opening tag. Opening tags have the following syntax: `<elementName>`.
-
-```js
-assert(document.querySelector('figcaption'));
-```
-
-Your `figcaption` element should have a closing tag. Closing tags have a `/` just after the `<` character.
-
-```js
-assert(code.match(/<\/figcaption\>/));
-```
-
-The `figcaption` element should be nested in the `figure` element.
+The `figcaption`'s text should be `Cats love lasagna`. Check for typos and that the necessary spaces are present around the `em` element's opening and closing tags.
 
 ```js
 assert(
-  document.querySelector('figure > figcaption') &&
-    document.querySelector('figure > figcaption')
-);
-```
-
-The lasagna `img` element should be nested in the `figure` element.
-
-```js
-assert(
-  document.querySelector('figure > img') &&
-    document.querySelector('figure > img').getAttribute('src').toLowerCase() ===
-      'https://bit.ly/fcc-lasagna'
-);
-```
-
-The `figcaption` element nested in the `figure` element should be below the `img` element. You have them in the wrong order.
-
-```js
-assert(
-  document.querySelector('figcaption').previousElementSibling.nodeName === 'IMG'
-);
-```
-
-Your `figcaption` element's text should be `Cats love lasagna.` You have either omitted the text or have a typo.
-
-```js
-assert(
-  document.querySelector('figcaption').innerText.match(/Cats love lasagna.?$/i)
+  document
+    .querySelector('figcaption')
+    .innerText.replace(/\s+/gi, ' ')
+    .match(/cats love lasagna\.?/i)
 );
 ```
 
@@ -93,8 +71,9 @@ assert(
           <li>lasagna</li>
         </ul>
         <figure>
---fcc-editable-region--
           <img src="https://bit.ly/fcc-lasagna" alt="A slice of lasagna on a plate.">
+--fcc-editable-region--
+          <figcaption>Cats love lasagna.</figcaption>
 --fcc-editable-region--
         </figure>
       </section>
