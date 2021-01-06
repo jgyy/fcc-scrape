@@ -1,36 +1,54 @@
 ---
-id: 5ef9b03c81a63668521804df
-title: Part 45
+id: 5f05a1d8e233dff4a68508d8
+title: Part 46
 challengeType: 0
 ---
 
 # --description--
 
-The `id` attribute is used to identify specific HTML elements. Each `id` attribute's value must be unique all other `id` values for the entire page.
-
-Add an `id` attribute with the value `indoor` to the radio button. When elements have multiple attributes, the order of the attributes doesn't matter.
+Nest a another radio button with the option `Outdoor` in a new `label` element. The new radio button should be placed after the first one. Also, set its `id` attribute value to `outdoor`.
 
 # --hints--
 
-Your radio button should still be located between the opening and closing tags of the `label` element.
+You will need to add a new `label` element in which to nest your new radio button. Make sure it has both an opening and closing tag.
 
 ```js
-const labelChildNodes = [...$('form > label')[0].childNodes];
 assert(
-  labelChildNodes.filter((childNode) => childNode.nodeName === 'INPUT').length
+  document.querySelectorAll('label').length === 2 &&
+    code.match(/<\/label\>/g).length === 2
 );
 ```
 
-Your radio button should have an `id` attribute. Check that there is a space after the opening tag's name and/or there are spaces before all attribute names.
+The text ` Outdoor` should be located directly to the right of your new `radio` button. Make sure there is a space between the element and the text. You have either omitted the text or have a typo.
 
 ```js
-assert($('input')[0].hasAttribute('id'));
+const radioButtons = [...$('input')];
+assert(
+  radioButtons.filter((btn) =>
+    btn.nextSibling.nodeValue.replace(/\s+/g, ' ').match(/ Outdoor/i)
+  ).length
+);
 ```
 
-Your radio element should have an `id` attribute with the value `indoor`. You have either omitted the value or have a typo. Remember that attribute values should be surrounded with quotation marks.
+Your new radio button and associated label should be below the first one. You have them in the wrong order.
 
 ```js
-assert($('input')[0].id.match(/^indoor$/));
+const collection = [
+  ...document.querySelectorAll('input[type="radio"]')
+].map((node) => node.nextSibling.nodeValue.replace(/\s+/g, ''));
+assert(collection.indexOf('Indoor') < collection.indexOf('Outdoor'));
+```
+
+Your new radio button should have an `id` attribute. Check that there is a space after the opening tag's name and/or there are spaces before all attribute names.
+
+```js
+assert($('input')[1].hasAttribute('id'));
+```
+
+Your new radio element should have an `id` attribute with the value `outdoor`. You have either omitted the value or have a typo. Remember that attribute values should be surrounded with quotation marks.
+
+```js
+assert($('input')[1].id.match(/^outdoor$/));
 ```
 
 # --seed--
@@ -75,7 +93,7 @@ assert($('input')[0].id.match(/^indoor$/));
         <h2>Cat Form</h2>
         <form action="https://freecatphotoapp.com/submit-cat-photo">
 --fcc-editable-region--
-          <label><input type="radio"> Indoor</label>
+          <label><input id="indoor" type="radio"> Indoor</label>
 --fcc-editable-region--
           <input type="text" name="catphotourl" placeholder="cat photo URL" required>
           <button type="submit">Submit</button>
