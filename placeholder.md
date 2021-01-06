@@ -1,14 +1,14 @@
 ---
-id: 5ef9b03c81a63668521804da
-title: Part 41
+id: 5efb2c990dc218d6c85f89b2
+title: Part 42
 challengeType: 0
 ---
 
 # --description--
 
-Use the `button` element to create a clickable button. For example, `<button>Click Here</button>` creates a button with the text `Click Here`.
+Even through you added your button below the text input, they appear next to each other on the page. That's because both `input` and `button` elements are <dfn>inline elements</dfn>, which don't appear on new lines.
 
-Add a `button` element with the text `Submit` below the `input` element. Note the default behavior of clicking a form button with any attributes submits the form to the location specified in the form's `action` attribute.
+You learned previously that the button submits the form by default, but you can explicitly add the `type` attribute with the value `submit` to it to make it clearer. Go ahead and do this to specify this button should submit the form.
 
 # --hints--
 
@@ -24,19 +24,26 @@ Your `button` element should have a closing tag. Closing tags have a `/` just af
 assert(code.match(/<\/button\>/));
 ```
 
-Your `button` element's text should be 'Submit'. You have either omitted the text or have a typo.
+Your `button` element does not have a `type` attribute. Check that there is a space after the opening tag's name.
 
 ```js
-assert(document.querySelector('button').innerText.toLowerCase() === 'submit');
+assert($('button')[0].hasAttribute('type'));
 ```
 
-Your `button` element should be below the `input` element. You have them in the wrong order.
+Your `button` element should have a `type` attribute with the value `submit`. You have either omitted the value or have a typo. Remember that attribute values should be surrounded with quotation marks.
 
 ```js
-const collection = [...document.querySelectorAll('input, button')].map(
-  (node) => node.nodeName
+assert(
+  $('button')[0]
+    .getAttribute('type')
+    .match(/^submit$/i)
 );
-assert(collection.indexOf('INPUT') < collection.indexOf('BUTTON'));
+```
+
+Although you have set the `button` element's `type` attribute to `submit`, it is recommended to always surround the value of an attribute with quotation marks.
+
+```js
+assert(!/\<\s*button\s+type\s*=\s*submit/i.test(code));
 ```
 
 # --seed--
@@ -80,8 +87,9 @@ assert(collection.indexOf('INPUT') < collection.indexOf('BUTTON'));
       <section>
         <h2>Cat Form</h2>
         <form action="https://freecatphotoapp.com/submit-cat-photo">
---fcc-editable-region--
           <input type="text" name="catphotourl" placeholder="cat photo URL" required>
+--fcc-editable-region--
+          <button>Submit</button>
 --fcc-editable-region--
         </form>
       </section>
