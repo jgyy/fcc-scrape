@@ -1,71 +1,55 @@
 ---
-id: 5f0d4ab1b435f13ab6550052
-title: Part 51
+id: 5f0d4d04b435f13ab6550053
+title: Part 52
 challengeType: 0
 ---
 
 # --description--
 
-Next, you are going to add some new form `input` elements, so add another `fieldset` element directly below the current `fieldset` element.
+Add a `legend` element with the text `What's your cat's personality?` inside the second `fieldset` element.
 
 # --hints--
 
-Your new `fieldset` element should have an opening tag. Opening tags have this syntax: `<elementName>`.
+You have either deleted the second `fieldset` element or it is missing an opening tag or closing tag."
 
 ```js
-assert(document.querySelectorAll('fieldset').length >= 2);
-```
-
-You should only add one opening `fieldset` tag. Please remove any extras.
-
-```js
-assert(document.querySelectorAll('fieldset').length === 2);
-```
-
-Your new `fieldset` element should have a closing tag. Closing tags have a `/` just after the `<` character.
-
-```js
-assert(code.match(/<\/fieldset>/g).length >= 2);
-```
-
-You should only add one closing `fieldset` tag. Please remove any extras.
-
-```js
-assert(code.match(/<\/fieldset>/g).length === 2);
-```
-
-The second `fieldset` element should not be nested in the first `fieldset` element.
-
-```js
-const childrenOf1stFieldset = [
-  ...document.querySelector('form > fieldset').children
-];
-const foundElems = childrenOf1stFieldset.filter((child) => {
-  return child.nodeName === 'FIELDSET';
-});
-assert(foundElems.length === 0);
-```
-
-Both `fieldset` elements should be above the text field and its associated `label` element. They are out of order.
-
-```js
-const formChildren = $('form')[0].children;
 assert(
-  formChildren[0].nodeName === 'FIELDSET' &&
-    formChildren[1].nodeName === 'FIELDSET' &&
-    formChildren[2] &&
-    formChildren[2].nodeName === 'INPUT' &&
-    formChildren[2].getAttribute('type') === 'text'
+  document.querySelectorAll('fieldset').length === 2 &&
+    code.match(/<\/fieldset>/g).length === 2
 );
 ```
 
-Your new `fieldset` element should be below the existing `fieldset` element. You have them in the wrong order.
+Your `legend` element should have an opening tag. Opening tags have this syntax: `<elementName>`.
 
 ```js
-const fieldsetChildren = [...document.querySelectorAll('fieldset')].map(
-  (elem) => elem.children
+const secondFieldset = $('fieldset')[1];
+assert(
+  secondFieldset &&
+    [...secondFieldset.children].filter((child) => child.nodeName === 'LEGEND')
+      .length
 );
-assert(fieldsetChildren[0].length > fieldsetChildren[1].length);
+```
+
+Your `legend` element should have a closing tag. Closing tags have a `/` just after the `<` character.
+
+```js
+assert(code.match(/<\/legend\>/g).length === 2);
+```
+
+The `legend` element should have the text `What's your cat's personality?`. You have either omitted the text or have a typo.
+
+```js
+const secondFieldset = $('fieldset')[1];
+assert(
+  secondFieldset &&
+    [...secondFieldset.children].filter((child) => {
+      const extraSpacesRemoved = child.innerText.replace(/\s+/g, ' ');
+      return (
+        child.nodeName === 'LEGEND' &&
+        extraSpacesRemoved.match(/What's your cat's personality\??$/i)
+      );
+    }).length
+);
 ```
 
 # --seed--
@@ -109,15 +93,17 @@ assert(fieldsetChildren[0].length > fieldsetChildren[1].length);
       <section>
         <h2>Cat Form</h2>
         <form action="https://freecatphotoapp.com/submit-cat-photo">
---fcc-editable-region--
           <fieldset>
             <legend>Is your cat an indoor or outdoor cat?</legend>
             <label><input id="indoor" type="radio" name="indoor-outdoor" value="indoor"> Indoor</label>
             <label><input id="outdoor" type="radio" name="indoor-outdoor" value="outdoor"> Outdoor</label>
           </fieldset>
+--fcc-editable-region--
+          <fieldset>
+          </fieldset>
+--fcc-editable-region--
           <input type="text" name="catphotourl" placeholder="cat photo URL" required>
           <button type="submit">Submit</button>
---fcc-editable-region--
         </form>
       </section>
     </main>
