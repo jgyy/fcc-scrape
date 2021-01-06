@@ -1,68 +1,25 @@
 ---
-id: 5ef9b03c81a63668521804e2
-title: Part 53
+id: 5efc54138d6a74d05e68af76
+title: Part 54
 challengeType: 0
 ---
 
 # --description--
 
-Forms commonly use checkboxes for questions that may have more than one answer. For example, here's a checkbox with the option of `tacos`: `<input type="checkbox"> tacos`.
-
-Under the `legend` element you just added, add an `input` with its `type` attribute set to `checkbox` and give it the option of `Loving`.
+Add an `id` attribute with the value `loving` to the checkbox input.
 
 # --hints--
 
-The `input` element for your checkbox should have an opening tag, but not a closing tag.
+Your checkbox should have an `id` attribute. Check that there is a space after the opening tag's name and/or there are spaces before all attribute names.
 
 ```js
-assert($('fieldset > input') && !code.match(/<\/input\>/g));
+assert($('input[type="checkbox"]')[0].hasAttribute('id'));
 ```
 
-You should only have added one input element for your checkbox. Remove any extras.
+Your checkbox should have an `id` attribute with the value `loving`. You have either omitted the value or have a typo. Remember that attribute values should be surrounded with quotation marks.
 
 ```js
-assert($('fieldset > input').length === 1);
-```
-
-Your new `input` element should be below the `legend` element with the text `What's your cat's personality?`. You have them in the wrong order.
-
-```js
-const existingLegendElem = $('fieldset > legend')[1];
-assert(
-  existingLegendElem &&
-    existingLegendElem.nextElementSibling.nodeName === 'INPUT'
-);
-```
-
-Your new `input` element does not have a `type` attribute. Check that there is a space after the opening tag's name.
-
-```js
-assert($('fieldset > input')[0].hasAttribute('type'));
-```
-
-Your new `input` element should have a `type` attribute with the value `checkbox`. You have either omitted the value or have a typo. Remember that attribute values should be surrounded with quotation marks.
-
-```js
-assert(
-  $('fieldset > input')[0]
-    .getAttribute('type')
-    .match(/^checkbox$/i)
-);
-```
-
-Although you have set the new `input` element's `type` attribute to `checkbox`, it is recommended to always surround the value of an attribute with quotation marks.
-
-```js
-assert(!/\<\s*input\s+type\s*=\s*checkbox/i.test(code));
-```
-
-The text ` Loving` should be located directly to the right of your checkbox. Make sure there is a space between the element and the text. You have either omitted the text or have a typo.
-
-```js
-const checkboxInputElem = $('input[type="checkbox"]')[0];
-assert(
-  checkboxInputElem.nextSibling.nodeValue.replace(/\s+/g, ' ').match(/ Loving/i)
-);
+assert($('input[type="checkbox"]')[0].id.match(/^loving$/));
 ```
 
 # --seed--
@@ -112,8 +69,9 @@ assert(
             <label><input id="outdoor" type="radio" name="indoor-outdoor" value="outdoor"> Outdoor</label>
           </fieldset>
           <fieldset>
---fcc-editable-region--
             <legend>What's your cat's personality?</legend>
+--fcc-editable-region--
+            <input type="checkbox"> Loving
 --fcc-editable-region--
           </fieldset>
           <input type="text" name="catphotourl" placeholder="cat photo URL" required>
