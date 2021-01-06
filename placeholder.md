@@ -1,48 +1,46 @@
 ---
-id: 5f1a80975fc4bcae0edb3497
-title: Part 48
+id: 5ef9b03c81a63668521804e1
+title: Part 49
 challengeType: 0
 ---
 
 # --description--
 
-If you select the `Indoor` radio button and submit the form, the form data for the button is based on its `name` and `value` attributes. Since your radio buttons do not have a `value` attribute, the form data will include `indoor-outdoor=on`, which is not useful when you have multiple buttons.
+The `fieldset` element is used to group related inputs and labels together in a web form. `fieldset` elements are <dfn>block-level elements</dfn>, meaning that they appear on a new line.
 
-Add a `value` attribute to both radio buttons. For convenience, set the button's `value` attribute to the same value as its `id` attribute.
+Nest the `Indoor` and `Outdoor` radio buttons within a `fieldset` element, and don't forget to indent the buttons.
 
 # --hints--
 
 Both radio buttons should still be located between opening and closing `label` element tags.
 
 ```js
-const labelChildNodes = [...document.querySelectorAll('form > label')].map(
-  (node) => node.childNodes
-);
+const labelChildNodes = [...$('label')].map((node) => [...node.childNodes]);
 assert(
   labelChildNodes.filter((childNode) => childNode[0].nodeName === 'INPUT')
     .length === 2
 );
 ```
 
-Both radio buttons should have a `value` attribute. Check that there is a space after the opening tag's name and/or there are spaces before all attribute names.
+Your `fieldset` element should have an opening tag. Opening tags have the following syntax: `<elementName>`.
 
 ```js
-const radioButtons = [...document.querySelectorAll('input[type="radio"]')];
-assert(radioButtons.every((btn) => btn.hasAttribute('value')));
+assert(document.querySelector('fieldset'));
 ```
 
-The `Indoor` radio button's `value` attribute should be set to `indoor`. You have either omitted the value or have a typo. Remember that attribute values should be surrounded with quotation marks.
+Your `fieldset` element should have a closing tag. Closing tags have a `/` just after the `<` character.
 
 ```js
-const indoorRadioButton = document.querySelector('#indoor');
-assert(indoorRadioButton.getAttribute('value').match(/^indoor$/));
+assert(code.match(/<\/fieldset\>/));
 ```
 
-The `Outdoor` radio button's `value` attribute should be set to `outdoor`. You have either omitted the value or have a typo. Remember that attribute values should be surrounded with quotation marks.
+Both radio button and associated labels should be between the opening and closing tags of the `fieldset` element.
 
 ```js
-const outdoorRadioButton = document.querySelector('#outdoor');
-assert(outdoorRadioButton.getAttribute('value').match(/^outdoor$/));
+const radioButtons = [...$('input[type="radio"]')];
+assert(
+  radioButtons.every((btn) => btn.parentNode.parentNode.nodeName === 'FIELDSET')
+);
 ```
 
 # --seed--
@@ -59,6 +57,7 @@ assert(outdoorRadioButton.getAttribute('value').match(/^outdoor$/));
         <!-- TODO: Add link to cat photos -->
         <p>Click here to view more <a target="_blank" href="https://freecatphotoapp.com">cat photos</a>.</p>
         <a href="https://freecatphotoapp.com"><img src="https://bit.ly/fcc-relaxing-cat" alt="A cute orange cat lying on its back."></a>
+      </section>
       <section>
         <h2>Cat Lists</h2>
         <h3>Things cats love:</h3>
@@ -86,8 +85,8 @@ assert(outdoorRadioButton.getAttribute('value').match(/^outdoor$/));
         <h2>Cat Form</h2>
         <form action="https://freecatphotoapp.com/submit-cat-photo">
 --fcc-editable-region--
-          <label><input id="indoor" type="radio" name="indoor-outdoor"> Indoor</label>
-          <label><input id="outdoor" type="radio" name="indoor-outdoor"> Outdoor</label>
+          <label><input id="indoor" type="radio" name="indoor-outdoor" value="indoor"> Indoor</label>
+          <label><input id="outdoor" type="radio" name="indoor-outdoor" value="outdoor"> Outdoor</label>
 --fcc-editable-region--
           <input type="text" name="catphotourl" placeholder="cat photo URL" required>
           <button type="submit">Submit</button>
