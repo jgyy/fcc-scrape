@@ -1,37 +1,59 @@
 ---
-id: 5dc24165f86c76b9248c6ebc
-title: Part 9
+id: 5dc24614f86c76b9248c6ebd
+title: Part 10
 challengeType: 0
 ---
 
 # --description--
 
-All `img` elements should have an `alt` attribute. The `alt` attribute's text is used for screen readers to improve accessibility and is displayed if the image fails to load. For example, `<img src="cat.jpg" alt="A cat">` has an `alt` attribute with the text `A cat`.
+You can link to another page with the anchor (`a`) element. For example, [](https://www.freecodecamp.org) would link to `freecodecamp.org`.
 
-Add an `alt` attribute to the `img` element with the text `A cute orange cat lying on its back`.
+Add an anchor element after the paragraph that links to `https://freecatphotoapp.com`. At this point, the link won’t show up in the preview.
 
 # --hints--
 
-Your code should have an `img` element. You removed the `img` element from an earlier step.
+Your anchor (`a`) element should have an opening tag. Opening tags have this syntax: `<elementName>`.
 
 ```js
-assert(document.querySelector('img'));
+assert(document.querySelector('a'));
 ```
 
-Your `img` element does not have an `alt` attribute. Check that there is a space after the opening tag's name and/or there are spaces before all attribute names.
+Your anchor (`a`) element should have a closing tag. Closing tags have a `/` just after the `<` character.
 
 ```js
-assert(document.querySelector('img').hasAttribute('alt'));
+assert(code.match(/<\/a\>/));
 ```
 
-Your `img` element's `alt` attribute value is set to something other than 'A cute orange cat lying on its back'. Make sure the `alt` attribute's value is surrounded with quotation marks.
+Your anchor (`a`) element should be below the `p` element. You have them in the wrong order.
 
 ```js
-const altText = document
-  .querySelector('img')
-  .alt.toLowerCase()
-  .replace(/\s+/g, ' ');
-assert(altText.match(/A cute orange cat lying on its back\.?$/i));
+const collection = [...document.querySelectorAll('a, p')].map(
+  (node) => node.nodeName
+);
+assert(collection.indexOf('P') < collection.indexOf('A'));
+```
+
+Your anchor (`a`) element does not have an `href` attribute. Check that there is a space after the opening tag's name and/or there are spaces before all attribute names.
+
+```js
+assert(document.querySelector('a').hasAttribute('href'));
+```
+
+Your anchor (`a`) element should link to `https://freecatphotoapp.com`. You have either omitted the URL or have a typo.
+
+```js
+assert(
+  document.querySelector('a').getAttribute('href') ===
+    'https://freecatphotoapp.com'
+);
+```
+
+Although you have set the anchor ('a') element's `href` attribute to the correct link, it is recommended to always surround the value of an attribute with quotation marks.
+
+```js
+assert(
+  !/\<a\s+href\s*=\s*https:\/\/www.freecodecamp.org\/cat-photos/.test(code)
+);
 ```
 
 # --seed--
@@ -45,10 +67,10 @@ assert(altText.match(/A cute orange cat lying on its back\.?$/i));
     <main>
       <h2>Cat Photos</h2>
       <!-- TODO: Add link to cat photos -->
+--fcc-editable-region--
       <p>Click here to view more cat photos.</p>
 --fcc-editable-region--
-      <img src="https://bit.ly/fcc-relaxing-cat">
---fcc-editable-region--
+      <img src="https://bit.ly/fcc-relaxing-cat" alt="A cute orange cat lying on its back.">
     </main>
   </body>
 </html>
