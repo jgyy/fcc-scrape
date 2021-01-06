@@ -1,50 +1,56 @@
 ---
-id: 5dfa3589eacea3f48c6300ae
-title: Part 17
+id: 5dfa371beacea3f48c6300af
+title: Part 18
 challengeType: 0
 ---
 
 # --description--
 
-Within the second `section` element, add a new `h2` element with the text `Cat Lists`.
+When you add a lower rank heading element to the page, it's implied that you're starting a new subsection.
+
+After the last `h2` element of the second `section` element, add an `h3` element with the text `Things cats love:`.
 
 # --hints--
 
-Your `section` element should have an opening tag. Opening tags have this syntax: `<elementName>`.
+The second `section` element appears to be missing or does not have both an opening and closing tag.
 
 ```js
 assert(
-  document.querySelectorAll('section').length === 2 &&
-    code.match(/<\/section>/g).length === 2
+  document.querySelectorAll('main > section')[1] &&
+    code.match(/\<\/section>/g).length == 2
 );
 ```
 
-Your `h2` element should have an opening tag. Opening tags have this syntax: `<elementName>`.
+There should be an `h3` element right above the second `section` element's closing tag.
 
 ```js
-assert(document.querySelectorAll('h2').length === 2);
+assert(
+  document.querySelectorAll('main > section')[1].lastElementChild.nodeName ===
+    'H3'
+);
 ```
 
-Your `h2` element should have a closing tag. Closing tags have a `/` just after the `<` character.
-
-```js
-assert(code.match(/<\/h2\>/g).length === 2);
-```
-
-Your second `h2` element should be right above the second `section` element's closing tag. It is not in the correct position.
-
-```js
-const secondSection = document.querySelectorAll('section')[1];
-assert(secondSection.lastElementChild.nodeName === 'H2');
-```
-
-The second `h2` element should have the text `Cat Lists`. You have either omitted the text or have a typo.
+The `h3` element right above the second `section` element's closing tag should have the text `Things cats love:`. Make sure to include the colon at the end of the text.
 
 ```js
 assert(
   document
     .querySelectorAll('main > section')[1]
-    .lastElementChild.innerText.toLowerCase() === 'cat lists'
+    .lastElementChild.innerText.toLowerCase()
+    .replace(/\s+/g, ' ') === 'things cats love:'
+);
+```
+
+There should be an `h2` element with the text `Cat Lists` above the last `h3` element that is nested in the last `section` element'. You may have accidentally deleted the `h2` element.
+
+```js
+const secondSectionLastElemNode = document.querySelectorAll('main > section')[1]
+  .lastElementChild;
+assert(
+  secondSectionLastElemNode.nodeName === 'H3' &&
+    secondSectionLastElemNode.previousElementSibling.innerText
+      .toLowerCase()
+      .replace(/\s+/g, ' ') === 'cat lists'
 );
 ```
 
@@ -65,6 +71,7 @@ assert(
       </section>
 --fcc-editable-region--
       <section>
+        <h2>Cat Lists</h2>
       </section>
 --fcc-editable-region--
     </main>
