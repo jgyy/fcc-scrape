@@ -1,39 +1,37 @@
 ---
-id: 5dc24073f86c76b9248c6ebb
-title: Part 8
+id: 5dc24165f86c76b9248c6ebc
+title: Part 9
 challengeType: 0
 ---
 
 # --description--
 
-HTML <dfn>attributes</dfn> are special words used inside the opening tag of an element to control the element's behavior. The `src` attribute in an `img` element specifies the image's URL (where the image is located). An example of an `img` element using an `src` attribute: `<img src="https://www.your-image-source.com/your-image.jpg">`.
+All `img` elements should have an `alt` attribute. The `alt` attribute's text is used for screen readers to improve accessibility and is displayed if the image fails to load. For example, `<img src="cat.jpg" alt="A cat">` has an `alt` attribute with the text `A cat`.
 
-Add an `src` attribute to the existing `img` element that is set to the following URL: `https://bit.ly/fcc-relaxing-cat`.
+Add an `alt` attribute to the `img` element with the text `A cute orange cat lying on its back`.
 
 # --hints--
 
-Your code should have an `img` element. You may have removed the `img` element or you have not surrounded the `src` attribute's value with quotes.
+Your code should have an `img` element. You removed the `img` element from an earlier step.
 
 ```js
 assert(document.querySelector('img'));
 ```
 
-Your `img` element should have an `src` attribute. You have either omitted the attribute or have a typo. Make sure there is a space between the element name and the attribute name.
+Your `img` element does not have an `alt` attribute. Check that there is a space after the opening tag's name and/or there are spaces before all attribute names.
 
 ```js
-assert(document.querySelector('img').src);
+assert(document.querySelector('img').hasAttribute('alt'));
 ```
 
-Your `img` element's `src` attribute should be set to '`https://bit.ly/fcc-relaxing-cat`'. You have either omitted the URL or have a typo. The case of the URL is important.
+Your `img` element's `alt` attribute value is set to something other than 'A cute orange cat lying on its back'. Make sure the `alt` attribute's value is surrounded with quotation marks.
 
 ```js
-assert(document.querySelector('img').src === 'https://bit.ly/fcc-relaxing-cat');
-```
-
-Although you have set the `img` element's `src` to the correct URL, it is recommended to always surround the value of an attribute with quotation marks.
-
-```js
-assert(!/\<img\s+src\s*=\s*https:\/\/bit\.ly\/fcc-relaxing-cat/.test(code));
+const altText = document
+  .querySelector('img')
+  .alt.toLowerCase()
+  .replace(/\s+/g, ' ');
+assert(altText.match(/A cute orange cat lying on its back\.?$/i));
 ```
 
 # --seed--
@@ -49,7 +47,7 @@ assert(!/\<img\s+src\s*=\s*https:\/\/bit\.ly\/fcc-relaxing-cat/.test(code));
       <!-- TODO: Add link to cat photos -->
       <p>Click here to view more cat photos.</p>
 --fcc-editable-region--
-      <img>
+      <img src="https://bit.ly/fcc-relaxing-cat">
 --fcc-editable-region--
     </main>
   </body>
