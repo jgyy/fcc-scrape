@@ -1,42 +1,39 @@
 ---
-id: 5dc23f9bf86c76b9248c6eba
-title: Part 7
+id: 5dc24073f86c76b9248c6ebb
+title: Part 8
 challengeType: 0
 ---
 
 # --description--
 
-You can add images to your website by using the `img` element. `img` elements have an opening tag without a closing tag. A tag for an element without a closing tag is known as a <dfn>self-closing tag</dfn>.
+HTML <dfn>attributes</dfn> are special words used inside the opening tag of an element to control the element's behavior. The `src` attribute in an `img` element specifies the image's URL (where the image is located). An example of an `img` element using an `src` attribute: `<img src="https://www.your-image-source.com/your-image.jpg">`.
 
-Add an `img` element below the `p` element. At this point, no image will show up in the browser.
+Add an `src` attribute to the existing `img` element that is set to the following URL: `https://bit.ly/fcc-relaxing-cat`.
 
 # --hints--
 
-Your `img` element should have an opening tag. Opening tags have this syntax: `<elementName>`.
+Your code should have an `img` element. You may have removed the `img` element or you have not surrounded the `src` attribute's value with quotes.
 
 ```js
 assert(document.querySelector('img'));
 ```
 
-Your `img` element should not have a closing tag. Closing tags have a `/` just after the `<` character.
+Your `img` element should have an `src` attribute. You have either omitted the attribute or have a typo. Make sure there is a space between the element name and the attribute name.
 
 ```js
-assert(!code.match(/<\/img\>/));
+assert(document.querySelector('img').src);
 ```
 
-You should only have one `img` element. Remove any extras.
+Your `img` element's `src` attribute should be set to '`https://bit.ly/fcc-relaxing-cat`'. You have either omitted the URL or have a typo. The case of the URL is important.
 
 ```js
-assert(document.querySelectorAll('img').length === 1);
+assert(document.querySelector('img').src === 'https://bit.ly/fcc-relaxing-cat');
 ```
 
-Your `img` element should be below the `p` element. You have them in the wrong order.
+Although you have set the `img` element's `src` to the correct URL, it is recommended to always surround the value of an attribute with quotation marks.
 
 ```js
-const collection = [...document.querySelectorAll('p,img')].map(
-  (node) => node.nodeName
-);
-assert(collection.indexOf('P') < collection.indexOf('IMG'));
+assert(!/\<img\s+src\s*=\s*https:\/\/bit\.ly\/fcc-relaxing-cat/.test(code));
 ```
 
 # --seed--
@@ -50,8 +47,9 @@ assert(collection.indexOf('P') < collection.indexOf('IMG'));
     <main>
       <h2>Cat Photos</h2>
       <!-- TODO: Add link to cat photos -->
---fcc-editable-region--
       <p>Click here to view more cat photos.</p>
+--fcc-editable-region--
+      <img>
 --fcc-editable-region--
     </main>
   </body>
