@@ -1,24 +1,24 @@
 ---
-id: 5efb23e70dc218d6c85f89b1
-title: Part 37
+id: 7cf9b03d81a65668421804c3
+title: Part 38
 challengeType: 0
 ---
 
 # --description--
 
-There are many kinds of inputs you can create using the `type` attribute. You can easily create a password field, reset button, or a control to let users select a file from their computer.
+In order for a form's data to be accessed by the locaton specified in the `action` attribute, you must give the text field a `name` attribute and assign it a value to represent the data being submitted. For example, you could use the following syntax for an email address text field: `<input type="text" name="email">`.
 
-Create a text field to get text input from a user by adding the `type` attribute with the value `text` to the `input` element.
+Add the `name` attribute with the value `catphoto` to your text field.
 
 # --hints--
 
-You have either deleted your `input` element or it has invalid syntax. If you have added an attributes, make sure their values are surrounded by quotation marks.
+You have either deleted your `input` element or it has invalid syntax. All attributes' values should be surrounded by quotation marks.
 
 ```js
 assert($('input').length);
 ```
 
-Your `form` element should only contain the `input` element. Remove any extra HTML elements or text between the `form` element's tags.
+Your `form` should only contain the `input` element. Remove any HTML additional elements or text within the `form` element.
 
 ```js
 assert(
@@ -27,27 +27,26 @@ assert(
 );
 ```
 
-Your `input` element does not have a `type` attribute. with the value `text`. Check that there is a space after the opening tag's name and/or there are spaces before all attribute names.
+Your `input` element does not have a `name` attribute. Check that there is a space after the opening tag's name and/or there are spaces before all attribute names.
 
 ```js
-assert($('input')[0].hasAttribute('type'));
+assert($('input')[0].hasAttribute('name'));
 ```
 
-Your `input` element should have a `type` attribute with the value `text`. You have either omitted the value or have a typo. Remember that attribute values should be surrounded with quotation marks.
+Your `input` element should have a `name` attribute with the value `catphotourl`.  You have either omitted the value or have a typo. Remember that attribute values should be surrounded with quotation marks.
 
 ```js
 assert(
   $('input')[0]
-    .getAttribute('type')
-    .replace(/\s+/g, ' ')
-    .match(/^text$/i)
+    .getAttribute('name')
+    .match(/^catphotourl$/i)
 );
 ```
 
-Although you have set the `input` element's `type` attribute to the `text`, it is recommended to always surround the value of an attribute with quotation marks.
+Although you have set the `input` element's `name` attribute to `catphotourl`, it is recommended to always surround the value of an attribute with quotation marks.
 
 ```js
-assert(!/\<input\s+type\s*=\s*text/.test(code));
+assert(!/\<\s*input\s+.*\s*=\s*catphotourl/.test(code));
 ```
 
 # --seed--
@@ -92,7 +91,7 @@ assert(!/\<input\s+type\s*=\s*text/.test(code));
         <h2>Cat Form</h2>
         <form action="https://freecatphotoapp.com/submit-cat-photo">
 --fcc-editable-region--
-          <input>
+          <input type="text">
 --fcc-editable-region--
         </form>
       </section>
