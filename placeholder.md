@@ -1,78 +1,50 @@
 ---
-id: 5efae16e3cbd2bbdab94e334
-title: Part 30
+id: 5ef9b03c81a63668521804d4
+title: Part 31
 challengeType: 0
 ---
 
 # --description--
 
-After the last `img` element, add a `figcaption` element with the text `Cats hate other cats.`
+The `strong` element is used to indicate that some text is of strong importance or urgent.
+
+In the `figcaption` you just added, indicate that `hate` is of strong importance by wrapping it in a `strong` element.
 
 # --hints--
 
-Your `figcaption` element should have an opening tag. Opening tags have the following syntax: `<elementName>`.
+Your `strong` element should have an opening tag. Opening tags have this syntax: `<elementName>`.
 
 ```js
-assert(document.querySelectorAll('figcaption').length === 2);
+assert(document.querySelector('strong'));
 ```
 
-Your `figcaption` element should have a closing tag. Closing tags have a `/` just after the `<` character.
+Your strong element should have a closing tag. Closing tags have a `/` just after the `<` character.
 
 ```js
-assert(code.match(/<\/figcaption\>/g).length === 2);
+assert(code.match(/<\/strong\>/));
 ```
 
-There should be a `figure` element right above the second `section` element's closing tag.
-
-```js
-assert($('main > section')[1].lastElementChild.nodeName === 'FIGURE');
-```
-
-The last `img` element should be nested in the `figure` element.
-
-```js
-const catsImg = document.querySelectorAll('figure > img')[1];
-assert(
-  catsImg &&
-    catsImg.getAttribute('src').toLowerCase() === 'https://bit.ly/fcc-cats'
-);
-```
-
-Your `figure` element should have an opening tag. Opening tags have the following syntax: `<elementName>`.
-
-```js
-assert(document.querySelectorAll('figure').length === 2);
-```
-
-Your `figure` element should have a closing tag. Closing tags have a `/` just after the `<` character.
-
-```js
-assert(code.match(/<\/figure\>/g).length === 2);
-```
-
-The `figcaption` element should be nested in the `figure` element.
-
-```js
-assert(document.querySelectorAll('figure > figcaption').length === 2);
-```
-
-The `figcaption` element nested in the `figure` element should be below the `img` element. You have the `img` element and the `figcaption` element in the wrong order.
-
-```js
-assert(
-  document.querySelectorAll('figcaption')[1].previousElementSibling.nodeName ===
-    'IMG'
-);
-```
-
-The `figcaption` element should have the text `Cats hate other cats.` You have omitted a word or have a typo.
+Your strong element should surround the word `hate` in the text `Cats hate other cats.` You have either omitted the text or have a typo.
 
 ```js
 assert(
   document
     .querySelectorAll('figcaption')[1]
-    .innerText.toLowerCase()
-    .match(/Cats hate other cats\.?$/i)
+    .querySelector('strong')
+    .innerText.toLowerCase() === 'hate'
+);
+```
+
+The `figcaption`'s text should be `Cats hate other cats.` Check for typos and that the necessary spaces are present around the `strong` element's opening and closing tags.
+
+```js
+const secondFigCaption = document.querySelectorAll('figcaption')[1];
+assert(
+  secondFigCaption &&
+    secondFigCaption.innerText
+      .replace(/\s+/gi, ' ')
+      .trim()
+      .match(/cats hate other cats\.?/i)
 );
 ```
 
@@ -110,8 +82,9 @@ assert(
           <li>other cats</li>
         </ol>
         <figure>
---fcc-editable-region--
           <img src="https://bit.ly/fcc-cats" alt="Five cats looking around a field.">
+--fcc-editable-region--
+          <figcaption>Cats hate other cats.</figcaption>  
 --fcc-editable-region--
         </figure>
       </section>
