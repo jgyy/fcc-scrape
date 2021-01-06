@@ -1,34 +1,34 @@
 ---
-id: 5efae0543cbd2bbdab94e333
-title: Part 29
+id: 5efae16e3cbd2bbdab94e334
+title: Part 30
 challengeType: 0
 ---
 
 # --description--
 
-To improve accessibility of the image you just added, add an `alt` attribute with the text `Five cats looking around a field.`
+After the last `img` element, add a `figcaption` element with the text `Cats hate other cats.`
 
 # --hints--
 
-Your `figure` element should have an opening tag. Opening tags have this syntax: `<elementName>`.
+Your `figcaption` element should have an opening tag. Opening tags have the following syntax: `<elementName>`.
 
 ```js
-assert(document.querySelectorAll('figure').length === 2);
+assert(document.querySelectorAll('figcaption').length === 2);
 ```
 
-Your `ol` element should have a closing tag. Closing tags have a `/` just after the `<` character.
+Your `figcaption` element should have a closing tag. Closing tags have a `/` just after the `<` character.
 
 ```js
-assert(code.match(/<\/figure>/g).length === 2);
+assert(code.match(/<\/figcaption\>/g).length === 2);
 ```
 
-There should be a `figure` element right above the last `section` element's closing tag.
+There should be a `figure` element right above the second `section` element's closing tag.
 
 ```js
 assert($('main > section')[1].lastElementChild.nodeName === 'FIGURE');
 ```
 
-The Cats `img` element should be nested in the `figure` element.
+The last `img` element should be nested in the `figure` element.
 
 ```js
 const catsImg = document.querySelectorAll('figure > img')[1];
@@ -38,15 +38,41 @@ assert(
 );
 ```
 
-The Cats `img` element should have an `alt` attribute with the value `Five cats looking around a field.`
+Your `figure` element should have an opening tag. Opening tags have the following syntax: `<elementName>`.
 
 ```js
-const catsImg = document.querySelectorAll('figure > img')[1];
+assert(document.querySelectorAll('figure').length === 2);
+```
+
+Your `figure` element should have a closing tag. Closing tags have a `/` just after the `<` character.
+
+```js
+assert(code.match(/<\/figure\>/g).length === 2);
+```
+
+The `figcaption` element should be nested in the `figure` element.
+
+```js
+assert(document.querySelectorAll('figure > figcaption').length === 2);
+```
+
+The `figcaption` element nested in the `figure` element should be below the `img` element. You have the `img` element and the `figcaption` element in the wrong order.
+
+```js
 assert(
-  catsImg
-    .getAttribute('alt')
-    .replace(/\s+/g, ' ')
-    .match(/^Five cats looking around a field\.?$/i)
+  document.querySelectorAll('figcaption')[1].previousElementSibling.nodeName ===
+    'IMG'
+);
+```
+
+The `figcaption` element should have the text `Cats hate other cats.` You have omitted a word or have a typo.
+
+```js
+assert(
+  document
+    .querySelectorAll('figcaption')[1]
+    .innerText.toLowerCase()
+    .match(/Cats hate other cats\.?$/i)
 );
 ```
 
@@ -85,7 +111,7 @@ assert(
         </ol>
         <figure>
 --fcc-editable-region--
-          <img src="https://bit.ly/fcc-cats">
+          <img src="https://bit.ly/fcc-cats" alt="Five cats looking around a field.">
 --fcc-editable-region--
         </figure>
       </section>
