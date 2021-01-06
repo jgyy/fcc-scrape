@@ -1,45 +1,35 @@
 ---
-id: 5dfa22d1b521be39a3de7be0
-title: Part 12
+id: 5dfa2407b521be39a3de7be1
+title: Part 13
 challengeType: 0
 ---
 
 # --description--
 
-Turn the words `cat photos` located inside `p` element into a link by replacing the words with the anchor element added previously. The `p` element should show the same text in the browser, but the words `cat photos` should now be a link. There should only be one link showing in the app.
+Add a `target` attribute with the value `_blank` to the anchor (`a`) element's opening tag, so that the link opens in a new tab.
 
 # --hints--
 
-Your code should only contain one anchor (`a`) element. Remove any extra anchor elements.
+Your `p` element should have a nested anchor (`a`) element with the text `cat photos`. You may have deleted it or have a typo.
 
 ```js
-assert(document.querySelectorAll('a').length === 1);
-```
-
-Your anchor (`a`) element should be nested within the `p` element.
-
-```js
-assert($('p > a').length);
-```
-
-The link's text should be `cat photos`. You have either omitted the text or have a typo.
-
-```js
-const nestedAnchor = $('p > a')[0];
+const anchor = $('p > a');
 assert(
-  nestedAnchor.getAttribute('href') === 'https://freecatphotoapp.com' &&
-    nestedAnchor.innerText.toLowerCase().replace(/\s+/g, ' ') === 'cat photos'
+  anchor.length &&
+    anchor[0].innerText.toLowerCase().replace(/\s+/g, ' ') === 'cat photos'
 );
 ```
 
-After nesting the anchor (`a`) element, the only `p` element content visible in the browser should be `Click here to view more cat photos.` Double check the text, spacing, or punctuation of both the `p` and nested anchor element.
+Your anchor (`a`) element does not have a `target` attribute. Check that there is a space after the opening tag's name and/or there are spaces before all attribute names.
 
 ```js
-const pText = document
-  .querySelector('p')
-  .innerText.toLowerCase()
-  .replace(/\s+/g, ' ');
-assert(pText.match(/click here to view more cat photos\.?$/));
+assert(document.querySelector('a').hasAttribute('target'));
+```
+
+The value of the `target` attribute should '\_blank'. You have either omitted the value or have a typo. Remember that attribute values should be surrounded with quotation marks.
+
+```js
+assert(document.querySelector('a').getAttribute('target') === '_blank');
 ```
 
 # --seed--
@@ -54,8 +44,7 @@ assert(pText.match(/click here to view more cat photos\.?$/));
       <h2>Cat Photos</h2>
       <!-- TODO: Add link to cat photos -->
 --fcc-editable-region--
-      <p>Click here to view more cat photos.</p>
-      <a href="https://freecatphotoapp.com">cat photos</a>
+      <p>Click here to view more <a href="https://freecatphotoapp.com">cat photos</a>.</p>
 --fcc-editable-region--
       <img src="https://bit.ly/fcc-relaxing-cat" alt="A cute orange cat lying on its back.">
     </main>
