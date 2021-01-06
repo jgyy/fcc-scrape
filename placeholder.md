@@ -1,45 +1,52 @@
 ---
-id: 5dc17d3bf86c76b9248c6eb4
-title: Part 3
+id: 5dc17dc8f86c76b9248c6eb5
+title: Part 4
 challengeType: 0
 ---
 
 # --description--
 
-Paragraph (`p`) elements are used to create paragraph text on websites.
+Commenting allows you to leave messages without affecting the browser display. It also allows you to make code inactive. A comment in HTML starts with `<!--`, contains any number of lines of text, and ends with `-->`. For example, the comment `<!-- TODO: Remove h1 -->` contains the text `TODO: Remove h1`.
 
-Create a paragraph (`p`) element below your `h2` element, and give it the text `Click here to view more cat photos.`
+Add a comment above the `p` element with the text `TODO: Add link to cat photos`. \\
 
 # --hints--
 
-Your `p` element should have an opening tag. Opening tags have the following syntax: `<elementName>`.
+Your comment should start with `<!--`. You are missing one or more of the characters that define the start of a comment.
 
 ```js
-assert(document.querySelector('p'));
+assert(code.match(/<!--/));
 ```
 
-Your `p` element should have a closing tag. Closing tags have a `/` just after the `<` character.
+Your comment should end with `-->`.  You are missing one or more of the characters that define the end of a comment.
 
 ```js
-assert(code.match(/<\/p\>/));
+assert(code.match(/-->/));
 ```
 
-Your `p` element's text should be `Click here to view more cat photos.` You have either omitted the text or have a typo.
+Your code should not have extra opening/closing comment characters. You have an extra `<!--` or `-->` displaying in the browser.
 
 ```js
-const extraSpacesRemoved = document
-  .querySelector('p')
-  .innerText.replace(/\s+/g, ' ');
-assert(extraSpacesRemoved.match(/click here to view more cat photos\.?$/i));
+const noSpaces = code.replace(/\s/g, '');
+assert(noSpaces.match(/<!--/g).length < 2 && noSpaces.match(/-->/g).length < 2);
 ```
 
-Your `p` element should be below the `h2` element. You have them in the wrong order.
+Your comment should contain the text `TODO: Add link to cat photos`.
 
 ```js
-const collection = [...document.querySelectorAll('h2,p')].map(
-  (node) => node.nodeName
+assert(code.match(/<!--\s*todo:\s+add\s+link\s+to\s+cat\s+photos\s*-->/i));
+```
+
+Your comment should be above the `p` element. You have them in the wrong order.
+
+```js
+assert(
+  code
+    .replace(/\s/g, '')
+    .match(
+      /<!--todo:addlinktocatphotos--><p>clickheretoviewmorecatphotos\.?<\/p>/i
+    )
 );
-assert(collection.indexOf('H2') < collection.indexOf('P'));
 ```
 
 # --seed--
@@ -50,8 +57,9 @@ assert(collection.indexOf('H2') < collection.indexOf('P'));
 <html>
   <body>
     <h1>CatPhotoApp</h1>
---fcc-editable-region--
     <h2>Cat Photos</h2>
+--fcc-editable-region--
+    <p>Click here to view more cat photos.</p>
 --fcc-editable-region--
   </body>
 </html>
