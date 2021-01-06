@@ -1,62 +1,43 @@
 ---
-id: 5efc575c8d6a74d05e68af77
-title: Part 58
+id: 5f1a89f1190aff21ae42105a
+title: Part 59
 challengeType: 0
 ---
 
 # --description--
 
-Add a final checkbox after the previous one with an `id` attribute value of `energetic`. The `name` and attribute should be the same as the last checkbox.
+Like radio buttons, form data for selected checkboxes are `name` / `value` attribute pairs. While the `value` attribute is optional, it's best practice to include it with any checkboxes or radio buttons on the page.
 
-Also add a `label` element to the right of the new checkbox with text `Energetic`. Make sure to associate the `label` element with the new checkbox.
+Add a `value` attribute to each checkbox. For convenience, set each checkbox's `value` attribute to the same value as its `id` attribute.
 
 # --hints--
 
-You need to add a new checkbox.
+All three checkboxes should have a `value` attribute. Check that there is a space after the opening tag's name and/or there are spaces before all attribute names.
 
 ```js
-assert($('input[type="checkbox"]').length === 3);
+const checkboxes = [...document.querySelectorAll('input[type="checkbox"]')];
+assert(checkboxes.every((checkbox) => checkbox.hasAttribute('value')));
 ```
 
-Your new checkbox should have an `id` attribute with the value `energetic` and a `name` attribute with the value `personality`. Check that there is a space after the opening tag's name and/or there are spaces before all attribute names.
+The `value` attribute of the `Loving` checkbox should be set to `loving`. You have either omitted the value or have a typo. Remember that attribute values should be surrounded with quotation marks.
 
 ```js
-const checkboxes = [...$('input[type="checkbox"]')];
-assert(
-  checkboxes.some(
-    (checkbox) =>
-      checkbox.id === 'energetic' &&
-      checkbox.getAttribute('name') === 'personality'
-  )
-);
+const lovingCheckbox = document.querySelector('#loving');
+assert(lovingCheckbox.getAttribute('value').match(/^loving$/));
 ```
 
-Your new checkbox should be after the first one. You have them in the wrong order.
+The `value` attribute of the `Lazy` checkbox should be set to `lazy`. You have either omitted the value or have a typo. Remember that attribute values should be surrounded with quotation marks.
 
 ```js
-const checkboxes = [...$('input[type="checkbox"]')].map(
-  (checkbox) => checkbox.id
-);
-assert(checkboxes.indexOf('lazy') < checkboxes.indexOf('energetic'));
+const lazyCheckbox = document.querySelector('#lazy');
+assert(lazyCheckbox.getAttribute('value').match(/^lazy$/));
 ```
 
-On the right side of your new checkbox, there should be `label` element with the text `Energetic`.
+The `value` attribute of the `Energetic` checkbox should be set to `energetic`. You have either omitted the value or have a typo. Remember that attribute values should be surrounded with quotation marks.
 
 ```js
-const nextElementSibling = $('input[type="checkbox"]')[2].nextElementSibling;
-assert(
-  nextElementSibling.nodeName === 'LABEL' &&
-    nextElementSibling.innerText.replace(/\s+/g, '').match(/^Energetic$/i)
-);
-```
-
-The new `label` should have a `for` attribute with the same value as the `id` attribute of the new checkbox. You have either omitted the value or have a typo.
-
-```js
-assert(
-  $('input[type="checkbox"]')[2].nextElementSibling.getAttribute('for') ===
-    'energetic'
-);
+const energeticCheckbox = document.querySelector('#energetic');
+assert(energeticCheckbox.getAttribute('value').match(/^energetic$/));
 ```
 
 # --seed--
@@ -100,6 +81,7 @@ assert(
       <section>
         <h2>Cat Form</h2>
         <form action="https://freecatphotoapp.com/submit-cat-photo">
+--fcc-editable-region--
           <fieldset>
             <legend>Is your cat an indoor or outdoor cat?</legend>
             <label><input id="indoor" type="radio" name="indoor-outdoor" value="indoor"> Indoor</label>
@@ -107,11 +89,11 @@ assert(
           </fieldset>
           <fieldset>
             <legend>What's your cat's personality?</legend>
---fcc-editable-region--
             <input id="loving" type="checkbox" name="personality"> <label for="loving">Loving</label>
             <input id="lazy" type="checkbox" name="personality"> <label for="lazy">Lazy</label>
---fcc-editable-region--
+            <input id="energetic" type="checkbox" name="personality"> <label for="energetic"> Energetic</label>
           </fieldset>
+--fcc-editable-region--
           <input type="text" name="catphotourl" placeholder="cat photo URL" required>
           <button type="submit">Submit</button>
         </form>
