@@ -1,31 +1,32 @@
 ---
-id: 5ef9b03c81a63668521804e3
-title: Part 57
+id: 5efc575c8d6a74d05e68af77
+title: Part 58
 challengeType: 0
 ---
 
 # --description--
 
-Add another checkbox after the one you just added. The `id` attribute value should be `lazy` and the `name` attribute value should be the same as the last checkbox.
+Add a final checkbox after the previous one with an `id` attribute value of `energetic`. The `name` and attribute should be the same as the last checkbox.
 
-Also add a `label` element to the right of the new checkbox with the text `Lazy`. Make sure to associate the `label` element with the new checkbox using the `for` attribute.
+Also add a `label` element to the right of the new checkbox with text `Energetic`. Make sure to associate the `label` element with the new checkbox.
 
 # --hints--
 
 You need to add a new checkbox.
 
 ```js
-assert($('input[type="checkbox"]').length === 2);
+assert($('input[type="checkbox"]').length === 3);
 ```
 
-Your new checkbox should have an `id` attribute with the value `lazy` and a `name` attribute with the value `personality`. Check that there is a space after the opening tag's name and/or there are spaces before all attribute names.
+Your new checkbox should have an `id` attribute with the value `energetic` and a `name` attribute with the value `personality`. Check that there is a space after the opening tag's name and/or there are spaces before all attribute names.
 
 ```js
 const checkboxes = [...$('input[type="checkbox"]')];
 assert(
   checkboxes.some(
     (checkbox) =>
-      checkbox.id === 'lazy' && checkbox.getAttribute('name') === 'personality'
+      checkbox.id === 'energetic' &&
+      checkbox.getAttribute('name') === 'personality'
   )
 );
 ```
@@ -36,16 +37,16 @@ Your new checkbox should be after the first one. You have them in the wrong orde
 const checkboxes = [...$('input[type="checkbox"]')].map(
   (checkbox) => checkbox.id
 );
-assert(checkboxes.indexOf('loving') < checkboxes.indexOf('lazy'));
+assert(checkboxes.indexOf('lazy') < checkboxes.indexOf('energetic'));
 ```
 
-On the right side of your new checkbox, there should be `label` element with the text `Lazy`.
+On the right side of your new checkbox, there should be `label` element with the text `Energetic`.
 
 ```js
-const nextElementSibling = $('input[type="checkbox"]')[1].nextElementSibling;
+const nextElementSibling = $('input[type="checkbox"]')[2].nextElementSibling;
 assert(
   nextElementSibling.nodeName === 'LABEL' &&
-    nextElementSibling.innerText.replace(/\s+/g, '').match(/^Lazy$/i)
+    nextElementSibling.innerText.replace(/\s+/g, '').match(/^Energetic$/i)
 );
 ```
 
@@ -53,8 +54,8 @@ The new `label` should have a `for` attribute with the same value as the `id` at
 
 ```js
 assert(
-  $('input[type="checkbox"]')[1].nextElementSibling.getAttribute('for') ===
-    'lazy'
+  $('input[type="checkbox"]')[2].nextElementSibling.getAttribute('for') ===
+    'energetic'
 );
 ```
 
@@ -108,6 +109,7 @@ assert(
             <legend>What's your cat's personality?</legend>
 --fcc-editable-region--
             <input id="loving" type="checkbox" name="personality"> <label for="loving">Loving</label>
+            <input id="lazy" type="checkbox" name="personality"> <label for="lazy">Lazy</label>
 --fcc-editable-region--
           </fieldset>
           <input type="text" name="catphotourl" placeholder="cat photo URL" required>
