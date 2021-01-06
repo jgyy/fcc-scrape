@@ -1,54 +1,39 @@
 ---
-id: 5ef9b03c81a63668521804e5
-title: Part 60
+id: 5ef9b03c81a63668521804e7
+title: Part 61
 challengeType: 0
 ---
 
 # --description--
 
-In order to make a checkbox checked or radio button selected by default, you need to add the `checked` attribute to it. There's no need to set a value to the `checked` attribute. Instead, just add the word `checked` to the `input` element, making sure there is space between it and other attributes.
+Now you will add a footer section to the page.
 
-Make the first radio button and the first checkbox selected by default.
+After the `main` element, add a `footer` element.
 
 # --hints--
 
-Make sure there still are two radio buttons and three checkboxes nested in their respective `fieldset` elements.
+You have either deleted the `main` element or it is missing an opening tag or closing tag."
 
 ```js
-assert(
-  $('input[type="radio"]').length === 2 &&
-    $('fieldset > input[type="checkbox"]').length === 3
-);
+assert(document.querySelector('main') && code.match(/<\/main>/));
 ```
 
-The first radio button is missing the `checked` attribute.
+Your `footer` element should have an opening tag. Opening tags have the following syntax: `<elementName>`.
 
 ```js
-assert($('input[type="radio"]')[0].hasAttribute('checked'));
+assert(document.querySelector('footer'));
 ```
 
-The second radio button should not have the `checked` attribute.
+Your `footer` element should have a closing tag. Closing tags have a `/` just after the `<` character.
 
 ```js
-assert(!$('input[type="radio"]')[1].hasAttribute('checked'));
+assert(code.match(/<\/footer\>/));
 ```
 
-The first checkbox is missing the `checked` attribute.
+Your `footer` element should the below the closing `main` element tag. You have it put it somewhere else.
 
 ```js
-assert($('input[type="checkbox"]')[0].hasAttribute('checked'));
-```
-
-The second checkbox should not have the `checked` attribute.
-
-```js
-assert(!$('input[type="checkbox"]')[1].hasAttribute('checked'));
-```
-
-The third checkbox should not have the `checked` attribute.
-
-```js
-assert(!$('input[type="checkbox"]')[2].hasAttribute('checked'));
+assert(document.querySelector('main').nextElementSibling.nodeName === 'FOOTER');
 ```
 
 # --seed--
@@ -92,24 +77,24 @@ assert(!$('input[type="checkbox"]')[2].hasAttribute('checked'));
       <section>
         <h2>Cat Form</h2>
         <form action="https://freecatphotoapp.com/submit-cat-photo">
---fcc-editable-region--
           <fieldset>
             <legend>Is your cat an indoor or outdoor cat?</legend>
-            <label><input id="indoor" type="radio" name="indoor-outdoor" value="indoor"> Indoor</label>
+            <label><input id="indoor" type="radio" name="indoor-outdoor" value="indoor" checked> Indoor</label>
             <label><input id="outdoor" type="radio" name="indoor-outdoor" value="outdoor"> Outdoor</label>
           </fieldset>
           <fieldset>
             <legend>What's your cat's personality?</legend>
-            <input id="loving" type="checkbox" name="personality" value="loving"> <label for="loving">Loving</label>
+            <input id="loving" type="checkbox" name="personality" value="loving" checked> <label for="loving">Loving</label>
             <input id="lazy" type="checkbox" name="personality" value="lazy"> <label for="lazy">Lazy</label>
-            <input id="energetic" type="checkbox" name="personality" value="energetic"> <label for="energetic"> Energetic</label>
+            <input id="energetic" type="checkbox" name="personality" value="energetic"> <label for="energetic">Energetic</label>
           </fieldset>
---fcc-editable-region--
           <input type="text" name="catphotourl" placeholder="cat photo URL" required>
           <button type="submit">Submit</button>
         </form>
       </section>
+--fcc-editable-region--
     </main>
   </body>
 </html>
+--fcc-editable-region--
 ```
