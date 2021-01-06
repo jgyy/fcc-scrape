@@ -1,14 +1,14 @@
 ---
-id: 5ef9b03c81a63668521804de
-title: Part 47
+id: 5f1a80975fc4bcae0edb3497
+title: Part 48
 challengeType: 0
 ---
 
 # --description--
 
-Notice that both radio buttons can be selected at the same time. To make it so selecting one radio button automatically deselects the other, both buttons must have a `name` attribute with the same value.
+If you select the `Indoor` radio button and submit the form, the form data for the button is based on its `name` and `value` attributes. Since your radio buttons do not have a `value` attribute, the form data will include `indoor-outdoor=on`, which is not useful when you have multiple buttons.
 
-Add the `name` attribute with the value `indoor-outdoor` to both radio buttons.
+Add a `value` attribute to both radio buttons. For convenience, set the button's `value` attribute to the same value as its `id` attribute.
 
 # --hints--
 
@@ -24,22 +24,25 @@ assert(
 );
 ```
 
-Both radio buttons should have a `name` attribute. Check that there is a space after the opening tag's name and/or there are spaces before all attribute names.
+Both radio buttons should have a `value` attribute. Check that there is a space after the opening tag's name and/or there are spaces before all attribute names.
 
 ```js
 const radioButtons = [...document.querySelectorAll('input[type="radio"]')];
-assert(radioButtons.every((btn) => btn.hasAttribute('name')));
+assert(radioButtons.every((btn) => btn.hasAttribute('value')));
 ```
 
-Both radio buttons should have a `name` attribute with the value `indoor-outdoor`. You have either omitted the value or have a typo. Remember that attribute values should be surrounded with quotation marks.
+The `Indoor` radio button's `value` attribute should be set to `indoor`. You have either omitted the value or have a typo. Remember that attribute values should be surrounded with quotation marks.
 
 ```js
-const radioButtons = [...$('input[type="radio"]')];
-assert(
-  radioButtons.every((btn) =>
-    btn.getAttribute('name').match(/^indoor-outdoor$/)
-  )
-);
+const indoorRadioButton = document.querySelector('#indoor');
+assert(indoorRadioButton.getAttribute('value').match(/^indoor$/));
+```
+
+The `Outdoor` radio button's `value` attribute should be set to `outdoor`. You have either omitted the value or have a typo. Remember that attribute values should be surrounded with quotation marks.
+
+```js
+const outdoorRadioButton = document.querySelector('#outdoor');
+assert(outdoorRadioButton.getAttribute('value').match(/^outdoor$/));
 ```
 
 # --seed--
@@ -83,8 +86,8 @@ assert(
         <h2>Cat Form</h2>
         <form action="https://freecatphotoapp.com/submit-cat-photo">
 --fcc-editable-region--
-          <label><input id="indoor" type="radio"> Indoor</label>
-          <label><input id="outdoor" type="radio"> Outdoor</label>
+          <label><input id="indoor" type="radio" name="indoor-outdoor"> Indoor</label>
+          <label><input id="outdoor" type="radio" name="indoor-outdoor"> Outdoor</label>
 --fcc-editable-region--
           <input type="text" name="catphotourl" placeholder="cat photo URL" required>
           <button type="submit">Submit</button>
