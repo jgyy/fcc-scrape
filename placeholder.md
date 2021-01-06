@@ -1,51 +1,53 @@
 ---
-id: 5ef9b03c81a63668521804d4
-title: Part 31
+id: 5f07fb1579dc934717801375
+title: Part 32
 challengeType: 0
 ---
 
 # --description--
 
-The `strong` element is used to indicate that some text is of strong importance or urgent.
-
-In the `figcaption` you just added, indicate that `hate` is of strong importance by wrapping it in a `strong` element.
+It is time to add a new section. Add a third `section` element below the second `section` element.
 
 # --hints--
 
-Your `strong` element should have an opening tag. Opening tags have this syntax: `<elementName>`.
+Your `section` element should have an opening tag. Opening tags have this syntax: `<elementName>`.
 
 ```js
-assert(document.querySelector('strong'));
+assert(document.querySelectorAll('section').length >= 3);
 ```
 
-Your strong element should have a closing tag. Closing tags have a `/` just after the `<` character.
+You should only add one opening `section` tag. Please remove any extras.
 
 ```js
-assert(code.match(/<\/strong\>/));
+assert(document.querySelectorAll('section').length === 3);
 ```
 
-Your strong element should surround the word `hate` in the text `Cats hate other cats.` You have either omitted the text or have a typo.
+Your `section` element should have a closing tag. Closing tags have a `/` just after the `<` character.
 
 ```js
-assert(
-  document
-    .querySelectorAll('figcaption')[1]
-    .querySelector('strong')
-    .innerText.toLowerCase() === 'hate'
-);
+assert(code.match(/<\/section>/g).length >= 3);
 ```
 
-The `figcaption`'s text should be `Cats hate other cats.` Check for typos and that the necessary spaces are present around the `strong` element's opening and closing tags.
+You should only add one closing `section` tag. Please remove any extras.
 
 ```js
-const secondFigCaption = document.querySelectorAll('figcaption')[1];
-assert(
-  secondFigCaption &&
-    secondFigCaption.innerText
-      .replace(/\s+/gi, ' ')
-      .trim()
-      .match(/cats hate other cats\.?/i)
-);
+assert(code.match(/<\/section>/g).length === 3);
+```
+
+All of the `section` elements should be between the opening and closing tags of the `main` element.
+
+```js
+const childrenOfMain = [...document.querySelector('main').children];
+const sectionElemsFound = childrenOfMain.filter((child) => {
+  return child.nodeName === 'SECTION';
+});
+assert(sectionElemsFound.length === 3);
+```
+
+The last `section` element should have no content. Remove any HTML elements or text within the `section` element.
+
+```js
+assert($('main > section')[2].children.length === 0);
 ```
 
 # --seed--
@@ -58,36 +60,36 @@ assert(
     <h1>CatPhotoApp</h1>
     <main>
       <section>
-        <h2>Cat Photos</h2>
-        <!-- TODO: Add link to cat photos -->
-        <p>Click here to view more <a target="_blank" href="https://freecatphotoapp.com">cat photos</a>.</p>
-        <a href="https://freecatphotoapp.com"><img src="https://bit.ly/fcc-relaxing-cat" alt="A cute orange cat lying on its back."></a>
+      <h2>Cat Photos</h2>
+      <!-- TODO: Add link to cat photos -->
+      <p>Click here to view more <a target="_blank" href="https://freecatphotoapp.com">cat photos</a>.</p>
+      <a href="https://freecatphotoapp.com"><img src="https://bit.ly/fcc-relaxing-cat" alt="A cute orange cat lying on its back."></a>
       </section>
+--fcc-editable-region--
       <section>
-        <h2>Cat Lists</h2>
-        <h3>Things cats love:</h3>
-        <ul>
-          <li>cat nip</li>
-          <li>laser pointers</li>
-          <li>lasagna</li>
-        </ul>
-        <figure>
-          <img src="https://bit.ly/fcc-lasagna" alt="A slice of lasagna on a plate.">
-          <figcaption>Cats <em>love</em> lasagna.</figcaption>  
-        </figure>
-        <h3>Top 3 things cats hate:</h3>
-        <ol>
-          <li>flea treatment</li>
-          <li>thunder</li>
-          <li>other cats</li>
-        </ol>
-        <figure>
-          <img src="https://bit.ly/fcc-cats" alt="Five cats looking around a field.">
---fcc-editable-region--
-          <figcaption>Cats hate other cats.</figcaption>  
---fcc-editable-region--
-        </figure>
+      <h2>Cat Lists</h2>
+      <h3>Things cats love:</h3>
+      <ul>
+        <li>cat nip</li>
+        <li>laser pointers</li>
+        <li>lasagna</li>
+      </ul>
+      <figure>
+        <img src="https://bit.ly/fcc-lasagna" alt="A slice of lasagna on a plate.">
+        <figcaption>Cats <em>love</em> lasagna.</figcaption>  
+      </figure>
+      <h3>Top 3 things cats hate:</h3>
+      <ol>
+        <li>flea treatment</li>
+        <li>thunder</li>
+        <li>other cats</li>
+      </ol>
+      <figure>
+        <img src="https://bit.ly/fcc-cats" alt="Five cats looking around a field.">
+        <figcaption>Cats <strong>hate</strong> other cats.</figcaption>  
+      </figure>
       </section>
+--fcc-editable-region--
     </main>
   </body>
 </html>
