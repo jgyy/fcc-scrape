@@ -1,49 +1,43 @@
 ---
-id: 5ef9b03c81a63668521804d0
-title: Part 24
+id: 5ef9b03c81a63668521804d1
+title: Part 25
 challengeType: 0
 ---
 
 # --description--
 
-Emphasize the word `love` in the `figcaption` element by wrapping it in an emphasis (`em`) element.
+After the `figure` element, add another `h3` element with the text `Top 3 things cats hate:`.
 
 # --hints--
 
-Your emphasis (`em`) element should have an opening tag. Opening tags have this syntax: `<elementName>`.
-
-```js
-assert(document.querySelector('em'));
-```
-
-Your emphasis (`em`) element should have a closing tag. Closing tags have a `/` just after the `<` character.
-
-```js
-assert(code.match(/<\/em\>/));
-```
-
-You have either deleted the `figcaption` element or it is missing an opening or closing tag.
-
-```js
-assert(document.querySelector('figcaption') && code.match(/<\/figcaption\>/));
-```
-
-Your emphasis (`em`) element should surround the text `love`. You have either omitted the text or have a typo.
+There should be an `h3` element right above the second `section` element's closing tag. Make it has an opening and closing tag.
 
 ```js
 assert(
-  document.querySelector('figcaption > em').innerText.toLowerCase() === 'love'
+  document.querySelectorAll('main > section')[1].lastElementChild.nodeName ===
+    'H3' && code.match(/<\/h3\>/g).length === 2
 );
 ```
 
-The `figcaption`'s text should be `Cats love lasagna`. Check for typos and that the necessary spaces are present around the `em` element's opening and closing tags.
+The new `h3` element should have the text `Top 3 things cats hate:`. Make sure to include the colon at the end of the text.
 
 ```js
 assert(
   document
-    .querySelector('figcaption')
-    .innerText.replace(/\s+/gi, ' ')
-    .match(/cats love lasagna\.?/i)
+    .querySelectorAll('main > section')[1]
+    .lastElementChild.innerText.toLowerCase()
+    .replace(/\s+/g, ' ') === 'top 3 things cats hate:'
+);
+```
+
+There should be a `figure` above the new `h3` element. You may have accidentally deleted the `figure` element.
+
+```js
+const secondSectionLastElemNode = document.querySelectorAll('main > section')[1]
+  .lastElementChild;
+assert(
+  secondSectionLastElemNode.nodeName === 'H3' &&
+    secondSectionLastElemNode.previousElementSibling.nodeName === 'FIGURE'
 );
 ```
 
@@ -70,12 +64,12 @@ assert(
           <li>laser pointers</li>
           <li>lasagna</li>
         </ul>
+--fcc-editable-region--
         <figure>
           <img src="https://bit.ly/fcc-lasagna" alt="A slice of lasagna on a plate.">
---fcc-editable-region--
-          <figcaption>Cats love lasagna.</figcaption>
---fcc-editable-region--
+          <figcaption>Cats <em>love</em> lasagna.</figcaption>
         </figure>
+--fcc-editable-region--
       </section>
     </main>
   </body>
