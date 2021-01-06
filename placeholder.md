@@ -1,40 +1,34 @@
 ---
-id: 5ef9b03c81a63668521804eb
-title: Part 65
+id: 5ef9b03c81a63668521804ec
+title: Part 66
 challengeType: 0
 ---
 
 # --description--
 
-The `title` element determines what browsers show in the title bar or tab for the page.
+Notice that the entire contents of the page are nested within an `html` element. All other elements must be descendants of this `html` element.
 
-Add a `title` element within the `head` element. Its text should be `CatPhotoApp`.
+Add the `lang` attribute with the value `en` to the opening `html` tag to specify that the language of the page is English.
 
 # --hints--
 
-You have either deleted the `head` element or it is missing an opening tag or closing tag.
+You have either deleted the `html` element or it is missing an opening tag or closing tag.
 
 ```js
-assert(code.match(/\<head\>/) && code.match(/\<\/head\>/));
+assert(code.match(/\<html.*?\>/) && code.match(/\<\/html\>/));
 ```
 
-Your `title` element should be nested in the `head` element. Make sure to added an opening tag and closing tag for the `title` element.
+Your `html` element should have a `lang` attribute with the value `en`. You may have omitted the attribute/value, or have a typo.
 
 ```js
-const noSpaces = code.replace(/\s/g, '');
-assert(noSpaces.match(/\<head\>\<title\>.*\<\/title\>\<\/head\>/));
+const extraSpacesRemoved = code.replace(/\s+/g, ' ');
+assert(extraSpacesRemoved.match(/\<html lang\=("|')([a-z]+)\1\>/));
 ```
 
-Your `title` element should have a closing tag. Closing tags have a `/` just after the `<` character.
+Although you have set the `html` element's `lang` attribute to `en`, it is recommended to always surround the value of an attribute with quotation marks.
 
 ```js
-assert(code.match(/\<\/title\>/));
-```
-
-Your `title` element's text should be `CatPhotoApp`. You have either omitted the text or have a typo.
-
-```js
-assert(document.title && document.title.toLowerCase() === 'catphotoapp');
+assert(!/\<\s*html\s+lang\s*=en/i.test(code));
 ```
 
 # --seed--
@@ -42,11 +36,12 @@ assert(document.title && document.title.toLowerCase() === 'catphotoapp');
 ## --seed-contents--
 
 ```html
+--fcc-editable-region--
 <html>
 --fcc-editable-region--
   <head>
+    <title>CatPhotoApp</title>
   </head>
---fcc-editable-region--
   <body>
     <h1>CatPhotoApp</h1>
     <main>
