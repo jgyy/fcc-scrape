@@ -1,36 +1,60 @@
 ---
-id: 5efc518e8d6a74d05e68af75
-title: Part 56
+id: 5ef9b03c81a63668521804e3
+title: Part 57
 challengeType: 0
 ---
 
 # --description--
 
-Add the `name` attribute with the value `personality` to the checkbox `input` element.
+Add another checkbox after the one you just added. The `id` attribute value should be `lazy` and the `name` attribute value should be the same as the last checkbox.
 
-While you won't notice this in the browser, doing this makes it easier for a server to process your web form, especially when there are multiple checkboxes.
+Also add a `label` element to the right of the new checkbox with the text `Lazy`. Make sure to associate the `label` element with the new checkbox using the `for` attribute.
 
 # --hints--
 
-You should make sure the checkbox is still present.
+You need to add a new checkbox.
 
 ```js
-assert($('input[type="checkbox"]')[0]);
+assert($('input[type="checkbox"]').length === 2);
 ```
 
-The checkbox `input` element does not have a `name` attribute. Check that there is a space after the opening tag's name.
+Your new checkbox should have an `id` attribute with the value `lazy` and a `name` attribute with the value `personality`. Check that there is a space after the opening tag's name and/or there are spaces before all attribute names.
 
 ```js
-assert($('input[type="checkbox"]')[0].hasAttribute('name'));
+const checkboxes = [...$('input[type="checkbox"]')];
+assert(
+  checkboxes.some(
+    (checkbox) =>
+      checkbox.id === 'lazy' && checkbox.getAttribute('name') === 'personality'
+  )
+);
 ```
 
-The checkbox `input` element should have a `name` attribute with the value `personality`. You have either omitted the value or have a typo. Remember that attribute values should be surrounded with quotation marks.
+Your new checkbox should be after the first one. You have them in the wrong order.
+
+```js
+const checkboxes = [...$('input[type="checkbox"]')].map(
+  (checkbox) => checkbox.id
+);
+assert(checkboxes.indexOf('loving') < checkboxes.indexOf('lazy'));
+```
+
+On the right side of your new checkbox, there should be `label` element with the text `Lazy`.
+
+```js
+const nextElementSibling = $('input[type="checkbox"]')[1].nextElementSibling;
+assert(
+  nextElementSibling.nodeName === 'LABEL' &&
+    nextElementSibling.innerText.replace(/\s+/g, '').match(/^Lazy$/i)
+);
+```
+
+The new `label` should have a `for` attribute with the same value as the `id` attribute of the new checkbox. You have either omitted the value or have a typo.
 
 ```js
 assert(
-  $('input[type="checkbox"]')[0]
-    .getAttribute('name')
-    .match(/^personality$/)
+  $('input[type="checkbox"]')[1].nextElementSibling.getAttribute('for') ===
+    'lazy'
 );
 ```
 
@@ -83,7 +107,7 @@ assert(
           <fieldset>
             <legend>What's your cat's personality?</legend>
 --fcc-editable-region--
-            <input id="loving" type="checkbox"> <label for="loving">Loving</label>
+            <input id="loving" type="checkbox" name="personality"> <label for="loving">Loving</label>
 --fcc-editable-region--
           </fieldset>
           <input type="text" name="catphotourl" placeholder="cat photo URL" required>
