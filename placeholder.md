@@ -1,39 +1,39 @@
 ---
-id: 5ef9b03c81a63668521804e7
-title: Part 61
+id: 5ef9b03c81a63668521804e8
+title: Part 62
 challengeType: 0
 ---
 
 # --description--
 
-Now you will add a footer section to the page.
-
-After the `main` element, add a `footer` element.
+Nest a `p` element with the text `No Copyright - freeCodeCamp.org` within the `footer` element.
 
 # --hints--
 
-You have either deleted the `main` element or it is missing an opening tag or closing tag."
+You have either deleted the `footer` element or it is missing an opening tag or closing tag."
 
 ```js
-assert(document.querySelector('main') && code.match(/<\/main>/));
+assert(document.querySelector('footer') && code.match(/<\/footer>/));
 ```
 
-Your `footer` element should have an opening tag. Opening tags have the following syntax: `<elementName>`.
+Your `footer` element should have a `p` element. Make sure to added an opening tag and closing tag for the `p` element.
 
 ```js
-assert(document.querySelector('footer'));
+assert(document.querySelector('footer > p'));
 ```
 
 Your `footer` element should have a closing tag. Closing tags have a `/` just after the `<` character.
 
 ```js
-assert(code.match(/<\/footer\>/));
+const pElemClosingTags = code.match(/<\/p\>/g);
+assert(pElemClosingTags && pElemClosingTags.length === 2);
 ```
 
-Your `footer` element should the below the closing `main` element tag. You have it put it somewhere else.
+Your `p` element's text should be `No Copyright - freeCodeCamp.org`. You have either omitted the text, have a typo, or it is not between the `legend` element's opening and closing tags.
 
 ```js
-assert(document.querySelector('main').nextElementSibling.nodeName === 'FOOTER');
+const extraSpacesRemoved = $('footer > p')[0].innerText.replace(/\s+/g, ' ');
+assert(extraSpacesRemoved.match(/No Copyright - freeCodeCamp\.org$/i));
 ```
 
 # --seed--
@@ -92,9 +92,11 @@ assert(document.querySelector('main').nextElementSibling.nodeName === 'FOOTER');
           <button type="submit">Submit</button>
         </form>
       </section>
---fcc-editable-region--
     </main>
+--fcc-editable-region--
+    <footer>
+    </footer>
+--fcc-editable-region--
   </body>
 </html>
---fcc-editable-region--
 ```
