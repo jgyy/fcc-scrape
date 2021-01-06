@@ -1,55 +1,31 @@
 ---
-id: 5ef9b03c81a63668521804d2
-title: Part 26
+id: 5ef9b03c81a63668521804d3
+title: Part 27
 challengeType: 0
 ---
 
 # --description--
 
-The code for an ordered list (`ol`) is similar to an unordered list, but list items in an ordered list are numbered when displayed.
-
-After the final second section' last `h3` element, add an ordered list with these three list items: `flea treatment`, `thunder` and `other cats`.
+After the ordered list, add another `figure` element.
 
 # --hints--
 
-Your `ol` element should have an opening tag. Opening tags have this syntax: `<elementName>`.
+Your `figure` element should have an opening tag. Opening tags have this syntax: `<elementName>`.
 
 ```js
-assert(document.querySelector('ol'));
+assert(document.querySelectorAll('figure').length === 2);
 ```
 
-Your `ol` element should have a closing tag. Closing tags have a `/` just after the `<` character.
+Your `figure` element should have a closing tag. Closing tags have a `/` just after the `<` character.
 
 ```js
-assert(code.match(/<\/ol>/));
+assert(code.match(/<\/figure>/g).length === 2);
 ```
 
-The `ol` element should be above the second `section` element's closing tag. You have them in the wrong order.
+There should be a `figure` element right above the second `section` element's closing tag.
 
 ```js
-assert($('main > section')[1].lastElementChild.nodeName === 'OL');
-```
-
-The three `li` elements should be nested inside the `ol` element.
-
-```js
-assert(
-  [...document.querySelectorAll('li')].filter(
-    (item) => item.parentNode.nodeName === 'OL'
-  ).length === 3
-);
-```
-
-You should have three `li` elements with the text `flea treatment`, `thunder` and `other cats` in any order.
-
-```js
-assert.deepStrictEqual(
-  [...document.querySelectorAll('li')]
-    .filter((item) => item.parentNode.nodeName === 'OL')
-    .map((item) => item.innerText.toLowerCase())
-    .sort((a, b) => a.localeCompare(b)),
-  ['flea treatment', 'other cats', 'thunder']
-);
+assert($('main > section')[1].lastElementChild.nodeName === 'FIGURE');
 ```
 
 # --seed--
@@ -79,12 +55,16 @@ assert.deepStrictEqual(
           <img src="https://bit.ly/fcc-lasagna" alt="A slice of lasagna on a plate.">
           <figcaption>Cats <em>love</em> lasagna.</figcaption>
         </figure>
---fcc-editable-region--
         <h3>Top 3 things cats hate:</h3>
+--fcc-editable-region--
+        <ol>
+          <li>flea treatment</li>
+          <li>thunder</li>
+          <li>other cats</li>
+        </ol>
 --fcc-editable-region--
       </section>
     </main>
-
   </body>
 </html>
 ```
