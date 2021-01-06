@@ -1,51 +1,55 @@
 ---
-id: 5dc17dc8f86c76b9248c6eb5
-title: Part 4
+id: 5dc2385ff86c76b9248c6eb7
+title: Part 5
 challengeType: 0
 ---
 
 # --description--
 
-Commenting allows you to leave messages without affecting the browser display. It also allows you to make code inactive. A comment in HTML starts with `<!--`, contains any number of lines of text, and ends with `-->`. For example, the comment `<!-- TODO: Remove h1 -->` contains the text `TODO: Remove h1`.
+HTML5 has some elements that identify different content areas. These elements make your HTML easier to read and help with Search Engine Optimization (SEO) and accessibility.
 
-Add a comment above the `p` element with the text `TODO: Add link to cat photos`. \\
+Identify the main section of this page by adding a `<main>` opening tag after the `h1` element, and a `</main>` closing tag after the `p` element.
 
 # --hints--
 
-Your comment should start with `<!--`. You are missing one or more of the characters that define the start of a comment.
+Your `main` element should have an opening tag. Opening tags have this syntax: `<elementName>`.
 
 ```js
-assert(code.match(/<!--/));
+assert(document.querySelector('main'));
 ```
 
-Your comment should end with `-->`.  You are missing one or more of the characters that define the end of a comment.
+Your `main` element should have a closing tag. Closing tags have a `/` just after the `<` character.
 
 ```js
-assert(code.match(/-->/));
+assert(code.match(/<\/main\>/));
 ```
 
-Your code should not have extra opening/closing comment characters. You have an extra `<!--` or `-->` displaying in the browser.
+Your `main` element's opening tag should be below the `h1` element. You have them in the wrong order.
 
 ```js
-const noSpaces = code.replace(/\s/g, '');
-assert(noSpaces.match(/<!--/g).length < 2 && noSpaces.match(/-->/g).length < 2);
+const collection = [...document.querySelectorAll('main,h1')].map(
+  (node) => node.nodeName
+);
+assert(collection.indexOf('H1') < collection.indexOf('MAIN'));
 ```
 
-Your comment should contain the text `TODO: Add link to cat photos`.
+Your `main` element's opening tag should be above the `h2` element. You have them in the wrong order.
 
 ```js
-assert(code.match(/<!--\s*todo:\s+add\s+link\s+to\s+cat\s+photos\s*-->/i));
+const collection = [...document.querySelectorAll('main,h2')].map(
+  (node) => node.nodeName
+);
+assert(collection.indexOf('MAIN') < collection.indexOf('H2'));
 ```
 
-Your comment should be above the `p` element. You have them in the wrong order.
+Your `main` element's closing tag should be below the `p` element. You have them in the wrong order.
 
 ```js
+const mainNode = document.querySelector('main');
+const pNode = document.querySelector('p');
 assert(
-  code
-    .replace(/\s/g, '')
-    .match(
-      /<!--todo:addlinktocatphotos--><p>clickheretoviewmorecatphotos\.?<\/p>/i
-    )
+  mainNode.contains(pNode) &&
+    pNode.textContent.toLowerCase().match(/click here to view more cat photos/)
 );
 ```
 
@@ -56,9 +60,10 @@ assert(
 ```html
 <html>
   <body>
+--fcc-editable-region--
     <h1>CatPhotoApp</h1>
     <h2>Cat Photos</h2>
---fcc-editable-region--
+    <!-- TODO: Add link to cat photos -->
     <p>Click here to view more cat photos.</p>
 --fcc-editable-region--
   </body>
