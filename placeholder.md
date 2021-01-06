@@ -1,40 +1,40 @@
 ---
-id: 5ef9b03c81a63668521804ea
-title: Part 64
+id: 5ef9b03c81a63668521804eb
+title: Part 65
 challengeType: 0
 ---
 
 # --description--
 
-Notice that everything you've added to the page so far is inside the `body` element. All page content elements that should be rendered to the page go inside the `body` element. However, other important information goes inside the `head` element.
+The `title` element determines what browsers show in the title bar or tab for the page.
 
-Add a `head` element just above the `body` element.
+Add a `title` element within the `head` element. Its text should be `CatPhotoApp`.
 
 # --hints--
 
-You have either deleted the `body` element or it is missing an opening tag or closing tag.
+You have either deleted the `head` element or it is missing an opening tag or closing tag.
 
 ```js
-assert(document.querySelector('body') && code.match(/<\/body>/));
+assert(code.match(/\<head\>/) && code.match(/\<\/head\>/));
 ```
 
-Your `head` element should have an opening tag. Opening tags have the following syntax: `<elementName>`.
-
-```js
-assert(code.match(/\<head\>/));
-```
-
-Your `head` element should have a closing tag. Closing tags have a `/` just after the `<` character.
-
-```js
-assert(code.match(/\<\/head\>/));
-```
-
-Your `head` element should be above the opening `body` element tag. You have it put it somewhere else.
+Your `title` element should be nested in the `head` element. Make sure to added an opening tag and closing tag for the `title` element.
 
 ```js
 const noSpaces = code.replace(/\s/g, '');
-assert(noSpaces.match(/\<\/head\>\<body\>/));
+assert(noSpaces.match(/\<head\>\<title\>.*\<\/title\>\<\/head\>/));
+```
+
+Your `title` element should have a closing tag. Closing tags have a `/` just after the `<` character.
+
+```js
+assert(code.match(/\<\/title\>/));
+```
+
+Your `title` element's text should be `CatPhotoApp`. You have either omitted the text or have a typo.
+
+```js
+assert(document.title && document.title.toLowerCase() === 'catphotoapp');
 ```
 
 # --seed--
@@ -43,6 +43,9 @@ assert(noSpaces.match(/\<\/head\>\<body\>/));
 
 ```html
 <html>
+--fcc-editable-region--
+  <head>
+  </head>
 --fcc-editable-region--
   <body>
     <h1>CatPhotoApp</h1>
@@ -101,6 +104,5 @@ assert(noSpaces.match(/\<\/head\>\<body\>/));
       </p>
     </footer>
   </body>
---fcc-editable-region--
 </html>
 ```
