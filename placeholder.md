@@ -1,43 +1,59 @@
 ---
-id: 5f07be6ef7412fbad0c5626b
-title: Part 15
+id: 5f07c98cdb9413cbd4b16750
+title: Part 16
 challengeType: 0
 ---
 
 # --description--
 
-Before adding any new content, you should make use of a `section` element to separate the cat photos content from the future content.
-
-Take all the elements currently located within the `main` element and nest them in a `section` element.
+It is time to add a new section. Add a second `section` element below the existing `section` element.
 
 # --hints--
 
-Your `section` element should have an opening tag. Opening tags have the following syntax: `<elementName>`.
+Your `section` element should have an opening tag. Opening tags have this syntax: `<elementName>`.
 
 ```js
-assert(document.querySelector('section'));
+assert(document.querySelectorAll('section').length >= 2);
+```
+
+You should only add one opening `section` tag. Please remove any extras.
+
+```js
+assert(document.querySelectorAll('section').length === 2);
 ```
 
 Your `section` element should have a closing tag. Closing tags have a `/` just after the `<` character.
 
 ```js
-assert(code.match(/<\/section\>/));
+assert(code.match(/<\/section>/g).length >= 2);
 ```
 
-The entire `section` element should be between the opening and closing tags of the `main` element.
+You should only add one closing `section` tag. Please remove any extras.
 
 ```js
-assert(document.querySelector('section').parentNode.nodeName === 'MAIN');
+assert(code.match(/<\/section>/g).length === 2);
 ```
 
-The existing `h2`, comment, `p` element, and anchor (`a`) element should be between the opening and closing tags of the `section` element.
+The second `section` element should not be nested in the first `section` element.
 
 ```js
-const childrenOfSection = [...document.querySelector('section').childNodes];
-const foundElems = childrenOfSection.filter((child) => {
-  return ['H2', 'A', 'P'].includes(child.nodeName);
+const childrenOf1stSection = [
+  ...document.querySelector('main > section').children
+];
+const foundElems = childrenOf1stSection.filter((child) => {
+  return child.nodeName === 'SECTION';
 });
-assert(foundElems.length === 3);
+assert(foundElems.length === 0);
+```
+
+Both `section` elements should be between the opening and closing tags of the `main` element.
+
+```js
+const childrenOfMain = [...document.querySelector('main').children];
+const foundElems = childrenOfMain.filter((child) => {
+  return child.nodeName === 'SECTION';
+});
+assert(foundElems.length === 2);
 ```
 
 # --seed--
@@ -48,14 +64,16 @@ assert(foundElems.length === 3);
 <html>
   <body>
     <h1>CatPhotoApp</h1>
---fcc-editable-region--
     <main>
-      <h2>Cat Photos</h2>
-      <!-- TODO: Add link to cat photos -->
-      <p>Click here to view more <a target="_blank" href="https://freecatphotoapp.com">cat photos</a>.</p>
-      <a href="https://freecatphotoapp.com"><img src="https://bit.ly/fcc-relaxing-cat" alt="A cute orange cat lying on its back."></a>
-    </main>
 --fcc-editable-region--
+      <section>
+        <h2>Cat Photos</h2>
+        <!-- TODO: Add link to cat photos -->
+        <p>Click here to view more <a target="_blank" href="https://freecatphotoapp.com">cat photos</a>.</p>
+        <a href="https://freecatphotoapp.com"><img src="https://bit.ly/fcc-relaxing-cat" alt="A cute orange cat lying on its back."></a>
+      </section>
+--fcc-editable-region--
+    </main>
   </body>
 </html>
 ```
