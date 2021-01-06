@@ -1,56 +1,40 @@
 ---
-id: 5ef9b03c81a63668521804d5
-title: Part 33
+id: 5ef9b03c81a63668521804d6
+title: Part 34
 challengeType: 0
 ---
 
 # --description--
 
-Inside the third `section` element add an `h2` tag with the text `Cat Form`.
+Now you will add a web form to collect information from users.
+
+After the `Cat Form` heading, add a `form` element.
 
 # --hints--
 
-Unable to find the third `section` element. You may have accidentally deleted it or the opening tag or closing tag.
+Your `form` element should have an opening tag and closing tag. You may be missing one or both of the required tags, or have them in the wrong order.
 
 ```js
-assert(
-  document.querySelectorAll('section').length === 3 &&
-    code.match(/<\/section>/g).length === 3
-);
+assert(document.querySelector('form') && code.match(/<\/form>/g));
 ```
 
-Your `h2` element should have an opening tag and closing tag. You may be missing one or both of the required tags.
+Your `form` element tags are not in the correct order.
 
 ```js
-assert(
-  document.querySelectorAll('h2').length >= 3 &&
-    code.match(/<\/h2>/g).length >= 3
-);
+const noSpaces = code.replace(/\s/g, '');
+assert(noSpaces.indexOf('<form>') < noSpaces.indexOf('</form>'));
 ```
 
-You should only add one `h2` element. Please remove any extras.
+The `form` element nested in the last `section` element should be below the `h2` element. You have the `h2` element and the `form` element in the wrong order.
 
 ```js
-assert(document.querySelectorAll('h2').length === 3);
+assert(document.querySelector('form').previousElementSibling.nodeName === 'H2');
 ```
 
-The new `h2` element should be located right above the third `section` element's closing tag.
+The `form` element should have no content. Remove any HTML elements or text between the `form` element's tags.
 
 ```js
-const thirdSection = document.querySelectorAll('section')[2];
-assert(thirdSection.lastElementChild.nodeName === 'H2');
-```
-
-Your `h2` element's text should be `Cat Form`.
-
-```js
-const thirdSection = document.querySelectorAll('section')[2];
-assert(
-  thirdSection
-    .querySelector('h2')
-    .innerText.toLowerCase()
-    .replace(/\s+/g, ' ') === 'cat form'
-);
+assert($('form')[0].innerHTML.trim().length === 0);
 ```
 
 # --seed--
@@ -88,13 +72,14 @@ assert(
         </ol>
         <figure>
           <img src="https://bit.ly/fcc-cats" alt="Five cats looking around a field.">
-          <figcaption>Cats <strong>hate</strong> other cats.</figcaption>
+          <figcaption>Cats <strong>hate</strong> other cats.</figcaption>  
         </figure>
       </section>
---fcc-editable-region--
       <section>
-      </section>
 --fcc-editable-region--
+        <h2>Cat Form</h2>
+--fcc-editable-region--
+      </section>
     </main>
   </body>
 </html>
