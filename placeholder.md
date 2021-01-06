@@ -1,34 +1,28 @@
 ---
-id: 5ef9b03c81a63668521804ec
-title: Part 66
+id: 5ef9b03c81a63668521804ee
+title: Part 67
 challengeType: 0
 ---
 
 # --description--
 
-Notice that the entire contents of the page are nested within an `html` element. All other elements must be descendants of this `html` element.
+All pages should begin with `<!DOCTYPE html>`. This special string is known as a <dfn>declaration</dfn> and ensures the browser tries to meet industry-wide specifications.
 
-Add the `lang` attribute with the value `en` to the opening `html` tag to specify that the language of the page is English.
+To complete this project, add this declaration as the first line of the code.
 
 # --hints--
 
-You have either deleted the `html` element or it is missing an opening tag or closing tag.
+Your code should begin with the declaration `<!DOCTYPE html>`. You may have omitted the declaration, have a typo, or it is not the first line of code.
 
 ```js
-assert(code.match(/\<html.*?\>/) && code.match(/\<\/html\>/));
+assert(code.match(/\<\s*!DOCTYPE\s+html\s*\>/));
 ```
 
-Your `html` element should have a `lang` attribute with the value `en`. You may have omitted the attribute/value, or have a typo.
+Your `<!DOCTYPE html>` must be located at the top of the document.
 
 ```js
-const extraSpacesRemoved = code.replace(/\s+/g, ' ');
-assert(extraSpacesRemoved.match(/\<html lang\=("|')([a-z]+)\1\>/));
-```
-
-Although you have set the `html` element's `lang` attribute to `en`, it is recommended to always surround the value of an attribute with quotation marks.
-
-```js
-assert(!/\<\s*html\s+lang\s*=en/i.test(code));
+const noSpaces = code.replace(/\s/g, '');
+assert(noSpaces.match(/^\<\!DOCTYPEhtml\>\<html/));
 ```
 
 # --seed--
@@ -37,11 +31,11 @@ assert(!/\<\s*html\s+lang\s*=en/i.test(code));
 
 ```html
 --fcc-editable-region--
-<html>
---fcc-editable-region--
+<html lang="en">
   <head>
     <title>CatPhotoApp</title>
   </head>
+--fcc-editable-region--
   <body>
     <h1>CatPhotoApp</h1>
     <main>
@@ -87,6 +81,74 @@ assert(!/\<\s*html\s+lang\s*=en/i.test(code));
             <input id="loving" type="checkbox" name="personality" value="loving" checked> <label for="loving">Loving</label>
             <input id="lazy" type="checkbox" name="personality" value="lazy"> <label for="lazy">Lazy</label>
             <input id="energetic" type="checkbox" name="personality" value="energetic"> <label for="energetic">Energetic</label>
+          </fieldset>
+          <input type="text" name="catphotourl" placeholder="cat photo URL" required>
+          <button type="submit">Submit</button>
+        </form>
+      </section>
+    </main>
+    <footer>
+      <p>
+        No Copyright - <a href="https://www.freecodecamp.org">freeCodeCamp.org</a>
+      </p>
+    </footer>
+  </body>
+</html>
+```
+
+# --solutions--
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>CatPhotoApp</title>
+  </head>
+  <body>
+    <h1>CatPhotoApp</h1>
+    <main>
+      <section>
+        <h2>Cat Photos</h2>
+        <!-- TODO: Add link to cat photos -->
+        <p>Click here to view more <a target="_blank" href="https://freecatphotoapp.com">cat photos</a>.</p>
+        <a href="https://freecatphotoapp.com"><img src="https://bit.ly/fcc-relaxing-cat" alt="A cute orange cat lying on its back."></a>
+      </section>
+      <section>
+        <h2>Cat Lists</h2>
+        <h3>Things cats love:</h3>
+        <ul>
+          <li>cat nip</li>
+          <li>laser pointers</li>
+          <li>lasagna</li>
+        </ul>
+        <figure>
+          <img src="https://bit.ly/fcc-lasagna" alt="A slice of lasagna on a plate.">
+          <figcaption>Cats <em>love</em> lasagna.</figcaption>  
+        </figure>
+        <h3>Top 3 things cats hate:</h3>
+        <ol>
+          <li>flea treatment</li>
+          <li>thunder</li>
+          <li>other cats</li>
+        </ol>
+        <figure>
+          <img src="https://bit.ly/fcc-cats" alt="Five cats looking around a field.">
+          <figcaption>Cats <strong>hate</strong> other cats.</figcaption>  
+        </figure>
+      </section>
+      <section>
+        <h2>Cat Form</h2>
+        <form action="https://freecatphotoapp.com/submit-cat-photo">
+          <fieldset>
+            <legend>Is your cat an indoor or outdoor cat?</legend>
+            <label><input id="indoor" type="radio" name="indoor-outdoor" value="indoor" checked> Indoor</label>
+            <label><input id="outdoor" type="radio" name="indoor-outdoor" value="outdoor"> Outdoor</label>
+          </fieldset>
+          <fieldset>
+            <legend>What's your cat's personality?</legend>
+            <label for="loving"><input id="loving" type="checkbox" name="personality" value="loving" checked> Loving</label>
+            <label for="lazy"><input id="lazy" type="checkbox" name="personality" value="lazy"> Lazy</label>
+            <label for="energetic"><input id="energetic" type="checkbox" name="personality" value="energetic"> Energetic</label>
           </fieldset>
           <input type="text" name="catphotourl" placeholder="cat photo URL" required>
           <button type="submit">Submit</button>
