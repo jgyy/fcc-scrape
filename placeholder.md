@@ -1,31 +1,29 @@
 ---
-id: 587d78ad367417b2b2512afa
-title: Use the flex-wrap Property to Wrap a Row or Column
+id: 587d78ac367417b2b2512af7
+title: Use the justify-content Property in the Tweet Embed
 challengeType: 0
-videoUrl: 'https://scrimba.com/p/pVaDAv/cQv9ZtG'
-forumTopicId: 301114
+videoUrl: 'https://scrimba.com/p/pVaDAv/c43GgTa'
+forumTopicId: 301115
 ---
 
 # --description--
 
-CSS flexbox has a feature to split a flex item into multiple rows (or columns). By default, a flex container will fit all flex items together. For example, a row will all be on one line.
-
-However, using the `flex-wrap` property tells CSS to wrap items. This means extra items move into a new row or column. The break point of where the wrapping happens depends on the size of the items and the size of the container.
-
-CSS also has options for the direction of the wrap:
-
-<ul><li><code>nowrap</code>: this is the default setting, and does not wrap items.</li><li><code>wrap</code>: wraps items from left-to-right if they are in a row, or top-to-bottom if they are in a column.</li><li><code>wrap-reverse</code>: wraps items from right-to-left if they are in a row, or bottom-to-top if they are in a column.</li></ul>
+The last challenge showed an example of the `justify-content` property. For the tweet embed, this property can be applied to align the items in the `.profile-name` element.
 
 # --instructions--
 
-The current layout has too many boxes for one row. Add the CSS property `flex-wrap` to the `#box-container` element, and give it a value of `wrap`.
+Add the CSS property `justify-content` to the header's `.profile-name` element and set the value to any of the options from the last challenge.
 
 # --hints--
 
-The `#box-container` element should have the `flex-wrap` property set to a value of `wrap`.
+The `.profile-name` element should have the `justify-content` property set to any of these values: `center`, `flex-start`, `flex-end`, `space-between`, `space-around`, or `space-evenly`.
 
 ```js
-assert($('#box-container').css('flex-wrap') == 'wrap');
+assert(
+  code.match(
+    /header\s.profile-name\s*{\s*?.*?\s*?.*?\s*?\s*?.*?\s*?justify-content\s*:\s*(center|flex-start|flex-end|space-between|space-around|space-evenly)\s*;/g
+  )
+);
 ```
 
 # --seed--
@@ -34,104 +32,186 @@ assert($('#box-container').css('flex-wrap') == 'wrap');
 
 ```html
 <style>
-  #box-container {
-    background: gray;
+  body {
+    font-family: Arial, sans-serif;
+  }
+  header, footer {
     display: flex;
-    height: 100%;
+    flex-direction: row;
+  }
+  header .profile-thumbnail {
+    width: 50px;
+    height: 50px;
+    border-radius: 4px;
+  }
+  header .profile-name {
+    display: flex;
+    flex-direction: column;
 
+    margin-left: 10px;
   }
-  #box-1 {
-    background-color: dodgerblue;
-    width: 25%;
-    height: 50%;
+  header .follow-btn {
+    display: flex;
+    margin: 0 0 0 auto;
   }
-
-  #box-2 {
-    background-color: orangered;
-    width: 25%;
-    height: 50%;
+  header .follow-btn button {
+    border: 0;
+    border-radius: 3px;
+    padding: 5px;
   }
-  #box-3 {
-    background-color: violet;
-    width: 25%;
-    height: 50%;
+  header h3, header h4 {
+    display: flex;
+    margin: 0;
   }
-  #box-4 {
-    background-color: yellow;
-    width: 25%;
-    height: 50%;
+  #inner p {
+    margin-bottom: 10px;
+    font-size: 20px;
   }
-  #box-5 {
-    background-color: green;
-    width: 25%;
-    height: 50%;
+  #inner hr {
+    margin: 20px 0;
+    border-style: solid;
+    opacity: 0.1;
   }
-  #box-6 {
-    background-color: black;
-    width: 25%;
-    height: 50%;
+  footer .stats {
+    display: flex;
+    font-size: 15px;
+  }
+  footer .stats strong {
+    font-size: 18px;
+  }
+  footer .stats .likes {
+    margin-left: 10px;
+  }
+  footer .cta {
+    margin-left: auto;
+  }
+  footer .cta button {
+    border: 0;
+    background: transparent;
   }
 </style>
-
-<div id="box-container">
-  <div id="box-1"></div>
-  <div id="box-2"></div>
-  <div id="box-3"></div>
-  <div id="box-4"></div>
-  <div id="box-5"></div>
-  <div id="box-6"></div>
+<header>
+  <img src="https://freecodecamp.s3.amazonaws.com/quincy-twitter-photo.jpg" alt="Quincy Larson's profile picture" class="profile-thumbnail">
+  <div class="profile-name">
+    <h3>Quincy Larson</h3>
+    <h4>@ossia</h4>
+  </div>
+  <div class="follow-btn">
+    <button>Follow</button>
+  </div>
+</header>
+<div id="inner">
+  <p>I meet so many people who are in search of that one trick that will help them work smart. Even if you work smart, you still have to work hard.</p>
+  <span class="date">1:32 PM - 12 Jan 2018</span>
+  <hr>
 </div>
+<footer>
+  <div class="stats">
+    <div class="Retweets">
+      <strong>107</strong> Retweets
+    </div>
+    <div class="likes">
+      <strong>431</strong> Likes
+    </div>
+  </div>
+  <div class="cta">
+    <button class="share-btn">Share</button>
+    <button class="retweet-btn">Retweet</button>
+    <button class="like-btn">Like</button>
+  </div>
+</footer>
 ```
 
 # --solutions--
 
 ```html
 <style>
-  #box-container {
-    background: gray;
+  body {
+    font-family: Arial, sans-serif;
+  }
+  header, footer {
     display: flex;
-    height: 100%;
-    flex-wrap: wrap;
+    flex-direction: row;
   }
-  #box-1 {
-    background-color: dodgerblue;
-    width: 25%;
-    height: 50%;
+  header .profile-thumbnail {
+    width: 50px;
+    height: 50px;
+    border-radius: 4px;
   }
-
-  #box-2 {
-    background-color: orangered;
-    width: 25%;
-    height: 50%;
+  header .profile-name {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 10px;
   }
-  #box-3 {
-    background-color: violet;
-    width: 25%;
-    height: 50%;
+  header .follow-btn {
+    display: flex;
+    margin: 0 0 0 auto;
   }
-  #box-4 {
-    background-color: yellow;
-    width: 25%;
-    height: 50%;
+  header .follow-btn button {
+    border: 0;
+    border-radius: 3px;
+    padding: 5px;
   }
-  #box-5 {
-    background-color: green;
-    width: 25%;
-    height: 50%;
+  header h3, header h4 {
+    display: flex;
+    margin: 0;
   }
-  #box-6 {
-    background-color: black;
-    width: 25%;
-    height: 50%;
+  #inner p {
+    margin-bottom: 10px;
+    font-size: 20px;
+  }
+  #inner hr {
+    margin: 20px 0;
+    border-style: solid;
+    opacity: 0.1;
+  }
+  footer .stats {
+    display: flex;
+    font-size: 15px;
+  }
+  footer .stats strong {
+    font-size: 18px;
+  }
+  footer .stats .likes {
+    margin-left: 10px;
+  }
+  footer .cta {
+    margin-left: auto;
+  }
+  footer .cta button {
+    border: 0;
+    background: transparent;
   }
 </style>
-
-<div id="box-container">
-  <div id="box-1"></div>
-  <div id="box-2"></div>
-  <div id="box-3"></div>
-  <div id="box-4"></div>
-  <div id="box-5"></div>
-  <div id="box-6"></div>
+<header>
+  <img src="https://freecodecamp.s3.amazonaws.com/quincy-twitter-photo.jpg" alt="Quincy Larson's profile picture" class="profile-thumbnail">
+  <div class="profile-name">
+    <h3>Quincy Larson</h3>
+    <h4>@ossia</h4>
+  </div>
+  <div class="follow-btn">
+    <button>Follow</button>
+  </div>
+</header>
+<div id="inner">
+  <p>I meet so many people who are in search of that one trick that will help them work smart. Even if you work smart, you still have to work hard.</p>
+  <span class="date">1:32 PM - 12 Jan 2018</span>
+  <hr>
 </div>
+<footer>
+  <div class="stats">
+    <div class="Retweets">
+      <strong>107</strong> Retweets
+    </div>
+    <div class="likes">
+      <strong>431</strong> Likes
+    </div>
+  </div>
+  <div class="cta">
+    <button class="share-btn">Share</button>
+    <button class="retweet-btn">Retweet</button>
+    <button class="like-btn">Like</button>
+  </div>
+</footer>
 ```
