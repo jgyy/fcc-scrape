@@ -1,33 +1,45 @@
 ---
-id: 587d78af367417b2b2512b00
-title: Use the align-self Property
+id: 587d78ae367417b2b2512afd
+title: Use the flex-basis Property to Set the Initial Size of an Item
 challengeType: 0
-videoUrl: 'https://scrimba.com/p/pVaDAv/cMbvzfv'
-forumTopicId: 301107
+videoUrl: 'https://scrimba.com/p/pVaDAv/c3d9nCa'
+forumTopicId: 301108
 ---
 
 # --description--
 
-The final property for flex items is `align-self`. This property allows you to adjust each item's alignment individually, instead of setting them all at once. This is useful since other common adjustment techniques using the CSS properties `float`, `clear`, and `vertical-align` do not work on flex items.
+The `flex-basis` property specifies the initial size of the item before CSS makes adjustments with `flex-shrink` or `flex-grow`.
 
-`align-self` accepts the same values as `align-items` and will override any value set by the `align-items` property.
+The units used by the `flex-basis` property are the same as other size properties (`px`, `em`, `%`, etc.). The value `auto` sizes items based on the content.
 
 # --instructions--
 
-Add the CSS property `align-self` to both `#box-1` and `#box-2`. Give `#box-1` a value of `center` and give `#box-2` a value of `flex-end`.
+Set the initial size of the boxes using `flex-basis`. Add the CSS property `flex-basis` to both `#box-1` and `#box-2`. Give `#box-1` a value of `10em` and `#box-2` a value of `20em`.
 
 # --hints--
 
-The `#box-1` element should have the `align-self` property set to a value of `center`.
+The `#box-1` element should have a `flex-basis` property.
 
 ```js
-assert($('#box-1').css('align-self') == 'center');
+assert($('#box-1').css('flex-basis') != 'auto');
 ```
 
-The `#box-2` element should have the `align-self` property set to a value of `flex-end`.
+The `#box-1` element should have a `flex-basis` value of `10em`.
 
 ```js
-assert($('#box-2').css('align-self') == 'flex-end');
+assert(code.match(/#box-1\s*?{\s*?.*?\s*?.*?\s*?flex-basis:\s*?10em;/g));
+```
+
+The `#box-2` element should have the `flex-basis` property.
+
+```js
+assert($('#box-2').css('flex-basis') != 'auto');
+```
+
+The `#box-2` element should have a `flex-basis` value of `20em`.
+
+```js
+assert(code.match(/#box-2\s*?{\s*?.*?\s*?.*?\s*?flex-basis:\s*?20em;/g));
 ```
 
 # --seed--
@@ -40,18 +52,17 @@ assert($('#box-2').css('align-self') == 'flex-end');
     display: flex;
     height: 500px;
   }
+
   #box-1 {
     background-color: dodgerblue;
-
     height: 200px;
-    width: 200px;
+
   }
 
   #box-2 {
     background-color: orangered;
-
     height: 200px;
-    width: 200px;
+
   }
 </style>
 
@@ -69,18 +80,17 @@ assert($('#box-2').css('align-self') == 'flex-end');
     display: flex;
     height: 500px;
   }
+
   #box-1 {
     background-color: dodgerblue;
-    align-self: center;
     height: 200px;
-    width: 200px;
+    flex-basis: 10em;
   }
 
   #box-2 {
     background-color: orangered;
-    align-self: flex-end;
     height: 200px;
-    width: 200px;
+    flex-basis: 20em;
   }
 </style>
 
