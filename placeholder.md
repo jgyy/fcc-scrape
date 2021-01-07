@@ -1,31 +1,38 @@
 ---
-id: 587d78ae367417b2b2512aff
-title: Use the order Property to Rearrange Items
+id: 5a9036d038fddaf9a66b5d32
+title: Add Columns with grid-template-columns
 challengeType: 0
-videoUrl: 'https://scrimba.com/p/pVaDAv/cMbvNAG'
-forumTopicId: 301116
+videoUrl: 'https://scrimba.com/p/pByETK/c7NzDHv'
+forumTopicId: 301117
 ---
 
 # --description--
 
-The `order` property is used to tell CSS the order of how flex items appear in the flex container. By default, items will appear in the same order they come in the source HTML. The property takes numbers as values, and negative numbers can be used.
+Simply creating a grid element doesn't get you very far. You need to define the structure of the grid as well. To add some columns to the grid, use the `grid-template-columns` property on a grid container as demonstrated below:
+
+```css
+.container {
+  display: grid;
+  grid-template-columns: 50px 50px;
+}
+```
+
+This will give your grid two columns that are each 50px wide. The number of parameters given to the `grid-template-columns` property indicates the number of columns in the grid, and the value of each parameter indicates the width of each column.
 
 # --instructions--
 
-Add the CSS property `order` to both `#box-1` and `#box-2`. Give `#box-1` a value of `2` and give `#box-2` a value of `1`.
+Give the grid container three columns that are each `100px` wide.
 
 # --hints--
 
-The `#box-1` element should have the `order` property set to a value of `2`.
+`container` class should have a `grid-template-columns` property with three units of `100px`.
 
 ```js
-assert($('#box-1').css('order') == '2');
-```
-
-The `#box-2` element should have the `order` property set to a value of `1`.
-
-```js
-assert($('#box-2').css('order') == '1');
+assert(
+  code.match(
+    /.container\s*?{[\s\S]*grid-template-columns\s*?:\s*?100px\s*?100px\s*?100px\s*?;[\s\S]*}/gi
+  )
+);
 ```
 
 # --seed--
@@ -34,56 +41,35 @@ assert($('#box-2').css('order') == '1');
 
 ```html
 <style>
-  #box-container {
-    display: flex;
-    height: 500px;
-  }
-  #box-1 {
-    background-color: dodgerblue;
+  .d1{background:LightSkyBlue;}
+  .d2{background:LightSalmon;}
+  .d3{background:PaleTurquoise;}
+  .d4{background:LightPink;}
+  .d5{background:PaleGreen;}
 
-    height: 200px;
-    width: 200px;
-  }
+  .container {
+    font-size: 40px;
+    width: 100%;
+    background: LightGray;
+    display: grid;
+    /* Only change code below this line */
 
-  #box-2 {
-    background-color: orangered;
 
-    height: 200px;
-    width: 200px;
+    /* Only change code above this line */
   }
 </style>
 
-<div id="box-container">
-  <div id="box-1"></div>
-  <div id="box-2"></div>
+<div class="container">
+  <div class="d1">1</div>
+  <div class="d2">2</div>
+  <div class="d3">3</div>
+  <div class="d4">4</div>
+  <div class="d5">5</div>
 </div>
 ```
 
 # --solutions--
 
 ```html
-<style>
-  #box-container {
-    display: flex;
-    height: 500px;
-  }
-  #box-1 {
-    background-color: dodgerblue;
-    order: 2;
-    height: 200px;
-    width: 200px;
-  }
-
-  #box-2 {
-    background-color: orangered;
-    order: 1;
-    height: 200px;
-    width: 200px;
-  }
-</style>
-
-<div id="box-container">
-  <div id="box-1"></div>
-  <div id="box-2"></div>
-</div>
+<style>.container {grid-template-columns: 100px 100px 100px;}</style>
 ```
