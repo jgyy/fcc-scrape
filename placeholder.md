@@ -1,25 +1,31 @@
 ---
-id: 587d78ac367417b2b2512af5
-title: Apply the flex-direction Property to Create a Column in the Tweet Embed
+id: 587d78ab367417b2b2512af3
+title: Apply the flex-direction Property to Create Rows in the Tweet Embed
 challengeType: 0
-videoUrl: 'https://scrimba.com/p/pVaDAv/cnzdVC9'
-forumTopicId: 301103
+videoUrl: 'https://scrimba.com/p/pVaDAv/cJb8yuq'
+forumTopicId: 301104
 ---
 
 # --description--
 
-The tweet embed `header` and `footer` used the `flex-direction` property earlier with a row value. Similarly, the items inside the `.profile-name` element would work well stacked as a column.
+The `header` and `footer` in the tweet embed example have child items that could be arranged as rows using the `flex-direction` property. This tells CSS to align the children horizontally.
 
 # --instructions--
 
-Add the CSS property `flex-direction` to the header's `.profile-name` element and set the value to column.
+Add the CSS property `flex-direction` to both the `header` and `footer` and set the value to row.
 
 # --hints--
 
-The `.profile-name` element should have a `flex-direction` property set to column.
+The `header` should have a `flex-direction` property set to row.
 
 ```js
-assert($('.profile-name').css('flex-direction') == 'column');
+assert(code.match(/header\s*?{[^}]*?flex-direction:\s*?row;/g));
+```
+
+The `footer` should have a `flex-direction` property set to row.
+
+```js
+assert(code.match(/footer\s*?{[^}]*?flex-direction:\s*?row;/g));
 ```
 
 # --seed--
@@ -31,9 +37,9 @@ assert($('.profile-name').css('flex-direction') == 'column');
   body {
     font-family: Arial, sans-serif;
   }
-  header, footer {
+  header {
     display: flex;
-    flex-direction: row;
+
   }
   header .profile-thumbnail {
     width: 50px;
@@ -42,7 +48,6 @@ assert($('.profile-name').css('flex-direction') == 'column');
   }
   header .profile-name {
     display: flex;
-
     margin-left: 10px;
   }
   header .follow-btn {
@@ -66,6 +71,10 @@ assert($('.profile-name').css('flex-direction') == 'column');
     margin: 20px 0;
     border-style: solid;
     opacity: 0.1;
+  }
+  footer {
+    display: flex;
+
   }
   footer .stats {
     display: flex;
@@ -124,7 +133,7 @@ assert($('.profile-name').css('flex-direction') == 'column');
   body {
     font-family: Arial, sans-serif;
   }
-  header, footer {
+  header {
     display: flex;
     flex-direction: row;
   }
@@ -135,7 +144,6 @@ assert($('.profile-name').css('flex-direction') == 'column');
   }
   header .profile-name {
     display: flex;
-    flex-direction: column;
     margin-left: 10px;
   }
   header .follow-btn {
@@ -159,6 +167,10 @@ assert($('.profile-name').css('flex-direction') == 'column');
     margin: 20px 0;
     border-style: solid;
     opacity: 0.1;
+  }
+  footer {
+    display: flex;
+    flex-direction: row;
   }
   footer .stats {
     display: flex;
