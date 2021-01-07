@@ -1,27 +1,25 @@
 ---
-id: 587d78ab367417b2b2512af0
-title: 'Use display: flex to Position Two Boxes'
+id: 587d78ad367417b2b2512af9
+title: Use the align-items Property in the Tweet Embed
 challengeType: 0
-videoUrl: 'https://scrimba.com/p/pVaDAv/cgz3QS7'
-forumTopicId: 301105
+videoUrl: 'https://scrimba.com/p/pVaDAv/cd3PNfq'
+forumTopicId: 301106
 ---
 
 # --description--
 
-This section uses alternating challenge styles to show how to use CSS to position elements in a flexible way. First, a challenge will explain theory, then a practical challenge using a simple tweet component will apply the flexbox concept.
-
-Placing the CSS property `display: flex;` on an element allows you to use other flex properties to build a responsive page.
+The last challenge introduced the `align-items` property and gave an example. This property can be applied to a few tweet embed elements to align the flex items inside them.
 
 # --instructions--
 
-Add the CSS property `display` to `#box-container` and set its value to `flex`.
+Add the CSS property `align-items` to the header's `.follow-btn` element. Set the value to `center`.
 
 # --hints--
 
-`#box-container` should have the `display` property set to a value of `flex`.
+The `.follow-btn` element should have the `align-items` property set to a value of `center`.
 
 ```js
-assert($('#box-container').css('display') == 'flex');
+assert($('.follow-btn').css('align-items') == 'center');
 ```
 
 # --seed--
@@ -30,52 +28,188 @@ assert($('#box-container').css('display') == 'flex');
 
 ```html
 <style>
-  #box-container {
-    height: 500px;
-
+  body {
+    font-family: Arial, sans-serif;
   }
-
-  #box-1 {
-    background-color: dodgerblue;
-    width: 50%;
-    height: 50%;
+  header, footer {
+    display: flex;
+    flex-direction: row;
   }
+  header .profile-thumbnail {
+    width: 50px;
+    height: 50px;
+    border-radius: 4px;
+  }
+  header .profile-name {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 10px;
+  }
+  header .follow-btn {
+    display: flex;
 
-  #box-2 {
-    background-color: orangered;
-    width: 50%;
-    height: 50%;
+    margin: 0 0 0 auto;
+  }
+  header .follow-btn button {
+    border: 0;
+    border-radius: 3px;
+    padding: 5px;
+  }
+  header h3, header h4 {
+    display: flex;
+    margin: 0;
+  }
+  #inner p {
+    margin-bottom: 10px;
+    font-size: 20px;
+  }
+  #inner hr {
+    margin: 20px 0;
+    border-style: solid;
+    opacity: 0.1;
+  }
+  footer .stats {
+    display: flex;
+    font-size: 15px;
+  }
+  footer .stats strong {
+    font-size: 18px;
+  }
+  footer .stats .likes {
+    margin-left: 10px;
+  }
+  footer .cta {
+    margin-left: auto;
+  }
+  footer .cta button {
+    border: 0;
+    background: transparent;
   }
 </style>
-<div id="box-container">
-  <div id="box-1"></div>
-  <div id="box-2"></div>
+<header>
+  <img src="https://freecodecamp.s3.amazonaws.com/quincy-twitter-photo.jpg" alt="Quincy Larson's profile picture" class="profile-thumbnail">
+  <div class="profile-name">
+    <h3>Quincy Larson</h3>
+    <h4>@ossia</h4>
+  </div>
+  <div class="follow-btn">
+    <button>Follow</button>
+  </div>
+</header>
+<div id="inner">
+  <p>I meet so many people who are in search of that one trick that will help them work smart. Even if you work smart, you still have to work hard.</p>
+  <span class="date">1:32 PM - 12 Jan 2018</span>
+  <hr>
 </div>
+<footer>
+  <div class="stats">
+    <div class="Retweets">
+      <strong>107</strong> Retweets
+    </div>
+    <div class="likes">
+      <strong>431</strong> Likes
+    </div>
+  </div>
+  <div class="cta">
+    <button class="share-btn">Share</button>
+    <button class="retweet-btn">Retweet</button>
+    <button class="like-btn">Like</button>
+  </div>
+</footer>
 ```
 
 # --solutions--
 
 ```html
 <style>
-  #box-container {
-    height: 500px;
+  body {
+    font-family: Arial, sans-serif;
+  }
+  header, footer {
     display: flex;
+    flex-direction: row;
   }
-
-  #box-1 {
-    background-color: dodgerblue;
-    width: 50%;
-    height: 50%;
+  header .profile-thumbnail {
+    width: 50px;
+    height: 50px;
+    border-radius: 4px;
   }
-
-  #box-2 {
-    background-color: orangered;
-    width: 50%;
-    height: 50%;
+  header .profile-name {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 10px;
+  }
+  header .follow-btn {
+    display: flex;
+    align-items: center;
+    margin: 0 0 0 auto;
+  }
+  header .follow-btn button {
+    border: 0;
+    border-radius: 3px;
+    padding: 5px;
+  }
+  header h3, header h4 {
+    display: flex;
+    margin: 0;
+  }
+  #inner p {
+    margin-bottom: 10px;
+    font-size: 20px;
+  }
+  #inner hr {
+    margin: 20px 0;
+    border-style: solid;
+    opacity: 0.1;
+  }
+  footer .stats {
+    display: flex;
+    font-size: 15px;
+  }
+  footer .stats strong {
+    font-size: 18px;
+  }
+  footer .stats .likes {
+    margin-left: 10px;
+  }
+  footer .cta {
+    margin-left: auto;
+  }
+  footer .cta button {
+    border: 0;
+    background: transparent;
   }
 </style>
-<div id="box-container">
-  <div id="box-1"></div>
-  <div id="box-2"></div>
+<header>
+  <img src="https://freecodecamp.s3.amazonaws.com/quincy-twitter-photo.jpg" alt="Quincy Larson's profile picture" class="profile-thumbnail">
+  <div class="profile-name">
+    <h3>Quincy Larson</h3>
+    <h4>@ossia</h4>
+  </div>
+  <div class="follow-btn">
+    <button>Follow</button>
+  </div>
+</header>
+<div id="inner">
+  <p>I meet so many people who are in search of that one trick that will help them work smart. Even if you work smart, you still have to work hard.</p>
+  <span class="date">1:32 PM - 12 Jan 2018</span>
+  <hr>
 </div>
+<footer>
+  <div class="stats">
+    <div class="Retweets">
+      <strong>107</strong> Retweets
+    </div>
+    <div class="likes">
+      <strong>431</strong> Likes
+    </div>
+  </div>
+  <div class="cta">
+    <button class="share-btn">Share</button>
+    <button class="retweet-btn">Retweet</button>
+    <button class="like-btn">Like</button>
+  </div>
+</footer>
 ```
