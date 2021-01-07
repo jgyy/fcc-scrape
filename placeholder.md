@@ -1,63 +1,36 @@
 ---
-id: 587d78ab367417b2b2512af1
-title: Add Flex Superpowers to the Tweet Embed
+id: 587d78ad367417b2b2512af8
+title: Align Elements Using the align-items Property
 challengeType: 0
-videoUrl: 'https://scrimba.com/p/pVaDAv/c9W7MhM'
-forumTopicId: 301100
+videoUrl: 'https://scrimba.com/p/pVaDAv/c8aggtk'
+forumTopicId: 301101
 ---
 
 # --description--
 
-To the right is the tweet embed that will be used as the practical example. Some of the elements would look better with a different layout. The last challenge demonstrated `display: flex`. Here you'll add it to several components in the tweet embed to start adjusting their positioning.
+The `align-items` property is similar to `justify-content`. Recall that the `justify-content` property aligned flex items along the main axis. For rows, the main axis is a horizontal line and for columns it is a vertical line.
+
+Flex containers also have a **cross axis** which is the opposite of the main axis. For rows, the cross axis is vertical and for columns, the cross axis is horizontal.
+
+CSS offers the `align-items` property to align flex items along the cross axis. For a row, it tells CSS how to push the items in the entire row up or down within the container. And for a column, how to push all the items left or right within the container.
+
+The different values available for `align-items` include:
+
+<ul><li><code>flex-start</code>: aligns items to the start of the flex container. For rows, this aligns items to the top of the container. For columns, this aligns items to the left of the container.</li><li><code>flex-end</code>: aligns items to the end of the flex container. For rows, this aligns items to the bottom of the container. For columns, this aligns items to the right of the container.</li><li><code>center</code>: align items to the center. For rows, this vertically aligns items (equal space above and below the items). For columns, this horizontally aligns them (equal space to the left and right of the items).</li><li><code>stretch</code>: stretch the items to fill the flex container. For example, rows items are stretched to fill the flex container top-to-bottom. This is the default value if no <code>align-items</code> value is specified.</li><li><code>baseline</code>: align items to their baselines. Baseline is a text concept, think of it as the line that the letters sit on.</li></ul>
 
 # --instructions--
 
-Add the CSS property `display: flex` to all of the following items - note that the selectors are already set up in the CSS:
+An example helps show this property in action. Add the CSS property `align-items` to the `#box-container` element, and give it a value of `center`.
 
-`header`, the header's `.profile-name`, the header's `.follow-btn`, the header's `h3` and `h4`, the `footer`, and the footer's `.stats`.
+**Bonus**  
+Try the other options for the `align-items` property in the code editor to see their differences. But note that a value of `center` is the only one that will pass this challenge.
 
 # --hints--
 
-Your `header` should have a `display` property set to `flex`.
+The `#box-container` element should have an `align-items` property set to a value of `center`.
 
 ```js
-assert($('header').css('display') == 'flex');
-```
-
-Your `footer` should have a `display` property set to `flex`.
-
-```js
-assert($('footer').css('display') == 'flex');
-```
-
-Your `h3` should have a `display` property set to `flex`.
-
-```js
-assert($('h3').css('display') == 'flex');
-```
-
-Your `h4` should have a `display` property set to `flex`.
-
-```js
-assert($('h4').css('display') == 'flex');
-```
-
-Your `.profile-name` should have a `display` property set to `flex`.
-
-```js
-assert($('.profile-name').css('display') == 'flex');
-```
-
-Your `.follow-btn` should have a `display` property set to `flex`.
-
-```js
-assert($('.follow-btn').css('display') == 'flex');
-```
-
-Your `.stats` should have a `display` property set to `flex`.
-
-```js
-assert($('.stats').css('display') == 'flex');
+assert($('#box-container').css('align-items') == 'center');
 ```
 
 # --seed--
@@ -66,186 +39,56 @@ assert($('.stats').css('display') == 'flex');
 
 ```html
 <style>
-  body {
-    font-family: Arial, sans-serif;
-  }
-  header {
+  #box-container {
+    background: gray;
+    display: flex;
+    height: 500px;
 
   }
-  header .profile-thumbnail {
-    width: 50px;
-    height: 50px;
-    border-radius: 4px;
+  #box-1 {
+    background-color: dodgerblue;
+    width: 200px;
+    font-size: 24px;
   }
-  header .profile-name {
 
-    margin-left: 10px;
-  }
-  header .follow-btn {
-
-    margin: 0 0 0 auto;
-  }
-  header .follow-btn button {
-    border: 0;
-    border-radius: 3px;
-    padding: 5px;
-  }
-  header h3, header h4 {
-
-    margin: 0;
-  }
-  #inner p {
-    margin-bottom: 10px;
-    font-size: 20px;
-  }
-  #inner hr {
-    margin: 20px 0;
-    border-style: solid;
-    opacity: 0.1;
-  }
-  footer {
-
-  }
-  footer .stats {
-
-    font-size: 15px;
-  }
-  footer .stats strong {
+  #box-2 {
+    background-color: orangered;
+    width: 200px;
     font-size: 18px;
   }
-  footer .stats .likes {
-    margin-left: 10px;
-  }
-  footer .cta {
-    margin-left: auto;
-  }
-  footer .cta button {
-    border: 0;
-    background: transparent;
-  }
 </style>
-<header>
-  <img src="https://freecodecamp.s3.amazonaws.com/quincy-twitter-photo.jpg" alt="Quincy Larson's profile picture" class="profile-thumbnail">
-  <div class="profile-name">
-    <h3>Quincy Larson</h3>
-    <h4>@ossia</h4>
-  </div>
-  <div class="follow-btn">
-    <button>Follow</button>
-  </div>
-</header>
-<div id="inner">
-  <p>I meet so many people who are in search of that one trick that will help them work smart. Even if you work smart, you still have to work hard.</p>
-  <span class="date">1:32 PM - 12 Jan 2018</span>
-  <hr>
+
+<div id="box-container">
+  <div id="box-1"><p>Hello</p></div>
+  <div id="box-2"><p>Goodbye</p></div>
 </div>
-<footer>
-  <div class="stats">
-    <div class="Retweets">
-      <strong>107</strong> Retweets
-    </div>
-    <div class="likes">
-      <strong>431</strong> Likes
-    </div>
-  </div>
-  <div class="cta">
-    <button class="share-btn">Share</button>
-    <button class="retweet-btn">Retweet</button>
-    <button class="like-btn">Like</button>
-  </div>
-</footer>
 ```
 
 # --solutions--
 
 ```html
 <style>
-  body {
-    font-family: Arial, sans-serif;
-  }
-  header {
-   display: flex;
-  }
-  header .profile-thumbnail {
-    width: 50px;
-    height: 50px;
-    border-radius: 4px;
-  }
-  header .profile-name {
+  #box-container {
+    background: gray;
     display: flex;
-    margin-left: 10px;
+    height: 500px;
+    align-items: center;
   }
-  header .follow-btn {
-    display: flex;
-    margin: 0 0 0 auto;
+  #box-1 {
+    background-color: dodgerblue;
+    width: 200px;
+    font-size: 24px;
   }
-  header .follow-btn button {
-    border: 0;
-    border-radius: 3px;
-    padding: 5px;
-  }
-  header h3, header h4 {
-    display: flex;
-    margin: 0;
-  }
-  #inner p {
-    margin-bottom: 10px;
-    font-size: 20px;
-  }
-  #inner hr {
-    margin: 20px 0;
-    border-style: solid;
-    opacity: 0.1;
-  }
-  footer {
-    display: flex;
-  }
-  footer .stats {
-    display: flex;
-    font-size: 15px;
-  }
-  footer .stats strong {
+
+  #box-2 {
+    background-color: orangered;
+    width: 200px;
     font-size: 18px;
   }
-  footer .stats .likes {
-    margin-left: 10px;
-  }
-  footer .cta {
-    margin-left: auto;
-  }
-  footer .cta button {
-    border: 0;
-    background: transparent;
-  }
 </style>
-<header>
-  <img src="https://freecodecamp.s3.amazonaws.com/quincy-twitter-photo.jpg" alt="Quincy Larson's profile picture" class="profile-thumbnail">
-  <div class="profile-name">
-    <h3>Quincy Larson</h3>
-    <h4>@ossia</h4>
-  </div>
-  <div class="follow-btn">
-    <button>Follow</button>
-  </div>
-</header>
-<div id="inner">
-  <p>I meet so many people who are in search of that one trick that will help them work smart. Even if you work smart, you still have to work hard.</p>
-  <span class="date">1:32 PM - 12 Jan 2018</span>
-  <hr>
+
+<div id="box-container">
+  <div id="box-1"><p>Hello</p></div>
+  <div id="box-2"><p>Goodbye</p></div>
 </div>
-<footer>
-  <div class="stats">
-    <div class="Retweets">
-      <strong>107</strong> Retweets
-    </div>
-    <div class="likes">
-      <strong>431</strong> Likes
-    </div>
-  </div>
-  <div class="cta">
-    <button class="share-btn">Share</button>
-    <button class="retweet-btn">Retweet</button>
-    <button class="like-btn">Like</button>
-  </div>
-</footer>
 ```
