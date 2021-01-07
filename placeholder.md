@@ -1,51 +1,35 @@
 ---
-id: 587d78ae367417b2b2512afe
-title: Use the flex Shorthand Property
+id: 587d78ad367417b2b2512afb
+title: Use the flex-shrink Property to Shrink Items
 challengeType: 0
-videoUrl: 'https://scrimba.com/p/pVaDAv/cbpW2tE'
-forumTopicId: 301112
+videoUrl: 'https://scrimba.com/p/pVaDAv/cd3PBfr'
+forumTopicId: 301113
 ---
 
 # --description--
 
-There is a shortcut available to set several flex properties at once. The `flex-grow`, `flex-shrink`, and `flex-basis` properties can all be set together by using the `flex` property.
+So far, all the properties in the challenges apply to the flex container (the parent of the flex items). However, there are several useful properties for the flex items.
 
-For example, `flex: 1 0 10px;` will set the item to `flex-grow: 1;`, `flex-shrink: 0;`, and `flex-basis: 10px;`.
+The first is the `flex-shrink` property. When it's used, it allows an item to shrink if the flex container is too small. Items shrink when the width of the parent container is smaller than the combined widths of all the flex items within it.
 
-The default property settings are `flex: 0 1 auto;`.
+The `flex-shrink` property takes numbers as values. The higher the number, the more it will shrink compared to the other items in the container. For example, if one item has a `flex-shrink` value of `1` and the other has a `flex-shrink` value of `3`, the one with the value of `3` will shrink three times as much as the other.
 
 # --instructions--
 
-Add the CSS property `flex` to both `#box-1` and `#box-2`. Give `#box-1` the values so its `flex-grow` is `2`, its `flex-shrink` is `2`, and its `flex-basis` is `150px`. Give `#box-2` the values so its `flex-grow` is `1`, its `flex-shrink` is `1`, and its `flex-basis` is `150px`.
-
-These values will cause `#box-1` to grow to fill the extra space at twice the rate of `#box-2` when the container is greater than 300px and shrink at twice the rate of `#box-2` when the container is less than 300px. 300px is the combined size of the `flex-basis` values of the two boxes.
+Add the CSS property `flex-shrink` to both `#box-1` and `#box-2`. Give `#box-1` a value of `1` and `#box-2` a value of `2`.
 
 # --hints--
 
-The `#box-1` element should have the `flex` property set to a value of `2 2 150px`.
+The `#box-1` element should have the `flex-shrink` property set to a value of `1`.
 
 ```js
-assert(
-  $('#box-1').css('flex-grow') == '2' &&
-    $('#box-1').css('flex-shrink') == '2' &&
-    $('#box-1').css('flex-basis') == '150px'
-);
+assert($('#box-1').css('flex-shrink') == '1');
 ```
 
-The `#box-2` element should have the `flex` property set to a value of `1 1 150px`.
+The `#box-2` element should have the `flex-shrink` property set to a value of `2`.
 
 ```js
-assert(
-  $('#box-2').css('flex-grow') == '1' &&
-    $('#box-2').css('flex-shrink') == '1' &&
-    $('#box-2').css('flex-basis') == '150px'
-);
-```
-
-Your code should use the `flex` property for `#box-1` and `#box-2`.
-
-```js
-assert(code.match(/flex:\s*?\d\s+?\d\s+?150px;/g).length == 2);
+assert($('#box-2').css('flex-shrink') == '2');
 ```
 
 # --seed--
@@ -60,14 +44,16 @@ assert(code.match(/flex:\s*?\d\s+?\d\s+?150px;/g).length == 2);
   }
   #box-1 {
     background-color: dodgerblue;
-
+    width: 100%;
     height: 200px;
+
   }
 
   #box-2 {
     background-color: orangered;
-
+    width: 100%;
     height: 200px;
+
   }
 </style>
 
@@ -87,14 +73,16 @@ assert(code.match(/flex:\s*?\d\s+?\d\s+?150px;/g).length == 2);
   }
   #box-1 {
     background-color: dodgerblue;
-    flex: 2 2 150px;
+    width: 100%;
     height: 200px;
+    flex-shrink: 1;
   }
 
   #box-2 {
     background-color: orangered;
-    flex: 1 1 150px;
+    width: 100%;
     height: 200px;
+    flex-shrink: 2;
   }
 </style>
 
