@@ -1,36 +1,36 @@
 ---
-id: 587d78ad367417b2b2512af8
-title: Align Elements Using the align-items Property
+id: 587d78ac367417b2b2512af6
+title: Align Elements Using the justify-content Property
 challengeType: 0
-videoUrl: 'https://scrimba.com/p/pVaDAv/c8aggtk'
-forumTopicId: 301101
+videoUrl: 'https://scrimba.com/p/pVaDAv/c43gnHm'
+forumTopicId: 301102
 ---
 
 # --description--
 
-The `align-items` property is similar to `justify-content`. Recall that the `justify-content` property aligned flex items along the main axis. For rows, the main axis is a horizontal line and for columns it is a vertical line.
+Sometimes the flex items within a flex container do not fill all the space in the container. It is common to want to tell CSS how to align and space out the flex items a certain way. Fortunately, the `justify-content` property has several options to do this. But first, there is some important terminology to understand before reviewing those options.
 
-Flex containers also have a **cross axis** which is the opposite of the main axis. For rows, the cross axis is vertical and for columns, the cross axis is horizontal.
+[Here is a useful image showing a row to illustrate the concepts below.](https://www.w3.org/TR/css-flexbox-1/images/flex-direction-terms.svg)
 
-CSS offers the `align-items` property to align flex items along the cross axis. For a row, it tells CSS how to push the items in the entire row up or down within the container. And for a column, how to push all the items left or right within the container.
+Recall that setting a flex container as a row places the flex items side-by-side from left-to-right. A flex container set as a column places the flex items in a vertical stack from top-to-bottom. For each, the direction the flex items are arranged is called the **main axis**. For a row, this is a horizontal line that cuts through each item. And for a column, the main axis is a vertical line through the items.
 
-The different values available for `align-items` include:
+There are several options for how to space the flex items along the line that is the main axis. One of the most commonly used is `justify-content: center;`, which aligns all the flex items to the center inside the flex container. Others options include:
 
-<ul><li><code>flex-start</code>: aligns items to the start of the flex container. For rows, this aligns items to the top of the container. For columns, this aligns items to the left of the container.</li><li><code>flex-end</code>: aligns items to the end of the flex container. For rows, this aligns items to the bottom of the container. For columns, this aligns items to the right of the container.</li><li><code>center</code>: align items to the center. For rows, this vertically aligns items (equal space above and below the items). For columns, this horizontally aligns them (equal space to the left and right of the items).</li><li><code>stretch</code>: stretch the items to fill the flex container. For example, rows items are stretched to fill the flex container top-to-bottom. This is the default value if no <code>align-items</code> value is specified.</li><li><code>baseline</code>: align items to their baselines. Baseline is a text concept, think of it as the line that the letters sit on.</li></ul>
+<ul><li><code>flex-start</code>: aligns items to the start of the flex container. For a row, this pushes the items to the left of the container. For a column, this pushes the items to the top of the container. This is the default alignment if no <code>justify-content</code> is specified.</li><li><code>flex-end</code>: aligns items to the end of the flex container. For a row, this pushes the items to the right of the container. For a column, this pushes the items to the bottom of the container.</li><li><code>space-between</code>: aligns items to the center of the main axis, with extra space placed between the items. The first and last items are pushed to the very edge of the flex container. For example, in a row the first item is against the left side of the container, the last item is against the right side of the container, then the remaining space is distributed evenly among the other items.</li><li><code>space-around</code>: similar to <code>space-between</code> but the first and last items are not locked to the edges of the container, the space is distributed around all the items with a half space on either end of the flex container.</li><li><code>space-evenly</code>: Distributes space evenly between the flex items with a full space at either end of the flex container</li></ul>
 
 # --instructions--
 
-An example helps show this property in action. Add the CSS property `align-items` to the `#box-container` element, and give it a value of `center`.
+An example helps show this property in action. Add the CSS property `justify-content` to the `#box-container` element, and give it a value of `center`.
 
 **Bonus**  
-Try the other options for the `align-items` property in the code editor to see their differences. But note that a value of `center` is the only one that will pass this challenge.
+Try the other options for the `justify-content` property in the code editor to see their differences. But note that a value of `center` is the only one that will pass this challenge.
 
 # --hints--
 
-The `#box-container` element should have an `align-items` property set to a value of `center`.
+The `#box-container` element should have a `justify-content` property set to a value of `center`.
 
 ```js
-assert($('#box-container').css('align-items') == 'center');
+assert($('#box-container').css('justify-content') == 'center');
 ```
 
 # --seed--
@@ -47,20 +47,20 @@ assert($('#box-container').css('align-items') == 'center');
   }
   #box-1 {
     background-color: dodgerblue;
-    width: 200px;
-    font-size: 24px;
+    width: 25%;
+    height: 100%;
   }
 
   #box-2 {
     background-color: orangered;
-    width: 200px;
-    font-size: 18px;
+    width: 25%;
+    height: 100%;
   }
 </style>
 
 <div id="box-container">
-  <div id="box-1"><p>Hello</p></div>
-  <div id="box-2"><p>Goodbye</p></div>
+  <div id="box-1"></div>
+  <div id="box-2"></div>
 </div>
 ```
 
@@ -72,23 +72,23 @@ assert($('#box-container').css('align-items') == 'center');
     background: gray;
     display: flex;
     height: 500px;
-    align-items: center;
+    justify-content: center;
   }
   #box-1 {
     background-color: dodgerblue;
-    width: 200px;
-    font-size: 24px;
+    width: 25%;
+    height: 100%;
   }
 
   #box-2 {
     background-color: orangered;
-    width: 200px;
-    font-size: 18px;
+    width: 25%;
+    height: 100%;
   }
 </style>
 
 <div id="box-container">
-  <div id="box-1"><p>Hello</p></div>
-  <div id="box-2"><p>Goodbye</p></div>
+  <div id="box-1"></div>
+  <div id="box-2"></div>
 </div>
 ```
