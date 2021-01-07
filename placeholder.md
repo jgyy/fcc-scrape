@@ -1,35 +1,31 @@
 ---
-id: 587d78ad367417b2b2512afb
-title: Use the flex-shrink Property to Shrink Items
+id: 587d78ad367417b2b2512afa
+title: Use the flex-wrap Property to Wrap a Row or Column
 challengeType: 0
-videoUrl: 'https://scrimba.com/p/pVaDAv/cd3PBfr'
-forumTopicId: 301113
+videoUrl: 'https://scrimba.com/p/pVaDAv/cQv9ZtG'
+forumTopicId: 301114
 ---
 
 # --description--
 
-So far, all the properties in the challenges apply to the flex container (the parent of the flex items). However, there are several useful properties for the flex items.
+CSS flexbox has a feature to split a flex item into multiple rows (or columns). By default, a flex container will fit all flex items together. For example, a row will all be on one line.
 
-The first is the `flex-shrink` property. When it's used, it allows an item to shrink if the flex container is too small. Items shrink when the width of the parent container is smaller than the combined widths of all the flex items within it.
+However, using the `flex-wrap` property tells CSS to wrap items. This means extra items move into a new row or column. The break point of where the wrapping happens depends on the size of the items and the size of the container.
 
-The `flex-shrink` property takes numbers as values. The higher the number, the more it will shrink compared to the other items in the container. For example, if one item has a `flex-shrink` value of `1` and the other has a `flex-shrink` value of `3`, the one with the value of `3` will shrink three times as much as the other.
+CSS also has options for the direction of the wrap:
+
+<ul><li><code>nowrap</code>: this is the default setting, and does not wrap items.</li><li><code>wrap</code>: wraps items from left-to-right if they are in a row, or top-to-bottom if they are in a column.</li><li><code>wrap-reverse</code>: wraps items from right-to-left if they are in a row, or bottom-to-top if they are in a column.</li></ul>
 
 # --instructions--
 
-Add the CSS property `flex-shrink` to both `#box-1` and `#box-2`. Give `#box-1` a value of `1` and `#box-2` a value of `2`.
+The current layout has too many boxes for one row. Add the CSS property `flex-wrap` to the `#box-container` element, and give it a value of `wrap`.
 
 # --hints--
 
-The `#box-1` element should have the `flex-shrink` property set to a value of `1`.
+The `#box-container` element should have the `flex-wrap` property set to a value of `wrap`.
 
 ```js
-assert($('#box-1').css('flex-shrink') == '1');
-```
-
-The `#box-2` element should have the `flex-shrink` property set to a value of `2`.
-
-```js
-assert($('#box-2').css('flex-shrink') == '2');
+assert($('#box-container').css('flex-wrap') == 'wrap');
 ```
 
 # --seed--
@@ -39,27 +35,51 @@ assert($('#box-2').css('flex-shrink') == '2');
 ```html
 <style>
   #box-container {
+    background: gray;
     display: flex;
-    height: 500px;
+    height: 100%;
+
   }
   #box-1 {
     background-color: dodgerblue;
-    width: 100%;
-    height: 200px;
-
+    width: 25%;
+    height: 50%;
   }
 
   #box-2 {
     background-color: orangered;
-    width: 100%;
-    height: 200px;
-
+    width: 25%;
+    height: 50%;
+  }
+  #box-3 {
+    background-color: violet;
+    width: 25%;
+    height: 50%;
+  }
+  #box-4 {
+    background-color: yellow;
+    width: 25%;
+    height: 50%;
+  }
+  #box-5 {
+    background-color: green;
+    width: 25%;
+    height: 50%;
+  }
+  #box-6 {
+    background-color: black;
+    width: 25%;
+    height: 50%;
   }
 </style>
 
 <div id="box-container">
   <div id="box-1"></div>
   <div id="box-2"></div>
+  <div id="box-3"></div>
+  <div id="box-4"></div>
+  <div id="box-5"></div>
+  <div id="box-6"></div>
 </div>
 ```
 
@@ -68,26 +88,50 @@ assert($('#box-2').css('flex-shrink') == '2');
 ```html
 <style>
   #box-container {
+    background: gray;
     display: flex;
-    height: 500px;
+    height: 100%;
+    flex-wrap: wrap;
   }
   #box-1 {
     background-color: dodgerblue;
-    width: 100%;
-    height: 200px;
-    flex-shrink: 1;
+    width: 25%;
+    height: 50%;
   }
 
   #box-2 {
     background-color: orangered;
-    width: 100%;
-    height: 200px;
-    flex-shrink: 2;
+    width: 25%;
+    height: 50%;
+  }
+  #box-3 {
+    background-color: violet;
+    width: 25%;
+    height: 50%;
+  }
+  #box-4 {
+    background-color: yellow;
+    width: 25%;
+    height: 50%;
+  }
+  #box-5 {
+    background-color: green;
+    width: 25%;
+    height: 50%;
+  }
+  #box-6 {
+    background-color: black;
+    width: 25%;
+    height: 50%;
   }
 </style>
 
 <div id="box-container">
   <div id="box-1"></div>
   <div id="box-2"></div>
+  <div id="box-3"></div>
+  <div id="box-4"></div>
+  <div id="box-5"></div>
+  <div id="box-6"></div>
 </div>
 ```
