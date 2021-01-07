@@ -1,29 +1,33 @@
 ---
-id: 587d78ab367417b2b2512af2
-title: Use the flex-direction Property to Make a Row
+id: 587d78ae367417b2b2512afc
+title: Use the flex-grow Property to Expand Items
 challengeType: 0
-videoUrl: 'https://scrimba.com/p/pVaDAv/cBEkbfJ'
-forumTopicId: 301110
+videoUrl: 'https://scrimba.com/p/pVaDAv/c2p78cg'
+forumTopicId: 301111
 ---
 
 # --description--
 
-Adding `display: flex` to an element turns it into a flex container. This makes it possible to align any children of that element into rows or columns. You do this by adding the `flex-direction` property to the parent item and setting it to row or column. Creating a row will align the children horizontally, and creating a column will align the children vertically.
+The opposite of `flex-shrink` is the `flex-grow` property. Recall that `flex-shrink` controls the size of the items when the container shrinks. The `flex-grow` property controls the size of items when the parent container expands.
 
-Other options for `flex-direction` are `row-reverse` and `column-reverse`.
-
-**Note:** The default value for the `flex-direction` property is `row`.
+Using a similar example from the last challenge, if one item has a `flex-grow` value of `1` and the other has a `flex-grow` value of `3`, the one with the value of `3` will grow three times as much as the other.
 
 # --instructions--
 
-Add the CSS property `flex-direction` to the `#box-container` element, and give it a value of `row-reverse`.
+Add the CSS property `flex-grow` to both `#box-1` and `#box-2`. Give `#box-1` a value of `1` and `#box-2` a value of `2`.
 
 # --hints--
 
-The `#box-container` element should have a `flex-direction` property set to row-reverse.
+The `#box-1` element should have the `flex-grow` property set to a value of `1`.
 
 ```js
-assert($('#box-container').css('flex-direction') == 'row-reverse');
+assert($('#box-1').css('flex-grow') == '1');
+```
+
+The `#box-2` element should have the `flex-grow` property set to a value of `2`.
+
+```js
+assert($('#box-2').css('flex-grow') == '2');
 ```
 
 # --seed--
@@ -35,18 +39,18 @@ assert($('#box-container').css('flex-direction') == 'row-reverse');
   #box-container {
     display: flex;
     height: 500px;
-
   }
+
   #box-1 {
     background-color: dodgerblue;
-    width: 50%;
-    height: 50%;
+    height: 200px;
+
   }
 
   #box-2 {
     background-color: orangered;
-    width: 50%;
-    height: 50%;
+    height: 200px;
+
   }
 </style>
 
@@ -63,18 +67,18 @@ assert($('#box-container').css('flex-direction') == 'row-reverse');
   #box-container {
     display: flex;
     height: 500px;
-    flex-direction: row-reverse;
   }
+
   #box-1 {
     background-color: dodgerblue;
-    width: 50%;
-    height: 50%;
+    height: 200px;
+    flex-grow: 1;
   }
 
   #box-2 {
     background-color: orangered;
-    width: 50%;
-    height: 50%;
+    height: 200px;
+    flex-grow: 2;
   }
 </style>
 
