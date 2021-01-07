@@ -1,45 +1,25 @@
 ---
-id: 587d78ae367417b2b2512afd
-title: Use the flex-basis Property to Set the Initial Size of an Item
+id: 587d78ac367417b2b2512af4
+title: Use the flex-direction Property to Make a Column
 challengeType: 0
-videoUrl: 'https://scrimba.com/p/pVaDAv/c3d9nCa'
-forumTopicId: 301108
+videoUrl: 'https://scrimba.com/p/pVaDAv/cZmWeA4'
+forumTopicId: 301109
 ---
 
 # --description--
 
-The `flex-basis` property specifies the initial size of the item before CSS makes adjustments with `flex-shrink` or `flex-grow`.
-
-The units used by the `flex-basis` property are the same as other size properties (`px`, `em`, `%`, etc.). The value `auto` sizes items based on the content.
+The last two challenges used the `flex-direction` property set to `row`. This property can also create a column by vertically stacking the children of a flex container.
 
 # --instructions--
 
-Set the initial size of the boxes using `flex-basis`. Add the CSS property `flex-basis` to both `#box-1` and `#box-2`. Give `#box-1` a value of `10em` and `#box-2` a value of `20em`.
+Add the CSS property `flex-direction` to the `#box-container` element, and give it a value of `column`.
 
 # --hints--
 
-The `#box-1` element should have a `flex-basis` property.
+The `#box-container` element should have a `flex-direction` property set to column.
 
 ```js
-assert($('#box-1').css('flex-basis') != 'auto');
-```
-
-The `#box-1` element should have a `flex-basis` value of `10em`.
-
-```js
-assert(code.match(/#box-1\s*?{\s*?.*?\s*?.*?\s*?flex-basis:\s*?10em;/g));
-```
-
-The `#box-2` element should have the `flex-basis` property.
-
-```js
-assert($('#box-2').css('flex-basis') != 'auto');
-```
-
-The `#box-2` element should have a `flex-basis` value of `20em`.
-
-```js
-assert(code.match(/#box-2\s*?{\s*?.*?\s*?.*?\s*?flex-basis:\s*?20em;/g));
+assert($('#box-container').css('flex-direction') == 'column');
 ```
 
 # --seed--
@@ -51,18 +31,18 @@ assert(code.match(/#box-2\s*?{\s*?.*?\s*?.*?\s*?flex-basis:\s*?20em;/g));
   #box-container {
     display: flex;
     height: 500px;
-  }
 
+  }
   #box-1 {
     background-color: dodgerblue;
-    height: 200px;
-
+    width: 50%;
+    height: 50%;
   }
 
   #box-2 {
     background-color: orangered;
-    height: 200px;
-
+    width: 50%;
+    height: 50%;
   }
 </style>
 
@@ -79,18 +59,18 @@ assert(code.match(/#box-2\s*?{\s*?.*?\s*?.*?\s*?flex-basis:\s*?20em;/g));
   #box-container {
     display: flex;
     height: 500px;
+    flex-direction: column;
   }
-
   #box-1 {
     background-color: dodgerblue;
-    height: 200px;
-    flex-basis: 10em;
+    width: 50%;
+    height: 50%;
   }
 
   #box-2 {
     background-color: orangered;
-    height: 200px;
-    flex-basis: 20em;
+    width: 50%;
+    height: 50%;
   }
 </style>
 
