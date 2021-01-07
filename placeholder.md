@@ -1,25 +1,33 @@
 ---
-id: 587d78ad367417b2b2512af9
-title: Use the align-items Property in the Tweet Embed
+id: 587d78af367417b2b2512b00
+title: Use the align-self Property
 challengeType: 0
-videoUrl: 'https://scrimba.com/p/pVaDAv/cd3PNfq'
-forumTopicId: 301106
+videoUrl: 'https://scrimba.com/p/pVaDAv/cMbvzfv'
+forumTopicId: 301107
 ---
 
 # --description--
 
-The last challenge introduced the `align-items` property and gave an example. This property can be applied to a few tweet embed elements to align the flex items inside them.
+The final property for flex items is `align-self`. This property allows you to adjust each item's alignment individually, instead of setting them all at once. This is useful since other common adjustment techniques using the CSS properties `float`, `clear`, and `vertical-align` do not work on flex items.
+
+`align-self` accepts the same values as `align-items` and will override any value set by the `align-items` property.
 
 # --instructions--
 
-Add the CSS property `align-items` to the header's `.follow-btn` element. Set the value to `center`.
+Add the CSS property `align-self` to both `#box-1` and `#box-2`. Give `#box-1` a value of `center` and give `#box-2` a value of `flex-end`.
 
 # --hints--
 
-The `.follow-btn` element should have the `align-items` property set to a value of `center`.
+The `#box-1` element should have the `align-self` property set to a value of `center`.
 
 ```js
-assert($('.follow-btn').css('align-items') == 'center');
+assert($('#box-1').css('align-self') == 'center');
+```
+
+The `#box-2` element should have the `align-self` property set to a value of `flex-end`.
+
+```js
+assert($('#box-2').css('align-self') == 'flex-end');
 ```
 
 # --seed--
@@ -28,188 +36,56 @@ assert($('.follow-btn').css('align-items') == 'center');
 
 ```html
 <style>
-  body {
-    font-family: Arial, sans-serif;
-  }
-  header, footer {
+  #box-container {
     display: flex;
-    flex-direction: row;
+    height: 500px;
   }
-  header .profile-thumbnail {
-    width: 50px;
-    height: 50px;
-    border-radius: 4px;
-  }
-  header .profile-name {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin-left: 10px;
-  }
-  header .follow-btn {
-    display: flex;
+  #box-1 {
+    background-color: dodgerblue;
 
-    margin: 0 0 0 auto;
+    height: 200px;
+    width: 200px;
   }
-  header .follow-btn button {
-    border: 0;
-    border-radius: 3px;
-    padding: 5px;
-  }
-  header h3, header h4 {
-    display: flex;
-    margin: 0;
-  }
-  #inner p {
-    margin-bottom: 10px;
-    font-size: 20px;
-  }
-  #inner hr {
-    margin: 20px 0;
-    border-style: solid;
-    opacity: 0.1;
-  }
-  footer .stats {
-    display: flex;
-    font-size: 15px;
-  }
-  footer .stats strong {
-    font-size: 18px;
-  }
-  footer .stats .likes {
-    margin-left: 10px;
-  }
-  footer .cta {
-    margin-left: auto;
-  }
-  footer .cta button {
-    border: 0;
-    background: transparent;
+
+  #box-2 {
+    background-color: orangered;
+
+    height: 200px;
+    width: 200px;
   }
 </style>
-<header>
-  <img src="https://freecodecamp.s3.amazonaws.com/quincy-twitter-photo.jpg" alt="Quincy Larson's profile picture" class="profile-thumbnail">
-  <div class="profile-name">
-    <h3>Quincy Larson</h3>
-    <h4>@ossia</h4>
-  </div>
-  <div class="follow-btn">
-    <button>Follow</button>
-  </div>
-</header>
-<div id="inner">
-  <p>I meet so many people who are in search of that one trick that will help them work smart. Even if you work smart, you still have to work hard.</p>
-  <span class="date">1:32 PM - 12 Jan 2018</span>
-  <hr>
+
+<div id="box-container">
+  <div id="box-1"></div>
+  <div id="box-2"></div>
 </div>
-<footer>
-  <div class="stats">
-    <div class="Retweets">
-      <strong>107</strong> Retweets
-    </div>
-    <div class="likes">
-      <strong>431</strong> Likes
-    </div>
-  </div>
-  <div class="cta">
-    <button class="share-btn">Share</button>
-    <button class="retweet-btn">Retweet</button>
-    <button class="like-btn">Like</button>
-  </div>
-</footer>
 ```
 
 # --solutions--
 
 ```html
 <style>
-  body {
-    font-family: Arial, sans-serif;
-  }
-  header, footer {
+  #box-container {
     display: flex;
-    flex-direction: row;
+    height: 500px;
   }
-  header .profile-thumbnail {
-    width: 50px;
-    height: 50px;
-    border-radius: 4px;
+  #box-1 {
+    background-color: dodgerblue;
+    align-self: center;
+    height: 200px;
+    width: 200px;
   }
-  header .profile-name {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin-left: 10px;
-  }
-  header .follow-btn {
-    display: flex;
-    align-items: center;
-    margin: 0 0 0 auto;
-  }
-  header .follow-btn button {
-    border: 0;
-    border-radius: 3px;
-    padding: 5px;
-  }
-  header h3, header h4 {
-    display: flex;
-    margin: 0;
-  }
-  #inner p {
-    margin-bottom: 10px;
-    font-size: 20px;
-  }
-  #inner hr {
-    margin: 20px 0;
-    border-style: solid;
-    opacity: 0.1;
-  }
-  footer .stats {
-    display: flex;
-    font-size: 15px;
-  }
-  footer .stats strong {
-    font-size: 18px;
-  }
-  footer .stats .likes {
-    margin-left: 10px;
-  }
-  footer .cta {
-    margin-left: auto;
-  }
-  footer .cta button {
-    border: 0;
-    background: transparent;
+
+  #box-2 {
+    background-color: orangered;
+    align-self: flex-end;
+    height: 200px;
+    width: 200px;
   }
 </style>
-<header>
-  <img src="https://freecodecamp.s3.amazonaws.com/quincy-twitter-photo.jpg" alt="Quincy Larson's profile picture" class="profile-thumbnail">
-  <div class="profile-name">
-    <h3>Quincy Larson</h3>
-    <h4>@ossia</h4>
-  </div>
-  <div class="follow-btn">
-    <button>Follow</button>
-  </div>
-</header>
-<div id="inner">
-  <p>I meet so many people who are in search of that one trick that will help them work smart. Even if you work smart, you still have to work hard.</p>
-  <span class="date">1:32 PM - 12 Jan 2018</span>
-  <hr>
+
+<div id="box-container">
+  <div id="box-1"></div>
+  <div id="box-2"></div>
 </div>
-<footer>
-  <div class="stats">
-    <div class="Retweets">
-      <strong>107</strong> Retweets
-    </div>
-    <div class="likes">
-      <strong>431</strong> Likes
-    </div>
-  </div>
-  <div class="cta">
-    <button class="share-btn">Share</button>
-    <button class="retweet-btn">Retweet</button>
-    <button class="like-btn">Like</button>
-  </div>
-</footer>
 ```
