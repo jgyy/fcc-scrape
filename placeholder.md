@@ -1,36 +1,50 @@
 ---
-id: 5a94fe1369fb03452672e45d
-title: Place Items in Grid Areas Using the grid-area Property
+id: 5a94fe3669fb03452672e45f
+title: Reduce Repetition Using the repeat Function
 challengeType: 0
-videoUrl: 'https://scrimba.com/p/pByETK/cRrqmtV'
-forumTopicId: 301132
+videoUrl: 'https://scrimba.com/p/pByETK/cQvqyHR'
+forumTopicId: 301133
 ---
 
 # --description--
 
-After creating an area's template for your grid container, as shown in the previous challenge, you can place an item in your custom area by referencing the name you gave it. To do this, you use the `grid-area` property on an item like this:
+When you used `grid-template-columns` and `grid-template-rows` to define the structure of a grid, you entered a value for each row or column you created.
+
+Let's say you want a grid with 100 rows of the same height. It isn't very practical to insert 100 values individually. Fortunately, there's a better way - by using the `repeat` function to specify the number of times you want your column or row to be repeated, followed by a comma and the value you want to repeat.
+
+Here's an example that would create the 100 row grid, each row at 50px tall.
 
 ```css
-.item1 {
-  grid-area: header;
-}
+grid-template-rows: repeat(100, 50px);
 ```
 
-This lets the grid know that you want the `item1` class to go in the area named `header`. In this case, the item will use the entire top row because that whole row is named as the header area.
+You can also repeat multiple values with the repeat function and insert the function amongst other values when defining a grid structure. Here's what that looks like:
+
+```css
+grid-template-columns: repeat(2, 1fr 50px) 20px;
+```
+
+This translates to:
+
+```css
+grid-template-columns: 1fr 50px 1fr 50px 20px;
+```
+
+**Note:** The `1fr 50px` is repeated twice followed by 20px.
 
 # --instructions--
 
-Place an element with the `item5` class in the `footer` area using the `grid-area` property.
+Use `repeat` to remove repetition from the `grid-template-columns` property.
 
 # --hints--
 
-`item5` class should have a `grid-area` property that has the value of `footer`.
+`container` class should have a `grid-template-columns` property that is set to repeat 3 columns with the width of `1fr`.
 
 ```js
 assert(
-  __helpers
-    .removeCssComments(code)
-    .match(/.item5\s*?{[\s\S]*grid-area\s*?:\s*?footer\s*?;[\s\S]*}/gi)
+  code.match(
+    /.container\s*?{[\s\S]*grid-template-columns\s*?:\s*?repeat\s*?\(\s*?3\s*?,\s*?1fr\s*?\)\s*?;[\s\S]*}/gi
+  )
 );
 ```
 
@@ -44,14 +58,7 @@ assert(
   .item2{background:LightSalmon;}
   .item3{background:PaleTurquoise;}
   .item4{background:LightPink;}
-
-  .item5 {
-    background: PaleGreen;
-    /* Only change code below this line */
-
-    
-    /* Only change code above this line */
-  }
+  .item5{background:PaleGreen;}
 
   .container {
     font-size: 40px;
@@ -59,13 +66,13 @@ assert(
     width: 100%;
     background: LightGray;
     display: grid;
+    /* Only change code below this line */
+
     grid-template-columns: 1fr 1fr 1fr;
+
+    /* Only change code above this line */
     grid-template-rows: 1fr 1fr 1fr;
     grid-gap: 10px;
-    grid-template-areas:
-      "header header header"
-      "advert content content"
-      "footer footer footer";
   }
 </style>
 
@@ -81,5 +88,5 @@ assert(
 # --solutions--
 
 ```html
-<style>.item5 {grid-area: footer;}</style>
+<style>.container {grid-template-columns: repeat(3, 1fr);}</style>
 ```
