@@ -1,36 +1,27 @@
 ---
-id: 5a9036d038fddaf9a66b5d32
-title: Add Columns with grid-template-columns
+id: 5a9036ee38fddaf9a66b5d37
+title: Add Gaps Faster with grid-gap
 challengeType: 0
-videoUrl: 'https://scrimba.com/p/pByETK/c7NzDHv'
-forumTopicId: 301117
+videoUrl: 'https://scrimba.com/p/pByETK/ca2qVtv'
+forumTopicId: 301118
 ---
 
 # --description--
 
-Simply creating a grid element doesn't get you very far. You need to define the structure of the grid as well. To add some columns to the grid, use the `grid-template-columns` property on a grid container as demonstrated below:
-
-```css
-.container {
-  display: grid;
-  grid-template-columns: 50px 50px;
-}
-```
-
-This will give your grid two columns that are each 50px wide. The number of parameters given to the `grid-template-columns` property indicates the number of columns in the grid, and the value of each parameter indicates the width of each column.
+`grid-gap` is a shorthand property for `grid-row-gap` and `grid-column-gap` from the previous two challenges that's more convenient to use. If `grid-gap` has one value, it will create a gap between all rows and columns. However, if there are two values, it will use the first one to set the gap between the rows and the second value for the columns.
 
 # --instructions--
 
-Give the grid container three columns that are each `100px` wide.
+Use `grid-gap` to introduce a `10px` gap between the rows and `20px` gap between the columns.
 
 # --hints--
 
-`container` class should have a `grid-template-columns` property with three units of `100px`.
+`container` class should have a `grid-gap` property that introduces `10px` gap between the rows and `20px` gap between the columns.
 
 ```js
 assert(
   code.match(
-    /.container\s*?{[\s\S]*grid-template-columns\s*?:\s*?100px\s*?100px\s*?100px\s*?;[\s\S]*}/gi
+    /.container\s*?{[\s\S]*grid-gap\s*?:\s*?10px\s+?20px\s*?;[\s\S]*}/gi
   )
 );
 ```
@@ -49,16 +40,18 @@ assert(
 
   .container {
     font-size: 40px;
+    min-height: 300px;
     width: 100%;
     background: LightGray;
     display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
     /* Only change code below this line */
 
 
     /* Only change code above this line */
   }
 </style>
-
 <div class="container">
   <div class="d1">1</div>
   <div class="d2">2</div>
@@ -71,5 +64,5 @@ assert(
 # --solutions--
 
 ```html
-<style>.container {grid-template-columns: 100px 100px 100px;}</style>
+<style>.container {grid-gap: 10px 20px;}</style>
 ```
