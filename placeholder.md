@@ -1,36 +1,27 @@
 ---
-id: 5a94fe8569fb03452672e464
-title: Create Grids within Grids
+id: 5a858944d96184f06fd60d61
+title: Create Your First CSS Grid
 challengeType: 0
-forumTopicId: 301128
+videoUrl: 'https://scrimba.com/p/pByETK/cqwREC4'
+forumTopicId: 301129
 ---
 
 # --description--
 
-Turning an element into a grid only affects the behavior of its direct descendants. So by turning a direct descendant into a grid, you have a grid within a grid.
+Turn any HTML element into a grid container by setting its `display` property to `grid`. This gives you the ability to use all the other properties associated with CSS Grid.
 
-For example, by setting the `display` and `grid-template-columns` properties of the element with the `item3` class, you create a grid within your grid.
+**Note:** In CSS Grid, the parent element is referred to as the <dfn>container</dfn> and its children are called <dfn>items</dfn>.
 
 # --instructions--
 
-Turn the element with the `item3` class into a grid with two columns with a width of `auto` and `1fr` using `display` and `grid-template-columns`.
+Change the display of the div with the `container` class to `grid`.
 
 # --hints--
 
-`item3` class should have a `grid-template-columns` property with `auto` and `1fr` as values.
+`container` class should have a `display` property with a value of `grid`.
 
 ```js
-assert(
-  code.match(
-    /.item3\s*?{[\s\S]*grid-template-columns\s*?:\s*?auto\s*?1fr\s*?;[\s\S]*}/gi
-  )
-);
-```
-
-`item3` class should have a `display` property with the value of `grid`.
-
-```js
-assert(code.match(/.item3\s*?{[\s\S]*display\s*?:\s*?grid\s*?;[\s\S]*}/gi));
+assert(code.match(/.container\s*?{[\s\S]*display\s*?:\s*?grid\s*?;[\s\S]*}/gi));
 ```
 
 # --seed--
@@ -39,67 +30,34 @@ assert(code.match(/.item3\s*?{[\s\S]*display\s*?:\s*?grid\s*?;[\s\S]*}/gi));
 
 ```html
 <style>
+  .d1{background:LightSkyBlue;}
+  .d2{background:LightSalmon;}
+  .d3{background:PaleTurquoise;}
+  .d4{background:LightPink;}
+  .d5{background:PaleGreen;}
+
   .container {
-    font-size: 1.5em;
-    min-height: 300px;
+    font-size: 40px;
     width: 100%;
     background: LightGray;
-    display: grid;
-    grid-template-columns: auto 1fr;
-    grid-template-rows: auto 1fr auto;
-    grid-gap: 10px;
-    grid-template-areas:
-      "advert header"
-      "advert content"
-      "advert footer";
-  }
-  .item1 {
-    background: LightSkyBlue;
-    grid-area: header;
-  }
-
-  .item2 {
-    background: LightSalmon;
-    grid-area: advert;
-  }
-
-  .item3 {
-    background: PaleTurquoise;
-    grid-area: content;
     /* Only change code below this line */
 
-
+    
     /* Only change code above this line */
   }
-
-  .item4 {
-    background: lightpink;
-    grid-area: footer;
-  }
-
-  .itemOne {
-    background: PaleGreen;
-  }
-
-  .itemTwo {
-    background: BlanchedAlmond;
-  }
-
 </style>
 
 <div class="container">
-  <div class="item1">header</div>
-  <div class="item2">advert</div>
-  <div class="item3">
-    <div class="itemOne">paragraph1</div>
-    <div class="itemTwo">paragraph2</div>
-  </div>
-  <div class="item4">footer</div>
+  <div class="d1">1</div>
+  <div class="d2">2</div>
+  <div class="d3">3</div>
+  <div class="d4">4</div>
+  <div class="d5">5</div>
 </div>
 ```
 
 # --solutions--
 
 ```html
-<style>.item3 {grid-template-columns: auto 1fr; display: grid;}</style>
+<style>.container {display: grid;}</style>
 ```
