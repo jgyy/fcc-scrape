@@ -1,41 +1,39 @@
 ---
-id: 5a9036ee38fddaf9a66b5d34
-title: Use CSS Grid units to Change the Size of Columns and Rows
+id: 5a94fe2669fb03452672e45e
+title: Use grid-area Without Creating an Areas Template
 challengeType: 0
-videoUrl: 'https://scrimba.com/p/pByETK/cvE8phd'
-forumTopicId: 301134
+videoUrl: 'https://scrimba.com/p/pByETK/c6N7VhK'
+forumTopicId: 301135
 ---
 
 # --description--
 
-You can use absolute and relative units like `px` and `em` in CSS Grid to define the size of rows and columns. You can use these as well:
-
-`fr`: sets the column or row to a fraction of the available space,
-
-`auto`: sets the column or row to the width or height of its content automatically,
-
-`%`: adjusts the column or row to the percent width of its container.
-
-Here's the code that generates the output in the preview:
+The `grid-area` property you learned in the last challenge can be used in another way. If your grid doesn't have an areas template to reference, you can create an area on the fly for an item to be placed like this:
 
 ```css
-grid-template-columns: auto 50px 10% 2fr 1fr;
+item1 { grid-area: 1/1/2/4; }
 ```
 
-This snippet creates five columns. The first column is as wide as its content, the second column is 50px, the third column is 10% of its container, and for the last two columns; the remaining space is divided into three sections, two are allocated for the fourth column, and one for the fifth.
+This is using the line numbers you learned about earlier to define where the area for this item will be. The numbers in the example above represent these values:
+
+```css
+grid-area: horizontal line to start at / vertical line to start at / horizontal line to end at / vertical line to end at;
+```
+
+So the item in the example will consume the rows between lines 1 and 2, and the columns between lines 1 and 4.
 
 # --instructions--
 
-Make a grid with three columns whose widths are as follows: 1fr, 100px, and 2fr.
+Using the `grid-area` property, place the element with `item5` class between the third and fourth horizontal lines and between the first and fourth vertical lines.
 
 # --hints--
 
-`container` class should have a `grid-template-columns` property that has three columns with the following widths: `1fr, 100px, and 2fr`.
+The `item5` class should have a `grid-area` property to make it fill the whole area between the third and fourth horizontal lines, and first and fourth vertical lines.
 
 ```js
 assert(
   code.match(
-    /.container\s*?{[\s\S]*grid-template-columns\s*?:\s*?1fr\s*?100px\s*?2fr\s*?;[\s\S]*}/gi
+    /.item5\s*?{[\s\S]*grid-area\s*?:\s*?3\s*?\/\s*?1\s*?\/\s*?4\s*?\/\s*?4\s*?;[\s\S]*}/gi
   )
 );
 ```
@@ -46,37 +44,42 @@ assert(
 
 ```html
 <style>
-  .d1{background:LightSkyBlue;}
-  .d2{background:LightSalmon;}
-  .d3{background:PaleTurquoise;}
-  .d4{background:LightPink;}
-  .d5{background:PaleGreen;}
+  .item1{background:LightSkyBlue;}
+  .item2{background:LightSalmon;}
+  .item3{background:PaleTurquoise;}
+  .item4{background:LightPink;}
+
+  .item5 {
+    background: PaleGreen;
+    /* Only change code below this line */
+
+
+    /* Only change code above this line */
+  }
 
   .container {
     font-size: 40px;
+    min-height: 300px;
     width: 100%;
     background: LightGray;
     display: grid;
-    /* Only change code below this line */
-
-    grid-template-columns: auto 50px 10% 2fr 1fr;
-
-    /* Only change code above this line */
-    grid-template-rows: 50px 50px;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-gap: 10px;
   }
 </style>
 
 <div class="container">
-  <div class="d1">1</div>
-  <div class="d2">2</div>
-  <div class="d3">3</div>
-  <div class="d4">4</div>
-  <div class="d5">5</div>
+  <div class="item1">1</div>
+  <div class="item2">2</div>
+  <div class="item3">3</div>
+  <div class="item4">4</div>
+  <div class="item5">5</div>
 </div>
 ```
 
 # --solutions--
 
 ```html
-<style>.container {grid-template-columns: 1fr 100px 2fr;}</style>
+<style>.item5 {grid-area: 3/1/4/4;}</style>
 ```
