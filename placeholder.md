@@ -1,27 +1,27 @@
 ---
-id: 5a9036e138fddaf9a66b5d33
-title: Add Rows with grid-template-rows
+id: 5a90376038fddaf9a66b5d3c
+title: Align All Items Horizontally using justify-items
 challengeType: 0
-videoUrl: 'https://scrimba.com/p/pByETK/cbp9Pua'
-forumTopicId: 301119
+videoUrl: 'https://scrimba.com/p/pByETK/cJbpECn'
+forumTopicId: 301120
 ---
 
 # --description--
 
-The grid you created in the last challenge will set the number of rows automatically. To adjust the rows manually, use the `grid-template-rows` property in the same way you used `grid-template-columns` in previous challenge.
+Sometimes you want all the items in your CSS Grid to share the same alignment. You can use the previously learned properties and align them individually, or you can align them all at once horizontally by using `justify-items` on your grid container. This property can accept all the same values you learned about in the previous two challenges, the difference being that it will move **all** the items in our grid to the desired alignment.
 
 # --instructions--
 
-Add two rows to the grid that are `50px` tall each.
+Use this property to center all our items horizontally.
 
 # --hints--
 
-`container` class should have a `grid-template-rows` property with two units of `50px`.
+`container` class should have a `justify-items` property that has the value of `center`.
 
 ```js
 assert(
   code.match(
-    /.container\s*?{[\s\S]*grid-template-rows\s*?:\s*?50px\s*?50px\s*?;[\s\S]*}/gi
+    /.container\s*?{[\s\S]*justify-items\s*?:\s*?center\s*?;[\s\S]*}/gi
   )
 );
 ```
@@ -32,18 +32,21 @@ assert(
 
 ```html
 <style>
-  .d1{background:LightSkyBlue;}
-  .d2{background:LightSalmon;}
-  .d3{background:PaleTurquoise;}
-  .d4{background:LightPink;}
-  .d5{background:PaleGreen;}
+  .item1{background:LightSkyBlue;}
+  .item2{background:LightSalmon;}
+  .item3{background:PaleTurquoise;}
+  .item4{background:LightPink;}
+  .item5{background:PaleGreen;}
 
   .container {
     font-size: 40px;
+    min-height: 300px;
     width: 100%;
     background: LightGray;
     display: grid;
-    grid-template-columns: 100px 100px 100px;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-gap: 10px;
     /* Only change code below this line */
 
 
@@ -52,16 +55,16 @@ assert(
 </style>
 
 <div class="container">
-  <div class="d1">1</div>
-  <div class="d2">2</div>
-  <div class="d3">3</div>
-  <div class="d4">4</div>
-  <div class="d5">5</div>
+  <div class="item1">1</div>
+  <div class="item2">2</div>
+  <div class="item3">3</div>
+  <div class="item4">4</div>
+  <div class="item5">5</div>
 </div>
 ```
 
 # --solutions--
 
 ```html
-<style>.container {grid-template-rows: 50px 50px;}</style>
+<style>.container {justify-items: center;}</style>
 ```
