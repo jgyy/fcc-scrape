@@ -1,41 +1,65 @@
 ---
-id: 5a94fe2669fb03452672e45e
-title: Use grid-area Without Creating an Areas Template
+id: 5a90372638fddaf9a66b5d38
+title: Use grid-column to Control Spacing
 challengeType: 0
-videoUrl: 'https://scrimba.com/p/pByETK/c6N7VhK'
-forumTopicId: 301135
+videoUrl: 'https://scrimba.com/p/pByETK/cnzkDSr'
+forumTopicId: 301136
 ---
 
 # --description--
 
-The `grid-area` property you learned in the last challenge can be used in another way. If your grid doesn't have an areas template to reference, you can create an area on the fly for an item to be placed like this:
+Up to this point, all the properties that have been discussed are for grid containers. The `grid-column` property is the first one for use on the grid items themselves.
+
+The hypothetical horizontal and vertical lines that create the grid are referred to as <dfn>lines</dfn>. These lines are numbered starting with 1 at the top left corner of the grid and move right for columns and down for rows, counting upward.
+
+This is what the lines look like for a 3x3 grid:
+
+<div style='position:relative;margin:auto;background:Gainsboro;display:block;margin-top:100px;margin-bottom:50px;width:200px;height:200px;'><p style='left:25%;top:-30%;font-size:130%;position:absolute;color:RoyalBlue;'>column lines</p><p style='left:0%;top:-15%;font-size:130%;position:absolute;color:RoyalBlue;'>1</p><p style='left:30%;top:-15%;font-size:130%;position:absolute;color:RoyalBlue;'>2</p><p style='left:63%;top:-15%;font-size:130%;position:absolute;color:RoyalBlue;'>3</p><p style='left:95%;top:-15%;font-size:130%;position:absolute;color:RoyalBlue;'>4</p><p style='left:-40%;top:45%;font-size:130%;transform:rotateZ(-90deg);position:absolute;'>row lines</p><p style='left:-10%;top:-10%;font-size:130%;position:absolute;'>1</p><p style='left:-10%;top:21%;font-size:130%;position:absolute;'>2</p><p style='left:-10%;top:53%;font-size:130%;position:absolute;'>3</p><p style='left:-10%;top:85%;font-size:130%;position:absolute;'>4</p><div style='left:0%;top:0%;width:5%;height:100%;background:RoyalBlue;position:absolute;'></div><div style='left:31%;top:0%;width:5%;height:100%;background:RoyalBlue;position:absolute;'></div><div style='left:63%;top:0%;width:5%;height:100%;background:RoyalBlue;position:absolute;'></div><div style='left:95%;top:0%;width:5%;height:100%;background:RoyalBlue;position:absolute;'></div><div style='left:0%;top:0%;width:100%;height:5%;background:black;position:absolute;'></div><div style='left:0%;top:31%;width:100%;height:5%;background:black;position:absolute;'></div><div style='left:0%;top:63%;width:100%;height:5%;background:black;position:absolute;'></div><div style='left:0%;top:95%;width:100%;height:5%;background:black;position:absolute;'></div></div>
+
+To control the amount of columns an item will consume, you can use the `grid-column` property in conjunction with the line numbers you want the item to start and stop at.
+
+Here's an example:
 
 ```css
-item1 { grid-area: 1/1/2/4; }
+grid-column: 1 / 3;
 ```
 
-This is using the line numbers you learned about earlier to define where the area for this item will be. The numbers in the example above represent these values:
-
-```css
-grid-area: horizontal line to start at / vertical line to start at / horizontal line to end at / vertical line to end at;
-```
-
-So the item in the example will consume the rows between lines 1 and 2, and the columns between lines 1 and 4.
+This will make the item start at the first vertical line of the grid on the left and span to the 3rd line of the grid, consuming two columns.
 
 # --instructions--
 
-Using the `grid-area` property, place the element with `item5` class between the third and fourth horizontal lines and between the first and fourth vertical lines.
+Make the item with the class `item5` consume the last two columns of the grid.
 
 # --hints--
 
-The `item5` class should have a `grid-area` property to make it fill the whole area between the third and fourth horizontal lines, and first and fourth vertical lines.
+`item5` class should have a `grid-column` property.
 
 ```js
 assert(
-  code.match(
-    /.item5\s*?{[\s\S]*grid-area\s*?:\s*?3\s*?\/\s*?1\s*?\/\s*?4\s*?\/\s*?4\s*?;[\s\S]*}/gi
-  )
+  __helpers
+    .removeWhiteSpace($('style').text())
+    .match(/\.item5{.*grid-column:.*}/g)
 );
+```
+
+`item5` class should have a `grid-column` property which results in it consuming the last two columns of the grid.
+
+```js
+const colStart = getComputedStyle($('.item5')[0]).gridColumnStart;
+const colEnd = getComputedStyle($('.item5')[0]).gridColumnEnd;
+const result = colStart.toString() + colEnd.toString();
+const correctResults = [
+  '24',
+  '2-1',
+  '2span 2',
+  '2span2',
+  'span 2-1',
+  '-12',
+  'span 2span 2',
+  'span 2auto',
+  'autospan 2'
+];
+assert(correctResults.includes(result));
 ```
 
 # --seed--
@@ -81,5 +105,34 @@ assert(
 # --solutions--
 
 ```html
-<style>.item5 {grid-area: 3/1/4/4;}</style>
+<style>
+  .item1{background:LightSkyBlue;}
+  .item2{background:LightSalmon;}
+  .item3{background:PaleTurquoise;}
+  .item4{background:LightPink;}
+
+  .item5 {
+    background: PaleGreen;
+    grid-column: 2 / 4;
+  }
+
+  .container {
+    font-size: 40px;
+    min-height: 300px;
+    width: 100%;
+    background: LightGray;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-gap: 10px;
+  }
+</style>
+
+<div class="container">
+  <div class="item1">1</div>
+  <div class="item2">2</div>
+  <div class="item3">3</div>
+  <div class="item4">4</div>
+  <div class="item5">5</div>
+</div>
 ```
