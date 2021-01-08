@@ -1,34 +1,36 @@
 ---
-id: 5a94fe4469fb03452672e460
-title: Limit Item Size Using the minmax Function
+id: 5a94fe1369fb03452672e45d
+title: Place Items in Grid Areas Using the grid-area Property
 challengeType: 0
-videoUrl: 'https://scrimba.com/p/pByETK/cD97RTv'
-forumTopicId: 301131
+videoUrl: 'https://scrimba.com/p/pByETK/cRrqmtV'
+forumTopicId: 301132
 ---
 
 # --description--
 
-There's another built-in function to use with `grid-template-columns` and `grid-template-rows` called `minmax`. It's used to limit the size of items when the grid container changes size. To do this you need to specify the acceptable size range for your item. Here is an example:
+After creating an area's template for your grid container, as shown in the previous challenge, you can place an item in your custom area by referencing the name you gave it. To do this, you use the `grid-area` property on an item like this:
 
 ```css
-grid-template-columns: 100px minmax(50px, 200px);
+.item1 {
+  grid-area: header;
+}
 ```
 
-In the code above, `grid-template-columns` is set to create two columns; the first is 100px wide, and the second has the minimum width of 50px and the maximum width of 200px.
+This lets the grid know that you want the `item1` class to go in the area named `header`. In this case, the item will use the entire top row because that whole row is named as the header area.
 
 # --instructions--
 
-Using the `minmax` function, replace the `1fr` in the `repeat` function with a column size that has the minimum width of `90px` and the maximum width of `1fr`, and resize the preview panel to see the effect.
+Place an element with the `item5` class in the `footer` area using the `grid-area` property.
 
 # --hints--
 
-`container` class should have a `grid-template-columns` property that is set to repeat 3 columns with the minimum width of `90px` and maximum width of `1fr`.
+`item5` class should have a `grid-area` property that has the value of `footer`.
 
 ```js
 assert(
-  code.match(
-    /.container\s*?{[\s\S]*grid-template-columns\s*?:\s*?repeat\s*?\(\s*?3\s*?,\s*?minmax\s*?\(\s*?90px\s*?,\s*?1fr\s*?\)\s*?\)\s*?;[\s\S]*}/gi
-  )
+  __helpers
+    .removeCssComments(code)
+    .match(/.item5\s*?{[\s\S]*grid-area\s*?:\s*?footer\s*?;[\s\S]*}/gi)
 );
 ```
 
@@ -42,7 +44,14 @@ assert(
   .item2{background:LightSalmon;}
   .item3{background:PaleTurquoise;}
   .item4{background:LightPink;}
-  .item5{background:PaleGreen;}
+
+  .item5 {
+    background: PaleGreen;
+    /* Only change code below this line */
+
+    
+    /* Only change code above this line */
+  }
 
   .container {
     font-size: 40px;
@@ -50,13 +59,13 @@ assert(
     width: 100%;
     background: LightGray;
     display: grid;
-    /* Only change code below this line */
-
-    grid-template-columns: repeat(3, 1fr);
-
-    /* Only change code above this line */
+    grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
     grid-gap: 10px;
+    grid-template-areas:
+      "header header header"
+      "advert content content"
+      "footer footer footer";
   }
 </style>
 
@@ -72,5 +81,5 @@ assert(
 # --solutions--
 
 ```html
-<style>.container {grid-template-columns: repeat(3, minmax(90px, 1fr));}</style>
+<style>.item5 {grid-area: footer;}</style>
 ```
