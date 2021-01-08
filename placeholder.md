@@ -1,49 +1,41 @@
 ---
-id: 5a94fe3669fb03452672e45f
-title: Reduce Repetition Using the repeat Function
+id: 5a9036ee38fddaf9a66b5d34
+title: Use CSS Grid units to Change the Size of Columns and Rows
 challengeType: 0
-videoUrl: 'https://scrimba.com/p/pByETK/cQvqyHR'
-forumTopicId: 301133
+videoUrl: 'https://scrimba.com/p/pByETK/cvE8phd'
+forumTopicId: 301134
 ---
 
 # --description--
 
-When you used `grid-template-columns` and `grid-template-rows` to define the structure of a grid, you entered a value for each row or column you created.
+You can use absolute and relative units like `px` and `em` in CSS Grid to define the size of rows and columns. You can use these as well:
 
-Let's say you want a grid with 100 rows of the same height. It isn't very practical to insert 100 values individually. Fortunately, there's a better way - by using the `repeat` function to specify the number of times you want your column or row to be repeated, followed by a comma and the value you want to repeat.
+`fr`: sets the column or row to a fraction of the available space,
 
-Here's an example that would create the 100 row grid, each row at 50px tall.
+`auto`: sets the column or row to the width or height of its content automatically,
 
-```css
-grid-template-rows: repeat(100, 50px);
-```
+`%`: adjusts the column or row to the percent width of its container.
 
-You can also repeat multiple values with the repeat function and insert the function amongst other values when defining a grid structure. Here's what that looks like:
+Here's the code that generates the output in the preview:
 
 ```css
-grid-template-columns: repeat(2, 1fr 50px) 20px;
+grid-template-columns: auto 50px 10% 2fr 1fr;
 ```
 
-This translates to:
-
-```css
-grid-template-columns: 1fr 50px 1fr 50px 20px;
-```
-
-**Note:** The `1fr 50px` is repeated twice followed by 20px.
+This snippet creates five columns. The first column is as wide as its content, the second column is 50px, the third column is 10% of its container, and for the last two columns; the remaining space is divided into three sections, two are allocated for the fourth column, and one for the fifth.
 
 # --instructions--
 
-Use `repeat` to remove repetition from the `grid-template-columns` property.
+Make a grid with three columns whose widths are as follows: 1fr, 100px, and 2fr.
 
 # --hints--
 
-`container` class should have a `grid-template-columns` property that is set to repeat 3 columns with the width of `1fr`.
+`container` class should have a `grid-template-columns` property that has three columns with the following widths: `1fr, 100px, and 2fr`.
 
 ```js
 assert(
   code.match(
-    /.container\s*?{[\s\S]*grid-template-columns\s*?:\s*?repeat\s*?\(\s*?3\s*?,\s*?1fr\s*?\)\s*?;[\s\S]*}/gi
+    /.container\s*?{[\s\S]*grid-template-columns\s*?:\s*?1fr\s*?100px\s*?2fr\s*?;[\s\S]*}/gi
   )
 );
 ```
@@ -54,39 +46,37 @@ assert(
 
 ```html
 <style>
-  .item1{background:LightSkyBlue;}
-  .item2{background:LightSalmon;}
-  .item3{background:PaleTurquoise;}
-  .item4{background:LightPink;}
-  .item5{background:PaleGreen;}
+  .d1{background:LightSkyBlue;}
+  .d2{background:LightSalmon;}
+  .d3{background:PaleTurquoise;}
+  .d4{background:LightPink;}
+  .d5{background:PaleGreen;}
 
   .container {
     font-size: 40px;
-    min-height: 300px;
     width: 100%;
     background: LightGray;
     display: grid;
     /* Only change code below this line */
 
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: auto 50px 10% 2fr 1fr;
 
     /* Only change code above this line */
-    grid-template-rows: 1fr 1fr 1fr;
-    grid-gap: 10px;
+    grid-template-rows: 50px 50px;
   }
 </style>
 
 <div class="container">
-  <div class="item1">1</div>
-  <div class="item2">2</div>
-  <div class="item3">3</div>
-  <div class="item4">4</div>
-  <div class="item5">5</div>
+  <div class="d1">1</div>
+  <div class="d2">2</div>
+  <div class="d3">3</div>
+  <div class="d4">4</div>
+  <div class="d5">5</div>
 </div>
 ```
 
 # --solutions--
 
 ```html
-<style>.container {grid-template-columns: repeat(3, 1fr);}</style>
+<style>.container {grid-template-columns: 1fr 100px 2fr;}</style>
 ```
