@@ -1,31 +1,36 @@
 ---
-id: 5a94fe6269fb03452672e462
-title: Create Flexible Layouts Using auto-fit
+id: 5a94fe8569fb03452672e464
+title: Create Grids within Grids
 challengeType: 0
-videoUrl: 'https://scrimba.com/p/pByETK/c3dPph8'
-forumTopicId: 301127
+forumTopicId: 301128
 ---
 
 # --description--
 
-`auto-fit` works almost identically to `auto-fill`. The only difference is that when the container's size exceeds the size of all the items combined, `auto-fill` keeps inserting empty rows or columns and pushes your items to the side, while `auto-fit` collapses those empty rows or columns and stretches your items to fit the size of the container.
+Turning an element into a grid only affects the behavior of its direct descendants. So by turning a direct descendant into a grid, you have a grid within a grid.
 
-**Note:** If your container can't fit all your items on one row, it will move them down to a new one.
+For example, by setting the `display` and `grid-template-columns` properties of the element with the `item3` class, you create a grid within your grid.
 
 # --instructions--
 
-In the second grid, use `auto-fit` with `repeat` to fill the grid with columns that have a minimum width of `60px` and maximum of `1fr`. Then resize the preview to see the difference.
+Turn the element with the `item3` class into a grid with two columns with a width of `auto` and `1fr` using `display` and `grid-template-columns`.
 
 # --hints--
 
-`container2` class should have a `grid-template-columns` property with `repeat` and `auto-fit` that will fill the grid with columns that have a minimum width of `60px` and maximum of `1fr`.
+`item3` class should have a `grid-template-columns` property with `auto` and `1fr` as values.
 
 ```js
 assert(
   code.match(
-    /.container2\s*?{[\s\S]*grid-template-columns\s*?:\s*?repeat\s*?\(\s*?auto-fit\s*?,\s*?minmax\s*?\(\s*?60px\s*?,\s*?1fr\s*?\)\s*?\)\s*?;[\s\S]*}/gi
+    /.item3\s*?{[\s\S]*grid-template-columns\s*?:\s*?auto\s*?1fr\s*?;[\s\S]*}/gi
   )
 );
+```
+
+`item3` class should have a `display` property with the value of `grid`.
+
+```js
+assert(code.match(/.item3\s*?{[\s\S]*display\s*?:\s*?grid\s*?;[\s\S]*}/gi));
 ```
 
 # --seed--
@@ -34,57 +39,67 @@ assert(
 
 ```html
 <style>
-  .item1{background:LightSkyBlue;}
-  .item2{background:LightSalmon;}
-  .item3{background:PaleTurquoise;}
-  .item4{background:LightPink;}
-  .item5{background:PaleGreen;}
-
   .container {
-    font-size: 40px;
-    min-height: 100px;
+    font-size: 1.5em;
+    min-height: 300px;
     width: 100%;
     background: LightGray;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
-    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto 1fr auto;
     grid-gap: 10px;
+    grid-template-areas:
+      "advert header"
+      "advert content"
+      "advert footer";
+  }
+  .item1 {
+    background: LightSkyBlue;
+    grid-area: header;
   }
 
-  .container2 {
-    font-size: 40px;
-    min-height: 100px;
-    width: 100%;
-    background: Silver;
-    display: grid;
+  .item2 {
+    background: LightSalmon;
+    grid-area: advert;
+  }
+
+  .item3 {
+    background: PaleTurquoise;
+    grid-area: content;
     /* Only change code below this line */
 
-    grid-template-columns: repeat(3, minmax(60px, 1fr));
 
     /* Only change code above this line */
-    grid-template-rows: 1fr 1fr 1fr;
-    grid-gap: 10px;
   }
+
+  .item4 {
+    background: lightpink;
+    grid-area: footer;
+  }
+
+  .itemOne {
+    background: PaleGreen;
+  }
+
+  .itemTwo {
+    background: BlanchedAlmond;
+  }
+
 </style>
 
 <div class="container">
-  <div class="item1">1</div>
-  <div class="item2">2</div>
-  <div class="item3">3</div>
-  <div class="item4">4</div>
-  <div class="item5">5</div>
-</div>
-<div class="container2">
-  <div class="item1">1</div>
-  <div class="item2">2</div>
-  <div class="item3">3</div>
-  <div class="item4">4</div>
-  <div class="item5">5</div>
+  <div class="item1">header</div>
+  <div class="item2">advert</div>
+  <div class="item3">
+    <div class="itemOne">paragraph1</div>
+    <div class="itemTwo">paragraph2</div>
+  </div>
+  <div class="item4">footer</div>
 </div>
 ```
 
 # --solutions--
 
 ```html
-<style>.container {grid-template-columns: repeat( auto-fill, minmax(60px, 1fr));} .container2 {grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));}</style>
+<style>.item3 {grid-template-columns: auto 1fr; display: grid;}</style>
 ```
