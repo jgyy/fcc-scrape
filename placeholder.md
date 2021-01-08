@@ -1,34 +1,26 @@
 ---
-id: 5a9036ee38fddaf9a66b5d35
-title: Create a Column Gap Using grid-column-gap
+id: 5a9036ee38fddaf9a66b5d36
+title: Create a Row Gap using grid-row-gap
 challengeType: 0
-videoUrl: 'https://scrimba.com/p/pByETK/cVZ8vfD'
-forumTopicId: 301124
+videoUrl: 'https://scrimba.com/p/pByETK/cPbJ2Cv'
+forumTopicId: 301125
 ---
 
 # --description--
 
-So far in the grids you have created, the columns have all been tight up against each other. Sometimes you want a gap in between the columns. To add a gap between the columns, use the `grid-column-gap` property like this:
-
-```css
-grid-column-gap: 10px;
-```
-
-This creates 10px of empty space between all of our columns.
+You can add a gap in between the rows of a grid using `grid-row-gap` in the same way that you added a gap in between columns in the previous challenge.
 
 # --instructions--
 
-Give the columns in the grid a `20px` gap.
+Create a gap for the rows that is `5px` tall.
 
 # --hints--
 
-`container` class should have a `grid-column-gap` property that has the value of `20px`.
+`container` class should have a `grid-row-gap` property that has the value of `5px`.
 
 ```js
 assert(
-  code.match(
-    /.container\s*?{[\s\S]*grid-column-gap\s*?:\s*?20px\s*?;[\s\S]*}/gi
-  )
+  code.match(/.container\s*?{[\s\S]*grid-row-gap\s*?:\s*?5px\s*?;[\s\S]*}/gi)
 );
 ```
 
@@ -54,7 +46,7 @@ assert(
     grid-template-rows: 1fr 1fr 1fr;
     /* Only change code below this line */
 
-   
+    
     /* Only change code above this line */
   }
 </style>
@@ -71,5 +63,5 @@ assert(
 # --solutions--
 
 ```html
-<style>.container {grid-column-gap: 20px;}</style>
+<style>.container {grid-row-gap: 5px;}</style>
 ```
