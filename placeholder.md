@@ -1,27 +1,40 @@
 ---
-id: 5a858944d96184f06fd60d61
-title: Create Your First CSS Grid
+id: 5a94fe0569fb03452672e45c
+title: Divide the Grid Into an Area Template
 challengeType: 0
-videoUrl: 'https://scrimba.com/p/pByETK/cqwREC4'
-forumTopicId: 301129
+videoUrl: 'https://scrimba.com/p/pByETK/cLLpGAy'
+forumTopicId: 301130
 ---
 
 # --description--
 
-Turn any HTML element into a grid container by setting its `display` property to `grid`. This gives you the ability to use all the other properties associated with CSS Grid.
+You can group cells of your grid together into an <dfn>area</dfn> and give the area a custom name. Do this by using `grid-template-areas` on the container like this:
 
-**Note:** In CSS Grid, the parent element is referred to as the <dfn>container</dfn> and its children are called <dfn>items</dfn>.
+```css
+grid-template-areas:
+  "header header header"
+  "advert content content"
+  "footer footer footer";
+```
+
+The code above merges the top three cells together into an area named `header`, the bottom three cells into a `footer` area, and it makes two areas in the middle row; `advert` and `content`. **Note:** Every word in the code represents a cell and every pair of quotation marks represent a row. In addition to custom labels, you can use a period (`.`) to designate an empty cell in the grid.
 
 # --instructions--
 
-Change the display of the div with the `container` class to `grid`.
+Place the area template so that the cell labeled `advert` becomes an empty cell.
 
 # --hints--
 
-`container` class should have a `display` property with a value of `grid`.
+`container` class should have a `grid-template-areas` property similar to the preview but has `.` instead of the `advert` area.
 
 ```js
-assert(code.match(/.container\s*?{[\s\S]*display\s*?:\s*?grid\s*?;[\s\S]*}/gi));
+assert(
+  __helpers
+    .removeCssComments(code)
+    .match(
+      /.container\s*?{[\s\S]*grid-template-areas\s*?:\s*?"\s*?header\s*?header\s*?header\s*?"\s*?"\s*?.\s*?content\s*?content\s*?"\s*?"\s*?footer\s*?footer\s*?footer\s*?"\s*?;[\s\S]*}/gi
+    )
+);
 ```
 
 # --seed--
@@ -30,34 +43,71 @@ assert(code.match(/.container\s*?{[\s\S]*display\s*?:\s*?grid\s*?;[\s\S]*}/gi));
 
 ```html
 <style>
-  .d1{background:LightSkyBlue;}
-  .d2{background:LightSalmon;}
-  .d3{background:PaleTurquoise;}
-  .d4{background:LightPink;}
-  .d5{background:PaleGreen;}
+  .item1{background:LightSkyBlue;}
+  .item2{background:LightSalmon;}
+  .item3{background:PaleTurquoise;}
+  .item4{background:LightPink;}
+  .item5{background:PaleGreen;}
 
   .container {
     font-size: 40px;
+    min-height: 300px;
     width: 100%;
     background: LightGray;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-gap: 10px;
+    grid-template-areas:
     /* Only change code below this line */
-
-    
+      "header header header"
+      "advert content content"
+      "footer footer footer";
     /* Only change code above this line */
   }
 </style>
 
 <div class="container">
-  <div class="d1">1</div>
-  <div class="d2">2</div>
-  <div class="d3">3</div>
-  <div class="d4">4</div>
-  <div class="d5">5</div>
+  <div class="item1">1</div>
+  <div class="item2">2</div>
+  <div class="item3">3</div>
+  <div class="item4">4</div>
+  <div class="item5">5</div>
 </div>
 ```
 
 # --solutions--
 
 ```html
-<style>.container {display: grid;}</style>
+<style>
+  .item1{background:LightSkyBlue;}
+  .item2{background:LightSalmon;}
+  .item3{background:PaleTurquoise;}
+  .item4{background:LightPink;}
+  .item5{background:PaleGreen;}
+
+  .container {
+    font-size: 40px;
+    min-height: 300px;
+    width: 100%;
+    background: LightGray;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-gap: 10px;
+
+    grid-template-areas:
+      "header header header"
+      ". content content"
+      "footer footer footer";
+  }
+</style>
+
+<div class="container">
+  <div class="item1">1</div>
+  <div class="item2">2</div>
+  <div class="item3">3</div>
+  <div class="item4">4</div>
+  <div class="item5">5</div>
+</div>
 ```
