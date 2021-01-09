@@ -1,40 +1,39 @@
 ---
-id: 587d78b1367417b2b2512b09
-title: Make an Image Responsive
+id: 587d78b1367417b2b2512b0c
+title: Make Typography Responsive
 challengeType: 0
-videoUrl: 'https://scrimba.com/p/pzrPu4/cz763UD'
-forumTopicId: 301140
+videoUrl: 'https://scrimba.com/p/pzrPu4/crzN7T8'
+forumTopicId: 301141
 ---
 
 # --description--
 
-Making images responsive with CSS is actually very simple. You just need to add these properties to an image:
+Instead of using `em` or `px` to size text, you can use viewport units for responsive typography. Viewport units, like percentages, are relative units, but they are based off different items. Viewport units are relative to the viewport dimensions (width or height) of a device, and percentages are relative to the size of the parent container element.
 
-```css
-img {
-  max-width: 100%;
-  height: auto;
-}
-```
+The four different viewport units are:
 
-The `max-width` of `100%` will make sure the image is never wider than the container it is in, and the `height` of `auto` will make the image keep its original aspect ratio.
+<ul><li><code>vw</code> (viewport width): <code>10vw</code> would be 10% of the viewport's width.</li><li><code>vh</code> (viewport height): <code>3vh</code> would be 3% of the viewport's height.</li><li><code>vmin</code> (viewport minimum): <code>70vmin</code> would be 70% of the viewport's smaller dimension (height or width).</li><li><code>vmax</code> (viewport maximum): <code>100vmax</code> would be 100% of the viewport's bigger dimension (height or width).</li></ul>
+
+Here is an example that sets a body tag to 30% of the viewport's width.
+
+`body { width: 30vw; }`
 
 # --instructions--
 
-Add the style rules to the `responsive-img` class to make it responsive. It should never be wider than its container (in this case, it's the preview window) and it should keep its original aspect ratio. After you have added your code, resize the preview to see how your images behave.
+Set the `width` of the `h2` tag to 80% of the viewport's width and the `width` of the paragraph as 75% of the viewport's smaller dimension.
 
 # --hints--
 
-Your `responsive-img` class should have a `max-width` set to `100%`.
+Your `h2` tag should have a `width` of 80vw.
 
 ```js
-assert(getComputedStyle($('.responsive-img')[0]).maxWidth === '100%');
+assert(code.match(/h2\s*?{\s*?width:\s*?80vw;\s*?}/g));
 ```
 
-Your `responsive-img` class should have a `height` set to `auto`.
+Your `p` tag should have a `width` of 75vmin.
 
 ```js
-assert(code.match(/height:\s*?auto;/g));
+assert(code.match(/p\s*?{\s*?width:\s*?75vmin;\s*?}/g));
 ```
 
 # --seed--
@@ -43,34 +42,25 @@ assert(code.match(/height:\s*?auto;/g));
 
 ```html
 <style>
-.responsive-img {
 
-
-}
-
-img {
-  width: 600px;
-}
 </style>
 
-<img class="responsive-img" src="https://s3.amazonaws.com/freecodecamp/FCCStickerPack.jpg" alt="freeCodeCamp stickers set">
-<img src="https://s3.amazonaws.com/freecodecamp/FCCStickerPack.jpg" alt="freeCodeCamp stickers set">
+<h2>Importantus Ipsum</h2>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus quis tempus massa. Aenean erat nisl, gravida vel vestibulum cursus, interdum sit amet lectus. Sed sit amet quam nibh. Suspendisse quis tincidunt nulla. In hac habitasse platea dictumst. Ut sit amet pretium nisl. Vivamus vel mi sem. Aenean sit amet consectetur sem. Suspendisse pretium, purus et gravida consequat, nunc ligula ultricies diam, at aliquet velit libero a dui.</p>
 ```
 
 # --solutions--
 
 ```html
 <style>
-.responsive-img {
-  max-width: 100%;
-  height: auto;
-}
-
-img {
-  width: 600px;
-}
+  h2 {
+      width: 80vw;
+  }
+  p {
+      width: 75vmin;
+  }
 </style>
 
-<img class="responsive-img" src="https://s3.amazonaws.com/freecodecamp/FCCStickerPack.jpg" alt="freeCodeCamp stickers set">
-<img src="https://s3.amazonaws.com/freecodecamp/FCCStickerPack.jpg" alt="freeCodeCamp stickers set">
+<h2>Importantus Ipsum</h2>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus quis tempus massa. Aenean erat nisl, gravida vel vestibulum cursus, interdum sit amet lectus. Sed sit amet quam nibh. Suspendisse quis tincidunt nulla. In hac habitasse platea dictumst. Ut sit amet pretium nisl. Vivamus vel mi sem. Aenean sit amet consectetur sem. Suspendisse pretium, purus et gravida consequat, nunc ligula ultricies diam, at aliquet velit libero a dui.</p>
 ```
