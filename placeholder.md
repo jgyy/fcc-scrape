@@ -1,22 +1,25 @@
 ---
-id: 5d822fd413a79914d39e98f2
-title: Part 42
+id: 5d822fd413a79914d39e98f3
+title: Part 43
 challengeType: 0
 ---
 
 # --description--
 
-Add the new `bb1-window` class to the `bb1a`, `bb1b`, and `bb1c` elements. This will apply the gradient to them.
+You don't need the `height` or `background-color` properties in `bb1a`, `bb1b` or `bb1c` anymore, so go ahead and remove them.
 
 # --hints--
 
 test-text
 
 ```js
+const bb1aStyle = code.match(/\.bb1a\s*{[\s\S]+?[^}]}/g)[0];
+const bb1bStyle = code.match(/\.bb1b\s*{[\s\S]+?[^}]}/g)[0];
+const bb1cStyle = code.match(/\.bb1c\s*{[\s\S]+?[^}]}/g)[0];
 assert(
-  $('.bb1a.bb1-window').length === 1 &&
-    $('.bb1b.bb1-window').length === 1 &&
-    $('.bb1c.bb1-window').length === 1
+  !/(height|background-color)/g.test(bb1aStyle) &&
+    !/(height|background-color)/g.test(bb1bStyle) &&
+    !/(height|background-color)/g.test(bb1cStyle)
 );
 ```
 
@@ -165,9 +168,9 @@ assert(
       <div></div>
       <div></div>
       <div class="bb1">
-        <div class="bb1a"></div>
-        <div class="bb1b"></div>
-        <div class="bb1c"></div>
+        <div class="bb1a bb1-window"></div>
+        <div class="bb1b bb1-window"></div>
+        <div class="bb1c bb1-window"></div>
         <div class="bb1d"></div>
       </div>
       <div class="bb2"></div>
@@ -243,19 +246,14 @@ assert(
 
       .bb1a {
         width: 70%;
-        background-color: var(--building-color1);
       }
   
       .bb1b {
         width: 80%;
-        height: 10%;
-        background-color: var(--building-color1);
       }
   
       .bb1c {
         width: 90%;
-        height: 10%;
-        background-color: var(--building-color1);
       }
 
       .bb1d {
