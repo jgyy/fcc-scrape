@@ -1,14 +1,23 @@
 ---
-id: 5d822fd413a79914d39e9916
-title: Part 77
+id: 5d822fd413a79914d39e9917
+title: Part 78
 challengeType: 0
 ---
 
 # --description--
 
-Don't worry about the space at the bottom, everything will get moved down later when you add some height to the element at the top of the building.
+You can add multiple gradients to an element by separating them with a comma (`,`) like this:
 
-Add a `repeating-linear-gradient` to `fb1c` with a `90deg` angle, your `--building-color4` from `0%` to `10%` and `transparent` from `10%` to `15%`.
+```css
+gradient1(
+  colors
+),
+gradient2(
+  colors
+);
+```
+
+Add a `repeating-linear-gradient` to `fb1c` below the one that's there; use your `--building-color4` from `0%` to `10%` and `--window-color4` from `10%` and `90%`. This will fill in behind the gradient you added last.
 
 # --hints--
 
@@ -17,7 +26,7 @@ test-text
 ```js
 const fb1c = code.match(/\.fb1c\s*{[\s\S]+?[^}]}/g)[0];
 assert(
-  /background\s*:\s*repeating-linear-gradient\(\s*90deg\s*,\s*var\(\s*--building-color4\s*\)\s*(0%\s*,|,)\s*var\(\s*--building-color4\s*\)\s*10%\s*,\s*transparent\s*10%\s*,\s*transparent\s*15%\s*\)\s*(;|})/g.test(
+  /background\s*:\s*repeating-linear-gradient\(\s*90deg\s*,\s*var\(\s*--building-color4\s*\)\s*(0%\s*,|,)\s*var\(\s*--building-color4\s*\)\s*10%\s*,\s*transparent\s*10%\s*,\s*transparent\s*15%\s*\)\s*,\s*repeating-linear-gradient\(\s*var\(\s*--building-color4\s*\)\s*(0%\s*,|,)\s*var\(\s*--building-color4\s*\)\s*10%\s*,\s*var\(\s*--window-color4\s*\)\s*10%\s*,\s*var\(\s*--window-color4\s*\)\s*90%\s*\)\s*(;|})/g.test(
     fb1c
   )
 );
@@ -189,6 +198,13 @@ assert(
       .fb1c {
         width: 100%;
         height: 80%;
+        background: repeating-linear-gradient(
+            90deg,
+            var(--building-color4),
+            var(--building-color4) 10%,
+            transparent 10%,
+            transparent 15%
+          )
       }
 
       .fb2 {
@@ -448,7 +464,13 @@ assert(
             var(--building-color4) 10%,
             transparent 10%,
             transparent 15%
-          )
+          ),
+          repeating-linear-gradient(
+            var(--building-color4),
+            var(--building-color4) 10%,
+            var(--window-color4) 10%,
+            var(--window-color4) 90%
+          );
       }
 
       .fb2 {
