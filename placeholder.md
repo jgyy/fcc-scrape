@@ -1,20 +1,20 @@
 ---
-id: 5d822fd413a79914d39e9931
-title: Part 109
+id: 5d822fd413a79914d39e9936
+title: Part 110
 challengeType: 0
 ---
 
 # --description--
 
-You can remove the `background-color` for this building now, since it isn't needed.
+Okay, the buildings are done. Go back to the `*` selector and remove the border you applied to everything at the beginning and the buildings will come together.
 
 # --hints--
 
 test-text
 
 ```js
-const fb6 = code.match(/\.fb6\s*{[\s\S]+?[^}]}/g)[0];
-assert(!/background-color/g.test(fb6));
+const all = code.match(/\*\s*{[\s\S]+?[^}]}/g)[0];
+assert(!/border\s*:\s*1px\s+solid\s+black/g.test(all));
 ```
 
 # --seed--
@@ -302,7 +302,6 @@ assert(!/background-color/g.test(fb6));
       .fb6 {
         width: 9%;
         height: 38%;
-        background-color: var(--building-color3);
         background: repeating-linear-gradient(
             90deg,
             var(--building-color3),
@@ -417,7 +416,6 @@ assert(!/background-color/g.test(fb6));
       }
 
       * {
-        border: 1px solid black;
         box-sizing: border-box;
       }
 
