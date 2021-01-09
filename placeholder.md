@@ -1,34 +1,20 @@
 ---
-id: 5d822fd413a79914d39e98f4
-title: Part 44
+id: 5d822fd413a79914d39e98f5
+title: Part 45
 challengeType: 0
 ---
 
 # --description--
 
-Gradients can use as many colors as you want like this:
-
-```css
-gradient-type(
-  color1,
-  color2,
-  color3
-);
-```
-
-Add a `linear-gradient` to `bb1d` with `orange` as the first color, `--building-color1` as the second, and `--window-color1` as the third. Remember to use the gradient on the `background` property.
+It's a little hidden behind the foreground buildings, but you can see the three color gradient there. Since you are using that now, remove the `background-color` property from `bb1d`.
 
 # --hints--
 
 test-text
 
 ```js
-const bb1d = code.match(/\.bb1d\s*{[\s\S]+?[^}]}/g)[0];
-assert(
-  /background\s*:\s*linear-gradient\(\s*orange\s*,\s*var\(\s*--building-color1\s*\)\s*,\s*var\(\s*--window-color1\s*\)\s*\)\s*(;|})/g.test(
-    bb1d
-  )
-);
+const bb1dStyle = code.match(/\.bb1d\s*{[\s\S]+?[^}]}/g)[0];
+assert(!/background-color/g.test(bb1dStyle));
 ```
 
 # --seed--
@@ -95,6 +81,11 @@ assert(
         width: 100%;
         height: 70%;
         background-color: var(--building-color1);
+        background: linear-gradient(
+            orange,
+            var(--building-color1),
+            var(--window-color1)
+          );
       }
 
       .bb1-window {
@@ -262,7 +253,6 @@ assert(
       .bb1d {
         width: 100%;
         height: 70%;
-        background-color: var(--building-color1);
         background: linear-gradient(
             orange,
             var(--building-color1),
