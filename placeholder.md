@@ -1,21 +1,22 @@
 ---
-id: 5d822fd413a79914d39e9929
-title: Part 96
+id: 5d822fd413a79914d39e992a
+title: Part 97
 challengeType: 0
 ---
 
 # --description--
 
-Only three more building to go. Nest two new `div` elements within the `fb4` element and give them the classes of `fb4a` and `fb4b`, in that order. Remember that you sort of flipped the location of `fb4` and `fb5`, so it's the rightmost purple building you are working on now.
+Give `fb4b` a `width` of `100%` and `height` of `89%`.
 
 # --hints--
 
 test-text
 
 ```js
-const fb4 = $('.fb4').children('div');
+const fb4b = code.match(/\.fb4b\s*{[\s\S]+?[^}]}/g)[0];
 assert(
-  fb4.length === 2 && fb4[0] === $('div.fb4a')[0] && fb4[1] === $('div.fb4b')[0]
+  /width\s*:\s*100%\s*(;|})/g.test(fb4b) &&
+    /height\s*:\s*89%\s*(;|})/g.test(fb4b)
 );
 ```
 
@@ -334,7 +335,10 @@ assert(
         <div class="fb3a"></div>
         <div class="fb3b"></div>
       </div>
-      <div class="fb4"></div>
+      <div class="fb4">
+        <div class="fb4a"></div>
+        <div class="fb4b"></div>
+      </div>
       <div class="fb5"></div>
       <div class="fb6"></div>
       <div></div>
@@ -582,6 +586,11 @@ assert(
         background-color: var(--building-color1);
         position: relative;
         left: 10%;
+      }
+
+      .fb4b {
+        width: 100%;
+        height: 89%;
       }
       
       .fb5 {
