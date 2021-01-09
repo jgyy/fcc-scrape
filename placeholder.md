@@ -1,33 +1,22 @@
 ---
-id: 5d822fd413a79914d39e9917
-title: Part 78
+id: 5d822fd413a79914d39e9918
+title: Part 79
 challengeType: 0
 ---
 
 # --description--
 
-You can add multiple gradients to an element by separating them with a comma (`,`) like this:
-
-```css
-gradient1(
-  colors
-),
-gradient2(
-  colors
-);
-```
-
-Add a `repeating-linear-gradient` to `fb1c` below the one that's there; use your `--building-color4` from `0%` to `10%` and `--window-color4` from `10%` and `90%`. This will fill in behind the gradient you added last.
+You're going to use some more border tricks for top section. Add a `border-bottom` with a value of `7vh solid var(--building-color4)` to `fb1a`. This will put a `7vh` height border on the bottom. But since the element has zero size, it only shows up as a 2px wide line from the 1px border that is on all the elements.
 
 # --hints--
 
 test-text
 
 ```js
-const fb1c = code.match(/\.fb1c\s*{[\s\S]+?[^}]}/g)[0];
+const fb1a = code.match(/\.fb1a\s*{[\s\S]+?[^}]}/g)[0];
 assert(
-  /background\s*:\s*repeating-linear-gradient\(\s*90deg\s*,\s*var\(\s*--building-color4\s*\)\s*(0%\s*,|,)\s*var\(\s*--building-color4\s*\)\s*10%\s*,\s*transparent\s*10%\s*,\s*transparent\s*15%\s*\)\s*,\s*repeating-linear-gradient\(\s*var\(\s*--building-color4\s*\)\s*(0%\s*,|,)\s*var\(\s*--building-color4\s*\)\s*10%\s*,\s*var\(\s*--window-color4\s*\)\s*10%\s*,\s*var\(\s*--window-color4\s*\)\s*90%\s*\)\s*(;|})/g.test(
-    fb1c
+  /border-bottom\s*:\s*7vh\s+solid\s+var\(\s*--building-color4\s*\)\s*(;|})/g.test(
+    fb1a
   )
 );
 ```
@@ -204,7 +193,13 @@ assert(
             var(--building-color4) 10%,
             transparent 10%,
             transparent 15%
-          )
+          ),
+          repeating-linear-gradient(
+            var(--building-color4),
+            var(--building-color4) 10%,
+            var(--window-color4) 10%,
+            var(--window-color4) 90%
+          );
       }
 
       .fb2 {
@@ -447,6 +442,10 @@ assert(
       .fb1 {
         width: 10%;
         height: 60%;
+      }
+
+      .fb1a {
+        border-bottom: 7vh solid var(--building-color4);
       }
 
       .fb1b {
