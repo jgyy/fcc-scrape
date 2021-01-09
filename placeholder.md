@@ -1,20 +1,34 @@
 ---
-id: 5d822fd413a79914d39e98f5
-title: Part 45
+id: 5d822fd413a79914d39e98f6
+title: Part 46
 challengeType: 0
 ---
 
 # --description--
 
-It's a little hidden behind the foreground buildings, but you can see the three color gradient there. Since you are using that now, remove the `background-color` property from `bb1d`.
+You can specify where you want a gradient transition to complete by adding it to the color like this:
+
+```css
+gradient-type(
+  color1,
+  color2 20%,
+  color3
+);
+```
+
+Here, it will transition from `color1` to `color2` between `0%` and `20%` of the element and then transition to `color3` for the rest. Add `80%` to the `--building-color1` color of the `bb1d` gradient so you can see it in action.
 
 # --hints--
 
 test-text
 
 ```js
-const bb1dStyle = code.match(/\.bb1d\s*{[\s\S]+?[^}]}/g)[0];
-assert(!/background-color/g.test(bb1dStyle));
+const bb1d = code.match(/\.bb1d\s*{[\s\S]+?[^}]}/g)[0];
+assert(
+  /background\s*:\s*linear-gradient\(\s*orange\s*,\s*var\(\s*--building-color1\s*\)\s*80%\s*,\s*var\(\s*--window-color1\s*\)\s*\)\s*(;|})/g.test(
+    bb1d
+  )
+);
 ```
 
 # --seed--
@@ -80,7 +94,6 @@ assert(!/background-color/g.test(bb1dStyle));
       .bb1d {
         width: 100%;
         height: 70%;
-        background-color: var(--building-color1);
         background: linear-gradient(
             orange,
             var(--building-color1),
@@ -255,7 +268,7 @@ assert(!/background-color/g.test(bb1dStyle));
         height: 70%;
         background: linear-gradient(
             orange,
-            var(--building-color1),
+            var(--building-color1) 80%,
             var(--window-color1)
           );
       }
