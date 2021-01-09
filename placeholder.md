@@ -1,25 +1,33 @@
 ---
-id: 5d822fd413a79914d39e98f3
-title: Part 43
+id: 5d822fd413a79914d39e98f4
+title: Part 44
 challengeType: 0
 ---
 
 # --description--
 
-You don't need the `height` or `background-color` properties in `bb1a`, `bb1b` or `bb1c` anymore, so go ahead and remove them.
+Gradients can use as many colors as you want like this:
+
+```css
+gradient-type(
+  color1,
+  color2,
+  color3
+);
+```
+
+Add a `linear-gradient` to `bb1d` with `orange` as the first color, `--building-color1` as the second, and `--window-color1` as the third. Remember to use the gradient on the `background` property.
 
 # --hints--
 
 test-text
 
 ```js
-const bb1aStyle = code.match(/\.bb1a\s*{[\s\S]+?[^}]}/g)[0];
-const bb1bStyle = code.match(/\.bb1b\s*{[\s\S]+?[^}]}/g)[0];
-const bb1cStyle = code.match(/\.bb1c\s*{[\s\S]+?[^}]}/g)[0];
+const bb1d = code.match(/\.bb1d\s*{[\s\S]+?[^}]}/g)[0];
 assert(
-  !/(height|background-color)/g.test(bb1aStyle) &&
-    !/(height|background-color)/g.test(bb1bStyle) &&
-    !/(height|background-color)/g.test(bb1cStyle)
+  /background\s*:\s*linear-gradient\(\s*orange\s*,\s*var\(\s*--building-color1\s*\)\s*,\s*var\(\s*--window-color1\s*\)\s*\)\s*(;|})/g.test(
+    bb1d
+  )
 );
 ```
 
@@ -73,19 +81,14 @@ assert(
 
       .bb1a {
         width: 70%;
-        background-color: var(--building-color1);
       }
   
       .bb1b {
         width: 80%;
-        height: 10%;
-        background-color: var(--building-color1);
       }
   
       .bb1c {
         width: 90%;
-        height: 10%;
-        background-color: var(--building-color1);
       }
 
       .bb1d {
@@ -260,6 +263,11 @@ assert(
         width: 100%;
         height: 70%;
         background-color: var(--building-color1);
+        background: linear-gradient(
+            orange,
+            var(--building-color1),
+            var(--window-color1)
+          );
       }
 
       .bb1-window {
