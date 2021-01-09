@@ -1,24 +1,20 @@
 ---
-id: 5d822fd413a79914d39e9902
-title: Part 58
+id: 5d822fd413a79914d39e9903
+title: Part 59
 challengeType: 0
 ---
 
 # --description--
 
-Finally, on the `border-bottom` property of `bb2a`, change the `1vw` to `5vh` and change the `#000` color to your `--building-color2` variable. There you go, now it looks good! At any time throughout this project, you can comment out or remove the `border` property you added to everything at the beginning to see what the buildings will look like when that gets removed at the end.
+On to the next building! Create a new variable called `--window-color3` in `:root` and give it a value of `#d98cb3`. This will be the secondary color for the pink buildings.
 
 # --hints--
 
 test-text
 
 ```js
-const bb2a = code.match(/\.bb2a\s*{[\s\S]+?[^}]}/g)[0];
-assert(
-  /border-bottom\s*:\s*5vh\s+solid\s+var\(\s*--building-color2\s*\)\s*(;|})/g.test(
-    bb2a
-  )
-);
+const rootStyle = code.match(/:root\s*{[\s\S]+?[^}]}/g)[0];
+assert(/--window-color3\s*:\s*#d98cb3\s*(;|})/g.test(rootStyle));
 ```
 
 # --seed--
@@ -105,7 +101,7 @@ assert(
       }
 
       .bb2a {
-        border-bottom: 1vw solid #000;
+        border-bottom: 5vh solid var(--building-color2);
         border-left: 5vw solid transparent;
         border-right: 5vw solid transparent;
       }
@@ -229,6 +225,7 @@ assert(
         --building-color4: #538cc6;
         --window-color1: black;
         --window-color2: #8cd9b3;
+        --window-color3: #d98cb3;
       }
 
       * {
