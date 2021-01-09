@@ -1,19 +1,19 @@
 ---
-id: 5d822fd413a79914d39e9939
-title: Part 113
+id: 5d822fd413a79914d39e993b
+title: Part 115
 challengeType: 0
 ---
 
 # --description--
 
-At the top of the sky gradient color list, where you would put a direction for the gradient; add `closest-corner circle at 15% 15%,`. This will move the start of the gradient to `15%` from the top and left. It will make it end at the `closest-corner` and it will maintain a `circle` shape. These are some keywords built into gradients to describe how it behaves.
+Copy and paste your whole `sky` class along with all of its properties and values into the media query. You are going to make another color scheme for the skyline that changes it from day to night.
 
 # --hints--
 
 test-text
 
 ```js
-const sky = code.match(/\.sky\s*{[\s\S]+?[^}]}/g)[0];
+const sky = code.match(/\.sky\s*{[\s\S]+?[^}]}/g)[1];
 assert(
   /background\s*:\s*radial-gradient\(\s*closest-corner\s+circle\s+at\s+15%\s+15%\s*,\s*#ffcf33\s*(0%\s*,|,)\s*#ffcf33\s*20%\s*,\s*#ffff66\s*21%\s*,\s*#bbeeff\s*100%\s*\)\s*(;|})/g.test(
     sky
@@ -76,6 +76,7 @@ assert(
 
       .sky {
         background: radial-gradient(
+            closest-corner circle at 15% 15%,
             #ffcf33,
             #ffcf33 20%,
             #ffff66 21%,
@@ -327,6 +328,10 @@ assert(
             var(--window-color3) 10%,
             var(--window-color3) 30%
           );
+      }
+
+      @media (max-width: 1000px) {
+        
       }
     </style>
   </head>
@@ -713,6 +718,18 @@ assert(
             var(--window-color3) 10%,
             var(--window-color3) 30%
           );
+      }
+
+      @media (max-width: 1000px) {
+        .sky {
+          background: radial-gradient(
+              closest-corner circle at 15% 15%,
+              #ffcf33,
+              #ffcf33 20%,
+              #ffff66 21%,
+              #bbeeff 100%
+            );
+        }
       }
     </style>
   </head>
