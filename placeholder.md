@@ -1,19 +1,19 @@
 ---
-id: 5d822fd413a79914d39e98c9
-title: Part 1
+id: 5d822fd413a79914d39e98ca
+title: Part 2
 challengeType: 0
 ---
 
 # --description--
 
-Welcome to the CSS Variables skyline project! Start by adding the `!DOCTYPE html` declaration at the top of the document so the browser knows what type of document it's reading.
+Add opening and closing `html` tags below the doctype so you have a place to start putting some code.
 
 # --hints--
 
 test-text
 
 ```js
-assert(code.match(/<!DOCTYPE\s+html\s*>/gi));
+assert(code.match(/<!DOCTYPE\s+html\s*>\s*<html\s*>\s*<\/html\s*>/gi));
 ```
 
 # --seed--
@@ -21,10 +21,14 @@ assert(code.match(/<!DOCTYPE\s+html\s*>/gi));
 ## --seed-contents--
 
 ```html
+<!DOCTYPE html>
 ```
 
 # --solutions--
 
 ```html
 <!DOCTYPE html>
+<html>
+
+</html>
 ```
