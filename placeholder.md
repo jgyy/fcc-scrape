@@ -1,20 +1,24 @@
 ---
-id: 5d822fd413a79914d39e992f
-title: Part 102
+id: 5d822fd413a79914d39e9930
+title: Part 103
 challengeType: 0
 ---
 
 # --description--
 
-Add `display: flex;` and `flex-wrap: wrap;` to the window container. This will put your windows side by side and then push them down to a new row when they don't fit.
+This building is going to have another triangle on top. Give the top section a `border-top` of `5vh solid transparent` and a `border-left` that is `8vw`, `solid`, and uses your building color variable as the color.
 
 # --hints--
 
 test-text
 
 ```js
+const fb4a = code.match(/\.fb4a\s*{[\s\S]+?[^}]}/g)[0];
 assert(
-  $('.fb4b').css('display') === 'flex' && $('.fb4b').css('flex-wrap') === 'wrap'
+  /border-top\s*:\s*5vh\s+solid\s+transparent\s*(;|})/g.test(fb4a) &&
+    /border-left\s*:\s*8vw\s+solid\s+var\(\s*--building-color1\s*\)\s*(;|})/g.test(
+      fb4a
+    )
 );
 ```
 
@@ -263,6 +267,8 @@ assert(
         width: 100%;
         height: 89%;
         background-color: var(--building-color1);
+        display: flex;
+        flex-wrap: wrap;
       }
       
       .fb4-window {
@@ -603,6 +609,11 @@ assert(
         height: 45%;
         position: relative;
         left: 10%;
+      }
+
+      .fb4a {
+        border-top: 5vh solid transparent;
+        border-left: 8vw solid var(--building-color1);
       }
 
       .fb4b {
