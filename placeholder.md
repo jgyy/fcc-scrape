@@ -1,22 +1,23 @@
 ---
-id: 5d822fd413a79914d39e992a
-title: Part 97
+id: 5d822fd413a79914d39e992b
+title: Part 98
 challengeType: 0
 ---
 
 # --description--
 
-Give `fb4b` a `width` of `100%` and `height` of `89%`.
+Add your `--building-color1` variable as value of the `background-color` property of `fb4b`. Then, remove the `background-color` from `fb4`.
 
 # --hints--
 
 test-text
 
 ```js
+const fb4 = code.match(/\.fb4\s*{[\s\S]+?[^}]}/g)[0];
 const fb4b = code.match(/\.fb4b\s*{[\s\S]+?[^}]}/g)[0];
 assert(
-  /width\s*:\s*100%\s*(;|})/g.test(fb4b) &&
-    /height\s*:\s*89%\s*(;|})/g.test(fb4b)
+  !/background-color/g.test(fb4) &&
+    /background-color\s*:\s*var\(\s*--building-color1\s*\)\s*(;|})/g.test(fb4b)
 );
 ```
 
@@ -260,6 +261,11 @@ assert(
         background-color: var(--building-color1);
         position: relative;
         left: 10%;
+      }
+
+      .fb4b {
+        width: 100%;
+        height: 89%;
       }
       
       .fb5 {
@@ -583,7 +589,6 @@ assert(
       .fb4 {
         width: 8%;
         height: 45%;
-        background-color: var(--building-color1);
         position: relative;
         left: 10%;
       }
@@ -591,6 +596,7 @@ assert(
       .fb4b {
         width: 100%;
         height: 89%;
+        background-color: var(--building-color1);
       }
       
       .fb5 {
