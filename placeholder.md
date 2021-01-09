@@ -1,20 +1,33 @@
 ---
-id: 5d822fd413a79914d39e98ef
-title: Part 39
+id: 5d822fd413a79914d39e98f0
+title: Part 40
 challengeType: 0
 ---
 
 # --description--
 
-Create a new variable in `:root` called `--window-color1` and give it a value of `black`. This will be a secondary color for the purple buildings.
+Gradients in CSS are a way to transition between colors across the distance of an element. They are applied to the `background` property and the syntax looks like this:
+
+```css
+gradient-type(
+  color1,
+  color2
+);
+```
+
+In the example, `color1` is solid at the top, `color2` is solid at the bottom, and in between it transitions evenly from one to the next. In `bb1a`, add a gradient of type `linear-gradient` to the `background` property with `--building-color1` as the first color and `--window-color1` as the second.
 
 # --hints--
 
 test-text
 
 ```js
-const rootStyle = code.match(/:root\s*{[\s\S]+?[^}]}/g)[0];
-assert(/--window-color1\s*:\s*black\s*(;|})/g.test(rootStyle));
+const bb1a = code.match(/\.bb1a\s*{[\s\S]+?[^}]}/g)[0];
+assert(
+  /background\s*:\s*linear-gradient\(\s*var\(\s*--building-color1\s*\)\s*,\s*var\(\s*--window-color1\s*\)\s*\)\s*(;|})/g.test(
+    bb1a
+  )
+);
 ```
 
 # --seed--
@@ -32,6 +45,7 @@ assert(/--window-color1\s*:\s*black\s*(;|})/g.test(rootStyle));
         --building-color2: #66cc99;
         --building-color3: #cc6699;
         --building-color4: #538cc6;
+        --window-color1: black;
       }
 
       * {
@@ -234,6 +248,10 @@ assert(/--window-color1\s*:\s*black\s*(;|})/g.test(rootStyle));
         width: 70%;
         height: 10%;
         background-color: var(--building-color1);
+        background: linear-gradient(
+            var(--building-color1),
+            var(--window-color1)
+          );
       }
   
       .bb1b {
