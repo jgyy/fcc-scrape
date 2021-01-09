@@ -1,24 +1,20 @@
 ---
-id: 5d822fd413a79914d39e98d5
-title: Part 13
+id: 5d822fd413a79914d39e98d6
+title: Part 14
 challengeType: 0
 ---
 
 # --description--
 
-Give your `bb1` element these style properties: `display: flex;`, `flex-direction: column;`, and `align-items: center;`. This will center the parts of the building using "flex" or "flexbox". You will learn about it in more detail on another project.
+Now you have something that is starting to resemble a building. Lets get into your first variable. Variable declarations begin with two dashes (`-`) and are given a name and a value like this: `--variable-name: value;`. In the `bb1` class, create a variable named `--building-color1` and give it a value of `#999`.
 
 # --hints--
 
 test-text
 
 ```js
-const bb1 = $('.bb1');
-assert(
-  bb1.css('display') === 'flex' &&
-    bb1.css('flex-direction') === 'column' &&
-    bb1.css('align-items') === 'center'
-);
+const bb1style = code.match(/\.bb1\s*{[\s\S]+?[^}]}/g)[0];
+assert(/--building-color1\s*:\s*#999\s*(;|\s*})/g.test(bb1style));
 ```
 
 # --seed--
@@ -50,6 +46,9 @@ assert(
       .bb1 {
         width: 10%;
         height: 70%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
       }
 
       .bb1a {
@@ -117,6 +116,7 @@ assert(
         display: flex;
         flex-direction: column;
         align-items: center;
+        --building-color1: #999;
       }
 
       .bb1a {
