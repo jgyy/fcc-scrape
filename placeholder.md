@@ -1,22 +1,21 @@
 ---
-id: 5d822fd413a79914d39e9919
-title: Part 80
+id: 5d822fd413a79914d39e991a
+title: Part 81
 challengeType: 0
 ---
 
 # --description--
 
-When you make the left and right borders bigger, the border on the bottom will expand to be the width of the combined left and right border widths. Add `2vw solid transparent;` as the value of the `border-left` and `border-right` properties of `fb1a`. They will be invisible, but it will make the border on the bottom `4vw` wide.
+On to the next building! Nest two `div` elements within `fb2` and give them the classes of `fb2a` and `fb2b`, in that order.
 
 # --hints--
 
 test-text
 
 ```js
-const fb1a = code.match(/\.fb1a\s*{[\s\S]+?[^}]}/g)[0];
+const fb2 = $('.fb2').children('div');
 assert(
-  /border-left\s*:\s*2vw\s+solid\s+transparent\s*(;|})/g.test(fb1a) &&
-    /border-right\s*:\s*2vw\s+solid\s+transparent\s*(;|})/g.test(fb1a)
+  fb2.length === 2 && fb2[0] === $('div.fb2a')[0] && fb2[1] === $('div.fb2b')[0]
 );
 ```
 
@@ -179,6 +178,8 @@ assert(
 
       .fb1a {
         border-bottom: 7vh solid var(--building-color4);
+        border-left: 2vw solid transparent;
+        border-right: 2vw solid transparent;
       }
 
       .fb1b {
@@ -551,7 +552,10 @@ assert(
         <div class="fb1b"></div>
         <div class="fb1c"></div>
       </div>
-      <div class="fb2"></div>
+      <div class="fb2">
+        <div class="fb2a"></div>
+        <div class="fb2b"></div>
+      </div>
       <div></div>
       <div class="fb3"></div>
       <div class="fb4"></div>
