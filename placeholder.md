@@ -1,25 +1,21 @@
 ---
-id: 5d822fd413a79914d39e98e3
-title: Part 27
+id: 5d822fd413a79914d39e98e4
+title: Part 28
 challengeType: 0
 ---
 
 # --description--
 
-Create another variable named `--building-color4` and give it a value of `#538cc6`, make sure it's in the `:root` selector this time. Then use it to fill in the last building.
+The background buildings are starting to look pretty good. Create a new `div` below the `background-buildings` element and give it a class of `foreground-buildings`. This will be another container for more buildings.
 
 # --hints--
 
 test-text
 
 ```js
-const rootStyle = code.match(/:root\s*{[\s\S]+?[^}]}/g)[0];
-const bb4style = code.match(/\.bb4\s*{[\s\S]+?[^}]}/g)[0];
+const bodyDivs = $('#display-body').children('div');
 assert(
-  /--building-color4\s*:\s*#538cc6\s*(;|\s*})/g.test(rootStyle) &&
-    /background-color\s*:\s*var\(\s*--building-color4\s*\)\s*(;|\s*})/g.test(
-      bb4style
-    )
+  bodyDivs.length === 2 && bodyDivs[1] === $('div.foreground-buildings')[0]
 );
 ```
 
@@ -37,6 +33,7 @@ assert(
         --building-color1: #aa80ff;
         --building-color2: #66cc99;
         --building-color3: #cc6699;
+        --building-color4: #538cc6;
       }
 
       * {
@@ -105,6 +102,7 @@ assert(
       .bb4 {
         width: 11%;
         height: 58%;
+        background-color: var(--building-color4);
       }
     </style>
   </head>
@@ -233,6 +231,8 @@ assert(
       <div></div>
       <div></div>
     </div>
+
+    <div class="foreground-buildings"></div>
   </body>
 </html>
 ```
