@@ -1,22 +1,12 @@
 ---
-id: 5d822fd413a79914d39e98f6
-title: Part 46
+id: 5d822fd413a79914d39e98f7
+title: Part 47
 challengeType: 0
 ---
 
 # --description--
 
-You can specify where you want a gradient transition to complete by adding it to the color like this:
-
-```css
-gradient-type(
-  color1,
-  color2 20%,
-  color3
-);
-```
-
-Here, it will transition from `color1` to `color2` between `0%` and `20%` of the element and then transition to `color3` for the rest. Add `80%` to the `--building-color1` color of the `bb1d` gradient so you can see it in action.
+Remove `orange` from the `bb1d` gradient and change the `80%` to `50%`. This will make `--building-color1` solid for the top half, and then transition to `--window-color1` for the bottom half.
 
 # --hints--
 
@@ -25,7 +15,7 @@ test-text
 ```js
 const bb1d = code.match(/\.bb1d\s*{[\s\S]+?[^}]}/g)[0];
 assert(
-  /background\s*:\s*linear-gradient\(\s*orange\s*,\s*var\(\s*--building-color1\s*\)\s*80%\s*,\s*var\(\s*--window-color1\s*\)\s*\)\s*(;|})/g.test(
+  /background\s*:\s*linear-gradient\(\s*var\(\s*--building-color1\s*\)\s*50%\s*,\s*var\(\s*--window-color1\s*\)\s*\)\s*(;|})/g.test(
     bb1d
   )
 );
@@ -96,7 +86,7 @@ assert(
         height: 70%;
         background: linear-gradient(
             orange,
-            var(--building-color1),
+            var(--building-color1) 80%,
             var(--window-color1)
           );
       }
@@ -267,8 +257,7 @@ assert(
         width: 100%;
         height: 70%;
         background: linear-gradient(
-            orange,
-            var(--building-color1) 80%,
+            var(--building-color1) 50%,
             var(--window-color1)
           );
       }
