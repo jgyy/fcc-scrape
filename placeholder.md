@@ -1,20 +1,24 @@
 ---
-id: 5d822fd413a79914d39e9915
-title: Part 106
+id: 5d822fd413a79914d39e9934
+title: Part 107
 challengeType: 0
 ---
 
 # --description--
 
-You don't need the `background-color` for this building anymore so you can remove that property.
+Finally! You made it to the last building! Add a repeating gradient to it with a `90deg` direction. Use the building color from `0%` to `10%` and `transparent` from `10%` to `30%`.
 
 # --hints--
 
 test-text
 
 ```js
-const fb5 = code.match(/\.fb5\s*{[\s\S]+?[^}]}/g)[0];
-assert(!/background-color/g.test(fb5));
+const fb6 = code.match(/\.fb6\s*{[\s\S]+?[^}]}/g)[0];
+assert(
+  /background\s*:\s*repeating-linear-gradient\(\s*90deg\s*,\s*var\(\s*--building-color3\s*\)\s*(0%\s*,|,)\s*var\(\s*--building-color3\s*\)\s*10%\s*,\s*transparent\s*10%\s*,\s*transparent\s*30%\s*\)\s*(;|})/g.test(
+    fb6
+  )
+);
 ```
 
 # --seed--
@@ -282,7 +286,6 @@ assert(!/background-color/g.test(fb5));
       .fb5 {
         width: 10%;
         height: 33%;
-        background-color: var(--building-color2);
         position: relative;
         right: 10%;
         background: repeating-linear-gradient(
@@ -669,6 +672,13 @@ assert(!/background-color/g.test(fb5));
         width: 9%;
         height: 38%;
         background-color: var(--building-color3);
+        background: repeating-linear-gradient(
+          90deg,
+          var(--building-color3),
+          var(--building-color3) 10%,
+          transparent 10%,
+          transparent 30%
+        )
       }
     </style>
   </head>
