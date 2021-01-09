@@ -1,23 +1,24 @@
 ---
-id: 5d822fd413a79914d39e993c
-title: Part 116
+id: 5d822fd413a79914d39e993d
+title: Part 117
 challengeType: 0
 ---
 
 # --description--
 
-In the `sky` class of the media query, change the two `#ffcf33` color values to `#ccc`, the `#ffff66` to `#445`, and the `#bbeeff` to `#223`. Then you can resize your window to see the background change colors.
+Add a `:root` selector to the top of your media query. Then redefine all four of the `--building-color` variables to use the value `#000` there.
 
 # --hints--
 
 test-text
 
 ```js
-const sky = code.match(/\.sky\s*{[\s\S]+?[^}]}/g)[1];
+const root = code.match(/:root\s*{[\s\S]+?[^}]}/g)[1];
 assert(
-  /background\s*:\s*radial-gradient\(\s*closest-corner\s+circle\s+at\s+15%\s+15%\s*,\s*#ccc\s*(0%\s*,|,)\s*#ccc\s*20%\s*,\s*#445\s*21%\s*,\s*#223\s*100%\s*\)\s*(;|})/g.test(
-    sky
-  )
+  /--building-color1\s*:\s*#000\s*(;|})/g.test(root) &&
+    /--building-color2\s*:\s*#000\s*(;|})/g.test(root) &&
+    /--building-color3\s*:\s*#000\s*(;|})/g.test(root) &&
+    /--building-color4\s*:\s*#000\s*(;|})/g.test(root)
 );
 ```
 
@@ -334,10 +335,10 @@ assert(
         .sky {
           background: radial-gradient(
               closest-corner circle at 15% 15%,
-              #ffcf33,
-              #ffcf33 20%,
-              #ffff66 21%,
-              #bbeeff 100%
+              #ccc,
+              #ccc 20%,
+              #445 21%,
+              #223 100%
             );
         }
       }
@@ -729,6 +730,13 @@ assert(
       }
 
       @media (max-width: 1000px) {
+        :root {
+          --building-color1: #000;
+          --building-color2: #000;
+          --building-color3: #000;
+          --building-color4: #000;
+        }
+
         .sky {
           background: radial-gradient(
               closest-corner circle at 15% 15%,
