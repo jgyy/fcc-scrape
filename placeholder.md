@@ -1,24 +1,19 @@
 ---
-id: 5d822fd413a79914d39e98cf
-title: Part 7
+id: 5d822fd413a79914d39e98d0
+title: Part 8
 challengeType: 0
 ---
 
 # --description--
 
-You can see the body, it's the horizontal line on your page; the box around it is the html element. Make your body fill the whole viewport by giving it a `height` of `100vh`. Remove the default margin from the body by setting the `margin` to `0`. Finally, set the `overflow` property to `hidden` to hide any scroll bars that appear when something extends past the viewport.
+It's tough to see now, but there's a border at the edge of your preview, that's the body. Create a `div` element in the body with a class of `background-buildings`. This will be a container for a group of buildings.
 
 # --hints--
 
 test-text
 
 ```js
-const body = code.match(/body\s*{[\s\S]+?[^}]}/g)[0];
-assert(
-  /height\s*:\s*100vh\s*(;|})/g.test(body) &&
-    /margin\s*:\s*(0|0px)\s*(;|})/g.test(body) &&
-    /overflow\s*:\s*hidden\s*(;|})/g.test(body)
-);
+assert($('#display-body')[0].contains($('div.background-buildings')[0]));
 ```
 
 # --seed--
@@ -34,6 +29,12 @@ assert(
       * {
         border: 1px solid black;
         box-sizing: border-box;
+      }
+
+      body {
+        height: 100vh;
+        margin: 0;
+        overflow: hidden;
       }
     </style>
   </head>
@@ -65,6 +66,7 @@ assert(
   </head>
 
   <body>
+    <div class="background-buildings"></div>
   </body>
 </html>
 ```
