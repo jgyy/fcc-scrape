@@ -1,21 +1,24 @@
 ---
-id: 5d822fd413a79914d39e991a
-title: Part 81
+id: 5d822fd413a79914d39e991b
+title: Part 82
 challengeType: 0
 ---
 
 # --description--
 
-On to the next building! Nest two `div` elements within `fb2` and give them the classes of `fb2a` and `fb2b`, in that order.
+Give `fb2a` a `width` of `100%` and `fb2b` a `width` of `100%` and `height` of `75%`.
 
 # --hints--
 
 test-text
 
 ```js
-const fb2 = $('.fb2').children('div');
+const fb2a = code.match(/\.fb2a\s*{[\s\S]+?[^}]}/g)[0];
+const fb2b = code.match(/\.fb2b\s*{[\s\S]+?[^}]}/g)[0];
 assert(
-  fb2.length === 2 && fb2[0] === $('div.fb2a')[0] && fb2[1] === $('div.fb2b')[0]
+  /width\s*:\s*100%\s*(;|})/g.test(fb2a) &&
+    /width\s*:\s*100%\s*(;|})/g.test(fb2b) &&
+    /height\s*:\s*75%\s*(;|})/g.test(fb2b)
 );
 ```
 
@@ -280,7 +283,10 @@ assert(
         <div class="fb1b"></div>
         <div class="fb1c"></div>
       </div>
-      <div class="fb2"></div>
+      <div class="fb2">
+        <div class="fb2a"></div>
+        <div class="fb2b"></div>
+      </div>
       <div></div>
       <div class="fb3"></div>
       <div class="fb4"></div>
@@ -482,6 +488,15 @@ assert(
         width: 10%;
         height: 40%;
         background-color: var(--building-color3);
+      }
+
+      .fb2a {
+        width: 100%;
+      }
+
+      .fb2b {
+        width: 100%;
+        height: 75%;
       }
 
       .fb3 {
