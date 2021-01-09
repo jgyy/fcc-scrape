@@ -1,23 +1,23 @@
 ---
-id: 5d822fd413a79914d39e991e
-title: Part 85
+id: 5d822fd413a79914d39e991f
+title: Part 86
 challengeType: 0
 ---
 
 # --description--
 
-Give the `fb2-window` elements a `width` of `22%`, `height` of `100%`, and a `background-color` of your `--window-color3` variable.
+Move the `background-color` property and value from `fb2` to `fb2b` to just color the section and not the container.
 
 # --hints--
 
 test-text
 
 ```js
-const fb2w = code.match(/\.fb2-window\s*{[\s\S]+?[^}]}/g)[0];
+const fb2 = code.match(/\.fb2\s*{[\s\S]+?[^}]}/g)[0];
+const fb2b = code.match(/\.fb2b\s*{[\s\S]+?[^}]}/g)[0];
 assert(
-  /width\s*:\s*22%\s*(;|})/g.test(fb2w) &&
-    /height\s*:\s*100%\s*(;|})/g.test(fb2w) &&
-    /background-color\s*:\s*var\(\s*--window-color3\s*\)\s*(;|})/g.test(fb2w)
+  !/background-color/g.test(fb2) &&
+    /background-color\s*:\s*var\(\s*--building-color3\s*\)\s*(;|})/g.test(fb2b)
 );
 ```
 
@@ -221,6 +221,12 @@ assert(
       .fb2b {
         width: 100%;
         height: 75%;
+      }
+
+      .fb2-window {
+        width: 22%;
+        height: 100%;
+        background-color: var(--window-color3);
       }
 
       .fb3 {
@@ -499,7 +505,6 @@ assert(
       .fb2 {
         width: 10%;
         height: 40%;
-        background-color: var(--building-color3);
       }
 
       .fb2a {
@@ -509,6 +514,7 @@ assert(
       .fb2b {
         width: 100%;
         height: 75%;
+        background-color: var(--building-color3);
       }
 
       .fb2-window {
