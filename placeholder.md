@@ -1,25 +1,27 @@
 ---
-id: 5d822fd413a79914d39e98eb
-title: Part 35
+id: 5d822fd413a79914d39e98ec
+title: Part 36
 challengeType: 0
 ---
 
 # --description--
 
-The skyline is coming together. Fill in the `background-color` property of the foreground buildings. Use your `--building-color1` variable to fill in `fb3` and `fb4`, `--building-color2` for `fb5`, `--building-color3` for `fb2` and `fb6`, and `--building-color4` for `fb1`.
+Squeeze the buildings together again by adding two empty `div` elements at both the top and bottom of the `foreground-buildings` element, and one more in between `fb2` and `fb3`.
 
 # --hints--
 
 test-text
 
 ```js
+const fb = $('.foreground-buildings').children('div');
 assert(
-  $('.fb1').css('background-color') === 'rgb(83, 140, 198)' &&
-    $('.fb2').css('background-color') === 'rgb(204, 102, 153)' &&
-    $('.fb3').css('background-color') === 'rgb(170, 128, 255)' &&
-    $('.fb4').css('background-color') === 'rgb(170, 128, 255)' &&
-    $('.fb5').css('background-color') === 'rgb(102, 204, 153)' &&
-    $('.fb6').css('background-color') === 'rgb(204, 102, 153)'
+  fb.length === 11 &&
+    fb[2] === $('div.fb1')[0] &&
+    fb[3] === $('div.fb2')[0] &&
+    fb[5] === $('div.fb3')[0] &&
+    fb[6] === $('div.fb4')[0] &&
+    fb[7] === $('div.fb5')[0] &&
+    fb[8] === $('div.fb6')[0]
 );
 ```
 
@@ -114,31 +116,37 @@ assert(
       .fb1 {
         width: 10%;
         height: 60%;
+        background-color: var(--building-color4);
       }
 
       .fb2 {
         width: 10%;
         height: 40%;
+        background-color: var(--building-color3);
       }
 
       .fb3 {
         width: 10%;
         height: 35%;
+        background-color: var(--building-color1);
       }
   
       .fb4 {
         width: 8%;
         height: 45%;
+        background-color: var(--building-color1);
       }
       
       .fb5 {
         width: 10%;
         height: 33%;
+        background-color: var(--building-color2);
       }
 
       .fb6 {
         width: 9%;
         height: 38%;
+        background-color: var(--building-color3);
       }
     </style>
   </head>
@@ -316,12 +324,17 @@ assert(
     </div>
 
     <div class="foreground-buildings">
+      <div></div>
+      <div></div>
       <div class="fb1"></div>
       <div class="fb2"></div>
+      <div></div>
       <div class="fb3"></div>
       <div class="fb4"></div>
       <div class="fb5"></div>
       <div class="fb6"></div>
+      <div></div>
+      <div></div>
     </div>
   </body>
 </html>
