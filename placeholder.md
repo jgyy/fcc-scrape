@@ -1,20 +1,24 @@
 ---
-id: 5d822fd413a79914d39e98d6
-title: Part 14
+id: 5d822fd413a79914d39e98d7
+title: Part 15
 challengeType: 0
 ---
 
 # --description--
 
-Now you have something that is starting to resemble a building. Lets get into your first variable. Variable declarations begin with two dashes (`-`) and are given a name and a value like this: `--variable-name: value;`. In the `bb1` class, create a variable named `--building-color1` and give it a value of `#999`.
+To use a variable, just put the variable name in parenthesis with `var` in front of them like this: `var(--variable-name)`. Add your variable as the value of the `background-color` property of the `bb1a` class. Whatever value you gave the variable will be applied to whatever property you use it on. In this case, your variable has the value of `#999`. So `#999` will be used as the value for the `background-color` property.
 
 # --hints--
 
 test-text
 
 ```js
-const bb1style = code.match(/\.bb1\s*{[\s\S]+?[^}]}/g)[0];
-assert(/--building-color1\s*:\s*#999\s*(;|\s*})/g.test(bb1style));
+const bb1aStyle = code.match(/\.bb1a\s*{[\s\S]+?[^}]}/g)[0];
+assert(
+  /background-color\s*:\s*var\(\s*--building-color1\s*\)\s*(;|\s*})/g.test(
+    bb1aStyle
+  )
+);
 ```
 
 # --seed--
@@ -49,6 +53,7 @@ assert(/--building-color1\s*:\s*#999\s*(;|\s*})/g.test(bb1style));
         display: flex;
         flex-direction: column;
         align-items: center;
+        --building-color1: #999;
       }
 
       .bb1a {
@@ -122,6 +127,7 @@ assert(/--building-color1\s*:\s*#999\s*(;|\s*})/g.test(bb1style));
       .bb1a {
         width: 70%;
         height: 10%;
+        background-color: var(--building-color1);
       }
   
       .bb1b {
