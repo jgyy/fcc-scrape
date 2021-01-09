@@ -1,24 +1,28 @@
 ---
-id: 5d822fd413a79914d39e9906
-title: Part 62
+id: 5d822fd413a79914d39e9907
+title: Part 63
 challengeType: 0
 ---
 
 # --description--
 
-The next building will have three sections. Nest three `div` elements within `bb4`. Give them the classes of `bb4a`, `bb4b` and `bb4c` in that order.
+Give the new `div` elements these `width` and `height` values: `3%` and `10%` to `bb4a`, `80%` and `5%` to `bb4b`, and `100%` and `85%` to `bb4c`.
 
 # --hints--
 
 test-text
 
 ```js
-const bb4 = $('.bb4').children('div');
+const bb4a = code.match(/\.bb4a\s*{[\s\S]+?[^}]}/g)[0];
+const bb4b = code.match(/\.bb4b\s*{[\s\S]+?[^}]}/g)[0];
+const bb4c = code.match(/\.bb4c\s*{[\s\S]+?[^}]}/g)[0];
 assert(
-  bb4.length === 3 &&
-    bb4[0] === $('.bb4a')[0] &&
-    bb4[1] === $('.bb4b')[0] &&
-    bb4[2] === $('.bb4c')[0]
+  /width\s*:\s*3%\s*(;|})/g.test(bb4a) &&
+    /height\s*:\s*10%\s*(;|})/g.test(bb4a) &&
+    /width\s*:\s*80%\s*(;|})/g.test(bb4b) &&
+    /height\s*:\s*5%\s*(;|})/g.test(bb4b) &&
+    /width\s*:\s*100%\s*(;|})/g.test(bb4c) &&
+    /height\s*:\s*85%\s*(;|})/g.test(bb4c)
 );
 ```
 
@@ -199,7 +203,11 @@ assert(
       </div>
       <div class="bb3"></div>
       <div></div>
-      <div class="bb4"></div>
+      <div class="bb4">
+        <div class="bb4a"></div>
+        <div class="bb4b"></div>
+        <div class="bb4c"></div>
+      </div>
       <div></div>
       <div></div>
     </div>
@@ -335,6 +343,21 @@ assert(
         width: 11%;
         height: 58%;
         background-color: var(--building-color4);
+      }
+
+      .bb4a {
+        width: 3%;
+        height: 10%;
+      }
+
+      .bb4b {
+        width: 80%;
+        height: 5%;
+      }
+  
+      .bb4c {
+        width: 100%;
+        height: 85%;
       }
 
       /* FOREGROUND BUILDINGS - "fb" stands for "foreground building" */
