@@ -1,26 +1,20 @@
 ---
-id: 5d822fd413a79914d39e98ee
-title: Part 38
+id: 5d822fd413a79914d39e98ef
+title: Part 39
 challengeType: 0
 ---
 
 # --description--
 
-Your code is starting to get quite long. Add a comment above the `fb1` class that says `FOREGROUND BUILDINGS - "fb" stands for "foreground building"` to help people understand your code. Above the `bb1` class add another comment that says `BACKGROUND BUILDINGS - "bb" stands for "background building"`. If you don't remember, comments in CSS look like this: `/* Comment here */`.
+Create a new variable in `:root` called `--window-color1` and give it a value of `black`. This will be a secondary color for the purple buildings.
 
 # --hints--
 
 test-text
 
 ```js
-assert(
-  /\/\*\s*BACKGROUND BUILDINGS - "bb" stands for "background building"\s*\*\//g.test(
-    code
-  ) &&
-    /\/\*\s*FOREGROUND BUILDINGS - "fb" stands for "foreground building"\s*\*\//g.test(
-      code
-    )
-);
+const rootStyle = code.match(/:root\s*{[\s\S]+?[^}]}/g)[0];
+assert(/--window-color1\s*:\s*black\s*(;|})/g.test(rootStyle));
 ```
 
 # --seed--
@@ -60,7 +54,8 @@ assert(
         position: absolute;
         top: 0;
       }
-
+      
+      /* BACKGROUND BUILDINGS - "bb" stands for "background building" */
       .bb1 {
         width: 10%;
         height: 70%;
@@ -111,6 +106,7 @@ assert(
         background-color: var(--building-color4);
       }
 
+      /* FOREGROUND BUILDINGS - "fb" stands for "foreground building" */
       .fb1 {
         width: 10%;
         height: 60%;
@@ -201,6 +197,7 @@ assert(
         --building-color2: #66cc99;
         --building-color3: #cc6699;
         --building-color4: #538cc6;
+        --window-color1: black;
       }
 
       * {
