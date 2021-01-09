@@ -1,28 +1,19 @@
 ---
-id: 5d822fd413a79914d39e9923
-title: Part 90
+id: 5d822fd413a79914d39e9924
+title: Part 91
 challengeType: 0
 ---
 
 # --description--
 
-Remove the `background-color` property and value from `fb3` and add them to `fb3a` and `fb3b`.
+Add your `building-wrap` class to the `fb3` element to center the sections.
 
 # --hints--
 
 test-text
 
 ```js
-const fb3 = code.match(/\.fb3\s*{[\s\S]+?[^}]}/g)[0];
-const fb3a = code.match(/\.fb3a\s*{[\s\S]+?[^}]}/g)[0];
-const fb3b = code.match(/\.fb3b\s*{[\s\S]+?[^}]}/g)[0];
-assert(
-  !/background-color/g.test(fb3) &&
-    /background-color\s*:\s*var\(\s*--building-color1\s*\)\s*(;|})/g.test(
-      fb3a
-    ) &&
-    /background-color\s*:\s*var\(\s*--building-color1\s*\)\s*(;|})/g.test(fb3b)
-);
+assert($('.fb3.building-wrap').length === 1);
 ```
 
 # --seed--
@@ -239,19 +230,20 @@ assert(
       .fb3 {
         width: 10%;
         height: 35%;
-        background-color: var(--building-color1);
       }
-
+  
       .fb3a {
         width: 80%;
         height: 15%;
+        background-color: var(--building-color1);
       }
   
       .fb3b {
         width: 100%;
         height: 35%;
+        background-color: var(--building-color1);
       }
-  
+
       .fb4 {
         width: 8%;
         height: 45%;
@@ -636,7 +628,7 @@ assert(
         </div>
       </div>
       <div></div>
-      <div class="fb3">
+      <div class="fb3 building-wrap">
         <div class="fb3a"></div>
         <div class="fb3b"></div>
         <div class="fb3a"></div>
