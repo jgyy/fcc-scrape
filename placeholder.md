@@ -1,19 +1,24 @@
 ---
-id: 5d822fd413a79914d39e9909
-title: Part 65
+id: 5d822fd413a79914d39e990a
+title: Part 66
 challengeType: 0
 ---
 
 # --description--
 
-You want `bb4` to share the properties of `bb1` that center the sections. Instead of duplicating that code, create a new class above the background building comment called `building-wrap`. Leave it empty for now; this class will be used in a few places to save you some coding.
+Move the `display`, `flex-direction`, and `align-items` properties and values from `bb1` to the new `building-wrap` class.
 
 # --hints--
 
 test-text
 
 ```js
-assert(/\.building-wrap\s*{\s*}/g.test(code));
+const bWrap = code.match(/\.building-wrap\s*{[\s\S]+?[^}]}/g)[0];
+assert(
+  /display\s*:\s*flex\s*(;|})/g.test(bWrap) &&
+    /flex-direction\s*:\s*column\s*(;|})/g.test(bWrap) &&
+    /align-items\s*:\s*center\s*(;|})/g.test(bWrap)
+);
 ```
 
 # --seed--
@@ -55,6 +60,10 @@ assert(/\.building-wrap\s*{\s*}/g.test(code));
         justify-content: space-evenly;
         position: absolute;
         top: 0;
+      }
+
+      .building-wrap {
+
       }
       
       /* BACKGROUND BUILDINGS - "bb" stands for "background building" */
@@ -276,16 +285,15 @@ assert(/\.building-wrap\s*{\s*}/g.test(code));
       }
 
       .building-wrap {
-
+        display: flex;
+        flex-direction: column;
+        align-items: center;
       }
       
       /* BACKGROUND BUILDINGS - "bb" stands for "background building" */
       .bb1 {
         width: 10%;
         height: 70%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
       }
 
       .bb1a {
