@@ -1,23 +1,25 @@
 ---
-id: 5d822fd413a79914d39e98dc
-title: Part 20
+id: 5d822fd413a79914d39e98dd
+title: Part 21
 challengeType: 0
 ---
 
 # --description--
 
-The buildings are stacked on top of each other and running off the screen. Let's fix that. Add the properties `display: flex;`, `align-items: flex-end;`, and `justify-content: space-evenly;` to the `background-buildings` class. This will use Flexbox again to evenly space the buildings across the bottom of the element.
+I don't like how spaced out the buildings are. Squeeze them together by adding two empty `div` elements to the top of the `background-buildings` element, two more at the bottom of it, and one more in between `bb3` and `bb4`. These will be added as things that are spaced evenly across the container, effectively moving the buildings closer to the center.
 
 # --hints--
 
 test-text
 
 ```js
-const bb = $('.background-buildings');
+const bb = $('.background-buildings').children('div');
 assert(
-  bb.css('display') === 'flex' &&
-    bb.css('align-items') === 'flex-end' &&
-    bb.css('justify-content') === 'space-evenly'
+  bb.length === 9 &&
+    bb[2] === $('div.bb1')[0] &&
+    bb[3] === $('div.bb2')[0] &&
+    bb[4] === $('div.bb3')[0] &&
+    bb[6] === $('div.bb4')[0]
 );
 ```
 
@@ -45,6 +47,9 @@ assert(
       .background-buildings {
         width: 100%;
         height: 100%;
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-evenly;
       }
 
       .bb1 {
@@ -192,6 +197,8 @@ assert(
 
   <body>
     <div class="background-buildings">
+      <div></div>
+      <div></div>
       <div class="bb1">
         <div class="bb1a"></div>
         <div class="bb1b"></div>
@@ -200,7 +207,10 @@ assert(
       </div>
       <div class="bb2"></div>
       <div class="bb3"></div>
+      <div></div>
       <div class="bb4"></div>
+      <div></div>
+      <div></div>
     </div>
   </body>
 </html>
