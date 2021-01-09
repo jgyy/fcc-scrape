@@ -1,27 +1,25 @@
 ---
-id: 5d822fd413a79914d39e98ec
-title: Part 36
+id: 5d822fd413a79914d39e98ed
+title: Part 37
 challengeType: 0
 ---
 
 # --description--
 
-Squeeze the buildings together again by adding two empty `div` elements at both the top and bottom of the `foreground-buildings` element, and one more in between `fb2` and `fb3`.
+Move the position of `fb4` relative to where it is now by adding a `position` of `relative` and `left` of `10%` to it. Do the same for `fb5` but use `right` instead of `left`. This will cover up the remaining white space in between the buildings.
 
 # --hints--
 
 test-text
 
 ```js
-const fb = $('.foreground-buildings').children('div');
+const fb4style = code.match(/\.fb4\s*{[\s\S]+?[^}]}/g)[0];
+const fb5style = code.match(/\.fb5\s*{[\s\S]+?[^}]}/g)[0];
 assert(
-  fb.length === 11 &&
-    fb[2] === $('div.fb1')[0] &&
-    fb[3] === $('div.fb2')[0] &&
-    fb[5] === $('div.fb3')[0] &&
-    fb[6] === $('div.fb4')[0] &&
-    fb[7] === $('div.fb5')[0] &&
-    fb[8] === $('div.fb6')[0]
+  $('.fb4').css('position') === 'relative' &&
+    $('.fb5').css('position') === 'relative' &&
+    /left\s*:\s*10%\s*(;|})/g.test(fb4style) &&
+    /right\s*:\s*10%\s*(;|})/g.test(fb5style)
 );
 ```
 
@@ -170,12 +168,17 @@ assert(
     </div>
 
     <div class="foreground-buildings">
+      <div></div>
+      <div></div>
       <div class="fb1"></div>
       <div class="fb2"></div>
+      <div></div>
       <div class="fb3"></div>
       <div class="fb4"></div>
       <div class="fb5"></div>
       <div class="fb6"></div>
+      <div></div>
+      <div></div>
     </div>
   </body>
 </html>
@@ -289,12 +292,16 @@ assert(
         width: 8%;
         height: 45%;
         background-color: var(--building-color1);
+        position: relative;
+        left: 10%;
       }
       
       .fb5 {
         width: 10%;
         height: 33%;
         background-color: var(--building-color2);
+        position: relative;
+        right: 10%;
       }
 
       .fb6 {
