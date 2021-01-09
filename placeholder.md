@@ -1,19 +1,24 @@
 ---
-id: 5d822fd413a79914d39e9925
-title: Part 92
+id: 5d822fd413a79914d39e9926
+title: Part 93
 challengeType: 0
 ---
 
 # --description--
 
-Nest three new `div` elements in the first `fb3a` element. Give them each a class of `fb3-window`. These will be windows for this section.
+Give the `fb3-window` elements a `width` of `25%`, a `height` of `80%`, and use your `--window-color1` variable as the `background-color` value.
 
 # --hints--
 
 test-text
 
 ```js
-assert($('.fb3 div.fb3a:first-child').children('div.fb3-window').length === 3);
+const fb3w = code.match(/\.fb3-window\s*{[\s\S]+?[^}]}/g)[0];
+assert(
+  /width\s*:\s*25%\s*(;|})/g.test(fb3w) &&
+    /height\s*:\s*80%\s*(;|})/g.test(fb3w) &&
+    /background-color\s*:\s*var\(\s*--window-color1\s*\)\s*(;|})/g.test(fb3w)
+);
 ```
 
 # --seed--
@@ -316,7 +321,11 @@ assert($('.fb3 div.fb3a:first-child').children('div.fb3-window').length === 3);
       </div>
       <div></div>
       <div class="fb3 building-wrap">
-        <div class="fb3a"></div>
+        <div class="fb3a">
+          <div class="fb3-window"></div>
+          <div class="fb3-window"></div>
+          <div class="fb3-window"></div>
+        </div>
         <div class="fb3b"></div>
         <div class="fb3a"></div>
         <div class="fb3b"></div>
@@ -555,6 +564,12 @@ assert($('.fb3 div.fb3a:first-child').children('div.fb3-window').length === 3);
         width: 100%;
         height: 35%;
         background-color: var(--building-color1);
+      }
+
+      .fb3-window {
+        width: 25%;
+        height: 80%;
+        background-color: var(--window-color1);
       }
 
       .fb4 {
