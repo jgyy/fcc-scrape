@@ -1,12 +1,12 @@
 ---
-id: 5d822fd413a79914d39e9935
-title: Part 108
+id: 5d822fd413a79914d39e9931
+title: Part 109
 challengeType: 0
 ---
 
 # --description--
 
-Add another repeating gradient to this building; make it the same as the one you just added, except don't add the `90deg` direction and use your window color instead of the two `transparent` colors.
+You can remove the `background-color` for this building now, since it isn't needed.
 
 # --hints--
 
@@ -14,11 +14,7 @@ test-text
 
 ```js
 const fb6 = code.match(/\.fb6\s*{[\s\S]+?[^}]}/g)[0];
-assert(
-  /background\s*:\s*repeating-linear-gradient\(\s*90deg\s*,\s*var\(\s*--building-color3\s*\)\s*(0%\s*,|,)\s*var\(\s*--building-color3\s*\)\s*10%\s*,\s*transparent\s*10%\s*,\s*transparent\s*30%\s*\)\s*,\s*repeating-linear-gradient\(\s*var\(\s*--building-color3\s*\)\s*(0%\s*,|,)\s*var\(\s*--building-color3\s*\)\s*10%\s*,\s*var\(\s*--window-color3\s*\)\s*10%\s*,\s*var\(\s*--window-color3\s*\)\s*30%\s*\)\s*(;|})/g.test(
-    fb6
-  )
-);
+assert(!/background-color/g.test(fb6));
 ```
 
 # --seed--
@@ -308,12 +304,18 @@ assert(
         height: 38%;
         background-color: var(--building-color3);
         background: repeating-linear-gradient(
-          90deg,
-          var(--building-color3),
-          var(--building-color3) 10%,
-          transparent 10%,
-          transparent 30%
-        )
+            90deg,
+            var(--building-color3),
+            var(--building-color3) 10%,
+            transparent 10%,
+            transparent 30%
+          ),
+          repeating-linear-gradient(
+            var(--building-color3),
+            var(--building-color3) 10%,
+            var(--window-color3) 10%,
+            var(--window-color3) 30%
+          );
       }
     </style>
   </head>
@@ -678,7 +680,6 @@ assert(
       .fb6 {
         width: 9%;
         height: 38%;
-        background-color: var(--building-color3);
         background: repeating-linear-gradient(
             90deg,
             var(--building-color3),
