@@ -1,26 +1,64 @@
 ---
-id: 5d822fd413a79914d39e993e
-title: Part 118
+id: 587d78b0367417b2b2512b08
+title: Create a Media Query
 challengeType: 0
+videoUrl: 'https://scrimba.com/p/pzrPu4/cqwKrtm'
+forumTopicId: 301139
 ---
 
 # --description--
 
-Lastly, in the `:root` selector of the media query, redefine all four of the `--window-color` variables to use `#777`. When you're done, resize the window and watch it go from day to night.
+Media Queries are a new technique introduced in CSS3 that change the presentation of content based on different viewport sizes. The viewport is a user's visible area of a web page, and is different depending on the device used to access the site.
 
-Variables are primarily used with colors, and that's how you used them here. But they can be given any value and used on any property. Your project looks great!
+Media Queries consist of a media type, and if that media type matches the type of device the document is displayed on, the styles are applied. You can have as many selectors and styles inside your media query as you want.
+
+Here's an example of a media query that returns the content when the device's width is less than or equal to 100px:
+
+`@media (max-width: 100px) { /* CSS Rules */ }`
+
+and the following media query returns the content when the device's height is more than or equal to 350px:
+
+`@media (min-height: 350px) { /* CSS Rules */ }`
+
+Remember, the CSS inside the media query is applied only if the media type matches that of the device being used.
+
+# --instructions--
+
+Add a media query, so that the `p` tag has a `font-size` of `10px` when the device's height is less than or equal to `800px`.
 
 # --hints--
 
-test-text
+You should declare a `@media` query for devices with a `height` less than or equal to 800px.
 
 ```js
-const root = code.match(/:root\s*{[\s\S]+?[^}]}/g)[1];
 assert(
-  /--window-color1\s*:\s*#777\s*(;|})/g.test(root) &&
-    /--window-color2\s*:\s*#777\s*(;|})/g.test(root) &&
-    /--window-color3\s*:\s*#777\s*(;|})/g.test(root) &&
-    /--window-color4\s*:\s*#777\s*(;|})/g.test(root)
+  $('style')
+    .text()
+    .replace(/\s/g, '')
+    .match(/@media\(max-height:800px\)/g)
+);
+```
+
+Your `p` element should have a `font-size` of 10px when the device `height` is less than or equal to 800px.
+
+```js
+assert(
+  $('style')
+    .text()
+    .replace(/\s/g, '')
+    .match(/@media\(max-height:800px\){p{font-size:10px;?}}/g)
+);
+```
+
+Your `p` element should have an initial `font-size` of 20px when the device `height` is more than 800px.
+
+```js
+assert(
+  $('style')
+    .text()
+    .replace(/\s/g, '')
+    .replace(/@media.*}/g, '')
+    .match(/p{font-size:20px;?}/g)
 );
 ```
 
@@ -29,813 +67,33 @@ assert(
 ## --seed-contents--
 
 ```html
-<!DOCTYPE html>
-<html>    
-  <head>
-    <title>freeCodeCamp Skyline Project</title>
-    <style>
-      :root {
-        --building-color1: #aa80ff;
-        --building-color2: #66cc99;
-        --building-color3: #cc6699;
-        --building-color4: #538cc6;
-        --window-color1: #bb99ff;
-        --window-color2: #8cd9b3;
-        --window-color3: #d98cb3;
-        --window-color4: #8cb3d9;
-      }
+<style>
+  p {
+    font-size: 20px;
+  }
 
-      * {
-        box-sizing: border-box;
-      }
+  /* Only change code below this line */
 
-      body {
-        height: 100vh;
-        margin: 0;
-        overflow: hidden;
-      }
+  /* Only change code above this line */
+</style>
 
-      .background-buildings, .foreground-buildings {
-        width: 100%;
-        height: 100%;
-        display: flex;
-        align-items: flex-end;
-        justify-content: space-evenly;
-        position: absolute;
-        top: 0;
-      }
-      
-      .building-wrap {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
-
-      .window-wrap {
-        display: flex;
-        align-items: center;
-        justify-content: space-evenly;
-      }
-
-      .sky {
-        background: radial-gradient(
-            closest-corner circle at 15% 15%,
-            #ffcf33,
-            #ffcf33 20%,
-            #ffff66 21%,
-            #bbeeff 100%
-          );
-      }
-
-      /* BACKGROUND BUILDINGS - "bb" stands for "background building" */
-      .bb1 {
-        width: 10%;
-        height: 70%;
-      }
-
-      .bb1a {
-        width: 70%;
-      }
-  
-      .bb1b {
-        width: 80%;
-      }
-  
-      .bb1c {
-        width: 90%;
-      }
-
-      .bb1d {
-        width: 100%;
-        height: 70%;
-        background: linear-gradient(
-            var(--building-color1) 50%,
-            var(--window-color1)
-          );
-      }
-
-      .bb1-window {
-        height: 10%;
-        background: linear-gradient(
-            var(--building-color1),
-            var(--window-color1)
-          );
-      }
-
-      .bb2 {
-        width: 10%;
-        height: 50%;
-      }
-
-      .bb2a {
-        border-bottom: 5vh solid var(--building-color2);
-        border-left: 5vw solid transparent;
-        border-right: 5vw solid transparent;
-      }
-
-      .bb2b {
-        width: 100%;
-        height: 100%;
-        background: repeating-linear-gradient(
-            var(--building-color2),
-            var(--building-color2) 6%,
-            var(--window-color2) 6%,
-            var(--window-color2) 9%
-          );
-      }
-      
-      .bb3 {
-        width: 10%;
-        height: 55%;
-        background: repeating-linear-gradient(
-            90deg,
-            var(--building-color3),
-            var(--building-color3),
-            var(--window-color3) 15%
-          );
-      }
-
-      .bb4 {
-        width: 11%;
-        height: 58%;
-      }
-
-      .bb4a {
-        width: 3%;
-        height: 10%;
-        background-color: var(--building-color4);
-      }
-
-      .bb4b {
-        width: 80%;
-        height: 5%;
-        background-color: var(--building-color4);
-      }
-  
-      .bb4c {
-        width: 100%;
-        height: 85%;
-        background-color: var(--building-color4);
-      }
-
-      .bb4-window {
-        width: 18%;
-        height: 90%;
-        background-color: var(--window-color4);
-      }
-
-      /* FOREGROUND BUILDINGS - "fb" stands for "foreground building" */
-      .fb1 {
-        width: 10%;
-        height: 60%;
-      }
-
-      .fb1a {
-        border-bottom: 7vh solid var(--building-color4);
-        border-left: 2vw solid transparent;
-        border-right: 2vw solid transparent;
-      }
-
-      .fb1b {
-        width: 60%;
-        height: 10%;
-        background-color: var(--building-color4);
-      }
-  
-      .fb1c {
-        width: 100%;
-        height: 80%;
-        background: repeating-linear-gradient(
-            90deg,
-            var(--building-color4),
-            var(--building-color4) 10%,
-            transparent 10%,
-            transparent 15%
-          ),
-          repeating-linear-gradient(
-            var(--building-color4),
-            var(--building-color4) 10%,
-            var(--window-color4) 10%,
-            var(--window-color4) 90%
-          );
-      }
-
-      .fb2 {
-        width: 10%;
-        height: 40%;
-      }
-
-      .fb2a {
-        width: 100%;
-        border-bottom: 10vh solid var(--building-color3);
-        border-left: 1vw solid transparent;
-        border-right: 1vw solid transparent;
-      }
-
-      .fb2b {
-        width: 100%;
-        height: 75%;
-        background-color: var(--building-color3);
-      }
-
-      .fb2-window {
-        width: 22%;
-        height: 100%;
-        background-color: var(--window-color3);
-      }
-
-      .fb3 {
-        width: 10%;
-        height: 35%;
-      }
-  
-      .fb3a {
-        width: 80%;
-        height: 15%;
-        background-color: var(--building-color1);
-      }
-  
-      .fb3b {
-        width: 100%;
-        height: 35%;
-        background-color: var(--building-color1);
-      }
-
-      .fb3-window {
-        width: 25%;
-        height: 80%;
-        background-color: var(--window-color1);
-      }
-
-      .fb4 {
-        width: 8%;
-        height: 45%;
-        position: relative;
-        left: 10%;
-      }
-
-      .fb4a {
-        border-top: 5vh solid transparent;
-        border-left: 8vw solid var(--building-color1);
-      }
-
-      .fb4b {
-        width: 100%;
-        height: 89%;
-        background-color: var(--building-color1);
-        display: flex;
-        flex-wrap: wrap;
-      }
-      
-      .fb4-window {
-        width: 30%;
-        height: 10%;
-        border-radius: 50%;
-        background-color: var(--window-color1);
-        margin: 10%;
-      }
-
-      .fb5 {
-        width: 10%;
-        height: 33%;
-        position: relative;
-        right: 10%;
-        background: repeating-linear-gradient(
-            var(--building-color2),
-            var(--building-color2) 5%,
-            transparent 5%,
-            transparent 10%
-          ),
-          repeating-linear-gradient(
-            90deg,
-            var(--building-color2),
-            var(--building-color2) 12%,
-            var(--window-color2) 12%,
-            var(--window-color2) 44%
-          );
-      }
-
-      .fb6 {
-        width: 9%;
-        height: 38%;
-        background: repeating-linear-gradient(
-            90deg,
-            var(--building-color3),
-            var(--building-color3) 10%,
-            transparent 10%,
-            transparent 30%
-          ),
-          repeating-linear-gradient(
-            var(--building-color3),
-            var(--building-color3) 10%,
-            var(--window-color3) 10%,
-            var(--window-color3) 30%
-          );
-      }
-
-      @media (max-width: 1000px) {
-        :root {
-          --building-color1: #000;
-          --building-color2: #000;
-          --building-color3: #000;
-          --building-color4: #000;
-        }
-
-        .sky {
-          background: radial-gradient(
-              closest-corner circle at 15% 15%,
-              #ccc,
-              #ccc 20%,
-              #445 21%,
-              #223 100%
-            );
-        }
-      }
-    </style>
-  </head>
-
-  <body>
-    <div class="background-buildings sky">
-      <div></div>
-      <div></div>
-      <div class="bb1 building-wrap">
-        <div class="bb1a bb1-window"></div>
-        <div class="bb1b bb1-window"></div>
-        <div class="bb1c bb1-window"></div>
-        <div class="bb1d"></div>
-      </div>
-      <div class="bb2">
-        <div class="bb2a"></div>
-        <div class="bb2b"></div>
-      </div>
-      <div class="bb3"></div>
-      <div></div>
-      <div class="bb4 building-wrap">
-        <div class="bb4a"></div>
-        <div class="bb4b"></div>
-        <div class="bb4c window-wrap">
-          <div class="bb4-window"></div>
-          <div class="bb4-window"></div>
-          <div class="bb4-window"></div>
-          <div class="bb4-window"></div>
-        </div>
-      </div>
-      <div></div>
-      <div></div>
-    </div>
-
-    <div class="foreground-buildings">
-      <div></div>
-      <div></div>
-      <div class="fb1 building-wrap">
-        <div class="fb1a"></div>
-        <div class="fb1b"></div>
-        <div class="fb1c"></div>
-      </div>
-      <div class="fb2">
-        <div class="fb2a"></div>
-        <div class="fb2b window-wrap">
-          <div class="fb2-window"></div>
-          <div class="fb2-window"></div>
-          <div class="fb2-window"></div>
-        </div>
-      </div>
-      <div></div>
-      <div class="fb3 building-wrap">
-        <div class="fb3a window-wrap">
-          <div class="fb3-window"></div>
-          <div class="fb3-window"></div>
-          <div class="fb3-window"></div>
-        </div>
-        <div class="fb3b"></div>
-        <div class="fb3a"></div>
-        <div class="fb3b"></div>
-      </div>
-      <div class="fb4">
-        <div class="fb4a"></div>
-        <div class="fb4b">
-          <div class="fb4-window"></div>
-          <div class="fb4-window"></div>
-          <div class="fb4-window"></div>
-          <div class="fb4-window"></div>
-          <div class="fb4-window"></div>
-          <div class="fb4-window"></div>
-        </div>
-      </div>
-      <div class="fb5"></div>
-      <div class="fb6"></div>
-      <div></div>
-      <div></div>
-    </div>
-  </body>
-</html>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus quis tempus massa. Aenean erat nisl, gravida vel vestibulum cursus, interdum sit amet lectus. Sed sit amet quam nibh. Suspendisse quis tincidunt nulla. In hac habitasse platea dictumst. Ut sit amet pretium nisl. Vivamus vel mi sem. Aenean sit amet consectetur sem. Suspendisse pretium, purus et gravida consequat, nunc ligula ultricies diam, at aliquet velit libero a dui.</p>
 ```
 
 # --solutions--
 
 ```html
-<!DOCTYPE html>
-<html>    
-  <head>
-    <title>freeCodeCamp Skyline Project</title>
-    <style>
-      :root {
-        --building-color1: #aa80ff;
-        --building-color2: #66cc99;
-        --building-color3: #cc6699;
-        --building-color4: #538cc6;
-        --window-color1: #bb99ff;
-        --window-color2: #8cd9b3;
-        --window-color3: #d98cb3;
-        --window-color4: #8cb3d9;
-      }
+<style>
+  p {
+    font-size: 20px;
+  }
 
-      * {
-        box-sizing: border-box;
-      }
+  @media (max-height: 800px) {
+    p {
+      font-size: 10px;
+    }
+  }
+</style>
 
-      body {
-        height: 100vh;
-        margin: 0;
-        overflow: hidden;
-      }
-
-      .background-buildings, .foreground-buildings {
-        width: 100%;
-        height: 100%;
-        display: flex;
-        align-items: flex-end;
-        justify-content: space-evenly;
-        position: absolute;
-        top: 0;
-      }
-      
-      .building-wrap {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
-
-      .window-wrap {
-        display: flex;
-        align-items: center;
-        justify-content: space-evenly;
-      }
-
-      .sky {
-        background: radial-gradient(
-            closest-corner circle at 15% 15%,
-            #ffcf33,
-            #ffcf33 20%,
-            #ffff66 21%,
-            #bbeeff 100%
-          );
-      }
-
-      /* BACKGROUND BUILDINGS - "bb" stands for "background building" */
-      .bb1 {
-        width: 10%;
-        height: 70%;
-      }
-
-      .bb1a {
-        width: 70%;
-      }
-  
-      .bb1b {
-        width: 80%;
-      }
-  
-      .bb1c {
-        width: 90%;
-      }
-
-      .bb1d {
-        width: 100%;
-        height: 70%;
-        background: linear-gradient(
-            var(--building-color1) 50%,
-            var(--window-color1)
-          );
-      }
-
-      .bb1-window {
-        height: 10%;
-        background: linear-gradient(
-            var(--building-color1),
-            var(--window-color1)
-          );
-      }
-
-      .bb2 {
-        width: 10%;
-        height: 50%;
-      }
-
-      .bb2a {
-        border-bottom: 5vh solid var(--building-color2);
-        border-left: 5vw solid transparent;
-        border-right: 5vw solid transparent;
-      }
-
-      .bb2b {
-        width: 100%;
-        height: 100%;
-        background: repeating-linear-gradient(
-            var(--building-color2),
-            var(--building-color2) 6%,
-            var(--window-color2) 6%,
-            var(--window-color2) 9%
-          );
-      }
-      
-      .bb3 {
-        width: 10%;
-        height: 55%;
-        background: repeating-linear-gradient(
-            90deg,
-            var(--building-color3),
-            var(--building-color3),
-            var(--window-color3) 15%
-          );
-      }
-
-      .bb4 {
-        width: 11%;
-        height: 58%;
-      }
-
-      .bb4a {
-        width: 3%;
-        height: 10%;
-        background-color: var(--building-color4);
-      }
-
-      .bb4b {
-        width: 80%;
-        height: 5%;
-        background-color: var(--building-color4);
-      }
-  
-      .bb4c {
-        width: 100%;
-        height: 85%;
-        background-color: var(--building-color4);
-      }
-
-      .bb4-window {
-        width: 18%;
-        height: 90%;
-        background-color: var(--window-color4);
-      }
-
-      /* FOREGROUND BUILDINGS - "fb" stands for "foreground building" */
-      .fb1 {
-        width: 10%;
-        height: 60%;
-      }
-
-      .fb1a {
-        border-bottom: 7vh solid var(--building-color4);
-        border-left: 2vw solid transparent;
-        border-right: 2vw solid transparent;
-      }
-
-      .fb1b {
-        width: 60%;
-        height: 10%;
-        background-color: var(--building-color4);
-      }
-  
-      .fb1c {
-        width: 100%;
-        height: 80%;
-        background: repeating-linear-gradient(
-            90deg,
-            var(--building-color4),
-            var(--building-color4) 10%,
-            transparent 10%,
-            transparent 15%
-          ),
-          repeating-linear-gradient(
-            var(--building-color4),
-            var(--building-color4) 10%,
-            var(--window-color4) 10%,
-            var(--window-color4) 90%
-          );
-      }
-
-      .fb2 {
-        width: 10%;
-        height: 40%;
-      }
-
-      .fb2a {
-        width: 100%;
-        border-bottom: 10vh solid var(--building-color3);
-        border-left: 1vw solid transparent;
-        border-right: 1vw solid transparent;
-      }
-
-      .fb2b {
-        width: 100%;
-        height: 75%;
-        background-color: var(--building-color3);
-      }
-
-      .fb2-window {
-        width: 22%;
-        height: 100%;
-        background-color: var(--window-color3);
-      }
-
-      .fb3 {
-        width: 10%;
-        height: 35%;
-      }
-  
-      .fb3a {
-        width: 80%;
-        height: 15%;
-        background-color: var(--building-color1);
-      }
-  
-      .fb3b {
-        width: 100%;
-        height: 35%;
-        background-color: var(--building-color1);
-      }
-
-      .fb3-window {
-        width: 25%;
-        height: 80%;
-        background-color: var(--window-color1);
-      }
-
-      .fb4 {
-        width: 8%;
-        height: 45%;
-        position: relative;
-        left: 10%;
-      }
-
-      .fb4a {
-        border-top: 5vh solid transparent;
-        border-left: 8vw solid var(--building-color1);
-      }
-
-      .fb4b {
-        width: 100%;
-        height: 89%;
-        background-color: var(--building-color1);
-        display: flex;
-        flex-wrap: wrap;
-      }
-      
-      .fb4-window {
-        width: 30%;
-        height: 10%;
-        border-radius: 50%;
-        background-color: var(--window-color1);
-        margin: 10%;
-      }
-
-      .fb5 {
-        width: 10%;
-        height: 33%;
-        position: relative;
-        right: 10%;
-        background: repeating-linear-gradient(
-            var(--building-color2),
-            var(--building-color2) 5%,
-            transparent 5%,
-            transparent 10%
-          ),
-          repeating-linear-gradient(
-            90deg,
-            var(--building-color2),
-            var(--building-color2) 12%,
-            var(--window-color2) 12%,
-            var(--window-color2) 44%
-          );
-      }
-
-      .fb6 {
-        width: 9%;
-        height: 38%;
-        background: repeating-linear-gradient(
-            90deg,
-            var(--building-color3),
-            var(--building-color3) 10%,
-            transparent 10%,
-            transparent 30%
-          ),
-          repeating-linear-gradient(
-            var(--building-color3),
-            var(--building-color3) 10%,
-            var(--window-color3) 10%,
-            var(--window-color3) 30%
-          );
-      }
-
-      @media (max-width: 1000px) {
-        :root {
-          --building-color1: #000;
-          --building-color2: #000;
-          --building-color3: #000;
-          --building-color4: #000;
-          --window-color1: #777;
-          --window-color2: #777;
-          --window-color3: #777;
-          --window-color4: #777;
-        }
-
-        .sky {
-          background: radial-gradient(
-              closest-corner circle at 15% 15%,
-              #ccc,
-              #ccc 20%,
-              #445 21%,
-              #223 100%
-            );
-        }
-      }
-    </style>
-  </head>
-
-  <body>
-    <div class="background-buildings sky">
-      <div></div>
-      <div></div>
-      <div class="bb1 building-wrap">
-        <div class="bb1a bb1-window"></div>
-        <div class="bb1b bb1-window"></div>
-        <div class="bb1c bb1-window"></div>
-        <div class="bb1d"></div>
-      </div>
-      <div class="bb2">
-        <div class="bb2a"></div>
-        <div class="bb2b"></div>
-      </div>
-      <div class="bb3"></div>
-      <div></div>
-      <div class="bb4 building-wrap">
-        <div class="bb4a"></div>
-        <div class="bb4b"></div>
-        <div class="bb4c window-wrap">
-          <div class="bb4-window"></div>
-          <div class="bb4-window"></div>
-          <div class="bb4-window"></div>
-          <div class="bb4-window"></div>
-        </div>
-      </div>
-      <div></div>
-      <div></div>
-    </div>
-
-    <div class="foreground-buildings">
-      <div></div>
-      <div></div>
-      <div class="fb1 building-wrap">
-        <div class="fb1a"></div>
-        <div class="fb1b"></div>
-        <div class="fb1c"></div>
-      </div>
-      <div class="fb2">
-        <div class="fb2a"></div>
-        <div class="fb2b window-wrap">
-          <div class="fb2-window"></div>
-          <div class="fb2-window"></div>
-          <div class="fb2-window"></div>
-        </div>
-      </div>
-      <div></div>
-      <div class="fb3 building-wrap">
-        <div class="fb3a window-wrap">
-          <div class="fb3-window"></div>
-          <div class="fb3-window"></div>
-          <div class="fb3-window"></div>
-        </div>
-        <div class="fb3b"></div>
-        <div class="fb3a"></div>
-        <div class="fb3b"></div>
-      </div>
-      <div class="fb4">
-        <div class="fb4a"></div>
-        <div class="fb4b">
-          <div class="fb4-window"></div>
-          <div class="fb4-window"></div>
-          <div class="fb4-window"></div>
-          <div class="fb4-window"></div>
-          <div class="fb4-window"></div>
-          <div class="fb4-window"></div>
-        </div>
-      </div>
-      <div class="fb5"></div>
-      <div class="fb6"></div>
-      <div></div>
-      <div></div>
-    </div>
-  </body>
-</html>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus quis tempus massa. Aenean erat nisl, gravida vel vestibulum cursus, interdum sit amet lectus. Sed sit amet quam nibh. Suspendisse quis tincidunt nulla. In hac habitasse platea dictumst. Ut sit amet pretium nisl. Vivamus vel mi sem. Aenean sit amet consectetur sem. Suspendisse pretium, purus et gravida consequat, nunc ligula ultricies diam, at aliquet velit libero a dui.</p>
 ```
