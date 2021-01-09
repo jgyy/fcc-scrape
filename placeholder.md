@@ -1,19 +1,24 @@
 ---
-id: 5d822fd413a79914d39e992c
-title: Part 99
+id: 5d822fd413a79914d39e992d
+title: Part 100
 challengeType: 0
 ---
 
 # --description--
 
-Nest six `div` elements within `fb4b` and give them all a class of `fb4-window`.
+Give the `fb4-window` elements a `width` of `30%`, `height` of `10%`, and `border-radius` of `50%`. These will make some circular windows for this building.
 
 # --hints--
 
 test-text
 
 ```js
-assert($('.fb4b').children('div.fb4-window').length === 6);
+const fb4w = code.match(/\.fb4-window\s*{[\s\S]+?[^}]}/g)[0];
+assert(
+  /width\s*:\s*30%\s*(;|})/g.test(fb4w) &&
+    /height\s*:\s*10%\s*(;|})/g.test(fb4w) &&
+    /border-radius\s*:\s*50%\s*(;|})/g.test(fb4w)
+);
 ```
 
 # --seed--
@@ -338,7 +343,14 @@ assert($('.fb4b').children('div.fb4-window').length === 6);
       </div>
       <div class="fb4">
         <div class="fb4a"></div>
-        <div class="fb4b"></div>
+        <div class="fb4b">
+          <div class="fb4-window"></div>
+          <div class="fb4-window"></div>
+          <div class="fb4-window"></div>
+          <div class="fb4-window"></div>
+          <div class="fb4-window"></div>
+          <div class="fb4-window"></div>
+        </div>
       </div>
       <div class="fb5"></div>
       <div class="fb6"></div>
@@ -594,6 +606,12 @@ assert($('.fb4b').children('div.fb4-window').length === 6);
         background-color: var(--building-color1);
       }
       
+      .fb4-window {
+        width: 30%;
+        height: 10%;
+        border-radius: 50%;
+      }
+
       .fb5 {
         width: 10%;
         height: 33%;
