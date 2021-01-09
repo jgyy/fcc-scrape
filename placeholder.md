@@ -1,21 +1,20 @@
 ---
-id: 5d822fd413a79914d39e990b
-title: Part 67
+id: 5d822fd413a79914d39e990c
+title: Part 68
 challengeType: 0
 ---
 
 # --description--
 
-Add the new `building-wrap` class to the `bb1` and `bb4` elements. This will apply the centering properties to the buildings that need it.
+Create a new variable called `--window-color4` in `:root` and give it a value of `#8cb3d9`. This will be the secondary color for the last background building.
 
 # --hints--
 
 test-text
 
 ```js
-assert(
-  $('.bb1.building-wrap').length === 1 && $('.bb4.building-wrap').length === 1
-);
+const rootStyle = code.match(/:root\s*{[\s\S]+?[^}]}/g)[0];
+assert(/--window-color4\s*:\s*#8cb3d9\s*(;|})/g.test(rootStyle));
 ```
 
 # --seed--
@@ -58,13 +57,13 @@ assert(
         position: absolute;
         top: 0;
       }
-
+      
       .building-wrap {
         display: flex;
         flex-direction: column;
         align-items: center;
       }
-      
+
       /* BACKGROUND BUILDINGS - "bb" stands for "background building" */
       .bb1 {
         width: 10%;
@@ -203,7 +202,7 @@ assert(
     <div class="background-buildings">
       <div></div>
       <div></div>
-      <div class="bb1">
+      <div class="bb1 building-wrap">
         <div class="bb1a bb1-window"></div>
         <div class="bb1b bb1-window"></div>
         <div class="bb1c bb1-window"></div>
@@ -215,7 +214,7 @@ assert(
       </div>
       <div class="bb3"></div>
       <div></div>
-      <div class="bb4">
+      <div class="bb4 building-wrap">
         <div class="bb4a"></div>
         <div class="bb4b"></div>
         <div class="bb4c"></div>
@@ -257,6 +256,7 @@ assert(
         --window-color1: black;
         --window-color2: #8cd9b3;
         --window-color3: #d98cb3;
+        --window-color4: #8cb3d9;
       }
 
       * {
