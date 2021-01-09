@@ -1,12 +1,12 @@
 ---
-id: 5d822fd413a79914d39e98ff
-title: Part 55
+id: 5d822fd413a79914d39e9900
+title: Part 56
 challengeType: 0
 ---
 
 # --description--
 
-Next, remove the `width` and `height` from `bb2a`, and change the `border-left` and `border-right` to use `5vw` instead of `1vw`. The element will now have zero size and the borders will come together in the middle.
+Next, change the two `#999` of `bb2a` to `transparent`. This will make the left and right borders invisible.
 
 # --hints--
 
@@ -15,10 +15,8 @@ test-text
 ```js
 const bb2a = code.match(/\.bb2a\s*{[\s\S]+?[^}]}/g)[0];
 assert(
-  !/width/g.test(bb2a) &&
-    !/height/g.test(bb2a) &&
-    /border-left\s*:\s*5vw\s+solid\s+#999\s*(;|})/g.test(bb2a) &&
-    /border-right\s*:\s*5vw\s+solid\s+#999\s*(;|})/g.test(bb2a)
+  /border-left\s*:\s*5vw\s+solid\s+transparent\s*(;|})/g.test(bb2a) &&
+    /border-right\s*:\s*5vw\s+solid\s+transparent\s*(;|})/g.test(bb2a)
 );
 ```
 
@@ -107,12 +105,10 @@ assert(
 
       .bb2a {
         margin: auto;
-        width: 5vw;
-        height: 5vw;
         border-top: 1vw solid #000;
         border-bottom: 1vw solid #000;
-        border-left: 1vw solid #999;
-        border-right: 1vw solid #999;
+        border-left: 5vw solid #999;
+        border-right: 5vw solid #999;
       }
 
       .bb2b {
@@ -304,8 +300,8 @@ assert(
         margin: auto;
         border-top: 1vw solid #000;
         border-bottom: 1vw solid #000;
-        border-left: 5vw solid #999;
-        border-right: 5vw solid #999;
+        border-left: 5vw solid transparent;
+        border-right: 5vw solid transparent;
       }
 
       .bb2b {
