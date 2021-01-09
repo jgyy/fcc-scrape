@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>Part 103</title>
+  <title>Part 102</title>
   <style>
     html {
       line-height: 1.5;
@@ -213,19 +213,15 @@
 </head>
 <body>
 <header id="title-block-header">
-<h1 class="title">Part 103</h1>
+<h1 class="title">Part 102</h1>
 </header>
 <h1 id="description">–description–</h1>
-<p>This building is going to have another triangle on top. Give the top section a <code>border-top</code> of <code>5vh solid transparent</code> and a <code>border-left</code> that is <code>8vw</code>, <code>solid</code>, and uses your building color variable as the color.</p>
+<p>Add <code>display: flex;</code> and <code>flex-wrap: wrap;</code> to the window container. This will put your windows side by side and then push them down to a new row when they don’t fit.</p>
 <h1 id="hints">–hints–</h1>
 <p>test-text</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> fb4a <span class="op">=</span> code<span class="op">.</span><span class="fu">match</span>(<span class="ss">/</span><span class="sc">\.</span><span class="ss">fb4a</span><span class="sc">\s*</span><span class="ss">{</span><span class="sc">[\s\S]+?[^}]</span><span class="ss">}/g</span>)[<span class="dv">0</span>]<span class="op">;</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">assert</span>(</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="ss">/border-top</span><span class="sc">\s*</span><span class="ss">:</span><span class="sc">\s*</span><span class="ss">5vh</span><span class="sc">\s+</span><span class="ss">solid</span><span class="sc">\s+</span><span class="ss">transparent</span><span class="sc">\s*(</span><span class="ss">;</span><span class="sc">|</span><span class="ss">}</span><span class="sc">)</span><span class="ss">/g</span><span class="op">.</span><span class="fu">test</span>(fb4a) <span class="op">&amp;&amp;</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="ss">/border-left</span><span class="sc">\s*</span><span class="ss">:</span><span class="sc">\s*</span><span class="ss">8vw</span><span class="sc">\s+</span><span class="ss">solid</span><span class="sc">\s+</span><span class="ss">var</span><span class="sc">\(\s*</span><span class="ss">--building-color1</span><span class="sc">\s*\)\s*(</span><span class="ss">;</span><span class="sc">|</span><span class="ss">}</span><span class="sc">)</span><span class="ss">/g</span><span class="op">.</span><span class="fu">test</span>(</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>      fb4a</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>)<span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">assert</span>(</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">$</span>(<span class="st">&#39;.fb4b&#39;</span>)<span class="op">.</span><span class="fu">css</span>(<span class="st">&#39;display&#39;</span>) <span class="op">===</span> <span class="st">&#39;flex&#39;</span> <span class="op">&amp;&amp;</span> <span class="fu">$</span>(<span class="st">&#39;.fb4b&#39;</span>)<span class="op">.</span><span class="fu">css</span>(<span class="st">&#39;flex-wrap&#39;</span>) <span class="op">===</span> <span class="st">&#39;wrap&#39;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>)<span class="op">;</span></span></code></pre></div>
 <h1 id="seed">–seed–</h1>
 <h2 id="seed-contents">–seed-contents–</h2>
 <div class="sourceCode" id="cb2"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;!DOCTYPE </span>html<span class="dt">&gt;</span></span>
@@ -468,109 +464,107 @@
 <span id="cb2-238"><a href="#cb2-238" aria-hidden="true" tabindex="-1"></a>        <span class="kw">width</span>: <span class="dv">100</span><span class="dt">%</span><span class="op">;</span></span>
 <span id="cb2-239"><a href="#cb2-239" aria-hidden="true" tabindex="-1"></a>        <span class="kw">height</span>: <span class="dv">89</span><span class="dt">%</span><span class="op">;</span></span>
 <span id="cb2-240"><a href="#cb2-240" aria-hidden="true" tabindex="-1"></a>        <span class="kw">background-color</span>: <span class="fu">var(</span><span class="va">--building-color1</span><span class="fu">)</span><span class="op">;</span></span>
-<span id="cb2-241"><a href="#cb2-241" aria-hidden="true" tabindex="-1"></a>        <span class="kw">display</span>: flex<span class="op">;</span></span>
-<span id="cb2-242"><a href="#cb2-242" aria-hidden="true" tabindex="-1"></a>        <span class="kw">flex-wrap</span>: wrap<span class="op">;</span></span>
-<span id="cb2-243"><a href="#cb2-243" aria-hidden="true" tabindex="-1"></a>      }</span>
-<span id="cb2-244"><a href="#cb2-244" aria-hidden="true" tabindex="-1"></a>      </span>
-<span id="cb2-245"><a href="#cb2-245" aria-hidden="true" tabindex="-1"></a>      <span class="fu">.fb4-window</span> {</span>
-<span id="cb2-246"><a href="#cb2-246" aria-hidden="true" tabindex="-1"></a>        <span class="kw">width</span>: <span class="dv">30</span><span class="dt">%</span><span class="op">;</span></span>
-<span id="cb2-247"><a href="#cb2-247" aria-hidden="true" tabindex="-1"></a>        <span class="kw">height</span>: <span class="dv">10</span><span class="dt">%</span><span class="op">;</span></span>
-<span id="cb2-248"><a href="#cb2-248" aria-hidden="true" tabindex="-1"></a>        <span class="kw">border-radius</span>: <span class="dv">50</span><span class="dt">%</span><span class="op">;</span></span>
-<span id="cb2-249"><a href="#cb2-249" aria-hidden="true" tabindex="-1"></a>        <span class="kw">background-color</span>: <span class="fu">var(</span><span class="va">--window-color1</span><span class="fu">)</span><span class="op">;</span></span>
-<span id="cb2-250"><a href="#cb2-250" aria-hidden="true" tabindex="-1"></a>        <span class="kw">margin</span>: <span class="dv">10</span><span class="dt">%</span><span class="op">;</span></span>
-<span id="cb2-251"><a href="#cb2-251" aria-hidden="true" tabindex="-1"></a>      }</span>
-<span id="cb2-252"><a href="#cb2-252" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-253"><a href="#cb2-253" aria-hidden="true" tabindex="-1"></a>      <span class="fu">.fb5</span> {</span>
-<span id="cb2-254"><a href="#cb2-254" aria-hidden="true" tabindex="-1"></a>        <span class="kw">width</span>: <span class="dv">10</span><span class="dt">%</span><span class="op">;</span></span>
-<span id="cb2-255"><a href="#cb2-255" aria-hidden="true" tabindex="-1"></a>        <span class="kw">height</span>: <span class="dv">33</span><span class="dt">%</span><span class="op">;</span></span>
-<span id="cb2-256"><a href="#cb2-256" aria-hidden="true" tabindex="-1"></a>        <span class="kw">background-color</span>: <span class="fu">var(</span><span class="va">--building-color2</span><span class="fu">)</span><span class="op">;</span></span>
-<span id="cb2-257"><a href="#cb2-257" aria-hidden="true" tabindex="-1"></a>        <span class="kw">position</span>: <span class="dv">relative</span><span class="op">;</span></span>
-<span id="cb2-258"><a href="#cb2-258" aria-hidden="true" tabindex="-1"></a>        <span class="kw">right</span>: <span class="dv">10</span><span class="dt">%</span><span class="op">;</span></span>
-<span id="cb2-259"><a href="#cb2-259" aria-hidden="true" tabindex="-1"></a>      }</span>
-<span id="cb2-260"><a href="#cb2-260" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-261"><a href="#cb2-261" aria-hidden="true" tabindex="-1"></a>      <span class="fu">.fb6</span> {</span>
-<span id="cb2-262"><a href="#cb2-262" aria-hidden="true" tabindex="-1"></a>        <span class="kw">width</span>: <span class="dv">9</span><span class="dt">%</span><span class="op">;</span></span>
-<span id="cb2-263"><a href="#cb2-263" aria-hidden="true" tabindex="-1"></a>        <span class="kw">height</span>: <span class="dv">38</span><span class="dt">%</span><span class="op">;</span></span>
-<span id="cb2-264"><a href="#cb2-264" aria-hidden="true" tabindex="-1"></a>        <span class="kw">background-color</span>: <span class="fu">var(</span><span class="va">--building-color3</span><span class="fu">)</span><span class="op">;</span></span>
-<span id="cb2-265"><a href="#cb2-265" aria-hidden="true" tabindex="-1"></a>      }</span>
-<span id="cb2-266"><a href="#cb2-266" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;/style&gt;</span></span>
-<span id="cb2-267"><a href="#cb2-267" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;/head&gt;</span></span>
-<span id="cb2-268"><a href="#cb2-268" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-269"><a href="#cb2-269" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;body&gt;</span></span>
-<span id="cb2-270"><a href="#cb2-270" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;background-buildings&quot;</span><span class="kw">&gt;</span></span>
-<span id="cb2-271"><a href="#cb2-271" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;div&gt;&lt;/div&gt;</span></span>
-<span id="cb2-272"><a href="#cb2-272" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;div&gt;&lt;/div&gt;</span></span>
-<span id="cb2-273"><a href="#cb2-273" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;bb1 building-wrap&quot;</span><span class="kw">&gt;</span></span>
-<span id="cb2-274"><a href="#cb2-274" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;bb1a bb1-window&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
-<span id="cb2-275"><a href="#cb2-275" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;bb1b bb1-window&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
-<span id="cb2-276"><a href="#cb2-276" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;bb1c bb1-window&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
-<span id="cb2-277"><a href="#cb2-277" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;bb1d&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
-<span id="cb2-278"><a href="#cb2-278" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;/div&gt;</span></span>
-<span id="cb2-279"><a href="#cb2-279" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;bb2&quot;</span><span class="kw">&gt;</span></span>
-<span id="cb2-280"><a href="#cb2-280" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;bb2a&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
-<span id="cb2-281"><a href="#cb2-281" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;bb2b&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
-<span id="cb2-282"><a href="#cb2-282" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;/div&gt;</span></span>
-<span id="cb2-283"><a href="#cb2-283" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;bb3&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
-<span id="cb2-284"><a href="#cb2-284" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;div&gt;&lt;/div&gt;</span></span>
-<span id="cb2-285"><a href="#cb2-285" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;bb4 building-wrap&quot;</span><span class="kw">&gt;</span></span>
-<span id="cb2-286"><a href="#cb2-286" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;bb4a&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
-<span id="cb2-287"><a href="#cb2-287" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;bb4b&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
-<span id="cb2-288"><a href="#cb2-288" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;bb4c window-wrap&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb2-241"><a href="#cb2-241" aria-hidden="true" tabindex="-1"></a>      }</span>
+<span id="cb2-242"><a href="#cb2-242" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb2-243"><a href="#cb2-243" aria-hidden="true" tabindex="-1"></a>      <span class="fu">.fb4-window</span> {</span>
+<span id="cb2-244"><a href="#cb2-244" aria-hidden="true" tabindex="-1"></a>        <span class="kw">width</span>: <span class="dv">30</span><span class="dt">%</span><span class="op">;</span></span>
+<span id="cb2-245"><a href="#cb2-245" aria-hidden="true" tabindex="-1"></a>        <span class="kw">height</span>: <span class="dv">10</span><span class="dt">%</span><span class="op">;</span></span>
+<span id="cb2-246"><a href="#cb2-246" aria-hidden="true" tabindex="-1"></a>        <span class="kw">border-radius</span>: <span class="dv">50</span><span class="dt">%</span><span class="op">;</span></span>
+<span id="cb2-247"><a href="#cb2-247" aria-hidden="true" tabindex="-1"></a>        <span class="kw">background-color</span>: <span class="fu">var(</span><span class="va">--window-color1</span><span class="fu">)</span><span class="op">;</span></span>
+<span id="cb2-248"><a href="#cb2-248" aria-hidden="true" tabindex="-1"></a>        <span class="kw">margin</span>: <span class="dv">10</span><span class="dt">%</span><span class="op">;</span></span>
+<span id="cb2-249"><a href="#cb2-249" aria-hidden="true" tabindex="-1"></a>      }</span>
+<span id="cb2-250"><a href="#cb2-250" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-251"><a href="#cb2-251" aria-hidden="true" tabindex="-1"></a>      <span class="fu">.fb5</span> {</span>
+<span id="cb2-252"><a href="#cb2-252" aria-hidden="true" tabindex="-1"></a>        <span class="kw">width</span>: <span class="dv">10</span><span class="dt">%</span><span class="op">;</span></span>
+<span id="cb2-253"><a href="#cb2-253" aria-hidden="true" tabindex="-1"></a>        <span class="kw">height</span>: <span class="dv">33</span><span class="dt">%</span><span class="op">;</span></span>
+<span id="cb2-254"><a href="#cb2-254" aria-hidden="true" tabindex="-1"></a>        <span class="kw">background-color</span>: <span class="fu">var(</span><span class="va">--building-color2</span><span class="fu">)</span><span class="op">;</span></span>
+<span id="cb2-255"><a href="#cb2-255" aria-hidden="true" tabindex="-1"></a>        <span class="kw">position</span>: <span class="dv">relative</span><span class="op">;</span></span>
+<span id="cb2-256"><a href="#cb2-256" aria-hidden="true" tabindex="-1"></a>        <span class="kw">right</span>: <span class="dv">10</span><span class="dt">%</span><span class="op">;</span></span>
+<span id="cb2-257"><a href="#cb2-257" aria-hidden="true" tabindex="-1"></a>      }</span>
+<span id="cb2-258"><a href="#cb2-258" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-259"><a href="#cb2-259" aria-hidden="true" tabindex="-1"></a>      <span class="fu">.fb6</span> {</span>
+<span id="cb2-260"><a href="#cb2-260" aria-hidden="true" tabindex="-1"></a>        <span class="kw">width</span>: <span class="dv">9</span><span class="dt">%</span><span class="op">;</span></span>
+<span id="cb2-261"><a href="#cb2-261" aria-hidden="true" tabindex="-1"></a>        <span class="kw">height</span>: <span class="dv">38</span><span class="dt">%</span><span class="op">;</span></span>
+<span id="cb2-262"><a href="#cb2-262" aria-hidden="true" tabindex="-1"></a>        <span class="kw">background-color</span>: <span class="fu">var(</span><span class="va">--building-color3</span><span class="fu">)</span><span class="op">;</span></span>
+<span id="cb2-263"><a href="#cb2-263" aria-hidden="true" tabindex="-1"></a>      }</span>
+<span id="cb2-264"><a href="#cb2-264" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;/style&gt;</span></span>
+<span id="cb2-265"><a href="#cb2-265" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;/head&gt;</span></span>
+<span id="cb2-266"><a href="#cb2-266" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-267"><a href="#cb2-267" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;body&gt;</span></span>
+<span id="cb2-268"><a href="#cb2-268" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;background-buildings&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb2-269"><a href="#cb2-269" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;div&gt;&lt;/div&gt;</span></span>
+<span id="cb2-270"><a href="#cb2-270" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;div&gt;&lt;/div&gt;</span></span>
+<span id="cb2-271"><a href="#cb2-271" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;bb1 building-wrap&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb2-272"><a href="#cb2-272" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;bb1a bb1-window&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
+<span id="cb2-273"><a href="#cb2-273" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;bb1b bb1-window&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
+<span id="cb2-274"><a href="#cb2-274" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;bb1c bb1-window&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
+<span id="cb2-275"><a href="#cb2-275" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;bb1d&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
+<span id="cb2-276"><a href="#cb2-276" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;/div&gt;</span></span>
+<span id="cb2-277"><a href="#cb2-277" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;bb2&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb2-278"><a href="#cb2-278" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;bb2a&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
+<span id="cb2-279"><a href="#cb2-279" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;bb2b&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
+<span id="cb2-280"><a href="#cb2-280" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;/div&gt;</span></span>
+<span id="cb2-281"><a href="#cb2-281" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;bb3&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
+<span id="cb2-282"><a href="#cb2-282" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;div&gt;&lt;/div&gt;</span></span>
+<span id="cb2-283"><a href="#cb2-283" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;bb4 building-wrap&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb2-284"><a href="#cb2-284" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;bb4a&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
+<span id="cb2-285"><a href="#cb2-285" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;bb4b&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
+<span id="cb2-286"><a href="#cb2-286" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;bb4c window-wrap&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb2-287"><a href="#cb2-287" aria-hidden="true" tabindex="-1"></a>          <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;bb4-window&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
+<span id="cb2-288"><a href="#cb2-288" aria-hidden="true" tabindex="-1"></a>          <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;bb4-window&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
 <span id="cb2-289"><a href="#cb2-289" aria-hidden="true" tabindex="-1"></a>          <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;bb4-window&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
 <span id="cb2-290"><a href="#cb2-290" aria-hidden="true" tabindex="-1"></a>          <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;bb4-window&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
-<span id="cb2-291"><a href="#cb2-291" aria-hidden="true" tabindex="-1"></a>          <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;bb4-window&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
-<span id="cb2-292"><a href="#cb2-292" aria-hidden="true" tabindex="-1"></a>          <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;bb4-window&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
-<span id="cb2-293"><a href="#cb2-293" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;/div&gt;</span></span>
-<span id="cb2-294"><a href="#cb2-294" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;/div&gt;</span></span>
-<span id="cb2-295"><a href="#cb2-295" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;div&gt;&lt;/div&gt;</span></span>
-<span id="cb2-296"><a href="#cb2-296" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;div&gt;&lt;/div&gt;</span></span>
-<span id="cb2-297"><a href="#cb2-297" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;/div&gt;</span></span>
-<span id="cb2-298"><a href="#cb2-298" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-299"><a href="#cb2-299" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;foreground-buildings&quot;</span><span class="kw">&gt;</span></span>
-<span id="cb2-300"><a href="#cb2-300" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;div&gt;&lt;/div&gt;</span></span>
-<span id="cb2-301"><a href="#cb2-301" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;div&gt;&lt;/div&gt;</span></span>
-<span id="cb2-302"><a href="#cb2-302" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb1 building-wrap&quot;</span><span class="kw">&gt;</span></span>
-<span id="cb2-303"><a href="#cb2-303" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb1a&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
-<span id="cb2-304"><a href="#cb2-304" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb1b&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
-<span id="cb2-305"><a href="#cb2-305" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb1c&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
-<span id="cb2-306"><a href="#cb2-306" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;/div&gt;</span></span>
-<span id="cb2-307"><a href="#cb2-307" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb2&quot;</span><span class="kw">&gt;</span></span>
-<span id="cb2-308"><a href="#cb2-308" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb2a&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
-<span id="cb2-309"><a href="#cb2-309" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb2b window-wrap&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb2-291"><a href="#cb2-291" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;/div&gt;</span></span>
+<span id="cb2-292"><a href="#cb2-292" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;/div&gt;</span></span>
+<span id="cb2-293"><a href="#cb2-293" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;div&gt;&lt;/div&gt;</span></span>
+<span id="cb2-294"><a href="#cb2-294" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;div&gt;&lt;/div&gt;</span></span>
+<span id="cb2-295"><a href="#cb2-295" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;/div&gt;</span></span>
+<span id="cb2-296"><a href="#cb2-296" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-297"><a href="#cb2-297" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;foreground-buildings&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb2-298"><a href="#cb2-298" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;div&gt;&lt;/div&gt;</span></span>
+<span id="cb2-299"><a href="#cb2-299" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;div&gt;&lt;/div&gt;</span></span>
+<span id="cb2-300"><a href="#cb2-300" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb1 building-wrap&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb2-301"><a href="#cb2-301" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb1a&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
+<span id="cb2-302"><a href="#cb2-302" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb1b&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
+<span id="cb2-303"><a href="#cb2-303" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb1c&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
+<span id="cb2-304"><a href="#cb2-304" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;/div&gt;</span></span>
+<span id="cb2-305"><a href="#cb2-305" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb2&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb2-306"><a href="#cb2-306" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb2a&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
+<span id="cb2-307"><a href="#cb2-307" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb2b window-wrap&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb2-308"><a href="#cb2-308" aria-hidden="true" tabindex="-1"></a>          <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb2-window&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
+<span id="cb2-309"><a href="#cb2-309" aria-hidden="true" tabindex="-1"></a>          <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb2-window&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
 <span id="cb2-310"><a href="#cb2-310" aria-hidden="true" tabindex="-1"></a>          <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb2-window&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
-<span id="cb2-311"><a href="#cb2-311" aria-hidden="true" tabindex="-1"></a>          <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb2-window&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
-<span id="cb2-312"><a href="#cb2-312" aria-hidden="true" tabindex="-1"></a>          <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb2-window&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
-<span id="cb2-313"><a href="#cb2-313" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;/div&gt;</span></span>
-<span id="cb2-314"><a href="#cb2-314" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;/div&gt;</span></span>
-<span id="cb2-315"><a href="#cb2-315" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;div&gt;&lt;/div&gt;</span></span>
-<span id="cb2-316"><a href="#cb2-316" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb3 building-wrap&quot;</span><span class="kw">&gt;</span></span>
-<span id="cb2-317"><a href="#cb2-317" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb3a window-wrap&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb2-311"><a href="#cb2-311" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;/div&gt;</span></span>
+<span id="cb2-312"><a href="#cb2-312" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;/div&gt;</span></span>
+<span id="cb2-313"><a href="#cb2-313" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;div&gt;&lt;/div&gt;</span></span>
+<span id="cb2-314"><a href="#cb2-314" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb3 building-wrap&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb2-315"><a href="#cb2-315" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb3a window-wrap&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb2-316"><a href="#cb2-316" aria-hidden="true" tabindex="-1"></a>          <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb3-window&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
+<span id="cb2-317"><a href="#cb2-317" aria-hidden="true" tabindex="-1"></a>          <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb3-window&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
 <span id="cb2-318"><a href="#cb2-318" aria-hidden="true" tabindex="-1"></a>          <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb3-window&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
-<span id="cb2-319"><a href="#cb2-319" aria-hidden="true" tabindex="-1"></a>          <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb3-window&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
-<span id="cb2-320"><a href="#cb2-320" aria-hidden="true" tabindex="-1"></a>          <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb3-window&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
-<span id="cb2-321"><a href="#cb2-321" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;/div&gt;</span></span>
+<span id="cb2-319"><a href="#cb2-319" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;/div&gt;</span></span>
+<span id="cb2-320"><a href="#cb2-320" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb3b&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
+<span id="cb2-321"><a href="#cb2-321" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb3a&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
 <span id="cb2-322"><a href="#cb2-322" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb3b&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
-<span id="cb2-323"><a href="#cb2-323" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb3a&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
-<span id="cb2-324"><a href="#cb2-324" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb3b&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
-<span id="cb2-325"><a href="#cb2-325" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;/div&gt;</span></span>
-<span id="cb2-326"><a href="#cb2-326" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb4&quot;</span><span class="kw">&gt;</span></span>
-<span id="cb2-327"><a href="#cb2-327" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb4a&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
-<span id="cb2-328"><a href="#cb2-328" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb4b&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb2-323"><a href="#cb2-323" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;/div&gt;</span></span>
+<span id="cb2-324"><a href="#cb2-324" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb4&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb2-325"><a href="#cb2-325" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb4a&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
+<span id="cb2-326"><a href="#cb2-326" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb4b&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb2-327"><a href="#cb2-327" aria-hidden="true" tabindex="-1"></a>          <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb4-window&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
+<span id="cb2-328"><a href="#cb2-328" aria-hidden="true" tabindex="-1"></a>          <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb4-window&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
 <span id="cb2-329"><a href="#cb2-329" aria-hidden="true" tabindex="-1"></a>          <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb4-window&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
 <span id="cb2-330"><a href="#cb2-330" aria-hidden="true" tabindex="-1"></a>          <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb4-window&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
 <span id="cb2-331"><a href="#cb2-331" aria-hidden="true" tabindex="-1"></a>          <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb4-window&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
 <span id="cb2-332"><a href="#cb2-332" aria-hidden="true" tabindex="-1"></a>          <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb4-window&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
-<span id="cb2-333"><a href="#cb2-333" aria-hidden="true" tabindex="-1"></a>          <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb4-window&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
-<span id="cb2-334"><a href="#cb2-334" aria-hidden="true" tabindex="-1"></a>          <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb4-window&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
-<span id="cb2-335"><a href="#cb2-335" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;/div&gt;</span></span>
-<span id="cb2-336"><a href="#cb2-336" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;/div&gt;</span></span>
-<span id="cb2-337"><a href="#cb2-337" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb5&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
-<span id="cb2-338"><a href="#cb2-338" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb6&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
-<span id="cb2-339"><a href="#cb2-339" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;div&gt;&lt;/div&gt;</span></span>
-<span id="cb2-340"><a href="#cb2-340" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;div&gt;&lt;/div&gt;</span></span>
-<span id="cb2-341"><a href="#cb2-341" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;/div&gt;</span></span>
-<span id="cb2-342"><a href="#cb2-342" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;/body&gt;</span></span>
-<span id="cb2-343"><a href="#cb2-343" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/html&gt;</span></span></code></pre></div>
+<span id="cb2-333"><a href="#cb2-333" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;/div&gt;</span></span>
+<span id="cb2-334"><a href="#cb2-334" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;/div&gt;</span></span>
+<span id="cb2-335"><a href="#cb2-335" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb5&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
+<span id="cb2-336"><a href="#cb2-336" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb6&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
+<span id="cb2-337"><a href="#cb2-337" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;div&gt;&lt;/div&gt;</span></span>
+<span id="cb2-338"><a href="#cb2-338" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;div&gt;&lt;/div&gt;</span></span>
+<span id="cb2-339"><a href="#cb2-339" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;/div&gt;</span></span>
+<span id="cb2-340"><a href="#cb2-340" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;/body&gt;</span></span>
+<span id="cb2-341"><a href="#cb2-341" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/html&gt;</span></span></code></pre></div>
 <h1 id="solutions">–solutions–</h1>
 <div class="sourceCode" id="cb3"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;!DOCTYPE </span>html<span class="dt">&gt;</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;html&gt;</span>    </span>
@@ -808,117 +802,112 @@
 <span id="cb3-234"><a href="#cb3-234" aria-hidden="true" tabindex="-1"></a>        <span class="kw">left</span>: <span class="dv">10</span><span class="dt">%</span><span class="op">;</span></span>
 <span id="cb3-235"><a href="#cb3-235" aria-hidden="true" tabindex="-1"></a>      }</span>
 <span id="cb3-236"><a href="#cb3-236" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-237"><a href="#cb3-237" aria-hidden="true" tabindex="-1"></a>      <span class="fu">.fb4a</span> {</span>
-<span id="cb3-238"><a href="#cb3-238" aria-hidden="true" tabindex="-1"></a>        <span class="kw">border-top</span>: <span class="dv">5</span><span class="dt">vh</span> <span class="dv">solid</span> <span class="dv">transparent</span><span class="op">;</span></span>
-<span id="cb3-239"><a href="#cb3-239" aria-hidden="true" tabindex="-1"></a>        <span class="kw">border-left</span>: <span class="dv">8</span><span class="dt">vw</span> <span class="dv">solid</span> <span class="fu">var(</span><span class="va">--building-color1</span><span class="fu">)</span><span class="op">;</span></span>
-<span id="cb3-240"><a href="#cb3-240" aria-hidden="true" tabindex="-1"></a>      }</span>
-<span id="cb3-241"><a href="#cb3-241" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-242"><a href="#cb3-242" aria-hidden="true" tabindex="-1"></a>      <span class="fu">.fb4b</span> {</span>
-<span id="cb3-243"><a href="#cb3-243" aria-hidden="true" tabindex="-1"></a>        <span class="kw">width</span>: <span class="dv">100</span><span class="dt">%</span><span class="op">;</span></span>
-<span id="cb3-244"><a href="#cb3-244" aria-hidden="true" tabindex="-1"></a>        <span class="kw">height</span>: <span class="dv">89</span><span class="dt">%</span><span class="op">;</span></span>
-<span id="cb3-245"><a href="#cb3-245" aria-hidden="true" tabindex="-1"></a>        <span class="kw">background-color</span>: <span class="fu">var(</span><span class="va">--building-color1</span><span class="fu">)</span><span class="op">;</span></span>
-<span id="cb3-246"><a href="#cb3-246" aria-hidden="true" tabindex="-1"></a>        <span class="kw">display</span>: flex<span class="op">;</span></span>
-<span id="cb3-247"><a href="#cb3-247" aria-hidden="true" tabindex="-1"></a>        <span class="kw">flex-wrap</span>: wrap<span class="op">;</span></span>
-<span id="cb3-248"><a href="#cb3-248" aria-hidden="true" tabindex="-1"></a>      }</span>
-<span id="cb3-249"><a href="#cb3-249" aria-hidden="true" tabindex="-1"></a>      </span>
-<span id="cb3-250"><a href="#cb3-250" aria-hidden="true" tabindex="-1"></a>      <span class="fu">.fb4-window</span> {</span>
-<span id="cb3-251"><a href="#cb3-251" aria-hidden="true" tabindex="-1"></a>        <span class="kw">width</span>: <span class="dv">30</span><span class="dt">%</span><span class="op">;</span></span>
-<span id="cb3-252"><a href="#cb3-252" aria-hidden="true" tabindex="-1"></a>        <span class="kw">height</span>: <span class="dv">10</span><span class="dt">%</span><span class="op">;</span></span>
-<span id="cb3-253"><a href="#cb3-253" aria-hidden="true" tabindex="-1"></a>        <span class="kw">border-radius</span>: <span class="dv">50</span><span class="dt">%</span><span class="op">;</span></span>
-<span id="cb3-254"><a href="#cb3-254" aria-hidden="true" tabindex="-1"></a>        <span class="kw">background-color</span>: <span class="fu">var(</span><span class="va">--window-color1</span><span class="fu">)</span><span class="op">;</span></span>
-<span id="cb3-255"><a href="#cb3-255" aria-hidden="true" tabindex="-1"></a>        <span class="kw">margin</span>: <span class="dv">10</span><span class="dt">%</span><span class="op">;</span></span>
-<span id="cb3-256"><a href="#cb3-256" aria-hidden="true" tabindex="-1"></a>      }</span>
-<span id="cb3-257"><a href="#cb3-257" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-258"><a href="#cb3-258" aria-hidden="true" tabindex="-1"></a>      <span class="fu">.fb5</span> {</span>
-<span id="cb3-259"><a href="#cb3-259" aria-hidden="true" tabindex="-1"></a>        <span class="kw">width</span>: <span class="dv">10</span><span class="dt">%</span><span class="op">;</span></span>
-<span id="cb3-260"><a href="#cb3-260" aria-hidden="true" tabindex="-1"></a>        <span class="kw">height</span>: <span class="dv">33</span><span class="dt">%</span><span class="op">;</span></span>
-<span id="cb3-261"><a href="#cb3-261" aria-hidden="true" tabindex="-1"></a>        <span class="kw">background-color</span>: <span class="fu">var(</span><span class="va">--building-color2</span><span class="fu">)</span><span class="op">;</span></span>
-<span id="cb3-262"><a href="#cb3-262" aria-hidden="true" tabindex="-1"></a>        <span class="kw">position</span>: <span class="dv">relative</span><span class="op">;</span></span>
-<span id="cb3-263"><a href="#cb3-263" aria-hidden="true" tabindex="-1"></a>        <span class="kw">right</span>: <span class="dv">10</span><span class="dt">%</span><span class="op">;</span></span>
-<span id="cb3-264"><a href="#cb3-264" aria-hidden="true" tabindex="-1"></a>      }</span>
-<span id="cb3-265"><a href="#cb3-265" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-266"><a href="#cb3-266" aria-hidden="true" tabindex="-1"></a>      <span class="fu">.fb6</span> {</span>
-<span id="cb3-267"><a href="#cb3-267" aria-hidden="true" tabindex="-1"></a>        <span class="kw">width</span>: <span class="dv">9</span><span class="dt">%</span><span class="op">;</span></span>
-<span id="cb3-268"><a href="#cb3-268" aria-hidden="true" tabindex="-1"></a>        <span class="kw">height</span>: <span class="dv">38</span><span class="dt">%</span><span class="op">;</span></span>
-<span id="cb3-269"><a href="#cb3-269" aria-hidden="true" tabindex="-1"></a>        <span class="kw">background-color</span>: <span class="fu">var(</span><span class="va">--building-color3</span><span class="fu">)</span><span class="op">;</span></span>
-<span id="cb3-270"><a href="#cb3-270" aria-hidden="true" tabindex="-1"></a>      }</span>
-<span id="cb3-271"><a href="#cb3-271" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;/style&gt;</span></span>
-<span id="cb3-272"><a href="#cb3-272" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;/head&gt;</span></span>
-<span id="cb3-273"><a href="#cb3-273" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-274"><a href="#cb3-274" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;body&gt;</span></span>
-<span id="cb3-275"><a href="#cb3-275" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;background-buildings&quot;</span><span class="kw">&gt;</span></span>
-<span id="cb3-276"><a href="#cb3-276" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;div&gt;&lt;/div&gt;</span></span>
-<span id="cb3-277"><a href="#cb3-277" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;div&gt;&lt;/div&gt;</span></span>
-<span id="cb3-278"><a href="#cb3-278" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;bb1 building-wrap&quot;</span><span class="kw">&gt;</span></span>
-<span id="cb3-279"><a href="#cb3-279" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;bb1a bb1-window&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
-<span id="cb3-280"><a href="#cb3-280" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;bb1b bb1-window&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
-<span id="cb3-281"><a href="#cb3-281" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;bb1c bb1-window&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
-<span id="cb3-282"><a href="#cb3-282" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;bb1d&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
-<span id="cb3-283"><a href="#cb3-283" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;/div&gt;</span></span>
-<span id="cb3-284"><a href="#cb3-284" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;bb2&quot;</span><span class="kw">&gt;</span></span>
-<span id="cb3-285"><a href="#cb3-285" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;bb2a&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
-<span id="cb3-286"><a href="#cb3-286" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;bb2b&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
-<span id="cb3-287"><a href="#cb3-287" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;/div&gt;</span></span>
-<span id="cb3-288"><a href="#cb3-288" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;bb3&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
-<span id="cb3-289"><a href="#cb3-289" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;div&gt;&lt;/div&gt;</span></span>
-<span id="cb3-290"><a href="#cb3-290" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;bb4 building-wrap&quot;</span><span class="kw">&gt;</span></span>
-<span id="cb3-291"><a href="#cb3-291" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;bb4a&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
-<span id="cb3-292"><a href="#cb3-292" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;bb4b&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
-<span id="cb3-293"><a href="#cb3-293" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;bb4c window-wrap&quot;</span><span class="kw">&gt;</span></span>
-<span id="cb3-294"><a href="#cb3-294" aria-hidden="true" tabindex="-1"></a>          <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;bb4-window&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
-<span id="cb3-295"><a href="#cb3-295" aria-hidden="true" tabindex="-1"></a>          <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;bb4-window&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
-<span id="cb3-296"><a href="#cb3-296" aria-hidden="true" tabindex="-1"></a>          <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;bb4-window&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
-<span id="cb3-297"><a href="#cb3-297" aria-hidden="true" tabindex="-1"></a>          <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;bb4-window&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
-<span id="cb3-298"><a href="#cb3-298" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;/div&gt;</span></span>
-<span id="cb3-299"><a href="#cb3-299" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;/div&gt;</span></span>
+<span id="cb3-237"><a href="#cb3-237" aria-hidden="true" tabindex="-1"></a>      <span class="fu">.fb4b</span> {</span>
+<span id="cb3-238"><a href="#cb3-238" aria-hidden="true" tabindex="-1"></a>        <span class="kw">width</span>: <span class="dv">100</span><span class="dt">%</span><span class="op">;</span></span>
+<span id="cb3-239"><a href="#cb3-239" aria-hidden="true" tabindex="-1"></a>        <span class="kw">height</span>: <span class="dv">89</span><span class="dt">%</span><span class="op">;</span></span>
+<span id="cb3-240"><a href="#cb3-240" aria-hidden="true" tabindex="-1"></a>        <span class="kw">background-color</span>: <span class="fu">var(</span><span class="va">--building-color1</span><span class="fu">)</span><span class="op">;</span></span>
+<span id="cb3-241"><a href="#cb3-241" aria-hidden="true" tabindex="-1"></a>        <span class="kw">display</span>: flex<span class="op">;</span></span>
+<span id="cb3-242"><a href="#cb3-242" aria-hidden="true" tabindex="-1"></a>        <span class="kw">flex-wrap</span>: wrap<span class="op">;</span></span>
+<span id="cb3-243"><a href="#cb3-243" aria-hidden="true" tabindex="-1"></a>      }</span>
+<span id="cb3-244"><a href="#cb3-244" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb3-245"><a href="#cb3-245" aria-hidden="true" tabindex="-1"></a>      <span class="fu">.fb4-window</span> {</span>
+<span id="cb3-246"><a href="#cb3-246" aria-hidden="true" tabindex="-1"></a>        <span class="kw">width</span>: <span class="dv">30</span><span class="dt">%</span><span class="op">;</span></span>
+<span id="cb3-247"><a href="#cb3-247" aria-hidden="true" tabindex="-1"></a>        <span class="kw">height</span>: <span class="dv">10</span><span class="dt">%</span><span class="op">;</span></span>
+<span id="cb3-248"><a href="#cb3-248" aria-hidden="true" tabindex="-1"></a>        <span class="kw">border-radius</span>: <span class="dv">50</span><span class="dt">%</span><span class="op">;</span></span>
+<span id="cb3-249"><a href="#cb3-249" aria-hidden="true" tabindex="-1"></a>        <span class="kw">background-color</span>: <span class="fu">var(</span><span class="va">--window-color1</span><span class="fu">)</span><span class="op">;</span></span>
+<span id="cb3-250"><a href="#cb3-250" aria-hidden="true" tabindex="-1"></a>        <span class="kw">margin</span>: <span class="dv">10</span><span class="dt">%</span><span class="op">;</span></span>
+<span id="cb3-251"><a href="#cb3-251" aria-hidden="true" tabindex="-1"></a>      }</span>
+<span id="cb3-252"><a href="#cb3-252" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-253"><a href="#cb3-253" aria-hidden="true" tabindex="-1"></a>      <span class="fu">.fb5</span> {</span>
+<span id="cb3-254"><a href="#cb3-254" aria-hidden="true" tabindex="-1"></a>        <span class="kw">width</span>: <span class="dv">10</span><span class="dt">%</span><span class="op">;</span></span>
+<span id="cb3-255"><a href="#cb3-255" aria-hidden="true" tabindex="-1"></a>        <span class="kw">height</span>: <span class="dv">33</span><span class="dt">%</span><span class="op">;</span></span>
+<span id="cb3-256"><a href="#cb3-256" aria-hidden="true" tabindex="-1"></a>        <span class="kw">background-color</span>: <span class="fu">var(</span><span class="va">--building-color2</span><span class="fu">)</span><span class="op">;</span></span>
+<span id="cb3-257"><a href="#cb3-257" aria-hidden="true" tabindex="-1"></a>        <span class="kw">position</span>: <span class="dv">relative</span><span class="op">;</span></span>
+<span id="cb3-258"><a href="#cb3-258" aria-hidden="true" tabindex="-1"></a>        <span class="kw">right</span>: <span class="dv">10</span><span class="dt">%</span><span class="op">;</span></span>
+<span id="cb3-259"><a href="#cb3-259" aria-hidden="true" tabindex="-1"></a>      }</span>
+<span id="cb3-260"><a href="#cb3-260" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-261"><a href="#cb3-261" aria-hidden="true" tabindex="-1"></a>      <span class="fu">.fb6</span> {</span>
+<span id="cb3-262"><a href="#cb3-262" aria-hidden="true" tabindex="-1"></a>        <span class="kw">width</span>: <span class="dv">9</span><span class="dt">%</span><span class="op">;</span></span>
+<span id="cb3-263"><a href="#cb3-263" aria-hidden="true" tabindex="-1"></a>        <span class="kw">height</span>: <span class="dv">38</span><span class="dt">%</span><span class="op">;</span></span>
+<span id="cb3-264"><a href="#cb3-264" aria-hidden="true" tabindex="-1"></a>        <span class="kw">background-color</span>: <span class="fu">var(</span><span class="va">--building-color3</span><span class="fu">)</span><span class="op">;</span></span>
+<span id="cb3-265"><a href="#cb3-265" aria-hidden="true" tabindex="-1"></a>      }</span>
+<span id="cb3-266"><a href="#cb3-266" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;/style&gt;</span></span>
+<span id="cb3-267"><a href="#cb3-267" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;/head&gt;</span></span>
+<span id="cb3-268"><a href="#cb3-268" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-269"><a href="#cb3-269" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;body&gt;</span></span>
+<span id="cb3-270"><a href="#cb3-270" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;background-buildings&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb3-271"><a href="#cb3-271" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;div&gt;&lt;/div&gt;</span></span>
+<span id="cb3-272"><a href="#cb3-272" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;div&gt;&lt;/div&gt;</span></span>
+<span id="cb3-273"><a href="#cb3-273" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;bb1 building-wrap&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb3-274"><a href="#cb3-274" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;bb1a bb1-window&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
+<span id="cb3-275"><a href="#cb3-275" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;bb1b bb1-window&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
+<span id="cb3-276"><a href="#cb3-276" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;bb1c bb1-window&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
+<span id="cb3-277"><a href="#cb3-277" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;bb1d&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
+<span id="cb3-278"><a href="#cb3-278" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;/div&gt;</span></span>
+<span id="cb3-279"><a href="#cb3-279" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;bb2&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb3-280"><a href="#cb3-280" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;bb2a&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
+<span id="cb3-281"><a href="#cb3-281" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;bb2b&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
+<span id="cb3-282"><a href="#cb3-282" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;/div&gt;</span></span>
+<span id="cb3-283"><a href="#cb3-283" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;bb3&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
+<span id="cb3-284"><a href="#cb3-284" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;div&gt;&lt;/div&gt;</span></span>
+<span id="cb3-285"><a href="#cb3-285" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;bb4 building-wrap&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb3-286"><a href="#cb3-286" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;bb4a&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
+<span id="cb3-287"><a href="#cb3-287" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;bb4b&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
+<span id="cb3-288"><a href="#cb3-288" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;bb4c window-wrap&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb3-289"><a href="#cb3-289" aria-hidden="true" tabindex="-1"></a>          <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;bb4-window&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
+<span id="cb3-290"><a href="#cb3-290" aria-hidden="true" tabindex="-1"></a>          <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;bb4-window&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
+<span id="cb3-291"><a href="#cb3-291" aria-hidden="true" tabindex="-1"></a>          <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;bb4-window&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
+<span id="cb3-292"><a href="#cb3-292" aria-hidden="true" tabindex="-1"></a>          <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;bb4-window&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
+<span id="cb3-293"><a href="#cb3-293" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;/div&gt;</span></span>
+<span id="cb3-294"><a href="#cb3-294" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;/div&gt;</span></span>
+<span id="cb3-295"><a href="#cb3-295" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;div&gt;&lt;/div&gt;</span></span>
+<span id="cb3-296"><a href="#cb3-296" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;div&gt;&lt;/div&gt;</span></span>
+<span id="cb3-297"><a href="#cb3-297" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;/div&gt;</span></span>
+<span id="cb3-298"><a href="#cb3-298" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-299"><a href="#cb3-299" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;foreground-buildings&quot;</span><span class="kw">&gt;</span></span>
 <span id="cb3-300"><a href="#cb3-300" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;div&gt;&lt;/div&gt;</span></span>
 <span id="cb3-301"><a href="#cb3-301" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;div&gt;&lt;/div&gt;</span></span>
-<span id="cb3-302"><a href="#cb3-302" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;/div&gt;</span></span>
-<span id="cb3-303"><a href="#cb3-303" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-304"><a href="#cb3-304" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;foreground-buildings&quot;</span><span class="kw">&gt;</span></span>
-<span id="cb3-305"><a href="#cb3-305" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;div&gt;&lt;/div&gt;</span></span>
-<span id="cb3-306"><a href="#cb3-306" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;div&gt;&lt;/div&gt;</span></span>
-<span id="cb3-307"><a href="#cb3-307" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb1 building-wrap&quot;</span><span class="kw">&gt;</span></span>
-<span id="cb3-308"><a href="#cb3-308" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb1a&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
-<span id="cb3-309"><a href="#cb3-309" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb1b&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
-<span id="cb3-310"><a href="#cb3-310" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb1c&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
-<span id="cb3-311"><a href="#cb3-311" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;/div&gt;</span></span>
-<span id="cb3-312"><a href="#cb3-312" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb2&quot;</span><span class="kw">&gt;</span></span>
-<span id="cb3-313"><a href="#cb3-313" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb2a&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
-<span id="cb3-314"><a href="#cb3-314" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb2b window-wrap&quot;</span><span class="kw">&gt;</span></span>
-<span id="cb3-315"><a href="#cb3-315" aria-hidden="true" tabindex="-1"></a>          <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb2-window&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
-<span id="cb3-316"><a href="#cb3-316" aria-hidden="true" tabindex="-1"></a>          <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb2-window&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
-<span id="cb3-317"><a href="#cb3-317" aria-hidden="true" tabindex="-1"></a>          <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb2-window&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
-<span id="cb3-318"><a href="#cb3-318" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;/div&gt;</span></span>
-<span id="cb3-319"><a href="#cb3-319" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;/div&gt;</span></span>
-<span id="cb3-320"><a href="#cb3-320" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;div&gt;&lt;/div&gt;</span></span>
-<span id="cb3-321"><a href="#cb3-321" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb3 building-wrap&quot;</span><span class="kw">&gt;</span></span>
-<span id="cb3-322"><a href="#cb3-322" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb3a window-wrap&quot;</span><span class="kw">&gt;</span></span>
-<span id="cb3-323"><a href="#cb3-323" aria-hidden="true" tabindex="-1"></a>          <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb3-window&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
-<span id="cb3-324"><a href="#cb3-324" aria-hidden="true" tabindex="-1"></a>          <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb3-window&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
-<span id="cb3-325"><a href="#cb3-325" aria-hidden="true" tabindex="-1"></a>          <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb3-window&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
-<span id="cb3-326"><a href="#cb3-326" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;/div&gt;</span></span>
-<span id="cb3-327"><a href="#cb3-327" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb3b&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
-<span id="cb3-328"><a href="#cb3-328" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb3a&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
-<span id="cb3-329"><a href="#cb3-329" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb3b&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
-<span id="cb3-330"><a href="#cb3-330" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;/div&gt;</span></span>
-<span id="cb3-331"><a href="#cb3-331" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb4&quot;</span><span class="kw">&gt;</span></span>
-<span id="cb3-332"><a href="#cb3-332" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb4a&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
-<span id="cb3-333"><a href="#cb3-333" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb4b&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb3-302"><a href="#cb3-302" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb1 building-wrap&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb3-303"><a href="#cb3-303" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb1a&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
+<span id="cb3-304"><a href="#cb3-304" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb1b&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
+<span id="cb3-305"><a href="#cb3-305" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb1c&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
+<span id="cb3-306"><a href="#cb3-306" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;/div&gt;</span></span>
+<span id="cb3-307"><a href="#cb3-307" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb2&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb3-308"><a href="#cb3-308" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb2a&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
+<span id="cb3-309"><a href="#cb3-309" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb2b window-wrap&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb3-310"><a href="#cb3-310" aria-hidden="true" tabindex="-1"></a>          <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb2-window&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
+<span id="cb3-311"><a href="#cb3-311" aria-hidden="true" tabindex="-1"></a>          <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb2-window&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
+<span id="cb3-312"><a href="#cb3-312" aria-hidden="true" tabindex="-1"></a>          <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb2-window&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
+<span id="cb3-313"><a href="#cb3-313" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;/div&gt;</span></span>
+<span id="cb3-314"><a href="#cb3-314" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;/div&gt;</span></span>
+<span id="cb3-315"><a href="#cb3-315" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;div&gt;&lt;/div&gt;</span></span>
+<span id="cb3-316"><a href="#cb3-316" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb3 building-wrap&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb3-317"><a href="#cb3-317" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb3a window-wrap&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb3-318"><a href="#cb3-318" aria-hidden="true" tabindex="-1"></a>          <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb3-window&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
+<span id="cb3-319"><a href="#cb3-319" aria-hidden="true" tabindex="-1"></a>          <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb3-window&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
+<span id="cb3-320"><a href="#cb3-320" aria-hidden="true" tabindex="-1"></a>          <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb3-window&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
+<span id="cb3-321"><a href="#cb3-321" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;/div&gt;</span></span>
+<span id="cb3-322"><a href="#cb3-322" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb3b&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
+<span id="cb3-323"><a href="#cb3-323" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb3a&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
+<span id="cb3-324"><a href="#cb3-324" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb3b&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
+<span id="cb3-325"><a href="#cb3-325" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;/div&gt;</span></span>
+<span id="cb3-326"><a href="#cb3-326" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb4&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb3-327"><a href="#cb3-327" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb4a&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
+<span id="cb3-328"><a href="#cb3-328" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb4b&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb3-329"><a href="#cb3-329" aria-hidden="true" tabindex="-1"></a>          <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb4-window&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
+<span id="cb3-330"><a href="#cb3-330" aria-hidden="true" tabindex="-1"></a>          <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb4-window&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
+<span id="cb3-331"><a href="#cb3-331" aria-hidden="true" tabindex="-1"></a>          <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb4-window&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
+<span id="cb3-332"><a href="#cb3-332" aria-hidden="true" tabindex="-1"></a>          <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb4-window&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
+<span id="cb3-333"><a href="#cb3-333" aria-hidden="true" tabindex="-1"></a>          <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb4-window&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
 <span id="cb3-334"><a href="#cb3-334" aria-hidden="true" tabindex="-1"></a>          <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb4-window&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
-<span id="cb3-335"><a href="#cb3-335" aria-hidden="true" tabindex="-1"></a>          <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb4-window&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
-<span id="cb3-336"><a href="#cb3-336" aria-hidden="true" tabindex="-1"></a>          <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb4-window&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
-<span id="cb3-337"><a href="#cb3-337" aria-hidden="true" tabindex="-1"></a>          <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb4-window&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
-<span id="cb3-338"><a href="#cb3-338" aria-hidden="true" tabindex="-1"></a>          <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb4-window&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
-<span id="cb3-339"><a href="#cb3-339" aria-hidden="true" tabindex="-1"></a>          <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb4-window&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
-<span id="cb3-340"><a href="#cb3-340" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;/div&gt;</span></span>
-<span id="cb3-341"><a href="#cb3-341" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;/div&gt;</span></span>
-<span id="cb3-342"><a href="#cb3-342" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb5&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
-<span id="cb3-343"><a href="#cb3-343" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb6&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
-<span id="cb3-344"><a href="#cb3-344" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;div&gt;&lt;/div&gt;</span></span>
-<span id="cb3-345"><a href="#cb3-345" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;div&gt;&lt;/div&gt;</span></span>
-<span id="cb3-346"><a href="#cb3-346" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;/div&gt;</span></span>
-<span id="cb3-347"><a href="#cb3-347" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;/body&gt;</span></span>
-<span id="cb3-348"><a href="#cb3-348" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/html&gt;</span></span></code></pre></div>
+<span id="cb3-335"><a href="#cb3-335" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;/div&gt;</span></span>
+<span id="cb3-336"><a href="#cb3-336" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;/div&gt;</span></span>
+<span id="cb3-337"><a href="#cb3-337" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb5&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
+<span id="cb3-338"><a href="#cb3-338" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;fb6&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
+<span id="cb3-339"><a href="#cb3-339" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;div&gt;&lt;/div&gt;</span></span>
+<span id="cb3-340"><a href="#cb3-340" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;div&gt;&lt;/div&gt;</span></span>
+<span id="cb3-341"><a href="#cb3-341" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;/div&gt;</span></span>
+<span id="cb3-342"><a href="#cb3-342" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;/body&gt;</span></span>
+<span id="cb3-343"><a href="#cb3-343" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/html&gt;</span></span></code></pre></div>
 </body>
 </html>
