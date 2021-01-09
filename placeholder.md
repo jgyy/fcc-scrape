@@ -1,12 +1,12 @@
 ---
-id: 5d822fd413a79914d39e9901
-title: Part 57
+id: 5d822fd413a79914d39e9902
+title: Part 58
 challengeType: 0
 ---
 
 # --description--
 
-Remove the `margin` and `border-top` properties and values from `bb2a` to turn it into a triangle for the top of the building.
+Finally, on the `border-bottom` property of `bb2a`, change the `1vw` to `5vh` and change the `#000` color to your `--building-color2` variable. There you go, now it looks good! At any time throughout this project, you can comment out or remove the `border` property you added to everything at the beginning to see what the buildings will look like when that gets removed at the end.
 
 # --hints--
 
@@ -14,7 +14,11 @@ test-text
 
 ```js
 const bb2a = code.match(/\.bb2a\s*{[\s\S]+?[^}]}/g)[0];
-assert(!/margin/g.test(bb2a) && !/border-top/g.test(bb2a));
+assert(
+  /border-bottom\s*:\s*5vh\s+solid\s+var\(\s*--building-color2\s*\)\s*(;|})/g.test(
+    bb2a
+  )
+);
 ```
 
 # --seed--
@@ -101,8 +105,6 @@ assert(!/margin/g.test(bb2a) && !/border-top/g.test(bb2a));
       }
 
       .bb2a {
-        margin: auto;
-        border-top: 1vw solid #000;
         border-bottom: 1vw solid #000;
         border-left: 5vw solid transparent;
         border-right: 5vw solid transparent;
@@ -294,7 +296,7 @@ assert(!/margin/g.test(bb2a) && !/border-top/g.test(bb2a));
       }
 
       .bb2a {
-        border-bottom: 1vw solid #000;
+        border-bottom: 5vh solid var(--building-color2);
         border-left: 5vw solid transparent;
         border-right: 5vw solid transparent;
       }
