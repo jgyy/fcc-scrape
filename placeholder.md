@@ -1,28 +1,24 @@
 ---
-id: 5d822fd413a79914d39e9907
-title: Part 63
+id: 5d822fd413a79914d39e9908
+title: Part 64
 challengeType: 0
 ---
 
 # --description--
 
-Give the new `div` elements these `width` and `height` values: `3%` and `10%` to `bb4a`, `80%` and `5%` to `bb4b`, and `100%` and `85%` to `bb4c`.
+Remove the `background-color` property and value from `bb4` and add it to the three new sections; `bb4a`, `bb4b`, and `bb4c`, so only the sections are filled.
 
 # --hints--
 
 test-text
 
 ```js
-const bb4a = code.match(/\.bb4a\s*{[\s\S]+?[^}]}/g)[0];
-const bb4b = code.match(/\.bb4b\s*{[\s\S]+?[^}]}/g)[0];
-const bb4c = code.match(/\.bb4c\s*{[\s\S]+?[^}]}/g)[0];
+const bb4 = code.match(/\.bb4\s*{[\s\S]+?[^}]}/g)[0];
 assert(
-  /width\s*:\s*3%\s*(;|})/g.test(bb4a) &&
-    /height\s*:\s*10%\s*(;|})/g.test(bb4a) &&
-    /width\s*:\s*80%\s*(;|})/g.test(bb4b) &&
-    /height\s*:\s*5%\s*(;|})/g.test(bb4b) &&
-    /width\s*:\s*100%\s*(;|})/g.test(bb4c) &&
-    /height\s*:\s*85%\s*(;|})/g.test(bb4c)
+  !/background-color/g.test(bb4) &&
+    $('.bb4a').css('background-color') === 'rgb(83, 140, 198)' &&
+    $('.bb4b').css('background-color') === 'rgb(83, 140, 198)' &&
+    $('.bb4c').css('background-color') === 'rgb(83, 140, 198)'
 );
 ```
 
@@ -142,6 +138,21 @@ assert(
         width: 11%;
         height: 58%;
         background-color: var(--building-color4);
+      }
+
+      .bb4a {
+        width: 3%;
+        height: 10%;
+      }
+
+      .bb4b {
+        width: 80%;
+        height: 5%;
+      }
+  
+      .bb4c {
+        width: 100%;
+        height: 85%;
       }
 
       /* FOREGROUND BUILDINGS - "fb" stands for "foreground building" */
@@ -342,22 +353,24 @@ assert(
       .bb4 {
         width: 11%;
         height: 58%;
-        background-color: var(--building-color4);
       }
 
       .bb4a {
         width: 3%;
         height: 10%;
+        background-color: var(--building-color4);
       }
 
       .bb4b {
         width: 80%;
         height: 5%;
+        background-color: var(--building-color4);
       }
   
       .bb4c {
         width: 100%;
         height: 85%;
+        background-color: var(--building-color4);
       }
 
       /* FOREGROUND BUILDINGS - "fb" stands for "foreground building" */
