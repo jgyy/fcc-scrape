@@ -1,39 +1,40 @@
 ---
-id: 587d78b1367417b2b2512b0c
-title: Make Typography Responsive
+id: 587d78b1367417b2b2512b0a
+title: Use a Retina Image for Higher Resolution Displays
 challengeType: 0
-videoUrl: 'https://scrimba.com/p/pzrPu4/crzN7T8'
-forumTopicId: 301141
+videoUrl: 'https://scrimba.com/p/pzrPu4/cVZ4Rfp'
+forumTopicId: 301142
 ---
 
 # --description--
 
-Instead of using `em` or `px` to size text, you can use viewport units for responsive typography. Viewport units, like percentages, are relative units, but they are based off different items. Viewport units are relative to the viewport dimensions (width or height) of a device, and percentages are relative to the size of the parent container element.
+With the increase of internet connected devices, their sizes and specifications vary, and the displays they use could be different externally and internally. Pixel density is an aspect that could be different on one device from others and this density is known as Pixel Per Inch(PPI) or Dots Per Inch(DPI). The most famous such display is the one known as a "Retina Display" on the latest Apple MacBook Pro notebooks, and recently iMac computers. Due to the difference in pixel density between a "Retina" and "Non-Retina" displays, some images that have not been made with a High-Resolution Display in mind could look "pixelated" when rendered on a High-Resolution display.
 
-The four different viewport units are:
+The simplest way to make your images properly appear on High-Resolution Displays, such as the MacBook Pros "retina display" is to define their `width` and `height` values as only half of what the original file is. Here is an example of an image that is only using half of the original height and width:
 
-<ul><li><code>vw</code> (viewport width): <code>10vw</code> would be 10% of the viewport's width.</li><li><code>vh</code> (viewport height): <code>3vh</code> would be 3% of the viewport's height.</li><li><code>vmin</code> (viewport minimum): <code>70vmin</code> would be 70% of the viewport's smaller dimension (height or width).</li><li><code>vmax</code> (viewport maximum): <code>100vmax</code> would be 100% of the viewport's bigger dimension (height or width).</li></ul>
-
-Here is an example that sets a body tag to 30% of the viewport's width.
-
-`body { width: 30vw; }`
+```html
+<style>
+  img { height: 250px; width: 250px; }
+</style>
+<img src="coolPic500x500" alt="A most excellent picture">
+```
 
 # --instructions--
 
-Set the `width` of the `h2` tag to 80% of the viewport's width and the `width` of the paragraph as 75% of the viewport's smaller dimension.
+Set the `width` and `height` of the `img` tag to half of their original values. In this case, both the original `height` and the original `width` are `200px`.
 
 # --hints--
 
-Your `h2` tag should have a `width` of 80vw.
+Your `img` tag should have a `width` of 100 pixels.
 
 ```js
-assert(code.match(/h2\s*?{\s*?width:\s*?80vw;\s*?}/g));
+assert(document.querySelector('img').width === 100);
 ```
 
-Your `p` tag should have a `width` of 75vmin.
+Your `img` tag should have a `height` of 100 pixels.
 
 ```js
-assert(code.match(/p\s*?{\s*?width:\s*?75vmin;\s*?}/g));
+assert(document.querySelector('img').height === 100);
 ```
 
 # --seed--
@@ -45,22 +46,18 @@ assert(code.match(/p\s*?{\s*?width:\s*?75vmin;\s*?}/g));
 
 </style>
 
-<h2>Importantus Ipsum</h2>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus quis tempus massa. Aenean erat nisl, gravida vel vestibulum cursus, interdum sit amet lectus. Sed sit amet quam nibh. Suspendisse quis tincidunt nulla. In hac habitasse platea dictumst. Ut sit amet pretium nisl. Vivamus vel mi sem. Aenean sit amet consectetur sem. Suspendisse pretium, purus et gravida consequat, nunc ligula ultricies diam, at aliquet velit libero a dui.</p>
+<img src="https://s3.amazonaws.com/freecodecamp/FCCStickers-CamperBot200x200.jpg" alt="freeCodeCamp sticker that says 'Because CamperBot Cares'">
 ```
 
 # --solutions--
 
 ```html
 <style>
-  h2 {
-      width: 80vw;
-  }
-  p {
-      width: 75vmin;
+  img { 
+    height: 100px; 
+    width: 100px; 
   }
 </style>
 
-<h2>Importantus Ipsum</h2>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus quis tempus massa. Aenean erat nisl, gravida vel vestibulum cursus, interdum sit amet lectus. Sed sit amet quam nibh. Suspendisse quis tincidunt nulla. In hac habitasse platea dictumst. Ut sit amet pretium nisl. Vivamus vel mi sem. Aenean sit amet consectetur sem. Suspendisse pretium, purus et gravida consequat, nunc ligula ultricies diam, at aliquet velit libero a dui.</p>
+<img src="https://s3.amazonaws.com/freecodecamp/FCCStickers-CamperBot200x200.jpg" alt="freeCodeCamp sticker that says 'Because CamperBot Cares'">
 ```
