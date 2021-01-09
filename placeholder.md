@@ -1,23 +1,24 @@
 ---
-id: 5d822fd413a79914d39e98e8
-title: Part 32
+id: 5d822fd413a79914d39e98e9
+title: Part 33
 challengeType: 0
 ---
 
 # --description--
 
-Add the same `display`, `align-items`, and `justify-content` properties and values to `foreground-buildings` that you used on `background-buildings`. Again, this will use Flexbox to evenly space the buildings across the bottom of their container.
+I see some code that can be optimized. Move the `position` and `top` properties and values from `foreground-buildings` to `background-buildings`. Then select both `background-buildings` and `foreground-buildings` there, effectively applying those styles to both of the elements. You can use a comma (`,`) to separate selectors like this: `selector1, selector2`.
 
 # --hints--
 
 test-text
 
 ```js
-const fb = $('.foreground-buildings');
 assert(
-  fb.css('display') === 'flex' &&
-    fb.css('align-items') === 'flex-end' &&
-    fb.css('justify-content') === 'space-evenly'
+  $('.background-buildings').css('position') === 'absolute' &&
+    $('.background-buildings').css('top') === '0px' &&
+    /(\.background-buildings\s*,\s*\.foreground-buildings|\.foreground-buildings\s*,\s*\.background-buildings)/g.test(
+      code
+    )
 );
 ```
 
@@ -112,6 +113,9 @@ assert(
         height: 100%;
         position: absolute;
         top: 0;
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-evenly;
       }
 
       .fb1 {
@@ -202,12 +206,14 @@ assert(
         overflow: hidden;
       }
 
-      .background-buildings {
+      .background-buildings, .foreground-buildings {
         width: 100%;
         height: 100%;
         display: flex;
         align-items: flex-end;
         justify-content: space-evenly;
+        position: absolute;
+        top: 0;
       }
 
       .bb1 {
@@ -263,8 +269,6 @@ assert(
       .foreground-buildings {
         width: 100%;
         height: 100%;
-        position: absolute;
-        top: 0;
         display: flex;
         align-items: flex-end;
         justify-content: space-evenly;
