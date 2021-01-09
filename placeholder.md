@@ -1,21 +1,25 @@
 ---
-id: 5d822fd413a79914d39e9914
-title: Part 76
+id: 5d822fd413a79914d39e9916
+title: Part 77
 challengeType: 0
 ---
 
 # --description--
 
-Move the `background-color` property and value from `fb1` to `fb1b`.
+Don't worry about the space at the bottom, everything will get moved down later when you add some height to the element at the top of the building.
+
+Add a `repeating-linear-gradient` to `fb1c` with a `90deg` angle, your `--building-color4` from `0%` to `10%` and `transparent` from `10%` to `15%`.
 
 # --hints--
 
 test-text
 
 ```js
-const fb1b = code.match(/\.fb1b\s*{[\s\S]+?[^}]}/g)[0];
+const fb1c = code.match(/\.fb1c\s*{[\s\S]+?[^}]}/g)[0];
 assert(
-  /background-color\s*:\s*var\(\s*--building-color4\s*\)\s*(;|})/g.test(fb1b)
+  /background\s*:\s*repeating-linear-gradient\(\s*90deg\s*,\s*var\(\s*--building-color4\s*\)\s*(0%\s*,|,)\s*var\(\s*--building-color4\s*\)\s*10%\s*,\s*transparent\s*10%\s*,\s*transparent\s*15%\s*\)\s*(;|})/g.test(
+    fb1c
+  )
 );
 ```
 
@@ -174,12 +178,12 @@ assert(
       .fb1 {
         width: 10%;
         height: 60%;
-        background-color: var(--building-color4);
       }
 
       .fb1b {
         width: 60%;
         height: 10%;
+        background-color: var(--building-color4);
       }
   
       .fb1c {
@@ -438,6 +442,13 @@ assert(
       .fb1c {
         width: 100%;
         height: 80%;
+        background: repeating-linear-gradient(
+            90deg,
+            var(--building-color4),
+            var(--building-color4) 10%,
+            transparent 10%,
+            transparent 15%
+          )
       }
 
       .fb2 {
