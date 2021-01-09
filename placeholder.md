@@ -1,24 +1,19 @@
 ---
-id: 5d822fd413a79914d39e990f
-title: Part 71
+id: 5d822fd413a79914d39e9910
+title: Part 72
 challengeType: 0
 ---
 
 # --description--
 
-The windows are stacked on top of each other at the left of the section, behind the purple building. Add a new class below `building-wrap` called `window-wrap` and add these properties to it: `display: flex;`, `align-items: center;`, and `justify-content: space-evenly;`. This will be used in a few places to center window elements vertically and space them evenly in their parent.
+Add the new `window-wrap` class to the `bb4c` element.
 
 # --hints--
 
 test-text
 
 ```js
-const wWrap = code.match(/\.window-wrap\s*{[\s\S]+?[^}]}/g)[0];
-assert(
-  /display\s*:\s*flex\s*(;|})/g.test(wWrap) &&
-    /align-items\s*:\s*center\s*(;|})/g.test(wWrap) &&
-    /justify-content\s*:\s*space-evenly\s*(;|})/g.test(wWrap)
-);
+assert($('.bb4c.window-wrap').length === 1);
 ```
 
 # --seed--
@@ -67,6 +62,12 @@ assert(
         display: flex;
         flex-direction: column;
         align-items: center;
+      }
+
+      .window-wrap {
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
       }
 
       /* BACKGROUND BUILDINGS - "bb" stands for "background building" */
@@ -467,7 +468,7 @@ assert(
       <div class="bb4 building-wrap">
         <div class="bb4a"></div>
         <div class="bb4b"></div>
-        <div class="bb4c">
+        <div class="bb4c window-wrap">
           <div class="bb4-window"></div>
           <div class="bb4-window"></div>
           <div class="bb4-window"></div>
