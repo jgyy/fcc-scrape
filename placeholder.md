@@ -1,19 +1,26 @@
 ---
-id: 5d822fd413a79914d39e98ea
-title: Part 34
+id: 5d822fd413a79914d39e98eb
+title: Part 35
 challengeType: 0
 ---
 
 # --description--
 
-Now that you did that, you can delete the old `foreground-buildings` class and all of its properties since they aren't needed anymore.
+The skyline is coming together. Fill in the `background-color` property of the foreground buildings. Use your `--building-color1` variable to fill in `fb3` and `fb4`, `--building-color2` for `fb5`, `--building-color3` for `fb2` and `fb6`, and `--building-color4` for `fb1`.
 
 # --hints--
 
 test-text
 
 ```js
-assert(code.match(/\.foreground-buildings/g).length === 1);
+assert(
+  $('.fb1').css('background-color') === 'rgb(83, 140, 198)' &&
+    $('.fb2').css('background-color') === 'rgb(204, 102, 153)' &&
+    $('.fb3').css('background-color') === 'rgb(170, 128, 255)' &&
+    $('.fb4').css('background-color') === 'rgb(170, 128, 255)' &&
+    $('.fb5').css('background-color') === 'rgb(102, 204, 153)' &&
+    $('.fb6').css('background-color') === 'rgb(204, 102, 153)'
+);
 ```
 
 # --seed--
@@ -102,14 +109,6 @@ assert(code.match(/\.foreground-buildings/g).length === 1);
         width: 11%;
         height: 58%;
         background-color: var(--building-color4);
-      }
-
-      .foreground-buildings {
-        width: 100%;
-        height: 100%;
-        display: flex;
-        align-items: flex-end;
-        justify-content: space-evenly;
       }
 
       .fb1 {
@@ -263,31 +262,37 @@ assert(code.match(/\.foreground-buildings/g).length === 1);
       .fb1 {
         width: 10%;
         height: 60%;
+        background-color: var(--building-color4);
       }
 
       .fb2 {
         width: 10%;
         height: 40%;
+        background-color: var(--building-color3);
       }
 
       .fb3 {
         width: 10%;
         height: 35%;
+        background-color: var(--building-color1);
       }
   
       .fb4 {
         width: 8%;
         height: 45%;
+        background-color: var(--building-color1);
       }
       
       .fb5 {
         width: 10%;
         height: 33%;
+        background-color: var(--building-color2);
       }
 
       .fb6 {
         width: 9%;
         height: 38%;
+        background-color: var(--building-color3);
       }
     </style>
   </head>
