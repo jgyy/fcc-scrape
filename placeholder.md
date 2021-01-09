@@ -1,25 +1,26 @@
 ---
-id: 5d822fd413a79914d39e9920
-title: Part 87
+id: 5d822fd413a79914d39e9921
+title: Part 88
 challengeType: 0
 ---
 
 # --description--
 
-For `fb2a`, add a `border-bottom` of `10vh solid var(--building-color3)` and a `border-left` and `border-right` of `1vw solid transparent`. This time the border trick will create a trapezoid shape.
+For the next building, nest four `div` elements within `fb3` with classes of `fb3a`, `fb3b`, `fb3a` again, and `fb3b` again, in that order. This building will have four sections and the top two will be almost the same as the bottom two.
 
 # --hints--
 
 test-text
 
 ```js
-const fb2a = code.match(/\.fb2a\s*{[\s\S]+?[^}]}/g)[0];
+const fb3 = $('.fb3').children('div');
+console.log(fb3);
 assert(
-  /border-bottom\s*:\s*10vh\s+solid\s+var\(\s*--building-color3\s*\)\s*(;|})/g.test(
-    fb2a
-  ) &&
-    /border-left\s*:\s*1vw\s+solid\s+transparent\s*(;|})/g.test(fb2a) &&
-    /border-right\s*:\s*1vw\s+solid\s+transparent\s*(;|})/g.test(fb2a)
+  fb3.length === 4 &&
+    fb3[0] === $('div.fb3a')[0] &&
+    fb3[1] === $('div.fb3b')[0] &&
+    fb3[2] === $('div.fb3a')[1] &&
+    fb3[3] === $('div.fb3b')[1]
 );
 ```
 
@@ -217,6 +218,9 @@ assert(
 
       .fb2a {
         width: 100%;
+        border-bottom: 10vh solid var(--building-color3);
+        border-left: 1vw solid transparent;
+        border-right: 1vw solid transparent;
       }
 
       .fb2b {
@@ -605,7 +609,12 @@ assert(
         </div>
       </div>
       <div></div>
-      <div class="fb3"></div>
+      <div class="fb3">
+        <div class="fb3a"></div>
+        <div class="fb3b"></div>
+        <div class="fb3a"></div>
+        <div class="fb3b"></div>
+      </div>
       <div class="fb4"></div>
       <div class="fb5"></div>
       <div class="fb6"></div>
