@@ -1,32 +1,24 @@
 ---
-id: 5d822fd413a79914d39e98f0
-title: Part 40
+id: 5d822fd413a79914d39e98f1
+title: Part 41
 challengeType: 0
 ---
 
 # --description--
 
-Gradients in CSS are a way to transition between colors across the distance of an element. They are applied to the `background` property and the syntax looks like this:
-
-```css
-gradient-type(
-  color1,
-  color2
-);
-```
-
-In the example, `color1` is solid at the top, `color2` is solid at the bottom, and in between it transitions evenly from one to the next. In `bb1a`, add a gradient of type `linear-gradient` to the `background` property with `--building-color1` as the first color and `--window-color1` as the second.
+You want to add the same gradient to the next two sections. But instead of doing that, create a new class called `bb1-window` and move the `height` and `background` properties and values from `bb1a` to the new class.
 
 # --hints--
 
 test-text
 
 ```js
-const bb1a = code.match(/\.bb1a\s*{[\s\S]+?[^}]}/g)[0];
+const bb1wStyle = code.match(/\.bb1-window\s*{[\s\S]+?[^}]}/g)[0];
 assert(
-  /background\s*:\s*linear-gradient\(\s*var\(\s*--building-color1\s*\)\s*,\s*var\(\s*--window-color1\s*\)\s*\)\s*(;|})/g.test(
-    bb1a
-  )
+  /height\s*:\s*10%\s*(;|})/g.test(bb1wStyle) &&
+    /background\s*:\s*linear-gradient\(\s*var\(\s*--building-color1\s*\)\s*,\s*var\(\s*--window-color1\s*\)\s*\)\s*(;|})/g.test(
+      bb1wStyle
+    )
 );
 ```
 
@@ -82,6 +74,10 @@ assert(
         width: 70%;
         height: 10%;
         background-color: var(--building-color1);
+        background: linear-gradient(
+            var(--building-color1),
+            var(--window-color1)
+          );
       }
   
       .bb1b {
@@ -246,12 +242,7 @@ assert(
 
       .bb1a {
         width: 70%;
-        height: 10%;
         background-color: var(--building-color1);
-        background: linear-gradient(
-            var(--building-color1),
-            var(--window-color1)
-          );
       }
   
       .bb1b {
@@ -270,6 +261,14 @@ assert(
         width: 100%;
         height: 70%;
         background-color: var(--building-color1);
+      }
+
+      .bb1-window {
+        height: 10%;
+        background: linear-gradient(
+            var(--building-color1),
+            var(--window-color1)
+          );
       }
 
       .bb2 {
