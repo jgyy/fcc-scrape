@@ -1,12 +1,12 @@
 ---
-id: 5d822fd413a79914d39e993b
-title: Part 115
+id: 5d822fd413a79914d39e993c
+title: Part 116
 challengeType: 0
 ---
 
 # --description--
 
-Copy and paste your whole `sky` class along with all of its properties and values into the media query. You are going to make another color scheme for the skyline that changes it from day to night.
+In the `sky` class of the media query, change the two `#ffcf33` color values to `#ccc`, the `#ffff66` to `#445`, and the `#bbeeff` to `#223`. Then you can resize your window to see the background change colors.
 
 # --hints--
 
@@ -15,7 +15,7 @@ test-text
 ```js
 const sky = code.match(/\.sky\s*{[\s\S]+?[^}]}/g)[1];
 assert(
-  /background\s*:\s*radial-gradient\(\s*closest-corner\s+circle\s+at\s+15%\s+15%\s*,\s*#ffcf33\s*(0%\s*,|,)\s*#ffcf33\s*20%\s*,\s*#ffff66\s*21%\s*,\s*#bbeeff\s*100%\s*\)\s*(;|})/g.test(
+  /background\s*:\s*radial-gradient\(\s*closest-corner\s+circle\s+at\s+15%\s+15%\s*,\s*#ccc\s*(0%\s*,|,)\s*#ccc\s*20%\s*,\s*#445\s*21%\s*,\s*#223\s*100%\s*\)\s*(;|})/g.test(
     sky
   )
 );
@@ -331,7 +331,15 @@ assert(
       }
 
       @media (max-width: 1000px) {
-        
+        .sky {
+          background: radial-gradient(
+              closest-corner circle at 15% 15%,
+              #ffcf33,
+              #ffcf33 20%,
+              #ffff66 21%,
+              #bbeeff 100%
+            );
+        }
       }
     </style>
   </head>
@@ -724,10 +732,10 @@ assert(
         .sky {
           background: radial-gradient(
               closest-corner circle at 15% 15%,
-              #ffcf33,
-              #ffcf33 20%,
-              #ffff66 21%,
-              #bbeeff 100%
+              #ccc,
+              #ccc 20%,
+              #445 21%,
+              #223 100%
             );
         }
       }
