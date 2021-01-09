@@ -1,12 +1,12 @@
 ---
-id: 5d822fd413a79914d39e98e0
-title: Part 24
+id: 5d822fd413a79914d39e98e1
+title: Part 25
 challengeType: 0
 ---
 
 # --description--
 
-Create a new variable by the other ones named `--building-color3` and give it a value of `#cc6699`. Then use it as the `background-color` of the `bb3` class and give it a fallback value of `pink`.
+That one used the fallback value as well? I see the problem now! The variables you declared in `bb1` do not cascade to the `bb2` and `bb3` sibling elements. That's just how CSS works. Because of this, variables are often declared in the `:root` selector. This is the highest level selector in CSS; putting your variables there will make them usable everywhere. Add the `:root` selector to the top of your stylesheet and move all your variable declarations there.
 
 # --hints--
 
@@ -14,12 +14,14 @@ test-text
 
 ```js
 const bb1style = code.match(/\.bb1\s*{[\s\S]+?[^}]}/g)[0];
-const bb3style = code.match(/\.bb3\s*{[\s\S]+?[^}]}/g)[0];
+const rootStyle = code.match(/:root\s*{[\s\S]+?[^}]}/g)[0];
 assert(
-  /--building-color3\s*:\s*#cc6699\s*(;|\s*})/g.test(bb1style) &&
-    /background-color\s*:\s*var\(\s*--building-color3\s*,\s*pink\s*\)\s*(;|\s*})/g.test(
-      bb3style
-    )
+  /--building-color1\s*:\s*#aa80ff\s*(;|\s*})/g.test(rootStyle) &&
+    /--building-color2\s*:\s*#66cc99\s*(;|\s*})/g.test(rootStyle) &&
+    /--building-color3\s*:\s*#cc6699\s*(;|\s*})/g.test(rootStyle) &&
+    !/--building-color1\s*:\s*#aa80ff\s*(;|\s*})/g.test(bb1style) &&
+    !/--building-color2\s*:\s*#66cc99\s*(;|\s*})/g.test(bb1style) &&
+    !/--building-color3\s*:\s*#cc6699\s*(;|\s*})/g.test(bb1style)
 );
 ```
 
@@ -60,6 +62,7 @@ assert(
         align-items: center;
         --building-color1: #aa80ff;
         --building-color2: #66cc99;
+        --building-color3: #cc6699;
       }
 
       .bb1a {
@@ -95,6 +98,7 @@ assert(
       .bb3 {
         width: 10%;
         height: 55%;
+        background-color: var(--building-color3, pink);
       }
 
       .bb4 {
@@ -133,6 +137,12 @@ assert(
   <head>
     <title>freeCodeCamp Skyline Project</title>
     <style>
+      :root {
+        --building-color1: #aa80ff;
+        --building-color2: #66cc99;
+        --building-color3: #cc6699;
+      }
+
       * {
         border: 1px solid black;
         box-sizing: border-box;
@@ -158,9 +168,6 @@ assert(
         display: flex;
         flex-direction: column;
         align-items: center;
-        --building-color1: #aa80ff;
-        --building-color2: #66cc99;
-        --building-color3: #cc6699;
       }
 
       .bb1a {
