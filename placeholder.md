@@ -1,25 +1,27 @@
 ---
-id: 5d822fd413a79914d39e9922
-title: Part 89
+id: 5d822fd413a79914d39e9923
+title: Part 90
 challengeType: 0
 ---
 
 # --description--
 
-Give the `fb3a` element a `width` of `80%` and `height` of `15%`. Then give the `fb3b` element a `width` of `100%` and `height` of `35%`.
+Remove the `background-color` property and value from `fb3` and add them to `fb3a` and `fb3b`.
 
 # --hints--
 
 test-text
 
 ```js
+const fb3 = code.match(/\.fb3\s*{[\s\S]+?[^}]}/g)[0];
 const fb3a = code.match(/\.fb3a\s*{[\s\S]+?[^}]}/g)[0];
 const fb3b = code.match(/\.fb3b\s*{[\s\S]+?[^}]}/g)[0];
 assert(
-  /width\s*:\s*80%\s*(;|})/g.test(fb3a) &&
-    /height\s*:\s*15%\s*(;|})/g.test(fb3a) &&
-    /width\s*:\s*100%\s*(;|})/g.test(fb3b) &&
-    /height\s*:\s*35%\s*(;|})/g.test(fb3b)
+  !/background-color/g.test(fb3) &&
+    /background-color\s*:\s*var\(\s*--building-color1\s*\)\s*(;|})/g.test(
+      fb3a
+    ) &&
+    /background-color\s*:\s*var\(\s*--building-color1\s*\)\s*(;|})/g.test(fb3b)
 );
 ```
 
@@ -238,6 +240,16 @@ assert(
         width: 10%;
         height: 35%;
         background-color: var(--building-color1);
+      }
+
+      .fb3a {
+        width: 80%;
+        height: 15%;
+      }
+  
+      .fb3b {
+        width: 100%;
+        height: 35%;
       }
   
       .fb4 {
@@ -539,19 +551,20 @@ assert(
       .fb3 {
         width: 10%;
         height: 35%;
-        background-color: var(--building-color1);
       }
-
+  
       .fb3a {
         width: 80%;
         height: 15%;
+        background-color: var(--building-color1);
       }
   
       .fb3b {
         width: 100%;
         height: 35%;
+        background-color: var(--building-color1);
       }
-  
+
       .fb4 {
         width: 8%;
         height: 45%;
