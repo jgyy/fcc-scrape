@@ -1,24 +1,25 @@
 ---
-id: 5d822fd413a79914d39e9911
-title: Part 73
+id: 5d822fd413a79914d39e9912
+title: Part 74
 challengeType: 0
 ---
 
 # --description--
 
-Looks good! On to the foreground buildings! Turn the `fb1` building into three sections by nesting three new `div` elements within it. Give them the classes of `fb1a`, `fb1b` and `fb1c`, in that order.
+Give `fb1b` a `width` of `60%` and `height` of `10%`, and `fb1c` a `width` of `100%` and `height` of `80%`.
 
 # --hints--
 
 test-text
 
 ```js
-const fb1 = $('.fb1').children('div');
+const fb1b = code.match(/\.fb1b\s*{[\s\S]+?[^}]}/g)[0];
+const fb1c = code.match(/\.fb1c\s*{[\s\S]+?[^}]}/g)[0];
 assert(
-  fb1.length === 3 &&
-    fb1[0] === $('div.fb1a')[0] &&
-    fb1[1] === $('div.fb1b')[0] &&
-    fb1[2] === $('div.fb1c')[0]
+  /width\s*:\s*60%\s*(;|})/g.test(fb1b) &&
+    /height\s*:\s*10%\s*(;|})/g.test(fb1b) &&
+    /width\s*:\s*100%\s*(;|})/g.test(fb1c) &&
+    /height\s*:\s*80%\s*(;|})/g.test(fb1c)
 );
 ```
 
@@ -249,7 +250,11 @@ assert(
     <div class="foreground-buildings">
       <div></div>
       <div></div>
-      <div class="fb1"></div>
+      <div class="fb1">
+        <div class="fb1a"></div>
+        <div class="fb1b"></div>
+        <div class="fb1c"></div>
+      </div>
       <div class="fb2"></div>
       <div></div>
       <div class="fb3"></div>
@@ -419,6 +424,16 @@ assert(
         background-color: var(--building-color4);
       }
 
+      .fb1b {
+        width: 60%;
+        height: 10%;
+      }
+  
+      .fb1c {
+        width: 100%;
+        height: 80%;
+      }
+      
       .fb2 {
         width: 10%;
         height: 40%;
