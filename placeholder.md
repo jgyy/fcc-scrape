@@ -1,23 +1,25 @@
 ---
-id: 5d822fd413a79914d39e98df
-title: Part 23
+id: 5d822fd413a79914d39e98e0
+title: Part 24
 challengeType: 0
 ---
 
 # --description--
 
-Hmm, I'm not sure why that didn't work. You can add a fallback value to a variable by putting it as the second value of where you use the variable like this: `var(--variable-name, fallback-value)`. The property will use the fallback value when there's a problem with the variable. Add a fallback value of `green` to the `background-color` of `bb2`.
+Create a new variable by the other ones named `--building-color3` and give it a value of `#cc6699`. Then use it as the `background-color` of the `bb3` class and give it a fallback value of `pink`.
 
 # --hints--
 
 test-text
 
 ```js
-const bb2style = code.match(/\.bb2\s*{[\s\S]+?[^}]}/g)[0];
+const bb1style = code.match(/\.bb1\s*{[\s\S]+?[^}]}/g)[0];
+const bb3style = code.match(/\.bb3\s*{[\s\S]+?[^}]}/g)[0];
 assert(
-  /background-color\s*:\s*var\(\s*--building-color2\s*,\s*green\s*\)\s*(;|\s*})/g.test(
-    bb2style
-  )
+  /--building-color3\s*:\s*#cc6699\s*(;|\s*})/g.test(bb1style) &&
+    /background-color\s*:\s*var\(\s*--building-color3\s*,\s*pink\s*\)\s*(;|\s*})/g.test(
+      bb3style
+    )
 );
 ```
 
@@ -87,7 +89,7 @@ assert(
       .bb2 {
         width: 10%;
         height: 50%;
-        background-color: var(--building-color2);
+        background-color: var(--building-color2, green);
       }
 
       .bb3 {
@@ -158,6 +160,7 @@ assert(
         align-items: center;
         --building-color1: #aa80ff;
         --building-color2: #66cc99;
+        --building-color3: #cc6699;
       }
 
       .bb1a {
@@ -193,6 +196,7 @@ assert(
       .bb3 {
         width: 10%;
         height: 55%;
+        background-color: var(--building-color3, pink);
       }
 
       .bb4 {
