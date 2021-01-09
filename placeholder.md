@@ -1,24 +1,20 @@
 ---
-id: 5d822fd413a79914d39e98fc
-title: Part 52
+id: 5d822fd413a79914d39e98fd
+title: Part 53
 challengeType: 0
 ---
 
 # --description--
 
-You can see the hard color change at the top of the section. Change the gradient type from `linear-gradient` to `repeating-linear-gradient` for this section. This will make the four colors of your gradient repeat until it gets to the bottom of the element; giving you some stripes, and saving you from having to add a bunch of elements to create them.
+In the next few steps, you are going to use some tricks with CSS borders to turn the `bb2a` section into a triangle at the top of the building. First, remove the `background-color` from `bb2` since you don't need it anymore.
 
 # --hints--
 
 test-text
 
 ```js
-const bb2b = code.match(/\.bb2b\s*{[\s\S]+?[^}]}/g)[0];
-assert(
-  /background\s*:\s*repeating-linear-gradient\(\s*var\(\s*--building-color2\s*\)\s*(0%\s*,|,)\s*var\(\s*--building-color2\s*\)\s*6%\s*,\s*var\(\s*--window-color2\s*\)\s*6%\s*,\s*var\(\s*--window-color2\s*\)\s*9%\s*\)\s*(;|})/g.test(
-    bb2b
-  )
-);
+const bb2 = code.match(/\.bb2\s*{[\s\S]+?[^}]}/g)[0];
+assert(!/background-color/g.test(bb2));
 ```
 
 # --seed--
@@ -60,7 +56,7 @@ assert(
         position: absolute;
         top: 0;
       }
-
+      
       /* BACKGROUND BUILDINGS - "bb" stands for "background building" */
       .bb1 {
         width: 10%;
@@ -108,7 +104,7 @@ assert(
       .bb2b {
         width: 100%;
         height: 100%;
-        background: linear-gradient(
+        background: repeating-linear-gradient(
             var(--building-color2),
             var(--building-color2) 6%,
             var(--window-color2) 6%,
@@ -288,7 +284,6 @@ assert(
       .bb2 {
         width: 10%;
         height: 50%;
-        background-color: var(--building-color2);
       }
 
       .bb2b {
