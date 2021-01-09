@@ -1,21 +1,22 @@
 ---
-id: 5d822fd413a79914d39e98f8
-title: Part 48
+id: 5d822fd413a79914d39e98f9
+title: Part 49
 challengeType: 0
 ---
 
 # --description--
 
-Nest two new `div` elements within `bb2`, give them the classes of `bb2a` and `bb2b`, in that order. These will be two sections for this building.
+Give `bb2b` a `width` and `height` of `100%` to make it fill the building container. You will add something on the top a little later.
 
 # --hints--
 
 test-text
 
 ```js
-const bb2 = $('.bb2').children('div');
 assert(
-  bb2.length === 2 && bb2[0] === $('.bb2a')[0] && bb2[1] === $('.bb2b')[0]
+  /\.bb2b\s*{\s*(width\s*:\s*100%\s*;\s*height\s*:\s*100%\s*(;|})|height\s*:\s*100%\s*;\s*width\s*:\s*100%\s*(;|}))/g.test(
+    code
+  )
 );
 ```
 
@@ -167,7 +168,10 @@ assert(
         <div class="bb1c bb1-window"></div>
         <div class="bb1d"></div>
       </div>
-      <div class="bb2"></div>
+      <div class="bb2">
+        <div class="bb2a"></div>
+        <div class="bb2b"></div>
+      </div>
       <div class="bb3"></div>
       <div></div>
       <div class="bb4"></div>
@@ -273,6 +277,11 @@ assert(
         background-color: var(--building-color2);
       }
 
+      .bb2b {
+        width: 100%;
+        height: 100%;
+      }
+      
       .bb3 {
         width: 10%;
         height: 55%;
