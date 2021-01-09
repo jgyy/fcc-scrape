@@ -1,25 +1,19 @@
 ---
-id: 5d822fd413a79914d39e9908
-title: Part 64
+id: 5d822fd413a79914d39e9909
+title: Part 65
 challengeType: 0
 ---
 
 # --description--
 
-Remove the `background-color` property and value from `bb4` and add it to the three new sections; `bb4a`, `bb4b`, and `bb4c`, so only the sections are filled.
+You want `bb4` to share the properties of `bb1` that center the sections. Instead of duplicating that code, create a new class above the background building comment called `building-wrap`. Leave it empty for now; this class will be used in a few places to save you some coding.
 
 # --hints--
 
 test-text
 
 ```js
-const bb4 = code.match(/\.bb4\s*{[\s\S]+?[^}]}/g)[0];
-assert(
-  !/background-color/g.test(bb4) &&
-    $('.bb4a').css('background-color') === 'rgb(83, 140, 198)' &&
-    $('.bb4b').css('background-color') === 'rgb(83, 140, 198)' &&
-    $('.bb4c').css('background-color') === 'rgb(83, 140, 198)'
-);
+assert(/\.building-wrap\s*{\s*}/g.test(code));
 ```
 
 # --seed--
@@ -137,22 +131,24 @@ assert(
       .bb4 {
         width: 11%;
         height: 58%;
-        background-color: var(--building-color4);
       }
 
       .bb4a {
         width: 3%;
         height: 10%;
+        background-color: var(--building-color4);
       }
 
       .bb4b {
         width: 80%;
         height: 5%;
+        background-color: var(--building-color4);
       }
   
       .bb4c {
         width: 100%;
         height: 85%;
+        background-color: var(--building-color4);
       }
 
       /* FOREGROUND BUILDINGS - "fb" stands for "foreground building" */
@@ -277,6 +273,10 @@ assert(
         justify-content: space-evenly;
         position: absolute;
         top: 0;
+      }
+
+      .building-wrap {
+
       }
       
       /* BACKGROUND BUILDINGS - "bb" stands for "background building" */
