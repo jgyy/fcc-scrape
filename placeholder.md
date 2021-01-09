@@ -1,19 +1,22 @@
 ---
-id: 5d822fd413a79914d39e98d0
-title: Part 8
+id: 5d822fd413a79914d39e98d1
+title: Part 9
 challengeType: 0
 ---
 
 # --description--
 
-It's tough to see now, but there's a border at the edge of your preview, that's the body. Create a `div` element in the body with a class of `background-buildings`. This will be a container for a group of buildings.
+Give your background buildings element a `width` and `height` of `100%` to make it the full width and height of its parent, the body.
 
 # --hints--
 
 test-text
 
 ```js
-assert($('#display-body')[0].contains($('div.background-buildings')[0]));
+const bb = code.match(/\.background-buildings\s*{[\s\S]+?[^}]}/g)[0];
+assert(
+  /width\s*:\s*100%\s*(;|})/g.test(bb) && /height\s*:\s*100%\s*(;|})/g.test(bb)
+);
 ```
 
 # --seed--
@@ -40,6 +43,7 @@ assert($('#display-body')[0].contains($('div.background-buildings')[0]));
   </head>
 
   <body>
+    <div class="background-buildings"></div>
   </body>
 </html>
 ```
@@ -61,6 +65,11 @@ assert($('#display-body')[0].contains($('div.background-buildings')[0]));
         height: 100vh;
         margin: 0;
         overflow: hidden;
+      }
+
+      .background-buildings {
+        width: 100%;
+        height: 100%;
       }
     </style>
   </head>
