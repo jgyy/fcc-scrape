@@ -1,19 +1,19 @@
 ---
-id: 5d822fd413a79914d39e9924
-title: Part 91
+id: 5d822fd413a79914d39e9925
+title: Part 92
 challengeType: 0
 ---
 
 # --description--
 
-Add your `building-wrap` class to the `fb3` element to center the sections.
+Nest three new `div` elements in the first `fb3a` element. Give them each a class of `fb3-window`. These will be windows for this section.
 
 # --hints--
 
 test-text
 
 ```js
-assert($('.fb3.building-wrap').length === 1);
+assert($('.fb3 div.fb3a:first-child').children('div.fb3-window').length === 3);
 ```
 
 # --seed--
@@ -315,7 +315,7 @@ assert($('.fb3.building-wrap').length === 1);
         </div>
       </div>
       <div></div>
-      <div class="fb3">
+      <div class="fb3 building-wrap">
         <div class="fb3a"></div>
         <div class="fb3b"></div>
         <div class="fb3a"></div>
@@ -629,7 +629,11 @@ assert($('.fb3.building-wrap').length === 1);
       </div>
       <div></div>
       <div class="fb3 building-wrap">
-        <div class="fb3a"></div>
+        <div class="fb3a">
+          <div class="fb3-window"></div>
+          <div class="fb3-window"></div>
+          <div class="fb3-window"></div>
+        </div>
         <div class="fb3b"></div>
         <div class="fb3a"></div>
         <div class="fb3b"></div>
