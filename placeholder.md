@@ -1,20 +1,19 @@
 ---
-id: 5d822fd413a79914d39e9936
-title: Part 110
+id: 5d822fd413a79914d39e9937
+title: Part 111
 challengeType: 0
 ---
 
 # --description--
 
-Okay, the buildings are done. Go back to the `*` selector and remove the border you applied to everything at the beginning and the buildings will come together.
+Add `sky` as a second class to the `background-buildings` element. You are going to make a background for the skyline.
 
 # --hints--
 
 test-text
 
 ```js
-const all = code.match(/\*\s*{[\s\S]+?[^}]}/g)[0];
-assert(!/border\s*:\s*1px\s+solid\s+black/g.test(all));
+assert($('.background-buildings.sky').length === 1);
 ```
 
 # --seed--
@@ -39,7 +38,6 @@ assert(!/border\s*:\s*1px\s+solid\s+black/g.test(all));
       }
 
       * {
-        border: 1px solid black;
         box-sizing: border-box;
       }
 
@@ -696,7 +694,7 @@ assert(!/border\s*:\s*1px\s+solid\s+black/g.test(all));
   </head>
 
   <body>
-    <div class="background-buildings">
+    <div class="background-buildings sky">
       <div></div>
       <div></div>
       <div class="bb1 building-wrap">
