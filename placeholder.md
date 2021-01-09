@@ -1,19 +1,25 @@
 ---
-id: 5d822fd413a79914d39e9910
-title: Part 72
+id: 5d822fd413a79914d39e9911
+title: Part 73
 challengeType: 0
 ---
 
 # --description--
 
-Add the new `window-wrap` class to the `bb4c` element.
+Looks good! On to the foreground buildings! Turn the `fb1` building into three sections by nesting three new `div` elements within it. Give them the classes of `fb1a`, `fb1b` and `fb1c`, in that order.
 
 # --hints--
 
 test-text
 
 ```js
-assert($('.bb4c.window-wrap').length === 1);
+const fb1 = $('.fb1').children('div');
+assert(
+  fb1.length === 3 &&
+    fb1[0] === $('div.fb1a')[0] &&
+    fb1[1] === $('div.fb1b')[0] &&
+    fb1[2] === $('div.fb1c')[0]
+);
 ```
 
 # --seed--
@@ -229,7 +235,7 @@ assert($('.bb4c.window-wrap').length === 1);
       <div class="bb4 building-wrap">
         <div class="bb4a"></div>
         <div class="bb4b"></div>
-        <div class="bb4c">
+        <div class="bb4c window-wrap">
           <div class="bb4-window"></div>
           <div class="bb4-window"></div>
           <div class="bb4-window"></div>
@@ -482,7 +488,11 @@ assert($('.bb4c.window-wrap').length === 1);
     <div class="foreground-buildings">
       <div></div>
       <div></div>
-      <div class="fb1"></div>
+      <div class="fb1">
+        <div class="fb1a"></div>
+        <div class="fb1b"></div>
+        <div class="fb1c"></div>
+      </div>
       <div class="fb2"></div>
       <div></div>
       <div class="fb3"></div>
