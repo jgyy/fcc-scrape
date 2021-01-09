@@ -1,19 +1,24 @@
 ---
-id: 5d822fd413a79914d39e991d
-title: Part 84
+id: 5d822fd413a79914d39e991e
+title: Part 85
 challengeType: 0
 ---
 
 # --description--
 
-Add your `window-wrap` class to `fb2b` to position the new window elements.
+Give the `fb2-window` elements a `width` of `22%`, `height` of `100%`, and a `background-color` of your `--window-color3` variable.
 
 # --hints--
 
 test-text
 
 ```js
-assert($('.fb2b.window-wrap').length === 1);
+const fb2w = code.match(/\.fb2-window\s*{[\s\S]+?[^}]}/g)[0];
+assert(
+  /width\s*:\s*22%\s*(;|})/g.test(fb2w) &&
+    /height\s*:\s*100%\s*(;|})/g.test(fb2w) &&
+    /background-color\s*:\s*var\(\s*--window-color3\s*\)\s*(;|})/g.test(fb2w)
+);
 ```
 
 # --seed--
@@ -288,7 +293,7 @@ assert($('.fb2b.window-wrap').length === 1);
       </div>
       <div class="fb2">
         <div class="fb2a"></div>
-        <div class="fb2b">
+        <div class="fb2b window-wrap">
           <div class="fb2-window"></div>
           <div class="fb2-window"></div>
           <div class="fb2-window"></div>
@@ -504,6 +509,12 @@ assert($('.fb2b.window-wrap').length === 1);
       .fb2b {
         width: 100%;
         height: 75%;
+      }
+
+      .fb2-window {
+        width: 22%;
+        height: 100%;
+        background-color: var(--window-color3);
       }
 
       .fb3 {
