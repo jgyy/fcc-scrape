@@ -1,25 +1,25 @@
 ---
-id: 5d822fd413a79914d39e98ed
-title: Part 37
+id: 5d822fd413a79914d39e98ee
+title: Part 38
 challengeType: 0
 ---
 
 # --description--
 
-Move the position of `fb4` relative to where it is now by adding a `position` of `relative` and `left` of `10%` to it. Do the same for `fb5` but use `right` instead of `left`. This will cover up the remaining white space in between the buildings.
+Your code is starting to get quite long. Add a comment above the `fb1` class that says `FOREGROUND BUILDINGS - "fb" stands for "foreground building"` to help people understand your code. Above the `bb1` class add another comment that says `BACKGROUND BUILDINGS - "bb" stands for "background building"`. If you don't remember, comments in CSS look like this: `/* Comment here */`.
 
 # --hints--
 
 test-text
 
 ```js
-const fb4style = code.match(/\.fb4\s*{[\s\S]+?[^}]}/g)[0];
-const fb5style = code.match(/\.fb5\s*{[\s\S]+?[^}]}/g)[0];
 assert(
-  $('.fb4').css('position') === 'relative' &&
-    $('.fb5').css('position') === 'relative' &&
-    /left\s*:\s*10%\s*(;|})/g.test(fb4style) &&
-    /right\s*:\s*10%\s*(;|})/g.test(fb5style)
+  /\/\*\s*BACKGROUND BUILDINGS - "bb" stands for "background building"\s*\*\//g.test(
+    code
+  ) &&
+    /\/\*\s*FOREGROUND BUILDINGS - "fb" stands for "foreground building"\s*\*\//g.test(
+      code
+    )
 );
 ```
 
@@ -133,12 +133,16 @@ assert(
         width: 8%;
         height: 45%;
         background-color: var(--building-color1);
+        position: relative;
+        left: 10%;
       }
       
       .fb5 {
         width: 10%;
         height: 33%;
         background-color: var(--building-color2);
+        position: relative;
+        right: 10%;
       }
 
       .fb6 {
@@ -219,7 +223,8 @@ assert(
         position: absolute;
         top: 0;
       }
-
+      
+      /* BACKGROUND BUILDINGS - "bb" stands for "background building" */
       .bb1 {
         width: 10%;
         height: 70%;
@@ -270,6 +275,7 @@ assert(
         background-color: var(--building-color4);
       }
 
+      /* FOREGROUND BUILDINGS - "fb" stands for "foreground building" */
       .fb1 {
         width: 10%;
         height: 60%;
