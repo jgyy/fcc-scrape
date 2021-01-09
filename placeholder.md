@@ -1,19 +1,20 @@
 ---
-id: 5d822fd413a79914d39e9927
-title: Part 94
+id: 5d822fd413a79914d39e9928
+title: Part 95
 challengeType: 0
 ---
 
 # --description--
 
-Add your `window-wrap` class to the `fb3a` element to center and space the windows.
+I'm not thrilled about that black for the windows anymore. Change the `--window-color1` value to `#bb99ff`.
 
 # --hints--
 
 test-text
 
 ```js
-assert($('.fb3 div.fb3a:first-child').hasClass('window-wrap'));
+const root = code.match(/:root\s*{[\s\S]+?[^}]}/g)[0];
+assert(/--window-color1\s*:\s*#bb99ff\s*(;|})/g.test(root));
 ```
 
 # --seed--
@@ -322,7 +323,7 @@ assert($('.fb3 div.fb3a:first-child').hasClass('window-wrap'));
       </div>
       <div></div>
       <div class="fb3 building-wrap">
-        <div class="fb3a">
+        <div class="fb3a window-wrap">
           <div class="fb3-window"></div>
           <div class="fb3-window"></div>
           <div class="fb3-window"></div>
@@ -354,7 +355,7 @@ assert($('.fb3 div.fb3a:first-child').hasClass('window-wrap'));
         --building-color2: #66cc99;
         --building-color3: #cc6699;
         --building-color4: #538cc6;
-        --window-color1: black;
+        --window-color1: #bb99ff;
         --window-color2: #8cd9b3;
         --window-color3: #d98cb3;
         --window-color4: #8cb3d9;
