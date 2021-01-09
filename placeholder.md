@@ -1,32 +1,20 @@
 ---
-id: 5d822fd413a79914d39e98d8
-title: Part 16
+id: 5d822fd413a79914d39e98d9
+title: Part 17
 challengeType: 0
 ---
 
 # --description--
 
-It's that simple. Use the same variable as the `background-color` of the `bb1b`, `bb1c`, and `bb1d` classes to fill in the rest of the building.
+I don't really like that color. Change the value of your variable from `#999` to `#aa80ff` and you can see how it gets applied everywhere you used the variable. This is the main advantage of using variables, being able to quickly change many values in your stylesheet by just changing the value of a variable.
 
 # --hints--
 
 test-text
 
 ```js
-const bb1bStyle = code.match(/\.bb1b\s*{[\s\S]+?[^}]}/g)[0];
-const bb1cStyle = code.match(/\.bb1c\s*{[\s\S]+?[^}]}/g)[0];
-const bb1dStyle = code.match(/\.bb1d\s*{[\s\S]+?[^}]}/g)[0];
-assert(
-  /background-color\s*:\s*var\(\s*--building-color1\s*\)\s*(;|\s*})/g.test(
-    bb1bStyle
-  ) &&
-    /background-color\s*:\s*var\(\s*--building-color1\s*\)\s*(;|\s*})/g.test(
-      bb1cStyle
-    ) &&
-    /background-color\s*:\s*var\(\s*--building-color1\s*\)\s*(;|\s*})/g.test(
-      bb1dStyle
-    )
-);
+const bb1style = code.match(/\.bb1\s*{[\s\S]+?[^}]}/g)[0];
+assert(/--building-color1\s*:\s*#aa80ff\s*(;|\s*})/g.test(bb1style));
 ```
 
 # --seed--
@@ -73,16 +61,19 @@ assert(
       .bb1b {
         width: 80%;
         height: 10%;
+        background-color: var(--building-color1);
       }
   
       .bb1c {
         width: 90%;
         height: 10%;
+        background-color: var(--building-color1);
       }
 
       .bb1d {
         width: 100%;
         height: 70%;
+        background-color: var(--building-color1);
       }
     </style>
   </head>
@@ -130,7 +121,7 @@ assert(
         display: flex;
         flex-direction: column;
         align-items: center;
-        --building-color1: #999;
+        --building-color1: #aa80ff;
       }
 
       .bb1a {
