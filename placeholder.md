@@ -1,23 +1,20 @@
 ---
-id: 5d822fd413a79914d39e98f9
-title: Part 49
+id: 5d822fd413a79914d39e98fa
+title: Part 50
 challengeType: 0
 ---
 
 # --description--
 
-Give `bb2b` a `width` and `height` of `100%` to make it fill the building container. You will add something on the top a little later.
+Create a new variable in `:root` named `window-color2` with a value of `#8cd9b3`. This will be used as the secondary color for this building.
 
 # --hints--
 
 test-text
 
 ```js
-assert(
-  /\.bb2b\s*{\s*(width\s*:\s*100%\s*;\s*height\s*:\s*100%\s*(;|})|height\s*:\s*100%\s*;\s*width\s*:\s*100%\s*(;|}))/g.test(
-    code
-  )
-);
+const rootStyle = code.match(/:root\s*{[\s\S]+?[^}]}/g)[0];
+assert(/--window-color2\s*:\s*#8cd9b3\s*(;|})/g.test(rootStyle));
 ```
 
 # --seed--
@@ -103,6 +100,11 @@ assert(
         background-color: var(--building-color2);
       }
 
+      .bb2b {
+        width: 100%;
+        height: 100%;
+      }
+      
       .bb3 {
         width: 10%;
         height: 55%;
@@ -210,6 +212,7 @@ assert(
         --building-color3: #cc6699;
         --building-color4: #538cc6;
         --window-color1: black;
+        --window-color2: #8cd9b3;
       }
 
       * {
