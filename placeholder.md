@@ -1,37 +1,23 @@
 ---
-id: 5d822fd413a79914d39e98e7
-title: Part 31
+id: 5d822fd413a79914d39e98e8
+title: Part 32
 challengeType: 0
 ---
 
 # --description--
 
-Give the six new elements these `width` and `height` values: `10%` and `60%` to `fb1`, `10%` and `40%` to `fb2`, `10%` and `35%` to `fb3`, `8%` and `45%` to `fb4`, `10%` and `33%` to `fb5`, and `9%` and `38%` to `fb6`.
+Add the same `display`, `align-items`, and `justify-content` properties and values to `foreground-buildings` that you used on `background-buildings`. Again, this will use Flexbox to evenly space the buildings across the bottom of their container.
 
 # --hints--
 
 test-text
 
 ```js
+const fb = $('.foreground-buildings');
 assert(
-  /\.fb1\s*{\s*(width\s*:\s*10%\s*;\s*height\s*:\s*60%\s*(;|})|height\s*:\s*60%\s*;\s*width\s*:\s*10%\s*(;|}))/g.test(
-    code
-  ) &&
-    /\.fb2\s*{\s*(width\s*:\s*10%\s*;\s*height\s*:\s*40%\s*(;|})|height\s*:\s*40%\s*;\s*width\s*:\s*10%\s*(;|}))/g.test(
-      code
-    ) &&
-    /\.fb3\s*{\s*(width\s*:\s*10%\s*;\s*height\s*:\s*35%\s*(;|})|height\s*:\s*35%\s*;\s*width\s*:\s*10%\s*(;|}))/g.test(
-      code
-    ) &&
-    /\.fb4\s*{\s*(width\s*:\s*8%\s*;\s*height\s*:\s*45%\s*(;|})|height\s*:\s*45%\s*;\s*width\s*:\s*8%\s*(;|}))/g.test(
-      code
-    ) &&
-    /\.fb5\s*{\s*(width\s*:\s*10%\s*;\s*height\s*:\s*33%\s*(;|})|height\s*:\s*33%\s*;\s*width\s*:\s*10%\s*(;|}))/g.test(
-      code
-    ) &&
-    /\.fb6\s*{\s*(width\s*:\s*9%\s*;\s*height\s*:\s*38%\s*(;|})|height\s*:\s*38%\s*;\s*width\s*:\s*9%\s*(;|}))/g.test(
-      code
-    )
+  fb.css('display') === 'flex' &&
+    fb.css('align-items') === 'flex-end' &&
+    fb.css('justify-content') === 'space-evenly'
 );
 ```
 
@@ -126,6 +112,36 @@ assert(
         height: 100%;
         position: absolute;
         top: 0;
+      }
+
+      .fb1 {
+        width: 10%;
+        height: 60%;
+      }
+
+      .fb2 {
+        width: 10%;
+        height: 40%;
+      }
+
+      .fb3 {
+        width: 10%;
+        height: 35%;
+      }
+  
+      .fb4 {
+        width: 8%;
+        height: 45%;
+      }
+      
+      .fb5 {
+        width: 10%;
+        height: 33%;
+      }
+
+      .fb6 {
+        width: 9%;
+        height: 38%;
       }
     </style>
   </head>
@@ -249,6 +265,9 @@ assert(
         height: 100%;
         position: absolute;
         top: 0;
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-evenly;
       }
 
       .fb1 {
