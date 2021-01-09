@@ -1,27 +1,37 @@
 ---
-id: 5d822fd413a79914d39e98e6
-title: Part 30
+id: 5d822fd413a79914d39e98e7
+title: Part 31
 challengeType: 0
 ---
 
 # --description--
 
-Nest six `div` elements within `foreground-buildings` and give them the classes of `fb1` through `fb6` in that order. "fb" stands for "foreground building". These will be six more buildings for the foreground.
+Give the six new elements these `width` and `height` values: `10%` and `60%` to `fb1`, `10%` and `40%` to `fb2`, `10%` and `35%` to `fb3`, `8%` and `45%` to `fb4`, `10%` and `33%` to `fb5`, and `9%` and `38%` to `fb6`.
 
 # --hints--
 
 test-text
 
 ```js
-const fb = $('.foreground-buildings').children('div');
 assert(
-  fb.length === 6 &&
-    fb[0] === $('div.fb1')[0] &&
-    fb[1] === $('div.fb2')[0] &&
-    fb[2] === $('div.fb3')[0] &&
-    fb[3] === $('div.fb4')[0] &&
-    fb[4] === $('div.fb5')[0] &&
-    fb[5] === $('div.fb6')[0]
+  /\.fb1\s*{\s*(width\s*:\s*10%\s*;\s*height\s*:\s*60%\s*(;|})|height\s*:\s*60%\s*;\s*width\s*:\s*10%\s*(;|}))/g.test(
+    code
+  ) &&
+    /\.fb2\s*{\s*(width\s*:\s*10%\s*;\s*height\s*:\s*40%\s*(;|})|height\s*:\s*40%\s*;\s*width\s*:\s*10%\s*(;|}))/g.test(
+      code
+    ) &&
+    /\.fb3\s*{\s*(width\s*:\s*10%\s*;\s*height\s*:\s*35%\s*(;|})|height\s*:\s*35%\s*;\s*width\s*:\s*10%\s*(;|}))/g.test(
+      code
+    ) &&
+    /\.fb4\s*{\s*(width\s*:\s*8%\s*;\s*height\s*:\s*45%\s*(;|})|height\s*:\s*45%\s*;\s*width\s*:\s*8%\s*(;|}))/g.test(
+      code
+    ) &&
+    /\.fb5\s*{\s*(width\s*:\s*10%\s*;\s*height\s*:\s*33%\s*(;|})|height\s*:\s*33%\s*;\s*width\s*:\s*10%\s*(;|}))/g.test(
+      code
+    ) &&
+    /\.fb6\s*{\s*(width\s*:\s*9%\s*;\s*height\s*:\s*38%\s*(;|})|height\s*:\s*38%\s*;\s*width\s*:\s*9%\s*(;|}))/g.test(
+      code
+    )
 );
 ```
 
@@ -138,7 +148,14 @@ assert(
       <div></div>
     </div>
 
-    <div class="foreground-buildings"></div>
+    <div class="foreground-buildings">
+      <div class="fb1"></div>
+      <div class="fb2"></div>
+      <div class="fb3"></div>
+      <div class="fb4"></div>
+      <div class="fb5"></div>
+      <div class="fb6"></div>
+    </div>
   </body>
 </html>
 ```
@@ -232,6 +249,36 @@ assert(
         height: 100%;
         position: absolute;
         top: 0;
+      }
+
+      .fb1 {
+        width: 10%;
+        height: 60%;
+      }
+
+      .fb2 {
+        width: 10%;
+        height: 40%;
+      }
+
+      .fb3 {
+        width: 10%;
+        height: 35%;
+      }
+  
+      .fb4 {
+        width: 8%;
+        height: 45%;
+      }
+      
+      .fb5 {
+        width: 10%;
+        height: 33%;
+      }
+
+      .fb6 {
+        width: 9%;
+        height: 38%;
       }
     </style>
   </head>
