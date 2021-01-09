@@ -1,12 +1,14 @@
 ---
-id: 5d822fd413a79914d39e993d
-title: Part 117
+id: 5d822fd413a79914d39e993e
+title: Part 118
 challengeType: 0
 ---
 
 # --description--
 
-Add a `:root` selector to the top of your media query. Then redefine all four of the `--building-color` variables to use the value `#000` there.
+Lastly, in the `:root` selector of the media query, redefine all four of the `--window-color` variables to use `#777`. When you're done, resize the window and watch it go from day to night.
+
+Variables are primarily used with colors, and that's how you used them here. But they can be given any value and used on any property. Your project looks great!
 
 # --hints--
 
@@ -15,10 +17,10 @@ test-text
 ```js
 const root = code.match(/:root\s*{[\s\S]+?[^}]}/g)[1];
 assert(
-  /--building-color1\s*:\s*#000\s*(;|})/g.test(root) &&
-    /--building-color2\s*:\s*#000\s*(;|})/g.test(root) &&
-    /--building-color3\s*:\s*#000\s*(;|})/g.test(root) &&
-    /--building-color4\s*:\s*#000\s*(;|})/g.test(root)
+  /--window-color1\s*:\s*#777\s*(;|})/g.test(root) &&
+    /--window-color2\s*:\s*#777\s*(;|})/g.test(root) &&
+    /--window-color3\s*:\s*#777\s*(;|})/g.test(root) &&
+    /--window-color4\s*:\s*#777\s*(;|})/g.test(root)
 );
 ```
 
@@ -332,6 +334,13 @@ assert(
       }
 
       @media (max-width: 1000px) {
+        :root {
+          --building-color1: #000;
+          --building-color2: #000;
+          --building-color3: #000;
+          --building-color4: #000;
+        }
+
         .sky {
           background: radial-gradient(
               closest-corner circle at 15% 15%,
@@ -735,6 +744,10 @@ assert(
           --building-color2: #000;
           --building-color3: #000;
           --building-color4: #000;
+          --window-color1: #777;
+          --window-color2: #777;
+          --window-color3: #777;
+          --window-color4: #777;
         }
 
         .sky {
