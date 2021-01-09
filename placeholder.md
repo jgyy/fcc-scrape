@@ -1,25 +1,23 @@
 ---
-id: 5d822fd413a79914d39e990e
-title: Part 70
+id: 5d822fd413a79914d39e990f
+title: Part 71
 challengeType: 0
 ---
 
 # --description--
 
-Give the `bb4-window` class a `width` of `18%`, a `height` of `90%`, and add your `--window-color4` variable as the `background-color`.
+The windows are stacked on top of each other at the left of the section, behind the purple building. Add a new class below `building-wrap` called `window-wrap` and add these properties to it: `display: flex;`, `align-items: center;`, and `justify-content: space-evenly;`. This will be used in a few places to center window elements vertically and space them evenly in their parent.
 
 # --hints--
 
 test-text
 
 ```js
-const bb4Window = code.match(/\.bb4-window\s*{[\s\S]+?[^}]}/g)[0];
+const wWrap = code.match(/\.window-wrap\s*{[\s\S]+?[^}]}/g)[0];
 assert(
-  /width\s*:\s*18%\s*(;|})/g.test(bb4Window) &&
-    /height\s*:\s*90%\s*(;|})/g.test(bb4Window) &&
-    /background-color\s*:\s*var\(\s*--window-color4\s*\)\s*(;|})/g.test(
-      bb4Window
-    )
+  /display\s*:\s*flex\s*(;|})/g.test(wWrap) &&
+    /align-items\s*:\s*center\s*(;|})/g.test(wWrap) &&
+    /justify-content\s*:\s*space-evenly\s*(;|})/g.test(wWrap)
 );
 ```
 
@@ -162,6 +160,12 @@ assert(
         background-color: var(--building-color4);
       }
 
+      .bb4-window {
+        width: 18%;
+        height: 90%;
+        background-color: var(--window-color4);
+      }
+
       /* FOREGROUND BUILDINGS - "fb" stands for "foreground building" */
       .fb1 {
         width: 10%;
@@ -296,6 +300,12 @@ assert(
         display: flex;
         flex-direction: column;
         align-items: center;
+      }
+
+      .window-wrap {
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
       }
 
       /* BACKGROUND BUILDINGS - "bb" stands for "background building" */
