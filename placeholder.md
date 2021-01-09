@@ -1,12 +1,12 @@
 ---
-id: 5d822fd413a79914d39e9918
-title: Part 79
+id: 5d822fd413a79914d39e9919
+title: Part 80
 challengeType: 0
 ---
 
 # --description--
 
-You're going to use some more border tricks for top section. Add a `border-bottom` with a value of `7vh solid var(--building-color4)` to `fb1a`. This will put a `7vh` height border on the bottom. But since the element has zero size, it only shows up as a 2px wide line from the 1px border that is on all the elements.
+When you make the left and right borders bigger, the border on the bottom will expand to be the width of the combined left and right border widths. Add `2vw solid transparent;` as the value of the `border-left` and `border-right` properties of `fb1a`. They will be invisible, but it will make the border on the bottom `4vw` wide.
 
 # --hints--
 
@@ -15,9 +15,8 @@ test-text
 ```js
 const fb1a = code.match(/\.fb1a\s*{[\s\S]+?[^}]}/g)[0];
 assert(
-  /border-bottom\s*:\s*7vh\s+solid\s+var\(\s*--building-color4\s*\)\s*(;|})/g.test(
-    fb1a
-  )
+  /border-left\s*:\s*2vw\s+solid\s+transparent\s*(;|})/g.test(fb1a) &&
+    /border-right\s*:\s*2vw\s+solid\s+transparent\s*(;|})/g.test(fb1a)
 );
 ```
 
@@ -176,6 +175,10 @@ assert(
       .fb1 {
         width: 10%;
         height: 60%;
+      }
+
+      .fb1a {
+        border-bottom: 7vh solid var(--building-color4);
       }
 
       .fb1b {
@@ -446,6 +449,8 @@ assert(
 
       .fb1a {
         border-bottom: 7vh solid var(--building-color4);
+        border-left: 2vw solid transparent;
+        border-right: 2vw solid transparent;
       }
 
       .fb1b {
