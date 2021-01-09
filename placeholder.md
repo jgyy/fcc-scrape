@@ -1,20 +1,24 @@
 ---
-id: 5d822fd413a79914d39e98d9
-title: Part 17
+id: 5d822fd413a79914d39e98da
+title: Part 18
 challengeType: 0
 ---
 
 # --description--
 
-I don't really like that color. Change the value of your variable from `#999` to `#aa80ff` and you can see how it gets applied everywhere you used the variable. This is the main advantage of using variables, being able to quickly change many values in your stylesheet by just changing the value of a variable.
+Your first building looks pretty good now. Let's make some more! Nest three new `div` elements in the `background-buildings` container and give them the classes of `bb2`, `bb3`, and `bb4` in that order. These will be three more buildings for the background.
 
 # --hints--
 
 test-text
 
 ```js
-const bb1style = code.match(/\.bb1\s*{[\s\S]+?[^}]}/g)[0];
-assert(/--building-color1\s*:\s*#aa80ff\s*(;|\s*})/g.test(bb1style));
+const bb = $('.background-buildings');
+assert(
+  bb.children('.bb2').length === 1 &&
+    bb.children('.bb3').length === 1 &&
+    bb.children('.bb4').length === 1
+);
 ```
 
 # --seed--
@@ -49,7 +53,7 @@ assert(/--building-color1\s*:\s*#aa80ff\s*(;|\s*})/g.test(bb1style));
         display: flex;
         flex-direction: column;
         align-items: center;
-        --building-color1: #999;
+        --building-color1: #aa80ff;
       }
 
       .bb1a {
@@ -158,6 +162,9 @@ assert(/--building-color1\s*:\s*#aa80ff\s*(;|\s*})/g.test(bb1style));
         <div class="bb1c"></div>
         <div class="bb1d"></div>
       </div>
+      <div class="bb2"></div>
+      <div class="bb3"></div>
+      <div class="bb4"></div>
     </div>
   </body>
 </html>
