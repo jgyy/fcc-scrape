@@ -1,24 +1,19 @@
 ---
-id: 5d822fd413a79914d39e9926
-title: Part 93
+id: 5d822fd413a79914d39e9927
+title: Part 94
 challengeType: 0
 ---
 
 # --description--
 
-Give the `fb3-window` elements a `width` of `25%`, a `height` of `80%`, and use your `--window-color1` variable as the `background-color` value.
+Add your `window-wrap` class to the `fb3a` element to center and space the windows.
 
 # --hints--
 
 test-text
 
 ```js
-const fb3w = code.match(/\.fb3-window\s*{[\s\S]+?[^}]}/g)[0];
-assert(
-  /width\s*:\s*25%\s*(;|})/g.test(fb3w) &&
-    /height\s*:\s*80%\s*(;|})/g.test(fb3w) &&
-    /background-color\s*:\s*var\(\s*--window-color1\s*\)\s*(;|})/g.test(fb3w)
-);
+assert($('.fb3 div.fb3a:first-child').hasClass('window-wrap'));
 ```
 
 # --seed--
@@ -247,6 +242,12 @@ assert(
         width: 100%;
         height: 35%;
         background-color: var(--building-color1);
+      }
+
+      .fb3-window {
+        width: 25%;
+        height: 80%;
+        background-color: var(--window-color1);
       }
 
       .fb4 {
@@ -644,7 +645,7 @@ assert(
       </div>
       <div></div>
       <div class="fb3 building-wrap">
-        <div class="fb3a">
+        <div class="fb3a window-wrap">
           <div class="fb3-window"></div>
           <div class="fb3-window"></div>
           <div class="fb3-window"></div>
