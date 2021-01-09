@@ -1,23 +1,25 @@
 ---
-id: 5d822fd413a79914d39e991f
-title: Part 86
+id: 5d822fd413a79914d39e9920
+title: Part 87
 challengeType: 0
 ---
 
 # --description--
 
-Move the `background-color` property and value from `fb2` to `fb2b` to just color the section and not the container.
+For `fb2a`, add a `border-bottom` of `10vh solid var(--building-color3)` and a `border-left` and `border-right` of `1vw solid transparent`. This time the border trick will create a trapezoid shape.
 
 # --hints--
 
 test-text
 
 ```js
-const fb2 = code.match(/\.fb2\s*{[\s\S]+?[^}]}/g)[0];
-const fb2b = code.match(/\.fb2b\s*{[\s\S]+?[^}]}/g)[0];
+const fb2a = code.match(/\.fb2a\s*{[\s\S]+?[^}]}/g)[0];
 assert(
-  !/background-color/g.test(fb2) &&
-    /background-color\s*:\s*var\(\s*--building-color3\s*\)\s*(;|})/g.test(fb2b)
+  /border-bottom\s*:\s*10vh\s+solid\s+var\(\s*--building-color3\s*\)\s*(;|})/g.test(
+    fb2a
+  ) &&
+    /border-left\s*:\s*1vw\s+solid\s+transparent\s*(;|})/g.test(fb2a) &&
+    /border-right\s*:\s*1vw\s+solid\s+transparent\s*(;|})/g.test(fb2a)
 );
 ```
 
@@ -211,7 +213,6 @@ assert(
       .fb2 {
         width: 10%;
         height: 40%;
-        background-color: var(--building-color3);
       }
 
       .fb2a {
@@ -221,6 +222,7 @@ assert(
       .fb2b {
         width: 100%;
         height: 75%;
+        background-color: var(--building-color3);
       }
 
       .fb2-window {
@@ -509,6 +511,9 @@ assert(
 
       .fb2a {
         width: 100%;
+        border-bottom: 10vh solid var(--building-color3);
+        border-left: 1vw solid transparent;
+        border-right: 1vw solid transparent;
       }
 
       .fb2b {
