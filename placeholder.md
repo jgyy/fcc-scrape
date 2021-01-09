@@ -1,20 +1,25 @@
 ---
-id: 5d822fd413a79914d39e9905
-title: Part 61
+id: 5d822fd413a79914d39e9906
+title: Part 62
 challengeType: 0
 ---
 
 # --description--
 
-Remove the `background-color` property and value from `bb3` since you are using the gradient as the background now.
+The next building will have three sections. Nest three `div` elements within `bb4`. Give them the classes of `bb4a`, `bb4b` and `bb4c` in that order.
 
 # --hints--
 
 test-text
 
 ```js
-const bb3 = code.match(/\.bb3\s*{[\s\S]+?[^}]}/g)[0];
-assert(!/background-color/g.test(bb3));
+const bb4 = $('.bb4').children('div');
+assert(
+  bb4.length === 3 &&
+    bb4[0] === $('.bb4a')[0] &&
+    bb4[1] === $('.bb4b')[0] &&
+    bb4[2] === $('.bb4c')[0]
+);
 ```
 
 # --seed--
@@ -121,7 +126,6 @@ assert(!/background-color/g.test(bb3));
       .bb3 {
         width: 10%;
         height: 55%;
-        background-color: var(--building-color3);
         background: repeating-linear-gradient(
             90deg,
             var(--building-color3),
@@ -392,7 +396,11 @@ assert(!/background-color/g.test(bb3));
       </div>
       <div class="bb3"></div>
       <div></div>
-      <div class="bb4"></div>
+      <div class="bb4">
+        <div class="bb4a"></div>
+        <div class="bb4b"></div>
+        <div class="bb4c"></div>
+      </div>
       <div></div>
       <div></div>
     </div>
