@@ -1,24 +1,27 @@
 ---
-id: 5d822fd413a79914d39e98e5
-title: Part 29
+id: 5d822fd413a79914d39e98e6
+title: Part 30
 challengeType: 0
 ---
 
 # --description--
 
-You want the foreground buildings container to sit directly on top of the background buildings element. Give it a `width` and `height` of `100%`, set the `position` to `absolute`, and the `top` to `0`. This will make it the same size as the body and move the start of it to the top left corner.
+Nest six `div` elements within `foreground-buildings` and give them the classes of `fb1` through `fb6` in that order. "fb" stands for "foreground building". These will be six more buildings for the foreground.
 
 # --hints--
 
 test-text
 
 ```js
-const fb = code.match(/\.foreground-buildings\s*{[\s\S]+?[^}]}/g)[0];
+const fb = $('.foreground-buildings').children('div');
 assert(
-  $('.foreground-buildings').css('position') === 'absolute' &&
-    $('.foreground-buildings').css('top') === '0px' &&
-    /width\s*:\s*100%\s*(;|})/g.test(fb) &&
-    /height\s*:\s*100%\s*(;|})/g.test(fb)
+  fb.length === 6 &&
+    fb[0] === $('div.fb1')[0] &&
+    fb[1] === $('div.fb2')[0] &&
+    fb[2] === $('div.fb3')[0] &&
+    fb[3] === $('div.fb4')[0] &&
+    fb[4] === $('div.fb5')[0] &&
+    fb[5] === $('div.fb6')[0]
 );
 ```
 
@@ -106,6 +109,13 @@ assert(
         width: 11%;
         height: 58%;
         background-color: var(--building-color4);
+      }
+
+      .foreground-buildings {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
       }
     </style>
   </head>
@@ -244,7 +254,14 @@ assert(
       <div></div>
     </div>
 
-    <div class="foreground-buildings"></div>
+    <div class="foreground-buildings">
+      <div class="fb1"></div>
+      <div class="fb2"></div>
+      <div class="fb3"></div>
+      <div class="fb4"></div>
+      <div class="fb5"></div>
+      <div class="fb6"></div>
+    </div>
   </body>
 </html>
 ```
