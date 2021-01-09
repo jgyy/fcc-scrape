@@ -1,21 +1,24 @@
 ---
-id: 5d822fd413a79914d39e98e4
-title: Part 28
+id: 5d822fd413a79914d39e98e5
+title: Part 29
 challengeType: 0
 ---
 
 # --description--
 
-The background buildings are starting to look pretty good. Create a new `div` below the `background-buildings` element and give it a class of `foreground-buildings`. This will be another container for more buildings.
+You want the foreground buildings container to sit directly on top of the background buildings element. Give it a `width` and `height` of `100%`, set the `position` to `absolute`, and the `top` to `0`. This will make it the same size as the body and move the start of it to the top left corner.
 
 # --hints--
 
 test-text
 
 ```js
-const bodyDivs = $('#display-body').children('div');
+const fb = code.match(/\.foreground-buildings\s*{[\s\S]+?[^}]}/g)[0];
 assert(
-  bodyDivs.length === 2 && bodyDivs[1] === $('div.foreground-buildings')[0]
+  $('.foreground-buildings').css('position') === 'absolute' &&
+    $('.foreground-buildings').css('top') === '0px' &&
+    /width\s*:\s*100%\s*(;|})/g.test(fb) &&
+    /height\s*:\s*100%\s*(;|})/g.test(fb)
 );
 ```
 
@@ -124,6 +127,8 @@ assert(
       <div></div>
       <div></div>
     </div>
+
+    <div class="foreground-buildings"></div>
   </body>
 </html>
 ```
@@ -210,6 +215,13 @@ assert(
         width: 11%;
         height: 58%;
         background-color: var(--building-color4);
+      }
+
+      .foreground-buildings {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
       }
     </style>
   </head>
