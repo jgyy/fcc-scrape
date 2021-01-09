@@ -1,23 +1,12 @@
 ---
-id: 5d822fd413a79914d39e98fb
-title: Part 51
+id: 5d822fd413a79914d39e98fc
+title: Part 52
 challengeType: 0
 ---
 
 # --description--
 
-You can make an instant color change in a gradient by giving the transition zero space like this:
-
-```css
-gradient-type(
-  color1,
-  color1 50%,
-  color2 50%,
-  color2
-);
-```
-
-Here, the top half of the element will be `color1` and the bottom half will be `color2`. Add a `linear-gradient` to `bb2b` that uses `--building-color2` from `0%` to `6%` and `--window-color2` from `6%` to `9%`.
+You can see the hard color change at the top of the section. Change the gradient type from `linear-gradient` to `repeating-linear-gradient` for this section. This will make the four colors of your gradient repeat until it gets to the bottom of the element; giving you some stripes, and saving you from having to add a bunch of elements to create them.
 
 # --hints--
 
@@ -26,7 +15,7 @@ test-text
 ```js
 const bb2b = code.match(/\.bb2b\s*{[\s\S]+?[^}]}/g)[0];
 assert(
-  /background\s*:\s*linear-gradient\(\s*var\(\s*--building-color2\s*\)\s*(0%\s*,|,)\s*var\(\s*--building-color2\s*\)\s*6%\s*,\s*var\(\s*--window-color2\s*\)\s*6%\s*,\s*var\(\s*--window-color2\s*\)\s*9%\s*\)\s*(;|})/g.test(
+  /background\s*:\s*repeating-linear-gradient\(\s*var\(\s*--building-color2\s*\)\s*(0%\s*,|,)\s*var\(\s*--building-color2\s*\)\s*6%\s*,\s*var\(\s*--window-color2\s*\)\s*6%\s*,\s*var\(\s*--window-color2\s*\)\s*9%\s*\)\s*(;|})/g.test(
     bb2b
   )
 );
@@ -71,7 +60,7 @@ assert(
         position: absolute;
         top: 0;
       }
-      
+
       /* BACKGROUND BUILDINGS - "bb" stands for "background building" */
       .bb1 {
         width: 10%;
@@ -119,6 +108,12 @@ assert(
       .bb2b {
         width: 100%;
         height: 100%;
+        background: linear-gradient(
+            var(--building-color2),
+            var(--building-color2) 6%,
+            var(--window-color2) 6%,
+            var(--window-color2) 9%
+          );
       }
       
       .bb3 {
@@ -251,7 +246,7 @@ assert(
         position: absolute;
         top: 0;
       }
-
+      
       /* BACKGROUND BUILDINGS - "bb" stands for "background building" */
       .bb1 {
         width: 10%;
@@ -299,7 +294,7 @@ assert(
       .bb2b {
         width: 100%;
         height: 100%;
-        background: linear-gradient(
+        background: repeating-linear-gradient(
             var(--building-color2),
             var(--building-color2) 6%,
             var(--window-color2) 6%,
