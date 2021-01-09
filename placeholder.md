@@ -1,31 +1,23 @@
 ---
-id: 5d822fd413a79914d39e98d4
-title: Part 12
+id: 5d822fd413a79914d39e98d5
+title: Part 13
 challengeType: 0
 ---
 
 # --description--
 
-Give the parts of your building `width` and `height` properties with these values: `70%` and `10%` to `bb1a`, `80%` and `10%` to `bb1b`, `90%` and `10%` to `bb1c`, and `100%` and `70%` to `bb1d`. Remember that these percentages are relative to the parent and note that the heights will add up to 100% to fill the container vertically.
+Give your `bb1` element these style properties: `display: flex;`, `flex-direction: column;`, and `align-items: center;`. This will center the parts of the building using "flex" or "flexbox". You will learn about it in more detail on another project.
 
 # --hints--
 
 test-text
 
 ```js
-const bb1a = code.match(/\.bb1a\s*{[\s\S]+?[^}]}/g)[0];
-const bb1b = code.match(/\.bb1b\s*{[\s\S]+?[^}]}/g)[0];
-const bb1c = code.match(/\.bb1c\s*{[\s\S]+?[^}]}/g)[0];
-const bb1d = code.match(/\.bb1d\s*{[\s\S]+?[^}]}/g)[0];
+const bb1 = $('.bb1');
 assert(
-  /width\s*:\s*70%\s*(;|})/g.test(bb1a) &&
-    /height\s*:\s*10%\s*(;|})/g.test(bb1a) &&
-    /width\s*:\s*80%\s*(;|})/g.test(bb1b) &&
-    /height\s*:\s*10%\s*(;|})/g.test(bb1b) &&
-    /width\s*:\s*90%\s*(;|})/g.test(bb1c) &&
-    /height\s*:\s*10%\s*(;|})/g.test(bb1c) &&
-    /width\s*:\s*100%\s*(;|})/g.test(bb1d) &&
-    /height\s*:\s*70%\s*(;|})/g.test(bb1d)
+  bb1.css('display') === 'flex' &&
+    bb1.css('flex-direction') === 'column' &&
+    bb1.css('align-items') === 'center'
 );
 ```
 
@@ -57,6 +49,26 @@ assert(
 
       .bb1 {
         width: 10%;
+        height: 70%;
+      }
+
+      .bb1a {
+        width: 70%;
+        height: 10%;
+      }
+  
+      .bb1b {
+        width: 80%;
+        height: 10%;
+      }
+  
+      .bb1c {
+        width: 90%;
+        height: 10%;
+      }
+
+      .bb1d {
+        width: 100%;
         height: 70%;
       }
     </style>
@@ -102,6 +114,9 @@ assert(
       .bb1 {
         width: 10%;
         height: 70%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
       }
 
       .bb1a {
