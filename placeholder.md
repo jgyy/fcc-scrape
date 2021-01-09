@@ -1,24 +1,22 @@
 ---
-id: 5d822fd413a79914d39e98f1
-title: Part 41
+id: 5d822fd413a79914d39e98f2
+title: Part 42
 challengeType: 0
 ---
 
 # --description--
 
-You want to add the same gradient to the next two sections. But instead of doing that, create a new class called `bb1-window` and move the `height` and `background` properties and values from `bb1a` to the new class.
+Add the new `bb1-window` class to the `bb1a`, `bb1b`, and `bb1c` elements. This will apply the gradient to them.
 
 # --hints--
 
 test-text
 
 ```js
-const bb1wStyle = code.match(/\.bb1-window\s*{[\s\S]+?[^}]}/g)[0];
 assert(
-  /height\s*:\s*10%\s*(;|})/g.test(bb1wStyle) &&
-    /background\s*:\s*linear-gradient\(\s*var\(\s*--building-color1\s*\)\s*,\s*var\(\s*--window-color1\s*\)\s*\)\s*(;|})/g.test(
-      bb1wStyle
-    )
+  $('.bb1a.bb1-window').length === 1 &&
+    $('.bb1b.bb1-window').length === 1 &&
+    $('.bb1c.bb1-window').length === 1
 );
 ```
 
@@ -72,12 +70,7 @@ assert(
 
       .bb1a {
         width: 70%;
-        height: 10%;
         background-color: var(--building-color1);
-        background: linear-gradient(
-            var(--building-color1),
-            var(--window-color1)
-          );
       }
   
       .bb1b {
@@ -96,6 +89,14 @@ assert(
         width: 100%;
         height: 70%;
         background-color: var(--building-color1);
+      }
+
+      .bb1-window {
+        height: 10%;
+        background: linear-gradient(
+            var(--building-color1),
+            var(--window-color1)
+          );
       }
 
       .bb2 {
@@ -337,9 +338,9 @@ assert(
       <div></div>
       <div></div>
       <div class="bb1">
-        <div class="bb1a"></div>
-        <div class="bb1b"></div>
-        <div class="bb1c"></div>
+        <div class="bb1a bb1-window"></div>
+        <div class="bb1b bb1-window"></div>
+        <div class="bb1c bb1-window"></div>
         <div class="bb1d"></div>
       </div>
       <div class="bb2"></div>
