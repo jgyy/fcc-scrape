@@ -1,20 +1,40 @@
 ---
-id: 5d822fd413a79914d39e98fd
-title: Part 53
+id: 5d822fd413a79914d39e98fe
+title: Part 54
 challengeType: 0
 ---
 
 # --description--
 
-In the next few steps, you are going to use some tricks with CSS borders to turn the `bb2a` section into a triangle at the top of the building. First, remove the `background-color` from `bb2` since you don't need it anymore.
+Add these properties to `bb2a`:
+
+```css
+  margin: auto;
+  width: 5vw;
+  height: 5vw;
+  border-top: 1vw solid #000;
+  border-bottom: 1vw solid #000;
+  border-left: 1vw solid #999;
+  border-right: 1vw solid #999;
+```
+
+After you add these, you can see how a thick border on an element gives you some angles where two sides meet. You are going to use that bottom border as the top of the building.
 
 # --hints--
 
 test-text
 
 ```js
-const bb2 = code.match(/\.bb2\s*{[\s\S]+?[^}]}/g)[0];
-assert(!/background-color/g.test(bb2));
+const bb2a = code.match(/\.bb2a\s*{[\s\S]+?[^}]}/g)[0];
+assert(
+  /margin\s*:\s*auto\s*(;|})/g.test(bb2a) &&
+    /width\s*:\s*5vw\s*(;|})/g.test(bb2a) &&
+    /height\s*:\s*5vw\s*(;|})/g.test(bb2a) &&
+    /border-top\s*:\s*1vw\s+solid\s+#000\s*(;|})/g.test(bb2a) &&
+    /border-bottom\s*:\s*1vw\s+solid\s+#000\s*(;|})/g.test(bb2a) &&
+    /border-left\s*:\s*1vw\s+solid\s+#999\s*(;|})/g.test(bb2a) &&
+    /border-right\s*:\s*1vw\s+solid\s+#999\s*(;|})/g.test(bb2a)
+);
 ```
 
 # --seed--
@@ -98,7 +118,6 @@ assert(!/background-color/g.test(bb2));
       .bb2 {
         width: 10%;
         height: 50%;
-        background-color: var(--building-color2);
       }
 
       .bb2b {
@@ -284,6 +303,16 @@ assert(!/background-color/g.test(bb2));
       .bb2 {
         width: 10%;
         height: 50%;
+      }
+
+      .bb2a {
+        margin: auto;
+        width: 5vw;
+        height: 5vw;
+        border-top: 1vw solid #000;
+        border-bottom: 1vw solid #000;
+        border-left: 1vw solid #999;
+        border-right: 1vw solid #999;
       }
 
       .bb2b {
