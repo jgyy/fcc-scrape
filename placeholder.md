@@ -1,28 +1,23 @@
 ---
-id: 5d822fd413a79914d39e98db
-title: Part 19
+id: 5d822fd413a79914d39e98dc
+title: Part 20
 challengeType: 0
 ---
 
 # --description--
 
-Give the new buildings `width` and `height` properties of: `10%` and `50%` for `bb2`, `10%` and `55%` for `bb3`, and `11%` and `58%` for `bb4`. You will be using almost all percent based units and some Flexbox for this project, so everything will be completely responsive.
+The buildings are stacked on top of each other and running off the screen. Let's fix that. Add the properties `display: flex;`, `align-items: flex-end;`, and `justify-content: space-evenly;` to the `background-buildings` class. This will use Flexbox again to evenly space the buildings across the bottom of the element.
 
 # --hints--
 
 test-text
 
 ```js
-const bb2 = code.match(/\.bb2\s*{[\s\S]+?[^}]}/g)[0];
-const bb3 = code.match(/\.bb3\s*{[\s\S]+?[^}]}/g)[0];
-const bb4 = code.match(/\.bb4\s*{[\s\S]+?[^}]}/g)[0];
+const bb = $('.background-buildings');
 assert(
-  /width\s*:\s*10%\s*(;|})/g.test(bb2) &&
-    /height\s*:\s*50%\s*(;|})/g.test(bb2) &&
-    /width\s*:\s*10%\s*(;|})/g.test(bb3) &&
-    /height\s*:\s*55%\s*(;|})/g.test(bb3) &&
-    /width\s*:\s*11%\s*(;|})/g.test(bb4) &&
-    /height\s*:\s*58%\s*(;|})/g.test(bb4)
+  bb.css('display') === 'flex' &&
+    bb.css('align-items') === 'flex-end' &&
+    bb.css('justify-content') === 'space-evenly'
 );
 ```
 
@@ -84,6 +79,21 @@ assert(
         height: 70%;
         background-color: var(--building-color1);
       }
+
+      .bb2 {
+        width: 10%;
+        height: 50%;
+      }
+
+      .bb3 {
+        width: 10%;
+        height: 55%;
+      }
+
+      .bb4 {
+        width: 11%;
+        height: 58%;
+      }
     </style>
   </head>
 
@@ -125,6 +135,9 @@ assert(
       .background-buildings {
         width: 100%;
         height: 100%;
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-evenly;
       }
 
       .bb1 {
