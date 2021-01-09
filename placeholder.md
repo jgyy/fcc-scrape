@@ -1,19 +1,19 @@
 ---
-id: 5d822fd413a79914d39e991c
-title: Part 83
+id: 5d822fd413a79914d39e991d
+title: Part 84
 challengeType: 0
 ---
 
 # --description--
 
-Nest three `div` elements within `fb2b` and give them a class of `fb2-window`. These will be windows for this section of the building.
+Add your `window-wrap` class to `fb2b` to position the new window elements.
 
 # --hints--
 
 test-text
 
 ```js
-assert($('.fb2b').children('div.fb2-window').length === 3);
+assert($('.fb2b.window-wrap').length === 1);
 ```
 
 # --seed--
@@ -288,7 +288,11 @@ assert($('.fb2b').children('div.fb2-window').length === 3);
       </div>
       <div class="fb2">
         <div class="fb2a"></div>
-        <div class="fb2b"></div>
+        <div class="fb2b">
+          <div class="fb2-window"></div>
+          <div class="fb2-window"></div>
+          <div class="fb2-window"></div>
+        </div>
       </div>
       <div></div>
       <div class="fb3"></div>
@@ -572,7 +576,7 @@ assert($('.fb2b').children('div.fb2-window').length === 3);
       </div>
       <div class="fb2">
         <div class="fb2a"></div>
-        <div class="fb2b">
+        <div class="fb2b window-wrap">
           <div class="fb2-window"></div>
           <div class="fb2-window"></div>
           <div class="fb2-window"></div>
