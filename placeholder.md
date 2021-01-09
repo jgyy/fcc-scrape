@@ -1,19 +1,26 @@
 ---
-id: 5d822fd413a79914d39e990d
-title: Part 69
+id: 5d822fd413a79914d39e990e
+title: Part 70
 challengeType: 0
 ---
 
 # --description--
 
-Nest four new `div` elements within `bb4c`, give them all the class of `bb4-window`. These will be windows for this building.
+Give the `bb4-window` class a `width` of `18%`, a `height` of `90%`, and add your `--window-color4` variable as the `background-color`.
 
 # --hints--
 
 test-text
 
 ```js
-assert($('.bb4c').children('div.bb4-window').length === 4);
+const bb4Window = code.match(/\.bb4-window\s*{[\s\S]+?[^}]}/g)[0];
+assert(
+  /width\s*:\s*18%\s*(;|})/g.test(bb4Window) &&
+    /height\s*:\s*90%\s*(;|})/g.test(bb4Window) &&
+    /background-color\s*:\s*var\(\s*--window-color4\s*\)\s*(;|})/g.test(
+      bb4Window
+    )
+);
 ```
 
 # --seed--
@@ -217,7 +224,12 @@ assert($('.bb4c').children('div.bb4-window').length === 4);
       <div class="bb4 building-wrap">
         <div class="bb4a"></div>
         <div class="bb4b"></div>
-        <div class="bb4c"></div>
+        <div class="bb4c">
+          <div class="bb4-window"></div>
+          <div class="bb4-window"></div>
+          <div class="bb4-window"></div>
+          <div class="bb4-window"></div>
+        </div>
       </div>
       <div></div>
       <div></div>
@@ -375,6 +387,12 @@ assert($('.bb4c').children('div.bb4-window').length === 4);
         width: 100%;
         height: 85%;
         background-color: var(--building-color4);
+      }
+
+      .bb4-window {
+        width: 18%;
+        height: 90%;
+        background-color: var(--window-color4);
       }
 
       /* FOREGROUND BUILDINGS - "fb" stands for "foreground building" */
