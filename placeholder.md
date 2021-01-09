@@ -1,26 +1,19 @@
 ---
-id: 5d822fd413a79914d39e9912
-title: Part 74
+id: 5d822fd413a79914d39e9913
+title: Part 75
 challengeType: 0
 ---
 
 # --description--
 
-Give `fb1b` a `width` of `60%` and `height` of `10%`, and `fb1c` a `width` of `100%` and `height` of `80%`.
+Add the `building-wrap` class to the `fb1` element to center the sections.
 
 # --hints--
 
 test-text
 
 ```js
-const fb1b = code.match(/\.fb1b\s*{[\s\S]+?[^}]}/g)[0];
-const fb1c = code.match(/\.fb1c\s*{[\s\S]+?[^}]}/g)[0];
-assert(
-  /width\s*:\s*60%\s*(;|})/g.test(fb1b) &&
-    /height\s*:\s*10%\s*(;|})/g.test(fb1b) &&
-    /width\s*:\s*100%\s*(;|})/g.test(fb1c) &&
-    /height\s*:\s*80%\s*(;|})/g.test(fb1c)
-);
+assert($('.fb1.building-wrap').length === 1);
 ```
 
 # --seed--
@@ -181,6 +174,16 @@ assert(
         background-color: var(--building-color4);
       }
 
+      .fb1b {
+        width: 60%;
+        height: 10%;
+      }
+  
+      .fb1c {
+        width: 100%;
+        height: 80%;
+      }
+      
       .fb2 {
         width: 10%;
         height: 40%;
@@ -433,7 +436,7 @@ assert(
         width: 100%;
         height: 80%;
       }
-      
+
       .fb2 {
         width: 10%;
         height: 40%;
@@ -503,7 +506,7 @@ assert(
     <div class="foreground-buildings">
       <div></div>
       <div></div>
-      <div class="fb1">
+      <div class="fb1 building-wrap">
         <div class="fb1a"></div>
         <div class="fb1b"></div>
         <div class="fb1c"></div>
