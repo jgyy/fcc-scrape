@@ -1,23 +1,21 @@
 ---
-id: 5d822fd413a79914d39e98f7
-title: Part 47
+id: 5d822fd413a79914d39e98f8
+title: Part 48
 challengeType: 0
 ---
 
 # --description--
 
-Remove `orange` from the `bb1d` gradient and change the `80%` to `50%`. This will make `--building-color1` solid for the top half, and then transition to `--window-color1` for the bottom half.
+Nest two new `div` elements within `bb2`, give them the classes of `bb2a` and `bb2b`, in that order. These will be two sections for this building.
 
 # --hints--
 
 test-text
 
 ```js
-const bb1d = code.match(/\.bb1d\s*{[\s\S]+?[^}]}/g)[0];
+const bb2 = $('.bb2').children('div');
 assert(
-  /background\s*:\s*linear-gradient\(\s*var\(\s*--building-color1\s*\)\s*50%\s*,\s*var\(\s*--window-color1\s*\)\s*\)\s*(;|})/g.test(
-    bb1d
-  )
+  bb2.length === 2 && bb2[0] === $('.bb2a')[0] && bb2[1] === $('.bb2b')[0]
 );
 ```
 
@@ -85,8 +83,7 @@ assert(
         width: 100%;
         height: 70%;
         background: linear-gradient(
-            orange,
-            var(--building-color1) 80%,
+            var(--building-color1) 50%,
             var(--window-color1)
           );
       }
@@ -341,7 +338,10 @@ assert(
         <div class="bb1c bb1-window"></div>
         <div class="bb1d"></div>
       </div>
-      <div class="bb2"></div>
+      <div class="bb2">
+        <div class="bb2a"></div>
+        <div class="bb2b"></div>
+      </div>
       <div class="bb3"></div>
       <div></div>
       <div class="bb4"></div>
