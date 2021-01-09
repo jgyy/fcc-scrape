@@ -1,23 +1,19 @@
 ---
-id: 5d822fd413a79914d39e98cd
-title: Part 5
+id: 5d822fd413a79914d39e98ce
+title: Part 6
 challengeType: 0
 ---
 
 # --description--
 
-In CSS, you can target everything with an asterisk. Add a border to everything by using the `*` selector in your style area and giving it a `border` of `1px solid black`. This is a trick I like to use to help visualize where elements are and their size. You will remove this later.
+Also add a `box-sizing` of `border-box` to the everything. This will make it so the border you added doesn't add any size to your elements.
 
 # --hints--
 
 test-text
 
 ```js
-assert(
-  code.match(
-    /<style\s*>\s*\*\s*{\s*border\s*:\s*1px\s+solid\s+black\s*;?\s*}\s*<\/style\s*>/g
-  )
-);
+assert($('#display-body').css('box-sizing') === 'border-box');
 ```
 
 # --seed--
@@ -29,7 +25,11 @@ assert(
 <html>    
   <head>
     <title>freeCodeCamp Skyline Project</title>
-    <style></style>
+    <style>
+      * {
+        border: 1px solid black;
+      }
+    </style>
   </head>
 
   <body>
@@ -47,6 +47,7 @@ assert(
     <style>
       * {
         border: 1px solid black;
+        box-sizing: border-box;
       }
     </style>
   </head>
