@@ -1,25 +1,19 @@
 ---
-id: 5d822fd413a79914d39e991b
-title: Part 82
+id: 5d822fd413a79914d39e991c
+title: Part 83
 challengeType: 0
 ---
 
 # --description--
 
-Give `fb2a` a `width` of `100%` and `fb2b` a `width` of `100%` and `height` of `75%`.
+Nest three `div` elements within `fb2b` and give them a class of `fb2-window`. These will be windows for this section of the building.
 
 # --hints--
 
 test-text
 
 ```js
-const fb2a = code.match(/\.fb2a\s*{[\s\S]+?[^}]}/g)[0];
-const fb2b = code.match(/\.fb2b\s*{[\s\S]+?[^}]}/g)[0];
-assert(
-  /width\s*:\s*100%\s*(;|})/g.test(fb2a) &&
-    /width\s*:\s*100%\s*(;|})/g.test(fb2b) &&
-    /height\s*:\s*75%\s*(;|})/g.test(fb2b)
-);
+assert($('.fb2b').children('div.fb2-window').length === 3);
 ```
 
 # --seed--
@@ -213,6 +207,15 @@ assert(
         width: 10%;
         height: 40%;
         background-color: var(--building-color3);
+      }
+
+      .fb2a {
+        width: 100%;
+      }
+
+      .fb2b {
+        width: 100%;
+        height: 75%;
       }
 
       .fb3 {
@@ -569,7 +572,11 @@ assert(
       </div>
       <div class="fb2">
         <div class="fb2a"></div>
-        <div class="fb2b"></div>
+        <div class="fb2b">
+          <div class="fb2-window"></div>
+          <div class="fb2-window"></div>
+          <div class="fb2-window"></div>
+        </div>
       </div>
       <div></div>
       <div class="fb3"></div>
