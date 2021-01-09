@@ -1,25 +1,25 @@
 ---
-id: 5d822fd413a79914d39e98dd
-title: Part 21
+id: 5d822fd413a79914d39e98de
+title: Part 22
 challengeType: 0
 ---
 
 # --description--
 
-I don't like how spaced out the buildings are. Squeeze them together by adding two empty `div` elements to the top of the `background-buildings` element, two more at the bottom of it, and one more in between `bb3` and `bb4`. These will be added as things that are spaced evenly across the container, effectively moving the buildings closer to the center.
+Create a new variable by the other one called `--building-color2` and give it a value of `#66cc99`. Then set it as the `background-color` of `bb2`.
 
 # --hints--
 
 test-text
 
 ```js
-const bb = $('.background-buildings').children('div');
+const bb1style = code.match(/\.bb1\s*{[\s\S]+?[^}]}/g)[0];
+const bb2style = code.match(/\.bb2\s*{[\s\S]+?[^}]}/g)[0];
 assert(
-  bb.length === 9 &&
-    bb[2] === $('div.bb1')[0] &&
-    bb[3] === $('div.bb2')[0] &&
-    bb[4] === $('div.bb3')[0] &&
-    bb[6] === $('div.bb4')[0]
+  /--building-color2\s*:\s*#66cc99\s*(;|\s*})/g.test(bb1style) &&
+    /background-color\s*:\s*var\(\s*--building-color2\s*\)\s*(;|\s*})/g.test(
+      bb2style
+    )
 );
 ```
 
@@ -104,6 +104,8 @@ assert(
 
   <body>
     <div class="background-buildings">
+      <div></div>
+      <div></div>
       <div class="bb1">
         <div class="bb1a"></div>
         <div class="bb1b"></div>
@@ -112,7 +114,10 @@ assert(
       </div>
       <div class="bb2"></div>
       <div class="bb3"></div>
+      <div></div>
       <div class="bb4"></div>
+      <div></div>
+      <div></div>
     </div>
   </body>
 </html>
@@ -152,6 +157,7 @@ assert(
         flex-direction: column;
         align-items: center;
         --building-color1: #aa80ff;
+        --building-color2: #66cc99;
       }
 
       .bb1a {
@@ -181,6 +187,7 @@ assert(
       .bb2 {
         width: 10%;
         height: 50%;
+        background-color: var(--building-color2);
       }
 
       .bb3 {
