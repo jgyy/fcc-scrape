@@ -1,24 +1,19 @@
 ---
-id: 5d822fd413a79914d39e992b
-title: Part 98
+id: 5d822fd413a79914d39e992c
+title: Part 99
 challengeType: 0
 ---
 
 # --description--
 
-Add your `--building-color1` variable as value of the `background-color` property of `fb4b`. Then, remove the `background-color` from `fb4`.
+Nest six `div` elements within `fb4b` and give them all a class of `fb4-window`.
 
 # --hints--
 
 test-text
 
 ```js
-const fb4 = code.match(/\.fb4\s*{[\s\S]+?[^}]}/g)[0];
-const fb4b = code.match(/\.fb4b\s*{[\s\S]+?[^}]}/g)[0];
-assert(
-  !/background-color/g.test(fb4) &&
-    /background-color\s*:\s*var\(\s*--building-color1\s*\)\s*(;|})/g.test(fb4b)
-);
+assert($('.fb4b').children('div.fb4-window').length === 6);
 ```
 
 # --seed--
@@ -258,7 +253,6 @@ assert(
       .fb4 {
         width: 8%;
         height: 45%;
-        background-color: var(--building-color1);
         position: relative;
         left: 10%;
       }
@@ -266,6 +260,7 @@ assert(
       .fb4b {
         width: 100%;
         height: 89%;
+        background-color: var(--building-color1);
       }
       
       .fb5 {
@@ -674,7 +669,14 @@ assert(
       </div>
       <div class="fb4">
         <div class="fb4a"></div>
-        <div class="fb4b"></div>
+        <div class="fb4b">
+          <div class="fb4-window"></div>
+          <div class="fb4-window"></div>
+          <div class="fb4-window"></div>
+          <div class="fb4-window"></div>
+          <div class="fb4-window"></div>
+          <div class="fb4-window"></div>
+        </div>
       </div>
       <div class="fb5"></div>
       <div class="fb6"></div>
