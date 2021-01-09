@@ -1,26 +1,25 @@
 ---
-id: 5d822fd413a79914d39e9921
-title: Part 88
+id: 5d822fd413a79914d39e9922
+title: Part 89
 challengeType: 0
 ---
 
 # --description--
 
-For the next building, nest four `div` elements within `fb3` with classes of `fb3a`, `fb3b`, `fb3a` again, and `fb3b` again, in that order. This building will have four sections and the top two will be almost the same as the bottom two.
+Give the `fb3a` element a `width` of `80%` and `height` of `15%`. Then give the `fb3b` element a `width` of `100%` and `height` of `35%`.
 
 # --hints--
 
 test-text
 
 ```js
-const fb3 = $('.fb3').children('div');
-console.log(fb3);
+const fb3a = code.match(/\.fb3a\s*{[\s\S]+?[^}]}/g)[0];
+const fb3b = code.match(/\.fb3b\s*{[\s\S]+?[^}]}/g)[0];
 assert(
-  fb3.length === 4 &&
-    fb3[0] === $('div.fb3a')[0] &&
-    fb3[1] === $('div.fb3b')[0] &&
-    fb3[2] === $('div.fb3a')[1] &&
-    fb3[3] === $('div.fb3b')[1]
+  /width\s*:\s*80%\s*(;|})/g.test(fb3a) &&
+    /height\s*:\s*15%\s*(;|})/g.test(fb3a) &&
+    /width\s*:\s*100%\s*(;|})/g.test(fb3b) &&
+    /height\s*:\s*35%\s*(;|})/g.test(fb3b)
 );
 ```
 
@@ -312,7 +311,12 @@ assert(
         </div>
       </div>
       <div></div>
-      <div class="fb3"></div>
+      <div class="fb3">
+        <div class="fb3a"></div>
+        <div class="fb3b"></div>
+        <div class="fb3a"></div>
+        <div class="fb3b"></div>
+      </div>
       <div class="fb4"></div>
       <div class="fb5"></div>
       <div class="fb6"></div>
@@ -536,6 +540,16 @@ assert(
         width: 10%;
         height: 35%;
         background-color: var(--building-color1);
+      }
+
+      .fb3a {
+        width: 80%;
+        height: 15%;
+      }
+  
+      .fb3b {
+        width: 100%;
+        height: 35%;
       }
   
       .fb4 {
