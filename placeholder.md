@@ -1,19 +1,24 @@
 ---
-id: 5d822fd413a79914d39e9937
-title: Part 111
+id: 5d822fd413a79914d39e9938
+title: Part 112
 challengeType: 0
 ---
 
 # --description--
 
-Add `sky` as a second class to the `background-buildings` element. You are going to make a background for the skyline.
+Give the `sky` class a `radial-gradient`. Use `#ffcf33` from `0%` to `20%`, `#ffff66` at `21%`, and `#bbeeff` at `100%`. This will add circular gradient to the background that will be your sun.
 
 # --hints--
 
 test-text
 
 ```js
-assert($('.background-buildings.sky').length === 1);
+const sky = code.match(/\.sky\s*{[\s\S]+?[^}]}/g)[0];
+assert(
+  /background\s*:\s*radial-gradient\(\s*#ffcf33\s*(0%\s*,|,)\s*#ffcf33\s*20%\s*,\s*#ffff66\s*21%\s*,\s*#bbeeff\s*100%\s*\)\s*(;|})/g.test(
+    sky
+  )
+);
 ```
 
 # --seed--
@@ -318,7 +323,7 @@ assert($('.background-buildings.sky').length === 1);
   </head>
 
   <body>
-    <div class="background-buildings">
+    <div class="background-buildings sky">
       <div></div>
       <div></div>
       <div class="bb1 building-wrap">
@@ -443,6 +448,15 @@ assert($('.background-buildings.sky').length === 1);
         display: flex;
         align-items: center;
         justify-content: space-evenly;
+      }
+
+      .sky {
+        background: radial-gradient(
+            #ffcf33,
+            #ffcf33 20%,
+            #ffff66 21%,
+            #bbeeff 100%
+          );
       }
 
       /* BACKGROUND BUILDINGS - "bb" stands for "background building" */
