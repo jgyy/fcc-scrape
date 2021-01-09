@@ -1,20 +1,22 @@
 ---
-id: 5d822fd413a79914d39e9928
-title: Part 95
+id: 5d822fd413a79914d39e9929
+title: Part 96
 challengeType: 0
 ---
 
 # --description--
 
-I'm not thrilled about that black for the windows anymore. Change the `--window-color1` value to `#bb99ff`.
+Only three more building to go. Nest two new `div` elements within the `fb4` element and give them the classes of `fb4a` and `fb4b`, in that order. Remember that you sort of flipped the location of `fb4` and `fb5`, so it's the rightmost purple building you are working on now.
 
 # --hints--
 
 test-text
 
 ```js
-const root = code.match(/:root\s*{[\s\S]+?[^}]}/g)[0];
-assert(/--window-color1\s*:\s*#bb99ff\s*(;|})/g.test(root));
+const fb4 = $('.fb4').children('div');
+assert(
+  fb4.length === 2 && fb4[0] === $('div.fb4a')[0] && fb4[1] === $('div.fb4b')[0]
+);
 ```
 
 # --seed--
@@ -32,7 +34,7 @@ assert(/--window-color1\s*:\s*#bb99ff\s*(;|})/g.test(root));
         --building-color2: #66cc99;
         --building-color3: #cc6699;
         --building-color4: #538cc6;
-        --window-color1: black;
+        --window-color1: #bb99ff;
         --window-color2: #8cd9b3;
         --window-color3: #d98cb3;
         --window-color4: #8cb3d9;
@@ -655,7 +657,10 @@ assert(/--window-color1\s*:\s*#bb99ff\s*(;|})/g.test(root));
         <div class="fb3a"></div>
         <div class="fb3b"></div>
       </div>
-      <div class="fb4"></div>
+      <div class="fb4">
+        <div class="fb4a"></div>
+        <div class="fb4b"></div>
+      </div>
       <div class="fb5"></div>
       <div class="fb6"></div>
       <div></div>
