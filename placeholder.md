@@ -1,63 +1,51 @@
 ---
-id: 587d78b1367417b2b2512b0a
-title: Use a Retina Image for Higher Resolution Displays
-challengeType: 0
-videoUrl: 'https://scrimba.com/p/pzrPu4/cVZ4Rfp'
-forumTopicId: 301142
+id: bd7158d8c242eddfaeb5bd13
+title: Build a Personal Portfolio Webpage
+challengeType: 3
+forumTopicId: 301143
 ---
 
 # --description--
 
-With the increase of internet connected devices, their sizes and specifications vary, and the displays they use could be different externally and internally. Pixel density is an aspect that could be different on one device from others and this density is known as Pixel Per Inch(PPI) or Dots Per Inch(DPI). The most famous such display is the one known as a "Retina Display" on the latest Apple MacBook Pro notebooks, and recently iMac computers. Due to the difference in pixel density between a "Retina" and "Non-Retina" displays, some images that have not been made with a High-Resolution Display in mind could look "pixelated" when rendered on a High-Resolution display.
+**Objective:** Build a [CodePen.io](https://codepen.io) app that is functionally similar to this: <https://codepen.io/freeCodeCamp/full/zNBOYG>.
 
-The simplest way to make your images properly appear on High-Resolution Displays, such as the MacBook Pros "retina display" is to define their `width` and `height` values as only half of what the original file is. Here is an example of an image that is only using half of the original height and width:
+Fulfill the below [user stories](https://en.wikipedia.org/wiki/User_story) and get all of the tests to pass. Give it your own personal style.
 
-```html
-<style>
-  img { height: 250px; width: 250px; }
-</style>
-<img src="coolPic500x500" alt="A most excellent picture">
-```
+You can use HTML, JavaScript, and CSS to complete this project. Plain CSS is recommended because that is what the lessons have covered so far and you should get some practice with plain CSS. You can use Bootstrap or SASS if you choose. Additional technologies (just for example jQuery, React, Angular, or Vue) are not recommended for this project, and using them is at your own risk. Other projects will give you a chance to work with different technology stacks like React. We will accept and try to fix all issue reports that use the suggested technology stack for this project. Happy coding!
 
-# --instructions--
+**User Story #1:** My portfolio should have a welcome section with an id of `welcome-section`.
 
-Set the `width` and `height` of the `img` tag to half of their original values. In this case, both the original `height` and the original `width` are `200px`.
+**User Story #2:** The welcome section should have an `h1` element that contains text.
+
+**User Story #3:** My portfolio should have a projects section with an id of `projects`.
+
+**User Story #4:** The projects section should contain at least one element with a class of `project-tile` to hold a project.
+
+**User Story #5:** The projects section should contain at least one link to a project.
+
+**User Story #6:** My portfolio should have a navbar with an id of `navbar`.
+
+**User Story #7:** The navbar should contain at least one link that I can click on to navigate to different sections of the page.
+
+**User Story #8:** My portfolio should have a link with an id of `profile-link`, which opens my GitHub or FCC profile in a new tab.
+
+**User Story #9:** My portfolio should have at least one media query.
+
+**User Story #10:** The height of the welcome section should be equal to the height of the viewport.
+
+**User Story #11:** The navbar should always be at the top of the viewport.
+
+You can build your project by forking [this CodePen pen](https://codepen.io/freeCodeCamp/pen/MJjpwO). Or you can use this CDN link to run the tests in any environment you like: `https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js`
+
+Once you're done, submit the URL to your working project with all its tests passing.
 
 # --hints--
 
-Your `img` tag should have a `width` of 100 pixels.
-
-```js
-assert(document.querySelector('img').width === 100);
-```
-
-Your `img` tag should have a `height` of 100 pixels.
-
-```js
-assert(document.querySelector('img').height === 100);
-```
 
 # --seed--
-
-## --seed-contents--
-
-```html
-<style>
-
-</style>
-
-<img src="https://s3.amazonaws.com/freecodecamp/FCCStickers-CamperBot200x200.jpg" alt="freeCodeCamp sticker that says 'Because CamperBot Cares'">
-```
 
 # --solutions--
 
 ```html
-<style>
-  img { 
-    height: 100px; 
-    width: 100px; 
-  }
-</style>
-
-<img src="https://s3.amazonaws.com/freecodecamp/FCCStickers-CamperBot200x200.jpg" alt="freeCodeCamp sticker that says 'Because CamperBot Cares'">
+// solution required
 ```
