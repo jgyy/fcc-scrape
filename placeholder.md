@@ -1,76 +1,64 @@
 ---
-id: a77dbc43c33f39daa4429b4f
-title: Boo who
-challengeType: 5
-forumTopicId: 16000
+id: 5a661e0f1068aca922b3ef17
+title: Access an Array's Contents Using Bracket Notation
+challengeType: 1
+forumTopicId: 301149
 ---
 
 # --description--
 
-Check if a value is classified as a boolean primitive. Return true or false.
+The fundamental feature of any data structure is, of course, the ability to not only store data, but to be able to retrieve that data on command. So, now that we've learned how to create an array, let's begin to think about how we can access that array's information.
 
-Boolean primitives are true and false.
+When we define a simple array as seen below, there are 3 items in it:
+
+```js
+let ourArray = ["a", "b", "c"];
+```
+
+In an array, each array item has an <dfn>index</dfn>. This index doubles as the position of that item in the array, and how you reference it. However, it is important to note, that JavaScript arrays are <dfn>zero-indexed</dfn>, meaning that the first element of an array is actually at the ***zeroth*** position, not the first. In order to retrieve an element from an array we can enclose an index in brackets and append it to the end of an array, or more commonly, to a variable which references an array object. This is known as <dfn>bracket notation</dfn>. For example, if we want to retrieve the `"a"` from `ourArray` and assign it to a variable, we can do so with the following code:
+
+```js
+let ourVariable = ourArray[0];
+// ourVariable equals "a"
+```
+
+In addition to accessing the value associated with an index, you can also *set* an index to a value using the same notation:
+
+```js
+ourArray[1] = "not b anymore";
+// ourArray now equals ["a", "not b anymore", "c"];
+```
+
+Using bracket notation, we have now reset the item at index 1 from `"b"`, to `"not b anymore"`.
+
+# --instructions--
+
+In order to complete this challenge, set the 2nd position (index `1`) of `myArray` to anything you want, besides `"b"`.
 
 # --hints--
 
-`booWho(true)` should return true.
+`myArray[0]` should be equal to `"a"`
 
 ```js
-assert.strictEqual(booWho(true), true);
+assert.strictEqual(myArray[0], 'a');
 ```
 
-`booWho(false)` should return true.
+`myArray[1]` should not be equal to `"b"`
 
 ```js
-assert.strictEqual(booWho(false), true);
+assert.notStrictEqual(myArray[1], 'b');
 ```
 
-`booWho([1, 2, 3])` should return false.
+`myArray[2]` should be equal to `"c"`
 
 ```js
-assert.strictEqual(booWho([1, 2, 3]), false);
+assert.strictEqual(myArray[2], 'c');
 ```
 
-`booWho([].slice)` should return false.
+`myArray[3]` should be equal to `"d"`
 
 ```js
-assert.strictEqual(booWho([].slice), false);
-```
-
-`booWho({ "a": 1 })` should return false.
-
-```js
-assert.strictEqual(booWho({ a: 1 }), false);
-```
-
-`booWho(1)` should return false.
-
-```js
-assert.strictEqual(booWho(1), false);
-```
-
-`booWho(NaN)` should return false.
-
-```js
-assert.strictEqual(booWho(NaN), false);
-```
-
-`booWho("a")` should return false.
-
-```js
-assert.strictEqual(booWho('a'), false);
-```
-
-`booWho("true")` should return false.
-
-```js
-assert.strictEqual(booWho('true'), false);
-```
-
-`booWho("false")` should return false.
-
-```js
-assert.strictEqual(booWho('false'), false);
+assert.strictEqual(myArray[3], 'd');
 ```
 
 # --seed--
@@ -78,19 +66,16 @@ assert.strictEqual(booWho('false'), false);
 ## --seed-contents--
 
 ```js
-function booWho(bool) {
-  return bool;
-}
+let myArray = ["a", "b", "c", "d"];
+// Only change code below this line
 
-booWho(null);
+// Only change code above this line
+console.log(myArray);
 ```
 
 # --solutions--
 
 ```js
-function booWho(bool) {
-  return typeof bool === "boolean";
-}
-
-booWho(null);
+let myArray = ["a", "b", "c", "d"];
+myArray[1] = "e";
 ```
