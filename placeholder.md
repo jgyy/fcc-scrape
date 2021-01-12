@@ -1,52 +1,52 @@
 ---
-id: 56533eb9ac21ba0edf2244b3
-title: Convert Celsius to Fahrenheit
-challengeType: 1
-forumTopicId: 16806
+id: a302f7aae1aa3152a5b413bc
+title: Factorialize a Number
+challengeType: 5
+forumTopicId: 16013
 ---
 
 # --description--
 
-The algorithm to convert from Celsius to Fahrenheit is the temperature in Celsius times `9/5`, plus `32`.
+Return the factorial of the provided integer.
 
-You are given a variable `celsius` representing a temperature in Celsius. Use the variable `fahrenheit` already defined and assign it the Fahrenheit temperature equivalent to the given Celsius temperature. Use the algorithm mentioned above to help convert the Celsius temperature to Fahrenheit.
+If the integer is represented with the letter n, a factorial is the product of all positive integers less than or equal to n.
+
+Factorials are often represented with the shorthand notation `n!`
+
+For example: `5! = 1 * 2 * 3 * 4 * 5 = 120`
+
+Only integers greater than or equal to zero will be supplied to the function.
 
 # --hints--
 
-`convertToF(0)` should return a number
+`factorialize(5)` should return a number.
 
 ```js
-assert(typeof convertToF(0) === 'number');
+assert(typeof factorialize(5) === 'number');
 ```
 
-`convertToF(-30)` should return a value of `-22`
+`factorialize(5)` should return 120.
 
 ```js
-assert(convertToF(-30) === -22);
+assert(factorialize(5) === 120);
 ```
 
-`convertToF(-10)` should return a value of `14`
+`factorialize(10)` should return 3628800.
 
 ```js
-assert(convertToF(-10) === 14);
+assert(factorialize(10) === 3628800);
 ```
 
-`convertToF(0)` should return a value of `32`
+`factorialize(20)` should return 2432902008176640000.
 
 ```js
-assert(convertToF(0) === 32);
+assert(factorialize(20) === 2432902008176640000);
 ```
 
-`convertToF(20)` should return a value of `68`
+`factorialize(0)` should return 1.
 
 ```js
-assert(convertToF(20) === 68);
-```
-
-`convertToF(30)` should return a value of `86`
-
-```js
-assert(convertToF(30) === 86);
+assert(factorialize(0) === 1);
 ```
 
 # --seed--
@@ -54,22 +54,19 @@ assert(convertToF(30) === 86);
 ## --seed-contents--
 
 ```js
-function convertToF(celsius) {
-  let fahrenheit;
-  return fahrenheit;
+function factorialize(num) {
+  return num;
 }
 
-convertToF(30);
+factorialize(5);
 ```
 
 # --solutions--
 
 ```js
-function convertToF(celsius) {
-  let fahrenheit = celsius * 9/5 + 32;
-
-  return fahrenheit;
+function factorialize(num) {
+  return num < 1 ? 1 : num * factorialize(num - 1);
 }
 
-convertToF(30);
+factorialize(5);
 ```
