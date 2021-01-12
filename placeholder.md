@@ -1,92 +1,62 @@
 ---
-id: af2170cad53daa0770fabdea
-title: Mutations
+id: afcc8d540bea9ea2669306b6
+title: Repeat a String Repeat a String
 challengeType: 5
-forumTopicId: 16025
+forumTopicId: 16041
 ---
 
 # --description--
 
-Return true if the string in the first element of the array contains all of the letters of the string in the second element of the array.
-
-For example, `["hello", "Hello"]`, should return true because all of the letters in the second string are present in the first, ignoring case.
-
-The arguments `["hello", "hey"]` should return false because the string "hello" does not contain a "y".
-
-Lastly, `["Alien", "line"]`, should return true because all of the letters in "line" are present in "Alien".
+Repeat a given string `str` (first argument) for `num` times (second argument). Return an empty string if `num` is not a positive number. For the purpose of this challenge, do *not* use the built-in `.repeat()` method.
 
 # --hints--
 
-`mutation(["hello", "hey"])` should return false.
+`repeatStringNumTimes("*", 3)` should return `"***"`.
 
 ```js
-assert(mutation(['hello', 'hey']) === false);
+assert(repeatStringNumTimes('*', 3) === '***');
 ```
 
-`mutation(["hello", "Hello"])` should return true.
+`repeatStringNumTimes("abc", 3)` should return `"abcabcabc"`.
 
 ```js
-assert(mutation(['hello', 'Hello']) === true);
+assert(repeatStringNumTimes('abc', 3) === 'abcabcabc');
 ```
 
-`mutation(["zyxwvutsrqponmlkjihgfedcba", "qrstu"])` should return true.
+`repeatStringNumTimes("abc", 4)` should return `"abcabcabcabc"`.
 
 ```js
-assert(mutation(['zyxwvutsrqponmlkjihgfedcba', 'qrstu']) === true);
+assert(repeatStringNumTimes('abc', 4) === 'abcabcabcabc');
 ```
 
-`mutation(["Mary", "Army"])` should return true.
+`repeatStringNumTimes("abc", 1)` should return `"abc"`.
 
 ```js
-assert(mutation(['Mary', 'Army']) === true);
+assert(repeatStringNumTimes('abc', 1) === 'abc');
 ```
 
-`mutation(["Mary", "Aarmy"])` should return true.
+`repeatStringNumTimes("*", 8)` should return `"********"`.
 
 ```js
-assert(mutation(['Mary', 'Aarmy']) === true);
+assert(repeatStringNumTimes('*', 8) === '********');
 ```
 
-`mutation(["Alien", "line"])` should return true.
+`repeatStringNumTimes("abc", -2)` should return `""`.
 
 ```js
-assert(mutation(['Alien', 'line']) === true);
+assert(repeatStringNumTimes('abc', -2) === '');
 ```
 
-`mutation(["floor", "for"])` should return true.
+The built-in `repeat()` method should not be used.
 
 ```js
-assert(mutation(['floor', 'for']) === true);
+assert(!/\.repeat/g.test(code));
 ```
 
-`mutation(["hello", "neo"])` should return false.
+`repeatStringNumTimes("abc", 0)` should return `""`.
 
 ```js
-assert(mutation(['hello', 'neo']) === false);
-```
-
-`mutation(["voodoo", "no"])` should return false.
-
-```js
-assert(mutation(['voodoo', 'no']) === false);
-```
-
-`mutation(["ate", "date"]` should return false.
-
-```js
-assert(mutation(['ate', 'date']) === false);
-```
-
-`mutation(["Tiger", "Zebra"])` should return false.
-
-```js
-assert(mutation(['Tiger', 'Zebra']) === false);
-```
-
-`mutation(["Noel", "Ole"])` should return true.
-
-```js
-assert(mutation(['Noel', 'Ole']) === true);
+assert(repeatStringNumTimes('abc', 0) === '');
 ```
 
 # --seed--
@@ -94,23 +64,20 @@ assert(mutation(['Noel', 'Ole']) === true);
 ## --seed-contents--
 
 ```js
-function mutation(arr) {
-  return arr;
+function repeatStringNumTimes(str, num) {
+  return str;
 }
 
-mutation(["hello", "hey"]);
+repeatStringNumTimes("abc", 3);
 ```
 
 # --solutions--
 
 ```js
-function mutation(arr) {
-  let hash = Object.create(null);
-
-  arr[0].toLowerCase().split('').forEach(c => hash[c] = true);
-
-  return !arr[1].toLowerCase().split('').filter(c => !hash[c]).length;
+function repeatStringNumTimes(str, num) {
+  if (num < 1) return '';
+  return num === 1 ? str : str + repeatStringNumTimes(str, num-1);
 }
 
-mutation(["hello", "hey"]);
+repeatStringNumTimes("abc", 3);
 ```
