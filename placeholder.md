@@ -1,65 +1,35 @@
 ---
-id: a26cbbe9ad8655a977e1ceb5
-title: Find the Longest Word in a String
+id: a6e40f1041b06c996f7b2406
+title: Finders Keepers
 challengeType: 5
-forumTopicId: 16015
+forumTopicId: 16016
 ---
 
 # --description--
 
-Return the length of the longest word in the provided sentence.
-
-Your response should be a number.
+Create a function that looks through an array `arr` and returns the first element in it that passes a 'truth test'. This means that given an element `x`, the 'truth test' is passed if `func(x)` is `true`. If no element passes the test, return `undefined`.
 
 # --hints--
 
-`findLongestWordLength("The quick brown fox jumped over the lazy dog")` should return a number.
+`findElement([1, 3, 5, 8, 9, 10], function(num) { return num % 2 === 0; })` should return 8.
 
 ```js
-assert(
-  typeof findLongestWordLength(
-    'The quick brown fox jumped over the lazy dog'
-  ) === 'number'
+assert.strictEqual(
+  findElement([1, 3, 5, 8, 9, 10], function (num) {
+    return num % 2 === 0;
+  }),
+  8
 );
 ```
 
-`findLongestWordLength("The quick brown fox jumped over the lazy dog")` should return 6.
+`findElement([1, 3, 5, 9], function(num) { return num % 2 === 0; })` should return undefined.
 
 ```js
-assert(
-  findLongestWordLength('The quick brown fox jumped over the lazy dog') === 6
-);
-```
-
-`findLongestWordLength("May the force be with you")` should return 5.
-
-```js
-assert(findLongestWordLength('May the force be with you') === 5);
-```
-
-`findLongestWordLength("Google do a barrel roll")` should return 6.
-
-```js
-assert(findLongestWordLength('Google do a barrel roll') === 6);
-```
-
-`findLongestWordLength("What is the average airspeed velocity of an unladen swallow")` should return 8.
-
-```js
-assert(
-  findLongestWordLength(
-    'What is the average airspeed velocity of an unladen swallow'
-  ) === 8
-);
-```
-
-`findLongestWordLength("What if we try a super-long word such as otorhinolaryngology")` should return 19.
-
-```js
-assert(
-  findLongestWordLength(
-    'What if we try a super-long word such as otorhinolaryngology'
-  ) === 19
+assert.strictEqual(
+  findElement([1, 3, 5, 9], function (num) {
+    return num % 2 === 0;
+  }),
+  undefined
 );
 ```
 
@@ -68,19 +38,20 @@ assert(
 ## --seed-contents--
 
 ```js
-function findLongestWordLength(str) {
-  return str.length;
+function findElement(arr, func) {
+  let num = 0;
+  return num;
 }
 
-findLongestWordLength("The quick brown fox jumped over the lazy dog");
+findElement([1, 2, 3, 4], num => num % 2 === 0);
 ```
 
 # --solutions--
 
 ```js
-function findLongestWordLength(str) {
-  return str.split(' ').sort((a, b) => b.length - a.length)[0].length;
+function findElement(arr, func) {
+  return arr.filter(func)[0];
 }
 
-findLongestWordLength("The quick brown fox jumped over the lazy dog");
+findElement([1, 2, 3, 4], num => num % 2 === 0);
 ```
