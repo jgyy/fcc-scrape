@@ -1,71 +1,42 @@
 ---
-id: a789b3483989747d63b0e427
-title: Return Largest Numbers in Arrays
+id: a202eed8fc186c8434cb6d61
+title: Reverse a String
 challengeType: 5
-forumTopicId: 16042
+forumTopicId: 16043
 ---
 
 # --description--
 
-Return an array consisting of the largest number from each provided sub-array. For simplicity, the provided array will contain exactly 4 sub-arrays.
+Reverse the provided string.
 
-Remember, you can iterate through an array with a simple for loop, and access each member with array syntax `arr[i]`.
+You may need to turn the string into an array before you can reverse it.
+
+Your result must be a string.
 
 # --hints--
 
-`largestOfFour([[4, 5, 1, 3], [13, 27, 18, 26], [32, 35, 37, 39], [1000, 1001, 857, 1]])` should return an array.
+`reverseString("hello")` should return a string.
 
 ```js
-assert(
-  largestOfFour([
-    [4, 5, 1, 3],
-    [13, 27, 18, 26],
-    [32, 35, 37, 39],
-    [1000, 1001, 857, 1]
-  ]).constructor === Array
-);
+assert(typeof reverseString('hello') === 'string');
 ```
 
-`largestOfFour([[13, 27, 18, 26], [4, 5, 1, 3], [32, 35, 37, 39], [1000, 1001, 857, 1]])` should return `[27, 5, 39, 1001]`.
+`reverseString("hello")` should become `"olleh"`.
 
 ```js
-assert.deepEqual(
-  largestOfFour([
-    [13, 27, 18, 26],
-    [4, 5, 1, 3],
-    [32, 35, 37, 39],
-    [1000, 1001, 857, 1]
-  ]),
-  [27, 5, 39, 1001]
-);
+assert(reverseString('hello') === 'olleh');
 ```
 
-`largestOfFour([[4, 9, 1, 3], [13, 35, 18, 26], [32, 35, 97, 39], [1000000, 1001, 857, 1]])` should return `[9, 35, 97, 1000000]`.
+`reverseString("Howdy")` should become `"ydwoH"`.
 
 ```js
-assert.deepEqual(
-  largestOfFour([
-    [4, 9, 1, 3],
-    [13, 35, 18, 26],
-    [32, 35, 97, 39],
-    [1000000, 1001, 857, 1]
-  ]),
-  [9, 35, 97, 1000000]
-);
+assert(reverseString('Howdy') === 'ydwoH');
 ```
 
-`largestOfFour([[17, 23, 25, 12], [25, 7, 34, 48], [4, -10, 18, 21], [-72, -3, -17, -10]])` should return `[25, 48, 21, -3]`.
+`reverseString("Greetings from Earth")` should return `"htraE morf sgniteerG"`.
 
 ```js
-assert.deepEqual(
-  largestOfFour([
-    [17, 23, 25, 12],
-    [25, 7, 34, 48],
-    [4, -10, 18, 21],
-    [-72, -3, -17, -10]
-  ]),
-  [25, 48, 21, -3]
-);
+assert(reverseString('Greetings from Earth') === 'htraE morf sgniteerG');
 ```
 
 # --seed--
@@ -73,19 +44,19 @@ assert.deepEqual(
 ## --seed-contents--
 
 ```js
-function largestOfFour(arr) {
-  return arr;
+function reverseString(str) {
+  return str;
 }
 
-largestOfFour([[4, 5, 1, 3], [13, 27, 18, 26], [32, 35, 37, 39], [1000, 1001, 857, 1]]);
+reverseString("hello");
 ```
 
 # --solutions--
 
 ```js
-function largestOfFour(arr) {
-  return arr.map(subArr => Math.max.apply(null, subArr));
+function reverseString(str) {
+  return str.split('').reverse().join('');
 }
 
-largestOfFour([[4, 5, 1, 3], [13, 27, 18, 26], [32, 35, 37, 39], [1000, 1001, 857, 1]]);
+reverseString("hello");
 ```
