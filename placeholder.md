@@ -1,36 +1,92 @@
 ---
-id: a6e40f1041b06c996f7b2406
-title: Finders Keepers
+id: af2170cad53daa0770fabdea
+title: Mutations
 challengeType: 5
-forumTopicId: 16016
+forumTopicId: 16025
 ---
 
 # --description--
 
-Create a function that looks through an array `arr` and returns the first element in it that passes a 'truth test'. This means that given an element `x`, the 'truth test' is passed if `func(x)` is `true`. If no element passes the test, return `undefined`.
+Return true if the string in the first element of the array contains all of the letters of the string in the second element of the array.
+
+For example, `["hello", "Hello"]`, should return true because all of the letters in the second string are present in the first, ignoring case.
+
+The arguments `["hello", "hey"]` should return false because the string "hello" does not contain a "y".
+
+Lastly, `["Alien", "line"]`, should return true because all of the letters in "line" are present in "Alien".
 
 # --hints--
 
-`findElement([1, 3, 5, 8, 9, 10], function(num) { return num % 2 === 0; })` should return 8.
+`mutation(["hello", "hey"])` should return false.
 
 ```js
-assert.strictEqual(
-  findElement([1, 3, 5, 8, 9, 10], function (num) {
-    return num % 2 === 0;
-  }),
-  8
-);
+assert(mutation(['hello', 'hey']) === false);
 ```
 
-`findElement([1, 3, 5, 9], function(num) { return num % 2 === 0; })` should return undefined.
+`mutation(["hello", "Hello"])` should return true.
 
 ```js
-assert.strictEqual(
-  findElement([1, 3, 5, 9], function (num) {
-    return num % 2 === 0;
-  }),
-  undefined
-);
+assert(mutation(['hello', 'Hello']) === true);
+```
+
+`mutation(["zyxwvutsrqponmlkjihgfedcba", "qrstu"])` should return true.
+
+```js
+assert(mutation(['zyxwvutsrqponmlkjihgfedcba', 'qrstu']) === true);
+```
+
+`mutation(["Mary", "Army"])` should return true.
+
+```js
+assert(mutation(['Mary', 'Army']) === true);
+```
+
+`mutation(["Mary", "Aarmy"])` should return true.
+
+```js
+assert(mutation(['Mary', 'Aarmy']) === true);
+```
+
+`mutation(["Alien", "line"])` should return true.
+
+```js
+assert(mutation(['Alien', 'line']) === true);
+```
+
+`mutation(["floor", "for"])` should return true.
+
+```js
+assert(mutation(['floor', 'for']) === true);
+```
+
+`mutation(["hello", "neo"])` should return false.
+
+```js
+assert(mutation(['hello', 'neo']) === false);
+```
+
+`mutation(["voodoo", "no"])` should return false.
+
+```js
+assert(mutation(['voodoo', 'no']) === false);
+```
+
+`mutation(["ate", "date"]` should return false.
+
+```js
+assert(mutation(['ate', 'date']) === false);
+```
+
+`mutation(["Tiger", "Zebra"])` should return false.
+
+```js
+assert(mutation(['Tiger', 'Zebra']) === false);
+```
+
+`mutation(["Noel", "Ole"])` should return true.
+
+```js
+assert(mutation(['Noel', 'Ole']) === true);
 ```
 
 # --seed--
@@ -38,20 +94,23 @@ assert.strictEqual(
 ## --seed-contents--
 
 ```js
-function findElement(arr, func) {
-  let num = 0;
-  return num;
+function mutation(arr) {
+  return arr;
 }
 
-findElement([1, 2, 3, 4], num => num % 2 === 0);
+mutation(["hello", "hey"]);
 ```
 
 # --solutions--
 
 ```js
-function findElement(arr, func) {
-  return arr.filter(func)[0];
+function mutation(arr) {
+  let hash = Object.create(null);
+
+  arr[0].toLowerCase().split('').forEach(c => hash[c] = true);
+
+  return !arr[1].toLowerCase().split('').filter(c => !hash[c]).length;
 }
 
-findElement([1, 2, 3, 4], num => num % 2 === 0);
+mutation(["hello", "hey"]);
 ```
