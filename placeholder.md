@@ -1,42 +1,66 @@
 ---
-id: adf08ec01beb4f99fc7a68f2
-title: Falsy Bouncer
+id: a26cbbe9ad8655a977e1ceb5
+title: Find the Longest Word in a String
 challengeType: 5
-forumTopicId: 16014
+forumTopicId: 16015
 ---
 
 # --description--
 
-Remove all falsy values from an array.
+Return the length of the longest word in the provided sentence.
 
-Falsy values in JavaScript are `false`, `null`, `0`, `""`, `undefined`, and `NaN`.
-
-Hint: Try converting each value to a Boolean.
+Your response should be a number.
 
 # --hints--
 
-`bouncer([7, "ate", "", false, 9])` should return `[7, "ate", 9]`.
+`findLongestWordLength("The quick brown fox jumped over the lazy dog")` should return a number.
 
 ```js
-assert.deepEqual(bouncer([7, 'ate', '', false, 9]), [7, 'ate', 9]);
+assert(
+  typeof findLongestWordLength(
+    'The quick brown fox jumped over the lazy dog'
+  ) === 'number'
+);
 ```
 
-`bouncer(["a", "b", "c"])` should return `["a", "b", "c"]`.
+`findLongestWordLength("The quick brown fox jumped over the lazy dog")` should return 6.
 
 ```js
-assert.deepEqual(bouncer(['a', 'b', 'c']), ['a', 'b', 'c']);
+assert(
+  findLongestWordLength('The quick brown fox jumped over the lazy dog') === 6
+);
 ```
 
-`bouncer([false, null, 0, NaN, undefined, ""])` should return `[]`.
+`findLongestWordLength("May the force be with you")` should return 5.
 
 ```js
-assert.deepEqual(bouncer([false, null, 0, NaN, undefined, '']), []);
+assert(findLongestWordLength('May the force be with you') === 5);
 ```
 
-`bouncer([null, NaN, 1, 2, undefined])` should return `[1, 2]`.
+`findLongestWordLength("Google do a barrel roll")` should return 6.
 
 ```js
-assert.deepEqual(bouncer([null, NaN, 1, 2, undefined]), [1, 2]);
+assert(findLongestWordLength('Google do a barrel roll') === 6);
+```
+
+`findLongestWordLength("What is the average airspeed velocity of an unladen swallow")` should return 8.
+
+```js
+assert(
+  findLongestWordLength(
+    'What is the average airspeed velocity of an unladen swallow'
+  ) === 8
+);
+```
+
+`findLongestWordLength("What if we try a super-long word such as otorhinolaryngology")` should return 19.
+
+```js
+assert(
+  findLongestWordLength(
+    'What if we try a super-long word such as otorhinolaryngology'
+  ) === 19
+);
 ```
 
 # --seed--
@@ -44,19 +68,19 @@ assert.deepEqual(bouncer([null, NaN, 1, 2, undefined]), [1, 2]);
 ## --seed-contents--
 
 ```js
-function bouncer(arr) {
-  return arr;
+function findLongestWordLength(str) {
+  return str.length;
 }
 
-bouncer([7, "ate", "", false, 9]);
+findLongestWordLength("The quick brown fox jumped over the lazy dog");
 ```
 
 # --solutions--
 
 ```js
-function bouncer(arr) {
-  return arr.filter(e => e);
+function findLongestWordLength(str) {
+  return str.split(' ').sort((a, b) => b.length - a.length)[0].length;
 }
 
-bouncer([7, "ate", "", false, 9]);
+findLongestWordLength("The quick brown fox jumped over the lazy dog");
 ```
