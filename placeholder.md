@@ -1,92 +1,52 @@
 ---
-id: acda2fb1324d9b0fa741e6b5
-title: Confirm the Ending
-challengeType: 5
-forumTopicId: 16006
+id: 56533eb9ac21ba0edf2244b3
+title: Convert Celsius to Fahrenheit
+challengeType: 1
+forumTopicId: 16806
 ---
 
 # --description--
 
-Check if a string (first argument, `str`) ends with the given target string (second argument, `target`).
+The algorithm to convert from Celsius to Fahrenheit is the temperature in Celsius times `9/5`, plus `32`.
 
-This challenge *can* be solved with the `.endsWith()` method, which was introduced in ES2015. But for the purpose of this challenge, we would like you to use one of the JavaScript substring methods instead.
+You are given a variable `celsius` representing a temperature in Celsius. Use the variable `fahrenheit` already defined and assign it the Fahrenheit temperature equivalent to the given Celsius temperature. Use the algorithm mentioned above to help convert the Celsius temperature to Fahrenheit.
 
 # --hints--
 
-`confirmEnding("Bastian", "n")` should return true.
+`convertToF(0)` should return a number
 
 ```js
-assert(confirmEnding('Bastian', 'n') === true);
+assert(typeof convertToF(0) === 'number');
 ```
 
-`confirmEnding("Congratulation", "on")` should return true.
+`convertToF(-30)` should return a value of `-22`
 
 ```js
-assert(confirmEnding('Congratulation', 'on') === true);
+assert(convertToF(-30) === -22);
 ```
 
-`confirmEnding("Connor", "n")` should return false.
+`convertToF(-10)` should return a value of `14`
 
 ```js
-assert(confirmEnding('Connor', 'n') === false);
+assert(convertToF(-10) === 14);
 ```
 
-`confirmEnding("Walking on water and developing software from a specification are easy if both are frozen", "specification")` should return false.
+`convertToF(0)` should return a value of `32`
 
 ```js
-assert(
-  confirmEnding(
-    'Walking on water and developing software from a specification are easy if both are frozen',
-    'specification'
-  ) === false
-);
+assert(convertToF(0) === 32);
 ```
 
-`confirmEnding("He has to give me a new name", "name")` should return true.
+`convertToF(20)` should return a value of `68`
 
 ```js
-assert(confirmEnding('He has to give me a new name', 'name') === true);
+assert(convertToF(20) === 68);
 ```
 
-`confirmEnding("Open sesame", "same")` should return true.
+`convertToF(30)` should return a value of `86`
 
 ```js
-assert(confirmEnding('Open sesame', 'same') === true);
-```
-
-`confirmEnding("Open sesame", "sage")` should return false.
-
-```js
-assert(confirmEnding('Open sesame', 'sage') === false);
-```
-
-`confirmEnding("Open sesame", "game")` should return false.
-
-```js
-assert(confirmEnding('Open sesame', 'game') === false);
-```
-
-`confirmEnding("If you want to save our world, you must hurry. We dont know how much longer we can withstand the nothing", "mountain")` should return false.
-
-```js
-assert(
-  confirmEnding(
-    'If you want to save our world, you must hurry. We dont know how much longer we can withstand the nothing',
-    'mountain'
-  ) === false
-);
-```
-
-`confirmEnding("Abstraction", "action")` should return true.
-
-```js
-assert(confirmEnding('Abstraction', 'action') === true);
-```
-
-Your code should not use the built-in method `.endsWith()` to solve the challenge.
-
-```js
-assert(!/\.endsWith\(.*?\)\s*?;?/.test(code) && !/\['endsWith'\]/.test(code));
+assert(convertToF(30) === 86);
 ```
 
 # --seed--
@@ -94,19 +54,22 @@ assert(!/\.endsWith\(.*?\)\s*?;?/.test(code) && !/\['endsWith'\]/.test(code));
 ## --seed-contents--
 
 ```js
-function confirmEnding(str, target) {
-  return str;
+function convertToF(celsius) {
+  let fahrenheit;
+  return fahrenheit;
 }
 
-confirmEnding("Bastian", "n");
+convertToF(30);
 ```
 
 # --solutions--
 
 ```js
-function confirmEnding(str, target) {
-  return str.substring(str.length - target.length) === target;
+function convertToF(celsius) {
+  let fahrenheit = celsius * 9/5 + 32;
+
+  return fahrenheit;
 }
 
-confirmEnding("Bastian", "n");
+convertToF(30);
 ```
