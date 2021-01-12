@@ -1,64 +1,83 @@
 ---
-id: 5a661e0f1068aca922b3ef17
-title: Access an Array's Contents Using Bracket Notation
-challengeType: 1
-forumTopicId: 301149
+id: a9bd25c716030ec90084d8a1
+title: Chunky Monkey
+challengeType: 5
+forumTopicId: 16005
 ---
 
 # --description--
 
-The fundamental feature of any data structure is, of course, the ability to not only store data, but to be able to retrieve that data on command. So, now that we've learned how to create an array, let's begin to think about how we can access that array's information.
-
-When we define a simple array as seen below, there are 3 items in it:
-
-```js
-let ourArray = ["a", "b", "c"];
-```
-
-In an array, each array item has an <dfn>index</dfn>. This index doubles as the position of that item in the array, and how you reference it. However, it is important to note, that JavaScript arrays are <dfn>zero-indexed</dfn>, meaning that the first element of an array is actually at the ***zeroth*** position, not the first. In order to retrieve an element from an array we can enclose an index in brackets and append it to the end of an array, or more commonly, to a variable which references an array object. This is known as <dfn>bracket notation</dfn>. For example, if we want to retrieve the `"a"` from `ourArray` and assign it to a variable, we can do so with the following code:
-
-```js
-let ourVariable = ourArray[0];
-// ourVariable equals "a"
-```
-
-In addition to accessing the value associated with an index, you can also *set* an index to a value using the same notation:
-
-```js
-ourArray[1] = "not b anymore";
-// ourArray now equals ["a", "not b anymore", "c"];
-```
-
-Using bracket notation, we have now reset the item at index 1 from `"b"`, to `"not b anymore"`.
-
-# --instructions--
-
-In order to complete this challenge, set the 2nd position (index `1`) of `myArray` to anything you want, besides `"b"`.
+Write a function that splits an array (first argument) into groups the length of `size` (second argument) and returns them as a two-dimensional array.
 
 # --hints--
 
-`myArray[0]` should be equal to `"a"`
+`chunkArrayInGroups(["a", "b", "c", "d"], 2)` should return `[["a", "b"], ["c", "d"]]`.
 
 ```js
-assert.strictEqual(myArray[0], 'a');
+assert.deepEqual(chunkArrayInGroups(['a', 'b', 'c', 'd'], 2), [
+  ['a', 'b'],
+  ['c', 'd']
+]);
 ```
 
-`myArray[1]` should not be equal to `"b"`
+`chunkArrayInGroups([0, 1, 2, 3, 4, 5], 3)` should return `[[0, 1, 2], [3, 4, 5]]`.
 
 ```js
-assert.notStrictEqual(myArray[1], 'b');
+assert.deepEqual(chunkArrayInGroups([0, 1, 2, 3, 4, 5], 3), [
+  [0, 1, 2],
+  [3, 4, 5]
+]);
 ```
 
-`myArray[2]` should be equal to `"c"`
+`chunkArrayInGroups([0, 1, 2, 3, 4, 5], 2)` should return `[[0, 1], [2, 3], [4, 5]]`.
 
 ```js
-assert.strictEqual(myArray[2], 'c');
+assert.deepEqual(chunkArrayInGroups([0, 1, 2, 3, 4, 5], 2), [
+  [0, 1],
+  [2, 3],
+  [4, 5]
+]);
 ```
 
-`myArray[3]` should be equal to `"d"`
+`chunkArrayInGroups([0, 1, 2, 3, 4, 5], 4)` should return `[[0, 1, 2, 3], [4, 5]]`.
 
 ```js
-assert.strictEqual(myArray[3], 'd');
+assert.deepEqual(chunkArrayInGroups([0, 1, 2, 3, 4, 5], 4), [
+  [0, 1, 2, 3],
+  [4, 5]
+]);
+```
+
+`chunkArrayInGroups([0, 1, 2, 3, 4, 5, 6], 3)` should return `[[0, 1, 2], [3, 4, 5], [6]]`.
+
+```js
+assert.deepEqual(chunkArrayInGroups([0, 1, 2, 3, 4, 5, 6], 3), [
+  [0, 1, 2],
+  [3, 4, 5],
+  [6]
+]);
+```
+
+`chunkArrayInGroups([0, 1, 2, 3, 4, 5, 6, 7, 8], 4)` should return `[[0, 1, 2, 3], [4, 5, 6, 7], [8]]`.
+
+```js
+assert.deepEqual(chunkArrayInGroups([0, 1, 2, 3, 4, 5, 6, 7, 8], 4), [
+  [0, 1, 2, 3],
+  [4, 5, 6, 7],
+  [8]
+]);
+```
+
+`chunkArrayInGroups([0, 1, 2, 3, 4, 5, 6, 7, 8], 2)` should return `[[0, 1], [2, 3], [4, 5], [6, 7], [8]]`.
+
+```js
+assert.deepEqual(chunkArrayInGroups([0, 1, 2, 3, 4, 5, 6, 7, 8], 2), [
+  [0, 1],
+  [2, 3],
+  [4, 5],
+  [6, 7],
+  [8]
+]);
 ```
 
 # --seed--
@@ -66,16 +85,25 @@ assert.strictEqual(myArray[3], 'd');
 ## --seed-contents--
 
 ```js
-let myArray = ["a", "b", "c", "d"];
-// Only change code below this line
+function chunkArrayInGroups(arr, size) {
+  return arr;
+}
 
-// Only change code above this line
-console.log(myArray);
+chunkArrayInGroups(["a", "b", "c", "d"], 2);
 ```
 
 # --solutions--
 
 ```js
-let myArray = ["a", "b", "c", "d"];
-myArray[1] = "e";
+function chunkArrayInGroups(arr, size) {
+  let out = [];
+
+  for (let i = 0; i < arr.length; i += size) {
+    out.push(arr.slice(i, i + size));
+  }
+
+  return out;
+}
+
+chunkArrayInGroups(["a", "b", "c", "d"], 2);
 ```
