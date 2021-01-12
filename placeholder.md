@@ -1,97 +1,63 @@
 ---
-id: 579e2a2c335b9d72dd32e05c
-title: Slice and Splice
+id: ab6137d4e35944e21037b769
+title: Title Case a Sentence
 challengeType: 5
-forumTopicId: 301148
+forumTopicId: 16088
 ---
 
 # --description--
 
-You are given two arrays and an index.
+Return the provided string with the first letter of each word capitalized. Make sure the rest of the word is in lower case.
 
-Copy each element of the first array into the second array, in order.
-
-Begin inserting elements at index `n` of the second array.
-
-Return the resulting array. The input arrays should remain the same after the function runs.
+For the purpose of this exercise, you should also capitalize connecting words like "the" and "of".
 
 # --hints--
 
-`frankenSplice([1, 2, 3], [4, 5], 1)` should return `[4, 1, 2, 3, 5]`.
+`titleCase("I'm a little tea pot")` should return a string.
 
 ```js
-assert.deepEqual(frankenSplice([1, 2, 3], [4, 5], 1), [4, 1, 2, 3, 5]);
+assert(typeof titleCase("I'm a little tea pot") === 'string');
 ```
 
-`frankenSplice([1, 2], ["a", "b"], 1)` should return `["a", 1, 2, "b"]`.
+`titleCase("I'm a little tea pot")` should return `I'm A Little Tea Pot`.
 
 ```js
-assert.deepEqual(frankenSplice(testArr1, testArr2, 1), ['a', 1, 2, 'b']);
+assert(titleCase("I'm a little tea pot") === "I'm A Little Tea Pot");
 ```
 
-`frankenSplice(["claw", "tentacle"], ["head", "shoulders", "knees", "toes"], 2)` should return `["head", "shoulders", "claw", "tentacle", "knees", "toes"]`.
+`titleCase("sHoRt AnD sToUt")` should return `Short And Stout`.
 
 ```js
-assert.deepEqual(
-  frankenSplice(
-    ['claw', 'tentacle'],
-    ['head', 'shoulders', 'knees', 'toes'],
-    2
-  ),
-  ['head', 'shoulders', 'claw', 'tentacle', 'knees', 'toes']
+assert(titleCase('sHoRt AnD sToUt') === 'Short And Stout');
+```
+
+`titleCase("HERE IS MY HANDLE HERE IS MY SPOUT")` should return `Here Is My Handle Here Is My Spout`.
+
+```js
+assert(
+  titleCase('HERE IS MY HANDLE HERE IS MY SPOUT') ===
+    'Here Is My Handle Here Is My Spout'
 );
-```
-
-All elements from the first array should be added to the second array in their original order.
-
-```js
-assert.deepEqual(frankenSplice([1, 2, 3, 4], [], 0), [1, 2, 3, 4]);
-```
-
-The first array should remain the same after the function runs.
-
-```js
-frankenSplice(testArr1, testArr2, 1);
-assert.deepEqual(testArr1, [1, 2]);
-```
-
-The second array should remain the same after the function runs.
-
-```js
-frankenSplice(testArr1, testArr2, 1);
-assert.deepEqual(testArr2, ['a', 'b']);
 ```
 
 # --seed--
 
-## --after-user-code--
-
-```js
-let testArr1 = [1, 2];
-let testArr2 = ["a", "b"];
-```
-
 ## --seed-contents--
 
 ```js
-function frankenSplice(arr1, arr2, n) {
-  return arr2;
+function titleCase(str) {
+  return str;
 }
 
-frankenSplice([1, 2, 3], [4, 5, 6], 1);
+titleCase("I'm a little tea pot");
 ```
 
 # --solutions--
 
 ```js
-function frankenSplice(arr1, arr2, n) {
-  // It's alive. It's alive!
-  let result = arr2.slice();
-  for (let i = 0; i < arr1.length; i++) {
-    result.splice(n+i, 0, arr1[i]);
-  }
-  return result;
+function titleCase(str) {
+  return str.split(' ').map(word => word.charAt(0).toUpperCase() + word.substring(1).toLowerCase()).join(' ');
 }
 
-frankenSplice([1, 2, 3], [4, 5], 1);
+titleCase("I'm a little tea pot");
 ```
