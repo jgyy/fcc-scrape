@@ -1,52 +1,42 @@
 ---
-id: a302f7aae1aa3152a5b413bc
-title: Factorialize a Number
+id: adf08ec01beb4f99fc7a68f2
+title: Falsy Bouncer
 challengeType: 5
-forumTopicId: 16013
+forumTopicId: 16014
 ---
 
 # --description--
 
-Return the factorial of the provided integer.
+Remove all falsy values from an array.
 
-If the integer is represented with the letter n, a factorial is the product of all positive integers less than or equal to n.
+Falsy values in JavaScript are `false`, `null`, `0`, `""`, `undefined`, and `NaN`.
 
-Factorials are often represented with the shorthand notation `n!`
-
-For example: `5! = 1 * 2 * 3 * 4 * 5 = 120`
-
-Only integers greater than or equal to zero will be supplied to the function.
+Hint: Try converting each value to a Boolean.
 
 # --hints--
 
-`factorialize(5)` should return a number.
+`bouncer([7, "ate", "", false, 9])` should return `[7, "ate", 9]`.
 
 ```js
-assert(typeof factorialize(5) === 'number');
+assert.deepEqual(bouncer([7, 'ate', '', false, 9]), [7, 'ate', 9]);
 ```
 
-`factorialize(5)` should return 120.
+`bouncer(["a", "b", "c"])` should return `["a", "b", "c"]`.
 
 ```js
-assert(factorialize(5) === 120);
+assert.deepEqual(bouncer(['a', 'b', 'c']), ['a', 'b', 'c']);
 ```
 
-`factorialize(10)` should return 3628800.
+`bouncer([false, null, 0, NaN, undefined, ""])` should return `[]`.
 
 ```js
-assert(factorialize(10) === 3628800);
+assert.deepEqual(bouncer([false, null, 0, NaN, undefined, '']), []);
 ```
 
-`factorialize(20)` should return 2432902008176640000.
+`bouncer([null, NaN, 1, 2, undefined])` should return `[1, 2]`.
 
 ```js
-assert(factorialize(20) === 2432902008176640000);
-```
-
-`factorialize(0)` should return 1.
-
-```js
-assert(factorialize(0) === 1);
+assert.deepEqual(bouncer([null, NaN, 1, 2, undefined]), [1, 2]);
 ```
 
 # --seed--
@@ -54,19 +44,19 @@ assert(factorialize(0) === 1);
 ## --seed-contents--
 
 ```js
-function factorialize(num) {
-  return num;
+function bouncer(arr) {
+  return arr;
 }
 
-factorialize(5);
+bouncer([7, "ate", "", false, 9]);
 ```
 
 # --solutions--
 
 ```js
-function factorialize(num) {
-  return num < 1 ? 1 : num * factorialize(num - 1);
+function bouncer(arr) {
+  return arr.filter(e => e);
 }
 
-factorialize(5);
+bouncer([7, "ate", "", false, 9]);
 ```
