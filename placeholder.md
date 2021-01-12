@@ -1,83 +1,92 @@
 ---
-id: a9bd25c716030ec90084d8a1
-title: Chunky Monkey
+id: acda2fb1324d9b0fa741e6b5
+title: Confirm the Ending
 challengeType: 5
-forumTopicId: 16005
+forumTopicId: 16006
 ---
 
 # --description--
 
-Write a function that splits an array (first argument) into groups the length of `size` (second argument) and returns them as a two-dimensional array.
+Check if a string (first argument, `str`) ends with the given target string (second argument, `target`).
+
+This challenge *can* be solved with the `.endsWith()` method, which was introduced in ES2015. But for the purpose of this challenge, we would like you to use one of the JavaScript substring methods instead.
 
 # --hints--
 
-`chunkArrayInGroups(["a", "b", "c", "d"], 2)` should return `[["a", "b"], ["c", "d"]]`.
+`confirmEnding("Bastian", "n")` should return true.
 
 ```js
-assert.deepEqual(chunkArrayInGroups(['a', 'b', 'c', 'd'], 2), [
-  ['a', 'b'],
-  ['c', 'd']
-]);
+assert(confirmEnding('Bastian', 'n') === true);
 ```
 
-`chunkArrayInGroups([0, 1, 2, 3, 4, 5], 3)` should return `[[0, 1, 2], [3, 4, 5]]`.
+`confirmEnding("Congratulation", "on")` should return true.
 
 ```js
-assert.deepEqual(chunkArrayInGroups([0, 1, 2, 3, 4, 5], 3), [
-  [0, 1, 2],
-  [3, 4, 5]
-]);
+assert(confirmEnding('Congratulation', 'on') === true);
 ```
 
-`chunkArrayInGroups([0, 1, 2, 3, 4, 5], 2)` should return `[[0, 1], [2, 3], [4, 5]]`.
+`confirmEnding("Connor", "n")` should return false.
 
 ```js
-assert.deepEqual(chunkArrayInGroups([0, 1, 2, 3, 4, 5], 2), [
-  [0, 1],
-  [2, 3],
-  [4, 5]
-]);
+assert(confirmEnding('Connor', 'n') === false);
 ```
 
-`chunkArrayInGroups([0, 1, 2, 3, 4, 5], 4)` should return `[[0, 1, 2, 3], [4, 5]]`.
+`confirmEnding("Walking on water and developing software from a specification are easy if both are frozen", "specification")` should return false.
 
 ```js
-assert.deepEqual(chunkArrayInGroups([0, 1, 2, 3, 4, 5], 4), [
-  [0, 1, 2, 3],
-  [4, 5]
-]);
+assert(
+  confirmEnding(
+    'Walking on water and developing software from a specification are easy if both are frozen',
+    'specification'
+  ) === false
+);
 ```
 
-`chunkArrayInGroups([0, 1, 2, 3, 4, 5, 6], 3)` should return `[[0, 1, 2], [3, 4, 5], [6]]`.
+`confirmEnding("He has to give me a new name", "name")` should return true.
 
 ```js
-assert.deepEqual(chunkArrayInGroups([0, 1, 2, 3, 4, 5, 6], 3), [
-  [0, 1, 2],
-  [3, 4, 5],
-  [6]
-]);
+assert(confirmEnding('He has to give me a new name', 'name') === true);
 ```
 
-`chunkArrayInGroups([0, 1, 2, 3, 4, 5, 6, 7, 8], 4)` should return `[[0, 1, 2, 3], [4, 5, 6, 7], [8]]`.
+`confirmEnding("Open sesame", "same")` should return true.
 
 ```js
-assert.deepEqual(chunkArrayInGroups([0, 1, 2, 3, 4, 5, 6, 7, 8], 4), [
-  [0, 1, 2, 3],
-  [4, 5, 6, 7],
-  [8]
-]);
+assert(confirmEnding('Open sesame', 'same') === true);
 ```
 
-`chunkArrayInGroups([0, 1, 2, 3, 4, 5, 6, 7, 8], 2)` should return `[[0, 1], [2, 3], [4, 5], [6, 7], [8]]`.
+`confirmEnding("Open sesame", "sage")` should return false.
 
 ```js
-assert.deepEqual(chunkArrayInGroups([0, 1, 2, 3, 4, 5, 6, 7, 8], 2), [
-  [0, 1],
-  [2, 3],
-  [4, 5],
-  [6, 7],
-  [8]
-]);
+assert(confirmEnding('Open sesame', 'sage') === false);
+```
+
+`confirmEnding("Open sesame", "game")` should return false.
+
+```js
+assert(confirmEnding('Open sesame', 'game') === false);
+```
+
+`confirmEnding("If you want to save our world, you must hurry. We dont know how much longer we can withstand the nothing", "mountain")` should return false.
+
+```js
+assert(
+  confirmEnding(
+    'If you want to save our world, you must hurry. We dont know how much longer we can withstand the nothing',
+    'mountain'
+  ) === false
+);
+```
+
+`confirmEnding("Abstraction", "action")` should return true.
+
+```js
+assert(confirmEnding('Abstraction', 'action') === true);
+```
+
+Your code should not use the built-in method `.endsWith()` to solve the challenge.
+
+```js
+assert(!/\.endsWith\(.*?\)\s*?;?/.test(code) && !/\['endsWith'\]/.test(code));
 ```
 
 # --seed--
@@ -85,25 +94,19 @@ assert.deepEqual(chunkArrayInGroups([0, 1, 2, 3, 4, 5, 6, 7, 8], 2), [
 ## --seed-contents--
 
 ```js
-function chunkArrayInGroups(arr, size) {
-  return arr;
+function confirmEnding(str, target) {
+  return str;
 }
 
-chunkArrayInGroups(["a", "b", "c", "d"], 2);
+confirmEnding("Bastian", "n");
 ```
 
 # --solutions--
 
 ```js
-function chunkArrayInGroups(arr, size) {
-  let out = [];
-
-  for (let i = 0; i < arr.length; i += size) {
-    out.push(arr.slice(i, i + size));
-  }
-
-  return out;
+function confirmEnding(str, target) {
+  return str.substring(str.length - target.length) === target;
 }
 
-chunkArrayInGroups(["a", "b", "c", "d"], 2);
+confirmEnding("Bastian", "n");
 ```
