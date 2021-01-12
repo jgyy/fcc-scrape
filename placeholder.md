@@ -1,62 +1,97 @@
 ---
-id: a202eed8fc186c8434cb6d61
-title: Reverse a String
+id: 579e2a2c335b9d72dd32e05c
+title: Slice and Splice
 challengeType: 5
-forumTopicId: 16043
+forumTopicId: 301148
 ---
 
 # --description--
 
-Reverse the provided string.
+You are given two arrays and an index.
 
-You may need to turn the string into an array before you can reverse it.
+Copy each element of the first array into the second array, in order.
 
-Your result must be a string.
+Begin inserting elements at index `n` of the second array.
+
+Return the resulting array. The input arrays should remain the same after the function runs.
 
 # --hints--
 
-`reverseString("hello")` should return a string.
+`frankenSplice([1, 2, 3], [4, 5], 1)` should return `[4, 1, 2, 3, 5]`.
 
 ```js
-assert(typeof reverseString('hello') === 'string');
+assert.deepEqual(frankenSplice([1, 2, 3], [4, 5], 1), [4, 1, 2, 3, 5]);
 ```
 
-`reverseString("hello")` should become `"olleh"`.
+`frankenSplice([1, 2], ["a", "b"], 1)` should return `["a", 1, 2, "b"]`.
 
 ```js
-assert(reverseString('hello') === 'olleh');
+assert.deepEqual(frankenSplice(testArr1, testArr2, 1), ['a', 1, 2, 'b']);
 ```
 
-`reverseString("Howdy")` should become `"ydwoH"`.
+`frankenSplice(["claw", "tentacle"], ["head", "shoulders", "knees", "toes"], 2)` should return `["head", "shoulders", "claw", "tentacle", "knees", "toes"]`.
 
 ```js
-assert(reverseString('Howdy') === 'ydwoH');
+assert.deepEqual(
+  frankenSplice(
+    ['claw', 'tentacle'],
+    ['head', 'shoulders', 'knees', 'toes'],
+    2
+  ),
+  ['head', 'shoulders', 'claw', 'tentacle', 'knees', 'toes']
+);
 ```
 
-`reverseString("Greetings from Earth")` should return `"htraE morf sgniteerG"`.
+All elements from the first array should be added to the second array in their original order.
 
 ```js
-assert(reverseString('Greetings from Earth') === 'htraE morf sgniteerG');
+assert.deepEqual(frankenSplice([1, 2, 3, 4], [], 0), [1, 2, 3, 4]);
+```
+
+The first array should remain the same after the function runs.
+
+```js
+frankenSplice(testArr1, testArr2, 1);
+assert.deepEqual(testArr1, [1, 2]);
+```
+
+The second array should remain the same after the function runs.
+
+```js
+frankenSplice(testArr1, testArr2, 1);
+assert.deepEqual(testArr2, ['a', 'b']);
 ```
 
 # --seed--
 
+## --after-user-code--
+
+```js
+let testArr1 = [1, 2];
+let testArr2 = ["a", "b"];
+```
+
 ## --seed-contents--
 
 ```js
-function reverseString(str) {
-  return str;
+function frankenSplice(arr1, arr2, n) {
+  return arr2;
 }
 
-reverseString("hello");
+frankenSplice([1, 2, 3], [4, 5, 6], 1);
 ```
 
 # --solutions--
 
 ```js
-function reverseString(str) {
-  return str.split('').reverse().join('');
+function frankenSplice(arr1, arr2, n) {
+  // It's alive. It's alive!
+  let result = arr2.slice();
+  for (let i = 0; i < arr1.length; i++) {
+    result.splice(n+i, 0, arr1[i]);
+  }
+  return result;
 }
 
-reverseString("hello");
+frankenSplice([1, 2, 3], [4, 5], 1);
 ```
