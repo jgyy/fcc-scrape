@@ -1,62 +1,71 @@
 ---
-id: afcc8d540bea9ea2669306b6
-title: Repeat a String Repeat a String
+id: a789b3483989747d63b0e427
+title: Return Largest Numbers in Arrays
 challengeType: 5
-forumTopicId: 16041
+forumTopicId: 16042
 ---
 
 # --description--
 
-Repeat a given string `str` (first argument) for `num` times (second argument). Return an empty string if `num` is not a positive number. For the purpose of this challenge, do *not* use the built-in `.repeat()` method.
+Return an array consisting of the largest number from each provided sub-array. For simplicity, the provided array will contain exactly 4 sub-arrays.
+
+Remember, you can iterate through an array with a simple for loop, and access each member with array syntax `arr[i]`.
 
 # --hints--
 
-`repeatStringNumTimes("*", 3)` should return `"***"`.
+`largestOfFour([[4, 5, 1, 3], [13, 27, 18, 26], [32, 35, 37, 39], [1000, 1001, 857, 1]])` should return an array.
 
 ```js
-assert(repeatStringNumTimes('*', 3) === '***');
+assert(
+  largestOfFour([
+    [4, 5, 1, 3],
+    [13, 27, 18, 26],
+    [32, 35, 37, 39],
+    [1000, 1001, 857, 1]
+  ]).constructor === Array
+);
 ```
 
-`repeatStringNumTimes("abc", 3)` should return `"abcabcabc"`.
+`largestOfFour([[13, 27, 18, 26], [4, 5, 1, 3], [32, 35, 37, 39], [1000, 1001, 857, 1]])` should return `[27, 5, 39, 1001]`.
 
 ```js
-assert(repeatStringNumTimes('abc', 3) === 'abcabcabc');
+assert.deepEqual(
+  largestOfFour([
+    [13, 27, 18, 26],
+    [4, 5, 1, 3],
+    [32, 35, 37, 39],
+    [1000, 1001, 857, 1]
+  ]),
+  [27, 5, 39, 1001]
+);
 ```
 
-`repeatStringNumTimes("abc", 4)` should return `"abcabcabcabc"`.
+`largestOfFour([[4, 9, 1, 3], [13, 35, 18, 26], [32, 35, 97, 39], [1000000, 1001, 857, 1]])` should return `[9, 35, 97, 1000000]`.
 
 ```js
-assert(repeatStringNumTimes('abc', 4) === 'abcabcabcabc');
+assert.deepEqual(
+  largestOfFour([
+    [4, 9, 1, 3],
+    [13, 35, 18, 26],
+    [32, 35, 97, 39],
+    [1000000, 1001, 857, 1]
+  ]),
+  [9, 35, 97, 1000000]
+);
 ```
 
-`repeatStringNumTimes("abc", 1)` should return `"abc"`.
+`largestOfFour([[17, 23, 25, 12], [25, 7, 34, 48], [4, -10, 18, 21], [-72, -3, -17, -10]])` should return `[25, 48, 21, -3]`.
 
 ```js
-assert(repeatStringNumTimes('abc', 1) === 'abc');
-```
-
-`repeatStringNumTimes("*", 8)` should return `"********"`.
-
-```js
-assert(repeatStringNumTimes('*', 8) === '********');
-```
-
-`repeatStringNumTimes("abc", -2)` should return `""`.
-
-```js
-assert(repeatStringNumTimes('abc', -2) === '');
-```
-
-The built-in `repeat()` method should not be used.
-
-```js
-assert(!/\.repeat/g.test(code));
-```
-
-`repeatStringNumTimes("abc", 0)` should return `""`.
-
-```js
-assert(repeatStringNumTimes('abc', 0) === '');
+assert.deepEqual(
+  largestOfFour([
+    [17, 23, 25, 12],
+    [25, 7, 34, 48],
+    [4, -10, 18, 21],
+    [-72, -3, -17, -10]
+  ]),
+  [25, 48, 21, -3]
+);
 ```
 
 # --seed--
@@ -64,20 +73,19 @@ assert(repeatStringNumTimes('abc', 0) === '');
 ## --seed-contents--
 
 ```js
-function repeatStringNumTimes(str, num) {
-  return str;
+function largestOfFour(arr) {
+  return arr;
 }
 
-repeatStringNumTimes("abc", 3);
+largestOfFour([[4, 5, 1, 3], [13, 27, 18, 26], [32, 35, 37, 39], [1000, 1001, 857, 1]]);
 ```
 
 # --solutions--
 
 ```js
-function repeatStringNumTimes(str, num) {
-  if (num < 1) return '';
-  return num === 1 ? str : str + repeatStringNumTimes(str, num-1);
+function largestOfFour(arr) {
+  return arr.map(subArr => Math.max.apply(null, subArr));
 }
 
-repeatStringNumTimes("abc", 3);
+largestOfFour([[4, 5, 1, 3], [13, 27, 18, 26], [32, 35, 37, 39], [1000, 1001, 857, 1]]);
 ```
