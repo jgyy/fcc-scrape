@@ -1,43 +1,66 @@
 ---
-id: ab6137d4e35944e21037b769
-title: Title Case a Sentence
+id: ac6993d51946422351508a41
+title: Truncate a String
 challengeType: 5
-forumTopicId: 16088
+forumTopicId: 16089
 ---
 
 # --description--
 
-Return the provided string with the first letter of each word capitalized. Make sure the rest of the word is in lower case.
-
-For the purpose of this exercise, you should also capitalize connecting words like "the" and "of".
+Truncate a string (first argument) if it is longer than the given maximum string length (second argument). Return the truncated string with a `...` ending.
 
 # --hints--
 
-`titleCase("I'm a little tea pot")` should return a string.
-
-```js
-assert(typeof titleCase("I'm a little tea pot") === 'string');
-```
-
-`titleCase("I'm a little tea pot")` should return `I'm A Little Tea Pot`.
-
-```js
-assert(titleCase("I'm a little tea pot") === "I'm A Little Tea Pot");
-```
-
-`titleCase("sHoRt AnD sToUt")` should return `Short And Stout`.
-
-```js
-assert(titleCase('sHoRt AnD sToUt') === 'Short And Stout');
-```
-
-`titleCase("HERE IS MY HANDLE HERE IS MY SPOUT")` should return `Here Is My Handle Here Is My Spout`.
+`truncateString("A-tisket a-tasket A green and yellow basket", 8)` should return "A-tisket...".
 
 ```js
 assert(
-  titleCase('HERE IS MY HANDLE HERE IS MY SPOUT') ===
-    'Here Is My Handle Here Is My Spout'
+  truncateString('A-tisket a-tasket A green and yellow basket', 8) ===
+    'A-tisket...'
 );
+```
+
+`truncateString("Peter Piper picked a peck of pickled peppers", 11)` should return "Peter Piper...".
+
+```js
+assert(
+  truncateString('Peter Piper picked a peck of pickled peppers', 11) ===
+    'Peter Piper...'
+);
+```
+
+`truncateString("A-tisket a-tasket A green and yellow basket", "A-tisket a-tasket A green and yellow basket".length)` should return "A-tisket a-tasket A green and yellow basket".
+
+```js
+assert(
+  truncateString(
+    'A-tisket a-tasket A green and yellow basket',
+    'A-tisket a-tasket A green and yellow basket'.length
+  ) === 'A-tisket a-tasket A green and yellow basket'
+);
+```
+
+`truncateString("A-tisket a-tasket A green and yellow basket", "A-tisket a-tasket A green and yellow basket".length + 2)` should return "A-tisket a-tasket A green and yellow basket".
+
+```js
+assert(
+  truncateString(
+    'A-tisket a-tasket A green and yellow basket',
+    'A-tisket a-tasket A green and yellow basket'.length + 2
+  ) === 'A-tisket a-tasket A green and yellow basket'
+);
+```
+
+`truncateString("A-", 1)` should return "A...".
+
+```js
+assert(truncateString('A-', 1) === 'A...');
+```
+
+`truncateString("Absolutely Longer", 2)` should return "Ab...".
+
+```js
+assert(truncateString('Absolutely Longer', 2) === 'Ab...');
 ```
 
 # --seed--
@@ -45,19 +68,23 @@ assert(
 ## --seed-contents--
 
 ```js
-function titleCase(str) {
+function truncateString(str, num) {
   return str;
 }
 
-titleCase("I'm a little tea pot");
+truncateString("A-tisket a-tasket A green and yellow basket", 8);
 ```
 
 # --solutions--
 
 ```js
-function titleCase(str) {
-  return str.split(' ').map(word => word.charAt(0).toUpperCase() + word.substring(1).toLowerCase()).join(' ');
+function truncateString(str, num) {
+  if (num >= str.length) {
+    return str;
+  }
+
+  return str.slice(0, num) + '...';
 }
 
-titleCase("I'm a little tea pot");
+truncateString("A-tisket a-tasket A green and yellow basket", 8);
 ```
