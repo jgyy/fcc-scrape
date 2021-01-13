@@ -1,13 +1,15 @@
 ---
-id: 5d65f2c62012114c7d7c57eb
-title: Part 18
+id: 5d65f4cd2012114c7d7c57ec
+title: Part 19
 challengeType: 0
-dashedName: part-18
+dashedName: part-19
 ---
 
 # --description--
 
-Similar to the `goStore` function, create a `goCave` function that prints "Going to cave." to the console.
+Also, create a `fightDragon` function that prints "Fighting dragon." to the console.
+
+When you are finished, you can test out your program in the browser.
 
 # --hints--
 
@@ -15,9 +17,9 @@ See description above for instructions.
 
 ```js
 assert(
-  goCave
+  fightDragon
     .toString()
-    .match(/console\.log\(\s*[\"\'\`]Going to cave\.?[\"\'\`]\s*\)/)
+    .match(/console\.log\(\s*[\"\'\`]Fighting dragon\.?[\"\'\`]\s*\)/)
 );
 ```
 
@@ -128,6 +130,10 @@ function goStore() {
   console.log("Going to store.")
 }
 
+function goCave() {
+  console.log("Going to cave.");
+}
+
 </script>
 ```
 
@@ -165,6 +171,10 @@ function goStore() {
 
 function goCave() {
   console.log("Going to cave.");
+}
+
+function fightDragon() {
+  console.log("Fighting dragon.");
 }
 </script>
 ```
