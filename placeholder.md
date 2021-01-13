@@ -1,20 +1,26 @@
 ---
-id: 5d5aae1207f328a948d398d5
-title: Part 9
+id: 5d5ab57f07f328a948d398d6
+title: Part 10
 challengeType: 0
-dashedName: part-9
+dashedName: part-10
 ---
 
 # --description--
 
-For now, let's start the player with just the stick. Delete the dagger and sword items in the array. More items will be added to the array during game play.
+In order to update HTML elements on the page, you need to get references to them in your JavaScript code. The code `let el = document.querySelector("#el");` gets a reference to an HTML element with an `id` of `el` and assigns it to the variable `el`.
+
+Get a reference to the HTML element with the `id` of `button1` and assign it to a variable with the name `button1`.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(inventory[0] === 'stick' && inventory.length === 1);
+assert(
+  /let\s+button1\s*\=\s*document.querySelector\(\s*[\'\"\`]\s*\#button1\s*[\'\"\`]\s*\);?/.test(
+    code
+  )
+);
 ```
 
 # --seed--
@@ -102,8 +108,9 @@ let gold = 50;
 let currentWeapon = 0;
 let fighting;
 let monsterHealth;
-let inventory = ["stick", "dagger", "sword"];
+let inventory = ["stick"];
 
+  
 </script>
 ```
 
@@ -118,5 +125,7 @@ let currentWeapon = 0;
 let fighting;
 let monsterHealth;
 let inventory = ["stick"];
+
+let button1 = document.querySelector('#button1');
 </script>
 ```
