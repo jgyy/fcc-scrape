@@ -1,50 +1,22 @@
 ---
-id: 5d64cf8f853b56a21cd16319
-title: Part 12
+id: 5d651ee1ee291f75bbd738ee
+title: Part 13
 challengeType: 0
-dashedName: part-12
+dashedName: part-13
 ---
 
 # --description--
 
-Here are the ids of the other HTML elements that we want a reference to in the JavaScript code: `button2`, `button3`, `text`, `xpText`, `healthText`, `goldText`, `monsterStats`, `monsterNameText`, `monsterHealthText`.
+Make a comment to describe what the next few lines of code will do. Comments can be written with either two forward-slashes `//` or with a multi-line sequence `/* */`. For example, here is a single line comment that says "hello world": `// hello world`.
 
-Just like you did with `storeButton`, create variables and set them equal to the element references.
+Write a single line comment that says "initialize buttons".
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(
-  /const\s+button2\s*\=\s*document.querySelector\(\s*[\'\"\`]\s*\#button2\s*[\'\"\`]\s*\);?/.test(
-    code
-  ) &&
-    /const\s+button3\s*\=\s*document.querySelector\(\s*[\'\"\`]\s*\#button3\s*[\'\"\`]\s*\);?/.test(
-      code
-    ) &&
-    /const\s+text\s*\=\s*document.querySelector\(\s*[\'\"\`]\s*\#text\s*[\'\"\`]\s*\);?/.test(
-      code
-    ) &&
-    /const\s+xpText\s*\=\s*document.querySelector\(\s*[\'\"\`]\s*\#xpText\s*[\'\"\`]\s*\);?/.test(
-      code
-    ) &&
-    /const\s+healthText\s*\=\s*document.querySelector\(\s*[\'\"\`]\s*\#healthText\s*[\'\"\`]\s*\);?/.test(
-      code
-    ) &&
-    /const\s+goldText\s*\=\s*document.querySelector\(\s*[\'\"\`]\s*\#goldText\s*[\'\"\`]\s*\);?/.test(
-      code
-    ) &&
-    /const\s+monsterStats\s*\=\s*document.querySelector\(\s*[\'\"\`]\s*\#monsterStats\s*[\'\"\`]\s*\);?/.test(
-      code
-    ) &&
-    /const\s+monsterNameText|monsterName\s*\=\s*document.querySelector\(\s*[\'\"\`]\s*\#monsterName\s*[\'\"\`]\s*\);?/.test(
-      code
-    ) &&
-    /const\s+monsterHealthText|monsterHealth\s*\=\s*document.querySelector\(\s*[\'\"\`]\s*\#monsterHealth\s*[\'\"\`]\s*\);?/.test(
-      code
-    )
-);
+assert(/\/\/\s*[iI]nitialize buttons/.test(code));
 ```
 
 # --seed--
@@ -135,6 +107,15 @@ let monsterHealth;
 let inventory = ["stick"];
 
 const button1 = document.querySelector('#button1');
+const button2 = document.querySelector("#button2");
+const button3 = document.querySelector("#button3");
+const text = document.querySelector("#text");
+const xpText = document.querySelector("#xpText");
+const healthText = document.querySelector("#healthText");
+const goldText = document.querySelector("#goldText");
+const monsterStats = document.querySelector("#monsterStats");
+const monsterNameText = document.querySelector("#monsterName");
+const monsterHealthText = document.querySelector("#monsterHealth");
   
 </script>
 ```
@@ -161,5 +142,7 @@ const goldText = document.querySelector("#goldText");
 const monsterStats = document.querySelector("#monsterStats");
 const monsterNameText = document.querySelector("#monsterName");
 const monsterHealthText = document.querySelector("#monsterHealth");
+
+// initialize buttons
 </script>
 ```
