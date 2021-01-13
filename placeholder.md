@@ -1,20 +1,23 @@
 ---
-id: 5d652e5a6e6bf7a6a27aa80a
-title: Part 14
+id: 5d653b2d6e6bf7a6a27aa80b
+title: Part 15
 challengeType: 0
-dashedName: part-14
+dashedName: part-15
 ---
 
 # --description--
 
-Designate what the first button in the HTML does by setting the `onclick` property of `button1` to the function name `goStore`. You will create the `goStore` function later. For example, in `button.onclick = openProgram;`, the `onclick` property of `button` is set to `openProgram`.
+Now set the `onclick` property of `button2` and `button3`. The second button should be set to `goCave` and the third button should be set to `fightDragon`.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(/button1\.onclick\s*\=\s*goStore\;?/.test(code));
+assert(
+  /button2\.onclick\s*\=\s*goCave\;?/.test(code) &&
+    /button3\.onclick\s*\=\s*fightDragon\;?/.test(code)
+);
 ```
 
 # --seed--
@@ -116,7 +119,7 @@ const monsterNameText = document.querySelector("#monsterName");
 const monsterHealthText = document.querySelector("#monsterHealth");
 
 // initialize buttons
-
+button1.onclick = goStore;
 
 </script>
 ```
@@ -146,5 +149,7 @@ const monsterHealthText = document.querySelector("#monsterHealth");
 
 // initialize buttons
 button1.onclick = goStore;
+button2.onclick = goCave;
+button3.onclick = fightDragon;
 </script>
 ```
