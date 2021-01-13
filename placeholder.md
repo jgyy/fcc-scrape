@@ -1,70 +1,43 @@
 ---
-id: 587d7b7b367417b2b2512b13
-title: Copy an Array with the Spread Operator
+id: 587d7b7a367417b2b2512b12
+title: Copy Array Items Using slice()
 challengeType: 1
-forumTopicId: 301157
+forumTopicId: 301158
 ---
 
 # --description--
 
-While `slice()` allows us to be selective about what elements of an array to copy, among several other useful tasks, ES6's new <dfn>spread operator</dfn> allows us to easily copy *all* of an array's elements, in order, with a simple and highly readable syntax. The spread syntax simply looks like this: `...`
-
-In practice, we can use the spread operator to copy an array like so:
+The next method we will cover is `slice()`. Rather than modifying an array, `slice()` copies or *extracts* a given number of elements to a new array, leaving the array it is called upon untouched. `slice()` takes only 2 parameters — the first is the index at which to begin extraction, and the second is the index at which to stop extraction (extraction will occur up to, but not including the element at this index). Consider this:
 
 ```js
-let thisArray = [true, true, undefined, false, null];
-let thatArray = [...thisArray];
-// thatArray equals [true, true, undefined, false, null]
-// thisArray remains unchanged and thatArray contains the same elements as thisArray
+let weatherConditions = ['rain', 'snow', 'sleet', 'hail', 'clear'];
+
+let todaysWeather = weatherConditions.slice(1, 3);
+// todaysWeather equals ['snow', 'sleet'];
+// weatherConditions still equals ['rain', 'snow', 'sleet', 'hail', 'clear']
 ```
+
+In effect, we have created a new array by extracting elements from an existing array.
 
 # --instructions--
 
-We have defined a function, `copyMachine` which takes `arr` (an array) and `num` (a number) as arguments. The function is supposed to return a new array made up of `num` copies of `arr`. We have done most of the work for you, but it doesn't work quite right yet. Modify the function using spread syntax so that it works correctly (hint: another method we have already covered might come in handy here!).
+We have defined a function, `forecast`, that takes an array as an argument. Modify the function using `slice()` to extract information from the argument array and return a new array that contains the elements `'warm'` and `'sunny'`.
 
 # --hints--
 
-`copyMachine([true, false, true], 2)` should return `[[true, false, true], [true, false, true]]`
+`forecast` should return `["warm", "sunny"]`
 
 ```js
-assert.deepEqual(copyMachine([true, false, true], 2), [
-  [true, false, true],
-  [true, false, true]
-]);
+assert.deepEqual(
+  forecast(['cold', 'rainy', 'warm', 'sunny', 'cool', 'thunderstorms']),
+  ['warm', 'sunny']
+);
 ```
 
-`copyMachine([1, 2, 3], 5)` should return `[[1, 2, 3], [1, 2, 3], [1, 2, 3], [1, 2, 3], [1, 2, 3]]`
+The `forecast` function should utilize the `slice()` method
 
 ```js
-assert.deepEqual(copyMachine([1, 2, 3], 5), [
-  [1, 2, 3],
-  [1, 2, 3],
-  [1, 2, 3],
-  [1, 2, 3],
-  [1, 2, 3]
-]);
-```
-
-`copyMachine([true, true, null], 1)` should return `[[true, true, null]]`
-
-```js
-assert.deepEqual(copyMachine([true, true, null], 1), [[true, true, null]]);
-```
-
-`copyMachine(["it works"], 3)` should return `[["it works"], ["it works"], ["it works"]]`
-
-```js
-assert.deepEqual(copyMachine(['it works'], 3), [
-  ['it works'],
-  ['it works'],
-  ['it works']
-]);
-```
-
-The `copyMachine` function should utilize the `spread operator` with array `arr`
-
-```js
-assert(__helpers.removeJSComments(code).match(/\.\.\.arr/));
+assert(/\.slice\(/.test(code));
 ```
 
 # --seed--
@@ -72,30 +45,20 @@ assert(__helpers.removeJSComments(code).match(/\.\.\.arr/));
 ## --seed-contents--
 
 ```js
-function copyMachine(arr, num) {
-  let newArr = [];
-  while (num >= 1) {
-    // Only change code below this line
+function forecast(arr) {
+  // Only change code below this line
 
-    // Only change code above this line
-    num--;
-  }
-  return newArr;
+  return arr;
 }
 
-console.log(copyMachine([true, false, true], 2));
+// Only change code above this line
+console.log(forecast(['cold', 'rainy', 'warm', 'sunny', 'cool', 'thunderstorms']));
 ```
 
 # --solutions--
 
 ```js
-function copyMachine(arr,num){
-    let newArr=[];
-    while(num >=1){
-    newArr.push([...arr]);
-    num--;
-    }
-    return newArr;
+function forecast(arr) {
+  return arr.slice(2,4);
 }
-console.log(copyMachine([true, false, true], 2));
 ```
