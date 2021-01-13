@@ -1,20 +1,24 @@
 ---
-id: 5d6653d5e0696bdec46938da
-title: Part 28
+id: 5d665983e0696bdec46938dc
+title: Part 29
 challengeType: 0
-dashedName: part-28
+dashedName: part-29
 ---
 
 # --description--
 
-Below the list of `const` variables, create a new `const` variable called `locations`. Set it to equal an empty array. This will be used to store all the data for the locations in the game.
+Arrays can store any data type, including objects. Objects are similar to arrays, except that instead of using indexes to access and modify their data, you access the data in objects through what are called properties.
+
+Inside the `locations` array add an empty object using curly braces.
+
+Here is an example of an array named `arr` with an empty object inside: `const arr = [{}];`
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(Array.isArray(locations) && locations.length === 0);
+assert.deepStrictEqual(JSON.stringify(locations), `[{}]`);
 ```
 
 # --seed--
@@ -115,6 +119,8 @@ const monsterStats = document.querySelector("#monsterStats");
 const monsterNameText = document.querySelector("#monsterName");
 const monsterHealthText = document.querySelector("#monsterHealth");
 
+const locations = [];
+
 // initialize buttons
 button1.onclick = goStore;
 button2.onclick = goCave;
@@ -183,7 +189,7 @@ const monsterStats = document.querySelector("#monsterStats");
 const monsterNameText = document.querySelector("#monsterName");
 const monsterHealthText = document.querySelector("#monsterHealth");
 
-const locations = [];
+const locations = [{}];
 
 // initialize buttons
 button1.onclick = goStore;
