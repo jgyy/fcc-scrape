@@ -1,50 +1,67 @@
 ---
-id: 587d7b7d367417b2b2512b1f
-title: Modify an Array Stored in an Object
+id: 587d7b7c367417b2b2512b19
+title: Modify an Object Nested Within an Object
 challengeType: 1
-forumTopicId: 301163
+forumTopicId: 301164
+dashedName: modify-an-object-nested-within-an-object
 ---
 
 # --description--
 
-Now you've seen all the basic operations for JavaScript objects. You can add, modify, and remove key-value pairs, check if keys exist, and iterate over all the keys in an object. As you continue learning JavaScript you will see even more versatile applications of objects. Additionally, the Data Structures lessons located in the Coding Interview Prep section of the curriculum also cover the ES6 <dfn>Map</dfn> and <dfn>Set</dfn> objects, both of which are similar to ordinary objects but provide some additional features. Now that you've learned the basics of arrays and objects, you're fully prepared to begin tackling more complex problems using JavaScript!
+Now let's take a look at a slightly more complex object. Object properties can be nested to an arbitrary depth, and their values can be any type of data supported by JavaScript, including arrays and even other objects. Consider the following:
+
+```js
+let nestedObject = {
+  id: 28802695164,
+  date: 'December 31, 2016',
+  data: {
+    totalUsers: 99,
+    online: 80,
+    onlineStatus: {
+      active: 67,
+      away: 13,
+      busy: 8
+    }
+  }
+};
+```
+
+`nestedObject` has three properties: `id` (value is a number), `date` (value is a string), and `data` (value is an object with its nested structure). While structures can quickly become complex, we can still use the same notations to access the information we need. To assign the value `10` to the `busy` property of the nested `onlineStatus` object, we use dot notation to reference the property:
+
+```js
+nestedObject.data.onlineStatus.busy = 10;
+```
 
 # --instructions--
 
-Take a look at the object we've provided in the code editor. The `user` object contains three keys. The `data` key contains five keys, one of which contains an array of `friends`. From this, you can see how flexible objects are as data structures. We've started writing a function `addFriend`. Finish writing it so that it takes a `user` object and adds the name of the `friend` argument to the array stored in `user.data.friends` and returns that array.
+Here we've defined an object `userActivity`, which includes another object nested within it. Set the value of the `online` key to `45`.
 
 # --hints--
 
-The `user` object should have `name`, `age`, and `data` keys.
-
-```js
-assert('name' in user && 'age' in user && 'data' in user);
-```
-
-The `addFriend` function should accept a `user` object and a `friend` string as arguments and add the friend to the array of `friends` in the `user` object.
+`userActivity` should have `id`, `date` and `data` properties.
 
 ```js
 assert(
-  (function () {
-    let L1 = user.data.friends.length;
-    addFriend(user, 'Sean');
-    let L2 = user.data.friends.length;
-    return L2 === L1 + 1;
-  })()
+  'id' in userActivity && 'date' in userActivity && 'data' in userActivity
 );
 ```
 
-`addFriend(user, "Pete")` should return `["Sam", "Kira", "Tomo", "Pete"]`.
+`userActivity` should have a `data` key set to an object with keys `totalUsers` and `online`.
 
 ```js
-assert.deepEqual(
-  (function () {
-    delete user.data.friends;
-    user.data.friends = ['Sam', 'Kira', 'Tomo'];
-    return addFriend(user, 'Pete');
-  })(),
-  ['Sam', 'Kira', 'Tomo', 'Pete']
-);
+assert('totalUsers' in userActivity.data && 'online' in userActivity.data);
+```
+
+The `online` property nested in the `data` key of `userActivity` should be set to `45`
+
+```js
+assert(userActivity.data.online === 45);
+```
+
+The `online` property should be set using dot or bracket notation.
+
+```js
+assert.strictEqual(code.search(/online: 45/), -1);
 ```
 
 # --seed--
@@ -52,60 +69,33 @@ assert.deepEqual(
 ## --seed-contents--
 
 ```js
-let user = {
-  name: 'Kenneth',
-  age: 28,
+let userActivity = {
+  id: 23894201352,
+  date: 'January 1, 2017',
   data: {
-    username: 'kennethCodesAllDay',
-    joinDate: 'March 26, 2016',
-    organization: 'freeCodeCamp',
-    friends: [
-      'Sam',
-      'Kira',
-      'Tomo'
-    ],
-    location: {
-      city: 'San Francisco',
-      state: 'CA',
-      country: 'USA'
-    }
+    totalUsers: 51,
+    online: 42
   }
 };
 
-function addFriend(userObj, friend) {
-  // Only change code below this line
+// Only change code below this line
 
-  // Only change code above this line
-}
+// Only change code above this line
 
-console.log(addFriend(user, 'Pete'));
+console.log(userActivity);
 ```
 
 # --solutions--
 
 ```js
-let user = {
-  name: 'Kenneth',
-  age: 28,
+let userActivity = {
+  id: 23894201352,
+  date: 'January 1, 2017',
   data: {
-    username: 'kennethCodesAllDay',
-    joinDate: 'March 26, 2016',
-    organization: 'freeCodeCamp',
-    friends: [
-      'Sam',
-      'Kira',
-      'Tomo'
-    ],
-    location: {
-      city: 'San Francisco',
-      state: 'CA',
-      country: 'USA'
-    }
+    totalUsers: 51,
+    online: 42
   }
 };
 
-function addFriend(userObj, friend) {
-  userObj.data.friends.push(friend);
-  return userObj.data.friends;
-}
+userActivity.data.online = 45;
 ```
