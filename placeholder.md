@@ -1,22 +1,30 @@
 ---
-id: 5d5aac9c07f328a948d398d3
-title: Part 7
+id: 5d5aad2307f328a948d398d4
+title: Part 8
 challengeType: 0
-dashedName: part-7
+dashedName: part-8
 ---
 
 # --description--
 
-Now set the inventory to equal the string "stick".
+Since the inventory can store multiple items, change the value of `inventory` to an array with the items stick, dagger, and sword.
 
-Strings must be surrounded with double quotes `"`, single quotes `'`, or backticks `` ` ``.
+Here is an example of a variable sandwich that equals a three-item array:
+
+```js
+let sandwich = ["peanut butter", "jelly", "bread"];
+```
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(inventory === 'stick');
+assert(
+  inventory.includes('stick') &&
+    inventory.includes('dagger') &&
+    inventory.includes('sword')
+);
 ```
 
 # --seed--
@@ -104,7 +112,7 @@ let gold = 50;
 let currentWeapon = 0;
 let fighting;
 let monsterHealth;
-let inventory;
+let inventory = "stick";
 
 </script>
 ```
@@ -119,6 +127,6 @@ let gold = 50;
 let currentWeapon = 0;
 let fighting;
 let monsterHealth;
-let inventory = "stick";
+let inventory = ["stick", "dagger", "sword"];
 </script>
 ```
