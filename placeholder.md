@@ -1,86 +1,39 @@
 ---
-id: 587d7b7d367417b2b2512b1c
-title: Check if an Object has a Property
+id: 587d7b7b367417b2b2512b17
+title: Combine Arrays with the Spread Operator
 challengeType: 1
-forumTopicId: 301155
+forumTopicId: 301156
 ---
 
 # --description--
 
-Now we can add, modify, and remove keys from objects. But what if we just wanted to know if an object has a specific property? JavaScript provides us with two different ways to do this. One uses the `hasOwnProperty()` method and the other uses the `in` keyword. If we have an object `users` with a property of `Alan`, we could check for its presence in either of the following ways:
+Another huge advantage of the <dfn>spread</dfn> operator, is the ability to combine arrays, or to insert all the elements of one array into another, at any index. With more traditional syntaxes, we can concatenate arrays, but this only allows us to combine arrays at the end of one, and at the start of another. Spread syntax makes the following operation extremely simple:
 
 ```js
-users.hasOwnProperty('Alan');
-'Alan' in users;
-// both return true
+let thisArray = ['sage', 'rosemary', 'parsley', 'thyme'];
+
+let thatArray = ['basil', 'cilantro', ...thisArray, 'coriander'];
+// thatArray now equals ['basil', 'cilantro', 'sage', 'rosemary', 'parsley', 'thyme', 'coriander']
 ```
+
+Using spread syntax, we have just achieved an operation that would have been more complex and more verbose had we used traditional methods.
 
 # --instructions--
 
-We've created an object, `users`, with some users in it and a function `isEveryoneHere`, which we pass the `users` object to as an argument. Finish writing this function so that it returns `true` only if the `users` object contains all four names, `Alan`, `Jeff`, `Sarah`, and `Ryan`, as keys, and `false` otherwise.
+We have defined a function `spreadOut` that returns the variable `sentence`. Modify the function using the <dfn>spread</dfn> operator so that it returns the array `['learning', 'to', 'code', 'is', 'fun']`.
 
 # --hints--
 
-The `users` object should only contain the keys `Alan`, `Jeff`, `Sarah`, and `Ryan`
+`spreadOut` should return `["learning", "to", "code", "is", "fun"]`
 
 ```js
-assert(
-  'Alan' in users &&
-    'Jeff' in users &&
-    'Sarah' in users &&
-    'Ryan' in users &&
-    Object.keys(users).length === 4
-);
+assert.deepEqual(spreadOut(), ['learning', 'to', 'code', 'is', 'fun']);
 ```
 
-The function `isEveryoneHere` should return `true` if `Alan`, `Jeff`, `Sarah`, and `Ryan` are properties on the `users` object
+The `spreadOut` function should utilize spread syntax
 
 ```js
-assert(isEveryoneHere(users) === true);
-```
-
-The function `isEveryoneHere` should return `false` if `Alan` is not a property on the `users` object
-
-```js
-assert(
-  (function () {
-    delete users.Alan;
-    return isEveryoneHere(users);
-  })() === false
-);
-```
-
-The function `isEveryoneHere` should return `false` if `Jeff` is not a property on the `users` object
-
-```js
-assert(
-  (function () {
-    delete users.Jeff;
-    return isEveryoneHere(users);
-  })() === false
-);
-```
-
-The function `isEveryoneHere` should return `false` if `Sarah` is not a property on the `users` object
-
-```js
-assert(
-  (function () {
-    delete users.Sarah;
-    return isEveryoneHere(users);
-  })() === false
-);
-```
-
-The function `isEveryoneHere` should return `false` if `Ryan` is not a property on the `users` object
-
-```js
-assert(
-  (function () {
-    delete users.Ryan;
-    return isEveryoneHere(users);
-  })() === false
-);
+assert.notStrictEqual(spreadOut.toString().search(/[...]/), -1);
 ```
 
 # --seed--
@@ -88,64 +41,21 @@ assert(
 ## --seed-contents--
 
 ```js
-let users = {
-  Alan: {
-    age: 27,
-    online: true
-  },
-  Jeff: {
-    age: 32,
-    online: true
-  },
-  Sarah: {
-    age: 48,
-    online: true
-  },
-  Ryan: {
-    age: 19,
-    online: true
-  }
-};
-
-function isEveryoneHere(obj) {
-  // Only change code below this line
-
-  // Only change code above this line
+function spreadOut() {
+  let fragment = ['to', 'code'];
+  let sentence; // Change this line
+  return sentence;
 }
 
-console.log(isEveryoneHere(users));
+console.log(spreadOut());
 ```
 
 # --solutions--
 
 ```js
-let users = {
-  Alan: {
-    age: 27,
-    online: true
-  },
-  Jeff: {
-    age: 32,
-    online: true
-  },
-  Sarah: {
-    age: 48,
-    online: true
-  },
-  Ryan: {
-    age: 19,
-    online: true
-  }
-};
-
-function isEveryoneHere(obj) {
-  return [
-    'Alan',
-    'Jeff',
-    'Sarah',
-    'Ryan'
-  ].every(i => obj.hasOwnProperty(i));
+function spreadOut() {
+  let fragment = ['to', 'code'];
+  let sentence = ['learning', ...fragment, 'is', 'fun'];
+  return sentence;
 }
-
-console.log(isEveryoneHere(users));
 ```
