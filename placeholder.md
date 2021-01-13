@@ -1,28 +1,30 @@
 ---
-id: 5d66198de0696bdec46938d8
-title: Part 26
+id: 5d661bc6e0696bdec46938d9
+title: Part 27
 challengeType: 0
-dashedName: part-26
+dashedName: part-27
 ---
 
 # --description--
 
-Add double quote marks around the word "Store" in the line "You see a sign that says Store." Before each quotation mark add a `\` to signal that the following quote is not the end of the string, but should instead appear inside the string. This is called escaping.
+There is repetition in the `goTown` and `goStore` functions. When you have repetition in code, it is a sign that you need a new function.
+
+Above the `goTown` function, create an empty function called `update`. This time the function should take a parameter named `location` so data can be passed into the function when it is called.
+
+Here is an example of a function named `testFun` that accepts a parameter named `param`:
+
+```js
+function testFun(param) {
+  console.log(param);
+}
+```
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(
-  (() => {
-    goTown();
-    return (
-      text.innerText ===
-      'You are in the town square. You see a sign that says "Store".'
-    );
-  })()
-);
+assert(update.toString().match(/function update\(\s*location\)\s*\{\s*\}/));
 ```
 
 # --seed--
@@ -135,7 +137,7 @@ function goTown() {
   button1.onclick = goStore;
   button2.onclick = goCave;
   button3.onclick = fightDragon;
-  text.innerText = "You are in the town square. You see a sign that says Store.";
+  text.innerText = "You are in the town square. You see a sign that says \"Store\".";
 }
 
 function goStore() {
@@ -192,6 +194,9 @@ const monsterHealthText = document.querySelector("#monsterHealth");
 button1.onclick = goStore;
 button2.onclick = goCave;
 button3.onclick = fightDragon;
+
+function update(location) {  
+}
 
 function goTown() {
   button1.innerText = "Go to store";
