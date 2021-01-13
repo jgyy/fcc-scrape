@@ -1,20 +1,22 @@
 ---
-id: 5d5aab5d07f328a948d398d2
-title: Part 6
+id: 5d5aac9c07f328a948d398d3
+title: Part 7
 challengeType: 0
-dashedName: part-6
+dashedName: part-7
 ---
 
 # --description--
 
-Declare variables named `monsterHealth` and `inventory` without initializing them.
+Now set the inventory to equal the string "stick".
+
+Strings must be surrounded with double quotes `"`, single quotes `'`, or backticks `` ` ``.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(monsterHealth === undefined && inventory === undefined);
+assert(inventory === 'stick');
 ```
 
 # --seed--
@@ -101,6 +103,8 @@ let health = 100;
 let gold = 50;
 let currentWeapon = 0;
 let fighting;
+let monsterHealth;
+let inventory;
 
 </script>
 ```
@@ -115,6 +119,6 @@ let gold = 50;
 let currentWeapon = 0;
 let fighting;
 let monsterHealth;
-let inventory;
+let inventory = "stick";
 </script>
 ```
