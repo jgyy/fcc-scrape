@@ -1,23 +1,25 @@
 ---
-id: 5d653b2d6e6bf7a6a27aa80b
-title: Part 15
+id: 5d653c4d6e6bf7a6a27aa80c
+title: Part 16
 challengeType: 0
-dashedName: part-15
+dashedName: part-16
 ---
 
 # --description--
 
-Now set the `onclick` property of `button2` and `button3`. The second button should be set to `goCave` and the third button should be set to `fightDragon`.
+Create the `goStore` function to hold the code that runs whenever the player goes to the store. Here is an example of an empty function called `functionName` (Note the opening curly brace at the end of the first line and the closing curly brace on the second line):
+
+```js
+function functionName() {
+}
+```
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(
-  /button2\.onclick\s*\=\s*goCave\;?/.test(code) &&
-    /button3\.onclick\s*\=\s*fightDragon\;?/.test(code)
-);
+assert(typeof goStore === 'function');
 ```
 
 # --seed--
@@ -120,6 +122,8 @@ const monsterHealthText = document.querySelector("#monsterHealth");
 
 // initialize buttons
 button1.onclick = goStore;
+button2.onclick = goCave;
+button3.onclick = fightDragon;
 
 </script>
 ```
@@ -151,5 +155,8 @@ const monsterHealthText = document.querySelector("#monsterHealth");
 button1.onclick = goStore;
 button2.onclick = goCave;
 button3.onclick = fightDragon;
+
+function goStore() {
+}
 </script>
 ```
