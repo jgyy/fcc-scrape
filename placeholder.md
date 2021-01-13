@@ -1,13 +1,13 @@
 ---
-id: 5d66093c4bab337fbb433885
-title: Part 22
+id: 5d660a32e0696bdec46938d5
+title: Part 23
 challengeType: 0
-dashedName: part-22
+dashedName: part-23
 ---
 
 # --description--
 
-Now that the text on the buttons have changed, the `onclick` properties on the buttons should change. Inside the goStore function, update the `onclick` property of all three buttons. The new functions should be `buyHealth`, `buyWeapon`, and `goTown`. If you have trouble, look at how the buttons were initialized.
+Right after the `onclick` properties are updated, change the `innerText` property of `text` to "You enter the store."
 
 # --hints--
 
@@ -15,9 +15,9 @@ See description above for instructions.
 
 ```js
 assert(
-  goStore.toString().match(/button1\.onclick\s*\=\s*buyHealth\;?/) &&
-    goStore.toString().match(/button2\.onclick\s*\=\s*buyWeapon\;?/) &&
-    goStore.toString().match(/button3\.onclick\s*\=\s*goTown\;?/)
+  goStore
+    .toString()
+    .match(/text\.innerText\s*\=\s*[\'\"\`]You enter the store\.?[\'\"\`]/)
 );
 ```
 
@@ -128,6 +128,9 @@ function goStore() {
   button1.innerText = "Buy 10 health (10 gold)";
   button2.innerText = "Buy weapon (30 gold)";
   button3.innerText = "Go to town square";
+  button1.onclick = buyHealth;
+  button2.onclick = buyWeapon;
+  button3.onclick = goTown;
 }
 
 function goCave() {
@@ -176,6 +179,7 @@ function goStore() {
   button1.onclick = buyHealth;
   button2.onclick = buyWeapon;
   button3.onclick = goTown;
+  text.innerText = "You enter the store.";
 }
 
 function goCave() {
