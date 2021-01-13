@@ -1,62 +1,59 @@
 ---
-id: 587d7b7c367417b2b2512b1a
-title: Access Property Names with Bracket Notation
+id: 587d78b2367417b2b2512b0e
+title: Add Items to an Array with push() and unshift()
 challengeType: 1
-forumTopicId: 301150
+forumTopicId: 301151
 ---
 
 # --description--
 
-In the first object challenge we mentioned the use of bracket notation as a way to access property values using the evaluation of a variable. For instance, imagine that our `foods` object is being used in a program for a supermarket cash register. We have some function that sets the `selectedFood` and we want to check our `foods` object for the presence of that food. This might look like:
+An array's length, like the data types it can contain, is not fixed. Arrays can be defined with a length of any number of elements, and elements can be added or removed over time; in other words, arrays are <dfn>mutable</dfn>. In this challenge, we will look at two methods with which we can programmatically modify an array: `Array.push()` and `Array.unshift()`.
+
+Both methods take one or more elements as parameters and add those elements to the array the method is being called on; the `push()` method adds elements to the end of an array, and `unshift()` adds elements to the beginning. Consider the following:
 
 ```js
-let selectedFood = getCurrentFood(scannedItem);
-let inventory = foods[selectedFood];
-```
+let twentyThree = 'XXIII';
+let romanNumerals = ['XXI', 'XXII'];
 
-This code will evaluate the value stored in the `selectedFood` variable and return the value of that key in the `foods` object, or `undefined` if it is not present. Bracket notation is very useful because sometimes object properties are not known before runtime or we need to access them in a more dynamic way.
+romanNumerals.unshift('XIX', 'XX');
+// now equals ['XIX', 'XX', 'XXI', 'XXII']
+
+romanNumerals.push(twentyThree);
+// now equals ['XIX', 'XX', 'XXI', 'XXII', 'XXIII']Notice that we can also pass variables, which allows us even greater flexibility in dynamically modifying our array's data.
+```
 
 # --instructions--
 
-We've defined a function, `checkInventory`, which receives a scanned item as an argument. Return the current value of the `scannedItem` key in the `foods` object. You can assume that only valid keys will be provided as an argument to `checkInventory`.
+We have defined a function, `mixedNumbers`, which we are passing an array as an argument. Modify the function by using `push()` and `unshift()` to add `'I', 2, 'three'` to the beginning of the array and `7, 'VIII', 9` to the end so that the returned array contains representations of the numbers 1-9 in order.
 
 # --hints--
 
-`checkInventory` should be a function.
+`mixedNumbers(["IV", 5, "six"])` should now return `["I", 2, "three", "IV", 5, "six", 7, "VIII", 9]`
 
 ```js
-assert.strictEqual(typeof checkInventory, 'function');
+assert.deepEqual(mixedNumbers(['IV', 5, 'six']), [
+  'I',
+  2,
+  'three',
+  'IV',
+  5,
+  'six',
+  7,
+  'VIII',
+  9
+]);
 ```
 
-The `foods` object should have only the following key-value pairs: `apples: 25`, `oranges: 32`, `plums: 28`, `bananas: 13`, `grapes: 35`, `strawberries: 27`.
+The `mixedNumbers` function should utilize the `push()` method
 
 ```js
-assert.deepEqual(foods, {
-  apples: 25,
-  oranges: 32,
-  plums: 28,
-  bananas: 13,
-  grapes: 35,
-  strawberries: 27
-});
+assert(mixedNumbers.toString().match(/\.push/));
 ```
 
-`checkInventory("apples")` should return `25`.
+The `mixedNumbers` function should utilize the `unshift()` method
 
 ```js
-assert.strictEqual(checkInventory('apples'), 25);
-```
-
-`checkInventory("bananas")` should return `13`.
-
-```js
-assert.strictEqual(checkInventory('bananas'), 13);
-```
-
-`checkInventory("strawberries")` should return `27`.
-
-```js
-assert.strictEqual(checkInventory('strawberries'), 27);
+assert(mixedNumbers.toString().match(/\.unshift/));
 ```
 
 # --seed--
@@ -64,37 +61,22 @@ assert.strictEqual(checkInventory('strawberries'), 27);
 ## --seed-contents--
 
 ```js
-let foods = {
-  apples: 25,
-  oranges: 32,
-  plums: 28,
-  bananas: 13,
-  grapes: 35,
-  strawberries: 27
-};
-
-function checkInventory(scannedItem) {
+function mixedNumbers(arr) {
   // Only change code below this line
 
   // Only change code above this line
+  return arr;
 }
 
-console.log(checkInventory("apples"));
+console.log(mixedNumbers(['IV', 5, 'six']));
 ```
 
 # --solutions--
 
 ```js
-let foods = {
-  apples: 25,
-  oranges: 32,
-  plums: 28,
-  bananas: 13,
-  grapes: 35,
-  strawberries: 27
-};
-
-function checkInventory(scannedItem) {
-  return foods[scannedItem];
+function mixedNumbers(arr) {
+  arr.push(7,'VIII',9);
+  arr.unshift('I',2,'three');
+  return arr;
 }
 ```
