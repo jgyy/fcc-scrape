@@ -1,25 +1,23 @@
 ---
-id: 5d6755fce0696bdec46938df
-title: Part 32
+id: 5d675726e0696bdec46938e0
+title: Part 33
 challengeType: 0
-dashedName: part-32
+dashedName: part-33
 ---
 
 # --description--
 
-Inside the `"button text"` array, add three string elements. Use the three stings assigned to the buttons inside the `goTown` function.
-
-Here is an example array with three strings: `const arr = ["one", "two", "three"];`.
+Add another property in the object with the name `"button functions"`. The value should be an array containing the three `onclick` functions from the `goTown` function. It should look like this: `[goStore, goCave, fightDragon]`
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert.deepStrictEqual(locations[0]['button text'], [
-  'Go to store',
-  'Go to cave',
-  'Fight dragon'
+assert.deepStrictEqual(locations[0]['button functions'], [
+  goStore,
+  goCave,
+  fightDragon
 ]);
 ```
 
@@ -124,7 +122,7 @@ const monsterHealthText = document.querySelector("#monsterHealth");
 const locations = [
   {
     name: "town square",
-    "button text": []
+    "button text": ["Go to store", "Go to cave", "Fight dragon"]
   }
 ];
 
@@ -199,7 +197,8 @@ const monsterHealthText = document.querySelector("#monsterHealth");
 const locations = [
   {
     name: "town square",
-    "button text": ["Go to store", "Go to cave", "Fight dragon"]
+    "button text": ["Go to store", "Go to cave", "Fight dragon"],
+    "button functions": [goStore, goCave, fightDragon]
   }
 ];
 
