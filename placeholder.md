@@ -1,67 +1,60 @@
 ---
-id: 587d7b7c367417b2b2512b19
-title: Modify an Object Nested Within an Object
+id: 587d78b2367417b2b2512b0f
+title: Remove Items from an Array with pop() and shift()
 challengeType: 1
-forumTopicId: 301164
-dashedName: modify-an-object-nested-within-an-object
+forumTopicId: 301165
+dashedName: remove-items-from-an-array-with-pop-and-shift
 ---
 
 # --description--
 
-Now let's take a look at a slightly more complex object. Object properties can be nested to an arbitrary depth, and their values can be any type of data supported by JavaScript, including arrays and even other objects. Consider the following:
+Both `push()` and `unshift()` have corresponding methods that are nearly functional opposites: `pop()` and `shift()`. As you may have guessed by now, instead of adding, `pop()` *removes* an element from the end of an array, while `shift()` removes an element from the beginning. The key difference between `pop()` and `shift()` and their cousins `push()` and `unshift()`, is that neither method takes parameters, and each only allows an array to be modified by a single element at a time.
+
+Let's take a look:
 
 ```js
-let nestedObject = {
-  id: 28802695164,
-  date: 'December 31, 2016',
-  data: {
-    totalUsers: 99,
-    online: 80,
-    onlineStatus: {
-      active: 67,
-      away: 13,
-      busy: 8
-    }
-  }
-};
+let greetings = ['whats up?', 'hello', 'see ya!'];
+
+greetings.pop();
+// now equals ['whats up?', 'hello']
+
+greetings.shift();
+// now equals ['hello']
 ```
 
-`nestedObject` has three properties: `id` (value is a number), `date` (value is a string), and `data` (value is an object with its nested structure). While structures can quickly become complex, we can still use the same notations to access the information we need. To assign the value `10` to the `busy` property of the nested `onlineStatus` object, we use dot notation to reference the property:
+We can also return the value of the removed element with either method like this:
 
 ```js
-nestedObject.data.onlineStatus.busy = 10;
+let popped = greetings.pop();
+// returns 'hello'
+// greetings now equals []
 ```
 
 # --instructions--
 
-Here we've defined an object `userActivity`, which includes another object nested within it. Set the value of the `online` key to `45`.
+We have defined a function, `popShift`, which takes an array as an argument and returns a new array. Modify the function, using `pop()` and `shift()`, to remove the first and last elements of the argument array, and assign the removed elements to their corresponding variables, so that the returned array contains their values.
 
 # --hints--
 
-`userActivity` should have `id`, `date` and `data` properties.
+`popShift(["challenge", "is", "not", "complete"])` should return `["challenge", "complete"]`
 
 ```js
-assert(
-  'id' in userActivity && 'date' in userActivity && 'data' in userActivity
-);
+assert.deepEqual(popShift(['challenge', 'is', 'not', 'complete']), [
+  'challenge',
+  'complete'
+]);
 ```
 
-`userActivity` should have a `data` key set to an object with keys `totalUsers` and `online`.
+The `popShift` function should utilize the `pop()` method
 
 ```js
-assert('totalUsers' in userActivity.data && 'online' in userActivity.data);
+assert.notStrictEqual(popShift.toString().search(/\.pop\(/), -1);
 ```
 
-The `online` property nested in the `data` key of `userActivity` should be set to `45`
+The `popShift` function should utilize the `shift()` method
 
 ```js
-assert(userActivity.data.online === 45);
-```
-
-The `online` property should be set using dot or bracket notation.
-
-```js
-assert.strictEqual(code.search(/online: 45/), -1);
+assert.notStrictEqual(popShift.toString().search(/\.shift\(/), -1);
 ```
 
 # --seed--
@@ -69,33 +62,21 @@ assert.strictEqual(code.search(/online: 45/), -1);
 ## --seed-contents--
 
 ```js
-let userActivity = {
-  id: 23894201352,
-  date: 'January 1, 2017',
-  data: {
-    totalUsers: 51,
-    online: 42
-  }
-};
+function popShift(arr) {
+  let popped; // Change this line
+  let shifted; // Change this line
+  return [shifted, popped];
+}
 
-// Only change code below this line
-
-// Only change code above this line
-
-console.log(userActivity);
+console.log(popShift(['challenge', 'is', 'not', 'complete']));
 ```
 
 # --solutions--
 
 ```js
-let userActivity = {
-  id: 23894201352,
-  date: 'January 1, 2017',
-  data: {
-    totalUsers: 51,
-    online: 42
-  }
-};
-
-userActivity.data.online = 45;
+function popShift(arr) {
+  let popped = arr.pop(); // Change this line
+  let shifted = arr.shift(); // Change this line
+  return [shifted, popped];
+}
 ```
