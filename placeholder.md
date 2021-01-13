@@ -1,13 +1,13 @@
 ---
-id: 5d660a32e0696bdec46938d5
-title: Part 23
+id: 5d6616d8e0696bdec46938d6
+title: Part 24
 challengeType: 0
-dashedName: part-23
+dashedName: part-24
 ---
 
 # --description--
 
-Right after the `onclick` properties are updated, change the `innerText` property of `text` to "You enter the store."
+At the end of the current code, add three new empty functions called `buyHealth`, `buyWeapon`, and `goTown`. After this step, you can test out the game by clicking the "Go to store" button.
 
 # --hints--
 
@@ -15,9 +15,9 @@ See description above for instructions.
 
 ```js
 assert(
-  goStore
-    .toString()
-    .match(/text\.innerText\s*\=\s*[\'\"\`]You enter the store\.?[\'\"\`]/)
+  typeof buyHealth === 'function' &&
+    typeof buyWeapon === 'function' &&
+    typeof goTown === 'function'
 );
 ```
 
@@ -131,6 +131,7 @@ function goStore() {
   button1.onclick = buyHealth;
   button2.onclick = buyWeapon;
   button3.onclick = goTown;
+  text.innerText = "You enter the store.";
 }
 
 function goCave() {
@@ -188,6 +189,15 @@ function goCave() {
 
 function fightDragon() {
   console.log("Fighting dragon.");
+}
+
+function buyHealth() {
+}
+
+function buyWeapon() {
+}
+
+function goTown() {
 }
 </script>
 ```
