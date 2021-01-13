@@ -1,15 +1,15 @@
 ---
-id: 5d65f4cd2012114c7d7c57ec
-title: Part 19
+id: 5d65f6392012114c7d7c57ed
+title: Part 20
 challengeType: 0
-dashedName: part-19
+dashedName: part-20
 ---
 
 # --description--
 
-Also, create a `fightDragon` function that prints "Fighting dragon." to the console.
+When a player clicks the 'Go to store' button, the buttons and text in the game should change. Remove the code inside the `goStore` function. Add a new line of code inside the function that updates the text of `button1` so that it says "Buy 10 health (10 gold)".
 
-When you are finished, you can test out your program in the browser.
+For example, this code updates the text of `button` to say "Click Me": `button.innerText = "Click Me";`.
 
 # --hints--
 
@@ -17,9 +17,10 @@ See description above for instructions.
 
 ```js
 assert(
-  fightDragon
-    .toString()
-    .match(/console\.log\(\s*[\"\'\`]Fighting dragon\.?[\"\'\`]\s*\)/)
+  (() => {
+    goStore();
+    return button1.innerText === 'Buy 10 health (10 gold)';
+  })()
 );
 ```
 
@@ -127,11 +128,15 @@ button2.onclick = goCave;
 button3.onclick = fightDragon;
 
 function goStore() {
-  console.log("Going to store.")
+  console.log("Going to store.");
 }
 
 function goCave() {
   console.log("Going to cave.");
+}
+
+function fightDragon() {
+  console.log("Fighting dragon.");
 }
 
 </script>
@@ -166,7 +171,7 @@ button2.onclick = goCave;
 button3.onclick = fightDragon;
 
 function goStore() {
-  console.log("Going to store.")
+  button1.innerText = "Buy 10 health (10 gold)";
 }
 
 function goCave() {
