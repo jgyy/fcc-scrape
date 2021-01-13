@@ -1,188 +1,49 @@
 ---
-id: 587d7b7b367417b2b2512b16
-title: Create complex multi-dimensional arrays
+id: 587d7b7d367417b2b2512b1e
+title: Generate an Array of All Object Keys with Object.keys()
 challengeType: 1
-forumTopicId: 301159
+forumTopicId: 301160
 ---
 
 # --description--
 
-Awesome! You have just learned a ton about arrays! This has been a fairly high level overview, and there is plenty more to learn about working with arrays, much of which you will see in later sections. But before moving on to looking at <dfn>Objects</dfn>, lets take one more look, and see how arrays can become a bit more complex than what we have seen in previous challenges.
-
-One of the most powerful features when thinking of arrays as data structures, is that arrays can contain, or even be completely made up of other arrays. We have seen arrays that contain arrays in previous challenges, but fairly simple ones. However, arrays can contain an infinite depth of arrays that can contain other arrays, each with their own arbitrary levels of depth, and so on. In this way, an array can very quickly become very complex data structure, known as a <dfn>multi-dimensional</dfn>, or nested array. Consider the following example:
-
-```js
-let nestedArray = [ // top, or first level - the outer most array
-  ['deep'], // an array within an array, 2 levels of depth
-  [
-    ['deeper'], ['deeper'] // 2 arrays nested 3 levels deep
-  ],
-  [
-    [
-      ['deepest'], ['deepest'] // 2 arrays nested 4 levels deep
-    ],
-    [
-      [
-        ['deepest-est?'] // an array nested 5 levels deep
-      ]
-    ]
-  ]
-];
-```
-
-While this example may seem convoluted, this level of complexity is not unheard of, or even unusual, when dealing with large amounts of data. However, we can still very easily access the deepest levels of an array this complex with bracket notation:
-
-```js
-console.log(nestedArray[2][1][0][0][0]);
-// logs: deepest-est?
-```
-
-And now that we know where that piece of data is, we can reset it if we need to:
-
-```js
-nestedArray[2][1][0][0][0] = 'deeper still';
-
-console.log(nestedArray[2][1][0][0][0]);
-// now logs: deeper still
-```
+We can also generate an array which contains all the keys stored in an object using the `Object.keys()` method and passing in an object as the argument. This will return an array with strings representing each property in the object. Again, there will be no specific order to the entries in the array.
 
 # --instructions--
 
-We have defined a variable, `myNestedArray`, set equal to an array. Modify `myNestedArray`, using any combination of <dfn>strings</dfn>, <dfn>numbers</dfn>, and <dfn>booleans</dfn> for data elements, so that it has exactly five levels of depth (remember, the outer-most array is level 1). Somewhere on the third level, include the string `'deep'`, on the fourth level, include the string `'deeper'`, and on the fifth level, include the string `'deepest'`.
+Finish writing the `getArrayOfUsers` function so that it returns an array containing all the properties in the object it receives as an argument.
 
 # --hints--
 
-`myNestedArray` should contain only numbers, booleans, and strings as data elements
-
-```js
-assert.strictEqual(
-  (function (arr) {
-    let flattened = (function flatten(arr) {
-      const flat = [].concat(...arr);
-      return flat.some(Array.isArray) ? flatten(flat) : flat;
-    })(arr);
-    for (let i = 0; i < flattened.length; i++) {
-      if (
-        typeof flattened[i] !== 'number' &&
-        typeof flattened[i] !== 'string' &&
-        typeof flattened[i] !== 'boolean'
-      ) {
-        return false;
-      }
-    }
-    return true;
-  })(myNestedArray),
-  true
-);
-```
-
-`myNestedArray` should have exactly 5 levels of depth
-
-```js
-assert.strictEqual(
-  (function (arr) {
-    let depth = 0;
-    function arrayDepth(array, i, d) {
-      if (Array.isArray(array[i])) {
-        arrayDepth(array[i], 0, d + 1);
-      } else {
-        depth = d > depth ? d : depth;
-      }
-      if (i < array.length) {
-        arrayDepth(array, i + 1, d);
-      }
-    }
-    arrayDepth(arr, 0, 0);
-    return depth;
-  })(myNestedArray),
-  4
-);
-```
-
-`myNestedArray` should contain exactly one occurrence of the string `"deep"` on an array nested 3 levels deep
+The `users` object should only contain the keys `Alan`, `Jeff`, `Sarah`, and `Ryan`
 
 ```js
 assert(
-  (function howDeep(array, target, depth = 0) {
-    return array.reduce((combined, current) => {
-      if (Array.isArray(current)) {
-        return combined.concat(howDeep(current, target, depth + 1));
-      } else if (current === target) {
-        return combined.concat(depth);
-      } else {
-        return combined;
-      }
-    }, []);
-  })(myNestedArray, 'deep').length === 1 &&
-    (function howDeep(array, target, depth = 0) {
-      return array.reduce((combined, current) => {
-        if (Array.isArray(current)) {
-          return combined.concat(howDeep(current, target, depth + 1));
-        } else if (current === target) {
-          return combined.concat(depth);
-        } else {
-          return combined;
-        }
-      }, []);
-    })(myNestedArray, 'deep')[0] === 2
+  'Alan' in users &&
+    'Jeff' in users &&
+    'Sarah' in users &&
+    'Ryan' in users &&
+    Object.keys(users).length === 4
 );
 ```
 
-`myNestedArray` should contain exactly one occurrence of the string `"deeper"` on an array nested 4 levels deep
+The `getArrayOfUsers` function should return an array which contains all the keys in the `users` object
 
 ```js
 assert(
-  (function howDeep(array, target, depth = 0) {
-    return array.reduce((combined, current) => {
-      if (Array.isArray(current)) {
-        return combined.concat(howDeep(current, target, depth + 1));
-      } else if (current === target) {
-        return combined.concat(depth);
-      } else {
-        return combined;
-      }
-    }, []);
-  })(myNestedArray, 'deeper').length === 1 &&
-    (function howDeep(array, target, depth = 0) {
-      return array.reduce((combined, current) => {
-        if (Array.isArray(current)) {
-          return combined.concat(howDeep(current, target, depth + 1));
-        } else if (current === target) {
-          return combined.concat(depth);
-        } else {
-          return combined;
-        }
-      }, []);
-    })(myNestedArray, 'deeper')[0] === 3
-);
-```
-
-`myNestedArray` should contain exactly one occurrence of the string `"deepest"` on an array nested 5 levels deep
-
-```js
-assert(
-  (function howDeep(array, target, depth = 0) {
-    return array.reduce((combined, current) => {
-      if (Array.isArray(current)) {
-        return combined.concat(howDeep(current, target, depth + 1));
-      } else if (current === target) {
-        return combined.concat(depth);
-      } else {
-        return combined;
-      }
-    }, []);
-  })(myNestedArray, 'deepest').length === 1 &&
-    (function howDeep(array, target, depth = 0) {
-      return array.reduce((combined, current) => {
-        if (Array.isArray(current)) {
-          return combined.concat(howDeep(current, target, depth + 1));
-        } else if (current === target) {
-          return combined.concat(depth);
-        } else {
-          return combined;
-        }
-      }, []);
-    })(myNestedArray, 'deepest')[0] === 4
+  (function () {
+    users.Sam = {};
+    users.Lewis = {};
+    let R = getArrayOfUsers(users);
+    return (
+      R.indexOf('Alan') !== -1 &&
+      R.indexOf('Jeff') !== -1 &&
+      R.indexOf('Sarah') !== -1 &&
+      R.indexOf('Ryan') !== -1 &&
+      R.indexOf('Sam') !== -1 &&
+      R.indexOf('Lewis') !== -1
+    );
+  })() === true
 );
 ```
 
@@ -191,25 +52,59 @@ assert(
 ## --seed-contents--
 
 ```js
-let myNestedArray = [
+let users = {
+  Alan: {
+    age: 27,
+    online: false
+  },
+  Jeff: {
+    age: 32,
+    online: true
+  },
+  Sarah: {
+    age: 48,
+    online: false
+  },
+  Ryan: {
+    age: 19,
+    online: true
+  }
+};
+
+function getArrayOfUsers(obj) {
   // Only change code below this line
-  ['unshift', false, 1, 2, 3, 'complex', 'nested'],
-  ['loop', 'shift', 6, 7, 1000, 'method'],
-  ['concat', false, true, 'spread', 'array'],
-  ['mutate', 1327.98, 'splice', 'slice', 'push'],
-  ['iterate', 1.3849, 7, '8.4876', 'arbitrary', 'depth']
+
   // Only change code above this line
-];
+}
+
+console.log(getArrayOfUsers(users));
 ```
 
 # --solutions--
 
 ```js
-let myNestedArray = [
-  ['unshift', ['deep', ['deeper', ['deepest']]],false, 1, 2, 3, 'complex', 'nested'],
-  ['loop', 'shift', 6, 7, 1000, 'method'],
-  ['concat', false, true, 'spread', 'array'],
-  ['mutate', 1327.98, 'splice', 'slice', 'push'],
-  ['iterate', 1.3849, 7, '8.4876', 'arbitrary', 'depth']
-];
+let users = {
+  Alan: {
+    age: 27,
+    online: false
+  },
+  Jeff: {
+    age: 32,
+    online: true
+  },
+  Sarah: {
+    age: 48,
+    online: false
+  },
+  Ryan: {
+    age: 19,
+    online: true
+  }
+};
+
+function getArrayOfUsers(obj) {
+  return Object.keys(obj);
+}
+
+console.log(getArrayOfUsers(users));
 ```
