@@ -1,26 +1,20 @@
 ---
-id: 5d5ab57f07f328a948d398d6
-title: Part 10
+id: 5d5b66ce07f328a948d398d7
+title: Part 11
 challengeType: 0
-dashedName: part-10
+dashedName: part-11
 ---
 
 # --description--
 
-In order to update HTML elements on the page, you need to get references to them in your JavaScript code. The code `let el = document.querySelector("#el");` gets a reference to an HTML element with an `id` of `el` and assigns it to the variable `el`.
-
-Get a reference to the HTML element with the `id` of `button1` and assign it to a variable with the name `button1`.
+You can also declare variables with the `const` key word. Since `button1` is a constant that will never change, switch the `let` keyword that declares the variable to `const`.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(
-  /let\s+button1\s*\=\s*document.querySelector\(\s*[\'\"\`]\s*\#button1\s*[\'\"\`]\s*\);?/.test(
-    code
-  )
-);
+assert(/const\s+button1\s*/.test(code));
 ```
 
 # --seed--
@@ -110,6 +104,7 @@ let fighting;
 let monsterHealth;
 let inventory = ["stick"];
 
+let button1 = document.querySelector('#button1');
   
 </script>
 ```
@@ -126,6 +121,6 @@ let fighting;
 let monsterHealth;
 let inventory = ["stick"];
 
-let button1 = document.querySelector('#button1');
+const button1 = document.querySelector('#button1');
 </script>
 ```
