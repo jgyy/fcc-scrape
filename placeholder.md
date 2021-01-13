@@ -1,13 +1,13 @@
 ---
-id: 5d661814e0696bdec46938d7
-title: Part 25
+id: 5d66198de0696bdec46938d8
+title: Part 26
 challengeType: 0
-dashedName: part-25
+dashedName: part-26
 ---
 
 # --description--
 
-Move the `goTown` function to above the `goStore` function. Then, copy and paste the contents of the `goStore` function into the `goTown` function.
+Add double quote marks around the word "Store" in the line "You see a sign that says Store." Before each quotation mark add a `\` to signal that the following quote is not the end of the string, but should instead appear inside the string. This is called escaping.
 
 # --hints--
 
@@ -18,13 +18,8 @@ assert(
   (() => {
     goTown();
     return (
-      button1.innerText === 'Buy 10 health (10 gold)' &&
-      button2.innerText === 'Buy weapon (30 gold)' &&
-      button3.innerText === 'Go to town square' &&
-      text.innerText === 'You enter the store.' &&
-      goTown.toString().match(/button1\.onclick\s*\=\s*buyHealth\;?/) &&
-      goTown.toString().match(/button2\.onclick\s*\=\s*buyWeapon\;?/) &&
-      goTown.toString().match(/button3\.onclick\s*\=\s*goTown\;?/)
+      text.innerText ===
+      'You are in the town square. You see a sign that says "Store".'
     );
   })()
 );
@@ -133,6 +128,16 @@ button1.onclick = goStore;
 button2.onclick = goCave;
 button3.onclick = fightDragon;
 
+function goTown() {
+  button1.innerText = "Go to store";
+  button2.innerText = "Go to cave";
+  button3.innerText = "Fight dragon";
+  button1.onclick = goStore;
+  button2.onclick = goCave;
+  button3.onclick = fightDragon;
+  text.innerText = "You are in the town square. You see a sign that says Store.";
+}
+
 function goStore() {
   button1.innerText = "Buy 10 health (10 gold)";
   button2.innerText = "Buy weapon (30 gold)";
@@ -155,9 +160,6 @@ function buyHealth() {
 }
 
 function buyWeapon() {
-}
-
-function goTown() {
 }
 
 </script>
@@ -192,13 +194,13 @@ button2.onclick = goCave;
 button3.onclick = fightDragon;
 
 function goTown() {
-  button1.innerText = "Buy 10 health (10 gold)";
-  button2.innerText = "Buy weapon (30 gold)";
-  button3.innerText = "Go to town square";
-  button1.onclick = buyHealth;
-  button2.onclick = buyWeapon;
-  button3.onclick = goTown;
-  text.innerText = "You enter the store.";
+  button1.innerText = "Go to store";
+  button2.innerText = "Go to cave";
+  button3.innerText = "Fight dragon";
+  button1.onclick = goStore;
+  button2.onclick = goCave;
+  button3.onclick = fightDragon;
+  text.innerText = "You are in the town square. You see a sign that says \"Store\".";
 }
 
 function goStore() {
