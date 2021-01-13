@@ -1,22 +1,20 @@
 ---
-id: 5d651ee1ee291f75bbd738ee
-title: Part 13
+id: 5d652e5a6e6bf7a6a27aa80a
+title: Part 14
 challengeType: 0
-dashedName: part-13
+dashedName: part-14
 ---
 
 # --description--
 
-Make a comment to describe what the next few lines of code will do. Comments can be written with either two forward-slashes `//` or with a multi-line sequence `/* */`. For example, here is a single line comment that says "hello world": `// hello world`.
-
-Write a single line comment that says "initialize buttons".
+Designate what the first button in the HTML does by setting the `onclick` property of `button1` to the function name `goStore`. You will create the `goStore` function later. For example, in `button.onclick = openProgram;`, the `onclick` property of `button` is set to `openProgram`.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(/\/\/\s*[iI]nitialize buttons/.test(code));
+assert(/button1\.onclick\s*\=\s*goStore\;?/.test(code));
 ```
 
 # --seed--
@@ -116,7 +114,10 @@ const goldText = document.querySelector("#goldText");
 const monsterStats = document.querySelector("#monsterStats");
 const monsterNameText = document.querySelector("#monsterName");
 const monsterHealthText = document.querySelector("#monsterHealth");
-  
+
+// initialize buttons
+
+
 </script>
 ```
 
@@ -144,5 +145,6 @@ const monsterNameText = document.querySelector("#monsterName");
 const monsterHealthText = document.querySelector("#monsterHealth");
 
 // initialize buttons
+button1.onclick = goStore;
 </script>
 ```
