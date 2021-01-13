@@ -1,30 +1,20 @@
 ---
-id: 5d5aad2307f328a948d398d4
-title: Part 8
+id: 5d5aae1207f328a948d398d5
+title: Part 9
 challengeType: 0
-dashedName: part-8
+dashedName: part-9
 ---
 
 # --description--
 
-Since the inventory can store multiple items, change the value of `inventory` to an array with the items stick, dagger, and sword.
-
-Here is an example of a variable sandwich that equals a three-item array:
-
-```js
-let sandwich = ["peanut butter", "jelly", "bread"];
-```
+For now, let's start the player with just the stick. Delete the dagger and sword items in the array. More items will be added to the array during game play.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(
-  inventory.includes('stick') &&
-    inventory.includes('dagger') &&
-    inventory.includes('sword')
-);
+assert(inventory[0] === 'stick' && inventory.length === 1);
 ```
 
 # --seed--
@@ -112,7 +102,7 @@ let gold = 50;
 let currentWeapon = 0;
 let fighting;
 let monsterHealth;
-let inventory = "stick";
+let inventory = ["stick", "dagger", "sword"];
 
 </script>
 ```
@@ -127,6 +117,6 @@ let gold = 50;
 let currentWeapon = 0;
 let fighting;
 let monsterHealth;
-let inventory = ["stick", "dagger", "sword"];
+let inventory = ["stick"];
 </script>
 ```
