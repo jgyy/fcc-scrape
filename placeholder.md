@@ -1,30 +1,20 @@
 ---
-id: 5d661bc6e0696bdec46938d9
-title: Part 27
+id: 5d6653d5e0696bdec46938da
+title: Part 28
 challengeType: 0
-dashedName: part-27
+dashedName: part-28
 ---
 
 # --description--
 
-There is repetition in the `goTown` and `goStore` functions. When you have repetition in code, it is a sign that you need a new function.
-
-Above the `goTown` function, create an empty function called `update`. This time the function should take a parameter named `location` so data can be passed into the function when it is called.
-
-Here is an example of a function named `testFun` that accepts a parameter named `param`:
-
-```js
-function testFun(param) {
-  console.log(param);
-}
-```
+Below the list of `const` variables, create a new `const` variable called `locations`. Set it to equal an empty array. This will be used to store all the data for the locations in the game.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(update.toString().match(/function update\(\s*location\)\s*\{\s*\}/));
+assert(Array.isArray(locations) && locations.length === 0);
 ```
 
 # --seed--
@@ -130,6 +120,9 @@ button1.onclick = goStore;
 button2.onclick = goCave;
 button3.onclick = fightDragon;
 
+function update(location) {  
+}
+
 function goTown() {
   button1.innerText = "Go to store";
   button2.innerText = "Go to cave";
@@ -189,6 +182,8 @@ const goldText = document.querySelector("#goldText");
 const monsterStats = document.querySelector("#monsterStats");
 const monsterNameText = document.querySelector("#monsterName");
 const monsterHealthText = document.querySelector("#monsterHealth");
+
+const locations = [];
 
 // initialize buttons
 button1.onclick = goStore;
