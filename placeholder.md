@@ -1,69 +1,82 @@
 ---
-id: 587d78b2367417b2b2512b10
-title: Remove Items Using splice()
+id: 587d7b7e367417b2b2512b20
+title: Use an Array to Store a Collection of Data
 challengeType: 1
-forumTopicId: 301166
-dashedName: remove-items-using-splice
+forumTopicId: 301167
+dashedName: use-an-array-to-store-a-collection-of-data
 ---
 
 # --description--
 
-Ok, so we've learned how to remove elements from the beginning and end of arrays using `shift()` and `pop()`, but what if we want to remove an element from somewhere in the middle? Or remove more than one element at once? Well, that's where `splice()` comes in. `splice()` allows us to do just that: **remove any number of consecutive elements** from anywhere in an array.
-
-`splice()` can take up to 3 parameters, but for now, we'll focus on just the first 2. The first two parameters of `splice()` are integers which represent indexes, or positions, of the array that `splice()` is being called upon. And remember, arrays are *zero-indexed*, so to indicate the first element of an array, we would use `0`. `splice()`'s first parameter represents the index on the array from which to begin removing elements, while the second parameter indicates the number of elements to delete. For example:
+The below is an example of the simplest implementation of an array data structure. This is known as a <dfn>one-dimensional array</dfn>, meaning it only has one level, or that it does not have any other arrays nested within it. Notice it contains <dfn>booleans</dfn>, <dfn>strings</dfn>, and <dfn>numbers</dfn>, among other valid JavaScript data types:
 
 ```js
-let array = ['today', 'was', 'not', 'so', 'great'];
-
-array.splice(2, 2);
-// remove 2 elements beginning with the 3rd element
-// array now equals ['today', 'was', 'great']
+let simpleArray = ['one', 2, 'three', true, false, undefined, null];
+console.log(simpleArray.length);
+// logs 7
 ```
 
-`splice()` not only modifies the array it's being called on, but it also returns a new array containing the value of the removed elements:
+All arrays have a length property, which as shown above, can be very easily accessed with the syntax `Array.length`. A more complex implementation of an array can be seen below. This is known as a <dfn>multi-dimensional array</dfn>, or an array that contains other arrays. Notice that this array also contains JavaScript <dfn>objects</dfn>, which we will examine very closely in our next section, but for now, all you need to know is that arrays are also capable of storing complex objects.
 
 ```js
-let array = ['I', 'am', 'feeling', 'really', 'happy'];
-
-let newArray = array.splice(3, 2);
-// newArray equals ['really', 'happy']
+let complexArray = [
+  [
+    {
+      one: 1,
+      two: 2
+    },
+    {
+      three: 3,
+      four: 4
+    }
+  ],
+  [
+    {
+      a: "a",
+      b: "b"
+    },
+    {
+      c: "c",
+      d: "d"
+    }
+  ]
+];
 ```
 
 # --instructions--
 
-We've initialized an array `arr`. Use `splice()` to remove elements from `arr`, so that it only contains elements that sum to the value of `10`.
+We have defined a variable called `yourArray`. Complete the statement by assigning an array of at least 5 elements in length to the `yourArray` variable. Your array should contain at least one <dfn>string</dfn>, one <dfn>number</dfn>, and one <dfn>boolean</dfn>.
 
 # --hints--
 
-You should not change the original line of `const arr = [2, 4, 5, 1, 7, 5, 2, 1];`.
+`yourArray` should be an array.
 
 ```js
-assert(
-  __helpers.removeWhiteSpace(code).match(/constarr=\[2,4,5,1,7,5,2,1\];?/)
-);
+assert.strictEqual(Array.isArray(yourArray), true);
 ```
 
-`arr` should only contain elements that sum to `10`.
+`yourArray` should be at least 5 elements long.
 
 ```js
-assert.strictEqual(
-  arr.reduce((a, b) => a + b),
-  10
-);
+assert.isAtLeast(yourArray.length, 5);
 ```
 
-Your code should utilize the `splice()` method on `arr`.
+`yourArray` should contain at least one `boolean`.
 
 ```js
-assert(__helpers.removeWhiteSpace(code).match(/arr\.splice\(/));
+assert(yourArray.filter((el) => typeof el === 'boolean').length >= 1);
 ```
 
-The splice should only remove elements from `arr` and not add any additional elements to `arr`.
+`yourArray` should contain at least one `number`.
 
 ```js
-assert(
-  !__helpers.removeWhiteSpace(code).match(/arr\.splice\(\d+,\d+,\d+.*\)/g)
-);
+assert(yourArray.filter((el) => typeof el === 'number').length >= 1);
+```
+
+`yourArray` should contain at least one `string`.
+
+```js
+assert(yourArray.filter((el) => typeof el === 'string').length >= 1);
 ```
 
 # --seed--
@@ -71,16 +84,11 @@ assert(
 ## --seed-contents--
 
 ```js
-const arr = [2, 4, 5, 1, 7, 5, 2, 1];
-// Only change code below this line
-
-// Only change code above this line
-console.log(arr);
+let yourArray; // Change this line
 ```
 
 # --solutions--
 
 ```js
-const arr = [2, 4, 5, 1, 7, 5, 2, 1];
-arr.splice(1, 4);
+let yourArray = ['a string', 100, true, ['one', 2], 'another string'];
 ```
