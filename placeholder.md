@@ -1,20 +1,21 @@
 ---
-id: 5d674fd9e0696bdec46938dd
-title: Part 30
+id: 5d6752e3e0696bdec46938de
+title: Part 31
 challengeType: 0
-dashedName: part-30
+dashedName: part-31
 ---
 
 # --description--
 
-Inside the object you just added, create a property called `name` with the value of "town square".
+After the `name` property put a comma. On the next line add a property named `"button text"` that has a value of an empty array. Since the property name has more than one word, there must be quotes around it.
 
-For example, here is an example of an array with an object inside that has a property called `name` with a value of "Quincy Larson" (new lines are used only for the purpose of making the code more readable):
+Here is an example:
 
 ```js
 const arr = [
   {
-    name: "Quincy Larson"
+    name: "Quincy Larson",
+    "favorite colors": []
   }
 ]
 ```
@@ -24,7 +25,7 @@ const arr = [
 See description above for instructions.
 
 ```js
-assert(locations[0].name === 'town square');
+assert.deepStrictEqual(locations[0]['button text'], []);
 ```
 
 # --seed--
@@ -125,7 +126,11 @@ const monsterStats = document.querySelector("#monsterStats");
 const monsterNameText = document.querySelector("#monsterName");
 const monsterHealthText = document.querySelector("#monsterHealth");
 
-const locations = [{}];
+const locations = [
+  {
+    name: "town square"
+  }
+];
 
 // initialize buttons
 button1.onclick = goStore;
@@ -197,7 +202,8 @@ const monsterHealthText = document.querySelector("#monsterHealth");
 
 const locations = [
   {
-    name: "town square"
+    name: "town square",
+    "button text": []
   }
 ];
 
