@@ -1,70 +1,86 @@
 ---
-id: 587d7b7b367417b2b2512b14
-title: Check For The Presence of an Element With indexOf()
+id: 587d7b7d367417b2b2512b1c
+title: Check if an Object has a Property
 challengeType: 1
-forumTopicId: 301154
+forumTopicId: 301155
 ---
 
 # --description--
 
-Since arrays can be changed, or *mutated*, at any time, there's no guarantee about where a particular piece of data will be on a given array, or if that element even still exists. Luckily, JavaScript provides us with another built-in method, `indexOf()`, that allows us to quickly and easily check for the presence of an element on an array. `indexOf()` takes an element as a parameter, and when called, it returns the position, or index, of that element, or `-1` if the element does not exist on the array.
-
-For example:
+Now we can add, modify, and remove keys from objects. But what if we just wanted to know if an object has a specific property? JavaScript provides us with two different ways to do this. One uses the `hasOwnProperty()` method and the other uses the `in` keyword. If we have an object `users` with a property of `Alan`, we could check for its presence in either of the following ways:
 
 ```js
-let fruits = ['apples', 'pears', 'oranges', 'peaches', 'pears'];
-
-fruits.indexOf('dates'); // returns -1
-fruits.indexOf('oranges'); // returns 2
-fruits.indexOf('pears'); // returns 1, the first index at which the element exists
+users.hasOwnProperty('Alan');
+'Alan' in users;
+// both return true
 ```
 
 # --instructions--
 
-`indexOf()` can be incredibly useful for quickly checking for the presence of an element on an array. We have defined a function, `quickCheck`, that takes an array and an element as arguments. Modify the function using `indexOf()` so that it returns `true` if the passed element exists on the array, and `false` if it does not.
+We've created an object, `users`, with some users in it and a function `isEveryoneHere`, which we pass the `users` object to as an argument. Finish writing this function so that it returns `true` only if the `users` object contains all four names, `Alan`, `Jeff`, `Sarah`, and `Ryan`, as keys, and `false` otherwise.
 
 # --hints--
 
-The `quickCheck` function should return a boolean (`true` or `false`), not a string (`"true"` or `"false"`)
+The `users` object should only contain the keys `Alan`, `Jeff`, `Sarah`, and `Ryan`
 
 ```js
-assert.isBoolean(quickCheck(['squash', 'onions', 'shallots'], 'mushrooms'));
-```
-
-`quickCheck(["squash", "onions", "shallots"], "mushrooms")` should return `false`
-
-```js
-assert.strictEqual(
-  quickCheck(['squash', 'onions', 'shallots'], 'mushrooms'),
-  false
+assert(
+  'Alan' in users &&
+    'Jeff' in users &&
+    'Sarah' in users &&
+    'Ryan' in users &&
+    Object.keys(users).length === 4
 );
 ```
 
-`quickCheck(["onions", "squash", "shallots"], "onions")` should return `true`
+The function `isEveryoneHere` should return `true` if `Alan`, `Jeff`, `Sarah`, and `Ryan` are properties on the `users` object
 
 ```js
-assert.strictEqual(
-  quickCheck(['onions', 'squash', 'shallots'], 'onions'),
-  true
+assert(isEveryoneHere(users) === true);
+```
+
+The function `isEveryoneHere` should return `false` if `Alan` is not a property on the `users` object
+
+```js
+assert(
+  (function () {
+    delete users.Alan;
+    return isEveryoneHere(users);
+  })() === false
 );
 ```
 
-`quickCheck([3, 5, 9, 125, 45, 2], 125)` should return `true`
+The function `isEveryoneHere` should return `false` if `Jeff` is not a property on the `users` object
 
 ```js
-assert.strictEqual(quickCheck([3, 5, 9, 125, 45, 2], 125), true);
+assert(
+  (function () {
+    delete users.Jeff;
+    return isEveryoneHere(users);
+  })() === false
+);
 ```
 
-`quickCheck([true, false, false], undefined)` should return `false`
+The function `isEveryoneHere` should return `false` if `Sarah` is not a property on the `users` object
 
 ```js
-assert.strictEqual(quickCheck([true, false, false], undefined), false);
+assert(
+  (function () {
+    delete users.Sarah;
+    return isEveryoneHere(users);
+  })() === false
+);
 ```
 
-The `quickCheck` function should utilize the `indexOf()` method
+The function `isEveryoneHere` should return `false` if `Ryan` is not a property on the `users` object
 
 ```js
-assert.notStrictEqual(quickCheck.toString().search(/\.indexOf\(/), -1);
+assert(
+  (function () {
+    delete users.Ryan;
+    return isEveryoneHere(users);
+  })() === false
+);
 ```
 
 # --seed--
@@ -72,19 +88,64 @@ assert.notStrictEqual(quickCheck.toString().search(/\.indexOf\(/), -1);
 ## --seed-contents--
 
 ```js
-function quickCheck(arr, elem) {
+let users = {
+  Alan: {
+    age: 27,
+    online: true
+  },
+  Jeff: {
+    age: 32,
+    online: true
+  },
+  Sarah: {
+    age: 48,
+    online: true
+  },
+  Ryan: {
+    age: 19,
+    online: true
+  }
+};
+
+function isEveryoneHere(obj) {
   // Only change code below this line
 
   // Only change code above this line
 }
 
-console.log(quickCheck(['squash', 'onions', 'shallots'], 'mushrooms'));
+console.log(isEveryoneHere(users));
 ```
 
 # --solutions--
 
 ```js
-function quickCheck(arr, elem) {
-  return arr.indexOf(elem) >= 0; 
+let users = {
+  Alan: {
+    age: 27,
+    online: true
+  },
+  Jeff: {
+    age: 32,
+    online: true
+  },
+  Sarah: {
+    age: 48,
+    online: true
+  },
+  Ryan: {
+    age: 19,
+    online: true
+  }
+};
+
+function isEveryoneHere(obj) {
+  return [
+    'Alan',
+    'Jeff',
+    'Sarah',
+    'Ryan'
+  ].every(i => obj.hasOwnProperty(i));
 }
+
+console.log(isEveryoneHere(users));
 ```
