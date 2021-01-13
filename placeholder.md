@@ -1,22 +1,20 @@
 ---
-id: 5d5a813321b9e3db6c106a46
-title: Part 1
+id: 5d5a8dd907f328a948d398ce
+title: Part 2
 challengeType: 0
-dashedName: part-1
+dashedName: part-2
 ---
 
 # --description--
 
-To keep track of the player's experience points, we've declared a variable called `xp` and assigned it the starting value of 0.
-
-Create another variable to keep track of health and start it at 100.
+Create a variable called `gold` and set it to the value 50.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(health === 100);
+assert(gold === 50);
 ```
 
 # --seed--
@@ -99,6 +97,7 @@ assert(health === 100);
 ```html
 <script>
 var xp = 0;
+var health = 100;
 
 </script>
 ```
@@ -109,5 +108,6 @@ var xp = 0;
 <script>
 var xp = 0;
 var health = 100;
+var gold = 50;
 </script>
 ```
