@@ -1,59 +1,70 @@
 ---
-id: 587d78b2367417b2b2512b0e
-title: Add Items to an Array with push() and unshift()
+id: 587d78b3367417b2b2512b11
+title: Add Items Using splice()
 challengeType: 1
-forumTopicId: 301151
+forumTopicId: 301152
 ---
 
 # --description--
 
-An array's length, like the data types it can contain, is not fixed. Arrays can be defined with a length of any number of elements, and elements can be added or removed over time; in other words, arrays are <dfn>mutable</dfn>. In this challenge, we will look at two methods with which we can programmatically modify an array: `Array.push()` and `Array.unshift()`.
-
-Both methods take one or more elements as parameters and add those elements to the array the method is being called on; the `push()` method adds elements to the end of an array, and `unshift()` adds elements to the beginning. Consider the following:
+Remember in the last challenge we mentioned that `splice()` can take up to three parameters? Well, you can use the third parameter, comprised of one or more element(s), to add to the array. This can be incredibly useful for quickly switching out an element, or a set of elements, for another.
 
 ```js
-let twentyThree = 'XXIII';
-let romanNumerals = ['XXI', 'XXII'];
+const numbers = [10, 11, 12, 12, 15];
+const startIndex = 3;
+const amountToDelete = 1;
 
-romanNumerals.unshift('XIX', 'XX');
-// now equals ['XIX', 'XX', 'XXI', 'XXII']
-
-romanNumerals.push(twentyThree);
-// now equals ['XIX', 'XX', 'XXI', 'XXII', 'XXIII']Notice that we can also pass variables, which allows us even greater flexibility in dynamically modifying our array's data.
+numbers.splice(startIndex, amountToDelete, 13, 14);
+// the second entry of 12 is removed, and we add 13 and 14 at the same index
+console.log(numbers);
+// returns [ 10, 11, 12, 13, 14, 15 ]
 ```
+
+Here we begin with an array of numbers. We then pass the following to `splice()`. The index at which to begin deleting elements (3), the number of elements to be deleted (1), and the elements (13, 14) to be inserted at that same index. Note that there can be any number of elements (separated by commas) following `amountToDelete`, each of which gets inserted.
 
 # --instructions--
 
-We have defined a function, `mixedNumbers`, which we are passing an array as an argument. Modify the function by using `push()` and `unshift()` to add `'I', 2, 'three'` to the beginning of the array and `7, 'VIII', 9` to the end so that the returned array contains representations of the numbers 1-9 in order.
+We have defined a function, `htmlColorNames`, which takes an array of HTML colors as an argument. Modify the function using `splice()` to remove the first two elements of the array and add `'DarkSalmon'` and `'BlanchedAlmond'` in their respective places.
 
 # --hints--
 
-`mixedNumbers(["IV", 5, "six"])` should now return `["I", 2, "three", "IV", 5, "six", 7, "VIII", 9]`
+`htmlColorNames` should return `["DarkSalmon", "BlanchedAlmond", "LavenderBlush", "PaleTurquoise", "FireBrick"]`
 
 ```js
-assert.deepEqual(mixedNumbers(['IV', 5, 'six']), [
-  'I',
-  2,
-  'three',
-  'IV',
-  5,
-  'six',
-  7,
-  'VIII',
-  9
-]);
+assert.deepEqual(
+  htmlColorNames([
+    'DarkGoldenRod',
+    'WhiteSmoke',
+    'LavenderBlush',
+    'PaleTurquoise',
+    'FireBrick'
+  ]),
+  [
+    'DarkSalmon',
+    'BlanchedAlmond',
+    'LavenderBlush',
+    'PaleTurquoise',
+    'FireBrick'
+  ]
+);
 ```
 
-The `mixedNumbers` function should utilize the `push()` method
+The `htmlColorNames` function should utilize the `splice()` method
 
 ```js
-assert(mixedNumbers.toString().match(/\.push/));
+assert(/.splice/.test(code));
 ```
 
-The `mixedNumbers` function should utilize the `unshift()` method
+You should not use `shift()` or `unshift()`.
 
 ```js
-assert(mixedNumbers.toString().match(/\.unshift/));
+assert(!/shift|unshift/.test(code));
+```
+
+You should not use array bracket notation.
+
+```js
+assert(!/\[\d\]\s*=/.test(code));
 ```
 
 # --seed--
@@ -61,22 +72,21 @@ assert(mixedNumbers.toString().match(/\.unshift/));
 ## --seed-contents--
 
 ```js
-function mixedNumbers(arr) {
+function htmlColorNames(arr) {
   // Only change code below this line
 
   // Only change code above this line
   return arr;
 }
 
-console.log(mixedNumbers(['IV', 5, 'six']));
+console.log(htmlColorNames(['DarkGoldenRod', 'WhiteSmoke', 'LavenderBlush', 'PaleTurquoise', 'FireBrick']));
 ```
 
 # --solutions--
 
 ```js
-function mixedNumbers(arr) {
-  arr.push(7,'VIII',9);
-  arr.unshift('I',2,'three');
+function htmlColorNames(arr) {
+  arr.splice(0,2,'DarkSalmon', 'BlanchedAlmond');
   return arr;
 }
 ```
