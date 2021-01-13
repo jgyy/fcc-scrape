@@ -1,70 +1,93 @@
 ---
-id: 587d78b3367417b2b2512b11
-title: Add Items Using splice()
+id: 587d7b7c367417b2b2512b18
+title: Add Key-Value Pairs to JavaScript Objects
 challengeType: 1
-forumTopicId: 301152
+forumTopicId: 301153
 ---
 
 # --description--
 
-Remember in the last challenge we mentioned that `splice()` can take up to three parameters? Well, you can use the third parameter, comprised of one or more element(s), to add to the array. This can be incredibly useful for quickly switching out an element, or a set of elements, for another.
+At their most basic, objects are just collections of <dfn>key-value</dfn> pairs. In other words, they are pieces of data (<dfn>values</dfn>) mapped to unique identifiers called <dfn>properties</dfn> (<dfn>keys</dfn>). Take a look at an example:
 
 ```js
-const numbers = [10, 11, 12, 12, 15];
-const startIndex = 3;
-const amountToDelete = 1;
-
-numbers.splice(startIndex, amountToDelete, 13, 14);
-// the second entry of 12 is removed, and we add 13 and 14 at the same index
-console.log(numbers);
-// returns [ 10, 11, 12, 13, 14, 15 ]
+const tekkenCharacter = {
+  player: 'Hwoarang',
+  fightingStyle: 'Tae Kwon Doe',
+  human: true
+};
 ```
 
-Here we begin with an array of numbers. We then pass the following to `splice()`. The index at which to begin deleting elements (3), the number of elements to be deleted (1), and the elements (13, 14) to be inserted at that same index. Note that there can be any number of elements (separated by commas) following `amountToDelete`, each of which gets inserted.
+The above code defines a Tekken video game character object called `tekkenCharacter`. It has three properties, each of which map to a specific value. If you want to add an additional property, such as "origin", it can be done by assigning `origin` to the object:
+
+```js
+tekkenCharacter.origin = 'South Korea';
+```
+
+This uses dot notation. If you were to observe the `tekkenCharacter` object, it will now include the `origin` property. Hwoarang also had distinct orange hair. You can add this property with bracket notation by doing:
+
+```js
+tekkenCharacter['hair color'] = 'dyed orange';
+```
+
+Bracket notation is required if your property has a space in it or if you want to use a variable to name the property. In the above case, the property is enclosed in quotes to denote it as a string and will be added exactly as shown. Without quotes, it will be evaluated as a variable and the name of the property will be whatever value the variable is. Here's an example with a variable:
+
+```js
+const eyes = 'eye color';
+
+tekkenCharacter[eyes] = 'brown';
+```
+
+After adding all the examples, the object will look like this:
+
+```js
+{
+  player: 'Hwoarang',
+  fightingStyle: 'Tae Kwon Doe',
+  human: true,
+  origin: 'South Korea',
+  'hair color': 'dyed orange',
+  'eye color': 'brown'
+};
+```
 
 # --instructions--
 
-We have defined a function, `htmlColorNames`, which takes an array of HTML colors as an argument. Modify the function using `splice()` to remove the first two elements of the array and add `'DarkSalmon'` and `'BlanchedAlmond'` in their respective places.
+A `foods` object has been created with three entries. Using the syntax of your choice, add three more entries to it: `bananas` with a value of `13`, `grapes` with a value of `35`, and `strawberries` with a value of `27`.
 
 # --hints--
 
-`htmlColorNames` should return `["DarkSalmon", "BlanchedAlmond", "LavenderBlush", "PaleTurquoise", "FireBrick"]`
+`foods` should be an object.
 
 ```js
-assert.deepEqual(
-  htmlColorNames([
-    'DarkGoldenRod',
-    'WhiteSmoke',
-    'LavenderBlush',
-    'PaleTurquoise',
-    'FireBrick'
-  ]),
-  [
-    'DarkSalmon',
-    'BlanchedAlmond',
-    'LavenderBlush',
-    'PaleTurquoise',
-    'FireBrick'
-  ]
+assert(typeof foods === 'object');
+```
+
+The `foods` object should have a key `"bananas"` with a value of `13`.
+
+```js
+assert(foods.bananas === 13);
+```
+
+The `foods` object should have a key `"grapes"` with a value of `35`.
+
+```js
+assert(foods.grapes === 35);
+```
+
+The `foods` object should have a key `"strawberries"` with a value of `27`.
+
+```js
+assert(foods.strawberries === 27);
+```
+
+The key-value pairs should be set using dot or bracket notation.
+
+```js
+assert(
+  code.search(/bananas:/) === -1 &&
+    code.search(/grapes:/) === -1 &&
+    code.search(/strawberries:/) === -1
 );
-```
-
-The `htmlColorNames` function should utilize the `splice()` method
-
-```js
-assert(/.splice/.test(code));
-```
-
-You should not use `shift()` or `unshift()`.
-
-```js
-assert(!/shift|unshift/.test(code));
-```
-
-You should not use array bracket notation.
-
-```js
-assert(!/\[\d\]\s*=/.test(code));
 ```
 
 # --seed--
@@ -72,21 +95,29 @@ assert(!/\[\d\]\s*=/.test(code));
 ## --seed-contents--
 
 ```js
-function htmlColorNames(arr) {
-  // Only change code below this line
+let foods = {
+  apples: 25,
+  oranges: 32,
+  plums: 28
+};
 
-  // Only change code above this line
-  return arr;
-}
+// Only change code below this line
 
-console.log(htmlColorNames(['DarkGoldenRod', 'WhiteSmoke', 'LavenderBlush', 'PaleTurquoise', 'FireBrick']));
+// Only change code above this line
+
+console.log(foods);
 ```
 
 # --solutions--
 
 ```js
-function htmlColorNames(arr) {
-  arr.splice(0,2,'DarkSalmon', 'BlanchedAlmond');
-  return arr;
-}
+let foods = {
+  apples: 25,
+  oranges: 32,
+  plums: 28
+};
+
+foods['bananas'] = 13;
+foods['grapes']  = 35;
+foods['strawberries'] = 27;
 ```
