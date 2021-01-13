@@ -1,20 +1,22 @@
 ---
-id: 5d5a8dd907f328a948d398ce
-title: Part 2
+id: 5d5a8f1c07f328a948d398cf
+title: Part 3
 challengeType: 0
-dashedName: part-2
+dashedName: part-3
 ---
 
 # --description--
 
-Create a variable called `gold` and set it to the value 50.
+Create a variable called `currentWeapon` and set it to 0. When a name has two words, the convention is to use so-called "lowerCamelCase". The first word is all lowercase, and then the first letter of every preceding word is uppercased.
+
+When a name has two words, the convention is to use so-called "lowerCamelCase". The variable name should look like this: currentWeapon.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(gold === 50);
+assert(currentWeapon === 0);
 ```
 
 # --seed--
@@ -98,6 +100,7 @@ assert(gold === 50);
 <script>
 var xp = 0;
 var health = 100;
+var gold = 50;
 
 </script>
 ```
@@ -109,5 +112,6 @@ var health = 100;
 var xp = 0;
 var health = 100;
 var gold = 50;
+var currentWeapon = 0;
 </script>
 ```
