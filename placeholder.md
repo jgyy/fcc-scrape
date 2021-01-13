@@ -1,82 +1,48 @@
 ---
-id: 587d7b7e367417b2b2512b20
-title: Use an Array to Store a Collection of Data
+id: 587d7b7c367417b2b2512b1b
+title: Use the delete Keyword to Remove Object Properties
 challengeType: 1
-forumTopicId: 301167
-dashedName: use-an-array-to-store-a-collection-of-data
+forumTopicId: 301168
+dashedName: use-the-delete-keyword-to-remove-object-properties
 ---
 
 # --description--
 
-The below is an example of the simplest implementation of an array data structure. This is known as a <dfn>one-dimensional array</dfn>, meaning it only has one level, or that it does not have any other arrays nested within it. Notice it contains <dfn>booleans</dfn>, <dfn>strings</dfn>, and <dfn>numbers</dfn>, among other valid JavaScript data types:
+Now you know what objects are and their basic features and advantages. In short, they are key-value stores which provide a flexible, intuitive way to structure data, ***and***, they provide very fast lookup time. Throughout the rest of these challenges, we will describe several common operations you can perform on objects so you can become comfortable applying these useful data structures in your programs.
+
+In earlier challenges, we have both added to and modified an object's key-value pairs. Here we will see how we can *remove* a key-value pair from an object.
+
+Let's revisit our `foods` object example one last time. If we wanted to remove the `apples` key, we can remove it by using the `delete` keyword like this:
 
 ```js
-let simpleArray = ['one', 2, 'three', true, false, undefined, null];
-console.log(simpleArray.length);
-// logs 7
-```
-
-All arrays have a length property, which as shown above, can be very easily accessed with the syntax `Array.length`. A more complex implementation of an array can be seen below. This is known as a <dfn>multi-dimensional array</dfn>, or an array that contains other arrays. Notice that this array also contains JavaScript <dfn>objects</dfn>, which we will examine very closely in our next section, but for now, all you need to know is that arrays are also capable of storing complex objects.
-
-```js
-let complexArray = [
-  [
-    {
-      one: 1,
-      two: 2
-    },
-    {
-      three: 3,
-      four: 4
-    }
-  ],
-  [
-    {
-      a: "a",
-      b: "b"
-    },
-    {
-      c: "c",
-      d: "d"
-    }
-  ]
-];
+delete foods.apples;
 ```
 
 # --instructions--
 
-We have defined a variable called `yourArray`. Complete the statement by assigning an array of at least 5 elements in length to the `yourArray` variable. Your array should contain at least one <dfn>string</dfn>, one <dfn>number</dfn>, and one <dfn>boolean</dfn>.
+Use the delete keyword to remove the `oranges`, `plums`, and `strawberries` keys from the `foods` object.
 
 # --hints--
 
-`yourArray` should be an array.
+The `foods` object should only have three keys: `apples`, `grapes`, and `bananas`.
 
 ```js
-assert.strictEqual(Array.isArray(yourArray), true);
+assert(
+  !foods.hasOwnProperty('oranges') &&
+    !foods.hasOwnProperty('plums') &&
+    !foods.hasOwnProperty('strawberries') &&
+    Object.keys(foods).length === 3
+);
 ```
 
-`yourArray` should be at least 5 elements long.
+The `oranges`, `plums`, and `strawberries` keys should be removed using `delete`.
 
 ```js
-assert.isAtLeast(yourArray.length, 5);
-```
-
-`yourArray` should contain at least one `boolean`.
-
-```js
-assert(yourArray.filter((el) => typeof el === 'boolean').length >= 1);
-```
-
-`yourArray` should contain at least one `number`.
-
-```js
-assert(yourArray.filter((el) => typeof el === 'number').length >= 1);
-```
-
-`yourArray` should contain at least one `string`.
-
-```js
-assert(yourArray.filter((el) => typeof el === 'string').length >= 1);
+assert(
+  code.search(/oranges:/) !== -1 &&
+    code.search(/plums:/) !== -1 &&
+    code.search(/strawberries:/) !== -1
+);
 ```
 
 # --seed--
@@ -84,11 +50,37 @@ assert(yourArray.filter((el) => typeof el === 'string').length >= 1);
 ## --seed-contents--
 
 ```js
-let yourArray; // Change this line
+let foods = {
+  apples: 25,
+  oranges: 32,
+  plums: 28,
+  bananas: 13,
+  grapes: 35,
+  strawberries: 27
+};
+
+// Only change code below this line
+
+// Only change code above this line
+
+console.log(foods);
 ```
 
 # --solutions--
 
 ```js
-let yourArray = ['a string', 100, true, ['one', 2], 'another string'];
+let foods = {
+  apples: 25,
+  oranges: 32,
+  plums: 28,
+  bananas: 13,
+  grapes: 35,
+  strawberries: 27
+};
+
+delete foods.oranges;
+delete foods.plums;
+delete foods.strawberries;
+
+console.log(foods);
 ```
