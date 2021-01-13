@@ -1,86 +1,113 @@
 ---
-id: 587d7b7c367417b2b2512b1b
-title: Use the delete Keyword to Remove Object Properties
-challengeType: 1
-forumTopicId: 301168
-dashedName: use-the-delete-keyword-to-remove-object-properties
+id: 5d5a813321b9e3db6c106a46
+title: Part 1
+challengeType: 0
+dashedName: part-1
 ---
 
 # --description--
 
-Now you know what objects are and their basic features and advantages. In short, they are key-value stores which provide a flexible, intuitive way to structure data, ***and***, they provide very fast lookup time. Throughout the rest of these challenges, we will describe several common operations you can perform on objects so you can become comfortable applying these useful data structures in your programs.
+To keep track of the player's experience points, we've declared a variable called `xp` and assigned it the starting value of 0.
 
-In earlier challenges, we have both added to and modified an object's key-value pairs. Here we will see how we can *remove* a key-value pair from an object.
-
-Let's revisit our `foods` object example one last time. If we wanted to remove the `apples` key, we can remove it by using the `delete` keyword like this:
-
-```js
-delete foods.apples;
-```
-
-# --instructions--
-
-Use the delete keyword to remove the `oranges`, `plums`, and `strawberries` keys from the `foods` object.
+Create another variable to keep track of health and start it at 100.
 
 # --hints--
 
-The `foods` object should only have three keys: `apples`, `grapes`, and `bananas`.
+See description above for instructions.
 
 ```js
-assert(
-  !foods.hasOwnProperty('oranges') &&
-    !foods.hasOwnProperty('plums') &&
-    !foods.hasOwnProperty('strawberries') &&
-    Object.keys(foods).length === 3
-);
-```
-
-The `oranges`, `plums`, and `strawberries` keys should be removed using `delete`.
-
-```js
-assert(
-  code.search(/oranges:/) !== -1 &&
-    code.search(/plums:/) !== -1 &&
-    code.search(/strawberries:/) !== -1
-);
+assert(health === 100);
 ```
 
 # --seed--
 
+## --before-user-code--
+
+```html
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>RPG - Dragon Repeller</title>
+  <style>
+    body {
+      background-color: darkblue;
+    }
+    #text {
+      background-color: black;
+      color: white;
+      padding: 10px;
+    }
+    #game {
+      max-width: 500px;
+      max-height: 400px;
+      background-color: lightgray;
+      color: white;
+      margin: 0 auto;
+      padding: 10px;
+    }
+    #controls {
+      border: 1px black solid;
+      padding: 5px;
+    }
+    #stats {
+      border: 1px black solid;
+      color: black;
+      padding: 5px;
+    }
+    #monsterStats {
+      display: none;
+      border: 1px black solid;
+      color: white;
+      padding: 5px;
+      background-color: red;
+    }
+    .stat {
+      padding-right: 10px;
+    }
+  </style>
+</head>
+<body>
+<div id="game">
+  <div id="stats">
+    <span class="stat">XP: <strong><span id="xpText">0</span></strong></span>
+    <span class="stat">Health: <strong><span id="healthText">100</span></strong></span>
+    <span class="stat">Gold: <strong><span id="goldText">50</span></strong></span>
+  </div>
+  <div id="controls">
+    <button id="button1">Go to store</button>
+    <button id="button2">Go to cave</button>
+    <button id="button3">Fight dragon</button>
+  </div>
+  <div id="monsterStats">
+    <span class="stat">Monster Name: <strong><span id="monsterName"></span></strong></span>
+    <span class="stat">Health: <strong><span id="monsterHealth"></span></strong></span>
+  </div>
+  <div id="text">Welcome to Dragon Repeller. You must defeat the dragon that is preventing people from leaving the town. You are in the town square. Where do you want to go? Use the buttons above.</div>
+</div>
+```
+
+## --after-user-code--
+
+```html
+</body>
+</html>
+```
+
 ## --seed-contents--
 
-```js
-let foods = {
-  apples: 25,
-  oranges: 32,
-  plums: 28,
-  bananas: 13,
-  grapes: 35,
-  strawberries: 27
-};
+```html
+<script>
+var xp = 0;
 
-// Only change code below this line
-
-// Only change code above this line
-
-console.log(foods);
+</script>
 ```
 
 # --solutions--
 
-```js
-let foods = {
-  apples: 25,
-  oranges: 32,
-  plums: 28,
-  bananas: 13,
-  grapes: 35,
-  strawberries: 27
-};
-
-delete foods.oranges;
-delete foods.plums;
-delete foods.strawberries;
-
-console.log(foods);
+```html
+<script>
+var xp = 0;
+var health = 100;
+</script>
 ```
