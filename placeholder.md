@@ -1,39 +1,70 @@
 ---
-id: 587d7b7b367417b2b2512b17
-title: Combine Arrays with the Spread Operator
+id: 587d7b7b367417b2b2512b13
+title: Copy an Array with the Spread Operator
 challengeType: 1
-forumTopicId: 301156
+forumTopicId: 301157
 ---
 
 # --description--
 
-Another huge advantage of the <dfn>spread</dfn> operator, is the ability to combine arrays, or to insert all the elements of one array into another, at any index. With more traditional syntaxes, we can concatenate arrays, but this only allows us to combine arrays at the end of one, and at the start of another. Spread syntax makes the following operation extremely simple:
+While `slice()` allows us to be selective about what elements of an array to copy, among several other useful tasks, ES6's new <dfn>spread operator</dfn> allows us to easily copy *all* of an array's elements, in order, with a simple and highly readable syntax. The spread syntax simply looks like this: `...`
+
+In practice, we can use the spread operator to copy an array like so:
 
 ```js
-let thisArray = ['sage', 'rosemary', 'parsley', 'thyme'];
-
-let thatArray = ['basil', 'cilantro', ...thisArray, 'coriander'];
-// thatArray now equals ['basil', 'cilantro', 'sage', 'rosemary', 'parsley', 'thyme', 'coriander']
+let thisArray = [true, true, undefined, false, null];
+let thatArray = [...thisArray];
+// thatArray equals [true, true, undefined, false, null]
+// thisArray remains unchanged and thatArray contains the same elements as thisArray
 ```
-
-Using spread syntax, we have just achieved an operation that would have been more complex and more verbose had we used traditional methods.
 
 # --instructions--
 
-We have defined a function `spreadOut` that returns the variable `sentence`. Modify the function using the <dfn>spread</dfn> operator so that it returns the array `['learning', 'to', 'code', 'is', 'fun']`.
+We have defined a function, `copyMachine` which takes `arr` (an array) and `num` (a number) as arguments. The function is supposed to return a new array made up of `num` copies of `arr`. We have done most of the work for you, but it doesn't work quite right yet. Modify the function using spread syntax so that it works correctly (hint: another method we have already covered might come in handy here!).
 
 # --hints--
 
-`spreadOut` should return `["learning", "to", "code", "is", "fun"]`
+`copyMachine([true, false, true], 2)` should return `[[true, false, true], [true, false, true]]`
 
 ```js
-assert.deepEqual(spreadOut(), ['learning', 'to', 'code', 'is', 'fun']);
+assert.deepEqual(copyMachine([true, false, true], 2), [
+  [true, false, true],
+  [true, false, true]
+]);
 ```
 
-The `spreadOut` function should utilize spread syntax
+`copyMachine([1, 2, 3], 5)` should return `[[1, 2, 3], [1, 2, 3], [1, 2, 3], [1, 2, 3], [1, 2, 3]]`
 
 ```js
-assert.notStrictEqual(spreadOut.toString().search(/[...]/), -1);
+assert.deepEqual(copyMachine([1, 2, 3], 5), [
+  [1, 2, 3],
+  [1, 2, 3],
+  [1, 2, 3],
+  [1, 2, 3],
+  [1, 2, 3]
+]);
+```
+
+`copyMachine([true, true, null], 1)` should return `[[true, true, null]]`
+
+```js
+assert.deepEqual(copyMachine([true, true, null], 1), [[true, true, null]]);
+```
+
+`copyMachine(["it works"], 3)` should return `[["it works"], ["it works"], ["it works"]]`
+
+```js
+assert.deepEqual(copyMachine(['it works'], 3), [
+  ['it works'],
+  ['it works'],
+  ['it works']
+]);
+```
+
+The `copyMachine` function should utilize the `spread operator` with array `arr`
+
+```js
+assert(__helpers.removeJSComments(code).match(/\.\.\.arr/));
 ```
 
 # --seed--
@@ -41,21 +72,30 @@ assert.notStrictEqual(spreadOut.toString().search(/[...]/), -1);
 ## --seed-contents--
 
 ```js
-function spreadOut() {
-  let fragment = ['to', 'code'];
-  let sentence; // Change this line
-  return sentence;
+function copyMachine(arr, num) {
+  let newArr = [];
+  while (num >= 1) {
+    // Only change code below this line
+
+    // Only change code above this line
+    num--;
+  }
+  return newArr;
 }
 
-console.log(spreadOut());
+console.log(copyMachine([true, false, true], 2));
 ```
 
 # --solutions--
 
 ```js
-function spreadOut() {
-  let fragment = ['to', 'code'];
-  let sentence = ['learning', ...fragment, 'is', 'fun'];
-  return sentence;
+function copyMachine(arr,num){
+    let newArr=[];
+    while(num >=1){
+    newArr.push([...arr]);
+    num--;
+    }
+    return newArr;
 }
+console.log(copyMachine([true, false, true], 2));
 ```
