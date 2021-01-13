@@ -1,13 +1,13 @@
 ---
-id: 5d6616d8e0696bdec46938d6
-title: Part 24
+id: 5d661814e0696bdec46938d7
+title: Part 25
 challengeType: 0
-dashedName: part-24
+dashedName: part-25
 ---
 
 # --description--
 
-At the end of the current code, add three new empty functions called `buyHealth`, `buyWeapon`, and `goTown`. After this step, you can test out the game by clicking the "Go to store" button.
+Move the `goTown` function to above the `goStore` function. Then, copy and paste the contents of the `goStore` function into the `goTown` function.
 
 # --hints--
 
@@ -15,9 +15,18 @@ See description above for instructions.
 
 ```js
 assert(
-  typeof buyHealth === 'function' &&
-    typeof buyWeapon === 'function' &&
-    typeof goTown === 'function'
+  (() => {
+    goTown();
+    return (
+      button1.innerText === 'Buy 10 health (10 gold)' &&
+      button2.innerText === 'Buy weapon (30 gold)' &&
+      button3.innerText === 'Go to town square' &&
+      text.innerText === 'You enter the store.' &&
+      goTown.toString().match(/button1\.onclick\s*\=\s*buyHealth\;?/) &&
+      goTown.toString().match(/button2\.onclick\s*\=\s*buyWeapon\;?/) &&
+      goTown.toString().match(/button3\.onclick\s*\=\s*goTown\;?/)
+    );
+  })()
 );
 ```
 
@@ -142,6 +151,15 @@ function fightDragon() {
   console.log("Fighting dragon.");
 }
 
+function buyHealth() {
+}
+
+function buyWeapon() {
+}
+
+function goTown() {
+}
+
 </script>
 ```
 
@@ -173,6 +191,16 @@ button1.onclick = goStore;
 button2.onclick = goCave;
 button3.onclick = fightDragon;
 
+function goTown() {
+  button1.innerText = "Buy 10 health (10 gold)";
+  button2.innerText = "Buy weapon (30 gold)";
+  button3.innerText = "Go to town square";
+  button1.onclick = buyHealth;
+  button2.onclick = buyWeapon;
+  button3.onclick = goTown;
+  text.innerText = "You enter the store.";
+}
+
 function goStore() {
   button1.innerText = "Buy 10 health (10 gold)";
   button2.innerText = "Buy weapon (30 gold)";
@@ -195,9 +223,6 @@ function buyHealth() {
 }
 
 function buyWeapon() {
-}
-
-function goTown() {
 }
 </script>
 ```
