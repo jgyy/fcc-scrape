@@ -1,114 +1,62 @@
 ---
-id: a24c1a4622e3c05097f71d67
-title: Where do I Belong
-challengeType: 5
-forumTopicId: 16094
+id: 587d7b7c367417b2b2512b1a
+title: Access Property Names with Bracket Notation
+challengeType: 1
+forumTopicId: 301150
 ---
 
 # --description--
 
-Return the lowest index at which a value (second argument) should be inserted into an array (first argument) once it has been sorted. The returned value should be a number.
+In the first object challenge we mentioned the use of bracket notation as a way to access property values using the evaluation of a variable. For instance, imagine that our `foods` object is being used in a program for a supermarket cash register. We have some function that sets the `selectedFood` and we want to check our `foods` object for the presence of that food. This might look like:
 
-For example, `getIndexToIns([1,2,3,4], 1.5)` should return `1` because it is greater than `1` (index 0), but less than `2` (index 1).
+```js
+let selectedFood = getCurrentFood(scannedItem);
+let inventory = foods[selectedFood];
+```
 
-Likewise, `getIndexToIns([20,3,5], 19)` should return `2` because once the array has been sorted it will look like `[3,5,20]` and `19` is less than `20` (index 2) and greater than `5` (index 1).
+This code will evaluate the value stored in the `selectedFood` variable and return the value of that key in the `foods` object, or `undefined` if it is not present. Bracket notation is very useful because sometimes object properties are not known before runtime or we need to access them in a more dynamic way.
+
+# --instructions--
+
+We've defined a function, `checkInventory`, which receives a scanned item as an argument. Return the current value of the `scannedItem` key in the `foods` object. You can assume that only valid keys will be provided as an argument to `checkInventory`.
 
 # --hints--
 
-`getIndexToIns([10, 20, 30, 40, 50], 35)` should return `3`.
+`checkInventory` should be a function.
 
 ```js
-assert(getIndexToIns([10, 20, 30, 40, 50], 35) === 3);
+assert.strictEqual(typeof checkInventory, 'function');
 ```
 
-`getIndexToIns([10, 20, 30, 40, 50], 35)` should return a number.
+The `foods` object should have only the following key-value pairs: `apples: 25`, `oranges: 32`, `plums: 28`, `bananas: 13`, `grapes: 35`, `strawberries: 27`.
 
 ```js
-assert(typeof getIndexToIns([10, 20, 30, 40, 50], 35) === 'number');
+assert.deepEqual(foods, {
+  apples: 25,
+  oranges: 32,
+  plums: 28,
+  bananas: 13,
+  grapes: 35,
+  strawberries: 27
+});
 ```
 
-`getIndexToIns([10, 20, 30, 40, 50], 30)` should return `2`.
+`checkInventory("apples")` should return `25`.
 
 ```js
-assert(getIndexToIns([10, 20, 30, 40, 50], 30) === 2);
+assert.strictEqual(checkInventory('apples'), 25);
 ```
 
-`getIndexToIns([10, 20, 30, 40, 50], 30)` should return a number.
+`checkInventory("bananas")` should return `13`.
 
 ```js
-assert(typeof getIndexToIns([10, 20, 30, 40, 50], 30) === 'number');
+assert.strictEqual(checkInventory('bananas'), 13);
 ```
 
-`getIndexToIns([40, 60], 50)` should return `1`.
+`checkInventory("strawberries")` should return `27`.
 
 ```js
-assert(getIndexToIns([40, 60], 50) === 1);
-```
-
-`getIndexToIns([40, 60], 50)` should return a number.
-
-```js
-assert(typeof getIndexToIns([40, 60], 50) === 'number');
-```
-
-`getIndexToIns([3, 10, 5], 3)` should return `0`.
-
-```js
-assert(getIndexToIns([3, 10, 5], 3) === 0);
-```
-
-`getIndexToIns([3, 10, 5], 3)` should return a number.
-
-```js
-assert(typeof getIndexToIns([3, 10, 5], 3) === 'number');
-```
-
-`getIndexToIns([5, 3, 20, 3], 5)` should return `2`.
-
-```js
-assert(getIndexToIns([5, 3, 20, 3], 5) === 2);
-```
-
-`getIndexToIns([5, 3, 20, 3], 5)` should return a number.
-
-```js
-assert(typeof getIndexToIns([5, 3, 20, 3], 5) === 'number');
-```
-
-`getIndexToIns([2, 20, 10], 19)` should return `2`.
-
-```js
-assert(getIndexToIns([2, 20, 10], 19) === 2);
-```
-
-`getIndexToIns([2, 20, 10], 19)` should return a number.
-
-```js
-assert(typeof getIndexToIns([2, 20, 10], 19) === 'number');
-```
-
-`getIndexToIns([2, 5, 10], 15)` should return `3`.
-
-```js
-assert(getIndexToIns([2, 5, 10], 15) === 3);
-```
-
-`getIndexToIns([2, 5, 10], 15)` should return a number.
-
-```js
-assert(typeof getIndexToIns([2, 5, 10], 15) === 'number');
-```
-
-`getIndexToIns([], 1)` should return `0`.
-
-```js
-assert(getIndexToIns([], 1) === 0);
-```
-
-`getIndexToIns([], 1)` should return a number.
-
-```js
-assert(typeof getIndexToIns([], 1) === 'number');
+assert.strictEqual(checkInventory('strawberries'), 27);
 ```
 
 # --seed--
@@ -116,27 +64,37 @@ assert(typeof getIndexToIns([], 1) === 'number');
 ## --seed-contents--
 
 ```js
-function getIndexToIns(arr, num) {
-  return num;
+let foods = {
+  apples: 25,
+  oranges: 32,
+  plums: 28,
+  bananas: 13,
+  grapes: 35,
+  strawberries: 27
+};
+
+function checkInventory(scannedItem) {
+  // Only change code below this line
+
+  // Only change code above this line
 }
 
-getIndexToIns([40, 60], 50);
+console.log(checkInventory("apples"));
 ```
 
 # --solutions--
 
 ```js
-function getIndexToIns(arr, num) {
-  arr = arr.sort((a, b) => a - b);
+let foods = {
+  apples: 25,
+  oranges: 32,
+  plums: 28,
+  bananas: 13,
+  grapes: 35,
+  strawberries: 27
+};
 
-  for (let i = 0; i < arr.length; i++) {
-    if (arr[i] >= num) {
-      return i;
-    }
-  }
-
-  return arr.length;
+function checkInventory(scannedItem) {
+  return foods[scannedItem];
 }
-
-getIndexToIns([40, 60], 50);
 ```
