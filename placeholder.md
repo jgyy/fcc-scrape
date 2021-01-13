@@ -1,24 +1,30 @@
 ---
-id: 5d665983e0696bdec46938dc
-title: Part 29
+id: 5d674fd9e0696bdec46938dd
+title: Part 30
 challengeType: 0
-dashedName: part-29
+dashedName: part-30
 ---
 
 # --description--
 
-Arrays can store any data type, including objects. Objects are similar to arrays, except that instead of using indexes to access and modify their data, you access the data in objects through what are called properties.
+Inside the object you just added, create a property called `name` with the value of "town square".
 
-Inside the `locations` array add an empty object using curly braces.
+For example, here is an example of an array with an object inside that has a property called `name` with a value of "Quincy Larson" (new lines are used only for the purpose of making the code more readable):
 
-Here is an example of an array named `arr` with an empty object inside: `const arr = [{}];`
+```js
+const arr = [
+  {
+    name: "Quincy Larson"
+  }
+]
+```
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert.deepStrictEqual(JSON.stringify(locations), `[{}]`);
+assert(locations[0].name === 'town square');
 ```
 
 # --seed--
@@ -119,7 +125,7 @@ const monsterStats = document.querySelector("#monsterStats");
 const monsterNameText = document.querySelector("#monsterName");
 const monsterHealthText = document.querySelector("#monsterHealth");
 
-const locations = [];
+const locations = [{}];
 
 // initialize buttons
 button1.onclick = goStore;
@@ -189,7 +195,11 @@ const monsterStats = document.querySelector("#monsterStats");
 const monsterNameText = document.querySelector("#monsterName");
 const monsterHealthText = document.querySelector("#monsterHealth");
 
-const locations = [{}];
+const locations = [
+  {
+    name: "town square"
+  }
+];
 
 // initialize buttons
 button1.onclick = goStore;
