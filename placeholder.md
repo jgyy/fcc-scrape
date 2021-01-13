@@ -1,16 +1,17 @@
 ---
-id: 5d653c4d6e6bf7a6a27aa80c
-title: Part 16
+id: 5d6542826e6bf7a6a27aa80d
+title: Part 17
 challengeType: 0
-dashedName: part-16
+dashedName: part-17
 ---
 
 # --description--
 
-Create the `goStore` function to hold the code that runs whenever the player goes to the store. Here is an example of an empty function called `functionName` (Note the opening curly brace at the end of the first line and the closing curly brace on the second line):
+For now, make the `goStore` function output the message "Going to store." to the web console. For example, here is a function that outputs the message "Hello World" to the web console (Note that code inside a function should be indented):
 
 ```js
 function functionName() {
+  console.log("Hello World");
 }
 ```
 
@@ -19,7 +20,11 @@ function functionName() {
 See description above for instructions.
 
 ```js
-assert(typeof goStore === 'function');
+assert(
+  goStore
+    .toString()
+    .match(/console\.log\(\s*[\"\'\`]Going to store\.?[\"\'\`]\s*\)/)
+);
 ```
 
 # --seed--
@@ -125,6 +130,9 @@ button1.onclick = goStore;
 button2.onclick = goCave;
 button3.onclick = fightDragon;
 
+function goStore() {
+}
+
 </script>
 ```
 
@@ -157,6 +165,7 @@ button2.onclick = goCave;
 button3.onclick = fightDragon;
 
 function goStore() {
+  console.log("Going to store.");
 }
 </script>
 ```
