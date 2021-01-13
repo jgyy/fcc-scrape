@@ -1,15 +1,13 @@
 ---
-id: 5d65f6392012114c7d7c57ed
-title: Part 20
+id: 5d6606634bab337fbb433884
+title: Part 21
 challengeType: 0
-dashedName: part-20
+dashedName: part-21
 ---
 
 # --description--
 
-When a player clicks the 'Go to store' button, the buttons and text in the game should change. Remove the code inside the `goStore` function. Add a new line of code inside the function that updates the text of `button1` so that it says "Buy 10 health (10 gold)".
-
-For example, this code updates the text of `button` to say "Click Me": `button.innerText = "Click Me";`.
+After the line that updates `button1`, update the text of `button2` to say "Buy weapon (30 gold)" and update the text of `button3` to say "Go to town square".
 
 # --hints--
 
@@ -19,7 +17,11 @@ See description above for instructions.
 assert(
   (() => {
     goStore();
-    return button1.innerText === 'Buy 10 health (10 gold)';
+    return (
+      button1.innerText === 'Buy 10 health (10 gold)' &&
+      button2.innerText === 'Buy weapon (30 gold)' &&
+      button3.innerText === 'Go to town square'
+    );
   })()
 );
 ```
@@ -128,7 +130,7 @@ button2.onclick = goCave;
 button3.onclick = fightDragon;
 
 function goStore() {
-  console.log("Going to store.");
+  button1.innerText = "Buy 10 health (10 gold)";
 }
 
 function goCave() {
@@ -172,6 +174,8 @@ button3.onclick = fightDragon;
 
 function goStore() {
   button1.innerText = "Buy 10 health (10 gold)";
+  button2.innerText = "Buy weapon (30 gold)";
+  button3.innerText = "Go to town square";
 }
 
 function goCave() {
