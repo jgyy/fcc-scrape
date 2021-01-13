@@ -1,19 +1,13 @@
 ---
-id: 5d6542826e6bf7a6a27aa80d
-title: Part 17
+id: 5d65f2c62012114c7d7c57eb
+title: Part 18
 challengeType: 0
-dashedName: part-17
+dashedName: part-18
 ---
 
 # --description--
 
-For now, make the `goStore` function output the message "Going to store." to the web console. For example, here is a function that outputs the message "Hello World" to the web console (Note that code inside a function should be indented):
-
-```js
-function functionName() {
-  console.log("Hello World");
-}
-```
+Similar to the `goStore` function, create a `goCave` function that prints "Going to cave." to the console.
 
 # --hints--
 
@@ -21,9 +15,9 @@ See description above for instructions.
 
 ```js
 assert(
-  goStore
+  goCave
     .toString()
-    .match(/console\.log\(\s*[\"\'\`]Going to store\.?[\"\'\`]\s*\)/)
+    .match(/console\.log\(\s*[\"\'\`]Going to cave\.?[\"\'\`]\s*\)/)
 );
 ```
 
@@ -131,6 +125,7 @@ button2.onclick = goCave;
 button3.onclick = fightDragon;
 
 function goStore() {
+  console.log("Going to store.")
 }
 
 </script>
@@ -165,7 +160,11 @@ button2.onclick = goCave;
 button3.onclick = fightDragon;
 
 function goStore() {
-  console.log("Going to store.");
+  console.log("Going to store.")
+}
+
+function goCave() {
+  console.log("Going to cave.");
 }
 </script>
 ```
