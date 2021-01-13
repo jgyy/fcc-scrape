@@ -1,22 +1,27 @@
 ---
-id: 5d5a8f1c07f328a948d398cf
-title: Part 3
+id: 5d5a903507f328a948d398d0
+title: Part 4
 challengeType: 0
-dashedName: part-3
+dashedName: part-4
 ---
 
 # --description--
 
-Create a variable called `currentWeapon` and set it to 0. When a name has two words, the convention is to use so-called "lowerCamelCase". The first word is all lowercase, and then the first letter of every preceding word is uppercased.
+We've been declaring variables with the `var` keyword. However, in modern JavaScript, it's better to use `let` instead of `var` because it fixes a number of unusual behaviors with `var` that make it difficult to reason about.
 
-When a name has two words, the convention is to use so-called "lowerCamelCase". The variable name should look like this: currentWeapon.
+Change every `var` to `let`.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(currentWeapon === 0);
+assert(
+  /let\s+xp\s*\=\s*0\;?/.test(code) &&
+    /let\s+health\s*\=\s*100\;?/.test(code) &&
+    /let\s+gold\s*\=\s*50\;?/.test(code) &&
+    /let\s+currentWeapon\s*\=\s*0\;?/.test(code)
+);
 ```
 
 # --seed--
@@ -101,6 +106,7 @@ assert(currentWeapon === 0);
 var xp = 0;
 var health = 100;
 var gold = 50;
+var currentWeapon = 0;
 
 </script>
 ```
@@ -109,9 +115,9 @@ var gold = 50;
 
 ```html
 <script>
-var xp = 0;
-var health = 100;
-var gold = 50;
-var currentWeapon = 0;
+let xp = 0;
+let health = 100;
+let gold = 50;
+let currentWeapon = 0;
 </script>
 ```
