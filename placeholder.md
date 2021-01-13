@@ -1,22 +1,20 @@
 ---
-id: 5d5aaa5807f328a948d398d1
-title: Part 5
+id: 5d5aab5d07f328a948d398d2
+title: Part 6
 challengeType: 0
-dashedName: part-5
+dashedName: part-6
 ---
 
 # --description--
 
-Now you will declare a variable without initializing it.
-
-Using the `let` keyword, declare a variable called `fighting` but don't set it equal to anything. Just end the line with a semicolon right after the variable name.
+Declare variables named `monsterHealth` and `inventory` without initializing them.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(/let\s+fighting\s*;?/.test(code) && fighting === undefined);
+assert(monsterHealth === undefined && inventory === undefined);
 ```
 
 # --seed--
@@ -102,6 +100,7 @@ let xp = 0;
 let health = 100;
 let gold = 50;
 let currentWeapon = 0;
+let fighting;
 
 </script>
 ```
@@ -115,5 +114,7 @@ let health = 100;
 let gold = 50;
 let currentWeapon = 0;
 let fighting;
+let monsterHealth;
+let inventory;
 </script>
 ```
