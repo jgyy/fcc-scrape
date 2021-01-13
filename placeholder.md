@@ -1,31 +1,26 @@
 ---
-id: 5d6752e3e0696bdec46938de
-title: Part 31
+id: 5d6755fce0696bdec46938df
+title: Part 32
 challengeType: 0
-dashedName: part-31
+dashedName: part-32
 ---
 
 # --description--
 
-After the `name` property put a comma. On the next line add a property named `"button text"` that has a value of an empty array. Since the property name has more than one word, there must be quotes around it.
+Inside the `"button text"` array, add three string elements. Use the three stings assigned to the buttons inside the `goTown` function.
 
-Here is an example:
-
-```js
-const arr = [
-  {
-    name: "Quincy Larson",
-    "favorite colors": []
-  }
-]
-```
+Here is an example array with three strings: `const arr = ["one", "two", "three"];`.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert.deepStrictEqual(locations[0]['button text'], []);
+assert.deepStrictEqual(locations[0]['button text'], [
+  'Go to store',
+  'Go to cave',
+  'Fight dragon'
+]);
 ```
 
 # --seed--
@@ -128,7 +123,8 @@ const monsterHealthText = document.querySelector("#monsterHealth");
 
 const locations = [
   {
-    name: "town square"
+    name: "town square",
+    "button text": []
   }
 ];
 
@@ -203,7 +199,7 @@ const monsterHealthText = document.querySelector("#monsterHealth");
 const locations = [
   {
     name: "town square",
-    "button text": []
+    "button text": ["Go to store", "Go to cave", "Fight dragon"]
   }
 ];
 
