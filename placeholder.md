@@ -1,93 +1,70 @@
 ---
-id: 587d7b7c367417b2b2512b18
-title: Add Key-Value Pairs to JavaScript Objects
+id: 587d7b7b367417b2b2512b14
+title: Check For The Presence of an Element With indexOf()
 challengeType: 1
-forumTopicId: 301153
+forumTopicId: 301154
 ---
 
 # --description--
 
-At their most basic, objects are just collections of <dfn>key-value</dfn> pairs. In other words, they are pieces of data (<dfn>values</dfn>) mapped to unique identifiers called <dfn>properties</dfn> (<dfn>keys</dfn>). Take a look at an example:
+Since arrays can be changed, or *mutated*, at any time, there's no guarantee about where a particular piece of data will be on a given array, or if that element even still exists. Luckily, JavaScript provides us with another built-in method, `indexOf()`, that allows us to quickly and easily check for the presence of an element on an array. `indexOf()` takes an element as a parameter, and when called, it returns the position, or index, of that element, or `-1` if the element does not exist on the array.
+
+For example:
 
 ```js
-const tekkenCharacter = {
-  player: 'Hwoarang',
-  fightingStyle: 'Tae Kwon Doe',
-  human: true
-};
-```
+let fruits = ['apples', 'pears', 'oranges', 'peaches', 'pears'];
 
-The above code defines a Tekken video game character object called `tekkenCharacter`. It has three properties, each of which map to a specific value. If you want to add an additional property, such as "origin", it can be done by assigning `origin` to the object:
-
-```js
-tekkenCharacter.origin = 'South Korea';
-```
-
-This uses dot notation. If you were to observe the `tekkenCharacter` object, it will now include the `origin` property. Hwoarang also had distinct orange hair. You can add this property with bracket notation by doing:
-
-```js
-tekkenCharacter['hair color'] = 'dyed orange';
-```
-
-Bracket notation is required if your property has a space in it or if you want to use a variable to name the property. In the above case, the property is enclosed in quotes to denote it as a string and will be added exactly as shown. Without quotes, it will be evaluated as a variable and the name of the property will be whatever value the variable is. Here's an example with a variable:
-
-```js
-const eyes = 'eye color';
-
-tekkenCharacter[eyes] = 'brown';
-```
-
-After adding all the examples, the object will look like this:
-
-```js
-{
-  player: 'Hwoarang',
-  fightingStyle: 'Tae Kwon Doe',
-  human: true,
-  origin: 'South Korea',
-  'hair color': 'dyed orange',
-  'eye color': 'brown'
-};
+fruits.indexOf('dates'); // returns -1
+fruits.indexOf('oranges'); // returns 2
+fruits.indexOf('pears'); // returns 1, the first index at which the element exists
 ```
 
 # --instructions--
 
-A `foods` object has been created with three entries. Using the syntax of your choice, add three more entries to it: `bananas` with a value of `13`, `grapes` with a value of `35`, and `strawberries` with a value of `27`.
+`indexOf()` can be incredibly useful for quickly checking for the presence of an element on an array. We have defined a function, `quickCheck`, that takes an array and an element as arguments. Modify the function using `indexOf()` so that it returns `true` if the passed element exists on the array, and `false` if it does not.
 
 # --hints--
 
-`foods` should be an object.
+The `quickCheck` function should return a boolean (`true` or `false`), not a string (`"true"` or `"false"`)
 
 ```js
-assert(typeof foods === 'object');
+assert.isBoolean(quickCheck(['squash', 'onions', 'shallots'], 'mushrooms'));
 ```
 
-The `foods` object should have a key `"bananas"` with a value of `13`.
+`quickCheck(["squash", "onions", "shallots"], "mushrooms")` should return `false`
 
 ```js
-assert(foods.bananas === 13);
-```
-
-The `foods` object should have a key `"grapes"` with a value of `35`.
-
-```js
-assert(foods.grapes === 35);
-```
-
-The `foods` object should have a key `"strawberries"` with a value of `27`.
-
-```js
-assert(foods.strawberries === 27);
-```
-
-The key-value pairs should be set using dot or bracket notation.
-
-```js
-assert(
-  code.search(/bananas:/) === -1 &&
-    code.search(/grapes:/) === -1 &&
-    code.search(/strawberries:/) === -1
+assert.strictEqual(
+  quickCheck(['squash', 'onions', 'shallots'], 'mushrooms'),
+  false
 );
+```
+
+`quickCheck(["onions", "squash", "shallots"], "onions")` should return `true`
+
+```js
+assert.strictEqual(
+  quickCheck(['onions', 'squash', 'shallots'], 'onions'),
+  true
+);
+```
+
+`quickCheck([3, 5, 9, 125, 45, 2], 125)` should return `true`
+
+```js
+assert.strictEqual(quickCheck([3, 5, 9, 125, 45, 2], 125), true);
+```
+
+`quickCheck([true, false, false], undefined)` should return `false`
+
+```js
+assert.strictEqual(quickCheck([true, false, false], undefined), false);
+```
+
+The `quickCheck` function should utilize the `indexOf()` method
+
+```js
+assert.notStrictEqual(quickCheck.toString().search(/\.indexOf\(/), -1);
 ```
 
 # --seed--
@@ -95,29 +72,19 @@ assert(
 ## --seed-contents--
 
 ```js
-let foods = {
-  apples: 25,
-  oranges: 32,
-  plums: 28
-};
+function quickCheck(arr, elem) {
+  // Only change code below this line
 
-// Only change code below this line
+  // Only change code above this line
+}
 
-// Only change code above this line
-
-console.log(foods);
+console.log(quickCheck(['squash', 'onions', 'shallots'], 'mushrooms'));
 ```
 
 # --solutions--
 
 ```js
-let foods = {
-  apples: 25,
-  oranges: 32,
-  plums: 28
-};
-
-foods['bananas'] = 13;
-foods['grapes']  = 35;
-foods['strawberries'] = 27;
+function quickCheck(arr, elem) {
+  return arr.indexOf(elem) >= 0; 
+}
 ```
