@@ -1,27 +1,22 @@
 ---
-id: 5d5a903507f328a948d398d0
-title: Part 4
+id: 5d5aaa5807f328a948d398d1
+title: Part 5
 challengeType: 0
-dashedName: part-4
+dashedName: part-5
 ---
 
 # --description--
 
-We've been declaring variables with the `var` keyword. However, in modern JavaScript, it's better to use `let` instead of `var` because it fixes a number of unusual behaviors with `var` that make it difficult to reason about.
+Now you will declare a variable without initializing it.
 
-Change every `var` to `let`.
+Using the `let` keyword, declare a variable called `fighting` but don't set it equal to anything. Just end the line with a semicolon right after the variable name.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(
-  /let\s+xp\s*\=\s*0\;?/.test(code) &&
-    /let\s+health\s*\=\s*100\;?/.test(code) &&
-    /let\s+gold\s*\=\s*50\;?/.test(code) &&
-    /let\s+currentWeapon\s*\=\s*0\;?/.test(code)
-);
+assert(/let\s+fighting\s*;?/.test(code) && fighting === undefined);
 ```
 
 # --seed--
@@ -103,10 +98,10 @@ assert(
 
 ```html
 <script>
-var xp = 0;
-var health = 100;
-var gold = 50;
-var currentWeapon = 0;
+let xp = 0;
+let health = 100;
+let gold = 50;
+let currentWeapon = 0;
 
 </script>
 ```
@@ -119,5 +114,6 @@ let xp = 0;
 let health = 100;
 let gold = 50;
 let currentWeapon = 0;
+let fighting;
 </script>
 ```
