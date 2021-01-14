@@ -1,24 +1,22 @@
 ---
-id: 5d7f410b7c4263f469c36b19
-title: Part 107
+id: 5d7f41fa7c4263f469c36b1a
+title: Part 108
 challengeType: 0
-dashedName: part-107
+dashedName: part-108
 ---
 
 # --description--
 
-Now set the `innerText` properties of `goldText` and `xpText` to the updated values.
+Finish the `defeatMonster` function by calling the `update()` function and pass in `locations[4]`.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-(xp = 10),
-  (gold = 10),
-  fightSlime(),
-  defeatMonster(),
-  assert(goldText.innerText === '23' && xpText.innerText === '12');
+assert(
+  defeatMonster.toString().match(/^\s*update\(\s*locations\[\s*4\s*\]\s*\)/m)
+);
 ```
 
 # --seed--
@@ -297,6 +295,9 @@ function dodge() {
 function defeatMonster() {
   gold += Math.floor(monsters[fighting].level * 6.7);
   xp += monsters[fighting].level;
+  goldText.innerText = gold;
+  xpText.innerText = xp;
+
 }
 
 function lose() {
@@ -508,6 +509,7 @@ function defeatMonster() {
   xp += monsters[fighting].level;
   goldText.innerText = gold;
   xpText.innerText = xp;
+  update(locations[4]);
 }
 
 function lose() {
