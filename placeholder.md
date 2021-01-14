@@ -1,28 +1,24 @@
 ---
-id: 5dbfced07736e5ee7d235544
-title: Part 143
+id: 5dbfd4837736e5ee7d235545
+title: Part 144
 challengeType: 0
-dashedName: part-143
+dashedName: part-144
 ---
 
 # --description--
 
-A `for` loop runs "for" a specific number of times.
+For loops are declared with three optional expressions separated by semicolons: `for ([initialization]; [condition]; [final-expression])`.
 
-We will go over how for loops work in the next several steps. In the meantime, just copy the for loop below and paste it at the end of the `pick` function:
+The initialization statement is executed only one time before the loop starts and is often used to define and set up the loop variable. Think of it like declaring a variable to use as a counter in your `for` loop.
 
-```js
-for (let x = 1; x < 5; x++) {
-
-}
-```
+Many `for` loops use `i` as an initializer and start from 0, so change `let x = 1;` to `let i = 0;`.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(pick.toString().replace(/\s/g, '').includes('for(varx=1;x<5;x++){'));
+assert(pick.toString().replace(/\s/g, '').includes('for(vari=0;x<5;x++){'));
 ```
 
 # --seed--
@@ -253,15 +249,15 @@ function buyHealth() {
 function buyWeapon() {
   if (currentWeapon < weapons.length - 1) {
     if (gold >= 30) {
-    gold -= 30;
-    currentWeapon++;
-    goldText.innerText = gold;
-    let newWeapon = weapons[currentWeapon].name;
-    text.innerText = "You now have a " + newWeapon + ".";
-    inventory.push(newWeapon);
-    text.innerText += " In your inventory you have: " + inventory;
+      gold -= 30;
+      currentWeapon++;
+      goldText.innerText = gold;
+      let newWeapon = weapons[currentWeapon].name;
+      text.innerText = "You now have a " + newWeapon + ".";
+      inventory.push(newWeapon);
+      text.innerText += " In your inventory you have: " + inventory;
     } else {
-    text.innerText = "You do not have enough gold to buy a weapon.";
+      text.innerText = "You do not have enough gold to buy a weapon.";
     }
   } else {
     text.innerText = "You already have the most powerful weapon!";
@@ -390,6 +386,10 @@ function pick(guess) {
   }
 
   text.innerText = "You picked " + guess + ". Here are the random numbers:\n";
+  
+  for (let x = 1; x < 5; x++) {
+
+  }
 }
 
 </script>
@@ -548,15 +548,15 @@ function buyHealth() {
 function buyWeapon() {
   if (currentWeapon < weapons.length - 1) {
     if (gold >= 30) {
-    gold -= 30;
-    currentWeapon++;
-    goldText.innerText = gold;
-    let newWeapon = weapons[currentWeapon].name;
-    text.innerText = "You now have a " + newWeapon + ".";
-    inventory.push(newWeapon);
-    text.innerText += " In your inventory you have: " + inventory;
+      gold -= 30;
+      currentWeapon++;
+      goldText.innerText = gold;
+      let newWeapon = weapons[currentWeapon].name;
+      text.innerText = "You now have a " + newWeapon + ".";
+      inventory.push(newWeapon);
+      text.innerText += " In your inventory you have: " + inventory;
     } else {
-    text.innerText = "You do not have enough gold to buy a weapon.";
+      text.innerText = "You do not have enough gold to buy a weapon.";
     }
   } else {
     text.innerText = "You already have the most powerful weapon!";
@@ -684,7 +684,7 @@ function pick(guess) {
 
   text.innerText = "You picked " + guess + ". Here are the random numbers:\n";
   
-  for (let x = 1; x < 5; x++) {
+  for (let i = 0; x < 5; x++) {
 
   }
 }
