@@ -1,20 +1,33 @@
 ---
-id: 5d71f669e39bedcf8f0998fe
-title: Part 91
+id: 5d72027ce39bedcf8f099900
+title: Part 92
 challengeType: 0
-dashedName: part-91
+dashedName: part-92
 ---
 
 # --description--
 
-In the `goFight` function, call the `update` function and pass it `locations[3]`.
+Next in the `goFight` function, set `monsterHealth` to equal the health of the current monster. You can get the health of the current monster with `monsters[fighting].health`. Try to understand that line before continuing.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(goFight.toString().match(/update\(\s*locations\[\s*3\s*\]\s*\)\;?/));
+assert(
+  (() => {
+    fightSlime();
+    return monsterHealth === 15;
+  })() &&
+    (() => {
+      fightBeast();
+      return monsterHealth === 60;
+    })() &&
+    (() => {
+      fightDragon();
+      return monsterHealth === 300;
+    })()
+);
 ```
 
 # --seed--
@@ -265,6 +278,7 @@ function fightDragon() {
 }
 
 function goFight() {
+  update(locations[3]);
 }
 
 function attack() {
@@ -450,6 +464,7 @@ function fightDragon() {
 
 function goFight() {
   update(locations[3]);
+  monsterHealth = monsters[fighting].health;
 }
 
 function attack() {
