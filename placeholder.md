@@ -1,63 +1,83 @@
 ---
-id: 56533eb9ac21ba0edf2244c7
-title: Accessing Object Properties with Dot Notation
+id: 56533eb9ac21ba0edf2244c9
+title: Accessing Object Properties with Variables
 challengeType: 1
-videoUrl: 'https://scrimba.com/c/cGryJs8'
-forumTopicId: 16164
-dashedName: accessing-object-properties-with-dot-notation
+videoUrl: 'https://scrimba.com/c/cnQyKur'
+forumTopicId: 16165
+dashedName: accessing-object-properties-with-variables
 ---
 
 # --description--
 
-There are two ways to access the properties of an object: dot notation (`.`) and bracket notation (`[]`), similar to an array.
+Another use of bracket notation on objects is to access a property which is stored as the value of a variable. This can be very useful for iterating through an object's properties or when accessing a lookup table.
 
-Dot notation is what you use when you know the name of the property you're trying to access ahead of time.
-
-Here is a sample of using dot notation (`.`) to read an object's property:
+Here is an example of using a variable to access a property:
 
 ```js
-var myObj = {
-  prop1: "val1",
-  prop2: "val2"
+var dogs = {
+  Fido: "Mutt",  Hunter: "Doberman",  Snoopie: "Beagle"
 };
-var prop1val = myObj.prop1; // val1
-var prop2val = myObj.prop2; // val2
+var myDog = "Hunter";
+var myBreed = dogs[myDog];
+console.log(myBreed); // "Doberman"
 ```
+
+Another way you can use this concept is when the property's name is collected dynamically during the program execution, as follows:
+
+```js
+var someObj = {
+  propName: "John"
+};
+function propPrefix(str) {
+  var s = "prop";
+  return s + str;
+}
+var someProp = propPrefix("Name"); // someProp now holds the value 'propName'
+console.log(someObj[someProp]); // "John"
+```
+
+Note that we do *not* use quotes around the variable name when using it to access the property because we are using the *value* of the variable, not the *name*.
 
 # --instructions--
 
-Read in the property values of `testObj` using dot notation. Set the variable `hatValue` equal to the object's property `hat` and set the variable `shirtValue` equal to the object's property `shirt`.
+Set the `playerNumber` variable to `16`. Then, use the variable to look up the player's name and assign it to `player`.
 
 # --hints--
 
-`hatValue` should be a string
+`playerNumber` should be a number
 
 ```js
-assert(typeof hatValue === 'string');
+assert(typeof playerNumber === 'number');
 ```
 
-The value of `hatValue` should be `"ballcap"`
+The variable `player` should be a string
 
 ```js
-assert(hatValue === 'ballcap');
+assert(typeof player === 'string');
 ```
 
-`shirtValue` should be a string
+The value of `player` should be "Montana"
 
 ```js
-assert(typeof shirtValue === 'string');
+assert(player === 'Montana');
 ```
 
-The value of `shirtValue` should be `"jersey"`
+You should use bracket notation to access `testObj`
 
 ```js
-assert(shirtValue === 'jersey');
+assert(/testObj\s*?\[.*?\]/.test(code));
 ```
 
-You should use dot notation twice
+You should not assign the value `Montana` to the variable `player` directly.
 
 ```js
-assert(code.match(/testObj\.\w+/g).length > 1);
+assert(!code.match(/player\s*=\s*"|\'\s*Montana\s*"|\'\s*;/gi));
+```
+
+You should be using the variable `playerNumber` in your bracket notation
+
+```js
+assert(/testObj\s*?\[\s*playerNumber\s*\]/.test(code));
 ```
 
 # --seed--
@@ -65,7 +85,7 @@ assert(code.match(/testObj\.\w+/g).length > 1);
 ## --after-user-code--
 
 ```js
-(function(a,b) { return "hatValue = '" + a + "', shirtValue = '" + b + "'"; })(hatValue,shirtValue);
+if(typeof player !== "undefined"){(function(v){return v;})(player);}
 ```
 
 ## --seed-contents--
@@ -73,26 +93,25 @@ assert(code.match(/testObj\.\w+/g).length > 1);
 ```js
 // Setup
 var testObj = {
-  "hat": "ballcap",
-  "shirt": "jersey",
-  "shoes": "cleats"
+  12: "Namath",
+  16: "Montana",
+  19: "Unitas"
 };
 
 // Only change code below this line
 
-var hatValue = testObj;      // Change this line
-var shirtValue = testObj;    // Change this line
+var playerNumber;       // Change this line
+var player = testObj;   // Change this line
 ```
 
 # --solutions--
 
 ```js
 var testObj = {
-  "hat": "ballcap",
-  "shirt": "jersey",
-  "shoes": "cleats"
+  12: "Namath",
+  16: "Montana",
+  19: "Unitas"
 };
-
-var hatValue = testObj.hat;
-var shirtValue = testObj.shirt;
+var playerNumber = 16;
+var player = testObj[playerNumber];
 ```
