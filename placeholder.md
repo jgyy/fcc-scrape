@@ -1,33 +1,28 @@
 ---
-id: 5dbc35326ef5fe3a704f84a5
-title: Part 142
+id: 5dbfced07736e5ee7d235544
+title: Part 143
 challengeType: 0
-dashedName: part-142
+dashedName: part-143
 ---
 
 # --description--
 
-Before the final end quote in the string you just added, insert the new line escape sequence (`\n`). This will cause the next part you add to `text.innerText` to appear on a new line.
+A `for` loop runs "for" a specific number of times.
+
+We will go over how for loops work in the next several steps. In the meantime, just copy the for loop below and paste it at the end of the `pick` function:
+
+```js
+for (let x = 1; x < 5; x++) {
+
+}
+```
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(
-  pick
-    .toString()
-    .replace(/\s/g, '')
-    .includes(
-      'text.innerText="Youpicked"+guess+".Herearetherandomnumbers:\\n";'
-    ) ||
-    pick
-      .toString()
-      .replace(/\s/g, '')
-      .includes(
-        'text.innerText="Youpicked".concat(guess,".Herearetherandomnumbers:\\n");'
-      )
-);
+assert(pick.toString().replace(/\s/g, '').includes('for(varx=1;x<5;x++){'));
 ```
 
 # --seed--
@@ -394,7 +389,7 @@ function pick(guess) {
     numbers.push(Math.floor(Math.random() * 11));
   }
 
-  text.innerText = "You picked " + guess + ". Here are the random numbers:";
+  text.innerText = "You picked " + guess + ". Here are the random numbers:\n";
 }
 
 </script>
@@ -688,6 +683,10 @@ function pick(guess) {
   }
 
   text.innerText = "You picked " + guess + ". Here are the random numbers:\n";
+  
+  for (let x = 1; x < 5; x++) {
+
+  }
 }
 </script>
 ```
