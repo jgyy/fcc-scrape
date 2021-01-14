@@ -1,13 +1,13 @@
 ---
-id: 5dbff2d07736e5ee7d23554b
-title: Part 150
+id: 5dbffd907736e5ee7d23554c
+title: Part 151
 challengeType: 0
-dashedName: part-150
+dashedName: part-151
 ---
 
 # --description--
 
-Add an `else` expression. Inside add "Wrong! You lose 10 health!" to the end of `text.innerText`. Also, subtract 10 from `health` and update `healthText.innerText`.
+At the end of the `else` statement, check if `health` is less than or equal to zero. If so, call the `lose()` function.
 
 # --hints--
 
@@ -15,13 +15,12 @@ See description above for instructions.
 
 ```js
 assert(
-  pick.toString().replace(/\s/g, '').includes('else{') &&
-    pick
-      .toString()
-      .replace(/\s/g, '')
-      .includes('text.innerText+="Wrong!Youlose10health!";') &&
-    pick.toString().replace(/\s/g, '').includes('health-=10;') &&
-    pick.toString().replace(/\s/g, '').includes('healthText.innerText=health;')
+  pick
+    .toString()
+    .replace(/\s/g, '')
+    .includes(
+      'else{text.innerText+="Wrong!Youlose10health!";health-=10;healthText.innerText=health;if(health<=0){lose();}}'
+    )
 );
 ```
 
@@ -253,15 +252,15 @@ function buyHealth() {
 function buyWeapon() {
   if (currentWeapon < weapons.length - 1) {
     if (gold >= 30) {
-    gold -= 30;
-    currentWeapon++;
-    goldText.innerText = gold;
-    let newWeapon = weapons[currentWeapon].name;
-    text.innerText = "You now have a " + newWeapon + ".";
-    inventory.push(newWeapon);
-    text.innerText += " In your inventory you have: " + inventory;
+      gold -= 30;
+      currentWeapon++;
+      goldText.innerText = gold;
+      let newWeapon = weapons[currentWeapon].name;
+      text.innerText = "You now have a " + newWeapon + ".";
+      inventory.push(newWeapon);
+      text.innerText += " In your inventory you have: " + inventory;
     } else {
-    text.innerText = "You do not have enough gold to buy a weapon.";
+      text.innerText = "You do not have enough gold to buy a weapon.";
     }
   } else {
     text.innerText = "You already have the most powerful weapon!";
@@ -399,6 +398,10 @@ function pick(guess) {
     text.innerText += "Right! You win 20 gold!";
     gold += 20;
     goldText.innerText = gold;
+  } else {
+    text.innerText += "Wrong! You lose 10 health!";
+    health -= 10;
+    healthText.innerText = health;
   }
 }
 
@@ -558,15 +561,15 @@ function buyHealth() {
 function buyWeapon() {
   if (currentWeapon < weapons.length - 1) {
     if (gold >= 30) {
-    gold -= 30;
-    currentWeapon++;
-    goldText.innerText = gold;
-    let newWeapon = weapons[currentWeapon].name;
-    text.innerText = "You now have a " + newWeapon + ".";
-    inventory.push(newWeapon);
-    text.innerText += " In your inventory you have: " + inventory;
+      gold -= 30;
+      currentWeapon++;
+      goldText.innerText = gold;
+      let newWeapon = weapons[currentWeapon].name;
+      text.innerText = "You now have a " + newWeapon + ".";
+      inventory.push(newWeapon);
+      text.innerText += " In your inventory you have: " + inventory;
     } else {
-    text.innerText = "You do not have enough gold to buy a weapon.";
+      text.innerText = "You do not have enough gold to buy a weapon.";
     }
   } else {
     text.innerText = "You already have the most powerful weapon!";
@@ -706,6 +709,9 @@ function pick(guess) {
     text.innerText += "Wrong! You lose 10 health!";
     health -= 10;
     healthText.innerText = health;
+    if (health <= 0) {
+    lose();
+    }
   }
 }
 </script>
