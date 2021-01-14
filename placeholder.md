@@ -1,25 +1,20 @@
 ---
-id: 5d7df0458360d21c6826a9b1
-title: Part 96
+id: 5d7df2a68360d21c6826a9b2
+title: Part 97
 challengeType: 0
-dashedName: part-96
+dashedName: part-97
 ---
 
 # --description--
 
-Now use the `+=` operator to append more text to `text.innerText`. Add the text " You attack it with your \[weapon name]." but replace "\[weapon name]" with the actual weapon name. Remember, you can get the weapon name with `weapons[currentWeapon].name`.
+Next, set `health` to equal `health` minus the monster's level. You can get the monster's level with `monsters[fighting].level`.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-(currentWeapon = 3),
-  fightDragon(),
-  attack(),
-  assert(
-    text.innerText === 'The dragon attacks. You attack it with your sword.'
-  );
+(health = 50), fightDragon(), attack(), assert(health === 30);
 ```
 
 # --seed--
@@ -225,15 +220,15 @@ function buyHealth() {
 function buyWeapon() {
   if (currentWeapon < weapons.length - 1) {
     if (gold >= 30) {
-      gold -= 30;
-      currentWeapon++;
-      goldText.innerText = gold;
-      let newWeapon = weapons[currentWeapon].name;
-      text.innerText = "You now have a " + newWeapon + ".";
-      inventory.push(newWeapon);
-      text.innerText += " In your inventory you have: " + inventory;
+    gold -= 30;
+    currentWeapon++;
+    goldText.innerText = gold;
+    let newWeapon = weapons[currentWeapon].name;
+    text.innerText = "You now have a " + newWeapon + ".";
+    inventory.push(newWeapon);
+    text.innerText += " In your inventory you have: " + inventory;
     } else {
-      text.innerText = "You do not have enough gold to buy a weapon.";
+    text.innerText = "You do not have enough gold to buy a weapon.";
     }
   } else {
     text.innerText = "You already have the most powerful weapon!";
@@ -279,6 +274,7 @@ function goFight() {
 
 function attack() {
   text.innerText = "The " + monsters[fighting].name + " attacks.";
+  text.innerText += " You attack it with your " + weapons[currentWeapon].name + ".";
 }
 
 function dodge() {
@@ -415,15 +411,15 @@ function buyHealth() {
 function buyWeapon() {
   if (currentWeapon < weapons.length - 1) {
     if (gold >= 30) {
-      gold -= 30;
-      currentWeapon++;
-      goldText.innerText = gold;
-      let newWeapon = weapons[currentWeapon].name;
-      text.innerText = "You now have a " + newWeapon + ".";
-      inventory.push(newWeapon);
-      text.innerText += " In your inventory you have: " + inventory;
+    gold -= 30;
+    currentWeapon++;
+    goldText.innerText = gold;
+    let newWeapon = weapons[currentWeapon].name;
+    text.innerText = "You now have a " + newWeapon + ".";
+    inventory.push(newWeapon);
+    text.innerText += " In your inventory you have: " + inventory;
     } else {
-      text.innerText = "You do not have enough gold to buy a weapon.";
+    text.innerText = "You do not have enough gold to buy a weapon.";
     }
   } else {
     text.innerText = "You already have the most powerful weapon!";
@@ -470,6 +466,7 @@ function goFight() {
 function attack() {
   text.innerText = "The " + monsters[fighting].name + " attacks.";
   text.innerText += " You attack it with your " + weapons[currentWeapon].name + ".";
+  health -= monsters[fighting].level;
 }
 
 function dodge() {
