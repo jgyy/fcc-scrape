@@ -1,15 +1,13 @@
 ---
-id: 5dbabb746ef5fe3a704f848d
-title: Part 119
+id: 5dbac08e6ef5fe3a704f848f
+title: Part 120
 challengeType: 0
-dashedName: part-119
+dashedName: part-120
 ---
 
 # --description--
 
-The game could be complete now, but let's make it more interesting.
-
-Inside the `attack` function, change the line `health -= monsters[fighting].level;` to `health -= getMonsterAttackValue(monsters[fighting].level);` This sets `health` to equal `health` minus the return value of the `getMonsterAttackValue` function. Also, pass the level of the monster to `getMonsterAttackValue` as an argument.
+Under the `attack` function, create a function with name `getMonsterAttackValue` that takes `level` as a parameter.
 
 # --hints--
 
@@ -17,10 +15,8 @@ See description above for instructions.
 
 ```js
 assert(
-  attack
-    .toString()
-    .replace(/\s/g, '')
-    .includes('health-=getMonsterAttackValue(monsters[fighting].level')
+  getMonsterAttackValue.toString().replace(/\s/g, '') ===
+    'functiongetMonsterAttackValue(level){}'
 );
 ```
 
@@ -246,15 +242,15 @@ function buyHealth() {
 function buyWeapon() {
   if (currentWeapon < weapons.length - 1) {
     if (gold >= 30) {
-      gold -= 30;
-      currentWeapon++;
-      goldText.innerText = gold;
-      let newWeapon = weapons[currentWeapon].name;
-      text.innerText = "You now have a " + newWeapon + ".";
-      inventory.push(newWeapon);
-      text.innerText += " In your inventory you have: " + inventory;
+    gold -= 30;
+    currentWeapon++;
+    goldText.innerText = gold;
+    let newWeapon = weapons[currentWeapon].name;
+    text.innerText = "You now have a " + newWeapon + ".";
+    inventory.push(newWeapon);
+    text.innerText += " In your inventory you have: " + inventory;
     } else {
-      text.innerText = "You do not have enough gold to buy a weapon.";
+    text.innerText = "You do not have enough gold to buy a weapon.";
     }
   } else {
     text.innerText = "You already have the most powerful weapon!";
@@ -301,7 +297,7 @@ function goFight() {
 function attack() {
   text.innerText = "The " + monsters[fighting].name + " attacks.";
   text.innerText += " You attack it with your " + weapons[currentWeapon].name + ".";
-  health -= monsters[fighting].level;
+  health -= getMonsterAttackValue(monsters[fighting].level);
   monsterHealth -= weapons[currentWeapon].power + Math.floor(Math.random() * xp) + 1;
   healthText.innerText = health;
   monsterHealthText.innerText = monsterHealth;
@@ -494,15 +490,15 @@ function buyHealth() {
 function buyWeapon() {
   if (currentWeapon < weapons.length - 1) {
     if (gold >= 30) {
-      gold -= 30;
-      currentWeapon++;
-      goldText.innerText = gold;
-      let newWeapon = weapons[currentWeapon].name;
-      text.innerText = "You now have a " + newWeapon + ".";
-      inventory.push(newWeapon);
-      text.innerText += " In your inventory you have: " + inventory;
+    gold -= 30;
+    currentWeapon++;
+    goldText.innerText = gold;
+    let newWeapon = weapons[currentWeapon].name;
+    text.innerText = "You now have a " + newWeapon + ".";
+    inventory.push(newWeapon);
+    text.innerText += " In your inventory you have: " + inventory;
     } else {
-      text.innerText = "You do not have enough gold to buy a weapon.";
+    text.innerText = "You do not have enough gold to buy a weapon.";
     }
   } else {
     text.innerText = "You already have the most powerful weapon!";
@@ -558,6 +554,9 @@ function attack() {
   } else if (monsterHealth <= 0) {
     fighting === 2 ? winGame() : defeatMonster();
   }
+}
+
+function getMonsterAttackValue(level) {
 }
 
 function dodge() {
