@@ -1,24 +1,20 @@
 ---
-id: 5d6f82da7c812010bf3327d8
-title: Part 63
+id: 5d6f919f7c812010bf3327d9
+title: Part 64
 challengeType: 0
-dashedName: part-63
+dashedName: part-64
 ---
 
 # --description--
 
-Now update the `innerText` property of `goldText` and `text`. `text` should equal "You now have a new weapon.".
+Let's tell the player what weapon they bought. In between the two lines you just wrote, use `let` to initialize a new variable called `newWeapon`. Set `newWeapon` to equal `weapons`.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-buyWeapon(),
-  assert(
-    goldText.innerText === '20' &&
-      text.innerText === 'You now have a new weapon.'
-  );
+assert(/let\s*newWeapon\s*\=\s*weapons\;?/.test(code));
 ```
 
 # --seed--
@@ -205,6 +201,8 @@ function buyWeapon() {
   if (gold >= 30) {
     gold -= 30;
     currentWeapon++;
+    goldText.innerText = gold;
+    text.innerText = "You now have a new weapon.";
   }
 }
 
@@ -327,6 +325,7 @@ function buyWeapon() {
     gold -= 30;
     currentWeapon++;
     goldText.innerText = gold;
+    let newWeapon = weapons;
     text.innerText = "You now have a new weapon.";
   }
 }
