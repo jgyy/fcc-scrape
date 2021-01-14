@@ -1,21 +1,33 @@
 ---
-id: 5dbc33956ef5fe3a704f84a4
-title: Part 141
+id: 5dbc35326ef5fe3a704f84a5
+title: Part 142
 challengeType: 0
-dashedName: part-141
+dashedName: part-142
 ---
 
 # --description--
 
-After the `while` loop, set `text.innerText` to equal "You picked \[guess]. Here are the random numbers:". Replace \[guess] with the actual guess.
+Before the final end quote in the string you just added, insert the new line escape sequence (`\n`). This will cause the next part you add to `text.innerText` to appear on a new line.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-pickTwo(),
-  assert(text.innerText === 'You picked 2. Here are the random numbers:');
+assert(
+  pick
+    .toString()
+    .replace(/\s/g, '')
+    .includes(
+      'text.innerText="Youpicked"+guess+".Herearetherandomnumbers:\\n";'
+    ) ||
+    pick
+      .toString()
+      .replace(/\s/g, '')
+      .includes(
+        'text.innerText="Youpicked".concat(guess,".Herearetherandomnumbers:\\n");'
+      )
+);
 ```
 
 # --seed--
@@ -246,15 +258,15 @@ function buyHealth() {
 function buyWeapon() {
   if (currentWeapon < weapons.length - 1) {
     if (gold >= 30) {
-      gold -= 30;
-      currentWeapon++;
-      goldText.innerText = gold;
-      let newWeapon = weapons[currentWeapon].name;
-      text.innerText = "You now have a " + newWeapon + ".";
-      inventory.push(newWeapon);
-      text.innerText += " In your inventory you have: " + inventory;
+    gold -= 30;
+    currentWeapon++;
+    goldText.innerText = gold;
+    let newWeapon = weapons[currentWeapon].name;
+    text.innerText = "You now have a " + newWeapon + ".";
+    inventory.push(newWeapon);
+    text.innerText += " In your inventory you have: " + inventory;
     } else {
-      text.innerText = "You do not have enough gold to buy a weapon.";
+    text.innerText = "You do not have enough gold to buy a weapon.";
     }
   } else {
     text.innerText = "You already have the most powerful weapon!";
@@ -381,6 +393,8 @@ function pick(guess) {
   while(numbers.length < 10) {
     numbers.push(Math.floor(Math.random() * 11));
   }
+
+  text.innerText = "You picked " + guess + ". Here are the random numbers:";
 }
 
 </script>
@@ -539,15 +553,15 @@ function buyHealth() {
 function buyWeapon() {
   if (currentWeapon < weapons.length - 1) {
     if (gold >= 30) {
-      gold -= 30;
-      currentWeapon++;
-      goldText.innerText = gold;
-      let newWeapon = weapons[currentWeapon].name;
-      text.innerText = "You now have a " + newWeapon + ".";
-      inventory.push(newWeapon);
-      text.innerText += " In your inventory you have: " + inventory;
+    gold -= 30;
+    currentWeapon++;
+    goldText.innerText = gold;
+    let newWeapon = weapons[currentWeapon].name;
+    text.innerText = "You now have a " + newWeapon + ".";
+    inventory.push(newWeapon);
+    text.innerText += " In your inventory you have: " + inventory;
     } else {
-      text.innerText = "You do not have enough gold to buy a weapon.";
+    text.innerText = "You do not have enough gold to buy a weapon.";
     }
   } else {
     text.innerText = "You already have the most powerful weapon!";
@@ -673,7 +687,7 @@ function pick(guess) {
     numbers.push(Math.floor(Math.random() * 11));
   }
 
-  text.innerText = "You picked " + guess + ". Here are the random numbers:";
+  text.innerText = "You picked " + guess + ". Here are the random numbers:\n";
 }
 </script>
 ```
