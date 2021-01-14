@@ -1,13 +1,20 @@
 ---
-id: 5d6f96747c812010bf3327db
-title: Part 66
+id: 5d6f98247c812010bf3327dc
+title: Part 67
 challengeType: 0
-dashedName: part-66
+dashedName: part-67
 ---
 
 # --description--
 
-Get just the name property of the current weapon by adding `.name` at the end of `weapons[currentWeapon]` (don't use a space).
+You can insert variables into a string with the concatenation (`+`) operator. Update the "You now have a new weapon." string so it says "You now have a " and then lists the name of the new weapon. Make sure to add a period at the end of the sentence.
+
+Here is an example that creates the string "Hello, our name is freeCodeCamp.":
+
+```js
+let ourName = "freeCodeCamp";
+let ourStr = "Hello, our name is " + ourName + ".";
+```
 
 # --hints--
 
@@ -15,7 +22,9 @@ See description above for instructions.
 
 ```js
 assert(
-  /let\s*newWeapon\s*\=\s*weapons\s?\[currentWeapon\]\.name\;?/.test(code)
+  buyWeapon
+    .toString()
+    .match(/[\'\"\`]You now have a [\'\"\`]\s*\+\s*newWeapon\;?/)
 );
 ```
 
@@ -204,7 +213,7 @@ function buyWeapon() {
     gold -= 30;
     currentWeapon++;
     goldText.innerText = gold;
-    let newWeapon = weapons[currentWeapon];
+    let newWeapon = weapons[currentWeapon].name;
     text.innerText = "You now have a new weapon.";
   }
 }
@@ -329,7 +338,7 @@ function buyWeapon() {
     currentWeapon++;
     goldText.innerText = gold;
     let newWeapon = weapons[currentWeapon].name;
-    text.innerText = "You now have a new weapon.";
+    text.innerText = "You now have a " + newWeapon + ".";
   }
 }
 
