@@ -1,19 +1,19 @@
 ---
-id: 5dbac6176ef5fe3a704f8493
-title: Part 125
+id: 5dbaca566ef5fe3a704f8494
+title: Part 126
 challengeType: 0
-dashedName: part-125
+dashedName: part-126
 ---
 
 # --description--
 
-In the `attack` function after the line `health -= getMonsterAttackValue(monsters[fighting].level);`, create an empty if expression. For the condition, put the function call `isMonsterHit()`.
+In the `attack` function, move the line `monsterHealth -= weapons[currentWeapon].power + Math.floor(Math.random() * xp) + 1;` into the `if` block.
 
-Here is an example of an empty if expression with a function call as the condition:
+Here is an example of code in an `if` block that logs a message to the console:
 
 ```js
 if (isTrue()) {
-
+  console.log("It's true!");
 }
 ```
 
@@ -22,7 +22,14 @@ if (isTrue()) {
 See description above for instructions.
 
 ```js
-assert(attack.toString().replace(/\s/g, '').includes('if(isMonsterHit()){}'));
+assert(
+  attack
+    .toString()
+    .replace(/\s/g, '')
+    .match(
+      /if\(isMonsterHit\(\)\)\{monsterHealth\-\=weapons\[currentWeapon\]\.power\+Math\.floor\(Math\.random\(\)\*xp\)\+1;?\}/
+    )
+);
 ```
 
 # --seed--
@@ -303,6 +310,10 @@ function attack() {
   text.innerText = "The " + monsters[fighting].name + " attacks.";
   text.innerText += " You attack it with your " + weapons[currentWeapon].name + ".";
   health -= getMonsterAttackValue(monsters[fighting].level);
+  
+  if (isMonsterHit()) {
+
+  }
   monsterHealth -= weapons[currentWeapon].power + Math.floor(Math.random() * xp) + 1;
   healthText.innerText = health;
   monsterHealthText.innerText = monsterHealth;
@@ -558,8 +569,8 @@ function attack() {
   text.innerText += " You attack it with your " + weapons[currentWeapon].name + ".";
   health -= getMonsterAttackValue(monsters[fighting].level);
   if (isMonsterHit()) {
+    monsterHealth -= weapons[currentWeapon].power + Math.floor(Math.random() * xp) + 1;
   }
-  monsterHealth -= weapons[currentWeapon].power + Math.floor(Math.random() * xp) + 1;
   healthText.innerText = health;
   monsterHealthText.innerText = monsterHealth;
   if (health <= 0) {
