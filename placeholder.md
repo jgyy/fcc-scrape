@@ -1,25 +1,20 @@
 ---
-id: 5d6f736b7c812010bf3327d2
-title: Part 58
+id: 5d6f776c7c812010bf3327d3
+title: Part 59
 challengeType: 0
-dashedName: part-58
+dashedName: part-59
 ---
 
 # --description--
 
-Just like in the `locations` array, all the elements in `weapons` will be objects. Add four objects to the `weapons` array, each with two properties: `name` and `power`. The first should be the `name` "stick" with `power` set to 5. Then, "dagger" with set `power` to 30. Next, "claw hammer" with a `power` of 50. Finally, "sword" with a `power` of 100.
+Inside the `buyWeapon` function, add an `if` statement to check if gold is greater than or equal to 30.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert.deepStrictEqual(weapons, [
-  { name: 'stick', power: 5 },
-  { name: 'dagger', power: 30 },
-  { name: 'claw hammer', power: 50 },
-  { name: 'sword', power: 100 }
-]);
+assert(buyWeapon.toString().match(/if\s*\(\s*gold\s*\>\=\s*30\)\s*\{\s*\}/));
 ```
 
 # --seed--
@@ -120,7 +115,24 @@ const monsterStats = document.querySelector("#monsterStats");
 const monsterNameText = document.querySelector("#monsterName");
 const monsterHealthText = document.querySelector("#monsterHealth");
 
-const weapons = [];
+const weapons = [
+  {
+    name: "stick",
+    power: 5
+  },
+  {
+    name: "dagger",
+    power: 30
+  },
+  {
+    name: "claw hammer",
+    power: 50
+  },
+  {
+    name: "sword",
+    power: 100
+  }
+];
 
 const locations = [
   {
@@ -303,6 +315,9 @@ function buyHealth() {
 }
 
 function buyWeapon() {
+  if (gold >= 30) {
+    
+  }
 }
 
 function fightSlime() {
