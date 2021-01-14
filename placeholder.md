@@ -1,39 +1,26 @@
 ---
-id: 5d80c3c021b11cdaa3f6b165
-title: Part 114
+id: 5d80d20d21b11cdaa3f6b166
+title: Part 115
 challengeType: 0
-dashedName: part-114
+dashedName: part-115
 ---
 
 # --description--
 
-At the end of the code, create a `restart` function. Inside the function, set `xp` to 0, set `health` to 100, set `gold` to 50, set `currentWeapon` to 0, and set `inventory` to `["stick"]`. Also, update the `innerText` properties of `goldText`, `healthText`, and `xpText` to their current values. Finally, call the `goTown()` function.
-
-After this step is a good time to test the game so far.
+Inside the `attack` function, update the contents of the `else if` statement. Instead of calling the `defeatMonster` function right away, create an `if` statement with an `else` statement. If the player is fighting the dragon (`fighting === 2`), then call the `winGame` function. Else, call the `defeatMonster` function.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-(currentWeapon = 1),
-  (inventory = ['stick', 'dagger']),
-  fightSlime(),
-  attack(),
-  defeatMonster(),
-  restart(),
-  assert(
-    xp === 0 &&
-      gold === 50 &&
-      currentWeapon === 0 &&
-      inventory[0] === 'stick' &&
-      inventory.length === 1 &&
-      goldText.innerText === '50' &&
-      healthText.innerText === '100' &&
-      xpText.innerText === '0' &&
-      text.innerText ===
-        'You are in the town square. You see a sign that says "Store."'
-  );
+assert(
+  attack
+    .toString()
+    .match(
+      /^\s*\}\s*else\s*if\s*\(\s*monsterHealth\s*\<\=\s*0\s*\)\s*\{\s*if\s*\(\s*fighting\s*===\s*2\)\s*\{\s*winGame\(\s*\)\;?\s*\}\s*else\s*\{\s*defeatMonster\(\s*\)\;?\s*\}\s*\}/m
+    )
+);
 ```
 
 # --seed--
@@ -334,6 +321,18 @@ function lose() {
   update(locations[5]);
 }
 
+function restart() {
+  xp = 0;
+  health = 100;
+  gold = 50;
+  currentWeapon = 0;
+  inventory = ["stick"];
+  goldText.innerText = gold;
+  healthText.innerText = health;
+  xpText.innerText = xp;
+  goTown();
+}
+
 </script>
 ```
 
@@ -540,7 +539,11 @@ function attack() {
   if (health <= 0) {
     lose();
   } else if (monsterHealth <= 0) {
-    defeatMonster();
+    if (fighting === 2) {
+      winGame();
+    } else {
+      defeatMonster();
+    }
   }
 }
 
