@@ -1,27 +1,26 @@
 ---
-id: 5d6f9a4c7c812010bf3327dd
-title: Part 68
+id: 5d70850e066dac7142a6d797
+title: Part 69
 challengeType: 0
-dashedName: part-68
+dashedName: part-69
 ---
 
 # --description--
 
-Way back at the beginning you created the `inventory` array. Push the `newWeapon` onto the end of the `inventory` array. Here is an example of pushing onto an array:
-
-```js
-let arr = ["first"];
-let next = "second";
-arr.push(next);
-// arr now equals ["first", "second"]
-```
+Up to this point, anytime `text.innerText` was updated, the old text was erased. This time, use the `+=` operator instead of the `=` operator to add text to the end of `text.innerText`. Add the string " In your inventory you have: " (include the spaces at the beginning and end).
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-buyWeapon(), assert.deepStrictEqual(inventory, ['stick', 'dagger']);
+assert(
+  buyWeapon
+    .toString()
+    .match(
+      /text\.innerText\s*\+\=\s*[\'\"\`] In your inventory you have\: [\'\"\`]\;?/
+    )
+);
 ```
 
 # --seed--
@@ -211,6 +210,7 @@ function buyWeapon() {
     goldText.innerText = gold;
     let newWeapon = weapons[currentWeapon].name;
     text.innerText = "You now have a " + newWeapon + ".";
+    inventory.push(newWeapon);
   }
 }
 
@@ -336,6 +336,7 @@ function buyWeapon() {
     let newWeapon = weapons[currentWeapon].name;
     text.innerText = "You now have a " + newWeapon + ".";
     inventory.push(newWeapon);
+    text.innerText += " In your inventory you have: ";
   }
 }
 
