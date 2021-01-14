@@ -1,13 +1,21 @@
 ---
-id: 5dbae0446ef5fe3a704f8495
-title: Part 127
+id: 5dbae1f66ef5fe3a704f8496
+title: Part 128
 challengeType: 0
-dashedName: part-127
+dashedName: part-128
 ---
 
 # --description--
 
-Add an `else` expression to the `if` expression. Use the `+=` operator to add the text " You miss." onto the end of `text.innerText`.
+Now create the `isMonsterHit` function. It will return a boolean to be used in the `if` expression. Return the result of the comparison `Math.random() > .2`.
+
+Here is a function that returns the result of a comparison:
+
+```js
+function flipHeads() {
+  return Math.random() > .5;
+}
+```
 
 # --hints--
 
@@ -15,12 +23,14 @@ See description above for instructions.
 
 ```js
 assert(
-  attack
+  isMonsterHit
     .toString()
     .replace(/\s/g, '')
-    .match(
-      /if\(isMonsterHit\(\)\)\{monsterHealth\-\=weapons\[currentWeapon\]\.power\+Math\.floor\(Math\.random\(\)\*xp\)\+1;?\}else\{text\.innerText\+\=[\'\"\`]Youmiss.[\'\"\`]\;?\}/
-    )
+    .includes('returnMath.random()>.2') ||
+    isMonsterHit
+      .toString()
+      .replace(/\s/g, '')
+      .includes('returnMath.random()>0.2')
 );
 ```
 
@@ -305,6 +315,8 @@ function attack() {
 
   if (isMonsterHit()) {
     monsterHealth -= weapons[currentWeapon].power + Math.floor(Math.random() * xp) + 1;
+  } else {
+    text.innerText += " You miss.";
   }
   healthText.innerText = health;
   monsterHealthText.innerText = monsterHealth;
@@ -577,6 +589,10 @@ function attack() {
 function getMonsterAttackValue(level) {
   const hit = (level * 5) - (Math.floor(Math.random() * xp));
   return hit > 0 ? hit : 0;
+}
+
+function isMonsterHit() {
+  return Math.random() > .2;
 }
 
 function dodge() {
