@@ -1,29 +1,22 @@
 ---
-id: 5d6f6f747c812010bf3327ce
-title: Part 55
+id: 5d6f70937c812010bf3327cf
+title: Part 56
 challengeType: 0
-dashedName: part-55
+dashedName: part-56
 ---
 
 # --description--
 
-Now when a player tries to buy health it will only work if they have enough money. If the player does not have enough money, nothing will happen. Add an `else` statement where you can put code to run if a player dees not have enough money.
-
-Here is an example of an empty `else` statement:
-
-```js
-if (num >= 5) {
-  console.log("Num is greater than or equal to five!");
-} else {
-}
-```
+Inside the `else` statement, set `text.innerText` to equal "You do not have enough gold to buy health."
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(buyHealth.toString().match(/\}\s*else\s*\{\s*\}/));
+(gold = 5),
+  buyHealth(),
+  assert(text.innerText === 'You do not have enough gold to buy health.');
 ```
 
 # --seed--
@@ -182,6 +175,8 @@ function buyHealth() {
     health += 10;
     goldText.innerText = gold;
     healthText.innerText = health;
+  } else {
+
   }
 }
 
@@ -279,7 +274,7 @@ function buyHealth() {
     goldText.innerText = gold;
     healthText.innerText = health;
   } else {
-
+    text.innerText = "You do not have enough gold to buy health.";
   }
 }
 
