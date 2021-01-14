@@ -1,20 +1,20 @@
 ---
-id: 5d6f776c7c812010bf3327d3
-title: Part 59
+id: 5d6f785f7c812010bf3327d4
+title: Part 60
 challengeType: 0
-dashedName: part-59
+dashedName: part-60
 ---
 
 # --description--
 
-Inside the `buyWeapon` function, add an `if` statement to check if gold is greater than or equal to 30.
+Similar to in the `buyHealth` function, set `gold` to equal 30 less than its current value.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(buyWeapon.toString().match(/if\s*\(\s*gold\s*\>\=\s*30\)\s*\{\s*\}/));
+(gold = 50), buyWeapon(), assert(gold === 20);
 ```
 
 # --seed--
@@ -198,6 +198,9 @@ function buyHealth() {
 }
 
 function buyWeapon() {
+  if (gold >= 30) {
+    
+  }
 }
 
 function fightSlime() {
@@ -316,7 +319,7 @@ function buyHealth() {
 
 function buyWeapon() {
   if (gold >= 30) {
-    
+    gold -= 30;
   }
 }
 
