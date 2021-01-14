@@ -1,20 +1,24 @@
 ---
-id: 5d708fae066dac7142a6d79f
-title: Part 77
+id: 5d709664066dac7142a6d7a0
+title: Part 78
 challengeType: 0
-dashedName: part-77
+dashedName: part-78
 ---
 
 # --description--
 
-After the `buyWeapon` function, create an empty function called `sellWeapon`.
+Players should not be able to sell their only weapon. Inside the `sellWeapon` function, add an `if` statement with a condition that checks if the length of the `inventory` array is greater than one.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(typeof sellWeapon === 'function');
+assert(
+  sellWeapon
+    .toString()
+    .match(/if\s*\(\s*inventory\.length\s*\>\s*1\s*\)\s*\{\s*\}/)
+);
 ```
 
 # --seed--
@@ -217,6 +221,9 @@ function buyWeapon() {
   }
 }
 
+function sellWeapon() {
+}
+
 function fightSlime() {
 }
 
@@ -352,6 +359,9 @@ function buyWeapon() {
 }
 
 function sellWeapon() {
+  if (inventory.length > 1) {
+
+  }
 }
 
 function fightSlime() {
