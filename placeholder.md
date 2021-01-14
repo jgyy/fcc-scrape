@@ -1,13 +1,15 @@
 ---
-id: 5dbac0c86ef5fe3a704f8490
-title: Part 121
+id: 5dbac1f16ef5fe3a704f8491
+title: Part 122
 challengeType: 0
-dashedName: part-121
+dashedName: part-122
 ---
 
 # --description--
 
-The attack of the monster will be based on the monster's level and player's `xp`. In the `getMonsterAttackValue` function, use `const` to create a variable called `hit`. Set it to equal the equation `(level * 5) - (Math.floor(Math.random() * xp))`.
+Log the value of `hit` to the console to use in debugging.
+
+Here is how to log the value of `num` to the console: `console.log(num);`.
 
 # --hints--
 
@@ -18,7 +20,7 @@ assert(
   getMonsterAttackValue
     .toString()
     .replace(/\s/g, '')
-    .includes('varhit=level*5-Math.floor(Math.random()*xp)')
+    .includes('console.log(hit)')
 );
 ```
 
@@ -311,7 +313,7 @@ function attack() {
 }
 
 function getMonsterAttackValue(level) {
-
+  const hit = (level * 5) - (Math.floor(Math.random() * xp));
 }
 
 function dodge() {
@@ -564,6 +566,7 @@ function attack() {
 
 function getMonsterAttackValue(level) {
   const hit = (level * 5) - (Math.floor(Math.random() * xp));
+  console.log(hit);
 }
 
 function dodge() {
