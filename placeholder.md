@@ -1,40 +1,20 @@
 ---
-id: 5d80d67021b11cdaa3f6b167
-title: Part 116
+id: 5d80da7521b11cdaa3f6b168
+title: Part 117
 challengeType: 0
-dashedName: part-116
+dashedName: part-117
 ---
 
 # --description--
 
-The conditional operator, also called the ternary operator, can be used as a one line if-else expression. The syntax is: `condition ? statement-if-true : statement-if-false;`.
-
-Change the if-else expression from the last challenge to use the ternary operator instead. Here is an example:
-
-```js
-if (age >= 18) {
-  adultFunction();
-} else {
-  kidFunction();
-}
-
-// The above if-else expression does the same thing as the following line
-
-age >= 18 ? adultFunction() : kidFunction();
-```
+After the `lose` function, create a function called `winGame`. Inside the `winGame` function, call the `update` function and pass in `locations[6]`.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(
-  attack
-    .toString()
-    .match(
-      /^\s*\}\s*else\s*if\s*\(\s*monsterHealth\s*\<\=\s*0\s*\)\s*\{\s*fighting\s*\=\=\=\s*2\s*\?\s*winGame\(\s*\)\s*\:\s*defeatMonster\(\s*\)\;?\s*\}/m
-    )
-);
+assert(winGame.toString().replace(/\s/g, '').includes('update(locations[6])'));
 ```
 
 # --seed--
@@ -253,15 +233,15 @@ function buyHealth() {
 function buyWeapon() {
   if (currentWeapon < weapons.length - 1) {
     if (gold >= 30) {
-    gold -= 30;
-    currentWeapon++;
-    goldText.innerText = gold;
-    let newWeapon = weapons[currentWeapon].name;
-    text.innerText = "You now have a " + newWeapon + ".";
-    inventory.push(newWeapon);
-    text.innerText += " In your inventory you have: " + inventory;
+      gold -= 30;
+      currentWeapon++;
+      goldText.innerText = gold;
+      let newWeapon = weapons[currentWeapon].name;
+      text.innerText = "You now have a " + newWeapon + ".";
+      inventory.push(newWeapon);
+      text.innerText += " In your inventory you have: " + inventory;
     } else {
-    text.innerText = "You do not have enough gold to buy a weapon.";
+      text.innerText = "You do not have enough gold to buy a weapon.";
     }
   } else {
     text.innerText = "You already have the most powerful weapon!";
@@ -315,11 +295,7 @@ function attack() {
   if (health <= 0) {
     lose();
   } else if (monsterHealth <= 0) {
-    if (fighting === 2) {
-    winGame();
-    } else {
-    defeatMonster();
-    }
+    fighting === 2 ? winGame() : defeatMonster();
   }
 }
 
@@ -495,15 +471,15 @@ function buyHealth() {
 function buyWeapon() {
   if (currentWeapon < weapons.length - 1) {
     if (gold >= 30) {
-    gold -= 30;
-    currentWeapon++;
-    goldText.innerText = gold;
-    let newWeapon = weapons[currentWeapon].name;
-    text.innerText = "You now have a " + newWeapon + ".";
-    inventory.push(newWeapon);
-    text.innerText += " In your inventory you have: " + inventory;
+      gold -= 30;
+      currentWeapon++;
+      goldText.innerText = gold;
+      let newWeapon = weapons[currentWeapon].name;
+      text.innerText = "You now have a " + newWeapon + ".";
+      inventory.push(newWeapon);
+      text.innerText += " In your inventory you have: " + inventory;
     } else {
-    text.innerText = "You do not have enough gold to buy a weapon.";
+      text.innerText = "You do not have enough gold to buy a weapon.";
     }
   } else {
     text.innerText = "You already have the most powerful weapon!";
@@ -575,6 +551,10 @@ function defeatMonster() {
 
 function lose() {
   update(locations[5]);
+}
+
+function winGame() {
+  update(locations[6]);
 }
 
 function restart() {
