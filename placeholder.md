@@ -1,13 +1,23 @@
 ---
-id: 5d6905ace0696bdec46938f3
-title: Part 52
+id: 5d6f6bfc7c812010bf3327cc
+title: Part 53
 challengeType: 0
-dashedName: part-52
+dashedName: part-53
 ---
 
 # --description--
 
-Now that the gold and health variables have been updated, we need to update the values displayed on the screen. Inside the `buyHealth` function, add the line `goldText.innerText = gold;`. Then use the same pattern to update `healthText`.
+What if the player doesn't have enough gold to buy health? Put all the code in the `buyHealth` function inside an `if` statement. Here is an example of an `if` statement inside a function:
+
+```js
+function checkMoney() {
+  if (condition) {
+    console.log("You have money!");
+  }
+}
+```
+
+Note: For now you should use the word "condition" inside the `if` statement but we'll be changing that next.
 
 # --hints--
 
@@ -15,8 +25,15 @@ See description above for instructions.
 
 ```js
 assert(
-  buyHealth.toString().match(/goldText\.innerText\s*\=\s*gold\;?/) &&
-    buyHealth.toString().match(/healthText.innerText\s*\=\s*health\;?/)
+  buyHealth
+    .toString()
+    .match(
+      /if\s*\(\s*condition\s*\)\s*\{\s*(gold|health|goldText|healthText)/
+    ) &&
+    buyHealth.toString().match(/gold\s*\-\=\s*10\;?/) &&
+    buyHealth.toString().match(/health\s*\+\=\s*10\;?/) &&
+    buyHealth.toString().match(/goldText\.innerText\s*\=\s*gold\;?/) &&
+    buyHealth.toString().match(/healthText\.innerText\s*\=\s*health\;?/)
 );
 ```
 
@@ -173,6 +190,8 @@ function fightDragon() {
 function buyHealth() {
   gold -= 10;
   health += 10;
+  goldText.innerText = gold;
+  healthText.innerText = health;
 }
 
 function buyWeapon() {
@@ -263,10 +282,12 @@ function fightDragon() {
 }
 
 function buyHealth() {
-  gold -= 10;
-  health += 10;
-  goldText.innerText = gold;
-  healthText.innerText = health;
+  if (condition) {
+    gold -= 10;
+    health += 10;
+    goldText.innerText = gold;
+    healthText.innerText = health;
+  }
 }
 
 function buyWeapon() {
