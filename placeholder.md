@@ -1,13 +1,15 @@
 ---
-id: 5d72027ce39bedcf8f099900
-title: Part 92
+id: 5d721925e39bedcf8f099901
+title: Part 93
 challengeType: 0
-dashedName: part-92
+dashedName: part-93
 ---
 
 # --description--
 
-Next in the `goFight` function, set `monsterHealth` to equal the health of the current monster. You can get the health of the current monster with `monsters[fighting].health`. Try to understand that line before continuing.
+The HTML that shows the monster stats that has been hidden using CSS. Display the `monsterStats` HTML element by updating its CSS `display` property to equal `block`.
+
+Here is an example of updating the `display` property of an element named `myElement`: `myElement.style.display = "block";`
 
 # --hints--
 
@@ -15,18 +17,9 @@ See description above for instructions.
 
 ```js
 assert(
-  (() => {
-    fightSlime();
-    return monsterHealth === 15;
-  })() &&
-    (() => {
-      fightBeast();
-      return monsterHealth === 60;
-    })() &&
-    (() => {
-      fightDragon();
-      return monsterHealth === 300;
-    })()
+  goFight
+    .toString()
+    .match(/^\s*monsterStats\.style\.display\s*\=\s*[\'\"\`]block[\'\"\`]\;?/m)
 );
 ```
 
@@ -279,6 +272,7 @@ function fightDragon() {
 
 function goFight() {
   update(locations[3]);
+  monsterHealth = monsters[fighting].health;
 }
 
 function attack() {
@@ -465,6 +459,7 @@ function fightDragon() {
 function goFight() {
   update(locations[3]);
   monsterHealth = monsters[fighting].health;
+  monsterStats.style.display = "block";
 }
 
 function attack() {
