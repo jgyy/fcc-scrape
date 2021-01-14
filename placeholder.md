@@ -1,13 +1,13 @@
 ---
-id: 5d709664066dac7142a6d7a0
-title: Part 78
+id: 5d709bbc066dac7142a6d7a2
+title: Part 79
 challengeType: 0
-dashedName: part-78
+dashedName: part-79
 ---
 
 # --description--
 
-Players should not be able to sell their only weapon. Inside the `sellWeapon` function, add an `if` statement with a condition that checks if the length of the `inventory` array is greater than one.
+Inside the `if` statement, set `gold` equal to 15 more than its current value. Also, update `goldText.innerText` to the new value.
 
 # --hints--
 
@@ -15,9 +15,18 @@ See description above for instructions.
 
 ```js
 assert(
-  sellWeapon
-    .toString()
-    .match(/if\s*\(\s*inventory\.length\s*\>\s*1\s*\)\s*\{\s*\}/)
+  (() => {
+    gold = 50;
+    inventory = ['stick'];
+    sellWeapon();
+    return gold === 50 && goldText.innerText === '50';
+  })() &&
+    (() => {
+      gold = 50;
+      inventory = ['stick', 'dagger'];
+      sellWeapon();
+      return gold === 65 && goldText.innerText === '65';
+    })()
 );
 ```
 
@@ -222,6 +231,9 @@ function buyWeapon() {
 }
 
 function sellWeapon() {
+  if (inventory.length > 1) {
+
+  }
 }
 
 function fightSlime() {
@@ -360,7 +372,8 @@ function buyWeapon() {
 
 function sellWeapon() {
   if (inventory.length > 1) {
-
+    gold += 15;
+    goldText.innerText = gold;
   }
 }
 
