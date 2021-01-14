@@ -1,22 +1,20 @@
 ---
-id: 5d6f70937c812010bf3327cf
-title: Part 56
+id: 5d6f72657c812010bf3327d0
+title: Part 57
 challengeType: 0
-dashedName: part-56
+dashedName: part-57
 ---
 
 # --description--
 
-Inside the `else` statement, set `text.innerText` to equal "You do not have enough gold to buy health."
+Before we write the code for the `buyWeapon` function, use `const` to create a `weapons` variable right above the `locations` array. Set it to equal an empty array.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-(gold = 5),
-  buyHealth(),
-  assert(text.innerText === 'You do not have enough gold to buy health.');
+assert.deepStrictEqual(weapons, []);
 ```
 
 # --seed--
@@ -176,7 +174,7 @@ function buyHealth() {
     goldText.innerText = gold;
     healthText.innerText = health;
   } else {
-
+    text.innerText = "You do not have enough gold to buy health.";
   }
 }
 
@@ -214,6 +212,8 @@ const goldText = document.querySelector("#goldText");
 const monsterStats = document.querySelector("#monsterStats");
 const monsterNameText = document.querySelector("#monsterName");
 const monsterHealthText = document.querySelector("#monsterHealth");
+
+const weapons = [];
 
 const locations = [
   {
