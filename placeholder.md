@@ -1,19 +1,20 @@
 ---
-id: 5d6f6e3c7c812010bf3327cd
-title: Part 54
+id: 5d6f6f747c812010bf3327ce
+title: Part 55
 challengeType: 0
-dashedName: part-54
+dashedName: part-55
 ---
 
 # --description--
 
-The word "condition" inside the if statement is just a placeholder. Change the condition to check if the amount of gold the player has is greater than or equal to 10.
+Now when a player tries to buy health it will only work if they have enough money. If the player does not have enough money, nothing will happen. Add an `else` statement where you can put code to run if a player dees not have enough money.
 
-Here is an `if` statement that checks if `num` is greater than or equal to 5:
+Here is an example of an empty `else` statement:
 
 ```js
 if (num >= 5) {
   console.log("Num is greater than or equal to five!");
+} else {
 }
 ```
 
@@ -22,7 +23,7 @@ if (num >= 5) {
 See description above for instructions.
 
 ```js
-assert(buyHealth.toString().match(/if\s*\(\s*gold\s*\>\=\s*10\s*\)/));
+assert(buyHealth.toString().match(/\}\s*else\s*\{\s*\}/));
 ```
 
 # --seed--
@@ -176,7 +177,7 @@ function fightDragon() {
 }
 
 function buyHealth() {
-  if (condition) {
+  if (gold >= 10) {
     gold -= 10;
     health += 10;
     goldText.innerText = gold;
@@ -277,6 +278,8 @@ function buyHealth() {
     health += 10;
     goldText.innerText = gold;
     healthText.innerText = health;
+  } else {
+
   }
 }
 
