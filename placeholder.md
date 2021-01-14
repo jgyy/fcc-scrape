@@ -1,36 +1,22 @@
 ---
-id: 5d68c5efe0696bdec46938ea
-title: Part 43
+id: 5d68c758e0696bdec46938eb
+title: Part 44
 challengeType: 0
-dashedName: part-43
+dashedName: part-44
 ---
 
 # --description--
 
-Now update the three `onclick` properties. These will look very similar to the `innerText` properties, except instead of using the `"button text"` part of the `location`, use `"button functions"`.
+Finally, update `text.innerText` to equal the `text` from the location object.
+
+So far we have been accessing properties of the location object using bracket notation. This time use dot notation. Here is how to access a `name` property of an object called `obj` using dot notation: `obj.name`.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(
-  update
-    .toString()
-    .match(
-      /button1\.onclick\s*\=\s*location\[[\'\"\`]button functions[\'\"\`]\]\[0\]/
-    ) &&
-    update
-      .toString()
-      .match(
-        /button2\.onclick\s*\=\s*location\[[\'\"\`]button functions[\'\"\`]\]\[1\]/
-      ) &&
-    update
-      .toString()
-      .match(
-        /button3\.onclick\s*\=\s*location\[[\'\"\`]button functions[\'\"\`]\]\[2\]/
-      )
-);
+assert(update.toString().match(/text\.innerText\s*\=\s*location\.text\;?/));
 ```
 
 # --seed--
@@ -155,9 +141,9 @@ function update(location) {
   button1.innerText = location["button text"][0];
   button2.innerText = location["button text"][1];
   button3.innerText = location["button text"][2];
-  button1.onclick = goStore;
-  button2.onclick = goCave;
-  button3.onclick = fightDragon;
+  button1.onclick = location["button functions"][0];
+  button2.onclick = location["button functions"][1];
+  button3.onclick = location["button functions"][2];
   text.innerText = "You are in the town square. You see a sign that says \"Store\".";
 }
 
@@ -235,7 +221,7 @@ function update(location) {
   button1.onclick = location["button functions"][0];
   button2.onclick = location["button functions"][1];
   button3.onclick = location["button functions"][2];
-  text.innerText = "You are in the town square. You see a sign that says \"Store\".";
+  text.innerText = location.text;
 }
 
 function goTown() {
