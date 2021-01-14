@@ -1,13 +1,13 @@
 ---
-id: 5d708c9a066dac7142a6d79d
-title: Part 75
+id: 5d708dd7066dac7142a6d79e
+title: Part 76
 challengeType: 0
-dashedName: part-75
+dashedName: part-76
 ---
 
 # --description--
 
-Add an `else` statement on the end of the outer `if` statement. Inside the `else` statement, set `text.innerText` to "You already have the most powerful weapon!".
+Once a player has the most powerful weapon, we'll give them the ability to sell their older weapons back. In the else statement, set `button2.innerText` to equal "Sell weapon for 15 gold". Also, set `button2.onclick` to the function name `sellWeapon`.
 
 # --hints--
 
@@ -18,7 +18,7 @@ assert(
   buyWeapon
     .toString()
     .match(
-      /\}\s*else\s*\{\s*text\.innerText\s*\=\s*[\'\"\`]You do not have enough gold to buy a weapon\.?[\'\"\`]\;?\s*\}\s*\}\s*else\s*\{\s*text\.innerText\s*\=\s*[\'\"\`]You already have the most powerful weapon\![\'\"\`]\;?\s*\}/
+      /else\s*\{\s*text\.innerText\s*\=\s*[\'\"\`]You already have the most powerful weapon\![\'\"\`]\;?\s*button2\.innerText\s*\=\s*[\'\"\`]Sell weapon for 15 gold\.?[\'\"\`]\;?\s*button2\.onclick\s*\=\s*sellWeapon\;?\s*\}/
     )
 );
 ```
@@ -216,6 +216,8 @@ function buyWeapon() {
     } else {
       text.innerText = "You do not have enough gold to buy a weapon.";
     }
+  } else {
+    text.innerText = "You already have the most powerful weapon!";
   }
 }
 
@@ -348,6 +350,8 @@ function buyWeapon() {
     }
   } else {
     text.innerText = "You already have the most powerful weapon!";
+    button2.innerText = "Sell weapon for 15 gold";
+    button2.onclick = sellWeapon;
   }
 }
 
