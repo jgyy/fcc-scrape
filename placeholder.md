@@ -1,13 +1,13 @@
 ---
-id: 5dbac08e6ef5fe3a704f848f
-title: Part 120
+id: 5dbac0c86ef5fe3a704f8490
+title: Part 121
 challengeType: 0
-dashedName: part-120
+dashedName: part-121
 ---
 
 # --description--
 
-Under the `attack` function, create a function with name `getMonsterAttackValue` that takes `level` as a parameter.
+The attack of the monster will be based on the monster's level and player's `xp`. In the `getMonsterAttackValue` function, use `const` to create a variable called `hit`. Set it to equal the equation `(level * 5) - (Math.floor(Math.random() * xp))`.
 
 # --hints--
 
@@ -15,8 +15,10 @@ See description above for instructions.
 
 ```js
 assert(
-  getMonsterAttackValue.toString().replace(/\s/g, '') ===
-    'functiongetMonsterAttackValue(level){}'
+  getMonsterAttackValue
+    .toString()
+    .replace(/\s/g, '')
+    .includes('varhit=level*5-Math.floor(Math.random()*xp)')
 );
 ```
 
@@ -308,6 +310,10 @@ function attack() {
   }
 }
 
+function getMonsterAttackValue(level) {
+
+}
+
 function dodge() {
   text.innerText = "You dodge the attack from the " + monsters[fighting].name + ".";
 }
@@ -557,6 +563,7 @@ function attack() {
 }
 
 function getMonsterAttackValue(level) {
+  const hit = (level * 5) - (Math.floor(Math.random() * xp));
 }
 
 function dodge() {
