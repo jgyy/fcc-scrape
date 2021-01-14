@@ -1,13 +1,13 @@
 ---
-id: 5d68c51ee0696bdec46938e9
-title: Part 42
+id: 5d68c5efe0696bdec46938ea
+title: Part 43
 challengeType: 0
-dashedName: part-42
+dashedName: part-43
 ---
 
 # --description--
 
-Now update the `innerText` of the other two buttons. They should be set to equal the same thing as the first button, except the number inside the brackets should be 1 for the second button and 2 for the third button.
+Now update the three `onclick` properties. These will look very similar to the `innerText` properties, except instead of using the `"button text"` part of the `location`, use `"button functions"`.
 
 # --hints--
 
@@ -18,12 +18,17 @@ assert(
   update
     .toString()
     .match(
-      /button2\.innerText\s*\=\s*location\[[\'\"\`]button text[\'\"\`]\]\[1\]/
+      /button1\.onclick\s*\=\s*location\[[\'\"\`]button functions[\'\"\`]\]\[0\]/
     ) &&
     update
       .toString()
       .match(
-        /button3\.innerText\s*\=\s*location\[[\'\"\`]button text[\'\"\`]\]\[2\]/
+        /button2\.onclick\s*\=\s*location\[[\'\"\`]button functions[\'\"\`]\]\[1\]/
+      ) &&
+    update
+      .toString()
+      .match(
+        /button3\.onclick\s*\=\s*location\[[\'\"\`]button functions[\'\"\`]\]\[2\]/
       )
 );
 ```
@@ -148,8 +153,8 @@ button3.onclick = fightDragon;
 
 function update(location) {  
   button1.innerText = location["button text"][0];
-  button2.innerText = "Go to cave";
-  button3.innerText = "Fight dragon";
+  button2.innerText = location["button text"][1];
+  button3.innerText = location["button text"][2];
   button1.onclick = goStore;
   button2.onclick = goCave;
   button3.onclick = fightDragon;
@@ -227,9 +232,9 @@ function update(location) {
   button1.innerText = location["button text"][0];
   button2.innerText = location["button text"][1];
   button3.innerText = location["button text"][2];
-  button1.onclick = goStore;
-  button2.onclick = goCave;
-  button3.onclick = fightDragon;
+  button1.onclick = location["button functions"][0];
+  button2.onclick = location["button functions"][1];
+  button3.onclick = location["button functions"][2];
   text.innerText = "You are in the town square. You see a sign that says \"Store\".";
 }
 
