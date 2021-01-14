@@ -1,19 +1,19 @@
 ---
-id: 5d6f98247c812010bf3327dc
-title: Part 67
+id: 5d6f9a4c7c812010bf3327dd
+title: Part 68
 challengeType: 0
-dashedName: part-67
+dashedName: part-68
 ---
 
 # --description--
 
-You can insert variables into a string with the concatenation (`+`) operator. Update the "You now have a new weapon." string so it says "You now have a " and then lists the name of the new weapon. Make sure to add a period at the end of the sentence.
-
-Here is an example that creates the string "Hello, our name is freeCodeCamp.":
+Way back at the beginning you created the `inventory` array. Push the `newWeapon` onto the end of the `inventory` array. Here is an example of pushing onto an array:
 
 ```js
-let ourName = "freeCodeCamp";
-let ourStr = "Hello, our name is " + ourName + ".";
+let arr = ["first"];
+let next = "second";
+arr.push(next);
+// arr now equals ["first", "second"]
 ```
 
 # --hints--
@@ -21,11 +21,7 @@ let ourStr = "Hello, our name is " + ourName + ".";
 See description above for instructions.
 
 ```js
-assert(
-  buyWeapon
-    .toString()
-    .match(/[\'\"\`]You now have a [\'\"\`]\s*\+\s*newWeapon\;?/)
-);
+buyWeapon(), assert.deepStrictEqual(inventory, ['stick', 'dagger']);
 ```
 
 # --seed--
@@ -214,7 +210,7 @@ function buyWeapon() {
     currentWeapon++;
     goldText.innerText = gold;
     let newWeapon = weapons[currentWeapon].name;
-    text.innerText = "You now have a new weapon.";
+    text.innerText = "You now have a " + newWeapon + ".";
   }
 }
 
@@ -339,6 +335,7 @@ function buyWeapon() {
     goldText.innerText = gold;
     let newWeapon = weapons[currentWeapon].name;
     text.innerText = "You now have a " + newWeapon + ".";
+    inventory.push(newWeapon);
   }
 }
 
