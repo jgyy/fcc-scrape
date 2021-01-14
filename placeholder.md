@@ -1,20 +1,20 @@
 ---
-id: 5d7f4d9421b11cdaa3f6b160
-title: Part 112
+id: 5d80c1d821b11cdaa3f6b164
+title: Part 113
 challengeType: 0
-dashedName: part-112
+dashedName: part-113
 ---
 
 # --description--
 
-After a monster is defeated the monster stat box should no longer display. On the first line of the `update` function add: `monsterStats.style.display = "none";`.
+In the `lose` function, call the `update` function and pass in `locations[5]`.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-fightSlime(), defeatMonster(), assert(monsterStats.style.display === 'none');
+update(locations[0]), lose(), assert(text.innerText === 'You die. ☠️');
 ```
 
 # --seed--
@@ -199,7 +199,8 @@ button1.onclick = goStore;
 button2.onclick = goCave;
 button3.onclick = fightDragon;
 
-function update(location) {  
+function update(location) {
+  monsterStats.style.display = "none";
   button1.innerText = location["button text"][0];
   button2.innerText = location["button text"][1];
   button3.innerText = location["button text"][2];
@@ -235,15 +236,15 @@ function buyHealth() {
 function buyWeapon() {
   if (currentWeapon < weapons.length - 1) {
     if (gold >= 30) {
-    gold -= 30;
-    currentWeapon++;
-    goldText.innerText = gold;
-    let newWeapon = weapons[currentWeapon].name;
-    text.innerText = "You now have a " + newWeapon + ".";
-    inventory.push(newWeapon);
-    text.innerText += " In your inventory you have: " + inventory;
+      gold -= 30;
+      currentWeapon++;
+      goldText.innerText = gold;
+      let newWeapon = weapons[currentWeapon].name;
+      text.innerText = "You now have a " + newWeapon + ".";
+      inventory.push(newWeapon);
+      text.innerText += " In your inventory you have: " + inventory;
     } else {
-    text.innerText = "You do not have enough gold to buy a weapon.";
+      text.innerText = "You do not have enough gold to buy a weapon.";
     }
   } else {
     text.innerText = "You already have the most powerful weapon!";
@@ -460,15 +461,15 @@ function buyHealth() {
 function buyWeapon() {
   if (currentWeapon < weapons.length - 1) {
     if (gold >= 30) {
-    gold -= 30;
-    currentWeapon++;
-    goldText.innerText = gold;
-    let newWeapon = weapons[currentWeapon].name;
-    text.innerText = "You now have a " + newWeapon + ".";
-    inventory.push(newWeapon);
-    text.innerText += " In your inventory you have: " + inventory;
+      gold -= 30;
+      currentWeapon++;
+      goldText.innerText = gold;
+      let newWeapon = weapons[currentWeapon].name;
+      text.innerText = "You now have a " + newWeapon + ".";
+      inventory.push(newWeapon);
+      text.innerText += " In your inventory you have: " + inventory;
     } else {
-    text.innerText = "You do not have enough gold to buy a weapon.";
+      text.innerText = "You do not have enough gold to buy a weapon.";
     }
   } else {
     text.innerText = "You already have the most powerful weapon!";
@@ -539,6 +540,7 @@ function defeatMonster() {
 }
 
 function lose() {
+  update(locations[5]);
 }
 </script>
 ```
