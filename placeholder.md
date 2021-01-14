@@ -1,26 +1,20 @@
 ---
-id: 5d708dd7066dac7142a6d79e
-title: Part 76
+id: 5d708fae066dac7142a6d79f
+title: Part 77
 challengeType: 0
-dashedName: part-76
+dashedName: part-77
 ---
 
 # --description--
 
-Once a player has the most powerful weapon, we'll give them the ability to sell their older weapons back. In the else statement, set `button2.innerText` to equal "Sell weapon for 15 gold". Also, set `button2.onclick` to the function name `sellWeapon`.
+After the `buyWeapon` function, create an empty function called `sellWeapon`.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(
-  buyWeapon
-    .toString()
-    .match(
-      /else\s*\{\s*text\.innerText\s*\=\s*[\'\"\`]You already have the most powerful weapon\![\'\"\`]\;?\s*button2\.innerText\s*\=\s*[\'\"\`]Sell weapon for 15 gold\.?[\'\"\`]\;?\s*button2\.onclick\s*\=\s*sellWeapon\;?\s*\}/
-    )
-);
+assert(typeof sellWeapon === 'function');
 ```
 
 # --seed--
@@ -206,18 +200,20 @@ function buyHealth() {
 function buyWeapon() {
   if (currentWeapon < weapons.length - 1) {
     if (gold >= 30) {
-      gold -= 30;
-      currentWeapon++;
-      goldText.innerText = gold;
-      let newWeapon = weapons[currentWeapon].name;
-      text.innerText = "You now have a " + newWeapon + ".";
-      inventory.push(newWeapon);
-      text.innerText += " In your inventory you have: " + inventory;
+    gold -= 30;
+    currentWeapon++;
+    goldText.innerText = gold;
+    let newWeapon = weapons[currentWeapon].name;
+    text.innerText = "You now have a " + newWeapon + ".";
+    inventory.push(newWeapon);
+    text.innerText += " In your inventory you have: " + inventory;
     } else {
-      text.innerText = "You do not have enough gold to buy a weapon.";
+    text.innerText = "You do not have enough gold to buy a weapon.";
     }
   } else {
     text.innerText = "You already have the most powerful weapon!";
+    button2.innerText = "Sell weapon for 15 gold";
+    button2.onclick = sellWeapon;
   }
 }
 
@@ -338,21 +334,24 @@ function buyHealth() {
 function buyWeapon() {
   if (currentWeapon < weapons.length - 1) {
     if (gold >= 30) {
-      gold -= 30;
-      currentWeapon++;
-      goldText.innerText = gold;
-      let newWeapon = weapons[currentWeapon].name;
-      text.innerText = "You now have a " + newWeapon + ".";
-      inventory.push(newWeapon);
-      text.innerText += " In your inventory you have: " + inventory;
+    gold -= 30;
+    currentWeapon++;
+    goldText.innerText = gold;
+    let newWeapon = weapons[currentWeapon].name;
+    text.innerText = "You now have a " + newWeapon + ".";
+    inventory.push(newWeapon);
+    text.innerText += " In your inventory you have: " + inventory;
     } else {
-      text.innerText = "You do not have enough gold to buy a weapon.";
+    text.innerText = "You do not have enough gold to buy a weapon.";
     }
   } else {
     text.innerText = "You already have the most powerful weapon!";
     button2.innerText = "Sell weapon for 15 gold";
     button2.onclick = sellWeapon;
   }
+}
+
+function sellWeapon() {
 }
 
 function fightSlime() {
