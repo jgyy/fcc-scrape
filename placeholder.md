@@ -1,13 +1,15 @@
 ---
-id: 5dbfe2f37736e5ee7d235548
-title: Part 147
+id: 5dbfeffe7736e5ee7d235549
+title: Part 148
 challengeType: 0
-dashedName: part-147
+dashedName: part-148
 ---
 
 # --description--
 
-Inside the for loop, use the `+=` operator to add to the end of `text.innerText`. Add the the number at index `i` in the `numbers` array with `numbers[i]`. Then add a new line. So the entire line inside the for loop should look like: `text.innerText += numbers[i] + "\n";`
+The `indexOf()` array method returns the first index at which a given element can be found in the array, or -1 if it is not present.
+
+After the for loop, add an `if` expression to check if the guessed number is in the `numbers` array. The condition of the `if` expression should check if `numbers.indexOf(guess) !== -1`.
 
 # --hints--
 
@@ -18,7 +20,7 @@ assert(
   pick
     .toString()
     .replace(/\s/g, '')
-    .includes('text.innerText+=numbers[i]+"\\n";}}')
+    .includes('if(numbers.indexOf(guess)!==-1){}')
 );
 ```
 
@@ -389,7 +391,7 @@ function pick(guess) {
   text.innerText = "You picked " + guess + ". Here are the random numbers:\n";
   
   for (let i = 0; i < 10; i++) {
-
+    text.innerText += numbers[i] + "\n";
   }
 }
 
@@ -687,6 +689,10 @@ function pick(guess) {
   
   for (let i = 0; i < 10; i++) {
     text.innerText += numbers[i] + "\n";
+  }
+
+  if (numbers.indexOf(guess) !== -1) {
+
   }
 }
 </script>
