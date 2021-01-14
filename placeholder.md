@@ -1,27 +1,20 @@
 ---
-id: 5d68ca40e0696bdec46938ed
-title: Part 46
+id: 5d68d3f7e0696bdec46938ee
+title: Part 47
 challengeType: 0
-dashedName: part-46
+dashedName: part-47
 ---
 
 # --description--
 
-Add a third object in the `locations` array with the same properties as the other two objects.
-
-Set `name` to "cave". Set the elements in the `"button text"` array to \["Fight slime", "Fight fanged beast", and "Go to town square". Set te elements in the `"button functions"` array to be "fightSlime", "fightBeast", and "goTown". Set the value of the `text` property to "You enter the cave. You see some monsters.".
+Now update the `goCave` function using the pattern from `goTown` and `goCave`.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert.deepStrictEqual(locations[2], {
-  name: 'cave',
-  'button text': ['Fight slime', 'Fight fanged beast', 'Go to town square'],
-  'button functions': [fightSlime, fightBeast, goTown],
-  text: 'You enter the cave. You see some monsters.'
-});
+assert(goCave.toString().match(/update\(locations\[2\]\)\;?/));
 ```
 
 # --seed--
@@ -139,6 +132,12 @@ const locations = [
     "button text": ["Buy 10 health (10 gold)", "Buy weapon (30 gold)", "Go to town square"],
     "button functions": [buyHealth, buyWeapon, goTown],
     text: "You enter the store."
+  },
+  {
+    name: "cave",
+    "button text": ["Fight slime", "Fight fanged beast", "Go to town square"],
+    "button functions": [fightSlime, fightBeast, goTown],
+    text: "You enter the cave. You see some monsters."
   }
 ];
 
@@ -250,7 +249,7 @@ function goStore() {
 }
 
 function goCave() {
-  console.log("Going to cave.");
+  update(locations[2]);
 }
 
 function fightDragon() {
