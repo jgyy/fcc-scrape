@@ -1,22 +1,20 @@
 ---
-id: 5d68c758e0696bdec46938eb
-title: Part 44
+id: 5d68c947e0696bdec46938ec
+title: Part 45
 challengeType: 0
-dashedName: part-44
+dashedName: part-45
 ---
 
 # --description--
 
-Finally, update `text.innerText` to equal the `text` from the location object.
-
-So far we have been accessing properties of the location object using bracket notation. This time use dot notation. Here is how to access a `name` property of an object called `obj` using dot notation: `obj.name`.
+Now update the `goStore` function. The code should look just like the code inside the `goTown` function, except the number 0 should be changed to 1. After this step would be a good time to try out the game so far. You should be able to move between the store and the town square.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(update.toString().match(/text\.innerText\s*\=\s*location\.text\;?/));
+assert(goStore.toString().match(/update\(locations\[1\]\)/));
 ```
 
 # --seed--
@@ -144,7 +142,7 @@ function update(location) {
   button1.onclick = location["button functions"][0];
   button2.onclick = location["button functions"][1];
   button3.onclick = location["button functions"][2];
-  text.innerText = "You are in the town square. You see a sign that says \"Store\".";
+  text.innerText = location.text;
 }
 
 function goTown() {
@@ -229,6 +227,7 @@ function goTown() {
 }
 
 function goStore() {
+  update(locations[1]);
 }
 
 function goCave() {
