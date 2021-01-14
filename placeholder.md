@@ -1,55 +1,42 @@
 ---
-id: 56bbb991ad1ed5201cd392d2
-title: Add New Properties to a JavaScript Object
+id: cf1111c1c11feddfaeb3bdef
+title: Add Two Numbers with JavaScript
 challengeType: 1
-videoUrl: 'https://scrimba.com/c/cQe38UD'
-forumTopicId: 301169
-dashedName: add-new-properties-to-a-javascript-object
+videoUrl: 'https://scrimba.com/c/cM2KBAG'
+forumTopicId: 16650
+dashedName: add-two-numbers-with-javascript
 ---
 
 # --description--
 
-You can add new properties to existing JavaScript objects the same way you would modify them.
+`Number` is a data type in JavaScript which represents numeric data.
 
-Here's how we would add a `"bark"` property to `ourDog`:
+Now let's try to add two numbers using JavaScript.
 
-`ourDog.bark = "bow-wow";`
+JavaScript uses the `+` symbol as an addition operator when placed between two numbers.
 
-or
-
-`ourDog["bark"] = "bow-wow";`
-
-Now when we evaluate `ourDog.bark`, we'll get his bark, "bow-wow".
-
-Example:
+**Example:**
 
 ```js
-var ourDog = {
-  "name": "Camper",
-  "legs": 4,
-  "tails": 1,
-  "friends": ["everything!"]
-};
-
-ourDog.bark = "bow-wow";
+myVar = 5 + 10; // assigned 15
 ```
 
 # --instructions--
 
-Add a `"bark"` property to `myDog` and set it to a dog sound, such as "woof". You may use either dot or bracket notation.
+Change the `0` so that sum will equal `20`.
 
 # --hints--
 
-You should add the property `"bark"` to `myDog`.
+`sum` should equal `20`.
 
 ```js
-assert(myDog.bark !== undefined);
+assert(sum === 20);
 ```
 
-You should not add `"bark"` to the setup section.
+You should use the `+` operator.
 
 ```js
-assert(!/bark[^\n]:/.test(code));
+assert(/\+/.test(code));
 ```
 
 # --seed--
@@ -57,31 +44,17 @@ assert(!/bark[^\n]:/.test(code));
 ## --after-user-code--
 
 ```js
-(function(z){return z;})(myDog);
+(function(z){return 'sum = '+z;})(sum);
 ```
 
 ## --seed-contents--
 
 ```js
-// Setup
-var myDog = {
-  "name": "Happy Coder",
-  "legs": 4,
-  "tails": 1,
-  "friends": ["freeCodeCamp Campers"]
-};
-
-// Only change code below this line
+var sum = 10 + 0;
 ```
 
 # --solutions--
 
 ```js
-var myDog = {
-  "name": "Happy Coder",
-  "legs": 4,
-  "tails": 1,
-  "friends": ["freeCodeCamp Campers"]
-};
-myDog.bark = "Woof Woof";
+var sum = 10 + 10;
 ```
