@@ -1,15 +1,13 @@
 ---
-id: 5d721925e39bedcf8f099901
-title: Part 93
+id: 5d7dea508360d21c6826a9af
+title: Part 94
 challengeType: 0
-dashedName: part-93
+dashedName: part-94
 ---
 
 # --description--
 
-The HTML that shows the monster stats that has been hidden using CSS. Display the `monsterStats` HTML element by updating its CSS `display` property to equal `block`.
-
-Here is an example of updating the `display` property of an element named `myElement`: `myElement.style.display = "block";`
+Now set the `innerText` property of `monsterNameText` to equal `monsters[fighting].name`. Also, set the `innerText` property of `monsterHealthText` to equal `monsterHealth`.
 
 # --hints--
 
@@ -17,9 +15,20 @@ See description above for instructions.
 
 ```js
 assert(
-  goFight
-    .toString()
-    .match(/^\s*monsterStats\.style\.display\s*\=\s*[\'\"\`]block[\'\"\`]\;?/m)
+  (() => {
+    fightBeast();
+    return (
+      monsterNameText.innerText === 'fanged beast' &&
+      monsterHealthText.innerText === '60'
+    );
+  })() &&
+    (() => {
+      fightDragon();
+      return (
+        monsterNameText.innerText === 'dragon' &&
+        monsterHealthText.innerText === '300'
+      );
+    })()
 );
 ```
 
@@ -226,15 +235,15 @@ function buyHealth() {
 function buyWeapon() {
   if (currentWeapon < weapons.length - 1) {
     if (gold >= 30) {
-    gold -= 30;
-    currentWeapon++;
-    goldText.innerText = gold;
-    let newWeapon = weapons[currentWeapon].name;
-    text.innerText = "You now have a " + newWeapon + ".";
-    inventory.push(newWeapon);
-    text.innerText += " In your inventory you have: " + inventory;
+      gold -= 30;
+      currentWeapon++;
+      goldText.innerText = gold;
+      let newWeapon = weapons[currentWeapon].name;
+      text.innerText = "You now have a " + newWeapon + ".";
+      inventory.push(newWeapon);
+      text.innerText += " In your inventory you have: " + inventory;
     } else {
-    text.innerText = "You do not have enough gold to buy a weapon.";
+      text.innerText = "You do not have enough gold to buy a weapon.";
     }
   } else {
     text.innerText = "You already have the most powerful weapon!";
@@ -273,6 +282,7 @@ function fightDragon() {
 function goFight() {
   update(locations[3]);
   monsterHealth = monsters[fighting].health;
+  monsterStats.style.display = "block";
 }
 
 function attack() {
@@ -412,15 +422,15 @@ function buyHealth() {
 function buyWeapon() {
   if (currentWeapon < weapons.length - 1) {
     if (gold >= 30) {
-    gold -= 30;
-    currentWeapon++;
-    goldText.innerText = gold;
-    let newWeapon = weapons[currentWeapon].name;
-    text.innerText = "You now have a " + newWeapon + ".";
-    inventory.push(newWeapon);
-    text.innerText += " In your inventory you have: " + inventory;
+      gold -= 30;
+      currentWeapon++;
+      goldText.innerText = gold;
+      let newWeapon = weapons[currentWeapon].name;
+      text.innerText = "You now have a " + newWeapon + ".";
+      inventory.push(newWeapon);
+      text.innerText += " In your inventory you have: " + inventory;
     } else {
-    text.innerText = "You do not have enough gold to buy a weapon.";
+      text.innerText = "You do not have enough gold to buy a weapon.";
     }
   } else {
     text.innerText = "You already have the most powerful weapon!";
@@ -460,6 +470,8 @@ function goFight() {
   update(locations[3]);
   monsterHealth = monsters[fighting].health;
   monsterStats.style.display = "block";
+  monsterNameText.innerText = monsters[fighting].name;
+  monsterHealthText.innerText = monsterHealth;
 }
 
 function attack() {
