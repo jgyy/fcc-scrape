@@ -1,20 +1,22 @@
 ---
-id: 5d7e077e8360d21c6826a9b9
-title: Part 103
+id: 5d7e13798360d21c6826a9bb
+title: Part 104
 challengeType: 0
-dashedName: part-103
+dashedName: part-104
 ---
 
 # --description--
 
-At the end of the code add two empty functions named `defeatMonster` and `lose`.
+Inside the `dodge` function, set `text.innerText` equal to "You dodge the attack from the \[monster's name]." Instead of "\[monster's name]", get the monster's name with `monsters[fighting].name`.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(typeof defeatMonster === 'function' && typeof lose === 'function');
+fightDragon(),
+  dodge(),
+  assert(text.innerText === 'You dodge the attack from the dragon.');
 ```
 
 # --seed--
@@ -289,6 +291,12 @@ function attack() {
 function dodge() {
 }
 
+function defeatMonster() {
+}
+
+function lose() {
+}
+
 </script>
 ```
 
@@ -487,6 +495,7 @@ function attack() {
 }
 
 function dodge() {
+  text.innerText = "You dodge the attack from the " + monsters[fighting].name + ".";
 }
 
 function defeatMonster() {
