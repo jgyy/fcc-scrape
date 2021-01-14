@@ -1,60 +1,128 @@
 ---
-id: cf1111c1c11feddfaeb3bdef
-title: Add Two Numbers with JavaScript
+id: 56533eb9ac21ba0edf2244de
+title: Adding a Default Option in Switch Statements
 challengeType: 1
-videoUrl: 'https://scrimba.com/c/cM2KBAG'
-forumTopicId: 16650
-dashedName: add-two-numbers-with-javascript
+videoUrl: 'https://scrimba.com/c/c3JvVfg'
+forumTopicId: 16653
+dashedName: adding-a-default-option-in-switch-statements
 ---
 
 # --description--
 
-`Number` is a data type in JavaScript which represents numeric data.
+In a `switch` statement you may not be able to specify all possible values as `case` statements. Instead, you can add the `default` statement which will be executed if no matching `case` statements are found. Think of it like the final `else` statement in an `if/else` chain.
 
-Now let's try to add two numbers using JavaScript.
-
-JavaScript uses the `+` symbol as an addition operator when placed between two numbers.
-
-**Example:**
+A `default` statement should be the last case.
 
 ```js
-myVar = 5 + 10; // assigned 15
+switch (num) {
+  case value1:
+    statement1;
+    break;
+  case value2:
+    statement2;
+    break;
+...
+  default:
+    defaultStatement;
+    break;
+}
 ```
 
 # --instructions--
 
-Change the `0` so that sum will equal `20`.
+Write a switch statement to set `answer` for the following conditions:  
+`"a"` - "apple"  
+`"b"` - "bird"  
+`"c"` - "cat"  
+`default` - "stuff"
 
 # --hints--
 
-`sum` should equal `20`.
+`switchOfStuff("a")` should have a value of "apple"
 
 ```js
-assert(sum === 20);
+assert(switchOfStuff('a') === 'apple');
 ```
 
-You should use the `+` operator.
+`switchOfStuff("b")` should have a value of "bird"
 
 ```js
-assert(/\+/.test(code));
+assert(switchOfStuff('b') === 'bird');
+```
+
+`switchOfStuff("c")` should have a value of "cat"
+
+```js
+assert(switchOfStuff('c') === 'cat');
+```
+
+`switchOfStuff("d")` should have a value of "stuff"
+
+```js
+assert(switchOfStuff('d') === 'stuff');
+```
+
+`switchOfStuff(4)` should have a value of "stuff"
+
+```js
+assert(switchOfStuff(4) === 'stuff');
+```
+
+You should not use any `if` or `else` statements
+
+```js
+assert(!/else/g.test(code) || !/if/g.test(code));
+```
+
+You should use a `default` statement
+
+```js
+assert(switchOfStuff('string-to-trigger-default-case') === 'stuff');
+```
+
+You should have at least 3 `break` statements
+
+```js
+assert(code.match(/break/g).length > 2);
 ```
 
 # --seed--
 
-## --after-user-code--
-
-```js
-(function(z){return 'sum = '+z;})(sum);
-```
-
 ## --seed-contents--
 
 ```js
-var sum = 10 + 0;
+function switchOfStuff(val) {
+  var answer = "";
+  // Only change code below this line
+
+
+
+  // Only change code above this line
+  return answer;
+}
+
+switchOfStuff(1);
 ```
 
 # --solutions--
 
 ```js
-var sum = 10 + 10;
+function switchOfStuff(val) {
+  var answer = "";
+
+  switch(val) {
+    case "a":
+      answer = "apple";
+      break;
+    case "b":
+      answer = "bird";
+      break;
+    case "c":
+      answer = "cat";
+      break;
+    default:
+      answer = "stuff";
+  }
+  return answer;
+}
 ```
