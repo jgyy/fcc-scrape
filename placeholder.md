@@ -1,40 +1,28 @@
 ---
-id: 5d6f6bfc7c812010bf3327cc
-title: Part 53
+id: 5d6f6e3c7c812010bf3327cd
+title: Part 54
 challengeType: 0
-dashedName: part-53
+dashedName: part-54
 ---
 
 # --description--
 
-What if the player doesn't have enough gold to buy health? Put all the code in the `buyHealth` function inside an `if` statement. Here is an example of an `if` statement inside a function:
+The word "condition" inside the if statement is just a placeholder. Change the condition to check if the amount of gold the player has is greater than or equal to 10.
+
+Here is an `if` statement that checks if `num` is greater than or equal to 5:
 
 ```js
-function checkMoney() {
-  if (condition) {
-    console.log("You have money!");
-  }
+if (num >= 5) {
+  console.log("Num is greater than or equal to five!");
 }
 ```
-
-Note: For now you should use the word "condition" inside the `if` statement but we'll be changing that next.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(
-  buyHealth
-    .toString()
-    .match(
-      /if\s*\(\s*condition\s*\)\s*\{\s*(gold|health|goldText|healthText)/
-    ) &&
-    buyHealth.toString().match(/gold\s*\-\=\s*10\;?/) &&
-    buyHealth.toString().match(/health\s*\+\=\s*10\;?/) &&
-    buyHealth.toString().match(/goldText\.innerText\s*\=\s*gold\;?/) &&
-    buyHealth.toString().match(/healthText\.innerText\s*\=\s*health\;?/)
-);
+assert(buyHealth.toString().match(/if\s*\(\s*gold\s*\>\=\s*10\s*\)/));
 ```
 
 # --seed--
@@ -188,10 +176,12 @@ function fightDragon() {
 }
 
 function buyHealth() {
-  gold -= 10;
-  health += 10;
-  goldText.innerText = gold;
-  healthText.innerText = health;
+  if (condition) {
+    gold -= 10;
+    health += 10;
+    goldText.innerText = gold;
+    healthText.innerText = health;
+  }
 }
 
 function buyWeapon() {
@@ -282,7 +272,7 @@ function fightDragon() {
 }
 
 function buyHealth() {
-  if (condition) {
+  if (gold >= 10) {
     gold -= 10;
     health += 10;
     goldText.innerText = gold;
