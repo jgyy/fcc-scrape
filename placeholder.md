@@ -1,23 +1,15 @@
 ---
-id: 5dbbb00e6ef5fe3a704f849b
-title: Part 133
+id: 5dbbb1466ef5fe3a704f849c
+title: Part 134
 challengeType: 0
-dashedName: part-133
+dashedName: part-134
 ---
 
 # --description--
 
-We don't want a player's only weapon to break.
+The only thing left to add is a mini-game easter egg (a hidden feature).
 
-Use the "logical and" operator (`&&`) to add a second condition to the `if` expression you just wrote. A player's weapon should only be able to break if `inventory.length` does not equal (`!==`) one.
-
-Here is an example of an `if` expression with the conditions that `firstName` equals "Quincy" AND `lastName` does NOT equal "Larson". With `&&`, both conditions must be true or else the entire statement evaluates to false.
-
-```js
-if (firstName === "Quincy" && lastName !== "Larson") {
-  console.log("Cool name but not the creator of freeCodeCamp.org.")
-}
-```
+Add a new function called `easterEgg` that calls the `update` function and passes in `locations[7]` as an argument.
 
 # --hints--
 
@@ -25,12 +17,10 @@ See description above for instructions.
 
 ```js
 assert(
-  attack
+  easterEgg
     .toString()
     .replace(/\s/g, '')
-    .match(
-      /if\(Math\.random\(\)\<\=0?\.1\&\&inventory\.length\!\=\=1\)\{text\.innerText\+\=\"Your\"\+inventory\.pop\(\)\+\"breaks\.\"\;?currentWeapon--\;?\}/
-    )
+    .match(/functioneasterEgg\(\)\{(return)?update\(locations\[7\]\)\;?}/)
 );
 ```
 
@@ -326,7 +316,7 @@ function attack() {
     fighting === 2 ? winGame() : defeatMonster();
   }
 
-  if (Math.random() <= .1) {
+  if (Math.random() <= .1 && inventory.length !== 1) {
     text.innerText += " Your " +  inventory.pop() + " breaks.";
     currentWeapon--;
   }
@@ -638,6 +628,10 @@ function restart() {
   healthText.innerText = health;
   xpText.innerText = xp;
   goTown();
+}
+
+function easterEgg() {
+  update(locations[7]);
 }
 </script>
 ```
