@@ -1,20 +1,25 @@
 ---
-id: 5dbc23a66ef5fe3a704f84a0
-title: Part 137
+id: 5dbc2c506ef5fe3a704f84a1
+title: Part 138
 challengeType: 0
-dashedName: part-137
+dashedName: part-138
 ---
 
 # --description--
 
-Add a `pick` function with a parameter named "guess".
+Inside `pick`, use `let` to initialize a variable named "numbers" and set it to an empty array.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(pick.toString().replace(/\s/g, '').includes('functionpick(guess){}'));
+assert(
+  pick
+    .toString()
+    .replace(/\s/g, '')
+    .match(/functionpick\(guess\)\{varnumbers\=\[\]\;?\}/)
+);
 ```
 
 # --seed--
@@ -375,6 +380,10 @@ function pickEight() {
   pick(8);
 }
 
+function pick(guess) {
+
+}
+
 </script>
 ```
 
@@ -659,6 +668,8 @@ function pickEight() {
   pick(8);
 }
 
-function pick(guess) {}
+function pick(guess) {
+  let numbers = [];
+}
 </script>
 ```
