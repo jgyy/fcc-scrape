@@ -1,15 +1,13 @@
 ---
-id: 5d6904b6e0696bdec46938f2
-title: Part 51
+id: 5d6905ace0696bdec46938f3
+title: Part 52
 challengeType: 0
-dashedName: part-51
+dashedName: part-52
 ---
 
 # --description--
 
-There is a shorthand way to add or subtract from a variable called compound assignment. The long way to add to a variable is `num = num + 5`. The shorthand way is `num += 5`. It works the same way with subtraction.
-
-Update both lines inside the `buyHealth` function to use compound assignment.
+Now that the gold and health variables have been updated, we need to update the values displayed on the screen. Inside the `buyHealth` function, add the line `goldText.innerText = gold;`. Then use the same pattern to update `healthText`.
 
 # --hints--
 
@@ -17,8 +15,8 @@ See description above for instructions.
 
 ```js
 assert(
-  buyHealth.toString().match(/gold\s*\-\=\s*10\;?/) &&
-    buyHealth.toString().match(/health\s*\+\=\s*10\;?/)
+  buyHealth.toString().match(/goldText\.innerText\s*\=\s*gold\;?/) &&
+    buyHealth.toString().match(/healthText.innerText\s*\=\s*health\;?/)
 );
 ```
 
@@ -173,8 +171,8 @@ function fightDragon() {
 }
 
 function buyHealth() {
-  gold = gold - 10;
-  health = health + 10;
+  gold -= 10;
+  health += 10;
 }
 
 function buyWeapon() {
@@ -267,6 +265,8 @@ function fightDragon() {
 function buyHealth() {
   gold -= 10;
   health += 10;
+  goldText.innerText = gold;
+  healthText.innerText = health;
 }
 
 function buyWeapon() {
