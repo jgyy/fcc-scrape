@@ -1,22 +1,20 @@
 ---
-id: 5d67ae95e0696bdec46938e5
-title: Part 38
+id: 5d67b284e0696bdec46938e6
+title: Part 39
 challengeType: 0
-dashedName: part-38
+dashedName: part-39
 ---
 
 # --description--
 
-Now change the code you just wrote to call the `update` function so the `locations` array is passed in as an argument.
-
-Here is how you would call a function named `exampleFunction` with an argument called `arg`: `exampleFunction(arg);`
+The `locations` array contains two locations: the town square and store. Currently the entire array with both locations is being passed in to the update function. Pass in only the first element of the locations array by adding `[0]` at the end of the name of the array. For example, `exampleFunction(arg[0]);`
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(goTown.toString().match(/update\(locations\)/));
+assert(goTown.toString().match(/update\(locations\[0\]\)/));
 ```
 
 # --seed--
@@ -148,7 +146,7 @@ function update(location) {
 }
 
 function goTown() {
-  update();
+  update(locations);
 }
 
 function goStore() {
@@ -225,7 +223,7 @@ function update(location) {
 }
 
 function goTown() {
-  update(locations);
+  update(locations[0]);
 }
 
 function goStore() {
