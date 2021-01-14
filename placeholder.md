@@ -1,13 +1,25 @@
 ---
-id: 5d7e02c88360d21c6826a9b7
-title: Part 101
+id: 5d7e06728360d21c6826a9b8
+title: Part 102
 challengeType: 0
-dashedName: part-101
+dashedName: part-102
 ---
 
 # --description--
 
-Check if health is less than or equal to zero. If it is, call the `lose()` function.
+An `else` statement can be conditional with an `else if` statement. At the end of the `if` statement, add an `else if` statement to check if `monsterHealth` is less than or equal to zero. Inside the `else if` block, call the `defeatMonster()` function.
+
+Here is an example of an `if` statement with `else if` and `else`:
+
+```js
+if (num > 15) {
+  return "Bigger than 15";
+} else if (num < 5) {
+  return "Smaller than 5";
+} else {
+  return "Between 5 and 15";
+}
+```
 
 # --hints--
 
@@ -17,7 +29,9 @@ See description above for instructions.
 assert(
   attack
     .toString()
-    .match(/^\s*if\s*\(\s*health\s*\<\=\s*0\s*\)\s*\{\s*lose\(\s*\);?\s*\}/m)
+    .match(
+      /^\s*if\s*\(\s*health\s*\<\=\s*0\s*\)\s*\{\s*lose\(\s*\);?\s*\}\s*else if\s*\(\s*monsterHealth\s*\<\=\s*0\s*\)\s*\{\s*defeatMonster\(\s*\)\;?\s*\}/m
+    )
 );
 ```
 
@@ -224,15 +238,15 @@ function buyHealth() {
 function buyWeapon() {
   if (currentWeapon < weapons.length - 1) {
     if (gold >= 30) {
-      gold -= 30;
-      currentWeapon++;
-      goldText.innerText = gold;
-      let newWeapon = weapons[currentWeapon].name;
-      text.innerText = "You now have a " + newWeapon + ".";
-      inventory.push(newWeapon);
-      text.innerText += " In your inventory you have: " + inventory;
+    gold -= 30;
+    currentWeapon++;
+    goldText.innerText = gold;
+    let newWeapon = weapons[currentWeapon].name;
+    text.innerText = "You now have a " + newWeapon + ".";
+    inventory.push(newWeapon);
+    text.innerText += " In your inventory you have: " + inventory;
     } else {
-      text.innerText = "You do not have enough gold to buy a weapon.";
+    text.innerText = "You do not have enough gold to buy a weapon.";
     }
   } else {
     text.innerText = "You already have the most powerful weapon!";
@@ -283,6 +297,9 @@ function attack() {
   monsterHealth -= weapons[currentWeapon].power + Math.floor(Math.random() * xp) + 1;
   healthText.innerText = health;
   monsterHealthText.innerText = monsterHealth;
+  if (health <= 0) {
+    lose();
+  }
 }
 
 function dodge() {
@@ -419,15 +436,15 @@ function buyHealth() {
 function buyWeapon() {
   if (currentWeapon < weapons.length - 1) {
     if (gold >= 30) {
-      gold -= 30;
-      currentWeapon++;
-      goldText.innerText = gold;
-      let newWeapon = weapons[currentWeapon].name;
-      text.innerText = "You now have a " + newWeapon + ".";
-      inventory.push(newWeapon);
-      text.innerText += " In your inventory you have: " + inventory;
+    gold -= 30;
+    currentWeapon++;
+    goldText.innerText = gold;
+    let newWeapon = weapons[currentWeapon].name;
+    text.innerText = "You now have a " + newWeapon + ".";
+    inventory.push(newWeapon);
+    text.innerText += " In your inventory you have: " + inventory;
     } else {
-      text.innerText = "You do not have enough gold to buy a weapon.";
+    text.innerText = "You do not have enough gold to buy a weapon.";
     }
   } else {
     text.innerText = "You already have the most powerful weapon!";
@@ -480,6 +497,8 @@ function attack() {
   monsterHealthText.innerText = monsterHealth;
   if (health <= 0) {
     lose();
+  } else if (monsterHealth <= 0) {
+    defeatMonster();
   }
 }
 
