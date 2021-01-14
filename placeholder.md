@@ -1,15 +1,24 @@
 ---
-id: 5dbac1f16ef5fe3a704f8491
-title: Part 122
+id: 5dbac2b06ef5fe3a704f8492
+title: Part 123
 challengeType: 0
-dashedName: part-122
+dashedName: part-123
 ---
 
 # --description--
 
-Log the value of `hit` to the console to use in debugging.
+Now return `hit` from the `getMonsterAttackValue` function. The return value of this function is used in the `attack` function.
 
-Here is how to log the value of `num` to the console: `console.log(num);`.
+Here is an example of a function that returns a value:
+
+```js
+function plusThree(num) {
+  let numPlusThree = num + 3;
+  return numPlusThree;
+}
+
+const answer = plusThree(5); // 8
+```
 
 # --hints--
 
@@ -17,10 +26,7 @@ See description above for instructions.
 
 ```js
 assert(
-  getMonsterAttackValue
-    .toString()
-    .replace(/\s/g, '')
-    .includes('console.log(hit)')
+  getMonsterAttackValue.toString().replace(/\s/g, '').includes('returnhit')
 );
 ```
 
@@ -314,6 +320,7 @@ function attack() {
 
 function getMonsterAttackValue(level) {
   const hit = (level * 5) - (Math.floor(Math.random() * xp));
+  console.log(hit);
 }
 
 function dodge() {
@@ -566,7 +573,7 @@ function attack() {
 
 function getMonsterAttackValue(level) {
   const hit = (level * 5) - (Math.floor(Math.random() * xp));
-  console.log(hit);
+  return hit;
 }
 
 function dodge() {
