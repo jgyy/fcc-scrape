@@ -1,26 +1,20 @@
 ---
-id: 5d71cab4f27e5122af9f1178
-title: Part 85
+id: 5d71ea30f27e5122af9f1179
+title: Part 86
 challengeType: 0
-dashedName: part-85
+dashedName: part-86
 ---
 
 # --description--
 
-Now we'll start working on fighting monsters. Organize your code by moving the `fightDragon` function to the bottom of the code near the other fight functions.
-
-Below where the `weapons` array is defined, define a `monsters` array. Set the contents of the `monsters` array to: `{ name: "slime", level: 2, health: 15 }, {name: "fanged beast", level: 8, health: 60 }, { name: "dragon", level: 20, health: 300 }`. Space out the code similar to the `weapons` array so that it is easier to read.
+Fighting each type of monster will be very similar so all three fighting functions will call a function named `goFight`. At the end of the code, add an empty function named `goFight`.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert.deepStrictEqual(monsters, [
-  { name: 'slime', level: 2, health: 15 },
-  { name: 'fanged beast', level: 8, health: 60 },
-  { name: 'dragon', level: 20, health: 300 }
-]);
+assert(typeof goFight === 'function');
 ```
 
 # --seed--
@@ -140,6 +134,24 @@ const weapons = [
   }
 ];
 
+const monsters = [
+  {
+    name: "slime",
+    level: 2,
+    health: 15
+  },
+  {
+    name: "fanged beast",
+    level: 8,
+    health: 60
+  },
+  {
+    name: "dragon",
+    level: 20,
+    health: 300
+  }
+];
+
 const locations = [
   {
     name: "town square",
@@ -188,10 +200,6 @@ function goCave() {
   update(locations[2]);
 }
 
-function fightDragon() {
-  console.log("Fighting dragon.");
-}
-
 function buyHealth() {
   if (gold >= 10) {
     gold -= 10;
@@ -206,15 +214,15 @@ function buyHealth() {
 function buyWeapon() {
   if (currentWeapon < weapons.length - 1) {
     if (gold >= 30) {
-      gold -= 30;
-      currentWeapon++;
-      goldText.innerText = gold;
-      let newWeapon = weapons[currentWeapon].name;
-      text.innerText = "You now have a " + newWeapon + ".";
-      inventory.push(newWeapon);
-      text.innerText += " In your inventory you have: " + inventory;
+    gold -= 30;
+    currentWeapon++;
+    goldText.innerText = gold;
+    let newWeapon = weapons[currentWeapon].name;
+    text.innerText = "You now have a " + newWeapon + ".";
+    inventory.push(newWeapon);
+    text.innerText += " In your inventory you have: " + inventory;
     } else {
-      text.innerText = "You do not have enough gold to buy a weapon.";
+    text.innerText = "You do not have enough gold to buy a weapon.";
     }
   } else {
     text.innerText = "You already have the most powerful weapon!";
@@ -239,6 +247,10 @@ function fightSlime() {
 }
 
 function fightBeast() {
+}
+
+function fightDragon() {
+  console.log("Fighting dragon.");
 }
 
 </script>
@@ -366,15 +378,15 @@ function buyHealth() {
 function buyWeapon() {
   if (currentWeapon < weapons.length - 1) {
     if (gold >= 30) {
-      gold -= 30;
-      currentWeapon++;
-      goldText.innerText = gold;
-      let newWeapon = weapons[currentWeapon].name;
-      text.innerText = "You now have a " + newWeapon + ".";
-      inventory.push(newWeapon);
-      text.innerText += " In your inventory you have: " + inventory;
+    gold -= 30;
+    currentWeapon++;
+    goldText.innerText = gold;
+    let newWeapon = weapons[currentWeapon].name;
+    text.innerText = "You now have a " + newWeapon + ".";
+    inventory.push(newWeapon);
+    text.innerText += " In your inventory you have: " + inventory;
     } else {
-      text.innerText = "You do not have enough gold to buy a weapon.";
+    text.innerText = "You do not have enough gold to buy a weapon.";
     }
   } else {
     text.innerText = "You already have the most powerful weapon!";
@@ -403,6 +415,9 @@ function fightBeast() {
 
 function fightDragon() {
   console.log("Fighting dragon.");
+}
+
+function goFight() {
 }
 </script>
 ```
