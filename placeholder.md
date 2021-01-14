@@ -1,38 +1,20 @@
 ---
-id: 5d7e06728360d21c6826a9b8
-title: Part 102
+id: 5d7e077e8360d21c6826a9b9
+title: Part 103
 challengeType: 0
-dashedName: part-102
+dashedName: part-103
 ---
 
 # --description--
 
-An `else` statement can be conditional with an `else if` statement. At the end of the `if` statement, add an `else if` statement to check if `monsterHealth` is less than or equal to zero. Inside the `else if` block, call the `defeatMonster()` function.
-
-Here is an example of an `if` statement with `else if` and `else`:
-
-```js
-if (num > 15) {
-  return "Bigger than 15";
-} else if (num < 5) {
-  return "Smaller than 5";
-} else {
-  return "Between 5 and 15";
-}
-```
+At the end of the code add two empty functions named `defeatMonster` and `lose`.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(
-  attack
-    .toString()
-    .match(
-      /^\s*if\s*\(\s*health\s*\<\=\s*0\s*\)\s*\{\s*lose\(\s*\);?\s*\}\s*else if\s*\(\s*monsterHealth\s*\<\=\s*0\s*\)\s*\{\s*defeatMonster\(\s*\)\;?\s*\}/m
-    )
-);
+assert(typeof defeatMonster === 'function' && typeof lose === 'function');
 ```
 
 # --seed--
@@ -299,6 +281,8 @@ function attack() {
   monsterHealthText.innerText = monsterHealth;
   if (health <= 0) {
     lose();
+  } else if (monsterHealth <= 0) {
+    defeatMonster();
   }
 }
 
@@ -503,6 +487,12 @@ function attack() {
 }
 
 function dodge() {
+}
+
+function defeatMonster() {
+}
+
+function lose() {
 }
 </script>
 ```
