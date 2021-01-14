@@ -1,20 +1,20 @@
 ---
-id: 5d71f217e39bedcf8f0998fd
-title: Part 90
+id: 5d71f669e39bedcf8f0998fe
+title: Part 91
 challengeType: 0
-dashedName: part-90
+dashedName: part-91
 ---
 
 # --description--
 
-At the end of the code create empty functions named `attack` and `dodge`.
+In the `goFight` function, call the `update` function and pass it `locations[3]`.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(typeof attack === 'function' && typeof dodge === 'function');
+assert(goFight.toString().match(/update\(\s*locations\[\s*3\s*\]\s*\)\;?/));
 ```
 
 # --seed--
@@ -267,6 +267,12 @@ function fightDragon() {
 function goFight() {
 }
 
+function attack() {
+}
+
+function dodge() {
+}
+
 </script>
 ```
 
@@ -443,6 +449,7 @@ function fightDragon() {
 }
 
 function goFight() {
+  update(locations[3]);
 }
 
 function attack() {
