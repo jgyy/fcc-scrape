@@ -1,13 +1,23 @@
 ---
-id: 5dbbaeb56ef5fe3a704f849a
-title: Part 132
+id: 5dbbb00e6ef5fe3a704f849b
+title: Part 133
 challengeType: 0
-dashedName: part-132
+dashedName: part-133
 ---
 
 # --description--
 
-Decrement the value of `currentWeapon` using `--`. For example, say `num` equals 5. After running `num--`, `num` now equals 4.
+We don't want a player's only weapon to break.
+
+Use the "logical and" operator (`&&`) to add a second condition to the `if` expression you just wrote. A player's weapon should only be able to break if `inventory.length` does not equal (`!==`) one.
+
+Here is an example of an `if` expression with the conditions that `firstName` equals "Quincy" AND `lastName` does NOT equal "Larson". With `&&`, both conditions must be true or else the entire statement evaluates to false.
+
+```js
+if (firstName === "Quincy" && lastName !== "Larson") {
+  console.log("Cool name but not the creator of freeCodeCamp.org.")
+}
+```
 
 # --hints--
 
@@ -19,7 +29,7 @@ assert(
     .toString()
     .replace(/\s/g, '')
     .match(
-      /if\(Math\.random\(\)\<\=0?\.1\)\{text\.innerText\+\=\"Your\"\+inventory\.pop\(\)\+\"breaks\.\"\;?currentWeapon--\;?\}/
+      /if\(Math\.random\(\)\<\=0?\.1\&\&inventory\.length\!\=\=1\)\{text\.innerText\+\=\"Your\"\+inventory\.pop\(\)\+\"breaks\.\"\;?currentWeapon--\;?\}/
     )
 );
 ```
@@ -318,6 +328,7 @@ function attack() {
 
   if (Math.random() <= .1) {
     text.innerText += " Your " +  inventory.pop() + " breaks.";
+    currentWeapon--;
   }
 }
 
@@ -582,7 +593,7 @@ function attack() {
   } else if (monsterHealth <= 0) {
     fighting === 2 ? winGame() : defeatMonster();
   }
-  if (Math.random() <= .1) {
+  if (Math.random() <= .1 && inventory.length !== 1) {
     text.innerText += " Your " +  inventory.pop() + " breaks.";
     currentWeapon--;
   }
