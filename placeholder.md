@@ -1,13 +1,13 @@
 ---
-id: 5d70850e066dac7142a6d797
-title: Part 69
+id: 5d70862e066dac7142a6d798
+title: Part 70
 challengeType: 0
-dashedName: part-69
+dashedName: part-70
 ---
 
 # --description--
 
-Up to this point, anytime `text.innerText` was updated, the old text was erased. This time, use the `+=` operator instead of the `=` operator to add text to the end of `text.innerText`. Add the string " In your inventory you have: " (include the spaces at the beginning and end).
+At the end of the string you just added after the ending quote mark, add `+ inventory` to add the contents of the inventory to the end of the string.
 
 # --hints--
 
@@ -18,7 +18,7 @@ assert(
   buyWeapon
     .toString()
     .match(
-      /text\.innerText\s*\+\=\s*[\'\"\`] In your inventory you have\: [\'\"\`]\;?/
+      /text\.innerText\s*\+\=\s*[\'\"\`] In your inventory you have\: [\'\"\`]\s*\+\s*inventory\;?/
     )
 );
 ```
@@ -211,6 +211,7 @@ function buyWeapon() {
     let newWeapon = weapons[currentWeapon].name;
     text.innerText = "You now have a " + newWeapon + ".";
     inventory.push(newWeapon);
+    text.innerText += " In your inventory you have: ";
   }
 }
 
@@ -336,7 +337,7 @@ function buyWeapon() {
     let newWeapon = weapons[currentWeapon].name;
     text.innerText = "You now have a " + newWeapon + ".";
     inventory.push(newWeapon);
-    text.innerText += " In your inventory you have: ";
+    text.innerText += " In your inventory you have: " + inventory;
   }
 }
 
