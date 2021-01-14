@@ -1,13 +1,13 @@
 ---
-id: 5d708be9066dac7142a6d79c
-title: Part 74
+id: 5d708c9a066dac7142a6d79d
+title: Part 75
 challengeType: 0
-dashedName: part-74
+dashedName: part-75
 ---
 
 # --description--
 
-We have to fix an error. The `currentWeapon` variable is the array index. Array indexing starts at zero. The index of the last element in an array is one less than the length of the array. In the `if` condition you are working on, change `weapons.length` to `weapons.length - 1`.
+Add an `else` statement on the end of the outer `if` statement. Inside the `else` statement, set `text.innerText` to "You already have the most powerful weapon!".
 
 # --hints--
 
@@ -18,7 +18,7 @@ assert(
   buyWeapon
     .toString()
     .match(
-      /if\s*\(\s*currentWeapon\s*\<\s*weapons\.length\s*\-\s*1\s*\)\s*\{\s*if\s*\(\s*gold\s*\>\=\s*30\s*\)\s*\{/
+      /\}\s*else\s*\{\s*text\.innerText\s*\=\s*[\'\"\`]You do not have enough gold to buy a weapon\.?[\'\"\`]\;?\s*\}\s*\}\s*else\s*\{\s*text\.innerText\s*\=\s*[\'\"\`]You already have the most powerful weapon\![\'\"\`]\;?\s*\}/
     )
 );
 ```
@@ -204,7 +204,7 @@ function buyHealth() {
 }
 
 function buyWeapon() {
-  if (currentWeapon < weapons.length) {
+  if (currentWeapon < weapons.length - 1) {
     if (gold >= 30) {
       gold -= 30;
       currentWeapon++;
@@ -346,6 +346,8 @@ function buyWeapon() {
     } else {
       text.innerText = "You do not have enough gold to buy a weapon.";
     }
+  } else {
+    text.innerText = "You already have the most powerful weapon!";
   }
 }
 
