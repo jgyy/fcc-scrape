@@ -1,28 +1,24 @@
 ---
-id: 5d6f7b917c812010bf3327d7
-title: Part 62
+id: 5d6f82da7c812010bf3327d8
+title: Part 63
 challengeType: 0
-dashedName: part-62
+dashedName: part-63
 ---
 
 # --description--
 
-You can easily increment or add one to a variable with the `++` operator. All three of these statements add one to a number:
-
-```js
-num = num + 1;
-num += 1;
-num++;
-```
-
-Change the line `currentWeapon += 1;` to use the `++` operator.
+Now update the `innerText` property of `goldText` and `text`. `text` should equal "You now have a new weapon.".
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(buyWeapon.toString().match(/currentWeapon\s*\+\+\;?/));
+buyWeapon(),
+  assert(
+    goldText.innerText === '20' &&
+      text.innerText === 'You now have a new weapon.'
+  );
 ```
 
 # --seed--
@@ -208,7 +204,7 @@ function buyHealth() {
 function buyWeapon() {
   if (gold >= 30) {
     gold -= 30;
-    currentWeapon += 1;
+    currentWeapon++;
   }
 }
 
@@ -330,6 +326,8 @@ function buyWeapon() {
   if (gold >= 30) {
     gold -= 30;
     currentWeapon++;
+    goldText.innerText = gold;
+    text.innerText = "You now have a new weapon.";
   }
 }
 
