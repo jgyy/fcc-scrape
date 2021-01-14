@@ -1,29 +1,36 @@
 ---
-id: 5d67845ee0696bdec46938e2
-title: Part 35
+id: 5d67880ee0696bdec46938e3
+title: Part 36
 challengeType: 0
-dashedName: part-35
+dashedName: part-36
 ---
 
 # --description--
 
-The `locations` array currently has one element which is an object. Within the array, and after the object's final curly brace, add a comma. On the next line within the array, add another object with all the same properties as the first object. Keep the property names the same on the second object, but change all the property values to the information from the `goStore` function. Also, set the `name` property to `store`.
+Now we are can consolidate the code inside the `goTown` and `goStore` functions. Copy the code inside the `goTown` function and paste it in the `update` function. Then delete all the code inside the `goTown` and `goStore` functions.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert.deepStrictEqual(locations[1], {
-  name: 'store',
-  'button text': [
-    'Buy 10 health (10 gold)',
-    'Buy weapon (30 gold)',
-    'Go to town square'
-  ],
-  'button functions': [buyHealth, buyWeapon, goTown],
-  text: 'You enter the store.'
-});
+assert(
+  (() => {
+    update();
+    return (
+      goTown.toString() === 'function goTown() {}' &&
+      goStore.toString() === 'function goStore() {}' &&
+      button1.innerText === 'Go to store' &&
+      button2.innerText === 'Go to cave' &&
+      button3.innerText === 'Fight dragon' &&
+      text.innerText ===
+        'You are in the town square. You see a sign that says "Store".' &&
+      update.toString().match(/button1\.onclick\s*\=\s*goStore\;?/) &&
+      update.toString().match(/button2\.onclick\s*\=\s*goCave\;?/) &&
+      update.toString().match(/button3\.onclick\s*\=\s*fightDragon\;?/)
+    );
+  })()
+);
 ```
 
 # --seed--
@@ -130,6 +137,12 @@ const locations = [
     "button text": ["Go to store", "Go to cave", "Fight dragon"],
     "button functions": [goStore, goCave, fightDragon],
     text: "You are in the town square. You see a sign that says \"Store.\""
+  },
+  {
+    name: "store",
+    "button text": ["Buy 10 health (10 gold)", "Buy weapon (30 gold)", "Go to town square"],
+    "button functions": [buyHealth, buyWeapon, goTown],
+    text: "You enter the store."
   }
 ];
 
@@ -222,9 +235,6 @@ button2.onclick = goCave;
 button3.onclick = fightDragon;
 
 function update(location) {  
-}
-
-function goTown() {
   button1.innerText = "Go to store";
   button2.innerText = "Go to cave";
   button3.innerText = "Fight dragon";
@@ -234,14 +244,10 @@ function goTown() {
   text.innerText = "You are in the town square. You see a sign that says \"Store\".";
 }
 
+function goTown() {
+}
+
 function goStore() {
-  button1.innerText = "Buy 10 health (10 gold)";
-  button2.innerText = "Buy weapon (30 gold)";
-  button3.innerText = "Go to town square";
-  button1.onclick = buyHealth;
-  button2.onclick = buyWeapon;
-  button3.onclick = goTown;
-  text.innerText = "You enter the store.";
 }
 
 function goCave() {
