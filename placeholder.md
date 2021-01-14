@@ -1,13 +1,13 @@
 ---
-id: 5d7f43947c4263f469c36b1b
-title: Part 109
+id: 5d7f44ac7c4263f469c36b1c
+title: Part 110
 challengeType: 0
-dashedName: part-109
+dashedName: part-110
 ---
 
 # --description--
 
-Add a new object in the `locations` array with all the same properties as the other objects in the array. Set `name` to "kill monster". Set `"button text"` to `["Go to town square", "Go to town square", "Go to town square"]`. Set `"button functions"` to `[goTown, goTown, goTown]`. And set `text` to "The monster screams Arg! as it dies. You gain experience points and find gold.".
+The word "Arg!" should have quotes around it. Besides escaping quotes, there is another way you can include quote marks inside a quote. Change the double quotes to single quotes around the sentence, "The monster screams Arg! as it dies. You gain experience points and find gold". Then add double quotes around "Arg!"
 
 # --hints--
 
@@ -23,7 +23,7 @@ assert.deepStrictEqual(locations[4], {
   ],
   'button functions': [goTown, goTown, goTown],
   text:
-    'The monster screams Arg! as it dies. You gain experience points and find gold.'
+    'The monster screams "Arg!" as it dies. You gain experience points and find gold.'
 });
 ```
 
@@ -186,6 +186,12 @@ const locations = [
     "button text": ["Attack", "Dodge", "Run"],
     "button functions": [attack, dodge, goTown],
     text: "You are fighting a monster."
+  },
+  {
+    name: "kill monster",
+    "button text": ["Go to town square", "Go to town square", "Go to town square"],
+    "button functions": [goTown, goTown, goTown],
+    text: "The monster screams Arg! as it dies. You gain experience points and find gold."
   }
 ];
 
@@ -230,15 +236,15 @@ function buyHealth() {
 function buyWeapon() {
   if (currentWeapon < weapons.length - 1) {
     if (gold >= 30) {
-      gold -= 30;
-      currentWeapon++;
-      goldText.innerText = gold;
-      let newWeapon = weapons[currentWeapon].name;
-      text.innerText = "You now have a " + newWeapon + ".";
-      inventory.push(newWeapon);
-      text.innerText += " In your inventory you have: " + inventory;
+    gold -= 30;
+    currentWeapon++;
+    goldText.innerText = gold;
+    let newWeapon = weapons[currentWeapon].name;
+    text.innerText = "You now have a " + newWeapon + ".";
+    inventory.push(newWeapon);
+    text.innerText += " In your inventory you have: " + inventory;
     } else {
-      text.innerText = "You do not have enough gold to buy a weapon.";
+    text.innerText = "You do not have enough gold to buy a weapon.";
     }
   } else {
     text.innerText = "You already have the most powerful weapon!";
@@ -403,7 +409,7 @@ const locations = [
     name: "kill monster",
     "button text": ["Go to town square", "Go to town square", "Go to town square"],
     "button functions": [goTown, goTown, goTown],
-    text: "The monster screams Arg! as it dies. You gain experience points and find gold."
+    text: 'The monster screams "Arg!" as it dies. You gain experience points and find gold.'
   }
 ];
 
@@ -448,15 +454,15 @@ function buyHealth() {
 function buyWeapon() {
   if (currentWeapon < weapons.length - 1) {
     if (gold >= 30) {
-      gold -= 30;
-      currentWeapon++;
-      goldText.innerText = gold;
-      let newWeapon = weapons[currentWeapon].name;
-      text.innerText = "You now have a " + newWeapon + ".";
-      inventory.push(newWeapon);
-      text.innerText += " In your inventory you have: " + inventory;
+    gold -= 30;
+    currentWeapon++;
+    goldText.innerText = gold;
+    let newWeapon = weapons[currentWeapon].name;
+    text.innerText = "You now have a " + newWeapon + ".";
+    inventory.push(newWeapon);
+    text.innerText += " In your inventory you have: " + inventory;
     } else {
-      text.innerText = "You do not have enough gold to buy a weapon.";
+    text.innerText = "You do not have enough gold to buy a weapon.";
     }
   } else {
     text.innerText = "You already have the most powerful weapon!";
