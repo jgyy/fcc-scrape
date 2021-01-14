@@ -1,22 +1,30 @@
 ---
-id: 5d7f41fa7c4263f469c36b1a
-title: Part 108
+id: 5d7f43947c4263f469c36b1b
+title: Part 109
 challengeType: 0
-dashedName: part-108
+dashedName: part-109
 ---
 
 # --description--
 
-Finish the `defeatMonster` function by calling the `update()` function and pass in `locations[4]`.
+Add a new object in the `locations` array with all the same properties as the other objects in the array. Set `name` to "kill monster". Set `"button text"` to `["Go to town square", "Go to town square", "Go to town square"]`. Set `"button functions"` to `[goTown, goTown, goTown]`. And set `text` to "The monster screams Arg! as it dies. You gain experience points and find gold.".
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(
-  defeatMonster.toString().match(/^\s*update\(\s*locations\[\s*4\s*\]\s*\)/m)
-);
+assert.deepStrictEqual(locations[4], {
+  name: 'kill monster',
+  'button text': [
+    'Go to town square',
+    'Go to town square',
+    'Go to town square'
+  ],
+  'button functions': [goTown, goTown, goTown],
+  text:
+    'The monster screams Arg! as it dies. You gain experience points and find gold.'
+});
 ```
 
 # --seed--
@@ -222,15 +230,15 @@ function buyHealth() {
 function buyWeapon() {
   if (currentWeapon < weapons.length - 1) {
     if (gold >= 30) {
-    gold -= 30;
-    currentWeapon++;
-    goldText.innerText = gold;
-    let newWeapon = weapons[currentWeapon].name;
-    text.innerText = "You now have a " + newWeapon + ".";
-    inventory.push(newWeapon);
-    text.innerText += " In your inventory you have: " + inventory;
+      gold -= 30;
+      currentWeapon++;
+      goldText.innerText = gold;
+      let newWeapon = weapons[currentWeapon].name;
+      text.innerText = "You now have a " + newWeapon + ".";
+      inventory.push(newWeapon);
+      text.innerText += " In your inventory you have: " + inventory;
     } else {
-    text.innerText = "You do not have enough gold to buy a weapon.";
+      text.innerText = "You do not have enough gold to buy a weapon.";
     }
   } else {
     text.innerText = "You already have the most powerful weapon!";
@@ -297,7 +305,7 @@ function defeatMonster() {
   xp += monsters[fighting].level;
   goldText.innerText = gold;
   xpText.innerText = xp;
-
+  update(locations[4]);
 }
 
 function lose() {
@@ -390,6 +398,12 @@ const locations = [
     "button text": ["Attack", "Dodge", "Run"],
     "button functions": [attack, dodge, goTown],
     text: "You are fighting a monster."
+  },
+  {
+    name: "kill monster",
+    "button text": ["Go to town square", "Go to town square", "Go to town square"],
+    "button functions": [goTown, goTown, goTown],
+    text: "The monster screams Arg! as it dies. You gain experience points and find gold."
   }
 ];
 
@@ -434,15 +448,15 @@ function buyHealth() {
 function buyWeapon() {
   if (currentWeapon < weapons.length - 1) {
     if (gold >= 30) {
-    gold -= 30;
-    currentWeapon++;
-    goldText.innerText = gold;
-    let newWeapon = weapons[currentWeapon].name;
-    text.innerText = "You now have a " + newWeapon + ".";
-    inventory.push(newWeapon);
-    text.innerText += " In your inventory you have: " + inventory;
+      gold -= 30;
+      currentWeapon++;
+      goldText.innerText = gold;
+      let newWeapon = weapons[currentWeapon].name;
+      text.innerText = "You now have a " + newWeapon + ".";
+      inventory.push(newWeapon);
+      text.innerText += " In your inventory you have: " + inventory;
     } else {
-    text.innerText = "You do not have enough gold to buy a weapon.";
+      text.innerText = "You do not have enough gold to buy a weapon.";
     }
   } else {
     text.innerText = "You already have the most powerful weapon!";
