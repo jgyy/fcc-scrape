@@ -1,22 +1,25 @@
 ---
-id: 5dbfdc377736e5ee7d235547
-title: Part 146
+id: 5dbfe2f37736e5ee7d235548
+title: Part 147
 challengeType: 0
-dashedName: part-146
+dashedName: part-147
 ---
 
 # --description--
 
-The last statement in a `for` loop is the final-expression, and is executed at the end of each loop iteration.
-
-Since we changed the initializer from `x` to `i`, change `x++` to `i++`. This will iterate the initializer `i` by 1 after each loop.
+Inside the for loop, use the `+=` operator to add to the end of `text.innerText`. Add the the number at index `i` in the `numbers` array with `numbers[i]`. Then add a new line. So the entire line inside the for loop should look like: `text.innerText += numbers[i] + "\n";`
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(pick.toString().replace(/\s/g, '').includes('for(vari=0;i<10;i++){'));
+assert(
+  pick
+    .toString()
+    .replace(/\s/g, '')
+    .includes('text.innerText+=numbers[i]+"\\n";}}')
+);
 ```
 
 # --seed--
@@ -385,7 +388,7 @@ function pick(guess) {
 
   text.innerText = "You picked " + guess + ". Here are the random numbers:\n";
   
-  for (let i = 0; i < 10; x++) {
+  for (let i = 0; i < 10; i++) {
 
   }
 }
@@ -683,7 +686,7 @@ function pick(guess) {
   text.innerText = "You picked " + guess + ". Here are the random numbers:\n";
   
   for (let i = 0; i < 10; i++) {
-
+    text.innerText += numbers[i] + "\n";
   }
 }
 </script>
