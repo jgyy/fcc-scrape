@@ -1,13 +1,21 @@
 ---
-id: 5d71b58b848f6914ab89897d
-title: Part 80
+id: 5d71bdca848f6914ab89897e
+title: Part 81
 challengeType: 0
-dashedName: part-80
+dashedName: part-81
 ---
 
 # --description--
 
-Use the `let` keyword to create a variable named `currentWeapon`. Don't set it equal to anything yet. Notice that we already have a `currentWeapon` variable from earlier. Since the `let` keyword is used instead of `var`, this new version of `currentWeapon` is scoped only to this `if` statement. At the close of the `if` statement, the old version of `currentWeapon` will be used again.
+Use the `shift()` method on the `inventory` array to remove the first element and return that removed element. Set `currentWeapon` to equal returned element.
+
+Here is an example:
+
+```js
+let arr = ["one", "two", "three"];
+let firstElement = arr.shift();
+// arr now equals ["two", "three"] and firstElement now equals "one"
+```
 
 # --hints--
 
@@ -16,7 +24,7 @@ See description above for instructions.
 ```js
 assert(
   code.match(
-    /if\s*\(\s*inventory\.length\s*\>\s*1\s*\)\s*\{\s*(.\s*)*let\s*currentWeapon\;?/
+    /if\s*\(\s*inventory\.length\s*\>\s*1\s*\)\s*\{\s*(.\s*)*let\s*currentWeapon\s*\=\s*inventory\.shift\(\s*\)\;?/
   )
 );
 ```
@@ -225,6 +233,7 @@ function sellWeapon() {
   if (inventory.length > 1) {
     gold += 15;
     goldText.innerText = gold;
+    let currentWeapon;
   }
 }
 
@@ -366,7 +375,7 @@ function sellWeapon() {
   if (inventory.length > 1) {
     gold += 15;
     goldText.innerText = gold;
-    let currentWeapon;
+    let currentWeapon = inventory.shift();
   }
 }
 
