@@ -1,21 +1,13 @@
 ---
-id: 5dbba89e6ef5fe3a704f8499
-title: Part 131
+id: 5dbbaeb56ef5fe3a704f849a
+title: Part 132
 challengeType: 0
-dashedName: part-131
+dashedName: part-132
 ---
 
 # --description--
 
-Use the `+=` operator to add "Your \[last item in inventory array] breaks." to the end of `text.innerText`. Instead of the bracketed text, it should show the actual item name.
-
-Use `inventory.pop()` to both remove the last element from the array AND return that element. For example:
-
-```js
-let shoppingList = ["milk", "apples", "cereal"];
-console.log("I bought " + shoppingList.pop() + "."); // Logs "I bought cereal."
-// shoppingList now equals ["milk", "apples"]
-```
+Decrement the value of `currentWeapon` using `--`. For example, say `num` equals 5. After running `num--`, `num` now equals 4.
 
 # --hints--
 
@@ -27,14 +19,8 @@ assert(
     .toString()
     .replace(/\s/g, '')
     .match(
-      /if\(Math\.random\(\)\<\=0?\.1\)\{text\.innerText\+\=\"Your\"\+inventory\.pop\(\)\+\"breaks\.\"\;?\}/
-    ) ||
-    attack
-      .toString()
-      .replace(/\s/g, '')
-      .match(
-        /if\(Math\.random\(\)\<\=0?\.1\)\{text\.innerText\+\=\"Your\"\.concat\(inventory\.pop\(\)\,\"breaks\.\"\)\;?\}/
-      )
+      /if\(Math\.random\(\)\<\=0?\.1\)\{text\.innerText\+\=\"Your\"\+inventory\.pop\(\)\+\"breaks\.\"\;?currentWeapon--\;?\}/
+    )
 );
 ```
 
@@ -329,9 +315,9 @@ function attack() {
   } else if (monsterHealth <= 0) {
     fighting === 2 ? winGame() : defeatMonster();
   }
-  
-  if (Math.random() <= .1) {
 
+  if (Math.random() <= .1) {
+    text.innerText += " Your " +  inventory.pop() + " breaks.";
   }
 }
 
@@ -596,9 +582,9 @@ function attack() {
   } else if (monsterHealth <= 0) {
     fighting === 2 ? winGame() : defeatMonster();
   }
-
   if (Math.random() <= .1) {
     text.innerText += " Your " +  inventory.pop() + " breaks.";
+    currentWeapon--;
   }
 }
 
