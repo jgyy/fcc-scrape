@@ -1,13 +1,21 @@
 ---
-id: 5dbba70e6ef5fe3a704f8498
-title: Part 130
+id: 5dbba89e6ef5fe3a704f8499
+title: Part 131
 challengeType: 0
-dashedName: part-130
+dashedName: part-131
 ---
 
 # --description--
 
-On every attack, there should be a small chance that the player's weapon breaks. At the end of the `attack` function, add an empty `if` expression with the condition `Math.random() <= .1`.
+Use the `+=` operator to add "Your \[last item in inventory array] breaks." to the end of `text.innerText`. Instead of the bracketed text, it should show the actual item name.
+
+Use `inventory.pop()` to both remove the last element from the array AND return that element. For example:
+
+```js
+let shoppingList = ["milk", "apples", "cereal"];
+console.log("I bought " + shoppingList.pop() + "."); // Logs "I bought cereal."
+// shoppingList now equals ["milk", "apples"]
+```
 
 # --hints--
 
@@ -15,11 +23,18 @@ See description above for instructions.
 
 ```js
 assert(
-  attack.toString().replace(/\s/g, '').includes('if(Math.random()<=.1){}') ||
-    isMonsterHit
+  attack
+    .toString()
+    .replace(/\s/g, '')
+    .match(
+      /if\(Math\.random\(\)\<\=0?\.1\)\{text\.innerText\+\=\"Your\"\+inventory\.pop\(\)\+\"breaks\.\"\;?\}/
+    ) ||
+    attack
       .toString()
       .replace(/\s/g, '')
-      .includes('if(Math.random()<=0.1){}')
+      .match(
+        /if\(Math\.random\(\)\<\=0?\.1\)\{text\.innerText\+\=\"Your\"\.concat\(inventory\.pop\(\)\,\"breaks\.\"\)\;?\}/
+      )
 );
 ```
 
@@ -245,15 +260,15 @@ function buyHealth() {
 function buyWeapon() {
   if (currentWeapon < weapons.length - 1) {
     if (gold >= 30) {
-      gold -= 30;
-      currentWeapon++;
-      goldText.innerText = gold;
-      let newWeapon = weapons[currentWeapon].name;
-      text.innerText = "You now have a " + newWeapon + ".";
-      inventory.push(newWeapon);
-      text.innerText += " In your inventory you have: " + inventory;
+    gold -= 30;
+    currentWeapon++;
+    goldText.innerText = gold;
+    let newWeapon = weapons[currentWeapon].name;
+    text.innerText = "You now have a " + newWeapon + ".";
+    inventory.push(newWeapon);
+    text.innerText += " In your inventory you have: " + inventory;
     } else {
-      text.innerText = "You do not have enough gold to buy a weapon.";
+    text.innerText = "You do not have enough gold to buy a weapon.";
     }
   } else {
     text.innerText = "You already have the most powerful weapon!";
@@ -313,6 +328,10 @@ function attack() {
     lose();
   } else if (monsterHealth <= 0) {
     fighting === 2 ? winGame() : defeatMonster();
+  }
+  
+  if (Math.random() <= .1) {
+
   }
 }
 
@@ -508,15 +527,15 @@ function buyHealth() {
 function buyWeapon() {
   if (currentWeapon < weapons.length - 1) {
     if (gold >= 30) {
-      gold -= 30;
-      currentWeapon++;
-      goldText.innerText = gold;
-      let newWeapon = weapons[currentWeapon].name;
-      text.innerText = "You now have a " + newWeapon + ".";
-      inventory.push(newWeapon);
-      text.innerText += " In your inventory you have: " + inventory;
+    gold -= 30;
+    currentWeapon++;
+    goldText.innerText = gold;
+    let newWeapon = weapons[currentWeapon].name;
+    text.innerText = "You now have a " + newWeapon + ".";
+    inventory.push(newWeapon);
+    text.innerText += " In your inventory you have: " + inventory;
     } else {
-      text.innerText = "You do not have enough gold to buy a weapon.";
+    text.innerText = "You do not have enough gold to buy a weapon.";
     }
   } else {
     text.innerText = "You already have the most powerful weapon!";
@@ -577,7 +596,9 @@ function attack() {
   } else if (monsterHealth <= 0) {
     fighting === 2 ? winGame() : defeatMonster();
   }
+
   if (Math.random() <= .1) {
+    text.innerText += " Your " +  inventory.pop() + " breaks.";
   }
 }
 
