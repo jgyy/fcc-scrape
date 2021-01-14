@@ -1,22 +1,20 @@
 ---
-id: 5d68d631e0696bdec46938f0
-title: Part 49
+id: 5d68dbf7e0696bdec46938f1
+title: Part 50
 challengeType: 0
-dashedName: part-49
+dashedName: part-50
 ---
 
 # --description--
 
-Now that the store and cave locations are complete, we'll code the actions at those locations. Inside the `buyHealth` function, set `gold` to equal `gold` minus 10.
-
-For example here is how you would set set `num` to equal 5 less than `num`: `num = num - 5;`.
+After gold is subtracted, add ten to health.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-buyHealth(), assert(gold === 40);
+buyHealth(), assert(gold === 40 && health === 110);
 ```
 
 # --seed--
@@ -170,6 +168,7 @@ function fightDragon() {
 }
 
 function buyHealth() {
+  gold = gold - 10;
 }
 
 function buyWeapon() {
@@ -261,6 +260,7 @@ function fightDragon() {
 
 function buyHealth() {
   gold = gold - 10;
+  health = health + 10;
 }
 
 function buyWeapon() {
