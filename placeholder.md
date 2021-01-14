@@ -1,23 +1,24 @@
 ---
-id: 5d71c20f848f6914ab898980
-title: Part 83
+id: 5d71c80e848f6914ab898981
+title: Part 84
 challengeType: 0
-dashedName: part-83
+dashedName: part-84
 ---
 
 # --description--
 
-Now use the `+=` operator to add to `text.innerText`. Add the string " In your inventory you have: " (with spaces at the beginning and end). Then add the `inventory` variable to the end of the string.
+Add code so that if the length of the inventory is NOT more than one, then a text message appears that says "Don't sell your only weapon!".
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-(inventory = ['potato', 'carrot']),
+(inventory = ['potato']),
   sellWeapon(),
   assert(
-    text.innerText === 'You sold a potato. In your inventory you have: carrot'
+    inventory[0] === 'potato' &&
+      text.innerText === "Don't sell your only weapon!"
   );
 ```
 
@@ -227,7 +228,7 @@ function sellWeapon() {
     goldText.innerText = gold;
     let currentWeapon = inventory.shift();
     text.innerText = "You sold a " + currentWeapon + ".";
-    
+    text.innerText += " In your inventory you have: " + inventory;
   }
 }
 
@@ -372,6 +373,8 @@ function sellWeapon() {
     let currentWeapon = inventory.shift();
     text.innerText = "You sold a " + currentWeapon + ".";
     text.innerText += " In your inventory you have: " + inventory;
+  } else {
+    text.innerText = "Don't sell your only weapon!";
   }
 }
 
