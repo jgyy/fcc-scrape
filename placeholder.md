@@ -1,13 +1,13 @@
 ---
-id: 5dbff18d7736e5ee7d23554a
-title: Part 149
+id: 5dbff2d07736e5ee7d23554b
+title: Part 150
 challengeType: 0
-dashedName: part-149
+dashedName: part-150
 ---
 
 # --description--
 
-Inside the `if` expression, add the following string to the end of `text.innerText`: "Right! You win 20 gold!" Also, add 20 to the value of `gold` and update `goldText.innerText`.
+Add an `else` expression. Inside add "Wrong! You lose 10 health!" to the end of `text.innerText`. Also, subtract 10 from `health` and update `healthText.innerText`.
 
 # --hints--
 
@@ -15,12 +15,13 @@ See description above for instructions.
 
 ```js
 assert(
-  pick
-    .toString()
-    .replace(/\s/g, '')
-    .includes('text.innerText+="Right!Youwin20gold!";') &&
-    pick.toString().replace(/\s/g, '').includes('gold+=20;') &&
-    pick.toString().replace(/\s/g, '').includes('goldText.innerText=gold;')
+  pick.toString().replace(/\s/g, '').includes('else{') &&
+    pick
+      .toString()
+      .replace(/\s/g, '')
+      .includes('text.innerText+="Wrong!Youlose10health!";') &&
+    pick.toString().replace(/\s/g, '').includes('health-=10;') &&
+    pick.toString().replace(/\s/g, '').includes('healthText.innerText=health;')
 );
 ```
 
@@ -395,7 +396,9 @@ function pick(guess) {
   }
 
   if (numbers.indexOf(guess) !== -1) {
-
+    text.innerText += "Right! You win 20 gold!";
+    gold += 20;
+    goldText.innerText = gold;
   }
 }
 
@@ -699,6 +702,10 @@ function pick(guess) {
     text.innerText += "Right! You win 20 gold!";
     gold += 20;
     goldText.innerText = gold;
+  } else {
+    text.innerText += "Wrong! You lose 10 health!";
+    health -= 10;
+    healthText.innerText = health;
   }
 }
 </script>
