@@ -1,20 +1,20 @@
 ---
-id: 5d68d3f7e0696bdec46938ee
-title: Part 47
+id: 5d68d4fde0696bdec46938ef
+title: Part 48
 challengeType: 0
-dashedName: part-47
+dashedName: part-48
 ---
 
 # --description--
 
-Now update the `goCave` function using the pattern from `goTown` and `goCave`.
+Create two more empty functions: `fightSlime` and `fightBeast`.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(goCave.toString().match(/update\(locations\[2\]\)\;?/));
+assert(typeof fightSlime === 'function' && typeof fightBeast === 'function');
 ```
 
 # --seed--
@@ -83,11 +83,6 @@ assert(goCave.toString().match(/update\(locations\[2\]\)\;?/));
   </div>
   <div id="text">Welcome to Dragon Repeller. You must defeat the dragon that is preventing people from leaving the town. You are in the town square. Where do you want to go? Use the buttons above.</div>
 </div>
-<script>
-// Need to initialize for test
-function fightSlime() {}
-function fightBeast() {}
-</script>
 ```
 
 ## --after-user-code--
@@ -165,7 +160,7 @@ function goStore() {
 }
 
 function goCave() {
-  console.log("Going to cave.");
+  update(locations[2]);
 }
 
 function fightDragon() {
@@ -260,6 +255,12 @@ function buyHealth() {
 }
 
 function buyWeapon() {
+}
+
+function fightSlime() {
+}
+
+function fightBeast() {
 }
 </script>
 ```
