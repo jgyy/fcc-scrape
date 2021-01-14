@@ -1,51 +1,67 @@
 ---
-id: 56533eb9ac21ba0edf2244cc
-title: Accessing Nested Objects
+id: 56533eb9ac21ba0edf2244c8
+title: Accessing Object Properties with Bracket Notation
 challengeType: 1
-videoUrl: 'https://scrimba.com/c/cRnRnfa'
-forumTopicId: 16161
-dashedName: accessing-nested-objects
+videoUrl: 'https://scrimba.com/c/cBvmEHP'
+forumTopicId: 16163
+dashedName: accessing-object-properties-with-bracket-notation
 ---
 
 # --description--
 
-The sub-properties of objects can be accessed by chaining together the dot or bracket notation.
+The second way to access the properties of an object is bracket notation (`[]`). If the property of the object you are trying to access has a space in its name, you will need to use bracket notation.
 
-Here is a nested object:
+However, you can still use bracket notation on object properties without spaces.
+
+Here is a sample of using bracket notation to read an object's property:
 
 ```js
-var ourStorage = {
-  "desk": {
-    "drawer": "stapler"
-  },
-  "cabinet": {
-    "top drawer": { 
-      "folder1": "a file",
-      "folder2": "secrets"
-    },
-    "bottom drawer": "soda"
-  }
+var myObj = {
+  "Space Name": "Kirk",
+  "More Space": "Spock",
+  "NoSpace": "USS Enterprise"
 };
-ourStorage.cabinet["top drawer"].folder2;  // "secrets"
-ourStorage.desk.drawer; // "stapler"
+myObj["Space Name"]; // Kirk
+myObj['More Space']; // Spock
+myObj["NoSpace"];    // USS Enterprise
 ```
+
+Note that property names with spaces in them must be in quotes (single or double).
 
 # --instructions--
 
-Access the `myStorage` object and assign the contents of the `glove box` property to the `gloveBoxContents` variable. Use dot notation for all properties where possible, otherwise use bracket notation.
+Read the values of the properties `"an entree"` and `"the drink"` of `testObj` using bracket notation and assign them to `entreeValue` and `drinkValue` respectively.
 
 # --hints--
 
-`gloveBoxContents` should equal "maps".
+`entreeValue` should be a string
 
 ```js
-assert(gloveBoxContents === 'maps');
+assert(typeof entreeValue === 'string');
 ```
 
-Your code should use dot and bracket notation to access `myStorage`.
+The value of `entreeValue` should be `"hamburger"`
 
 ```js
-assert(/=\s*myStorage\.car\.inside\[\s*("|')glove box\1\s*\]/g.test(code));
+assert(entreeValue === 'hamburger');
+```
+
+`drinkValue` should be a string
+
+```js
+assert(typeof drinkValue === 'string');
+```
+
+The value of `drinkValue` should be `"water"`
+
+```js
+assert(drinkValue === 'water');
+```
+
+You should use bracket notation twice
+
+```js
+assert(code.match(/testObj\s*?\[('|")[^'"]+\1\]/g).length > 1);
 ```
 
 # --seed--
@@ -53,46 +69,33 @@ assert(/=\s*myStorage\.car\.inside\[\s*("|')glove box\1\s*\]/g.test(code));
 ## --after-user-code--
 
 ```js
-(function(x) { 
-  if(typeof x != 'undefined') { 
-    return "gloveBoxContents = " + x;
-  }
-  return "gloveBoxContents is undefined";
-})(gloveBoxContents);
+(function(a,b) { return "entreeValue = '" + a + "', drinkValue = '" + b + "'"; })(entreeValue,drinkValue);
 ```
 
 ## --seed-contents--
 
 ```js
 // Setup
-var myStorage = {
-  "car": {
-    "inside": {
-      "glove box": "maps",
-      "passenger seat": "crumbs"
-     },
-    "outside": {
-      "trunk": "jack"
-    }
-  }
+var testObj = {
+  "an entree": "hamburger",
+  "my side": "veggies",
+  "the drink": "water"
 };
 
-var gloveBoxContents = undefined; // Change this line
+// Only change code below this line
+
+var entreeValue = testObj;   // Change this line
+var drinkValue = testObj;    // Change this line
 ```
 
 # --solutions--
 
 ```js
-var myStorage = {
-  "car":{
-    "inside":{
-      "glove box":"maps",
-      "passenger seat":"crumbs"
-    },
-    "outside":{
-      "trunk":"jack"
-    }
-  }
+var testObj = {
+  "an entree": "hamburger",
+  "my side": "veggies",
+  "the drink": "water"
 };
-var gloveBoxContents = myStorage.car.inside["glove box"];
+var entreeValue = testObj["an entree"];
+var drinkValue = testObj['the drink'];
 ```
