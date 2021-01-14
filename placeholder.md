@@ -1,32 +1,22 @@
 ---
-id: 5d71bdca848f6914ab89897e
-title: Part 81
+id: 5d71bfdf848f6914ab89897f
+title: Part 82
 challengeType: 0
-dashedName: part-81
+dashedName: part-82
 ---
 
 # --description--
 
-Use the `shift()` method on the `inventory` array to remove the first element and return that removed element. Set `currentWeapon` to equal returned element.
-
-Here is an example:
-
-```js
-let arr = ["one", "two", "three"];
-let firstElement = arr.shift();
-// arr now equals ["two", "three"] and firstElement now equals "one"
-```
+After the line that creates the `currentWeapon` variable, set `text.innerText` to equal `"You sold a " + currentWeapon + "."`
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(
-  code.match(
-    /if\s*\(\s*inventory\.length\s*\>\s*1\s*\)\s*\{\s*(.\s*)*let\s*currentWeapon\s*\=\s*inventory\.shift\(\s*\)\;?/
-  )
-);
+(inventory = ['potato', 'carrot']),
+  sellWeapon(),
+  assert(text.innerText === 'You sold a potato.' && inventory[0] === 'carrot');
 ```
 
 # --seed--
@@ -212,15 +202,15 @@ function buyHealth() {
 function buyWeapon() {
   if (currentWeapon < weapons.length - 1) {
     if (gold >= 30) {
-    gold -= 30;
-    currentWeapon++;
-    goldText.innerText = gold;
-    let newWeapon = weapons[currentWeapon].name;
-    text.innerText = "You now have a " + newWeapon + ".";
-    inventory.push(newWeapon);
-    text.innerText += " In your inventory you have: " + inventory;
+      gold -= 30;
+      currentWeapon++;
+      goldText.innerText = gold;
+      let newWeapon = weapons[currentWeapon].name;
+      text.innerText = "You now have a " + newWeapon + ".";
+      inventory.push(newWeapon);
+      text.innerText += " In your inventory you have: " + inventory;
     } else {
-    text.innerText = "You do not have enough gold to buy a weapon.";
+      text.innerText = "You do not have enough gold to buy a weapon.";
     }
   } else {
     text.innerText = "You already have the most powerful weapon!";
@@ -233,7 +223,8 @@ function sellWeapon() {
   if (inventory.length > 1) {
     gold += 15;
     goldText.innerText = gold;
-    let currentWeapon;
+    let currentWeapon = inventory.shift();
+    
   }
 }
 
@@ -354,15 +345,15 @@ function buyHealth() {
 function buyWeapon() {
   if (currentWeapon < weapons.length - 1) {
     if (gold >= 30) {
-    gold -= 30;
-    currentWeapon++;
-    goldText.innerText = gold;
-    let newWeapon = weapons[currentWeapon].name;
-    text.innerText = "You now have a " + newWeapon + ".";
-    inventory.push(newWeapon);
-    text.innerText += " In your inventory you have: " + inventory;
+      gold -= 30;
+      currentWeapon++;
+      goldText.innerText = gold;
+      let newWeapon = weapons[currentWeapon].name;
+      text.innerText = "You now have a " + newWeapon + ".";
+      inventory.push(newWeapon);
+      text.innerText += " In your inventory you have: " + inventory;
     } else {
-    text.innerText = "You do not have enough gold to buy a weapon.";
+      text.innerText = "You do not have enough gold to buy a weapon.";
     }
   } else {
     text.innerText = "You already have the most powerful weapon!";
@@ -376,6 +367,7 @@ function sellWeapon() {
     gold += 15;
     goldText.innerText = gold;
     let currentWeapon = inventory.shift();
+    text.innerText = "You sold a " + currentWeapon + ".";
   }
 }
 
