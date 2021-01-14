@@ -1,23 +1,22 @@
 ---
-id: 5dbac2b06ef5fe3a704f8492
-title: Part 123
+id: 5dbbb5076ef5fe3a704f849d
+title: Part 124
 challengeType: 0
-dashedName: part-123
+dashedName: part-124
 ---
 
 # --description--
 
-Now return `hit` from the `getMonsterAttackValue` function. The return value of this function is used in the `attack` function.
+If you play the game in its current state you might notice a bug. If your `xp` is high enough, the `getMonsterAttackValue` function will sometimes return a negative number, which will actually add to your total health when fighting a monster!
 
-Here is an example of a function that returns a value:
+In `getMonsterAttackValue`, change `return hit` to a ternary operator that returns `hit` if `hit` is greater than 0, or returns 0 if it is not.
+
+For example, here's a function that returns 5 if `tickets` is greater than 3, or returns 0 if it is not:
 
 ```js
-function plusThree(num) {
-  let numPlusThree = num + 3;
-  return numPlusThree;
+function applyDiscount(tickets) {
+  return tickets > 2 : 5 : 0;
 }
-
-const answer = plusThree(5); // 8
 ```
 
 # --hints--
@@ -26,7 +25,10 @@ See description above for instructions.
 
 ```js
 assert(
-  getMonsterAttackValue.toString().replace(/\s/g, '').includes('returnhit')
+  getMonsterAttackValue
+    .toString()
+    .replace(/\s/g, '')
+    .includes('returnhit>0?hit:0')
 );
 ```
 
@@ -321,6 +323,7 @@ function attack() {
 function getMonsterAttackValue(level) {
   const hit = (level * 5) - (Math.floor(Math.random() * xp));
   console.log(hit);
+  return hit;
 }
 
 function dodge() {
@@ -573,7 +576,7 @@ function attack() {
 
 function getMonsterAttackValue(level) {
   const hit = (level * 5) - (Math.floor(Math.random() * xp));
-  return hit;
+  return hit > 0 ? hit : 0;
 }
 
 function dodge() {
