@@ -1,22 +1,20 @@
 ---
-id: 5d7f3b6c7c4263f469c36b17
-title: Part 105
+id: 5d7f405c7c4263f469c36b18
+title: Part 106
 challengeType: 0
-dashedName: part-105
+dashedName: part-106
 ---
 
 # --description--
 
-In the `defeatMonster` function, set `gold` to equal `gold` plus the monster's level times 6.7. You can get the monster's level with `monsters[fighting].level`.
-
-Here is how you would set `num` to equal `num` plus five times eight: `num += 5 * 8`. Remember that `Math.floor()` rounds any number passed to it down to the nearest whole number.
+Set `xp` to equal `xp` plus the monster's level.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-(gold = 10), fightSlime(), defeatMonster(), assert(gold === 23);
+(xp = 10), fightSlime(), defeatMonster(), assert(xp === 12);
 ```
 
 # --seed--
@@ -293,6 +291,7 @@ function dodge() {
 }
 
 function defeatMonster() {
+  gold += Math.floor(monsters[fighting].level * 6.7);
 }
 
 function lose() {
@@ -501,6 +500,7 @@ function dodge() {
 
 function defeatMonster() {
   gold += Math.floor(monsters[fighting].level * 6.7);
+  xp += monsters[fighting].level;
 }
 
 function lose() {
