@@ -1,20 +1,25 @@
 ---
-id: 5d6f72657c812010bf3327d0
-title: Part 57
+id: 5d6f736b7c812010bf3327d2
+title: Part 58
 challengeType: 0
-dashedName: part-57
+dashedName: part-58
 ---
 
 # --description--
 
-Before we write the code for the `buyWeapon` function, use `const` to create a `weapons` variable right above the `locations` array. Set it to equal an empty array.
+Just like in the `locations` array, all the elements in `weapons` will be objects. Add four objects to the `weapons` array, each with two properties: `name` and `power`. The first should be the `name` "stick" with `power` set to 5. Then, "dagger" with set `power` to 30. Next, "claw hammer" with a `power` of 50. Finally, "sword" with a `power` of 100.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert.deepStrictEqual(weapons, []);
+assert.deepStrictEqual(weapons, [
+  { name: 'stick', power: 5 },
+  { name: 'dagger', power: 30 },
+  { name: 'claw hammer', power: 50 },
+  { name: 'sword', power: 100 }
+]);
 ```
 
 # --seed--
@@ -115,6 +120,8 @@ const monsterStats = document.querySelector("#monsterStats");
 const monsterNameText = document.querySelector("#monsterName");
 const monsterHealthText = document.querySelector("#monsterHealth");
 
+const weapons = [];
+
 const locations = [
   {
     name: "town square",
@@ -213,7 +220,24 @@ const monsterStats = document.querySelector("#monsterStats");
 const monsterNameText = document.querySelector("#monsterName");
 const monsterHealthText = document.querySelector("#monsterHealth");
 
-const weapons = [];
+const weapons = [
+  {
+    name: "stick",
+    power: 5
+  },
+  {
+    name: "dagger",
+    power: 30
+  },
+  {
+    name: "claw hammer",
+    power: 50
+  },
+  {
+    name: "sword",
+    power: 100
+  }
+];
 
 const locations = [
   {
