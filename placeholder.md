@@ -1,15 +1,13 @@
 ---
-id: 5d7df75a8360d21c6826a9b4
-title: Part 99
+id: 5d7dfb908360d21c6826a9b5
+title: Part 100
 challengeType: 0
-dashedName: part-99
+dashedName: part-100
 ---
 
 # --description--
 
-At the end of that line, add a random number between one and the value of `xp`. Here is the formula to get a random number between 1 and 5: `Math.floor(Math.random() * 5) + 1`.
-
-`Math.random()` returns a decimal or floating point number between 0 and 1, and `Math.floor()` rounds a given number down to the nearest integer.
+Update `healthText.innerText` and `monsterHealthText.innerText` to equal `health` and `monsterHealth`.
 
 # --hints--
 
@@ -17,10 +15,11 @@ See description above for instructions.
 
 ```js
 (xp = 1),
+  (health = 50),
   fightDragon(),
   (monsterHealth = 20),
   attack(),
-  assert(monsterHealth === 14);
+  assert(monsterHealthText.innerText === '14' && healthText.innerText === '30');
 ```
 
 # --seed--
@@ -282,7 +281,7 @@ function attack() {
   text.innerText = "The " + monsters[fighting].name + " attacks.";
   text.innerText += " You attack it with your " + weapons[currentWeapon].name + ".";
   health -= monsters[fighting].level;
-  monsterHealth -= weapons[currentWeapon].power;
+  monsterHealth -= weapons[currentWeapon].power + Math.floor(Math.random() * xp) + 1;
 }
 
 function dodge() {
@@ -476,6 +475,8 @@ function attack() {
   text.innerText += " You attack it with your " + weapons[currentWeapon].name + ".";
   health -= monsters[fighting].level;
   monsterHealth -= weapons[currentWeapon].power + Math.floor(Math.random() * xp) + 1;
+  healthText.innerText = health;
+  monsterHealthText.innerText = monsterHealth;
 }
 
 function dodge() {
