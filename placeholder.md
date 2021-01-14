@@ -1,15 +1,13 @@
 ---
-id: 5d67b945e0696bdec46938e7
-title: Part 40
+id: 5d68c3b1e0696bdec46938e8
+title: Part 41
 challengeType: 0
-dashedName: part-40
+dashedName: part-41
 ---
 
 # --description--
 
-Now that the `goTown` function calls the `update` function with the first element of the `locations` array, it is time to use that location information to update the `innerText` and `onclick` properties.
-
-Inside the `update` function, change `button1.innerText` to equal `location["button text"]`. That line gets the `"button text"` property of the `location` that was passed into the `update` function\`.
+`location["button text"]` is an array with three elements. Use only the first element of the array by adding `[0]` at the end.
 
 # --hints--
 
@@ -19,7 +17,9 @@ See description above for instructions.
 assert(
   update
     .toString()
-    .match(/button1\.innerText\s*\=\s*location\[[\'\"\`]button text[\'\"\`]\]/)
+    .match(
+      /button1\.innerText\s*\=\s*location\[[\'\"\`]button text[\'\"\`]\]\[0\]/
+    )
 );
 ```
 
@@ -142,7 +142,7 @@ button2.onclick = goCave;
 button3.onclick = fightDragon;
 
 function update(location) {  
-  button1.innerText = "Go to store";
+  button1.innerText = location["button text"];
   button2.innerText = "Go to cave";
   button3.innerText = "Fight dragon";
   button1.onclick = goStore;
@@ -219,7 +219,7 @@ button2.onclick = goCave;
 button3.onclick = fightDragon;
 
 function update(location) {  
-  button1.innerText = location["button text"];
+  button1.innerText = location["button text"][0];
   button2.innerText = "Go to cave";
   button3.innerText = "Fight dragon";
   button1.onclick = goStore;
