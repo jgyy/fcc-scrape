@@ -1,21 +1,13 @@
 ---
-id: 5dbaca566ef5fe3a704f8494
-title: Part 126
+id: 5dbae0446ef5fe3a704f8495
+title: Part 127
 challengeType: 0
-dashedName: part-126
+dashedName: part-127
 ---
 
 # --description--
 
-In the `attack` function, move the line `monsterHealth -= weapons[currentWeapon].power + Math.floor(Math.random() * xp) + 1;` into the `if` block.
-
-Here is an example of code in an `if` block that logs a message to the console:
-
-```js
-if (isTrue()) {
-  console.log("It's true!");
-}
-```
+Add an `else` expression to the `if` expression. Use the `+=` operator to add the text " You miss." onto the end of `text.innerText`.
 
 # --hints--
 
@@ -27,7 +19,7 @@ assert(
     .toString()
     .replace(/\s/g, '')
     .match(
-      /if\(isMonsterHit\(\)\)\{monsterHealth\-\=weapons\[currentWeapon\]\.power\+Math\.floor\(Math\.random\(\)\*xp\)\+1;?\}/
+      /if\(isMonsterHit\(\)\)\{monsterHealth\-\=weapons\[currentWeapon\]\.power\+Math\.floor\(Math\.random\(\)\*xp\)\+1;?\}else\{text\.innerText\+\=[\'\"\`]Youmiss.[\'\"\`]\;?\}/
     )
 );
 ```
@@ -310,11 +302,10 @@ function attack() {
   text.innerText = "The " + monsters[fighting].name + " attacks.";
   text.innerText += " You attack it with your " + weapons[currentWeapon].name + ".";
   health -= getMonsterAttackValue(monsters[fighting].level);
-  
-  if (isMonsterHit()) {
 
+  if (isMonsterHit()) {
+    monsterHealth -= weapons[currentWeapon].power + Math.floor(Math.random() * xp) + 1;
   }
-  monsterHealth -= weapons[currentWeapon].power + Math.floor(Math.random() * xp) + 1;
   healthText.innerText = health;
   monsterHealthText.innerText = monsterHealth;
   if (health <= 0) {
@@ -568,8 +559,11 @@ function attack() {
   text.innerText = "The " + monsters[fighting].name + " attacks.";
   text.innerText += " You attack it with your " + weapons[currentWeapon].name + ".";
   health -= getMonsterAttackValue(monsters[fighting].level);
+
   if (isMonsterHit()) {
     monsterHealth -= weapons[currentWeapon].power + Math.floor(Math.random() * xp) + 1;
+  } else {
+    text.innerText += " You miss.";
   }
   healthText.innerText = health;
   monsterHealthText.innerText = monsterHealth;
