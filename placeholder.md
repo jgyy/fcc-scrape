@@ -1,20 +1,22 @@
 ---
-id: 5d68d4fde0696bdec46938ef
-title: Part 48
+id: 5d68d631e0696bdec46938f0
+title: Part 49
 challengeType: 0
-dashedName: part-48
+dashedName: part-49
 ---
 
 # --description--
 
-Create two more empty functions: `fightSlime` and `fightBeast`.
+Now that the store and cave locations are complete, we'll code the actions at those locations. Inside the `buyHealth` function, set `gold` to equal `gold` minus 10.
+
+For example here is how you would set set `num` to equal 5 less than `num`: `num = num - 5;`.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(typeof fightSlime === 'function' && typeof fightBeast === 'function');
+buyHealth(), assert(gold === 40);
 ```
 
 # --seed--
@@ -173,6 +175,12 @@ function buyHealth() {
 function buyWeapon() {
 }
 
+function fightSlime() {
+}
+
+function fightBeast() {
+}
+
 </script>
 ```
 
@@ -252,6 +260,7 @@ function fightDragon() {
 }
 
 function buyHealth() {
+  gold = gold - 10;
 }
 
 function buyWeapon() {
