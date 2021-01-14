@@ -1,27 +1,30 @@
 ---
-id: 5dbffd907736e5ee7d23554c
-title: Part 151
+id: 5dbffe887736e5ee7d23554d
+title: Part 152
 challengeType: 0
-dashedName: part-151
+dashedName: part-152
 ---
 
 # --description--
 
-At the end of the `else` statement, check if `health` is less than or equal to zero. If so, call the `lose()` function.
+Inside the `locations` array, on the `kill monster` object, "button functions" is currently set to `[goTown, goTown, goTown]`. Change the third `goTown` to `easterEgg`. This is how a player will access the hidden feature of the game.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(
-  pick
-    .toString()
-    .replace(/\s/g, '')
-    .includes(
-      'else{text.innerText+="Wrong!Youlose10health!";health-=10;healthText.innerText=health;if(health<=0){lose();}}'
-    )
-);
+assert.deepStrictEqual(locations[4], {
+  name: 'kill monster',
+  'button text': [
+    'Go to town square',
+    'Go to town square',
+    'Go to town square'
+  ],
+  'button functions': [goTown, goTown, easterEgg],
+  text:
+    'The monster screams "Arg!" as it dies. You gain experience points and find gold.'
+});
 ```
 
 # --seed--
@@ -252,15 +255,15 @@ function buyHealth() {
 function buyWeapon() {
   if (currentWeapon < weapons.length - 1) {
     if (gold >= 30) {
-      gold -= 30;
-      currentWeapon++;
-      goldText.innerText = gold;
-      let newWeapon = weapons[currentWeapon].name;
-      text.innerText = "You now have a " + newWeapon + ".";
-      inventory.push(newWeapon);
-      text.innerText += " In your inventory you have: " + inventory;
+    gold -= 30;
+    currentWeapon++;
+    goldText.innerText = gold;
+    let newWeapon = weapons[currentWeapon].name;
+    text.innerText = "You now have a " + newWeapon + ".";
+    inventory.push(newWeapon);
+    text.innerText += " In your inventory you have: " + inventory;
     } else {
-      text.innerText = "You do not have enough gold to buy a weapon.";
+    text.innerText = "You do not have enough gold to buy a weapon.";
     }
   } else {
     text.innerText = "You already have the most powerful weapon!";
@@ -402,6 +405,9 @@ function pick(guess) {
     text.innerText += "Wrong! You lose 10 health!";
     health -= 10;
     healthText.innerText = health;
+    if (health <= 0) {
+    lose();
+    }
   }
 }
 
@@ -496,7 +502,7 @@ const locations = [
   {
     name: "kill monster",
     "button text": ["Go to town square", "Go to town square", "Go to town square"],
-    "button functions": [goTown, goTown, goTown],
+    "button functions": [goTown, goTown, easterEgg],
     text: 'The monster screams "Arg!" as it dies. You gain experience points and find gold.'
   },
   {
@@ -561,15 +567,15 @@ function buyHealth() {
 function buyWeapon() {
   if (currentWeapon < weapons.length - 1) {
     if (gold >= 30) {
-      gold -= 30;
-      currentWeapon++;
-      goldText.innerText = gold;
-      let newWeapon = weapons[currentWeapon].name;
-      text.innerText = "You now have a " + newWeapon + ".";
-      inventory.push(newWeapon);
-      text.innerText += " In your inventory you have: " + inventory;
+    gold -= 30;
+    currentWeapon++;
+    goldText.innerText = gold;
+    let newWeapon = weapons[currentWeapon].name;
+    text.innerText = "You now have a " + newWeapon + ".";
+    inventory.push(newWeapon);
+    text.innerText += " In your inventory you have: " + inventory;
     } else {
-      text.innerText = "You do not have enough gold to buy a weapon.";
+    text.innerText = "You do not have enough gold to buy a weapon.";
     }
   } else {
     text.innerText = "You already have the most powerful weapon!";
