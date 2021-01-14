@@ -1,20 +1,39 @@
 ---
-id: 5d80c1d821b11cdaa3f6b164
-title: Part 113
+id: 5d80c3c021b11cdaa3f6b165
+title: Part 114
 challengeType: 0
-dashedName: part-113
+dashedName: part-114
 ---
 
 # --description--
 
-In the `lose` function, call the `update` function and pass in `locations[5]`.
+At the end of the code, create a `restart` function. Inside the function, set `xp` to 0, set `health` to 100, set `gold` to 50, set `currentWeapon` to 0, and set `inventory` to `["stick"]`. Also, update the `innerText` properties of `goldText`, `healthText`, and `xpText` to their current values. Finally, call the `goTown()` function.
+
+After this step is a good time to test the game so far.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-update(locations[0]), lose(), assert(text.innerText === 'You die. ☠️');
+(currentWeapon = 1),
+  (inventory = ['stick', 'dagger']),
+  fightSlime(),
+  attack(),
+  defeatMonster(),
+  restart(),
+  assert(
+    xp === 0 &&
+      gold === 50 &&
+      currentWeapon === 0 &&
+      inventory[0] === 'stick' &&
+      inventory.length === 1 &&
+      goldText.innerText === '50' &&
+      healthText.innerText === '100' &&
+      xpText.innerText === '0' &&
+      text.innerText ===
+        'You are in the town square. You see a sign that says "Store."'
+  );
 ```
 
 # --seed--
@@ -83,9 +102,6 @@ update(locations[0]), lose(), assert(text.innerText === 'You die. ☠️');
   </div>
   <div id="text">Welcome to Dragon Repeller. You must defeat the dragon that is preventing people from leaving the town. You are in the town square. Where do you want to go? Use the buttons above.</div>
 </div>
-<script>
-function restart() {} // Initialize for test
-</script>
 ```
 
 ## --after-user-code--
@@ -315,6 +331,7 @@ function defeatMonster() {
 }
 
 function lose() {
+  update(locations[5]);
 }
 
 </script>
@@ -541,6 +558,18 @@ function defeatMonster() {
 
 function lose() {
   update(locations[5]);
+}
+
+function restart() {
+  xp = 0;
+  health = 100;
+  gold = 50;
+  currentWeapon = 0;
+  inventory = ["stick"];
+  goldText.innerText = gold;
+  healthText.innerText = health;
+  xpText.innerText = xp;
+  goTown();
 }
 </script>
 ```
