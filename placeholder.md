@@ -1,57 +1,51 @@
 ---
-id: 56533eb9ac21ba0edf2244cd
-title: Accessing Nested Arrays
+id: 56533eb9ac21ba0edf2244cc
+title: Accessing Nested Objects
 challengeType: 1
-videoUrl: 'https://scrimba.com/c/cLeGDtZ'
-forumTopicId: 16160
-dashedName: accessing-nested-arrays
+videoUrl: 'https://scrimba.com/c/cRnRnfa'
+forumTopicId: 16161
+dashedName: accessing-nested-objects
 ---
 
 # --description--
 
-As we have seen in earlier examples, objects can contain both nested objects and nested arrays. Similar to accessing nested objects, Array bracket notation can be chained to access nested arrays.
+The sub-properties of objects can be accessed by chaining together the dot or bracket notation.
 
-Here is an example of how to access a nested array:
+Here is a nested object:
 
 ```js
-var ourPets = [
-  {
-    animalType: "cat",
-    names: [
-      "Meowzer",
-      "Fluffy",
-      "Kit-Cat"
-    ]
+var ourStorage = {
+  "desk": {
+    "drawer": "stapler"
   },
-  {
-    animalType: "dog",
-    names: [
-      "Spot",
-      "Bowser",
-      "Frankie"
-    ]
+  "cabinet": {
+    "top drawer": { 
+      "folder1": "a file",
+      "folder2": "secrets"
+    },
+    "bottom drawer": "soda"
   }
-];
-ourPets[0].names[1]; // "Fluffy"
-ourPets[1].names[0]; // "Spot"
+};
+ourStorage.cabinet["top drawer"].folder2;  // "secrets"
+ourStorage.desk.drawer; // "stapler"
 ```
 
 # --instructions--
 
-Retrieve the second tree from the variable `myPlants` using object dot and array bracket notation.
+Access the `myStorage` object and assign the contents of the `glove box` property to the `gloveBoxContents` variable. Use dot notation for all properties where possible, otherwise use bracket notation.
 
 # --hints--
 
-`secondTree` should equal "pine".
+`gloveBoxContents` should equal "maps".
 
 ```js
-assert(secondTree === 'pine');
+assert(gloveBoxContents === 'maps');
 ```
 
-Your code should use dot and bracket notation to access `myPlants`.
+Your code should use dot and bracket notation to access `myStorage`.
 
 ```js
-assert(/=\s*myPlants\[1\].list\[1\]/.test(code));
+assert(/=\s*myStorage\.car\.inside\[\s*("|')glove box\1\s*\]/g.test(code));
 ```
 
 # --seed--
@@ -59,65 +53,46 @@ assert(/=\s*myPlants\[1\].list\[1\]/.test(code));
 ## --after-user-code--
 
 ```js
-(function(x) {
-  if(typeof x != 'undefined') {
-    return "secondTree = " + x;
+(function(x) { 
+  if(typeof x != 'undefined') { 
+    return "gloveBoxContents = " + x;
   }
-  return "secondTree is undefined";
-})(secondTree);
+  return "gloveBoxContents is undefined";
+})(gloveBoxContents);
 ```
 
 ## --seed-contents--
 
 ```js
 // Setup
-var myPlants = [
-  {
-    type: "flowers",
-    list: [
-      "rose",
-      "tulip",
-      "dandelion"
-    ]
-  },
-  {
-    type: "trees",
-    list: [
-      "fir",
-      "pine",
-      "birch"
-    ]
+var myStorage = {
+  "car": {
+    "inside": {
+      "glove box": "maps",
+      "passenger seat": "crumbs"
+     },
+    "outside": {
+      "trunk": "jack"
+    }
   }
-];
+};
 
-// Only change code below this line
-
-var secondTree = ""; // Change this line
+var gloveBoxContents = undefined; // Change this line
 ```
 
 # --solutions--
 
 ```js
-var myPlants = [
-  {
-    type: "flowers",
-    list: [
-      "rose",
-      "tulip",
-      "dandelion"
-    ]
-  },
-  {
-    type: "trees",
-    list: [
-      "fir",
-      "pine",
-      "birch"
-    ]
+var myStorage = {
+  "car":{
+    "inside":{
+      "glove box":"maps",
+      "passenger seat":"crumbs"
+    },
+    "outside":{
+      "trunk":"jack"
+    }
   }
-];
-
-// Only change code below this line
-
-var secondTree = myPlants[1].list[1];
+};
+var gloveBoxContents = myStorage.car.inside["glove box"];
 ```
