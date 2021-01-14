@@ -1,22 +1,23 @@
 ---
-id: 5d71eb0bf27e5122af9f117a
-title: Part 87
+id: 5d71f787e39bedcf8f0998ff
+title: Part 88
 challengeType: 0
-dashedName: part-87
+dashedName: part-88
 ---
 
 # --description--
 
-Inside the `fightSlime` function, set `fighting` to equal 0 (which is the index of the slime in the `monsters` array). On the next line, call the `goFight` function.
-
-As a reminder, here is how you would call a function named `myFunc`: `myFunc();`.
+Write the code for the `fightBeast` and `fightDragon` functions, using the `fightSlime` function as an example. Make sure to delete the line that is already in the `fightDragon` function.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(fightSlime.toString().match(/fighting\s*\=\s*0\;?\s*goFight\(\s*\)\;?/));
+assert(
+  fightBeast.toString().match(/fighting\s*\=\s*1\;?\s*goFight\(\s*\)\;?/) &&
+    fightDragon.toString().match(/fighting\s*\=\s*2\;?\s*goFight\(\s*\)\;?/)
+);
 ```
 
 # --seed--
@@ -216,15 +217,15 @@ function buyHealth() {
 function buyWeapon() {
   if (currentWeapon < weapons.length - 1) {
     if (gold >= 30) {
-      gold -= 30;
-      currentWeapon++;
-      goldText.innerText = gold;
-      let newWeapon = weapons[currentWeapon].name;
-      text.innerText = "You now have a " + newWeapon + ".";
-      inventory.push(newWeapon);
-      text.innerText += " In your inventory you have: " + inventory;
+    gold -= 30;
+    currentWeapon++;
+    goldText.innerText = gold;
+    let newWeapon = weapons[currentWeapon].name;
+    text.innerText = "You now have a " + newWeapon + ".";
+    inventory.push(newWeapon);
+    text.innerText += " In your inventory you have: " + inventory;
     } else {
-      text.innerText = "You do not have enough gold to buy a weapon.";
+    text.innerText = "You do not have enough gold to buy a weapon.";
     }
   } else {
     text.innerText = "You already have the most powerful weapon!";
@@ -246,6 +247,8 @@ function sellWeapon() {
 }
 
 function fightSlime() {
+  fighting = 0;
+  goFight();
 }
 
 function fightBeast() {
@@ -383,15 +386,15 @@ function buyHealth() {
 function buyWeapon() {
   if (currentWeapon < weapons.length - 1) {
     if (gold >= 30) {
-      gold -= 30;
-      currentWeapon++;
-      goldText.innerText = gold;
-      let newWeapon = weapons[currentWeapon].name;
-      text.innerText = "You now have a " + newWeapon + ".";
-      inventory.push(newWeapon);
-      text.innerText += " In your inventory you have: " + inventory;
+    gold -= 30;
+    currentWeapon++;
+    goldText.innerText = gold;
+    let newWeapon = weapons[currentWeapon].name;
+    text.innerText = "You now have a " + newWeapon + ".";
+    inventory.push(newWeapon);
+    text.innerText += " In your inventory you have: " + inventory;
     } else {
-      text.innerText = "You do not have enough gold to buy a weapon.";
+    text.innerText = "You do not have enough gold to buy a weapon.";
     }
   } else {
     text.innerText = "You already have the most powerful weapon!";
@@ -418,10 +421,13 @@ function fightSlime() {
 }
 
 function fightBeast() {
+  fighting = 1;
+  goFight();
 }
 
 function fightDragon() {
-  console.log("Fighting dragon.");
+  fighting = 2;
+  goFight();
 }
 
 function goFight() {
