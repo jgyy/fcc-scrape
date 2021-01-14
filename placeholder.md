@@ -1,83 +1,55 @@
 ---
-id: 56533eb9ac21ba0edf2244c9
-title: Accessing Object Properties with Variables
+id: 56bbb991ad1ed5201cd392d2
+title: Add New Properties to a JavaScript Object
 challengeType: 1
-videoUrl: 'https://scrimba.com/c/cnQyKur'
-forumTopicId: 16165
-dashedName: accessing-object-properties-with-variables
+videoUrl: 'https://scrimba.com/c/cQe38UD'
+forumTopicId: 301169
+dashedName: add-new-properties-to-a-javascript-object
 ---
 
 # --description--
 
-Another use of bracket notation on objects is to access a property which is stored as the value of a variable. This can be very useful for iterating through an object's properties or when accessing a lookup table.
+You can add new properties to existing JavaScript objects the same way you would modify them.
 
-Here is an example of using a variable to access a property:
+Here's how we would add a `"bark"` property to `ourDog`:
+
+`ourDog.bark = "bow-wow";`
+
+or
+
+`ourDog["bark"] = "bow-wow";`
+
+Now when we evaluate `ourDog.bark`, we'll get his bark, "bow-wow".
+
+Example:
 
 ```js
-var dogs = {
-  Fido: "Mutt",  Hunter: "Doberman",  Snoopie: "Beagle"
+var ourDog = {
+  "name": "Camper",
+  "legs": 4,
+  "tails": 1,
+  "friends": ["everything!"]
 };
-var myDog = "Hunter";
-var myBreed = dogs[myDog];
-console.log(myBreed); // "Doberman"
+
+ourDog.bark = "bow-wow";
 ```
-
-Another way you can use this concept is when the property's name is collected dynamically during the program execution, as follows:
-
-```js
-var someObj = {
-  propName: "John"
-};
-function propPrefix(str) {
-  var s = "prop";
-  return s + str;
-}
-var someProp = propPrefix("Name"); // someProp now holds the value 'propName'
-console.log(someObj[someProp]); // "John"
-```
-
-Note that we do *not* use quotes around the variable name when using it to access the property because we are using the *value* of the variable, not the *name*.
 
 # --instructions--
 
-Set the `playerNumber` variable to `16`. Then, use the variable to look up the player's name and assign it to `player`.
+Add a `"bark"` property to `myDog` and set it to a dog sound, such as "woof". You may use either dot or bracket notation.
 
 # --hints--
 
-`playerNumber` should be a number
+You should add the property `"bark"` to `myDog`.
 
 ```js
-assert(typeof playerNumber === 'number');
+assert(myDog.bark !== undefined);
 ```
 
-The variable `player` should be a string
+You should not add `"bark"` to the setup section.
 
 ```js
-assert(typeof player === 'string');
-```
-
-The value of `player` should be "Montana"
-
-```js
-assert(player === 'Montana');
-```
-
-You should use bracket notation to access `testObj`
-
-```js
-assert(/testObj\s*?\[.*?\]/.test(code));
-```
-
-You should not assign the value `Montana` to the variable `player` directly.
-
-```js
-assert(!code.match(/player\s*=\s*"|\'\s*Montana\s*"|\'\s*;/gi));
-```
-
-You should be using the variable `playerNumber` in your bracket notation
-
-```js
-assert(/testObj\s*?\[\s*playerNumber\s*\]/.test(code));
+assert(!/bark[^\n]:/.test(code));
 ```
 
 # --seed--
@@ -85,33 +57,31 @@ assert(/testObj\s*?\[\s*playerNumber\s*\]/.test(code));
 ## --after-user-code--
 
 ```js
-if(typeof player !== "undefined"){(function(v){return v;})(player);}
+(function(z){return z;})(myDog);
 ```
 
 ## --seed-contents--
 
 ```js
 // Setup
-var testObj = {
-  12: "Namath",
-  16: "Montana",
-  19: "Unitas"
+var myDog = {
+  "name": "Happy Coder",
+  "legs": 4,
+  "tails": 1,
+  "friends": ["freeCodeCamp Campers"]
 };
 
 // Only change code below this line
-
-var playerNumber;       // Change this line
-var player = testObj;   // Change this line
 ```
 
 # --solutions--
 
 ```js
-var testObj = {
-  12: "Namath",
-  16: "Montana",
-  19: "Unitas"
+var myDog = {
+  "name": "Happy Coder",
+  "legs": 4,
+  "tails": 1,
+  "friends": ["freeCodeCamp Campers"]
 };
-var playerNumber = 16;
-var player = testObj[playerNumber];
+myDog.bark = "Woof Woof";
 ```
