@@ -1,13 +1,13 @@
 ---
-id: 5d709bbc066dac7142a6d7a2
-title: Part 79
+id: 5d71b58b848f6914ab89897d
+title: Part 80
 challengeType: 0
-dashedName: part-79
+dashedName: part-80
 ---
 
 # --description--
 
-Inside the `if` statement, set `gold` equal to 15 more than its current value. Also, update `goldText.innerText` to the new value.
+Use the `let` keyword to create a variable named `currentWeapon`. Don't set it equal to anything yet. Notice that we already have a `currentWeapon` variable from earlier. Since the `let` keyword is used instead of `var`, this new version of `currentWeapon` is scoped only to this `if` statement. At the close of the `if` statement, the old version of `currentWeapon` will be used again.
 
 # --hints--
 
@@ -15,18 +15,9 @@ See description above for instructions.
 
 ```js
 assert(
-  (() => {
-    gold = 50;
-    inventory = ['stick'];
-    sellWeapon();
-    return gold === 50 && goldText.innerText === '50';
-  })() &&
-    (() => {
-      gold = 50;
-      inventory = ['stick', 'dagger'];
-      sellWeapon();
-      return gold === 65 && goldText.innerText === '65';
-    })()
+  code.match(
+    /if\s*\(\s*inventory\.length\s*\>\s*1\s*\)\s*\{\s*(.\s*)*let\s*currentWeapon\;?/
+  )
 );
 ```
 
@@ -232,7 +223,8 @@ function buyWeapon() {
 
 function sellWeapon() {
   if (inventory.length > 1) {
-
+    gold += 15;
+    goldText.innerText = gold;
   }
 }
 
@@ -374,6 +366,7 @@ function sellWeapon() {
   if (inventory.length > 1) {
     gold += 15;
     goldText.innerText = gold;
+    let currentWeapon;
   }
 }
 
