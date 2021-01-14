@@ -1,20 +1,22 @@
 ---
-id: 5d6f94347c812010bf3327da
-title: Part 65
+id: 5d6f96747c812010bf3327db
+title: Part 66
 challengeType: 0
-dashedName: part-65
+dashedName: part-66
 ---
 
 # --description--
 
-Right after the word `weapons` (with no space between), add brackets `[]`. In between the brackets put `currentWeapon`, which is the index number of the weapon the player just bought.
+Get just the name property of the current weapon by adding `.name` at the end of `weapons[currentWeapon]` (don't use a space).
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(/let\s*newWeapon\s*\=\s*weapons\s?\[currentWeapon\]\;?/.test(code));
+assert(
+  /let\s*newWeapon\s*\=\s*weapons\s?\[currentWeapon\]\.name\;?/.test(code)
+);
 ```
 
 # --seed--
@@ -202,7 +204,7 @@ function buyWeapon() {
     gold -= 30;
     currentWeapon++;
     goldText.innerText = gold;
-    let newWeapon = weapons;
+    let newWeapon = weapons[currentWeapon];
     text.innerText = "You now have a new weapon.";
   }
 }
@@ -326,7 +328,7 @@ function buyWeapon() {
     gold -= 30;
     currentWeapon++;
     goldText.innerText = gold;
-    let newWeapon = weapons[currentWeapon];
+    let newWeapon = weapons[currentWeapon].name;
     text.innerText = "You now have a new weapon.";
   }
 }
