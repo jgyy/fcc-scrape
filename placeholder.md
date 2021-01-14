@@ -1,22 +1,22 @@
 ---
-id: 5d7e13798360d21c6826a9bb
-title: Part 104
+id: 5d7f3b6c7c4263f469c36b17
+title: Part 105
 challengeType: 0
-dashedName: part-104
+dashedName: part-105
 ---
 
 # --description--
 
-Inside the `dodge` function, set `text.innerText` equal to "You dodge the attack from the \[monster's name]." Instead of "\[monster's name]", get the monster's name with `monsters[fighting].name`.
+In the `defeatMonster` function, set `gold` to equal `gold` plus the monster's level times 6.7. You can get the monster's level with `monsters[fighting].level`.
+
+Here is how you would set `num` to equal `num` plus five times eight: `num += 5 * 8`. Remember that `Math.floor()` rounds any number passed to it down to the nearest whole number.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-fightDragon(),
-  dodge(),
-  assert(text.innerText === 'You dodge the attack from the dragon.');
+(gold = 10), fightSlime(), defeatMonster(), assert(gold === 23);
 ```
 
 # --seed--
@@ -289,6 +289,7 @@ function attack() {
 }
 
 function dodge() {
+  text.innerText = "You dodge the attack from the " + monsters[fighting].name + ".";
 }
 
 function defeatMonster() {
@@ -499,6 +500,7 @@ function dodge() {
 }
 
 function defeatMonster() {
+  gold += Math.floor(monsters[fighting].level * 6.7);
 }
 
 function lose() {
