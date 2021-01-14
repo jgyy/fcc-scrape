@@ -1,13 +1,13 @@
 ---
-id: 5d68c3b1e0696bdec46938e8
-title: Part 41
+id: 5d68c51ee0696bdec46938e9
+title: Part 42
 challengeType: 0
-dashedName: part-41
+dashedName: part-42
 ---
 
 # --description--
 
-`location["button text"]` is an array with three elements. Use only the first element of the array by adding `[0]` at the end.
+Now update the `innerText` of the other two buttons. They should be set to equal the same thing as the first button, except the number inside the brackets should be 1 for the second button and 2 for the third button.
 
 # --hints--
 
@@ -18,8 +18,13 @@ assert(
   update
     .toString()
     .match(
-      /button1\.innerText\s*\=\s*location\[[\'\"\`]button text[\'\"\`]\]\[0\]/
-    )
+      /button2\.innerText\s*\=\s*location\[[\'\"\`]button text[\'\"\`]\]\[1\]/
+    ) &&
+    update
+      .toString()
+      .match(
+        /button3\.innerText\s*\=\s*location\[[\'\"\`]button text[\'\"\`]\]\[2\]/
+      )
 );
 ```
 
@@ -142,7 +147,7 @@ button2.onclick = goCave;
 button3.onclick = fightDragon;
 
 function update(location) {  
-  button1.innerText = location["button text"];
+  button1.innerText = location["button text"][0];
   button2.innerText = "Go to cave";
   button3.innerText = "Fight dragon";
   button1.onclick = goStore;
@@ -220,8 +225,8 @@ button3.onclick = fightDragon;
 
 function update(location) {  
   button1.innerText = location["button text"][0];
-  button2.innerText = "Go to cave";
-  button3.innerText = "Fight dragon";
+  button2.innerText = location["button text"][1];
+  button3.innerText = location["button text"][2];
   button1.onclick = goStore;
   button2.onclick = goCave;
   button3.onclick = fightDragon;
