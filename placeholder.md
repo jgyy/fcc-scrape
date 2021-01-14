@@ -1,20 +1,20 @@
 ---
-id: 5d6f919f7c812010bf3327d9
-title: Part 64
+id: 5d6f94347c812010bf3327da
+title: Part 65
 challengeType: 0
-dashedName: part-64
+dashedName: part-65
 ---
 
 # --description--
 
-Let's tell the player what weapon they bought. In between the two lines you just wrote, use `let` to initialize a new variable called `newWeapon`. Set `newWeapon` to equal `weapons`.
+Right after the word `weapons` (with no space between), add brackets `[]`. In between the brackets put `currentWeapon`, which is the index number of the weapon the player just bought.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(/let\s*newWeapon\s*\=\s*weapons\;?/.test(code));
+assert(/let\s*newWeapon\s*\=\s*weapons\s?\[currentWeapon\]\;?/.test(code));
 ```
 
 # --seed--
@@ -202,6 +202,7 @@ function buyWeapon() {
     gold -= 30;
     currentWeapon++;
     goldText.innerText = gold;
+    let newWeapon = weapons;
     text.innerText = "You now have a new weapon.";
   }
 }
@@ -325,7 +326,7 @@ function buyWeapon() {
     gold -= 30;
     currentWeapon++;
     goldText.innerText = gold;
-    let newWeapon = weapons;
+    let newWeapon = weapons[currentWeapon];
     text.innerText = "You now have a new weapon.";
   }
 }
