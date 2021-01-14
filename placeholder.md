@@ -1,28 +1,25 @@
 ---
-id: 5dbbf3796ef5fe3a704f849e
-title: Part 135
+id: 5dbbf8d86ef5fe3a704f849f
+title: Part 136
 challengeType: 0
-dashedName: part-135
+dashedName: part-136
 ---
 
 # --description--
 
-Add a new object to the `locations` array.
+At the end of the code, add two new functions named `pickTwo` and `pickEight`.
 
-Set `name` to "easter egg", `"button text"` to `["2", "8", "Go to town square?"]`, `"button functions"` to `[pickTwo, pickEight, goTown]`, and `text` to "You find a secret game. Pick a number above. Ten numbers will be randomly chosen between 0 and 10. If the number you choose matches one of the random numbers, you win!"
+Inside each function call the `pick()` function. Pass either "2" or "8" as arguments to `pick` depending on the function name.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert.deepStrictEqual(locations[7], {
-  name: 'easter egg',
-  'button text': ['2', '8', 'Go to town square?'],
-  'button functions': [pickTwo, pickEight, goTown],
-  text:
-    'You find a secret game. Pick a number above. Ten numbers will be randomly chosen between 0 and 10. If the number you choose matches one of the random numbers, you win!'
-});
+assert(
+  pickTwo.toString().replace(/\s/g, '').includes('pick(2)') &&
+    pickEight.toString().replace(/\s/g, '').includes('pick(8)')
+);
 ```
 
 # --seed--
@@ -92,7 +89,7 @@ assert.deepStrictEqual(locations[7], {
   <div id="text">Welcome to Dragon Repeller. You must defeat the dragon that is preventing people from leaving the town. You are in the town square. Where do you want to go? Use the buttons above.</div>
 </div>
 <script>
-let pickTwo, pickEight; // initialize for test
+const pick = num => num; // Initialize for test
 </script>
 ```
 
@@ -205,6 +202,12 @@ const locations = [
     "button text": ["Fight slime", "Fight fanged beast", "Go to town square"], 
     "button functions": [restart, restart, restart], 
     text: "You defeat the dragon! YOU WIN THE GAME! 🎉" 
+  },
+  {
+    name: "easter egg",
+    "button text": ["2", "8", "Go to town square?"],
+    "button functions": [pickTwo, pickEight, goTown],
+    text: "You find a secret game. Pick a number above. Ten numbers will be randomly chosen between 0 and 10. If the number you choose matches one of the random numbers, you win!"
   }
 ];
 
@@ -250,15 +253,15 @@ function buyHealth() {
 function buyWeapon() {
   if (currentWeapon < weapons.length - 1) {
     if (gold >= 30) {
-    gold -= 30;
-    currentWeapon++;
-    goldText.innerText = gold;
-    let newWeapon = weapons[currentWeapon].name;
-    text.innerText = "You now have a " + newWeapon + ".";
-    inventory.push(newWeapon);
-    text.innerText += " In your inventory you have: " + inventory;
+      gold -= 30;
+      currentWeapon++;
+      goldText.innerText = gold;
+      let newWeapon = weapons[currentWeapon].name;
+      text.innerText = "You now have a " + newWeapon + ".";
+      inventory.push(newWeapon);
+      text.innerText += " In your inventory you have: " + inventory;
     } else {
-    text.innerText = "You do not have enough gold to buy a weapon.";
+      text.innerText = "You do not have enough gold to buy a weapon.";
     }
   } else {
     text.innerText = "You already have the most powerful weapon!";
@@ -528,15 +531,15 @@ function buyHealth() {
 function buyWeapon() {
   if (currentWeapon < weapons.length - 1) {
     if (gold >= 30) {
-    gold -= 30;
-    currentWeapon++;
-    goldText.innerText = gold;
-    let newWeapon = weapons[currentWeapon].name;
-    text.innerText = "You now have a " + newWeapon + ".";
-    inventory.push(newWeapon);
-    text.innerText += " In your inventory you have: " + inventory;
+      gold -= 30;
+      currentWeapon++;
+      goldText.innerText = gold;
+      let newWeapon = weapons[currentWeapon].name;
+      text.innerText = "You now have a " + newWeapon + ".";
+      inventory.push(newWeapon);
+      text.innerText += " In your inventory you have: " + inventory;
     } else {
-    text.innerText = "You do not have enough gold to buy a weapon.";
+      text.innerText = "You do not have enough gold to buy a weapon.";
     }
   } else {
     text.innerText = "You already have the most powerful weapon!";
@@ -646,6 +649,14 @@ function restart() {
 
 function easterEgg() {
   update(locations[7]);
+}
+
+function pickTwo() {
+  pick(2);
+}
+
+function pickEight() {
+  pick(8);
 }
 </script>
 ```
