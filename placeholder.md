@@ -1,25 +1,13 @@
 ---
-id: 5dbc2d056ef5fe3a704f84a2
-title: Part 139
+id: 5dbc2f2d6ef5fe3a704f84a3
+title: Part 140
 challengeType: 0
-dashedName: part-139
+dashedName: part-140
 ---
 
 # --description--
 
-Inside `pick`, create a `while` loop to run the same code multiple times. The code inside the `while` loop should keep repeating while `numbers.length` is less than 10 and stop once that condition is no longer true.
-
-Here is an example of a while loop that repeats code inside the loop while `i` is less than five.
-
-```js
-let ourArray = [];
-let i = 0;
-while(i < 5) {
-  ourArray.push(i);
-  i++;
-}
-// ourArray now equals [0,1,2,3,4]
-```
+Inside the `while` loop, push a random number between 0 and 10 onto the end of the `numbers` array. Get the random number with `Math.floor(Math.random() * 11)`.
 
 # --hints--
 
@@ -30,9 +18,7 @@ assert(
   pick
     .toString()
     .replace(/\s/g, '')
-    .includes(
-      'while(numbers.length<10){if(_LPC++%2000===0&&Date.now()-_LP>1500){'
-    )
+    .includes('numbers.push(Math.floor(Math.random()*11));}')
 );
 ```
 
@@ -396,6 +382,9 @@ function pickEight() {
 
 function pick(guess) {
   let numbers = [];
+  while(numbers.length < 10) {
+
+  }
 }
 
 </script>
@@ -685,7 +674,7 @@ function pickEight() {
 function pick(guess) {
   let numbers = [];
   while(numbers.length < 10) {
-
+    numbers.push(Math.floor(Math.random() * 11));
   }
 }
 </script>
