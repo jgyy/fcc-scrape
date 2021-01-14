@@ -1,13 +1,13 @@
 ---
-id: 5d708ab5066dac7142a6d79b
-title: Part 73
+id: 5d708be9066dac7142a6d79c
+title: Part 74
 challengeType: 0
-dashedName: part-73
+dashedName: part-74
 ---
 
 # --description--
 
-At some point in the future, you may want to add more weapons. Instead of checking if `currentWeapon` is less than three, check if `currentWeapon` is less than the length of the `weapons` array. For example, here is how you would get the length of an array called `arr`: `arr.length`.
+We have to fix an error. The `currentWeapon` variable is the array index. Array indexing starts at zero. The index of the last element in an array is one less than the length of the array. In the `if` condition you are working on, change `weapons.length` to `weapons.length - 1`.
 
 # --hints--
 
@@ -18,7 +18,7 @@ assert(
   buyWeapon
     .toString()
     .match(
-      /if\s*\(\s*currentWeapon\s*\<\s*weapons\.length\s*\)\s*\{\s*if\s*\(\s*gold\s*\>\=\s*30\s*\)\s*\{/
+      /if\s*\(\s*currentWeapon\s*\<\s*weapons\.length\s*\-\s*1\s*\)\s*\{\s*if\s*\(\s*gold\s*\>\=\s*30\s*\)\s*\{/
     )
 );
 ```
@@ -204,7 +204,7 @@ function buyHealth() {
 }
 
 function buyWeapon() {
-  if (currentWeapon < 3) {
+  if (currentWeapon < weapons.length) {
     if (gold >= 30) {
       gold -= 30;
       currentWeapon++;
@@ -334,7 +334,7 @@ function buyHealth() {
 }
 
 function buyWeapon() {
-  if (currentWeapon < weapons.length) {
+  if (currentWeapon < weapons.length - 1) {
     if (gold >= 30) {
       gold -= 30;
       currentWeapon++;
