@@ -1,27 +1,28 @@
 ---
-id: 5dbbb1466ef5fe3a704f849c
-title: Part 134
+id: 5dbbf3796ef5fe3a704f849e
+title: Part 135
 challengeType: 0
-dashedName: part-134
+dashedName: part-135
 ---
 
 # --description--
 
-The only thing left to add is a mini-game easter egg (a hidden feature).
+Add a new object to the `locations` array.
 
-Add a new function called `easterEgg` that calls the `update` function and passes in `locations[7]` as an argument.
+Set `name` to "easter egg", `"button text"` to `["2", "8", "Go to town square?"]`, `"button functions"` to `[pickTwo, pickEight, goTown]`, and `text` to "You find a secret game. Pick a number above. Ten numbers will be randomly chosen between 0 and 10. If the number you choose matches one of the random numbers, you win!"
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(
-  easterEgg
-    .toString()
-    .replace(/\s/g, '')
-    .match(/functioneasterEgg\(\)\{(return)?update\(locations\[7\]\)\;?}/)
-);
+assert.deepStrictEqual(locations[7], {
+  name: 'easter egg',
+  'button text': ['2', '8', 'Go to town square?'],
+  'button functions': [pickTwo, pickEight, goTown],
+  text:
+    'You find a secret game. Pick a number above. Ten numbers will be randomly chosen between 0 and 10. If the number you choose matches one of the random numbers, you win!'
+});
 ```
 
 # --seed--
@@ -90,6 +91,9 @@ assert(
   </div>
   <div id="text">Welcome to Dragon Repeller. You must defeat the dragon that is preventing people from leaving the town. You are in the town square. Where do you want to go? Use the buttons above.</div>
 </div>
+<script>
+let pickTwo, pickEight; // initialize for test
+</script>
 ```
 
 ## --after-user-code--
@@ -364,6 +368,10 @@ function restart() {
   goTown();
 }
 
+function easterEgg() {
+  update(locations[7]);
+}
+
 </script>
 ```
 
@@ -469,6 +477,12 @@ const locations = [
     "button text": ["Fight slime", "Fight fanged beast", "Go to town square"], 
     "button functions": [restart, restart, restart], 
     text: "You defeat the dragon! YOU WIN THE GAME! 🎉" 
+  },
+  {
+    name: "easter egg",
+    "button text": ["2", "8", "Go to town square?"],
+    "button functions": [pickTwo, pickEight, goTown],
+    text: "You find a secret game. Pick a number above. Ten numbers will be randomly chosen between 0 and 10. If the number you choose matches one of the random numbers, you win!"
   }
 ];
 
