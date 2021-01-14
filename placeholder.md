@@ -1,20 +1,28 @@
 ---
-id: 5d6f79667c812010bf3327d6
-title: Part 61
+id: 5d6f7b917c812010bf3327d7
+title: Part 62
 challengeType: 0
-dashedName: part-61
+dashedName: part-62
 ---
 
 # --description--
 
-The value of `currentWeapon` corresponds to an index in the `weapons` array. The player starts with a stick since `currentWeapon` starts at 0 and `weapons[0]` is the "stick" weapon. In the `buyWeapon` function, add one to `currentWeapon` since the user is buying the next weapon in the `weapons` array.
+You can easily increment or add one to a variable with the `++` operator. All three of these statements add one to a number:
+
+```js
+num = num + 1;
+num += 1;
+num++;
+```
+
+Change the line `currentWeapon += 1;` to use the `++` operator.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-(currentWeapon = 0), buyWeapon(), assert(currentWeapon === 1);
+assert(buyWeapon.toString().match(/currentWeapon\s*\+\+\;?/));
 ```
 
 # --seed--
@@ -200,6 +208,7 @@ function buyHealth() {
 function buyWeapon() {
   if (gold >= 30) {
     gold -= 30;
+    currentWeapon += 1;
   }
 }
 
@@ -320,7 +329,7 @@ function buyHealth() {
 function buyWeapon() {
   if (gold >= 30) {
     gold -= 30;
-    currentWeapon += 1;
+    currentWeapon++;
   }
 }
 
