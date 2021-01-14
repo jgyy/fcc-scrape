@@ -1,20 +1,27 @@
 ---
-id: 5d68c947e0696bdec46938ec
-title: Part 45
+id: 5d68ca40e0696bdec46938ed
+title: Part 46
 challengeType: 0
-dashedName: part-45
+dashedName: part-46
 ---
 
 # --description--
 
-Now update the `goStore` function. The code should look just like the code inside the `goTown` function, except the number 0 should be changed to 1. After this step would be a good time to try out the game so far. You should be able to move between the store and the town square.
+Add a third object in the `locations` array with the same properties as the other two objects.
+
+Set `name` to "cave". Set the elements in the `"button text"` array to \["Fight slime", "Fight fanged beast", and "Go to town square". Set te elements in the `"button functions"` array to be "fightSlime", "fightBeast", and "goTown". Set the value of the `text` property to "You enter the cave. You see some monsters.".
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(goStore.toString().match(/update\(locations\[1\]\)/));
+assert.deepStrictEqual(locations[2], {
+  name: 'cave',
+  'button text': ['Fight slime', 'Fight fanged beast', 'Go to town square'],
+  'button functions': [fightSlime, fightBeast, goTown],
+  text: 'You enter the cave. You see some monsters.'
+});
 ```
 
 # --seed--
@@ -83,6 +90,11 @@ assert(goStore.toString().match(/update\(locations\[1\]\)/));
   </div>
   <div id="text">Welcome to Dragon Repeller. You must defeat the dragon that is preventing people from leaving the town. You are in the town square. Where do you want to go? Use the buttons above.</div>
 </div>
+<script>
+// Need to initialize for test
+function fightSlime() {}
+function fightBeast() {}
+</script>
 ```
 
 ## --after-user-code--
@@ -150,6 +162,7 @@ function goTown() {
 }
 
 function goStore() {
+  update(locations[1]);
 }
 
 function goCave() {
@@ -204,6 +217,12 @@ const locations = [
     "button text": ["Buy 10 health (10 gold)", "Buy weapon (30 gold)", "Go to town square"],
     "button functions": [buyHealth, buyWeapon, goTown],
     text: "You enter the store."
+  },
+    {
+    name: "cave",
+    "button text": ["Fight slime", "Fight fanged beast", "Go to town square"],
+    "button functions": [fightSlime, fightBeast, goTown],
+    text: "You enter the cave. You see some monsters."
   }
 ];
 
