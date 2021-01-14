@@ -1,49 +1,57 @@
 ---
-id: 56592a60ddddeae28f7aa8e1
-title: Access Multi-Dimensional Arrays With Indexes
+id: 56533eb9ac21ba0edf2244cd
+title: Accessing Nested Arrays
 challengeType: 1
-videoUrl: 'https://scrimba.com/c/ckND4Cq'
-forumTopicId: 16159
-dashedName: access-multi-dimensional-arrays-with-indexes
+videoUrl: 'https://scrimba.com/c/cLeGDtZ'
+forumTopicId: 16160
+dashedName: accessing-nested-arrays
 ---
 
 # --description--
 
-One way to think of a <dfn>multi-dimensional</dfn> array, is as an *array of arrays*. When you use brackets to access your array, the first set of brackets refers to the entries in the outer-most (the first level) array, and each additional pair of brackets refers to the next level of entries inside.
+As we have seen in earlier examples, objects can contain both nested objects and nested arrays. Similar to accessing nested objects, Array bracket notation can be chained to access nested arrays.
 
-**Example**
+Here is an example of how to access a nested array:
 
 ```js
-var arr = [
-  [1,2,3],
-  [4,5,6],
-  [7,8,9],
-  [[10,11,12], 13, 14]
+var ourPets = [
+  {
+    animalType: "cat",
+    names: [
+      "Meowzer",
+      "Fluffy",
+      "Kit-Cat"
+    ]
+  },
+  {
+    animalType: "dog",
+    names: [
+      "Spot",
+      "Bowser",
+      "Frankie"
+    ]
+  }
 ];
-arr[3]; // equals [[10,11,12], 13, 14]
-arr[3][0]; // equals [10,11,12]
-arr[3][0][1]; // equals 11
+ourPets[0].names[1]; // "Fluffy"
+ourPets[1].names[0]; // "Spot"
 ```
-
-**Note**  
-There shouldn't be any spaces between the array name and the square brackets, like `array [0][0]` and even this `array [0] [0]` is not allowed. Although JavaScript is able to process this correctly, this may confuse other programmers reading your code.
 
 # --instructions--
 
-Using bracket notation select an element from `myArray` such that `myData` is equal to `8`.
+Retrieve the second tree from the variable `myPlants` using object dot and array bracket notation.
 
 # --hints--
 
-`myData` should be equal to `8`.
+`secondTree` should equal "pine".
 
 ```js
-assert(myData === 8);
+assert(secondTree === 'pine');
 ```
 
-You should be using bracket notation to read the correct value from `myArray`.
+Your code should use dot and bracket notation to access `myPlants`.
 
 ```js
-assert(/myData=myArray\[2\]\[1\]/.test(__helpers.removeWhiteSpace(code)));
+assert(/=\s*myPlants\[1\].list\[1\]/.test(code));
 ```
 
 # --seed--
@@ -51,22 +59,65 @@ assert(/myData=myArray\[2\]\[1\]/.test(__helpers.removeWhiteSpace(code)));
 ## --after-user-code--
 
 ```js
-if(typeof myArray !== "undefined"){(function(){return "myData: " + myData + " myArray: " + JSON.stringify(myArray);})();}
+(function(x) {
+  if(typeof x != 'undefined') {
+    return "secondTree = " + x;
+  }
+  return "secondTree is undefined";
+})(secondTree);
 ```
 
 ## --seed-contents--
 
 ```js
 // Setup
-var myArray = [[1,2,3], [4,5,6], [7,8,9], [[10,11,12], 13, 14]];
+var myPlants = [
+  {
+    type: "flowers",
+    list: [
+      "rose",
+      "tulip",
+      "dandelion"
+    ]
+  },
+  {
+    type: "trees",
+    list: [
+      "fir",
+      "pine",
+      "birch"
+    ]
+  }
+];
 
 // Only change code below this line
-var myData = myArray[0][0];
+
+var secondTree = ""; // Change this line
 ```
 
 # --solutions--
 
 ```js
-var myArray = [[1,2,3],[4,5,6], [7,8,9], [[10,11,12], 13, 14]];
-var myData = myArray[2][1];
+var myPlants = [
+  {
+    type: "flowers",
+    list: [
+      "rose",
+      "tulip",
+      "dandelion"
+    ]
+  },
+  {
+    type: "trees",
+    list: [
+      "fir",
+      "pine",
+      "birch"
+    ]
+  }
+];
+
+// Only change code below this line
+
+var secondTree = myPlants[1].list[1];
 ```
