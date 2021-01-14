@@ -1,25 +1,26 @@
 ---
-id: 5d71c80e848f6914ab898981
-title: Part 84
+id: 5d71cab4f27e5122af9f1178
+title: Part 85
 challengeType: 0
-dashedName: part-84
+dashedName: part-85
 ---
 
 # --description--
 
-Add code so that if the length of the inventory is NOT more than one, then a text message appears that says "Don't sell your only weapon!".
+Now we'll start working on fighting monsters. Organize your code by moving the `fightDragon` function to the bottom of the code near the other fight functions.
+
+Below where the `weapons` array is defined, define a `monsters` array. Set the contents of the `monsters` array to: `{ name: "slime", level: 2, health: 15 }, {name: "fanged beast", level: 8, health: 60 }, { name: "dragon", level: 20, health: 300 }`. Space out the code similar to the `weapons` array so that it is easier to read.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-(inventory = ['potato']),
-  sellWeapon(),
-  assert(
-    inventory[0] === 'potato' &&
-      text.innerText === "Don't sell your only weapon!"
-  );
+assert.deepStrictEqual(monsters, [
+  { name: 'slime', level: 2, health: 15 },
+  { name: 'fanged beast', level: 8, health: 60 },
+  { name: 'dragon', level: 20, health: 300 }
+]);
 ```
 
 # --seed--
@@ -205,15 +206,15 @@ function buyHealth() {
 function buyWeapon() {
   if (currentWeapon < weapons.length - 1) {
     if (gold >= 30) {
-    gold -= 30;
-    currentWeapon++;
-    goldText.innerText = gold;
-    let newWeapon = weapons[currentWeapon].name;
-    text.innerText = "You now have a " + newWeapon + ".";
-    inventory.push(newWeapon);
-    text.innerText += " In your inventory you have: " + inventory;
+      gold -= 30;
+      currentWeapon++;
+      goldText.innerText = gold;
+      let newWeapon = weapons[currentWeapon].name;
+      text.innerText = "You now have a " + newWeapon + ".";
+      inventory.push(newWeapon);
+      text.innerText += " In your inventory you have: " + inventory;
     } else {
-    text.innerText = "You do not have enough gold to buy a weapon.";
+      text.innerText = "You do not have enough gold to buy a weapon.";
     }
   } else {
     text.innerText = "You already have the most powerful weapon!";
@@ -229,6 +230,8 @@ function sellWeapon() {
     let currentWeapon = inventory.shift();
     text.innerText = "You sold a " + currentWeapon + ".";
     text.innerText += " In your inventory you have: " + inventory;
+  } else {
+    text.innerText = "Don't sell your only weapon!";
   }
 }
 
@@ -283,6 +286,24 @@ const weapons = [
   }
 ];
 
+const monsters = [
+  {
+    name: "slime",
+    level: 2,
+    health: 15
+  },
+  {
+    name: "fanged beast",
+    level: 8,
+    health: 60
+  },
+  {
+    name: "dragon",
+    level: 20,
+    health: 300
+  }
+];
+
 const locations = [
   {
     name: "town square",
@@ -331,10 +352,6 @@ function goCave() {
   update(locations[2]);
 }
 
-function fightDragon() {
-  console.log("Fighting dragon.");
-}
-
 function buyHealth() {
   if (gold >= 10) {
     gold -= 10;
@@ -349,15 +366,15 @@ function buyHealth() {
 function buyWeapon() {
   if (currentWeapon < weapons.length - 1) {
     if (gold >= 30) {
-    gold -= 30;
-    currentWeapon++;
-    goldText.innerText = gold;
-    let newWeapon = weapons[currentWeapon].name;
-    text.innerText = "You now have a " + newWeapon + ".";
-    inventory.push(newWeapon);
-    text.innerText += " In your inventory you have: " + inventory;
+      gold -= 30;
+      currentWeapon++;
+      goldText.innerText = gold;
+      let newWeapon = weapons[currentWeapon].name;
+      text.innerText = "You now have a " + newWeapon + ".";
+      inventory.push(newWeapon);
+      text.innerText += " In your inventory you have: " + inventory;
     } else {
-    text.innerText = "You do not have enough gold to buy a weapon.";
+      text.innerText = "You do not have enough gold to buy a weapon.";
     }
   } else {
     text.innerText = "You already have the most powerful weapon!";
@@ -382,6 +399,10 @@ function fightSlime() {
 }
 
 function fightBeast() {
+}
+
+function fightDragon() {
+  console.log("Fighting dragon.");
 }
 </script>
 ```
