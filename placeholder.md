@@ -1,67 +1,63 @@
 ---
-id: 56533eb9ac21ba0edf2244c8
-title: Accessing Object Properties with Bracket Notation
+id: 56533eb9ac21ba0edf2244c7
+title: Accessing Object Properties with Dot Notation
 challengeType: 1
-videoUrl: 'https://scrimba.com/c/cBvmEHP'
-forumTopicId: 16163
-dashedName: accessing-object-properties-with-bracket-notation
+videoUrl: 'https://scrimba.com/c/cGryJs8'
+forumTopicId: 16164
+dashedName: accessing-object-properties-with-dot-notation
 ---
 
 # --description--
 
-The second way to access the properties of an object is bracket notation (`[]`). If the property of the object you are trying to access has a space in its name, you will need to use bracket notation.
+There are two ways to access the properties of an object: dot notation (`.`) and bracket notation (`[]`), similar to an array.
 
-However, you can still use bracket notation on object properties without spaces.
+Dot notation is what you use when you know the name of the property you're trying to access ahead of time.
 
-Here is a sample of using bracket notation to read an object's property:
+Here is a sample of using dot notation (`.`) to read an object's property:
 
 ```js
 var myObj = {
-  "Space Name": "Kirk",
-  "More Space": "Spock",
-  "NoSpace": "USS Enterprise"
+  prop1: "val1",
+  prop2: "val2"
 };
-myObj["Space Name"]; // Kirk
-myObj['More Space']; // Spock
-myObj["NoSpace"];    // USS Enterprise
+var prop1val = myObj.prop1; // val1
+var prop2val = myObj.prop2; // val2
 ```
-
-Note that property names with spaces in them must be in quotes (single or double).
 
 # --instructions--
 
-Read the values of the properties `"an entree"` and `"the drink"` of `testObj` using bracket notation and assign them to `entreeValue` and `drinkValue` respectively.
+Read in the property values of `testObj` using dot notation. Set the variable `hatValue` equal to the object's property `hat` and set the variable `shirtValue` equal to the object's property `shirt`.
 
 # --hints--
 
-`entreeValue` should be a string
+`hatValue` should be a string
 
 ```js
-assert(typeof entreeValue === 'string');
+assert(typeof hatValue === 'string');
 ```
 
-The value of `entreeValue` should be `"hamburger"`
+The value of `hatValue` should be `"ballcap"`
 
 ```js
-assert(entreeValue === 'hamburger');
+assert(hatValue === 'ballcap');
 ```
 
-`drinkValue` should be a string
+`shirtValue` should be a string
 
 ```js
-assert(typeof drinkValue === 'string');
+assert(typeof shirtValue === 'string');
 ```
 
-The value of `drinkValue` should be `"water"`
+The value of `shirtValue` should be `"jersey"`
 
 ```js
-assert(drinkValue === 'water');
+assert(shirtValue === 'jersey');
 ```
 
-You should use bracket notation twice
+You should use dot notation twice
 
 ```js
-assert(code.match(/testObj\s*?\[('|")[^'"]+\1\]/g).length > 1);
+assert(code.match(/testObj\.\w+/g).length > 1);
 ```
 
 # --seed--
@@ -69,7 +65,7 @@ assert(code.match(/testObj\s*?\[('|")[^'"]+\1\]/g).length > 1);
 ## --after-user-code--
 
 ```js
-(function(a,b) { return "entreeValue = '" + a + "', drinkValue = '" + b + "'"; })(entreeValue,drinkValue);
+(function(a,b) { return "hatValue = '" + a + "', shirtValue = '" + b + "'"; })(hatValue,shirtValue);
 ```
 
 ## --seed-contents--
@@ -77,25 +73,26 @@ assert(code.match(/testObj\s*?\[('|")[^'"]+\1\]/g).length > 1);
 ```js
 // Setup
 var testObj = {
-  "an entree": "hamburger",
-  "my side": "veggies",
-  "the drink": "water"
+  "hat": "ballcap",
+  "shirt": "jersey",
+  "shoes": "cleats"
 };
 
 // Only change code below this line
 
-var entreeValue = testObj;   // Change this line
-var drinkValue = testObj;    // Change this line
+var hatValue = testObj;      // Change this line
+var shirtValue = testObj;    // Change this line
 ```
 
 # --solutions--
 
 ```js
 var testObj = {
-  "an entree": "hamburger",
-  "my side": "veggies",
-  "the drink": "water"
+  "hat": "ballcap",
+  "shirt": "jersey",
+  "shoes": "cleats"
 };
-var entreeValue = testObj["an entree"];
-var drinkValue = testObj['the drink'];
+
+var hatValue = testObj.hat;
+var shirtValue = testObj.shirt;
 ```
