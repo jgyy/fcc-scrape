@@ -1,20 +1,25 @@
 ---
-id: 5d80da7521b11cdaa3f6b168
-title: Part 117
+id: 5dbab6d36ef5fe3a704f848c
+title: Part 118
 challengeType: 0
-dashedName: part-117
+dashedName: part-118
 ---
 
 # --description--
 
-After the `lose` function, create a function called `winGame`. Inside the `winGame` function, call the `update` function and pass in `locations[6]`.
+Add another object in the `locations` array. Everything should be the same as the "lose" element, except the `name` should be "win" and the text should be "You defeat the dragon! YOU WIN THE GAME! 🎉"
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(winGame.toString().replace(/\s/g, '').includes('update(locations[6])'));
+assert.deepStrictEqual(locations[6], {
+  name: 'win',
+  'button text': ['Fight slime', 'Fight fanged beast', 'Go to town square'],
+  'button functions': [restart, restart, restart],
+  text: 'You defeat the dragon! YOU WIN THE GAME! 🎉'
+});
 ```
 
 # --seed--
@@ -233,15 +238,15 @@ function buyHealth() {
 function buyWeapon() {
   if (currentWeapon < weapons.length - 1) {
     if (gold >= 30) {
-      gold -= 30;
-      currentWeapon++;
-      goldText.innerText = gold;
-      let newWeapon = weapons[currentWeapon].name;
-      text.innerText = "You now have a " + newWeapon + ".";
-      inventory.push(newWeapon);
-      text.innerText += " In your inventory you have: " + inventory;
+    gold -= 30;
+    currentWeapon++;
+    goldText.innerText = gold;
+    let newWeapon = weapons[currentWeapon].name;
+    text.innerText = "You now have a " + newWeapon + ".";
+    inventory.push(newWeapon);
+    text.innerText += " In your inventory you have: " + inventory;
     } else {
-      text.innerText = "You do not have enough gold to buy a weapon.";
+    text.innerText = "You do not have enough gold to buy a weapon.";
     }
   } else {
     text.innerText = "You already have the most powerful weapon!";
@@ -313,6 +318,10 @@ function defeatMonster() {
 
 function lose() {
   update(locations[5]);
+}
+
+function winGame() {
+  update(locations[6]);
 }
 
 function restart() {
@@ -426,6 +435,12 @@ const locations = [
     "button text": ["REPLAY?", "REPLAY?", "REPLAY?"],
     "button functions": [restart, restart, restart],
     text: "You die. ☠️"
+  },
+  { 
+    name: "win", 
+    "button text": ["Fight slime", "Fight fanged beast", "Go to town square"], 
+    "button functions": [restart, restart, restart], 
+    text: "You defeat the dragon! YOU WIN THE GAME! 🎉" 
   }
 ];
 
@@ -471,15 +486,15 @@ function buyHealth() {
 function buyWeapon() {
   if (currentWeapon < weapons.length - 1) {
     if (gold >= 30) {
-      gold -= 30;
-      currentWeapon++;
-      goldText.innerText = gold;
-      let newWeapon = weapons[currentWeapon].name;
-      text.innerText = "You now have a " + newWeapon + ".";
-      inventory.push(newWeapon);
-      text.innerText += " In your inventory you have: " + inventory;
+    gold -= 30;
+    currentWeapon++;
+    goldText.innerText = gold;
+    let newWeapon = weapons[currentWeapon].name;
+    text.innerText = "You now have a " + newWeapon + ".";
+    inventory.push(newWeapon);
+    text.innerText += " In your inventory you have: " + inventory;
     } else {
-      text.innerText = "You do not have enough gold to buy a weapon.";
+    text.innerText = "You do not have enough gold to buy a weapon.";
     }
   } else {
     text.innerText = "You already have the most powerful weapon!";
