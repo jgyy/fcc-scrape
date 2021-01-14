@@ -1,20 +1,25 @@
 ---
-id: 5d68dbf7e0696bdec46938f1
-title: Part 50
+id: 5d6904b6e0696bdec46938f2
+title: Part 51
 challengeType: 0
-dashedName: part-50
+dashedName: part-51
 ---
 
 # --description--
 
-After gold is subtracted, add ten to health.
+There is a shorthand way to add or subtract from a variable called compound assignment. The long way to add to a variable is `num = num + 5`. The shorthand way is `num += 5`. It works the same way with subtraction.
+
+Update both lines inside the `buyHealth` function to use compound assignment.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-buyHealth(), assert(gold === 40 && health === 110);
+assert(
+  buyHealth.toString().match(/gold\s*\-\=\s*10\;?/) &&
+    buyHealth.toString().match(/health\s*\+\=\s*10\;?/)
+);
 ```
 
 # --seed--
@@ -169,6 +174,7 @@ function fightDragon() {
 
 function buyHealth() {
   gold = gold - 10;
+  health = health + 10;
 }
 
 function buyWeapon() {
@@ -259,8 +265,8 @@ function fightDragon() {
 }
 
 function buyHealth() {
-  gold = gold - 10;
-  health = health + 10;
+  gold -= 10;
+  health += 10;
 }
 
 function buyWeapon() {
