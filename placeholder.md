@@ -1,13 +1,13 @@
 ---
-id: 5d7088d2066dac7142a6d79a
-title: Part 72
+id: 5d708ab5066dac7142a6d79b
+title: Part 73
 challengeType: 0
-dashedName: part-72
+dashedName: part-73
 ---
 
 # --description--
 
-Once a player has the best weapon, they can't buy another one. Wrap all the code in the `buyWeapon` function inside another `if` statement. The condition should check if `currentWeapon` is less than 3 (the index of the last weapon).
+At some point in the future, you may want to add more weapons. Instead of checking if `currentWeapon` is less than three, check if `currentWeapon` is less than the length of the `weapons` array. For example, here is how you would get the length of an array called `arr`: `arr.length`.
 
 # --hints--
 
@@ -18,13 +18,8 @@ assert(
   buyWeapon
     .toString()
     .match(
-      /if\s*\(\s*currentWeapon\s*\<\s*3\s*\)\s*\{\s*if\s*\(\s*gold\s*\>\=\s*30\s*\)\s*\{/
-    ) &&
-    buyWeapon
-      .toString()
-      .match(
-        /\}\s*else\s*\{\s*text\.innerText\s*\=\s*[\'\"\`]You do not have enough gold to buy a weapon\.?[\'\"\`]\;?\s*\}\s*\}/
-      )
+      /if\s*\(\s*currentWeapon\s*\<\s*weapons\.length\s*\)\s*\{\s*if\s*\(\s*gold\s*\>\=\s*30\s*\)\s*\{/
+    )
 );
 ```
 
@@ -209,16 +204,18 @@ function buyHealth() {
 }
 
 function buyWeapon() {
-  if (gold >= 30) {
-    gold -= 30;
-    currentWeapon++;
-    goldText.innerText = gold;
-    let newWeapon = weapons[currentWeapon].name;
-    text.innerText = "You now have a " + newWeapon + ".";
-    inventory.push(newWeapon);
-    text.innerText += " In your inventory you have: " + inventory;
-  } else {
-    text.innerText = "You do not have enough gold to buy a weapon.";
+  if (currentWeapon < 3) {
+    if (gold >= 30) {
+      gold -= 30;
+      currentWeapon++;
+      goldText.innerText = gold;
+      let newWeapon = weapons[currentWeapon].name;
+      text.innerText = "You now have a " + newWeapon + ".";
+      inventory.push(newWeapon);
+      text.innerText += " In your inventory you have: " + inventory;
+    } else {
+      text.innerText = "You do not have enough gold to buy a weapon.";
+    }
   }
 }
 
@@ -337,7 +334,7 @@ function buyHealth() {
 }
 
 function buyWeapon() {
-  if (currentWeapon < 3) {
+  if (currentWeapon < weapons.length) {
     if (gold >= 30) {
       gold -= 30;
       currentWeapon++;
