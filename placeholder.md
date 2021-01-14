@@ -1,21 +1,15 @@
 ---
-id: 5dbae1f66ef5fe3a704f8496
-title: Part 128
+id: 5dbba5716ef5fe3a704f8497
+title: Part 129
 challengeType: 0
-dashedName: part-128
+dashedName: part-129
 ---
 
 # --description--
 
-Now create the `isMonsterHit` function. It will return a boolean to be used in the `if` expression. Return the result of the comparison `Math.random() > .2`.
+The player should hit if either `Math.random() > .2` OR if the player's health is less than 20. At the end of the return statement, add the "logical or" operator (`||`) and then check if `health` is less than 20.
 
-Here is a function that returns the result of a comparison:
-
-```js
-function flipHeads() {
-  return Math.random() > .5;
-}
-```
+Here is an example that returns true if either a number is less than 10 or more than 20: `num < 10 || num > 20`.
 
 # --hints--
 
@@ -26,11 +20,11 @@ assert(
   isMonsterHit
     .toString()
     .replace(/\s/g, '')
-    .includes('returnMath.random()>.2') ||
+    .includes('returnMath.random()>.2||health<20') ||
     isMonsterHit
       .toString()
       .replace(/\s/g, '')
-      .includes('returnMath.random()>0.2')
+      .includes('returnMath.random()>0.2||health<20')
 );
 ```
 
@@ -205,7 +199,7 @@ const locations = [
     "button text": ["REPLAY?", "REPLAY?", "REPLAY?"],
     "button functions": [restart, restart, restart],
     text: "You die. ☠️"
-  },
+  }
   { 
     name: "win", 
     "button text": ["Fight slime", "Fight fanged beast", "Go to town square"], 
@@ -256,15 +250,15 @@ function buyHealth() {
 function buyWeapon() {
   if (currentWeapon < weapons.length - 1) {
     if (gold >= 30) {
-    gold -= 30;
-    currentWeapon++;
-    goldText.innerText = gold;
-    let newWeapon = weapons[currentWeapon].name;
-    text.innerText = "You now have a " + newWeapon + ".";
-    inventory.push(newWeapon);
-    text.innerText += " In your inventory you have: " + inventory;
+      gold -= 30;
+      currentWeapon++;
+      goldText.innerText = gold;
+      let newWeapon = weapons[currentWeapon].name;
+      text.innerText = "You now have a " + newWeapon + ".";
+      inventory.push(newWeapon);
+      text.innerText += " In your inventory you have: " + inventory;
     } else {
-    text.innerText = "You do not have enough gold to buy a weapon.";
+      text.innerText = "You do not have enough gold to buy a weapon.";
     }
   } else {
     text.innerText = "You already have the most powerful weapon!";
@@ -331,6 +325,10 @@ function getMonsterAttackValue(level) {
   const hit = (level * 5) - (Math.floor(Math.random() * xp));
   console.log(hit);
   return hit > 0 ? hit : 0;
+}
+
+function isMonsterHit() {
+  return Math.random() > .2;
 }
 
 function dodge() {
@@ -515,15 +513,15 @@ function buyHealth() {
 function buyWeapon() {
   if (currentWeapon < weapons.length - 1) {
     if (gold >= 30) {
-    gold -= 30;
-    currentWeapon++;
-    goldText.innerText = gold;
-    let newWeapon = weapons[currentWeapon].name;
-    text.innerText = "You now have a " + newWeapon + ".";
-    inventory.push(newWeapon);
-    text.innerText += " In your inventory you have: " + inventory;
+      gold -= 30;
+      currentWeapon++;
+      goldText.innerText = gold;
+      let newWeapon = weapons[currentWeapon].name;
+      text.innerText = "You now have a " + newWeapon + ".";
+      inventory.push(newWeapon);
+      text.innerText += " In your inventory you have: " + inventory;
     } else {
-    text.innerText = "You do not have enough gold to buy a weapon.";
+      text.innerText = "You do not have enough gold to buy a weapon.";
     }
   } else {
     text.innerText = "You already have the most powerful weapon!";
@@ -592,7 +590,7 @@ function getMonsterAttackValue(level) {
 }
 
 function isMonsterHit() {
-  return Math.random() > .2;
+  return Math.random() > .2 || health < 20;
 }
 
 function dodge() {
