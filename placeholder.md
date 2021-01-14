@@ -1,25 +1,21 @@
 ---
-id: 5dbc2f2d6ef5fe3a704f84a3
-title: Part 140
+id: 5dbc33956ef5fe3a704f84a4
+title: Part 141
 challengeType: 0
-dashedName: part-140
+dashedName: part-141
 ---
 
 # --description--
 
-Inside the `while` loop, push a random number between 0 and 10 onto the end of the `numbers` array. Get the random number with `Math.floor(Math.random() * 11)`.
+After the `while` loop, set `text.innerText` to equal "You picked \[guess]. Here are the random numbers:". Replace \[guess] with the actual guess.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(
-  pick
-    .toString()
-    .replace(/\s/g, '')
-    .includes('numbers.push(Math.floor(Math.random()*11));}')
-);
+pickTwo(),
+  assert(text.innerText === 'You picked 2. Here are the random numbers:');
 ```
 
 # --seed--
@@ -383,7 +379,7 @@ function pickEight() {
 function pick(guess) {
   let numbers = [];
   while(numbers.length < 10) {
-
+    numbers.push(Math.floor(Math.random() * 11));
   }
 }
 
@@ -676,6 +672,8 @@ function pick(guess) {
   while(numbers.length < 10) {
     numbers.push(Math.floor(Math.random() * 11));
   }
+
+  text.innerText = "You picked " + guess + ". Here are the random numbers:";
 }
 </script>
 ```
