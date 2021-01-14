@@ -1,15 +1,13 @@
 ---
-id: 5dbfeffe7736e5ee7d235549
-title: Part 148
+id: 5dbff18d7736e5ee7d23554a
+title: Part 149
 challengeType: 0
-dashedName: part-148
+dashedName: part-149
 ---
 
 # --description--
 
-The `indexOf()` array method returns the first index at which a given element can be found in the array, or -1 if it is not present.
-
-After the for loop, add an `if` expression to check if the guessed number is in the `numbers` array. The condition of the `if` expression should check if `numbers.indexOf(guess) !== -1`.
+Inside the `if` expression, add the following string to the end of `text.innerText`: "Right! You win 20 gold!" Also, add 20 to the value of `gold` and update `goldText.innerText`.
 
 # --hints--
 
@@ -20,7 +18,9 @@ assert(
   pick
     .toString()
     .replace(/\s/g, '')
-    .includes('if(numbers.indexOf(guess)!==-1){}')
+    .includes('text.innerText+="Right!Youwin20gold!";') &&
+    pick.toString().replace(/\s/g, '').includes('gold+=20;') &&
+    pick.toString().replace(/\s/g, '').includes('goldText.innerText=gold;')
 );
 ```
 
@@ -393,6 +393,10 @@ function pick(guess) {
   for (let i = 0; i < 10; i++) {
     text.innerText += numbers[i] + "\n";
   }
+
+  if (numbers.indexOf(guess) !== -1) {
+
+  }
 }
 
 </script>
@@ -692,7 +696,9 @@ function pick(guess) {
   }
 
   if (numbers.indexOf(guess) !== -1) {
-
+    text.innerText += "Right! You win 20 gold!";
+    gold += 20;
+    goldText.innerText = gold;
   }
 }
 </script>
