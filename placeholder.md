@@ -1,22 +1,22 @@
 ---
-id: 5dbfdb737736e5ee7d235546
-title: Part 145
+id: 5dbfdc377736e5ee7d235547
+title: Part 146
 challengeType: 0
-dashedName: part-145
+dashedName: part-146
 ---
 
 # --description--
 
-The second statement in a `for` loop, the condition statement, is evaluated at the beginning of every loop iteration. The loop will continue as long as it evaluates to true.
+The last statement in a `for` loop is the final-expression, and is executed at the end of each loop iteration.
 
-We want the loop to run 10 times, so change `x < 5` to `i < 10`.
+Since we changed the initializer from `x` to `i`, change `x++` to `i++`. This will iterate the initializer `i` by 1 after each loop.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(pick.toString().replace(/\s/g, '').includes('for(vari=0;i<10;x++){'));
+assert(pick.toString().replace(/\s/g, '').includes('for(vari=0;i<10;i++){'));
 ```
 
 # --seed--
@@ -385,7 +385,7 @@ function pick(guess) {
 
   text.innerText = "You picked " + guess + ". Here are the random numbers:\n";
   
-  for (let i = 0; x < 5; x++) {
+  for (let i = 0; i < 10; x++) {
 
   }
 }
@@ -682,7 +682,7 @@ function pick(guess) {
 
   text.innerText = "You picked " + guess + ". Here are the random numbers:\n";
   
-  for (let i = 0; i < 10; x++) {
+  for (let i = 0; i < 10; i++) {
 
   }
 }
