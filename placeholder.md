@@ -1,23 +1,29 @@
 ---
-id: 5d678366e0696bdec46938e1
-title: Part 34
+id: 5d67845ee0696bdec46938e2
+title: Part 35
 challengeType: 0
-dashedName: part-34
+dashedName: part-35
 ---
 
 # --description--
 
-Add one final property to the object named `text`. The value should be the final text from the `goTown` function.
+The `locations` array currently has one element which is an object. Within the array, and after the object's final curly brace, add a comma. On the next line within the array, add another object with all the same properties as the first object. Keep the property names the same on the second object, but change all the property values to the information from the `goStore` function. Also, set the `name` property to `store`.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(
-  locations[0].text ===
-    'You are in the town square. You see a sign that says "Store."'
-);
+assert.deepStrictEqual(locations[1], {
+  name: 'store',
+  'button text': [
+    'Buy 10 health (10 gold)',
+    'Buy weapon (30 gold)',
+    'Go to town square'
+  ],
+  'button functions': [buyHealth, buyWeapon, goTown],
+  text: 'You enter the store.'
+});
 ```
 
 # --seed--
@@ -122,7 +128,8 @@ const locations = [
   {
     name: "town square",
     "button text": ["Go to store", "Go to cave", "Fight dragon"],
-    "button functions": [goStore, goCave, fightDragon]
+    "button functions": [goStore, goCave, fightDragon],
+    text: "You are in the town square. You see a sign that says \"Store.\""
   }
 ];
 
@@ -200,6 +207,12 @@ const locations = [
     "button text": ["Go to store", "Go to cave", "Fight dragon"],
     "button functions": [goStore, goCave, fightDragon],
     text: "You are in the town square. You see a sign that says \"Store.\""
+  },
+  {
+    name: "store",
+    "button text": ["Buy 10 health (10 gold)", "Buy weapon (30 gold)", "Go to town square"],
+    "button functions": [buyHealth, buyWeapon, goTown],
+    text: "You enter the store."
   }
 ];
 
