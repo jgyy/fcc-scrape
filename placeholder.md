@@ -1,67 +1,49 @@
 ---
-id: 56bbb991ad1ed5201cd392ca
-title: Access Array Data with Indexes
+id: 56592a60ddddeae28f7aa8e1
+title: Access Multi-Dimensional Arrays With Indexes
 challengeType: 1
-videoUrl: 'https://scrimba.com/c/cBZQbTz'
-forumTopicId: 16158
-dashedName: access-array-data-with-indexes
+videoUrl: 'https://scrimba.com/c/ckND4Cq'
+forumTopicId: 16159
+dashedName: access-multi-dimensional-arrays-with-indexes
 ---
 
 # --description--
 
-We can access the data inside arrays using <dfn>indexes</dfn>.
-
-Array indexes are written in the same bracket notation that strings use, except that instead of specifying a character, they are specifying an entry in the array. Like strings, arrays use <dfn>zero-based</dfn> indexing, so the first element in an array has an index of `0`.
-
-<br>
+One way to think of a <dfn>multi-dimensional</dfn> array, is as an *array of arrays*. When you use brackets to access your array, the first set of brackets refers to the entries in the outer-most (the first level) array, and each additional pair of brackets refers to the next level of entries inside.
 
 **Example**
 
 ```js
-var array = [50,60,70];
-array[0]; // equals 50
-var data = array[1];  // equals 60
+var arr = [
+  [1,2,3],
+  [4,5,6],
+  [7,8,9],
+  [[10,11,12], 13, 14]
+];
+arr[3]; // equals [[10,11,12], 13, 14]
+arr[3][0]; // equals [10,11,12]
+arr[3][0][1]; // equals 11
 ```
 
 **Note**  
-There shouldn't be any spaces between the array name and the square brackets, like `array [0]`. Although JavaScript is able to process this correctly, this may confuse other programmers reading your code.
+There shouldn't be any spaces between the array name and the square brackets, like `array [0][0]` and even this `array [0] [0]` is not allowed. Although JavaScript is able to process this correctly, this may confuse other programmers reading your code.
 
 # --instructions--
 
-Create a variable called `myData` and set it to equal the first value of `myArray` using bracket notation.
+Using bracket notation select an element from `myArray` such that `myData` is equal to `8`.
 
 # --hints--
 
-The variable `myData` should equal the first value of `myArray`.
+`myData` should be equal to `8`.
 
 ```js
-assert(
-  (function () {
-    if (
-      typeof myArray !== 'undefined' &&
-      typeof myData !== 'undefined' &&
-      myArray[0] === myData
-    ) {
-      return true;
-    } else {
-      return false;
-    }
-  })()
-);
+assert(myData === 8);
 ```
 
-The data in variable `myArray` should be accessed using bracket notation.
+You should be using bracket notation to read the correct value from `myArray`.
 
 ```js
-assert(
-  (function () {
-    if (code.match(/\s*=\s*myArray\[0\]/g)) {
-      return true;
-    } else {
-      return false;
-    }
-  })()
-);
+assert(/myData=myArray\[2\]\[1\]/.test(__helpers.removeWhiteSpace(code)));
 ```
 
 # --seed--
@@ -69,21 +51,22 @@ assert(
 ## --after-user-code--
 
 ```js
-if(typeof myArray !== "undefined" && typeof myData !== "undefined"){(function(y,z){return 'myArray = ' + JSON.stringify(y) + ', myData = ' + JSON.stringify(z);})(myArray, myData);}
+if(typeof myArray !== "undefined"){(function(){return "myData: " + myData + " myArray: " + JSON.stringify(myArray);})();}
 ```
 
 ## --seed-contents--
 
 ```js
 // Setup
-var myArray = [50,60,70];
+var myArray = [[1,2,3], [4,5,6], [7,8,9], [[10,11,12], 13, 14]];
 
 // Only change code below this line
+var myData = myArray[0][0];
 ```
 
 # --solutions--
 
 ```js
-var myArray = [50,60,70];
-var myData = myArray[0];
+var myArray = [[1,2,3],[4,5,6], [7,8,9], [[10,11,12], 13, 14]];
+var myData = myArray[2][1];
 ```
