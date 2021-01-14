@@ -1,15 +1,13 @@
 ---
-id: 5dbba5716ef5fe3a704f8497
-title: Part 129
+id: 5dbba70e6ef5fe3a704f8498
+title: Part 130
 challengeType: 0
-dashedName: part-129
+dashedName: part-130
 ---
 
 # --description--
 
-The player should hit if either `Math.random() > .2` OR if the player's health is less than 20. At the end of the return statement, add the "logical or" operator (`||`) and then check if `health` is less than 20.
-
-Here is an example that returns true if either a number is less than 10 or more than 20: `num < 10 || num > 20`.
+On every attack, there should be a small chance that the player's weapon breaks. At the end of the `attack` function, add an empty `if` expression with the condition `Math.random() <= .1`.
 
 # --hints--
 
@@ -17,14 +15,11 @@ See description above for instructions.
 
 ```js
 assert(
-  isMonsterHit
-    .toString()
-    .replace(/\s/g, '')
-    .includes('returnMath.random()>.2||health<20') ||
+  attack.toString().replace(/\s/g, '').includes('if(Math.random()<=.1){}') ||
     isMonsterHit
       .toString()
       .replace(/\s/g, '')
-      .includes('returnMath.random()>0.2||health<20')
+      .includes('if(Math.random()<=0.1){}')
 );
 ```
 
@@ -199,7 +194,7 @@ const locations = [
     "button text": ["REPLAY?", "REPLAY?", "REPLAY?"],
     "button functions": [restart, restart, restart],
     text: "You die. ☠️"
-  }
+  },
   { 
     name: "win", 
     "button text": ["Fight slime", "Fight fanged beast", "Go to town square"], 
@@ -328,7 +323,7 @@ function getMonsterAttackValue(level) {
 }
 
 function isMonsterHit() {
-  return Math.random() > .2;
+  return Math.random() > .2 || health < 20;
 }
 
 function dodge() {
@@ -581,6 +576,8 @@ function attack() {
     lose();
   } else if (monsterHealth <= 0) {
     fighting === 2 ? winGame() : defeatMonster();
+  }
+  if (Math.random() <= .1) {
   }
 }
 
