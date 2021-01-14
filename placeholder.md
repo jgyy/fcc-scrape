@@ -1,13 +1,25 @@
 ---
-id: 5dbc2c506ef5fe3a704f84a1
-title: Part 138
+id: 5dbc2d056ef5fe3a704f84a2
+title: Part 139
 challengeType: 0
-dashedName: part-138
+dashedName: part-139
 ---
 
 # --description--
 
-Inside `pick`, use `let` to initialize a variable named "numbers" and set it to an empty array.
+Inside `pick`, create a `while` loop to run the same code multiple times. The code inside the `while` loop should keep repeating while `numbers.length` is less than 10 and stop once that condition is no longer true.
+
+Here is an example of a while loop that repeats code inside the loop while `i` is less than five.
+
+```js
+let ourArray = [];
+let i = 0;
+while(i < 5) {
+  ourArray.push(i);
+  i++;
+}
+// ourArray now equals [0,1,2,3,4]
+```
 
 # --hints--
 
@@ -18,7 +30,9 @@ assert(
   pick
     .toString()
     .replace(/\s/g, '')
-    .match(/functionpick\(guess\)\{varnumbers\=\[\]\;?\}/)
+    .includes(
+      'while(numbers.length<10){if(_LPC++%2000===0&&Date.now()-_LP>1500){'
+    )
 );
 ```
 
@@ -381,7 +395,7 @@ function pickEight() {
 }
 
 function pick(guess) {
-
+  let numbers = [];
 }
 
 </script>
@@ -670,6 +684,9 @@ function pickEight() {
 
 function pick(guess) {
   let numbers = [];
+  while(numbers.length < 10) {
+
+  }
 }
 </script>
 ```
