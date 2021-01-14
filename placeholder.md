@@ -1,13 +1,13 @@
 ---
-id: 5d71bfdf848f6914ab89897f
-title: Part 82
+id: 5d71c20f848f6914ab898980
+title: Part 83
 challengeType: 0
-dashedName: part-82
+dashedName: part-83
 ---
 
 # --description--
 
-After the line that creates the `currentWeapon` variable, set `text.innerText` to equal `"You sold a " + currentWeapon + "."`
+Now use the `+=` operator to add to `text.innerText`. Add the string " In your inventory you have: " (with spaces at the beginning and end). Then add the `inventory` variable to the end of the string.
 
 # --hints--
 
@@ -16,7 +16,9 @@ See description above for instructions.
 ```js
 (inventory = ['potato', 'carrot']),
   sellWeapon(),
-  assert(text.innerText === 'You sold a potato.' && inventory[0] === 'carrot');
+  assert(
+    text.innerText === 'You sold a potato. In your inventory you have: carrot'
+  );
 ```
 
 # --seed--
@@ -202,15 +204,15 @@ function buyHealth() {
 function buyWeapon() {
   if (currentWeapon < weapons.length - 1) {
     if (gold >= 30) {
-      gold -= 30;
-      currentWeapon++;
-      goldText.innerText = gold;
-      let newWeapon = weapons[currentWeapon].name;
-      text.innerText = "You now have a " + newWeapon + ".";
-      inventory.push(newWeapon);
-      text.innerText += " In your inventory you have: " + inventory;
+    gold -= 30;
+    currentWeapon++;
+    goldText.innerText = gold;
+    let newWeapon = weapons[currentWeapon].name;
+    text.innerText = "You now have a " + newWeapon + ".";
+    inventory.push(newWeapon);
+    text.innerText += " In your inventory you have: " + inventory;
     } else {
-      text.innerText = "You do not have enough gold to buy a weapon.";
+    text.innerText = "You do not have enough gold to buy a weapon.";
     }
   } else {
     text.innerText = "You already have the most powerful weapon!";
@@ -224,6 +226,7 @@ function sellWeapon() {
     gold += 15;
     goldText.innerText = gold;
     let currentWeapon = inventory.shift();
+    text.innerText = "You sold a " + currentWeapon + ".";
     
   }
 }
@@ -345,15 +348,15 @@ function buyHealth() {
 function buyWeapon() {
   if (currentWeapon < weapons.length - 1) {
     if (gold >= 30) {
-      gold -= 30;
-      currentWeapon++;
-      goldText.innerText = gold;
-      let newWeapon = weapons[currentWeapon].name;
-      text.innerText = "You now have a " + newWeapon + ".";
-      inventory.push(newWeapon);
-      text.innerText += " In your inventory you have: " + inventory;
+    gold -= 30;
+    currentWeapon++;
+    goldText.innerText = gold;
+    let newWeapon = weapons[currentWeapon].name;
+    text.innerText = "You now have a " + newWeapon + ".";
+    inventory.push(newWeapon);
+    text.innerText += " In your inventory you have: " + inventory;
     } else {
-      text.innerText = "You do not have enough gold to buy a weapon.";
+    text.innerText = "You do not have enough gold to buy a weapon.";
     }
   } else {
     text.innerText = "You already have the most powerful weapon!";
@@ -368,6 +371,7 @@ function sellWeapon() {
     goldText.innerText = gold;
     let currentWeapon = inventory.shift();
     text.innerText = "You sold a " + currentWeapon + ".";
+    text.innerText += " In your inventory you have: " + inventory;
   }
 }
 
