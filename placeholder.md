@@ -1,20 +1,24 @@
 ---
-id: 5d7f405c7c4263f469c36b18
-title: Part 106
+id: 5d7f410b7c4263f469c36b19
+title: Part 107
 challengeType: 0
-dashedName: part-106
+dashedName: part-107
 ---
 
 # --description--
 
-Set `xp` to equal `xp` plus the monster's level.
+Now set the `innerText` properties of `goldText` and `xpText` to the updated values.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-(xp = 10), fightSlime(), defeatMonster(), assert(xp === 12);
+(xp = 10),
+  (gold = 10),
+  fightSlime(),
+  defeatMonster(),
+  assert(goldText.innerText === '23' && xpText.innerText === '12');
 ```
 
 # --seed--
@@ -292,6 +296,7 @@ function dodge() {
 
 function defeatMonster() {
   gold += Math.floor(monsters[fighting].level * 6.7);
+  xp += monsters[fighting].level;
 }
 
 function lose() {
@@ -501,6 +506,8 @@ function dodge() {
 function defeatMonster() {
   gold += Math.floor(monsters[fighting].level * 6.7);
   xp += monsters[fighting].level;
+  goldText.innerText = gold;
+  xpText.innerText = xp;
 }
 
 function lose() {
