@@ -1,30 +1,20 @@
 ---
-id: 5dbffe887736e5ee7d23554d
-title: Part 152
+id: 5dc01a727736e5ee7d23554f
+title: Part 153
 challengeType: 0
-dashedName: part-152
+dashedName: part-153
 ---
 
 # --description--
 
-Inside the `locations` array, on the `kill monster` object, "button functions" is currently set to `[goTown, goTown, goTown]`. Change the third `goTown` to `easterEgg`. This is how a player will access the hidden feature of the game.
+Congratulations! You are finished! Now try out the game.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert.deepStrictEqual(locations[4], {
-  name: 'kill monster',
-  'button text': [
-    'Go to town square',
-    'Go to town square',
-    'Go to town square'
-  ],
-  'button functions': [goTown, goTown, easterEgg],
-  text:
-    'The monster screams "Arg!" as it dies. You gain experience points and find gold.'
-});
+
 ```
 
 # --seed--
@@ -190,7 +180,7 @@ const locations = [
   {
     name: "kill monster",
     "button text": ["Go to town square", "Go to town square", "Go to town square"],
-    "button functions": [goTown, goTown, goTown],
+    "button functions": [goTown, goTown, easterEgg],
     text: 'The monster screams "Arg!" as it dies. You gain experience points and find gold.'
   },
   {
