@@ -1,13 +1,13 @@
 ---
-id: 5d70862e066dac7142a6d798
-title: Part 70
+id: 5d7086d4066dac7142a6d799
+title: Part 71
 challengeType: 0
-dashedName: part-70
+dashedName: part-71
 ---
 
 # --description--
 
-At the end of the string you just added after the ending quote mark, add `+ inventory` to add the contents of the inventory to the end of the string.
+At the end of the `if` statement inside the `buyWeapon` function, add an `else` statement. Inside the `else` statement, set `text.innerText` to equal "You do not have enough gold to buy a weapon.".
 
 # --hints--
 
@@ -18,7 +18,7 @@ assert(
   buyWeapon
     .toString()
     .match(
-      /text\.innerText\s*\+\=\s*[\'\"\`] In your inventory you have\: [\'\"\`]\s*\+\s*inventory\;?/
+      /\}\s*else\s*\{\s*text\.innerText\s*\=\s*[\'\"\`]You do not have enough gold to buy a weapon\.?[\'\"\`]\;?\s*\}/
     )
 );
 ```
@@ -211,7 +211,7 @@ function buyWeapon() {
     let newWeapon = weapons[currentWeapon].name;
     text.innerText = "You now have a " + newWeapon + ".";
     inventory.push(newWeapon);
-    text.innerText += " In your inventory you have: ";
+    text.innerText += " In your inventory you have: " + inventory;
   }
 }
 
@@ -338,6 +338,8 @@ function buyWeapon() {
     text.innerText = "You now have a " + newWeapon + ".";
     inventory.push(newWeapon);
     text.innerText += " In your inventory you have: " + inventory;
+  } else {
+    text.innerText = "You do not have enough gold to buy a weapon.";
   }
 }
 
