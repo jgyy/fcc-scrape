@@ -1,36 +1,22 @@
 ---
-id: 5d67880ee0696bdec46938e3
-title: Part 36
+id: 5d67ad3de0696bdec46938e4
+title: Part 37
 challengeType: 0
-dashedName: part-36
+dashedName: part-37
 ---
 
 # --description--
 
-Now we are can consolidate the code inside the `goTown` and `goStore` functions. Copy the code inside the `goTown` function and paste it in the `update` function. Then delete all the code inside the `goTown` and `goStore` functions.
+Instead of assigning the `innerText` and `onClick` properties to specific strings and functions like it does now, the `update` function will use data from the `location` that is passed into it. First, data needs to be passed into the `update` function. Inside the `goTown` function, call the `update` function.
+
+Here is how you would call a function named `exampleFunction`: `exampleFunction();`
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(
-  (() => {
-    update();
-    return (
-      goTown.toString() === 'function goTown() {}' &&
-      goStore.toString() === 'function goStore() {}' &&
-      button1.innerText === 'Go to store' &&
-      button2.innerText === 'Go to cave' &&
-      button3.innerText === 'Fight dragon' &&
-      text.innerText ===
-        'You are in the town square. You see a sign that says "Store".' &&
-      update.toString().match(/button1\.onclick\s*\=\s*goStore\;?/) &&
-      update.toString().match(/button2\.onclick\s*\=\s*goCave\;?/) &&
-      update.toString().match(/button3\.onclick\s*\=\s*fightDragon\;?/)
-    );
-  })()
-);
+assert(goTown.toString().match(/update\(\)/));
 ```
 
 # --seed--
@@ -152,9 +138,6 @@ button2.onclick = goCave;
 button3.onclick = fightDragon;
 
 function update(location) {  
-}
-
-function goTown() {
   button1.innerText = "Go to store";
   button2.innerText = "Go to cave";
   button3.innerText = "Fight dragon";
@@ -164,14 +147,10 @@ function goTown() {
   text.innerText = "You are in the town square. You see a sign that says \"Store\".";
 }
 
+function goTown() {
+}
+
 function goStore() {
-  button1.innerText = "Buy 10 health (10 gold)";
-  button2.innerText = "Buy weapon (30 gold)";
-  button3.innerText = "Go to town square";
-  button1.onclick = buyHealth;
-  button2.onclick = buyWeapon;
-  button3.onclick = goTown;
-  text.innerText = "You enter the store.";
 }
 
 function goCave() {
@@ -245,6 +224,7 @@ function update(location) {
 }
 
 function goTown() {
+  update();
 }
 
 function goStore() {
