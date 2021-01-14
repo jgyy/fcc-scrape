@@ -1,25 +1,20 @@
 ---
-id: 5dbbf8d86ef5fe3a704f849f
-title: Part 136
+id: 5dbc23a66ef5fe3a704f84a0
+title: Part 137
 challengeType: 0
-dashedName: part-136
+dashedName: part-137
 ---
 
 # --description--
 
-At the end of the code, add two new functions named `pickTwo` and `pickEight`.
-
-Inside each function call the `pick()` function. Pass either "2" or "8" as arguments to `pick` depending on the function name.
+Add a `pick` function with a parameter named "guess".
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(
-  pickTwo.toString().replace(/\s/g, '').includes('pick(2)') &&
-    pickEight.toString().replace(/\s/g, '').includes('pick(8)')
-);
+assert(pick.toString().replace(/\s/g, '').includes('functionpick(guess){}'));
 ```
 
 # --seed--
@@ -88,9 +83,6 @@ assert(
   </div>
   <div id="text">Welcome to Dragon Repeller. You must defeat the dragon that is preventing people from leaving the town. You are in the town square. Where do you want to go? Use the buttons above.</div>
 </div>
-<script>
-const pick = num => num; // Initialize for test
-</script>
 ```
 
 ## --after-user-code--
@@ -373,6 +365,14 @@ function restart() {
 
 function easterEgg() {
   update(locations[7]);
+}
+
+function pickTwo() {
+  pick(2);
+}
+
+function pickEight() {
+  pick(8);
 }
 
 </script>
@@ -658,5 +658,7 @@ function pickTwo() {
 function pickEight() {
   pick(8);
 }
+
+function pick(guess) {}
 </script>
 ```
