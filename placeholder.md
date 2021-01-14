@@ -1,13 +1,13 @@
 ---
-id: 5d7086d4066dac7142a6d799
-title: Part 71
+id: 5d7088d2066dac7142a6d79a
+title: Part 72
 challengeType: 0
-dashedName: part-71
+dashedName: part-72
 ---
 
 # --description--
 
-At the end of the `if` statement inside the `buyWeapon` function, add an `else` statement. Inside the `else` statement, set `text.innerText` to equal "You do not have enough gold to buy a weapon.".
+Once a player has the best weapon, they can't buy another one. Wrap all the code in the `buyWeapon` function inside another `if` statement. The condition should check if `currentWeapon` is less than 3 (the index of the last weapon).
 
 # --hints--
 
@@ -18,8 +18,13 @@ assert(
   buyWeapon
     .toString()
     .match(
-      /\}\s*else\s*\{\s*text\.innerText\s*\=\s*[\'\"\`]You do not have enough gold to buy a weapon\.?[\'\"\`]\;?\s*\}/
-    )
+      /if\s*\(\s*currentWeapon\s*\<\s*3\s*\)\s*\{\s*if\s*\(\s*gold\s*\>\=\s*30\s*\)\s*\{/
+    ) &&
+    buyWeapon
+      .toString()
+      .match(
+        /\}\s*else\s*\{\s*text\.innerText\s*\=\s*[\'\"\`]You do not have enough gold to buy a weapon\.?[\'\"\`]\;?\s*\}\s*\}/
+      )
 );
 ```
 
@@ -212,6 +217,8 @@ function buyWeapon() {
     text.innerText = "You now have a " + newWeapon + ".";
     inventory.push(newWeapon);
     text.innerText += " In your inventory you have: " + inventory;
+  } else {
+    text.innerText = "You do not have enough gold to buy a weapon.";
   }
 }
 
@@ -330,16 +337,18 @@ function buyHealth() {
 }
 
 function buyWeapon() {
-  if (gold >= 30) {
-    gold -= 30;
-    currentWeapon++;
-    goldText.innerText = gold;
-    let newWeapon = weapons[currentWeapon].name;
-    text.innerText = "You now have a " + newWeapon + ".";
-    inventory.push(newWeapon);
-    text.innerText += " In your inventory you have: " + inventory;
-  } else {
-    text.innerText = "You do not have enough gold to buy a weapon.";
+  if (currentWeapon < 3) {
+    if (gold >= 30) {
+      gold -= 30;
+      currentWeapon++;
+      goldText.innerText = gold;
+      let newWeapon = weapons[currentWeapon].name;
+      text.innerText = "You now have a " + newWeapon + ".";
+      inventory.push(newWeapon);
+      text.innerText += " In your inventory you have: " + inventory;
+    } else {
+      text.innerText = "You do not have enough gold to buy a weapon.";
+    }
   }
 }
 
