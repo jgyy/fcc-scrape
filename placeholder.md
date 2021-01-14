@@ -1,25 +1,20 @@
 ---
-id: 5d71ed88f27e5122af9f117b
-title: Part 89
+id: 5d71f217e39bedcf8f0998fd
+title: Part 90
 challengeType: 0
-dashedName: part-89
+dashedName: part-90
 ---
 
 # --description--
 
-Add a new object in the `locations` array with all the same properties as the other objects in the array. Set `name` to "fight". Set `"button text"` to `["Attack", "Dodge", "Run"]`. Set `"button functions"` to `[attack, dodge, goTown]`. And set `text` to "You are fighting a monster.".
+At the end of the code create empty functions named `attack` and `dodge`.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert.deepStrictEqual(locations[3], {
-  name: 'fight',
-  'button text': ['Attack', 'Dodge', 'Run'],
-  'button functions': [attack, dodge, goTown],
-  text: 'You are fighting a monster.'
-});
+assert(typeof attack === 'function' && typeof dodge === 'function');
 ```
 
 # --seed--
@@ -88,11 +83,6 @@ assert.deepStrictEqual(locations[3], {
   </div>
   <div id="text">Welcome to Dragon Repeller. You must defeat the dragon that is preventing people from leaving the town. You are in the town square. Where do you want to go? Use the buttons above.</div>
 </div>
-<script>
-// initialize for test
-const attack = () => {}
-const dodge = () => {}
-</script>
 ```
 
 ## --after-user-code--
@@ -180,6 +170,12 @@ const locations = [
     "button text": ["Fight slime", "Fight fanged beast", "Go to town square"],
     "button functions": [fightSlime, fightBeast, goTown],
     text: "You enter the cave. You see some monsters."
+  },
+  {
+    name: "fight",
+    "button text": ["Attack", "Dodge", "Run"],
+    "button functions": [attack, dodge, goTown],
+    text: "You are fighting a monster."
   }
 ];
 
@@ -224,15 +220,15 @@ function buyHealth() {
 function buyWeapon() {
   if (currentWeapon < weapons.length - 1) {
     if (gold >= 30) {
-      gold -= 30;
-      currentWeapon++;
-      goldText.innerText = gold;
-      let newWeapon = weapons[currentWeapon].name;
-      text.innerText = "You now have a " + newWeapon + ".";
-      inventory.push(newWeapon);
-      text.innerText += " In your inventory you have: " + inventory;
+    gold -= 30;
+    currentWeapon++;
+    goldText.innerText = gold;
+    let newWeapon = weapons[currentWeapon].name;
+    text.innerText = "You now have a " + newWeapon + ".";
+    inventory.push(newWeapon);
+    text.innerText += " In your inventory you have: " + inventory;
     } else {
-      text.innerText = "You do not have enough gold to buy a weapon.";
+    text.innerText = "You do not have enough gold to buy a weapon.";
     }
   } else {
     text.innerText = "You already have the most powerful weapon!";
@@ -402,15 +398,15 @@ function buyHealth() {
 function buyWeapon() {
   if (currentWeapon < weapons.length - 1) {
     if (gold >= 30) {
-      gold -= 30;
-      currentWeapon++;
-      goldText.innerText = gold;
-      let newWeapon = weapons[currentWeapon].name;
-      text.innerText = "You now have a " + newWeapon + ".";
-      inventory.push(newWeapon);
-      text.innerText += " In your inventory you have: " + inventory;
+    gold -= 30;
+    currentWeapon++;
+    goldText.innerText = gold;
+    let newWeapon = weapons[currentWeapon].name;
+    text.innerText = "You now have a " + newWeapon + ".";
+    inventory.push(newWeapon);
+    text.innerText += " In your inventory you have: " + inventory;
     } else {
-      text.innerText = "You do not have enough gold to buy a weapon.";
+    text.innerText = "You do not have enough gold to buy a weapon.";
     }
   } else {
     text.innerText = "You already have the most powerful weapon!";
@@ -447,6 +443,12 @@ function fightDragon() {
 }
 
 function goFight() {
+}
+
+function attack() {
+}
+
+function dodge() {
 }
 </script>
 ```
