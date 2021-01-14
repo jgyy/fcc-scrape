@@ -1,22 +1,22 @@
 ---
-id: 5d67ad3de0696bdec46938e4
-title: Part 37
+id: 5d67ae95e0696bdec46938e5
+title: Part 38
 challengeType: 0
-dashedName: part-37
+dashedName: part-38
 ---
 
 # --description--
 
-Instead of assigning the `innerText` and `onClick` properties to specific strings and functions like it does now, the `update` function will use data from the `location` that is passed into it. First, data needs to be passed into the `update` function. Inside the `goTown` function, call the `update` function.
+Now change the code you just wrote to call the `update` function so the `locations` array is passed in as an argument.
 
-Here is how you would call a function named `exampleFunction`: `exampleFunction();`
+Here is how you would call a function named `exampleFunction` with an argument called `arg`: `exampleFunction(arg);`
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(goTown.toString().match(/update\(\)/));
+assert(goTown.toString().match(/update\(locations\)/));
 ```
 
 # --seed--
@@ -148,6 +148,7 @@ function update(location) {
 }
 
 function goTown() {
+  update();
 }
 
 function goStore() {
@@ -224,7 +225,7 @@ function update(location) {
 }
 
 function goTown() {
-  update();
+  update(locations);
 }
 
 function goStore() {
