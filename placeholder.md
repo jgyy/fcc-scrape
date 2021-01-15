@@ -1,128 +1,78 @@
 ---
-id: 56533eb9ac21ba0edf2244be
-title: Global Scope and Functions
+id: 56533eb9ac21ba0edf2244c0
+title: Global vs. Local Scope in Functions
 challengeType: 1
-videoUrl: 'https://scrimba.com/c/cQM7mCN'
-forumTopicId: 18193
-dashedName: global-scope-and-functions
+videoUrl: 'https://scrimba.com/c/c2QwKH2'
+forumTopicId: 18194
+dashedName: global-vs--local-scope-in-functions
 ---
 
 # --description--
 
-In JavaScript, <dfn>scope</dfn> refers to the visibility of variables. Variables which are defined outside of a function block have <dfn>Global</dfn> scope. This means, they can be seen everywhere in your JavaScript code.
+It is possible to have both <dfn>local</dfn> and <dfn>global</dfn> variables with the same name. When you do this, the `local` variable takes precedence over the `global` variable.
 
-Variables which are used without the `var` keyword are automatically created in the `global` scope. This can create unintended consequences elsewhere in your code or when running a function again. You should always declare your variables with `var`.
+In this example:
+
+```js
+var someVar = "Hat";
+function myFun() {
+  var someVar = "Head";
+  return someVar;
+}
+```
+
+The function `myFun` will return `"Head"` because the `local` version of the variable is present.
 
 # --instructions--
 
-Using `var`, declare a global variable named `myGlobal` outside of any function. Initialize it with a value of `10`.
-
-Inside function `fun1`, assign `5` to `oopsGlobal` ***without*** using the `var` keyword.
+Add a local variable to `myOutfit` function to override the value of `outerWear` with `"sweater"`.
 
 # --hints--
 
-`myGlobal` should be defined
+You should not change the value of the global `outerWear`.
 
 ```js
-assert(typeof myGlobal != 'undefined');
+assert(outerWear === 'T-Shirt');
 ```
 
-`myGlobal` should have a value of `10`
+`myOutfit` should return `"sweater"`.
 
 ```js
-assert(myGlobal === 10);
+assert(myOutfit() === 'sweater');
 ```
 
-`myGlobal` should be declared using the `var` keyword
+You should not change the return statement.
 
 ```js
-assert(/var\s+myGlobal/.test(code));
-```
-
-`oopsGlobal` should be a global variable and have a value of `5`
-
-```js
-assert(typeof oopsGlobal != 'undefined' && oopsGlobal === 5);
+assert(/return outerWear/.test(code));
 ```
 
 # --seed--
 
-## --before-user-code--
-
-```js
-var logOutput = "";
-var originalConsole = console
-function capture() {
-    var nativeLog = console.log;
-    console.log = function (message) {
-        logOutput = message;
-        if(nativeLog.apply) {
-          nativeLog.apply(originalConsole, arguments);
-        } else {
-          var nativeMsg = Array.prototype.slice.apply(arguments).join(' ');
-          nativeLog(nativeMsg);
-        }
-    };
-}
-
-function uncapture() {
-  console.log = originalConsole.log;
-}
-var oopsGlobal;
-capture();
-```
-
-## --after-user-code--
-
-```js
-fun1();
-fun2();
-uncapture();
-(function() { return logOutput || "console.log never called"; })();
-```
-
 ## --seed-contents--
 
 ```js
-// Declare the myGlobal variable below this line
+// Setup
+var outerWear = "T-Shirt";
+
+function myOutfit() {
+  // Only change code below this line
 
 
-function fun1() {
-  // Assign 5 to oopsGlobal Here
 
+  // Only change code above this line
+  return outerWear;
 }
 
-// Only change code above this line
-
-function fun2() {
-  var output = "";
-  if (typeof myGlobal != "undefined") {
-    output += "myGlobal: " + myGlobal;
-  }
-  if (typeof oopsGlobal != "undefined") {
-    output += " oopsGlobal: " + oopsGlobal;
-  }
-  console.log(output);
-}
+myOutfit();
 ```
 
 # --solutions--
 
 ```js
-var myGlobal = 10;
-
-function fun1() {
-  oopsGlobal = 5;
-}
-
-function fun2() {
-  var output = "";
-  if(typeof myGlobal != "undefined") {
-    output += "myGlobal: " + myGlobal;
-  }
-  if(typeof oopsGlobal != "undefined") {
-    output += " oopsGlobal: " + oopsGlobal;
-  }
-  console.log(output);
+var outerWear = "T-Shirt";
+function myOutfit() {
+  var outerWear = "sweater";
+  return outerWear;
 }
 ```
