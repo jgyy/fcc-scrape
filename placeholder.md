@@ -1,55 +1,30 @@
 ---
-id: 56533eb9ac21ba0edf2244ac
-title: Increment a Number with JavaScript
+id: 56533eb9ac21ba0edf2244a9
+title: Initializing Variables with the Assignment Operator
 challengeType: 1
-videoUrl: 'https://scrimba.com/c/ca8GLT9'
-forumTopicId: 18201
-dashedName: increment-a-number-with-javascript
+videoUrl: 'https://scrimba.com/c/cWJ4Bfb'
+forumTopicId: 301171
+dashedName: initializing-variables-with-the-assignment-operator
 ---
 
 # --description--
 
-You can easily <dfn>increment</dfn> or add one to a variable with the `++` operator.
+It is common to <dfn>initialize</dfn> a variable to an initial value in the same line as it is declared.
 
-`i++;`
+`var myVar = 0;`
 
-is the equivalent of
-
-`i = i + 1;`
-
-**Note**  
-The entire line becomes `i++;`, eliminating the need for the equal sign.
+Creates a new variable called `myVar` and assigns it an initial value of `0`.
 
 # --instructions--
 
-Change the code to use the `++` operator on `myVar`.
+Define a variable `a` with `var` and initialize it to a value of `9`.
 
 # --hints--
 
-`myVar` should equal `88`.
+You should initialize `a` to a value of `9`.
 
 ```js
-assert(myVar === 88);
-```
-
-You should not use the assignment operator.
-
-```js
-assert(
-  /var\s*myVar\s*=\s*87;\s*\/*.*\s*([+]{2}\s*myVar|myVar\s*[+]{2});/.test(code)
-);
-```
-
-You should use the `++` operator.
-
-```js
-assert(/[+]{2}\s*myVar|myVar\s*[+]{2}/.test(code));
-```
-
-You should not change code above the specified comment.
-
-```js
-assert(/var myVar = 87;/.test(code));
+assert(/var\s+a\s*=\s*9(\s*;?\s*)$/.test(code));
 ```
 
 # --seed--
@@ -57,21 +32,16 @@ assert(/var myVar = 87;/.test(code));
 ## --after-user-code--
 
 ```js
-(function(z){return 'myVar = ' + z;})(myVar);
+if(typeof a !== 'undefined') {(function(a){return "a = " + a;})(a);} else { (function() {return 'a is undefined';})(); }
 ```
 
 ## --seed-contents--
 
 ```js
-var myVar = 87;
-
-// Only change code below this line
-myVar = myVar + 1;
 ```
 
 # --solutions--
 
 ```js
-var myVar = 87;
-myVar++;
+var a = 9;
 ```
