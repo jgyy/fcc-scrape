@@ -1,43 +1,47 @@
 ---
-id: 587d7b86367417b2b2512b3d
-title: Prevent Infinite Loops with a Valid Terminal Condition
+id: 587d7b83367417b2b2512b37
+title: Understanding the Differences between the freeCodeCamp and Browser Console
 challengeType: 1
-forumTopicId: 301192
-dashedName: prevent-infinite-loops-with-a-valid-terminal-condition
+forumTopicId: 301193
+dashedName: understanding-the-differences-between-the-freecodecamp-and-browser-console
 ---
 
 # --description--
 
-The final topic is the dreaded infinite loop. Loops are great tools when you need your program to run a code block a certain number of times or until a condition is met, but they need a terminal condition that ends the looping. Infinite loops are likely to freeze or crash the browser, and cause general program execution mayhem, which no one wants.
+You may have noticed that some freeCodeCamp JavaScript challenges include their own console. This console behaves a little differently than the browser console you used in the last challenge.
 
-There was an example of an infinite loop in the introduction to this section - it had no terminal condition to break out of the `while` loop inside `loopy()`. Do NOT call this function!
+The following challenge is meant to highlight the main difference between the freeCodeCamp console and your browser console.
 
-```js
-function loopy() {
-  while(true) {
-    console.log("Hello, world!");
-  }
-}
-```
+When you run ordinary JavaScript, the browser's console will display your `console.log()` statements the exact number of times it is called.
 
-It's the programmer's job to ensure that the terminal condition, which tells the program when to break out of the loop code, is eventually reached. One error is incrementing or decrementing a counter variable in the wrong direction from the terminal condition. Another one is accidentally resetting a counter or index variable within the loop code, instead of incrementing or decrementing it.
+The freeCodeCamp console will print your `console.log()` statements a short time after the editor detects a change in the script, as well as during testing.
+
+The freeCodeCamp console is cleared before the tests are run and, to avoid spam, only prints the logs during the first test (see the note below for exceptions).
+
+If you would like to see every log for every test, run the tests, and open the browser console. If you prefer to use the browser console, and want it to mimic the freeCodeCamp console, place `console.clear()` before any other `console` calls, to clear the browser console.
+
+**Note:** `console.log`s inside functions are printed to the freeCodeCamp console whenever those functions are called, this can help debugging functions that are called during testing.
 
 # --instructions--
 
-The `myFunc()` function contains an infinite loop because the terminal condition `i != 4` will never evaluate to `false` (and break the looping) - `i` will increment by 2 each pass, and jump right over 4 since `i` is odd to start. Fix the comparison operator in the terminal condition so the loop only runs for `i` less than or equal to 4.
+First, use `console.log` to log the `output` variable. Then, use `console.clear` to clear the browser console.
 
 # --hints--
 
-Your code should change the comparison operator in the terminal condition (the middle part) of the `for` loop.
+You should use `console.clear()` to clear the browser console.
 
 ```js
-assert(code.match(/i\s*?<=\s*?4;/g).length == 1);
+assert(
+  __helpers
+    .removeWhiteSpace(__helpers.removeJSComments(code))
+    .match(/console.clear\(\)/)
+);
 ```
 
-Your code should fix the comparison operator in the terminal condition of the loop.
+You should use `console.log()` to print the `output` variable.
 
 ```js
-assert(!code.match(/i\s*?!=\s*?4;/g));
+assert(__helpers.removeWhiteSpace(code).match(/console\.log\(output\)/));
 ```
 
 # --seed--
@@ -45,19 +49,25 @@ assert(!code.match(/i\s*?!=\s*?4;/g));
 ## --seed-contents--
 
 ```js
-function myFunc() {
-  for (let i = 1; i != 4; i += 2) {
-    console.log("Still going!");
-  }
-}
+// Open your browser console.
+let output = "Get this to log once in the freeCodeCamp console and twice in the browser console";
+// Use console.log() to print the output variable.
+
+// Run the tests to see the difference between the two consoles.
+
+// Now, add console.clear() before your console.log() to clear the browser console, and pass the tests.
 ```
 
 # --solutions--
 
 ```js
-function myFunc() {
- for (let i = 1; i <= 4; i += 2) {
-   console.log("Still going!");
- }
-}
+// Open your browser console.
+let output = "Get this to log once in the freeCodeCamp console and twice in the browser console";
+// Use console.log() to print the output variable.
+console.clear();
+console.log(output);
+
+// Run the tests to see the difference between the two consoles.
+
+// Now, add console.clear() before your console.log() to clear the browser console, and pass the tests.
 ```
