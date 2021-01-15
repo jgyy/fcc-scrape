@@ -1,93 +1,119 @@
 ---
-id: 56533eb9ac21ba0edf2244e1
-title: Nesting For Loops
+id: 56533eb9ac21ba0edf2244bd
+title: Passing Values to Functions with Arguments
 challengeType: 1
-videoUrl: 'https://scrimba.com/c/cRn6GHM'
-forumTopicId: 18248
-dashedName: nesting-for-loops
+videoUrl: 'https://scrimba.com/c/cy8rahW'
+forumTopicId: 18254
+dashedName: passing-values-to-functions-with-arguments
 ---
 
 # --description--
 
-If you have a multi-dimensional array, you can use the same logic as the prior waypoint to loop through both the array and any sub-arrays. Here is an example:
+<dfn>Parameters</dfn> are variables that act as placeholders for the values that are to be input to a function when it is called. When a function is defined, it is typically defined along with one or more parameters. The actual values that are input (or <dfn>"passed"</dfn>) into a function when it is called are known as <dfn>arguments</dfn>.
+
+Here is a function with two parameters, `param1` and `param2`:
 
 ```js
-var arr = [
-  [1,2], [3,4], [5,6]
-];
-for (var i=0; i < arr.length; i++) {
-  for (var j=0; j < arr[i].length; j++) {
-    console.log(arr[i][j]);
-  }
+function testFun(param1, param2) {
+  console.log(param1, param2);
 }
 ```
 
-This outputs each sub-element in `arr` one at a time. Note that for the inner loop, we are checking the `.length` of `arr[i]`, since `arr[i]` is itself an array.
+Then we can call `testFun`: `testFun("Hello", "World");` We have passed two arguments, `"Hello"` and `"World"`. Inside the function, `param1` will equal "Hello" and `param2` will equal "World". Note that you could call `testFun` again with different arguments and the parameters would take on the value of the new arguments.
 
 # --instructions--
 
-Modify function `multiplyAll` so that it returns the product of all the numbers in the sub-arrays of `arr`.
+<ol><li>Create a function called <code>functionWithArgs</code> that accepts two arguments and outputs their sum to the dev console.</li><li>Call the function with two numbers as arguments.</li></ol>
 
 # --hints--
 
-`multiplyAll([[1],[2],[3]])` should return `6`
+`functionWithArgs` should be a function.
 
 ```js
-assert(multiplyAll([[1], [2], [3]]) === 6);
+assert(typeof functionWithArgs === 'function');
 ```
 
-`multiplyAll([[1,2],[3,4],[5,6,7]])` should return `5040`
+`functionWithArgs(1,2)` should output `3`.
+
+```js
+if (typeof functionWithArgs === 'function') {
+  capture();
+  functionWithArgs(1, 2);
+  uncapture();
+}
+assert(logOutput == 3);
+```
+
+`functionWithArgs(7,9)` should output `16`.
+
+```js
+if (typeof functionWithArgs === 'function') {
+  capture();
+  functionWithArgs(7, 9);
+  uncapture();
+}
+assert(logOutput == 16);
+```
+
+You should call `functionWithArgs` with two numbers after you define it.
 
 ```js
 assert(
-  multiplyAll([
-    [1, 2],
-    [3, 4],
-    [5, 6, 7]
-  ]) === 5040
-);
-```
-
-`multiplyAll([[5,1],[0.2, 4, 0.5],[3, 9]])` should return `54`
-
-```js
-assert(
-  multiplyAll([
-    [5, 1],
-    [0.2, 4, 0.5],
-    [3, 9]
-  ]) === 54
+  /functionWithArgs\([-+]?\d*\.?\d*,[-+]?\d*\.?\d*\)/.test(
+    code.replace(/\s/g, '')
+  )
 );
 ```
 
 # --seed--
 
+## --before-user-code--
+
+```js
+var logOutput = "";
+var originalConsole = console
+function capture() {
+    var nativeLog = console.log;
+    console.log = function (message) {
+        if(message) logOutput = JSON.stringify(message).trim();
+        if(nativeLog.apply) {
+          nativeLog.apply(originalConsole, arguments);
+        } else {
+          var nativeMsg = Array.prototype.slice.apply(arguments).join(' ');
+          nativeLog(nativeMsg);
+        }
+    };
+}
+
+function uncapture() {
+  console.log = originalConsole.log;
+}
+
+capture();
+```
+
+## --after-user-code--
+
+```js
+uncapture();
+
+if (typeof functionWithArgs !== "function") { 
+  (function() { return "functionWithArgs is not defined"; })();
+} else {
+  (function() { return logOutput || "console.log never called"; })();
+}
+```
+
 ## --seed-contents--
 
 ```js
-function multiplyAll(arr) {
-  var product = 1;
-  // Only change code below this line
-
-  // Only change code above this line
-  return product;
-}
-
-multiplyAll([[1,2],[3,4],[5,6,7]]);
 ```
 
 # --solutions--
 
 ```js
-function multiplyAll(arr) {
-  var product = 1;
-  for (var i = 0; i < arr.length; i++) {
-    for (var j = 0; j < arr[i].length; j++) {
-      product *= arr[i][j];
-    }
-  }
-  return product;
+function functionWithArgs(a, b) {
+  console.log(a + b);
 }
-
-multiplyAll([[1,2],[3,4],[5,6,7]]);
+functionWithArgs(10, 5);
 ```
