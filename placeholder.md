@@ -1,181 +1,107 @@
 ---
-id: 56533eb9ac21ba0edf2244cf
-title: Record Collection
+id: 5cfa3679138e7d9595b9d9d4
+title: Replace Loops using Recursion
 challengeType: 1
-forumTopicId: 18261
-dashedName: record-collection
+videoUrl: >-
+  https://www.freecodecamp.org/news/how-recursion-works-explained-with-flowcharts-and-a-video-de61f40cb7f9/
+forumTopicId: 301175
+dashedName: replace-loops-using-recursion
 ---
 
 # --description--
 
-You are given a JSON object representing a part of your musical album collection. Each album has a unique id number as its key and several other properties. Not all albums have complete information.
+Recursion is the concept that a function can be expressed in terms of itself. To help understand this, start by thinking about the following task: multiply the first `n` elements of an array to create the product of those elements. Using a `for` loop, you could do this:
 
-You start with an `updateRecords` function that takes an object like `collection`, an `id`, a `prop` (like `artist` or `tracks`), and a `value`. Complete the function using the rules below to modify the object passed to the function.
+```js
+  function multiply(arr, n) {
+    var product = 1;
+    for (var i = 0; i < n; i++) {
+        product *= arr[i];
+    }
+    return product;
+  }
+```
 
--   Your function must always return the entire object.
--   If `prop` isn't `tracks` and `value` isn't an empty string, update or set that album's `prop` to `value`.
--   If `prop` is `tracks` but the album doesn't have a `tracks` property, create an empty array and add `value` to it.
--   If `prop` is `tracks` and `value` isn't an empty string, add `value` to the end of the album's existing `tracks` array.
--   If `value` is an empty string, delete the given `prop` property from the album.
+However, notice that `multiply(arr, n) == multiply(arr, n - 1) * arr[n - 1]`. That means you can rewrite `multiply` in terms of itself and never need to use a loop.
 
-**Note:** A copy of the `collection` object is used for the tests.
+```js
+  function multiply(arr, n) {
+    if (n <= 0) {
+      return 1;
+    } else {
+      return multiply(arr, n - 1) * arr[n - 1];
+    }
+  }
+```
+
+The recursive version of `multiply` breaks down like this. In the <dfn>base case</dfn>, where `n <= 0`, it returns 1. For larger values of `n`, it calls itself, but with `n - 1`. That function call is evaluated in the same way, calling `multiply` again until `n <= 0`. At this point, all the functions can return and the original `multiply` returns the answer.
+
+**Note:** Recursive functions must have a base case when they return without calling the function again (in this example, when `n <= 0`), otherwise they can never finish executing.
+
+# --instructions--
+
+Write a recursive function, `sum(arr, n)`, that returns the sum of the first `n` elements of an array `arr`.
 
 # --hints--
 
-After `updateRecords(collection, 5439, "artist", "ABBA")`, `artist` should be `ABBA`
+`sum([1], 0)` should equal 0.
+
+```js
+assert.equal(sum([1], 0), 0);
+```
+
+`sum([2, 3, 4], 1)` should equal 2.
+
+```js
+assert.equal(sum([2, 3, 4], 1), 2);
+```
+
+`sum([2, 3, 4, 5], 3)` should equal 9.
+
+```js
+assert.equal(sum([2, 3, 4, 5], 3), 9);
+```
+
+Your code should not rely on any kind of loops (`for` or `while` or higher order functions such as `forEach`, `map`, `filter`, or `reduce`.).
 
 ```js
 assert(
-  updateRecords(_recordCollection, 5439, 'artist', 'ABBA')[5439]['artist'] ===
-    'ABBA'
+  !__helpers
+    .removeJSComments(code)
+    .match(/for|while|forEach|map|filter|reduce/g)
 );
 ```
 
-After `updateRecords(collection, 5439, "tracks", "Take a Chance on Me")`, `tracks` should have `Take a Chance on Me` as the last element.
+You should use recursion to solve this problem.
 
 ```js
 assert(
-  updateRecords(_recordCollection, 5439, 'tracks', 'Take a Chance on Me')[5439][
-    'tracks'
-  ].pop() === 'Take a Chance on Me'
-);
-```
-
-After `updateRecords(collection, 2548, "artist", "")`, `artist` should not be set
-
-```js
-updateRecords(_recordCollection, 2548, 'artist', '');
-assert(!_recordCollection[2548].hasOwnProperty('artist'));
-```
-
-After `updateRecords(collection, 1245, "tracks", "Addicted to Love")`, `tracks` should have `Addicted to Love` as the last element.
-
-```js
-assert(
-  updateRecords(_recordCollection, 1245, 'tracks', 'Addicted to Love')[1245][
-    'tracks'
-  ].pop() === 'Addicted to Love'
-);
-```
-
-After `updateRecords(collection, 2468, "tracks", "Free")`, `tracks` should have `1999` as the first element.
-
-```js
-assert(
-  updateRecords(_recordCollection, 2468, 'tracks', 'Free')[2468][
-    'tracks'
-  ][0] === '1999'
-);
-```
-
-After `updateRecords(collection, 2548, "tracks", "")`, `tracks` should not be set
-
-```js
-updateRecords(_recordCollection, 2548, 'tracks', '');
-assert(!_recordCollection[2548].hasOwnProperty('tracks'));
-```
-
-After `updateRecords(collection, 1245, "albumTitle", "Riptide")`, `albumTitle` should be `Riptide`
-
-```js
-assert(
-  updateRecords(_recordCollection, 1245, 'albumTitle', 'Riptide')[1245][
-    'albumTitle'
-  ] === 'Riptide'
+  __helpers.removeJSComments(sum.toString()).match(/sum\(.*\)/g).length > 1
 );
 ```
 
 # --seed--
 
-## --before-user-code--
-
-```js
-const _recordCollection = {
-  2548: {
-    albumTitle: 'Slippery When Wet',
-    artist: 'Bon Jovi',
-    tracks: ['Let It Rock', 'You Give Love a Bad Name']
-  },
-  2468: {
-    albumTitle: '1999',
-    artist: 'Prince',
-    tracks: ['1999', 'Little Red Corvette']
-  },
-  1245: {
-    artist: 'Robert Palmer',
-    tracks: []
-  },
-  5439: {
-    albumTitle: 'ABBA Gold'
-  }
-};
-```
-
 ## --seed-contents--
 
 ```js
-// Setup
-var collection = {
-  2548: {
-    albumTitle: 'Slippery When Wet',
-    artist: 'Bon Jovi',
-    tracks: ['Let It Rock', 'You Give Love a Bad Name']
-  },
-  2468: {
-    albumTitle: '1999',
-    artist: 'Prince',
-    tracks: ['1999', 'Little Red Corvette']
-  },
-  1245: {
-    artist: 'Robert Palmer',
-    tracks: []
-  },
-  5439: {
-    albumTitle: 'ABBA Gold'
-  }
-};
+function sum(arr, n) {
+  // Only change code below this line
 
-// Only change code below this line
-function updateRecords(object, id, prop, value) {
-  return object;
+  // Only change code above this line
 }
-
-updateRecords(collection, 5439, 'artist', 'ABBA');
 ```
 
 # --solutions--
 
 ```js
-var collection = {
-  2548: {
-    albumTitle: 'Slippery When Wet',
-    artist: 'Bon Jovi',
-    tracks: ['Let It Rock', 'You Give Love a Bad Name']
-  },
-  2468: {
-    albumTitle: '1999',
-    artist: 'Prince',
-    tracks: ['1999', 'Little Red Corvette']
-  },
-  1245: {
-    artist: 'Robert Palmer',
-    tracks: []
-  },
-  5439: {
-    albumTitle: 'ABBA Gold'
-  }
-};
-
-// Only change code below this line
-function updateRecords(object, id, prop, value) {
-  if (value === '') delete object[id][prop];
-  else if (prop === 'tracks') {
-    object[id][prop] = object[id][prop] || [];
-    object[id][prop].push(value);
+function sum(arr, n) {
+  // Only change code below this line
+  if(n <= 0) {
+    return 0;
   } else {
-    object[id][prop] = value;
+    return sum(arr, n - 1) + arr[n - 1];
   }
-
-  return object;
+  // Only change code above this line
 }
 ```
