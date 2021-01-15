@@ -1,117 +1,50 @@
 ---
-id: 56533eb9ac21ba0edf2244dc
-title: Chaining If Else Statements
+id: bd7123c9c441eddfaeb4bdef
+title: Comment Your JavaScript Code
 challengeType: 1
-videoUrl: 'https://scrimba.com/c/caeJgsw'
-forumTopicId: 16772
-dashedName: chaining-if-else-statements
+videoUrl: 'https://scrimba.com/c/c7ynnTp'
+forumTopicId: 16783
+dashedName: comment-your-javascript-code
 ---
 
 # --description--
 
-`if/else` statements can be chained together for complex logic. Here is <dfn>pseudocode</dfn> of multiple chained `if` / `else if` statements:
+Comments are lines of code that JavaScript will intentionally ignore. Comments are a great way to leave notes to yourself and to other people who will later need to figure out what that code does.
+
+There are two ways to write comments in JavaScript:
+
+Using `//` will tell JavaScript to ignore the remainder of the text on the current line:
 
 ```js
-if (condition1) {
-  statement1
-} else if (condition2) {
-  statement2
-} else if (condition3) {
-  statement3
-. . .
-} else {
-  statementN
-}
+// This is an in-line comment.
 ```
+
+You can make a multi-line comment beginning with `/*` and ending with `*/`:
+
+```js
+/* This is a
+multi-line comment */
+```
+
+**Best Practice**  
+As you write code, you should regularly add comments to clarify the function of parts of your code. Good commenting can help communicate the intent of your code—both for others *and* for your future self.
 
 # --instructions--
 
-Write chained `if`/`else if` statements to fulfill the following conditions:
-
-`num < 5` - return "Tiny"  
-`num < 10` - return "Small"  
-`num < 15` - return "Medium"  
-`num < 20` - return "Large"  
-`num >= 20` - return "Huge"
+Try creating one of each type of comment.
 
 # --hints--
 
-You should have at least four `else` statements
+You should create a `//` style comment that contains at least five letters.
 
 ```js
-assert(code.match(/else/g).length > 3);
+assert(code.match(/(\/\/)...../g));
 ```
 
-You should have at least four `if` statements
+You should create a `/* */` style comment that contains at least five letters.
 
 ```js
-assert(code.match(/if/g).length > 3);
-```
-
-You should have at least one `return` statement
-
-```js
-assert(code.match(/return/g).length >= 1);
-```
-
-`testSize(0)` should return "Tiny"
-
-```js
-assert(testSize(0) === 'Tiny');
-```
-
-`testSize(4)` should return "Tiny"
-
-```js
-assert(testSize(4) === 'Tiny');
-```
-
-`testSize(5)` should return "Small"
-
-```js
-assert(testSize(5) === 'Small');
-```
-
-`testSize(8)` should return "Small"
-
-```js
-assert(testSize(8) === 'Small');
-```
-
-`testSize(10)` should return "Medium"
-
-```js
-assert(testSize(10) === 'Medium');
-```
-
-`testSize(14)` should return "Medium"
-
-```js
-assert(testSize(14) === 'Medium');
-```
-
-`testSize(15)` should return "Large"
-
-```js
-assert(testSize(15) === 'Large');
-```
-
-`testSize(17)` should return "Large"
-
-```js
-assert(testSize(17) === 'Large');
-```
-
-`testSize(20)` should return "Huge"
-
-```js
-assert(testSize(20) === 'Huge');
-```
-
-`testSize(25)` should return "Huge"
-
-```js
-assert(testSize(25) === 'Huge');
+assert(code.match(/(\/\*)([^\/]{5,})(?=\*\/)/gm));
 ```
 
 # --seed--
@@ -119,31 +52,11 @@ assert(testSize(25) === 'Huge');
 ## --seed-contents--
 
 ```js
-function testSize(num) {
-  // Only change code below this line
-
-
-  return "Change Me";
-  // Only change code above this line
-}
-
-testSize(7);
 ```
 
 # --solutions--
 
 ```js
-function testSize(num) {
-  if (num < 5) {
-    return "Tiny";
-  } else if (num < 10) {
-    return "Small";
-  } else if (num < 15) {
-    return "Medium";
-  } else if (num < 20) {
-    return "Large";
-  } else {
-    return "Huge";
-  }
-}
+// Fake Comment
+/* Another Comment */
 ```
