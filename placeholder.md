@@ -1,31 +1,37 @@
 ---
-id: bd7993c9c69feddfaeb7bdef
-title: Multiply Two Decimals with JavaScript
+id: cf1231c1c11feddfaeb5bdef
+title: Multiply Two Numbers with JavaScript
 challengeType: 1
-videoUrl: 'https://scrimba.com/c/ce2GeHq'
-forumTopicId: 301173
-dashedName: multiply-two-decimals-with-javascript
+videoUrl: 'https://scrimba.com/c/cP3y3Aq'
+forumTopicId: 18243
+dashedName: multiply-two-numbers-with-javascript
 ---
 
 # --description--
 
-In JavaScript, you can also perform calculations with decimal numbers, just like whole numbers.
+We can also multiply one number by another.
 
-Let's multiply two decimals together to get their product.
+JavaScript uses the `*` symbol for multiplication of two numbers.
+
+**Example**
+
+```js
+myVar = 13 * 13; // assigned 169
+```
 
 # --instructions--
 
-Change the `0.0` so that product will equal `5.0`.
+Change the `0` so that product will equal `80`.
 
 # --hints--
 
-The variable `product` should equal `5.0`.
+The variable `product` should be equal to 80.
 
 ```js
-assert(product === 5.0);
+assert(product === 80);
 ```
 
-You should use the `*` operator
+You should use the `*` operator.
 
 ```js
 assert(/\*/.test(code));
@@ -36,17 +42,17 @@ assert(/\*/.test(code));
 ## --after-user-code--
 
 ```js
-(function(y){return 'product = '+y;})(product);
+(function(z){return 'product = '+z;})(product);
 ```
 
 ## --seed-contents--
 
 ```js
-var product = 2.0 * 0.0;
+var product = 8 * 0;
 ```
 
 # --solutions--
 
 ```js
-var product = 2.0 * 2.5;
+var product = 8 * 10;
 ```
