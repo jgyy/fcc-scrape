@@ -1,77 +1,57 @@
 ---
-id: 5ee127a03c3b35dd45426493
-title: Assigning the Value of One Variable to Another
+id: 56533eb9ac21ba0edf2244c3
+title: Assignment with a Returned Value
 challengeType: 1
-videoUrl: ''
-forumTopicId: 418265
-dashedName: assigning-the-value-of-one-variable-to-another
+videoUrl: 'https://scrimba.com/c/ce2pEtB'
+forumTopicId: 16658
+dashedName: assignment-with-a-returned-value
 ---
 
 # --description--
 
-After a value is assigned to a variable using the <dfn>assignment</dfn> operator, you can assign the value of that variable to another variable using the <dfn>assignment</dfn> operator.
+If you'll recall from our discussion of [Storing Values with the Assignment Operator](/learn/javascript-algorithms-and-data-structures/basic-javascript/storing-values-with-the-assignment-operator), everything to the right of the equal sign is resolved before the value is assigned. This means we can take the return value of a function and assign it to a variable.
 
-```js
-var myVar;
-myVar = 5;
-var myNum;
-myNum = myVar;
-```
+Assume we have pre-defined a function `sum` which adds two numbers together, then:
 
-The above declares a `myVar` variable with no value, then assigns it the value `5`. Next, a variable named `myNum` is declared with no value. Then, the contents of `myVar` (which is `5`) is assigned to the variable `myNum`. Now, `myNum` also has the value of `5`.
+`ourSum = sum(5, 12);`
+
+will call `sum` function, which returns a value of `17` and assigns it to `ourSum` variable.
 
 # --instructions--
 
-Assign the contents of `a` to variable `b`.
+Call the `processArg` function with an argument of `7` and assign its return value to the variable `processed`.
 
 # --hints--
 
-You should not change code above the specified comment.
+`processed` should have a value of `2`
 
 ```js
-assert(/var a;/.test(code) && /a = 7;/.test(code) && /var b;/.test(code));
+assert(processed === 2);
 ```
 
-`b` should have a value of 7.
+You should assign `processArg` to `processed`
 
 ```js
-assert(typeof b === 'number' && b === 7);
-```
-
-`a` should be assigned to `b` with `=`.
-
-```js
-assert(/b\s*=\s*a\s*/g.test(code));
+assert(/processed\s*=\s*processArg\(\s*7\s*\)/.test(code));
 ```
 
 # --seed--
 
-## --before-user-code--
-
-```js
-if (typeof a != 'undefined') {
-  a = undefined;
-}
-if (typeof b != 'undefined') {
-  b = undefined;
-}
-```
-
 ## --after-user-code--
 
 ```js
-(function(a, b) {
-  return 'a = ' + a + ', b = ' + b;
-})(a, b);
+(function(){return "processed = " + processed})();
 ```
 
 ## --seed-contents--
 
 ```js
 // Setup
-var a;
-a = 7;
-var b;
+var processed = 0;
+
+function processArg(num) {
+  return (num + 3) / 5;
+}
 
 // Only change code below this line
 ```
@@ -79,8 +59,11 @@ var b;
 # --solutions--
 
 ```js
-var a;
-a = 7;
-var b;
-b = a;
+var processed = 0;
+
+function processArg(num) {
+  return (num + 3) / 5;
+}
+
+processed = processArg(7);
 ```
