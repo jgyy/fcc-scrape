@@ -1,51 +1,50 @@
 ---
-id: 587d7b84367417b2b2512b35
-title: Catch Misspelled Variable and Function Names
+id: 587d7b84367417b2b2512b37
+title: Catch Mixed Usage of Single and Double Quotes
 challengeType: 1
-forumTopicId: 301186
-dashedName: catch-misspelled-variable-and-function-names
+forumTopicId: 301188
+dashedName: catch-mixed-usage-of-single-and-double-quotes
 ---
 
 # --description--
 
-The `console.log()` and `typeof` methods are the two primary ways to check intermediate values and types of program output. Now it's time to get into the common forms that bugs take. One syntax-level issue that fast typers can commiserate with is the humble spelling error.
+JavaScript allows the use of both single (`'`) and double (`"`) quotes to declare a string. Deciding which one to use generally comes down to personal preference, with some exceptions.
 
-Transposed, missing, or mis-capitalized characters in a variable or function name will have the browser looking for an object that doesn't exist - and complain in the form of a reference error. JavaScript variable and function names are case-sensitive.
+Having two choices is great when a string has contractions or another piece of text that's in quotes. Just be careful that you don't close the string too early, which causes a syntax error.
+
+Here are some examples of mixing quotes:
+
+```js
+// These are correct:
+const grouchoContraction = "I've had a perfectly wonderful evening, but this wasn't it.";
+const quoteInString = "Groucho Marx once said 'Quote me as saying I was mis-quoted.'";
+// This is incorrect:
+const uhOhGroucho = 'I've had a perfectly wonderful evening, but this wasn't it.';
+```
+
+Of course, it is okay to use only one style of quotes. You can escape the quotes inside the string by using the backslash (`\`) escape character:
+
+```js
+// Correct use of same quotes:
+const allSameQuotes = 'I\'ve had a perfectly wonderful evening, but this wasn\'t it.';
+```
 
 # --instructions--
 
-Fix the two spelling errors in the code so the `netWorkingCapital` calculation works.
+Fix the string so it either uses different quotes for the `href` value, or escape the existing ones. Keep the double quote marks around the entire string.
 
 # --hints--
 
-Check the spelling of the two variables used in the netWorkingCapital calculation, the console output should show that "Net working capital is: 2".
+Your code should fix the quotes around the `href` value "#Home" by either changing or escaping them.
 
 ```js
-assert(netWorkingCapital === 2);
+assert(code.match(/<a href=\s*?('|\\")#Home\1\s*?>/g));
 ```
 
-There should be no instances of mis-spelled variables in the code.
+Your code should keep the double quotes around the entire string.
 
 ```js
-assert(!code.match(/recievables/g));
-```
-
-The `receivables` variable should be declared and used properly in the code.
-
-```js
-assert(code.match(/receivables/g).length == 2);
-```
-
-There should be no instances of mis-spelled variables in the code.
-
-```js
-assert(!code.match(/payable;/g));
-```
-
-The `payables` variable should be declared and used properly in the code.
-
-```js
-assert(code.match(/payables/g).length == 2);
+assert(code.match(/"<p>.*?<\/p>";/g));
 ```
 
 # --seed--
@@ -53,17 +52,13 @@ assert(code.match(/payables/g).length == 2);
 ## --seed-contents--
 
 ```js
-let receivables = 10;
-let payables = 8;
-let netWorkingCapital = recievables - payable;
-console.log(`Net working capital is: ${netWorkingCapital}`);
+let innerHtml = "<p>Click here to <a href="#Home">return home</a></p>";
+console.log(innerHtml);
 ```
 
 # --solutions--
 
 ```js
-let receivables = 10;
-let payables = 8;
-let netWorkingCapital = receivables - payables;
-console.log(`Net working capital is: ${netWorkingCapital}`);
+let innerHtml = "<p>Click here to <a href=\"#Home\">return home</a></p>";
+console.log(innerHtml);
 ```
