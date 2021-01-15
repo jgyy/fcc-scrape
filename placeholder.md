@@ -1,47 +1,43 @@
 ---
-id: 587d7b85367417b2b2512b38
-title: Catch Use of Assignment Operator Instead of Equality Operator
+id: 587d7b86367417b2b2512b3d
+title: Prevent Infinite Loops with a Valid Terminal Condition
 challengeType: 1
-forumTopicId: 301191
-dashedName: catch-use-of-assignment-operator-instead-of-equality-operator
+forumTopicId: 301192
+dashedName: prevent-infinite-loops-with-a-valid-terminal-condition
 ---
 
 # --description--
 
-Branching programs, i.e. ones that do different things if certain conditions are met, rely on `if`, `else if`, and `else` statements in JavaScript. The condition sometimes takes the form of testing whether a result is equal to a value.
+The final topic is the dreaded infinite loop. Loops are great tools when you need your program to run a code block a certain number of times or until a condition is met, but they need a terminal condition that ends the looping. Infinite loops are likely to freeze or crash the browser, and cause general program execution mayhem, which no one wants.
 
-This logic is spoken (in English, at least) as "if x equals y, then ..." which can literally translate into code using the `=`, or assignment operator. This leads to unexpected control flow in your program.
-
-As covered in previous challenges, the assignment operator (`=`) in JavaScript assigns a value to a variable name. And the `==` and `===` operators check for equality (the triple `===` tests for strict equality, meaning both value and type are the same).
-
-The code below assigns `x` to be 2, which evaluates as `true`. Almost every value on its own in JavaScript evaluates to `true`, except what are known as the "falsy" values: `false`, `0`, `""` (an empty string), `NaN`, `undefined`, and `null`.
+There was an example of an infinite loop in the introduction to this section - it had no terminal condition to break out of the `while` loop inside `loopy()`. Do NOT call this function!
 
 ```js
-let x = 1;
-let y = 2;
-if (x = y) {
-  // this code block will run for any value of y (unless y were originally set as a falsy)
-} else {
-  // this code block is what should run (but won't) in this example
+function loopy() {
+  while(true) {
+    console.log("Hello, world!");
+  }
 }
 ```
 
+It's the programmer's job to ensure that the terminal condition, which tells the program when to break out of the loop code, is eventually reached. One error is incrementing or decrementing a counter variable in the wrong direction from the terminal condition. Another one is accidentally resetting a counter or index variable within the loop code, instead of incrementing or decrementing it.
+
 # --instructions--
 
-Fix the condition so the program runs the right branch, and the appropriate value is assigned to `result`.
+The `myFunc()` function contains an infinite loop because the terminal condition `i != 4` will never evaluate to `false` (and break the looping) - `i` will increment by 2 each pass, and jump right over 4 since `i` is odd to start. Fix the comparison operator in the terminal condition so the loop only runs for `i` less than or equal to 4.
 
 # --hints--
 
-Your code should fix the condition so it checks for equality, instead of using assignment.
+Your code should change the comparison operator in the terminal condition (the middle part) of the `for` loop.
 
 ```js
-assert(result == 'Not equal!');
+assert(code.match(/i\s*?<=\s*?4;/g).length == 1);
 ```
 
-The condition should use either `==` or `===` to test for equality.
+Your code should fix the comparison operator in the terminal condition of the loop.
 
 ```js
-assert(code.match(/x\s*?===?\s*?y/g));
+assert(!code.match(/i\s*?!=\s*?4;/g));
 ```
 
 # --seed--
@@ -49,31 +45,19 @@ assert(code.match(/x\s*?===?\s*?y/g));
 ## --seed-contents--
 
 ```js
-let x = 7;
-let y = 9;
-let result = "to come";
-
-if(x = y) {
-  result = "Equal!";
-} else {
-  result = "Not equal!";
+function myFunc() {
+  for (let i = 1; i != 4; i += 2) {
+    console.log("Still going!");
+  }
 }
-
-console.log(result);
 ```
 
 # --solutions--
 
 ```js
-let x = 7;
-let y = 9;
-let result = "to come";
-
-if(x === y) {
- result = "Equal!";
-} else {
- result = "Not equal!";
+function myFunc() {
+ for (let i = 1; i <= 4; i += 2) {
+   console.log("Still going!");
+ }
 }
-
-console.log(result);
 ```
