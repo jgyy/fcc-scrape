@@ -1,48 +1,105 @@
 ---
-id: 587d7b84367417b2b2512b34
-title: Use typeof to Check the Type of a Variable
+id: 587d7b87367417b2b2512b40
+title: Compare Scopes of the var and let Keywords
 challengeType: 1
-forumTopicId: 18374
-dashedName: use-typeof-to-check-the-type-of-a-variable
+forumTopicId: 301195
+dashedName: compare-scopes-of-the-var-and-let-keywords
 ---
 
 # --description--
 
-You can use `typeof` to check the data structure, or type, of a variable. This is useful in debugging when working with multiple data types. If you think you're adding two numbers, but one is actually a string, the results can be unexpected. Type errors can lurk in calculations or function calls. Be careful especially when you're accessing and working with external data in the form of a JavaScript Object Notation (JSON) object.
+When you declare a variable with the `var` keyword, it is declared globally, or locally if declared inside a function.
 
-Here are some examples using `typeof`:
+The `let` keyword behaves similarly, but with some extra features. When you declare a variable with the `let` keyword inside a block, statement, or expression, its scope is limited to that block, statement, or expression.
+
+For example:
 
 ```js
-console.log(typeof ""); // outputs "string"
-console.log(typeof 0); // outputs "number"
-console.log(typeof []); // outputs "object"
-console.log(typeof {}); // outputs "object"
+var numArray = [];
+for (var i = 0; i < 3; i++) {
+  numArray.push(i);
+}
+console.log(numArray);
+// returns [0, 1, 2]
+console.log(i);
+// returns 3
 ```
 
-JavaScript recognizes six primitive (immutable) data types: `Boolean`, `Null`, `Undefined`, `Number`, `String`, and `Symbol` (new with ES6) and one type for mutable items: `Object`. Note that in JavaScript, arrays are technically a type of object.
+With the `var` keyword, `i` is declared globally. So when `i++` is executed, it updates the global variable. This code is similar to the following:
+
+```js
+var numArray = [];
+var i;
+for (i = 0; i < 3; i++) {
+  numArray.push(i);
+}
+console.log(numArray);
+// returns [0, 1, 2]
+console.log(i);
+// returns 3
+```
+
+This behavior will cause problems if you were to create a function and store it for later use inside a for loop that uses the `i` variable. This is because the stored function will always refer to the value of the updated global `i` variable.
+
+```js
+var printNumTwo;
+for (var i = 0; i < 3; i++) {
+  if (i === 2) {
+    printNumTwo = function() {
+      return i;
+    };
+  }
+}
+console.log(printNumTwo());
+// returns 3
+```
+
+As you can see, `printNumTwo()` prints 3 and not 2. This is because the value assigned to `i` was updated and the `printNumTwo()` returns the global `i` and not the value `i` had when the function was created in the for loop. The `let` keyword does not follow this behavior:
+
+```js
+let printNumTwo;
+for (let i = 0; i < 3; i++) {
+  if (i === 2) {
+    printNumTwo = function() {
+      return i;
+    };
+  }
+}
+console.log(printNumTwo());
+// returns 2
+console.log(i);
+// returns "i is not defined"
+```
+
+`i` is not defined because it was not declared in the global scope. It is only declared within the for loop statement. `printNumTwo()` returned the correct value because three different `i` variables with unique values (0, 1, and 2) were created by the `let` keyword within the loop statement.
 
 # --instructions--
 
-Add two `console.log()` statements to check the `typeof` each of the two variables `seven` and `three` in the code.
+Fix the code so that `i` declared in the if statement is a separate variable than `i` declared in the first line of the function. Be certain not to use the `var` keyword anywhere in your code.
+
+This exercise is designed to illustrate the difference between how `var` and `let` keywords assign scope to the declared variable. When programming a function similar to the one used in this exercise, it is often better to use different variable names to avoid confusion.
 
 # --hints--
 
-Your code should use `typeof` in two `console.log()` statements to check the type of the variables.
+`var` should not exist in code.
 
 ```js
-assert(code.match(/console\.log\(typeof[\( ].*\)?\)/g).length == 2);
+(getUserInput) => assert(!getUserInput('index').match(/var/g));
 ```
 
-Your code should use `typeof` to check the type of the variable `seven`.
+The variable `i` declared in the if statement should equal "block scope".
 
 ```js
-assert(code.match(/typeof[\( ]seven\)?/g));
+(getUserInput) =>
+  assert(
+    getUserInput('index').match(/(i\s*=\s*).*\s*.*\s*.*\1('|")block\s*scope\2/g)
+  );
 ```
 
-Your code should use `typeof` to check the type of the variable `three`.
+`checkScope()` should return "function scope"
 
 ```js
-assert(code.match(/typeof[\( ]three\)?/g));
+assert(checkScope() === 'function scope');
 ```
 
 # --seed--
@@ -50,15 +107,28 @@ assert(code.match(/typeof[\( ]three\)?/g));
 ## --seed-contents--
 
 ```js
-let seven = 7;
-let three = "3";
-console.log(seven + three);
-// Only change code below this line
+function checkScope() {
+  var i = 'function scope';
+  if (true) {
+    i = 'block scope';
+    console.log('Block scope i is: ', i);
+  }
+  console.log('Function scope i is: ', i);
+  return i;
+}
 ```
 
 # --solutions--
 
 ```js
-let seven = 7;let three = "3";console.log(typeof seven);
-console.log(typeof three);
+function checkScope() {
+  let i = 'function scope';
+  if (true) {
+    let i = 'block scope';
+    console.log('Block scope i is: ', i);
+  }
+ 
+  console.log('Function scope i is: ', i);
+  return i;
+}
 ```
