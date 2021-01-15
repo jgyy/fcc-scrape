@@ -1,38 +1,131 @@
 ---
-id: 56533eb9ac21ba0edf2244c3
-title: Assignment with a Returned Value
+id: 56bbb991ad1ed5201cd392d0
+title: Build JavaScript Objects
 challengeType: 1
-videoUrl: 'https://scrimba.com/c/ce2pEtB'
-forumTopicId: 16658
-dashedName: assignment-with-a-returned-value
+videoUrl: 'https://scrimba.com/c/cWGkbtd'
+forumTopicId: 16769
+dashedName: build-javascript-objects
 ---
 
 # --description--
 
-If you'll recall from our discussion of [Storing Values with the Assignment Operator](/learn/javascript-algorithms-and-data-structures/basic-javascript/storing-values-with-the-assignment-operator), everything to the right of the equal sign is resolved before the value is assigned. This means we can take the return value of a function and assign it to a variable.
+You may have heard the term `object` before.
 
-Assume we have pre-defined a function `sum` which adds two numbers together, then:
+Objects are similar to `arrays`, except that instead of using indexes to access and modify their data, you access the data in objects through what are called `properties`.
 
-`ourSum = sum(5, 12);`
+Objects are useful for storing data in a structured way, and can represent real world objects, like a cat.
 
-will call `sum` function, which returns a value of `17` and assigns it to `ourSum` variable.
+Here's a sample cat object:
+
+```js
+var cat = {
+  "name": "Whiskers",
+  "legs": 4,
+  "tails": 1,
+  "enemies": ["Water", "Dogs"]
+};
+```
+
+In this example, all the properties are stored as strings, such as - `"name"`, `"legs"`, and `"tails"`. However, you can also use numbers as properties. You can even omit the quotes for single-word string properties, as follows:
+
+```js
+var anotherObject = {
+  make: "Ford",
+  5: "five",
+  "model": "focus"
+};
+```
+
+However, if your object has any non-string properties, JavaScript will automatically typecast them as strings.
 
 # --instructions--
 
-Call the `processArg` function with an argument of `7` and assign its return value to the variable `processed`.
+Make an object that represents a dog called `myDog` which contains the properties `"name"` (a string), `"legs"`, `"tails"` and `"friends"`.
+
+You can set these object properties to whatever values you want, as long as `"name"` is a string, `"legs"` and `"tails"` are numbers, and `"friends"` is an array.
 
 # --hints--
 
-`processed` should have a value of `2`
+`myDog` should contain the property `name` and it should be a `string`.
 
 ```js
-assert(processed === 2);
+assert(
+  (function (z) {
+    if (
+      z.hasOwnProperty('name') &&
+      z.name !== undefined &&
+      typeof z.name === 'string'
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  })(myDog)
+);
 ```
 
-You should assign `processArg` to `processed`
+`myDog` should contain the property `legs` and it should be a `number`.
 
 ```js
-assert(/processed\s*=\s*processArg\(\s*7\s*\)/.test(code));
+assert(
+  (function (z) {
+    if (
+      z.hasOwnProperty('legs') &&
+      z.legs !== undefined &&
+      typeof z.legs === 'number'
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  })(myDog)
+);
+```
+
+`myDog` should contain the property `tails` and it should be a `number`.
+
+```js
+assert(
+  (function (z) {
+    if (
+      z.hasOwnProperty('tails') &&
+      z.tails !== undefined &&
+      typeof z.tails === 'number'
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  })(myDog)
+);
+```
+
+`myDog` should contain the property `friends` and it should be an `array`.
+
+```js
+assert(
+  (function (z) {
+    if (
+      z.hasOwnProperty('friends') &&
+      z.friends !== undefined &&
+      Array.isArray(z.friends)
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  })(myDog)
+);
+```
+
+`myDog` should only contain all the given properties.
+
+```js
+assert(
+  (function (z) {
+    return Object.keys(z).length === 4;
+  })(myDog)
+);
 ```
 
 # --seed--
@@ -40,30 +133,27 @@ assert(/processed\s*=\s*processArg\(\s*7\s*\)/.test(code));
 ## --after-user-code--
 
 ```js
-(function(){return "processed = " + processed})();
+(function(z){return z;})(myDog);
 ```
 
 ## --seed-contents--
 
 ```js
-// Setup
-var processed = 0;
-
-function processArg(num) {
-  return (num + 3) / 5;
-}
-
+var myDog = {
 // Only change code below this line
+
+
+// Only change code above this line
+};
 ```
 
 # --solutions--
 
 ```js
-var processed = 0;
-
-function processArg(num) {
-  return (num + 3) / 5;
-}
-
-processed = processArg(7);
+var myDog = {
+  "name": "Camper",
+  "legs": 4,
+  "tails": 1,
+  "friends": ["everything!"]
+};
 ```
