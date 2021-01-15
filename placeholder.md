@@ -1,65 +1,70 @@
 ---
-id: bd7123c9c448eddfaeb5bdef
-title: Find the Length of a String
+id: 56533eb9ac21ba0edf2244ae
+title: Finding a Remainder in JavaScript
 challengeType: 1
-videoUrl: 'https://scrimba.com/c/cvmqEAd'
-forumTopicId: 18182
-dashedName: find-the-length-of-a-string
+videoUrl: 'https://scrimba.com/c/cWP24Ub'
+forumTopicId: 18184
+dashedName: finding-a-remainder-in-javascript
 ---
 
 # --description--
 
-You can find the length of a `String` value by writing `.length` after the string variable or string literal.
+The <dfn>remainder</dfn> operator `%` gives the remainder of the division of two numbers.
 
-`"Alan Peter".length; // 10`
+**Example**
 
-For example, if we created a variable `var firstName = "Charles"`, we could find out how long the string `"Charles"` is by using the `firstName.length` property.
+<blockquote>5 % 2 = 1 because<br>Math.floor(5 / 2) = 2 (Quotient)<br>2 * 2 = 4<br>5 - 4 = 1 (Remainder)</blockquote>
+
+**Usage**  
+In mathematics, a number can be checked to be even or odd by checking the remainder of the division of the number by `2`.
+
+<blockquote>17 % 2 = 1 (17 is Odd)<br>48 % 2 = 0 (48 is Even)</blockquote>
+
+**Note**  
+The <dfn>remainder</dfn> operator is sometimes incorrectly referred to as the "modulus" operator. It is very similar to modulus, but does not work properly with negative numbers.
 
 # --instructions--
 
-Use the `.length` property to count the number of characters in the `lastName` variable and assign it to `lastNameLength`.
+Set `remainder` equal to the remainder of `11` divided by `3` using the <dfn>remainder</dfn> (`%`) operator.
 
 # --hints--
 
-You should not change the variable declarations in the `// Setup` section.
+The variable `remainder` should be initialized
 
 ```js
-assert(
-  code.match(/var lastNameLength = 0;/) &&
-    code.match(/var lastName = "Lovelace";/)
-);
+assert(/var\s+?remainder/.test(code));
 ```
 
-`lastNameLength` should be equal to eight.
+The value of `remainder` should be `2`
 
 ```js
-assert(typeof lastNameLength !== 'undefined' && lastNameLength === 8);
+assert(remainder === 2);
 ```
 
-You should be getting the length of `lastName` by using `.length` like this: `lastName.length`.
+You should use the `%` operator
 
 ```js
-assert(code.match(/=\s*lastName\.length/g) && !code.match(/lastName\s*=\s*8/));
+assert(/\s+?remainder\s*?=\s*?.*%.*;?/.test(code));
 ```
 
 # --seed--
 
+## --after-user-code--
+
+```js
+(function(y){return 'remainder = '+y;})(remainder);
+```
+
 ## --seed-contents--
 
 ```js
-// Setup
-var lastNameLength = 0;
-var lastName = "Lovelace";
-
 // Only change code below this line
 
-lastNameLength = lastName;
+var remainder;
 ```
 
 # --solutions--
 
 ```js
-var lastNameLength = 0;
-var lastName = "Lovelace";
-lastNameLength = lastName.length;
+var remainder =  11 % 3;
 ```
