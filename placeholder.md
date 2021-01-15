@@ -1,114 +1,95 @@
 ---
-id: 56533eb9ac21ba0edf2244dd
-title: Selecting from Many Options with Switch Statements
+id: 56533eb9ac21ba0edf2244bc
+title: Shopping List
 challengeType: 1
-videoUrl: 'https://scrimba.com/c/c4mv4fm'
-forumTopicId: 18277
-dashedName: selecting-from-many-options-with-switch-statements
+videoUrl: 'https://scrimba.com/c/c9MEKHZ'
+forumTopicId: 18280
+dashedName: shopping-list
 ---
 
 # --description--
 
-If you have many options to choose from, use a <dfn>switch</dfn> statement. A `switch` statement tests a value and can have many <dfn>case</dfn> statements which define various possible values. Statements are executed from the first matched `case` value until a `break` is encountered.
+Create a shopping list in the variable `myList`. The list should be a multi-dimensional array containing several sub-arrays.
 
-Here is an example of a `switch` statement:
+The first element in each sub-array should contain a string with the name of the item. The second element should be a number representing the quantity i.e.
 
-```js
-switch(lowercaseLetter) {
-  case "a":
-    console.log("A");
-    break;
-  case "b":
-    console.log("B");
-    break;
-}
-```
+`["Chocolate Bar", 15]`
 
-`case` values are tested with strict equality (`===`). The `break` tells JavaScript to stop executing statements. If the `break` is omitted, the next statement will be executed.
-
-# --instructions--
-
-Write a switch statement which tests `val` and sets `answer` for the following conditions:  
-`1` - "alpha"  
-`2` - "beta"  
-`3` - "gamma"  
-`4` - "delta"
+There should be at least 5 sub-arrays in the list.
 
 # --hints--
 
-`caseInSwitch(1)` should have a value of "alpha"
+`myList` should be an array.
 
 ```js
-assert(caseInSwitch(1) === 'alpha');
+assert(isArray);
 ```
 
-`caseInSwitch(2)` should have a value of "beta"
+The first elements in each of your sub-arrays should all be strings.
 
 ```js
-assert(caseInSwitch(2) === 'beta');
+assert(hasString);
 ```
 
-`caseInSwitch(3)` should have a value of "gamma"
+The second elements in each of your sub-arrays should all be numbers.
 
 ```js
-assert(caseInSwitch(3) === 'gamma');
+assert(hasNumber);
 ```
 
-`caseInSwitch(4)` should have a value of "delta"
+You should have at least 5 items in your list.
 
 ```js
-assert(caseInSwitch(4) === 'delta');
-```
-
-You should not use any `if` or `else` statements
-
-```js
-assert(!/else/g.test(code) || !/if/g.test(code));
-```
-
-You should have at least 3 `break` statements
-
-```js
-assert(code.match(/break/g).length > 2);
+assert(count > 4);
 ```
 
 # --seed--
 
+## --after-user-code--
+
+```js
+var count = 0;
+var isArray = false;
+var hasString = false;
+var hasNumber = false;
+(function(list){
+  if(Array.isArray(myList)) {
+    isArray = true;
+    if(myList.length > 0) {
+      hasString = true;
+      hasNumber = true;
+      for (var elem of myList) {
+        if(!elem || !elem[0] || typeof elem[0] !== 'string') {
+          hasString = false;
+        }
+        if(!elem || typeof elem[1] !== 'number') {
+          hasNumber = false;
+        }
+      }
+    }
+    count = myList.length;
+    return JSON.stringify(myList);
+  } else {
+    return "myList is not an array";
+  }
+
+})(myList);
+```
+
 ## --seed-contents--
 
 ```js
-function caseInSwitch(val) {
-  var answer = "";
-  // Only change code below this line
-
-
-
-  // Only change code above this line
-  return answer;
-}
-
-caseInSwitch(1);
+var myList = [];
 ```
 
 # --solutions--
 
 ```js
-function caseInSwitch(val) {
-  var answer = "";
-
-  switch(val) {
-    case 1:
-      answer = "alpha";
-      break;
-    case 2:
-      answer = "beta";
-      break;
-    case 3:
-      answer = "gamma";
-      break;
-    case 4:
-      answer = "delta";
-  }
-  return answer;
-}
+var myList = [
+  ["Candy", 10],
+  ["Potatoes", 12],
+  ["Eggs", 12],
+  ["Catfood", 1],
+  ["Toads", 9]
+];
 ```
