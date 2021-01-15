@@ -1,53 +1,71 @@
 ---
-id: 5675e877dbd60be8ad28edc6
-title: Iterate Through an Array with a For Loop
+id: 5a2efd662fb457916e1fe604
+title: Iterate with JavaScript Do...While Loops
 challengeType: 1
-videoUrl: 'https://scrimba.com/c/caeR3HB'
-forumTopicId: 18216
-dashedName: iterate-through-an-array-with-a-for-loop
+videoUrl: 'https://scrimba.com/c/cDqWGcp'
+forumTopicId: 301172
+dashedName: iterate-with-javascript-do---while-loops
 ---
 
 # --description--
 
-A common task in JavaScript is to iterate through the contents of an array. One way to do that is with a `for` loop. This code will output each element of the array `arr` to the console:
+The next type of loop you will learn is called a `do...while` loop. It is called a `do...while` loop because it will first `do` one pass of the code inside the loop no matter what, and then continue to run the loop `while` the specified condition evaluates to `true`.
 
 ```js
-var arr = [10, 9, 8, 7, 6];
-for (var i = 0; i < arr.length; i++) {
-   console.log(arr[i]);
+var ourArray = [];
+var i = 0;
+do {
+  ourArray.push(i);
+  i++;
+} while (i < 5);
+```
+
+The example above behaves similar to other types of loops, and the resulting array will look like `[0, 1, 2, 3, 4]`. However, what makes the `do...while` different from other loops is how it behaves when the condition fails on the first check. Let's see this in action: Here is a regular `while` loop that will run the code in the loop as long as `i < 5`:
+
+```js
+var ourArray = []; 
+var i = 5;
+while (i < 5) {
+  ourArray.push(i);
+  i++;
 }
 ```
 
-Remember that arrays have zero-based indexing, which means the last index of the array is `length - 1`. Our condition for this loop is `i < arr.length`, which stops the loop when `i` is equal to `length`. In this case the last iteration is `i === 4` i.e. when `i` becomes equal to `arr.length` and outputs `6` to the console.
+In this example, we initialize the value of `ourArray` to an empty array and the value of `i` to 5. When we execute the `while` loop, the condition evaluates to `false` because `i` is not less than 5, so we do not execute the code inside the loop. The result is that `ourArray` will end up with no values added to it, and it will still look like `[]` when all of the code in the example above has completed running. Now, take a look at a `do...while` loop:
+
+```js
+var ourArray = []; 
+var i = 5;
+do {
+  ourArray.push(i);
+  i++;
+} while (i < 5);
+```
+
+In this case, we initialize the value of `i` to 5, just like we did with the `while` loop. When we get to the next line, there is no condition to evaluate, so we go to the code inside the curly braces and execute it. We will add a single element to the array and then increment `i` before we get to the condition check. When we finally evaluate the condition `i < 5` on the last line, we see that `i` is now 6, which fails the conditional check, so we exit the loop and are done. At the end of the above example, the value of `ourArray` is `[5]`. Essentially, a `do...while` loop ensures that the code inside the loop will run at least once. Let's try getting a `do...while` loop to work by pushing values to an array.
 
 # --instructions--
 
-Declare and initialize a variable `total` to `0`. Use a `for` loop to add the value of each element of the `myArr` array to `total`.
+Change the `while` loop in the code to a `do...while` loop so the loop will push only the number `10` to `myArray`, and `i` will be equal to `11` when your code has finished running.
 
 # --hints--
 
-`total` should be declared and initialized to 0.
+You should be using a `do...while` loop for this exercise.
 
 ```js
-assert(code.match(/(var|let|const)\s*?total\s*=\s*0.*?;?/));
+assert(code.match(/do/g));
 ```
 
-`total` should equal 20.
+`myArray` should equal `[10]`.
 
 ```js
-assert(total === 20);
+assert.deepEqual(myArray, [10]);
 ```
 
-You should use a `for` loop to iterate through `myArr`.
+`i` should equal `11`
 
 ```js
-assert(/for\s*\(/g.test(code) && /myArr\s*\[/g.test(code));
-```
-
-You should not attempt to directly assign the value 20 to `total`.
-
-```js
-assert(!__helpers.removeWhiteSpace(code).match(/total[=+-]0*[1-9]+/gm));
+assert.equal(i, 11);
 ```
 
 # --seed--
@@ -55,25 +73,30 @@ assert(!__helpers.removeWhiteSpace(code).match(/total[=+-]0*[1-9]+/gm));
 ## --after-user-code--
 
 ```js
-(function(){if(typeof total !== 'undefined') { return "total = " + total; } else { return "total is undefined";}})()
+if(typeof myArray !== "undefined"){(function(){return myArray;})();}
 ```
 
 ## --seed-contents--
 
 ```js
 // Setup
-var myArr = [ 2, 3, 4, 5, 6];
+var myArray = [];
+var i = 10;
 
 // Only change code below this line
+while (i < 5) {
+  myArray.push(i);
+  i++;
+}
 ```
 
 # --solutions--
 
 ```js
-var myArr = [ 2, 3, 4, 5, 6];
-var total = 0;
-
-for (var i = 0; i < myArr.length; i++) {
-  total += myArr[i];
-}
+var myArray = [];
+var i = 10;
+do {
+  myArray.push(i);
+  i++;
+} while (i < 5)
 ```
