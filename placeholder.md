@@ -1,59 +1,59 @@
 ---
-id: 56533eb9ac21ba0edf2244b2
-title: Compound Assignment With Augmented Division
+id: 56533eb9ac21ba0edf2244b1
+title: Compound Assignment With Augmented Multiplication
 challengeType: 1
-videoUrl: 'https://scrimba.com/c/c2QvKT2'
-forumTopicId: 16659
-dashedName: compound-assignment-with-augmented-division
+videoUrl: 'https://scrimba.com/c/c83vrfa'
+forumTopicId: 16662
+dashedName: compound-assignment-with-augmented-multiplication
 ---
 
 # --description--
 
-The `/=` operator divides a variable by another number.
+The `*=` operator multiplies a variable by a number.
 
-`myVar = myVar / 5;`
+`myVar = myVar * 5;`
 
-Will divide `myVar` by `5`. This can be rewritten as:
+will multiply `myVar` by `5`. This can be rewritten as:
 
-`myVar /= 5;`
+`myVar *= 5;`
 
 # --instructions--
 
-Convert the assignments for `a`, `b`, and `c` to use the `/=` operator.
+Convert the assignments for `a`, `b`, and `c` to use the `*=` operator.
 
 # --hints--
 
-`a` should equal `4`.
+`a` should equal `25`.
 
 ```js
-assert(a === 4);
+assert(a === 25);
 ```
 
-`b` should equal `27`.
+`b` should equal `36`.
 
 ```js
-assert(b === 27);
+assert(b === 36);
 ```
 
-`c` should equal `3`.
+`c` should equal `46`.
 
 ```js
-assert(c === 3);
+assert(c === 46);
 ```
 
-You should use the `/=` operator for each variable.
+You should use the `*=` operator for each variable.
 
 ```js
-assert(code.match(/\/=/g).length === 3);
+assert(code.match(/\*=/g).length === 3);
 ```
 
 You should not modify the code above the specified comment.
 
 ```js
 assert(
-  /var a = 48;/.test(code) &&
-    /var b = 108;/.test(code) &&
-    /var c = 33;/.test(code)
+  /var a = 5;/.test(code) &&
+    /var b = 12;/.test(code) &&
+    /var c = 4\.6;/.test(code)
 );
 ```
 
@@ -68,24 +68,24 @@ assert(
 ## --seed-contents--
 
 ```js
-var a = 48;
-var b = 108;
-var c = 33;
+var a = 5;
+var b = 12;
+var c = 4.6;
 
 // Only change code below this line
-a = a / 12;
-b = b / 4;
-c = c / 11;
+a = a * 5;
+b = 3 * b;
+c = c * 10;
 ```
 
 # --solutions--
 
 ```js
-var a = 48;
-var b = 108;
-var c = 33;
+var a = 5;
+var b = 12;
+var c = 4.6;
 
-a /= 12;
-b /= 4;
-c /= 11;
+a *= 5;
+b *= 3;
+c *= 10;
 ```
