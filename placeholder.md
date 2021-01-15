@@ -1,95 +1,118 @@
 ---
-id: 56533eb9ac21ba0edf2244bc
-title: Shopping List
+id: 56533eb9ac21ba0edf2244c6
+title: Stand in Line
 challengeType: 1
-videoUrl: 'https://scrimba.com/c/c9MEKHZ'
-forumTopicId: 18280
-dashedName: shopping-list
+videoUrl: 'https://scrimba.com/c/ca8Q8tP'
+forumTopicId: 18307
+dashedName: stand-in-line
 ---
 
 # --description--
 
-Create a shopping list in the variable `myList`. The list should be a multi-dimensional array containing several sub-arrays.
+In Computer Science a <dfn>queue</dfn> is an abstract <dfn>Data Structure</dfn> where items are kept in order. New items can be added at the back of the queue and old items are taken off from the front of the queue.
 
-The first element in each sub-array should contain a string with the name of the item. The second element should be a number representing the quantity i.e.
+Write a function `nextInLine` which takes an array (`arr`) and a number (`item`) as arguments.
 
-`["Chocolate Bar", 15]`
+Add the number to the end of the array, then remove the first element of the array.
 
-There should be at least 5 sub-arrays in the list.
+The `nextInLine` function should then return the element that was removed.
 
 # --hints--
 
-`myList` should be an array.
+`nextInLine([], 5)` should return a number.
 
 ```js
-assert(isArray);
+assert.isNumber(nextInLine([], 5));
 ```
 
-The first elements in each of your sub-arrays should all be strings.
+`nextInLine([], 1)` should return `1`
 
 ```js
-assert(hasString);
+assert(nextInLine([], 1) === 1);
 ```
 
-The second elements in each of your sub-arrays should all be numbers.
+`nextInLine([2], 1)` should return `2`
 
 ```js
-assert(hasNumber);
+assert(nextInLine([2], 1) === 2);
 ```
 
-You should have at least 5 items in your list.
+`nextInLine([5,6,7,8,9], 1)` should return `5`
 
 ```js
-assert(count > 4);
+assert(nextInLine([5, 6, 7, 8, 9], 1) === 5);
+```
+
+After `nextInLine(testArr, 10)`, `testArr[4]` should be `10`
+
+```js
+nextInLine(testArr, 10);
+assert(testArr[4] === 10);
 ```
 
 # --seed--
 
+## --before-user-code--
+
+```js
+var logOutput = [];
+var originalConsole = console
+function capture() {
+    var nativeLog = console.log;
+    console.log = function (message) {
+        logOutput.push(message);
+        if(nativeLog.apply) {
+          nativeLog.apply(originalConsole, arguments);
+        } else {
+          var nativeMsg = Array.prototype.slice.apply(arguments).join(' ');
+          nativeLog(nativeMsg);
+        }
+    };
+}
+
+function uncapture() {
+  console.log = originalConsole.log;
+}
+
+capture();
+```
+
 ## --after-user-code--
 
 ```js
-var count = 0;
-var isArray = false;
-var hasString = false;
-var hasNumber = false;
-(function(list){
-  if(Array.isArray(myList)) {
-    isArray = true;
-    if(myList.length > 0) {
-      hasString = true;
-      hasNumber = true;
-      for (var elem of myList) {
-        if(!elem || !elem[0] || typeof elem[0] !== 'string') {
-          hasString = false;
-        }
-        if(!elem || typeof elem[1] !== 'number') {
-          hasNumber = false;
-        }
-      }
-    }
-    count = myList.length;
-    return JSON.stringify(myList);
-  } else {
-    return "myList is not an array";
-  }
-
-})(myList);
+uncapture();
+testArr = [1,2,3,4,5];
+(function() { return logOutput.join("\n");})();
 ```
 
 ## --seed-contents--
 
 ```js
-var myList = [];
+function nextInLine(arr, item) {
+  // Only change code below this line
+  
+  return item;
+  // Only change code above this line
+  
+
+}
+
+// Setup
+var testArr = [1,2,3,4,5];
+
+// Display code
+console.log("Before: " + JSON.stringify(testArr));
+console.log(nextInLine(testArr, 6));
+console.log("After: " + JSON.stringify(testArr));
 ```
 
 # --solutions--
 
 ```js
-var myList = [
-  ["Candy", 10],
-  ["Potatoes", 12],
-  ["Eggs", 12],
-  ["Catfood", 1],
-  ["Toads", 9]
-];
+var testArr = [ 1,2,3,4,5];
+
+function nextInLine(arr, item) {
+    arr.push(item);
+    return arr.shift();
+}
 ```
