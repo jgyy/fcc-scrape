@@ -1,65 +1,59 @@
 ---
-id: 56533eb9ac21ba0edf2244af
-title: Compound Assignment With Augmented Addition
+id: 56533eb9ac21ba0edf2244b2
+title: Compound Assignment With Augmented Division
 challengeType: 1
-videoUrl: 'https://scrimba.com/c/cDR6LCb'
-forumTopicId: 16661
-dashedName: compound-assignment-with-augmented-addition
+videoUrl: 'https://scrimba.com/c/c2QvKT2'
+forumTopicId: 16659
+dashedName: compound-assignment-with-augmented-division
 ---
 
 # --description--
 
-In programming, it is common to use assignments to modify the contents of a variable. Remember that everything to the right of the equals sign is evaluated first, so we can say:
+The `/=` operator divides a variable by another number.
 
-`myVar = myVar + 5;`
+`myVar = myVar / 5;`
 
-to add `5` to `myVar`. Since this is such a common pattern, there are operators which do both a mathematical operation and assignment in one step.
+Will divide `myVar` by `5`. This can be rewritten as:
 
-One such operator is the `+=` operator.
-
-```js
-var myVar = 1;
-myVar += 5;
-console.log(myVar); // Returns 6
-```
+`myVar /= 5;`
 
 # --instructions--
 
-Convert the assignments for `a`, `b`, and `c` to use the `+=` operator.
+Convert the assignments for `a`, `b`, and `c` to use the `/=` operator.
 
 # --hints--
 
-`a` should equal `15`.
+`a` should equal `4`.
 
 ```js
-assert(a === 15);
+assert(a === 4);
 ```
 
-`b` should equal `26`.
+`b` should equal `27`.
 
 ```js
-assert(b === 26);
+assert(b === 27);
 ```
 
-`c` should equal `19`.
+`c` should equal `3`.
 
 ```js
-assert(c === 19);
+assert(c === 3);
 ```
 
-You should use the `+=` operator for each variable.
+You should use the `/=` operator for each variable.
 
 ```js
-assert(code.match(/\+=/g).length === 3);
+assert(code.match(/\/=/g).length === 3);
 ```
 
 You should not modify the code above the specified comment.
 
 ```js
 assert(
-  /var a = 3;/.test(code) &&
-    /var b = 17;/.test(code) &&
-    /var c = 12;/.test(code)
+  /var a = 48;/.test(code) &&
+    /var b = 108;/.test(code) &&
+    /var c = 33;/.test(code)
 );
 ```
 
@@ -74,24 +68,24 @@ assert(
 ## --seed-contents--
 
 ```js
-var a = 3;
-var b = 17;
-var c = 12;
+var a = 48;
+var b = 108;
+var c = 33;
 
 // Only change code below this line
-a = a + 12;
-b = 9 + b;
-c = c + 7;
+a = a / 12;
+b = b / 4;
+c = c / 11;
 ```
 
 # --solutions--
 
 ```js
-var a = 3;
-var b = 17;
-var c = 12;
+var a = 48;
+var b = 108;
+var c = 33;
 
-a += 12;
-b += 9;
-c += 7;
+a /= 12;
+b /= 4;
+c /= 11;
 ```
