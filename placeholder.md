@@ -1,43 +1,53 @@
 ---
-id: 56104e9e514f539506016a5c
-title: Iterate Odd Numbers With a For Loop
+id: 5675e877dbd60be8ad28edc6
+title: Iterate Through an Array with a For Loop
 challengeType: 1
-videoUrl: 'https://scrimba.com/c/cm8n7T9'
-forumTopicId: 18212
-dashedName: iterate-odd-numbers-with-a-for-loop
+videoUrl: 'https://scrimba.com/c/caeR3HB'
+forumTopicId: 18216
+dashedName: iterate-through-an-array-with-a-for-loop
 ---
 
 # --description--
 
-For loops don't have to iterate one at a time. By changing our `final-expression`, we can count by even numbers.
-
-We'll start at `i = 0` and loop while `i < 10`. We'll increment `i` by 2 each loop with `i += 2`.
+A common task in JavaScript is to iterate through the contents of an array. One way to do that is with a `for` loop. This code will output each element of the array `arr` to the console:
 
 ```js
-var ourArray = [];
-for (var i = 0; i < 10; i += 2) {
-  ourArray.push(i);
+var arr = [10, 9, 8, 7, 6];
+for (var i = 0; i < arr.length; i++) {
+   console.log(arr[i]);
 }
 ```
 
-`ourArray` will now contain `[0,2,4,6,8]`. Let's change our `initialization` so we can count by odd numbers.
+Remember that arrays have zero-based indexing, which means the last index of the array is `length - 1`. Our condition for this loop is `i < arr.length`, which stops the loop when `i` is equal to `length`. In this case the last iteration is `i === 4` i.e. when `i` becomes equal to `arr.length` and outputs `6` to the console.
 
 # --instructions--
 
-Push the odd numbers from 1 through 9 to `myArray` using a `for` loop.
+Declare and initialize a variable `total` to `0`. Use a `for` loop to add the value of each element of the `myArr` array to `total`.
 
 # --hints--
 
-You should be using a `for` loop for this.
+`total` should be declared and initialized to 0.
 
 ```js
-assert(/for\s*\([^)]+?\)/.test(code));
+assert(code.match(/(var|let|const)\s*?total\s*=\s*0.*?;?/));
 ```
 
-`myArray` should equal `[1,3,5,7,9]`.
+`total` should equal 20.
 
 ```js
-assert.deepEqual(myArray, [1, 3, 5, 7, 9]);
+assert(total === 20);
+```
+
+You should use a `for` loop to iterate through `myArr`.
+
+```js
+assert(/for\s*\(/g.test(code) && /myArr\s*\[/g.test(code));
+```
+
+You should not attempt to directly assign the value 20 to `total`.
+
+```js
+assert(!__helpers.removeWhiteSpace(code).match(/total[=+-]0*[1-9]+/gm));
 ```
 
 # --seed--
@@ -45,14 +55,14 @@ assert.deepEqual(myArray, [1, 3, 5, 7, 9]);
 ## --after-user-code--
 
 ```js
-if(typeof myArray !== "undefined"){(function(){return myArray;})();}
+(function(){if(typeof total !== 'undefined') { return "total = " + total; } else { return "total is undefined";}})()
 ```
 
 ## --seed-contents--
 
 ```js
 // Setup
-var myArray = [];
+var myArr = [ 2, 3, 4, 5, 6];
 
 // Only change code below this line
 ```
@@ -60,8 +70,10 @@ var myArray = [];
 # --solutions--
 
 ```js
-var myArray = [];
-for (var i = 1; i < 10; i += 2) {
-  myArray.push(i);
+var myArr = [ 2, 3, 4, 5, 6];
+var total = 0;
+
+for (var i = 0; i < myArr.length; i++) {
+  total += myArr[i];
 }
 ```
