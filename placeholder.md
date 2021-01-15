@@ -1,41 +1,51 @@
 ---
-id: 587d7b85367417b2b2512b39
-title: Catch Missing Open and Closing Parenthesis After a Function Call
+id: 587d7b84367417b2b2512b35
+title: Catch Misspelled Variable and Function Names
 challengeType: 1
-forumTopicId: 301185
-dashedName: catch-missing-open-and-closing-parenthesis-after-a-function-call
+forumTopicId: 301186
+dashedName: catch-misspelled-variable-and-function-names
 ---
 
 # --description--
 
-When a function or method doesn't take any arguments, you may forget to include the (empty) opening and closing parentheses when calling it. Often times the result of a function call is saved in a variable for other use in your code. This error can be detected by logging variable values (or their types) to the console and seeing that one is set to a function reference, instead of the expected value the function returns.
+The `console.log()` and `typeof` methods are the two primary ways to check intermediate values and types of program output. Now it's time to get into the common forms that bugs take. One syntax-level issue that fast typers can commiserate with is the humble spelling error.
 
-The variables in the following example are different:
-
-```js
-function myFunction() {
-  return "You rock!";
-}
-let varOne = myFunction; // set to equal a function
-let varTwo = myFunction(); // set to equal the string "You rock!"
-```
+Transposed, missing, or mis-capitalized characters in a variable or function name will have the browser looking for an object that doesn't exist - and complain in the form of a reference error. JavaScript variable and function names are case-sensitive.
 
 # --instructions--
 
-Fix the code so the variable `result` is set to the value returned from calling the function `getNine`.
+Fix the two spelling errors in the code so the `netWorkingCapital` calculation works.
 
 # --hints--
 
-Your code should fix the variable `result` so it is set to the number that the function `getNine` returns.
+Check the spelling of the two variables used in the netWorkingCapital calculation, the console output should show that "Net working capital is: 2".
 
 ```js
-assert(result == 9);
+assert(netWorkingCapital === 2);
 ```
 
-Your code should call the `getNine` function.
+There should be no instances of mis-spelled variables in the code.
 
 ```js
-assert(code.match(/getNine\(\)/g).length == 2);
+assert(!code.match(/recievables/g));
+```
+
+The `receivables` variable should be declared and used properly in the code.
+
+```js
+assert(code.match(/receivables/g).length == 2);
+```
+
+There should be no instances of mis-spelled variables in the code.
+
+```js
+assert(!code.match(/payable;/g));
+```
+
+The `payables` variable should be declared and used properly in the code.
+
+```js
+assert(code.match(/payables/g).length == 2);
 ```
 
 # --seed--
@@ -43,25 +53,17 @@ assert(code.match(/getNine\(\)/g).length == 2);
 ## --seed-contents--
 
 ```js
-function getNine() {
-  let x = 6;
-  let y = 3;
-  return x + y;
-}
-
-let result = getNine;
-console.log(result);
+let receivables = 10;
+let payables = 8;
+let netWorkingCapital = recievables - payable;
+console.log(`Net working capital is: ${netWorkingCapital}`);
 ```
 
 # --solutions--
 
 ```js
-function getNine() {
- let x = 6;
- let y = 3;
- return x + y;
-}
-
-let result = getNine();
-console.log(result);
+let receivables = 10;
+let payables = 8;
+let netWorkingCapital = receivables - payables;
+console.log(`Net working capital is: ${netWorkingCapital}`);
 ```
