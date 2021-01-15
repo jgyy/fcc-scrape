@@ -1,60 +1,55 @@
 ---
-id: bd7123c9c444eddfaeb5bdef
-title: Declare String Variables
+id: 56533eb9ac21ba0edf2244ad
+title: Decrement a Number with JavaScript
 challengeType: 1
-videoUrl: 'https://scrimba.com/c/c2QvWU6'
-forumTopicId: 17557
-dashedName: declare-string-variables
+videoUrl: 'https://scrimba.com/c/cM2KeS2'
+forumTopicId: 17558
+dashedName: decrement-a-number-with-javascript
 ---
 
 # --description--
 
-Previously we have used the code
+You can easily <dfn>decrement</dfn> or decrease a variable by one with the `--` operator.
 
-`var myName = "your name";`
+`i--;`
 
-`"your name"` is called a <dfn>string</dfn> <dfn>literal</dfn>. It is a string because it is a series of zero or more characters enclosed in single or double quotes.
+is the equivalent of
+
+`i = i - 1;`
+
+**Note**  
+The entire line becomes `i--;`, eliminating the need for the equal sign.
 
 # --instructions--
 
-Create two new `string` variables: `myFirstName` and `myLastName` and assign them the values of your first and last name, respectively.
+Change the code to use the `--` operator on `myVar`.
 
 # --hints--
 
-`myFirstName` should be a string with at least one character in it.
+`myVar` should equal `10`.
+
+```js
+assert(myVar === 10);
+```
+
+`myVar = myVar - 1;` should be changed.
 
 ```js
 assert(
-  (function () {
-    if (
-      typeof myFirstName !== 'undefined' &&
-      typeof myFirstName === 'string' &&
-      myFirstName.length > 0
-    ) {
-      return true;
-    } else {
-      return false;
-    }
-  })()
+  /var\s*myVar\s*=\s*11;\s*\/*.*\s*([-]{2}\s*myVar|myVar\s*[-]{2});/.test(code)
 );
 ```
 
-`myLastName` should be a string with at least one character in it.
+You should use the `--` operator on `myVar`.
 
 ```js
-assert(
-  (function () {
-    if (
-      typeof myLastName !== 'undefined' &&
-      typeof myLastName === 'string' &&
-      myLastName.length > 0
-    ) {
-      return true;
-    } else {
-      return false;
-    }
-  })()
-);
+assert(/[-]{2}\s*myVar|myVar\s*[-]{2}/.test(code));
+```
+
+You should not change code above the specified comment.
+
+```js
+assert(/var myVar = 11;/.test(code));
 ```
 
 # --seed--
@@ -62,17 +57,21 @@ assert(
 ## --after-user-code--
 
 ```js
-if(typeof myFirstName !== "undefined" && typeof myLastName !== "undefined"){(function(){return myFirstName + ', ' + myLastName;})();}
+(function(z){return 'myVar = ' + z;})(myVar);
 ```
 
 ## --seed-contents--
 
 ```js
+var myVar = 11;
+
+// Only change code below this line
+myVar = myVar - 1;
 ```
 
 # --solutions--
 
 ```js
-var myFirstName = "Alan";
-var myLastName = "Turing";
+var myVar = 11;
+myVar--;
 ```
