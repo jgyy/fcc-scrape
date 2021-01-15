@@ -1,48 +1,45 @@
 ---
-id: 56533eb9ac21ba0edf2244aa
-title: Understanding Uninitialized Variables
+id: 56bbb991ad1ed5201cd392d1
+title: Updating Object Properties
 challengeType: 1
-videoUrl: 'https://scrimba.com/c/cBa2JAL'
-forumTopicId: 18335
-dashedName: understanding-uninitialized-variables
+videoUrl: 'https://scrimba.com/c/c9yEJT4'
+forumTopicId: 18336
+dashedName: updating-object-properties
 ---
 
 # --description--
 
-When JavaScript variables are declared, they have an initial value of `undefined`. If you do a mathematical operation on an `undefined` variable your result will be `NaN` which means <dfn>"Not a Number"</dfn>. If you concatenate a string with an `undefined` variable, you will get a literal <dfn>string</dfn> of `"undefined"`.
+After you've created a JavaScript object, you can update its properties at any time just like you would update any other variable. You can use either dot or bracket notation to update.
+
+For example, let's look at `ourDog`:
+
+```js
+var ourDog = {
+  "name": "Camper",
+  "legs": 4,
+  "tails": 1,
+  "friends": ["everything!"]
+};
+```
+
+Since he's a particularly happy dog, let's change his name to "Happy Camper". Here's how we update his object's name property: `ourDog.name = "Happy Camper";` or `ourDog["name"] = "Happy Camper";` Now when we evaluate `ourDog.name`, instead of getting "Camper", we'll get his new name, "Happy Camper".
 
 # --instructions--
 
-Initialize the three variables `a`, `b`, and `c` with `5`, `10`, and `"I am a"` respectively so that they will not be `undefined`.
+Update the `myDog` object's name property. Let's change her name from "Coder" to "Happy Coder". You can use either dot or bracket notation.
 
 # --hints--
 
-`a` should be defined and evaluated to have the value of `6`.
+You should update `myDog`'s `"name"` property to equal "Happy Coder".
 
 ```js
-assert(typeof a === 'number' && a === 6);
+assert(/happy coder/gi.test(myDog.name));
 ```
 
-`b` should be defined and evaluated to have the value of `15`.
+You should not edit the `myDog` definition.
 
 ```js
-assert(typeof b === 'number' && b === 15);
-```
-
-`c` should not contain `undefined` and should have a value of "I am a String!"
-
-```js
-assert(!/undefined/.test(c) && c === 'I am a String!');
-```
-
-You should not change code below the specified comment.
-
-```js
-assert(
-  /a = a \+ 1;/.test(code) &&
-    /b = b \+ 5;/.test(code) &&
-    /c = c \+ " String!";/.test(code)
-);
+assert(/"name": "Coder"/.test(code));
 ```
 
 # --seed--
@@ -50,30 +47,31 @@ assert(
 ## --after-user-code--
 
 ```js
-(function(a,b,c){ return "a = " + a + ", b = " + b + ", c = '" + c + "'"; })(a,b,c);
+(function(z){return z;})(myDog);
 ```
 
 ## --seed-contents--
 
 ```js
-// Only change code below this line
-var a;
-var b;
-var c;
-// Only change code above this line
+// Setup
+var myDog = {
+  "name": "Coder",
+  "legs": 4,
+  "tails": 1,
+  "friends": ["freeCodeCamp Campers"]
+};
 
-a = a + 1;
-b = b + 5;
-c = c + " String!";
+// Only change code below this line
 ```
 
 # --solutions--
 
 ```js
-var a = 5;
-var b = 10;
-var c = "I am a";
-a = a + 1;
-b = b + 5;
-c = c + " String!";
+var myDog = {
+  "name": "Coder",
+  "legs": 4,
+  "tails": 1,
+  "friends": ["freeCodeCamp Campers"]
+};
+myDog.name = "Happy Coder";
 ```
