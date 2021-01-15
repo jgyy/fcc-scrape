@@ -1,82 +1,70 @@
 ---
-id: 56533eb9ac21ba0edf2244db
-title: Introducing Else If Statements
+id: 56533eb9ac21ba0edf2244da
+title: Introducing Else Statements
 challengeType: 1
-videoUrl: 'https://scrimba.com/c/caeJ2hm'
-forumTopicId: 18206
-dashedName: introducing-else-if-statements
+videoUrl: 'https://scrimba.com/c/cek4Efq'
+forumTopicId: 18207
+dashedName: introducing-else-statements
 ---
 
 # --description--
 
-If you have multiple conditions that need to be addressed, you can chain `if` statements together with `else if` statements.
+When a condition for an `if` statement is true, the block of code following it is executed. What about when that condition is false? Normally nothing would happen. With an `else` statement, an alternate block of code can be executed.
 
 ```js
-if (num > 15) {
-  return "Bigger than 15";
-} else if (num < 5) {
-  return "Smaller than 5";
+if (num > 10) {
+  return "Bigger than 10";
 } else {
-  return "Between 5 and 15";
+  return "10 or Less";
 }
 ```
 
 # --instructions--
 
-Convert the logic to use `else if` statements.
+Combine the `if` statements into a single `if/else` statement.
 
 # --hints--
 
-You should have at least two `else` statements
+You should only have one `if` statement in the editor
 
 ```js
-assert(code.match(/else/g).length > 1);
+assert(code.match(/if/g).length === 1);
 ```
 
-You should have at least two `if` statements
+You should use an `else` statement
 
 ```js
-assert(code.match(/if/g).length > 1);
+assert(/else/g.test(code));
 ```
 
-You should have closing and opening curly braces for each `if else` code block.
+`testElse(4)` should return "5 or Smaller"
 
 ```js
-assert(
-  code.match(
-    /if\s*\((.+)\)\s*\{[\s\S]+\}\s*else\s+if\s*\((.+)\)\s*\{[\s\S]+\}\s*else\s*\{[\s\S]+\s*\}/
-  )
-);
+assert(testElse(4) === '5 or Smaller');
 ```
 
-`testElseIf(0)` should return "Smaller than 5"
+`testElse(5)` should return "5 or Smaller"
 
 ```js
-assert(testElseIf(0) === 'Smaller than 5');
+assert(testElse(5) === '5 or Smaller');
 ```
 
-`testElseIf(5)` should return "Between 5 and 10"
+`testElse(6)` should return "Bigger than 5"
 
 ```js
-assert(testElseIf(5) === 'Between 5 and 10');
+assert(testElse(6) === 'Bigger than 5');
 ```
 
-`testElseIf(7)` should return "Between 5 and 10"
+`testElse(10)` should return "Bigger than 5".
 
 ```js
-assert(testElseIf(7) === 'Between 5 and 10');
+assert(testElse(10) === 'Bigger than 5');
 ```
 
-`testElseIf(10)` should return "Between 5 and 10"
+You should not change the code above or below the specified comments.
 
 ```js
-assert(testElseIf(10) === 'Between 5 and 10');
-```
-
-`testElseIf(12)` should return "Greater than 10"
-
-```js
-assert(testElseIf(12) === 'Greater than 10');
+assert(/var result = "";/.test(code) && /return result;/.test(code));
 ```
 
 # --seed--
@@ -84,31 +72,35 @@ assert(testElseIf(12) === 'Greater than 10');
 ## --seed-contents--
 
 ```js
-function testElseIf(val) {
-  if (val > 10) {
-    return "Greater than 10";
+function testElse(val) {
+  var result = "";
+  // Only change code below this line
+
+  if (val > 5) {
+    result = "Bigger than 5";
   }
 
-  if (val < 5) {
-    return "Smaller than 5";
+  if (val <= 5) {
+    result = "5 or Smaller";
   }
 
-  return "Between 5 and 10";
+  // Only change code above this line
+  return result;
 }
 
-testElseIf(7);
+testElse(4);
 ```
 
 # --solutions--
 
 ```js
-function testElseIf(val) {
-  if(val > 10) {
-    return "Greater than 10";
-  } else if(val < 5) {
-    return "Smaller than 5";
+function testElse(val) {
+  var result = "";
+  if(val > 5) {
+    result = "Bigger than 5";
   } else {
-    return "Between 5 and 10";
+    result = "5 or Smaller";
   }
+  return result;
 }
 ```
