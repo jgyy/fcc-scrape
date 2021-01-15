@@ -1,135 +1,97 @@
 ---
-id: 56533eb9ac21ba0edf2244d9
-title: Comparisons with the Logical Or Operator
+id: 56533eb9ac21ba0edf2244af
+title: Compound Assignment With Augmented Addition
 challengeType: 1
-videoUrl: 'https://scrimba.com/c/cEPrGTN'
-forumTopicId: 16800
-dashedName: comparisons-with-the-logical-or-operator
+videoUrl: 'https://scrimba.com/c/cDR6LCb'
+forumTopicId: 16661
+dashedName: compound-assignment-with-augmented-addition
 ---
 
 # --description--
 
-The <dfn>logical or</dfn> operator (`||`) returns `true` if either of the <dfn>operands</dfn> is `true`. Otherwise, it returns `false`.
+In programming, it is common to use assignments to modify the contents of a variable. Remember that everything to the right of the equals sign is evaluated first, so we can say:
 
-The <dfn>logical or</dfn> operator is composed of two pipe symbols: (`||`). This can typically be found between your Backspace and Enter keys.
+`myVar = myVar + 5;`
 
-The pattern below should look familiar from prior waypoints:
+to add `5` to `myVar`. Since this is such a common pattern, there are operators which do both a mathematical operation and assignment in one step.
 
-```js
-if (num > 10) {
-  return "No";
-}
-if (num < 5) {
-  return "No";
-}
-return "Yes";
-```
-
-will return "Yes" only if `num` is between `5` and `10` (5 and 10 included). The same logic can be written as:
+One such operator is the `+=` operator.
 
 ```js
-if (num > 10 || num < 5) {
-  return "No";
-}
-return "Yes";
+var myVar = 1;
+myVar += 5;
+console.log(myVar); // Returns 6
 ```
 
 # --instructions--
 
-Combine the two `if` statements into one statement which returns `"Outside"` if `val` is not between `10` and `20`, inclusive. Otherwise, return `"Inside"`.
+Convert the assignments for `a`, `b`, and `c` to use the `+=` operator.
 
 # --hints--
 
-You should use the `||` operator once
+`a` should equal `15`.
 
 ```js
-assert(code.match(/\|\|/g).length === 1);
+assert(a === 15);
 ```
 
-You should only have one `if` statement
+`b` should equal `26`.
 
 ```js
-assert(code.match(/if/g).length === 1);
+assert(b === 26);
 ```
 
-`testLogicalOr(0)` should return "Outside"
+`c` should equal `19`.
 
 ```js
-assert(testLogicalOr(0) === 'Outside');
+assert(c === 19);
 ```
 
-`testLogicalOr(9)` should return "Outside"
+You should use the `+=` operator for each variable.
 
 ```js
-assert(testLogicalOr(9) === 'Outside');
+assert(code.match(/\+=/g).length === 3);
 ```
 
-`testLogicalOr(10)` should return "Inside"
+You should not modify the code above the specified comment.
 
 ```js
-assert(testLogicalOr(10) === 'Inside');
-```
-
-`testLogicalOr(15)` should return "Inside"
-
-```js
-assert(testLogicalOr(15) === 'Inside');
-```
-
-`testLogicalOr(19)` should return "Inside"
-
-```js
-assert(testLogicalOr(19) === 'Inside');
-```
-
-`testLogicalOr(20)` should return "Inside"
-
-```js
-assert(testLogicalOr(20) === 'Inside');
-```
-
-`testLogicalOr(21)` should return "Outside"
-
-```js
-assert(testLogicalOr(21) === 'Outside');
-```
-
-`testLogicalOr(25)` should return "Outside"
-
-```js
-assert(testLogicalOr(25) === 'Outside');
+assert(
+  /var a = 3;/.test(code) &&
+    /var b = 17;/.test(code) &&
+    /var c = 12;/.test(code)
+);
 ```
 
 # --seed--
 
+## --after-user-code--
+
+```js
+(function(a,b,c){ return "a = " + a + ", b = " + b + ", c = " + c; })(a,b,c);
+```
+
 ## --seed-contents--
 
 ```js
-function testLogicalOr(val) {
-  // Only change code below this line
+var a = 3;
+var b = 17;
+var c = 12;
 
-  if (val) {
-    return "Outside";
-  }
-
-  if (val) {
-    return "Outside";
-  }
-
-  // Only change code above this line
-  return "Inside";
-}
-
-testLogicalOr(15);
+// Only change code below this line
+a = a + 12;
+b = 9 + b;
+c = c + 7;
 ```
 
 # --solutions--
 
 ```js
-function testLogicalOr(val) {
-  if (val < 10 || val > 20) {
-    return "Outside";
-  }
-  return "Inside";
-}
+var a = 3;
+var b = 17;
+var c = 12;
+
+a += 12;
+b += 9;
+c += 7;
 ```
