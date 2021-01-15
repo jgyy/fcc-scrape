@@ -1,50 +1,62 @@
 ---
-id: 587d7b84367417b2b2512b37
-title: Catch Mixed Usage of Single and Double Quotes
+id: 587d7b86367417b2b2512b3b
+title: Catch Off By One Errors When Using Indexing
 challengeType: 1
-forumTopicId: 301188
-dashedName: catch-mixed-usage-of-single-and-double-quotes
+forumTopicId: 301189
+dashedName: catch-off-by-one-errors-when-using-indexing
 ---
 
 # --description--
 
-JavaScript allows the use of both single (`'`) and double (`"`) quotes to declare a string. Deciding which one to use generally comes down to personal preference, with some exceptions.
+<dfn>Off by one errors</dfn> (sometimes called OBOE) crop up when you're trying to target a specific index of a string or array (to slice or access a segment), or when looping over the indices of them. JavaScript indexing starts at zero, not one, which means the last index is always one less than the length of the item. If you try to access an index equal to the length, the program may throw an "index out of range" reference error or print `undefined`.
 
-Having two choices is great when a string has contractions or another piece of text that's in quotes. Just be careful that you don't close the string too early, which causes a syntax error.
-
-Here are some examples of mixing quotes:
+When you use string or array methods that take index ranges as arguments, it helps to read the documentation and understand if they are inclusive (the item at the given index is part of what's returned) or not. Here are some examples of off by one errors:
 
 ```js
-// These are correct:
-const grouchoContraction = "I've had a perfectly wonderful evening, but this wasn't it.";
-const quoteInString = "Groucho Marx once said 'Quote me as saying I was mis-quoted.'";
-// This is incorrect:
-const uhOhGroucho = 'I've had a perfectly wonderful evening, but this wasn't it.';
-```
-
-Of course, it is okay to use only one style of quotes. You can escape the quotes inside the string by using the backslash (`\`) escape character:
-
-```js
-// Correct use of same quotes:
-const allSameQuotes = 'I\'ve had a perfectly wonderful evening, but this wasn\'t it.';
+let alphabet = "abcdefghijklmnopqrstuvwxyz";
+let len = alphabet.length;
+for (let i = 0; i <= len; i++) {
+  // loops one too many times at the end
+  console.log(alphabet[i]);
+}
+for (let j = 1; j < len; j++) {
+  // loops one too few times and misses the first character at index 0
+  console.log(alphabet[j]);
+}
+for (let k = 0; k < len; k++) {
+  // Goldilocks approves - this is just right
+  console.log(alphabet[k]);
+}
 ```
 
 # --instructions--
 
-Fix the string so it either uses different quotes for the `href` value, or escape the existing ones. Keep the double quote marks around the entire string.
+Fix the two indexing errors in the following function so all the numbers 1 through 5 are printed to the console.
 
 # --hints--
 
-Your code should fix the quotes around the `href` value "#Home" by either changing or escaping them.
+Your code should set the initial condition of the loop so it starts at the first index.
 
 ```js
-assert(code.match(/<a href=\s*?('|\\")#Home\1\s*?>/g));
+assert(code.match(/i\s*?=\s*?0\s*?;/g).length == 1);
 ```
 
-Your code should keep the double quotes around the entire string.
+Your code should fix the initial condition of the loop so that the index starts at 0.
 
 ```js
-assert(code.match(/"<p>.*?<\/p>";/g));
+assert(!code.match(/i\s?=\s*?1\s*?;/g));
+```
+
+Your code should set the terminal condition of the loop so it stops at the last index.
+
+```js
+assert(code.match(/i\s*?<\s*?len\s*?;/g).length == 1);
+```
+
+Your code should fix the terminal condition of the loop so that it stops at 1 before the length.
+
+```js
+assert(!code.match(/i\s*?<=\s*?len;/g));
 ```
 
 # --seed--
@@ -52,13 +64,31 @@ assert(code.match(/"<p>.*?<\/p>";/g));
 ## --seed-contents--
 
 ```js
-let innerHtml = "<p>Click here to <a href="#Home">return home</a></p>";
-console.log(innerHtml);
+function countToFive() {
+  let firstFive = "12345";
+  let len = firstFive.length;
+  // Only change code below this line
+  for (let i = 1; i <= len; i++) {
+  // Only change code above this line
+    console.log(firstFive[i]);
+  }
+}
+
+countToFive();
 ```
 
 # --solutions--
 
 ```js
-let innerHtml = "<p>Click here to <a href=\"#Home\">return home</a></p>";
-console.log(innerHtml);
+function countToFive() {
+ let firstFive = "12345";
+ let len = firstFive.length;
+ // Only change code below this line
+ for (let i = 0; i < len; i++) {
+ // Only change code above this line
+   console.log(firstFive[i]);
+ }
+}
+
+countToFive();
 ```
