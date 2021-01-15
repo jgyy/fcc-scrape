@@ -1,66 +1,72 @@
 ---
-id: 56533eb9ac21ba0edf2244d2
-title: Comparison with the Inequality Operator
+id: 56533eb9ac21ba0edf2244d6
+title: Comparison with the Less Than Operator
 challengeType: 1
-videoUrl: 'https://scrimba.com/c/cdBm9Sr'
-forumTopicId: 16787
-dashedName: comparison-with-the-inequality-operator
+videoUrl: 'https://scrimba.com/c/cNVRWtB'
+forumTopicId: 16789
+dashedName: comparison-with-the-less-than-operator
 ---
 
 # --description--
 
-The inequality operator (`!=`) is the opposite of the equality operator. It means "Not Equal" and returns `false` where equality would return `true` and *vice versa*. Like the equality operator, the inequality operator will convert data types of values while comparing.
+The <dfn>less than</dfn> operator (`<`) compares the values of two numbers. If the number to the left is less than the number to the right, it returns `true`. Otherwise, it returns `false`. Like the equality operator, <dfn>less than</dfn> operator converts data types while comparing.
 
 **Examples**
 
 ```js
-1 !=  2     // true
-1 != "1"    // false
-1 != '1'    // false
-1 != true   // false
-0 != false  // false
+2   < 5  // true
+'3' < 7  // true
+5   < 5  // false
+3   < 2  // false
+'8' < 4  // false
 ```
 
 # --instructions--
 
-Add the inequality operator `!=` in the `if` statement so that the function will return "Not Equal" when `val` is not equivalent to `99`
+Add the less than operator to the indicated lines so that the return statements make sense.
 
 # --hints--
 
-`testNotEqual(99)` should return "Equal"
+`testLessThan(0)` should return "Under 25"
 
 ```js
-assert(testNotEqual(99) === 'Equal');
+assert(testLessThan(0) === 'Under 25');
 ```
 
-`testNotEqual("99")` should return "Equal"
+`testLessThan(24)` should return "Under 25"
 
 ```js
-assert(testNotEqual('99') === 'Equal');
+assert(testLessThan(24) === 'Under 25');
 ```
 
-`testNotEqual(12)` should return "Not Equal"
+`testLessThan(25)` should return "Under 55"
 
 ```js
-assert(testNotEqual(12) === 'Not Equal');
+assert(testLessThan(25) === 'Under 55');
 ```
 
-`testNotEqual("12")` should return "Not Equal"
+`testLessThan(54)` should return "Under 55"
 
 ```js
-assert(testNotEqual('12') === 'Not Equal');
+assert(testLessThan(54) === 'Under 55');
 ```
 
-`testNotEqual("bob")` should return "Not Equal"
+`testLessThan(55)` should return "55 or Over"
 
 ```js
-assert(testNotEqual('bob') === 'Not Equal');
+assert(testLessThan(55) === '55 or Over');
 ```
 
-You should use the `!=` operator
+`testLessThan(99)` should return "55 or Over"
 
 ```js
-assert(code.match(/(?!!==)!=/));
+assert(testLessThan(99) === '55 or Over');
+```
+
+You should use the `<` operator at least twice
+
+```js
+assert(code.match(/val\s*<\s*('|")*\d+('|")*/g).length > 1);
 ```
 
 # --seed--
@@ -68,24 +74,33 @@ assert(code.match(/(?!!==)!=/));
 ## --seed-contents--
 
 ```js
-// Setup
-function testNotEqual(val) {
-  if (val) { // Change this line
-    return "Not Equal";
+function testLessThan(val) {
+  if (val) {  // Change this line
+    return "Under 25";
   }
-  return "Equal";
+
+  if (val) {  // Change this line
+    return "Under 55";
+  }
+
+  return "55 or Over";
 }
 
-testNotEqual(10);
+testLessThan(10);
 ```
 
 # --solutions--
 
 ```js
-function testNotEqual(val) {
-  if (val != 99) {
-    return "Not Equal";
+function testLessThan(val) {
+  if (val < 25) {  // Change this line
+    return "Under 25";
   }
-  return "Equal";
+
+  if (val < 55) {  // Change this line
+    return "Under 55";
+  }
+
+  return "55 or Over";
 }
 ```
