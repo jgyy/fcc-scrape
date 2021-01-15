@@ -1,64 +1,79 @@
 ---
-id: 56533eb9ac21ba0edf2244d0
-title: Comparison with the Equality Operator
+id: 56533eb9ac21ba0edf2244d4
+title: Comparison with the Greater Than Operator
 challengeType: 1
-videoUrl: 'https://scrimba.com/c/cKyVMAL'
-forumTopicId: 16784
-dashedName: comparison-with-the-equality-operator
+videoUrl: 'https://scrimba.com/c/cp6GbH4'
+forumTopicId: 16786
+dashedName: comparison-with-the-greater-than-operator
 ---
 
 # --description--
 
-There are many <dfn>comparison operators</dfn> in JavaScript. All of these operators return a boolean `true` or `false` value.
+The greater than operator (`>`) compares the values of two numbers. If the number to the left is greater than the number to the right, it returns `true`. Otherwise, it returns `false`.
 
-The most basic operator is the equality operator `==`. The equality operator compares two values and returns `true` if they're equivalent or `false` if they are not. Note that equality is different from assignment (`=`), which assigns the value on the right of the operator to a variable on the left.
+Like the equality operator, greater than operator will convert data types of values while comparing.
 
-```js
-function equalityTest(myVal) {
-  if (myVal == 10) {
-     return "Equal";
-  }
-  return "Not Equal";
-}
-```
-
-If `myVal` is equal to `10`, the equality operator returns `true`, so the code in the curly braces will execute, and the function will return `"Equal"`. Otherwise, the function will return `"Not Equal"`. In order for JavaScript to compare two different <dfn>data types</dfn> (for example, `numbers` and `strings`), it must convert one type to another. This is known as "Type Coercion". Once it does, however, it can compare terms as follows:
+**Examples**
 
 ```js
-1   ==  1   // true
-1   ==  2   // false
-1   == '1'  // true
-"3" ==  3   // true
+5   >  3   // true
+7   > '3'  // true
+2   >  3   // false
+'1' >  9   // false
 ```
 
 # --instructions--
 
-Add the equality operator to the indicated line so that the function will return "Equal" when `val` is equivalent to `12`.
+Add the greater than operator to the indicated lines so that the return statements make sense.
 
 # --hints--
 
-`testEqual(10)` should return "Not Equal"
+`testGreaterThan(0)` should return "10 or Under"
 
 ```js
-assert(testEqual(10) === 'Not Equal');
+assert(testGreaterThan(0) === '10 or Under');
 ```
 
-`testEqual(12)` should return "Equal"
+`testGreaterThan(10)` should return "10 or Under"
 
 ```js
-assert(testEqual(12) === 'Equal');
+assert(testGreaterThan(10) === '10 or Under');
 ```
 
-`testEqual("12")` should return "Equal"
+`testGreaterThan(11)` should return "Over 10"
 
 ```js
-assert(testEqual('12') === 'Equal');
+assert(testGreaterThan(11) === 'Over 10');
 ```
 
-You should use the `==` operator
+`testGreaterThan(99)` should return "Over 10"
 
 ```js
-assert(code.match(/==/g) && !code.match(/===/g));
+assert(testGreaterThan(99) === 'Over 10');
+```
+
+`testGreaterThan(100)` should return "Over 10"
+
+```js
+assert(testGreaterThan(100) === 'Over 10');
+```
+
+`testGreaterThan(101)` should return "Over 100"
+
+```js
+assert(testGreaterThan(101) === 'Over 100');
+```
+
+`testGreaterThan(150)` should return "Over 100"
+
+```js
+assert(testGreaterThan(150) === 'Over 100');
+```
+
+You should use the `>` operator at least twice
+
+```js
+assert(code.match(/val\s*>\s*('|")*\d+('|")*/g).length > 1);
 ```
 
 # --seed--
@@ -66,24 +81,31 @@ assert(code.match(/==/g) && !code.match(/===/g));
 ## --seed-contents--
 
 ```js
-// Setup
-function testEqual(val) {
-  if (val) { // Change this line
-    return "Equal";
+function testGreaterThan(val) {
+  if (val) {  // Change this line
+    return "Over 100";
   }
-  return "Not Equal";
+
+  if (val) {  // Change this line
+    return "Over 10";
+  }
+
+  return "10 or Under";
 }
 
-testEqual(10);
+testGreaterThan(10);
 ```
 
 # --solutions--
 
 ```js
-function testEqual(val) {
-  if (val == 12) {
-    return "Equal";
+function testGreaterThan(val) {
+  if (val > 100) {  // Change this line
+    return "Over 100";
   }
-  return "Not Equal";
+  if (val > 10) {  // Change this line
+    return "Over 10";
+  }
+  return "10 or Under";
 }
 ```
