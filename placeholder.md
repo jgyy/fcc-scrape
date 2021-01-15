@@ -1,71 +1,78 @@
 ---
-id: cf1111c1c12feddfaeb3bdef
-title: Use Conditional Logic with If Statements
+id: 587d7b7e367417b2b2512b21
+title: Use Multiple Conditional (Ternary) Operators
 challengeType: 1
-videoUrl: 'https://scrimba.com/c/cy87mf3'
-forumTopicId: 18348
-dashedName: use-conditional-logic-with-if-statements
+videoUrl: 'https://scrimba.com/c/cyWJBT4'
+forumTopicId: 301179
+dashedName: use-multiple-conditional-ternary-operators
 ---
 
 # --description--
 
-`If` statements are used to make decisions in code. The keyword `if` tells JavaScript to execute the code in the curly braces under certain conditions, defined in the parentheses. These conditions are known as `Boolean` conditions and they may only be `true` or `false`.
+In the previous challenge, you used a single conditional operator. You can also chain them together to check for multiple conditions.
 
-When the condition evaluates to `true`, the program executes the statement inside the curly braces. When the Boolean condition evaluates to `false`, the statement inside the curly braces will not execute.
-
-**Pseudocode**
-
-<blockquote>if (<i>condition is true</i>) {<br>  <i>statement is executed</i><br>}</blockquote>
-
-**Example**
+The following function uses if, else if, and else statements to check multiple conditions:
 
 ```js
-function test (myCondition) {
-  if (myCondition) {
-     return "It was true";
+function findGreaterOrEqual(a, b) {
+  if (a === b) {
+    return "a and b are equal";
   }
-  return "It was false";
+  else if (a > b) {
+    return "a is greater";
+  }
+  else {
+    return "b is greater";
+  }
 }
-test(true);  // returns "It was true"
-test(false); // returns "It was false"
 ```
 
-When `test` is called with a value of `true`, the `if` statement evaluates `myCondition` to see if it is `true` or not. Since it is `true`, the function returns `"It was true"`. When we call `test` with a value of `false`, `myCondition` is *not* `true` and the statement in the curly braces is not executed and the function returns `"It was false"`.
+The above function can be re-written using multiple conditional operators:
+
+```js
+function findGreaterOrEqual(a, b) {
+  return (a === b) ? "a and b are equal" 
+    : (a > b) ? "a is greater" 
+    : "b is greater";
+}
+```
+
+It is considered best practice to format multiple conditional operators such that each condition is on a separate line, as shown above. Using multiple conditional operators without proper indentation may make your code hard to read. For example:
+
+```js
+function findGreaterOrEqual(a, b) {
+  return (a === b) ? "a and b are equal" : (a > b) ? "a is greater" : "b is greater";
+}
+```
 
 # --instructions--
 
-Create an `if` statement inside the function to return `"Yes, that was true"` if the parameter `wasThatTrue` is `true` and return `"No, that was false"` otherwise.
+In the `checkSign` function, use multiple conditional operators - following the recommended format used in `findGreaterOrEqual` - to check if a number is positive, negative or zero. The function should return `"positive"`, `"negative"` or `"zero"`.
 
 # --hints--
 
-`trueOrFalse` should be a function
+`checkSign` should use multiple conditional operators
 
 ```js
-assert(typeof trueOrFalse === 'function');
+assert(/.+?\s*?\?\s*?.+?\s*?:\s*?.+?\s*?\?\s*?.+?\s*?:\s*?.+?/gi.test(code));
 ```
 
-`trueOrFalse(true)` should return a string
+`checkSign(10)` should return "positive". Note that capitalization matters
 
 ```js
-assert(typeof trueOrFalse(true) === 'string');
+assert(checkSign(10) === 'positive');
 ```
 
-`trueOrFalse(false)` should return a string
+`checkSign(-12)` should return "negative". Note that capitalization matters
 
 ```js
-assert(typeof trueOrFalse(false) === 'string');
+assert(checkSign(-12) === 'negative');
 ```
 
-`trueOrFalse(true)` should return "Yes, that was true"
+`checkSign(0)` should return "zero". Note that capitalization matters
 
 ```js
-assert(trueOrFalse(true) === 'Yes, that was true');
-```
-
-`trueOrFalse(false)` should return "No, that was false"
-
-```js
-assert(trueOrFalse(false) === 'No, that was false');
+assert(checkSign(0) === 'zero');
 ```
 
 # --seed--
@@ -73,23 +80,17 @@ assert(trueOrFalse(false) === 'No, that was false');
 ## --seed-contents--
 
 ```js
-function trueOrFalse(wasThatTrue) {
-  // Only change code below this line
-
-
-
-  // Only change code above this line
+function checkSign(num) {
 
 }
+
+checkSign(10);
 ```
 
 # --solutions--
 
 ```js
-function trueOrFalse(wasThatTrue) {
-  if (wasThatTrue) {
-    return "Yes, that was true";
-  }
-  return "No, that was false";
+function checkSign(num) {
+  return (num > 0) ? 'positive' : (num < 0) ? 'negative' : 'zero';
 }
 ```
