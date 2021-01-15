@@ -1,152 +1,107 @@
 ---
-id: 56533eb9ac21ba0edf2244ca
-title: Using Objects for Lookups
+id: 56533eb9ac21ba0edf2244bb
+title: Word Blanks
 challengeType: 1
-videoUrl: 'https://scrimba.com/c/cdBk8sM'
-forumTopicId: 18373
-dashedName: using-objects-for-lookups
+videoUrl: 'https://scrimba.com/c/caqn8zuP'
+forumTopicId: 18377
+dashedName: word-blanks
 ---
 
 # --description--
 
-Objects can be thought of as a key/value storage, like a dictionary. If you have tabular data, you can use an object to "lookup" values rather than a `switch` statement or an `if/else` chain. This is most useful when you know that your input data is limited to a certain range.
+We will now use our knowledge of strings to build a "[Mad Libs](https://en.wikipedia.org/wiki/Mad_Libs)" style word game we're calling "Word Blanks". You will create an (optionally humorous) "Fill in the Blanks" style sentence.
 
-Here is an example of a simple reverse alphabet lookup:
+In a "Mad Libs" game, you are provided sentences with some missing words, like nouns, verbs, adjectives and adverbs. You then fill in the missing pieces with words of your choice in a way that the completed sentence makes sense.
+
+Consider this sentence - "It was really **\_\_\_\_**, and we **\_\_\_\_** ourselves **\_\_\_\_**". This sentence has three missing pieces- an adjective, a verb and an adverb, and we can add words of our choice to complete it. We can then assign the completed sentence to a variable as follows:
 
 ```js
-var alpha = {
-  1:"Z",
-  2:"Y",
-  3:"X",
-  4:"W",
-  ...
-  24:"C",
-  25:"B",
-  26:"A"
-};
-alpha[2]; // "Y"
-alpha[24]; // "C"
-
-var value = 2;
-alpha[value]; // "Y"
+var sentence = "It was really " + "hot" + ", and we " + "laughed" + " ourselves " + "silly" + ".";
 ```
 
 # --instructions--
 
-Convert the switch statement into an object called `lookup`. Use it to look up `val` and assign the associated string to the `result` variable.
+In this challenge, we provide you with a noun, a verb, an adjective and an adverb. You need to form a complete sentence using words of your choice, along with the words we provide.
+
+You will need to use the string concatenation operator `+` to build a new string, using the provided variables: `myNoun`, `myAdjective`, `myVerb`, and `myAdverb`. You will then assign the formed string to the `wordBlanks` variable. You should not change the words assigned to the variables.
+
+You will also need to account for spaces in your string, so that the final sentence has spaces between all the words. The result should be a complete sentence.
 
 # --hints--
 
-`phoneticLookup("alpha")` should equal `"Adams"`
+`wordBlanks` should be a string.
 
 ```js
-assert(phoneticLookup('alpha') === 'Adams');
+assert(typeof wordBlanks === 'string');
 ```
 
-`phoneticLookup("bravo")` should equal `"Boston"`
-
-```js
-assert(phoneticLookup('bravo') === 'Boston');
-```
-
-`phoneticLookup("charlie")` should equal `"Chicago"`
-
-```js
-assert(phoneticLookup('charlie') === 'Chicago');
-```
-
-`phoneticLookup("delta")` should equal `"Denver"`
-
-```js
-assert(phoneticLookup('delta') === 'Denver');
-```
-
-`phoneticLookup("echo")` should equal `"Easy"`
-
-```js
-assert(phoneticLookup('echo') === 'Easy');
-```
-
-`phoneticLookup("foxtrot")` should equal `"Frank"`
-
-```js
-assert(phoneticLookup('foxtrot') === 'Frank');
-```
-
-`phoneticLookup("")` should equal `undefined`
-
-```js
-assert(typeof phoneticLookup('') === 'undefined');
-```
-
-You should not modify the `return` statement
-
-```js
-assert(code.match(/return\sresult;/));
-```
-
-You should not use `case`, `switch`, or `if` statements
+You should not change the values assigned to `myNoun`, `myVerb`, `myAdjective` or `myAdverb`.
 
 ```js
 assert(
-  !/case|switch|if/g.test(code.replace(/([/]{2}.*)|([/][*][^/*]*[*][/])/g, ''))
+  myNoun === 'dog' &&
+    myVerb === 'ran' &&
+    myAdjective === 'big' &&
+    myAdverb === 'quickly'
+);
+```
+
+You should not directly use the values "dog", "ran", "big", or "quickly" to create `wordBlanks`.
+
+```js
+const newCode = removeAssignments(code);
+assert(
+  !/dog/.test(newCode) &&
+    !/ran/.test(newCode) &&
+    !/big/.test(newCode) &&
+    !/quickly/.test(newCode)
+);
+```
+
+`wordBlanks` should contain all of the words assigned to the variables `myNoun`, `myVerb`, `myAdjective` and `myAdverb` separated by non-word characters (and any additional words in your madlib).
+
+```js
+assert(
+  /\bdog\b/.test(wordBlanks) &&
+    /\bbig\b/.test(wordBlanks) &&
+    /\bran\b/.test(wordBlanks) &&
+    /\bquickly\b/.test(wordBlanks)
 );
 ```
 
 # --seed--
 
+## --after-user-code--
+
+```js
+const removeAssignments = str => str
+  .replace(/myNoun\s*=\s*["']dog["']/g, '')
+  .replace(/myAdjective\s*=\s*["']big["']/g, '')
+  .replace(/myVerb\s*=\s*["']ran["']/g, '')
+  .replace(/myAdverb\s*=\s*["']quickly["']/g, '');
+```
+
 ## --seed-contents--
 
 ```js
-// Setup
-function phoneticLookup(val) {
-  var result = "";
+var myNoun = "dog";
+var myAdjective = "big";
+var myVerb = "ran";
+var myAdverb = "quickly";
 
-  // Only change code below this line
-  switch(val) {
-    case "alpha":
-      result = "Adams";
-      break;
-    case "bravo":
-      result = "Boston";
-      break;
-    case "charlie":
-      result = "Chicago";
-      break;
-    case "delta":
-      result = "Denver";
-      break;
-    case "echo":
-      result = "Easy";
-      break;
-    case "foxtrot":
-      result = "Frank";
-  }
-
-  // Only change code above this line
-  return result;
-}
-
-phoneticLookup("charlie");
+// Only change code below this line
+var wordBlanks = ""; // Change this line
+// Only change code above this line
 ```
 
 # --solutions--
 
 ```js
-function phoneticLookup(val) {
-  var result = "";
+var myNoun = "dog";
+var myAdjective = "big";
+var myVerb = "ran";
+var myAdverb = "quickly";
 
-  var lookup = {
-    alpha: "Adams",
-    bravo: "Boston",
-    charlie: "Chicago",
-    delta: "Denver",
-    echo: "Easy",
-    foxtrot: "Frank"
-  };
-
-  result = lookup[val];
-
-  return result;
-}
+var wordBlanks = "Once there was a " + myNoun + " which was very " + myAdjective + ". ";
+wordBlanks += "It " + myVerb + " " + myAdverb + " around the yard.";
 ```
