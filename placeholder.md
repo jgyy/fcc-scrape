@@ -1,107 +1,101 @@
 ---
-id: 56533eb9ac21ba0edf2244bb
-title: Word Blanks
+id: 56bbb991ad1ed5201cd392cf
+title: Write Reusable JavaScript with Functions
 challengeType: 1
-videoUrl: 'https://scrimba.com/c/caqn8zuP'
-forumTopicId: 18377
-dashedName: word-blanks
+videoUrl: 'https://scrimba.com/c/cL6dqfy'
+forumTopicId: 18378
+dashedName: write-reusable-javascript-with-functions
 ---
 
 # --description--
 
-We will now use our knowledge of strings to build a "[Mad Libs](https://en.wikipedia.org/wiki/Mad_Libs)" style word game we're calling "Word Blanks". You will create an (optionally humorous) "Fill in the Blanks" style sentence.
+In JavaScript, we can divide up our code into reusable parts called <dfn>functions</dfn>.
 
-In a "Mad Libs" game, you are provided sentences with some missing words, like nouns, verbs, adjectives and adverbs. You then fill in the missing pieces with words of your choice in a way that the completed sentence makes sense.
-
-Consider this sentence - "It was really **\_\_\_\_**, and we **\_\_\_\_** ourselves **\_\_\_\_**". This sentence has three missing pieces- an adjective, a verb and an adverb, and we can add words of our choice to complete it. We can then assign the completed sentence to a variable as follows:
+Here's an example of a function:
 
 ```js
-var sentence = "It was really " + "hot" + ", and we " + "laughed" + " ourselves " + "silly" + ".";
+function functionName() {
+  console.log("Hello World");
+}
 ```
+
+You can call or <dfn>invoke</dfn> this function by using its name followed by parentheses, like this: `functionName();` Each time the function is called it will print out the message `"Hello World"` on the dev console. All of the code between the curly braces will be executed every time the function is called.
 
 # --instructions--
 
-In this challenge, we provide you with a noun, a verb, an adjective and an adverb. You need to form a complete sentence using words of your choice, along with the words we provide.
-
-You will need to use the string concatenation operator `+` to build a new string, using the provided variables: `myNoun`, `myAdjective`, `myVerb`, and `myAdverb`. You will then assign the formed string to the `wordBlanks` variable. You should not change the words assigned to the variables.
-
-You will also need to account for spaces in your string, so that the final sentence has spaces between all the words. The result should be a complete sentence.
+<ol><li>Create a function called <code>reusableFunction</code> which prints <code>"Hi World"</code> to the dev console.</li><li>Call the function.</li></ol>
 
 # --hints--
 
-`wordBlanks` should be a string.
+`reusableFunction` should be a function.
 
 ```js
-assert(typeof wordBlanks === 'string');
+assert(typeof reusableFunction === 'function');
 ```
 
-You should not change the values assigned to `myNoun`, `myVerb`, `myAdjective` or `myAdverb`.
+`reusableFunction` should output "Hi World" to the dev console.
 
 ```js
-assert(
-  myNoun === 'dog' &&
-    myVerb === 'ran' &&
-    myAdjective === 'big' &&
-    myAdverb === 'quickly'
-);
+assert(hiWorldWasLogged);
 ```
 
-You should not directly use the values "dog", "ran", "big", or "quickly" to create `wordBlanks`.
+You should call `reusableFunction` after you define it.
 
 ```js
-const newCode = removeAssignments(code);
-assert(
-  !/dog/.test(newCode) &&
-    !/ran/.test(newCode) &&
-    !/big/.test(newCode) &&
-    !/quickly/.test(newCode)
-);
-```
-
-`wordBlanks` should contain all of the words assigned to the variables `myNoun`, `myVerb`, `myAdjective` and `myAdverb` separated by non-word characters (and any additional words in your madlib).
-
-```js
-assert(
-  /\bdog\b/.test(wordBlanks) &&
-    /\bbig\b/.test(wordBlanks) &&
-    /\bran\b/.test(wordBlanks) &&
-    /\bquickly\b/.test(wordBlanks)
-);
+assert(/^\s*reusableFunction\(\)\s*/m.test(code));
 ```
 
 # --seed--
 
+## --before-user-code--
+
+```js
+var logOutput = "";
+var originalConsole = console;
+var nativeLog = console.log;
+var hiWorldWasLogged = false;
+function capture() {
+    console.log = function (message) {
+        if(message === 'Hi World')  hiWorldWasLogged = true;
+        if(message && message.trim) logOutput = message.trim();
+        if(nativeLog.apply) {
+          nativeLog.apply(originalConsole, arguments);
+        } else {
+          var nativeMsg = Array.prototype.slice.apply(arguments).join(' ');
+          nativeLog(nativeMsg);
+        }
+    };
+}
+
+function uncapture() {
+  console.log = nativeLog;
+}
+
+capture();
+```
+
 ## --after-user-code--
 
 ```js
-const removeAssignments = str => str
-  .replace(/myNoun\s*=\s*["']dog["']/g, '')
-  .replace(/myAdjective\s*=\s*["']big["']/g, '')
-  .replace(/myVerb\s*=\s*["']ran["']/g, '')
-  .replace(/myAdverb\s*=\s*["']quickly["']/g, '');
+uncapture();
+
+if (typeof reusableFunction !== "function") { 
+  (function() { return "reusableFunction is not defined"; })();
+} else {
+  (function() { return logOutput || "console.log never called"; })();
+}
 ```
 
 ## --seed-contents--
 
 ```js
-var myNoun = "dog";
-var myAdjective = "big";
-var myVerb = "ran";
-var myAdverb = "quickly";
-
-// Only change code below this line
-var wordBlanks = ""; // Change this line
-// Only change code above this line
 ```
 
 # --solutions--
 
 ```js
-var myNoun = "dog";
-var myAdjective = "big";
-var myVerb = "ran";
-var myAdverb = "quickly";
-
-var wordBlanks = "Once there was a " + myNoun + " which was very " + myAdjective + ". ";
-wordBlanks += "It " + myVerb + " " + myAdverb + " around the yard.";
+function reusableFunction() {
+  console.log("Hi World");
+}
+reusableFunction();
 ```
