@@ -1,55 +1,58 @@
 ---
-id: 56533eb9ac21ba0edf2244d1
-title: Comparison with the Strict Equality Operator
+id: 56533eb9ac21ba0edf2244d3
+title: Comparison with the Strict Inequality Operator
 challengeType: 1
-videoUrl: 'https://scrimba.com/c/cy87atr'
-forumTopicId: 16790
-dashedName: comparison-with-the-strict-equality-operator
+videoUrl: 'https://scrimba.com/c/cKekkUy'
+forumTopicId: 16791
+dashedName: comparison-with-the-strict-inequality-operator
 ---
 
 # --description--
 
-Strict equality (`===`) is the counterpart to the equality operator (`==`). However, unlike the equality operator, which attempts to convert both values being compared to a common type, the strict equality operator does not perform a type conversion.
-
-If the values being compared have different types, they are considered unequal, and the strict equality operator will return false.
+The strict inequality operator (`!==`) is the logical opposite of the strict equality operator. It means "Strictly Not Equal" and returns `false` where strict equality would return `true` and *vice versa*. Strict inequality will not convert data types.
 
 **Examples**
 
 ```js
-3 ===  3   // true
-3 === '3'  // false
+3 !==  3   // false
+3 !== '3'  // true
+4 !==  3   // true
 ```
-
-In the second example, `3` is a `Number` type and `'3'` is a `String` type.
 
 # --instructions--
 
-Use the strict equality operator in the `if` statement so the function will return "Equal" when `val` is strictly equal to `7`
+Add the strict inequality operator to the `if` statement so the function will return "Not Equal" when `val` is not strictly equal to `17`
 
 # --hints--
 
-`testStrict(10)` should return "Not Equal"
+`testStrictNotEqual(17)` should return "Equal"
 
 ```js
-assert(testStrict(10) === 'Not Equal');
+assert(testStrictNotEqual(17) === 'Equal');
 ```
 
-`testStrict(7)` should return "Equal"
+`testStrictNotEqual("17")` should return "Not Equal"
 
 ```js
-assert(testStrict(7) === 'Equal');
+assert(testStrictNotEqual('17') === 'Not Equal');
 ```
 
-`testStrict("7")` should return "Not Equal"
+`testStrictNotEqual(12)` should return "Not Equal"
 
 ```js
-assert(testStrict('7') === 'Not Equal');
+assert(testStrictNotEqual(12) === 'Not Equal');
 ```
 
-You should use the `===` operator
+`testStrictNotEqual("bob")` should return "Not Equal"
 
 ```js
-assert(code.match(/(val\s*===\s*\d+)|(\d+\s*===\s*val)/g).length > 0);
+assert(testStrictNotEqual('bob') === 'Not Equal');
+```
+
+You should use the `!==` operator
+
+```js
+assert(code.match(/(val\s*!==\s*\d+)|(\d+\s*!==\s*val)/g).length > 0);
 ```
 
 # --seed--
@@ -58,23 +61,23 @@ assert(code.match(/(val\s*===\s*\d+)|(\d+\s*===\s*val)/g).length > 0);
 
 ```js
 // Setup
-function testStrict(val) {
+function testStrictNotEqual(val) {
   if (val) { // Change this line
-    return "Equal";
+    return "Not Equal";
   }
-  return "Not Equal";
+  return "Equal";
 }
 
-testStrict(10);
+testStrictNotEqual(10);
 ```
 
 # --solutions--
 
 ```js
-function testStrict(val) {
-  if (val === 7) {
-    return "Equal";
+function testStrictNotEqual(val) {
+  if (val !== 17) {
+    return "Not Equal";
   }
-  return "Not Equal";
+  return "Equal";
 }
 ```
