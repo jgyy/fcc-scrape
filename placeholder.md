@@ -1,54 +1,77 @@
 ---
-id: 56533eb9ac21ba0edf2244bf
-title: Local Scope and Functions
+id: 5690307fddb111c6084545d7
+title: Logical Order in If Else Statements
 challengeType: 1
-videoUrl: 'https://scrimba.com/c/cd62NhM'
-forumTopicId: 18227
-dashedName: local-scope-and-functions
+videoUrl: 'https://scrimba.com/c/cwNvMUV'
+forumTopicId: 18228
+dashedName: logical-order-in-if-else-statements
 ---
 
 # --description--
 
-Variables which are declared within a function, as well as the function parameters have <dfn>local</dfn> scope. That means, they are only visible within that function.
+Order is important in `if`, `else if` statements.
 
-Here is a function `myTest` with a local variable called `loc`.
+The function is executed from top to bottom so you will want to be careful of what statement comes first.
+
+Take these two functions as an example.
+
+Here's the first:
 
 ```js
-function myTest() {
-  var loc = "foo";
-  console.log(loc);
+function foo(x) {
+  if (x < 1) {
+    return "Less than one";
+  } else if (x < 2) {
+    return "Less than two";
+  } else {
+    return "Greater than or equal to two";
+  }
 }
-myTest(); // logs "foo"
-console.log(loc); // loc is not defined
 ```
 
-`loc` is not defined outside of the function.
+And the second just switches the order of the statements:
+
+```js
+function bar(x) {
+  if (x < 2) {
+    return "Less than two";
+  } else if (x < 1) {
+    return "Less than one";
+  } else {
+    return "Greater than or equal to two";
+  }
+}
+```
+
+While these two functions look nearly identical if we pass a number to both we get different outputs.
+
+```js
+foo(0) // "Less than one"
+bar(0) // "Less than two"
+```
 
 # --instructions--
 
-The editor has two `console.log`s to help you see what is happening. Check the console as you code to see how it changes. Declare a local variable `myVar` inside `myLocalScope` and run the tests.
-
-**Note:** The console will still have 'ReferenceError: myVar is not defined', but this will not cause the tests to fail.
+Change the order of logic in the function so that it will return the correct statements in all cases.
 
 # --hints--
 
-The code should not contain a global `myVar` variable.
+`orderMyLogic(4)` should return "Less than 5"
 
 ```js
-function declared() {
-  myVar;
-}
-assert.throws(declared, ReferenceError);
+assert(orderMyLogic(4) === 'Less than 5');
 ```
 
-You should add a local `myVar` variable.
+`orderMyLogic(6)` should return "Less than 10"
 
 ```js
-assert(
-  /functionmyLocalScope\(\)\{.+(var|let|const)myVar[\s\S]*}/.test(
-    __helpers.removeWhiteSpace(code)
-  )
-);
+assert(orderMyLogic(6) === 'Less than 10');
+```
+
+`orderMyLogic(11)` should return "Greater than or equal to 10"
+
+```js
+assert(orderMyLogic(11) === 'Greater than or equal to 10');
 ```
 
 # --seed--
@@ -56,31 +79,29 @@ assert(
 ## --seed-contents--
 
 ```js
-function myLocalScope() {
-
-  // Only change code below this line
-
-  console.log('inside myLocalScope', myVar);
+function orderMyLogic(val) {
+  if (val < 10) {
+    return "Less than 10";
+  } else if (val < 5) {
+    return "Less than 5";
+  } else {
+    return "Greater than or equal to 10";
+  }
 }
-myLocalScope();
 
-// Run and check the console
-// myVar is not defined outside of myLocalScope
-console.log('outside myLocalScope', myVar);
+orderMyLogic(7);
 ```
 
 # --solutions--
 
 ```js
-function myLocalScope() {
-
-  // Only change code below this line
-  var myVar;
-  console.log('inside myLocalScope', myVar);
+function orderMyLogic(val) {
+  if(val < 5) {
+    return "Less than 5";
+  } else if (val < 10) {
+    return "Less than 10";
+  } else {
+    return "Greater than or equal to 10";
+  }
 }
-myLocalScope();
-
-// Run and check the console
-// myVar is not defined outside of myLocalScope
-console.log('outside myLocalScope', myVar);
 ```
