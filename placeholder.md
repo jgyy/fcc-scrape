@@ -1,29 +1,23 @@
 ---
-id: 587d7b7e367417b2b2512b22
-title: Use the parseInt Function with a Radix
+id: 587d7b7e367417b2b2512b23
+title: Use the parseInt Function
 challengeType: 1
-videoUrl: 'https://scrimba.com/c/c6K4Kh3'
-forumTopicId: 301182
-dashedName: use-the-parseint-function-with-a-radix
+videoUrl: 'https://scrimba.com/c/cm83LSW'
+forumTopicId: 301183
+dashedName: use-the-parseint-function
 ---
 
 # --description--
 
-The `parseInt()` function parses a string and returns an integer. It takes a second argument for the radix, which specifies the base of the number in the string. The radix can be an integer between 2 and 36.
+The `parseInt()` function parses a string and returns an integer. Here's an example:
 
-The function call looks like:
+`var a = parseInt("007");`
 
-`parseInt(string, radix);`
-
-And here's an example:
-
-`var a = parseInt("11", 2);`
-
-The radix variable says that "11" is in the binary system, or base 2. This example converts the string "11" to an integer 3.
+The above function converts the string "007" to an integer 7. If the first character in the string can't be converted into a number, then it returns `NaN`.
 
 # --instructions--
 
-Use `parseInt()` in the `convertToInteger` function so it converts a binary number to an integer and returns it.
+Use `parseInt()` in the `convertToInteger` function so it converts the input string `str` into an integer, and returns it.
 
 # --hints--
 
@@ -33,22 +27,22 @@ Use `parseInt()` in the `convertToInteger` function so it converts a binary numb
 assert(/parseInt/g.test(code));
 ```
 
-`convertToInteger("10011")` should return a number
+`convertToInteger("56")` should return a number
 
 ```js
-assert(typeof convertToInteger('10011') === 'number');
+assert(typeof convertToInteger('56') === 'number');
 ```
 
-`convertToInteger("10011")` should return 19
+`convertToInteger("56")` should return 56
 
 ```js
-assert(convertToInteger('10011') === 19);
+assert(convertToInteger('56') === 56);
 ```
 
-`convertToInteger("111001")` should return 57
+`convertToInteger("77")` should return 77
 
 ```js
-assert(convertToInteger('111001') === 57);
+assert(convertToInteger('77') === 77);
 ```
 
 `convertToInteger("JamesBond")` should return NaN
@@ -66,13 +60,13 @@ function convertToInteger(str) {
 
 }
 
-convertToInteger("10011");
+convertToInteger("56");
 ```
 
 # --solutions--
 
 ```js
 function convertToInteger(str) {
-  return parseInt(str, 2);
+  return parseInt(str);
 }
 ```
