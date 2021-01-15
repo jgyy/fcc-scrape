@@ -1,46 +1,49 @@
 ---
-id: 56533eb9ac21ba0edf2244d8
-title: Comparisons with the Logical And Operator
+id: 56533eb9ac21ba0edf2244d9
+title: Comparisons with the Logical Or Operator
 challengeType: 1
-videoUrl: 'https://scrimba.com/c/cvbRVtr'
-forumTopicId: 16799
-dashedName: comparisons-with-the-logical-and-operator
+videoUrl: 'https://scrimba.com/c/cEPrGTN'
+forumTopicId: 16800
+dashedName: comparisons-with-the-logical-or-operator
 ---
 
 # --description--
 
-Sometimes you will need to test more than one thing at a time. The <dfn>logical and</dfn> operator (`&&`) returns `true` if and only if the <dfn>operands</dfn> to the left and right of it are true.
+The <dfn>logical or</dfn> operator (`||`) returns `true` if either of the <dfn>operands</dfn> is `true`. Otherwise, it returns `false`.
 
-The same effect could be achieved by nesting an if statement inside another if:
+The <dfn>logical or</dfn> operator is composed of two pipe symbols: (`||`). This can typically be found between your Backspace and Enter keys.
+
+The pattern below should look familiar from prior waypoints:
 
 ```js
-if (num > 5) {
-  if (num < 10) {
-    return "Yes";
-  }
+if (num > 10) {
+  return "No";
 }
-return "No";
+if (num < 5) {
+  return "No";
+}
+return "Yes";
 ```
 
-will only return "Yes" if `num` is greater than `5` and less than `10`. The same logic can be written as:
+will return "Yes" only if `num` is between `5` and `10` (5 and 10 included). The same logic can be written as:
 
 ```js
-if (num > 5 && num < 10) {
-  return "Yes";
+if (num > 10 || num < 5) {
+  return "No";
 }
-return "No";
+return "Yes";
 ```
 
 # --instructions--
 
-Replace the two if statements with one statement, using the && operator, which will return `"Yes"` if `val` is less than or equal to `50` and greater than or equal to `25`. Otherwise, will return `"No"`.
+Combine the two `if` statements into one statement which returns `"Outside"` if `val` is not between `10` and `20`, inclusive. Otherwise, return `"Inside"`.
 
 # --hints--
 
-You should use the `&&` operator once
+You should use the `||` operator once
 
 ```js
-assert(code.match(/&&/g).length === 1);
+assert(code.match(/\|\|/g).length === 1);
 ```
 
 You should only have one `if` statement
@@ -49,52 +52,52 @@ You should only have one `if` statement
 assert(code.match(/if/g).length === 1);
 ```
 
-`testLogicalAnd(0)` should return "No"
+`testLogicalOr(0)` should return "Outside"
 
 ```js
-assert(testLogicalAnd(0) === 'No');
+assert(testLogicalOr(0) === 'Outside');
 ```
 
-`testLogicalAnd(24)` should return "No"
+`testLogicalOr(9)` should return "Outside"
 
 ```js
-assert(testLogicalAnd(24) === 'No');
+assert(testLogicalOr(9) === 'Outside');
 ```
 
-`testLogicalAnd(25)` should return "Yes"
+`testLogicalOr(10)` should return "Inside"
 
 ```js
-assert(testLogicalAnd(25) === 'Yes');
+assert(testLogicalOr(10) === 'Inside');
 ```
 
-`testLogicalAnd(30)` should return "Yes"
+`testLogicalOr(15)` should return "Inside"
 
 ```js
-assert(testLogicalAnd(30) === 'Yes');
+assert(testLogicalOr(15) === 'Inside');
 ```
 
-`testLogicalAnd(50)` should return "Yes"
+`testLogicalOr(19)` should return "Inside"
 
 ```js
-assert(testLogicalAnd(50) === 'Yes');
+assert(testLogicalOr(19) === 'Inside');
 ```
 
-`testLogicalAnd(51)` should return "No"
+`testLogicalOr(20)` should return "Inside"
 
 ```js
-assert(testLogicalAnd(51) === 'No');
+assert(testLogicalOr(20) === 'Inside');
 ```
 
-`testLogicalAnd(75)` should return "No"
+`testLogicalOr(21)` should return "Outside"
 
 ```js
-assert(testLogicalAnd(75) === 'No');
+assert(testLogicalOr(21) === 'Outside');
 ```
 
-`testLogicalAnd(80)` should return "No"
+`testLogicalOr(25)` should return "Outside"
 
 ```js
-assert(testLogicalAnd(80) === 'No');
+assert(testLogicalOr(25) === 'Outside');
 ```
 
 # --seed--
@@ -102,29 +105,31 @@ assert(testLogicalAnd(80) === 'No');
 ## --seed-contents--
 
 ```js
-function testLogicalAnd(val) {
+function testLogicalOr(val) {
   // Only change code below this line
 
   if (val) {
-    if (val) {
-      return "Yes";
-    }
+    return "Outside";
+  }
+
+  if (val) {
+    return "Outside";
   }
 
   // Only change code above this line
-  return "No";
+  return "Inside";
 }
 
-testLogicalAnd(10);
+testLogicalOr(15);
 ```
 
 # --solutions--
 
 ```js
-function testLogicalAnd(val) {
-  if (val >= 25 && val <= 50) {
-    return "Yes";
+function testLogicalOr(val) {
+  if (val < 10 || val > 20) {
+    return "Outside";
   }
-  return "No";
+  return "Inside";
 }
 ```
