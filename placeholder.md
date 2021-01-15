@@ -1,150 +1,52 @@
 ---
-id: 56533eb9ac21ba0edf2244df
-title: Multiple Identical Options in Switch Statements
+id: bd7993c9c69feddfaeb7bdef
+title: Multiply Two Decimals with JavaScript
 challengeType: 1
-videoUrl: 'https://scrimba.com/c/cdBKWCV'
-forumTopicId: 18242
-dashedName: multiple-identical-options-in-switch-statements
+videoUrl: 'https://scrimba.com/c/ce2GeHq'
+forumTopicId: 301173
+dashedName: multiply-two-decimals-with-javascript
 ---
 
 # --description--
 
-If the `break` statement is omitted from a `switch` statement's `case`, the following `case` statement(s) are executed until a `break` is encountered. If you have multiple inputs with the same output, you can represent them in a `switch` statement like this:
+In JavaScript, you can also perform calculations with decimal numbers, just like whole numbers.
 
-```js
-var result = "";
-switch(val) {
-  case 1:
-  case 2:
-  case 3:
-    result = "1, 2, or 3";
-    break;
-  case 4:
-    result = "4 alone";
-}
-```
-
-Cases for 1, 2, and 3 will all produce the same result.
+Let's multiply two decimals together to get their product.
 
 # --instructions--
 
-Write a switch statement to set `answer` for the following ranges:  
-`1-3` - "Low"  
-`4-6` - "Mid"  
-`7-9` - "High"
-
-**Note**  
-You will need to have a `case` statement for each number in the range.
+Change the `0.0` so that product will equal `5.0`.
 
 # --hints--
 
-`sequentialSizes(1)` should return "Low"
+The variable `product` should equal `5.0`.
 
 ```js
-assert(sequentialSizes(1) === 'Low');
+assert(product === 5.0);
 ```
 
-`sequentialSizes(2)` should return "Low"
+You should use the `*` operator
 
 ```js
-assert(sequentialSizes(2) === 'Low');
-```
-
-`sequentialSizes(3)` should return "Low"
-
-```js
-assert(sequentialSizes(3) === 'Low');
-```
-
-`sequentialSizes(4)` should return "Mid"
-
-```js
-assert(sequentialSizes(4) === 'Mid');
-```
-
-`sequentialSizes(5)` should return "Mid"
-
-```js
-assert(sequentialSizes(5) === 'Mid');
-```
-
-`sequentialSizes(6)` should return "Mid"
-
-```js
-assert(sequentialSizes(6) === 'Mid');
-```
-
-`sequentialSizes(7)` should return "High"
-
-```js
-assert(sequentialSizes(7) === 'High');
-```
-
-`sequentialSizes(8)` should return "High"
-
-```js
-assert(sequentialSizes(8) === 'High');
-```
-
-`sequentialSizes(9)` should return "High"
-
-```js
-assert(sequentialSizes(9) === 'High');
-```
-
-You should not use any `if` or `else` statements
-
-```js
-assert(!/else/g.test(code) || !/if/g.test(code));
-```
-
-You should have nine `case` statements
-
-```js
-assert(code.match(/case/g).length === 9);
+assert(/\*/.test(code));
 ```
 
 # --seed--
 
+## --after-user-code--
+
+```js
+(function(y){return 'product = '+y;})(product);
+```
+
 ## --seed-contents--
 
 ```js
-function sequentialSizes(val) {
-  var answer = "";
-  // Only change code below this line
-
-
-
-  // Only change code above this line
-  return answer;
-}
-
-sequentialSizes(1);
+var product = 2.0 * 0.0;
 ```
 
 # --solutions--
 
 ```js
-function sequentialSizes(val) {
-  var answer = "";
-
-  switch(val) {
-    case 1:
-    case 2:
-    case 3:
-      answer = "Low";
-      break;
-    case 4:
-    case 5:
-    case 6:
-      answer = "Mid";
-      break;
-    case 7:
-    case 8:
-    case 9:
-      answer = "High";
-  }
-
-  return answer;
-}
+var product = 2.0 * 2.5;
 ```
