@@ -1,81 +1,42 @@
 ---
-id: 56533eb9ac21ba0edf2244b6
-title: Escape Sequences in Strings
+id: 56533eb9ac21ba0edf2244b5
+title: Escaping Literal Quotes in Strings
 challengeType: 1
-videoUrl: 'https://scrimba.com/c/cvmqRh6'
-forumTopicId: 17567
-dashedName: escape-sequences-in-strings
+videoUrl: 'https://scrimba.com/c/c2QvgSr'
+forumTopicId: 17568
+dashedName: escaping-literal-quotes-in-strings
 ---
 
 # --description--
 
-Quotes are not the only characters that can be <dfn>escaped</dfn> inside a string. There are two reasons to use escaping characters:
+When you are defining a string you must start and end with a single or double quote. What happens when you need a literal quote: `"` or `'` inside of your string?
 
-1.  To allow you to use characters you may not otherwise be able to type out, such as a carriage return.
-2.  To allow you to represent multiple quotes in a string without JavaScript misinterpreting what you mean.
+In JavaScript, you can <dfn>escape</dfn> a quote from considering it as an end of string quote by placing a <dfn>backslash</dfn> (`\`) in front of the quote.
 
-We learned this in the previous challenge.
+`var sampleStr = "Alan said, \"Peter is learning JavaScript\".";`
 
-<table class='table table-striped'><thead><tr><th>Code</th><th>Output</th></tr></thead><tbody><tr><td><code>\'</code></td><td>single quote</td></tr><tr><td><code>\"</code></td><td>double quote</td></tr><tr><td><code>\\</code></td><td>backslash</td></tr><tr><td><code>\n</code></td><td>newline</td></tr><tr><td><code>\r</code></td><td>carriage return</td></tr><tr><td><code>\t</code></td><td>tab</td></tr><tr><td><code>\b</code></td><td>word boundary</td></tr><tr><td><code>\f</code></td><td>form feed</td></tr></tbody></table>
+This signals to JavaScript that the following quote is not the end of the string, but should instead appear inside the string. So if you were to print this to the console, you would get:
 
-*Note that the backslash itself must be escaped in order to display as a backslash.*
+`Alan said, "Peter is learning JavaScript".`
 
 # --instructions--
 
-Assign the following three lines of text into the single variable `myStr` using escape sequences.
+Use <dfn>backslashes</dfn> to assign a string to the `myStr` variable so that if you were to print it to the console, you would see:
 
-<blockquote>FirstLine<br>    \SecondLine<br>ThirdLine</blockquote>
-
-You will need to use escape sequences to insert special characters correctly. You will also need to follow the spacing as it looks above, with no spaces between escape sequences or words.
-
-Here is the text with the escape sequences written out.
-
-"FirstLine```newline``tab``backslash```SecondLine`newline`ThirdLine"
+`I am a "double quoted" string inside "double quotes".`
 
 # --hints--
 
-`myStr` should not contain any spaces
+You should use two double quotes (`"`) and four escaped double quotes (`\"`).
 
 ```js
-assert(!/ /.test(myStr));
+assert(code.match(/\\"/g).length === 4 && code.match(/[^\\]"/g).length === 2);
 ```
 
-`myStr` should contain the strings `FirstLine`, `SecondLine` and `ThirdLine` (remember case sensitivity)
+Variable myStr should contain the string: `I am a "double quoted" string inside "double quotes".`
 
 ```js
-assert(
-  /FirstLine/.test(myStr) && /SecondLine/.test(myStr) && /ThirdLine/.test(myStr)
-);
-```
-
-`FirstLine` should be followed by the newline character `\n`
-
-```js
-assert(/FirstLine\n/.test(myStr));
-```
-
-`myStr` should contain a tab character `\t` which follows a newline character
-
-```js
-assert(/\n\t/.test(myStr));
-```
-
-`SecondLine` should be preceded by the backslash character `\`
-
-```js
-assert(/\\SecondLine/.test(myStr));
-```
-
-There should be a newline character between `SecondLine` and `ThirdLine`
-
-```js
-assert(/SecondLine\nThirdLine/.test(myStr));
-```
-
-`myStr` should only contain characters shown in the instructions
-
-```js
-assert(myStr === 'FirstLine\n\t\\SecondLine\nThirdLine');
+assert(/I am a "double quoted" string inside "double quotes(\."|"\.)$/.test(myStr));
 ```
 
 # --seed--
@@ -84,18 +45,22 @@ assert(myStr === 'FirstLine\n\t\\SecondLine\nThirdLine');
 
 ```js
 (function(){
-if (myStr !== undefined){
-console.log('myStr:\n' + myStr);}})();
+  if(typeof myStr === 'string') {
+    console.log("myStr = \"" + myStr + "\"");
+  } else {
+    console.log("myStr is undefined");
+  }
+})();
 ```
 
 ## --seed-contents--
 
 ```js
-var myStr; // Change this line
+var myStr = ""; // Change this line
 ```
 
 # --solutions--
 
 ```js
-var myStr = "FirstLine\n\t\\SecondLine\nThirdLine";
+var myStr = "I am a \"double quoted\" string inside \"double quotes\".";
 ```
