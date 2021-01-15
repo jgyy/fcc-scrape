@@ -1,83 +1,105 @@
 ---
-id: 5cfa3679138e7d9595b9d9d4
-title: Replace Loops using Recursion
+id: 56533eb9ac21ba0edf2244e0
+title: Replacing If Else Chains with Switch
 challengeType: 1
-videoUrl: >-
-  https://www.freecodecamp.org/news/how-recursion-works-explained-with-flowcharts-and-a-video-de61f40cb7f9/
-forumTopicId: 301175
-dashedName: replace-loops-using-recursion
+videoUrl: 'https://scrimba.com/c/c3JE8fy'
+forumTopicId: 18266
+dashedName: replacing-if-else-chains-with-switch
 ---
 
 # --description--
 
-Recursion is the concept that a function can be expressed in terms of itself. To help understand this, start by thinking about the following task: multiply the first `n` elements of an array to create the product of those elements. Using a `for` loop, you could do this:
+If you have many options to choose from, a `switch` statement can be easier to write than many chained `if`/`else if` statements. The following:
 
 ```js
-  function multiply(arr, n) {
-    var product = 1;
-    for (var i = 0; i < n; i++) {
-        product *= arr[i];
-    }
-    return product;
-  }
+if (val === 1) {
+  answer = "a";
+} else if (val === 2) {
+  answer = "b";
+} else {
+  answer = "c";
+}
 ```
 
-However, notice that `multiply(arr, n) == multiply(arr, n - 1) * arr[n - 1]`. That means you can rewrite `multiply` in terms of itself and never need to use a loop.
+can be replaced with:
 
 ```js
-  function multiply(arr, n) {
-    if (n <= 0) {
-      return 1;
-    } else {
-      return multiply(arr, n - 1) * arr[n - 1];
-    }
-  }
+switch(val) {
+  case 1:
+    answer = "a";
+    break;
+  case 2:
+    answer = "b";
+    break;
+  default:
+    answer = "c";
+}
 ```
-
-The recursive version of `multiply` breaks down like this. In the <dfn>base case</dfn>, where `n <= 0`, it returns 1. For larger values of `n`, it calls itself, but with `n - 1`. That function call is evaluated in the same way, calling `multiply` again until `n <= 0`. At this point, all the functions can return and the original `multiply` returns the answer.
-
-**Note:** Recursive functions must have a base case when they return without calling the function again (in this example, when `n <= 0`), otherwise they can never finish executing.
 
 # --instructions--
 
-Write a recursive function, `sum(arr, n)`, that returns the sum of the first `n` elements of an array `arr`.
+Change the chained `if`/`else if` statements into a `switch` statement.
 
 # --hints--
 
-`sum([1], 0)` should equal 0.
+You should not use any `else` statements anywhere in the editor
 
 ```js
-assert.equal(sum([1], 0), 0);
+assert(!/else/g.test(code));
 ```
 
-`sum([2, 3, 4], 1)` should equal 2.
+You should not use any `if` statements anywhere in the editor
 
 ```js
-assert.equal(sum([2, 3, 4], 1), 2);
+assert(!/if/g.test(code));
 ```
 
-`sum([2, 3, 4, 5], 3)` should equal 9.
+You should have at least four `break` statements
 
 ```js
-assert.equal(sum([2, 3, 4, 5], 3), 9);
+assert(code.match(/break/g).length >= 4);
 ```
 
-Your code should not rely on any kind of loops (`for` or `while` or higher order functions such as `forEach`, `map`, `filter`, or `reduce`.).
+`chainToSwitch("bob")` should be "Marley"
 
 ```js
-assert(
-  !__helpers
-    .removeJSComments(code)
-    .match(/for|while|forEach|map|filter|reduce/g)
-);
+assert(chainToSwitch('bob') === 'Marley');
 ```
 
-You should use recursion to solve this problem.
+`chainToSwitch(42)` should be "The Answer"
 
 ```js
-assert(
-  __helpers.removeJSComments(sum.toString()).match(/sum\(.*\)/g).length > 1
-);
+assert(chainToSwitch(42) === 'The Answer');
+```
+
+`chainToSwitch(1)` should be "There is no #1"
+
+```js
+assert(chainToSwitch(1) === 'There is no #1');
+```
+
+`chainToSwitch(99)` should be "Missed me by this much!"
+
+```js
+assert(chainToSwitch(99) === 'Missed me by this much!');
+```
+
+`chainToSwitch(7)` should be "Ate Nine"
+
+```js
+assert(chainToSwitch(7) === 'Ate Nine');
+```
+
+`chainToSwitch("John")` should be "" (empty string)
+
+```js
+assert(chainToSwitch('John') === '');
+```
+
+`chainToSwitch(156)` should be "" (empty string)
+
+```js
+assert(chainToSwitch(156) === '');
 ```
 
 # --seed--
@@ -85,23 +107,51 @@ assert(
 ## --seed-contents--
 
 ```js
-function sum(arr, n) {
+function chainToSwitch(val) {
+  var answer = "";
   // Only change code below this line
 
+  if (val === "bob") {
+    answer = "Marley";
+  } else if (val === 42) {
+    answer = "The Answer";
+  } else if (val === 1) {
+    answer = "There is no #1";
+  } else if (val === 99) {
+    answer = "Missed me by this much!";
+  } else if (val === 7) {
+    answer = "Ate Nine";
+  }
+
   // Only change code above this line
+  return answer;
 }
+
+chainToSwitch(7);
 ```
 
 # --solutions--
 
 ```js
-function sum(arr, n) {
-  // Only change code below this line
-  if(n <= 0) {
-    return 0;
-  } else {
-    return sum(arr, n - 1) + arr[n - 1];
+function chainToSwitch(val) {
+  var answer = "";
+
+  switch(val) {
+    case "bob":
+      answer = "Marley";
+      break;
+    case 42:
+      answer = "The Answer";
+      break;
+    case 1:
+      answer = "There is no #1";
+      break;
+    case 99:
+      answer = "Missed me by this much!";
+      break;
+    case 7:
+      answer = "Ate Nine";
   }
-  // Only change code above this line
+  return answer;
 }
 ```
