@@ -1,58 +1,75 @@
 ---
-id: 5679ceb97cbaa8c51670a16b
-title: Returning Boolean Values from Functions
+id: 56533eb9ac21ba0edf2244dd
+title: Selecting from Many Options with Switch Statements
 challengeType: 1
-videoUrl: 'https://scrimba.com/c/cp62qAQ'
-forumTopicId: 18273
-dashedName: returning-boolean-values-from-functions
+videoUrl: 'https://scrimba.com/c/c4mv4fm'
+forumTopicId: 18277
+dashedName: selecting-from-many-options-with-switch-statements
 ---
 
 # --description--
 
-You may recall from [Comparison with the Equality Operator](/learn/javascript-algorithms-and-data-structures/basic-javascript/comparison-with-the-equality-operator) that all comparison operators return a boolean `true` or `false` value.
+If you have many options to choose from, use a <dfn>switch</dfn> statement. A `switch` statement tests a value and can have many <dfn>case</dfn> statements which define various possible values. Statements are executed from the first matched `case` value until a `break` is encountered.
 
-Sometimes people use an if/else statement to do a comparison, like this:
+Here is an example of a `switch` statement:
 
 ```js
-function isEqual(a,b) {
-  if (a === b) {
-    return true;
-  } else {
-    return false;
-  }
+switch(lowercaseLetter) {
+  case "a":
+    console.log("A");
+    break;
+  case "b":
+    console.log("B");
+    break;
 }
 ```
 
-But there's a better way to do this. Since `===` returns `true` or `false`, we can return the result of the comparison:
-
-```js
-function isEqual(a,b) {
-  return a === b;
-}
-```
+`case` values are tested with strict equality (`===`). The `break` tells JavaScript to stop executing statements. If the `break` is omitted, the next statement will be executed.
 
 # --instructions--
 
-Fix the function `isLess` to remove the `if/else` statements.
+Write a switch statement which tests `val` and sets `answer` for the following conditions:  
+`1` - "alpha"  
+`2` - "beta"  
+`3` - "gamma"  
+`4` - "delta"
 
 # --hints--
 
-`isLess(10,15)` should return `true`
+`caseInSwitch(1)` should have a value of "alpha"
 
 ```js
-assert(isLess(10, 15) === true);
+assert(caseInSwitch(1) === 'alpha');
 ```
 
-`isLess(15,10)` should return `false`
+`caseInSwitch(2)` should have a value of "beta"
 
 ```js
-assert(isLess(15, 10) === false);
+assert(caseInSwitch(2) === 'beta');
+```
+
+`caseInSwitch(3)` should have a value of "gamma"
+
+```js
+assert(caseInSwitch(3) === 'gamma');
+```
+
+`caseInSwitch(4)` should have a value of "delta"
+
+```js
+assert(caseInSwitch(4) === 'delta');
 ```
 
 You should not use any `if` or `else` statements
 
 ```js
-assert(!/if|else/g.test(code));
+assert(!/else/g.test(code) || !/if/g.test(code));
+```
+
+You should have at least 3 `break` statements
+
+```js
+assert(code.match(/break/g).length > 2);
 ```
 
 # --seed--
@@ -60,23 +77,38 @@ assert(!/if|else/g.test(code));
 ## --seed-contents--
 
 ```js
-function isLess(a, b) {
+function caseInSwitch(val) {
+  var answer = "";
   // Only change code below this line
-  if (a < b) {
-    return true;
-  } else {
-    return false;
-  }
+
+
+
   // Only change code above this line
+  return answer;
 }
 
-isLess(10, 15);
+caseInSwitch(1);
 ```
 
 # --solutions--
 
 ```js
-function isLess(a, b) {
-  return a < b;
+function caseInSwitch(val) {
+  var answer = "";
+
+  switch(val) {
+    case 1:
+      answer = "alpha";
+      break;
+    case 2:
+      answer = "beta";
+      break;
+    case 3:
+      answer = "gamma";
+      break;
+    case 4:
+      answer = "delta";
+  }
+  return answer;
 }
 ```
