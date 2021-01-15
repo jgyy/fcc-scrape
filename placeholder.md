@@ -1,66 +1,95 @@
 ---
-id: bd7123c9c452eddfaeb5bdef
-title: Use Bracket Notation to Find the Nth-to-Last Character in a String
+id: cf1111c1c12feddfaeb3bdef
+title: Use Conditional Logic with If Statements
 challengeType: 1
-videoUrl: 'https://scrimba.com/c/cw4vkh9'
-forumTopicId: 18344
-dashedName: use-bracket-notation-to-find-the-nth-to-last-character-in-a-string
+videoUrl: 'https://scrimba.com/c/cy87mf3'
+forumTopicId: 18348
+dashedName: use-conditional-logic-with-if-statements
 ---
 
 # --description--
 
-You can use the same principle we just used to retrieve the last character in a string to retrieve the Nth-to-last character.
+`If` statements are used to make decisions in code. The keyword `if` tells JavaScript to execute the code in the curly braces under certain conditions, defined in the parentheses. These conditions are known as `Boolean` conditions and they may only be `true` or `false`.
 
-For example, you can get the value of the third-to-last letter of the `var firstName = "Charles"` string by using `firstName[firstName.length - 3]`
+When the condition evaluates to `true`, the program executes the statement inside the curly braces. When the Boolean condition evaluates to `false`, the statement inside the curly braces will not execute.
 
-Example:
+**Pseudocode**
+
+<blockquote>if (<i>condition is true</i>) {<br>  <i>statement is executed</i><br>}</blockquote>
+
+**Example**
 
 ```js
-var firstName = "Charles";
-var thirdToLastLetter = firstName[firstName.length - 3]; // thirdToLastLetter is "l"
+function test (myCondition) {
+  if (myCondition) {
+     return "It was true";
+  }
+  return "It was false";
+}
+test(true);  // returns "It was true"
+test(false); // returns "It was false"
 ```
+
+When `test` is called with a value of `true`, the `if` statement evaluates `myCondition` to see if it is `true` or not. Since it is `true`, the function returns `"It was true"`. When we call `test` with a value of `false`, `myCondition` is *not* `true` and the statement in the curly braces is not executed and the function returns `"It was false"`.
 
 # --instructions--
 
-Use <dfn>bracket notation</dfn> to find the second-to-last character in the `lastName` string.
-
-**Hint:** Try looking at the example above if you get stuck.
+Create an `if` statement inside the function to return `"Yes, that was true"` if the parameter `wasThatTrue` is `true` and return `"No, that was false"` otherwise.
 
 # --hints--
 
-`secondToLastLetterOfLastName` should be "c".
+`trueOrFalse` should be a function
 
 ```js
-assert(secondToLastLetterOfLastName === 'c');
+assert(typeof trueOrFalse === 'function');
 ```
 
-You should use `.length` to get the second last letter.
+`trueOrFalse(true)` should return a string
 
 ```js
-assert(code.match(/\.length/g).length > 0);
+assert(typeof trueOrFalse(true) === 'string');
+```
+
+`trueOrFalse(false)` should return a string
+
+```js
+assert(typeof trueOrFalse(false) === 'string');
+```
+
+`trueOrFalse(true)` should return "Yes, that was true"
+
+```js
+assert(trueOrFalse(true) === 'Yes, that was true');
+```
+
+`trueOrFalse(false)` should return "No, that was false"
+
+```js
+assert(trueOrFalse(false) === 'No, that was false');
 ```
 
 # --seed--
 
-## --after-user-code--
-
-```js
-(function(v){return v;})(secondToLastLetterOfLastName);
-```
-
 ## --seed-contents--
 
 ```js
-// Setup
-var lastName = "Lovelace";
+function trueOrFalse(wasThatTrue) {
+  // Only change code below this line
 
-// Only change code below this line
-var secondToLastLetterOfLastName = lastName; // Change this line
+
+
+  // Only change code above this line
+
+}
 ```
 
 # --solutions--
 
 ```js
-var lastName = "Lovelace";
-var secondToLastLetterOfLastName = lastName[lastName.length - 2];
+function trueOrFalse(wasThatTrue) {
+  if (wasThatTrue) {
+    return "Yes, that was true";
+  }
+  return "No, that was false";
+}
 ```
