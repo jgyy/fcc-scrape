@@ -1,78 +1,58 @@
 ---
-id: 56533eb9ac21ba0edf2244c4
-title: Return Early Pattern for Functions
+id: 5679ceb97cbaa8c51670a16b
+title: Returning Boolean Values from Functions
 challengeType: 1
-videoUrl: 'https://scrimba.com/c/cQe39Sq'
-forumTopicId: 18272
-dashedName: return-early-pattern-for-functions
+videoUrl: 'https://scrimba.com/c/cp62qAQ'
+forumTopicId: 18273
+dashedName: returning-boolean-values-from-functions
 ---
 
 # --description--
 
-When a `return` statement is reached, the execution of the current function stops and control returns to the calling location.
+You may recall from [Comparison with the Equality Operator](/learn/javascript-algorithms-and-data-structures/basic-javascript/comparison-with-the-equality-operator) that all comparison operators return a boolean `true` or `false` value.
 
-**Example**
+Sometimes people use an if/else statement to do a comparison, like this:
 
 ```js
-function myFun() {
-  console.log("Hello");
-  return "World";
-  console.log("byebye")
+function isEqual(a,b) {
+  if (a === b) {
+    return true;
+  } else {
+    return false;
+  }
 }
-myFun();
 ```
 
-The above outputs "Hello" to the console, returns "World", but `"byebye"` is never output, because the function exits at the `return` statement.
+But there's a better way to do this. Since `===` returns `true` or `false`, we can return the result of the comparison:
+
+```js
+function isEqual(a,b) {
+  return a === b;
+}
+```
 
 # --instructions--
 
-Modify the function `abTest` so that if `a` or `b` are less than `0` the function will immediately exit with a value of `undefined`.
-
-**Hint**  
-Remember that [`undefined` is a keyword](https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/basic-javascript/understanding-uninitialized-variables), not a string.
+Fix the function `isLess` to remove the `if/else` statements.
 
 # --hints--
 
-`abTest(2,2)` should return a number
+`isLess(10,15)` should return `true`
 
 ```js
-assert(typeof abTest(2, 2) === 'number');
+assert(isLess(10, 15) === true);
 ```
 
-`abTest(2,2)` should return `8`
+`isLess(15,10)` should return `false`
 
 ```js
-assert(abTest(2, 2) === 8);
+assert(isLess(15, 10) === false);
 ```
 
-`abTest(-2,2)` should return `undefined`
+You should not use any `if` or `else` statements
 
 ```js
-assert(abTest(-2, 2) === undefined);
-```
-
-`abTest(2,-2)` should return `undefined`
-
-```js
-assert(abTest(2, -2) === undefined);
-```
-
-`abTest(2,8)` should return `18`
-
-```js
-assert(abTest(2, 8) === 18);
-```
-
-`abTest(3,3)` should return `12`
-
-```js
-assert(abTest(3, 3) === 12);
-```
-
-`abTest(0,0)` should return `0`
-
-```js
-assert(abTest(0, 0) === 0);
+assert(!/if|else/g.test(code));
 ```
 
 # --seed--
@@ -80,27 +60,23 @@ assert(abTest(0, 0) === 0);
 ## --seed-contents--
 
 ```js
-// Setup
-function abTest(a, b) {
+function isLess(a, b) {
   // Only change code below this line
-
-
-
+  if (a < b) {
+    return true;
+  } else {
+    return false;
+  }
   // Only change code above this line
-
-  return Math.round(Math.pow(Math.sqrt(a) + Math.sqrt(b), 2));
 }
 
-abTest(2,2);
+isLess(10, 15);
 ```
 
 # --solutions--
 
 ```js
-function abTest(a, b) {
-  if(a < 0 || b < 0) {
-    return undefined;
-  }
-  return Math.round(Math.pow(Math.sqrt(a) + Math.sqrt(b), 2));
+function isLess(a, b) {
+  return a < b;
 }
 ```
