@@ -1,40 +1,51 @@
 ---
-id: 56533eb9ac21ba0edf2244b9
-title: Constructing Strings with Variables
+id: 56105e7b514f539506016a5e
+title: Count Backwards With a For Loop
 challengeType: 1
-videoUrl: 'https://scrimba.com/c/cqk8rf4'
-forumTopicId: 16805
-dashedName: constructing-strings-with-variables
+videoUrl: 'https://scrimba.com/c/c2R6BHa'
+forumTopicId: 16808
+dashedName: count-backwards-with-a-for-loop
 ---
 
 # --description--
 
-Sometimes you will need to build a string, [Mad Libs](https://en.wikipedia.org/wiki/Mad_Libs) style. By using the concatenation operator (`+`), you can insert one or more variables into a string you're building.
+A for loop can also count backwards, so long as we can define the right conditions.
 
-Example:
+In order to count backwards by twos, we'll need to change our `initialization`, `condition`, and `final-expression`.
+
+We'll start at `i = 10` and loop while `i > 0`. We'll decrement `i` by 2 each loop with `i -= 2`.
 
 ```js
-var ourName = "freeCodeCamp";
-var ourStr = "Hello, our name is " + ourName + ", how are you?";
-// ourStr is now "Hello, our name is freeCodeCamp, how are you?"
+var ourArray = [];
+for (var i = 10; i > 0; i -= 2) {
+  ourArray.push(i);
+}
 ```
+
+`ourArray` will now contain `[10,8,6,4,2]`. Let's change our `initialization` and `final-expression` so we can count backward by twos by odd numbers.
 
 # --instructions--
 
-Set `myName` to a string equal to your name and build `myStr` with `myName` between the strings `"My name is "` and `" and I am well!"`
+Push the odd numbers from 9 through 1 to `myArray` using a `for` loop.
 
 # --hints--
 
-`myName` should be set to a string at least 3 characters long.
+You should be using a `for` loop for this.
 
 ```js
-assert(typeof myName !== 'undefined' && myName.length > 2);
+assert(/for\s*\([^)]+?\)/.test(code));
 ```
 
-You should use two `+` operators to build `myStr` with `myName` inside it.
+You should be using the array method `push`.
 
 ```js
-assert(code.match(/["']\s*\+\s*myName\s*\+\s*["']/g).length > 0);
+assert(code.match(/myArray.push/));
+```
+
+`myArray` should equal `[9,7,5,3,1]`.
+
+```js
+assert.deepEqual(myArray, [9, 7, 5, 3, 1]);
 ```
 
 # --seed--
@@ -42,33 +53,23 @@ assert(code.match(/["']\s*\+\s*myName\s*\+\s*["']/g).length > 0);
 ## --after-user-code--
 
 ```js
-(function(){
-  var output = [];
-  if(typeof myName === 'string') {
-    output.push('myName = "' + myName + '"');
-  } else {
-    output.push('myName is not a string');
-  }
-  if(typeof myStr === 'string') {
-    output.push('myStr = "' + myStr + '"');
-  } else {
-    output.push('myStr is not a string');
-  }
-  return output.join('\n');
-})();
+if(typeof myArray !== "undefined"){(function(){return myArray;})();}
 ```
 
 ## --seed-contents--
 
 ```js
+// Setup
+var myArray = [];
+
 // Only change code below this line
-var myName;
-var myStr;
 ```
 
 # --solutions--
 
 ```js
-var myName = "Bob";
-var myStr = "My name is " + myName + " and I am well!";
+var myArray = [];
+for (var i = 9; i > 0; i -= 2) {
+  myArray.push(i);
+}
 ```
