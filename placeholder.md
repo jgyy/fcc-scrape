@@ -1,33 +1,47 @@
 ---
-id: 587d7b84367417b2b2512b36
-title: 'Catch Unclosed Parentheses, Brackets, Braces and Quotes'
+id: 587d7b85367417b2b2512b38
+title: Catch Use of Assignment Operator Instead of Equality Operator
 challengeType: 1
-forumTopicId: 301190
-dashedName: catch-unclosed-parentheses-brackets-braces-and-quotes
+forumTopicId: 301191
+dashedName: catch-use-of-assignment-operator-instead-of-equality-operator
 ---
 
 # --description--
 
-Another syntax error to be aware of is that all opening parentheses, brackets, curly braces, and quotes have a closing pair. Forgetting a piece tends to happen when you're editing existing code and inserting items with one of the pair types. Also, take care when nesting code blocks into others, such as adding a callback function as an argument to a method.
+Branching programs, i.e. ones that do different things if certain conditions are met, rely on `if`, `else if`, and `else` statements in JavaScript. The condition sometimes takes the form of testing whether a result is equal to a value.
 
-One way to avoid this mistake is as soon as the opening character is typed, immediately include the closing match, then move the cursor back between them and continue coding. Fortunately, most modern code editors generate the second half of the pair automatically.
+This logic is spoken (in English, at least) as "if x equals y, then ..." which can literally translate into code using the `=`, or assignment operator. This leads to unexpected control flow in your program.
+
+As covered in previous challenges, the assignment operator (`=`) in JavaScript assigns a value to a variable name. And the `==` and `===` operators check for equality (the triple `===` tests for strict equality, meaning both value and type are the same).
+
+The code below assigns `x` to be 2, which evaluates as `true`. Almost every value on its own in JavaScript evaluates to `true`, except what are known as the "falsy" values: `false`, `0`, `""` (an empty string), `NaN`, `undefined`, and `null`.
+
+```js
+let x = 1;
+let y = 2;
+if (x = y) {
+  // this code block will run for any value of y (unless y were originally set as a falsy)
+} else {
+  // this code block is what should run (but won't) in this example
+}
+```
 
 # --instructions--
 
-Fix the two pair errors in the code.
+Fix the condition so the program runs the right branch, and the appropriate value is assigned to `result`.
 
 # --hints--
 
-Your code should fix the missing piece of the array.
+Your code should fix the condition so it checks for equality, instead of using assignment.
 
 ```js
-assert(code.match(/myArray\s*?=\s*?\[\s*?1\s*?,\s*?2\s*?,\s*?3\s*?\];/g));
+assert(result == 'Not equal!');
 ```
 
-Your code should fix the missing piece of the `.reduce()` method. The console output should show that "Sum of array values is: 6".
+The condition should use either `==` or `===` to test for equality.
 
 ```js
-assert(arraySum === 6);
+assert(code.match(/x\s*?===?\s*?y/g));
 ```
 
 # --seed--
@@ -35,15 +49,31 @@ assert(arraySum === 6);
 ## --seed-contents--
 
 ```js
-let myArray = [1, 2, 3;
-let arraySum = myArray.reduce((previous, current =>  previous + current);
-console.log(`Sum of array values is: ${arraySum}`);
+let x = 7;
+let y = 9;
+let result = "to come";
+
+if(x = y) {
+  result = "Equal!";
+} else {
+  result = "Not equal!";
+}
+
+console.log(result);
 ```
 
 # --solutions--
 
 ```js
-let myArray = [1, 2, 3];
-let arraySum = myArray.reduce((previous, current) =>  previous + current);
-console.log(`Sum of array values is: ${arraySum}`);
+let x = 7;
+let y = 9;
+let result = "to come";
+
+if(x === y) {
+ result = "Equal!";
+} else {
+ result = "Not equal!";
+}
+
+console.log(result);
 ```
