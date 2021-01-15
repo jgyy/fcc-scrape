@@ -1,128 +1,77 @@
 ---
-id: 56533eb9ac21ba0edf2244de
-title: Adding a Default Option in Switch Statements
+id: 56533eb9ac21ba0edf2244ed
+title: Appending Variables to Strings
 challengeType: 1
-videoUrl: 'https://scrimba.com/c/c3JvVfg'
-forumTopicId: 16653
-dashedName: adding-a-default-option-in-switch-statements
+videoUrl: 'https://scrimba.com/c/cbQmZfa'
+forumTopicId: 16656
+dashedName: appending-variables-to-strings
 ---
 
 # --description--
 
-In a `switch` statement you may not be able to specify all possible values as `case` statements. Instead, you can add the `default` statement which will be executed if no matching `case` statements are found. Think of it like the final `else` statement in an `if/else` chain.
+Just as we can build a string over multiple lines out of string <dfn>literals</dfn>, we can also append variables to a string using the plus equals (`+=`) operator.
 
-A `default` statement should be the last case.
+Example:
 
 ```js
-switch (num) {
-  case value1:
-    statement1;
-    break;
-  case value2:
-    statement2;
-    break;
-...
-  default:
-    defaultStatement;
-    break;
-}
+var anAdjective = "awesome!";
+var ourStr = "freeCodeCamp is ";
+ourStr += anAdjective;
+// ourStr is now "freeCodeCamp is awesome!"
 ```
 
 # --instructions--
 
-Write a switch statement to set `answer` for the following conditions:  
-`"a"` - "apple"  
-`"b"` - "bird"  
-`"c"` - "cat"  
-`default` - "stuff"
+Set `someAdjective` to a string of at least 3 characters and append it to `myStr` using the `+=` operator.
 
 # --hints--
 
-`switchOfStuff("a")` should have a value of "apple"
+`someAdjective` should be set to a string at least 3 characters long.
 
 ```js
-assert(switchOfStuff('a') === 'apple');
+assert(typeof someAdjective !== 'undefined' && someAdjective.length > 2);
 ```
 
-`switchOfStuff("b")` should have a value of "bird"
+You should append `someAdjective` to `myStr` using the `+=` operator.
 
 ```js
-assert(switchOfStuff('b') === 'bird');
-```
-
-`switchOfStuff("c")` should have a value of "cat"
-
-```js
-assert(switchOfStuff('c') === 'cat');
-```
-
-`switchOfStuff("d")` should have a value of "stuff"
-
-```js
-assert(switchOfStuff('d') === 'stuff');
-```
-
-`switchOfStuff(4)` should have a value of "stuff"
-
-```js
-assert(switchOfStuff(4) === 'stuff');
-```
-
-You should not use any `if` or `else` statements
-
-```js
-assert(!/else/g.test(code) || !/if/g.test(code));
-```
-
-You should use a `default` statement
-
-```js
-assert(switchOfStuff('string-to-trigger-default-case') === 'stuff');
-```
-
-You should have at least 3 `break` statements
-
-```js
-assert(code.match(/break/g).length > 2);
+assert(code.match(/myStr\s*\+=\s*someAdjective\s*/).length > 0);
 ```
 
 # --seed--
 
+## --after-user-code--
+
+```js
+(function(){
+  var output = [];
+  if(typeof someAdjective === 'string') {
+    output.push('someAdjective = "' + someAdjective + '"');
+  } else {
+    output.push('someAdjective is not a string');
+  }
+  if(typeof myStr === 'string') {
+    output.push('myStr = "' + myStr + '"');
+  } else {
+    output.push('myStr is not a string');
+  }
+  return output.join('\n');
+})();
+```
+
 ## --seed-contents--
 
 ```js
-function switchOfStuff(val) {
-  var answer = "";
-  // Only change code below this line
+// Change code below this line
 
-
-
-  // Only change code above this line
-  return answer;
-}
-
-switchOfStuff(1);
+var someAdjective;
+var myStr = "Learning to code is ";
 ```
 
 # --solutions--
 
 ```js
-function switchOfStuff(val) {
-  var answer = "";
-
-  switch(val) {
-    case "a":
-      answer = "apple";
-      break;
-    case "b":
-      answer = "bird";
-      break;
-    case "c":
-      answer = "cat";
-      break;
-    default:
-      answer = "stuff";
-  }
-  return answer;
-}
+var someAdjective = "neat";
+var myStr = "Learning to code is ";
+myStr += someAdjective;
 ```
