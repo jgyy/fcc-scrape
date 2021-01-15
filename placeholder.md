@@ -1,55 +1,65 @@
 ---
-id: 599a789b454f2bbd91a3ff4d
-title: Practice comparing different values
+id: 5688e62ea601b2482ff8422b
+title: Profile Lookup
 challengeType: 1
-videoUrl: 'https://scrimba.com/c/cm8PqCa'
-forumTopicId: 301174
-dashedName: practice-comparing-different-values
+videoUrl: 'https://scrimba.com/c/cDqW2Cg'
+forumTopicId: 18259
+dashedName: profile-lookup
 ---
 
 # --description--
 
-In the last two challenges, we learned about the equality operator (`==`) and the strict equality operator (`===`). Let's do a quick review and practice using these operators some more.
+We have an array of objects representing different people in our contacts lists.
 
-If the values being compared are not of the same type, the equality operator will perform a type conversion, and then evaluate the values. However, the strict equality operator will compare both the data type and value as-is, without converting one type to the other.
+A `lookUpProfile` function that takes `name` and a property (`prop`) as arguments has been pre-written for you.
 
-**Examples**
+The function should check if `name` is an actual contact's `firstName` and the given property (`prop`) is a property of that contact.
 
-```js
-3 == '3'  // returns true because JavaScript performs type conversion from string to number
-3 === '3' // returns false because the types are different and type conversion is not performed
-```
+If both are true, then return the "value" of that property.
 
-**Note**  
-In JavaScript, you can determine the type of a variable or a value with the `typeof` operator, as follows:
+If `name` does not correspond to any contacts then return `"No such contact"`.
 
-```js
-typeof 3   // returns 'number'
-typeof '3' // returns 'string'
-```
-
-# --instructions--
-
-The `compareEquality` function in the editor compares two values using the equality operator. Modify the function so that it returns "Equal" only when the values are strictly equal.
+If `prop` does not correspond to any valid properties of a contact found to match `name` then return `"No such property"`.
 
 # --hints--
 
-`compareEquality(10, "10")` should return "Not Equal"
+`lookUpProfile("Kristian", "lastName")` should return `"Vos"`
 
 ```js
-assert(compareEquality(10, '10') === 'Not Equal');
+assert(lookUpProfile('Kristian', 'lastName') === 'Vos');
 ```
 
-`compareEquality("20", 20)` should return "Not Equal"
+`lookUpProfile("Sherlock", "likes")` should return `["Intriguing Cases", "Violin"]`
 
 ```js
-assert(compareEquality('20', 20) === 'Not Equal');
+assert.deepEqual(lookUpProfile('Sherlock', 'likes'), [
+  'Intriguing Cases',
+  'Violin'
+]);
 ```
 
-You should use the `===` operator
+`lookUpProfile("Harry", "likes")` should return an array
 
 ```js
-assert(code.match(/===/g));
+assert(typeof lookUpProfile('Harry', 'likes') === 'object');
+```
+
+`lookUpProfile("Bob", "number")` should return "No such contact"
+
+```js
+assert(lookUpProfile('Bob', 'number') === 'No such contact');
+```
+
+`lookUpProfile("Bob", "potato")` should return "No such contact"
+
+```js
+assert(lookUpProfile('Bob', 'potato') === 'No such contact');
+```
+
+`lookUpProfile("Akira", "address")` should return "No such property"
+
+```js
+assert(lookUpProfile('Akira', 'address') === 'No such property');
 ```
 
 # --seed--
@@ -58,23 +68,84 @@ assert(code.match(/===/g));
 
 ```js
 // Setup
-function compareEquality(a, b) {
-  if (a == b) { // Change this line
-    return "Equal";
-  }
-  return "Not Equal";
+var contacts = [
+    {
+        "firstName": "Akira",
+        "lastName": "Laine",
+        "number": "0543236543",
+        "likes": ["Pizza", "Coding", "Brownie Points"]
+    },
+    {
+        "firstName": "Harry",
+        "lastName": "Potter",
+        "number": "0994372684",
+        "likes": ["Hogwarts", "Magic", "Hagrid"]
+    },
+    {
+        "firstName": "Sherlock",
+        "lastName": "Holmes",
+        "number": "0487345643",
+        "likes": ["Intriguing Cases", "Violin"]
+    },
+    {
+        "firstName": "Kristian",
+        "lastName": "Vos",
+        "number": "unknown",
+        "likes": ["JavaScript", "Gaming", "Foxes"]
+    }
+];
+
+
+function lookUpProfile(name, prop){
+// Only change code below this line
+
+// Only change code above this line
 }
 
-compareEquality(10, "10");
+lookUpProfile("Akira", "likes");
 ```
 
 # --solutions--
 
 ```js
-function compareEquality(a,b) {
-  if (a === b) {
-    return "Equal";
-  }
-  return "Not Equal";
+var contacts = [
+    {
+        "firstName": "Akira",
+        "lastName": "Laine",
+        "number": "0543236543",
+        "likes": ["Pizza", "Coding", "Brownie Points"]
+    },
+    {
+        "firstName": "Harry",
+        "lastName": "Potter",
+        "number": "0994372684",
+        "likes": ["Hogwarts", "Magic", "Hagrid"]
+    },
+    {
+        "firstName": "Sherlock",
+        "lastName": "Holmes",
+        "number": "0487345643",
+        "likes": ["Intriguing Cases", "Violin"]
+    },
+    {
+        "firstName": "Kristian",
+        "lastName": "Vos",
+        "number": "unknown",
+        "likes": ["JavaScript", "Gaming", "Foxes"]
+    },
+];
+
+
+//Write your function in between these comments
+function lookUpProfile(name, prop){
+    for(var i in contacts){
+      if(contacts[i].firstName === name) {
+        return contacts[i][prop] || "No such property";
+      }
+    }
+   return "No such contact";
 }
+//Write your function in between these comments
+
+lookUpProfile("Akira", "likes");
 ```
