@@ -1,72 +1,78 @@
 ---
-id: 56533eb9ac21ba0edf2244d6
-title: Comparison with the Less Than Operator
+id: 56533eb9ac21ba0edf2244d7
+title: Comparison with the Less Than Or Equal To Operator
 challengeType: 1
-videoUrl: 'https://scrimba.com/c/cNVRWtB'
-forumTopicId: 16789
-dashedName: comparison-with-the-less-than-operator
+videoUrl: 'https://scrimba.com/c/cNVR7Am'
+forumTopicId: 16788
+dashedName: comparison-with-the-less-than-or-equal-to-operator
 ---
 
 # --description--
 
-The <dfn>less than</dfn> operator (`<`) compares the values of two numbers. If the number to the left is less than the number to the right, it returns `true`. Otherwise, it returns `false`. Like the equality operator, <dfn>less than</dfn> operator converts data types while comparing.
+The less than or equal to operator (`<=`) compares the values of two numbers. If the number to the left is less than or equal to the number to the right, it returns `true`. If the number on the left is greater than the number on the right, it returns `false`. Like the equality operator, `less than or equal to` converts data types.
 
 **Examples**
 
 ```js
-2   < 5  // true
-'3' < 7  // true
-5   < 5  // false
-3   < 2  // false
-'8' < 4  // false
+4   <= 5  // true
+'7' <= 7  // true
+5   <= 5  // true
+3   <= 2  // false
+'8' <= 4  // false
 ```
 
 # --instructions--
 
-Add the less than operator to the indicated lines so that the return statements make sense.
+Add the less than or equal to operator to the indicated lines so that the return statements make sense.
 
 # --hints--
 
-`testLessThan(0)` should return "Under 25"
+`testLessOrEqual(0)` should return "Smaller Than or Equal to 12"
 
 ```js
-assert(testLessThan(0) === 'Under 25');
+assert(testLessOrEqual(0) === 'Smaller Than or Equal to 12');
 ```
 
-`testLessThan(24)` should return "Under 25"
+`testLessOrEqual(11)` should return "Smaller Than or Equal to 12"
 
 ```js
-assert(testLessThan(24) === 'Under 25');
+assert(testLessOrEqual(11) === 'Smaller Than or Equal to 12');
 ```
 
-`testLessThan(25)` should return "Under 55"
+`testLessOrEqual(12)` should return "Smaller Than or Equal to 12"
 
 ```js
-assert(testLessThan(25) === 'Under 55');
+assert(testLessOrEqual(12) === 'Smaller Than or Equal to 12');
 ```
 
-`testLessThan(54)` should return "Under 55"
+`testLessOrEqual(23)` should return "Smaller Than or Equal to 24"
 
 ```js
-assert(testLessThan(54) === 'Under 55');
+assert(testLessOrEqual(23) === 'Smaller Than or Equal to 24');
 ```
 
-`testLessThan(55)` should return "55 or Over"
+`testLessOrEqual(24)` should return "Smaller Than or Equal to 24"
 
 ```js
-assert(testLessThan(55) === '55 or Over');
+assert(testLessOrEqual(24) === 'Smaller Than or Equal to 24');
 ```
 
-`testLessThan(99)` should return "55 or Over"
+`testLessOrEqual(25)` should return "More Than 24"
 
 ```js
-assert(testLessThan(99) === '55 or Over');
+assert(testLessOrEqual(25) === 'More Than 24');
 ```
 
-You should use the `<` operator at least twice
+`testLessOrEqual(55)` should return "More Than 24"
 
 ```js
-assert(code.match(/val\s*<\s*('|")*\d+('|")*/g).length > 1);
+assert(testLessOrEqual(55) === 'More Than 24');
+```
+
+You should use the `<=` operator at least twice
+
+```js
+assert(code.match(/val\s*<=\s*('|")*\d+('|")*/g).length > 1);
 ```
 
 # --seed--
@@ -74,33 +80,33 @@ assert(code.match(/val\s*<\s*('|")*\d+('|")*/g).length > 1);
 ## --seed-contents--
 
 ```js
-function testLessThan(val) {
+function testLessOrEqual(val) {
   if (val) {  // Change this line
-    return "Under 25";
+    return "Smaller Than or Equal to 12";
   }
 
   if (val) {  // Change this line
-    return "Under 55";
+    return "Smaller Than or Equal to 24";
   }
 
-  return "55 or Over";
+  return "More Than 24";
 }
 
-testLessThan(10);
+testLessOrEqual(10);
 ```
 
 # --solutions--
 
 ```js
-function testLessThan(val) {
-  if (val < 25) {  // Change this line
-    return "Under 25";
+function testLessOrEqual(val) {
+  if (val <= 12) {  // Change this line
+    return "Smaller Than or Equal to 12";
   }
 
-  if (val < 55) {  // Change this line
-    return "Under 55";
+  if (val <= 24) {  // Change this line
+    return "Smaller Than or Equal to 24";
   }
 
-  return "55 or Over";
+  return "More Than 24";
 }
 ```
