@@ -1,43 +1,40 @@
 ---
-id: 56533eb9ac21ba0edf2244b8
-title: Concatenating Strings with the Plus Equals Operator
+id: 56533eb9ac21ba0edf2244b9
+title: Constructing Strings with Variables
 challengeType: 1
-videoUrl: 'https://scrimba.com/c/cbQmmC4'
-forumTopicId: 16803
-dashedName: concatenating-strings-with-the-plus-equals-operator
+videoUrl: 'https://scrimba.com/c/cqk8rf4'
+forumTopicId: 16805
+dashedName: constructing-strings-with-variables
 ---
 
 # --description--
 
-We can also use the `+=` operator to <dfn>concatenate</dfn> a string onto the end of an existing string variable. This can be very helpful to break a long string over several lines.
-
-**Note**  
-Watch out for spaces. Concatenation does not add spaces between concatenated strings, so you'll need to add them yourself.
+Sometimes you will need to build a string, [Mad Libs](https://en.wikipedia.org/wiki/Mad_Libs) style. By using the concatenation operator (`+`), you can insert one or more variables into a string you're building.
 
 Example:
 
 ```js
-var ourStr = "I come first. ";
-ourStr += "I come second.";
-// ourStr is now "I come first. I come second."
+var ourName = "freeCodeCamp";
+var ourStr = "Hello, our name is " + ourName + ", how are you?";
+// ourStr is now "Hello, our name is freeCodeCamp, how are you?"
 ```
 
 # --instructions--
 
-Build `myStr` over several lines by concatenating these two strings: `"This is the first sentence. "` and `"This is the second sentence."` using the `+=` operator. Use the `+=` operator similar to how it is shown in the editor. Start by assigning the first string to `myStr`, then add on the second string.
+Set `myName` to a string equal to your name and build `myStr` with `myName` between the strings `"My name is "` and `" and I am well!"`
 
 # --hints--
 
-`myStr` should have a value of `This is the first sentence. This is the second sentence.`
+`myName` should be set to a string at least 3 characters long.
 
 ```js
-assert(myStr === 'This is the first sentence. This is the second sentence.');
+assert(typeof myName !== 'undefined' && myName.length > 2);
 ```
 
-You should use the `+=` operator to build `myStr`.
+You should use two `+` operators to build `myStr` with `myName` inside it.
 
 ```js
-assert(code.match(/myStr\s*\+=\s*(["']).*\1/g));
+assert(code.match(/["']\s*\+\s*myName\s*\+\s*["']/g).length > 0);
 ```
 
 # --seed--
@@ -46,11 +43,18 @@ assert(code.match(/myStr\s*\+=\s*(["']).*\1/g));
 
 ```js
 (function(){
-  if(typeof myStr === 'string') {
-    return 'myStr = "' + myStr + '"';
+  var output = [];
+  if(typeof myName === 'string') {
+    output.push('myName = "' + myName + '"');
   } else {
-    return 'myStr is not a string';
+    output.push('myName is not a string');
   }
+  if(typeof myStr === 'string') {
+    output.push('myStr = "' + myStr + '"');
+  } else {
+    output.push('myStr is not a string');
+  }
+  return output.join('\n');
 })();
 ```
 
@@ -58,13 +62,13 @@ assert(code.match(/myStr\s*\+=\s*(["']).*\1/g));
 
 ```js
 // Only change code below this line
-
+var myName;
 var myStr;
 ```
 
 # --solutions--
 
 ```js
-var myStr = "This is the first sentence. ";
-myStr += "This is the second sentence.";
+var myName = "Bob";
+var myStr = "My name is " + myName + " and I am well!";
 ```
