@@ -1,85 +1,150 @@
 ---
-id: cf1111c1c11feddfaeb8bdef
-title: Modify Array Data With Indexes
+id: 56533eb9ac21ba0edf2244df
+title: Multiple Identical Options in Switch Statements
 challengeType: 1
-videoUrl: 'https://scrimba.com/c/czQM4A8'
-forumTopicId: 18241
-dashedName: modify-array-data-with-indexes
+videoUrl: 'https://scrimba.com/c/cdBKWCV'
+forumTopicId: 18242
+dashedName: multiple-identical-options-in-switch-statements
 ---
 
 # --description--
 
-Unlike strings, the entries of arrays are <dfn>mutable</dfn> and can be changed freely.
-
-**Example**
+If the `break` statement is omitted from a `switch` statement's `case`, the following `case` statement(s) are executed until a `break` is encountered. If you have multiple inputs with the same output, you can represent them in a `switch` statement like this:
 
 ```js
-var ourArray = [50,40,30];
-ourArray[0] = 15; // equals [15,40,30]
+var result = "";
+switch(val) {
+  case 1:
+  case 2:
+  case 3:
+    result = "1, 2, or 3";
+    break;
+  case 4:
+    result = "4 alone";
+}
 ```
 
-**Note**  
-There shouldn't be any spaces between the array name and the square brackets, like `array [0]`. Although JavaScript is able to process this correctly, this may confuse other programmers reading your code.
+Cases for 1, 2, and 3 will all produce the same result.
 
 # --instructions--
 
-Modify the data stored at index `0` of `myArray` to a value of `45`.
+Write a switch statement to set `answer` for the following ranges:  
+`1-3` - "Low"  
+`4-6` - "Mid"  
+`7-9` - "High"
+
+**Note**  
+You will need to have a `case` statement for each number in the range.
 
 # --hints--
 
-`myArray` should now be [45,64,99].
+`sequentialSizes(1)` should return "Low"
 
 ```js
-assert(
-  (function () {
-    if (
-      typeof myArray != 'undefined' &&
-      myArray[0] == 45 &&
-      myArray[1] == 64 &&
-      myArray[2] == 99
-    ) {
-      return true;
-    } else {
-      return false;
-    }
-  })()
-);
+assert(sequentialSizes(1) === 'Low');
 ```
 
-You should be using correct index to modify the value in `myArray`.
+`sequentialSizes(2)` should return "Low"
 
 ```js
-assert(
-  (function () {
-    if (code.match(/myArray\[0\]\s*=\s*/g)) {
-      return true;
-    } else {
-      return false;
-    }
-  })()
-);
+assert(sequentialSizes(2) === 'Low');
+```
+
+`sequentialSizes(3)` should return "Low"
+
+```js
+assert(sequentialSizes(3) === 'Low');
+```
+
+`sequentialSizes(4)` should return "Mid"
+
+```js
+assert(sequentialSizes(4) === 'Mid');
+```
+
+`sequentialSizes(5)` should return "Mid"
+
+```js
+assert(sequentialSizes(5) === 'Mid');
+```
+
+`sequentialSizes(6)` should return "Mid"
+
+```js
+assert(sequentialSizes(6) === 'Mid');
+```
+
+`sequentialSizes(7)` should return "High"
+
+```js
+assert(sequentialSizes(7) === 'High');
+```
+
+`sequentialSizes(8)` should return "High"
+
+```js
+assert(sequentialSizes(8) === 'High');
+```
+
+`sequentialSizes(9)` should return "High"
+
+```js
+assert(sequentialSizes(9) === 'High');
+```
+
+You should not use any `if` or `else` statements
+
+```js
+assert(!/else/g.test(code) || !/if/g.test(code));
+```
+
+You should have nine `case` statements
+
+```js
+assert(code.match(/case/g).length === 9);
 ```
 
 # --seed--
 
-## --after-user-code--
-
-```js
-if(typeof myArray !== "undefined"){(function(){return myArray;})();}
-```
-
 ## --seed-contents--
 
 ```js
-// Setup
-var myArray = [18,64,99];
+function sequentialSizes(val) {
+  var answer = "";
+  // Only change code below this line
 
-// Only change code below this line
+
+
+  // Only change code above this line
+  return answer;
+}
+
+sequentialSizes(1);
 ```
 
 # --solutions--
 
 ```js
-var myArray = [18,64,99];
-myArray[0] = 45;
+function sequentialSizes(val) {
+  var answer = "";
+
+  switch(val) {
+    case 1:
+    case 2:
+    case 3:
+      answer = "Low";
+      break;
+    case 4:
+    case 5:
+    case 6:
+      answer = "Mid";
+      break;
+    case 7:
+    case 8:
+    case 9:
+      answer = "High";
+  }
+
+  return answer;
+}
 ```
