@@ -1,101 +1,57 @@
 ---
-id: 56bbb991ad1ed5201cd392cf
-title: Write Reusable JavaScript with Functions
+id: 587d7b85367417b2b2512b3a
+title: Catch Arguments Passed in the Wrong Order When Calling a Function
 challengeType: 1
-videoUrl: 'https://scrimba.com/c/cL6dqfy'
-forumTopicId: 18378
-dashedName: write-reusable-javascript-with-functions
+forumTopicId: 301184
+dashedName: catch-arguments-passed-in-the-wrong-order-when-calling-a-function
 ---
 
 # --description--
 
-In JavaScript, we can divide up our code into reusable parts called <dfn>functions</dfn>.
-
-Here's an example of a function:
-
-```js
-function functionName() {
-  console.log("Hello World");
-}
-```
-
-You can call or <dfn>invoke</dfn> this function by using its name followed by parentheses, like this: `functionName();` Each time the function is called it will print out the message `"Hello World"` on the dev console. All of the code between the curly braces will be executed every time the function is called.
+Continuing the discussion on calling functions, the next bug to watch out for is when a function's arguments are supplied in the incorrect order. If the arguments are different types, such as a function expecting an array and an integer, this will likely throw a runtime error. If the arguments are the same type (all integers, for example), then the logic of the code won't make sense. Make sure to supply all required arguments, in the proper order to avoid these issues.
 
 # --instructions--
 
-<ol><li>Create a function called <code>reusableFunction</code> which prints <code>"Hi World"</code> to the dev console.</li><li>Call the function.</li></ol>
+The function `raiseToPower` raises a base to an exponent. Unfortunately, it's not called properly - fix the code so the value of `power` is the expected 8.
 
 # --hints--
 
-`reusableFunction` should be a function.
+Your code should fix the variable `power` so it equals 2 raised to the 3rd power, not 3 raised to the 2nd power.
 
 ```js
-assert(typeof reusableFunction === 'function');
+assert(power == 8);
 ```
 
-`reusableFunction` should output "Hi World" to the dev console.
+Your code should use the correct order of the arguments for the `raiseToPower` function call.
 
 ```js
-assert(hiWorldWasLogged);
-```
-
-You should call `reusableFunction` after you define it.
-
-```js
-assert(/^\s*reusableFunction\(\)\s*/m.test(code));
+assert(code.match(/raiseToPower\(\s*?base\s*?,\s*?exp\s*?\);/g));
 ```
 
 # --seed--
 
-## --before-user-code--
-
-```js
-var logOutput = "";
-var originalConsole = console;
-var nativeLog = console.log;
-var hiWorldWasLogged = false;
-function capture() {
-    console.log = function (message) {
-        if(message === 'Hi World')  hiWorldWasLogged = true;
-        if(message && message.trim) logOutput = message.trim();
-        if(nativeLog.apply) {
-          nativeLog.apply(originalConsole, arguments);
-        } else {
-          var nativeMsg = Array.prototype.slice.apply(arguments).join(' ');
-          nativeLog(nativeMsg);
-        }
-    };
-}
-
-function uncapture() {
-  console.log = nativeLog;
-}
-
-capture();
-```
-
-## --after-user-code--
-
-```js
-uncapture();
-
-if (typeof reusableFunction !== "function") { 
-  (function() { return "reusableFunction is not defined"; })();
-} else {
-  (function() { return logOutput || "console.log never called"; })();
-}
-```
-
 ## --seed-contents--
 
 ```js
+function raiseToPower(b, e) {
+  return Math.pow(b, e);
+}
+
+let base = 2;
+let exp = 3;
+let power = raiseToPower(exp, base);
+console.log(power);
 ```
 
 # --solutions--
 
 ```js
-function reusableFunction() {
-  console.log("Hi World");
+function raiseToPower(b, e) {
+ return Math.pow(b, e);
 }
-reusableFunction();
+
+let base = 2;
+let exp = 3;
+let power = raiseToPower(base, exp);
+console.log(power);
 ```
