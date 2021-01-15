@@ -1,75 +1,58 @@
 ---
-id: 56533eb9ac21ba0edf2244a8
-title: Storing Values with the Assignment Operator
+id: cf1111c1c11feddfaeb4bdef
+title: Subtract One Number from Another with JavaScript
 challengeType: 1
-videoUrl: 'https://scrimba.com/c/cEanysE'
-forumTopicId: 18310
-dashedName: storing-values-with-the-assignment-operator
+videoUrl: 'https://scrimba.com/c/cP3yQtk'
+forumTopicId: 18314
+dashedName: subtract-one-number-from-another-with-javascript
 ---
 
 # --description--
 
-In JavaScript, you can store a value in a variable with the <dfn>assignment</dfn> operator (`=`).
+We can also subtract one number from another.
 
-`myVariable = 5;`
+JavaScript uses the `-` symbol for subtraction.
 
-This assigns the `Number` value `5` to `myVariable`.
-
-If there are any calculations to the right of the `=` operator, those are performed before the value is assigned to the variable on the left of the operator.
+**Example**
 
 ```js
-var myVar;
-myVar = 5;
+myVar = 12 - 6; // assigned 6
 ```
-
-First, this code creates a variable named `myVar`. Then, the code assigns `5` to `myVar`. Now, if `myVar` appears again in the code, the program will treat it as if it is `5`.
 
 # --instructions--
 
-Assign the value `7` to variable `a`.
+Change the `0` so the difference is `12`.
 
 # --hints--
 
-You should not change code above the specified comment.
+The variable `difference` should be equal to 12.
 
 ```js
-assert(/var a;/.test(code));
+assert(difference === 12);
 ```
 
-`a` should have a value of 7.
+You should only subtract one number from 45.
 
 ```js
-assert(typeof a === 'number' && a === 7);
+assert(/difference=45-33;?/.test(__helpers.removeWhiteSpace(code)));
 ```
 
 # --seed--
 
-## --before-user-code--
-
-```js
-if (typeof a != 'undefined') {
-  a = undefined;
-}
-```
-
 ## --after-user-code--
 
 ```js
-(function(a){return "a = " + a;})(a);
+(function(z){return 'difference = '+z;})(difference);
 ```
 
 ## --seed-contents--
 
 ```js
-// Setup
-var a;
-
-// Only change code below this line
+var difference = 45 - 0;
 ```
 
 # --solutions--
 
 ```js
-var a;
-a = 7;
+var difference = 45 - 33;
 ```
