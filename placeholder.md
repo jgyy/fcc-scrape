@@ -1,45 +1,43 @@
 ---
-id: bd7123c9c549eddfaeb5bdef
-title: Use Bracket Notation to Find the First Character in a String
+id: bd7123c9c451eddfaeb5bdef
+title: Use Bracket Notation to Find the Last Character in a String
 challengeType: 1
-videoUrl: 'https://scrimba.com/c/ca8JwhW'
-forumTopicId: 18341
-dashedName: use-bracket-notation-to-find-the-first-character-in-a-string
+videoUrl: 'https://scrimba.com/c/cBZQGcv'
+forumTopicId: 18342
+dashedName: use-bracket-notation-to-find-the-last-character-in-a-string
 ---
 
 # --description--
 
-<dfn>Bracket notation</dfn> is a way to get a character at a specific `index` within a string.
+In order to get the last letter of a string, you can subtract one from the string's length.
 
-Most modern programming languages, like JavaScript, don't start counting at 1 like humans do. They start at 0. This is referred to as <dfn>Zero-based</dfn> indexing.
-
-For example, the character at index 0 in the word "Charles" is "C". So if `var firstName = "Charles"`, you can get the value of the first letter of the string by using `firstName[0]`.
+For example, if `var firstName = "Charles"`, you can get the value of the last letter of the string by using `firstName[firstName.length - 1]`.
 
 Example:
 
 ```js
 var firstName = "Charles";
-var firstLetter = firstName[0]; // firstLetter is "C"
+var lastLetter = firstName[firstName.length - 1]; // lastLetter is "s"
 ```
 
 # --instructions--
 
-Use bracket notation to find the first character in the `lastName` variable and assign it to `firstLetterOfLastName`.
+Use <dfn>bracket notation</dfn> to find the last character in the `lastName` variable.
 
 **Hint:** Try looking at the example above if you get stuck.
 
 # --hints--
 
-The `firstLetterOfLastName` variable should have the value of `L`.
+`lastLetterOfLastName` should be "e".
 
 ```js
-assert(firstLetterOfLastName === 'L');
+assert(lastLetterOfLastName === 'e');
 ```
 
-You should use bracket notation.
+You should use `.length` to get the last letter.
 
 ```js
-assert(code.match(/firstLetterOfLastName\s*?=\s*?lastName\[.*?\]/));
+assert(code.match(/\.length/g).length > 0);
 ```
 
 # --seed--
@@ -47,26 +45,22 @@ assert(code.match(/firstLetterOfLastName\s*?=\s*?lastName\[.*?\]/));
 ## --after-user-code--
 
 ```js
-(function(v){return v;})(firstLetterOfLastName);
+(function(v){return v;})(lastLetterOfLastName);
 ```
 
 ## --seed-contents--
 
 ```js
 // Setup
-var firstLetterOfLastName = "";
 var lastName = "Lovelace";
 
 // Only change code below this line
-firstLetterOfLastName = lastName; // Change this line
+var lastLetterOfLastName = lastName; // Change this line
 ```
 
 # --solutions--
 
 ```js
-var firstLetterOfLastName = "";
 var lastName = "Lovelace";
-
-// Only change code below this line
-firstLetterOfLastName = lastName[0];
+var lastLetterOfLastName = lastName[lastName.length - 1];
 ```
