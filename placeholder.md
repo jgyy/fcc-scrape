@@ -1,62 +1,33 @@
 ---
-id: 587d7b86367417b2b2512b3b
-title: Catch Off By One Errors When Using Indexing
+id: 587d7b84367417b2b2512b36
+title: 'Catch Unclosed Parentheses, Brackets, Braces and Quotes'
 challengeType: 1
-forumTopicId: 301189
-dashedName: catch-off-by-one-errors-when-using-indexing
+forumTopicId: 301190
+dashedName: catch-unclosed-parentheses-brackets-braces-and-quotes
 ---
 
 # --description--
 
-<dfn>Off by one errors</dfn> (sometimes called OBOE) crop up when you're trying to target a specific index of a string or array (to slice or access a segment), or when looping over the indices of them. JavaScript indexing starts at zero, not one, which means the last index is always one less than the length of the item. If you try to access an index equal to the length, the program may throw an "index out of range" reference error or print `undefined`.
+Another syntax error to be aware of is that all opening parentheses, brackets, curly braces, and quotes have a closing pair. Forgetting a piece tends to happen when you're editing existing code and inserting items with one of the pair types. Also, take care when nesting code blocks into others, such as adding a callback function as an argument to a method.
 
-When you use string or array methods that take index ranges as arguments, it helps to read the documentation and understand if they are inclusive (the item at the given index is part of what's returned) or not. Here are some examples of off by one errors:
-
-```js
-let alphabet = "abcdefghijklmnopqrstuvwxyz";
-let len = alphabet.length;
-for (let i = 0; i <= len; i++) {
-  // loops one too many times at the end
-  console.log(alphabet[i]);
-}
-for (let j = 1; j < len; j++) {
-  // loops one too few times and misses the first character at index 0
-  console.log(alphabet[j]);
-}
-for (let k = 0; k < len; k++) {
-  // Goldilocks approves - this is just right
-  console.log(alphabet[k]);
-}
-```
+One way to avoid this mistake is as soon as the opening character is typed, immediately include the closing match, then move the cursor back between them and continue coding. Fortunately, most modern code editors generate the second half of the pair automatically.
 
 # --instructions--
 
-Fix the two indexing errors in the following function so all the numbers 1 through 5 are printed to the console.
+Fix the two pair errors in the code.
 
 # --hints--
 
-Your code should set the initial condition of the loop so it starts at the first index.
+Your code should fix the missing piece of the array.
 
 ```js
-assert(code.match(/i\s*?=\s*?0\s*?;/g).length == 1);
+assert(code.match(/myArray\s*?=\s*?\[\s*?1\s*?,\s*?2\s*?,\s*?3\s*?\];/g));
 ```
 
-Your code should fix the initial condition of the loop so that the index starts at 0.
+Your code should fix the missing piece of the `.reduce()` method. The console output should show that "Sum of array values is: 6".
 
 ```js
-assert(!code.match(/i\s?=\s*?1\s*?;/g));
-```
-
-Your code should set the terminal condition of the loop so it stops at the last index.
-
-```js
-assert(code.match(/i\s*?<\s*?len\s*?;/g).length == 1);
-```
-
-Your code should fix the terminal condition of the loop so that it stops at 1 before the length.
-
-```js
-assert(!code.match(/i\s*?<=\s*?len;/g));
+assert(arraySum === 6);
 ```
 
 # --seed--
@@ -64,31 +35,15 @@ assert(!code.match(/i\s*?<=\s*?len;/g));
 ## --seed-contents--
 
 ```js
-function countToFive() {
-  let firstFive = "12345";
-  let len = firstFive.length;
-  // Only change code below this line
-  for (let i = 1; i <= len; i++) {
-  // Only change code above this line
-    console.log(firstFive[i]);
-  }
-}
-
-countToFive();
+let myArray = [1, 2, 3;
+let arraySum = myArray.reduce((previous, current =>  previous + current);
+console.log(`Sum of array values is: ${arraySum}`);
 ```
 
 # --solutions--
 
 ```js
-function countToFive() {
- let firstFive = "12345";
- let len = firstFive.length;
- // Only change code below this line
- for (let i = 0; i < len; i++) {
- // Only change code above this line
-   console.log(firstFive[i]);
- }
-}
-
-countToFive();
+let myArray = [1, 2, 3];
+let arraySum = myArray.reduce((previous, current) =>  previous + current);
+console.log(`Sum of array values is: ${arraySum}`);
 ```
