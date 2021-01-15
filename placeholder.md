@@ -1,73 +1,58 @@
 ---
-id: 56533eb9ac21ba0edf2244ab
-title: Understanding Case Sensitivity in Variables
+id: 598e8944f009e646fc236146
+title: Understanding Undefined Value returned from a Function
 challengeType: 1
-videoUrl: 'https://scrimba.com/c/cd6GDcD'
-forumTopicId: 18334
-dashedName: understanding-case-sensitivity-in-variables
+videoUrl: 'https://scrimba.com/c/ce2p7cL'
+forumTopicId: 301177
+dashedName: understanding-undefined-value-returned-from-a-function
 ---
 
 # --description--
 
-In JavaScript all variables and function names are case sensitive. This means that capitalization matters.
+A function can include the `return` statement but it does not have to. In the case that the function doesn't have a `return` statement, when you call it, the function processes the inner code but the returned value is `undefined`.
 
-`MYVAR` is not the same as `MyVar` nor `myvar`. It is possible to have multiple distinct variables with the same name but different casing. It is strongly recommended that for the sake of clarity, you *do not* use this language feature.
-
-<h4>Best Practice</h4>
-
-Write variable names in JavaScript in <dfn>camelCase</dfn>. In <dfn>camelCase</dfn>, multi-word variable names have the first word in lowercase and the first letter of each subsequent word is capitalized.
-
-**Examples:**
+**Example**
 
 ```js
-var someVariable;
-var anotherVariableName;
-var thisVariableNameIsSoLong;
+var sum = 0;
+function addSum(num) {
+  sum = sum + num;
+}
+addSum(3); // sum will be modified but returned value is undefined
 ```
+
+`addSum` is a function without a `return` statement. The function will change the global `sum` variable but the returned value of the function is `undefined`.
 
 # --instructions--
 
-Modify the existing declarations and assignments so their names use <dfn>camelCase</dfn>.  
-Do not create any new variables.
+Create a function `addFive` without any arguments. This function adds 5 to the `sum` variable, but its returned value is `undefined`.
 
 # --hints--
 
-`studlyCapVar` should be defined and have a value of `10`.
+`addFive` should be a function.
 
 ```js
-assert(typeof studlyCapVar !== 'undefined' && studlyCapVar === 10);
+assert(typeof addFive === 'function');
 ```
 
-`properCamelCase` should be defined and have a value of `"A String"`.
+Once both functions have ran, the `sum` should be equal to 8.
+
+```js
+assert(sum === 8);
+```
+
+Returned value from `addFive` should be `undefined`.
+
+```js
+assert(addFive() === undefined);
+```
+
+Inside the `addFive` function, you should add `5` to the `sum` variable.
 
 ```js
 assert(
-  typeof properCamelCase !== 'undefined' && properCamelCase === 'A String'
+  __helpers.removeWhiteSpace(addFive.toString()).match(/sum=sum\+5|sum\+=5/)
 );
-```
-
-`titleCaseOver` should be defined and have a value of `9000`.
-
-```js
-assert(typeof titleCaseOver !== 'undefined' && titleCaseOver === 9000);
-```
-
-`studlyCapVar` should use camelCase in both declaration and assignment sections.
-
-```js
-assert(code.match(/studlyCapVar/g).length === 2);
-```
-
-`properCamelCase` should use camelCase in both declaration and assignment sections.
-
-```js
-assert(code.match(/properCamelCase/g).length === 2);
-```
-
-`titleCaseOver` should use camelCase in both declaration and assignment sections.
-
-```js
-assert(code.match(/titleCaseOver/g).length === 2);
 ```
 
 # --seed--
@@ -75,25 +60,35 @@ assert(code.match(/titleCaseOver/g).length === 2);
 ## --seed-contents--
 
 ```js
-// Variable declarations
-var StUdLyCapVaR;
-var properCamelCase;
-var TitleCaseOver;
+// Setup
+var sum = 0;
 
-// Variable assignments
-STUDLYCAPVAR = 10;
-PRoperCAmelCAse = "A String";
-tITLEcASEoVER = 9000;
+function addThree() {
+  sum = sum + 3;
+}
+
+// Only change code below this line
+
+
+// Only change code above this line
+
+addThree();
+addFive();
 ```
 
 # --solutions--
 
 ```js
-var studlyCapVar;
-var properCamelCase;
-var titleCaseOver;
+var sum = 0;
 
-studlyCapVar = 10;
-properCamelCase = "A String";
-titleCaseOver = 9000;
+function addThree() {
+  sum = sum + 3;
+}
+
+function addFive() {
+  sum = sum + 5;
+}
+
+addThree();
+addFive();
 ```
