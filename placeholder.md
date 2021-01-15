@@ -1,49 +1,38 @@
 ---
-id: 56bbb991ad1ed5201cd392cb
-title: Manipulate Arrays With push()
+id: 56bbb991ad1ed5201cd392cd
+title: Manipulate Arrays With shift()
 challengeType: 1
-videoUrl: 'https://scrimba.com/c/cnqmVtJ'
-forumTopicId: 18237
-dashedName: manipulate-arrays-with-push
+videoUrl: 'https://scrimba.com/c/cRbVETW'
+forumTopicId: 18238
+dashedName: manipulate-arrays-with-shift
 ---
 
 # --description--
 
-An easy way to append data to the end of an array is via the `push()` function.
+`pop()` always removes the last element of an array. What if you want to remove the first?
 
-`.push()` takes one or more <dfn>parameters</dfn> and "pushes" them onto the end of the array.
+That's where `.shift()` comes in. It works just like `.pop()`, except it removes the first element instead of the last.
 
-Examples:
+Example:
 
 ```js
-var arr1 = [1,2,3];
-arr1.push(4);
-// arr1 is now [1,2,3,4]
-
-var arr2 = ["Stimpson", "J", "cat"];
-arr2.push(["happy", "joy"]);
-// arr2 now equals ["Stimpson", "J", "cat", ["happy", "joy"]]
+var ourArray = ["Stimpson", "J", ["cat"]];
+var removedFromOurArray = ourArray.shift();
+// removedFromOurArray now equals "Stimpson" and ourArray now equals ["J", ["cat"]].
 ```
 
 # --instructions--
 
-Push `["dog", 3]` onto the end of the `myArray` variable.
+Use the `.shift()` function to remove the first item from `myArray`, assigning the "shifted off" value to `removedFromMyArray`.
 
 # --hints--
 
-`myArray` should now equal `[["John", 23], ["cat", 2], ["dog", 3]]`.
+`myArray` should now equal `[["dog", 3]]`.
 
 ```js
 assert(
   (function (d) {
-    if (
-      d[2] != undefined &&
-      d[0][0] == 'John' &&
-      d[0][1] === 23 &&
-      d[2][0] == 'dog' &&
-      d[2][1] === 3 &&
-      d[2].length == 2
-    ) {
+    if (d[0][0] == 'dog' && d[0][1] === 3 && d[1] == undefined) {
       return true;
     } else {
       return false;
@@ -52,26 +41,47 @@ assert(
 );
 ```
 
+`removedFromMyArray` should contain `["John", 23]`.
+
+```js
+assert(
+  (function (d) {
+    if (
+      d[0] == 'John' &&
+      d[1] === 23 &&
+      typeof removedFromMyArray === 'object'
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  })(removedFromMyArray)
+);
+```
+
 # --seed--
 
 ## --after-user-code--
 
 ```js
-(function(z){return 'myArray = ' + JSON.stringify(z);})(myArray);
+(function(y, z){return 'myArray = ' + JSON.stringify(y) + ' & removedFromMyArray = ' + JSON.stringify(z);})(myArray, removedFromMyArray);
 ```
 
 ## --seed-contents--
 
 ```js
 // Setup
-var myArray = [["John", 23], ["cat", 2]];
+var myArray = [["John", 23], ["dog", 3]];
 
 // Only change code below this line
+var removedFromMyArray;
 ```
 
 # --solutions--
 
 ```js
-var myArray = [["John", 23], ["cat", 2]];
-myArray.push(["dog",3]);
+var myArray = [["John", 23], ["dog", 3]];
+
+// Only change code below this line
+var removedFromMyArray = myArray.shift();
 ```
