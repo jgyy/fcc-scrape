@@ -1,50 +1,64 @@
 ---
-id: bd7123c9c441eddfaeb4bdef
-title: Comment Your JavaScript Code
+id: 56533eb9ac21ba0edf2244d0
+title: Comparison with the Equality Operator
 challengeType: 1
-videoUrl: 'https://scrimba.com/c/c7ynnTp'
-forumTopicId: 16783
-dashedName: comment-your-javascript-code
+videoUrl: 'https://scrimba.com/c/cKyVMAL'
+forumTopicId: 16784
+dashedName: comparison-with-the-equality-operator
 ---
 
 # --description--
 
-Comments are lines of code that JavaScript will intentionally ignore. Comments are a great way to leave notes to yourself and to other people who will later need to figure out what that code does.
+There are many <dfn>comparison operators</dfn> in JavaScript. All of these operators return a boolean `true` or `false` value.
 
-There are two ways to write comments in JavaScript:
-
-Using `//` will tell JavaScript to ignore the remainder of the text on the current line:
+The most basic operator is the equality operator `==`. The equality operator compares two values and returns `true` if they're equivalent or `false` if they are not. Note that equality is different from assignment (`=`), which assigns the value on the right of the operator to a variable on the left.
 
 ```js
-// This is an in-line comment.
+function equalityTest(myVal) {
+  if (myVal == 10) {
+     return "Equal";
+  }
+  return "Not Equal";
+}
 ```
 
-You can make a multi-line comment beginning with `/*` and ending with `*/`:
+If `myVal` is equal to `10`, the equality operator returns `true`, so the code in the curly braces will execute, and the function will return `"Equal"`. Otherwise, the function will return `"Not Equal"`. In order for JavaScript to compare two different <dfn>data types</dfn> (for example, `numbers` and `strings`), it must convert one type to another. This is known as "Type Coercion". Once it does, however, it can compare terms as follows:
 
 ```js
-/* This is a
-multi-line comment */
+1   ==  1   // true
+1   ==  2   // false
+1   == '1'  // true
+"3" ==  3   // true
 ```
-
-**Best Practice**  
-As you write code, you should regularly add comments to clarify the function of parts of your code. Good commenting can help communicate the intent of your code—both for others *and* for your future self.
 
 # --instructions--
 
-Try creating one of each type of comment.
+Add the equality operator to the indicated line so that the function will return "Equal" when `val` is equivalent to `12`.
 
 # --hints--
 
-You should create a `//` style comment that contains at least five letters.
+`testEqual(10)` should return "Not Equal"
 
 ```js
-assert(code.match(/(\/\/)...../g));
+assert(testEqual(10) === 'Not Equal');
 ```
 
-You should create a `/* */` style comment that contains at least five letters.
+`testEqual(12)` should return "Equal"
 
 ```js
-assert(code.match(/(\/\*)([^\/]{5,})(?=\*\/)/gm));
+assert(testEqual(12) === 'Equal');
+```
+
+`testEqual("12")` should return "Equal"
+
+```js
+assert(testEqual('12') === 'Equal');
+```
+
+You should use the `==` operator
+
+```js
+assert(code.match(/==/g) && !code.match(/===/g));
 ```
 
 # --seed--
@@ -52,11 +66,24 @@ assert(code.match(/(\/\*)([^\/]{5,})(?=\*\/)/gm));
 ## --seed-contents--
 
 ```js
+// Setup
+function testEqual(val) {
+  if (val) { // Change this line
+    return "Equal";
+  }
+  return "Not Equal";
+}
+
+testEqual(10);
 ```
 
 # --solutions--
 
 ```js
-// Fake Comment
-/* Another Comment */
+function testEqual(val) {
+  if (val == 12) {
+    return "Equal";
+  }
+  return "Not Equal";
+}
 ```
