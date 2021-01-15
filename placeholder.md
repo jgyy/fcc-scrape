@@ -1,78 +1,181 @@
 ---
-id: 56533eb9ac21ba0edf2244b4
-title: Quoting Strings with Single Quotes
+id: 56533eb9ac21ba0edf2244cf
+title: Record Collection
 challengeType: 1
-videoUrl: 'https://scrimba.com/c/cbQmnhM'
-forumTopicId: 18260
-dashedName: quoting-strings-with-single-quotes
+forumTopicId: 18261
+dashedName: record-collection
 ---
 
 # --description--
 
-<dfn>String</dfn> values in JavaScript may be written with single or double quotes, as long as you start and end with the same type of quote. Unlike some other programming languages, single and double quotes work the same in JavaScript.
+You are given a JSON object representing a part of your musical album collection. Each album has a unique id number as its key and several other properties. Not all albums have complete information.
 
-```js
-doubleQuoteStr = "This is a string"; 
-singleQuoteStr = 'This is also a string';
-```
+You start with an `updateRecords` function that takes an object like `collection`, an `id`, a `prop` (like `artist` or `tracks`), and a `value`. Complete the function using the rules below to modify the object passed to the function.
 
-The reason why you might want to use one type of quote over the other is if you want to use both in a string. This might happen if you want to save a conversation in a string and have the conversation in quotes. Another use for it would be saving an `<a>` tag with various attributes in quotes, all within a string.
+-   Your function must always return the entire object.
+-   If `prop` isn't `tracks` and `value` isn't an empty string, update or set that album's `prop` to `value`.
+-   If `prop` is `tracks` but the album doesn't have a `tracks` property, create an empty array and add `value` to it.
+-   If `prop` is `tracks` and `value` isn't an empty string, add `value` to the end of the album's existing `tracks` array.
+-   If `value` is an empty string, delete the given `prop` property from the album.
 
-```js
-conversation = 'Finn exclaims to Jake, "Algebraic!"';
-```
-
-However, this becomes a problem if you need to use the outermost quotes within it. Remember, a string has the same kind of quote at the beginning and end. But if you have that same quote somewhere in the middle, the string will stop early and throw an error.
-
-```js
-goodStr = 'Jake asks Finn, "Hey, let\'s go on an adventure?"'; 
-badStr = 'Finn responds, "Let's go!"'; // Throws an error
-```
-
-In the <dfn>goodStr</dfn> above, you can use both quotes safely by using the backslash `\` as an escape character. **Note**  
-The backslash `\` should not be confused with the forward slash `/`. They do not do the same thing.
-
-# --instructions--
-
-Change the provided string to a string with single quotes at the beginning and end and no escape characters.
-
-Right now, the `<a>` tag in the string uses double quotes everywhere. You will need to change the outer quotes to single quotes so you can remove the escape characters.
+**Note:** A copy of the `collection` object is used for the tests.
 
 # --hints--
 
-You should remove all the `backslashes` (`\`).
+After `updateRecords(collection, 5439, "artist", "ABBA")`, `artist` should be `ABBA`
 
 ```js
 assert(
-  !/\\/g.test(code) &&
-    myStr.match(
-      '\\s*<a href\\s*=\\s*"http://www.example.com"\\s*target\\s*=\\s*"_blank">\\s*Link\\s*</a>\\s*'
-    )
+  updateRecords(_recordCollection, 5439, 'artist', 'ABBA')[5439]['artist'] ===
+    'ABBA'
 );
 ```
 
-You should have two single quotes `'` and four double quotes `"`.
+After `updateRecords(collection, 5439, "tracks", "Take a Chance on Me")`, `tracks` should have `Take a Chance on Me` as the last element.
 
 ```js
-assert(code.match(/"/g).length === 4 && code.match(/'/g).length === 2);
+assert(
+  updateRecords(_recordCollection, 5439, 'tracks', 'Take a Chance on Me')[5439][
+    'tracks'
+  ].pop() === 'Take a Chance on Me'
+);
+```
+
+After `updateRecords(collection, 2548, "artist", "")`, `artist` should not be set
+
+```js
+updateRecords(_recordCollection, 2548, 'artist', '');
+assert(!_recordCollection[2548].hasOwnProperty('artist'));
+```
+
+After `updateRecords(collection, 1245, "tracks", "Addicted to Love")`, `tracks` should have `Addicted to Love` as the last element.
+
+```js
+assert(
+  updateRecords(_recordCollection, 1245, 'tracks', 'Addicted to Love')[1245][
+    'tracks'
+  ].pop() === 'Addicted to Love'
+);
+```
+
+After `updateRecords(collection, 2468, "tracks", "Free")`, `tracks` should have `1999` as the first element.
+
+```js
+assert(
+  updateRecords(_recordCollection, 2468, 'tracks', 'Free')[2468][
+    'tracks'
+  ][0] === '1999'
+);
+```
+
+After `updateRecords(collection, 2548, "tracks", "")`, `tracks` should not be set
+
+```js
+updateRecords(_recordCollection, 2548, 'tracks', '');
+assert(!_recordCollection[2548].hasOwnProperty('tracks'));
+```
+
+After `updateRecords(collection, 1245, "albumTitle", "Riptide")`, `albumTitle` should be `Riptide`
+
+```js
+assert(
+  updateRecords(_recordCollection, 1245, 'albumTitle', 'Riptide')[1245][
+    'albumTitle'
+  ] === 'Riptide'
+);
 ```
 
 # --seed--
 
-## --after-user-code--
+## --before-user-code--
 
 ```js
-(function() { return "myStr = " + myStr; })();
+const _recordCollection = {
+  2548: {
+    albumTitle: 'Slippery When Wet',
+    artist: 'Bon Jovi',
+    tracks: ['Let It Rock', 'You Give Love a Bad Name']
+  },
+  2468: {
+    albumTitle: '1999',
+    artist: 'Prince',
+    tracks: ['1999', 'Little Red Corvette']
+  },
+  1245: {
+    artist: 'Robert Palmer',
+    tracks: []
+  },
+  5439: {
+    albumTitle: 'ABBA Gold'
+  }
+};
 ```
 
 ## --seed-contents--
 
 ```js
-var myStr = "<a href=\"http://www.example.com\" target=\"_blank\">Link</a>";
+// Setup
+var collection = {
+  2548: {
+    albumTitle: 'Slippery When Wet',
+    artist: 'Bon Jovi',
+    tracks: ['Let It Rock', 'You Give Love a Bad Name']
+  },
+  2468: {
+    albumTitle: '1999',
+    artist: 'Prince',
+    tracks: ['1999', 'Little Red Corvette']
+  },
+  1245: {
+    artist: 'Robert Palmer',
+    tracks: []
+  },
+  5439: {
+    albumTitle: 'ABBA Gold'
+  }
+};
+
+// Only change code below this line
+function updateRecords(object, id, prop, value) {
+  return object;
+}
+
+updateRecords(collection, 5439, 'artist', 'ABBA');
 ```
 
 # --solutions--
 
 ```js
-var myStr = '<a href="http://www.example.com" target="_blank">Link</a>';
+var collection = {
+  2548: {
+    albumTitle: 'Slippery When Wet',
+    artist: 'Bon Jovi',
+    tracks: ['Let It Rock', 'You Give Love a Bad Name']
+  },
+  2468: {
+    albumTitle: '1999',
+    artist: 'Prince',
+    tracks: ['1999', 'Little Red Corvette']
+  },
+  1245: {
+    artist: 'Robert Palmer',
+    tracks: []
+  },
+  5439: {
+    albumTitle: 'ABBA Gold'
+  }
+};
+
+// Only change code below this line
+function updateRecords(object, id, prop, value) {
+  if (value === '') delete object[id][prop];
+  else if (prop === 'tracks') {
+    object[id][prop] = object[id][prop] || [];
+    object[id][prop].push(value);
+  } else {
+    object[id][prop] = value;
+  }
+
+  return object;
+}
 ```
