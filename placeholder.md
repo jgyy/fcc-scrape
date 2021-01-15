@@ -1,79 +1,66 @@
 ---
-id: 56533eb9ac21ba0edf2244d5
-title: Comparison with the Greater Than Or Equal To Operator
+id: 56533eb9ac21ba0edf2244d2
+title: Comparison with the Inequality Operator
 challengeType: 1
-videoUrl: 'https://scrimba.com/c/c6KBqtV'
-forumTopicId: 16785
-dashedName: comparison-with-the-greater-than-or-equal-to-operator
+videoUrl: 'https://scrimba.com/c/cdBm9Sr'
+forumTopicId: 16787
+dashedName: comparison-with-the-inequality-operator
 ---
 
 # --description--
 
-The greater than or equal to operator (`>=`) compares the values of two numbers. If the number to the left is greater than or equal to the number to the right, it returns `true`. Otherwise, it returns `false`.
-
-Like the equality operator, `greater than or equal to` operator will convert data types while comparing.
+The inequality operator (`!=`) is the opposite of the equality operator. It means "Not Equal" and returns `false` where equality would return `true` and *vice versa*. Like the equality operator, the inequality operator will convert data types of values while comparing.
 
 **Examples**
 
 ```js
-6   >=  6   // true
-7   >= '3'  // true
-2   >=  3   // false
-'7' >=  9   // false
+1 !=  2     // true
+1 != "1"    // false
+1 != '1'    // false
+1 != true   // false
+0 != false  // false
 ```
 
 # --instructions--
 
-Add the greater than or equal to operator to the indicated lines so that the return statements make sense.
+Add the inequality operator `!=` in the `if` statement so that the function will return "Not Equal" when `val` is not equivalent to `99`
 
 # --hints--
 
-`testGreaterOrEqual(0)` should return "Less than 10"
+`testNotEqual(99)` should return "Equal"
 
 ```js
-assert(testGreaterOrEqual(0) === 'Less than 10');
+assert(testNotEqual(99) === 'Equal');
 ```
 
-`testGreaterOrEqual(9)` should return "Less than 10"
+`testNotEqual("99")` should return "Equal"
 
 ```js
-assert(testGreaterOrEqual(9) === 'Less than 10');
+assert(testNotEqual('99') === 'Equal');
 ```
 
-`testGreaterOrEqual(10)` should return "10 or Over"
+`testNotEqual(12)` should return "Not Equal"
 
 ```js
-assert(testGreaterOrEqual(10) === '10 or Over');
+assert(testNotEqual(12) === 'Not Equal');
 ```
 
-`testGreaterOrEqual(11)` should return "10 or Over"
+`testNotEqual("12")` should return "Not Equal"
 
 ```js
-assert(testGreaterOrEqual(11) === '10 or Over');
+assert(testNotEqual('12') === 'Not Equal');
 ```
 
-`testGreaterOrEqual(19)` should return "10 or Over"
+`testNotEqual("bob")` should return "Not Equal"
 
 ```js
-assert(testGreaterOrEqual(19) === '10 or Over');
+assert(testNotEqual('bob') === 'Not Equal');
 ```
 
-`testGreaterOrEqual(100)` should return "20 or Over"
+You should use the `!=` operator
 
 ```js
-assert(testGreaterOrEqual(100) === '20 or Over');
-```
-
-`testGreaterOrEqual(21)` should return "20 or Over"
-
-```js
-assert(testGreaterOrEqual(21) === '20 or Over');
-```
-
-You should use the `>=` operator at least twice
-
-```js
-assert(code.match(/val\s*>=\s*('|")*\d+('|")*/g).length > 1);
+assert(code.match(/(?!!==)!=/));
 ```
 
 # --seed--
@@ -81,33 +68,24 @@ assert(code.match(/val\s*>=\s*('|")*\d+('|")*/g).length > 1);
 ## --seed-contents--
 
 ```js
-function testGreaterOrEqual(val) {
-  if (val) {  // Change this line
-    return "20 or Over";
+// Setup
+function testNotEqual(val) {
+  if (val) { // Change this line
+    return "Not Equal";
   }
-
-  if (val) {  // Change this line
-    return "10 or Over";
-  }
-
-  return "Less than 10";
+  return "Equal";
 }
 
-testGreaterOrEqual(10);
+testNotEqual(10);
 ```
 
 # --solutions--
 
 ```js
-function testGreaterOrEqual(val) {
-  if (val >= 20) {  // Change this line
-    return "20 or Over";
+function testNotEqual(val) {
+  if (val != 99) {
+    return "Not Equal";
   }
-
-  if (val >= 10) {  // Change this line
-    return "10 or Over";
-  }
-
-  return "Less than 10";
+  return "Equal";
 }
 ```
