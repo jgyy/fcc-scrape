@@ -1,106 +1,67 @@
 ---
-id: 56533eb9ac21ba0edf2244da
-title: Introducing Else Statements
+id: 56104e9e514f539506016a5c
+title: Iterate Odd Numbers With a For Loop
 challengeType: 1
-videoUrl: 'https://scrimba.com/c/cek4Efq'
-forumTopicId: 18207
-dashedName: introducing-else-statements
+videoUrl: 'https://scrimba.com/c/cm8n7T9'
+forumTopicId: 18212
+dashedName: iterate-odd-numbers-with-a-for-loop
 ---
 
 # --description--
 
-When a condition for an `if` statement is true, the block of code following it is executed. What about when that condition is false? Normally nothing would happen. With an `else` statement, an alternate block of code can be executed.
+For loops don't have to iterate one at a time. By changing our `final-expression`, we can count by even numbers.
+
+We'll start at `i = 0` and loop while `i < 10`. We'll increment `i` by 2 each loop with `i += 2`.
 
 ```js
-if (num > 10) {
-  return "Bigger than 10";
-} else {
-  return "10 or Less";
+var ourArray = [];
+for (var i = 0; i < 10; i += 2) {
+  ourArray.push(i);
 }
 ```
 
+`ourArray` will now contain `[0,2,4,6,8]`. Let's change our `initialization` so we can count by odd numbers.
+
 # --instructions--
 
-Combine the `if` statements into a single `if/else` statement.
+Push the odd numbers from 1 through 9 to `myArray` using a `for` loop.
 
 # --hints--
 
-You should only have one `if` statement in the editor
+You should be using a `for` loop for this.
 
 ```js
-assert(code.match(/if/g).length === 1);
+assert(/for\s*\([^)]+?\)/.test(code));
 ```
 
-You should use an `else` statement
+`myArray` should equal `[1,3,5,7,9]`.
 
 ```js
-assert(/else/g.test(code));
-```
-
-`testElse(4)` should return "5 or Smaller"
-
-```js
-assert(testElse(4) === '5 or Smaller');
-```
-
-`testElse(5)` should return "5 or Smaller"
-
-```js
-assert(testElse(5) === '5 or Smaller');
-```
-
-`testElse(6)` should return "Bigger than 5"
-
-```js
-assert(testElse(6) === 'Bigger than 5');
-```
-
-`testElse(10)` should return "Bigger than 5".
-
-```js
-assert(testElse(10) === 'Bigger than 5');
-```
-
-You should not change the code above or below the specified comments.
-
-```js
-assert(/var result = "";/.test(code) && /return result;/.test(code));
+assert.deepEqual(myArray, [1, 3, 5, 7, 9]);
 ```
 
 # --seed--
 
+## --after-user-code--
+
+```js
+if(typeof myArray !== "undefined"){(function(){return myArray;})();}
+```
+
 ## --seed-contents--
 
 ```js
-function testElse(val) {
-  var result = "";
-  // Only change code below this line
+// Setup
+var myArray = [];
 
-  if (val > 5) {
-    result = "Bigger than 5";
-  }
-
-  if (val <= 5) {
-    result = "5 or Smaller";
-  }
-
-  // Only change code above this line
-  return result;
-}
-
-testElse(4);
+// Only change code below this line
 ```
 
 # --solutions--
 
 ```js
-function testElse(val) {
-  var result = "";
-  if(val > 5) {
-    result = "Bigger than 5";
-  } else {
-    result = "5 or Smaller";
-  }
-  return result;
+var myArray = [];
+for (var i = 1; i < 10; i += 2) {
+  myArray.push(i);
 }
 ```
