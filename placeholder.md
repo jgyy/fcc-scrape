@@ -1,79 +1,79 @@
 ---
-id: 56533eb9ac21ba0edf2244d4
-title: Comparison with the Greater Than Operator
+id: 56533eb9ac21ba0edf2244d5
+title: Comparison with the Greater Than Or Equal To Operator
 challengeType: 1
-videoUrl: 'https://scrimba.com/c/cp6GbH4'
-forumTopicId: 16786
-dashedName: comparison-with-the-greater-than-operator
+videoUrl: 'https://scrimba.com/c/c6KBqtV'
+forumTopicId: 16785
+dashedName: comparison-with-the-greater-than-or-equal-to-operator
 ---
 
 # --description--
 
-The greater than operator (`>`) compares the values of two numbers. If the number to the left is greater than the number to the right, it returns `true`. Otherwise, it returns `false`.
+The greater than or equal to operator (`>=`) compares the values of two numbers. If the number to the left is greater than or equal to the number to the right, it returns `true`. Otherwise, it returns `false`.
 
-Like the equality operator, greater than operator will convert data types of values while comparing.
+Like the equality operator, `greater than or equal to` operator will convert data types while comparing.
 
 **Examples**
 
 ```js
-5   >  3   // true
-7   > '3'  // true
-2   >  3   // false
-'1' >  9   // false
+6   >=  6   // true
+7   >= '3'  // true
+2   >=  3   // false
+'7' >=  9   // false
 ```
 
 # --instructions--
 
-Add the greater than operator to the indicated lines so that the return statements make sense.
+Add the greater than or equal to operator to the indicated lines so that the return statements make sense.
 
 # --hints--
 
-`testGreaterThan(0)` should return "10 or Under"
+`testGreaterOrEqual(0)` should return "Less than 10"
 
 ```js
-assert(testGreaterThan(0) === '10 or Under');
+assert(testGreaterOrEqual(0) === 'Less than 10');
 ```
 
-`testGreaterThan(10)` should return "10 or Under"
+`testGreaterOrEqual(9)` should return "Less than 10"
 
 ```js
-assert(testGreaterThan(10) === '10 or Under');
+assert(testGreaterOrEqual(9) === 'Less than 10');
 ```
 
-`testGreaterThan(11)` should return "Over 10"
+`testGreaterOrEqual(10)` should return "10 or Over"
 
 ```js
-assert(testGreaterThan(11) === 'Over 10');
+assert(testGreaterOrEqual(10) === '10 or Over');
 ```
 
-`testGreaterThan(99)` should return "Over 10"
+`testGreaterOrEqual(11)` should return "10 or Over"
 
 ```js
-assert(testGreaterThan(99) === 'Over 10');
+assert(testGreaterOrEqual(11) === '10 or Over');
 ```
 
-`testGreaterThan(100)` should return "Over 10"
+`testGreaterOrEqual(19)` should return "10 or Over"
 
 ```js
-assert(testGreaterThan(100) === 'Over 10');
+assert(testGreaterOrEqual(19) === '10 or Over');
 ```
 
-`testGreaterThan(101)` should return "Over 100"
+`testGreaterOrEqual(100)` should return "20 or Over"
 
 ```js
-assert(testGreaterThan(101) === 'Over 100');
+assert(testGreaterOrEqual(100) === '20 or Over');
 ```
 
-`testGreaterThan(150)` should return "Over 100"
+`testGreaterOrEqual(21)` should return "20 or Over"
 
 ```js
-assert(testGreaterThan(150) === 'Over 100');
+assert(testGreaterOrEqual(21) === '20 or Over');
 ```
 
-You should use the `>` operator at least twice
+You should use the `>=` operator at least twice
 
 ```js
-assert(code.match(/val\s*>\s*('|")*\d+('|")*/g).length > 1);
+assert(code.match(/val\s*>=\s*('|")*\d+('|")*/g).length > 1);
 ```
 
 # --seed--
@@ -81,31 +81,33 @@ assert(code.match(/val\s*>\s*('|")*\d+('|")*/g).length > 1);
 ## --seed-contents--
 
 ```js
-function testGreaterThan(val) {
+function testGreaterOrEqual(val) {
   if (val) {  // Change this line
-    return "Over 100";
+    return "20 or Over";
   }
 
   if (val) {  // Change this line
-    return "Over 10";
+    return "10 or Over";
   }
 
-  return "10 or Under";
+  return "Less than 10";
 }
 
-testGreaterThan(10);
+testGreaterOrEqual(10);
 ```
 
 # --solutions--
 
 ```js
-function testGreaterThan(val) {
-  if (val > 100) {  // Change this line
-    return "Over 100";
+function testGreaterOrEqual(val) {
+  if (val >= 20) {  // Change this line
+    return "20 or Over";
   }
-  if (val > 10) {  // Change this line
-    return "Over 10";
+
+  if (val >= 10) {  // Change this line
+    return "10 or Over";
   }
-  return "10 or Under";
+
+  return "Less than 10";
 }
 ```
