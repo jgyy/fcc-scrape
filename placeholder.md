@@ -1,107 +1,88 @@
 ---
-id: 5690307fddb111c6084545d7
-title: Logical Order in If Else Statements
+id: 56bbb991ad1ed5201cd392cc
+title: Manipulate Arrays With pop()
 challengeType: 1
-videoUrl: 'https://scrimba.com/c/cwNvMUV'
-forumTopicId: 18228
-dashedName: logical-order-in-if-else-statements
+videoUrl: 'https://scrimba.com/c/cRbVZAB'
+forumTopicId: 18236
+dashedName: manipulate-arrays-with-pop
 ---
 
 # --description--
 
-Order is important in `if`, `else if` statements.
+Another way to change the data in an array is with the `.pop()` function.
 
-The function is executed from top to bottom so you will want to be careful of what statement comes first.
+`.pop()` is used to "pop" a value off of the end of an array. We can store this "popped off" value by assigning it to a variable. In other words, `.pop()` removes the last element from an array and returns that element.
 
-Take these two functions as an example.
-
-Here's the first:
+Any type of entry can be "popped" off of an array - numbers, strings, even nested arrays.
 
 ```js
-function foo(x) {
-  if (x < 1) {
-    return "Less than one";
-  } else if (x < 2) {
-    return "Less than two";
-  } else {
-    return "Greater than or equal to two";
-  }
-}
-```
-
-And the second just switches the order of the statements:
-
-```js
-function bar(x) {
-  if (x < 2) {
-    return "Less than two";
-  } else if (x < 1) {
-    return "Less than one";
-  } else {
-    return "Greater than or equal to two";
-  }
-}
-```
-
-While these two functions look nearly identical if we pass a number to both we get different outputs.
-
-```js
-foo(0) // "Less than one"
-bar(0) // "Less than two"
+var threeArr = [1, 4, 6];
+var oneDown = threeArr.pop();
+console.log(oneDown); // Returns 6
+console.log(threeArr); // Returns [1, 4]
 ```
 
 # --instructions--
 
-Change the order of logic in the function so that it will return the correct statements in all cases.
+Use the `.pop()` function to remove the last item from `myArray`, assigning the "popped off" value to `removedFromMyArray`.
 
 # --hints--
 
-`orderMyLogic(4)` should return "Less than 5"
+`myArray` should only contain `[["John", 23]]`.
 
 ```js
-assert(orderMyLogic(4) === 'Less than 5');
+assert(
+  (function (d) {
+    if (d[0][0] == 'John' && d[0][1] === 23 && d[1] == undefined) {
+      return true;
+    } else {
+      return false;
+    }
+  })(myArray)
+);
 ```
 
-`orderMyLogic(6)` should return "Less than 10"
+You should use `pop()` on `myArray`.
 
 ```js
-assert(orderMyLogic(6) === 'Less than 10');
+assert(/removedFromMyArray\s*=\s*myArray\s*.\s*pop\s*(\s*)/.test(code));
 ```
 
-`orderMyLogic(11)` should return "Greater than or equal to 10"
+`removedFromMyArray` should only contain `["cat", 2]`.
 
 ```js
-assert(orderMyLogic(11) === 'Greater than or equal to 10');
+assert(
+  (function (d) {
+    if (d[0] == 'cat' && d[1] === 2 && d[2] == undefined) {
+      return true;
+    } else {
+      return false;
+    }
+  })(removedFromMyArray)
+);
 ```
 
 # --seed--
 
+## --after-user-code--
+
+```js
+(function(y, z){return 'myArray = ' + JSON.stringify(y) + ' & removedFromMyArray = ' + JSON.stringify(z);})(myArray, removedFromMyArray);
+```
+
 ## --seed-contents--
 
 ```js
-function orderMyLogic(val) {
-  if (val < 10) {
-    return "Less than 10";
-  } else if (val < 5) {
-    return "Less than 5";
-  } else {
-    return "Greater than or equal to 10";
-  }
-}
+// Setup
+var myArray = [["John", 23], ["cat", 2]];
 
-orderMyLogic(7);
+// Only change code below this line
+var removedFromMyArray;
 ```
 
 # --solutions--
 
 ```js
-function orderMyLogic(val) {
-  if(val < 5) {
-    return "Less than 5";
-  } else if (val < 10) {
-    return "Less than 10";
-  } else {
-    return "Greater than or equal to 10";
-  }
-}
+var myArray = [["John", 23], ["cat", 2]];
+var removedFromMyArray = myArray.pop();
 ```
