@@ -1,33 +1,48 @@
 ---
-id: 587d7b83367417b2b2512b33
-title: Use the JavaScript Console to Check the Value of a Variable
+id: 587d7b84367417b2b2512b34
+title: Use typeof to Check the Type of a Variable
 challengeType: 1
-forumTopicId: 18372
-dashedName: use-the-javascript-console-to-check-the-value-of-a-variable
+forumTopicId: 18374
+dashedName: use-typeof-to-check-the-type-of-a-variable
 ---
 
 # --description--
 
-Both Chrome and Firefox have excellent JavaScript consoles, also known as DevTools, for debugging your JavaScript.
+You can use `typeof` to check the data structure, or type, of a variable. This is useful in debugging when working with multiple data types. If you think you're adding two numbers, but one is actually a string, the results can be unexpected. Type errors can lurk in calculations or function calls. Be careful especially when you're accessing and working with external data in the form of a JavaScript Object Notation (JSON) object.
 
-You can find Developer tools in your Chrome's menu or Web Console in Firefox's menu. If you're using a different browser, or a mobile phone, we strongly recommend switching to desktop Firefox or Chrome.
+Here are some examples using `typeof`:
 
-The `console.log()` method, which "prints" the output of what's within its parentheses to the console, will likely be the most helpful debugging tool. Placing it at strategic points in your code can show you the intermediate values of variables. It's good practice to have an idea of what the output should be before looking at what it is. Having check points to see the status of your calculations throughout your code will help narrow down where the problem is.
+```js
+console.log(typeof ""); // outputs "string"
+console.log(typeof 0); // outputs "number"
+console.log(typeof []); // outputs "object"
+console.log(typeof {}); // outputs "object"
+```
 
-Here's an example to print 'Hello world!' to the console:
-
-`console.log('Hello world!');`
+JavaScript recognizes six primitive (immutable) data types: `Boolean`, `Null`, `Undefined`, `Number`, `String`, and `Symbol` (new with ES6) and one type for mutable items: `Object`. Note that in JavaScript, arrays are technically a type of object.
 
 # --instructions--
 
-Use the `console.log()` method to print the value of the variable `a` where noted in the code.
+Add two `console.log()` statements to check the `typeof` each of the two variables `seven` and `three` in the code.
 
 # --hints--
 
-Your code should use `console.log()` to check the value of the variable `a`.
+Your code should use `typeof` in two `console.log()` statements to check the type of the variables.
 
 ```js
-assert(code.match(/console\.log\(a\)/g));
+assert(code.match(/console\.log\(typeof[\( ].*\)?\)/g).length == 2);
+```
+
+Your code should use `typeof` to check the type of the variable `seven`.
+
+```js
+assert(code.match(/typeof[\( ]seven\)?/g));
+```
+
+Your code should use `typeof` to check the type of the variable `three`.
+
+```js
+assert(code.match(/typeof[\( ]three\)?/g));
 ```
 
 # --seed--
@@ -35,18 +50,15 @@ assert(code.match(/console\.log\(a\)/g));
 ## --seed-contents--
 
 ```js
-let a = 5;
-let b = 1;
-a++;
+let seven = 7;
+let three = "3";
+console.log(seven + three);
 // Only change code below this line
-
-
-let sumAB = a + b;
-console.log(sumAB);
 ```
 
 # --solutions--
 
 ```js
-var a = 5; console.log(a);
+let seven = 7;let three = "3";console.log(typeof seven);
+console.log(typeof three);
 ```
