@@ -1,54 +1,96 @@
 ---
-id: 587d7b7e367417b2b2512b23
-title: Use the parseInt Function
+id: 56533eb9ac21ba0edf2244ca
+title: Using Objects for Lookups
 challengeType: 1
-videoUrl: 'https://scrimba.com/c/cm83LSW'
-forumTopicId: 301183
-dashedName: use-the-parseint-function
+videoUrl: 'https://scrimba.com/c/cdBk8sM'
+forumTopicId: 18373
+dashedName: using-objects-for-lookups
 ---
 
 # --description--
 
-The `parseInt()` function parses a string and returns an integer. Here's an example:
+Objects can be thought of as a key/value storage, like a dictionary. If you have tabular data, you can use an object to "lookup" values rather than a `switch` statement or an `if/else` chain. This is most useful when you know that your input data is limited to a certain range.
 
-`var a = parseInt("007");`
+Here is an example of a simple reverse alphabet lookup:
 
-The above function converts the string "007" to an integer 7. If the first character in the string can't be converted into a number, then it returns `NaN`.
+```js
+var alpha = {
+  1:"Z",
+  2:"Y",
+  3:"X",
+  4:"W",
+  ...
+  24:"C",
+  25:"B",
+  26:"A"
+};
+alpha[2]; // "Y"
+alpha[24]; // "C"
+
+var value = 2;
+alpha[value]; // "Y"
+```
 
 # --instructions--
 
-Use `parseInt()` in the `convertToInteger` function so it converts the input string `str` into an integer, and returns it.
+Convert the switch statement into an object called `lookup`. Use it to look up `val` and assign the associated string to the `result` variable.
 
 # --hints--
 
-`convertToInteger` should use the `parseInt()` function
+`phoneticLookup("alpha")` should equal `"Adams"`
 
 ```js
-assert(/parseInt/g.test(code));
+assert(phoneticLookup('alpha') === 'Adams');
 ```
 
-`convertToInteger("56")` should return a number
+`phoneticLookup("bravo")` should equal `"Boston"`
 
 ```js
-assert(typeof convertToInteger('56') === 'number');
+assert(phoneticLookup('bravo') === 'Boston');
 ```
 
-`convertToInteger("56")` should return 56
+`phoneticLookup("charlie")` should equal `"Chicago"`
 
 ```js
-assert(convertToInteger('56') === 56);
+assert(phoneticLookup('charlie') === 'Chicago');
 ```
 
-`convertToInteger("77")` should return 77
+`phoneticLookup("delta")` should equal `"Denver"`
 
 ```js
-assert(convertToInteger('77') === 77);
+assert(phoneticLookup('delta') === 'Denver');
 ```
 
-`convertToInteger("JamesBond")` should return NaN
+`phoneticLookup("echo")` should equal `"Easy"`
 
 ```js
-assert.isNaN(convertToInteger('JamesBond'));
+assert(phoneticLookup('echo') === 'Easy');
+```
+
+`phoneticLookup("foxtrot")` should equal `"Frank"`
+
+```js
+assert(phoneticLookup('foxtrot') === 'Frank');
+```
+
+`phoneticLookup("")` should equal `undefined`
+
+```js
+assert(typeof phoneticLookup('') === 'undefined');
+```
+
+You should not modify the `return` statement
+
+```js
+assert(code.match(/return\sresult;/));
+```
+
+You should not use `case`, `switch`, or `if` statements
+
+```js
+assert(
+  !/case|switch|if/g.test(code.replace(/([/]{2}.*)|([/][*][^/*]*[*][/])/g, ''))
+);
 ```
 
 # --seed--
@@ -56,17 +98,55 @@ assert.isNaN(convertToInteger('JamesBond'));
 ## --seed-contents--
 
 ```js
-function convertToInteger(str) {
+// Setup
+function phoneticLookup(val) {
+  var result = "";
 
+  // Only change code below this line
+  switch(val) {
+    case "alpha":
+      result = "Adams";
+      break;
+    case "bravo":
+      result = "Boston";
+      break;
+    case "charlie":
+      result = "Chicago";
+      break;
+    case "delta":
+      result = "Denver";
+      break;
+    case "echo":
+      result = "Easy";
+      break;
+    case "foxtrot":
+      result = "Frank";
+  }
+
+  // Only change code above this line
+  return result;
 }
 
-convertToInteger("56");
+phoneticLookup("charlie");
 ```
 
 # --solutions--
 
 ```js
-function convertToInteger(str) {
-  return parseInt(str);
+function phoneticLookup(val) {
+  var result = "";
+
+  var lookup = {
+    alpha: "Adams",
+    bravo: "Boston",
+    charlie: "Chicago",
+    delta: "Denver",
+    echo: "Easy",
+    foxtrot: "Frank"
+  };
+
+  result = lookup[val];
+
+  return result;
 }
 ```
