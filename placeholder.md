@@ -1,43 +1,63 @@
 ---
-id: cf1111c1c11feddfaeb9bdef
-title: Generate Random Fractions with JavaScript
+id: cf1111c1c12feddfaeb1bdef
+title: Generate Random Whole Numbers with JavaScript
 challengeType: 1
-videoUrl: 'https://scrimba.com/c/cyWJJs3'
-forumTopicId: 18185
-dashedName: generate-random-fractions-with-javascript
+videoUrl: 'https://scrimba.com/c/cRn6bfr'
+forumTopicId: 18186
+dashedName: generate-random-whole-numbers-with-javascript
 ---
 
 # --description--
 
-Random numbers are useful for creating random behavior.
+It's great that we can generate random decimal numbers, but it's even more useful if we use it to generate random whole numbers.
 
-JavaScript has a `Math.random()` function that generates a random decimal number between `0` (inclusive) and not quite up to `1` (exclusive). Thus `Math.random()` can return a `0` but never quite return a `1`
+<ol><li>Use <code>Math.random()</code> to generate a random decimal.</li><li>Multiply that random decimal by <code>20</code>.</li><li>Use another function, <code>Math.floor()</code> to round the number down to its nearest whole number.</li></ol>
 
-**Note**  
-Like [Storing Values with the Equal Operator](/learn/javascript-algorithms-and-data-structures/basic-javascript/storing-values-with-the-assignment-operator), all function calls will be resolved before the `return` executes, so we can `return` the value of the `Math.random()` function.
+Remember that `Math.random()` can never quite return a `1` and, because we're rounding down, it's impossible to actually get `20`. This technique will give us a whole number between `0` and `19`.
+
+Putting everything together, this is what our code looks like:
+
+`Math.floor(Math.random() * 20);`
+
+We are calling `Math.random()`, multiplying the result by 20, then passing the value to `Math.floor()` function to round the value down to the nearest whole number.
 
 # --instructions--
 
-Change `randomFraction` to return a random number instead of returning `0`.
+Use this technique to generate and return a random whole number between `0` and `9`.
 
 # --hints--
 
-`randomFraction` should return a random number.
+The result of `randomWholeNum` should be a whole number.
 
 ```js
-assert(typeof randomFraction() === 'number');
+assert(
+  typeof randomWholeNum() === 'number' &&
+    (function () {
+      var r = randomWholeNum();
+      return Math.floor(r) === r;
+    })()
+);
 ```
 
-The number returned by `randomFraction` should be a decimal.
+You should use `Math.random` to generate a random number.
 
 ```js
-assert((randomFraction() + '').match(/\./g));
+assert(code.match(/Math.random/g).length >= 1);
 ```
 
-You should be using `Math.random` to generate the random decimal number.
+You should have multiplied the result of `Math.random` by 10 to make it a number that is between zero and nine.
 
 ```js
-assert(code.match(/Math\.random/g).length >= 0);
+assert(
+  code.match(/\s*?Math.random\s*?\(\s*?\)\s*?\*\s*?10[\D]\s*?/g) ||
+    code.match(/\s*?10\s*?\*\s*?Math.random\s*?\(\s*?\)\s*?/g)
+);
+```
+
+You should use `Math.floor` to remove the decimal part of the number.
+
+```js
+assert(code.match(/Math.floor/g).length >= 1);
 ```
 
 # --seed--
@@ -45,26 +65,24 @@ assert(code.match(/Math\.random/g).length >= 0);
 ## --after-user-code--
 
 ```js
-(function(){return randomFraction();})();
+(function(){return randomWholeNum();})();
 ```
 
 ## --seed-contents--
 
 ```js
-function randomFraction() {
+function randomWholeNum() {
 
   // Only change code below this line
 
-  return 0;
-
-  // Only change code above this line
+  return Math.random();
 }
 ```
 
 # --solutions--
 
 ```js
-function randomFraction() {
-  return Math.random();
+function randomWholeNum() {
+  return Math.floor(Math.random() * 10);
 }
 ```
