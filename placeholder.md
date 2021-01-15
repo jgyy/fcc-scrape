@@ -1,151 +1,78 @@
 ---
-id: 5688e62ea601b2482ff8422b
-title: Profile Lookup
+id: 56533eb9ac21ba0edf2244b4
+title: Quoting Strings with Single Quotes
 challengeType: 1
-videoUrl: 'https://scrimba.com/c/cDqW2Cg'
-forumTopicId: 18259
-dashedName: profile-lookup
+videoUrl: 'https://scrimba.com/c/cbQmnhM'
+forumTopicId: 18260
+dashedName: quoting-strings-with-single-quotes
 ---
 
 # --description--
 
-We have an array of objects representing different people in our contacts lists.
+<dfn>String</dfn> values in JavaScript may be written with single or double quotes, as long as you start and end with the same type of quote. Unlike some other programming languages, single and double quotes work the same in JavaScript.
 
-A `lookUpProfile` function that takes `name` and a property (`prop`) as arguments has been pre-written for you.
+```js
+doubleQuoteStr = "This is a string"; 
+singleQuoteStr = 'This is also a string';
+```
 
-The function should check if `name` is an actual contact's `firstName` and the given property (`prop`) is a property of that contact.
+The reason why you might want to use one type of quote over the other is if you want to use both in a string. This might happen if you want to save a conversation in a string and have the conversation in quotes. Another use for it would be saving an `<a>` tag with various attributes in quotes, all within a string.
 
-If both are true, then return the "value" of that property.
+```js
+conversation = 'Finn exclaims to Jake, "Algebraic!"';
+```
 
-If `name` does not correspond to any contacts then return `"No such contact"`.
+However, this becomes a problem if you need to use the outermost quotes within it. Remember, a string has the same kind of quote at the beginning and end. But if you have that same quote somewhere in the middle, the string will stop early and throw an error.
 
-If `prop` does not correspond to any valid properties of a contact found to match `name` then return `"No such property"`.
+```js
+goodStr = 'Jake asks Finn, "Hey, let\'s go on an adventure?"'; 
+badStr = 'Finn responds, "Let's go!"'; // Throws an error
+```
+
+In the <dfn>goodStr</dfn> above, you can use both quotes safely by using the backslash `\` as an escape character. **Note**  
+The backslash `\` should not be confused with the forward slash `/`. They do not do the same thing.
+
+# --instructions--
+
+Change the provided string to a string with single quotes at the beginning and end and no escape characters.
+
+Right now, the `<a>` tag in the string uses double quotes everywhere. You will need to change the outer quotes to single quotes so you can remove the escape characters.
 
 # --hints--
 
-`lookUpProfile("Kristian", "lastName")` should return `"Vos"`
+You should remove all the `backslashes` (`\`).
 
 ```js
-assert(lookUpProfile('Kristian', 'lastName') === 'Vos');
+assert(
+  !/\\/g.test(code) &&
+    myStr.match(
+      '\\s*<a href\\s*=\\s*"http://www.example.com"\\s*target\\s*=\\s*"_blank">\\s*Link\\s*</a>\\s*'
+    )
+);
 ```
 
-`lookUpProfile("Sherlock", "likes")` should return `["Intriguing Cases", "Violin"]`
+You should have two single quotes `'` and four double quotes `"`.
 
 ```js
-assert.deepEqual(lookUpProfile('Sherlock', 'likes'), [
-  'Intriguing Cases',
-  'Violin'
-]);
-```
-
-`lookUpProfile("Harry", "likes")` should return an array
-
-```js
-assert(typeof lookUpProfile('Harry', 'likes') === 'object');
-```
-
-`lookUpProfile("Bob", "number")` should return "No such contact"
-
-```js
-assert(lookUpProfile('Bob', 'number') === 'No such contact');
-```
-
-`lookUpProfile("Bob", "potato")` should return "No such contact"
-
-```js
-assert(lookUpProfile('Bob', 'potato') === 'No such contact');
-```
-
-`lookUpProfile("Akira", "address")` should return "No such property"
-
-```js
-assert(lookUpProfile('Akira', 'address') === 'No such property');
+assert(code.match(/"/g).length === 4 && code.match(/'/g).length === 2);
 ```
 
 # --seed--
 
+## --after-user-code--
+
+```js
+(function() { return "myStr = " + myStr; })();
+```
+
 ## --seed-contents--
 
 ```js
-// Setup
-var contacts = [
-    {
-        "firstName": "Akira",
-        "lastName": "Laine",
-        "number": "0543236543",
-        "likes": ["Pizza", "Coding", "Brownie Points"]
-    },
-    {
-        "firstName": "Harry",
-        "lastName": "Potter",
-        "number": "0994372684",
-        "likes": ["Hogwarts", "Magic", "Hagrid"]
-    },
-    {
-        "firstName": "Sherlock",
-        "lastName": "Holmes",
-        "number": "0487345643",
-        "likes": ["Intriguing Cases", "Violin"]
-    },
-    {
-        "firstName": "Kristian",
-        "lastName": "Vos",
-        "number": "unknown",
-        "likes": ["JavaScript", "Gaming", "Foxes"]
-    }
-];
-
-
-function lookUpProfile(name, prop){
-// Only change code below this line
-
-// Only change code above this line
-}
-
-lookUpProfile("Akira", "likes");
+var myStr = "<a href=\"http://www.example.com\" target=\"_blank\">Link</a>";
 ```
 
 # --solutions--
 
 ```js
-var contacts = [
-    {
-        "firstName": "Akira",
-        "lastName": "Laine",
-        "number": "0543236543",
-        "likes": ["Pizza", "Coding", "Brownie Points"]
-    },
-    {
-        "firstName": "Harry",
-        "lastName": "Potter",
-        "number": "0994372684",
-        "likes": ["Hogwarts", "Magic", "Hagrid"]
-    },
-    {
-        "firstName": "Sherlock",
-        "lastName": "Holmes",
-        "number": "0487345643",
-        "likes": ["Intriguing Cases", "Violin"]
-    },
-    {
-        "firstName": "Kristian",
-        "lastName": "Vos",
-        "number": "unknown",
-        "likes": ["JavaScript", "Gaming", "Foxes"]
-    },
-];
-
-
-//Write your function in between these comments
-function lookUpProfile(name, prop){
-    for(var i in contacts){
-      if(contacts[i].firstName === name) {
-        return contacts[i][prop] || "No such property";
-      }
-    }
-   return "No such contact";
-}
-//Write your function in between these comments
-
-lookUpProfile("Akira", "likes");
+var myStr = '<a href="http://www.example.com" target="_blank">Link</a>';
 ```
