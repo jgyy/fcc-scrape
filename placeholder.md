@@ -1,94 +1,79 @@
 ---
-id: 598e8944f009e646fc236146
-title: Understanding Undefined Value returned from a Function
+id: 56533eb9ac21ba0edf2244aa
+title: Understanding Uninitialized Variables
 challengeType: 1
-videoUrl: 'https://scrimba.com/c/ce2p7cL'
-forumTopicId: 301177
-dashedName: understanding-undefined-value-returned-from-a-function
+videoUrl: 'https://scrimba.com/c/cBa2JAL'
+forumTopicId: 18335
+dashedName: understanding-uninitialized-variables
 ---
 
 # --description--
 
-A function can include the `return` statement but it does not have to. In the case that the function doesn't have a `return` statement, when you call it, the function processes the inner code but the returned value is `undefined`.
-
-**Example**
-
-```js
-var sum = 0;
-function addSum(num) {
-  sum = sum + num;
-}
-addSum(3); // sum will be modified but returned value is undefined
-```
-
-`addSum` is a function without a `return` statement. The function will change the global `sum` variable but the returned value of the function is `undefined`.
+When JavaScript variables are declared, they have an initial value of `undefined`. If you do a mathematical operation on an `undefined` variable your result will be `NaN` which means <dfn>"Not a Number"</dfn>. If you concatenate a string with an `undefined` variable, you will get a literal <dfn>string</dfn> of `"undefined"`.
 
 # --instructions--
 
-Create a function `addFive` without any arguments. This function adds 5 to the `sum` variable, but its returned value is `undefined`.
+Initialize the three variables `a`, `b`, and `c` with `5`, `10`, and `"I am a"` respectively so that they will not be `undefined`.
 
 # --hints--
 
-`addFive` should be a function.
+`a` should be defined and evaluated to have the value of `6`.
 
 ```js
-assert(typeof addFive === 'function');
+assert(typeof a === 'number' && a === 6);
 ```
 
-Once both functions have ran, the `sum` should be equal to 8.
+`b` should be defined and evaluated to have the value of `15`.
 
 ```js
-assert(sum === 8);
+assert(typeof b === 'number' && b === 15);
 ```
 
-Returned value from `addFive` should be `undefined`.
+`c` should not contain `undefined` and should have a value of "I am a String!"
 
 ```js
-assert(addFive() === undefined);
+assert(!/undefined/.test(c) && c === 'I am a String!');
 ```
 
-Inside the `addFive` function, you should add `5` to the `sum` variable.
+You should not change code below the specified comment.
 
 ```js
 assert(
-  __helpers.removeWhiteSpace(addFive.toString()).match(/sum=sum\+5|sum\+=5/)
+  /a = a \+ 1;/.test(code) &&
+    /b = b \+ 5;/.test(code) &&
+    /c = c \+ " String!";/.test(code)
 );
 ```
 
 # --seed--
 
+## --after-user-code--
+
+```js
+(function(a,b,c){ return "a = " + a + ", b = " + b + ", c = '" + c + "'"; })(a,b,c);
+```
+
 ## --seed-contents--
 
 ```js
-// Setup
-var sum = 0;
-
-function addThree() {
-  sum = sum + 3;
-}
-
 // Only change code below this line
-
-
+var a;
+var b;
+var c;
 // Only change code above this line
 
-addThree();
-addFive();
+a = a + 1;
+b = b + 5;
+c = c + " String!";
 ```
 
 # --solutions--
 
 ```js
-var sum = 0;
-
-function addThree() {
-  sum = sum + 3;
-}
-
-function addFive() {
-  sum = sum + 5;
-}
-
-addThree();
-addFive();
+var a = 5;
+var b = 10;
+var c = "I am a";
+a = a + 1;
+b = b + 5;
+c = c + " String!";
 ```
