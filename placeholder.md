@@ -1,45 +1,45 @@
 ---
-id: 56bbb991ad1ed5201cd392d1
-title: Updating Object Properties
+id: bd7123c9c549eddfaeb5bdef
+title: Use Bracket Notation to Find the First Character in a String
 challengeType: 1
-videoUrl: 'https://scrimba.com/c/c9yEJT4'
-forumTopicId: 18336
-dashedName: updating-object-properties
+videoUrl: 'https://scrimba.com/c/ca8JwhW'
+forumTopicId: 18341
+dashedName: use-bracket-notation-to-find-the-first-character-in-a-string
 ---
 
 # --description--
 
-After you've created a JavaScript object, you can update its properties at any time just like you would update any other variable. You can use either dot or bracket notation to update.
+<dfn>Bracket notation</dfn> is a way to get a character at a specific `index` within a string.
 
-For example, let's look at `ourDog`:
+Most modern programming languages, like JavaScript, don't start counting at 1 like humans do. They start at 0. This is referred to as <dfn>Zero-based</dfn> indexing.
+
+For example, the character at index 0 in the word "Charles" is "C". So if `var firstName = "Charles"`, you can get the value of the first letter of the string by using `firstName[0]`.
+
+Example:
 
 ```js
-var ourDog = {
-  "name": "Camper",
-  "legs": 4,
-  "tails": 1,
-  "friends": ["everything!"]
-};
+var firstName = "Charles";
+var firstLetter = firstName[0]; // firstLetter is "C"
 ```
-
-Since he's a particularly happy dog, let's change his name to "Happy Camper". Here's how we update his object's name property: `ourDog.name = "Happy Camper";` or `ourDog["name"] = "Happy Camper";` Now when we evaluate `ourDog.name`, instead of getting "Camper", we'll get his new name, "Happy Camper".
 
 # --instructions--
 
-Update the `myDog` object's name property. Let's change her name from "Coder" to "Happy Coder". You can use either dot or bracket notation.
+Use bracket notation to find the first character in the `lastName` variable and assign it to `firstLetterOfLastName`.
+
+**Hint:** Try looking at the example above if you get stuck.
 
 # --hints--
 
-You should update `myDog`'s `"name"` property to equal "Happy Coder".
+The `firstLetterOfLastName` variable should have the value of `L`.
 
 ```js
-assert(/happy coder/gi.test(myDog.name));
+assert(firstLetterOfLastName === 'L');
 ```
 
-You should not edit the `myDog` definition.
+You should use bracket notation.
 
 ```js
-assert(/"name": "Coder"/.test(code));
+assert(code.match(/firstLetterOfLastName\s*?=\s*?lastName\[.*?\]/));
 ```
 
 # --seed--
@@ -47,31 +47,26 @@ assert(/"name": "Coder"/.test(code));
 ## --after-user-code--
 
 ```js
-(function(z){return z;})(myDog);
+(function(v){return v;})(firstLetterOfLastName);
 ```
 
 ## --seed-contents--
 
 ```js
 // Setup
-var myDog = {
-  "name": "Coder",
-  "legs": 4,
-  "tails": 1,
-  "friends": ["freeCodeCamp Campers"]
-};
+var firstLetterOfLastName = "";
+var lastName = "Lovelace";
 
 // Only change code below this line
+firstLetterOfLastName = lastName; // Change this line
 ```
 
 # --solutions--
 
 ```js
-var myDog = {
-  "name": "Coder",
-  "legs": 4,
-  "tails": 1,
-  "friends": ["freeCodeCamp Campers"]
-};
-myDog.name = "Happy Coder";
+var firstLetterOfLastName = "";
+var lastName = "Lovelace";
+
+// Only change code below this line
+firstLetterOfLastName = lastName[0];
 ```
