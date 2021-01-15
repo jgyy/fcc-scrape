@@ -1,68 +1,60 @@
 ---
-id: 587d7b7e367417b2b2512b24
-title: Use the Conditional (Ternary) Operator
+id: 587d7b7e367417b2b2512b22
+title: Use the parseInt Function with a Radix
 challengeType: 1
-forumTopicId: 301181
-dashedName: use-the-conditional-ternary-operator
+videoUrl: 'https://scrimba.com/c/c6K4Kh3'
+forumTopicId: 301182
+dashedName: use-the-parseint-function-with-a-radix
 ---
 
 # --description--
 
-The <dfn>conditional operator</dfn>, also called the <dfn>ternary operator</dfn>, can be used as a one line if-else expression.
+The `parseInt()` function parses a string and returns an integer. It takes a second argument for the radix, which specifies the base of the number in the string. The radix can be an integer between 2 and 36.
 
-The syntax is:
+The function call looks like:
 
-`condition ? expression-if-true : expression-if-false;`
+`parseInt(string, radix);`
 
-The following function uses an if-else statement to check a condition:
+And here's an example:
 
-```js
-function findGreater(a, b) {
-  if(a > b) {
-    return "a is greater";
-  }
-  else {
-    return "b is greater";
-  }
-}
-```
+`var a = parseInt("11", 2);`
 
-This can be re-written using the `conditional operator`:
-
-```js
-function findGreater(a, b) {
-  return a > b ? "a is greater" : "b is greater";
-}
-```
+The radix variable says that "11" is in the binary system, or base 2. This example converts the string "11" to an integer 3.
 
 # --instructions--
 
-Use the `conditional operator` in the `checkEqual` function to check if two numbers are equal or not. The function should return either "Equal" or "Not Equal".
+Use `parseInt()` in the `convertToInteger` function so it converts a binary number to an integer and returns it.
 
 # --hints--
 
-`checkEqual` should use the `conditional operator`
+`convertToInteger` should use the `parseInt()` function
 
 ```js
-assert(/.+?\s*?\?\s*?.+?\s*?:\s*?.+?/.test(code));
+assert(/parseInt/g.test(code));
 ```
 
-`checkEqual(1, 2)` should return "Not Equal"
+`convertToInteger("10011")` should return a number
 
 ```js
-assert(checkEqual(1, 2) === 'Not Equal');
+assert(typeof convertToInteger('10011') === 'number');
 ```
 
-`checkEqual(1, 1)` should return "Equal"
+`convertToInteger("10011")` should return 19
 
 ```js
-assert(checkEqual(1, 1) === 'Equal');
+assert(convertToInteger('10011') === 19);
 ```
 
-`checkEqual(1, -1)` should return "Not Equal"
+`convertToInteger("111001")` should return 57
 
 ```js
-assert(checkEqual(1, -1) === 'Not Equal');
+assert(convertToInteger('111001') === 57);
+```
+
+`convertToInteger("JamesBond")` should return NaN
+
+```js
+assert.isNaN(convertToInteger('JamesBond'));
 ```
 
 # --seed--
@@ -70,17 +62,17 @@ assert(checkEqual(1, -1) === 'Not Equal');
 ## --seed-contents--
 
 ```js
-function checkEqual(a, b) {
+function convertToInteger(str) {
 
 }
 
-checkEqual(1, 2);
+convertToInteger("10011");
 ```
 
 # --solutions--
 
 ```js
-function checkEqual(a, b) {
-  return a === b ? "Equal" : "Not Equal";
+function convertToInteger(str) {
+  return parseInt(str, 2);
 }
 ```
