@@ -1,47 +1,41 @@
 ---
-id: 587d7b83367417b2b2512b37
-title: Understanding the Differences between the freeCodeCamp and Browser Console
+id: 587d7b86367417b2b2512b3c
+title: Use Caution When Reinitializing Variables Inside a Loop
 challengeType: 1
-forumTopicId: 301193
-dashedName: understanding-the-differences-between-the-freecodecamp-and-browser-console
+forumTopicId: 301194
+dashedName: use-caution-when-reinitializing-variables-inside-a-loop
 ---
 
 # --description--
 
-You may have noticed that some freeCodeCamp JavaScript challenges include their own console. This console behaves a little differently than the browser console you used in the last challenge.
+Sometimes it's necessary to save information, increment counters, or re-set variables within a loop. A potential issue is when variables either should be reinitialized, and aren't, or vice versa. This is particularly dangerous if you accidentally reset the variable being used for the terminal condition, causing an infinite loop.
 
-The following challenge is meant to highlight the main difference between the freeCodeCamp console and your browser console.
-
-When you run ordinary JavaScript, the browser's console will display your `console.log()` statements the exact number of times it is called.
-
-The freeCodeCamp console will print your `console.log()` statements a short time after the editor detects a change in the script, as well as during testing.
-
-The freeCodeCamp console is cleared before the tests are run and, to avoid spam, only prints the logs during the first test (see the note below for exceptions).
-
-If you would like to see every log for every test, run the tests, and open the browser console. If you prefer to use the browser console, and want it to mimic the freeCodeCamp console, place `console.clear()` before any other `console` calls, to clear the browser console.
-
-**Note:** `console.log`s inside functions are printed to the freeCodeCamp console whenever those functions are called, this can help debugging functions that are called during testing.
+Printing variable values with each cycle of your loop by using `console.log()` can uncover buggy behavior related to resetting, or failing to reset a variable.
 
 # --instructions--
 
-First, use `console.log` to log the `output` variable. Then, use `console.clear` to clear the browser console.
+The following function is supposed to create a two-dimensional array with `m` rows and `n` columns of zeroes. Unfortunately, it's not producing the expected output because the `row` variable isn't being reinitialized (set back to an empty array) in the outer loop. Fix the code so it returns a correct 3x2 array of zeroes, which looks like `[[0, 0], [0, 0], [0, 0]]`.
 
 # --hints--
 
-You should use `console.clear()` to clear the browser console.
+Your code should set the `matrix` variable to an array holding 3 rows of 2 columns of zeroes each.
+
+```js
+assert(JSON.stringify(matrix) == '[[0,0],[0,0],[0,0]]');
+```
+
+The `matrix` variable should have 3 rows.
+
+```js
+assert(matrix.length == 3);
+```
+
+The `matrix` variable should have 2 columns in each row.
 
 ```js
 assert(
-  __helpers
-    .removeWhiteSpace(__helpers.removeJSComments(code))
-    .match(/console.clear\(\)/)
+  matrix[0].length == 2 && matrix[1].length === 2 && matrix[2].length === 2
 );
-```
-
-You should use `console.log()` to print the `output` variable.
-
-```js
-assert(__helpers.removeWhiteSpace(code).match(/console\.log\(output\)/));
 ```
 
 # --seed--
@@ -49,25 +43,47 @@ assert(__helpers.removeWhiteSpace(code).match(/console\.log\(output\)/));
 ## --seed-contents--
 
 ```js
-// Open your browser console.
-let output = "Get this to log once in the freeCodeCamp console and twice in the browser console";
-// Use console.log() to print the output variable.
+function zeroArray(m, n) {
+  // Creates a 2-D array with m rows and n columns of zeroes
+  let newArray = [];
+  let row = [];
+  for (let i = 0; i < m; i++) {
+    // Adds the m-th row into newArray
 
-// Run the tests to see the difference between the two consoles.
+    for (let j = 0; j < n; j++) {
+      // Pushes n zeroes into the current row to create the columns
+      row.push(0);
+    }
+    // Pushes the current row, which now has n zeroes in it, to the array
+    newArray.push(row);
+  }
+  return newArray;
+}
 
-// Now, add console.clear() before your console.log() to clear the browser console, and pass the tests.
+let matrix = zeroArray(3, 2);
+console.log(matrix);
 ```
 
 # --solutions--
 
 ```js
-// Open your browser console.
-let output = "Get this to log once in the freeCodeCamp console and twice in the browser console";
-// Use console.log() to print the output variable.
-console.clear();
-console.log(output);
+function zeroArray(m, n) {
+ // Creates a 2-D array with m rows and n columns of zeroes
+ let newArray = [];
+ for (let i = 0; i < m; i++) {
+   let row = [];
+   // Adds the m-th row into newArray
 
-// Run the tests to see the difference between the two consoles.
+   for (let j = 0; j < n; j++) {
+     // Pushes n zeroes into the current row to create the columns
+     row.push(0);
+   }
+   // Pushes the current row, which now has n zeroes in it, to the array
+   newArray.push(row);
+ }
+ return newArray;
+}
 
-// Now, add console.clear() before your console.log() to clear the browser console, and pass the tests.
+let matrix = zeroArray(3, 2);
+console.log(matrix);
 ```
