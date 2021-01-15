@@ -1,51 +1,93 @@
 ---
-id: cf1111c1c11feddfaeb7bdef
-title: Nest one Array within Another Array
+id: 56533eb9ac21ba0edf2244e1
+title: Nesting For Loops
 challengeType: 1
-videoUrl: 'https://scrimba.com/c/crZQZf8'
-forumTopicId: 18247
-dashedName: nest-one-array-within-another-array
+videoUrl: 'https://scrimba.com/c/cRn6GHM'
+forumTopicId: 18248
+dashedName: nesting-for-loops
 ---
 
 # --description--
 
-You can also nest arrays within other arrays, like below:
+If you have a multi-dimensional array, you can use the same logic as the prior waypoint to loop through both the array and any sub-arrays. Here is an example:
 
 ```js
-[["Bulls", 23], ["White Sox", 45]]
+var arr = [
+  [1,2], [3,4], [5,6]
+];
+for (var i=0; i < arr.length; i++) {
+  for (var j=0; j < arr[i].length; j++) {
+    console.log(arr[i][j]);
+  }
+}
 ```
 
-This is also called a <dfn>multi-dimensional array<dfn>.</dfn></dfn>
+This outputs each sub-element in `arr` one at a time. Note that for the inner loop, we are checking the `.length` of `arr[i]`, since `arr[i]` is itself an array.
 
 # --instructions--
 
-Create a nested array called `myArray`.
+Modify function `multiplyAll` so that it returns the product of all the numbers in the sub-arrays of `arr`.
 
 # --hints--
 
-`myArray` should have at least one array nested within another array.
+`multiplyAll([[1],[2],[3]])` should return `6`
 
 ```js
-assert(Array.isArray(myArray) && myArray.some(Array.isArray));
+assert(multiplyAll([[1], [2], [3]]) === 6);
+```
+
+`multiplyAll([[1,2],[3,4],[5,6,7]])` should return `5040`
+
+```js
+assert(
+  multiplyAll([
+    [1, 2],
+    [3, 4],
+    [5, 6, 7]
+  ]) === 5040
+);
+```
+
+`multiplyAll([[5,1],[0.2, 4, 0.5],[3, 9]])` should return `54`
+
+```js
+assert(
+  multiplyAll([
+    [5, 1],
+    [0.2, 4, 0.5],
+    [3, 9]
+  ]) === 54
+);
 ```
 
 # --seed--
 
-## --after-user-code--
-
-```js
-if(typeof myArray !== "undefined"){(function(){return myArray;})();}
-```
-
 ## --seed-contents--
 
 ```js
-// Only change code below this line
-var myArray = [];
+function multiplyAll(arr) {
+  var product = 1;
+  // Only change code below this line
+
+  // Only change code above this line
+  return product;
+}
+
+multiplyAll([[1,2],[3,4],[5,6,7]]);
 ```
 
 # --solutions--
 
 ```js
-var myArray = [[1,2,3]];
+function multiplyAll(arr) {
+  var product = 1;
+  for (var i = 0; i < arr.length; i++) {
+    for (var j = 0; j < arr[i].length; j++) {
+      product *= arr[i][j];
+    }
+  }
+  return product;
+}
+
+multiplyAll([[1,2],[3,4],[5,6,7]]);
 ```
