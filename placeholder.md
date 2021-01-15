@@ -1,21 +1,15 @@
 ---
-id: 56533eb9ac21ba0edf2244b7
-title: Concatenating Strings with Plus Operator
+id: 56533eb9ac21ba0edf2244b8
+title: Concatenating Strings with the Plus Equals Operator
 challengeType: 1
-videoUrl: 'https://scrimba.com/c/cNpM8AN'
-forumTopicId: 16802
-dashedName: concatenating-strings-with-plus-operator
+videoUrl: 'https://scrimba.com/c/cbQmmC4'
+forumTopicId: 16803
+dashedName: concatenating-strings-with-the-plus-equals-operator
 ---
 
 # --description--
 
-In JavaScript, when the `+` operator is used with a `String` value, it is called the <dfn>concatenation</dfn> operator. You can build a new string out of other strings by <dfn>concatenating</dfn> them together.
-
-**Example**
-
-```js
-'My name is Alan,' + ' I concatenate.'
-```
+We can also use the `+=` operator to <dfn>concatenate</dfn> a string onto the end of an existing string variable. This can be very helpful to break a long string over several lines.
 
 **Note**  
 Watch out for spaces. Concatenation does not add spaces between concatenated strings, so you'll need to add them yourself.
@@ -23,38 +17,27 @@ Watch out for spaces. Concatenation does not add spaces between concatenated str
 Example:
 
 ```js
-var ourStr = "I come first. " + "I come second.";
-// ourStr is "I come first. I come second."
+var ourStr = "I come first. ";
+ourStr += "I come second.";
+// ourStr is now "I come first. I come second."
 ```
 
 # --instructions--
 
-Build `myStr` from the strings `"This is the start. "` and `"This is the end."` using the `+` operator.
+Build `myStr` over several lines by concatenating these two strings: `"This is the first sentence. "` and `"This is the second sentence."` using the `+=` operator. Use the `+=` operator similar to how it is shown in the editor. Start by assigning the first string to `myStr`, then add on the second string.
 
 # --hints--
 
-`myStr` should have a value of `This is the start. This is the end.`
+`myStr` should have a value of `This is the first sentence. This is the second sentence.`
 
 ```js
-assert(myStr === 'This is the start. This is the end.');
+assert(myStr === 'This is the first sentence. This is the second sentence.');
 ```
 
-You should use the `+` operator to build `myStr`.
+You should use the `+=` operator to build `myStr`.
 
 ```js
-assert(code.match(/(["']).*\1\s*\+\s*(["']).*\2/g));
-```
-
-`myStr` should be created using the `var` keyword.
-
-```js
-assert(/var\s+myStr/.test(code));
-```
-
-You should assign the result to the `myStr` variable.
-
-```js
-assert(/myStr\s*=/.test(code));
+assert(code.match(/myStr\s*\+=\s*(["']).*\1/g));
 ```
 
 # --seed--
@@ -74,11 +57,14 @@ assert(/myStr\s*=/.test(code));
 ## --seed-contents--
 
 ```js
-var myStr; // Change this line
+// Only change code below this line
+
+var myStr;
 ```
 
 # --solutions--
 
 ```js
-var myStr = "This is the start. " + "This is the end.";
+var myStr = "This is the first sentence. ";
+myStr += "This is the second sentence.";
 ```
