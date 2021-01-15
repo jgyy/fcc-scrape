@@ -1,75 +1,204 @@
 ---
-id: 56105e7b514f539506016a5e
-title: Count Backwards With a For Loop
+id: 565bbe00e9cc8ac0725390f4
+title: Counting Cards
 challengeType: 1
-videoUrl: 'https://scrimba.com/c/c2R6BHa'
-forumTopicId: 16808
-dashedName: count-backwards-with-a-for-loop
+videoUrl: 'https://scrimba.com/c/c6KE7ty'
+forumTopicId: 16809
+dashedName: counting-cards
 ---
 
 # --description--
 
-A for loop can also count backwards, so long as we can define the right conditions.
+In the casino game Blackjack, a player can gain an advantage over the house by keeping track of the relative number of high and low cards remaining in the deck. This is called [Card Counting](https://en.wikipedia.org/wiki/Card_counting).
 
-In order to count backwards by twos, we'll need to change our `initialization`, `condition`, and `final-expression`.
+Having more high cards remaining in the deck favors the player. Each card is assigned a value according to the table below. When the count is positive, the player should bet high. When the count is zero or negative, the player should bet low.
 
-We'll start at `i = 10` and loop while `i > 0`. We'll decrement `i` by 2 each loop with `i -= 2`.
+<table class='table table-striped'><thead><tr><th>Count Change</th><th>Cards</th></tr></thead><tbody><tr><td>+1</td><td>2, 3, 4, 5, 6</td></tr><tr><td>0</td><td>7, 8, 9</td></tr><tr><td>-1</td><td>10, 'J', 'Q', 'K', 'A'</td></tr></tbody></table>
 
-```js
-var ourArray = [];
-for (var i = 10; i > 0; i -= 2) {
-  ourArray.push(i);
-}
-```
+You will write a card counting function. It will receive a `card` parameter, which can be a number or a string, and increment or decrement the global `count` variable according to the card's value (see table). The function will then return a string with the current count and the string `Bet` if the count is positive, or `Hold` if the count is zero or negative. The current count and the player's decision (`Bet` or `Hold`) should be separated by a single space.
 
-`ourArray` will now contain `[10,8,6,4,2]`. Let's change our `initialization` and `final-expression` so we can count backward by twos by odd numbers.
+**Example Output**  
+`-3 Hold`  
+`5 Bet`
 
-# --instructions--
-
-Push the odd numbers from 9 through 1 to `myArray` using a `for` loop.
+**Hint**  
+Do NOT reset `count` to 0 when value is 7, 8, or 9.  
+Do NOT return an array.  
+Do NOT include quotes (single or double) in the output.
 
 # --hints--
 
-You should be using a `for` loop for this.
+Cards Sequence 2, 3, 4, 5, 6 should return `5 Bet`
 
 ```js
-assert(/for\s*\([^)]+?\)/.test(code));
+assert(
+  (function () {
+    count = 0;
+    cc(2);
+    cc(3);
+    cc(4);
+    cc(5);
+    var out = cc(6);
+    if (out === '5 Bet') {
+      return true;
+    }
+    return false;
+  })()
+);
 ```
 
-You should be using the array method `push`.
+Cards Sequence 7, 8, 9 should return `0 Hold`
 
 ```js
-assert(code.match(/myArray.push/));
+assert(
+  (function () {
+    count = 0;
+    cc(7);
+    cc(8);
+    var out = cc(9);
+    if (out === '0 Hold') {
+      return true;
+    }
+    return false;
+  })()
+);
 ```
 
-`myArray` should equal `[9,7,5,3,1]`.
+Cards Sequence 10, J, Q, K, A should return `-5 Hold`
 
 ```js
-assert.deepEqual(myArray, [9, 7, 5, 3, 1]);
+assert(
+  (function () {
+    count = 0;
+    cc(10);
+    cc('J');
+    cc('Q');
+    cc('K');
+    var out = cc('A');
+    if (out === '-5 Hold') {
+      return true;
+    }
+    return false;
+  })()
+);
+```
+
+Cards Sequence 3, 7, Q, 8, A should return `-1 Hold`
+
+```js
+assert(
+  (function () {
+    count = 0;
+    cc(3);
+    cc(7);
+    cc('Q');
+    cc(8);
+    var out = cc('A');
+    if (out === '-1 Hold') {
+      return true;
+    }
+    return false;
+  })()
+);
+```
+
+Cards Sequence 2, J, 9, 2, 7 should return `1 Bet`
+
+```js
+assert(
+  (function () {
+    count = 0;
+    cc(2);
+    cc('J');
+    cc(9);
+    cc(2);
+    var out = cc(7);
+    if (out === '1 Bet') {
+      return true;
+    }
+    return false;
+  })()
+);
+```
+
+Cards Sequence 2, 2, 10 should return `1 Bet`
+
+```js
+assert(
+  (function () {
+    count = 0;
+    cc(2);
+    cc(2);
+    var out = cc(10);
+    if (out === '1 Bet') {
+      return true;
+    }
+    return false;
+  })()
+);
+```
+
+Cards Sequence 3, 2, A, 10, K should return `-1 Hold`
+
+```js
+assert(
+  (function () {
+    count = 0;
+    cc(3);
+    cc(2);
+    cc('A');
+    cc(10);
+    var out = cc('K');
+    if (out === '-1 Hold') {
+      return true;
+    }
+    return false;
+  })()
+);
 ```
 
 # --seed--
 
-## --after-user-code--
-
-```js
-if(typeof myArray !== "undefined"){(function(){return myArray;})();}
-```
-
 ## --seed-contents--
 
 ```js
-// Setup
-var myArray = [];
+var count = 0;
 
-// Only change code below this line
+function cc(card) {
+  // Only change code below this line
+
+
+  return "Change Me";
+  // Only change code above this line
+}
+
+cc(2); cc(3); cc(7); cc('K'); cc('A');
 ```
 
 # --solutions--
 
 ```js
-var myArray = [];
-for (var i = 9; i > 0; i -= 2) {
-  myArray.push(i);
+var count = 0;
+function cc(card) {
+  switch(card) {
+    case 2:
+    case 3:
+    case 4:
+    case 5:
+    case 6:
+      count++;
+      break;
+    case 10:
+    case 'J':
+    case 'Q':
+    case 'K':
+    case 'A':
+      count--;
+  }
+  if(count > 0) {
+    return count + " Bet";
+  } else {
+    return count + " Hold";
+  }
 }
 ```
