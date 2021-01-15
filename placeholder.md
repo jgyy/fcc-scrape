@@ -1,43 +1,43 @@
 ---
-id: bd7123c9c451eddfaeb5bdef
-title: Use Bracket Notation to Find the Last Character in a String
+id: bd7123c9c450eddfaeb5bdef
+title: Use Bracket Notation to Find the Nth Character in a String
 challengeType: 1
-videoUrl: 'https://scrimba.com/c/cBZQGcv'
-forumTopicId: 18342
-dashedName: use-bracket-notation-to-find-the-last-character-in-a-string
+videoUrl: 'https://scrimba.com/c/cWPVJua'
+forumTopicId: 18343
+dashedName: use-bracket-notation-to-find-the-nth-character-in-a-string
 ---
 
 # --description--
 
-In order to get the last letter of a string, you can subtract one from the string's length.
+You can also use <dfn>bracket notation</dfn> to get the character at other positions within a string.
 
-For example, if `var firstName = "Charles"`, you can get the value of the last letter of the string by using `firstName[firstName.length - 1]`.
+Remember that computers start counting at `0`, so the first character is actually the zeroth character.
 
 Example:
 
 ```js
-var firstName = "Charles";
-var lastLetter = firstName[firstName.length - 1]; // lastLetter is "s"
+var firstName = "Ada";
+var secondLetterOfFirstName = firstName[1]; // secondLetterOfFirstName is "d"
 ```
 
 # --instructions--
 
-Use <dfn>bracket notation</dfn> to find the last character in the `lastName` variable.
+Let's try to set `thirdLetterOfLastName` to equal the third letter of the `lastName` variable using bracket notation.
 
 **Hint:** Try looking at the example above if you get stuck.
 
 # --hints--
 
-`lastLetterOfLastName` should be "e".
+The `thirdLetterOfLastName` variable should have the value of `v`.
 
 ```js
-assert(lastLetterOfLastName === 'e');
+assert(thirdLetterOfLastName === 'v');
 ```
 
-You should use `.length` to get the last letter.
+You should use bracket notation.
 
 ```js
-assert(code.match(/\.length/g).length > 0);
+assert(code.match(/thirdLetterOfLastName\s*?=\s*?lastName\[.*?\]/));
 ```
 
 # --seed--
@@ -45,7 +45,7 @@ assert(code.match(/\.length/g).length > 0);
 ## --after-user-code--
 
 ```js
-(function(v){return v;})(lastLetterOfLastName);
+(function(v){return v;})(thirdLetterOfLastName);
 ```
 
 ## --seed-contents--
@@ -55,12 +55,12 @@ assert(code.match(/\.length/g).length > 0);
 var lastName = "Lovelace";
 
 // Only change code below this line
-var lastLetterOfLastName = lastName; // Change this line
+var thirdLetterOfLastName = lastName; // Change this line
 ```
 
 # --solutions--
 
 ```js
 var lastName = "Lovelace";
-var lastLetterOfLastName = lastName[lastName.length - 1];
+var thirdLetterOfLastName = lastName[2];
 ```
