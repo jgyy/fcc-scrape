@@ -1,58 +1,100 @@
 ---
-id: 56533eb9ac21ba0edf2244d3
-title: Comparison with the Strict Inequality Operator
+id: 56533eb9ac21ba0edf2244d8
+title: Comparisons with the Logical And Operator
 challengeType: 1
-videoUrl: 'https://scrimba.com/c/cKekkUy'
-forumTopicId: 16791
-dashedName: comparison-with-the-strict-inequality-operator
+videoUrl: 'https://scrimba.com/c/cvbRVtr'
+forumTopicId: 16799
+dashedName: comparisons-with-the-logical-and-operator
 ---
 
 # --description--
 
-The strict inequality operator (`!==`) is the logical opposite of the strict equality operator. It means "Strictly Not Equal" and returns `false` where strict equality would return `true` and *vice versa*. Strict inequality will not convert data types.
+Sometimes you will need to test more than one thing at a time. The <dfn>logical and</dfn> operator (`&&`) returns `true` if and only if the <dfn>operands</dfn> to the left and right of it are true.
 
-**Examples**
+The same effect could be achieved by nesting an if statement inside another if:
 
 ```js
-3 !==  3   // false
-3 !== '3'  // true
-4 !==  3   // true
+if (num > 5) {
+  if (num < 10) {
+    return "Yes";
+  }
+}
+return "No";
+```
+
+will only return "Yes" if `num` is greater than `5` and less than `10`. The same logic can be written as:
+
+```js
+if (num > 5 && num < 10) {
+  return "Yes";
+}
+return "No";
 ```
 
 # --instructions--
 
-Add the strict inequality operator to the `if` statement so the function will return "Not Equal" when `val` is not strictly equal to `17`
+Replace the two if statements with one statement, using the && operator, which will return `"Yes"` if `val` is less than or equal to `50` and greater than or equal to `25`. Otherwise, will return `"No"`.
 
 # --hints--
 
-`testStrictNotEqual(17)` should return "Equal"
+You should use the `&&` operator once
 
 ```js
-assert(testStrictNotEqual(17) === 'Equal');
+assert(code.match(/&&/g).length === 1);
 ```
 
-`testStrictNotEqual("17")` should return "Not Equal"
+You should only have one `if` statement
 
 ```js
-assert(testStrictNotEqual('17') === 'Not Equal');
+assert(code.match(/if/g).length === 1);
 ```
 
-`testStrictNotEqual(12)` should return "Not Equal"
+`testLogicalAnd(0)` should return "No"
 
 ```js
-assert(testStrictNotEqual(12) === 'Not Equal');
+assert(testLogicalAnd(0) === 'No');
 ```
 
-`testStrictNotEqual("bob")` should return "Not Equal"
+`testLogicalAnd(24)` should return "No"
 
 ```js
-assert(testStrictNotEqual('bob') === 'Not Equal');
+assert(testLogicalAnd(24) === 'No');
 ```
 
-You should use the `!==` operator
+`testLogicalAnd(25)` should return "Yes"
 
 ```js
-assert(code.match(/(val\s*!==\s*\d+)|(\d+\s*!==\s*val)/g).length > 0);
+assert(testLogicalAnd(25) === 'Yes');
+```
+
+`testLogicalAnd(30)` should return "Yes"
+
+```js
+assert(testLogicalAnd(30) === 'Yes');
+```
+
+`testLogicalAnd(50)` should return "Yes"
+
+```js
+assert(testLogicalAnd(50) === 'Yes');
+```
+
+`testLogicalAnd(51)` should return "No"
+
+```js
+assert(testLogicalAnd(51) === 'No');
+```
+
+`testLogicalAnd(75)` should return "No"
+
+```js
+assert(testLogicalAnd(75) === 'No');
+```
+
+`testLogicalAnd(80)` should return "No"
+
+```js
+assert(testLogicalAnd(80) === 'No');
 ```
 
 # --seed--
@@ -60,24 +102,29 @@ assert(code.match(/(val\s*!==\s*\d+)|(\d+\s*!==\s*val)/g).length > 0);
 ## --seed-contents--
 
 ```js
-// Setup
-function testStrictNotEqual(val) {
-  if (val) { // Change this line
-    return "Not Equal";
+function testLogicalAnd(val) {
+  // Only change code below this line
+
+  if (val) {
+    if (val) {
+      return "Yes";
+    }
   }
-  return "Equal";
+
+  // Only change code above this line
+  return "No";
 }
 
-testStrictNotEqual(10);
+testLogicalAnd(10);
 ```
 
 # --solutions--
 
 ```js
-function testStrictNotEqual(val) {
-  if (val !== 17) {
-    return "Not Equal";
+function testLogicalAnd(val) {
+  if (val >= 25 && val <= 50) {
+    return "Yes";
   }
-  return "Equal";
+  return "No";
 }
 ```
