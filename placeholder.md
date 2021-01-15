@@ -1,96 +1,70 @@
 ---
-id: 567af2437cbaa8c51670a16c
-title: Testing Objects for Properties
+id: 56533eb9ac21ba0edf2244ba
+title: Understand String Immutability
 challengeType: 1
-videoUrl: 'https://scrimba.com/c/c6Wz4ySr'
-forumTopicId: 18324
-dashedName: testing-objects-for-properties
+videoUrl: 'https://scrimba.com/c/cWPVaUR'
+forumTopicId: 18331
+dashedName: understand-string-immutability
 ---
 
 # --description--
 
-Sometimes it is useful to check if the property of a given object exists or not. We can use the `.hasOwnProperty(propname)` method of objects to determine if that object has the given property name. `.hasOwnProperty()` returns `true` or `false` if the property is found or not.
+In JavaScript, `String` values are <dfn>immutable</dfn>, which means that they cannot be altered once created.
 
-**Example**
+For example, the following code:
 
 ```js
-var myObj = {
-  top: "hat",
-  bottom: "pants"
-};
-myObj.hasOwnProperty("top");    // true
-myObj.hasOwnProperty("middle"); // false
+var myStr = "Bob";
+myStr[0] = "J";
+```
+
+cannot change the value of `myStr` to "Job", because the contents of `myStr` cannot be altered. Note that this does *not* mean that `myStr` cannot be changed, just that the individual characters of a <dfn>string literal</dfn> cannot be changed. The only way to change `myStr` would be to assign it with a new string, like this:
+
+```js
+var myStr = "Bob";
+myStr = "Job";
 ```
 
 # --instructions--
 
-Modify the function `checkObj` to test if an object passed to the function (`obj`) contains a specific property (`checkProp`). If the property is found, return that property's value. If not, return `"Not Found"`.
+Correct the assignment to `myStr` so it contains the string value of `Hello World` using the approach shown in the example above.
 
 # --hints--
 
-`checkObj({gift: "pony", pet: "kitten", bed: "sleigh"}, "gift")` should return `"pony"`.
+`myStr` should have a value of `Hello World`.
 
 ```js
-assert(
-  checkObj({ gift: 'pony', pet: 'kitten', bed: 'sleigh' }, 'gift') === 'pony'
-);
+assert(myStr === 'Hello World');
 ```
 
-`checkObj({gift: "pony", pet: "kitten", bed: "sleigh"}, "pet")` should return `"kitten"`.
+You should not change the code above the specified comment.
 
 ```js
-assert(
-  checkObj({ gift: 'pony', pet: 'kitten', bed: 'sleigh' }, 'pet') === 'kitten'
-);
-```
-
-`checkObj({gift: "pony", pet: "kitten", bed: "sleigh"}, "house")` should return `"Not Found"`.
-
-```js
-assert(
-  checkObj({ gift: 'pony', pet: 'kitten', bed: 'sleigh' }, 'house') ===
-    'Not Found'
-);
-```
-
-`checkObj({city: "Seattle"}, "city")` should return `"Seattle"`.
-
-```js
-assert(checkObj({ city: 'Seattle' }, 'city') === 'Seattle');
-```
-
-`checkObj({city: "Seattle"}, "district")` should return `"Not Found"`.
-
-```js
-assert(checkObj({ city: 'Seattle' }, 'district') === 'Not Found');
-```
-
-`checkObj({pet: "kitten", bed: "sleigh"}, "gift")` should return `"Not Found"`.
-
-```js
-assert(checkObj({ pet: 'kitten', bed: 'sleigh' }, 'gift') === 'Not Found');
+assert(/myStr = "Jello World"/.test(code));
 ```
 
 # --seed--
 
+## --after-user-code--
+
+```js
+(function(v){return "myStr = " + v;})(myStr);
+```
+
 ## --seed-contents--
 
 ```js
-function checkObj(obj, checkProp) {
-  // Only change code below this line
-  return "Change Me!";
-  // Only change code above this line
-}
+// Setup
+var myStr = "Jello World";
+
+// Only change code below this line
+myStr[0] = "H"; // Change this line
+// Only change code above this line
 ```
 
 # --solutions--
 
 ```js
-function checkObj(obj, checkProp) {
-  if(obj.hasOwnProperty(checkProp)) {
-    return obj[checkProp];
-  } else {
-    return "Not Found";
-  }
-}
+var myStr = "Jello World";
+myStr = "Hello World";
 ```
