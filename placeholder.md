@@ -1,59 +1,57 @@
 ---
-id: 56533eb9ac21ba0edf2244b1
-title: Compound Assignment With Augmented Multiplication
+id: 56533eb9ac21ba0edf2244b0
+title: Compound Assignment With Augmented Subtraction
 challengeType: 1
-videoUrl: 'https://scrimba.com/c/c83vrfa'
-forumTopicId: 16662
-dashedName: compound-assignment-with-augmented-multiplication
+videoUrl: 'https://scrimba.com/c/c2Qv7AV'
+forumTopicId: 16660
+dashedName: compound-assignment-with-augmented-subtraction
 ---
 
 # --description--
 
-The `*=` operator multiplies a variable by a number.
+Like the `+=` operator, `-=` subtracts a number from a variable.
 
-`myVar = myVar * 5;`
+`myVar = myVar - 5;`
 
-will multiply `myVar` by `5`. This can be rewritten as:
+will subtract `5` from `myVar`. This can be rewritten as:
 
-`myVar *= 5;`
+`myVar -= 5;`
 
 # --instructions--
 
-Convert the assignments for `a`, `b`, and `c` to use the `*=` operator.
+Convert the assignments for `a`, `b`, and `c` to use the `-=` operator.
 
 # --hints--
 
-`a` should equal `25`.
+`a` should equal `5`.
 
 ```js
-assert(a === 25);
+assert(a === 5);
 ```
 
-`b` should equal `36`.
+`b` should equal `-6`.
 
 ```js
-assert(b === 36);
+assert(b === -6);
 ```
 
-`c` should equal `46`.
+`c` should equal `2`.
 
 ```js
-assert(c === 46);
+assert(c === 2);
 ```
 
-You should use the `*=` operator for each variable.
+You should use the `-=` operator for each variable.
 
 ```js
-assert(code.match(/\*=/g).length === 3);
+assert(code.match(/-=/g).length === 3);
 ```
 
 You should not modify the code above the specified comment.
 
 ```js
 assert(
-  /var a = 5;/.test(code) &&
-    /var b = 12;/.test(code) &&
-    /var c = 4\.6;/.test(code)
+  /var a = 11;/.test(code) && /var b = 9;/.test(code) && /var c = 3;/.test(code)
 );
 ```
 
@@ -68,24 +66,24 @@ assert(
 ## --seed-contents--
 
 ```js
-var a = 5;
-var b = 12;
-var c = 4.6;
+var a = 11;
+var b = 9;
+var c = 3;
 
 // Only change code below this line
-a = a * 5;
-b = 3 * b;
-c = c * 10;
+a = a - 6;
+b = b - 15;
+c = c - 1;
 ```
 
 # --solutions--
 
 ```js
-var a = 5;
-var b = 12;
-var c = 4.6;
+var a = 11;
+var b = 9;
+var c = 3;
 
-a *= 5;
-b *= 3;
-c *= 10;
+a -= 6;
+b -= 15;
+c -= 1;
 ```
