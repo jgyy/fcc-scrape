@@ -1,204 +1,55 @@
 ---
-id: 565bbe00e9cc8ac0725390f4
-title: Counting Cards
+id: cf1391c1c11feddfaeb4bdef
+title: Create Decimal Numbers with JavaScript
 challengeType: 1
-videoUrl: 'https://scrimba.com/c/c6KE7ty'
-forumTopicId: 16809
-dashedName: counting-cards
+videoUrl: 'https://scrimba.com/c/ca8GEuW'
+forumTopicId: 16826
+dashedName: create-decimal-numbers-with-javascript
 ---
 
 # --description--
 
-In the casino game Blackjack, a player can gain an advantage over the house by keeping track of the relative number of high and low cards remaining in the deck. This is called [Card Counting](https://en.wikipedia.org/wiki/Card_counting).
+We can store decimal numbers in variables too. Decimal numbers are sometimes referred to as <dfn>floating point</dfn> numbers or <dfn>floats</dfn>.
 
-Having more high cards remaining in the deck favors the player. Each card is assigned a value according to the table below. When the count is positive, the player should bet high. When the count is zero or negative, the player should bet low.
+**Note**  
+Not all real numbers can accurately be represented in <dfn>floating point</dfn>. This can lead to rounding errors. [Details Here](https://en.wikipedia.org/wiki/Floating_point#Accuracy_problems).
 
-<table class='table table-striped'><thead><tr><th>Count Change</th><th>Cards</th></tr></thead><tbody><tr><td>+1</td><td>2, 3, 4, 5, 6</td></tr><tr><td>0</td><td>7, 8, 9</td></tr><tr><td>-1</td><td>10, 'J', 'Q', 'K', 'A'</td></tr></tbody></table>
+# --instructions--
 
-You will write a card counting function. It will receive a `card` parameter, which can be a number or a string, and increment or decrement the global `count` variable according to the card's value (see table). The function will then return a string with the current count and the string `Bet` if the count is positive, or `Hold` if the count is zero or negative. The current count and the player's decision (`Bet` or `Hold`) should be separated by a single space.
-
-**Example Output**  
-`-3 Hold`  
-`5 Bet`
-
-**Hint**  
-Do NOT reset `count` to 0 when value is 7, 8, or 9.  
-Do NOT return an array.  
-Do NOT include quotes (single or double) in the output.
+Create a variable `myDecimal` and give it a decimal value with a fractional part (e.g. `5.7`).
 
 # --hints--
 
-Cards Sequence 2, 3, 4, 5, 6 should return `5 Bet`
+`myDecimal` should be a number.
 
 ```js
-assert(
-  (function () {
-    count = 0;
-    cc(2);
-    cc(3);
-    cc(4);
-    cc(5);
-    var out = cc(6);
-    if (out === '5 Bet') {
-      return true;
-    }
-    return false;
-  })()
-);
+assert(typeof myDecimal === 'number');
 ```
 
-Cards Sequence 7, 8, 9 should return `0 Hold`
+`myDecimal` should have a decimal point
 
 ```js
-assert(
-  (function () {
-    count = 0;
-    cc(7);
-    cc(8);
-    var out = cc(9);
-    if (out === '0 Hold') {
-      return true;
-    }
-    return false;
-  })()
-);
-```
-
-Cards Sequence 10, J, Q, K, A should return `-5 Hold`
-
-```js
-assert(
-  (function () {
-    count = 0;
-    cc(10);
-    cc('J');
-    cc('Q');
-    cc('K');
-    var out = cc('A');
-    if (out === '-5 Hold') {
-      return true;
-    }
-    return false;
-  })()
-);
-```
-
-Cards Sequence 3, 7, Q, 8, A should return `-1 Hold`
-
-```js
-assert(
-  (function () {
-    count = 0;
-    cc(3);
-    cc(7);
-    cc('Q');
-    cc(8);
-    var out = cc('A');
-    if (out === '-1 Hold') {
-      return true;
-    }
-    return false;
-  })()
-);
-```
-
-Cards Sequence 2, J, 9, 2, 7 should return `1 Bet`
-
-```js
-assert(
-  (function () {
-    count = 0;
-    cc(2);
-    cc('J');
-    cc(9);
-    cc(2);
-    var out = cc(7);
-    if (out === '1 Bet') {
-      return true;
-    }
-    return false;
-  })()
-);
-```
-
-Cards Sequence 2, 2, 10 should return `1 Bet`
-
-```js
-assert(
-  (function () {
-    count = 0;
-    cc(2);
-    cc(2);
-    var out = cc(10);
-    if (out === '1 Bet') {
-      return true;
-    }
-    return false;
-  })()
-);
-```
-
-Cards Sequence 3, 2, A, 10, K should return `-1 Hold`
-
-```js
-assert(
-  (function () {
-    count = 0;
-    cc(3);
-    cc(2);
-    cc('A');
-    cc(10);
-    var out = cc('K');
-    if (out === '-1 Hold') {
-      return true;
-    }
-    return false;
-  })()
-);
+assert(myDecimal % 1 != 0);
 ```
 
 # --seed--
 
+## --after-user-code--
+
+```js
+(function(){if(typeof myDecimal !== "undefined"){return myDecimal;}})();
+```
+
 ## --seed-contents--
 
 ```js
-var count = 0;
+var ourDecimal = 5.7;
 
-function cc(card) {
-  // Only change code below this line
-
-
-  return "Change Me";
-  // Only change code above this line
-}
-
-cc(2); cc(3); cc(7); cc('K'); cc('A');
+// Only change code below this line
 ```
 
 # --solutions--
 
 ```js
-var count = 0;
-function cc(card) {
-  switch(card) {
-    case 2:
-    case 3:
-    case 4:
-    case 5:
-    case 6:
-      count++;
-      break;
-    case 10:
-    case 'J':
-    case 'Q':
-    case 'K':
-    case 'A':
-      count--;
-  }
-  if(count > 0) {
-    return count + " Bet";
-  } else {
-    return count + " Hold";
-  }
-}
+var myDecimal = 9.9;
 ```
