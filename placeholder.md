@@ -1,118 +1,64 @@
 ---
-id: 56533eb9ac21ba0edf2244c6
-title: Stand in Line
+id: bd7993c9c69feddfaeb8bdef
+title: Store Multiple Values in one Variable using JavaScript Arrays
 challengeType: 1
-videoUrl: 'https://scrimba.com/c/ca8Q8tP'
-forumTopicId: 18307
-dashedName: stand-in-line
+videoUrl: 'https://scrimba.com/c/crZQWAm'
+forumTopicId: 18309
+dashedName: store-multiple-values-in-one-variable-using-javascript-arrays
 ---
 
 # --description--
 
-In Computer Science a <dfn>queue</dfn> is an abstract <dfn>Data Structure</dfn> where items are kept in order. New items can be added at the back of the queue and old items are taken off from the front of the queue.
+With JavaScript `array` variables, we can store several pieces of data in one place.
 
-Write a function `nextInLine` which takes an array (`arr`) and a number (`item`) as arguments.
+You start an array declaration with an opening square bracket, end it with a closing square bracket, and put a comma between each entry, like this:
 
-Add the number to the end of the array, then remove the first element of the array.
+`var sandwich = ["peanut butter", "jelly", "bread"]`.
 
-The `nextInLine` function should then return the element that was removed.
+# --instructions--
+
+Modify the new array `myArray` so that it contains both a `string` and a `number` (in that order).
+
+**Hint**  
+Refer to the example code in the text editor if you get stuck.
 
 # --hints--
 
-`nextInLine([], 5)` should return a number.
+`myArray` should be an `array`.
 
 ```js
-assert.isNumber(nextInLine([], 5));
+assert(typeof myArray == 'object');
 ```
 
-`nextInLine([], 1)` should return `1`
+The first item in `myArray` should be a `string`.
 
 ```js
-assert(nextInLine([], 1) === 1);
+assert(typeof myArray[0] !== 'undefined' && typeof myArray[0] == 'string');
 ```
 
-`nextInLine([2], 1)` should return `2`
+The second item in `myArray` should be a `number`.
 
 ```js
-assert(nextInLine([2], 1) === 2);
-```
-
-`nextInLine([5,6,7,8,9], 1)` should return `5`
-
-```js
-assert(nextInLine([5, 6, 7, 8, 9], 1) === 5);
-```
-
-After `nextInLine(testArr, 10)`, `testArr[4]` should be `10`
-
-```js
-nextInLine(testArr, 10);
-assert(testArr[4] === 10);
+assert(typeof myArray[1] !== 'undefined' && typeof myArray[1] == 'number');
 ```
 
 # --seed--
 
-## --before-user-code--
-
-```js
-var logOutput = [];
-var originalConsole = console
-function capture() {
-    var nativeLog = console.log;
-    console.log = function (message) {
-        logOutput.push(message);
-        if(nativeLog.apply) {
-          nativeLog.apply(originalConsole, arguments);
-        } else {
-          var nativeMsg = Array.prototype.slice.apply(arguments).join(' ');
-          nativeLog(nativeMsg);
-        }
-    };
-}
-
-function uncapture() {
-  console.log = originalConsole.log;
-}
-
-capture();
-```
-
 ## --after-user-code--
 
 ```js
-uncapture();
-testArr = [1,2,3,4,5];
-(function() { return logOutput.join("\n");})();
+(function(z){return z;})(myArray);
 ```
 
 ## --seed-contents--
 
 ```js
-function nextInLine(arr, item) {
-  // Only change code below this line
-  
-  return item;
-  // Only change code above this line
-  
-
-}
-
-// Setup
-var testArr = [1,2,3,4,5];
-
-// Display code
-console.log("Before: " + JSON.stringify(testArr));
-console.log(nextInLine(testArr, 6));
-console.log("After: " + JSON.stringify(testArr));
+// Only change code below this line
+var myArray = [];
 ```
 
 # --solutions--
 
 ```js
-var testArr = [ 1,2,3,4,5];
-
-function nextInLine(arr, item) {
-    arr.push(item);
-    return arr.shift();
-}
+var myArray = ["The Answer", 42];
 ```
