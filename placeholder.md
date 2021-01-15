@@ -1,135 +1,77 @@
 ---
-id: 5664820f61c48e80c9fa476c
-title: Golf Code
+id: 56533eb9ac21ba0edf2244ac
+title: Increment a Number with JavaScript
 challengeType: 1
-videoUrl: 'https://scrimba.com/c/c9ykNUR'
-forumTopicId: 18195
-dashedName: golf-code
+videoUrl: 'https://scrimba.com/c/ca8GLT9'
+forumTopicId: 18201
+dashedName: increment-a-number-with-javascript
 ---
 
 # --description--
 
-In the game of [golf](https://en.wikipedia.org/wiki/Golf) each hole has a `par` meaning the average number of `strokes` a golfer is expected to make in order to sink the ball in a hole to complete the play. Depending on how far above or below `par` your `strokes` are, there is a different nickname.
+You can easily <dfn>increment</dfn> or add one to a variable with the `++` operator.
 
-Your function will be passed `par` and `strokes` arguments. Return the correct string according to this table which lists the strokes in order of priority; top (highest) to bottom (lowest):
+`i++;`
 
-<table class='table table-striped'><thead><tr><th>Strokes</th><th>Return</th></tr></thead><tbody><tr><td>1</td><td>"Hole-in-one!"</td></tr><tr><td>&#x3C;= par - 2</td><td>"Eagle"</td></tr><tr><td>par - 1</td><td>"Birdie"</td></tr><tr><td>par</td><td>"Par"</td></tr><tr><td>par + 1</td><td>"Bogey"</td></tr><tr><td>par + 2</td><td>"Double Bogey"</td></tr><tr><td>>= par + 3</td><td>"Go Home!"</td></tr></tbody></table>
+is the equivalent of
 
-`par` and `strokes` will always be numeric and positive. We have added an array of all the names for your convenience.
+`i = i + 1;`
+
+**Note**  
+The entire line becomes `i++;`, eliminating the need for the equal sign.
+
+# --instructions--
+
+Change the code to use the `++` operator on `myVar`.
 
 # --hints--
 
-`golfScore(4, 1)` should return "Hole-in-one!"
+`myVar` should equal `88`.
 
 ```js
-assert(golfScore(4, 1) === 'Hole-in-one!');
+assert(myVar === 88);
 ```
 
-`golfScore(4, 2)` should return "Eagle"
+You should not use the assignment operator.
 
 ```js
-assert(golfScore(4, 2) === 'Eagle');
+assert(
+  /var\s*myVar\s*=\s*87;\s*\/*.*\s*([+]{2}\s*myVar|myVar\s*[+]{2});/.test(code)
+);
 ```
 
-`golfScore(5, 2)` should return "Eagle"
+You should use the `++` operator.
 
 ```js
-assert(golfScore(5, 2) === 'Eagle');
+assert(/[+]{2}\s*myVar|myVar\s*[+]{2}/.test(code));
 ```
 
-`golfScore(4, 3)` should return "Birdie"
+You should not change code above the specified comment.
 
 ```js
-assert(golfScore(4, 3) === 'Birdie');
-```
-
-`golfScore(4, 4)` should return "Par"
-
-```js
-assert(golfScore(4, 4) === 'Par');
-```
-
-`golfScore(1, 1)` should return "Hole-in-one!"
-
-```js
-assert(golfScore(1, 1) === 'Hole-in-one!');
-```
-
-`golfScore(5, 5)` should return "Par"
-
-```js
-assert(golfScore(5, 5) === 'Par');
-```
-
-`golfScore(4, 5)` should return "Bogey"
-
-```js
-assert(golfScore(4, 5) === 'Bogey');
-```
-
-`golfScore(4, 6)` should return "Double Bogey"
-
-```js
-assert(golfScore(4, 6) === 'Double Bogey');
-```
-
-`golfScore(4, 7)` should return "Go Home!"
-
-```js
-assert(golfScore(4, 7) === 'Go Home!');
-```
-
-`golfScore(5, 9)` should return "Go Home!"
-
-```js
-assert(golfScore(5, 9) === 'Go Home!');
+assert(/var myVar = 87;/.test(code));
 ```
 
 # --seed--
 
+## --after-user-code--
+
+```js
+(function(z){return 'myVar = ' + z;})(myVar);
+```
+
 ## --seed-contents--
 
 ```js
-var names = ["Hole-in-one!", "Eagle", "Birdie", "Par", "Bogey", "Double Bogey", "Go Home!"];
-function golfScore(par, strokes) {
-  // Only change code below this line
+var myVar = 87;
 
-
-  return "Change Me";
-  // Only change code above this line
-}
-
-golfScore(5, 4);
+// Only change code below this line
+myVar = myVar + 1;
 ```
 
 # --solutions--
 
 ```js
-function golfScore(par, strokes) {
-  if (strokes === 1) {
-    return "Hole-in-one!";
-  }
-
-  if (strokes <= par - 2) {
-    return "Eagle";
-  }
-
-  if (strokes === par - 1) {
-    return "Birdie";
-  }
-
-  if (strokes === par) {
-    return "Par";
-  }
-
-  if (strokes === par + 1) {
-    return "Bogey";
-  }
-
-  if(strokes === par + 2) {
-    return "Double Bogey";
-  }
-
-  return "Go Home!";
-}
+var myVar = 87;
+myVar++;
 ```
