@@ -1,55 +1,78 @@
 ---
-id: 56533eb9ac21ba0edf2244c2
-title: Return a Value from a Function with Return
+id: 56533eb9ac21ba0edf2244c4
+title: Return Early Pattern for Functions
 challengeType: 1
-videoUrl: 'https://scrimba.com/c/cy87wue'
-forumTopicId: 18271
-dashedName: return-a-value-from-a-function-with-return
+videoUrl: 'https://scrimba.com/c/cQe39Sq'
+forumTopicId: 18272
+dashedName: return-early-pattern-for-functions
 ---
 
 # --description--
 
-We can pass values into a function with <dfn>arguments</dfn>. You can use a `return` statement to send a value back out of a function.
+When a `return` statement is reached, the execution of the current function stops and control returns to the calling location.
 
 **Example**
 
 ```js
-function plusThree(num) {
-  return num + 3;
+function myFun() {
+  console.log("Hello");
+  return "World";
+  console.log("byebye")
 }
-var answer = plusThree(5); // 8
+myFun();
 ```
 
-`plusThree` takes an <dfn>argument</dfn> for `num` and returns a value equal to `num + 3`.
+The above outputs "Hello" to the console, returns "World", but `"byebye"` is never output, because the function exits at the `return` statement.
 
 # --instructions--
 
-Create a function `timesFive` that accepts one argument, multiplies it by `5`, and returns the new value. See the last line in the editor for an example of how you can test your `timesFive` function.
+Modify the function `abTest` so that if `a` or `b` are less than `0` the function will immediately exit with a value of `undefined`.
+
+**Hint**  
+Remember that [`undefined` is a keyword](https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/basic-javascript/understanding-uninitialized-variables), not a string.
 
 # --hints--
 
-`timesFive` should be a function
+`abTest(2,2)` should return a number
 
 ```js
-assert(typeof timesFive === 'function');
+assert(typeof abTest(2, 2) === 'number');
 ```
 
-`timesFive(5)` should return `25`
+`abTest(2,2)` should return `8`
 
 ```js
-assert(timesFive(5) === 25);
+assert(abTest(2, 2) === 8);
 ```
 
-`timesFive(2)` should return `10`
+`abTest(-2,2)` should return `undefined`
 
 ```js
-assert(timesFive(2) === 10);
+assert(abTest(-2, 2) === undefined);
 ```
 
-`timesFive(0)` should return `0`
+`abTest(2,-2)` should return `undefined`
 
 ```js
-assert(timesFive(0) === 0);
+assert(abTest(2, -2) === undefined);
+```
+
+`abTest(2,8)` should return `18`
+
+```js
+assert(abTest(2, 8) === 18);
+```
+
+`abTest(3,3)` should return `12`
+
+```js
+assert(abTest(3, 3) === 12);
+```
+
+`abTest(0,0)` should return `0`
+
+```js
+assert(abTest(0, 0) === 0);
 ```
 
 # --seed--
@@ -57,13 +80,27 @@ assert(timesFive(0) === 0);
 ## --seed-contents--
 
 ```js
+// Setup
+function abTest(a, b) {
+  // Only change code below this line
+
+
+
+  // Only change code above this line
+
+  return Math.round(Math.pow(Math.sqrt(a) + Math.sqrt(b), 2));
+}
+
+abTest(2,2);
 ```
 
 # --solutions--
 
 ```js
-function timesFive(num) {
-  return num * 5;
+function abTest(a, b) {
+  if(a < 0 || b < 0) {
+    return undefined;
+  }
+  return Math.round(Math.pow(Math.sqrt(a) + Math.sqrt(b), 2));
 }
-timesFive(10);
 ```
