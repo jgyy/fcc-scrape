@@ -1,62 +1,99 @@
 ---
-id: bd7123c9c441eddfaeb5bdef
-title: Understanding Boolean Values
+id: 56533eb9ac21ba0edf2244ab
+title: Understanding Case Sensitivity in Variables
 challengeType: 1
-videoUrl: 'https://scrimba.com/c/c9Me8t4'
-forumTopicId: 301176
-dashedName: understanding-boolean-values
+videoUrl: 'https://scrimba.com/c/cd6GDcD'
+forumTopicId: 18334
+dashedName: understanding-case-sensitivity-in-variables
 ---
 
 # --description--
 
-Another data type is the <dfn>Boolean</dfn>. `Booleans` may only be one of two values: `true` or `false`. They are basically little on-off switches, where `true` is "on" and `false` is "off." These two states are mutually exclusive.
+In JavaScript all variables and function names are case sensitive. This means that capitalization matters.
 
-**Note**  
-`Boolean` values are never written with quotes. The `strings` `"true"` and `"false"` are not `Boolean` and have no special meaning in JavaScript.
+`MYVAR` is not the same as `MyVar` nor `myvar`. It is possible to have multiple distinct variables with the same name but different casing. It is strongly recommended that for the sake of clarity, you *do not* use this language feature.
+
+<h4>Best Practice</h4>
+
+Write variable names in JavaScript in <dfn>camelCase</dfn>. In <dfn>camelCase</dfn>, multi-word variable names have the first word in lowercase and the first letter of each subsequent word is capitalized.
+
+**Examples:**
+
+```js
+var someVariable;
+var anotherVariableName;
+var thisVariableNameIsSoLong;
+```
 
 # --instructions--
 
-Modify the `welcomeToBooleans` function so that it returns `true` instead of `false` when the run button is clicked.
+Modify the existing declarations and assignments so their names use <dfn>camelCase</dfn>.  
+Do not create any new variables.
 
 # --hints--
 
-The `welcomeToBooleans()` function should return a boolean (true/false) value.
+`studlyCapVar` should be defined and have a value of `10`.
 
 ```js
-assert(typeof welcomeToBooleans() === 'boolean');
+assert(typeof studlyCapVar !== 'undefined' && studlyCapVar === 10);
 ```
 
-`welcomeToBooleans()` should return true.
+`properCamelCase` should be defined and have a value of `"A String"`.
 
 ```js
-assert(welcomeToBooleans() === true);
+assert(
+  typeof properCamelCase !== 'undefined' && properCamelCase === 'A String'
+);
+```
+
+`titleCaseOver` should be defined and have a value of `9000`.
+
+```js
+assert(typeof titleCaseOver !== 'undefined' && titleCaseOver === 9000);
+```
+
+`studlyCapVar` should use camelCase in both declaration and assignment sections.
+
+```js
+assert(code.match(/studlyCapVar/g).length === 2);
+```
+
+`properCamelCase` should use camelCase in both declaration and assignment sections.
+
+```js
+assert(code.match(/properCamelCase/g).length === 2);
+```
+
+`titleCaseOver` should use camelCase in both declaration and assignment sections.
+
+```js
+assert(code.match(/titleCaseOver/g).length === 2);
 ```
 
 # --seed--
 
-## --after-user-code--
-
-```js
-welcomeToBooleans();
-```
-
 ## --seed-contents--
 
 ```js
-function welcomeToBooleans() {
+// Variable declarations
+var StUdLyCapVaR;
+var properCamelCase;
+var TitleCaseOver;
 
-  // Only change code below this line
-
-  return false; // Change this line
-
-  // Only change code above this line
-}
+// Variable assignments
+STUDLYCAPVAR = 10;
+PRoperCAmelCAse = "A String";
+tITLEcASEoVER = 9000;
 ```
 
 # --solutions--
 
 ```js
-function welcomeToBooleans() {
-  return true; // Change this line
-}
+var studlyCapVar;
+var properCamelCase;
+var titleCaseOver;
+
+studlyCapVar = 10;
+properCamelCase = "A String";
+titleCaseOver = 9000;
 ```
