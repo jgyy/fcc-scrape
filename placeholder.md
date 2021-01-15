@@ -1,31 +1,41 @@
 ---
-id: 587d7b85367417b2b2512b3a
-title: Catch Arguments Passed in the Wrong Order When Calling a Function
+id: 587d7b85367417b2b2512b39
+title: Catch Missing Open and Closing Parenthesis After a Function Call
 challengeType: 1
-forumTopicId: 301184
-dashedName: catch-arguments-passed-in-the-wrong-order-when-calling-a-function
+forumTopicId: 301185
+dashedName: catch-missing-open-and-closing-parenthesis-after-a-function-call
 ---
 
 # --description--
 
-Continuing the discussion on calling functions, the next bug to watch out for is when a function's arguments are supplied in the incorrect order. If the arguments are different types, such as a function expecting an array and an integer, this will likely throw a runtime error. If the arguments are the same type (all integers, for example), then the logic of the code won't make sense. Make sure to supply all required arguments, in the proper order to avoid these issues.
+When a function or method doesn't take any arguments, you may forget to include the (empty) opening and closing parentheses when calling it. Often times the result of a function call is saved in a variable for other use in your code. This error can be detected by logging variable values (or their types) to the console and seeing that one is set to a function reference, instead of the expected value the function returns.
+
+The variables in the following example are different:
+
+```js
+function myFunction() {
+  return "You rock!";
+}
+let varOne = myFunction; // set to equal a function
+let varTwo = myFunction(); // set to equal the string "You rock!"
+```
 
 # --instructions--
 
-The function `raiseToPower` raises a base to an exponent. Unfortunately, it's not called properly - fix the code so the value of `power` is the expected 8.
+Fix the code so the variable `result` is set to the value returned from calling the function `getNine`.
 
 # --hints--
 
-Your code should fix the variable `power` so it equals 2 raised to the 3rd power, not 3 raised to the 2nd power.
+Your code should fix the variable `result` so it is set to the number that the function `getNine` returns.
 
 ```js
-assert(power == 8);
+assert(result == 9);
 ```
 
-Your code should use the correct order of the arguments for the `raiseToPower` function call.
+Your code should call the `getNine` function.
 
 ```js
-assert(code.match(/raiseToPower\(\s*?base\s*?,\s*?exp\s*?\);/g));
+assert(code.match(/getNine\(\)/g).length == 2);
 ```
 
 # --seed--
@@ -33,25 +43,25 @@ assert(code.match(/raiseToPower\(\s*?base\s*?,\s*?exp\s*?\);/g));
 ## --seed-contents--
 
 ```js
-function raiseToPower(b, e) {
-  return Math.pow(b, e);
+function getNine() {
+  let x = 6;
+  let y = 3;
+  return x + y;
 }
 
-let base = 2;
-let exp = 3;
-let power = raiseToPower(exp, base);
-console.log(power);
+let result = getNine;
+console.log(result);
 ```
 
 # --solutions--
 
 ```js
-function raiseToPower(b, e) {
- return Math.pow(b, e);
+function getNine() {
+ let x = 6;
+ let y = 3;
+ return x + y;
 }
 
-let base = 2;
-let exp = 3;
-let power = raiseToPower(base, exp);
-console.log(power);
+let result = getNine();
+console.log(result);
 ```
