@@ -1,58 +1,60 @@
 ---
-id: 56533eb9ac21ba0edf2244b0
-title: Compound Assignment With Augmented Subtraction
+id: 56533eb9ac21ba0edf2244b7
+title: Concatenating Strings with Plus Operator
 challengeType: 1
-videoUrl: 'https://scrimba.com/c/c2Qv7AV'
-forumTopicId: 16660
-dashedName: compound-assignment-with-augmented-subtraction
+videoUrl: 'https://scrimba.com/c/cNpM8AN'
+forumTopicId: 16802
+dashedName: concatenating-strings-with-plus-operator
 ---
 
 # --description--
 
-Like the `+=` operator, `-=` subtracts a number from a variable.
+In JavaScript, when the `+` operator is used with a `String` value, it is called the <dfn>concatenation</dfn> operator. You can build a new string out of other strings by <dfn>concatenating</dfn> them together.
 
-`myVar = myVar - 5;`
+**Example**
 
-will subtract `5` from `myVar`. This can be rewritten as:
+```js
+'My name is Alan,' + ' I concatenate.'
+```
 
-`myVar -= 5;`
+**Note**  
+Watch out for spaces. Concatenation does not add spaces between concatenated strings, so you'll need to add them yourself.
+
+Example:
+
+```js
+var ourStr = "I come first. " + "I come second.";
+// ourStr is "I come first. I come second."
+```
 
 # --instructions--
 
-Convert the assignments for `a`, `b`, and `c` to use the `-=` operator.
+Build `myStr` from the strings `"This is the start. "` and `"This is the end."` using the `+` operator.
 
 # --hints--
 
-`a` should equal `5`.
+`myStr` should have a value of `This is the start. This is the end.`
 
 ```js
-assert(a === 5);
+assert(myStr === 'This is the start. This is the end.');
 ```
 
-`b` should equal `-6`.
+You should use the `+` operator to build `myStr`.
 
 ```js
-assert(b === -6);
+assert(code.match(/(["']).*\1\s*\+\s*(["']).*\2/g));
 ```
 
-`c` should equal `2`.
+`myStr` should be created using the `var` keyword.
 
 ```js
-assert(c === 2);
+assert(/var\s+myStr/.test(code));
 ```
 
-You should use the `-=` operator for each variable.
+You should assign the result to the `myStr` variable.
 
 ```js
-assert(code.match(/-=/g).length === 3);
-```
-
-You should not modify the code above the specified comment.
-
-```js
-assert(
-  /var a = 11;/.test(code) && /var b = 9;/.test(code) && /var c = 3;/.test(code)
-);
+assert(/myStr\s*=/.test(code));
 ```
 
 # --seed--
@@ -60,30 +62,23 @@ assert(
 ## --after-user-code--
 
 ```js
-(function(a,b,c){ return "a = " + a + ", b = " + b + ", c = " + c; })(a,b,c);
+(function(){
+  if(typeof myStr === 'string') {
+    return 'myStr = "' + myStr + '"';
+  } else {
+    return 'myStr is not a string';
+  }
+})();
 ```
 
 ## --seed-contents--
 
 ```js
-var a = 11;
-var b = 9;
-var c = 3;
-
-// Only change code below this line
-a = a - 6;
-b = b - 15;
-c = c - 1;
+var myStr; // Change this line
 ```
 
 # --solutions--
 
 ```js
-var a = 11;
-var b = 9;
-var c = 3;
-
-a -= 6;
-b -= 15;
-c -= 1;
+var myStr = "This is the start. " + "This is the end.";
 ```
