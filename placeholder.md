@@ -1,41 +1,33 @@
 ---
-id: 587d7b86367417b2b2512b3c
-title: Use Caution When Reinitializing Variables Inside a Loop
+id: 587d7b83367417b2b2512b33
+title: Use the JavaScript Console to Check the Value of a Variable
 challengeType: 1
-forumTopicId: 301194
-dashedName: use-caution-when-reinitializing-variables-inside-a-loop
+forumTopicId: 18372
+dashedName: use-the-javascript-console-to-check-the-value-of-a-variable
 ---
 
 # --description--
 
-Sometimes it's necessary to save information, increment counters, or re-set variables within a loop. A potential issue is when variables either should be reinitialized, and aren't, or vice versa. This is particularly dangerous if you accidentally reset the variable being used for the terminal condition, causing an infinite loop.
+Both Chrome and Firefox have excellent JavaScript consoles, also known as DevTools, for debugging your JavaScript.
 
-Printing variable values with each cycle of your loop by using `console.log()` can uncover buggy behavior related to resetting, or failing to reset a variable.
+You can find Developer tools in your Chrome's menu or Web Console in Firefox's menu. If you're using a different browser, or a mobile phone, we strongly recommend switching to desktop Firefox or Chrome.
+
+The `console.log()` method, which "prints" the output of what's within its parentheses to the console, will likely be the most helpful debugging tool. Placing it at strategic points in your code can show you the intermediate values of variables. It's good practice to have an idea of what the output should be before looking at what it is. Having check points to see the status of your calculations throughout your code will help narrow down where the problem is.
+
+Here's an example to print 'Hello world!' to the console:
+
+`console.log('Hello world!');`
 
 # --instructions--
 
-The following function is supposed to create a two-dimensional array with `m` rows and `n` columns of zeroes. Unfortunately, it's not producing the expected output because the `row` variable isn't being reinitialized (set back to an empty array) in the outer loop. Fix the code so it returns a correct 3x2 array of zeroes, which looks like `[[0, 0], [0, 0], [0, 0]]`.
+Use the `console.log()` method to print the value of the variable `a` where noted in the code.
 
 # --hints--
 
-Your code should set the `matrix` variable to an array holding 3 rows of 2 columns of zeroes each.
+Your code should use `console.log()` to check the value of the variable `a`.
 
 ```js
-assert(JSON.stringify(matrix) == '[[0,0],[0,0],[0,0]]');
-```
-
-The `matrix` variable should have 3 rows.
-
-```js
-assert(matrix.length == 3);
-```
-
-The `matrix` variable should have 2 columns in each row.
-
-```js
-assert(
-  matrix[0].length == 2 && matrix[1].length === 2 && matrix[2].length === 2
-);
+assert(code.match(/console\.log\(a\)/g));
 ```
 
 # --seed--
@@ -43,47 +35,18 @@ assert(
 ## --seed-contents--
 
 ```js
-function zeroArray(m, n) {
-  // Creates a 2-D array with m rows and n columns of zeroes
-  let newArray = [];
-  let row = [];
-  for (let i = 0; i < m; i++) {
-    // Adds the m-th row into newArray
+let a = 5;
+let b = 1;
+a++;
+// Only change code below this line
 
-    for (let j = 0; j < n; j++) {
-      // Pushes n zeroes into the current row to create the columns
-      row.push(0);
-    }
-    // Pushes the current row, which now has n zeroes in it, to the array
-    newArray.push(row);
-  }
-  return newArray;
-}
 
-let matrix = zeroArray(3, 2);
-console.log(matrix);
+let sumAB = a + b;
+console.log(sumAB);
 ```
 
 # --solutions--
 
 ```js
-function zeroArray(m, n) {
- // Creates a 2-D array with m rows and n columns of zeroes
- let newArray = [];
- for (let i = 0; i < m; i++) {
-   let row = [];
-   // Adds the m-th row into newArray
-
-   for (let j = 0; j < n; j++) {
-     // Pushes n zeroes into the current row to create the columns
-     row.push(0);
-   }
-   // Pushes the current row, which now has n zeroes in it, to the array
-   newArray.push(row);
- }
- return newArray;
-}
-
-let matrix = zeroArray(3, 2);
-console.log(matrix);
+var a = 5; console.log(a);
 ```
