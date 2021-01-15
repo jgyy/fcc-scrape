@@ -1,63 +1,68 @@
 ---
-id: 5cc0bd7a49b71cb96132e54c
-title: Use Recursion to Create a Range of Numbers
+id: 587d7b7e367417b2b2512b24
+title: Use the Conditional (Ternary) Operator
 challengeType: 1
-forumTopicId: 301180
-dashedName: use-recursion-to-create-a-range-of-numbers
+forumTopicId: 301181
+dashedName: use-the-conditional-ternary-operator
 ---
 
 # --description--
 
-Continuing from the previous challenge, we provide you another opportunity to create a recursive function to solve a problem.
+The <dfn>conditional operator</dfn>, also called the <dfn>ternary operator</dfn>, can be used as a one line if-else expression.
+
+The syntax is:
+
+`condition ? expression-if-true : expression-if-false;`
+
+The following function uses an if-else statement to check a condition:
+
+```js
+function findGreater(a, b) {
+  if(a > b) {
+    return "a is greater";
+  }
+  else {
+    return "b is greater";
+  }
+}
+```
+
+This can be re-written using the `conditional operator`:
+
+```js
+function findGreater(a, b) {
+  return a > b ? "a is greater" : "b is greater";
+}
+```
 
 # --instructions--
 
-We have defined a function named `rangeOfNumbers` with two parameters. The function should return an array of integers which begins with a number represented by the `startNum` parameter and ends with a number represented by the `endNum` parameter. The starting number will always be less than or equal to the ending number. Your function must use recursion by calling itself and not use loops of any kind. It should also work for cases where both `startNum` and `endNum` are the same.
+Use the `conditional operator` in the `checkEqual` function to check if two numbers are equal or not. The function should return either "Equal" or "Not Equal".
 
 # --hints--
 
-Your function should return an array.
+`checkEqual` should use the `conditional operator`
 
 ```js
-assert(Array.isArray(rangeOfNumbers(5, 10)));
+assert(/.+?\s*?\?\s*?.+?\s*?:\s*?.+?/.test(code));
 ```
 
-Your code should not use any loop syntax (`for` or `while` or higher order functions such as `forEach`, `map`, `filter`, or `reduce`).
+`checkEqual(1, 2)` should return "Not Equal"
 
 ```js
-assert(
-  !__helpers
-    .removeJSComments(code)
-    .match(/for|while|forEach|map|filter|reduce/g)
-);
+assert(checkEqual(1, 2) === 'Not Equal');
 ```
 
-`rangeOfNumbers` should use recursion (call itself) to solve this challenge.
+`checkEqual(1, 1)` should return "Equal"
 
 ```js
-assert(
-  __helpers
-    .removeJSComments(rangeOfNumbers.toString())
-    .match(/rangeOfNumbers\s*\(.+\)/)
-);
+assert(checkEqual(1, 1) === 'Equal');
 ```
 
-`rangeOfNumbers(1, 5)` should return `[1, 2, 3, 4, 5]`.
+`checkEqual(1, -1)` should return "Not Equal"
 
 ```js
-assert.deepStrictEqual(rangeOfNumbers(1, 5), [1, 2, 3, 4, 5]);
-```
-
-`rangeOfNumbers(6, 9)` should return `[6, 7, 8, 9]`.
-
-```js
-assert.deepStrictEqual(rangeOfNumbers(6, 9), [6, 7, 8, 9]);
-```
-
-`rangeOfNumbers(4, 4)` should return `[4]`.
-
-```js
-assert.deepStrictEqual(rangeOfNumbers(4, 4), [4]);
+assert(checkEqual(1, -1) === 'Not Equal');
 ```
 
 # --seed--
@@ -65,21 +70,17 @@ assert.deepStrictEqual(rangeOfNumbers(4, 4), [4]);
 ## --seed-contents--
 
 ```js
-function rangeOfNumbers(startNum, endNum) {
-  return [];
-};
+function checkEqual(a, b) {
+
+}
+
+checkEqual(1, 2);
 ```
 
 # --solutions--
 
 ```js
-function rangeOfNumbers(startNum, endNum) {
-  if (endNum - startNum === 0) {
-    return [startNum];
-  } else {
-    var numbers = rangeOfNumbers(startNum, endNum - 1);
-    numbers.push(endNum);
-    return numbers;
-  }
+function checkEqual(a, b) {
+  return a === b ? "Equal" : "Not Equal";
 }
 ```
