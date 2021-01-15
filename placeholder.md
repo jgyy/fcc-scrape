@@ -1,59 +1,38 @@
 ---
-id: 56bbb991ad1ed5201cd392d3
-title: Delete Properties from a JavaScript Object
+id: bd7993c9ca9feddfaeb7bdef
+title: Divide One Decimal by Another with JavaScript
 challengeType: 1
-videoUrl: 'https://scrimba.com/c/cDqKdTv'
-forumTopicId: 17560
-dashedName: delete-properties-from-a-javascript-object
+videoUrl: 'https://scrimba.com/c/cBZe9AW'
+forumTopicId: 18255
+dashedName: divide-one-decimal-by-another-with-javascript
 ---
 
 # --description--
 
-We can also delete properties from objects like this:
-
-`delete ourDog.bark;`
-
-Example:
-
-```js
-var ourDog = {
-  "name": "Camper",
-  "legs": 4,
-  "tails": 1,
-  "friends": ["everything!"],
-  "bark": "bow-wow"
-};
-
-delete ourDog.bark;
-```
-
-After the last line shown above, `ourDog` looks like:
-
-```js
-{
-  "name": "Camper",
-  "legs": 4,
-  "tails": 1,
-  "friends": ["everything!"]
-}
-```
+Now let's divide one decimal by another.
 
 # --instructions--
 
-Delete the `"tails"` property from `myDog`. You may use either dot or bracket notation.
+Change the `0.0` so that `quotient` will equal to `2.2`.
 
 # --hints--
 
-You should delete the property `"tails"` from `myDog`.
+The variable `quotient` should equal `2.2`
 
 ```js
-assert(typeof myDog === 'object' && myDog.tails === undefined);
+assert(quotient === 2.2);
 ```
 
-You should not modify the `myDog` setup.
+You should use the `/` operator to divide 4.4 by 2
 
 ```js
-assert(code.match(/"tails": 1/g).length > 0);
+assert(/4\.40*\s*\/\s*2\.*0*/.test(code));
+```
+
+The quotient variable should only be assigned once
+
+```js
+assert(code.match(/quotient/g).length === 1);
 ```
 
 # --seed--
@@ -61,33 +40,17 @@ assert(code.match(/"tails": 1/g).length > 0);
 ## --after-user-code--
 
 ```js
-(function(z){return z;})(myDog);
+(function(y){return 'quotient = '+y;})(quotient);
 ```
 
 ## --seed-contents--
 
 ```js
-// Setup
-var myDog = {
-  "name": "Happy Coder",
-  "legs": 4,
-  "tails": 1,
-  "friends": ["freeCodeCamp Campers"],
-  "bark": "woof"
-};
-
-// Only change code below this line
+var quotient = 0.0 / 2.0; // Change this line
 ```
 
 # --solutions--
 
 ```js
-var myDog = {
-  "name": "Happy Coder",
-  "legs": 4,
-  "tails": 1,
-  "friends": ["freeCodeCamp Campers"],
-  "bark": "woof"
-};
-delete myDog.tails;
+var quotient = 4.4 / 2.0;
 ```
