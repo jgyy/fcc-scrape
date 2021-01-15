@@ -1,159 +1,149 @@
 ---
-id: 56bbb991ad1ed5201cd392d0
-title: Build JavaScript Objects
+id: 56533eb9ac21ba0edf2244dc
+title: Chaining If Else Statements
 challengeType: 1
-videoUrl: 'https://scrimba.com/c/cWGkbtd'
-forumTopicId: 16769
-dashedName: build-javascript-objects
+videoUrl: 'https://scrimba.com/c/caeJgsw'
+forumTopicId: 16772
+dashedName: chaining-if-else-statements
 ---
 
 # --description--
 
-You may have heard the term `object` before.
-
-Objects are similar to `arrays`, except that instead of using indexes to access and modify their data, you access the data in objects through what are called `properties`.
-
-Objects are useful for storing data in a structured way, and can represent real world objects, like a cat.
-
-Here's a sample cat object:
+`if/else` statements can be chained together for complex logic. Here is <dfn>pseudocode</dfn> of multiple chained `if` / `else if` statements:
 
 ```js
-var cat = {
-  "name": "Whiskers",
-  "legs": 4,
-  "tails": 1,
-  "enemies": ["Water", "Dogs"]
-};
+if (condition1) {
+  statement1
+} else if (condition2) {
+  statement2
+} else if (condition3) {
+  statement3
+. . .
+} else {
+  statementN
+}
 ```
-
-In this example, all the properties are stored as strings, such as - `"name"`, `"legs"`, and `"tails"`. However, you can also use numbers as properties. You can even omit the quotes for single-word string properties, as follows:
-
-```js
-var anotherObject = {
-  make: "Ford",
-  5: "five",
-  "model": "focus"
-};
-```
-
-However, if your object has any non-string properties, JavaScript will automatically typecast them as strings.
 
 # --instructions--
 
-Make an object that represents a dog called `myDog` which contains the properties `"name"` (a string), `"legs"`, `"tails"` and `"friends"`.
+Write chained `if`/`else if` statements to fulfill the following conditions:
 
-You can set these object properties to whatever values you want, as long as `"name"` is a string, `"legs"` and `"tails"` are numbers, and `"friends"` is an array.
+`num < 5` - return "Tiny"  
+`num < 10` - return "Small"  
+`num < 15` - return "Medium"  
+`num < 20` - return "Large"  
+`num >= 20` - return "Huge"
 
 # --hints--
 
-`myDog` should contain the property `name` and it should be a `string`.
+You should have at least four `else` statements
 
 ```js
-assert(
-  (function (z) {
-    if (
-      z.hasOwnProperty('name') &&
-      z.name !== undefined &&
-      typeof z.name === 'string'
-    ) {
-      return true;
-    } else {
-      return false;
-    }
-  })(myDog)
-);
+assert(code.match(/else/g).length > 3);
 ```
 
-`myDog` should contain the property `legs` and it should be a `number`.
+You should have at least four `if` statements
 
 ```js
-assert(
-  (function (z) {
-    if (
-      z.hasOwnProperty('legs') &&
-      z.legs !== undefined &&
-      typeof z.legs === 'number'
-    ) {
-      return true;
-    } else {
-      return false;
-    }
-  })(myDog)
-);
+assert(code.match(/if/g).length > 3);
 ```
 
-`myDog` should contain the property `tails` and it should be a `number`.
+You should have at least one `return` statement
 
 ```js
-assert(
-  (function (z) {
-    if (
-      z.hasOwnProperty('tails') &&
-      z.tails !== undefined &&
-      typeof z.tails === 'number'
-    ) {
-      return true;
-    } else {
-      return false;
-    }
-  })(myDog)
-);
+assert(code.match(/return/g).length >= 1);
 ```
 
-`myDog` should contain the property `friends` and it should be an `array`.
+`testSize(0)` should return "Tiny"
 
 ```js
-assert(
-  (function (z) {
-    if (
-      z.hasOwnProperty('friends') &&
-      z.friends !== undefined &&
-      Array.isArray(z.friends)
-    ) {
-      return true;
-    } else {
-      return false;
-    }
-  })(myDog)
-);
+assert(testSize(0) === 'Tiny');
 ```
 
-`myDog` should only contain all the given properties.
+`testSize(4)` should return "Tiny"
 
 ```js
-assert(
-  (function (z) {
-    return Object.keys(z).length === 4;
-  })(myDog)
-);
+assert(testSize(4) === 'Tiny');
+```
+
+`testSize(5)` should return "Small"
+
+```js
+assert(testSize(5) === 'Small');
+```
+
+`testSize(8)` should return "Small"
+
+```js
+assert(testSize(8) === 'Small');
+```
+
+`testSize(10)` should return "Medium"
+
+```js
+assert(testSize(10) === 'Medium');
+```
+
+`testSize(14)` should return "Medium"
+
+```js
+assert(testSize(14) === 'Medium');
+```
+
+`testSize(15)` should return "Large"
+
+```js
+assert(testSize(15) === 'Large');
+```
+
+`testSize(17)` should return "Large"
+
+```js
+assert(testSize(17) === 'Large');
+```
+
+`testSize(20)` should return "Huge"
+
+```js
+assert(testSize(20) === 'Huge');
+```
+
+`testSize(25)` should return "Huge"
+
+```js
+assert(testSize(25) === 'Huge');
 ```
 
 # --seed--
 
-## --after-user-code--
-
-```js
-(function(z){return z;})(myDog);
-```
-
 ## --seed-contents--
 
 ```js
-var myDog = {
-// Only change code below this line
+function testSize(num) {
+  // Only change code below this line
 
 
-// Only change code above this line
-};
+  return "Change Me";
+  // Only change code above this line
+}
+
+testSize(7);
 ```
 
 # --solutions--
 
 ```js
-var myDog = {
-  "name": "Camper",
-  "legs": 4,
-  "tails": 1,
-  "friends": ["everything!"]
-};
+function testSize(num) {
+  if (num < 5) {
+    return "Tiny";
+  } else if (num < 10) {
+    return "Small";
+  } else if (num < 15) {
+    return "Medium";
+  } else if (num < 20) {
+    return "Large";
+  } else {
+    return "Huge";
+  }
+}
 ```
