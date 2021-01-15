@@ -1,119 +1,80 @@
 ---
-id: 56533eb9ac21ba0edf2244bd
-title: Passing Values to Functions with Arguments
+id: 599a789b454f2bbd91a3ff4d
+title: Practice comparing different values
 challengeType: 1
-videoUrl: 'https://scrimba.com/c/cy8rahW'
-forumTopicId: 18254
-dashedName: passing-values-to-functions-with-arguments
+videoUrl: 'https://scrimba.com/c/cm8PqCa'
+forumTopicId: 301174
+dashedName: practice-comparing-different-values
 ---
 
 # --description--
 
-<dfn>Parameters</dfn> are variables that act as placeholders for the values that are to be input to a function when it is called. When a function is defined, it is typically defined along with one or more parameters. The actual values that are input (or <dfn>"passed"</dfn>) into a function when it is called are known as <dfn>arguments</dfn>.
+In the last two challenges, we learned about the equality operator (`==`) and the strict equality operator (`===`). Let's do a quick review and practice using these operators some more.
 
-Here is a function with two parameters, `param1` and `param2`:
+If the values being compared are not of the same type, the equality operator will perform a type conversion, and then evaluate the values. However, the strict equality operator will compare both the data type and value as-is, without converting one type to the other.
+
+**Examples**
 
 ```js
-function testFun(param1, param2) {
-  console.log(param1, param2);
-}
+3 == '3'  // returns true because JavaScript performs type conversion from string to number
+3 === '3' // returns false because the types are different and type conversion is not performed
 ```
 
-Then we can call `testFun`: `testFun("Hello", "World");` We have passed two arguments, `"Hello"` and `"World"`. Inside the function, `param1` will equal "Hello" and `param2` will equal "World". Note that you could call `testFun` again with different arguments and the parameters would take on the value of the new arguments.
+**Note**  
+In JavaScript, you can determine the type of a variable or a value with the `typeof` operator, as follows:
+
+```js
+typeof 3   // returns 'number'
+typeof '3' // returns 'string'
+```
 
 # --instructions--
 
-<ol><li>Create a function called <code>functionWithArgs</code> that accepts two arguments and outputs their sum to the dev console.</li><li>Call the function with two numbers as arguments.</li></ol>
+The `compareEquality` function in the editor compares two values using the equality operator. Modify the function so that it returns "Equal" only when the values are strictly equal.
 
 # --hints--
 
-`functionWithArgs` should be a function.
+`compareEquality(10, "10")` should return "Not Equal"
 
 ```js
-assert(typeof functionWithArgs === 'function');
+assert(compareEquality(10, '10') === 'Not Equal');
 ```
 
-`functionWithArgs(1,2)` should output `3`.
+`compareEquality("20", 20)` should return "Not Equal"
 
 ```js
-if (typeof functionWithArgs === 'function') {
-  capture();
-  functionWithArgs(1, 2);
-  uncapture();
-}
-assert(logOutput == 3);
+assert(compareEquality('20', 20) === 'Not Equal');
 ```
 
-`functionWithArgs(7,9)` should output `16`.
+You should use the `===` operator
 
 ```js
-if (typeof functionWithArgs === 'function') {
-  capture();
-  functionWithArgs(7, 9);
-  uncapture();
-}
-assert(logOutput == 16);
-```
-
-You should call `functionWithArgs` with two numbers after you define it.
-
-```js
-assert(
-  /functionWithArgs\([-+]?\d*\.?\d*,[-+]?\d*\.?\d*\)/.test(
-    code.replace(/\s/g, '')
-  )
-);
+assert(code.match(/===/g));
 ```
 
 # --seed--
 
-## --before-user-code--
-
-```js
-var logOutput = "";
-var originalConsole = console
-function capture() {
-    var nativeLog = console.log;
-    console.log = function (message) {
-        if(message) logOutput = JSON.stringify(message).trim();
-        if(nativeLog.apply) {
-          nativeLog.apply(originalConsole, arguments);
-        } else {
-          var nativeMsg = Array.prototype.slice.apply(arguments).join(' ');
-          nativeLog(nativeMsg);
-        }
-    };
-}
-
-function uncapture() {
-  console.log = originalConsole.log;
-}
-
-capture();
-```
-
-## --after-user-code--
-
-```js
-uncapture();
-
-if (typeof functionWithArgs !== "function") { 
-  (function() { return "functionWithArgs is not defined"; })();
-} else {
-  (function() { return logOutput || "console.log never called"; })();
-}
-```
-
 ## --seed-contents--
 
 ```js
+// Setup
+function compareEquality(a, b) {
+  if (a == b) { // Change this line
+    return "Equal";
+  }
+  return "Not Equal";
+}
+
+compareEquality(10, "10");
 ```
 
 # --solutions--
 
 ```js
-function functionWithArgs(a, b) {
-  console.log(a + b);
+function compareEquality(a,b) {
+  if (a === b) {
+    return "Equal";
+  }
+  return "Not Equal";
 }
-functionWithArgs(10, 5);
 ```
