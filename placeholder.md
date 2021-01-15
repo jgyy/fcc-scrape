@@ -1,40 +1,32 @@
 ---
-id: cf1231c1c11feddfaeb5bdef
-title: Multiply Two Numbers with JavaScript
+id: cf1111c1c11feddfaeb7bdef
+title: Nest one Array within Another Array
 challengeType: 1
-videoUrl: 'https://scrimba.com/c/cP3y3Aq'
-forumTopicId: 18243
-dashedName: multiply-two-numbers-with-javascript
+videoUrl: 'https://scrimba.com/c/crZQZf8'
+forumTopicId: 18247
+dashedName: nest-one-array-within-another-array
 ---
 
 # --description--
 
-We can also multiply one number by another.
-
-JavaScript uses the `*` symbol for multiplication of two numbers.
-
-**Example**
+You can also nest arrays within other arrays, like below:
 
 ```js
-myVar = 13 * 13; // assigned 169
+[["Bulls", 23], ["White Sox", 45]]
 ```
+
+This is also called a <dfn>multi-dimensional array<dfn>.</dfn></dfn>
 
 # --instructions--
 
-Change the `0` so that product will equal `80`.
+Create a nested array called `myArray`.
 
 # --hints--
 
-The variable `product` should be equal to 80.
+`myArray` should have at least one array nested within another array.
 
 ```js
-assert(product === 80);
-```
-
-You should use the `*` operator.
-
-```js
-assert(/\*/.test(code));
+assert(Array.isArray(myArray) && myArray.some(Array.isArray));
 ```
 
 # --seed--
@@ -42,17 +34,18 @@ assert(/\*/.test(code));
 ## --after-user-code--
 
 ```js
-(function(z){return 'product = '+z;})(product);
+if(typeof myArray !== "undefined"){(function(){return myArray;})();}
 ```
 
 ## --seed-contents--
 
 ```js
-var product = 8 * 0;
+// Only change code below this line
+var myArray = [];
 ```
 
 # --solutions--
 
 ```js
-var product = 8 * 10;
+var myArray = [[1,2,3]];
 ```
