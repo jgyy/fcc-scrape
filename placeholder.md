@@ -1,55 +1,59 @@
 ---
-id: 56533eb9ac21ba0edf2244ad
-title: Decrement a Number with JavaScript
+id: 56bbb991ad1ed5201cd392d3
+title: Delete Properties from a JavaScript Object
 challengeType: 1
-videoUrl: 'https://scrimba.com/c/cM2KeS2'
-forumTopicId: 17558
-dashedName: decrement-a-number-with-javascript
+videoUrl: 'https://scrimba.com/c/cDqKdTv'
+forumTopicId: 17560
+dashedName: delete-properties-from-a-javascript-object
 ---
 
 # --description--
 
-You can easily <dfn>decrement</dfn> or decrease a variable by one with the `--` operator.
+We can also delete properties from objects like this:
 
-`i--;`
+`delete ourDog.bark;`
 
-is the equivalent of
+Example:
 
-`i = i - 1;`
+```js
+var ourDog = {
+  "name": "Camper",
+  "legs": 4,
+  "tails": 1,
+  "friends": ["everything!"],
+  "bark": "bow-wow"
+};
 
-**Note**  
-The entire line becomes `i--;`, eliminating the need for the equal sign.
+delete ourDog.bark;
+```
+
+After the last line shown above, `ourDog` looks like:
+
+```js
+{
+  "name": "Camper",
+  "legs": 4,
+  "tails": 1,
+  "friends": ["everything!"]
+}
+```
 
 # --instructions--
 
-Change the code to use the `--` operator on `myVar`.
+Delete the `"tails"` property from `myDog`. You may use either dot or bracket notation.
 
 # --hints--
 
-`myVar` should equal `10`.
+You should delete the property `"tails"` from `myDog`.
 
 ```js
-assert(myVar === 10);
+assert(typeof myDog === 'object' && myDog.tails === undefined);
 ```
 
-`myVar = myVar - 1;` should be changed.
+You should not modify the `myDog` setup.
 
 ```js
-assert(
-  /var\s*myVar\s*=\s*11;\s*\/*.*\s*([-]{2}\s*myVar|myVar\s*[-]{2});/.test(code)
-);
-```
-
-You should use the `--` operator on `myVar`.
-
-```js
-assert(/[-]{2}\s*myVar|myVar\s*[-]{2}/.test(code));
-```
-
-You should not change code above the specified comment.
-
-```js
-assert(/var myVar = 11;/.test(code));
+assert(code.match(/"tails": 1/g).length > 0);
 ```
 
 # --seed--
@@ -57,21 +61,33 @@ assert(/var myVar = 11;/.test(code));
 ## --after-user-code--
 
 ```js
-(function(z){return 'myVar = ' + z;})(myVar);
+(function(z){return z;})(myDog);
 ```
 
 ## --seed-contents--
 
 ```js
-var myVar = 11;
+// Setup
+var myDog = {
+  "name": "Happy Coder",
+  "legs": 4,
+  "tails": 1,
+  "friends": ["freeCodeCamp Campers"],
+  "bark": "woof"
+};
 
 // Only change code below this line
-myVar = myVar - 1;
 ```
 
 # --solutions--
 
 ```js
-var myVar = 11;
-myVar--;
+var myDog = {
+  "name": "Happy Coder",
+  "legs": 4,
+  "tails": 1,
+  "friends": ["freeCodeCamp Campers"],
+  "bark": "woof"
+};
+delete myDog.tails;
 ```
