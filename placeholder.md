@@ -1,35 +1,43 @@
 ---
-id: cf1391c1c11feddfaeb4bdef
-title: Create Decimal Numbers with JavaScript
+id: bd7123c9c443eddfaeb5bdef
+title: Declare JavaScript Variables
 challengeType: 1
-videoUrl: 'https://scrimba.com/c/ca8GEuW'
-forumTopicId: 16826
-dashedName: create-decimal-numbers-with-javascript
+videoUrl: 'https://scrimba.com/c/cNanrHq'
+forumTopicId: 17556
+dashedName: declare-javascript-variables
 ---
 
 # --description--
 
-We can store decimal numbers in variables too. Decimal numbers are sometimes referred to as <dfn>floating point</dfn> numbers or <dfn>floats</dfn>.
+In computer science, <dfn>data</dfn> is anything that is meaningful to the computer. JavaScript provides eight different <dfn>data types</dfn> which are `undefined`, `null`, `boolean`, `string`, `symbol`, `bigint`, `number`, and `object`.
 
-**Note**  
-Not all real numbers can accurately be represented in <dfn>floating point</dfn>. This can lead to rounding errors. [Details Here](https://en.wikipedia.org/wiki/Floating_point#Accuracy_problems).
+For example, computers distinguish between numbers, such as the number `12`, and `strings`, such as `"12"`, `"dog"`, or `"123 cats"`, which are collections of characters. Computers can perform mathematical operations on a number, but not on a string.
+
+<dfn>Variables</dfn> allow computers to store and manipulate data in a dynamic fashion. They do this by using a "label" to point to the data rather than using the data itself. Any of the eight data types may be stored in a variable.
+
+`Variables` are similar to the x and y variables you use in mathematics, which means they're a simple name to represent the data we want to refer to. Computer `variables` differ from mathematical variables in that they can store different values at different times.
+
+We tell JavaScript to create or <dfn>declare</dfn> a variable by putting the keyword `var` in front of it, like so:
+
+```js
+var ourName;
+```
+
+creates a `variable` called `ourName`. In JavaScript we end statements with semicolons. `Variable` names can be made up of numbers, letters, and `$` or `_`, but may not contain spaces or start with a number.
 
 # --instructions--
 
-Create a variable `myDecimal` and give it a decimal value with a fractional part (e.g. `5.7`).
+Use the `var` keyword to create a variable called `myName`.
+
+**Hint**  
+Look at the `ourName` example above if you get stuck.
 
 # --hints--
 
-`myDecimal` should be a number.
+You should declare `myName` with the `var` keyword, ending with a semicolon
 
 ```js
-assert(typeof myDecimal === 'number');
-```
-
-`myDecimal` should have a decimal point
-
-```js
-assert(myDecimal % 1 != 0);
+assert(/var\s+myName\s*;/.test(code));
 ```
 
 # --seed--
@@ -37,19 +45,16 @@ assert(myDecimal % 1 != 0);
 ## --after-user-code--
 
 ```js
-(function(){if(typeof myDecimal !== "undefined"){return myDecimal;}})();
+if(typeof myName !== "undefined"){(function(v){return v;})(myName);}
 ```
 
 ## --seed-contents--
 
 ```js
-var ourDecimal = 5.7;
-
-// Only change code below this line
 ```
 
 # --solutions--
 
 ```js
-var myDecimal = 9.9;
+var myName;
 ```
