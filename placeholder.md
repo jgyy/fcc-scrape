@@ -1,77 +1,86 @@
 ---
-id: 56533eb9ac21ba0edf2244ed
-title: Appending Variables to Strings
+id: 5ee127a03c3b35dd45426493
+title: Assigning the Value of One Variable to Another
 challengeType: 1
-videoUrl: 'https://scrimba.com/c/cbQmZfa'
-forumTopicId: 16656
-dashedName: appending-variables-to-strings
+videoUrl: ''
+forumTopicId: 418265
+dashedName: assigning-the-value-of-one-variable-to-another
 ---
 
 # --description--
 
-Just as we can build a string over multiple lines out of string <dfn>literals</dfn>, we can also append variables to a string using the plus equals (`+=`) operator.
-
-Example:
+After a value is assigned to a variable using the <dfn>assignment</dfn> operator, you can assign the value of that variable to another variable using the <dfn>assignment</dfn> operator.
 
 ```js
-var anAdjective = "awesome!";
-var ourStr = "freeCodeCamp is ";
-ourStr += anAdjective;
-// ourStr is now "freeCodeCamp is awesome!"
+var myVar;
+myVar = 5;
+var myNum;
+myNum = myVar;
 ```
+
+The above declares a `myVar` variable with no value, then assigns it the value `5`. Next, a variable named `myNum` is declared with no value. Then, the contents of `myVar` (which is `5`) is assigned to the variable `myNum`. Now, `myNum` also has the value of `5`.
 
 # --instructions--
 
-Set `someAdjective` to a string of at least 3 characters and append it to `myStr` using the `+=` operator.
+Assign the contents of `a` to variable `b`.
 
 # --hints--
 
-`someAdjective` should be set to a string at least 3 characters long.
+You should not change code above the specified comment.
 
 ```js
-assert(typeof someAdjective !== 'undefined' && someAdjective.length > 2);
+assert(/var a;/.test(code) && /a = 7;/.test(code) && /var b;/.test(code));
 ```
 
-You should append `someAdjective` to `myStr` using the `+=` operator.
+`b` should have a value of 7.
 
 ```js
-assert(code.match(/myStr\s*\+=\s*someAdjective\s*/).length > 0);
+assert(typeof b === 'number' && b === 7);
+```
+
+`a` should be assigned to `b` with `=`.
+
+```js
+assert(/b\s*=\s*a\s*/g.test(code));
 ```
 
 # --seed--
 
+## --before-user-code--
+
+```js
+if (typeof a != 'undefined') {
+  a = undefined;
+}
+if (typeof b != 'undefined') {
+  b = undefined;
+}
+```
+
 ## --after-user-code--
 
 ```js
-(function(){
-  var output = [];
-  if(typeof someAdjective === 'string') {
-    output.push('someAdjective = "' + someAdjective + '"');
-  } else {
-    output.push('someAdjective is not a string');
-  }
-  if(typeof myStr === 'string') {
-    output.push('myStr = "' + myStr + '"');
-  } else {
-    output.push('myStr is not a string');
-  }
-  return output.join('\n');
-})();
+(function(a, b) {
+  return 'a = ' + a + ', b = ' + b;
+})(a, b);
 ```
 
 ## --seed-contents--
 
 ```js
-// Change code below this line
+// Setup
+var a;
+a = 7;
+var b;
 
-var someAdjective;
-var myStr = "Learning to code is ";
+// Only change code below this line
 ```
 
 # --solutions--
 
 ```js
-var someAdjective = "neat";
-var myStr = "Learning to code is ";
-myStr += someAdjective;
+var a;
+a = 7;
+var b;
+b = a;
 ```
