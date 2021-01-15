@@ -1,50 +1,88 @@
 ---
-id: 56533eb9ac21ba0edf2244c0
-title: Global vs. Local Scope in Functions
+id: 5664820f61c48e80c9fa476c
+title: Golf Code
 challengeType: 1
-videoUrl: 'https://scrimba.com/c/c2QwKH2'
-forumTopicId: 18194
-dashedName: global-vs--local-scope-in-functions
+videoUrl: 'https://scrimba.com/c/c9ykNUR'
+forumTopicId: 18195
+dashedName: golf-code
 ---
 
 # --description--
 
-It is possible to have both <dfn>local</dfn> and <dfn>global</dfn> variables with the same name. When you do this, the `local` variable takes precedence over the `global` variable.
+In the game of [golf](https://en.wikipedia.org/wiki/Golf) each hole has a `par` meaning the average number of `strokes` a golfer is expected to make in order to sink the ball in a hole to complete the play. Depending on how far above or below `par` your `strokes` are, there is a different nickname.
 
-In this example:
+Your function will be passed `par` and `strokes` arguments. Return the correct string according to this table which lists the strokes in order of priority; top (highest) to bottom (lowest):
 
-```js
-var someVar = "Hat";
-function myFun() {
-  var someVar = "Head";
-  return someVar;
-}
-```
+<table class='table table-striped'><thead><tr><th>Strokes</th><th>Return</th></tr></thead><tbody><tr><td>1</td><td>"Hole-in-one!"</td></tr><tr><td>&#x3C;= par - 2</td><td>"Eagle"</td></tr><tr><td>par - 1</td><td>"Birdie"</td></tr><tr><td>par</td><td>"Par"</td></tr><tr><td>par + 1</td><td>"Bogey"</td></tr><tr><td>par + 2</td><td>"Double Bogey"</td></tr><tr><td>>= par + 3</td><td>"Go Home!"</td></tr></tbody></table>
 
-The function `myFun` will return `"Head"` because the `local` version of the variable is present.
-
-# --instructions--
-
-Add a local variable to `myOutfit` function to override the value of `outerWear` with `"sweater"`.
+`par` and `strokes` will always be numeric and positive. We have added an array of all the names for your convenience.
 
 # --hints--
 
-You should not change the value of the global `outerWear`.
+`golfScore(4, 1)` should return "Hole-in-one!"
 
 ```js
-assert(outerWear === 'T-Shirt');
+assert(golfScore(4, 1) === 'Hole-in-one!');
 ```
 
-`myOutfit` should return `"sweater"`.
+`golfScore(4, 2)` should return "Eagle"
 
 ```js
-assert(myOutfit() === 'sweater');
+assert(golfScore(4, 2) === 'Eagle');
 ```
 
-You should not change the return statement.
+`golfScore(5, 2)` should return "Eagle"
 
 ```js
-assert(/return outerWear/.test(code));
+assert(golfScore(5, 2) === 'Eagle');
+```
+
+`golfScore(4, 3)` should return "Birdie"
+
+```js
+assert(golfScore(4, 3) === 'Birdie');
+```
+
+`golfScore(4, 4)` should return "Par"
+
+```js
+assert(golfScore(4, 4) === 'Par');
+```
+
+`golfScore(1, 1)` should return "Hole-in-one!"
+
+```js
+assert(golfScore(1, 1) === 'Hole-in-one!');
+```
+
+`golfScore(5, 5)` should return "Par"
+
+```js
+assert(golfScore(5, 5) === 'Par');
+```
+
+`golfScore(4, 5)` should return "Bogey"
+
+```js
+assert(golfScore(4, 5) === 'Bogey');
+```
+
+`golfScore(4, 6)` should return "Double Bogey"
+
+```js
+assert(golfScore(4, 6) === 'Double Bogey');
+```
+
+`golfScore(4, 7)` should return "Go Home!"
+
+```js
+assert(golfScore(4, 7) === 'Go Home!');
+```
+
+`golfScore(5, 9)` should return "Go Home!"
+
+```js
+assert(golfScore(5, 9) === 'Go Home!');
 ```
 
 # --seed--
@@ -52,27 +90,46 @@ assert(/return outerWear/.test(code));
 ## --seed-contents--
 
 ```js
-// Setup
-var outerWear = "T-Shirt";
-
-function myOutfit() {
+var names = ["Hole-in-one!", "Eagle", "Birdie", "Par", "Bogey", "Double Bogey", "Go Home!"];
+function golfScore(par, strokes) {
   // Only change code below this line
 
 
-
+  return "Change Me";
   // Only change code above this line
-  return outerWear;
 }
 
-myOutfit();
+golfScore(5, 4);
 ```
 
 # --solutions--
 
 ```js
-var outerWear = "T-Shirt";
-function myOutfit() {
-  var outerWear = "sweater";
-  return outerWear;
+function golfScore(par, strokes) {
+  if (strokes === 1) {
+    return "Hole-in-one!";
+  }
+
+  if (strokes <= par - 2) {
+    return "Eagle";
+  }
+
+  if (strokes === par - 1) {
+    return "Birdie";
+  }
+
+  if (strokes === par) {
+    return "Par";
+  }
+
+  if (strokes === par + 1) {
+    return "Bogey";
+  }
+
+  if(strokes === par + 2) {
+    return "Double Bogey";
+  }
+
+  return "Go Home!";
 }
 ```
