@@ -1,43 +1,60 @@
 ---
-id: bd7123c9c443eddfaeb5bdef
-title: Declare JavaScript Variables
+id: bd7123c9c444eddfaeb5bdef
+title: Declare String Variables
 challengeType: 1
-videoUrl: 'https://scrimba.com/c/cNanrHq'
-forumTopicId: 17556
-dashedName: declare-javascript-variables
+videoUrl: 'https://scrimba.com/c/c2QvWU6'
+forumTopicId: 17557
+dashedName: declare-string-variables
 ---
 
 # --description--
 
-In computer science, <dfn>data</dfn> is anything that is meaningful to the computer. JavaScript provides eight different <dfn>data types</dfn> which are `undefined`, `null`, `boolean`, `string`, `symbol`, `bigint`, `number`, and `object`.
+Previously we have used the code
 
-For example, computers distinguish between numbers, such as the number `12`, and `strings`, such as `"12"`, `"dog"`, or `"123 cats"`, which are collections of characters. Computers can perform mathematical operations on a number, but not on a string.
+`var myName = "your name";`
 
-<dfn>Variables</dfn> allow computers to store and manipulate data in a dynamic fashion. They do this by using a "label" to point to the data rather than using the data itself. Any of the eight data types may be stored in a variable.
-
-`Variables` are similar to the x and y variables you use in mathematics, which means they're a simple name to represent the data we want to refer to. Computer `variables` differ from mathematical variables in that they can store different values at different times.
-
-We tell JavaScript to create or <dfn>declare</dfn> a variable by putting the keyword `var` in front of it, like so:
-
-```js
-var ourName;
-```
-
-creates a `variable` called `ourName`. In JavaScript we end statements with semicolons. `Variable` names can be made up of numbers, letters, and `$` or `_`, but may not contain spaces or start with a number.
+`"your name"` is called a <dfn>string</dfn> <dfn>literal</dfn>. It is a string because it is a series of zero or more characters enclosed in single or double quotes.
 
 # --instructions--
 
-Use the `var` keyword to create a variable called `myName`.
-
-**Hint**  
-Look at the `ourName` example above if you get stuck.
+Create two new `string` variables: `myFirstName` and `myLastName` and assign them the values of your first and last name, respectively.
 
 # --hints--
 
-You should declare `myName` with the `var` keyword, ending with a semicolon
+`myFirstName` should be a string with at least one character in it.
 
 ```js
-assert(/var\s+myName\s*;/.test(code));
+assert(
+  (function () {
+    if (
+      typeof myFirstName !== 'undefined' &&
+      typeof myFirstName === 'string' &&
+      myFirstName.length > 0
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  })()
+);
+```
+
+`myLastName` should be a string with at least one character in it.
+
+```js
+assert(
+  (function () {
+    if (
+      typeof myLastName !== 'undefined' &&
+      typeof myLastName === 'string' &&
+      myLastName.length > 0
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  })()
+);
 ```
 
 # --seed--
@@ -45,7 +62,7 @@ assert(/var\s+myName\s*;/.test(code));
 ## --after-user-code--
 
 ```js
-if(typeof myName !== "undefined"){(function(v){return v;})(myName);}
+if(typeof myFirstName !== "undefined" && typeof myLastName !== "undefined"){(function(){return myFirstName + ', ' + myLastName;})();}
 ```
 
 ## --seed-contents--
@@ -56,5 +73,6 @@ if(typeof myName !== "undefined"){(function(v){return v;})(myName);}
 # --solutions--
 
 ```js
-var myName;
+var myFirstName = "Alan";
+var myLastName = "Turing";
 ```
