@@ -1,64 +1,75 @@
 ---
-id: bd7993c9c69feddfaeb8bdef
-title: Store Multiple Values in one Variable using JavaScript Arrays
+id: 56533eb9ac21ba0edf2244a8
+title: Storing Values with the Assignment Operator
 challengeType: 1
-videoUrl: 'https://scrimba.com/c/crZQWAm'
-forumTopicId: 18309
-dashedName: store-multiple-values-in-one-variable-using-javascript-arrays
+videoUrl: 'https://scrimba.com/c/cEanysE'
+forumTopicId: 18310
+dashedName: storing-values-with-the-assignment-operator
 ---
 
 # --description--
 
-With JavaScript `array` variables, we can store several pieces of data in one place.
+In JavaScript, you can store a value in a variable with the <dfn>assignment</dfn> operator (`=`).
 
-You start an array declaration with an opening square bracket, end it with a closing square bracket, and put a comma between each entry, like this:
+`myVariable = 5;`
 
-`var sandwich = ["peanut butter", "jelly", "bread"]`.
+This assigns the `Number` value `5` to `myVariable`.
+
+If there are any calculations to the right of the `=` operator, those are performed before the value is assigned to the variable on the left of the operator.
+
+```js
+var myVar;
+myVar = 5;
+```
+
+First, this code creates a variable named `myVar`. Then, the code assigns `5` to `myVar`. Now, if `myVar` appears again in the code, the program will treat it as if it is `5`.
 
 # --instructions--
 
-Modify the new array `myArray` so that it contains both a `string` and a `number` (in that order).
-
-**Hint**  
-Refer to the example code in the text editor if you get stuck.
+Assign the value `7` to variable `a`.
 
 # --hints--
 
-`myArray` should be an `array`.
+You should not change code above the specified comment.
 
 ```js
-assert(typeof myArray == 'object');
+assert(/var a;/.test(code));
 ```
 
-The first item in `myArray` should be a `string`.
+`a` should have a value of 7.
 
 ```js
-assert(typeof myArray[0] !== 'undefined' && typeof myArray[0] == 'string');
-```
-
-The second item in `myArray` should be a `number`.
-
-```js
-assert(typeof myArray[1] !== 'undefined' && typeof myArray[1] == 'number');
+assert(typeof a === 'number' && a === 7);
 ```
 
 # --seed--
 
+## --before-user-code--
+
+```js
+if (typeof a != 'undefined') {
+  a = undefined;
+}
+```
+
 ## --after-user-code--
 
 ```js
-(function(z){return z;})(myArray);
+(function(a){return "a = " + a;})(a);
 ```
 
 ## --seed-contents--
 
 ```js
+// Setup
+var a;
+
 // Only change code below this line
-var myArray = [];
 ```
 
 # --solutions--
 
 ```js
-var myArray = ["The Answer", 42];
+var a;
+a = 7;
 ```
