@@ -1,38 +1,40 @@
 ---
-id: bd7993c9ca9feddfaeb7bdef
-title: Divide One Decimal by Another with JavaScript
+id: cf1111c1c11feddfaeb6bdef
+title: Divide One Number by Another with JavaScript
 challengeType: 1
-videoUrl: 'https://scrimba.com/c/cBZe9AW'
-forumTopicId: 18255
-dashedName: divide-one-decimal-by-another-with-javascript
+videoUrl: 'https://scrimba.com/c/cqkbdAr'
+forumTopicId: 17566
+dashedName: divide-one-number-by-another-with-javascript
 ---
 
 # --description--
 
-Now let's divide one decimal by another.
+We can also divide one number by another.
+
+JavaScript uses the `/` symbol for division.
+
+**Example**
+
+```js
+myVar = 16 / 2; // assigned 8
+```
 
 # --instructions--
 
-Change the `0.0` so that `quotient` will equal to `2.2`.
+Change the `0` so that the `quotient` is equal to `2`.
 
 # --hints--
 
-The variable `quotient` should equal `2.2`
+The variable `quotient` should be equal to 2.
 
 ```js
-assert(quotient === 2.2);
+assert(quotient === 2);
 ```
 
-You should use the `/` operator to divide 4.4 by 2
+You should use the `/` operator.
 
 ```js
-assert(/4\.40*\s*\/\s*2\.*0*/.test(code));
-```
-
-The quotient variable should only be assigned once
-
-```js
-assert(code.match(/quotient/g).length === 1);
+assert(/\d+\s*\/\s*\d+/.test(code));
 ```
 
 # --seed--
@@ -40,17 +42,17 @@ assert(code.match(/quotient/g).length === 1);
 ## --after-user-code--
 
 ```js
-(function(y){return 'quotient = '+y;})(quotient);
+(function(z){return 'quotient = '+z;})(quotient);
 ```
 
 ## --seed-contents--
 
 ```js
-var quotient = 0.0 / 2.0; // Change this line
+var quotient = 66 / 0;
 ```
 
 # --solutions--
 
 ```js
-var quotient = 4.4 / 2.0;
+var quotient = 66 / 33;
 ```
