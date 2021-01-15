@@ -1,78 +1,55 @@
 ---
-id: 56533eb9ac21ba0edf2244d7
-title: Comparison with the Less Than Or Equal To Operator
+id: 56533eb9ac21ba0edf2244d1
+title: Comparison with the Strict Equality Operator
 challengeType: 1
-videoUrl: 'https://scrimba.com/c/cNVR7Am'
-forumTopicId: 16788
-dashedName: comparison-with-the-less-than-or-equal-to-operator
+videoUrl: 'https://scrimba.com/c/cy87atr'
+forumTopicId: 16790
+dashedName: comparison-with-the-strict-equality-operator
 ---
 
 # --description--
 
-The less than or equal to operator (`<=`) compares the values of two numbers. If the number to the left is less than or equal to the number to the right, it returns `true`. If the number on the left is greater than the number on the right, it returns `false`. Like the equality operator, `less than or equal to` converts data types.
+Strict equality (`===`) is the counterpart to the equality operator (`==`). However, unlike the equality operator, which attempts to convert both values being compared to a common type, the strict equality operator does not perform a type conversion.
+
+If the values being compared have different types, they are considered unequal, and the strict equality operator will return false.
 
 **Examples**
 
 ```js
-4   <= 5  // true
-'7' <= 7  // true
-5   <= 5  // true
-3   <= 2  // false
-'8' <= 4  // false
+3 ===  3   // true
+3 === '3'  // false
 ```
+
+In the second example, `3` is a `Number` type and `'3'` is a `String` type.
 
 # --instructions--
 
-Add the less than or equal to operator to the indicated lines so that the return statements make sense.
+Use the strict equality operator in the `if` statement so the function will return "Equal" when `val` is strictly equal to `7`
 
 # --hints--
 
-`testLessOrEqual(0)` should return "Smaller Than or Equal to 12"
+`testStrict(10)` should return "Not Equal"
 
 ```js
-assert(testLessOrEqual(0) === 'Smaller Than or Equal to 12');
+assert(testStrict(10) === 'Not Equal');
 ```
 
-`testLessOrEqual(11)` should return "Smaller Than or Equal to 12"
+`testStrict(7)` should return "Equal"
 
 ```js
-assert(testLessOrEqual(11) === 'Smaller Than or Equal to 12');
+assert(testStrict(7) === 'Equal');
 ```
 
-`testLessOrEqual(12)` should return "Smaller Than or Equal to 12"
+`testStrict("7")` should return "Not Equal"
 
 ```js
-assert(testLessOrEqual(12) === 'Smaller Than or Equal to 12');
+assert(testStrict('7') === 'Not Equal');
 ```
 
-`testLessOrEqual(23)` should return "Smaller Than or Equal to 24"
+You should use the `===` operator
 
 ```js
-assert(testLessOrEqual(23) === 'Smaller Than or Equal to 24');
-```
-
-`testLessOrEqual(24)` should return "Smaller Than or Equal to 24"
-
-```js
-assert(testLessOrEqual(24) === 'Smaller Than or Equal to 24');
-```
-
-`testLessOrEqual(25)` should return "More Than 24"
-
-```js
-assert(testLessOrEqual(25) === 'More Than 24');
-```
-
-`testLessOrEqual(55)` should return "More Than 24"
-
-```js
-assert(testLessOrEqual(55) === 'More Than 24');
-```
-
-You should use the `<=` operator at least twice
-
-```js
-assert(code.match(/val\s*<=\s*('|")*\d+('|")*/g).length > 1);
+assert(code.match(/(val\s*===\s*\d+)|(\d+\s*===\s*val)/g).length > 0);
 ```
 
 # --seed--
@@ -80,33 +57,24 @@ assert(code.match(/val\s*<=\s*('|")*\d+('|")*/g).length > 1);
 ## --seed-contents--
 
 ```js
-function testLessOrEqual(val) {
-  if (val) {  // Change this line
-    return "Smaller Than or Equal to 12";
+// Setup
+function testStrict(val) {
+  if (val) { // Change this line
+    return "Equal";
   }
-
-  if (val) {  // Change this line
-    return "Smaller Than or Equal to 24";
-  }
-
-  return "More Than 24";
+  return "Not Equal";
 }
 
-testLessOrEqual(10);
+testStrict(10);
 ```
 
 # --solutions--
 
 ```js
-function testLessOrEqual(val) {
-  if (val <= 12) {  // Change this line
-    return "Smaller Than or Equal to 12";
+function testStrict(val) {
+  if (val === 7) {
+    return "Equal";
   }
-
-  if (val <= 24) {  // Change this line
-    return "Smaller Than or Equal to 24";
-  }
-
-  return "More Than 24";
+  return "Not Equal";
 }
 ```
