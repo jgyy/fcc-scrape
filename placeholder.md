@@ -1,105 +1,55 @@
 ---
-id: 587d7b87367417b2b2512b40
-title: Compare Scopes of the var and let Keywords
+id: 5cdafbc32913098997531680
+title: Complete a Promise with resolve and reject
 challengeType: 1
-forumTopicId: 301195
-dashedName: compare-scopes-of-the-var-and-let-keywords
+forumTopicId: 301196
+dashedName: complete-a-promise-with-resolve-and-reject
 ---
 
 # --description--
 
-When you declare a variable with the `var` keyword, it is declared globally, or locally if declared inside a function.
-
-The `let` keyword behaves similarly, but with some extra features. When you declare a variable with the `let` keyword inside a block, statement, or expression, its scope is limited to that block, statement, or expression.
-
-For example:
+A promise has three states: `pending`, `fulfilled`, and `rejected`. The promise you created in the last challenge is forever stuck in the `pending` state because you did not add a way to complete the promise. The `resolve` and `reject` parameters given to the promise argument are used to do this. `resolve` is used when you want your promise to succeed, and `reject` is used when you want it to fail. These are methods that take an argument, as seen below.
 
 ```js
-var numArray = [];
-for (var i = 0; i < 3; i++) {
-  numArray.push(i);
-}
-console.log(numArray);
-// returns [0, 1, 2]
-console.log(i);
-// returns 3
-```
-
-With the `var` keyword, `i` is declared globally. So when `i++` is executed, it updates the global variable. This code is similar to the following:
-
-```js
-var numArray = [];
-var i;
-for (i = 0; i < 3; i++) {
-  numArray.push(i);
-}
-console.log(numArray);
-// returns [0, 1, 2]
-console.log(i);
-// returns 3
-```
-
-This behavior will cause problems if you were to create a function and store it for later use inside a for loop that uses the `i` variable. This is because the stored function will always refer to the value of the updated global `i` variable.
-
-```js
-var printNumTwo;
-for (var i = 0; i < 3; i++) {
-  if (i === 2) {
-    printNumTwo = function() {
-      return i;
-    };
+const myPromise = new Promise((resolve, reject) => {
+  if(condition here) {
+    resolve("Promise was fulfilled");
+  } else {
+    reject("Promise was rejected");
   }
-}
-console.log(printNumTwo());
-// returns 3
+});
 ```
 
-As you can see, `printNumTwo()` prints 3 and not 2. This is because the value assigned to `i` was updated and the `printNumTwo()` returns the global `i` and not the value `i` had when the function was created in the for loop. The `let` keyword does not follow this behavior:
-
-```js
-let printNumTwo;
-for (let i = 0; i < 3; i++) {
-  if (i === 2) {
-    printNumTwo = function() {
-      return i;
-    };
-  }
-}
-console.log(printNumTwo());
-// returns 2
-console.log(i);
-// returns "i is not defined"
-```
-
-`i` is not defined because it was not declared in the global scope. It is only declared within the for loop statement. `printNumTwo()` returned the correct value because three different `i` variables with unique values (0, 1, and 2) were created by the `let` keyword within the loop statement.
+The example above uses strings for the argument of these functions, but it can really be anything. Often, it might be an object, that you would use data from, to put on your website or elsewhere.
 
 # --instructions--
 
-Fix the code so that `i` declared in the if statement is a separate variable than `i` declared in the first line of the function. Be certain not to use the `var` keyword anywhere in your code.
-
-This exercise is designed to illustrate the difference between how `var` and `let` keywords assign scope to the declared variable. When programming a function similar to the one used in this exercise, it is often better to use different variable names to avoid confusion.
+Make the promise handle success and failure. If `responseFromServer` is `true`, call the `resolve` method to successfully complete the promise. Pass `resolve` a string with the value `We got the data`. If `responseFromServer` is `false`, use the `reject` method instead and pass it the string: `Data not received`.
 
 # --hints--
 
-`var` should not exist in code.
+`resolve` should be called with the expected string when the `if` condition is `true`.
 
 ```js
-(getUserInput) => assert(!getUserInput('index').match(/var/g));
+assert(
+  __helpers
+    .removeJSComments(code)
+    .match(
+      /if\s*\(\s*responseFromServer\s*\)\s*{\s*resolve\s*\(\s*('|"|`)We got the data\1\s*\)(\s*|\s*;\s*)}/g
+    )
+);
 ```
 
-The variable `i` declared in the if statement should equal "block scope".
+`reject` should be called with the expected string when the `if` condition is `false`.
 
 ```js
-(getUserInput) =>
-  assert(
-    getUserInput('index').match(/(i\s*=\s*).*\s*.*\s*.*\1('|")block\s*scope\2/g)
-  );
-```
-
-`checkScope()` should return "function scope"
-
-```js
-assert(checkScope() === 'function scope');
+assert(
+  __helpers
+    .removeJSComments(code)
+    .match(
+      /}\s*else\s*{\s*reject\s*\(\s*('|"|`)Data not received\1\s*\)(\s*|\s*;\s*)}/g
+    )
+);
 ```
 
 # --seed--
@@ -107,28 +57,29 @@ assert(checkScope() === 'function scope');
 ## --seed-contents--
 
 ```js
-function checkScope() {
-  var i = 'function scope';
-  if (true) {
-    i = 'block scope';
-    console.log('Block scope i is: ', i);
+const makeServerRequest = new Promise((resolve, reject) => {
+  // responseFromServer represents a response from a server
+  let responseFromServer;
+    
+  if(responseFromServer) {
+    // Change this line
+  } else {  
+    // Change this line
   }
-  console.log('Function scope i is: ', i);
-  return i;
-}
+});
 ```
 
 # --solutions--
 
 ```js
-function checkScope() {
-  let i = 'function scope';
-  if (true) {
-    let i = 'block scope';
-    console.log('Block scope i is: ', i);
+const makeServerRequest = new Promise((resolve, reject) => {
+  // responseFromServer represents a response from a server
+  let responseFromServer;
+
+  if(responseFromServer) {
+    resolve("We got the data");
+  } else {  
+    reject("Data not received");
   }
- 
-  console.log('Function scope i is: ', i);
-  return i;
-}
+});
 ```
