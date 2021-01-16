@@ -1,39 +1,49 @@
 ---
-id: 5cdafbb0291309899753167f
-title: Create a JavaScript Promise
-challengeType: 1
-forumTopicId: 301197
-dashedName: create-a-javascript-promise
+id: 5cddbfd622f1a59093ec611d
+title: Create a Module Script
+challengeType: 6
+forumTopicId: 301198
+dashedName: create-a-module-script
 ---
 
 # --description--
 
-A promise in JavaScript is exactly what it sounds like - you use it to make a promise to do something, usually asynchronously. When the task completes, you either fulfill your promise or fail to do so. `Promise` is a constructor function, so you need to use the `new` keyword to create one. It takes a function, as its argument, with two parameters - `resolve` and `reject`. These are methods used to determine the outcome of the promise. The syntax looks like this:
+JavaScript started with a small role to play on an otherwise mostly HTML web. Today, it’s huge, and some websites are built almost entirely with JavaScript. In order to make JavaScript more modular, clean, and maintainable; ES6 introduced a way to easily share code among JavaScript files. This involves exporting parts of a file for use in one or more other files, and importing the parts you need, where you need them. In order to take advantage of this functionality, you need to create a script in your HTML document with a type of `module`. Here’s an example:
 
-```js
-const myPromise = new Promise((resolve, reject) => {
-
-});
+```html
+<script type="module" src="filename.js"></script>
 ```
+
+A script that uses this `module` type can now use the `import` and `export` features you will learn about in the upcoming challenges.
 
 # --instructions--
 
-Create a new promise called `makeServerRequest`. Pass in a function with `resolve` and `reject` parameters to the constructor.
+Add a script to the HTML document of type `module` and give it the source file of `index.js`
 
 # --hints--
 
-You should assign a promise to a declared variable named `makeServerRequest`.
+You should create a `script` tag.
 
 ```js
-assert(makeServerRequest instanceof Promise);
+assert(code.match(/<\s*script[^>]*>\s*<\/\s*script\s*>/g));
 ```
 
-Your promise should receive a function with `resolve` and `reject` as parameters.
+Your `script` tag should be of type `module`.
 
 ```js
 assert(
   code.match(
-    /Promise\(\s*(function\s*\(\s*resolve\s*,\s*reject\s*\)\s*{|\(\s*resolve\s*,\s*reject\s*\)\s*=>\s*{)[^}]*}/g
+    /<\s*script\s+[^t]*type\s*=\s*('|")module\1[^>]*>\s*<\/\s*script\s*>/g
+  )
+);
+```
+
+Your `script` tag should have a `src` of `index.js`.
+
+```js
+assert(
+  code.match(
+    /<\s*script\s+[^s]*src\s*=\s*('|")index\.js\1[^>]*>\s*<\/\s*script\s*>/g
   )
 );
 ```
@@ -42,13 +52,22 @@ assert(
 
 ## --seed-contents--
 
-```js
+```html
+<html>
+  <body>
+    <!-- Only change code below this line -->
+
+    <!-- Only change code above this line -->
+  </body>
+</html>
 ```
 
 # --solutions--
 
-```js
-const makeServerRequest = new Promise((resolve, reject) => {
-
-});
+```html
+<html>
+  <body>
+    <script type="module" src="index.js"></script>
+  </body>
+</html>
 ```
