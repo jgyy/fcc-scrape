@@ -1,26 +1,29 @@
 ---
-id: 5d792533717672657b81aa69
-title: Part 18
+id: 5d7925335ab63018dcec11fe
+title: Part 19
 challengeType: 0
-dashedName: part-18
+dashedName: part-19
 ---
 
 # --description--
 
-When defining an arrow function with a single argument, the parentheses can be omitted:
+Arrow functions can have multiple statements:
 
 ```js
-const greeting = name => `Hello !`;
+const fn = (x, y) => {
+  const result = x + y;
+  return result; // explicit return statement required
+};
 ```
 
-Define a function `highPrecedence` which takes a single argument `str` and returns it.
+Use this syntax for the `highPrecedence` function.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(highPrecedence('a') === 'a');
+assert(code.replace(/\s/g, '').includes('highPrecedence=str=>{returnstr'));
 ```
 
 # --seed--
@@ -74,8 +77,9 @@ const infixToFunction = {
 
 const infixEval = (str, regex) =>
   str.replace(regex, (_, arg1, fn, arg2) =>
-    infixToFunction[fn](parseFloat(arg1), parseFloat(arg2))
-  );
+    infixToFunction[fn](parseFloat(arg1), parseFloat(arg2)));
+
+const highPrecedence = str => str;
 
 
 </script>
@@ -94,8 +98,11 @@ const infixToFunction = {
 
 const infixEval = (str, regex) =>
   str.replace(regex, (_, arg1, fn, arg2) =>
-    infixToFunction[fn](parseFloat(arg1), parseFloat(arg2)));
+    infixToFunction[fn](parseFloat(arg1), parseFloat(arg2))
+  );
 
-const highPrecedence = str => str;
+const highPrecedence = str => {
+  return str;
+};
 </script>
 ```
