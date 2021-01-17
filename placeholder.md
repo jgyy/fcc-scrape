@@ -1,24 +1,20 @@
 ---
-id: 5d79253297c0ebb149ea9fed
-title: Part 1
+id: 5d7925323be8848dbc58a07a
+title: Part 2
 challengeType: 0
-dashedName: part-1
+dashedName: part-2
 ---
 
 # --description--
 
-In functional programming, we prefer immutable values over mutable values.
-
-Mutable values (declared with `var` or `let`) can lead to unexpected behaviors and bugs. Values declared with `const` cannot be reassigned, which makes using them easier because you don't have to keep track of their values.
-
-Start by creating an empty `infixToFunction` object using `const`.
+Above `infixToFunction`, define an empty function `add` using the `function` keyword. It should accept two parameters, `x` and `y`.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(code.replace(/\s/g, '').includes('constinfixToFunction={}'));
+assert(code.replace(/\s/g, '').includes('functionadd(x,y){}'));
 ```
 
 # --seed--
@@ -63,6 +59,8 @@ assert(code.replace(/\s/g, '').includes('constinfixToFunction={}'));
 ```html
 <script>
 
+const infixToFunction = {};
+
 
 </script>
 ```
@@ -71,6 +69,10 @@ assert(code.replace(/\s/g, '').includes('constinfixToFunction={}'));
 
 ```html
 <script>
+function add(x, y) {
+
+}
+
 const infixToFunction = {};
 </script>
 ```
