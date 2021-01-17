@@ -1,22 +1,28 @@
 ---
-id: 5d7925329445167ecc2ac9c9
-title: Part 4
+id: 5d792532b07918c3a5904913
+title: Part 5
 challengeType: 0
-dashedName: part-4
+dashedName: part-5
 ---
 
 # --description--
 
-In JavaScript, functions are first class. This means that they can be used like any other values - for example, they can be assigned to variables.
+Anonymous functions are functions without names - they are used only once and then forgotten. The syntax is the same as for normal functions but without the name:
 
-Assign `add` to a new variable `addVar`.
+```js
+function(x) {
+  return x
+}
+```
+
+First, remove the `addVar` definition.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(code.replace(/\s/g, '').includes('constaddVar=add'));
+assert(!code.replace(/\s/g, '').includes('constaddVar=add'));
 ```
 
 # --seed--
@@ -65,6 +71,8 @@ function add(x, y) {
   return x + y;
 }
 
+const addVar = add;
+
 const infixToFunction = {};
 
 
@@ -78,8 +86,6 @@ const infixToFunction = {};
 function add(x, y) {
   return x + y;
 }
-
-const addVar = add;
 
 const infixToFunction = {};
 </script>
