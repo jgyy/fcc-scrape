@@ -1,59 +1,60 @@
 ---
-id: 587d7b8a367417b2b2512b4c
-title: >-
-  Use Destructuring Assignment with the Rest Parameter to Reassign Array
-  Elements
+id: 587d7b8c367417b2b2512b56
+title: Use export to Share a Code Block
 challengeType: 1
-forumTopicId: 301218
-dashedName: >-
-  use-destructuring-assignment-with-the-rest-parameter-to-reassign-array-elements
+forumTopicId: 301219
+dashedName: use-export-to-share-a-code-block
 ---
 
 # --description--
 
-In some situations involving array destructuring, we might want to collect the rest of the elements into a separate array.
-
-The result is similar to `Array.prototype.slice()`, as shown below:
+Imagine a file called `math_functions.js` that contains several functions related to mathematical operations. One of them is stored in a variable, `add`, that takes in two numbers and returns their sum. You want to use this function in several different JavaScript files. In order to share it with these other files, you first need to `export` it.
 
 ```js
-const [a, b, ...arr] = [1, 2, 3, 4, 5, 7];
-console.log(a, b); // 1, 2
-console.log(arr); // [3, 4, 5, 7]
+export const add = (x, y) => {
+  return x + y;
+}
 ```
 
-Variables `a` and `b` take the first and second values from the array. After that, because of the rest parameter's presence, `arr` gets the rest of the values in the form of an array. The rest element only works correctly as the last variable in the list. As in, you cannot use the rest parameter to catch a subarray that leaves out the last element of the original array.
+The above is a common way to export a single function, but you can achieve the same thing like this:
+
+```js
+const add = (x, y) => {
+  return x + y;
+}
+
+export { add };
+```
+
+When you export a variable or function, you can import it in another file and use it without having to rewrite the code. You can export multiple things by repeating the first example for each thing you want to export, or by placing them all in the export statement of the second example, like this:
+
+```js
+export { add, subtract };
+```
 
 # --instructions--
 
-Use destructuring assignment with the rest parameter to perform an effective `Array.prototype.slice()` so that `arr` is a sub-array of the original array `source` with the first two elements omitted.
+There are two string-related functions in the editor. Export both of them using the method of your choice.
 
 # --hints--
 
-`arr` should be `[3,4,5,6,7,8,9,10]`
-
-```js
-assert(arr.every((v, i) => v === i + 3) && arr.length === 8);
-```
-
-`source` should be `[1,2,3,4,5,6,7,8,9,10]`
-
-```js
-assert(source.every((v, i) => v === i + 1) && source.length === 10);
-```
-
-`Array.slice()` should not be used.
-
-```js
-(getUserInput) => assert(!getUserInput('index').match(/slice/g));
-```
-
-Destructuring on `list` should be used.
+You should properly export `uppercaseString`.
 
 ```js
 assert(
-  __helpers
-    .removeWhiteSpace(code)
-    .match(/\[(([_$a-z]\w*)?,){1,}\.\.\.arr\]=list/i)
+  code.match(
+    /(export\s+const\s+uppercaseString|export\s*{\s*(uppercaseString[^}]*|[^,]*,\s*uppercaseString\s*)})/g
+  )
+);
+```
+
+You should properly export `lowercaseString`.
+
+```js
+assert(
+  code.match(
+    /(export\s+const\s+lowercaseString|export\s*{\s*(lowercaseString[^}]*|[^,]*,\s*lowercaseString\s*)})/g
+  )
 );
 ```
 
@@ -62,23 +63,23 @@ assert(
 ## --seed-contents--
 
 ```js
-const source = [1,2,3,4,5,6,7,8,9,10];
-function removeFirstTwo(list) {
-  // Only change code below this line
-  const arr = list; // Change this line
-  // Only change code above this line
-  return arr;
+const uppercaseString = (string) => {
+  return string.toUpperCase();
 }
-const arr = removeFirstTwo(source);
+
+const lowercaseString = (string) => {
+  return string.toLowerCase()
+}
 ```
 
 # --solutions--
 
 ```js
-const source = [1,2,3,4,5,6,7,8,9,10];
-function removeFirstTwo(list) {
-  const [, , ...arr] = list;
-  return arr;
+export const uppercaseString = (string) => {
+  return string.toUpperCase();
 }
-const arr = removeFirstTwo(source);
+
+export const lowercaseString = (string) => {
+  return string.toLowerCase()
+}
 ```
