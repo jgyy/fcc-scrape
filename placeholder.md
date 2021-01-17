@@ -1,49 +1,45 @@
 ---
-id: 5cddbfd622f1a59093ec611d
-title: Create a Module Script
-challengeType: 6
-forumTopicId: 301198
-dashedName: create-a-module-script
+id: 587d7b8c367417b2b2512b58
+title: Create an Export Fallback with export default
+challengeType: 1
+forumTopicId: 301199
+dashedName: create-an-export-fallback-with-export-default
 ---
 
 # --description--
 
-JavaScript started with a small role to play on an otherwise mostly HTML web. Today, it’s huge, and some websites are built almost entirely with JavaScript. In order to make JavaScript more modular, clean, and maintainable; ES6 introduced a way to easily share code among JavaScript files. This involves exporting parts of a file for use in one or more other files, and importing the parts you need, where you need them. In order to take advantage of this functionality, you need to create a script in your HTML document with a type of `module`. Here’s an example:
+In the `export` lesson, you learned about the syntax referred to as a <dfn>named export</dfn>. This allowed you to make multiple functions and variables available for use in other files.
 
-```html
-<script type="module" src="filename.js"></script>
+There is another `export` syntax you need to know, known as <dfn>export default</dfn>. Usually you will use this syntax if only one value is being exported from a file. It is also used to create a fallback value for a file or module.
+
+Below are examples using `export default`:
+
+```js
+// named function
+export default function add(x, y) {
+  return x + y;
+}
+
+// anonymous function
+export default function(x, y) {
+  return x + y;
+}
 ```
 
-A script that uses this `module` type can now use the `import` and `export` features you will learn about in the upcoming challenges.
+Since `export default` is used to declare a fallback value for a module or file, you can only have one value be a default export in each module or file. Additionally, you cannot use `export default` with `var`, `let`, or `const`
 
 # --instructions--
 
-Add a script to the HTML document of type `module` and give it the source file of `index.js`
+The following function should be the fallback value for the module. Please add the necessary code to do so.
 
 # --hints--
 
-You should create a `script` tag.
-
-```js
-assert(code.match(/<\s*script[^>]*>\s*<\/\s*script\s*>/g));
-```
-
-Your `script` tag should be of type `module`.
+Your code should use `export` fallback.
 
 ```js
 assert(
   code.match(
-    /<\s*script\s+[^t]*type\s*=\s*('|")module\1[^>]*>\s*<\/\s*script\s*>/g
-  )
-);
-```
-
-Your `script` tag should have a `src` of `index.js`.
-
-```js
-assert(
-  code.match(
-    /<\s*script\s+[^s]*src\s*=\s*('|")index\.js\1[^>]*>\s*<\/\s*script\s*>/g
+    /export\s+default\s+function(\s+subtract\s*|\s*)\(\s*x,\s*y\s*\)\s*{/g
   )
 );
 ```
@@ -52,22 +48,16 @@ assert(
 
 ## --seed-contents--
 
-```html
-<html>
-  <body>
-    <!-- Only change code below this line -->
-
-    <!-- Only change code above this line -->
-  </body>
-</html>
+```js
+function subtract(x, y) {
+  return x - y;
+}
 ```
 
 # --solutions--
 
-```html
-<html>
-  <body>
-    <script type="module" src="index.js"></script>
-  </body>
-</html>
+```js
+export default function subtract(x, y) {
+  return x - y;
+}
 ```
