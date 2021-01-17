@@ -1,20 +1,20 @@
 ---
-id: 5d7925323be8848dbc58a07a
-title: Part 2
+id: 5d792532f631702ae6d23e11
+title: Part 3
 challengeType: 0
-dashedName: part-2
+dashedName: part-3
 ---
 
 # --description--
 
-Above `infixToFunction`, define an empty function `add` using the `function` keyword. It should accept two parameters, `x` and `y`.
+Now return the sum of `x` and `y` using the `return` keyword.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(code.replace(/\s/g, '').includes('functionadd(x,y){}'));
+assert(add(1, 2) === 3 && add(100, 2000) === 2100);
 ```
 
 # --seed--
@@ -59,6 +59,10 @@ assert(code.replace(/\s/g, '').includes('functionadd(x,y){}'));
 ```html
 <script>
 
+function add(x, y) {
+
+}
+
 const infixToFunction = {};
 
 
@@ -70,7 +74,7 @@ const infixToFunction = {};
 ```html
 <script>
 function add(x, y) {
-
+  return x + y;
 }
 
 const infixToFunction = {};
