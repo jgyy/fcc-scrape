@@ -1,20 +1,22 @@
 ---
-id: 5d792532f631702ae6d23e11
-title: Part 3
+id: 5d7925329445167ecc2ac9c9
+title: Part 4
 challengeType: 0
-dashedName: part-3
+dashedName: part-4
 ---
 
 # --description--
 
-Now return the sum of `x` and `y` using the `return` keyword.
+In JavaScript, functions are first class. This means that they can be used like any other values - for example, they can be assigned to variables.
+
+Assign `add` to a new variable `addVar`.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(add(1, 2) === 3 && add(100, 2000) === 2100);
+assert(code.replace(/\s/g, '').includes('constaddVar=add'));
 ```
 
 # --seed--
@@ -60,7 +62,7 @@ assert(add(1, 2) === 3 && add(100, 2000) === 2100);
 <script>
 
 function add(x, y) {
-
+  return x + y;
 }
 
 const infixToFunction = {};
@@ -76,6 +78,8 @@ const infixToFunction = {};
 function add(x, y) {
   return x + y;
 }
+
+const addVar = add;
 
 const infixToFunction = {};
 </script>
