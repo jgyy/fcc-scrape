@@ -1,41 +1,33 @@
 ---
-id: 587d7b89367417b2b2512b4a
-title: Use Destructuring Assignment to Assign Variables from Nested Objects
+id: 587d7b89367417b2b2512b49
+title: Use Destructuring Assignment to Assign Variables from Objects
 challengeType: 1
-forumTopicId: 301214
-dashedName: use-destructuring-assignment-to-assign-variables-from-nested-objects
+forumTopicId: 301215
+dashedName: use-destructuring-assignment-to-assign-variables-from-objects
 ---
 
 # --description--
 
-You can use the same principles from the previous two lessons to destructure values from nested objects.
+Destructuring allows you to assign a new variable name when extracting values. You can do this by putting the new name after a colon when assigning the value.
 
-Using an object similar to previous examples:
-
-```js
-const user = {
-  johnDoe: { 
-    age: 34,
-    email: 'johnDoe@freeCodeCamp.com'
-  }
-};
-```
-
-Here's how to extract the values of object properties and assign them to variables with the same name:
+Using the same object from the last example:
 
 ```js
-const { johnDoe: { age, email }} = user;
+const user = { name: 'John Doe', age: 34 };
 ```
 
-And here's how you can assign an object properties' values to variables with different names:
+Here's how you can give new variable names in the assignment:
 
 ```js
-const { johnDoe: { age: userAge, email: userEmail }} = user;
+const { name: userName, age: userAge } = user;
+// userName = 'John Doe', userAge = 34
 ```
+
+You may read it as "get the value of `user.name` and assign it to a new variable named `userName`" and so on.
 
 # --instructions--
 
-Replace the two assignments with an equivalent destructuring assignment. It should still assign the variables `lowToday` and `highToday` the values of `today.low` and `today.high` from the `LOCAL_FORECAST` object.
+Replace the two assignments with an equivalent destructuring assignment. It should still assign the variables `highToday` and `highTomorrow` the values of `today` and `tomorrow` from the `HIGH_TEMPERATURES` object.
 
 # --hints--
 
@@ -43,18 +35,8 @@ You should remove the ES5 assignment syntax.
 
 ```js
 assert(
-  !code.match(/lowToday = LOCAL_FORECAST\.today\.low/g) &&
-    !code.match(/highToday = LOCAL_FORECAST\.today.high/g)
-);
-```
-
-You should use destructuring to create the `lowToday` variable.
-
-```js
-assert(
-  code.match(
-    /(var|const|let)\s*{\s*today\s*:\s*{\s*(low\s*:\s*lowToday[^}]*|[^,]*,\s*low\s*:\s*lowToday\s*)}\s*}\s*=\s*LOCAL_FORECAST(;|\s+|\/\/)/g
-  )
+  !code.match(/highToday = HIGH_TEMPERATURES\.today/g) &&
+    !code.match(/highTomorrow = HIGH_TEMPERATURES\.tomorrow/g)
 );
 ```
 
@@ -63,15 +45,25 @@ You should use destructuring to create the `highToday` variable.
 ```js
 assert(
   code.match(
-    /(var|const|let)\s*{\s*today\s*:\s*{\s*(high\s*:\s*highToday[^}]*|[^,]*,\s*high\s*:\s*highToday\s*)}\s*}\s*=\s*LOCAL_FORECAST(;|\s+|\/\/)/g
+    /(var|const|let)\s*{\s*(today\s*:\s*highToday[^}]*|[^,]*,\s*today\s*:\s*highToday\s*)}\s*=\s*HIGH_TEMPERATURES(;|\s+|\/\/)/g
   )
 );
 ```
 
-`lowToday` should be equal to `64` and `highToday` should be equal to `77`.
+You should use destructuring to create the `highTomorrow` variable.
 
 ```js
-assert(lowToday === 64 && highToday === 77);
+assert(
+  code.match(
+    /(var|const|let)\s*{\s*(tomorrow\s*:\s*highTomorrow[^}]*|[^,]*,\s*tomorrow\s*:\s*highTomorrow\s*)}\s*=\s*HIGH_TEMPERATURES(;|\s+|\/\/)/g
+  )
+);
+```
+
+`highToday` should be equal to `77` and `highTomorrow` should be equal to `80`.
+
+```js
+assert(highToday === 77 && highTomorrow === 80);
 ```
 
 # --seed--
@@ -79,16 +71,16 @@ assert(lowToday === 64 && highToday === 77);
 ## --seed-contents--
 
 ```js
-const LOCAL_FORECAST = {
-  yesterday: { low: 61, high: 75 },
-  today: { low: 64, high: 77 },
-  tomorrow: { low: 68, high: 80 }
+const HIGH_TEMPERATURES = {
+  yesterday: 75,
+  today: 77,
+  tomorrow: 80
 };
 
 // Only change code below this line
   
-const lowToday = LOCAL_FORECAST.today.low;
-const highToday = LOCAL_FORECAST.today.high;
+const highToday = HIGH_TEMPERATURES.today;
+const highTomorrow = HIGH_TEMPERATURES.tomorrow; 
 
 // Only change code above this line
 ```
@@ -96,11 +88,11 @@ const highToday = LOCAL_FORECAST.today.high;
 # --solutions--
 
 ```js
-const LOCAL_FORECAST = {
-  yesterday: { low: 61, high: 75 },
-  today: { low: 64, high: 77 },
-  tomorrow: { low: 68, high: 80 }
+const HIGH_TEMPERATURES = {
+  yesterday: 75,
+  today: 77,
+  tomorrow: 80
 };
- 
-const { today: { low: lowToday, high: highToday }} = LOCAL_FORECAST;
+
+const { today: highToday, tomorrow: highTomorrow } = HIGH_TEMPERATURES;
 ```
