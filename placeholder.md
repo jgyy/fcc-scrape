@@ -1,136 +1,61 @@
 ---
-id: 587d7b8c367417b2b2512b54
-title: Use getters and setters to Control Access to an Object
+id: 587d7b88367417b2b2512b47
+title: Use the Rest Parameter with Function Parameters
 challengeType: 1
-forumTopicId: 301220
-dashedName: use-getters-and-setters-to-control-access-to-an-object
+forumTopicId: 301221
+dashedName: use-the-rest-parameter-with-function-parameters
 ---
 
 # --description--
 
-You can obtain values from an object and set the value of a property within an object.
+In order to help us create more flexible functions, ES6 introduces the <dfn>rest parameter</dfn> for function parameters. With the rest parameter, you can create functions that take a variable number of arguments. These arguments are stored in an array that can be accessed later from inside the function.
 
-These are classically called <dfn>getters</dfn> and <dfn>setters</dfn>.
-
-Getter functions are meant to simply return (get) the value of an object's private variable to the user without the user directly accessing the private variable.
-
-Setter functions are meant to modify (set) the value of an object's private variable based on the value passed into the setter function. This change could involve calculations, or even overwriting the previous value completely.  
+Check out this code:
 
 ```js
-class Book {
-  constructor(author) {
-    this._author = author;
-  }
-  // getter
-  get writer() {
-    return this._author;
-  }
-  // setter
-  set writer(updatedAuthor) {
-    this._author = updatedAuthor;
-  }
+function howMany(...args) {
+  return "You have passed " + args.length + " arguments.";
 }
-const novel = new Book('anonymous');
-console.log(novel.writer);  // anonymous
-novel.writer = 'newAuthor';
-console.log(novel.writer);  // newAuthor
+console.log(howMany(0, 1, 2)); // You have passed 3 arguments.
+console.log(howMany("string", null, [1, 2, 3], { })); // You have passed 4 arguments.
 ```
 
-Notice the syntax used to invoke the getter and setter. They do not even look like functions. Getters and setters are important because they hide internal implementation details. **Note:** It is convention to precede the name of a private variable with an underscore (`_`). However, the practice itself does not make a variable private.
+The rest parameter eliminates the need to check the `args` array and allows us to apply `map()`, `filter()` and `reduce()` on the parameters array.
 
 # --instructions--
 
-Use the `class` keyword to create a Thermostat class. The constructor accepts a Fahrenheit temperature.
-
-In the class, create a `getter` to obtain the temperature in Celsius and a `setter` to set the temperature in Celsius.
-
-Remember that `C = 5/9 * (F - 32)` and `F = C * 9.0 / 5 + 32`, where `F` is the value of temperature in Fahrenheit, and `C` is the value of the same temperature in Celsius.
-
-**Note:** When you implement this, you will track the temperature inside the class in one scale, either Fahrenheit or Celsius.
-
-This is the power of a getter and a setter. You are creating an API for another user, who can get the correct result regardless of which one you track.
-
-In other words, you are abstracting implementation details from the user.
+Modify the function `sum` using the rest parameter in such a way that the function `sum` is able to take any number of arguments and return their sum.
 
 # --hints--
 
-`Thermostat` should be a `class` with a defined `constructor` method.
+The result of `sum(0,1,2)` should be 3
 
 ```js
-assert(
-  typeof Thermostat === 'function' &&
-    typeof Thermostat.constructor === 'function'
-);
+assert(sum(0, 1, 2) === 3);
 ```
 
-`class` keyword should be used.
+The result of `sum(1,2,3,4)` should be 10
 
 ```js
-assert(code.match(/class/g));
+assert(sum(1, 2, 3, 4) === 10);
 ```
 
-`Thermostat` should be able to be instantiated.
+The result of `sum(5)` should be 5
 
 ```js
-assert(
-  (() => {
-    const t = new Thermostat(122);
-    return typeof t === 'object';
-  })()
-);
+assert(sum(5) === 5);
 ```
 
-When instantiated with a Fahrenheit value, `Thermostat` should set the correct temperature.
+The result of `sum()` should be 0
 
 ```js
-assert(
-  (() => {
-    const t = new Thermostat(122);
-    return t.temperature === 50;
-  })()
-);
+assert(sum() === 0);
 ```
 
-A `getter` should be defined.
+The `sum` function should use the `...` rest parameter on the `args` parameter.
 
 ```js
-assert(
-  (() => {
-    const desc = Object.getOwnPropertyDescriptor(
-      Thermostat.prototype,
-      'temperature'
-    );
-    return !!desc && typeof desc.get === 'function';
-  })()
-);
-```
-
-A `setter` should  be defined.
-
-```js
-assert(
-  (() => {
-    const desc = Object.getOwnPropertyDescriptor(
-      Thermostat.prototype,
-      'temperature'
-    );
-    return !!desc && typeof desc.set === 'function';
-  })()
-);
-```
-
-Calling the `setter` with a Celsius value should set the temperature.
-
-```js
-assert(
-  (() => {
-    const t = new Thermostat(32);
-    t.temperature = 26;
-    const u = new Thermostat(32);
-    u.temperature = 50;
-    return t.temperature === 26 && u.temperature === 50;
-  })()
-);
+assert(__helpers.removeWhiteSpace(code).match(/sum=\(\.\.\.args\)=>/));
 ```
 
 # --seed--
@@ -138,33 +63,16 @@ assert(
 ## --seed-contents--
 
 ```js
-// Only change code below this line
-
-// Only change code above this line
-
-const thermos = new Thermostat(76); // Setting in Fahrenheit scale
-let temp = thermos.temperature; // 24.44 in Celsius
-thermos.temperature = 26;
-temp = thermos.temperature; // 26 in Celsius
+const sum = (x, y, z) => {
+  const args = [x, y, z];
+  return args.reduce((a, b) => a + b, 0);
+}
 ```
 
 # --solutions--
 
 ```js
-class Thermostat {
-  constructor(fahrenheit) {
-    this._tempInCelsius = 5/9 * (fahrenheit - 32);
-  }
-  get temperature(){
-    return this._tempInCelsius;
-  }
-  set temperature(newTemp){
-    this._tempInCelsius = newTemp;
-  }
+const sum = (...args) => {
+  return args.reduce((a, b) => a + b, 0);
 }
-
-const thermos = new Thermostat(76); // Setting in Fahrenheit scale
-let temp = thermos.temperature; // 24.44 in Celsius
-thermos.temperature = 26;
-temp = thermos.temperature; // 26 in Celsius
 ```
