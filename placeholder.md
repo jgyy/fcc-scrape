@@ -1,25 +1,27 @@
 ---
-id: 5d79253358e8f646cbeb2bb0
-title: Part 15
+id: 5d792533bb38fab70b27f527
+title: Part 16
 challengeType: 0
-dashedName: part-15
+dashedName: part-16
 ---
 
 # --description--
 
-Change the `"+"` in the call to `infixToFunction` to `fn`.
+`arg1` and `arg2` are the numbers input by the user in a string such as "1+3".
 
-`fn` is the operator that the user inputs (`+`, `-`, `*` or `/`) - we use `infixToFunction` to get the function that corresponds to it.
+Pass `parseFloat(arg1)` and `parseFloat(arg2)` as the arguments to `infixToFunction[fn]` (remember `infixToFunction[fn]` is a function).
 
 # --hints--
 
 See description above for instructions.
 
 ```js
+const regex = /([0-9.]+)([+-\/*])([0-9.]+)/;
 assert(
-  code
-    .replace(/\s/g, '')
-    .includes('str.replace(regex,(match,arg1,fn,arg2)=>infixToFunction[fn])')
+  infixEval('23+35', regex) === '58' &&
+    infixEval('100-20', regex) === '80' &&
+    infixEval('10*10', regex) === '100' &&
+    infixEval('120/6', regex) === '20'
 );
 ```
 
@@ -74,7 +76,7 @@ const infixToFunction = {
 
 const infixEval = (str, regex) =>
   str.replace(regex, (match, arg1, fn, arg2) =>
-    infixToFunction["+"]
+    infixToFunction[fn]
   );
 
 
@@ -94,7 +96,7 @@ const infixToFunction = {
 
 const infixEval = (str, regex) =>
   str.replace(regex, (match, arg1, fn, arg2) =>
-    infixToFunction[fn]
+    infixToFunction[fn](parseFloat(arg1), parseFloat(arg2))
   );
 </script>
 ```
