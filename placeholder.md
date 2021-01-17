@@ -1,75 +1,76 @@
 ---
-id: 587d7b8a367417b2b2512b4f
-title: Write Concise Object Literal Declarations Using Object Property Shorthand
-challengeType: 1
-forumTopicId: 301225
-dashedName: write-concise-object-literal-declarations-using-object-property-shorthand
+id: 5d79253297c0ebb149ea9fed
+title: Part 1
+challengeType: 0
+dashedName: part-1
 ---
 
 # --description--
 
-ES6 adds some nice support for easily defining object literals.
+In functional programming, we prefer immutable values over mutable values.
 
-Consider the following code:
+Mutable values (declared with `var` or `let`) can lead to unexpected behaviors and bugs. Values declared with `const` cannot be reassigned, which makes using them easier because you don't have to keep track of their values.
 
-```js
-const getMousePosition = (x, y) => ({
-  x: x,
-  y: y
-});
-```
-
-`getMousePosition` is a simple function that returns an object containing two properties. ES6 provides the syntactic sugar to eliminate the redundancy of having to write `x: x`. You can simply write `x` once, and it will be converted to`x: x` (or something equivalent) under the hood. Here is the same function from above rewritten to use this new syntax:
-
-```js
-const getMousePosition = (x, y) => ({ x, y });
-```
-
-# --instructions--
-
-Use object property shorthand with object literals to create and return an object with `name`, `age` and `gender` properties.
+Start by creating an empty `infixToFunction` object using `const`.
 
 # --hints--
 
-`createPerson("Zodiac Hasbro", 56, "male")` should return `{name: "Zodiac Hasbro", age: 56, gender: "male"}`.
+See description above for instructions.
 
 ```js
-assert.deepEqual(
-  { name: 'Zodiac Hasbro', age: 56, gender: 'male' },
-  createPerson('Zodiac Hasbro', 56, 'male')
-);
-```
-
-Your code should not use `key:value`.
-
-```js
-(getUserInput) => assert(!getUserInput('index').match(/:/g));
+assert(code.replace(/\s/g, '').includes('constinfixToFunction={}'));
 ```
 
 # --seed--
 
+## --before-user-code--
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Spreadsheet</title>
+  <style>
+    #container {
+      display: grid;
+      grid-template-columns: 50px repeat(10, 200px);
+      grid-template-rows: repeat(11, 30px);
+    }
+    .label {
+      background-color: lightgray;
+      text-align: center;
+      vertical-align: middle;
+      line-height: 30px;
+    }
+  </style>
+</head>
+<body>
+<div id="container">
+  <div></div>
+</div>
+```
+
+## --after-user-code--
+
+```html
+</body>
+</html>
+```
+
 ## --seed-contents--
 
-```js
-const createPerson = (name, age, gender) => {
-  // Only change code below this line
-  return {
-    name: name,
-    age: age,
-    gender: gender
-  };
-  // Only change code above this line
-};
+```html
+<script>
+
+
+</script>
 ```
 
 # --solutions--
 
-```js
-const createPerson = (name, age, gender) => {
-  return {
-    name,
-    age,
-    gender
-  };
-};
+```html
+<script>
+const infixToFunction = {};
+</script>
 ```
