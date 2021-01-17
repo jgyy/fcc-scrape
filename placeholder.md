@@ -1,84 +1,55 @@
 ---
-id: 587d7b8a367417b2b2512b4e
-title: Create Strings using Template Literals
+id: 587d7b87367417b2b2512b41
+title: Declare a Read-Only Variable with the const Keyword
 challengeType: 1
-forumTopicId: 301200
-dashedName: create-strings-using-template-literals
+forumTopicId: 301201
+dashedName: declare-a-read-only-variable-with-the-const-keyword
 ---
 
 # --description--
 
-A new feature of ES6 is the <dfn>template literal</dfn>. This is a special type of string that makes creating complex strings easier.
+The keyword `let` is not the only new way to declare variables. In ES6, you can also declare variables using the `const` keyword.
 
-Template literals allow you to create multi-line strings and to use string interpolation features to create strings.
-
-Consider the code below:
+`const` has all the awesome features that `let` has, with the added bonus that variables declared using `const` are read-only. They are a constant value, which means that once a variable is assigned with `const`, it cannot be reassigned.
 
 ```js
-const person = {
-  name: "Zodiac Hasbro",
-  age: 56
-};
-
-// Template literal with multi-line and string interpolation
-const greeting = `Hello, my name is ${person.name}!
-I am ${person.age} years old.`;
-
-console.log(greeting); // prints
-// Hello, my name is Zodiac Hasbro!
-// I am 56 years old.
-
+const FAV_PET = "Cats";
+FAV_PET = "Dogs"; // returns error
 ```
 
-A lot of things happened there. Firstly, the example uses backticks (`` ` ``), not quotes (`'` or `"`), to wrap the string. Secondly, notice that the string is multi-line, both in the code and the output. This saves inserting `\n` within strings. The `${variable}` syntax used above is a placeholder. Basically, you won't have to use concatenation with the `+` operator anymore. To add variables to strings, you just drop the variable in a template string and wrap it with `${` and `}`. Similarly, you can include other expressions in your string literal, for example `${a + b}`. This new way of creating strings gives you more flexibility to create robust strings.
+As you can see, trying to reassign a variable declared with `const` will throw an error. You should always name variables you don't want to reassign using the `const` keyword. This helps when you accidentally attempt to reassign a variable that is meant to stay constant. A common practice when naming constants is to use all uppercase letters, with words separated by an underscore.
+
+**Note:** It is common for developers to use uppercase variable identifiers for immutable values and lowercase or camelCase for mutable values (objects and arrays). In a later challenge you will see an example of a lowercase variable identifier being used for an array.
 
 # --instructions--
 
-Use template literal syntax with backticks to create an array of list element (`li`) strings. Each list element's text should be one of the array elements from the `failure` property on the `result` object and have a `class` attribute with the value `text-warning`. The `makeList` function should return the array of list item strings.
-
-Use an iterator method (any kind of loop) to get the desired output (shown below).
-
-```js
-[
-  '<li class="text-warning">no-var</li>',
-  '<li class="text-warning">var-on-top</li>',
-  '<li class="text-warning">linebreak</li>'
-]
-```
+Change the code so that all variables are declared using `let` or `const`. Use `let` when you want the variable to change, and `const` when you want the variable to remain constant. Also, rename variables declared with `const` to conform to common practices, meaning constants should be in all caps.
 
 # --hints--
 
-`failuresList` should be an array containing `result failure` messages.
+`var` should not exist in your code.
 
 ```js
-assert(
-  typeof makeList(result.failure) === 'object' && failuresList.length === 3
-);
+(getUserInput) => assert(!getUserInput('index').match(/var/g));
 ```
 
-`failuresList` should be equal to the specified output.
+`SENTENCE` should be a constant variable declared with `const`.
 
 ```js
-assert(
-  makeList(result.failure).every(
-    (v, i) =>
-      v === `<li class="text-warning">${result.failure[i]}</li>` ||
-      v === `<li class='text-warning'>${result.failure[i]}</li>`
-  )
-);
+(getUserInput) => assert(getUserInput('index').match(/(const SENTENCE)/g));
 ```
 
-Template strings and expression interpolation should be used.
+`i` should be declared with `let`.
 
 ```js
-(getUserInput) => assert(getUserInput('index').match(/(`.*\${.*}.*`)/));
+(getUserInput) => assert(getUserInput('index').match(/(let i)/g));
 ```
 
-An iterator should be used.
+`console.log` should be changed to print the `SENTENCE` variable.
 
 ```js
 (getUserInput) =>
-  assert(getUserInput('index').match(/for|map|reduce|forEach|while/));
+  assert(getUserInput('index').match(/console\.log\(\s*SENTENCE\s*\)\s*;?/g));
 ```
 
 # --seed--
@@ -86,33 +57,31 @@ An iterator should be used.
 ## --seed-contents--
 
 ```js
-const result = {
-  success: ["max-length", "no-amd", "prefer-arrow-functions"],
-  failure: ["no-var", "var-on-top", "linebreak"],
-  skipped: ["no-extra-semi", "no-dup-keys"]
-};
-function makeList(arr) {
+function printManyTimes(str) {
+
   // Only change code below this line
-  const failureItems = [];
+
+  var sentence = str + " is cool!";
+  for (var i = 0; i < str.length; i+=2) {
+    console.log(sentence);
+  }
+
   // Only change code above this line
 
-  return failureItems;
 }
-
-const failuresList = makeList(result.failure);
+printManyTimes("freeCodeCamp");
 ```
 
 # --solutions--
 
 ```js
-const result = {
-  success: ["max-length", "no-amd", "prefer-arrow-functions"],
-  failure: ["no-var", "var-on-top", "linebreak"],
-  skipped: ["no-extra-semi", "no-dup-keys"]
-};
-function makeList(arr) {
-  return arr.map(val => `<li class="text-warning">${val}</li>`);
-}
+function printManyTimes(str) {
 
-const failuresList = makeList(result.failure);
+  const SENTENCE = str + " is cool!";
+  for (let i = 0; i < str.length; i+=2) {
+    console.log(SENTENCE);
+  }
+
+}
+printManyTimes("freeCodeCamp");
 ```
