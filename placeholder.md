@@ -1,20 +1,20 @@
 ---
-id: 5d79253352e33dd59ec2f6de
-title: Part 8
+id: 5d792533d31e4f7fad33011d
+title: Part 9
 challengeType: 0
-dashedName: part-8
+dashedName: part-9
 ---
 
 # --description--
 
-Add the key `+` to `infixToFunction` and assign it the value `addVar`.
+In `infixToFunction`, replace `addVar` with `(x, y) => x + y`.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(infixToFunction['+'].toString() === addVar.toString());
+assert(code.replace(/\s/g, '').match(/\+["']:\(x,y\)=>x\+y/));
 ```
 
 # --seed--
@@ -61,7 +61,9 @@ assert(infixToFunction['+'].toString() === addVar.toString());
 
 const addVar = (x, y) => x + y;
 
-const infixToFunction = {};
+const infixToFunction = {
+  "+": addVar
+};
 
 
 </script>
@@ -74,7 +76,7 @@ const infixToFunction = {};
 const addVar = (x, y) => x + y;
 
 const infixToFunction = {
-  "+": addVar
+  "+": (x, y) => x + y
 };
 </script>
 ```
