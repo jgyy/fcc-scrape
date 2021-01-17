@@ -1,88 +1,92 @@
 ---
-id: 587d7b87367417b2b2512b3f
-title: Explore Differences Between the var and let Keywords
+id: 5cdafbd72913098997531681
+title: Handle a Fulfilled Promise with then
 challengeType: 1
-forumTopicId: 301202
-dashedName: explore-differences-between-the-var-and-let-keywords
+forumTopicId: 301203
+dashedName: handle-a-fulfilled-promise-with-then
 ---
 
 # --description--
 
-One of the biggest problems with declaring variables with the `var` keyword is that you can overwrite variable declarations without an error.
+Promises are most useful when you have a process that takes an unknown amount of time in your code (i.e. something asynchronous), often a server request. When you make a server request it takes some amount of time, and after it completes you usually want to do something with the response from the server. This can be achieved by using the `then` method. The `then` method is executed immediately after your promise is fulfilled with `resolve`. Here’s an example:
 
 ```js
-var camper = 'James';
-var camper = 'David';
-console.log(camper);
-// logs 'David'
+myPromise.then(result => {
+  // do something with the result.
+});
 ```
 
-As you can see in the code above, the `camper` variable is originally declared as `James` and then overridden to be `David`. In a small application, you might not run into this type of problem, but when your code becomes larger, you might accidentally overwrite a variable that you did not intend to overwrite. Because this behavior does not throw an error, searching and fixing bugs becomes more difficult.  
-A new keyword called `let` was introduced in ES6 to solve this potential issue with the `var` keyword. If you were to replace `var` with `let` in the variable declarations of the code above, the result would be an error.
-
-```js
-let camper = 'James';
-let camper = 'David'; // throws an error
-```
-
-This error can be seen in the console of your browser. So unlike `var`, when using `let`, a variable with the same name can only be declared once. Note the `"use strict"`. This enables Strict Mode, which catches common coding mistakes and "unsafe" actions. For instance:
-
-```js
-"use strict";
-x = 3.14; // throws an error because x is not declared
-```
+`result` comes from the argument given to the `resolve` method.
 
 # --instructions--
 
-Update the code so it only uses the `let` keyword.
+Add the `then` method to your promise. Use `result` as the parameter of its callback function and log `result` to the console.
 
 # --hints--
 
-`var` should not exist in the code.
+You should call the `then` method on the promise.
 
 ```js
-(getUserInput) => assert(!getUserInput('index').match(/var/g));
+assert(
+  __helpers.removeWhiteSpace(code).match(/(makeServerRequest|\))\.then\(/g)
+);
 ```
 
-`catName` should be `Oliver`.
+Your `then` method should have a callback function with `result` as its parameter.
 
 ```js
-assert(catName === 'Oliver');
+assert(resultIsParameter);
 ```
 
-`quote` should be `"Oliver says Meow!"`
+You should log `result` to the console.
 
 ```js
-assert(quote === 'Oliver says Meow!');
+assert(
+  resultIsParameter &&
+    __helpers
+      .removeWhiteSpace(code)
+      .match(/\.then\(.*?result.*?console.log\(result\).*?\)/)
+);
 ```
 
 # --seed--
 
+## --after-user-code--
+
+```js
+const resultIsParameter = /\.then\((function\(result\){|result|\(result\)=>)/.test(__helpers.removeWhiteSpace(code));
+```
+
 ## --seed-contents--
 
 ```js
-var catName;
-var quote;
-function catTalk() {
-  "use strict";
-
-  catName = "Oliver";
-  quote = catName + " says Meow!";
-
-}
-catTalk();
+const makeServerRequest = new Promise((resolve, reject) => {
+  // responseFromServer is set to true to represent a successful response from a server
+  let responseFromServer = true;
+    
+  if(responseFromServer) {
+    resolve("We got the data");
+  } else {  
+    reject("Data not received");
+  }
+});
 ```
 
 # --solutions--
 
 ```js
-let catName;
-let quote;
-function catTalk() {
-  'use strict';
+const makeServerRequest = new Promise((resolve, reject) => {
+  // responseFromServer is set to true to represent a successful response from a server
+  let responseFromServer = true;
+    
+  if(responseFromServer) {
+    resolve("We got the data");
+  } else {  
+    reject("Data not received");
+  }
+});
 
-  catName = 'Oliver';
-  quote = catName + ' says Meow!';
-}
-catTalk();
+makeServerRequest.then(result => {
+  console.log(result);
+});
 ```
