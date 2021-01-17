@@ -1,75 +1,78 @@
 ---
-id: 587d7b87367417b2b2512b43
-title: Use Arrow Functions to Write Concise Anonymous Functions
+id: 587d7b8b367417b2b2512b53
+title: Use class Syntax to Define a Constructor Function
 challengeType: 1
-forumTopicId: 301211
-dashedName: use-arrow-functions-to-write-concise-anonymous-functions
+forumTopicId: 301212
+dashedName: use-class-syntax-to-define-a-constructor-function
 ---
 
 # --description--
 
-In JavaScript, we often don't need to name our functions, especially when passing a function as an argument to another function. Instead, we create inline functions. We don't need to name these functions because we do not reuse them anywhere else.
+ES6 provides a new syntax to create objects, using the <dfn>class</dfn> keyword.
 
-To achieve this, we often use the following syntax:
+It should be noted that the `class` syntax is just syntax, and not a full-fledged class-based implementation of an object-oriented paradigm, unlike in languages such as Java, Python, Ruby, etc.
+
+In ES5, we usually define a constructor function and use the `new` keyword to instantiate an object.
 
 ```js
-const myFunc = function() {
-  const myVar = "value";
-  return myVar;
+var SpaceShuttle = function(targetPlanet){
+  this.targetPlanet = targetPlanet;
 }
+var zeus = new SpaceShuttle('Jupiter');
 ```
 
-ES6 provides us with the syntactic sugar to not have to write anonymous functions this way. Instead, you can use **arrow function syntax**:
+The `class` syntax simply replaces the constructor function creation:
 
 ```js
-const myFunc = () => {
-  const myVar = "value";
-  return myVar;
+class SpaceShuttle {
+  constructor(targetPlanet) {
+    this.targetPlanet = targetPlanet;
+  }
 }
+const zeus = new SpaceShuttle('Jupiter');
 ```
 
-When there is no function body, and only a return value, arrow function syntax allows you to omit the keyword `return` as well as the brackets surrounding the code. This helps simplify smaller functions into one-line statements:
+It should be noted that the `class` keyword declares a new function, to which a constructor is added. This constructor is invoked when `new` is called to create a new object.  
+**Notes:**  
 
-```js
-const myFunc = () => "value";
-```
-
-This code will still return the string `value` by default.
+-   UpperCamelCase should be used by convention for ES6 class names, as in `SpaceShuttle` used above.
+-   The constructor method is a special method for creating and initializing an object created with a class. You will learn more about it in the Object Oriented Programming section of the JavaScript Algorithms And Data Structures Certification.
 
 # --instructions--
 
-Rewrite the function assigned to the variable `magic` which returns a `new Date()` to use arrow function syntax. Also, make sure nothing is defined using the keyword `var`.
+Use the `class` keyword and write a constructor to create the `Vegetable` class.
+
+The `Vegetable` class allows you to create a vegetable object with a property `name` that gets passed to the constructor.
 
 # --hints--
 
-User should replace `var` keyword.
+`Vegetable` should be a `class` with a defined `constructor` method.
 
 ```js
-(getUserInput) => assert(!getUserInput('index').match(/var/g));
+assert(
+  typeof Vegetable === 'function' && typeof Vegetable.constructor === 'function'
+);
 ```
 
-`magic` should be a constant variable (by using `const`).
+`class` keyword should be used.
 
 ```js
-(getUserInput) => assert(getUserInput('index').match(/const\s+magic/g));
+assert(code.match(/class/g));
 ```
 
-`magic` should be a `function`.
+`Vegetable` should be able to be instantiated.
 
 ```js
-assert(typeof magic === 'function');
+assert(() => {
+  const a = new Vegetable('apple');
+  return typeof a === 'object';
+});
 ```
 
-`magic()` should return correct date.
+`carrot.name` should return `carrot`.
 
 ```js
-assert(magic().setHours(0, 0, 0, 0) === new Date().setHours(0, 0, 0, 0));
-```
-
-`function` keyword should not be used.
-
-```js
-(getUserInput) => assert(!getUserInput('index').match(/function/g));
+assert(carrot.name == 'carrot');
 ```
 
 # --seed--
@@ -77,15 +80,21 @@ assert(magic().setHours(0, 0, 0, 0) === new Date().setHours(0, 0, 0, 0));
 ## --seed-contents--
 
 ```js
-var magic = function() {
-  return new Date();
-};
+// Only change code below this line
+
+// Only change code above this line
+
+const carrot = new Vegetable('carrot');
+console.log(carrot.name); // Should display 'carrot'
 ```
 
 # --solutions--
 
 ```js
-const magic = () => {
-  return new Date();
-};
+class Vegetable {
+  constructor(name) {
+    this.name = name;
+  }
+}
+const carrot = new Vegetable('carrot');
 ```
