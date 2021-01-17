@@ -1,78 +1,53 @@
 ---
-id: 587d7b8b367417b2b2512b53
-title: Use class Syntax to Define a Constructor Function
+id: 587d7b89367417b2b2512b4b
+title: Use Destructuring Assignment to Assign Variables from Arrays
 challengeType: 1
-forumTopicId: 301212
-dashedName: use-class-syntax-to-define-a-constructor-function
+forumTopicId: 301213
+dashedName: use-destructuring-assignment-to-assign-variables-from-arrays
 ---
 
 # --description--
 
-ES6 provides a new syntax to create objects, using the <dfn>class</dfn> keyword.
+ES6 makes destructuring arrays as easy as destructuring objects.
 
-It should be noted that the `class` syntax is just syntax, and not a full-fledged class-based implementation of an object-oriented paradigm, unlike in languages such as Java, Python, Ruby, etc.
+One key difference between the spread operator and array destructuring is that the spread operator unpacks all contents of an array into a comma-separated list. Consequently, you cannot pick or choose which elements you want to assign to variables.
 
-In ES5, we usually define a constructor function and use the `new` keyword to instantiate an object.
-
-```js
-var SpaceShuttle = function(targetPlanet){
-  this.targetPlanet = targetPlanet;
-}
-var zeus = new SpaceShuttle('Jupiter');
-```
-
-The `class` syntax simply replaces the constructor function creation:
+Destructuring an array lets us do exactly that:
 
 ```js
-class SpaceShuttle {
-  constructor(targetPlanet) {
-    this.targetPlanet = targetPlanet;
-  }
-}
-const zeus = new SpaceShuttle('Jupiter');
+const [a, b] = [1, 2, 3, 4, 5, 6];
+console.log(a, b); // 1, 2
 ```
 
-It should be noted that the `class` keyword declares a new function, to which a constructor is added. This constructor is invoked when `new` is called to create a new object.  
-**Notes:**  
+The variable `a` is assigned the first value of the array, and `b` is assigned the second value of the array. We can also access the value at any index in an array with destructuring by using commas to reach the desired index:
 
--   UpperCamelCase should be used by convention for ES6 class names, as in `SpaceShuttle` used above.
--   The constructor method is a special method for creating and initializing an object created with a class. You will learn more about it in the Object Oriented Programming section of the JavaScript Algorithms And Data Structures Certification.
+```js
+const [a, b,,, c] = [1, 2, 3, 4, 5, 6];
+console.log(a, b, c); // 1, 2, 5
+```
 
 # --instructions--
 
-Use the `class` keyword and write a constructor to create the `Vegetable` class.
-
-The `Vegetable` class allows you to create a vegetable object with a property `name` that gets passed to the constructor.
+Use destructuring assignment to swap the values of `a` and `b` so that `a` receives the value stored in `b`, and `b` receives the value stored in `a`.
 
 # --hints--
 
-`Vegetable` should be a `class` with a defined `constructor` method.
+Value of `a` should be 6, after swapping.
 
 ```js
-assert(
-  typeof Vegetable === 'function' && typeof Vegetable.constructor === 'function'
-);
+assert(a === 6);
 ```
 
-`class` keyword should be used.
+Value of `b` should be 8, after swapping.
 
 ```js
-assert(code.match(/class/g));
+assert(b === 8);
 ```
 
-`Vegetable` should be able to be instantiated.
+You should use array destructuring to swap a and b.
 
 ```js
-assert(() => {
-  const a = new Vegetable('apple');
-  return typeof a === 'object';
-});
-```
-
-`carrot.name` should return `carrot`.
-
-```js
-assert(carrot.name == 'carrot');
+assert(/\[\s*(\w)\s*,\s*(\w)\s*\]\s*=\s*\[\s*\2\s*,\s*\1\s*\]/g.test(code));
 ```
 
 # --seed--
@@ -80,21 +55,13 @@ assert(carrot.name == 'carrot');
 ## --seed-contents--
 
 ```js
+let a = 8, b = 6;
 // Only change code below this line
-
-// Only change code above this line
-
-const carrot = new Vegetable('carrot');
-console.log(carrot.name); // Should display 'carrot'
 ```
 
 # --solutions--
 
 ```js
-class Vegetable {
-  constructor(name) {
-    this.name = name;
-  }
-}
-const carrot = new Vegetable('carrot');
+let a = 8, b = 6;
+[a, b] = [b, a];
 ```
