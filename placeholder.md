@@ -1,28 +1,24 @@
 ---
-id: 5d792533bb38fab70b27f527
-title: Part 16
+id: 5d79253386060ed9eb04a070
+title: Part 17
 challengeType: 0
-dashedName: part-16
+dashedName: part-17
 ---
 
 # --description--
 
-`arg1` and `arg2` are the numbers input by the user in a string such as "1+3".
+The `match` parameter is currently unused, which can lead to unused variable warnings in some linters.
 
-Pass `parseFloat(arg1)` and `parseFloat(arg2)` as the arguments to `infixToFunction[fn]` (remember `infixToFunction[fn]` is a function).
+To fix this, prefix or replace it with an underscore (`_`) - both ways signal to the reader and linter that you're aware you don't need this.
+
+Note that a single underscore can only be used once in a function and may conflict with some libraries (Lodash, Underscore.js).
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-const regex = /([0-9.]+)([+-\/*])([0-9.]+)/;
-assert(
-  infixEval('23+35', regex) === '58' &&
-    infixEval('100-20', regex) === '80' &&
-    infixEval('10*10', regex) === '100' &&
-    infixEval('120/6', regex) === '20'
-);
+assert(code.replace(/\s/g, '').includes('str.replace(regex,(_'));
 ```
 
 # --seed--
@@ -76,7 +72,7 @@ const infixToFunction = {
 
 const infixEval = (str, regex) =>
   str.replace(regex, (match, arg1, fn, arg2) =>
-    infixToFunction[fn]
+    infixToFunction[fn](parseFloat(arg1), parseFloat(arg2))
   );
 
 
@@ -95,7 +91,7 @@ const infixToFunction = {
 };
 
 const infixEval = (str, regex) =>
-  str.replace(regex, (match, arg1, fn, arg2) =>
+  str.replace(regex, (_, arg1, fn, arg2) =>
     infixToFunction[fn](parseFloat(arg1), parseFloat(arg2))
   );
 </script>
