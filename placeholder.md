@@ -1,33 +1,38 @@
 ---
-id: 587d7b89367417b2b2512b49
-title: Use Destructuring Assignment to Assign Variables from Objects
+id: 5cfa550e84205a357704ccb6
+title: Use Destructuring Assignment to Extract Values from Objects
 challengeType: 1
-forumTopicId: 301215
-dashedName: use-destructuring-assignment-to-assign-variables-from-objects
+forumTopicId: 301216
+dashedName: use-destructuring-assignment-to-extract-values-from-objects
 ---
 
 # --description--
 
-Destructuring allows you to assign a new variable name when extracting values. You can do this by putting the new name after a colon when assigning the value.
+<dfn>Destructuring assignment</dfn> is special syntax introduced in ES6, for neatly assigning values taken directly from an object.
 
-Using the same object from the last example:
+Consider the following ES5 code:
 
 ```js
 const user = { name: 'John Doe', age: 34 };
+
+const name = user.name; // name = 'John Doe'
+const age = user.age; // age = 34
 ```
 
-Here's how you can give new variable names in the assignment:
+Here's an equivalent assignment statement using the ES6 destructuring syntax:
 
 ```js
-const { name: userName, age: userAge } = user;
-// userName = 'John Doe', userAge = 34
+const { name, age } = user;
+// name = 'John Doe', age = 34
 ```
 
-You may read it as "get the value of `user.name` and assign it to a new variable named `userName`" and so on.
+Here, the `name` and `age` variables will be created and assigned the values of their respective values from the `user` object. You can see how much cleaner this is.
+
+You can extract as many or few values from the object as you want.
 
 # --instructions--
 
-Replace the two assignments with an equivalent destructuring assignment. It should still assign the variables `highToday` and `highTomorrow` the values of `today` and `tomorrow` from the `HIGH_TEMPERATURES` object.
+Replace the two assignments with an equivalent destructuring assignment. It should still assign the variables `today` and `tomorrow` the values of `today` and `tomorrow` from the `HIGH_TEMPERATURES` object.
 
 # --hints--
 
@@ -35,35 +40,40 @@ You should remove the ES5 assignment syntax.
 
 ```js
 assert(
-  !code.match(/highToday = HIGH_TEMPERATURES\.today/g) &&
-    !code.match(/highTomorrow = HIGH_TEMPERATURES\.tomorrow/g)
+  !__helpers
+    .removeJSComments(code)
+    .match(/today\s*=\s*HIGH_TEMPERATURES\.(today|tomorrow)/g)
 );
 ```
 
-You should use destructuring to create the `highToday` variable.
+You should use destructuring to create the `today` variable.
 
 ```js
 assert(
-  code.match(
-    /(var|const|let)\s*{\s*(today\s*:\s*highToday[^}]*|[^,]*,\s*today\s*:\s*highToday\s*)}\s*=\s*HIGH_TEMPERATURES(;|\s+|\/\/)/g
-  )
+  __helpers
+    .removeJSComments(code)
+    .match(
+      /(var|let|const)\s*{\s*(today[^}]*|[^,]*,\s*today)\s*}\s*=\s*HIGH_TEMPERATURES(;|\s+|\/\/)/g
+    )
 );
 ```
 
-You should use destructuring to create the `highTomorrow` variable.
+You should use destructuring to create the `tomorrow` variable.
 
 ```js
 assert(
-  code.match(
-    /(var|const|let)\s*{\s*(tomorrow\s*:\s*highTomorrow[^}]*|[^,]*,\s*tomorrow\s*:\s*highTomorrow\s*)}\s*=\s*HIGH_TEMPERATURES(;|\s+|\/\/)/g
-  )
+  __helpers
+    .removeJSComments(code)
+    .match(
+      /(var|let|const)\s*{\s*(tomorrow[^}]*|[^,]*,\s*tomorrow)\s*}\s*=\s*HIGH_TEMPERATURES(;|\s+|\/\/)/g
+    )
 );
 ```
 
-`highToday` should be equal to `77` and `highTomorrow` should be equal to `80`.
+`today` should be equal to `77` and `tomorrow` should be equal to `80`.
 
 ```js
-assert(highToday === 77 && highTomorrow === 80);
+assert(today === 77 && tomorrow === 80);
 ```
 
 # --seed--
@@ -78,9 +88,9 @@ const HIGH_TEMPERATURES = {
 };
 
 // Only change code below this line
-  
-const highToday = HIGH_TEMPERATURES.today;
-const highTomorrow = HIGH_TEMPERATURES.tomorrow; 
+
+const today = HIGH_TEMPERATURES.today;
+const tomorrow = HIGH_TEMPERATURES.tomorrow;
 
 // Only change code above this line
 ```
@@ -94,5 +104,5 @@ const HIGH_TEMPERATURES = {
   tomorrow: 80
 };
 
-const { today: highToday, tomorrow: highTomorrow } = HIGH_TEMPERATURES;
+const { today, tomorrow } = HIGH_TEMPERATURES;
 ```
