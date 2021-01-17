@@ -1,62 +1,60 @@
 ---
-id: 587d7b8a367417b2b2512b4d
-title: Use Destructuring Assignment to Pass an Object as a Function's Parameters
+id: 587d7b8a367417b2b2512b4c
+title: >-
+  Use Destructuring Assignment with the Rest Parameter to Reassign Array
+  Elements
 challengeType: 1
-forumTopicId: 301217
-dashedName: use-destructuring-assignment-to-pass-an-object-as-a-functions-parameters
+forumTopicId: 301218
+dashedName: >-
+  use-destructuring-assignment-with-the-rest-parameter-to-reassign-array-elements
 ---
 
 # --description--
 
-In some cases, you can destructure the object in a function argument itself.
+In some situations involving array destructuring, we might want to collect the rest of the elements into a separate array.
 
-Consider the code below:
-
-```js
-const profileUpdate = (profileData) => {
-  const { name, age, nationality, location } = profileData;
-  // do something with these variables
-}
-```
-
-This effectively destructures the object sent into the function. This can also be done in-place:
+The result is similar to `Array.prototype.slice()`, as shown below:
 
 ```js
-const profileUpdate = ({ name, age, nationality, location }) => {
-  /* do something with these fields */
-}
+const [a, b, ...arr] = [1, 2, 3, 4, 5, 7];
+console.log(a, b); // 1, 2
+console.log(arr); // [3, 4, 5, 7]
 ```
 
-When `profileData` is passed to the above function, the values are destructured from the function parameter for use within the function.
+Variables `a` and `b` take the first and second values from the array. After that, because of the rest parameter's presence, `arr` gets the rest of the values in the form of an array. The rest element only works correctly as the last variable in the list. As in, you cannot use the rest parameter to catch a subarray that leaves out the last element of the original array.
 
 # --instructions--
 
-Use destructuring assignment within the argument to the function `half` to send only `max` and `min` inside the function.
+Use destructuring assignment with the rest parameter to perform an effective `Array.prototype.slice()` so that `arr` is a sub-array of the original array `source` with the first two elements omitted.
 
 # --hints--
 
-`stats` should be an `object`.
+`arr` should be `[3,4,5,6,7,8,9,10]`
 
 ```js
-assert(typeof stats === 'object');
+assert(arr.every((v, i) => v === i + 3) && arr.length === 8);
 ```
 
-`half(stats)` should be `28.015`
+`source` should be `[1,2,3,4,5,6,7,8,9,10]`
 
 ```js
-assert(half(stats) === 28.015);
+assert(source.every((v, i) => v === i + 1) && source.length === 10);
 ```
 
-Destructuring should be used.
+`Array.slice()` should not be used.
 
 ```js
-assert(__helpers.removeWhiteSpace(code).match(/half=\({\w+,\w+}\)/));
+(getUserInput) => assert(!getUserInput('index').match(/slice/g));
 ```
 
-Destructured parameter should be used.
+Destructuring on `list` should be used.
 
 ```js
-assert(!code.match(/stats\.max|stats\.min/));
+assert(
+  __helpers
+    .removeWhiteSpace(code)
+    .match(/\[(([_$a-z]\w*)?,){1,}\.\.\.arr\]=list/i)
+);
 ```
 
 # --seed--
@@ -64,31 +62,23 @@ assert(!code.match(/stats\.max|stats\.min/));
 ## --seed-contents--
 
 ```js
-const stats = {
-  max: 56.78,
-  standard_deviation: 4.34,
-  median: 34.54,
-  mode: 23.87,
-  min: -0.75,
-  average: 35.85
-};
-
-// Only change code below this line
-const half = (stats) => (stats.max + stats.min) / 2.0; 
-// Only change code above this line
+const source = [1,2,3,4,5,6,7,8,9,10];
+function removeFirstTwo(list) {
+  // Only change code below this line
+  const arr = list; // Change this line
+  // Only change code above this line
+  return arr;
+}
+const arr = removeFirstTwo(source);
 ```
 
 # --solutions--
 
 ```js
-const stats = {
-  max: 56.78,
-  standard_deviation: 4.34,
-  median: 34.54,
-  mode: 23.87,
-  min: -0.75,
-  average: 35.85
-};
-
-const half = ( {max, min} ) => (max + min) / 2.0;
+const source = [1,2,3,4,5,6,7,8,9,10];
+function removeFirstTwo(list) {
+  const [, , ...arr] = list;
+  return arr;
+}
+const arr = removeFirstTwo(source);
 ```
