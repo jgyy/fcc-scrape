@@ -1,24 +1,26 @@
 ---
-id: 5d79253386060ed9eb04a070
-title: Part 17
+id: 5d792533717672657b81aa69
+title: Part 18
 challengeType: 0
-dashedName: part-17
+dashedName: part-18
 ---
 
 # --description--
 
-The `match` parameter is currently unused, which can lead to unused variable warnings in some linters.
+When defining an arrow function with a single argument, the parentheses can be omitted:
 
-To fix this, prefix or replace it with an underscore (`_`) - both ways signal to the reader and linter that you're aware you don't need this.
+```js
+const greeting = name => `Hello !`;
+```
 
-Note that a single underscore can only be used once in a function and may conflict with some libraries (Lodash, Underscore.js).
+Define a function `highPrecedence` which takes a single argument `str` and returns it.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(code.replace(/\s/g, '').includes('str.replace(regex,(_'));
+assert(highPrecedence('a') === 'a');
 ```
 
 # --seed--
@@ -71,7 +73,7 @@ const infixToFunction = {
 };
 
 const infixEval = (str, regex) =>
-  str.replace(regex, (match, arg1, fn, arg2) =>
+  str.replace(regex, (_, arg1, fn, arg2) =>
     infixToFunction[fn](parseFloat(arg1), parseFloat(arg2))
   );
 
@@ -92,7 +94,8 @@ const infixToFunction = {
 
 const infixEval = (str, regex) =>
   str.replace(regex, (_, arg1, fn, arg2) =>
-    infixToFunction[fn](parseFloat(arg1), parseFloat(arg2))
-  );
+    infixToFunction[fn](parseFloat(arg1), parseFloat(arg2)));
+
+const highPrecedence = str => str;
 </script>
 ```
