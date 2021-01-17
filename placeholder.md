@@ -1,73 +1,59 @@
 ---
-id: 587d7b88367417b2b2512b44
-title: Write Arrow Functions with Parameters
+id: 587d7b8b367417b2b2512b50
+title: Write Concise Declarative Functions with ES6
 challengeType: 1
-forumTopicId: 301223
-dashedName: write-arrow-functions-with-parameters
+forumTopicId: 301224
+dashedName: write-concise-declarative-functions-with-es6
 ---
 
 # --description--
 
-Just like a regular function, you can pass arguments into an arrow function.
+When defining functions within objects in ES5, we have to use the keyword `function` as follows:
 
 ```js
-// doubles input value and returns it
-const doubler = (item) => item * 2;
-doubler(4); // returns 8
+const person = {
+  name: "Taylor",
+  sayHello: function() {
+    return `Hello! My name is ${this.name}.`;
+  }
+};
 ```
 
-If an arrow function has a single parameter, the parentheses enclosing the parameter may be omitted.
+With ES6, You can remove the `function` keyword and colon altogether when defining functions in objects. Here's an example of this syntax:
 
 ```js
-// the same function, without the parameter parentheses
-const doubler = item => item * 2;
-```
-
-It is possible to pass more than one argument into an arrow function.
-
-```js
-// multiplies the first input value by the second and returns it
-const multiplier = (item, multi) => item * multi;
-multiplier(4, 2); // returns 8
+const person = {
+  name: "Taylor",
+  sayHello() {
+    return `Hello! My name is ${this.name}.`;
+  }
+};
 ```
 
 # --instructions--
 
-Rewrite the `myConcat` function which appends contents of `arr2` to `arr1` so that the function uses arrow function syntax.
+Refactor the function `setGear` inside the object `bicycle` to use the shorthand syntax described above.
 
 # --hints--
 
-You should replace the `var` keyword.
+Traditional function expression should not be used.
 
 ```js
-(getUserInput) => assert(!getUserInput('index').match(/var/g));
+(getUserInput) => assert(!__helpers.removeJSComments(code).match(/function/));
 ```
 
-`myConcat` should be a constant variable (by using `const`).
-
-```js
-(getUserInput) => assert(getUserInput('index').match(/const\s+myConcat/g));
-```
-
-`myConcat` should be an arrow function with two parameters
+`setGear` should be a declarative function.
 
 ```js
 assert(
-  /myConcat=\(\w+,\w+\)=>/.test(code.replace(/\s/g, '')) &&
-    typeof myConcat === 'function'
+  typeof bicycle.setGear === 'function' && code.match(/setGear\s*\(.+\)\s*\{/)
 );
 ```
 
-`myConcat()` should return `[1, 2, 3, 4, 5]`.
+`bicycle.setGear(48)` should change the `gear` value to 48.
 
 ```js
-assert.deepEqual(myConcat([1, 2], [3, 4, 5]), [1, 2, 3, 4, 5]);
-```
-
-`function` keyword should not be used.
-
-```js
-(getUserInput) => assert(!getUserInput('index').match(/function/g));
+assert(new bicycle.setGear(48).gear === 48);
 ```
 
 # --seed--
@@ -75,19 +61,26 @@ assert.deepEqual(myConcat([1, 2], [3, 4, 5]), [1, 2, 3, 4, 5]);
 ## --seed-contents--
 
 ```js
-var myConcat = function(arr1, arr2) {
-  return arr1.concat(arr2);
+// Only change code below this line
+const bicycle = {
+  gear: 2,
+  setGear: function(newGear) {
+    this.gear = newGear;
+  }
 };
-
-console.log(myConcat([1, 2], [3, 4, 5]));
+// Only change code above this line
+bicycle.setGear(3);
+console.log(bicycle.gear);
 ```
 
 # --solutions--
 
 ```js
-const myConcat = (arr1, arr2) =>  {
-  return arr1.concat(arr2);
+const bicycle = {
+  gear: 2,
+  setGear(newGear) {
+    this.gear = newGear;
+  }
 };
-
-console.log(myConcat([1, 2], [3, 4, 5]));
+bicycle.setGear(3);
 ```
