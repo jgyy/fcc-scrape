@@ -1,59 +1,49 @@
 ---
-id: 587d7b8b367417b2b2512b50
-title: Write Concise Declarative Functions with ES6
+id: 587d7b8a367417b2b2512b4f
+title: Write Concise Object Literal Declarations Using Object Property Shorthand
 challengeType: 1
-forumTopicId: 301224
-dashedName: write-concise-declarative-functions-with-es6
+forumTopicId: 301225
+dashedName: write-concise-object-literal-declarations-using-object-property-shorthand
 ---
 
 # --description--
 
-When defining functions within objects in ES5, we have to use the keyword `function` as follows:
+ES6 adds some nice support for easily defining object literals.
+
+Consider the following code:
 
 ```js
-const person = {
-  name: "Taylor",
-  sayHello: function() {
-    return `Hello! My name is ${this.name}.`;
-  }
-};
+const getMousePosition = (x, y) => ({
+  x: x,
+  y: y
+});
 ```
 
-With ES6, You can remove the `function` keyword and colon altogether when defining functions in objects. Here's an example of this syntax:
+`getMousePosition` is a simple function that returns an object containing two properties. ES6 provides the syntactic sugar to eliminate the redundancy of having to write `x: x`. You can simply write `x` once, and it will be converted to`x: x` (or something equivalent) under the hood. Here is the same function from above rewritten to use this new syntax:
 
 ```js
-const person = {
-  name: "Taylor",
-  sayHello() {
-    return `Hello! My name is ${this.name}.`;
-  }
-};
+const getMousePosition = (x, y) => ({ x, y });
 ```
 
 # --instructions--
 
-Refactor the function `setGear` inside the object `bicycle` to use the shorthand syntax described above.
+Use object property shorthand with object literals to create and return an object with `name`, `age` and `gender` properties.
 
 # --hints--
 
-Traditional function expression should not be used.
+`createPerson("Zodiac Hasbro", 56, "male")` should return `{name: "Zodiac Hasbro", age: 56, gender: "male"}`.
 
 ```js
-(getUserInput) => assert(!__helpers.removeJSComments(code).match(/function/));
-```
-
-`setGear` should be a declarative function.
-
-```js
-assert(
-  typeof bicycle.setGear === 'function' && code.match(/setGear\s*\(.+\)\s*\{/)
+assert.deepEqual(
+  { name: 'Zodiac Hasbro', age: 56, gender: 'male' },
+  createPerson('Zodiac Hasbro', 56, 'male')
 );
 ```
 
-`bicycle.setGear(48)` should change the `gear` value to 48.
+Your code should not use `key:value`.
 
 ```js
-assert(new bicycle.setGear(48).gear === 48);
+(getUserInput) => assert(!getUserInput('index').match(/:/g));
 ```
 
 # --seed--
@@ -61,26 +51,25 @@ assert(new bicycle.setGear(48).gear === 48);
 ## --seed-contents--
 
 ```js
-// Only change code below this line
-const bicycle = {
-  gear: 2,
-  setGear: function(newGear) {
-    this.gear = newGear;
-  }
+const createPerson = (name, age, gender) => {
+  // Only change code below this line
+  return {
+    name: name,
+    age: age,
+    gender: gender
+  };
+  // Only change code above this line
 };
-// Only change code above this line
-bicycle.setGear(3);
-console.log(bicycle.gear);
 ```
 
 # --solutions--
 
 ```js
-const bicycle = {
-  gear: 2,
-  setGear(newGear) {
-    this.gear = newGear;
-  }
+const createPerson = (name, age, gender) => {
+  return {
+    name,
+    age,
+    gender
+  };
 };
-bicycle.setGear(3);
 ```
