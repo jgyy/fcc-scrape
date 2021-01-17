@@ -1,29 +1,20 @@
 ---
-id: 5d7925335ab63018dcec11fe
-title: Part 19
+id: 5d7925330f300c342315066d
+title: Part 20
 challengeType: 0
-dashedName: part-19
+dashedName: part-20
 ---
 
 # --description--
 
-Arrow functions can have multiple statements:
-
-```js
-const fn = (x, y) => {
-  const result = x + y;
-  return result; // explicit return statement required
-};
-```
-
-Use this syntax for the `highPrecedence` function.
+In `highPrecedence`, define `regex` to be `/([0-9.]+)([*\/])([0-9.]+)/`.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(code.replace(/\s/g, '').includes('highPrecedence=str=>{returnstr'));
+assert(code.replace(/\s/g, '').includes('regex=/([0-9.]+)([*\\/])([0-9.]+)/'));
 ```
 
 # --seed--
@@ -77,9 +68,12 @@ const infixToFunction = {
 
 const infixEval = (str, regex) =>
   str.replace(regex, (_, arg1, fn, arg2) =>
-    infixToFunction[fn](parseFloat(arg1), parseFloat(arg2)));
+    infixToFunction[fn](parseFloat(arg1), parseFloat(arg2))
+  );
 
-const highPrecedence = str => str;
+const highPrecedence = str => {
+  return str;
+};
 
 
 </script>
@@ -102,6 +96,7 @@ const infixEval = (str, regex) =>
   );
 
 const highPrecedence = str => {
+  const regex = /([0-9.]+)([*\/])([0-9.]+)/;
   return str;
 };
 </script>
