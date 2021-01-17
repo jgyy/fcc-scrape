@@ -1,60 +1,73 @@
 ---
-id: 587d7b89367417b2b2512b48
-title: Use the Spread Operator to Evaluate Arrays In-Place
+id: 587d7b88367417b2b2512b44
+title: Write Arrow Functions with Parameters
 challengeType: 1
-forumTopicId: 301222
-dashedName: use-the-spread-operator-to-evaluate-arrays-in-place
+forumTopicId: 301223
+dashedName: write-arrow-functions-with-parameters
 ---
 
 # --description--
 
-ES6 introduces the <dfn>spread operator</dfn>, which allows us to expand arrays and other expressions in places where multiple parameters or elements are expected.
-
-The ES5 code below uses `apply()` to compute the maximum value in an array:
+Just like a regular function, you can pass arguments into an arrow function.
 
 ```js
-var arr = [6, 89, 3, 45];
-var maximus = Math.max.apply(null, arr); // returns 89
+// doubles input value and returns it
+const doubler = (item) => item * 2;
+doubler(4); // returns 8
 ```
 
-We had to use `Math.max.apply(null, arr)` because `Math.max(arr)` returns `NaN`. `Math.max()` expects comma-separated arguments, but not an array. The spread operator makes this syntax much better to read and maintain.
+If an arrow function has a single parameter, the parentheses enclosing the parameter may be omitted.
 
 ```js
-const arr = [6, 89, 3, 45];
-const maximus = Math.max(...arr); // returns 89
+// the same function, without the parameter parentheses
+const doubler = item => item * 2;
 ```
 
-`...arr` returns an unpacked array. In other words, it *spreads* the array. However, the spread operator only works in-place, like in an argument to a function or in an array literal. The following code will not work:
+It is possible to pass more than one argument into an arrow function.
 
 ```js
-const spreaded = ...arr; // will throw a syntax error
+// multiplies the first input value by the second and returns it
+const multiplier = (item, multi) => item * multi;
+multiplier(4, 2); // returns 8
 ```
 
 # --instructions--
 
-Copy all contents of `arr1` into another array `arr2` using the spread operator.
+Rewrite the `myConcat` function which appends contents of `arr2` to `arr1` so that the function uses arrow function syntax.
 
 # --hints--
 
-`arr2` should be correct copy of `arr1`.
+You should replace the `var` keyword.
 
 ```js
-assert(arr2.every((v, i) => v === arr1[i]) && arr2.length);
+(getUserInput) => assert(!getUserInput('index').match(/var/g));
 ```
 
-`...` spread operator should be used to duplicate `arr1`.
+`myConcat` should be a constant variable (by using `const`).
 
 ```js
-assert(code.match(/Array\(\s*\.\.\.arr1\s*\)|\[\s*\.\.\.arr1\s*\]/));
+(getUserInput) => assert(getUserInput('index').match(/const\s+myConcat/g));
 ```
 
-`arr2` should remain unchanged when `arr1` is changed.
+`myConcat` should be an arrow function with two parameters
 
 ```js
-assert((arr1, arr2) => {
-  arr1.push('JUN');
-  return arr2.length < arr1.length;
-});
+assert(
+  /myConcat=\(\w+,\w+\)=>/.test(code.replace(/\s/g, '')) &&
+    typeof myConcat === 'function'
+);
+```
+
+`myConcat()` should return `[1, 2, 3, 4, 5]`.
+
+```js
+assert.deepEqual(myConcat([1, 2], [3, 4, 5]), [1, 2, 3, 4, 5]);
+```
+
+`function` keyword should not be used.
+
+```js
+(getUserInput) => assert(!getUserInput('index').match(/function/g));
 ```
 
 # --seed--
@@ -62,19 +75,19 @@ assert((arr1, arr2) => {
 ## --seed-contents--
 
 ```js
-const arr1 = ['JAN', 'FEB', 'MAR', 'APR', 'MAY'];
-let arr2;
+var myConcat = function(arr1, arr2) {
+  return arr1.concat(arr2);
+};
 
-arr2 = [];  // Change this line
-
-console.log(arr2);
+console.log(myConcat([1, 2], [3, 4, 5]));
 ```
 
 # --solutions--
 
 ```js
-const arr1 = ['JAN', 'FEB', 'MAR', 'APR', 'MAY'];
-let arr2;
+const myConcat = (arr1, arr2) =>  {
+  return arr1.concat(arr2);
+};
 
-arr2 = [...arr1];
+console.log(myConcat([1, 2], [3, 4, 5]));
 ```
