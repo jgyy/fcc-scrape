@@ -1,31 +1,32 @@
 ---
-id: 587d7b87367417b2b2512b42
-title: Mutate an Array Declared with const
+id: 598f48a36c8c40764b4e52b3
+title: Prevent Object Mutation
 challengeType: 1
-forumTopicId: 301206
-dashedName: mutate-an-array-declared-with-const
+forumTopicId: 301207
+dashedName: prevent-object-mutation
 ---
 
 # --description--
 
-The `const` declaration has many use cases in modern JavaScript.
+As seen in the previous challenge, `const` declaration alone doesn't really protect your data from mutation. To ensure your data doesn't change, JavaScript provides a function `Object.freeze` to prevent data mutation.
 
-Some developers prefer to assign all their variables using `const` by default, unless they know they will need to reassign the value. Only in that case, they use `let`.
-
-However, it is important to understand that objects (including arrays and functions) assigned to a variable using `const` are still mutable. Using the `const` declaration only prevents reassignment of the variable identifier.
+Once the object is frozen, you can no longer add, update, or delete properties from it. Any attempt at changing the object will be rejected without an error.
 
 ```js
-const s = [5, 6, 7];
-s = [1, 2, 3]; // throws error, trying to assign a const
-s[2] = 45; // works just as it would with an array declared with var or let
-console.log(s); // returns [5, 6, 45]
+let obj = {
+  name:"FreeCodeCamp",
+  review:"Awesome"
+};
+Object.freeze(obj);
+obj.review = "bad"; // will be ignored. Mutation not allowed
+obj.newProp = "Test"; // will be ignored. Mutation not allowed
+console.log(obj); 
+// { name: "FreeCodeCamp", review:"Awesome"}
 ```
-
-As you can see, you can mutate the object `[5, 6, 7]` itself and the variable `s` will still point to the altered array `[5, 6, 45]`. Like all arrays, the array elements in `s` are mutable, but because `const` was used, you cannot use the variable identifier `s` to point to a different array using the assignment operator.
 
 # --instructions--
 
-An array is declared as `const s = [5, 7, 2]`. Change the array to `[2, 5, 7]` using various element assignments.
+In this challenge you are going to use `Object.freeze` to prevent mathematical constants from changing. You need to freeze the `MATH_CONSTANTS` object so that no one is able to alter the value of `PI`, add, or delete properties.
 
 # --hints--
 
@@ -35,27 +36,28 @@ You should not replace `const` keyword.
 (getUserInput) => assert(getUserInput('index').match(/const/g));
 ```
 
-`s` should be a constant variable (by using `const`).
+`MATH_CONSTANTS` should be a constant variable (by using `const`).
 
 ```js
-(getUserInput) => assert(getUserInput('index').match(/const\s+s/g));
+(getUserInput) =>
+  assert(getUserInput('index').match(/const\s+MATH_CONSTANTS/g));
 ```
 
-You should not change the original array declaration.
+You should not change original `MATH_CONSTANTS`.
 
 ```js
 (getUserInput) =>
   assert(
     getUserInput('index').match(
-      /const\s+s\s*=\s*\[\s*5\s*,\s*7\s*,\s*2\s*\]\s*;?/g
+      /const\s+MATH_CONSTANTS\s+=\s+{\s+PI:\s+3.14\s+};/g
     )
   );
 ```
 
-`s` should be equal to `[2, 5, 7]`.
+`PI` should equal `3.14`.
 
 ```js
-assert.deepEqual(s, [2, 5, 7]);
+assert(PI === 3.14);
 ```
 
 # --seed--
@@ -63,25 +65,39 @@ assert.deepEqual(s, [2, 5, 7]);
 ## --seed-contents--
 
 ```js
-const s = [5, 7, 2];
-function editInPlace() {
+function freezeObj() {
+  const MATH_CONSTANTS = {
+    PI: 3.14
+  };
   // Only change code below this line
 
-  // Using s = [2, 5, 7] would be invalid
 
   // Only change code above this line
+  try {
+    MATH_CONSTANTS.PI = 99;
+  } catch(ex) {
+    console.log(ex);
+  }
+  return MATH_CONSTANTS.PI;
 }
-editInPlace();
+const PI = freezeObj();
 ```
 
 # --solutions--
 
 ```js
-const s = [5, 7, 2];
-function editInPlace() {
-  s[0] = 2;
-  s[1] = 5;
-  s[2] = 7;
+function freezeObj() {
+  const MATH_CONSTANTS = {
+    PI: 3.14
+  };
+  Object.freeze(MATH_CONSTANTS);
+
+  try {
+    MATH_CONSTANTS.PI = 99;
+  } catch(ex) {
+    console.log(ex);
+  }
+  return MATH_CONSTANTS.PI;
 }
-editInPlace();
+const PI = freezeObj();
 ```
