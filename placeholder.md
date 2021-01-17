@@ -1,28 +1,30 @@
 ---
-id: 5d792532b07918c3a5904913
-title: Part 5
+id: 5d792533cc8b18b6c133edc7
+title: Part 6
 challengeType: 0
-dashedName: part-5
+dashedName: part-6
 ---
 
 # --description--
 
-Anonymous functions are functions without names - they are used only once and then forgotten. The syntax is the same as for normal functions but without the name:
+Anonymous functions are often passed as arguments to other functions, but what if you want to call one later? You can assign anonymous functions to variables and call them with the variable's name:
 
 ```js
-function(x) {
-  return x
+const fn = function(x) {
+  return x;
 }
+
+fn();
 ```
 
-First, remove the `addVar` definition.
+Assign the anonymous function to the variable `addVar`.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(!code.replace(/\s/g, '').includes('constaddVar=add'));
+assert(code.replace(/\s/g, '').includes('constaddVar=function(x,y){returnx+y'));
 ```
 
 # --seed--
@@ -71,8 +73,6 @@ function add(x, y) {
   return x + y;
 }
 
-const addVar = add;
-
 const infixToFunction = {};
 
 
@@ -83,9 +83,9 @@ const infixToFunction = {};
 
 ```html
 <script>
-function add(x, y) {
+const addVar = function(x, y) {
   return x + y;
-}
+};
 
 const infixToFunction = {};
 </script>
