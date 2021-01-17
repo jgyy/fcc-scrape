@@ -1,31 +1,61 @@
 ---
-id: 587d7b8d367417b2b2512b59
-title: Import a Default Export
+id: 587d7b87367417b2b2512b42
+title: Mutate an Array Declared with const
 challengeType: 1
-forumTopicId: 301205
-dashedName: import-a-default-export
+forumTopicId: 301206
+dashedName: mutate-an-array-declared-with-const
 ---
 
 # --description--
 
-In the last challenge, you learned about `export default` and its uses. To import a default export, you need to use a different `import` syntax. In the following example, `add` is the default export of the `math_functions.js` file. Here is how to import it:
+The `const` declaration has many use cases in modern JavaScript.
+
+Some developers prefer to assign all their variables using `const` by default, unless they know they will need to reassign the value. Only in that case, they use `let`.
+
+However, it is important to understand that objects (including arrays and functions) assigned to a variable using `const` are still mutable. Using the `const` declaration only prevents reassignment of the variable identifier.
 
 ```js
-import add from "./math_functions.js";
+const s = [5, 6, 7];
+s = [1, 2, 3]; // throws error, trying to assign a const
+s[2] = 45; // works just as it would with an array declared with var or let
+console.log(s); // returns [5, 6, 45]
 ```
 
-The syntax differs in one key place. The imported value, `add`, is not surrounded by curly braces (`{}`). `add` here is simply a variable name for whatever the default export of the `math_functions.js` file is. You can use any name here when importing a default.
+As you can see, you can mutate the object `[5, 6, 7]` itself and the variable `s` will still point to the altered array `[5, 6, 45]`. Like all arrays, the array elements in `s` are mutable, but because `const` was used, you cannot use the variable identifier `s` to point to a different array using the assignment operator.
 
 # --instructions--
 
-In the following code, import the default export from the `math_functions.js` file, found in the same directory as this file. Give the import the name `subtract`.
+An array is declared as `const s = [5, 7, 2]`. Change the array to `[2, 5, 7]` using various element assignments.
 
 # --hints--
 
-You should properly import `subtract` from `math_functions.js`.
+You should not replace `const` keyword.
 
 ```js
-assert(code.match(/import\s+subtract\s+from\s+('|")\.\/math_functions\.js\1/g));
+(getUserInput) => assert(getUserInput('index').match(/const/g));
+```
+
+`s` should be a constant variable (by using `const`).
+
+```js
+(getUserInput) => assert(getUserInput('index').match(/const\s+s/g));
+```
+
+You should not change the original array declaration.
+
+```js
+(getUserInput) =>
+  assert(
+    getUserInput('index').match(
+      /const\s+s\s*=\s*\[\s*5\s*,\s*7\s*,\s*2\s*\]\s*;?/g
+    )
+  );
+```
+
+`s` should be equal to `[2, 5, 7]`.
+
+```js
+assert.deepEqual(s, [2, 5, 7]);
 ```
 
 # --seed--
@@ -33,16 +63,25 @@ assert(code.match(/import\s+subtract\s+from\s+('|")\.\/math_functions\.js\1/g));
 ## --seed-contents--
 
 ```js
-  
-// Only change code above this line
+const s = [5, 7, 2];
+function editInPlace() {
+  // Only change code below this line
 
-subtract(7,4);
+  // Using s = [2, 5, 7] would be invalid
+
+  // Only change code above this line
+}
+editInPlace();
 ```
 
 # --solutions--
 
 ```js
-import subtract from "./math_functions.js";
-
-subtract(7,4);
+const s = [5, 7, 2];
+function editInPlace() {
+  s[0] = 2;
+  s[1] = 5;
+  s[2] = 7;
+}
+editInPlace();
 ```
