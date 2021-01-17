@@ -1,53 +1,77 @@
 ---
-id: 587d7b89367417b2b2512b4b
-title: Use Destructuring Assignment to Assign Variables from Arrays
+id: 587d7b89367417b2b2512b4a
+title: Use Destructuring Assignment to Assign Variables from Nested Objects
 challengeType: 1
-forumTopicId: 301213
-dashedName: use-destructuring-assignment-to-assign-variables-from-arrays
+forumTopicId: 301214
+dashedName: use-destructuring-assignment-to-assign-variables-from-nested-objects
 ---
 
 # --description--
 
-ES6 makes destructuring arrays as easy as destructuring objects.
+You can use the same principles from the previous two lessons to destructure values from nested objects.
 
-One key difference between the spread operator and array destructuring is that the spread operator unpacks all contents of an array into a comma-separated list. Consequently, you cannot pick or choose which elements you want to assign to variables.
-
-Destructuring an array lets us do exactly that:
+Using an object similar to previous examples:
 
 ```js
-const [a, b] = [1, 2, 3, 4, 5, 6];
-console.log(a, b); // 1, 2
+const user = {
+  johnDoe: { 
+    age: 34,
+    email: 'johnDoe@freeCodeCamp.com'
+  }
+};
 ```
 
-The variable `a` is assigned the first value of the array, and `b` is assigned the second value of the array. We can also access the value at any index in an array with destructuring by using commas to reach the desired index:
+Here's how to extract the values of object properties and assign them to variables with the same name:
 
 ```js
-const [a, b,,, c] = [1, 2, 3, 4, 5, 6];
-console.log(a, b, c); // 1, 2, 5
+const { johnDoe: { age, email }} = user;
+```
+
+And here's how you can assign an object properties' values to variables with different names:
+
+```js
+const { johnDoe: { age: userAge, email: userEmail }} = user;
 ```
 
 # --instructions--
 
-Use destructuring assignment to swap the values of `a` and `b` so that `a` receives the value stored in `b`, and `b` receives the value stored in `a`.
+Replace the two assignments with an equivalent destructuring assignment. It should still assign the variables `lowToday` and `highToday` the values of `today.low` and `today.high` from the `LOCAL_FORECAST` object.
 
 # --hints--
 
-Value of `a` should be 6, after swapping.
+You should remove the ES5 assignment syntax.
 
 ```js
-assert(a === 6);
+assert(
+  !code.match(/lowToday = LOCAL_FORECAST\.today\.low/g) &&
+    !code.match(/highToday = LOCAL_FORECAST\.today.high/g)
+);
 ```
 
-Value of `b` should be 8, after swapping.
+You should use destructuring to create the `lowToday` variable.
 
 ```js
-assert(b === 8);
+assert(
+  code.match(
+    /(var|const|let)\s*{\s*today\s*:\s*{\s*(low\s*:\s*lowToday[^}]*|[^,]*,\s*low\s*:\s*lowToday\s*)}\s*}\s*=\s*LOCAL_FORECAST(;|\s+|\/\/)/g
+  )
+);
 ```
 
-You should use array destructuring to swap a and b.
+You should use destructuring to create the `highToday` variable.
 
 ```js
-assert(/\[\s*(\w)\s*,\s*(\w)\s*\]\s*=\s*\[\s*\2\s*,\s*\1\s*\]/g.test(code));
+assert(
+  code.match(
+    /(var|const|let)\s*{\s*today\s*:\s*{\s*(high\s*:\s*highToday[^}]*|[^,]*,\s*high\s*:\s*highToday\s*)}\s*}\s*=\s*LOCAL_FORECAST(;|\s+|\/\/)/g
+  )
+);
+```
+
+`lowToday` should be equal to `64` and `highToday` should be equal to `77`.
+
+```js
+assert(lowToday === 64 && highToday === 77);
 ```
 
 # --seed--
@@ -55,13 +79,28 @@ assert(/\[\s*(\w)\s*,\s*(\w)\s*\]\s*=\s*\[\s*\2\s*,\s*\1\s*\]/g.test(code));
 ## --seed-contents--
 
 ```js
-let a = 8, b = 6;
+const LOCAL_FORECAST = {
+  yesterday: { low: 61, high: 75 },
+  today: { low: 64, high: 77 },
+  tomorrow: { low: 68, high: 80 }
+};
+
 // Only change code below this line
+  
+const lowToday = LOCAL_FORECAST.today.low;
+const highToday = LOCAL_FORECAST.today.high;
+
+// Only change code above this line
 ```
 
 # --solutions--
 
 ```js
-let a = 8, b = 6;
-[a, b] = [b, a];
+const LOCAL_FORECAST = {
+  yesterday: { low: 61, high: 75 },
+  today: { low: 64, high: 77 },
+  tomorrow: { low: 68, high: 80 }
+};
+ 
+const { today: { low: lowToday, high: highToday }} = LOCAL_FORECAST;
 ```
