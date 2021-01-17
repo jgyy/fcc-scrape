@@ -1,48 +1,40 @@
 ---
-id: 587d7b88367417b2b2512b46
-title: Set Default Parameters for Your Functions
+id: 587d7b8c367417b2b2512b57
+title: Use * to Import Everything from a File
 challengeType: 1
-forumTopicId: 301209
-dashedName: set-default-parameters-for-your-functions
+forumTopicId: 301210
+dashedName: use--to-import-everything-from-a-file
 ---
 
 # --description--
 
-In order to help us create more flexible functions, ES6 introduces <dfn>default parameters</dfn> for functions.
-
-Check out this code:
+Suppose you have a file and you wish to import all of its contents into the current file. This can be done with the `import * as` syntax. Here's an example where the contents of a file named `math_functions.js` are imported into a file in the same directory:
 
 ```js
-const greeting = (name = "Anonymous") => "Hello " + name;
-
-console.log(greeting("John")); // Hello John
-console.log(greeting()); // Hello Anonymous
+import * as myMathModule from "./math_functions.js";
 ```
 
-The default parameter kicks in when the argument is not specified (it is undefined). As you can see in the example above, the parameter `name` will receive its default value `"Anonymous"` when you do not provide a value for the parameter. You can add default values for as many parameters as you want.
+The above `import` statement will create an object called `myMathModule`. This is just a variable name, you can name it anything. The object will contain all of the exports from `math_functions.js` in it, so you can access the functions like you would any other object property. Here's how you can use the `add` and `subtract` functions that were imported:
+
+```js
+myMathModule.add(2,3);
+myMathModule.subtract(5,3);
+```
 
 # --instructions--
 
-Modify the function `increment` by adding default parameters so that it will add 1 to `number` if `value` is not specified.
+The code in this file requires the contents of the file: `string_functions.js`, that is in the same directory as the current file. Use the `import * as` syntax to import everything from the file into an object called `stringFunctions`.
 
 # --hints--
 
-The result of `increment(5, 2)` should be `7`.
+Your code should properly use `import * as` syntax.
 
 ```js
-assert(increment(5, 2) === 7);
-```
-
-The result of `increment(5)` should be `6`.
-
-```js
-assert(increment(5) === 6);
-```
-
-A default parameter value of `1` should be used for `value`.
-
-```js
-assert(code.match(/value\s*=\s*1/g));
+assert(
+  code.match(
+    /import\s*\*\s*as\s+stringFunctions\s+from\s*('|")\.\/string_functions\.js\1/g
+  )
+);
 ```
 
 # --seed--
@@ -50,13 +42,18 @@ assert(code.match(/value\s*=\s*1/g));
 ## --seed-contents--
 
 ```js
-// Only change code below this line
-const increment = (number, value) => number + value;
 // Only change code above this line
+
+stringFunctions.uppercaseString("hello");
+stringFunctions.lowercaseString("WORLD!");
 ```
 
 # --solutions--
 
 ```js
-const increment = (number, value = 1) => number + value;
+import * as stringFunctions from "./string_functions.js";
+
+// add code above this line
+stringFunctions.uppercaseString("hello");
+stringFunctions.lowercaseString("WORLD!");
 ```
