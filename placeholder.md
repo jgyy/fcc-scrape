@@ -1,28 +1,20 @@
 ---
-id: 5d7925337954ed57a565a135
-title: Part 7
+id: 5d79253352e33dd59ec2f6de
+title: Part 8
 challengeType: 0
-dashedName: part-7
+dashedName: part-8
 ---
 
 # --description--
 
-This is possible because the anonymous function has been immediately assigned to a value - this is effectively the same as using a named function.
-
-Rewrite `addVar` using ES6's arrow syntax:
-
-```js
-const fn = (x, y) => x;
-```
-
-Note that the value is returned implicitly.
+Add the key `+` to `infixToFunction` and assign it the value `addVar`.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(code.replace(/\s/g, '').includes('constaddVar=(x,y)=>x+y'));
+assert(infixToFunction['+'].toString() === addVar.toString());
 ```
 
 # --seed--
@@ -67,9 +59,7 @@ assert(code.replace(/\s/g, '').includes('constaddVar=(x,y)=>x+y'));
 ```html
 <script>
 
-const addVar = function(x, y) {
-  return x + y;
-};
+const addVar = (x, y) => x + y;
 
 const infixToFunction = {};
 
@@ -83,6 +73,8 @@ const infixToFunction = {};
 <script>
 const addVar = (x, y) => x + y;
 
-const infixToFunction = {};
+const infixToFunction = {
+  "+": addVar
+};
 </script>
 ```
