@@ -1,13 +1,15 @@
 ---
-id: 5d792533a5c42fb4d1a4b70d
-title: Part 14
+id: 5d79253358e8f646cbeb2bb0
+title: Part 15
 challengeType: 0
-dashedName: part-14
+dashedName: part-15
 ---
 
 # --description--
 
-Replace the second argument of `str.replace` with an anonymous function, which takes `match`, `arg1`, `fn`, and `arg2`, and returns `infixToFunction["+"]`.
+Change the `"+"` in the call to `infixToFunction` to `fn`.
+
+`fn` is the operator that the user inputs (`+`, `-`, `*` or `/`) - we use `infixToFunction` to get the function that corresponds to it.
 
 # --hints--
 
@@ -17,7 +19,7 @@ See description above for instructions.
 assert(
   code
     .replace(/\s/g, '')
-    .includes('str.replace(regex,(match,arg1,fn,arg2)=>infixToFunction["+"])')
+    .includes('str.replace(regex,(match,arg1,fn,arg2)=>infixToFunction[fn])')
 );
 ```
 
@@ -70,7 +72,10 @@ const infixToFunction = {
   "/": (x, y) => x / y
 };
 
-const infixEval = (str, regex) => str.replace(regex, infixToFunction["+"]);
+const infixEval = (str, regex) =>
+  str.replace(regex, (match, arg1, fn, arg2) =>
+    infixToFunction["+"]
+  );
 
 
 </script>
@@ -89,7 +94,7 @@ const infixToFunction = {
 
 const infixEval = (str, regex) =>
   str.replace(regex, (match, arg1, fn, arg2) =>
-    infixToFunction["+"]
+    infixToFunction[fn]
   );
 </script>
 ```
