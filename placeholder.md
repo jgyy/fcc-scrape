@@ -1,20 +1,24 @@
 ---
-id: 5d792533e7707b9645d7b540
-title: Part 10
+id: 5d79253378595ec568f70ab6
+title: Part 11
 challengeType: 0
-dashedName: part-10
+dashedName: part-11
 ---
 
 # --description--
 
-Remove the now redundant `addVar` definition.
+Add similar definitions for `-`, `*` and `/` in `infixToFunction`.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(typeof addVar === 'undefined');
+assert(
+  infixToFunction['-'](10, 2) === 8 &&
+    infixToFunction['*'](10, 10) === 100 &&
+    infixToFunction['/'](100, 10) === 10
+);
 ```
 
 # --seed--
@@ -59,8 +63,6 @@ assert(typeof addVar === 'undefined');
 ```html
 <script>
 
-const addVar = (x, y) => x + y;
-
 const infixToFunction = {
   "+": (x, y) => x + y
 };
@@ -74,7 +76,10 @@ const infixToFunction = {
 ```html
 <script>
 const infixToFunction = {
-  "+": (x, y) => x + y
+  "+": (x, y) => x + y,
+  "-": (x, y) => x - y,
+  "*": (x, y) => x * y,
+  "/": (x, y) => x / y
 };
 </script>
 ```
