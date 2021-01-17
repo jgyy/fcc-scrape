@@ -1,20 +1,20 @@
 ---
-id: 5d792533d31e4f7fad33011d
-title: Part 9
+id: 5d792533e7707b9645d7b540
+title: Part 10
 challengeType: 0
-dashedName: part-9
+dashedName: part-10
 ---
 
 # --description--
 
-In `infixToFunction`, replace `addVar` with `(x, y) => x + y`.
+Remove the now redundant `addVar` definition.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(code.replace(/\s/g, '').match(/\+["']:\(x,y\)=>x\+y/));
+assert(typeof addVar === 'undefined');
 ```
 
 # --seed--
@@ -62,7 +62,7 @@ assert(code.replace(/\s/g, '').match(/\+["']:\(x,y\)=>x\+y/));
 const addVar = (x, y) => x + y;
 
 const infixToFunction = {
-  "+": addVar
+  "+": (x, y) => x + y
 };
 
 
@@ -73,8 +73,6 @@ const infixToFunction = {
 
 ```html
 <script>
-const addVar = (x, y) => x + y;
-
 const infixToFunction = {
   "+": (x, y) => x + y
 };
