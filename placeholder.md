@@ -1,28 +1,24 @@
 ---
-id: 5d792533ed00e75d129e1b18
-title: Part 13
+id: 5d792533a5c42fb4d1a4b70d
+title: Part 14
 challengeType: 0
-dashedName: part-13
+dashedName: part-14
 ---
 
 # --description--
 
-`replace` is a higher order function because it can take a function as argument (higher order functions can also return functions).
-
-Pass the `+` function from `infixToFunction` to the `replace` method as the second argument.
-
-This is how you would pass the `-` function:
-
-```js
-str.replace(regex, infixToFunction["-"])
-```
+Replace the second argument of `str.replace` with an anonymous function, which takes `match`, `arg1`, `fn`, and `arg2`, and returns `infixToFunction["+"]`.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(infixEval('ab', /(a)b/) === 'aba');
+assert(
+  code
+    .replace(/\s/g, '')
+    .includes('str.replace(regex,(match,arg1,fn,arg2)=>infixToFunction["+"])')
+);
 ```
 
 # --seed--
@@ -74,7 +70,7 @@ const infixToFunction = {
   "/": (x, y) => x / y
 };
 
-const infixEval = (str, regex) => str.replace(regex, "");
+const infixEval = (str, regex) => str.replace(regex, infixToFunction["+"]);
 
 
 </script>
@@ -91,6 +87,9 @@ const infixToFunction = {
   "/": (x, y) => x / y
 };
 
-const infixEval = (str, regex) => str.replace(regex, infixToFunction["+"]);
+const infixEval = (str, regex) =>
+  str.replace(regex, (match, arg1, fn, arg2) =>
+    infixToFunction["+"]
+  );
 </script>
 ```
