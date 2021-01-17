@@ -1,13 +1,13 @@
 ---
-id: 5d79253378595ec568f70ab6
-title: Part 11
+id: 5d7925330918ae4a2f282e7e
+title: Part 12
 challengeType: 0
-dashedName: part-11
+dashedName: part-12
 ---
 
 # --description--
 
-Add similar definitions for `-`, `*` and `/` in `infixToFunction`.
+Use arrow function syntax to define a function `infixEval` which takes `str` and `regex` as arguments and returns `str.replace(regex, "")`.
 
 # --hints--
 
@@ -15,9 +15,9 @@ See description above for instructions.
 
 ```js
 assert(
-  infixToFunction['-'](10, 2) === 8 &&
-    infixToFunction['*'](10, 10) === 100 &&
-    infixToFunction['/'](100, 10) === 10
+  /constinfixEval=\(str,regex\)=>str\.replace\(regex,['"]{2}\)/.test(
+    code.replace(/\s/g, '')
+  )
 );
 ```
 
@@ -64,7 +64,10 @@ assert(
 <script>
 
 const infixToFunction = {
-  "+": (x, y) => x + y
+  "+": (x, y) => x + y,
+  "-": (x, y) => x - y,
+  "*": (x, y) => x * y,
+  "/": (x, y) => x / y
 };
 
 
@@ -81,5 +84,7 @@ const infixToFunction = {
   "*": (x, y) => x * y,
   "/": (x, y) => x / y
 };
+
+const infixEval = (str, regex) => str.replace(regex, "");
 </script>
 ```
