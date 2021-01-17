@@ -1,30 +1,28 @@
 ---
-id: 5d792533cc8b18b6c133edc7
-title: Part 6
+id: 5d7925337954ed57a565a135
+title: Part 7
 challengeType: 0
-dashedName: part-6
+dashedName: part-7
 ---
 
 # --description--
 
-Anonymous functions are often passed as arguments to other functions, but what if you want to call one later? You can assign anonymous functions to variables and call them with the variable's name:
+This is possible because the anonymous function has been immediately assigned to a value - this is effectively the same as using a named function.
+
+Rewrite `addVar` using ES6's arrow syntax:
 
 ```js
-const fn = function(x) {
-  return x;
-}
-
-fn();
+const fn = (x, y) => x;
 ```
 
-Assign the anonymous function to the variable `addVar`.
+Note that the value is returned implicitly.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(code.replace(/\s/g, '').includes('constaddVar=function(x,y){returnx+y'));
+assert(code.replace(/\s/g, '').includes('constaddVar=(x,y)=>x+y'));
 ```
 
 # --seed--
@@ -69,9 +67,9 @@ assert(code.replace(/\s/g, '').includes('constaddVar=function(x,y){returnx+y'));
 ```html
 <script>
 
-function add(x, y) {
+const addVar = function(x, y) {
   return x + y;
-}
+};
 
 const infixToFunction = {};
 
@@ -83,9 +81,7 @@ const infixToFunction = {};
 
 ```html
 <script>
-const addVar = function(x, y) {
-  return x + y;
-};
+const addVar = (x, y) => x + y;
 
 const infixToFunction = {};
 </script>
