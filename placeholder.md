@@ -1,63 +1,51 @@
 ---
-id: 598f48a36c8c40764b4e52b3
-title: Prevent Object Mutation
+id: 587d7b8c367417b2b2512b55
+title: Reuse JavaScript Code Using import
 challengeType: 1
-forumTopicId: 301207
-dashedName: prevent-object-mutation
+forumTopicId: 301208
+dashedName: reuse-javascript-code-using-import
 ---
 
 # --description--
 
-As seen in the previous challenge, `const` declaration alone doesn't really protect your data from mutation. To ensure your data doesn't change, JavaScript provides a function `Object.freeze` to prevent data mutation.
-
-Once the object is frozen, you can no longer add, update, or delete properties from it. Any attempt at changing the object will be rejected without an error.
+`import` allows you to choose which parts of a file or module to load. In the previous lesson, the examples exported `add` from the `math_functions.js` file. Here's how you can import it to use in another file:
 
 ```js
-let obj = {
-  name:"FreeCodeCamp",
-  review:"Awesome"
-};
-Object.freeze(obj);
-obj.review = "bad"; // will be ignored. Mutation not allowed
-obj.newProp = "Test"; // will be ignored. Mutation not allowed
-console.log(obj); 
-// { name: "FreeCodeCamp", review:"Awesome"}
+import { add } from './math_functions.js';
+```
+
+Here, `import` will find `add` in `math_functions.js`, import just that function for you to use, and ignore the rest. The `./` tells the import to look for the `math_functions.js` file in the same folder as the current file. The relative file path (`./`) and file extension (`.js`) are required when using import in this way.
+
+You can import more than one item from the file by adding them in the `import` statement like this:
+
+```js
+import { add, subtract } from './math_functions.js';
 ```
 
 # --instructions--
 
-In this challenge you are going to use `Object.freeze` to prevent mathematical constants from changing. You need to freeze the `MATH_CONSTANTS` object so that no one is able to alter the value of `PI`, add, or delete properties.
+Add the appropriate `import` statement that will allow the current file to use the `uppercaseString` and `lowercaseString` functions you exported in the previous lesson. These functions are in a file called `string_functions.js`, which is in the same directory as the current file.
 
 # --hints--
 
-You should not replace `const` keyword.
+You should properly import `uppercaseString`.
 
 ```js
-(getUserInput) => assert(getUserInput('index').match(/const/g));
+assert(
+  code.match(
+    /import\s*{\s*(uppercaseString[^}]*|[^,]*,\s*uppercaseString\s*)}\s+from\s+('|")\.\/string_functions\.js\2/g
+  )
+);
 ```
 
-`MATH_CONSTANTS` should be a constant variable (by using `const`).
+You should properly import `lowercaseString`.
 
 ```js
-(getUserInput) =>
-  assert(getUserInput('index').match(/const\s+MATH_CONSTANTS/g));
-```
-
-You should not change original `MATH_CONSTANTS`.
-
-```js
-(getUserInput) =>
-  assert(
-    getUserInput('index').match(
-      /const\s+MATH_CONSTANTS\s+=\s+{\s+PI:\s+3.14\s+};/g
-    )
-  );
-```
-
-`PI` should equal `3.14`.
-
-```js
-assert(PI === 3.14);
+assert(
+  code.match(
+    /import\s*{\s*(lowercaseString[^}]*|[^,]*,\s*lowercaseString\s*)}\s+from\s+('|")\.\/string_functions\.js\2/g
+  )
+);
 ```
 
 # --seed--
@@ -65,39 +53,18 @@ assert(PI === 3.14);
 ## --seed-contents--
 
 ```js
-function freezeObj() {
-  const MATH_CONSTANTS = {
-    PI: 3.14
-  };
-  // Only change code below this line
+  
+// Only change code above this line
 
-
-  // Only change code above this line
-  try {
-    MATH_CONSTANTS.PI = 99;
-  } catch(ex) {
-    console.log(ex);
-  }
-  return MATH_CONSTANTS.PI;
-}
-const PI = freezeObj();
+uppercaseString("hello");
+lowercaseString("WORLD!");
 ```
 
 # --solutions--
 
 ```js
-function freezeObj() {
-  const MATH_CONSTANTS = {
-    PI: 3.14
-  };
-  Object.freeze(MATH_CONSTANTS);
+import { uppercaseString, lowercaseString } from './string_functions.js';
 
-  try {
-    MATH_CONSTANTS.PI = 99;
-  } catch(ex) {
-    console.log(ex);
-  }
-  return MATH_CONSTANTS.PI;
-}
-const PI = freezeObj();
+uppercaseString("hello");
+lowercaseString("WORLD!");
 ```
