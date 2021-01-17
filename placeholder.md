@@ -1,55 +1,59 @@
 ---
-id: 587d7b87367417b2b2512b41
-title: Declare a Read-Only Variable with the const Keyword
+id: 587d7b87367417b2b2512b3f
+title: Explore Differences Between the var and let Keywords
 challengeType: 1
-forumTopicId: 301201
-dashedName: declare-a-read-only-variable-with-the-const-keyword
+forumTopicId: 301202
+dashedName: explore-differences-between-the-var-and-let-keywords
 ---
 
 # --description--
 
-The keyword `let` is not the only new way to declare variables. In ES6, you can also declare variables using the `const` keyword.
-
-`const` has all the awesome features that `let` has, with the added bonus that variables declared using `const` are read-only. They are a constant value, which means that once a variable is assigned with `const`, it cannot be reassigned.
+One of the biggest problems with declaring variables with the `var` keyword is that you can overwrite variable declarations without an error.
 
 ```js
-const FAV_PET = "Cats";
-FAV_PET = "Dogs"; // returns error
+var camper = 'James';
+var camper = 'David';
+console.log(camper);
+// logs 'David'
 ```
 
-As you can see, trying to reassign a variable declared with `const` will throw an error. You should always name variables you don't want to reassign using the `const` keyword. This helps when you accidentally attempt to reassign a variable that is meant to stay constant. A common practice when naming constants is to use all uppercase letters, with words separated by an underscore.
+As you can see in the code above, the `camper` variable is originally declared as `James` and then overridden to be `David`. In a small application, you might not run into this type of problem, but when your code becomes larger, you might accidentally overwrite a variable that you did not intend to overwrite. Because this behavior does not throw an error, searching and fixing bugs becomes more difficult.  
+A new keyword called `let` was introduced in ES6 to solve this potential issue with the `var` keyword. If you were to replace `var` with `let` in the variable declarations of the code above, the result would be an error.
 
-**Note:** It is common for developers to use uppercase variable identifiers for immutable values and lowercase or camelCase for mutable values (objects and arrays). In a later challenge you will see an example of a lowercase variable identifier being used for an array.
+```js
+let camper = 'James';
+let camper = 'David'; // throws an error
+```
+
+This error can be seen in the console of your browser. So unlike `var`, when using `let`, a variable with the same name can only be declared once. Note the `"use strict"`. This enables Strict Mode, which catches common coding mistakes and "unsafe" actions. For instance:
+
+```js
+"use strict";
+x = 3.14; // throws an error because x is not declared
+```
 
 # --instructions--
 
-Change the code so that all variables are declared using `let` or `const`. Use `let` when you want the variable to change, and `const` when you want the variable to remain constant. Also, rename variables declared with `const` to conform to common practices, meaning constants should be in all caps.
+Update the code so it only uses the `let` keyword.
 
 # --hints--
 
-`var` should not exist in your code.
+`var` should not exist in the code.
 
 ```js
 (getUserInput) => assert(!getUserInput('index').match(/var/g));
 ```
 
-`SENTENCE` should be a constant variable declared with `const`.
+`catName` should be `Oliver`.
 
 ```js
-(getUserInput) => assert(getUserInput('index').match(/(const SENTENCE)/g));
+assert(catName === 'Oliver');
 ```
 
-`i` should be declared with `let`.
+`quote` should be `"Oliver says Meow!"`
 
 ```js
-(getUserInput) => assert(getUserInput('index').match(/(let i)/g));
-```
-
-`console.log` should be changed to print the `SENTENCE` variable.
-
-```js
-(getUserInput) =>
-  assert(getUserInput('index').match(/console\.log\(\s*SENTENCE\s*\)\s*;?/g));
+assert(quote === 'Oliver says Meow!');
 ```
 
 # --seed--
@@ -57,31 +61,28 @@ Change the code so that all variables are declared using `let` or `const`. Use `
 ## --seed-contents--
 
 ```js
-function printManyTimes(str) {
+var catName;
+var quote;
+function catTalk() {
+  "use strict";
 
-  // Only change code below this line
-
-  var sentence = str + " is cool!";
-  for (var i = 0; i < str.length; i+=2) {
-    console.log(sentence);
-  }
-
-  // Only change code above this line
+  catName = "Oliver";
+  quote = catName + " says Meow!";
 
 }
-printManyTimes("freeCodeCamp");
+catTalk();
 ```
 
 # --solutions--
 
 ```js
-function printManyTimes(str) {
+let catName;
+let quote;
+function catTalk() {
+  'use strict';
 
-  const SENTENCE = str + " is cool!";
-  for (let i = 0; i < str.length; i+=2) {
-    console.log(SENTENCE);
-  }
-
+  catName = 'Oliver';
+  quote = catName + ' says Meow!';
 }
-printManyTimes("freeCodeCamp");
+catTalk();
 ```
