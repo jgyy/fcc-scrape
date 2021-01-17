@@ -1,24 +1,28 @@
 ---
-id: 5d7925330918ae4a2f282e7e
-title: Part 12
+id: 5d792533ed00e75d129e1b18
+title: Part 13
 challengeType: 0
-dashedName: part-12
+dashedName: part-13
 ---
 
 # --description--
 
-Use arrow function syntax to define a function `infixEval` which takes `str` and `regex` as arguments and returns `str.replace(regex, "")`.
+`replace` is a higher order function because it can take a function as argument (higher order functions can also return functions).
+
+Pass the `+` function from `infixToFunction` to the `replace` method as the second argument.
+
+This is how you would pass the `-` function:
+
+```js
+str.replace(regex, infixToFunction["-"])
+```
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(
-  /constinfixEval=\(str,regex\)=>str\.replace\(regex,['"]{2}\)/.test(
-    code.replace(/\s/g, '')
-  )
-);
+assert(infixEval('ab', /(a)b/) === 'aba');
 ```
 
 # --seed--
@@ -70,6 +74,8 @@ const infixToFunction = {
   "/": (x, y) => x / y
 };
 
+const infixEval = (str, regex) => str.replace(regex, "");
+
 
 </script>
 ```
@@ -85,6 +91,6 @@ const infixToFunction = {
   "/": (x, y) => x / y
 };
 
-const infixEval = (str, regex) => str.replace(regex, "");
+const infixEval = (str, regex) => str.replace(regex, infixToFunction["+"]);
 </script>
 ```
