@@ -1,51 +1,48 @@
 ---
-id: 587d7b8c367417b2b2512b55
-title: Reuse JavaScript Code Using import
+id: 587d7b88367417b2b2512b46
+title: Set Default Parameters for Your Functions
 challengeType: 1
-forumTopicId: 301208
-dashedName: reuse-javascript-code-using-import
+forumTopicId: 301209
+dashedName: set-default-parameters-for-your-functions
 ---
 
 # --description--
 
-`import` allows you to choose which parts of a file or module to load. In the previous lesson, the examples exported `add` from the `math_functions.js` file. Here's how you can import it to use in another file:
+In order to help us create more flexible functions, ES6 introduces <dfn>default parameters</dfn> for functions.
+
+Check out this code:
 
 ```js
-import { add } from './math_functions.js';
+const greeting = (name = "Anonymous") => "Hello " + name;
+
+console.log(greeting("John")); // Hello John
+console.log(greeting()); // Hello Anonymous
 ```
 
-Here, `import` will find `add` in `math_functions.js`, import just that function for you to use, and ignore the rest. The `./` tells the import to look for the `math_functions.js` file in the same folder as the current file. The relative file path (`./`) and file extension (`.js`) are required when using import in this way.
-
-You can import more than one item from the file by adding them in the `import` statement like this:
-
-```js
-import { add, subtract } from './math_functions.js';
-```
+The default parameter kicks in when the argument is not specified (it is undefined). As you can see in the example above, the parameter `name` will receive its default value `"Anonymous"` when you do not provide a value for the parameter. You can add default values for as many parameters as you want.
 
 # --instructions--
 
-Add the appropriate `import` statement that will allow the current file to use the `uppercaseString` and `lowercaseString` functions you exported in the previous lesson. These functions are in a file called `string_functions.js`, which is in the same directory as the current file.
+Modify the function `increment` by adding default parameters so that it will add 1 to `number` if `value` is not specified.
 
 # --hints--
 
-You should properly import `uppercaseString`.
+The result of `increment(5, 2)` should be `7`.
 
 ```js
-assert(
-  code.match(
-    /import\s*{\s*(uppercaseString[^}]*|[^,]*,\s*uppercaseString\s*)}\s+from\s+('|")\.\/string_functions\.js\2/g
-  )
-);
+assert(increment(5, 2) === 7);
 ```
 
-You should properly import `lowercaseString`.
+The result of `increment(5)` should be `6`.
 
 ```js
-assert(
-  code.match(
-    /import\s*{\s*(lowercaseString[^}]*|[^,]*,\s*lowercaseString\s*)}\s+from\s+('|")\.\/string_functions\.js\2/g
-  )
-);
+assert(increment(5) === 6);
+```
+
+A default parameter value of `1` should be used for `value`.
+
+```js
+assert(code.match(/value\s*=\s*1/g));
 ```
 
 # --seed--
@@ -53,18 +50,13 @@ assert(
 ## --seed-contents--
 
 ```js
-  
+// Only change code below this line
+const increment = (number, value) => number + value;
 // Only change code above this line
-
-uppercaseString("hello");
-lowercaseString("WORLD!");
 ```
 
 # --solutions--
 
 ```js
-import { uppercaseString, lowercaseString } from './string_functions.js';
-
-uppercaseString("hello");
-lowercaseString("WORLD!");
+const increment = (number, value = 1) => number + value;
 ```
