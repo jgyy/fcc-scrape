@@ -1,51 +1,51 @@
 ---
-id: 5cdafbd72913098997531681
-title: Handle a Fulfilled Promise with then
+id: 5cdafbe72913098997531682
+title: Handle a Rejected Promise with catch
 challengeType: 1
-forumTopicId: 301203
-dashedName: handle-a-fulfilled-promise-with-then
+forumTopicId: 301204
+dashedName: handle-a-rejected-promise-with-catch
 ---
 
 # --description--
 
-Promises are most useful when you have a process that takes an unknown amount of time in your code (i.e. something asynchronous), often a server request. When you make a server request it takes some amount of time, and after it completes you usually want to do something with the response from the server. This can be achieved by using the `then` method. The `then` method is executed immediately after your promise is fulfilled with `resolve`. Here’s an example:
+`catch` is the method used when your promise has been rejected. It is executed immediately after a promise's `reject` method is called. Here’s the syntax:
 
 ```js
-myPromise.then(result => {
-  // do something with the result.
+myPromise.catch(error => {
+  // do something with the error.
 });
 ```
 
-`result` comes from the argument given to the `resolve` method.
+`error` is the argument passed in to the `reject` method.
 
 # --instructions--
 
-Add the `then` method to your promise. Use `result` as the parameter of its callback function and log `result` to the console.
+Add the `catch` method to your promise. Use `error` as the parameter of its callback function and log `error` to the console.
 
 # --hints--
 
-You should call the `then` method on the promise.
+You should call the `catch` method on the promise.
 
 ```js
 assert(
-  __helpers.removeWhiteSpace(code).match(/(makeServerRequest|\))\.then\(/g)
+  __helpers.removeWhiteSpace(code).match(/(makeServerRequest|\))\.catch\(/g)
 );
 ```
 
-Your `then` method should have a callback function with `result` as its parameter.
+Your `catch` method should have a callback function with `error` as its parameter.
 
 ```js
-assert(resultIsParameter);
+assert(errorIsParameter);
 ```
 
-You should log `result` to the console.
+You should log `error` to the console.
 
 ```js
 assert(
-  resultIsParameter &&
+  errorIsParameter &&
     __helpers
       .removeWhiteSpace(code)
-      .match(/\.then\(.*?result.*?console.log\(result\).*?\)/)
+      .match(/\.catch\(.*?error.*?console.log\(error\).*?\)/)
 );
 ```
 
@@ -54,30 +54,15 @@ assert(
 ## --after-user-code--
 
 ```js
-const resultIsParameter = /\.then\((function\(result\){|result|\(result\)=>)/.test(__helpers.removeWhiteSpace(code));
+const errorIsParameter = /\.catch\((function\(error\){|error|\(error\)=>)/.test(__helpers.removeWhiteSpace(code));
 ```
 
 ## --seed-contents--
 
 ```js
 const makeServerRequest = new Promise((resolve, reject) => {
-  // responseFromServer is set to true to represent a successful response from a server
-  let responseFromServer = true;
-    
-  if(responseFromServer) {
-    resolve("We got the data");
-  } else {  
-    reject("Data not received");
-  }
-});
-```
-
-# --solutions--
-
-```js
-const makeServerRequest = new Promise((resolve, reject) => {
-  // responseFromServer is set to true to represent a successful response from a server
-  let responseFromServer = true;
+  // responseFromServer is set to false to represent an unsuccessful response from a server
+  let responseFromServer = false;
     
   if(responseFromServer) {
     resolve("We got the data");
@@ -88,5 +73,28 @@ const makeServerRequest = new Promise((resolve, reject) => {
 
 makeServerRequest.then(result => {
   console.log(result);
+});
+```
+
+# --solutions--
+
+```js
+const makeServerRequest = new Promise((resolve, reject) => {
+  // responseFromServer is set to false to represent an unsuccessful response from a server
+  let responseFromServer = false;
+    
+  if(responseFromServer) {
+    resolve("We got the data");
+  } else {  
+    reject("Data not received");
+  }
+});
+
+makeServerRequest.then(result => {
+  console.log(result);
+});
+
+makeServerRequest.catch(error => {
+  console.log(error);
 });
 ```
