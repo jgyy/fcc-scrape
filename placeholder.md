@@ -1,79 +1,62 @@
 ---
-id: 5cfa550e84205a357704ccb6
-title: Use Destructuring Assignment to Extract Values from Objects
+id: 587d7b8a367417b2b2512b4d
+title: Use Destructuring Assignment to Pass an Object as a Function's Parameters
 challengeType: 1
-forumTopicId: 301216
-dashedName: use-destructuring-assignment-to-extract-values-from-objects
+forumTopicId: 301217
+dashedName: use-destructuring-assignment-to-pass-an-object-as-a-functions-parameters
 ---
 
 # --description--
 
-<dfn>Destructuring assignment</dfn> is special syntax introduced in ES6, for neatly assigning values taken directly from an object.
+In some cases, you can destructure the object in a function argument itself.
 
-Consider the following ES5 code:
-
-```js
-const user = { name: 'John Doe', age: 34 };
-
-const name = user.name; // name = 'John Doe'
-const age = user.age; // age = 34
-```
-
-Here's an equivalent assignment statement using the ES6 destructuring syntax:
+Consider the code below:
 
 ```js
-const { name, age } = user;
-// name = 'John Doe', age = 34
+const profileUpdate = (profileData) => {
+  const { name, age, nationality, location } = profileData;
+  // do something with these variables
+}
 ```
 
-Here, the `name` and `age` variables will be created and assigned the values of their respective values from the `user` object. You can see how much cleaner this is.
+This effectively destructures the object sent into the function. This can also be done in-place:
 
-You can extract as many or few values from the object as you want.
+```js
+const profileUpdate = ({ name, age, nationality, location }) => {
+  /* do something with these fields */
+}
+```
+
+When `profileData` is passed to the above function, the values are destructured from the function parameter for use within the function.
 
 # --instructions--
 
-Replace the two assignments with an equivalent destructuring assignment. It should still assign the variables `today` and `tomorrow` the values of `today` and `tomorrow` from the `HIGH_TEMPERATURES` object.
+Use destructuring assignment within the argument to the function `half` to send only `max` and `min` inside the function.
 
 # --hints--
 
-You should remove the ES5 assignment syntax.
+`stats` should be an `object`.
 
 ```js
-assert(
-  !__helpers
-    .removeJSComments(code)
-    .match(/today\s*=\s*HIGH_TEMPERATURES\.(today|tomorrow)/g)
-);
+assert(typeof stats === 'object');
 ```
 
-You should use destructuring to create the `today` variable.
+`half(stats)` should be `28.015`
 
 ```js
-assert(
-  __helpers
-    .removeJSComments(code)
-    .match(
-      /(var|let|const)\s*{\s*(today[^}]*|[^,]*,\s*today)\s*}\s*=\s*HIGH_TEMPERATURES(;|\s+|\/\/)/g
-    )
-);
+assert(half(stats) === 28.015);
 ```
 
-You should use destructuring to create the `tomorrow` variable.
+Destructuring should be used.
 
 ```js
-assert(
-  __helpers
-    .removeJSComments(code)
-    .match(
-      /(var|let|const)\s*{\s*(tomorrow[^}]*|[^,]*,\s*tomorrow)\s*}\s*=\s*HIGH_TEMPERATURES(;|\s+|\/\/)/g
-    )
-);
+assert(__helpers.removeWhiteSpace(code).match(/half=\({\w+,\w+}\)/));
 ```
 
-`today` should be equal to `77` and `tomorrow` should be equal to `80`.
+Destructured parameter should be used.
 
 ```js
-assert(today === 77 && tomorrow === 80);
+assert(!code.match(/stats\.max|stats\.min/));
 ```
 
 # --seed--
@@ -81,28 +64,31 @@ assert(today === 77 && tomorrow === 80);
 ## --seed-contents--
 
 ```js
-const HIGH_TEMPERATURES = {
-  yesterday: 75,
-  today: 77,
-  tomorrow: 80
+const stats = {
+  max: 56.78,
+  standard_deviation: 4.34,
+  median: 34.54,
+  mode: 23.87,
+  min: -0.75,
+  average: 35.85
 };
 
 // Only change code below this line
-
-const today = HIGH_TEMPERATURES.today;
-const tomorrow = HIGH_TEMPERATURES.tomorrow;
-
+const half = (stats) => (stats.max + stats.min) / 2.0; 
 // Only change code above this line
 ```
 
 # --solutions--
 
 ```js
-const HIGH_TEMPERATURES = {
-  yesterday: 75,
-  today: 77,
-  tomorrow: 80
+const stats = {
+  max: 56.78,
+  standard_deviation: 4.34,
+  median: 34.54,
+  mode: 23.87,
+  min: -0.75,
+  average: 35.85
 };
 
-const { today, tomorrow } = HIGH_TEMPERATURES;
+const half = ( {max, min} ) => (max + min) / 2.0;
 ```
