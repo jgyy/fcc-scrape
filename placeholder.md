@@ -1,100 +1,48 @@
 ---
-id: 5cdafbe72913098997531682
-title: Handle a Rejected Promise with catch
+id: 587d7b8d367417b2b2512b59
+title: Import a Default Export
 challengeType: 1
-forumTopicId: 301204
-dashedName: handle-a-rejected-promise-with-catch
+forumTopicId: 301205
+dashedName: import-a-default-export
 ---
 
 # --description--
 
-`catch` is the method used when your promise has been rejected. It is executed immediately after a promise's `reject` method is called. Here’s the syntax:
+In the last challenge, you learned about `export default` and its uses. To import a default export, you need to use a different `import` syntax. In the following example, `add` is the default export of the `math_functions.js` file. Here is how to import it:
 
 ```js
-myPromise.catch(error => {
-  // do something with the error.
-});
+import add from "./math_functions.js";
 ```
 
-`error` is the argument passed in to the `reject` method.
+The syntax differs in one key place. The imported value, `add`, is not surrounded by curly braces (`{}`). `add` here is simply a variable name for whatever the default export of the `math_functions.js` file is. You can use any name here when importing a default.
 
 # --instructions--
 
-Add the `catch` method to your promise. Use `error` as the parameter of its callback function and log `error` to the console.
+In the following code, import the default export from the `math_functions.js` file, found in the same directory as this file. Give the import the name `subtract`.
 
 # --hints--
 
-You should call the `catch` method on the promise.
+You should properly import `subtract` from `math_functions.js`.
 
 ```js
-assert(
-  __helpers.removeWhiteSpace(code).match(/(makeServerRequest|\))\.catch\(/g)
-);
-```
-
-Your `catch` method should have a callback function with `error` as its parameter.
-
-```js
-assert(errorIsParameter);
-```
-
-You should log `error` to the console.
-
-```js
-assert(
-  errorIsParameter &&
-    __helpers
-      .removeWhiteSpace(code)
-      .match(/\.catch\(.*?error.*?console.log\(error\).*?\)/)
-);
+assert(code.match(/import\s+subtract\s+from\s+('|")\.\/math_functions\.js\1/g));
 ```
 
 # --seed--
 
-## --after-user-code--
-
-```js
-const errorIsParameter = /\.catch\((function\(error\){|error|\(error\)=>)/.test(__helpers.removeWhiteSpace(code));
-```
-
 ## --seed-contents--
 
 ```js
-const makeServerRequest = new Promise((resolve, reject) => {
-  // responseFromServer is set to false to represent an unsuccessful response from a server
-  let responseFromServer = false;
-    
-  if(responseFromServer) {
-    resolve("We got the data");
-  } else {  
-    reject("Data not received");
-  }
-});
+  
+// Only change code above this line
 
-makeServerRequest.then(result => {
-  console.log(result);
-});
+subtract(7,4);
 ```
 
 # --solutions--
 
 ```js
-const makeServerRequest = new Promise((resolve, reject) => {
-  // responseFromServer is set to false to represent an unsuccessful response from a server
-  let responseFromServer = false;
-    
-  if(responseFromServer) {
-    resolve("We got the data");
-  } else {  
-    reject("Data not received");
-  }
-});
+import subtract from "./math_functions.js";
 
-makeServerRequest.then(result => {
-  console.log(result);
-});
-
-makeServerRequest.catch(error => {
-  console.log(error);
-});
+subtract(7,4);
 ```
