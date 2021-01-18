@@ -1,22 +1,23 @@
 ---
-id: 5d792539b2e0bd8f9e8213e4
-title: Part 133
+id: 5d792539239148965a1a59a5
+title: Part 134
 challengeType: 0
-dashedName: part-133
+dashedName: part-134
 ---
 
 # --description--
 
-Use the ternary operator to return `average([sorted[middle], sorted[middle + 1]])` if `length` is even, and `sorted[middle + 0.5]` otherwise.
-
-Note that the `middle` variable is close to the middle but is not actually the middle.
+Now add `median` to `spreadsheetFunctions`, just like you added `sum` and `average`.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(median([1, 20, 3]) === 3 && median([27, 7, 20, 10]) === 15);
+assert(
+  spreadsheetFunctions.median([1, 20, 3]) === 3 &&
+    spreadsheetFunctions.median([27, 7, 20, 10]) === 15
+);
 ```
 
 # --seed--
@@ -87,10 +88,10 @@ const median = nums => {
   const sorted = nums.slice().sort((x, y) => x - y);
   const length = sorted.length;
   const middle = sorted.length / 2 - 1;
-  return isEven(length);
+  return isEven(length)
+    ? average([sorted[middle], sorted[middle + 1]])
+    : sorted[middle + 0.5];
 }; 
-
-
 
 const spreadsheetFunctions = {
   "": x => x,
@@ -105,6 +106,8 @@ const spreadsheetFunctions = {
   nodups: arr => arr.reduce((a, x) => a.includes(x) ? a : a.concat(x), []),
   range: arr => range(...arr)
 };
+
+
 
 const applyFn = str => {
   const noHigh = highPrecedence(str);
@@ -228,6 +231,7 @@ const spreadsheetFunctions = {
   even: nums => nums.filter(isEven),
   sum,
   average,
+  median,
   has2: arr => arr.includes(2),
   nodups: arr => arr.reduce((a, x) => a.includes(x) ? a : a.concat(x), []),
   range: arr => range(...arr)
