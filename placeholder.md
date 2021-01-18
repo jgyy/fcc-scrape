@@ -1,21 +1,15 @@
 ---
-id: 5d7925399afb905c34730a75
-title: Part 129
+id: 5d792539728d1aa7788e2c9b
+title: Part 130
 challengeType: 0
-dashedName: part-129
+dashedName: part-130
 ---
 
 # --description--
 
-But our function takes an array of numbers, not strings. Luckily, you can pass a function `fn` as argument to sort:
+Unfortunately, `sort` not only returns a new array, but also modifies the existing one. So our function also modifies the array passed to it - it is impure.
 
-```js
-[2, 9, 10, 15].sort((a, b) => b - a); // [10, 9, 5, 2]
-```
-
-If `b - a` is less than 0, then `a` will be placed before `b`. As a result, this sorts the array in descending order.
-
-Use `sort` to sort `nums` in ascending order.
+You can fix this by adding `.slice()` between `nums` and `sort` - this creates a new array, that is equivalent to `nums`, but is immediately discarded, so it doesn't matter if it changes.
 
 # --hints--
 
@@ -23,7 +17,7 @@ See description above for instructions.
 
 ```js
 assert(
-  /constmedian=nums=>\{constsorted=nums\.sort\(\((.+),(.+)\)=>\1-\2\)/.test(
+  /constmedian=nums=>\{constsorted=nums\.slice\(\)\.sort\(\((.+),(.+)\)=>\1-\2\)/.test(
     code.replace(/\s/g, '')
   )
 );
@@ -94,7 +88,7 @@ const sum = nums => nums.reduce((a, x) => a + x);
 const average = nums => sum(nums) / nums.length;
 
 const median = nums => {
-  const sorted = nums.sort();
+  const sorted = nums.sort((x, y) => x - y);
 }; 
 
 const spreadsheetFunctions = {
@@ -218,7 +212,7 @@ const sum = nums => nums.reduce((a, x) => a + x);
 const average = nums => sum(nums) / nums.length;
 
 const median = nums => {
-  const sorted = nums.sort((x, y) => x - y);
+  const sorted = nums.slice().sort((x, y) => x - y);
 }; 
 
 const spreadsheetFunctions = {
