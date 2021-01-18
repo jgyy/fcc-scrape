@@ -1,13 +1,13 @@
 ---
-id: 5d7925379e0180a438ce7f95
-title: Part 87
+id: 5d792537c80984dfa5501b96
+title: Part 88
 challengeType: 0
-dashedName: part-87
+dashedName: part-88
 ---
 
 # --description--
 
-Inside the `range` `forEach`, use the `forEach` method on `letters`, passing in a function with argument `x` and an empty body.
+Inside `letters.forEach`, assign `document.createElement("input")` to `input`.
 
 # --hints--
 
@@ -15,7 +15,7 @@ See description above for instructions.
 
 ```js
 assert(
-  /window\.onload.*range\(1,99\)\.forEach\(\(?x\)?=>\{createLabel\(x\);?letters\.forEach\(\(?y\)?=>\{\}\);?\}\);?\}/.test(
+  /window\.onload[\s\S]*range\(1,99\)\.forEach\(\(?x\)?=>\{createLabel\(x\);?letters\.forEach\(\(?y\)?=>\{constinput=document\.createElement\(["']input["']\);?\}\);?\}\);?\}/.test(
     code.replace(/\s/g, '')
   )
 );
@@ -139,6 +139,9 @@ window.onload = () => {
   letters.forEach(createLabel);
   range(1, 99).forEach(x => {
     createLabel(x);
+    letters.forEach(y => {
+    
+    });
   });
 };
 
@@ -227,7 +230,7 @@ window.onload = () => {
   range(1, 99).forEach(x => {
     createLabel(x);
     letters.forEach(y => {
-    
+      const input = document.createElement("input"); 
     });
   });
 };
