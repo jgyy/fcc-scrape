@@ -1,13 +1,15 @@
 ---
-id: 5d792538de9fa3f298bcd5f6
-title: Part 101
+id: 5d7925385b74f69642e1fea5
+title: Part 102
 challengeType: 0
-dashedName: part-101
+dashedName: part-102
 ---
 
 # --description--
 
-Now try calling `highPrecedence` and pass it the string `"2*2"` without assigning it to a variable in `update`.
+Obviously, this was ignored, as all `highPrecedence` does is return a value and this value is ignored.
+
+Now compare `highPrecedence("2*2")` with `highPrecedence("2*2")`, and `console.log` the result.
 
 # --hints--
 
@@ -15,7 +17,7 @@ See description above for instructions.
 
 ```js
 assert(
-  /update=\(?event\)?=>\{.*highPrecedence\((['"])2\*2\1\).*\}/.test(
+  /update=\(?event\)?=>\{.*console\.log\((highPrecedence\(['"]2\*2['"]\))===\1\).*\}/.test(
     code.replace(/\s/g, '')
   )
 );
@@ -151,7 +153,7 @@ window.onload = () => {
 };
 
 const update = event => {
-  // window.onload();
+  // highPrecedence("2*2");
   const element = event.target;
   const value = element.value.replace(/\s/g, "");
   if (!value.includes(element.id) && value[0] === "=") {
@@ -255,7 +257,7 @@ window.onload = () => {
 };
 
 const update = event => {
-  highPrecedence("2*2");
+  console.log(highPrecedence("2*2") === highPrecedence("2*2"));
   const element = event.target;
   const value = element.value.replace(/\s/g, "");
   if (!value.includes(element.id) && value[0] === "=") {
