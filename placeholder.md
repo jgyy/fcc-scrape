@@ -1,28 +1,22 @@
 ---
-id: 5d792539534f1bf991bb987f
-title: Part 123
+id: 5d7925394089b762f93ffa52
+title: Part 124
 challengeType: 0
-dashedName: part-123
+dashedName: part-124
 ---
 
 # --description--
 
-ES6 introduced a shorthand object literal syntax:
+Now use the shorthand syntax to reference `sum` inside of `spreadsheetFunctions`.
 
-```js
-const a = 10;
-const myObject = { a };
-console.log(myObject); // { a: 10 }
-```
-
-First, move `sum` outside of `spreadsheetFunctions`. `sum` should be a function expression similar to `isEven`.
+This both adds it to the functions you can use in the spreadsheet, and allows you to use it throughout your program.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(sum([1, 2, 3]) === 6);
+assert(/[{,]sum[,}]/.test(code.replace(/\s/g, '')));
 ```
 
 # --seed--
@@ -86,6 +80,7 @@ const highPrecedence = str => {
 };
 
 const isEven = num => num % 2 === 0;
+const sum = nums => nums.reduce((a, x) => a + x);
 
 const spreadsheetFunctions = {
   "": x => x,
@@ -94,7 +89,6 @@ const spreadsheetFunctions = {
   firsttwo: arr => arr.slice(0, 2),
   lasttwo: arr => arr.slice(-2),
   even: nums => nums.filter(isEven),
-  sum: nums => nums.reduce((a, x) => a + x),
   has2: arr => arr.includes(2),
   nodups: arr => arr.reduce((a, x) => a.includes(x) ? a : a.concat(x), [])
 };
@@ -211,6 +205,7 @@ const spreadsheetFunctions = {
   firsttwo: arr => arr.slice(0, 2),
   lasttwo: arr => arr.slice(-2),
   even: nums => nums.filter(isEven),
+  sum,
   has2: arr => arr.includes(2),
   nodups: arr => arr.reduce((a, x) => a.includes(x) ? a : a.concat(x), [])
 };
