@@ -1,30 +1,20 @@
 ---
-id: 5d79253ad297a31cbe073718
-title: Part 140
+id: 5dc10b8b93704f41d279eb5b
+title: Part 141
 challengeType: 0
-dashedName: part-140
+dashedName: part-141
 ---
 
 # --description--
 
-The function in the `map` method can actually take a second argument: the index of the element.
-
-This is why you need an arrow function in `charRange` - if you don't use one, then the index will be passed to `String.fromCharCode` as the second argument, leading to unexpected results. However, it is safe for functions like `parseFloat` which take only one argument (but not for `parseInt`).
-
-Chain `.map((x, i) => x + i)` to `.fill(start)` to add its index to every element in the array in `range`.
+Congratulations, you've finished your functional programming spreadsheet! Now test it out by crunching some numbers.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(
-  code
-    .replace(/\s/g, '')
-    .includes(
-      'constrange=(start,end)=>Array(end-start+1).fill(start).map((x,i)=>x+i)'
-    )
-);
+
 ```
 
 # --seed--
@@ -132,7 +122,7 @@ const applyFn = str => {
   );
 };
 
-const range = (start, end) => Array(end - start + 1).fill(start);
+const range = (start, end) => Array(end - start + 1).fill(start).map((x, i) => x + i);
 
 
 
@@ -264,8 +254,6 @@ const applyFn = str => {
 };
 
 const range = (start, end) => Array(end - start + 1).fill(start).map((x, i) => x + i);
-
-
 
 const charRange = (start, end) =>
   range(start.charCodeAt(0), end.charCodeAt(0)).map(x =>
