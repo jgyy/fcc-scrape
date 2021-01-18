@@ -1,26 +1,22 @@
 ---
-id: 5d7925385b74f69642e1fea5
-title: Part 102
+id: 5d7925380ea76d55b2c97d7b
+title: Part 103
 challengeType: 0
-dashedName: part-102
+dashedName: part-103
 ---
 
 # --description--
 
-Obviously, this was ignored, as all `highPrecedence` does is return a value and this value is ignored.
+This is true, so `highPrecedence` might be a pure function. If you inspect it, you can see that it indeed performs no I/O and doesn't use functions like `Math.random()` - so it's pure.
 
-Now compare `highPrecedence("2*2")` with `highPrecedence("2*2")`, and `console.log` the result.
+Remove the `console.log` statement.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(
-  /update=\(?event\)?=>\{.*console\.log\((highPrecedence\(['"]2\*2['"]\))===\1\).*\}/.test(
-    code.replace(/\s/g, '')
-  )
-);
+assert(!code.includes('console.log'));
 ```
 
 # --seed--
@@ -153,7 +149,7 @@ window.onload = () => {
 };
 
 const update = event => {
-  // highPrecedence("2*2");
+  console.log(highPrecedence("2*2") === highPrecedence("2*2"));
   const element = event.target;
   const value = element.value.replace(/\s/g, "");
   if (!value.includes(element.id) && value[0] === "=") {
@@ -257,7 +253,6 @@ window.onload = () => {
 };
 
 const update = event => {
-  console.log(highPrecedence("2*2") === highPrecedence("2*2"));
   const element = event.target;
   const value = element.value.replace(/\s/g, "");
   if (!value.includes(element.id) && value[0] === "=") {
