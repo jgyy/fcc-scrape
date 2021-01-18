@@ -1,26 +1,20 @@
 ---
-id: 5d7925353d2c505eafd50cd9
-title: Part 47
+id: 5d79253539b5e944ba3e314c
+title: Part 48
 challengeType: 0
-dashedName: part-47
+dashedName: part-48
 ---
 
 # --description--
 
-Remove the curly braces and `return` keyword from `range`.
+Define a function `charRange` which takes `start` and `end` as arguments. It should return `start`.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(
-  code
-    .replace(/\s/g, '')
-    .includes(
-      'constrange=(start,end)=>start>end?[]:[start].concat(range(start+1,end))'
-    )
-);
+assert(code.replace(/\s/g, '').includes('constcharRange=(start,end)=>start'));
 ```
 
 # --seed--
@@ -102,9 +96,8 @@ const applyFn = str => {
   );
 };
 
-const range = (start, end) => {
-  return start > end ? [] : [start].concat(range(start + 1, end));
-}
+const range = (start, end) =>
+  start > end ? [] : [start].concat(range(start + 1, end));
 
 
 </script>
@@ -153,5 +146,7 @@ const applyFn = str => {
 
 const range = (start, end) =>
   start > end ? [] : [start].concat(range(start + 1, end));
+
+const charRange = (start, end) => start;
 </script>
 ```
