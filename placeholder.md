@@ -1,20 +1,24 @@
 ---
-id: 5d792535e3304f15a8890162
-title: Part 50
+id: 5d792535a40ea5ac549d6804
+title: Part 51
 challengeType: 0
-dashedName: part-50
+dashedName: part-51
 ---
 
 # --description--
 
-Use the `charCodeAt(0)` method on `start` and `end` in `charRange`, like this: `start.charCodeAt(0)`.
+Chain `map` onto `range(start.charCodeAt(0), end.charCodeAt(0))`, with `x => x` as the argument.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(JSON.stringify(charRange('A', 'C')) === '[65,66,67]');
+assert(
+  code
+    .replace(/\s/g, '')
+    .includes('range(start.charCodeAt(0),end.charCodeAt(0)).map(x=>x)')
+);
 ```
 
 # --seed--
@@ -99,7 +103,7 @@ const applyFn = str => {
 const range = (start, end) =>
   start > end ? [] : [start].concat(range(start + 1, end));
 
-const charRange = (start, end) => range(start, end);
+const charRange = (start, end) => range(start.charCodeAt(0), end.charCodeAt(0));
 
 
 </script>
@@ -149,6 +153,6 @@ const applyFn = str => {
 const range = (start, end) =>
   start > end ? [] : [start].concat(range(start + 1, end));
 
-const charRange = (start, end) => range(start.charCodeAt(0), end.charCodeAt(0));
+const charRange = (start, end) => range(start.charCodeAt(0), end.charCodeAt(0)).map(x => x);
 </script>
 ```
