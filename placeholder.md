@@ -1,28 +1,29 @@
 ---
-id: 5d792539dd4fd4c96fd85f7e
-title: Part 117
+id: 5d79253949802f8587c8bbd3
+title: Part 118
 challengeType: 0
-dashedName: part-117
+dashedName: part-118
 ---
 
 # --description--
 
-The `%` operator returns the remainder:
+The `filter` method keeps only the elements of an array that satisfy the function passed to it:
 
 ```js
-4 % 3; // 1
-5 % 3; // 2
-6 % 3; // 0
+[1, 10, 8, 3, 4, 5].filter(x > 3); // [10, 8, 4, 5]
 ```
 
-Add an `isEven` function (to the global scope) which returns whether the number passed to it is even.
+Use `filter` to add a function called `even` to `spreadsheetFunctions`, which returns all the even elements of an array, `nums`.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(isEven(20) && !isEven(31));
+assert(
+  JSON.stringify(spreadsheetFunctions.even([2, 3, 5, 6, 9, 4])) === '[2,6,4]' &&
+    code.includes('filter')
+);
 ```
 
 # --seed--
@@ -84,6 +85,8 @@ const highPrecedence = str => {
   const str2 = infixEval(str, regex);
   return str === str2 ? str : highPrecedence(str2);
 };
+
+const isEven = num => num % 2 === 0;
 
 const spreadsheetFunctions = {
   "": x => x,
@@ -202,7 +205,8 @@ const spreadsheetFunctions = {
   random: ([x, y]) => Math.floor(Math.random() * y + x),
   increment: nums => nums.map(x => x + 1),
   firsttwo: arr => arr.slice(0, 2),
-  lasttwo: arr => arr.slice(-2)
+  lasttwo: arr => arr.slice(-2),
+  even: nums => nums.filter(isEven)
 };
 
 
