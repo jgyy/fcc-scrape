@@ -1,20 +1,20 @@
 ---
-id: 5d79253539b5e944ba3e314c
-title: Part 48
+id: 5d792535a4f1cbff7a8b9a0b
+title: Part 49
 challengeType: 0
-dashedName: part-48
+dashedName: part-49
 ---
 
 # --description--
 
-Define a function `charRange` which takes `start` and `end` as arguments. It should return `start`.
+Make `charRange` return `range(start, end)`.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(code.replace(/\s/g, '').includes('constcharRange=(start,end)=>start'));
+assert(JSON.stringify(charRange(1, 5)) === '[1,2,3,4,5]');
 ```
 
 # --seed--
@@ -99,6 +99,8 @@ const applyFn = str => {
 const range = (start, end) =>
   start > end ? [] : [start].concat(range(start + 1, end));
 
+const charRange = (start, end) => start;
+
 
 </script>
 ```
@@ -147,6 +149,6 @@ const applyFn = str => {
 const range = (start, end) =>
   start > end ? [] : [start].concat(range(start + 1, end));
 
-const charRange = (start, end) => start;
+const charRange = (start, end) => range(start, end);
 </script>
 ```
