@@ -1,20 +1,20 @@
 ---
-id: 5d7925330f300c342315066d
-title: Part 20
+id: 5d792533aa6443215c9b16bf
+title: Part 21
 challengeType: 0
-dashedName: part-20
+dashedName: part-21
 ---
 
 # --description--
 
-In `highPrecedence`, define `regex` to be `/([0-9.]+)([*\/])([0-9.]+)/`.
+Now, assign the result of calling `infixEval` with `str` and `regex` to `str2`. Return `str2`.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(code.replace(/\s/g, '').includes('regex=/([0-9.]+)([*\\/])([0-9.]+)/'));
+assert(highPrecedence('7*6') === '42' && highPrecedence('50/25') === '2');
 ```
 
 # --seed--
@@ -72,6 +72,7 @@ const infixEval = (str, regex) =>
   );
 
 const highPrecedence = str => {
+  const regex = /([0-9.]+)([*\/])([0-9.]+)/;
   return str;
 };
 
@@ -97,7 +98,8 @@ const infixEval = (str, regex) =>
 
 const highPrecedence = str => {
   const regex = /([0-9.]+)([*\/])([0-9.]+)/;
-  return str;
+  const str2 = infixEval(str, regex);
+  return str2;
 };
 </script>
 ```
