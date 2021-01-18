@@ -1,33 +1,27 @@
 ---
-id: 5d7925341747ad42b12f8e68
-title: Part 42
+id: 5d792535b0b3c198ee3ed6f9
+title: Part 43
 challengeType: 0
-dashedName: part-42
+dashedName: part-43
 ---
 
 # --description--
 
-This is still valid because we're modifying `arr` in place instead of reassigning to it (which is invalid with the `const` keyword). But doing this still modifies state, and we don't want to do that in functional programming.
-
-The `concat` method returns a new array instead of modifying an existing one:
+The `concat` method can also accept arrays:
 
 ```js
-[1,2,3].concat(4); // [1, 2, 3, 4]
-[1,2,3].concat(4, 5); // [1, 2, 3, 4, 5]
+[1,2,3].concat([4, 5]); // [1, 2, 3, 4, 5]
+[1,2,3].concat([4, 5], [6, 7]); // [1, 2, 3, 4, 5, 6, 7]
 ```
 
-Use `concat` instead of `push` to return the result of adding `end` to `arr`.
+Use this form of `concat` by passing an array with just `end` to it: `arr.concat([end])`.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(
-  JSON.stringify(range(1, 2)) === '[1,2]' &&
-    code.includes('concat') &&
-    !code.includes('push')
-);
+assert(code.replace(/\s/g, '').includes('returnarr.concat([end])'));
 ```
 
 # --seed--
@@ -111,8 +105,7 @@ const applyFn = str => {
 
 const range = (start, end) => {
   const arr = [start];
-  arr.push(end);
-  return arr;
+  return arr.concat(end);
 }
 
 
@@ -162,7 +155,7 @@ const applyFn = str => {
 
 const range = (start, end) => {
   const arr = [start];
-  return arr.concat(end);
+  return arr.concat([end]);
 }
 </script>
 ```
