@@ -1,17 +1,15 @@
 ---
-id: 5d79253a98bd9fdf7ce68d0a
-title: Part 137
+id: 5d79253a1e9abf29de64c177
+title: Part 138
 challengeType: 0
-dashedName: part-137
+dashedName: part-138
 ---
 
 # --description--
 
-We've used recursion in `range`, but recursion can have performance issues in JavaScript. If performance is an issue, you should try to use a higher order function like `reduce`, and if you can't do that, you'll probably have to use a for/while loop.
+The `Array` function takes an argument `x` and creates an array of size `x` filled with `undefined`.
 
-While we don't expect the user to enter particularly large numbers so that performance is an issue, we're going to refactor `range` as an exercise.
-
-Replace the body of `range` with `start`.
+Make `range` return an array of `undefined` with size `end - start + 1`.
 
 # --hints--
 
@@ -19,7 +17,7 @@ See description above for instructions.
 
 ```js
 assert(
-  /constrange=\(start,end\)=>start(;|const)/.test(code.replace(/\s/g, ''))
+  code.replace(/\s/g, '').includes('constrange=(start,end)=>Array(end-start+1)')
 );
 ```
 
@@ -128,8 +126,7 @@ const applyFn = str => {
   );
 };
 
-const range = (start, end) =>
-  start > end ? [] : [start].concat(range(start + 1, end));
+const range = (start, end) => start
 
 
 
@@ -197,7 +194,6 @@ const update = event => {
 
 ```html
 <script>
-
 const infixToFunction = {
   "+": (x, y) => x + y,
   "-": (x, y) => x - y,
@@ -261,7 +257,7 @@ const applyFn = str => {
   );
 };
 
-const range = (start, end) => start
+const range = (start, end) => Array(end - start + 1);
 
 
 
