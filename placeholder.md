@@ -1,13 +1,13 @@
 ---
-id: 5d7925352047e5c54882c436
-title: Part 56
+id: 5d79253568e441c0adf9db9f
+title: Part 57
 challengeType: 0
-dashedName: part-56
+dashedName: part-57
 ---
 
 # --description--
 
-As `n1` and `n2` are actually strings, replace `n1` and `n2` with `parseInt(n1)` and `parseInt(n2)`.
+Now define a function `elemValue`, which takes an argument `n` and returns `n`. Use the curly brace arrow function syntax.
 
 # --hints--
 
@@ -15,9 +15,7 @@ See description above for instructions.
 
 ```js
 assert(
-  /evalFormula.*constrangeFromString=\(n1,n2\)=>range\(parseInt\(n1\),parseInt\(n2\)\)/.test(
-    code.replace(/\s/g, '')
-  )
+  /evalFormula.*constelemValue=n=>\{returnn;?\}/.test(code.replace(/\s/g, ''))
 );
 ```
 
@@ -110,7 +108,7 @@ const charRange = (start, end) =>
 
 const evalFormula = x => {
   const rangeRegex = /([A-J])([1-9][0-9]?):([A-J])([1-9][0-9]?)/gi;
-  const rangeFromString = (n1, n2) => range(n1, n2);
+  const rangeFromString = (n1, n2) => range(parseInt(n1), parseInt(n2));
 };
 
 
@@ -169,6 +167,9 @@ const charRange = (start, end) =>
 const evalFormula = x => {
   const rangeRegex = /([A-J])([1-9][0-9]?):([A-J])([1-9][0-9]?)/gi;
   const rangeFromString = (n1, n2) => range(parseInt(n1), parseInt(n2));
+  const elemValue = n => {
+    return n;
+  };
 };
 </script>
 ```
