@@ -1,21 +1,15 @@
 ---
-id: 5d7925334c5e22586dd72962
-title: Part 22
+id: 5d79253307ecd49e030bdcd1
+title: Part 23
 challengeType: 0
-dashedName: part-22
+dashedName: part-23
 ---
 
 # --description--
 
-The ternary operator has the following syntax:
+Recursion is when a function calls itself. We often use it instead of `while`/`for` loops, as loops usually involve mutable state.
 
-```js
-const result = condition ? valueIfTrue : valueIfFalse;
-const result = 1 === 1 ? 1 : 0; // 1
-const result = 9 > 10 ? "Yes" : "No"; // "No"
-```
-
-Use this operator to return `str` if `str === str2`, and an empty string (`""`) otherwise.
+Replace the empty string in `highPrecedence` with a call to `highPrecedence` with `str2` as argument.
 
 # --hints--
 
@@ -23,9 +17,9 @@ See description above for instructions.
 
 ```js
 assert(
-  highPrecedence('2*2') === '' &&
-    highPrecedence('2+2') === '2+2' &&
-    code.includes('?')
+  highPrecedence('2*2*2') === '8' &&
+    highPrecedence('2*2') === '4' &&
+    highPrecedence('2+2') === '2+2'
 );
 ```
 
@@ -86,7 +80,7 @@ const infixEval = (str, regex) =>
 const highPrecedence = str => {
   const regex = /([0-9.]+)([*\/])([0-9.]+)/;
   const str2 = infixEval(str, regex);
-  return str2;
+  return str === str2 ? str : "";
 };
 
 
@@ -112,7 +106,7 @@ const infixEval = (str, regex) =>
 const highPrecedence = str => {
   const regex = /([0-9.]+)([*\/])([0-9.]+)/;
   const str2 = infixEval(str, regex);
-  return str === str2 ? str : "";
+  return str === str2 ? str : highPrecedence(str2);
 };
 </script>
 ```
