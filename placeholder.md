@@ -1,22 +1,24 @@
 ---
-id: 5d792538631844ad0bdfb4c3
-title: Part 114
+id: 5d792538e2a8d20cc580d481
+title: Part 115
 challengeType: 0
-dashedName: part-114
+dashedName: part-115
 ---
 
 # --description--
 
-`evalFormula` is now pure, as it now has no external dependencies, and as before, performs no side effects.
+The `slice` method can also work on arrays.
 
-Now define a new function, `increment` inside `spreadsheetFunctions`, which takes `nums` as argument and uses `map` to increment each value of `nums` by 1.
+Add a method `firsttwo` to `spreadsheetFunctions` which takes `arr` as argument and uses `slice` to return the first two elements of `arr`.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(JSON.stringify(spreadsheetFunctions.increment([1, 5, 3])) === '[2,6,4]');
+assert(
+  JSON.stringify(spreadsheetFunctions.firsttwo([2, 6, 1, 4, 3])) === '[2,6]'
+);
 ```
 
 # --seed--
@@ -81,8 +83,11 @@ const highPrecedence = str => {
 
 const spreadsheetFunctions = {
   "": x => x,
-  random: ([x, y]) => Math.floor(Math.random() * y + x)
+  random: ([x, y]) => Math.floor(Math.random() * y + x),
+  increment: nums => nums.map(x => x + 1)
 };
+
+
 
 const applyFn = str => {
   const noHigh = highPrecedence(str);
@@ -187,7 +192,8 @@ const highPrecedence = str => {
 const spreadsheetFunctions = {
   "": x => x,
   random: ([x, y]) => Math.floor(Math.random() * y + x),
-  increment: nums => nums.map(x => x + 1)
+  increment: nums => nums.map(x => x + 1),
+  firsttwo: arr => arr.slice(0, 2)
 };
 
 
