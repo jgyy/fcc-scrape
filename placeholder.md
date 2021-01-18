@@ -1,17 +1,13 @@
 ---
-id: 5d7925383f1b77db7f1ff59e
-title: Part 100
+id: 5d792538de9fa3f298bcd5f6
+title: Part 101
 challengeType: 0
-dashedName: part-100
+dashedName: part-101
 ---
 
 # --description--
 
-This is (probably) false, so `random` is certainly impure.
-
-The second property of pure functions is that they perform no side effects, which are state and I/O modifications. If you call a function without assigning the result to a variable, and it does something, then it's an impure function.
-
-Call `window.onload()` in `update`.
+Now try calling `highPrecedence` and pass it the string `"2*2"` without assigning it to a variable in `update`.
 
 # --hints--
 
@@ -19,7 +15,9 @@ See description above for instructions.
 
 ```js
 assert(
-  /update=\(?event\)?=>\{.*window\.onload\(\).*\}/.test(code.replace(/\s/g, ''))
+  /update=\(?event\)?=>\{.*highPrecedence\((['"])2\*2\1\).*\}/.test(
+    code.replace(/\s/g, '')
+  )
 );
 ```
 
@@ -153,14 +151,13 @@ window.onload = () => {
 };
 
 const update = event => {
+  // window.onload();
   const element = event.target;
   const value = element.value.replace(/\s/g, "");
   if (!value.includes(element.id) && value[0] === "=") {
     element.value = evalFormula(value.slice(1));
   }
 };
-
-// console.log(spreadsheetFunctions["random"](1, 1000) === spreadsheetFunctions["random"](1, 1000))
 
 
 </script>
@@ -258,7 +255,7 @@ window.onload = () => {
 };
 
 const update = event => {
-  // window.onload();
+  highPrecedence("2*2");
   const element = event.target;
   const value = element.value.replace(/\s/g, "");
   if (!value.includes(element.id) && value[0] === "=") {
