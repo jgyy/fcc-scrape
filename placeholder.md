@@ -1,13 +1,15 @@
 ---
-id: 5d7925348a6a41c32f7a4e3e
-title: Part 36
+id: 5d792534408c5be896b0a46e
+title: Part 37
 challengeType: 0
-dashedName: part-36
+dashedName: part-37
 ---
 
 # --description--
 
-Replace the `""` in `str2.replace(regex, "")` with a function which takes `match`, `fn` and `args` as arguments and returns `spreadsheetFunctions`.
+The `hasOwnProperty` method checks if a key exists in an object. So `spreadsheetFunctions.hasOwnProperty("")` would return `true`, but replacing `""` with anything else would make it return `false`.
+
+Chain `hasOwnProperty` to `spreadsheetFunctions` to check if the `fn.toLowerCase()` key exists in `spreadsheetFunctions`.
 
 # --hints--
 
@@ -17,7 +19,9 @@ See description above for instructions.
 assert(
   code
     .replace(/\s/g, '')
-    .includes('returnstr2.replace(regex,(match,fn,args)=>spreadsheetFunctions)')
+    .includes(
+      'returnstr2.replace(regex,(match,fn,args)=>spreadsheetFunctions.hasOwnProperty(fn.toLowerCase()))'
+    )
 );
 ```
 
@@ -93,7 +97,7 @@ const applyFn = str => {
   const toNumberList = args => args.split(",").map(parseFloat);
   const applyFunction = (fn, args) =>
     spreadsheetFunctions[fn.toLowerCase()](toNumberList(args));
-  return str2.replace(regex, "");
+  return str2.replace(regex, (match, fn, args) => spreadsheetFunctions);
 }
 
 
@@ -134,7 +138,11 @@ const applyFn = str => {
   const toNumberList = args => args.split(",").map(parseFloat);
   const applyFunction = (fn, args) =>
     spreadsheetFunctions[fn.toLowerCase()](toNumberList(args));
-  return str2.replace(regex, (match, fn, args) => spreadsheetFunctions);
+  return str2.replace(
+    regex,
+    (match, fn, args) =>
+      spreadsheetFunctions.hasOwnProperty(fn.toLowerCase())
+  );
 }
 </script>
 ```
