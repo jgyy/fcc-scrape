@@ -1,13 +1,13 @@
 ---
-id: 5d792536dd8a4daf255488ac
-title: Part 70
+id: 5d792536449c73004f265fb1
+title: Part 71
 challengeType: 0
-dashedName: part-70
+dashedName: part-71
 ---
 
 # --description--
 
-Replace the `""` in `varRangeExpanded` with a function, which takes `match`, `c1`, `n1`, `c2` and `n2` as arguments, and returns `n1`.
+Replace the `n1` return value in `varRangeExpanded` with `rangeFromString(n1, n2)`.
 
 # --hints--
 
@@ -18,7 +18,7 @@ assert(
   code
     .replace(/\s/g, '')
     .includes(
-      'constvarRangeExpanded=x.replace(rangeRegex,(match,c1,n1,c2,n2)=>n1)'
+      'constvarRangeExpanded=x.replace(rangeRegex,(match,c1,n1,c2,n2)=>rangeFromString(n1,n2))'
     )
 );
 ```
@@ -115,7 +115,9 @@ const evalFormula = x => {
   const rangeFromString = (n1, n2) => range(parseInt(n1), parseInt(n2));
   const elemValue = n => c => document.getElementById(c + n).value;
   const addChars = c1 => c2 => n => charRange(c1, c2).map(elemValue(n));
-  const varRangeExpanded = x.replace(rangeRegex, "");
+  const varRangeExpanded = x.replace(rangeRegex, (match, c1, n1, c2, n2) =>
+    n1 
+  );
   return varRangeExpanded;
 };
 
@@ -178,7 +180,7 @@ const evalFormula = x => {
   const elemValue = n => c => document.getElementById(c + n).value;
   const addChars = c1 => c2 => n => charRange(c1, c2).map(elemValue(n));
   const varRangeExpanded = x.replace(rangeRegex, (match, c1, n1, c2, n2) =>
-    n1 
+    rangeFromString(n1, n2)
   );
   return varRangeExpanded;
 };
