@@ -1,21 +1,13 @@
 ---
-id: 5d7925398157757b23730fdd
-title: Part 121
+id: 5d792539de4b9ac14dd40409
+title: Part 122
 challengeType: 0
-dashedName: part-121
+dashedName: part-122
 ---
 
 # --description--
 
-The `reduce` method can take a second argument (in addition to the function), specifying the initial accumulator value. In this case, the current value starts from index 0 rather than index 1:
-
-```js
-[1, [1, 2, 3], [3, 4, 5]].reduce((a, x) => a.concat(x), []); // [1, 1, 2, 3, 3, 4, 5]
-// without the second argument, it first tries 1.concat([1, 2, 3]), but 1 is not an array
-// now it first tries [].concat(1) which works 
-```
-
-Add a function `nodups` to `spreadsheetFunctions`, with the value `arr => arr.reduce((a, x) => a.includes(x), [])`.
+Use the ternary operator in `nodups` to return `a` if `a.includes(x)` and `a.concat(x)` otherwise.
 
 # --hints--
 
@@ -23,9 +15,8 @@ See description above for instructions.
 
 ```js
 assert(
-  /nodups['"]?:arr=>arr\.reduce\(\(a,x\)=>a\.includes\(x\),\[\]\)/.test(
-    code.replace(/\s/g, '')
-  )
+  JSON.stringify(spreadsheetFunctions.nodups([1, 3, 1, 5, 7, 7, 9, 7])) ===
+    '[1,3,5,7,9]'
 );
 ```
 
@@ -100,6 +91,7 @@ const spreadsheetFunctions = {
   even: nums => nums.filter(isEven),
   sum: nums => nums.reduce((a, x) => a + x),
   has2: arr => arr.includes(2)
+  nodups: arr => arr.reduce((a, x) => a.includes(x), [])
 };
 
 
@@ -215,7 +207,7 @@ const spreadsheetFunctions = {
   even: nums => nums.filter(isEven),
   sum: nums => nums.reduce((a, x) => a + x),
   has2: arr => arr.includes(2),
-  nodups: arr => arr.reduce((a, x) => a.includes(x), [])
+  nodups: arr => arr.reduce((a, x) => a.includes(x) ? a : a.concat(x), [])
 };
 
 
