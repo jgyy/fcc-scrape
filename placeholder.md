@@ -1,13 +1,13 @@
 ---
-id: 5d7925357a0533eb221b005d
-title: Part 44
+id: 5d792535591db67ee15b4106
+title: Part 45
 challengeType: 0
-dashedName: part-44
+dashedName: part-45
 ---
 
 # --description--
 
-Replace the call to `arr` in `arr.concat([end])` with `[start]` and remove the `arr` variable and its definition.
+Use the ternary operator to return `[]` if `start > end` and `[start].concat([end])` otherwise.
 
 # --hints--
 
@@ -15,8 +15,8 @@ See description above for instructions.
 
 ```js
 assert(
-  !code.includes('arr') &&
-    code.replace(/\s/g, '').includes('[start].concat([end])')
+  JSON.stringify(range(3, 2)) === '[]' &&
+    JSON.stringify(range(1, 3)) === '[1,3]'
 );
 ```
 
@@ -100,8 +100,7 @@ const applyFn = str => {
 };
 
 const range = (start, end) => {
-  const arr = [start];
-  return arr.concat([end]);
+  return [start].concat([end]);
 }
 
 
@@ -150,7 +149,7 @@ const applyFn = str => {
 };
 
 const range = (start, end) => {
-  return [start].concat([end]);
+  return start > end ? [] : [start].concat([end]);
 }
 </script>
 ```
