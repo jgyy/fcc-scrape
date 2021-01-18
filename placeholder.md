@@ -1,13 +1,20 @@
 ---
-id: 5d792537c80984dfa5501b96
-title: Part 88
+id: 5d7925377b54d8a76efb5657
+title: Part 89
 challengeType: 0
-dashedName: part-88
+dashedName: part-89
 ---
 
 # --description--
 
-Inside `letters.forEach`, assign `document.createElement("input")` to `input`.
+Add the following code to `letters.forEach`:
+
+```js
+input.type = "text";
+input.id = y + x;
+input.onchange = update;
+container.appendChild(input);
+```
 
 # --hints--
 
@@ -15,7 +22,7 @@ See description above for instructions.
 
 ```js
 assert(
-  /window\.onload[\s\S]*range\(1,99\)\.forEach\(\(?x\)?=>\{createLabel\(x\);?letters\.forEach\(\(?y\)?=>\{constinput=document\.createElement\(["']input["']\);?\}\);?\}\);?\}/.test(
+  /window\.onload[\s\S]*range\(1,99\)\.forEach\(\(?x\)?=>\{createLabel\(x\);?letters\.forEach\(\(?y\)?=>\{constinput=document\.createElement\(["']input["']\);?input\.type=["']text["'];?input\.id=y\+x;?input\.onchange=update;?container\.appendChild\(input\);?\}\);?\}\);?\}/.test(
     code.replace(/\s/g, '')
   )
 );
@@ -140,7 +147,7 @@ window.onload = () => {
   range(1, 99).forEach(x => {
     createLabel(x);
     letters.forEach(y => {
-    
+      const input = document.createElement("input"); 
     });
   });
 };
@@ -230,7 +237,11 @@ window.onload = () => {
   range(1, 99).forEach(x => {
     createLabel(x);
     letters.forEach(y => {
-      const input = document.createElement("input"); 
+      const input = document.createElement("input");
+      input.type = "text";
+      input.id = y + x;
+      input.onchange = update;
+      container.appendChild(input);
     });
   });
 };
