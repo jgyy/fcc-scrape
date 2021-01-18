@@ -1,15 +1,21 @@
 ---
-id: 5d7925393b30099e37a34668
-title: Part 120
+id: 5d7925398157757b23730fdd
+title: Part 121
 challengeType: 0
-dashedName: part-120
+dashedName: part-121
 ---
 
 # --description--
 
-The `includes` method checks if an element is in an array.
+The `reduce` method can take a second argument (in addition to the function), specifying the initial accumulator value. In this case, the current value starts from index 0 rather than index 1:
 
-Add a `has2` function to `spreadsheetFunctions` which checks if the inputted array has the number 2 in it.
+```js
+[1, [1, 2, 3], [3, 4, 5]].reduce((a, x) => a.concat(x), []); // [1, 1, 2, 3, 3, 4, 5]
+// without the second argument, it first tries 1.concat([1, 2, 3]), but 1 is not an array
+// now it first tries [].concat(1) which works 
+```
+
+Add a function `nodups` to `spreadsheetFunctions`, with the value `arr => arr.reduce((a, x) => a.includes(x), [])`.
 
 # --hints--
 
@@ -17,7 +23,9 @@ See description above for instructions.
 
 ```js
 assert(
-  spreadsheetFunctions.has2([2, 3, 5]) && !spreadsheetFunctions.has2([1, 3, 10])
+  /nodups['"]?:arr=>arr\.reduce\(\(a,x\)=>a\.includes\(x\),\[\]\)/.test(
+    code.replace(/\s/g, '')
+  )
 );
 ```
 
@@ -90,7 +98,8 @@ const spreadsheetFunctions = {
   firsttwo: arr => arr.slice(0, 2),
   lasttwo: arr => arr.slice(-2),
   even: nums => nums.filter(isEven),
-  sum: nums => nums.reduce((a, x) => a + x)
+  sum: nums => nums.reduce((a, x) => a + x),
+  has2: arr => arr.includes(2)
 };
 
 
@@ -205,7 +214,8 @@ const spreadsheetFunctions = {
   lasttwo: arr => arr.slice(-2),
   even: nums => nums.filter(isEven),
   sum: nums => nums.reduce((a, x) => a + x),
-  has2: arr => arr.includes(2)
+  has2: arr => arr.includes(2),
+  nodups: arr => arr.reduce((a, x) => a.includes(x), [])
 };
 
 
