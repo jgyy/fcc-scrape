@@ -1,25 +1,26 @@
 ---
-id: 5d79253410532e13d13fe574
-title: Part 29
+id: 5d7925342415527083bd6667
+title: Part 30
 challengeType: 0
-dashedName: part-29
+dashedName: part-30
 ---
 
 # --description--
 
-Set `regex` to `/([a-z]*)\(([0-9., ]*)\)(?!.*\()/i` in `applyFn`.
+The `split` method returns an array of strings from a larger string by using its argument to determine where to make each split:
+
+```js
+"a b c".split(" "); // ["a", "b", "c"];
+```
+
+Add a function `toNumberList` (inside `applyFn`) which takes an argument `args` and splits it by commas. Return `toNumberList`.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(
-  applyFn
-    .toString()
-    .replace(/\s/g, '')
-    .includes('varregex=/([a-z]*)\\(([0-9.,]*)\\)(?!.*\\()/i')
-);
+assert(JSON.stringify(applyFn('')('foo,baz,bar')) === '["foo","baz","bar"]');
 ```
 
 # --seed--
@@ -90,6 +91,7 @@ const applyFn = str => {
   const noHigh = highPrecedence(str);
   const infix = /([0-9.]+)([+-])([0-9.]+)/;
   const str2 = infixEval(noHigh, infix);
+  const regex = /([a-z]*)\(([0-9., ]*)\)(?!.*\()/i;
 }
 
 
@@ -127,6 +129,8 @@ const applyFn = str => {
   const infix = /([0-9.]+)([+-])([0-9.]+)/;
   const str2 = infixEval(noHigh, infix);
   const regex = /([a-z]*)\(([0-9., ]*)\)(?!.*\()/i;
+  const toNumberList = args => args.split(",");
+  return toNumberList;
 }
 </script>
 ```
