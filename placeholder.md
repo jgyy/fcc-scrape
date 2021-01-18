@@ -1,26 +1,22 @@
 ---
-id: 5d792536c8d2f0fdfad768fe
-title: Part 65
+id: 5d79253639028b8ec56afcda
+title: Part 66
 challengeType: 0
-dashedName: part-65
+dashedName: part-66
 ---
 
 # --description--
 
-You can add more arguments by simply adding another arrow with another argument name:
-
-```js
-const manyArguments = a => b => c => d => [a, b, c, d]
-```
-
-Add another argument to `addChars` and add it to the sum: `c1 => c2 => n => c1 + c2 + n`.
+Replace the body of `addChars`, so that instead of adding the arguments, it returns a `charRange` between the first two arguments: `c1 => c2 => n => charRange(c1, c2)`.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(code.replace(/\s/g, '').includes('constaddChars=c1=>c2=>n=>c1+c2+n'));
+assert(
+  code.replace(/\s/g, '').includes('constaddChars=c1=>c2=>n=>charRange(c1,c2)')
+);
 ```
 
 # --seed--
@@ -114,7 +110,7 @@ const evalFormula = x => {
   const rangeRegex = /([A-J])([1-9][0-9]?):([A-J])([1-9][0-9]?)/gi;
   const rangeFromString = (n1, n2) => range(parseInt(n1), parseInt(n2));
   const elemValue = n => c => document.getElementById(c + n).value;
-  const addChars = c1 => c2 => c1 + c2
+  const addChars = c1 => c2 => n => c1 + c2 + n
   const fn = elemValue("1");
   return fn("A");
 };
@@ -176,7 +172,7 @@ const evalFormula = x => {
   const rangeRegex = /([A-J])([1-9][0-9]?):([A-J])([1-9][0-9]?)/gi;
   const rangeFromString = (n1, n2) => range(parseInt(n1), parseInt(n2));
   const elemValue = n => c => document.getElementById(c + n).value;
-  const addChars = c1 => c2 => n => c1 + c2 + n
+  const addChars = c1 => c2 => n => charRange(c1, c2)
   const fn = elemValue("1");
   return fn("A");
 };
