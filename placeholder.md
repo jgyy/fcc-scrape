@@ -1,22 +1,26 @@
 ---
-id: 5d792538d169f33142175b95
-title: Part 105
+id: 5d792538e48b5a2c6e5bbe12
+title: Part 106
 challengeType: 0
-dashedName: part-105
+dashedName: part-106
 ---
 
 # --description--
 
-To make this function pure, instead of depending on application state implicitly, we can pass it down explicitly as an argument.
-
-Add an argument `cells` to `evalFormula`.
+When calling `evalFormula` in `update`, pass in `Array.from(document.getElementById("container").children)` as the `cells` argument.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(code.replace(/\s/g, '').includes('evalFormula=(x,cells)=>{'));
+assert(
+  code
+    .replace(/\s/g, '')
+    .includes(
+      'evalFormula(value.slice(1),Array.from(document.getElementById("container").children))'
+    )
+);
 ```
 
 # --seed--
@@ -107,7 +111,7 @@ const charRange = (start, end) =>
     String.fromCharCode(x)
   );
 
-const evalFormula = x => {
+const evalFormula = (x, cells) => {
   const rangeRegex = /([A-J])([1-9][0-9]?):([A-J])([1-9][0-9]?)/gi;
   const rangeFromString = (n1, n2) => range(parseInt(n1), parseInt(n2));
   const elemValue = n => c => ""
@@ -227,6 +231,7 @@ const evalFormula = (x, cells) => {
   return functionExpanded === x
     ? functionExpanded
     : evalFormula(functionExpanded);
+  
 };
 
 window.onload = () => {
@@ -255,7 +260,10 @@ const update = event => {
   const element = event.target;
   const value = element.value.replace(/\s/g, "");
   if (!value.includes(element.id) && value[0] === "=") {
-    element.value = evalFormula(value.slice(1));
+    element.value = evalFormula(
+      value.slice(1),
+      Array.from(document.getElementById("container").children)
+    );
   }
 };
 </script>
