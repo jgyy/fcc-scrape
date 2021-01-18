@@ -1,20 +1,28 @@
 ---
-id: 5d792539a222f385c5c17d2b
-title: Part 127
+id: 5d7925398a7184b41b12a0e0
+title: Part 128
 challengeType: 0
-dashedName: part-127
+dashedName: part-128
 ---
 
 # --description--
 
-Now define a `median` function which takes an argument `nums` (in the global scope).
+The `sort` method sorts an array alphabetically:
+
+```js
+["B", "C", "A"].sort(); // ["A", "B", "C"]
+```
+
+Assign the sorted `nums` to `sorted` in `median`.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(/constmedian=\(?nums\)?=>/.test(code.replace(/\s/g, '')));
+assert(
+  code.replace(/\s/g, '').includes('constmedian=nums=>{constsorted=nums.sort()')
+);
 ```
 
 # --seed--
@@ -80,6 +88,8 @@ const highPrecedence = str => {
 const isEven = num => num % 2 === 0;
 const sum = nums => nums.reduce((a, x) => a + x);
 const average = nums => sum(nums) / nums.length;
+
+const median = nums => {}; 
 
 const spreadsheetFunctions = {
   "": x => x,
@@ -201,7 +211,9 @@ const isEven = num => num % 2 === 0;
 const sum = nums => nums.reduce((a, x) => a + x);
 const average = nums => sum(nums) / nums.length;
 
-const median = nums => {}; 
+const median = nums => {
+  const sorted = nums.sort();
+}; 
 
 const spreadsheetFunctions = {
   "": x => x,
