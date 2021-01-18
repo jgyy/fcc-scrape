@@ -1,26 +1,20 @@
 ---
-id: 5d7925366a5ff428fb483b40
-title: Part 75
+id: 5d7925365d4035eeb2e395fd
+title: Part 76
 challengeType: 0
-dashedName: part-75
+dashedName: part-76
 ---
 
 # --description--
 
-Replace the `""` in `varExpanded` with `match => document.getElementById(match.toUpperCase()).value`.
+Set `functionExpanded` to `applyFn(varExpanded)` in `evalFormula`. Return `functionExpanded`.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(
-  code
-    .replace(/\s/g, '')
-    .includes(
-      'constvarExpanded=varRangeExpanded.replace(varRegex,match=>document.getElementById(match.toUpperCase()).value)'
-    )
-);
+assert(code.includes('functionExpanded') && applyFn('2+2') === '4');
 ```
 
 # --seed--
@@ -119,7 +113,10 @@ const evalFormula = x => {
     rangeFromString(n1, n2).map(addChars(c1)(c2))
   );
   const varRegex = /[A-J][1-9][0-9]?/gi;
-  const varExpanded = varRangeExpanded.replace(varRegex, "");
+  const varExpanded = varRangeExpanded.replace(
+    varRegex,
+    match => document.getElementById(match.toUpperCase()).value
+  );
   return varExpanded;
 };
 
@@ -189,7 +186,8 @@ const evalFormula = x => {
     varRegex,
     match => document.getElementById(match.toUpperCase()).value
   );
-  return varExpanded;
+  const functionExpanded = applyFn(varExpanded);
+  return functionExpanded;
 };
 </script>
 ```
