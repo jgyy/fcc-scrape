@@ -1,22 +1,24 @@
 ---
-id: 5d7925394089b762f93ffa52
-title: Part 124
+id: 5d792539ec758d45a6900173
+title: Part 125
 challengeType: 0
-dashedName: part-124
+dashedName: part-125
 ---
 
 # --description--
 
-Now use the shorthand syntax to reference `sum` inside of `spreadsheetFunctions`.
+The `length` property returns the length of an array. Use this property with the `sum` function to define an `average` function.
 
-This both adds it to the functions you can use in the spreadsheet, and allows you to use it throughout your program.
+As with `sum`, add this function to both the global scope and to `spreadsheetFunctions`.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(/[{,]sum[,}]/.test(code.replace(/\s/g, '')));
+assert(
+  average([1, 5, 12]) === 6 && spreadsheetFunctions.average([1, 20, 3, 8]) === 8
+);
 ```
 
 # --seed--
@@ -89,6 +91,7 @@ const spreadsheetFunctions = {
   firsttwo: arr => arr.slice(0, 2),
   lasttwo: arr => arr.slice(-2),
   even: nums => nums.filter(isEven),
+  sum,
   has2: arr => arr.includes(2),
   nodups: arr => arr.reduce((a, x) => a.includes(x) ? a : a.concat(x), [])
 };
@@ -197,6 +200,7 @@ const highPrecedence = str => {
 
 const isEven = num => num % 2 === 0;
 const sum = nums => nums.reduce((a, x) => a + x);
+const average = nums => sum(nums) / nums.length;
 
 const spreadsheetFunctions = {
   "": x => x,
@@ -206,6 +210,7 @@ const spreadsheetFunctions = {
   lasttwo: arr => arr.slice(-2),
   even: nums => nums.filter(isEven),
   sum,
+  average,
   has2: arr => arr.includes(2),
   nodups: arr => arr.reduce((a, x) => a.includes(x) ? a : a.concat(x), [])
 };
