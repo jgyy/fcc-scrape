@@ -1,15 +1,15 @@
 ---
-id: 5d79253a1e9abf29de64c177
-title: Part 138
+id: 5d79253a8b29d78984369e4b
+title: Part 139
 challengeType: 0
-dashedName: part-138
+dashedName: part-139
 ---
 
 # --description--
 
-The `Array` function takes an argument `x` and creates an array of size `x` filled with `undefined`.
+The `fill` method takes an argument and replaces all elements of the array with that argument.
 
-Make `range` return an array of `undefined` with size `end - start + 1`.
+Use it on the array in `range` to replace everything with `start`.
 
 # --hints--
 
@@ -17,7 +17,9 @@ See description above for instructions.
 
 ```js
 assert(
-  code.replace(/\s/g, '').includes('constrange=(start,end)=>Array(end-start+1)')
+  code
+    .replace(/\s/g, '')
+    .includes('constrange=(start,end)=>Array(end-start+1).fill(start)')
 );
 ```
 
@@ -126,7 +128,7 @@ const applyFn = str => {
   );
 };
 
-const range = (start, end) => start
+const range = (start, end) => Array(end - start + 1);
 
 
 
@@ -194,6 +196,7 @@ const update = event => {
 
 ```html
 <script>
+
 const infixToFunction = {
   "+": (x, y) => x + y,
   "-": (x, y) => x - y,
@@ -257,7 +260,7 @@ const applyFn = str => {
   );
 };
 
-const range = (start, end) => Array(end - start + 1);
+const range = (start, end) => Array(end - start + 1).fill(start);
 
 
 
