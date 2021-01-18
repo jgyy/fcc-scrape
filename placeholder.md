@@ -1,30 +1,22 @@
 ---
-id: 5d79253791391b0acddd0ac5
-title: Part 82
+id: 5d7925373104ae5ae83f20a5
+title: Part 83
 challengeType: 0
-dashedName: part-82
+dashedName: part-83
 ---
 
 # --description--
 
-Add the following code to `createLabel`:
+The `forEach` method takes a function and calls it with each element of the array.
 
-```js
-label.className = "label";
-label.textContent = name;
-container.appendChild(label);
-```
+Chain `forEach` to `letters` and pass it the `createLabel` function to create a label for each of the letters.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(
-  /window\.onload[\s\S]*constcreateLabel=\(?name\)?=>\{constlabel=document\.createElement\(["']div["']\);?label\.className=["']label["'];?label\.textContent=name;?container\.appendChild\(label\);?\}/.test(
-    code.replace(/\s/g, '')
-  )
-);
+assert(code.replace(/\s/g, '').includes('letters.forEach(createLabel)'));
 ```
 
 # --seed--
@@ -137,6 +129,9 @@ window.onload = () => {
   const container = document.getElementById("container");
   const createLabel = name => {
     const label = document.createElement("div");
+    label.className = "label";
+    label.textContent = name;
+    container.appendChild(label);
   };
   const letters = charRange("A", "J");
 };
@@ -222,6 +217,7 @@ window.onload = () => {
     container.appendChild(label);
   };
   const letters = charRange("A", "J");
+  letters.forEach(createLabel);
 };
 </script>
 ```
