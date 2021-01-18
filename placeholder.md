@@ -1,23 +1,28 @@
 ---
-id: 5d792539de4b9ac14dd40409
-title: Part 122
+id: 5d792539534f1bf991bb987f
+title: Part 123
 challengeType: 0
-dashedName: part-122
+dashedName: part-123
 ---
 
 # --description--
 
-Use the ternary operator in `nodups` to return `a` if `a.includes(x)` and `a.concat(x)` otherwise.
+ES6 introduced a shorthand object literal syntax:
+
+```js
+const a = 10;
+const myObject = { a };
+console.log(myObject); // { a: 10 }
+```
+
+First, move `sum` outside of `spreadsheetFunctions`. `sum` should be a function expression similar to `isEven`.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(
-  JSON.stringify(spreadsheetFunctions.nodups([1, 3, 1, 5, 7, 7, 9, 7])) ===
-    '[1,3,5,7,9]'
-);
+assert(sum([1, 2, 3]) === 6);
 ```
 
 # --seed--
@@ -90,8 +95,8 @@ const spreadsheetFunctions = {
   lasttwo: arr => arr.slice(-2),
   even: nums => nums.filter(isEven),
   sum: nums => nums.reduce((a, x) => a + x),
-  has2: arr => arr.includes(2)
-  nodups: arr => arr.reduce((a, x) => a.includes(x), [])
+  has2: arr => arr.includes(2),
+  nodups: arr => arr.reduce((a, x) => a.includes(x) ? a : a.concat(x), [])
 };
 
 
@@ -197,6 +202,7 @@ const highPrecedence = str => {
 };
 
 const isEven = num => num % 2 === 0;
+const sum = nums => nums.reduce((a, x) => a + x);
 
 const spreadsheetFunctions = {
   "": x => x,
@@ -205,7 +211,6 @@ const spreadsheetFunctions = {
   firsttwo: arr => arr.slice(0, 2),
   lasttwo: arr => arr.slice(-2),
   even: nums => nums.filter(isEven),
-  sum: nums => nums.reduce((a, x) => a + x),
   has2: arr => arr.includes(2),
   nodups: arr => arr.reduce((a, x) => a.includes(x) ? a : a.concat(x), [])
 };
