@@ -1,13 +1,13 @@
 ---
-id: 5d792536cfd0fd893c630abb
-title: Part 74
+id: 5d7925366a5ff428fb483b40
+title: Part 75
 challengeType: 0
-dashedName: part-74
+dashedName: part-75
 ---
 
 # --description--
 
-Set `varRegex` to `/[A-J][1-9][0-9]?/gi`. Then set `varExpanded` to the result of replacing `varRegex` with an empty string in `varRangeExpanded`. Return `varExpanded`.
+Replace the `""` in `varExpanded` with `match => document.getElementById(match.toUpperCase()).value`.
 
 # --hints--
 
@@ -15,9 +15,11 @@ See description above for instructions.
 
 ```js
 assert(
-  code.includes('varRegex') &&
-    code.includes('varExpanded') &&
-    evalFormula('aC12bc') === 'abc'
+  code
+    .replace(/\s/g, '')
+    .includes(
+      'constvarExpanded=varRangeExpanded.replace(varRegex,match=>document.getElementById(match.toUpperCase()).value)'
+    )
 );
 ```
 
@@ -116,7 +118,9 @@ const evalFormula = x => {
   const varRangeExpanded = x.replace(rangeRegex, (_, c1, n1, c2, n2) =>
     rangeFromString(n1, n2).map(addChars(c1)(c2))
   );
-  return varRangeExpanded;
+  const varRegex = /[A-J][1-9][0-9]?/gi;
+  const varExpanded = varRangeExpanded.replace(varRegex, "");
+  return varExpanded;
 };
 
 
@@ -181,7 +185,10 @@ const evalFormula = x => {
     rangeFromString(n1, n2).map(addChars(c1)(c2))
   );
   const varRegex = /[A-J][1-9][0-9]?/gi;
-  const varExpanded = varRangeExpanded.replace(varRegex, "");
+  const varExpanded = varRangeExpanded.replace(
+    varRegex,
+    match => document.getElementById(match.toUpperCase()).value
+  );
   return varExpanded;
 };
 </script>
