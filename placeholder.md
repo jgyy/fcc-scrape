@@ -1,26 +1,20 @@
 ---
-id: 5d792538e48b5a2c6e5bbe12
-title: Part 106
+id: 5d7925387f3e9da5ec856dbe
+title: Part 107
 challengeType: 0
-dashedName: part-106
+dashedName: part-107
 ---
 
 # --description--
 
-When calling `evalFormula` in `update`, pass in `Array.from(document.getElementById("container").children)` as the `cells` argument.
+Update the recursive call to `evalFormula` by passing in `cells` as the second argument.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(
-  code
-    .replace(/\s/g, '')
-    .includes(
-      'evalFormula(value.slice(1),Array.from(document.getElementById("container").children))'
-    )
-);
+assert(code.replace(/\s/g, '').includes('evalFormula(functionExpanded,cells)'));
 ```
 
 # --seed--
@@ -128,6 +122,7 @@ const evalFormula = (x, cells) => {
   return functionExpanded === x
     ? functionExpanded
     : evalFormula(functionExpanded);
+  
 };
 
 window.onload = () => {
@@ -156,11 +151,12 @@ const update = event => {
   const element = event.target;
   const value = element.value.replace(/\s/g, "");
   if (!value.includes(element.id) && value[0] === "=") {
-    element.value = evalFormula(value.slice(1));
+    element.value = evalFormula(
+      value.slice(1),
+      Array.from(document.getElementById("container").children)
+    );
   }
 };
-
-
 </script>
 ```
 
@@ -215,6 +211,7 @@ const charRange = (start, end) =>
   );
 
 const evalFormula = (x, cells) => {
+  
   const rangeRegex = /([A-J])([1-9][0-9]?):([A-J])([1-9][0-9]?)/gi;
   const rangeFromString = (n1, n2) => range(parseInt(n1), parseInt(n2));
   const elemValue = n => c => ""
@@ -230,8 +227,7 @@ const evalFormula = (x, cells) => {
   const functionExpanded = applyFn(varExpanded);
   return functionExpanded === x
     ? functionExpanded
-    : evalFormula(functionExpanded);
-  
+    : evalFormula(functionExpanded, cells);
 };
 
 window.onload = () => {
