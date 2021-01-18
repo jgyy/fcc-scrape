@@ -1,13 +1,13 @@
 ---
-id: 5d7925379e2a488f333e2d43
-title: Part 80
+id: 5d7925379000785f6d8d9af3
+title: Part 81
 challengeType: 0
-dashedName: part-80
+dashedName: part-81
 ---
 
 # --description--
 
-Now define a function `createLabel` which takes an argument `name` and has an empty body.
+Inside `createLabel`, assign `document.createElement("div")` to `label`.
 
 # --hints--
 
@@ -15,7 +15,7 @@ See description above for instructions.
 
 ```js
 assert(
-  /window\.onload[\s\S]*constcreateLabel=\(?name\)?=>\{\}/.test(
+  /window\.onload[\s\S]*constcreateLabel=\(?name\)?=>\{constlabel=document\.createElement\(["']div["']\);?\}/.test(
     code.replace(/\s/g, '')
   )
 );
@@ -129,6 +129,9 @@ const evalFormula = x => {
 
 window.onload = () => {
   const container = document.getElementById("container");
+  const createLabel = name => {
+  
+  };
   const letters = charRange("A", "J");
 };
 
@@ -207,7 +210,7 @@ const evalFormula = x => {
 window.onload = () => {
   const container = document.getElementById("container");
   const createLabel = name => {
-  
+    const label = document.createElement("div");
   };
   const letters = charRange("A", "J");
 };
