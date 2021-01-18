@@ -1,13 +1,13 @@
 ---
-id: 5d7925341193948dfe6d76b4
-title: Part 33
+id: 5d792534cf81365cfca58794
+title: Part 34
 challengeType: 0
-dashedName: part-33
+dashedName: part-34
 ---
 
 # --description--
 
-Now, instead of returning `spreadsheetFunctions`, use bracket notation and `fn.toLowerCase()` to get a specific function from `spreadsheetFunctions`.
+Apply `toNumberList(args)` to `spreadsheetFunctions[fn.toLowerCase()]`.
 
 # --hints--
 
@@ -18,7 +18,7 @@ assert(
   code
     .replace(/\s/g, '')
     .includes(
-      'consttoNumberList=args=>args.split(",").map(parseFloat);constapplyFunction=(fn,args)=>spreadsheetFunctions[fn.toLowerCase()]'
+      'consttoNumberList=args=>args.split(",").map(parseFloat);constapplyFunction=(fn,args)=>spreadsheetFunctions[fn.toLowerCase()](toNumberList(args))'
     )
 );
 ```
@@ -93,7 +93,7 @@ const applyFn = str => {
   const str2 = infixEval(noHigh, infix);
   const regex = /([a-z]*)\(([0-9., ]*)\)(?!.*\()/i;
   const toNumberList = args => args.split(",").map(parseFloat);
-  const applyFunction = (fn, args) => spreadsheetFunctions;
+  const applyFunction = (fn, args) => spreadsheetFunctions[fn.toLowerCase()];
 }
 
 
@@ -132,7 +132,8 @@ const applyFn = str => {
   const str2 = infixEval(noHigh, infix);
   const regex = /([a-z]*)\(([0-9., ]*)\)(?!.*\()/i;
   const toNumberList = args => args.split(",").map(parseFloat);
-  const applyFunction = (fn, args) => spreadsheetFunctions[fn.toLowerCase()];
+  const applyFunction = (fn, args) =>
+    spreadsheetFunctions[fn.toLowerCase()](toNumberList(args));
 }
 </script>
 ```
