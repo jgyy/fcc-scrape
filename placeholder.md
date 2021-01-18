@@ -1,13 +1,13 @@
 ---
-id: 5d792534d586ef495ea9df90
-title: Part 28
+id: 5d79253410532e13d13fe574
+title: Part 29
 challengeType: 0
-dashedName: part-28
+dashedName: part-29
 ---
 
 # --description--
 
-Set `str2` to `infixEval(noHigh, infix)`.
+Set `regex` to `/([a-z]*)\(([0-9., ]*)\)(?!.*\()/i` in `applyFn`.
 
 # --hints--
 
@@ -15,11 +15,10 @@ See description above for instructions.
 
 ```js
 assert(
-  code
+  applyFn
+    .toString()
     .replace(/\s/g, '')
-    .includes(
-      'constapplyFn=str=>{constnoHigh=highPrecedence(str);constinfix=/([0-9.]+)([+-])([0-9.]+)/;conststr2=infixEval(noHigh,infix)'
-    )
+    .includes('varregex=/([a-z]*)\\(([0-9.,]*)\\)(?!.*\\()/i')
 );
 ```
 
@@ -90,6 +89,7 @@ const spreadsheetFunctions = {
 const applyFn = str => {
   const noHigh = highPrecedence(str);
   const infix = /([0-9.]+)([+-])([0-9.]+)/;
+  const str2 = infixEval(noHigh, infix);
 }
 
 
@@ -126,6 +126,7 @@ const applyFn = str => {
   const noHigh = highPrecedence(str);
   const infix = /([0-9.]+)([+-])([0-9.]+)/;
   const str2 = infixEval(noHigh, infix);
+  const regex = /([a-z]*)\(([0-9., ]*)\)(?!.*\()/i;
 }
 </script>
 ```
