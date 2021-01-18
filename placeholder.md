@@ -1,22 +1,26 @@
 ---
-id: 5d7925364c106e9aaf05a16f
-title: Part 77
+id: 5d792536970cd8e819cc8a96
+title: Part 78
 challengeType: 0
-dashedName: part-77
+dashedName: part-78
 ---
 
 # --description--
 
-`evalFormula` should return the value passed to it if this value remained unchanged. Otherwise, it should call itself with the latest value.
+You can define arrow functions without arguments:
 
-Use the ternary operator in the last line of `evalFormula` to return `functionExpanded` if `x === functionExpanded` and `evalFormula(functionExpanded)` otherwise.
+```js
+const two = () => 2;
+```
+
+Define an empty arrow function without arguments and assign it to `window.onload`.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(evalFormula('(2+2)*2') === '8');
+assert(code.replace(/\s/g, '').includes('window.onload=()=>'));
 ```
 
 # --seed--
@@ -120,7 +124,9 @@ const evalFormula = x => {
     match => document.getElementById(match.toUpperCase()).value
   );
   const functionExpanded = applyFn(varExpanded);
-  return functionExpanded;
+  return functionExpanded === x
+    ? functionExpanded
+    : evalFormula(functionExpanded);
 };
 
 
@@ -194,5 +200,7 @@ const evalFormula = x => {
     ? functionExpanded
     : evalFormula(functionExpanded);
 };
+
+window.onload = () => { };
 </script>
 ```
