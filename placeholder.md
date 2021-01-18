@@ -1,13 +1,21 @@
 ---
-id: 5d7925374321824cba309875
-title: Part 98
+id: 5d7925381e8565a5c50ba7f1
+title: Part 99
 challengeType: 0
-dashedName: part-98
+dashedName: part-99
 ---
 
 # --description--
 
-Change the `random` function so that it returns `Math.floor(Math.random() * y + x)`. It now returns a random number within a range.
+In functional programming, we strive to use a type of function called "pure functions" as much as possible. The first property of pure functions is that they always return the same value for the same arguments.
+
+You can check if this is the case by comparing a call to a function with another call (with the same arguments):
+
+```js
+console.log(f(2) === f(2)); // always true for pure functions
+```
+
+Use this technique to check if the `random` function in `spreadsheetFunctions` is pure by passing in the following array: `[1, 1000]`.
 
 # --hints--
 
@@ -15,9 +23,9 @@ See description above for instructions.
 
 ```js
 assert(
-  /["']?random["']?:\(\[x,y\]\)=>Math\.floor\(Math\.random\(\)\*y\+x\)/.test(
+  /(spreadsheetFunctions\[["']random["']\]\(1,1000\))===\1/.test(
     code.replace(/\s/g, '')
-  ) && spreadsheetFunctions['random']([1, 1]) === 1
+  )
 );
 ```
 
@@ -83,10 +91,8 @@ const highPrecedence = str => {
 
 const spreadsheetFunctions = {
   "": x => x,
-  random: ([x, y]) => x
+  random: ([x, y]) => Math.floor(Math.random() * y + x)
 };
-
-
 
 const applyFn = str => {
   const noHigh = highPrecedence(str);
@@ -159,6 +165,7 @@ const update = event => {
     element.value = evalFormula(value.slice(1));
   }
 };
+
 
 </script>
 ```
@@ -261,5 +268,7 @@ const update = event => {
     element.value = evalFormula(value.slice(1));
   }
 };
+
+// console.log(spreadsheetFunctions["random"](1, 1000) === spreadsheetFunctions["random"](1, 1000))
 </script>
 ```
