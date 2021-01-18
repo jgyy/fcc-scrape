@@ -1,20 +1,24 @@
 ---
-id: 5d7925373b7127cfaeb50c26
-title: Part 84
+id: 5d792537cb3a5cd6baca5e1a
+title: Part 85
 challengeType: 0
-dashedName: part-84
+dashedName: part-85
 ---
 
 # --description--
 
-Add `range(1, 99)` to the end of `window.onload` (the result will be discarded for now).
+Chain `forEach` onto `range(1, 99)`, passing in `createLabel` as an argument.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(/window\.onload[\s\S]*range\(1,99\);?\}/.test(code.replace(/\s/g, '')));
+assert(
+  /window\.onload[\s\S]*range\(1,99\)\.forEach\(createLabel\);?\}/.test(
+    code.replace(/\s/g, '')
+  )
+);
 ```
 
 # --seed--
@@ -133,6 +137,7 @@ window.onload = () => {
   };
   const letters = charRange("A", "J");
   letters.forEach(createLabel);
+  range(1, 99);
 };
 
 
@@ -217,7 +222,7 @@ window.onload = () => {
   };
   const letters = charRange("A", "J");
   letters.forEach(createLabel);
-  range(1, 99);
+  range(1, 99).forEach(createLabel);
 };
 </script>
 ```
