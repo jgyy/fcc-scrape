@@ -1,19 +1,23 @@
 ---
-id: 5d79253949802f8587c8bbd3
-title: Part 118
+id: 5d7925395888767e9304c082
+title: Part 119
 challengeType: 0
-dashedName: part-118
+dashedName: part-119
 ---
 
 # --description--
 
-The `filter` method keeps only the elements of an array that satisfy the function passed to it:
+The `reduce` method takes a function with an accumulator and the current value. The accumulator is initially set to the value at index 0.
+
+The `reduce` method then goes through each element of the array after that, passing in the element as the current value and the result of the last call as the accumulator.
+
+For example, here's how to multiply all the value in an array:
 
 ```js
-[1, 10, 8, 3, 4, 5].filter(x > 3); // [10, 8, 4, 5]
+[2, 3, 4].reduce((a, x) => a * x); // 24
 ```
 
-Use `filter` to add a function called `even` to `spreadsheetFunctions`, which returns all the even elements of an array, `nums`.
+Using `reduce`, add a function `sum` to `spreadsheetFunctions`, which sums all values in the array passed to it.
 
 # --hints--
 
@@ -21,8 +25,7 @@ See description above for instructions.
 
 ```js
 assert(
-  JSON.stringify(spreadsheetFunctions.even([2, 3, 5, 6, 9, 4])) === '[2,6,4]' &&
-    code.includes('filter')
+  spreadsheetFunctions.sum([10, 5, 1, 3]) === 19 && code.includes('reduce')
 );
 ```
 
@@ -93,7 +96,8 @@ const spreadsheetFunctions = {
   random: ([x, y]) => Math.floor(Math.random() * y + x),
   increment: nums => nums.map(x => x + 1),
   firsttwo: arr => arr.slice(0, 2),
-  lasttwo: arr => arr.slice(-2)
+  lasttwo: arr => arr.slice(-2),
+  even: nums => nums.filter(isEven)
 };
 
 
@@ -206,7 +210,8 @@ const spreadsheetFunctions = {
   increment: nums => nums.map(x => x + 1),
   firsttwo: arr => arr.slice(0, 2),
   lasttwo: arr => arr.slice(-2),
-  even: nums => nums.filter(isEven)
+  even: nums => nums.filter(isEven),
+  sum: nums => nums.reduce((a, x) => a + x)
 };
 
 
