@@ -1,13 +1,19 @@
 ---
-id: 5d79253639028b8ec56afcda
-title: Part 66
+id: 5d792536834f2fd93e84944f
+title: Part 67
 challengeType: 0
-dashedName: part-66
+dashedName: part-67
 ---
 
 # --description--
 
-Replace the body of `addChars`, so that instead of adding the arguments, it returns a `charRange` between the first two arguments: `c1 => c2 => n => charRange(c1, c2)`.
+You call curried functions like this:
+
+```js
+const result = add(1)(2);
+```
+
+Use `map` on the `charRange` in `addChars`, passing in `x => elemValue(n)(x)` as the argument.
 
 # --hints--
 
@@ -15,7 +21,11 @@ See description above for instructions.
 
 ```js
 assert(
-  code.replace(/\s/g, '').includes('constaddChars=c1=>c2=>n=>charRange(c1,c2)')
+  code
+    .replace(/\s/g, '')
+    .includes(
+      'constaddChars=c1=>c2=>n=>charRange(c1,c2).map(x=>elemValue(n)(x))'
+    )
 );
 ```
 
@@ -110,7 +120,7 @@ const evalFormula = x => {
   const rangeRegex = /([A-J])([1-9][0-9]?):([A-J])([1-9][0-9]?)/gi;
   const rangeFromString = (n1, n2) => range(parseInt(n1), parseInt(n2));
   const elemValue = n => c => document.getElementById(c + n).value;
-  const addChars = c1 => c2 => n => c1 + c2 + n
+  const addChars = c1 => c2 => n => charRange(c1, c2)
   const fn = elemValue("1");
   return fn("A");
 };
@@ -172,7 +182,7 @@ const evalFormula = x => {
   const rangeRegex = /([A-J])([1-9][0-9]?):([A-J])([1-9][0-9]?)/gi;
   const rangeFromString = (n1, n2) => range(parseInt(n1), parseInt(n2));
   const elemValue = n => c => document.getElementById(c + n).value;
-  const addChars = c1 => c2 => n => charRange(c1, c2)
+  const addChars = c1 => c2 => n => charRange(c1, c2).map(x => elemValue(n)(x));
   const fn = elemValue("1");
   return fn("A");
 };
