@@ -1,24 +1,22 @@
 ---
-id: 5d7925369614afd92d01fed5
-title: Part 63
+id: 5d792536504e68254fe02236
+title: Part 64
 challengeType: 0
-dashedName: part-63
+dashedName: part-64
 ---
 
 # --description--
 
-You also don't need the parentheses in `elemValue` - it's parsed this way automatically. Remove them.
+The technique we just used is called currying - instead of taking multiple arguments, a function takes a single argument and return another function, which also takes a single argument.
+
+Define a new curried function, `addChars`, and set it equal to `c1 => c2 => c1 + c2`.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(
-  /constelemValue=n=>c=>document\.getElementById\(c\+n\)\.value/.test(
-    code.replace(/\s/g, '')
-  )
-);
+assert(code.replace(/\s/g, '').includes('constaddChars=c1=>c2=>c1+c2'));
 ```
 
 # --seed--
@@ -111,7 +109,8 @@ const charRange = (start, end) =>
 const evalFormula = x => {
   const rangeRegex = /([A-J])([1-9][0-9]?):([A-J])([1-9][0-9]?)/gi;
   const rangeFromString = (n1, n2) => range(parseInt(n1), parseInt(n2));
-  const elemValue = n => (c => document.getElementById(c + n).value));
+  const elemValue = n => c => document.getElementById(c + n).value;
+
   const fn = elemValue("1");
   return fn("A");
 };
@@ -173,7 +172,7 @@ const evalFormula = x => {
   const rangeRegex = /([A-J])([1-9][0-9]?):([A-J])([1-9][0-9]?)/gi;
   const rangeFromString = (n1, n2) => range(parseInt(n1), parseInt(n2));
   const elemValue = n => c => document.getElementById(c + n).value;
-
+  const addChars = c1 => c2 => c1 + c2
   const fn = elemValue("1");
   return fn("A");
 };
