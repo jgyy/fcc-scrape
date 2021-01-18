@@ -1,26 +1,24 @@
 ---
-id: 5d792536970cd8e819cc8a96
-title: Part 78
+id: 5d792536e33baeaa60129e0a
+title: Part 79
 challengeType: 0
-dashedName: part-78
+dashedName: part-79
 ---
 
 # --description--
 
-You can define arrow functions without arguments:
-
-```js
-const two = () => 2;
-```
-
-Define an empty arrow function without arguments and assign it to `window.onload`.
+In `window.onload`, assign `document.getElementById("container")` to `container`. Also assign `charRange("A", "J")` to `letters`.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(code.replace(/\s/g, '').includes('window.onload=()=>'));
+assert(
+  /window\.onload=\(\)=>\{constcontainer=document\.getElementById\(["']container["']\);?constletters=charRange\(["']A["'],["']J["']\);?\}/.test(
+    code.replace(/\s/g, '')
+  )
+);
 ```
 
 # --seed--
@@ -129,6 +127,8 @@ const evalFormula = x => {
     : evalFormula(functionExpanded);
 };
 
+window.onload = () => { };
+
 
 </script>
 ```
@@ -201,6 +201,9 @@ const evalFormula = x => {
     : evalFormula(functionExpanded);
 };
 
-window.onload = () => { };
+window.onload = () => {
+  const container = document.getElementById("container");
+  const letters = charRange("A", "J");
+};
 </script>
 ```
