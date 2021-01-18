@@ -1,19 +1,21 @@
 ---
-id: 5d7925398a7184b41b12a0e0
-title: Part 128
+id: 5d7925399afb905c34730a75
+title: Part 129
 challengeType: 0
-dashedName: part-128
+dashedName: part-129
 ---
 
 # --description--
 
-The `sort` method sorts an array alphabetically:
+But our function takes an array of numbers, not strings. Luckily, you can pass a function `fn` as argument to sort:
 
 ```js
-["B", "C", "A"].sort(); // ["A", "B", "C"]
+[2, 9, 10, 15].sort((a, b) => b - a); // [10, 9, 5, 2]
 ```
 
-Assign the sorted `nums` to `sorted` in `median`.
+If `b - a` is less than 0, then `a` will be placed before `b`. As a result, this sorts the array in descending order.
+
+Use `sort` to sort `nums` in ascending order.
 
 # --hints--
 
@@ -21,7 +23,9 @@ See description above for instructions.
 
 ```js
 assert(
-  code.replace(/\s/g, '').includes('constmedian=nums=>{constsorted=nums.sort()')
+  /constmedian=nums=>\{constsorted=nums\.sort\(\((.+),(.+)\)=>\1-\2\)/.test(
+    code.replace(/\s/g, '')
+  )
 );
 ```
 
@@ -89,7 +93,9 @@ const isEven = num => num % 2 === 0;
 const sum = nums => nums.reduce((a, x) => a + x);
 const average = nums => sum(nums) / nums.length;
 
-const median = nums => {}; 
+const median = nums => {
+  const sorted = nums.sort();
+}; 
 
 const spreadsheetFunctions = {
   "": x => x,
@@ -212,7 +218,7 @@ const sum = nums => nums.reduce((a, x) => a + x);
 const average = nums => sum(nums) / nums.length;
 
 const median = nums => {
-  const sorted = nums.sort();
+  const sorted = nums.sort((x, y) => x - y);
 }; 
 
 const spreadsheetFunctions = {
