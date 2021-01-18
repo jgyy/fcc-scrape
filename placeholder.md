@@ -1,13 +1,15 @@
 ---
-id: 5d792539239148965a1a59a5
-title: Part 134
+id: 5d792539e1446045d0df6d28
+title: Part 135
 challengeType: 0
-dashedName: part-134
+dashedName: part-135
 ---
 
 # --description--
 
-Now add `median` to `spreadsheetFunctions`, just like you added `sum` and `average`.
+The `some` method checks if any element of the array satisfies the provided testing function.
+
+Add `someeven` to `spreadsheetFunctions`, which checks if any of the items passed in are even.
 
 # --hints--
 
@@ -15,8 +17,9 @@ See description above for instructions.
 
 ```js
 assert(
-  spreadsheetFunctions.median([1, 20, 3]) === 3 &&
-    spreadsheetFunctions.median([27, 7, 20, 10]) === 15
+  spreadsheetFunctions.someeven([1, 5, 4, 3]) &&
+    !spreadsheetFunctions.someeven([3, 5, 9]) &&
+    code.includes('.some')
 );
 ```
 
@@ -102,6 +105,7 @@ const spreadsheetFunctions = {
   even: nums => nums.filter(isEven),
   sum,
   average,
+  median,
   has2: arr => arr.includes(2),
   nodups: arr => arr.reduce((a, x) => a.includes(x) ? a : a.concat(x), []),
   range: arr => range(...arr)
@@ -234,7 +238,8 @@ const spreadsheetFunctions = {
   median,
   has2: arr => arr.includes(2),
   nodups: arr => arr.reduce((a, x) => a.includes(x) ? a : a.concat(x), []),
-  range: arr => range(...arr)
+  range: arr => range(...arr),
+  someeven: arr => arr.some(isEven)
 };
 
 
