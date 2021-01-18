@@ -1,24 +1,20 @@
 ---
-id: 5d79253939434a2724c0ec41
-title: Part 131
+id: 5d792539b9e1d3c54d8fe94a
+title: Part 132
 challengeType: 0
-dashedName: part-131
+dashedName: part-132
 ---
 
 # --description--
 
-Now define two variable: `length` which is `sorted.length` and `middle` which is `length / 2 - 1`.
+Add a return statement to `median` so that it returns `isEven(length)`.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(
-  /constmedian=nums=>\{constsorted=nums\.slice\(\)\.sort\(\((.+),(.+)\)=>\1-\2\);?constlength=sorted\.length;?constmiddle=length\/2-1/.test(
-    code.replace(/\s/g, '')
-  )
-);
+assert(median([1, 2, 3, 4]) && !median([1, 2, 3]));
 ```
 
 # --seed--
@@ -87,7 +83,11 @@ const average = nums => sum(nums) / nums.length;
 
 const median = nums => {
   const sorted = nums.slice().sort((x, y) => x - y);
+  const length = sorted.length;
+  const middle = sorted.length / 2 - 1;
 }; 
+
+
 
 const spreadsheetFunctions = {
   "": x => x,
@@ -102,8 +102,6 @@ const spreadsheetFunctions = {
   nodups: arr => arr.reduce((a, x) => a.includes(x) ? a : a.concat(x), []),
   range: arr => range(...arr)
 };
-
-
 
 const applyFn = str => {
   const noHigh = highPrecedence(str);
@@ -213,6 +211,7 @@ const median = nums => {
   const sorted = nums.slice().sort((x, y) => x - y);
   const length = sorted.length;
   const middle = length / 2 - 1;
+  return isEven(length);
 }; 
 
 
