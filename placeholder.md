@@ -1,22 +1,20 @@
 ---
-id: 5d7925373104ae5ae83f20a5
-title: Part 83
+id: 5d7925373b7127cfaeb50c26
+title: Part 84
 challengeType: 0
-dashedName: part-83
+dashedName: part-84
 ---
 
 # --description--
 
-The `forEach` method takes a function and calls it with each element of the array.
-
-Chain `forEach` to `letters` and pass it the `createLabel` function to create a label for each of the letters.
+Add `range(1, 99)` to the end of `window.onload` (the result will be discarded for now).
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(code.replace(/\s/g, '').includes('letters.forEach(createLabel)'));
+assert(/window\.onload[\s\S]*range\(1,99\);?\}/.test(code.replace(/\s/g, '')));
 ```
 
 # --seed--
@@ -134,6 +132,7 @@ window.onload = () => {
     container.appendChild(label);
   };
   const letters = charRange("A", "J");
+  letters.forEach(createLabel);
 };
 
 
@@ -218,6 +217,7 @@ window.onload = () => {
   };
   const letters = charRange("A", "J");
   letters.forEach(createLabel);
+  range(1, 99);
 };
 </script>
 ```
