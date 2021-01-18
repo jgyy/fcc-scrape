@@ -1,15 +1,13 @@
 ---
-id: 5d792536735f71d746ee5d99
-title: Part 61
+id: 5d792536ad340d9dff2e4a96
+title: Part 62
 challengeType: 0
-dashedName: part-61
+dashedName: part-62
 ---
 
 # --description--
 
-You might think that this wouldn't work because `fn` wouldn't have access to `n` after `elemValue` has finished executing. However, this works because of closures - functions have access to all variables declared at their time of creation.
-
-Inside `elemValue`, remove the variable `fn` and its definition, and replace `return fn` with `return c => document.getElementById(c + n).value`.
+Now, remove the curly braces and return statement.
 
 # --hints--
 
@@ -17,9 +15,9 @@ See description above for instructions.
 
 ```js
 assert(
-  code
-    .replace(/\s/g, '')
-    .includes('constelemValue=n=>{returnc=>document.getElementById(c+n).value')
+  /constelemValue=n=>\(?c=>document\.getElementById\(c\+n\)\.value/.test(
+    code.replace(/\s/g, '')
+  )
 );
 ```
 
@@ -114,8 +112,7 @@ const evalFormula = x => {
   const rangeRegex = /([A-J])([1-9][0-9]?):([A-J])([1-9][0-9]?)/gi;
   const rangeFromString = (n1, n2) => range(parseInt(n1), parseInt(n2));
   const elemValue = n => {
-    const fn = c => document.getElementById(c + n).value;
-    return fn;
+    return c => document.getElementById(c + n).value;
   };
   const fn = elemValue("1");
   return fn("A");
@@ -177,9 +174,7 @@ const charRange = (start, end) =>
 const evalFormula = x => {
   const rangeRegex = /([A-J])([1-9][0-9]?):([A-J])([1-9][0-9]?)/gi;
   const rangeFromString = (n1, n2) => range(parseInt(n1), parseInt(n2));
-  const elemValue = n => {
-    return c => document.getElementById(c + n).value;
-  };
+  const elemValue = n => (c => document.getElementById(c + n).value);
   const fn = elemValue("1");
   return fn("A");
 };
