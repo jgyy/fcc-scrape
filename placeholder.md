@@ -1,15 +1,21 @@
 ---
-id: 5d792539ec758d45a6900173
-title: Part 125
+id: 5d7925398d525f61a9ff3a79
+title: Part 126
 challengeType: 0
-dashedName: part-125
+dashedName: part-126
 ---
 
 # --description--
 
-The `length` property returns the length of an array. Use this property with the `sum` function to define an `average` function.
+The spread operator allow you to pass multiple arguments instead of an array:
 
-As with `sum`, add this function to both the global scope and to `spreadsheetFunctions`.
+```js
+const arr = [1, 2, 3];
+const sum3 = (a, b, c) => a + b + c;
+sum3(...arr); // 6
+```
+
+Use the spread operator to add `range` to `spreadsheetFunctions`.
 
 # --hints--
 
@@ -17,7 +23,8 @@ See description above for instructions.
 
 ```js
 assert(
-  average([1, 5, 12]) === 6 && spreadsheetFunctions.average([1, 20, 3, 8]) === 8
+  JSON.stringify(spreadsheetFunctions.range([1, 5])) === '[1,2,3,4,5]' &&
+    code.includes('...')
 );
 ```
 
@@ -83,6 +90,7 @@ const highPrecedence = str => {
 
 const isEven = num => num % 2 === 0;
 const sum = nums => nums.reduce((a, x) => a + x);
+const average = nums => sum(nums) / nums.length;
 
 const spreadsheetFunctions = {
   "": x => x,
@@ -92,6 +100,7 @@ const spreadsheetFunctions = {
   lasttwo: arr => arr.slice(-2),
   even: nums => nums.filter(isEven),
   sum,
+  average,
   has2: arr => arr.includes(2),
   nodups: arr => arr.reduce((a, x) => a.includes(x) ? a : a.concat(x), [])
 };
@@ -212,7 +221,8 @@ const spreadsheetFunctions = {
   sum,
   average,
   has2: arr => arr.includes(2),
-  nodups: arr => arr.reduce((a, x) => a.includes(x) ? a : a.concat(x), [])
+  nodups: arr => arr.reduce((a, x) => a.includes(x) ? a : a.concat(x), []),
+  range: arr => range(...arr)
 };
 
 
