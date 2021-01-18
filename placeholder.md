@@ -1,20 +1,23 @@
 ---
-id: 5d7925346b911fce161febaf
-title: Part 39
+id: 5d79253483eada4dd69258eb
+title: Part 40
 challengeType: 0
-dashedName: part-39
+dashedName: part-40
 ---
 
 # --description--
 
-Now define an empty function `range` which takes `start` and `end` as arguments (define it in the global scope).
+`range` should set `arr` to `[start]` and should then return `arr`.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(code.replace(/\s/g, '').includes('constrange=(start,end)=>'));
+assert(
+  code.replace(/\s/g, '').includes('constarr=[start]') &&
+    JSON.stringify(range(1)) === '[1]'
+);
 ```
 
 # --seed--
@@ -96,6 +99,10 @@ const applyFn = str => {
   );
 };
 
+const range = (start, end) => {
+
+}
+
 
 </script>
 ```
@@ -142,7 +149,8 @@ const applyFn = str => {
 };
 
 const range = (start, end) => {
-
+  const arr = [start];
+  return arr;
 }
 </script>
 ```
