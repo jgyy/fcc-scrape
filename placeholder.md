@@ -1,25 +1,22 @@
 ---
-id: 5d792538be4fe331f1a6c008
-title: Part 104
+id: 5d792538d169f33142175b95
+title: Part 105
 challengeType: 0
-dashedName: part-104
+dashedName: part-105
 ---
 
 # --description--
 
-Unfortunately, impure functions are necessary - if you don't use them, the application won't perform any I/O so won't do anything.
+To make this function pure, instead of depending on application state implicitly, we can pass it down explicitly as an argument.
 
-But we have an impure function that could be pure - `evalFormula`. It calls `document.getElementById(c + n).value`, but this value can change, even if the arguments don't.
-
-Change these calls to `""` - the function is now pure but doesn't work.
+Add an argument `cells` to `evalFormula`.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-const nos = code.replace(/\s/g, '');
-assert(nos.includes('elemValue=n=>c=>""') && nos.includes('match=>""'));
+assert(code.replace(/\s/g, '').includes('evalFormula=(x,cells)=>{'));
 ```
 
 # --seed--
@@ -113,7 +110,7 @@ const charRange = (start, end) =>
 const evalFormula = x => {
   const rangeRegex = /([A-J])([1-9][0-9]?):([A-J])([1-9][0-9]?)/gi;
   const rangeFromString = (n1, n2) => range(parseInt(n1), parseInt(n2));
-  const elemValue = n => c => document.getElementById(c + n).value;
+  const elemValue = n => c => ""
   const addChars = c1 => c2 => n => charRange(c1, c2).map(elemValue(n));
   const varRangeExpanded = x.replace(rangeRegex, (_, c1, n1, c2, n2) =>
     rangeFromString(n1, n2).map(addChars(c1)(c2))
@@ -121,7 +118,7 @@ const evalFormula = x => {
   const varRegex = /[A-J][1-9][0-9]?/gi;
   const varExpanded = varRangeExpanded.replace(
     varRegex,
-    match => document.getElementById(match.toUpperCase()).value
+    match => ""
   );
   const functionExpanded = applyFn(varExpanded);
   return functionExpanded === x
@@ -213,7 +210,7 @@ const charRange = (start, end) =>
     String.fromCharCode(x)
   );
 
-const evalFormula = x => {
+const evalFormula = (x, cells) => {
   const rangeRegex = /([A-J])([1-9][0-9]?):([A-J])([1-9][0-9]?)/gi;
   const rangeFromString = (n1, n2) => range(parseInt(n1), parseInt(n2));
   const elemValue = n => c => ""
