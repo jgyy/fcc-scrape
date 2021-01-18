@@ -1,20 +1,20 @@
 ---
-id: 5d792534f0eda837510e9192
-title: Part 38
+id: 5d7925346b911fce161febaf
+title: Part 39
 challengeType: 0
-dashedName: part-38
+dashedName: part-39
 ---
 
 # --description--
 
-Now use the ternary operator in the last line to return `applyFunction(fn, args)` if the statement is true, and `match` otherwise.
+Now define an empty function `range` which takes `start` and `end` as arguments (define it in the global scope).
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(applyFn('2+2*2') === '6' && applyFn('(2+2)*2') === '4*2');
+assert(code.replace(/\s/g, '').includes('constrange=(start,end)=>'));
 ```
 
 # --seed--
@@ -92,9 +92,9 @@ const applyFn = str => {
   return str2.replace(
     regex,
     (match, fn, args) =>
-      spreadsheetFunctions.hasOwnProperty(fn.toLowerCase())
+      spreadsheetFunctions.hasOwnProperty(fn.toLowerCase()) ? applyFunction(fn, args) : match
   );
-}
+};
 
 
 </script>
@@ -140,5 +140,9 @@ const applyFn = str => {
       spreadsheetFunctions.hasOwnProperty(fn.toLowerCase()) ? applyFunction(fn, args) : match
   );
 };
+
+const range = (start, end) => {
+
+}
 </script>
 ```
