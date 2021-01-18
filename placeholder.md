@@ -1,22 +1,24 @@
 ---
-id: 5d79253770083fb730c93a93
-title: Part 95
+id: 5d792537fef76b226b63b93b
+title: Part 96
 challengeType: 0
-dashedName: part-95
+dashedName: part-96
 ---
 
 # --description--
 
-You don't have to specify the second argument in `slice`. If you don't, then `slice` will extract from the first argument to the end of the string.
-
-Change the call to `slice` to log all characters except the first instead.
+Now change the if statement to set `element.value` to the result of passing `value.slice(1)` to `evalFormula`. There is no need to use `const` because we're modifying `element.value`, not declaring it.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(code.replace(/\s/g, '').includes('console.log(value.slice(1))'));
+assert(
+  /constupdate=\(?event\)?=>\{constelement=event\.target;?constvalue=element\.value\.replace\(\/\\s\/g,["']{2}\);?if\(!\(?value\.includes\(element\.id\)\)?&&value\[0\]===["']=["']\)\{element\.value=evalFormula\(value\.slice\(1\)\);?\}\}/.test(
+    code.replace(/\s/g, '')
+  )
+);
 ```
 
 # --seed--
@@ -151,7 +153,7 @@ const update = event => {
   const element = event.target;
   const value = element.value.replace(/\s/g, "");
   if (!value.includes(element.id) && value[0] === "=") {
-    console.log(value.slice(0, 2));
+    console.log(value.slice(1));
   }
 };
 
@@ -184,6 +186,8 @@ const highPrecedence = str => {
 const spreadsheetFunctions = {
   "": x => x
 };
+
+
 
 const applyFn = str => {
   const noHigh = highPrecedence(str);
@@ -253,7 +257,7 @@ const update = event => {
   const element = event.target;
   const value = element.value.replace(/\s/g, "");
   if (!value.includes(element.id) && value[0] === "=") {
-    console.log(value.slice(1));
+    element.value = evalFormula(value.slice(1));
   }
 };
 </script>
