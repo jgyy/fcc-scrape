@@ -1,13 +1,15 @@
 ---
-id: 5d792537ea3eaf302bf2d359
-title: Part 91
+id: 5d792537533b1c7843bfd029
+title: Part 92
 challengeType: 0
-dashedName: part-91
+dashedName: part-92
 ---
 
 # --description--
 
-Now set `value` to `element.value.replace(/\s/g, "")`. This removes all whitespace from `element` so that we can ignore it.
+The `includes` method works on a string and checks if the argument is its substring.
+
+Add an empty if statement to `update` which executes if `element.id` is **not** a substring of `value`.
 
 # --hints--
 
@@ -15,7 +17,7 @@ See description above for instructions.
 
 ```js
 assert(
-  /constupdate=\(?event\)?=>\{constelement=event\.target;?constvalue=element\.value\.replace\(\/\\s\/g,["']{2}\);?\}/.test(
+  /constupdate=\(?event\)?=>\{constelement=event\.target;?constvalue=element\.value\.replace\(\/\\s\/g,["']{2}\);?if\(!\(?value\.includes\(element\.id\)\)?\)\{\}\}/.test(
     code.replace(/\s/g, '')
   )
 );
@@ -151,6 +153,7 @@ window.onload = () => {
 
 const update = event => {
   const element = event.target;
+  const value = element.value.replace(/\s/g, "");
 };
 
 
@@ -250,6 +253,7 @@ window.onload = () => {
 const update = event => {
   const element = event.target;
   const value = element.value.replace(/\s/g, "");
+  if (!value.includes(element.id)) {}
 };
 </script>
 ```
