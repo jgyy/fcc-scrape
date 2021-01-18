@@ -1,15 +1,13 @@
 ---
-id: 5d79253685fc69b8fe60a0d2
-title: Part 72
+id: 5d792536dc6e3ab29525de9e
+title: Part 73
 challengeType: 0
-dashedName: part-72
+dashedName: part-73
 ---
 
 # --description--
 
-Chain the `map` method to `rangeFromString(n1, n2)` and pass it `addChars(c1)(c2)` as an argument.
-
-This returns an `addChars` function, which has `c1` and `c2` (the characters) preset, and only needs a number (`n`) to be passed to it (which we get from the `rangeFromString` array).
+The function in `varRangeExpanded` contains an unused argument. Replace or prefix it with an underscore.
 
 # --hints--
 
@@ -19,9 +17,7 @@ See description above for instructions.
 assert(
   code
     .replace(/\s/g, '')
-    .includes(
-      'constvarRangeExpanded=x.replace(rangeRegex,(match,c1,n1,c2,n2)=>rangeFromString(n1,n2).map(addChars(c1)(c2)))'
-    )
+    .includes('constvarRangeExpanded=x.replace(rangeRegex,(_')
 );
 ```
 
@@ -118,7 +114,7 @@ const evalFormula = x => {
   const elemValue = n => c => document.getElementById(c + n).value;
   const addChars = c1 => c2 => n => charRange(c1, c2).map(elemValue(n));
   const varRangeExpanded = x.replace(rangeRegex, (match, c1, n1, c2, n2) =>
-    rangeFromString(n1, n2)
+    rangeFromString(n1, n2).map(addChars(c1)(c2))
   );
   return varRangeExpanded;
 };
@@ -181,7 +177,7 @@ const evalFormula = x => {
   const rangeFromString = (n1, n2) => range(parseInt(n1), parseInt(n2));
   const elemValue = n => c => document.getElementById(c + n).value;
   const addChars = c1 => c2 => n => charRange(c1, c2).map(elemValue(n));
-  const varRangeExpanded = x.replace(rangeRegex, (match, c1, n1, c2, n2) =>
+  const varRangeExpanded = x.replace(rangeRegex, (_, c1, n1, c2, n2) =>
     rangeFromString(n1, n2).map(addChars(c1)(c2))
   );
   return varRangeExpanded;
