@@ -1,15 +1,13 @@
 ---
-id: 5d792539728d1aa7788e2c9b
-title: Part 130
+id: 5d79253939434a2724c0ec41
+title: Part 131
 challengeType: 0
-dashedName: part-130
+dashedName: part-131
 ---
 
 # --description--
 
-Unfortunately, `sort` not only returns a new array, but also modifies the existing one. So our function also modifies the array passed to it - it is impure.
-
-You can fix this by adding `.slice()` between `nums` and `sort` - this creates a new array, that is equivalent to `nums`, but is immediately discarded, so it doesn't matter if it changes.
+Now define two variable: `length` which is `sorted.length` and `middle` which is `length / 2 - 1`.
 
 # --hints--
 
@@ -17,7 +15,7 @@ See description above for instructions.
 
 ```js
 assert(
-  /constmedian=nums=>\{constsorted=nums\.slice\(\)\.sort\(\((.+),(.+)\)=>\1-\2\)/.test(
+  /constmedian=nums=>\{constsorted=nums\.slice\(\)\.sort\(\((.+),(.+)\)=>\1-\2\);?constlength=sorted\.length;?constmiddle=length\/2-1/.test(
     code.replace(/\s/g, '')
   )
 );
@@ -88,7 +86,7 @@ const sum = nums => nums.reduce((a, x) => a + x);
 const average = nums => sum(nums) / nums.length;
 
 const median = nums => {
-  const sorted = nums.sort((x, y) => x - y);
+  const sorted = nums.slice().sort((x, y) => x - y);
 }; 
 
 const spreadsheetFunctions = {
@@ -213,7 +211,11 @@ const average = nums => sum(nums) / nums.length;
 
 const median = nums => {
   const sorted = nums.slice().sort((x, y) => x - y);
+  const length = sorted.length;
+  const middle = length / 2 - 1;
 }; 
+
+
 
 const spreadsheetFunctions = {
   "": x => x,
@@ -228,8 +230,6 @@ const spreadsheetFunctions = {
   nodups: arr => arr.reduce((a, x) => a.includes(x) ? a : a.concat(x), []),
   range: arr => range(...arr)
 };
-
-
 
 const applyFn = str => {
   const noHigh = highPrecedence(str);
