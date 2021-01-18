@@ -1,13 +1,13 @@
 ---
-id: 5d792536e33baeaa60129e0a
-title: Part 79
+id: 5d7925379e2a488f333e2d43
+title: Part 80
 challengeType: 0
-dashedName: part-79
+dashedName: part-80
 ---
 
 # --description--
 
-In `window.onload`, assign `document.getElementById("container")` to `container`. Also assign `charRange("A", "J")` to `letters`.
+Now define a function `createLabel` which takes an argument `name` and has an empty body.
 
 # --hints--
 
@@ -15,7 +15,7 @@ See description above for instructions.
 
 ```js
 assert(
-  /window\.onload=\(\)=>\{constcontainer=document\.getElementById\(["']container["']\);?constletters=charRange\(["']A["'],["']J["']\);?\}/.test(
+  /window\.onload[\s\S]*constcreateLabel=\(?name\)?=>\{\}/.test(
     code.replace(/\s/g, '')
   )
 );
@@ -127,7 +127,10 @@ const evalFormula = x => {
     : evalFormula(functionExpanded);
 };
 
-window.onload = () => { };
+window.onload = () => {
+  const container = document.getElementById("container");
+  const letters = charRange("A", "J");
+};
 
 
 </script>
@@ -203,6 +206,9 @@ const evalFormula = x => {
 
 window.onload = () => {
   const container = document.getElementById("container");
+  const createLabel = name => {
+  
+  };
   const letters = charRange("A", "J");
 };
 </script>
