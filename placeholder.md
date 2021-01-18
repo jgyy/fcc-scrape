@@ -1,28 +1,28 @@
 ---
-id: 5d792538f5004390d6678554
-title: Part 116
+id: 5d792539dd4fd4c96fd85f7e
+title: Part 117
 challengeType: 0
-dashedName: part-116
+dashedName: part-117
 ---
 
 # --description--
 
-You can also pass in a negative argument to `slice` to specify that index from the end:
+The `%` operator returns the remainder:
 
 ```js
-[2, 4, 6, 8, 10].slice(-3); // [6, 8, 10]
+4 % 3; // 1
+5 % 3; // 2
+6 % 3; // 0
 ```
 
-Use a negative index to add a function `lasttwo` which returns the last two elements of an array.
+Add an `isEven` function (to the global scope) which returns whether the number passed to it is even.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(
-  JSON.stringify(spreadsheetFunctions.lasttwo([2, 6, 1, 4, 3])) === '[4,3]'
-);
+assert(isEven(20) && !isEven(31));
 ```
 
 # --seed--
@@ -89,7 +89,8 @@ const spreadsheetFunctions = {
   "": x => x,
   random: ([x, y]) => Math.floor(Math.random() * y + x),
   increment: nums => nums.map(x => x + 1),
-  firsttwo: arr => arr.slice(0, 2)
+  firsttwo: arr => arr.slice(0, 2),
+  lasttwo: arr => arr.slice(-2)
 };
 
 
@@ -193,6 +194,8 @@ const highPrecedence = str => {
   const str2 = infixEval(str, regex);
   return str === str2 ? str : highPrecedence(str2);
 };
+
+const isEven = num => num % 2 === 0;
 
 const spreadsheetFunctions = {
   "": x => x,
