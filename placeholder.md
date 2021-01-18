@@ -1,13 +1,19 @@
 ---
-id: 5d7925379000785f6d8d9af3
-title: Part 81
+id: 5d79253791391b0acddd0ac5
+title: Part 82
 challengeType: 0
-dashedName: part-81
+dashedName: part-82
 ---
 
 # --description--
 
-Inside `createLabel`, assign `document.createElement("div")` to `label`.
+Add the following code to `createLabel`:
+
+```js
+label.className = "label";
+label.textContent = name;
+container.appendChild(label);
+```
 
 # --hints--
 
@@ -15,7 +21,7 @@ See description above for instructions.
 
 ```js
 assert(
-  /window\.onload[\s\S]*constcreateLabel=\(?name\)?=>\{constlabel=document\.createElement\(["']div["']\);?\}/.test(
+  /window\.onload[\s\S]*constcreateLabel=\(?name\)?=>\{constlabel=document\.createElement\(["']div["']\);?label\.className=["']label["'];?label\.textContent=name;?container\.appendChild\(label\);?\}/.test(
     code.replace(/\s/g, '')
   )
 );
@@ -130,7 +136,7 @@ const evalFormula = x => {
 window.onload = () => {
   const container = document.getElementById("container");
   const createLabel = name => {
-  
+    const label = document.createElement("div");
   };
   const letters = charRange("A", "J");
 };
@@ -211,6 +217,9 @@ window.onload = () => {
   const container = document.getElementById("container");
   const createLabel = name => {
     const label = document.createElement("div");
+    label.className = "label";
+    label.textContent = name;
+    container.appendChild(label);
   };
   const letters = charRange("A", "J");
 };
