@@ -1,15 +1,17 @@
 ---
-id: 5d79253a8b29d78984369e4b
-title: Part 139
+id: 5d79253ad297a31cbe073718
+title: Part 140
 challengeType: 0
-dashedName: part-139
+dashedName: part-140
 ---
 
 # --description--
 
-The `fill` method takes an argument and replaces all elements of the array with that argument.
+The function in the `map` method can actually take a second argument: the index of the element.
 
-Use it on the array in `range` to replace everything with `start`.
+This is why you need an arrow function in `charRange` - if you don't use one, then the index will be passed to `String.fromCharCode` as the second argument, leading to unexpected results. However, it is safe for functions like `parseFloat` which take only one argument (but not for `parseInt`).
+
+Chain `.map((x, i) => x + i)` to `.fill(start)` to add its index to every element in the array in `range`.
 
 # --hints--
 
@@ -19,7 +21,9 @@ See description above for instructions.
 assert(
   code
     .replace(/\s/g, '')
-    .includes('constrange=(start,end)=>Array(end-start+1).fill(start)')
+    .includes(
+      'constrange=(start,end)=>Array(end-start+1).fill(start).map((x,i)=>x+i)'
+    )
 );
 ```
 
@@ -128,7 +132,7 @@ const applyFn = str => {
   );
 };
 
-const range = (start, end) => Array(end - start + 1);
+const range = (start, end) => Array(end - start + 1).fill(start);
 
 
 
@@ -196,7 +200,6 @@ const update = event => {
 
 ```html
 <script>
-
 const infixToFunction = {
   "+": (x, y) => x + y,
   "-": (x, y) => x - y,
@@ -260,7 +263,7 @@ const applyFn = str => {
   );
 };
 
-const range = (start, end) => Array(end - start + 1).fill(start);
+const range = (start, end) => Array(end - start + 1).fill(start).map((x, i) => x + i);
 
 
 
