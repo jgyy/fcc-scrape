@@ -1,13 +1,13 @@
 ---
-id: 5d792536ad340d9dff2e4a96
-title: Part 62
+id: 5d7925369614afd92d01fed5
+title: Part 63
 challengeType: 0
-dashedName: part-62
+dashedName: part-63
 ---
 
 # --description--
 
-Now, remove the curly braces and return statement.
+You also don't need the parentheses in `elemValue` - it's parsed this way automatically. Remove them.
 
 # --hints--
 
@@ -15,7 +15,7 @@ See description above for instructions.
 
 ```js
 assert(
-  /constelemValue=n=>\(?c=>document\.getElementById\(c\+n\)\.value/.test(
+  /constelemValue=n=>c=>document\.getElementById\(c\+n\)\.value/.test(
     code.replace(/\s/g, '')
   )
 );
@@ -111,9 +111,7 @@ const charRange = (start, end) =>
 const evalFormula = x => {
   const rangeRegex = /([A-J])([1-9][0-9]?):([A-J])([1-9][0-9]?)/gi;
   const rangeFromString = (n1, n2) => range(parseInt(n1), parseInt(n2));
-  const elemValue = n => {
-    return c => document.getElementById(c + n).value;
-  };
+  const elemValue = n => (c => document.getElementById(c + n).value));
   const fn = elemValue("1");
   return fn("A");
 };
@@ -174,7 +172,8 @@ const charRange = (start, end) =>
 const evalFormula = x => {
   const rangeRegex = /([A-J])([1-9][0-9]?):([A-J])([1-9][0-9]?)/gi;
   const rangeFromString = (n1, n2) => range(parseInt(n1), parseInt(n2));
-  const elemValue = n => (c => document.getElementById(c + n).value);
+  const elemValue = n => c => document.getElementById(c + n).value;
+
   const fn = elemValue("1");
   return fn("A");
 };
