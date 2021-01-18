@@ -1,13 +1,13 @@
 ---
-id: 5d792534cac2dbe0a719ea7a
-title: Part 26
+id: 5d792534857332d07ccba3ad
+title: Part 27
 challengeType: 0
-dashedName: part-26
+dashedName: part-27
 ---
 
 # --description--
 
-Set `noHigh` to `highPrecedence(str)` in `applyFn`.
+Set `infix` to `/([0-9.]+)([+-])([0-9.]+)/` in `applyFn`.
 
 # --hints--
 
@@ -17,7 +17,9 @@ See description above for instructions.
 assert(
   code
     .replace(/\s/g, '')
-    .includes('constapplyFn=str=>{constnoHigh=highPrecedence(str)')
+    .includes(
+      'constapplyFn=str=>{constnoHigh=highPrecedence(str);constinfix=/([0-9.]+)([+-])([0-9.]+)/'
+    )
 );
 ```
 
@@ -86,7 +88,7 @@ const spreadsheetFunctions = {
 };
 
 const applyFn = str => {
-
+  const noHigh = highPrecedence(str);
 }
 
 
@@ -121,6 +123,7 @@ const spreadsheetFunctions = {
 
 const applyFn = str => {
   const noHigh = highPrecedence(str);
+  const infix = /([0-9.]+)([+-])([0-9.]+)/;
 }
 </script>
 ```
