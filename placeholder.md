@@ -1,13 +1,13 @@
 ---
-id: 5d7925361596f84067904f7f
-title: Part 69
+id: 5d792536dd8a4daf255488ac
+title: Part 70
 challengeType: 0
-dashedName: part-69
+dashedName: part-70
 ---
 
 # --description--
 
-Remove the `fn` declaration and return statement. Set `varRangeExpanded` to the result of using the `replace` method on `x`, with `rangeRegex` as the first argument and `""` as the second argument. Then, return it.
+Replace the `""` in `varRangeExpanded` with a function, which takes `match`, `c1`, `n1`, `c2` and `n2` as arguments, and returns `n1`.
 
 # --hints--
 
@@ -15,9 +15,11 @@ See description above for instructions.
 
 ```js
 assert(
-  !code.includes('const fn') &&
-    code.includes('varRangeExpanded') &&
-    evalFormula('A1:J133') === '3'
+  code
+    .replace(/\s/g, '')
+    .includes(
+      'constvarRangeExpanded=x.replace(rangeRegex,(match,c1,n1,c2,n2)=>n1)'
+    )
 );
 ```
 
@@ -113,8 +115,8 @@ const evalFormula = x => {
   const rangeFromString = (n1, n2) => range(parseInt(n1), parseInt(n2));
   const elemValue = n => c => document.getElementById(c + n).value;
   const addChars = c1 => c2 => n => charRange(c1, c2).map(elemValue(n));
-  const fn = elemValue("1");
-  return fn("A");
+  const varRangeExpanded = x.replace(rangeRegex, "");
+  return varRangeExpanded;
 };
 
 
@@ -175,7 +177,9 @@ const evalFormula = x => {
   const rangeFromString = (n1, n2) => range(parseInt(n1), parseInt(n2));
   const elemValue = n => c => document.getElementById(c + n).value;
   const addChars = c1 => c2 => n => charRange(c1, c2).map(elemValue(n));
-  const varRangeExpanded = x.replace(rangeRegex, "");
+  const varRangeExpanded = x.replace(rangeRegex, (match, c1, n1, c2, n2) =>
+    n1 
+  );
   return varRangeExpanded;
 };
 </script>
