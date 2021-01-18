@@ -1,15 +1,13 @@
 ---
-id: 5d792536ddff9ea73c90a994
-title: Part 68
+id: 5d7925361596f84067904f7f
+title: Part 69
 challengeType: 0
-dashedName: part-68
+dashedName: part-69
 ---
 
 # --description--
 
-However, you don't need an arrow function. As `elemValue(n)` is a function, you can pass it to `map` directly.
-
-Change `x => elemValue(n)(x)` to `elemValue(n)`.
+Remove the `fn` declaration and return statement. Set `varRangeExpanded` to the result of using the `replace` method on `x`, with `rangeRegex` as the first argument and `""` as the second argument. Then, return it.
 
 # --hints--
 
@@ -17,9 +15,9 @@ See description above for instructions.
 
 ```js
 assert(
-  code
-    .replace(/\s/g, '')
-    .includes('constaddChars=c1=>c2=>n=>charRange(c1,c2).map(elemValue(n))')
+  !code.includes('const fn') &&
+    code.includes('varRangeExpanded') &&
+    evalFormula('A1:J133') === '3'
 );
 ```
 
@@ -114,7 +112,7 @@ const evalFormula = x => {
   const rangeRegex = /([A-J])([1-9][0-9]?):([A-J])([1-9][0-9]?)/gi;
   const rangeFromString = (n1, n2) => range(parseInt(n1), parseInt(n2));
   const elemValue = n => c => document.getElementById(c + n).value;
-  const addChars = c1 => c2 => n => charRange(c1, c2).map(x => elemValue(n)(x));
+  const addChars = c1 => c2 => n => charRange(c1, c2).map(elemValue(n));
   const fn = elemValue("1");
   return fn("A");
 };
@@ -177,8 +175,8 @@ const evalFormula = x => {
   const rangeFromString = (n1, n2) => range(parseInt(n1), parseInt(n2));
   const elemValue = n => c => document.getElementById(c + n).value;
   const addChars = c1 => c2 => n => charRange(c1, c2).map(elemValue(n));
-  const fn = elemValue("1");
-  return fn("A");
+  const varRangeExpanded = x.replace(rangeRegex, "");
+  return varRangeExpanded;
 };
 </script>
 ```
