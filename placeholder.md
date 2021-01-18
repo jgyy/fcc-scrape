@@ -1,15 +1,13 @@
 ---
-id: 5d7925383f122a279f4c54ad
-title: Part 109
+id: 5d7925387b682e962f209269
+title: Part 110
 challengeType: 0
-dashedName: part-109
+dashedName: part-110
 ---
 
 # --description--
 
-The `find` method returns the first element of an array that satisfies the function passed to it.
-
-Chain `find` onto `cells` and pass it `cell => cell === id`.
+In `idToText`, use the `id` property of `cell` to make sure the argument is equal to the cell's id rather than the cell itself.
 
 # --hints--
 
@@ -17,7 +15,7 @@ See description above for instructions.
 
 ```js
 assert(
-  /constidToText=\(?id\)?=>cells\.find\(\(?cell\)?=>cell===id\)/.test(
+  /constidToText=\(?id\)?=>cells\.find\(\(?cell\)?=>cell\.id===id\)/.test(
     code.replace(/\s/g, '')
   )
 );
@@ -112,8 +110,7 @@ const charRange = (start, end) =>
   );
 
 const evalFormula = (x, cells) => {
-  const idToText = id => cells;
-  
+  const idToText = id => cells.find(cell => cell === id);
   const rangeRegex = /([A-J])([1-9][0-9]?):([A-J])([1-9][0-9]?)/gi;
   const rangeFromString = (n1, n2) => range(parseInt(n1), parseInt(n2));
   const elemValue = n => c => ""
@@ -218,7 +215,7 @@ const charRange = (start, end) =>
   );
 
 const evalFormula = (x, cells) => {
-  const idToText = id => cells.find(cell => cell === id);
+  const idToText = id => cells.find(cell => cell.id === id);
   const rangeRegex = /([A-J])([1-9][0-9]?):([A-J])([1-9][0-9]?)/gi;
   const rangeFromString = (n1, n2) => range(parseInt(n1), parseInt(n2));
   const elemValue = n => c => ""
