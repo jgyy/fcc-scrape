@@ -1,13 +1,13 @@
 ---
-id: 5d79253742f3313d55db981f
-title: Part 86
+id: 5d7925379e0180a438ce7f95
+title: Part 87
 challengeType: 0
-dashedName: part-86
+dashedName: part-87
 ---
 
 # --description--
 
-Replace `createLabel` with an arrow function with a block body. This would allow us to add more statements. The arrow function should take an argument `x`, and call `createLabel(x)`.
+Inside the `range` `forEach`, use the `forEach` method on `letters`, passing in a function with argument `x` and an empty body.
 
 # --hints--
 
@@ -15,7 +15,7 @@ See description above for instructions.
 
 ```js
 assert(
-  /window\.onload[\s\S]*range\(1,99\)\.forEach\(\(?x\)?=>\{createLabel\(x\);?\}\);?\}/.test(
+  /window\.onload.*range\(1,99\)\.forEach\(\(?x\)?=>\{createLabel\(x\);?letters\.forEach\(\(?y\)?=>\{\}\);?\}\);?\}/.test(
     code.replace(/\s/g, '')
   )
 );
@@ -137,7 +137,9 @@ window.onload = () => {
   };
   const letters = charRange("A", "J");
   letters.forEach(createLabel);
-  range(1, 99).forEach(createLabel);
+  range(1, 99).forEach(x => {
+    createLabel(x);
+  });
 };
 
 
@@ -224,6 +226,9 @@ window.onload = () => {
   letters.forEach(createLabel);
   range(1, 99).forEach(x => {
     createLabel(x);
+    letters.forEach(y => {
+    
+    });
   });
 };
 </script>
