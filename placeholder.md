@@ -1,20 +1,24 @@
 ---
-id: 5d7925346f4f2da6df4354a6
-title: Part 25
+id: 5d792534cac2dbe0a719ea7a
+title: Part 26
 challengeType: 0
-dashedName: part-25
+dashedName: part-26
 ---
 
 # --description--
 
-Define an empty function `applyFn` which takes an argument `str`. Use the curly brace syntax with an anonymous function. Do not wrap parentheses around the parameter.
+Set `noHigh` to `highPrecedence(str)` in `applyFn`.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(code.replace(/\s/g, '').includes('constapplyFn=str=>{}'));
+assert(
+  code
+    .replace(/\s/g, '')
+    .includes('constapplyFn=str=>{constnoHigh=highPrecedence(str)')
+);
 ```
 
 # --seed--
@@ -81,6 +85,10 @@ const spreadsheetFunctions = {
   "": x => x
 };
 
+const applyFn = str => {
+
+}
+
 
 </script>
 ```
@@ -112,7 +120,7 @@ const spreadsheetFunctions = {
 };
 
 const applyFn = str => {
-
+  const noHigh = highPrecedence(str);
 }
 </script>
 ```
