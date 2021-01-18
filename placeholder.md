@@ -1,24 +1,20 @@
 ---
-id: 5d792535a40ea5ac549d6804
-title: Part 51
+id: 5d7925358c220e5b2998909e
+title: Part 52
 challengeType: 0
-dashedName: part-51
+dashedName: part-52
 ---
 
 # --description--
 
-Chain `map` onto `range(start.charCodeAt(0), end.charCodeAt(0))`, with `x => x` as the argument.
+Now, pass `x` to `String.fromCharCode` in the arrow function.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(
-  code
-    .replace(/\s/g, '')
-    .includes('range(start.charCodeAt(0),end.charCodeAt(0)).map(x=>x)')
-);
+assert(JSON.stringify(charRange('A', 'C')) === '["A","B","C"]');
 ```
 
 # --seed--
@@ -103,7 +99,7 @@ const applyFn = str => {
 const range = (start, end) =>
   start > end ? [] : [start].concat(range(start + 1, end));
 
-const charRange = (start, end) => range(start.charCodeAt(0), end.charCodeAt(0));
+const charRange = (start, end) => range(start.charCodeAt(0), end.charCodeAt(0)).map(x => x);
 
 
 </script>
@@ -153,6 +149,9 @@ const applyFn = str => {
 const range = (start, end) =>
   start > end ? [] : [start].concat(range(start + 1, end));
 
-const charRange = (start, end) => range(start.charCodeAt(0), end.charCodeAt(0)).map(x => x);
+const charRange = (start, end) =>
+  range(start.charCodeAt(0), end.charCodeAt(0)).map(x =>
+    String.fromCharCode(x)
+  );
 </script>
 ```
