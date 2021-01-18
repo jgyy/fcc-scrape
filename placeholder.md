@@ -1,20 +1,33 @@
 ---
-id: 5d7925342b2b993ef18cd45f
-title: Part 41
+id: 5d7925341747ad42b12f8e68
+title: Part 42
 challengeType: 0
-dashedName: part-41
+dashedName: part-42
 ---
 
 # --description--
 
-After declaring `arr`, but before returning it, `range` should use the `push` method to add `end` onto `arr`.
+This is still valid because we're modifying `arr` in place instead of reassigning to it (which is invalid with the `const` keyword). But doing this still modifies state, and we don't want to do that in functional programming.
+
+The `concat` method returns a new array instead of modifying an existing one:
+
+```js
+[1,2,3].concat(4); // [1, 2, 3, 4]
+[1,2,3].concat(4, 5); // [1, 2, 3, 4, 5]
+```
+
+Use `concat` instead of `push` to return the result of adding `end` to `arr`.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(JSON.stringify(range(1, 2)) === '[1,2]' && code.includes('push'));
+assert(
+  JSON.stringify(range(1, 2)) === '[1,2]' &&
+    code.includes('concat') &&
+    !code.includes('push')
+);
 ```
 
 # --seed--
@@ -98,6 +111,7 @@ const applyFn = str => {
 
 const range = (start, end) => {
   const arr = [start];
+  arr.push(end);
   return arr;
 }
 
@@ -148,8 +162,7 @@ const applyFn = str => {
 
 const range = (start, end) => {
   const arr = [start];
-  arr.push(end);
-  return arr;
+  return arr.concat(end);
 }
 </script>
 ```
