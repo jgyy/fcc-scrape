@@ -1,22 +1,24 @@
 ---
-id: 5d7925348ee084278ff15556
-title: Part 35
+id: 5d7925348a6a41c32f7a4e3e
+title: Part 36
 challengeType: 0
-dashedName: part-35
+dashedName: part-36
 ---
 
 # --description--
 
-Note that `applyFunction` can access `toNumberList` from outside of itself. This is called lexical scoping - inner functions can access variables from outer functions.
-
-Now return `str2.replace(regex, "")` at the end of `applyFn`.
+Replace the `""` in `str2.replace(regex, "")` with a function which takes `match`, `fn` and `args` as arguments and returns `spreadsheetFunctions`.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(applyFn('2*2fn(1, 2, 3.3)') === '4');
+assert(
+  code
+    .replace(/\s/g, '')
+    .includes('returnstr2.replace(regex,(match,fn,args)=>spreadsheetFunctions)')
+);
 ```
 
 # --seed--
@@ -91,6 +93,7 @@ const applyFn = str => {
   const toNumberList = args => args.split(",").map(parseFloat);
   const applyFunction = (fn, args) =>
     spreadsheetFunctions[fn.toLowerCase()](toNumberList(args));
+  return str2.replace(regex, "");
 }
 
 
@@ -131,7 +134,7 @@ const applyFn = str => {
   const toNumberList = args => args.split(",").map(parseFloat);
   const applyFunction = (fn, args) =>
     spreadsheetFunctions[fn.toLowerCase()](toNumberList(args));
-  return str2.replace(regex, "");
+  return str2.replace(regex, (match, fn, args) => spreadsheetFunctions);
 }
 </script>
 ```
