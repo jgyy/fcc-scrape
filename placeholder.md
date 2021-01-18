@@ -1,20 +1,22 @@
 ---
-id: 5d7925365d4035eeb2e395fd
-title: Part 76
+id: 5d7925364c106e9aaf05a16f
+title: Part 77
 challengeType: 0
-dashedName: part-76
+dashedName: part-77
 ---
 
 # --description--
 
-Set `functionExpanded` to `applyFn(varExpanded)` in `evalFormula`. Return `functionExpanded`.
+`evalFormula` should return the value passed to it if this value remained unchanged. Otherwise, it should call itself with the latest value.
+
+Use the ternary operator in the last line of `evalFormula` to return `functionExpanded` if `x === functionExpanded` and `evalFormula(functionExpanded)` otherwise.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(code.includes('functionExpanded') && applyFn('2+2') === '4');
+assert(evalFormula('(2+2)*2') === '8');
 ```
 
 # --seed--
@@ -117,7 +119,8 @@ const evalFormula = x => {
     varRegex,
     match => document.getElementById(match.toUpperCase()).value
   );
-  return varExpanded;
+  const functionExpanded = applyFn(varExpanded);
+  return functionExpanded;
 };
 
 
@@ -187,7 +190,9 @@ const evalFormula = x => {
     match => document.getElementById(match.toUpperCase()).value
   );
   const functionExpanded = applyFn(varExpanded);
-  return functionExpanded;
+  return functionExpanded === x
+    ? functionExpanded
+    : evalFormula(functionExpanded);
 };
 </script>
 ```
