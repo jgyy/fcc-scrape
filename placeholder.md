@@ -1,23 +1,20 @@
 ---
-id: 5d792535591db67ee15b4106
-title: Part 45
+id: 5d792535f1f7adf77de5831d
+title: Part 46
 challengeType: 0
-dashedName: part-45
+dashedName: part-46
 ---
 
 # --description--
 
-Use the ternary operator to return `[]` if `start > end` and `[start].concat([end])` otherwise.
+Replace `[end]` with a recursive call to `range`: `[start].concat(range(start + 1, end))`
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(
-  JSON.stringify(range(3, 2)) === '[]' &&
-    JSON.stringify(range(1, 3)) === '[1,3]'
-);
+assert(JSON.stringify(range(1, 5)) === '[1,2,3,4,5]');
 ```
 
 # --seed--
@@ -100,7 +97,7 @@ const applyFn = str => {
 };
 
 const range = (start, end) => {
-  return [start].concat([end]);
+  return start > end ? [] : [start].concat([end]);
 }
 
 
@@ -149,7 +146,7 @@ const applyFn = str => {
 };
 
 const range = (start, end) => {
-  return start > end ? [] : [start].concat([end]);
+  return start > end ? [] : [start].concat(range(start + 1, end));
 }
 </script>
 ```
