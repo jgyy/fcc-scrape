@@ -1,13 +1,13 @@
 ---
-id: 5d792536dc6e3ab29525de9e
-title: Part 73
+id: 5d792536cfd0fd893c630abb
+title: Part 74
 challengeType: 0
-dashedName: part-73
+dashedName: part-74
 ---
 
 # --description--
 
-The function in `varRangeExpanded` contains an unused argument. Replace or prefix it with an underscore.
+Set `varRegex` to `/[A-J][1-9][0-9]?/gi`. Then set `varExpanded` to the result of replacing `varRegex` with an empty string in `varRangeExpanded`. Return `varExpanded`.
 
 # --hints--
 
@@ -15,9 +15,9 @@ See description above for instructions.
 
 ```js
 assert(
-  code
-    .replace(/\s/g, '')
-    .includes('constvarRangeExpanded=x.replace(rangeRegex,(_')
+  code.includes('varRegex') &&
+    code.includes('varExpanded') &&
+    evalFormula('aC12bc') === 'abc'
 );
 ```
 
@@ -113,7 +113,7 @@ const evalFormula = x => {
   const rangeFromString = (n1, n2) => range(parseInt(n1), parseInt(n2));
   const elemValue = n => c => document.getElementById(c + n).value;
   const addChars = c1 => c2 => n => charRange(c1, c2).map(elemValue(n));
-  const varRangeExpanded = x.replace(rangeRegex, (match, c1, n1, c2, n2) =>
+  const varRangeExpanded = x.replace(rangeRegex, (_, c1, n1, c2, n2) =>
     rangeFromString(n1, n2).map(addChars(c1)(c2))
   );
   return varRangeExpanded;
@@ -180,7 +180,9 @@ const evalFormula = x => {
   const varRangeExpanded = x.replace(rangeRegex, (_, c1, n1, c2, n2) =>
     rangeFromString(n1, n2).map(addChars(c1)(c2))
   );
-  return varRangeExpanded;
+  const varRegex = /[A-J][1-9][0-9]?/gi;
+  const varExpanded = varRangeExpanded.replace(varRegex, "");
+  return varExpanded;
 };
 </script>
 ```
