@@ -1,13 +1,13 @@
 ---
-id: 5d792535e54a8cd729a0d708
-title: Part 59
+id: 5d7925353b307724a462b06b
+title: Part 60
 challengeType: 0
-dashedName: part-59
+dashedName: part-60
 ---
 
 # --description--
 
-Now define `fn` to be `elemValue("1")` (inside `evalFormula` but outside `elemValue`). As `elemValue` returns a function, `fn` is also a function.
+Finally, return `fn("A")`.
 
 # --hints--
 
@@ -15,7 +15,9 @@ See description above for instructions.
 
 ```js
 assert(
-  /elemValue.*constfn=elemValue\(['"]1['"]\);?\}/.test(code.replace(/\s/g, ''))
+  /elemValue.*constfn=elemValue\(['"]1['"]\);?returnfn\(['"]A['"]\);?\}/.test(
+    code.replace(/\s/g, '')
+  )
 );
 ```
 
@@ -113,6 +115,7 @@ const evalFormula = x => {
     const fn = c => document.getElementById(c + n).value;
     return fn;
   };
+  const fn = elemValue("1");
 };
 
 
@@ -176,6 +179,7 @@ const evalFormula = x => {
     return fn;
   };
   const fn = elemValue("1");
+  return fn("A");
 };
 </script>
 ```
