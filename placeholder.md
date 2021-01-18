@@ -1,31 +1,20 @@
 ---
-id: 5d7925398d525f61a9ff3a79
-title: Part 126
+id: 5d792539a222f385c5c17d2b
+title: Part 127
 challengeType: 0
-dashedName: part-126
+dashedName: part-127
 ---
 
 # --description--
 
-The spread operator allow you to pass multiple arguments instead of an array:
-
-```js
-const arr = [1, 2, 3];
-const sum3 = (a, b, c) => a + b + c;
-sum3(...arr); // 6
-```
-
-Use the spread operator to add `range` to `spreadsheetFunctions`.
+Now define a `median` function which takes an argument `nums` (in the global scope).
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(
-  JSON.stringify(spreadsheetFunctions.range([1, 5])) === '[1,2,3,4,5]' &&
-    code.includes('...')
-);
+assert(/constmedian=\(?nums\)?=>/.test(code.replace(/\s/g, '')));
 ```
 
 # --seed--
@@ -102,7 +91,8 @@ const spreadsheetFunctions = {
   sum,
   average,
   has2: arr => arr.includes(2),
-  nodups: arr => arr.reduce((a, x) => a.includes(x) ? a : a.concat(x), [])
+  nodups: arr => arr.reduce((a, x) => a.includes(x) ? a : a.concat(x), []),
+  range: arr => range(...arr)
 };
 
 
@@ -210,6 +200,8 @@ const highPrecedence = str => {
 const isEven = num => num % 2 === 0;
 const sum = nums => nums.reduce((a, x) => a + x);
 const average = nums => sum(nums) / nums.length;
+
+const median = nums => {}; 
 
 const spreadsheetFunctions = {
   "": x => x,
