@@ -1,22 +1,22 @@
 ---
-id: 5d7925384e34e944ecb4612d
-title: Part 113
+id: 5d792538631844ad0bdfb4c3
+title: Part 114
 challengeType: 0
-dashedName: part-113
+dashedName: part-114
 ---
 
 # --description--
 
-Change the empty string in `varExpanded` to the result of calling `idToText` with `match.toUpperCase()`.
+`evalFormula` is now pure, as it now has no external dependencies, and as before, performs no side effects.
+
+Now define a new function, `increment` inside `spreadsheetFunctions`, which takes `nums` as argument and uses `map` to increment each value of `nums` by 1.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(
-  code.replace(/\s/g, '').includes('match=>idToText(match.toUpperCase())')
-);
+assert(JSON.stringify(spreadsheetFunctions.increment([1, 5, 3])) === '[2,6,4]');
 ```
 
 # --seed--
@@ -119,9 +119,8 @@ const evalFormula = (x, cells) => {
   const varRegex = /[A-J][1-9][0-9]?/gi;
   const varExpanded = varRangeExpanded.replace(
     varRegex,
-    match => ""
+    match => idToText(match.toUpperCase())
   );
-  
   const functionExpanded = applyFn(varExpanded);
   return functionExpanded === x
     ? functionExpanded
@@ -187,8 +186,11 @@ const highPrecedence = str => {
 
 const spreadsheetFunctions = {
   "": x => x,
-  random: ([x, y]) => Math.floor(Math.random() * y + x)
+  random: ([x, y]) => Math.floor(Math.random() * y + x),
+  increment: nums => nums.map(x => x + 1)
 };
+
+
 
 const applyFn = str => {
   const noHigh = highPrecedence(str);
