@@ -1,24 +1,22 @@
 ---
-id: 5d792537dc0fe84345d4f19e
-title: Part 93
+id: 5d792537b6cadae0f4b0cda1
+title: Part 94
 challengeType: 0
-dashedName: part-93
+dashedName: part-94
 ---
 
 # --description--
 
-Add another condition to the if statement so that it only executes if the first character of `value` is `=`. Do this by adding `&& value[0] === "="` to the if statement.
+The `slice` method takes two arguments. It extracts characters from the string from the index specified by the first argument up to (but not including) the second argument. The index starts at 0.
+
+Use the `slice` method to log the first two letters of `value` to the console.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(
-  /constupdate=\(?event\)?=>\{constelement=event\.target;?constvalue=element\.value\.replace\(\/\\s\/g,["']{2}\);?if\(!\(?value\.includes\(element\.id\)\)?&&value\[0\]===["']=["']\)\{\}\}/.test(
-    code.replace(/\s/g, '')
-  )
-);
+assert(code.replace(/\s/g, '').includes('console.log(value.slice(0,2))'));
 ```
 
 # --seed--
@@ -152,7 +150,7 @@ window.onload = () => {
 const update = event => {
   const element = event.target;
   const value = element.value.replace(/\s/g, "");
-  if (!value.includes(element.id)) {}
+  if (!value.includes(element.id) && value[0] === "=") {}
 };
 
 
@@ -252,7 +250,9 @@ window.onload = () => {
 const update = event => {
   const element = event.target;
   const value = element.value.replace(/\s/g, "");
-  if (!value.includes(element.id) && value[0] === "=") {}
+  if (!value.includes(element.id) && value[0] === "=") {
+    console.log(value.slice(0, 2));
+  }
 };
 </script>
 ```
