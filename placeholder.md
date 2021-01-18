@@ -1,13 +1,20 @@
 ---
-id: 5d792537fef76b226b63b93b
-title: Part 96
+id: 5d79253760fca25ccbbd8990
+title: Part 97
 challengeType: 0
-dashedName: part-96
+dashedName: part-97
 ---
 
 # --description--
 
-Now change the if statement to set `element.value` to the result of passing `value.slice(1)` to `evalFormula`. There is no need to use `const` because we're modifying `element.value`, not declaring it.
+The array destructuring syntax can be used to extract values from arrays:
+
+```js
+const [x, y] = [1, 2]; // in variables
+const fn = ([x, y]) => x + y // in functions
+```
+
+Use this syntax to define a function `random` in `spreadsheetFunctions` which takes the array `[x, y]` and returns `x`.
 
 # --hints--
 
@@ -15,9 +22,8 @@ See description above for instructions.
 
 ```js
 assert(
-  /constupdate=\(?event\)?=>\{constelement=event\.target;?constvalue=element\.value\.replace\(\/\\s\/g,["']{2}\);?if\(!\(?value\.includes\(element\.id\)\)?&&value\[0\]===["']=["']\)\{element\.value=evalFormula\(value\.slice\(1\)\);?\}\}/.test(
-    code.replace(/\s/g, '')
-  )
+  /["']?random["']?:\(\[x,y\]\)=>x/.test(code.replace(/\s/g, '')) &&
+    spreadsheetFunctions['random']([1, 2]) === 1
 );
 ```
 
@@ -84,6 +90,8 @@ const highPrecedence = str => {
 const spreadsheetFunctions = {
   "": x => x
 };
+
+
 
 const applyFn = str => {
   const noHigh = highPrecedence(str);
@@ -153,11 +161,9 @@ const update = event => {
   const element = event.target;
   const value = element.value.replace(/\s/g, "");
   if (!value.includes(element.id) && value[0] === "=") {
-    console.log(value.slice(1));
+    element.value = evalFormula(value.slice(1));
   }
 };
-
-
 </script>
 ```
 
@@ -184,7 +190,8 @@ const highPrecedence = str => {
 };
 
 const spreadsheetFunctions = {
-  "": x => x
+  "": x => x,
+  random: ([x, y]) => x
 };
 
 
