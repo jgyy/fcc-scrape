@@ -1,13 +1,13 @@
 ---
-id: 5d7925357729e183a49498aa
-title: Part 53
+id: 5d79253555aa652afbb68086
+title: Part 54
 challengeType: 0
-dashedName: part-53
+dashedName: part-54
 ---
 
 # --description--
 
-Create a new function `evalFormula` which takes a single argument, `x`. Set `/([A-J])([1-9][0-9]?):([A-J])([1-9][0-9]?)/gi` to a variable named `rangeRegex`.
+Define a function `rangeFromString` in `evalFormula` which takes `n1` and `n2` as arguments and returns `n1`.
 
 # --hints--
 
@@ -15,11 +15,9 @@ See description above for instructions.
 
 ```js
 assert(
-  code
-    .replace(/\s/g, '')
-    .includes(
-      'constevalFormula=x=>{constrangeRegex=/([A-J])([1-9][0-9]?):([A-J])([1-9][0-9]?)/gi'
-    )
+  /evalFormula.*constrangeFromString=\(n1,n2\)=>n1/.test(
+    code.replace(/\s/g, '')
+  )
 );
 ```
 
@@ -110,6 +108,11 @@ const charRange = (start, end) =>
     String.fromCharCode(x)
   );
 
+const evalFormula = x => {
+  const rangeRegex = /([A-J])([1-9][0-9]?):([A-J])([1-9][0-9]?)/gi;
+
+};
+
 
 </script>
 ```
@@ -165,7 +168,7 @@ const charRange = (start, end) =>
 
 const evalFormula = x => {
   const rangeRegex = /([A-J])([1-9][0-9]?):([A-J])([1-9][0-9]?)/gi;
-
+  const rangeFromString = (n1, n2) => n1;
 };
 </script>
 ```
