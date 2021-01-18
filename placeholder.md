@@ -1,20 +1,26 @@
 ---
-id: 5d7925358c220e5b2998909e
-title: Part 52
+id: 5d7925357729e183a49498aa
+title: Part 53
 challengeType: 0
-dashedName: part-52
+dashedName: part-53
 ---
 
 # --description--
 
-Now, pass `x` to `String.fromCharCode` in the arrow function.
+Create a new function `evalFormula` which takes a single argument, `x`. Set `/([A-J])([1-9][0-9]?):([A-J])([1-9][0-9]?)/gi` to a variable named `rangeRegex`.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(JSON.stringify(charRange('A', 'C')) === '["A","B","C"]');
+assert(
+  code
+    .replace(/\s/g, '')
+    .includes(
+      'constevalFormula=x=>{constrangeRegex=/([A-J])([1-9][0-9]?):([A-J])([1-9][0-9]?)/gi'
+    )
+);
 ```
 
 # --seed--
@@ -99,7 +105,10 @@ const applyFn = str => {
 const range = (start, end) =>
   start > end ? [] : [start].concat(range(start + 1, end));
 
-const charRange = (start, end) => range(start.charCodeAt(0), end.charCodeAt(0)).map(x => x);
+const charRange = (start, end) =>
+  range(start.charCodeAt(0), end.charCodeAt(0)).map(x =>
+    String.fromCharCode(x)
+  );
 
 
 </script>
@@ -153,5 +162,10 @@ const charRange = (start, end) =>
   range(start.charCodeAt(0), end.charCodeAt(0)).map(x =>
     String.fromCharCode(x)
   );
+
+const evalFormula = x => {
+  const rangeRegex = /([A-J])([1-9][0-9]?):([A-J])([1-9][0-9]?)/gi;
+
+};
 </script>
 ```
