@@ -1,13 +1,13 @@
 ---
-id: 5d7925371398513549bb6395
-title: Part 90
+id: 5d792537ea3eaf302bf2d359
+title: Part 91
 challengeType: 0
-dashedName: part-90
+dashedName: part-91
 ---
 
 # --description--
 
-In the global scope, define a function called `update` which takes `event` as argument. It should define a variable, `element`, setting it to `event.target`.
+Now set `value` to `element.value.replace(/\s/g, "")`. This removes all whitespace from `element` so that we can ignore it.
 
 # --hints--
 
@@ -15,7 +15,7 @@ See description above for instructions.
 
 ```js
 assert(
-  /constupdate=\(?event\)?=>\{?constelement=event\.target;?\}?/.test(
+  /constupdate=\(?event\)?=>\{constelement=event\.target;?constvalue=element\.value\.replace\(\/\\s\/g,["']{2}\);?\}/.test(
     code.replace(/\s/g, '')
   )
 );
@@ -149,6 +149,10 @@ window.onload = () => {
   });
 };
 
+const update = event => {
+  const element = event.target;
+};
+
 
 </script>
 ```
@@ -245,6 +249,7 @@ window.onload = () => {
 
 const update = event => {
   const element = event.target;
+  const value = element.value.replace(/\s/g, "");
 };
 </script>
 ```
