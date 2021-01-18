@@ -1,15 +1,15 @@
 ---
-id: 5d792539e1446045d0df6d28
-title: Part 135
+id: 5d79253a2febbb77098730b9
+title: Part 136
 challengeType: 0
-dashedName: part-135
+dashedName: part-136
 ---
 
 # --description--
 
-The `some` method checks if any element of the array satisfies the provided testing function.
+The `every` method checks if all elements of an array satisfy the provided testing function.
 
-Add `someeven` to `spreadsheetFunctions`, which checks if any of the items passed in are even.
+Use it to add an `everyeven` function to `spreadsheetFunctions` which checks if all values passed in are even`spreadsheetFunctions` which checks if all values passed in are even.
 
 # --hints--
 
@@ -17,9 +17,9 @@ See description above for instructions.
 
 ```js
 assert(
-  spreadsheetFunctions.someeven([1, 5, 4, 3]) &&
-    !spreadsheetFunctions.someeven([3, 5, 9]) &&
-    code.includes('.some')
+  spreadsheetFunctions.everyeven([2, 6, 4, 0, 20]) &&
+    !spreadsheetFunctions.everyeven([10, 0, 9, 2]) &&
+    code.includes('.every')
 );
 ```
 
@@ -108,7 +108,8 @@ const spreadsheetFunctions = {
   median,
   has2: arr => arr.includes(2),
   nodups: arr => arr.reduce((a, x) => a.includes(x) ? a : a.concat(x), []),
-  range: arr => range(...arr)
+  range: arr => range(...arr),
+  someeven: arr => arr.some(isEven)
 };
 
 
@@ -239,10 +240,9 @@ const spreadsheetFunctions = {
   has2: arr => arr.includes(2),
   nodups: arr => arr.reduce((a, x) => a.includes(x) ? a : a.concat(x), []),
   range: arr => range(...arr),
-  someeven: arr => arr.some(isEven)
+  someeven: arr => arr.some(isEven),
+  everyeven: arr => arr.every(isEven)
 };
-
-
 
 const applyFn = str => {
   const noHigh = highPrecedence(str);
@@ -261,6 +261,8 @@ const applyFn = str => {
 
 const range = (start, end) =>
   start > end ? [] : [start].concat(range(start + 1, end));
+
+
 
 const charRange = (start, end) =>
   range(start.charCodeAt(0), end.charCodeAt(0)).map(x =>
