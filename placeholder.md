@@ -1,26 +1,20 @@
 ---
-id: 5d79253307ecd49e030bdcd1
-title: Part 23
+id: 5d792534257122211d3043af
+title: Part 24
 challengeType: 0
-dashedName: part-23
+dashedName: part-24
 ---
 
 # --description--
 
-Recursion is when a function calls itself. We often use it instead of `while`/`for` loops, as loops usually involve mutable state.
-
-Replace the empty string in `highPrecedence` with a call to `highPrecedence` with `str2` as argument.
+Define an object `spreadsheetFunctions`, with a single key - an empty string (`""`). The corresponding value should be the function `x => x`.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(
-  highPrecedence('2*2*2') === '8' &&
-    highPrecedence('2*2') === '4' &&
-    highPrecedence('2+2') === '2+2'
-);
+assert(spreadsheetFunctions['']('x') === 'x');
 ```
 
 # --seed--
@@ -80,7 +74,7 @@ const infixEval = (str, regex) =>
 const highPrecedence = str => {
   const regex = /([0-9.]+)([*\/])([0-9.]+)/;
   const str2 = infixEval(str, regex);
-  return str === str2 ? str : "";
+  return str === str2 ? str : highPrecedence(str2);
 };
 
 
@@ -107,6 +101,10 @@ const highPrecedence = str => {
   const regex = /([0-9.]+)([*\/])([0-9.]+)/;
   const str2 = infixEval(str, regex);
   return str === str2 ? str : highPrecedence(str2);
+};
+
+const spreadsheetFunctions = {
+  "": x => x
 };
 </script>
 ```
