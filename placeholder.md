@@ -1,15 +1,19 @@
 ---
-id: 5d792538e2a8d20cc580d481
-title: Part 115
+id: 5d792538f5004390d6678554
+title: Part 116
 challengeType: 0
-dashedName: part-115
+dashedName: part-116
 ---
 
 # --description--
 
-The `slice` method can also work on arrays.
+You can also pass in a negative argument to `slice` to specify that index from the end:
 
-Add a method `firsttwo` to `spreadsheetFunctions` which takes `arr` as argument and uses `slice` to return the first two elements of `arr`.
+```js
+[2, 4, 6, 8, 10].slice(-3); // [6, 8, 10]
+```
+
+Use a negative index to add a function `lasttwo` which returns the last two elements of an array.
 
 # --hints--
 
@@ -17,7 +21,7 @@ See description above for instructions.
 
 ```js
 assert(
-  JSON.stringify(spreadsheetFunctions.firsttwo([2, 6, 1, 4, 3])) === '[2,6]'
+  JSON.stringify(spreadsheetFunctions.lasttwo([2, 6, 1, 4, 3])) === '[4,3]'
 );
 ```
 
@@ -84,7 +88,8 @@ const highPrecedence = str => {
 const spreadsheetFunctions = {
   "": x => x,
   random: ([x, y]) => Math.floor(Math.random() * y + x),
-  increment: nums => nums.map(x => x + 1)
+  increment: nums => nums.map(x => x + 1),
+  firsttwo: arr => arr.slice(0, 2)
 };
 
 
@@ -193,7 +198,8 @@ const spreadsheetFunctions = {
   "": x => x,
   random: ([x, y]) => Math.floor(Math.random() * y + x),
   increment: nums => nums.map(x => x + 1),
-  firsttwo: arr => arr.slice(0, 2)
+  firsttwo: arr => arr.slice(0, 2),
+  lasttwo: arr => arr.slice(-2)
 };
 
 
