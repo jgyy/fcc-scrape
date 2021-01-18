@@ -1,28 +1,20 @@
 ---
-id: 5d792534408c5be896b0a46e
-title: Part 37
+id: 5d792534f0eda837510e9192
+title: Part 38
 challengeType: 0
-dashedName: part-37
+dashedName: part-38
 ---
 
 # --description--
 
-The `hasOwnProperty` method checks if a key exists in an object. So `spreadsheetFunctions.hasOwnProperty("")` would return `true`, but replacing `""` with anything else would make it return `false`.
-
-Chain `hasOwnProperty` to `spreadsheetFunctions` to check if the `fn.toLowerCase()` key exists in `spreadsheetFunctions`.
+Now use the ternary operator in the last line to return `applyFunction(fn, args)` if the statement is true, and `match` otherwise.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(
-  code
-    .replace(/\s/g, '')
-    .includes(
-      'returnstr2.replace(regex,(match,fn,args)=>spreadsheetFunctions.hasOwnProperty(fn.toLowerCase()))'
-    )
-);
+assert(applyFn('2+2*2') === '6' && applyFn('(2+2)*2') === '4*2');
 ```
 
 # --seed--
@@ -97,7 +89,11 @@ const applyFn = str => {
   const toNumberList = args => args.split(",").map(parseFloat);
   const applyFunction = (fn, args) =>
     spreadsheetFunctions[fn.toLowerCase()](toNumberList(args));
-  return str2.replace(regex, (match, fn, args) => spreadsheetFunctions);
+  return str2.replace(
+    regex,
+    (match, fn, args) =>
+      spreadsheetFunctions.hasOwnProperty(fn.toLowerCase())
+  );
 }
 
 
@@ -141,8 +137,8 @@ const applyFn = str => {
   return str2.replace(
     regex,
     (match, fn, args) =>
-      spreadsheetFunctions.hasOwnProperty(fn.toLowerCase())
+      spreadsheetFunctions.hasOwnProperty(fn.toLowerCase()) ? applyFunction(fn, args) : match
   );
-}
+};
 </script>
 ```
