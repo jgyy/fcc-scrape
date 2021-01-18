@@ -1,15 +1,17 @@
 ---
-id: 5d79253a2febbb77098730b9
-title: Part 136
+id: 5d79253a98bd9fdf7ce68d0a
+title: Part 137
 challengeType: 0
-dashedName: part-136
+dashedName: part-137
 ---
 
 # --description--
 
-The `every` method checks if all elements of an array satisfy the provided testing function.
+We've used recursion in `range`, but recursion can have performance issues in JavaScript. If performance is an issue, you should try to use a higher order function like `reduce`, and if you can't do that, you'll probably have to use a for/while loop.
 
-Use it to add an `everyeven` function to `spreadsheetFunctions` which checks if all values passed in are even`spreadsheetFunctions` which checks if all values passed in are even.
+While we don't expect the user to enter particularly large numbers so that performance is an issue, we're going to refactor `range` as an exercise.
+
+Replace the body of `range` with `start`.
 
 # --hints--
 
@@ -17,9 +19,7 @@ See description above for instructions.
 
 ```js
 assert(
-  spreadsheetFunctions.everyeven([2, 6, 4, 0, 20]) &&
-    !spreadsheetFunctions.everyeven([10, 0, 9, 2]) &&
-    code.includes('.every')
+  /constrange=\(start,end\)=>start(;|const)/.test(code.replace(/\s/g, ''))
 );
 ```
 
@@ -109,10 +109,9 @@ const spreadsheetFunctions = {
   has2: arr => arr.includes(2),
   nodups: arr => arr.reduce((a, x) => a.includes(x) ? a : a.concat(x), []),
   range: arr => range(...arr),
-  someeven: arr => arr.some(isEven)
+  someeven: arr => arr.some(isEven),
+  everyeven: arr => arr.every(isEven)
 };
-
-
 
 const applyFn = str => {
   const noHigh = highPrecedence(str);
@@ -131,6 +130,8 @@ const applyFn = str => {
 
 const range = (start, end) =>
   start > end ? [] : [start].concat(range(start + 1, end));
+
+
 
 const charRange = (start, end) =>
   range(start.charCodeAt(0), end.charCodeAt(0)).map(x =>
@@ -196,6 +197,7 @@ const update = event => {
 
 ```html
 <script>
+
 const infixToFunction = {
   "+": (x, y) => x + y,
   "-": (x, y) => x - y,
@@ -259,8 +261,7 @@ const applyFn = str => {
   );
 };
 
-const range = (start, end) =>
-  start > end ? [] : [start].concat(range(start + 1, end));
+const range = (start, end) => start
 
 
 
