@@ -1,20 +1,26 @@
 ---
-id: 5d792535f1f7adf77de5831d
-title: Part 46
+id: 5d7925353d2c505eafd50cd9
+title: Part 47
 challengeType: 0
-dashedName: part-46
+dashedName: part-47
 ---
 
 # --description--
 
-Replace `[end]` with a recursive call to `range`: `[start].concat(range(start + 1, end))`
+Remove the curly braces and `return` keyword from `range`.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(JSON.stringify(range(1, 5)) === '[1,2,3,4,5]');
+assert(
+  code
+    .replace(/\s/g, '')
+    .includes(
+      'constrange=(start,end)=>start>end?[]:[start].concat(range(start+1,end))'
+    )
+);
 ```
 
 # --seed--
@@ -97,7 +103,7 @@ const applyFn = str => {
 };
 
 const range = (start, end) => {
-  return start > end ? [] : [start].concat([end]);
+  return start > end ? [] : [start].concat(range(start + 1, end));
 }
 
 
@@ -145,8 +151,7 @@ const applyFn = str => {
   );
 };
 
-const range = (start, end) => {
-  return start > end ? [] : [start].concat(range(start + 1, end));
-}
+const range = (start, end) =>
+  start > end ? [] : [start].concat(range(start + 1, end));
 </script>
 ```
