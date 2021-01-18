@@ -1,20 +1,20 @@
 ---
-id: 5d792535a4f1cbff7a8b9a0b
-title: Part 49
+id: 5d792535e3304f15a8890162
+title: Part 50
 challengeType: 0
-dashedName: part-49
+dashedName: part-50
 ---
 
 # --description--
 
-Make `charRange` return `range(start, end)`.
+Use the `charCodeAt(0)` method on `start` and `end` in `charRange`, like this: `start.charCodeAt(0)`.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(JSON.stringify(charRange(1, 5)) === '[1,2,3,4,5]');
+assert(JSON.stringify(charRange('A', 'C')) === '[65,66,67]');
 ```
 
 # --seed--
@@ -99,7 +99,7 @@ const applyFn = str => {
 const range = (start, end) =>
   start > end ? [] : [start].concat(range(start + 1, end));
 
-const charRange = (start, end) => start;
+const charRange = (start, end) => range(start, end);
 
 
 </script>
@@ -149,6 +149,6 @@ const applyFn = str => {
 const range = (start, end) =>
   start > end ? [] : [start].concat(range(start + 1, end));
 
-const charRange = (start, end) => range(start, end);
+const charRange = (start, end) => range(start.charCodeAt(0), end.charCodeAt(0));
 </script>
 ```
