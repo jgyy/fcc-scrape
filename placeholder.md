@@ -1,22 +1,25 @@
 ---
-id: 5d7925380ea76d55b2c97d7b
-title: Part 103
+id: 5d792538be4fe331f1a6c008
+title: Part 104
 challengeType: 0
-dashedName: part-103
+dashedName: part-104
 ---
 
 # --description--
 
-This is true, so `highPrecedence` might be a pure function. If you inspect it, you can see that it indeed performs no I/O and doesn't use functions like `Math.random()` - so it's pure.
+Unfortunately, impure functions are necessary - if you don't use them, the application won't perform any I/O so won't do anything.
 
-Remove the `console.log` statement.
+But we have an impure function that could be pure - `evalFormula`. It calls `document.getElementById(c + n).value`, but this value can change, even if the arguments don't.
+
+Change these calls to `""` - the function is now pure but doesn't work.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(!code.includes('console.log'));
+const nos = code.replace(/\s/g, '');
+assert(nos.includes('elemValue=n=>c=>""') && nos.includes('match=>""'));
 ```
 
 # --seed--
@@ -149,7 +152,6 @@ window.onload = () => {
 };
 
 const update = event => {
-  console.log(highPrecedence("2*2") === highPrecedence("2*2"));
   const element = event.target;
   const value = element.value.replace(/\s/g, "");
   if (!value.includes(element.id) && value[0] === "=") {
@@ -214,7 +216,7 @@ const charRange = (start, end) =>
 const evalFormula = x => {
   const rangeRegex = /([A-J])([1-9][0-9]?):([A-J])([1-9][0-9]?)/gi;
   const rangeFromString = (n1, n2) => range(parseInt(n1), parseInt(n2));
-  const elemValue = n => c => document.getElementById(c + n).value;
+  const elemValue = n => c => ""
   const addChars = c1 => c2 => n => charRange(c1, c2).map(elemValue(n));
   const varRangeExpanded = x.replace(rangeRegex, (_, c1, n1, c2, n2) =>
     rangeFromString(n1, n2).map(addChars(c1)(c2))
@@ -222,7 +224,7 @@ const evalFormula = x => {
   const varRegex = /[A-J][1-9][0-9]?/gi;
   const varExpanded = varRangeExpanded.replace(
     varRegex,
-    match => document.getElementById(match.toUpperCase()).value
+    match => ""
   );
   const functionExpanded = applyFn(varExpanded);
   return functionExpanded === x
