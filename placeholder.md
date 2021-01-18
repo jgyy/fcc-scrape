@@ -1,13 +1,13 @@
 ---
-id: 5d7925356ab117923b80c9cd
-title: Part 58
+id: 5d792535e54a8cd729a0d708
+title: Part 59
 challengeType: 0
-dashedName: part-58
+dashedName: part-59
 ---
 
 # --description--
 
-Inside `elemValue`, define `fn` to be a function which takes `c` as argument and returns `document.getElementById(c + n).value`. Return `fn` instead of `n`.
+Now define `fn` to be `elemValue("1")` (inside `evalFormula` but outside `elemValue`). As `elemValue` returns a function, `fn` is also a function.
 
 # --hints--
 
@@ -15,9 +15,7 @@ See description above for instructions.
 
 ```js
 assert(
-  /elemValue.*constfn=\(?c\)?=>document\.getElementById\(c\+n\)\.value;?returnfn;?\}/.test(
-    code.replace(/\s/g, '')
-  )
+  /elemValue.*constfn=elemValue\(['"]1['"]\);?\}/.test(code.replace(/\s/g, ''))
 );
 ```
 
@@ -112,7 +110,8 @@ const evalFormula = x => {
   const rangeRegex = /([A-J])([1-9][0-9]?):([A-J])([1-9][0-9]?)/gi;
   const rangeFromString = (n1, n2) => range(parseInt(n1), parseInt(n2));
   const elemValue = n => {
-    return n;
+    const fn = c => document.getElementById(c + n).value;
+    return fn;
   };
 };
 
@@ -176,6 +175,7 @@ const evalFormula = x => {
     const fn = c => document.getElementById(c + n).value;
     return fn;
   };
+  const fn = elemValue("1");
 };
 </script>
 ```
