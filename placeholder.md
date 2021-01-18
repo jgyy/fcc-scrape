@@ -1,13 +1,15 @@
 ---
-id: 5d7925353b307724a462b06b
-title: Part 60
+id: 5d792536735f71d746ee5d99
+title: Part 61
 challengeType: 0
-dashedName: part-60
+dashedName: part-61
 ---
 
 # --description--
 
-Finally, return `fn("A")`.
+You might think that this wouldn't work because `fn` wouldn't have access to `n` after `elemValue` has finished executing. However, this works because of closures - functions have access to all variables declared at their time of creation.
+
+Inside `elemValue`, remove the variable `fn` and its definition, and replace `return fn` with `return c => document.getElementById(c + n).value`.
 
 # --hints--
 
@@ -15,9 +17,9 @@ See description above for instructions.
 
 ```js
 assert(
-  /elemValue.*constfn=elemValue\(['"]1['"]\);?returnfn\(['"]A['"]\);?\}/.test(
-    code.replace(/\s/g, '')
-  )
+  code
+    .replace(/\s/g, '')
+    .includes('constelemValue=n=>{returnc=>document.getElementById(c+n).value')
 );
 ```
 
@@ -116,6 +118,7 @@ const evalFormula = x => {
     return fn;
   };
   const fn = elemValue("1");
+  return fn("A");
 };
 
 
@@ -175,8 +178,7 @@ const evalFormula = x => {
   const rangeRegex = /([A-J])([1-9][0-9]?):([A-J])([1-9][0-9]?)/gi;
   const rangeFromString = (n1, n2) => range(parseInt(n1), parseInt(n2));
   const elemValue = n => {
-    const fn = c => document.getElementById(c + n).value;
-    return fn;
+    return c => document.getElementById(c + n).value;
   };
   const fn = elemValue("1");
   return fn("A");
