@@ -1,19 +1,13 @@
 ---
-id: 5d792534c3d26890ac1484d4
-title: Part 31
+id: 5d792534b92f3d1cd4410ce3
+title: Part 32
 challengeType: 0
-dashedName: part-31
+dashedName: part-32
 ---
 
 # --description--
 
-The `map` method takes a function and for each element of an array, it passes the element to the function and replace the element with the return value:
-
-```js
-[1, 2, 3].map(x => x + 1); // [2, 3, 4]
-```
-
-In `toNumberList`, chain the `map` method to `args.split(",")` and pass it `parseFloat` to parse each element of the array into a number.
+Define a new function `applyFunction` (inside `applyFn`). It should take two arguments: `fn` and `args`, and should return `spreadsheetFunctions`.
 
 # --hints--
 
@@ -23,7 +17,9 @@ See description above for instructions.
 assert(
   code
     .replace(/\s/g, '')
-    .includes('consttoNumberList=args=>args.split(",").map(parseFloat)')
+    .includes(
+      'consttoNumberList=args=>args.split(",").map(parseFloat);constapplyFunction=(fn,args)=>spreadsheetFunctions'
+    )
 );
 ```
 
@@ -96,7 +92,7 @@ const applyFn = str => {
   const infix = /([0-9.]+)([+-])([0-9.]+)/;
   const str2 = infixEval(noHigh, infix);
   const regex = /([a-z]*)\(([0-9., ]*)\)(?!.*\()/i;
-  const toNumberList = args => args.split(",");
+  const toNumberList = args => args.split(",").map(parseFloat);
 }
 
 
@@ -135,6 +131,7 @@ const applyFn = str => {
   const str2 = infixEval(noHigh, infix);
   const regex = /([a-z]*)\(([0-9., ]*)\)(?!.*\()/i;
   const toNumberList = args => args.split(",").map(parseFloat);
+  const applyFunction = (fn, args) => spreadsheetFunctions;
 }
 </script>
 ```
