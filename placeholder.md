@@ -1,20 +1,20 @@
 ---
-id: 5d792534257122211d3043af
-title: Part 24
+id: 5d7925346f4f2da6df4354a6
+title: Part 25
 challengeType: 0
-dashedName: part-24
+dashedName: part-25
 ---
 
 # --description--
 
-Define an object `spreadsheetFunctions`, with a single key - an empty string (`""`). The corresponding value should be the function `x => x`.
+Define an empty function `applyFn` which takes an argument `str`. Use the curly brace syntax with an anonymous function. Do not wrap parentheses around the parameter.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(spreadsheetFunctions['']('x') === 'x');
+assert(code.replace(/\s/g, '').includes('constapplyFn=str=>{}'));
 ```
 
 # --seed--
@@ -77,6 +77,10 @@ const highPrecedence = str => {
   return str === str2 ? str : highPrecedence(str2);
 };
 
+const spreadsheetFunctions = {
+  "": x => x
+};
+
 
 </script>
 ```
@@ -106,5 +110,9 @@ const highPrecedence = str => {
 const spreadsheetFunctions = {
   "": x => x
 };
+
+const applyFn = str => {
+
+}
 </script>
 ```
