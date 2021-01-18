@@ -1,22 +1,22 @@
 ---
-id: 5d792537b6cadae0f4b0cda1
-title: Part 94
+id: 5d79253770083fb730c93a93
+title: Part 95
 challengeType: 0
-dashedName: part-94
+dashedName: part-95
 ---
 
 # --description--
 
-The `slice` method takes two arguments. It extracts characters from the string from the index specified by the first argument up to (but not including) the second argument. The index starts at 0.
+You don't have to specify the second argument in `slice`. If you don't, then `slice` will extract from the first argument to the end of the string.
 
-Use the `slice` method to log the first two letters of `value` to the console.
+Change the call to `slice` to log all characters except the first instead.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(code.replace(/\s/g, '').includes('console.log(value.slice(0,2))'));
+assert(code.replace(/\s/g, '').includes('console.log(value.slice(1))'));
 ```
 
 # --seed--
@@ -150,7 +150,9 @@ window.onload = () => {
 const update = event => {
   const element = event.target;
   const value = element.value.replace(/\s/g, "");
-  if (!value.includes(element.id) && value[0] === "=") {}
+  if (!value.includes(element.id) && value[0] === "=") {
+    console.log(value.slice(0, 2));
+  }
 };
 
 
@@ -251,7 +253,7 @@ const update = event => {
   const element = event.target;
   const value = element.value.replace(/\s/g, "");
   if (!value.includes(element.id) && value[0] === "=") {
-    console.log(value.slice(0, 2));
+    console.log(value.slice(1));
   }
 };
 </script>
