@@ -1,22 +1,26 @@
 ---
-id: 5d792536504e68254fe02236
-title: Part 64
+id: 5d792536c8d2f0fdfad768fe
+title: Part 65
 challengeType: 0
-dashedName: part-64
+dashedName: part-65
 ---
 
 # --description--
 
-The technique we just used is called currying - instead of taking multiple arguments, a function takes a single argument and return another function, which also takes a single argument.
+You can add more arguments by simply adding another arrow with another argument name:
 
-Define a new curried function, `addChars`, and set it equal to `c1 => c2 => c1 + c2`.
+```js
+const manyArguments = a => b => c => d => [a, b, c, d]
+```
+
+Add another argument to `addChars` and add it to the sum: `c1 => c2 => n => c1 + c2 + n`.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(code.replace(/\s/g, '').includes('constaddChars=c1=>c2=>c1+c2'));
+assert(code.replace(/\s/g, '').includes('constaddChars=c1=>c2=>n=>c1+c2+n'));
 ```
 
 # --seed--
@@ -110,7 +114,7 @@ const evalFormula = x => {
   const rangeRegex = /([A-J])([1-9][0-9]?):([A-J])([1-9][0-9]?)/gi;
   const rangeFromString = (n1, n2) => range(parseInt(n1), parseInt(n2));
   const elemValue = n => c => document.getElementById(c + n).value;
-
+  const addChars = c1 => c2 => c1 + c2
   const fn = elemValue("1");
   return fn("A");
 };
@@ -172,7 +176,7 @@ const evalFormula = x => {
   const rangeRegex = /([A-J])([1-9][0-9]?):([A-J])([1-9][0-9]?)/gi;
   const rangeFromString = (n1, n2) => range(parseInt(n1), parseInt(n2));
   const elemValue = n => c => document.getElementById(c + n).value;
-  const addChars = c1 => c2 => c1 + c2
+  const addChars = c1 => c2 => n => c1 + c2 + n
   const fn = elemValue("1");
   return fn("A");
 };
