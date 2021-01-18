@@ -1,15 +1,13 @@
 ---
-id: 5d792537533b1c7843bfd029
-title: Part 92
+id: 5d792537dc0fe84345d4f19e
+title: Part 93
 challengeType: 0
-dashedName: part-92
+dashedName: part-93
 ---
 
 # --description--
 
-The `includes` method works on a string and checks if the argument is its substring.
-
-Add an empty if statement to `update` which executes if `element.id` is **not** a substring of `value`.
+Add another condition to the if statement so that it only executes if the first character of `value` is `=`. Do this by adding `&& value[0] === "="` to the if statement.
 
 # --hints--
 
@@ -17,7 +15,7 @@ See description above for instructions.
 
 ```js
 assert(
-  /constupdate=\(?event\)?=>\{constelement=event\.target;?constvalue=element\.value\.replace\(\/\\s\/g,["']{2}\);?if\(!\(?value\.includes\(element\.id\)\)?\)\{\}\}/.test(
+  /constupdate=\(?event\)?=>\{constelement=event\.target;?constvalue=element\.value\.replace\(\/\\s\/g,["']{2}\);?if\(!\(?value\.includes\(element\.id\)\)?&&value\[0\]===["']=["']\)\{\}\}/.test(
     code.replace(/\s/g, '')
   )
 );
@@ -154,6 +152,7 @@ window.onload = () => {
 const update = event => {
   const element = event.target;
   const value = element.value.replace(/\s/g, "");
+  if (!value.includes(element.id)) {}
 };
 
 
@@ -253,7 +252,7 @@ window.onload = () => {
 const update = event => {
   const element = event.target;
   const value = element.value.replace(/\s/g, "");
-  if (!value.includes(element.id)) {}
+  if (!value.includes(element.id) && value[0] === "=") {}
 };
 </script>
 ```
