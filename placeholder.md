@@ -1,23 +1,15 @@
 ---
-id: 5d7925395888767e9304c082
-title: Part 119
+id: 5d7925393b30099e37a34668
+title: Part 120
 challengeType: 0
-dashedName: part-119
+dashedName: part-120
 ---
 
 # --description--
 
-The `reduce` method takes a function with an accumulator and the current value. The accumulator is initially set to the value at index 0.
+The `includes` method checks if an element is in an array.
 
-The `reduce` method then goes through each element of the array after that, passing in the element as the current value and the result of the last call as the accumulator.
-
-For example, here's how to multiply all the value in an array:
-
-```js
-[2, 3, 4].reduce((a, x) => a * x); // 24
-```
-
-Using `reduce`, add a function `sum` to `spreadsheetFunctions`, which sums all values in the array passed to it.
+Add a `has2` function to `spreadsheetFunctions` which checks if the inputted array has the number 2 in it.
 
 # --hints--
 
@@ -25,7 +17,7 @@ See description above for instructions.
 
 ```js
 assert(
-  spreadsheetFunctions.sum([10, 5, 1, 3]) === 19 && code.includes('reduce')
+  spreadsheetFunctions.has2([2, 3, 5]) && !spreadsheetFunctions.has2([1, 3, 10])
 );
 ```
 
@@ -97,7 +89,8 @@ const spreadsheetFunctions = {
   increment: nums => nums.map(x => x + 1),
   firsttwo: arr => arr.slice(0, 2),
   lasttwo: arr => arr.slice(-2),
-  even: nums => nums.filter(isEven)
+  even: nums => nums.filter(isEven),
+  sum: nums => nums.reduce((a, x) => a + x)
 };
 
 
@@ -211,7 +204,8 @@ const spreadsheetFunctions = {
   firsttwo: arr => arr.slice(0, 2),
   lasttwo: arr => arr.slice(-2),
   even: nums => nums.filter(isEven),
-  sum: nums => nums.reduce((a, x) => a + x)
+  sum: nums => nums.reduce((a, x) => a + x),
+  has2: arr => arr.includes(2)
 };
 
 
