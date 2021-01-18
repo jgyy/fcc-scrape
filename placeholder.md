@@ -1,13 +1,13 @@
 ---
-id: 5d79253582be306d339564f6
-title: Part 55
+id: 5d7925352047e5c54882c436
+title: Part 56
 challengeType: 0
-dashedName: part-55
+dashedName: part-56
 ---
 
 # --description--
 
-Replace the `n1` return value in `rangeFromString` with `range(n1, n2)`.
+As `n1` and `n2` are actually strings, replace `n1` and `n2` with `parseInt(n1)` and `parseInt(n2)`.
 
 # --hints--
 
@@ -15,7 +15,7 @@ See description above for instructions.
 
 ```js
 assert(
-  /evalFormula.*constrangeFromString=\(n1,n2\)=>range\(n1,n2\)/.test(
+  /evalFormula.*constrangeFromString=\(n1,n2\)=>range\(parseInt\(n1\),parseInt\(n2\)\)/.test(
     code.replace(/\s/g, '')
   )
 );
@@ -110,7 +110,7 @@ const charRange = (start, end) =>
 
 const evalFormula = x => {
   const rangeRegex = /([A-J])([1-9][0-9]?):([A-J])([1-9][0-9]?)/gi;
-  const rangeFromString = (n1, n2) => n1;
+  const rangeFromString = (n1, n2) => range(n1, n2);
 };
 
 
@@ -168,7 +168,7 @@ const charRange = (start, end) =>
 
 const evalFormula = x => {
   const rangeRegex = /([A-J])([1-9][0-9]?):([A-J])([1-9][0-9]?)/gi;
-  const rangeFromString = (n1, n2) => range(n1, n2);
+  const rangeFromString = (n1, n2) => range(parseInt(n1), parseInt(n2));
 };
 </script>
 ```
