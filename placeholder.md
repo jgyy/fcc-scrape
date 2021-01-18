@@ -1,13 +1,13 @@
 ---
-id: 5d79253568e441c0adf9db9f
-title: Part 57
+id: 5d7925356ab117923b80c9cd
+title: Part 58
 challengeType: 0
-dashedName: part-57
+dashedName: part-58
 ---
 
 # --description--
 
-Now define a function `elemValue`, which takes an argument `n` and returns `n`. Use the curly brace arrow function syntax.
+Inside `elemValue`, define `fn` to be a function which takes `c` as argument and returns `document.getElementById(c + n).value`. Return `fn` instead of `n`.
 
 # --hints--
 
@@ -15,7 +15,9 @@ See description above for instructions.
 
 ```js
 assert(
-  /evalFormula.*constelemValue=n=>\{returnn;?\}/.test(code.replace(/\s/g, ''))
+  /elemValue.*constfn=\(?c\)?=>document\.getElementById\(c\+n\)\.value;?returnfn;?\}/.test(
+    code.replace(/\s/g, '')
+  )
 );
 ```
 
@@ -109,6 +111,9 @@ const charRange = (start, end) =>
 const evalFormula = x => {
   const rangeRegex = /([A-J])([1-9][0-9]?):([A-J])([1-9][0-9]?)/gi;
   const rangeFromString = (n1, n2) => range(parseInt(n1), parseInt(n2));
+  const elemValue = n => {
+    return n;
+  };
 };
 
 
@@ -168,7 +173,8 @@ const evalFormula = x => {
   const rangeRegex = /([A-J])([1-9][0-9]?):([A-J])([1-9][0-9]?)/gi;
   const rangeFromString = (n1, n2) => range(parseInt(n1), parseInt(n2));
   const elemValue = n => {
-    return n;
+    const fn = c => document.getElementById(c + n).value;
+    return fn;
   };
 };
 </script>
