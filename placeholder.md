@@ -1,20 +1,22 @@
 ---
-id: 5d79253891d93585323d1f3c
-title: Part 112
+id: 5d7925384e34e944ecb4612d
+title: Part 113
 challengeType: 0
-dashedName: part-112
+dashedName: part-113
 ---
 
 # --description--
 
-Change the empty string in `elemValue` to the result of calling `idToText` with `c + n`.
+Change the empty string in `varExpanded` to the result of calling `idToText` with `match.toUpperCase()`.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(code.replace(/\s/g, '').includes('elemValue=n=>c=>idToText(c+n)'));
+assert(
+  code.replace(/\s/g, '').includes('match=>idToText(match.toUpperCase())')
+);
 ```
 
 # --seed--
@@ -109,7 +111,7 @@ const evalFormula = (x, cells) => {
   const idToText = id => cells.find(cell => cell.id === id).value;
   const rangeRegex = /([A-J])([1-9][0-9]?):([A-J])([1-9][0-9]?)/gi;
   const rangeFromString = (n1, n2) => range(parseInt(n1), parseInt(n2));
-  const elemValue = n => c => ""
+  const elemValue = n => c => idToText(c + n);
   const addChars = c1 => c2 => n => charRange(c1, c2).map(elemValue(n));
   const varRangeExpanded = x.replace(rangeRegex, (_, c1, n1, c2, n2) =>
     rangeFromString(n1, n2).map(addChars(c1)(c2))
@@ -119,6 +121,7 @@ const evalFormula = (x, cells) => {
     varRegex,
     match => ""
   );
+  
   const functionExpanded = applyFn(varExpanded);
   return functionExpanded === x
     ? functionExpanded
@@ -222,9 +225,8 @@ const evalFormula = (x, cells) => {
   const varRegex = /[A-J][1-9][0-9]?/gi;
   const varExpanded = varRangeExpanded.replace(
     varRegex,
-    match => ""
+    match => idToText(match.toUpperCase())
   );
-  
   const functionExpanded = applyFn(varExpanded);
   return functionExpanded === x
     ? functionExpanded
