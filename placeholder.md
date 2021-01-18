@@ -1,27 +1,23 @@
 ---
-id: 5d792535b0b3c198ee3ed6f9
-title: Part 43
+id: 5d7925357a0533eb221b005d
+title: Part 44
 challengeType: 0
-dashedName: part-43
+dashedName: part-44
 ---
 
 # --description--
 
-The `concat` method can also accept arrays:
-
-```js
-[1,2,3].concat([4, 5]); // [1, 2, 3, 4, 5]
-[1,2,3].concat([4, 5], [6, 7]); // [1, 2, 3, 4, 5, 6, 7]
-```
-
-Use this form of `concat` by passing an array with just `end` to it: `arr.concat([end])`.
+Replace the call to `arr` in `arr.concat([end])` with `[start]` and remove the `arr` variable and its definition.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(code.replace(/\s/g, '').includes('returnarr.concat([end])'));
+assert(
+  !code.includes('arr') &&
+    code.replace(/\s/g, '').includes('[start].concat([end])')
+);
 ```
 
 # --seed--
@@ -105,7 +101,7 @@ const applyFn = str => {
 
 const range = (start, end) => {
   const arr = [start];
-  return arr.concat(end);
+  return arr.concat([end]);
 }
 
 
@@ -154,8 +150,7 @@ const applyFn = str => {
 };
 
 const range = (start, end) => {
-  const arr = [start];
-  return arr.concat([end]);
+  return [start].concat([end]);
 }
 </script>
 ```
