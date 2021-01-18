@@ -1,23 +1,20 @@
 ---
-id: 5d79253483eada4dd69258eb
-title: Part 40
+id: 5d7925342b2b993ef18cd45f
+title: Part 41
 challengeType: 0
-dashedName: part-40
+dashedName: part-41
 ---
 
 # --description--
 
-`range` should set `arr` to `[start]` and should then return `arr`.
+After declaring `arr`, but before returning it, `range` should use the `push` method to add `end` onto `arr`.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(
-  code.replace(/\s/g, '').includes('constarr=[start]') &&
-    JSON.stringify(range(1)) === '[1]'
-);
+assert(JSON.stringify(range(1, 2)) === '[1,2]' && code.includes('push'));
 ```
 
 # --seed--
@@ -100,7 +97,8 @@ const applyFn = str => {
 };
 
 const range = (start, end) => {
-
+  const arr = [start];
+  return arr;
 }
 
 
@@ -150,6 +148,7 @@ const applyFn = str => {
 
 const range = (start, end) => {
   const arr = [start];
+  arr.push(end);
   return arr;
 }
 </script>
