@@ -1,21 +1,17 @@
 ---
-id: 5d7925381e8565a5c50ba7f1
-title: Part 99
+id: 5d7925383f1b77db7f1ff59e
+title: Part 100
 challengeType: 0
-dashedName: part-99
+dashedName: part-100
 ---
 
 # --description--
 
-In functional programming, we strive to use a type of function called "pure functions" as much as possible. The first property of pure functions is that they always return the same value for the same arguments.
+This is (probably) false, so `random` is certainly impure.
 
-You can check if this is the case by comparing a call to a function with another call (with the same arguments):
+The second property of pure functions is that they perform no side effects, which are state and I/O modifications. If you call a function without assigning the result to a variable, and it does something, then it's an impure function.
 
-```js
-console.log(f(2) === f(2)); // always true for pure functions
-```
-
-Use this technique to check if the `random` function in `spreadsheetFunctions` is pure by passing in the following array: `[1, 1000]`.
+Call `window.onload()` in `update`.
 
 # --hints--
 
@@ -23,9 +19,7 @@ See description above for instructions.
 
 ```js
 assert(
-  /(spreadsheetFunctions\[["']random["']\]\(1,1000\))===\1/.test(
-    code.replace(/\s/g, '')
-  )
+  /update=\(?event\)?=>\{.*window\.onload\(\).*\}/.test(code.replace(/\s/g, ''))
 );
 ```
 
@@ -166,6 +160,8 @@ const update = event => {
   }
 };
 
+// console.log(spreadsheetFunctions["random"](1, 1000) === spreadsheetFunctions["random"](1, 1000))
+
 
 </script>
 ```
@@ -262,13 +258,12 @@ window.onload = () => {
 };
 
 const update = event => {
+  // window.onload();
   const element = event.target;
   const value = element.value.replace(/\s/g, "");
   if (!value.includes(element.id) && value[0] === "=") {
     element.value = evalFormula(value.slice(1));
   }
 };
-
-// console.log(spreadsheetFunctions["random"](1, 1000) === spreadsheetFunctions["random"](1, 1000))
 </script>
 ```
