@@ -1,60 +1,52 @@
 ---
-id: 9d7123c8c441eeafaeb5bdef
-title: Remove Elements from an Array Using slice Instead of splice
+id: 587d7da9367417b2b2512b6a
+title: Return a Sorted Array Without Changing the Original Array
 challengeType: 1
-forumTopicId: 301236
-dashedName: remove-elements-from-an-array-using-slice-instead-of-splice
+forumTopicId: 301237
+dashedName: return-a-sorted-array-without-changing-the-original-array
 ---
 
 # --description--
 
-A common pattern while working with arrays is when you want to remove items and keep the rest of the array. JavaScript offers the `splice` method for this, which takes arguments for the index of where to start removing items, then the number of items to remove. If the second argument is not provided, the default is to remove items through the end. However, the `splice` method mutates the original array it is called on. Here's an example:
-
-```js
-var cities = ["Chicago", "Delhi", "Islamabad", "London", "Berlin"];
-cities.splice(3, 1); // Returns "London" and deletes it from the cities array
-// cities is now ["Chicago", "Delhi", "Islamabad", "Berlin"]
-```
-
-As we saw in the last challenge, the `slice` method does not mutate the original array, but returns a new one which can be saved into a variable. Recall that the `slice` method takes two arguments for the indices to begin and end the slice (the end is non-inclusive), and returns those items in a new array. Using the `slice` method instead of `splice` helps to avoid any array-mutating side effects.
+A side effect of the `sort` method is that it changes the order of the elements in the original array. In other words, it mutates the array in place. One way to avoid this is to first concatenate an empty array to the one being sorted (remember that `slice` and `concat` return a new array), then run the `sort` method.
 
 # --instructions--
 
-Rewrite the function `nonMutatingSplice` by using `slice` instead of `splice`. It should limit the provided `cities` array to a length of 3, and return a new array with only the first three items.
-
-Do not mutate the original array provided to the function.
+Use the `sort` method in the `nonMutatingSort` function to sort the elements of an array in ascending order. The function should return a new array, and not mutate the `globalArray` variable.
 
 # --hints--
 
-Your code should use the `slice` method.
+Your code should use the `sort` method.
 
 ```js
-assert(code.match(/\.slice/g));
+assert(nonMutatingSort.toString().match(/\.sort/g));
 ```
 
-Your code should not use the `splice` method.
+The `globalArray` variable should not change.
 
 ```js
-assert(!code.match(/\.?[\s\S]*?splice/g));
+assert(JSON.stringify(globalArray) === JSON.stringify([5, 6, 3, 2, 9]));
 ```
 
-The `inputCities` array should not change.
+`nonMutatingSort(globalArray)` should return `[2, 3, 5, 6, 9]`.
 
 ```js
 assert(
-  JSON.stringify(inputCities) ===
-    JSON.stringify(['Chicago', 'Delhi', 'Islamabad', 'London', 'Berlin'])
+  JSON.stringify(nonMutatingSort(globalArray)) ===
+    JSON.stringify([2, 3, 5, 6, 9])
 );
 ```
 
-`nonMutatingSplice(["Chicago", "Delhi", "Islamabad", "London", "Berlin"])` should return `["Chicago", "Delhi", "Islamabad"]`.
+`nonMutatingSort(globalArray)` should not be hard coded.
 
 ```js
-assert(
-  JSON.stringify(
-    nonMutatingSplice(['Chicago', 'Delhi', 'Islamabad', 'London', 'Berlin'])
-  ) === JSON.stringify(['Chicago', 'Delhi', 'Islamabad'])
-);
+assert(!nonMutatingSort.toString().match(/[23569]/g));
+```
+
+The function should return a new array, not the array passed to it.
+
+```js
+assert(nonMutatingSort(globalArray) !== globalArray);
 ```
 
 # --seed--
@@ -62,24 +54,24 @@ assert(
 ## --seed-contents--
 
 ```js
-function nonMutatingSplice(cities) {
+var globalArray = [5, 6, 3, 2, 9];
+function nonMutatingSort(arr) {
   // Only change code below this line
-  return cities.splice(3);
+
 
   // Only change code above this line
 }
-var inputCities = ["Chicago", "Delhi", "Islamabad", "London", "Berlin"];
-nonMutatingSplice(inputCities);
+nonMutatingSort(globalArray);
 ```
 
 # --solutions--
 
 ```js
-function nonMutatingSplice(cities) {
+var globalArray = [5, 6, 3, 2, 9];
+function nonMutatingSort(arr) {
   // Only change code below this line
-  return cities.slice(0,3);
+  return [].concat(arr).sort((a,b) => a-b);
   // Only change code above this line
 }
-var inputCities = ["Chicago", "Delhi", "Islamabad", "London", "Berlin"];
-nonMutatingSplice(inputCities);
+nonMutatingSort(globalArray);
 ```
