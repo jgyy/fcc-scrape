@@ -1,20 +1,26 @@
 ---
-id: 587d7b8f367417b2b2512b63
-title: Use the filter Method to Extract Data from an Array
+id: 587d7b8f367417b2b2512b61
+title: Use the map Method to Extract Data from an Array
 challengeType: 1
-forumTopicId: 18179
-dashedName: use-the-filter-method-to-extract-data-from-an-array
+forumTopicId: 18214
+dashedName: use-the-map-method-to-extract-data-from-an-array
 ---
 
 # --description--
 
-Another useful array function is `Array.prototype.filter()`, or simply `filter()`.
+So far we have learned to use pure functions to avoid side effects in a program. Also, we have seen the value in having a function only depend on its input arguments.
 
-`filter` calls a function on each element of an array and returns a new array containing only the elements for which that function returns `true`. In other words, it filters the array, based on the function passed to it. Like `map`, it does this without needing to modify the original array.
+This is only the beginning. As its name suggests, functional programming is centered around a theory of functions.
 
-The callback function accepts three arguments. The first argument is the current element being processed. The second is the index of that element and the third is the array upon which the `filter` method was called.
+It would make sense to be able to pass them as arguments to other functions, and return a function from another function. Functions are considered <dfn>first class objects</dfn> in JavaScript, which means they can be used like any other object. They can be saved in variables, stored in an object, or passed as function arguments.
 
-See below for an example using the `filter` method on the `users` array to return a new array containing only the users under the age of 30. For simplicity, the example only uses the first argument of the callback.
+Let's start with some simple array functions, which are methods on the array object prototype. In this exercise we are looking at `Array.prototype.map()`, or more simply `map`.
+
+The `map` method iterates over each item in an array and returns a new array containing the results of calling the callback function on each element. It does this without mutating the original array.
+
+When the callback is used, it is passed three arguments. The first argument is the current element being processed. The second is the index of that element and the third is the array upon which the `map` method was called.
+
+See below for an example using the `map` method on the `users` array to return a new array containing only the names of the users as elements. For simplicity, the example only uses the first argument of the callback.
 
 ```js
 const users = [
@@ -23,13 +29,13 @@ const users = [
   { name: 'camperCat', age: 10 }
 ];
 
-const usersUnder30 = users.filter(user => user.age < 30);
-console.log(usersUnder30); // [ { name: 'Amy', age: 20 }, { name: 'camperCat', age: 10 } ]
+const names = users.map(user => user.name);
+console.log(names); // [ 'John', 'Amy', 'camperCat' ]
 ```
 
 # --instructions--
 
-The variable `watchList` holds an array of objects with information on several movies. Use a combination of `filter` and `map` on `watchList` to assign a new array of objects with only `title` and `rating` keys. The new array should only include objects where `imdbRating` is greater than or equal to 8.0. Note that the rating values are saved as strings in the object and you may need to convert them into numbers to perform mathematical operations on them.
+The `watchList` array holds objects with information on several movies. Use `map` on `watchList` to assign a new array of objects with only `title` and `rating` keys to the `ratings` variable. The code in the editor currently uses a `for` loop to do this, so you should replace the loop functionality with your `map` expression.
 
 # --hints--
 
@@ -41,26 +47,27 @@ assert(
 );
 ```
 
-Your code should use the `filter` method.
-
-```js
-assert(code.match(/\.filter/g));
-```
-
 Your code should not use a `for` loop.
 
 ```js
-assert(!code.match(/for\s*?\([\s\S]*?\)/g));
+assert(!__helpers.removeJSComments(code).match(/for\s*?\([\s\S]*?\)/));
 ```
 
-`filteredList` should equal `[{"title": "Inception","rating": "8.8"},{"title": "Interstellar","rating": "8.6"},{"title": "The Dark Knight","rating": "9.0"},{"title": "Batman Begins","rating": "8.3"}]`.
+Your code should use the `map` method.
 
 ```js
-assert.deepEqual(filteredList, [
+assert(code.match(/\.map/g));
+```
+
+`ratings` should equal `[{"title":"Inception","rating":"8.8"},{"title":"Interstellar","rating":"8.6"},{"title":"The Dark Knight","rating":"9.0"},{"title":"Batman Begins","rating":"8.3"},{"title":"Avatar","rating":"7.9"}]`.
+
+```js
+assert.deepEqual(ratings, [
   { title: 'Inception', rating: '8.8' },
   { title: 'Interstellar', rating: '8.6' },
   { title: 'The Dark Knight', rating: '9.0' },
-  { title: 'Batman Begins', rating: '8.3' }
+  { title: 'Batman Begins', rating: '8.3' },
+  { title: 'Avatar', rating: '7.9' }
 ]);
 ```
 
@@ -185,11 +192,14 @@ var watchList = [
 
 // Only change code below this line
 
-var filteredList;
+var ratings = [];
+for(var i=0; i < watchList.length; i++){
+  ratings.push({title: watchList[i]["Title"],  rating: watchList[i]["imdbRating"]});
+}
 
 // Only change code above this line
 
-console.log(filteredList);
+console.log(JSON.stringify(ratings));
 ```
 
 # --solutions--
@@ -309,7 +319,10 @@ var watchList = [
   }
 ];
 
-// Only change code below this line
-let filteredList = watchList.filter(e => e.imdbRating >= 8).map( ({Title: title, imdbRating: rating}) => ({title, rating}) );
-// Only change code above this line
+var ratings = watchList.map(function(movie) {
+  return {
+    title: movie["Title"],
+    rating: movie["imdbRating"]
+  }
+});
 ```
