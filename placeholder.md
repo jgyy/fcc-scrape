@@ -1,54 +1,68 @@
 ---
-id: 587d7b8e367417b2b2512b5e
-title: Avoid Mutations and Side Effects Using Functional Programming
+id: 587d7daa367417b2b2512b6c
+title: Combine an Array into a String Using the join Method
 challengeType: 1
-forumTopicId: 301228
-dashedName: avoid-mutations-and-side-effects-using-functional-programming
+forumTopicId: 18221
+dashedName: combine-an-array-into-a-string-using-the-join-method
 ---
 
 # --description--
 
-If you haven't already figured it out, the issue in the previous challenge was with the `splice` call in the `tabClose()` function. Unfortunately, `splice` changes the original array it is called on, so the second call to it used a modified array, and gave unexpected results.
+The `join` method is used to join the elements of an array together to create a string. It takes an argument for the delimiter that is used to separate the array elements in the string.
 
-This is a small example of a much larger pattern - you call a function on a variable, array, or an object, and the function changes the variable or something in the object.
+Here's an example:
 
-One of the core principles of functional programming is to not change things. Changes lead to bugs. It's easier to prevent bugs knowing that your functions don't change anything, including the function arguments or any global variable.
-
-The previous example didn't have any complicated operations but the `splice` method changed the original array, and resulted in a bug.
-
-Recall that in functional programming, changing or altering things is called <dfn>mutation</dfn>, and the outcome is called a <dfn>side effect</dfn>. A function, ideally, should be a <dfn>pure function</dfn>, meaning that it does not cause any side effects.
-
-Let's try to master this discipline and not alter any variable or object in our code.
+```js
+var arr = ["Hello", "World"];
+var str = arr.join(" ");
+// Sets str to "Hello World"
+```
 
 # --instructions--
 
-Fill in the code for the function `incrementer` so it returns the value of the global variable `fixedValue` increased by one.
+Use the `join` method (among others) inside the `sentensify` function to make a sentence from the words in the string `str`. The function should return a string. For example, "I-like-Star-Wars" would be converted to "I like Star Wars". For this challenge, do not use the `replace` method.
 
 # --hints--
 
-Your function `incrementer` should not change the value of `fixedValue` (which is `4`).
+Your code should use the `join` method.
 
 ```js
-incrementer();
-assert(fixedValue === 4);
+assert(code.match(/\.join/g));
 ```
 
-Your `incrementer` function should return a value that is one larger than the `fixedValue` value.
+Your code should not use the `replace` method.
 
 ```js
-const __newValue = incrementer();
-assert(__newValue === 5);
+assert(!code.match(/\.?[\s\S]*?replace/g));
 ```
 
-Your `incrementer` function should return a value based on the global `fixedValue` variable value.
+`sentensify("May-the-force-be-with-you")` should return a string.
 
 ```js
-(function () {
-  fixedValue = 10;
-  const newValue = incrementer();
-  assert(fixedValue === 10 && newValue === 11);
-  fixedValue = 4;
-})();
+assert(typeof sentensify('May-the-force-be-with-you') === 'string');
+```
+
+`sentensify("May-the-force-be-with-you")` should return `"May the force be with you"`.
+
+```js
+assert(sentensify('May-the-force-be-with-you') === 'May the force be with you');
+```
+
+`sentensify("The.force.is.strong.with.this.one")` should return `"The force is strong with this one"`.
+
+```js
+assert(
+  sentensify('The.force.is.strong.with.this.one') ===
+    'The force is strong with this one'
+);
+```
+
+`sentensify("There,has,been,an,awakening")` should return `"There has been an awakening"`.
+
+```js
+assert(
+  sentensify('There,has,been,an,awakening') === 'There has been an awakening'
+);
 ```
 
 # --seed--
@@ -56,23 +70,21 @@ Your `incrementer` function should return a value based on the global `fixedValu
 ## --seed-contents--
 
 ```js
-// The global variable
-var fixedValue = 4;
-
-function incrementer () {
+function sentensify(str) {
   // Only change code below this line
 
 
   // Only change code above this line
 }
+sentensify("May-the-force-be-with-you");
 ```
 
 # --solutions--
 
 ```js
-var fixedValue = 4
-
-function incrementer() {
-  return fixedValue + 1
+function sentensify(str) {
+  // Only change code below this line
+  return str.split(/\W/).join(' ');
+  // Only change code above this line
 }
 ```
