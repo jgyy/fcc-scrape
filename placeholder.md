@@ -1,84 +1,43 @@
 ---
-id: 587d7dab367417b2b2512b70
-title: Introduction to Currying and Partial Application
+id: 587d7b8d367417b2b2512b5b
+title: Learn About Functional Programming
 challengeType: 1
-forumTopicId: 301232
-dashedName: introduction-to-currying-and-partial-application
+forumTopicId: 301233
+dashedName: learn-about-functional-programming
 ---
 
 # --description--
 
-The <dfn>arity</dfn> of a function is the number of arguments it requires. <dfn>Currying</dfn> a function means to convert a function of N arity into N functions of arity 1.
+Functional programming is a style of programming where solutions are simple, isolated functions, without any side effects outside of the function scope.
 
-In other words, it restructures a function so it takes one argument, then returns another function that takes the next argument, and so on.
+`INPUT -> PROCESS -> OUTPUT`
 
-Here's an example:
+Functional programming is about:
 
-```js
-//Un-curried function
-function unCurried(x, y) {
-  return x + y;
-}
+1) Isolated functions - there is no dependence on the state of the program, which includes global variables that are subject to change
 
-//Curried function
-function curried(x) {
-  return function(y) {
-    return x + y;
-  }
-}
-//Alternative using ES6
-const curried = x => y => x + y
+2) Pure functions - the same input always gives the same output
 
-curried(1)(2) // Returns 3
-```
-
-This is useful in your program if you can't supply all the arguments to a function at one time. You can save each function call into a variable, which will hold the returned function reference that takes the next argument when it's available. Here's an example using the curried function in the example above:
-
-```js
-// Call a curried function in parts:
-var funcForY = curried(1);
-console.log(funcForY(2)); // Prints 3
-```
-
-Similarly, <dfn>partial application</dfn> can be described as applying a few arguments to a function at a time and returning another function that is applied to more arguments. Here's an example:
-
-```js
-//Impartial function
-function impartial(x, y, z) {
-  return x + y + z;
-}
-var partialFn = impartial.bind(this, 1, 2);
-partialFn(10); // Returns 13
-```
+3) Functions with limited side effects - any changes, or mutations, to the state of the program outside the function are carefully controlled
 
 # --instructions--
 
-Fill in the body of the `add` function so it uses currying to add parameters `x`, `y`, and `z`.
+The members of freeCodeCamp happen to love tea.
+
+In the code editor, the `prepareTea` and `getTea` functions are already defined for you. Call the `getTea` function to get 40 cups of tea for the team, and store them in the `tea4TeamFCC` variable.
 
 # --hints--
 
-`add(10)(20)(30)` should return `60`.
+The `tea4TeamFCC` variable should hold 40 cups of tea for the team.
 
 ```js
-assert(add(10)(20)(30) === 60);
+assert(tea4TeamFCC.length === 40);
 ```
 
-`add(1)(2)(3)` should return `6`.
+The `tea4TeamFCC` variable should hold cups of green tea.
 
 ```js
-assert(add(1)(2)(3) === 6);
-```
-
-`add(11)(22)(33)` should return `66`.
-
-```js
-assert(add(11)(22)(33) === 66);
-```
-
-Your code should include a final statement that returns `x + y + z`.
-
-```js
-assert(code.match(/[xyz]\s*?\+\s*?[xyz]\s*?\+\s*?[xyz]/g));
+assert(tea4TeamFCC[0] === 'greenTea');
 ```
 
 # --seed--
@@ -86,17 +45,44 @@ assert(code.match(/[xyz]\s*?\+\s*?[xyz]\s*?\+\s*?[xyz]/g));
 ## --seed-contents--
 
 ```js
-function add(x) {
-  // Only change code below this line
+// Function that returns a string representing a cup of green tea
+const prepareTea = () => 'greenTea';
 
+/*
+Given a function (representing the tea type) and number of cups needed, the
+following function returns an array of strings (each representing a cup of
+a specific type of tea).
+*/
+const getTea = (numOfCups) => {
+  const teaCups = [];
 
-  // Only change code above this line
-}
-add(10)(20)(30);
+  for(let cups = 1; cups <= numOfCups; cups += 1) {
+    const teaCup = prepareTea();
+    teaCups.push(teaCup);
+  }
+  return teaCups;
+};
+
+// Only change code below this line
+const tea4TeamFCC = null;
+// Only change code above this line
 ```
 
 # --solutions--
 
 ```js
-const add = x => y => z => x + y + z
+const prepareTea = () => 'greenTea';
+
+const getTea = (numOfCups) => {
+  const teaCups = [];
+  
+  for(let cups = 1; cups <= numOfCups; cups += 1) {
+    const teaCup = prepareTea();
+    teaCups.push(teaCup);
+  }
+
+  return teaCups;
+};
+
+const tea4TeamFCC = getTea(40); 
 ```
