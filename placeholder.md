@@ -1,43 +1,50 @@
 ---
-id: 587d7b8d367417b2b2512b5b
-title: Learn About Functional Programming
+id: 587d7b8e367417b2b2512b5f
+title: Pass Arguments to Avoid External Dependence in a Function
 challengeType: 1
-forumTopicId: 301233
-dashedName: learn-about-functional-programming
+forumTopicId: 301234
+dashedName: pass-arguments-to-avoid-external-dependence-in-a-function
 ---
 
 # --description--
 
-Functional programming is a style of programming where solutions are simple, isolated functions, without any side effects outside of the function scope.
+The last challenge was a step closer to functional programming principles, but there is still something missing.
 
-`INPUT -> PROCESS -> OUTPUT`
+We didn't alter the global variable value, but the function `incrementer` would not work without the global variable `fixedValue` being there.
 
-Functional programming is about:
+Another principle of functional programming is to always declare your dependencies explicitly. This means if a function depends on a variable or object being present, then pass that variable or object directly into the function as an argument.
 
-1) Isolated functions - there is no dependence on the state of the program, which includes global variables that are subject to change
+There are several good consequences from this principle. The function is easier to test, you know exactly what input it takes, and it won't depend on anything else in your program.
 
-2) Pure functions - the same input always gives the same output
+This can give you more confidence when you alter, remove, or add new code. You would know what you can or cannot change and you can see where the potential traps are.
 
-3) Functions with limited side effects - any changes, or mutations, to the state of the program outside the function are carefully controlled
+Finally, the function would always produce the same output for the same set of inputs, no matter what part of the code executes it.
 
 # --instructions--
 
-The members of freeCodeCamp happen to love tea.
+Let's update the `incrementer` function to clearly declare its dependencies.
 
-In the code editor, the `prepareTea` and `getTea` functions are already defined for you. Call the `getTea` function to get 40 cups of tea for the team, and store them in the `tea4TeamFCC` variable.
+Write the `incrementer` function so it takes an argument, and then returns a result after increasing the value by one.
 
 # --hints--
 
-The `tea4TeamFCC` variable should hold 40 cups of tea for the team.
+Your function `incrementer` should not change the value of `fixedValue` (which is `4`).
 
 ```js
-assert(tea4TeamFCC.length === 40);
+assert(fixedValue === 4);
 ```
 
-The `tea4TeamFCC` variable should hold cups of green tea.
+Your `incrementer` function should take an argument.
 
 ```js
-assert(tea4TeamFCC[0] === 'greenTea');
+assert(incrementer.length === 1);
+```
+
+Your `incrementer` function should return a value that is one larger than the `fixedValue` value.
+
+```js
+const __newValue = incrementer(fixedValue);
+assert(__newValue === 5);
 ```
 
 # --seed--
@@ -45,44 +52,29 @@ assert(tea4TeamFCC[0] === 'greenTea');
 ## --seed-contents--
 
 ```js
-// Function that returns a string representing a cup of green tea
-const prepareTea = () => 'greenTea';
-
-/*
-Given a function (representing the tea type) and number of cups needed, the
-following function returns an array of strings (each representing a cup of
-a specific type of tea).
-*/
-const getTea = (numOfCups) => {
-  const teaCups = [];
-
-  for(let cups = 1; cups <= numOfCups; cups += 1) {
-    const teaCup = prepareTea();
-    teaCups.push(teaCup);
-  }
-  return teaCups;
-};
+// The global variable
+var fixedValue = 4;
 
 // Only change code below this line
-const tea4TeamFCC = null;
-// Only change code above this line
+function incrementer () {
+
+
+  // Only change code above this line
+}
 ```
 
 # --solutions--
 
 ```js
-const prepareTea = () => 'greenTea';
+// The global variable
+var fixedValue = 4;
 
-const getTea = (numOfCups) => {
-  const teaCups = [];
+// Only change code below this line
+function incrementer (fixedValue) {
+  return fixedValue + 1;
+
+  // Only change code above this line
+}
+
   
-  for(let cups = 1; cups <= numOfCups; cups += 1) {
-    const teaCup = prepareTea();
-    teaCups.push(teaCup);
-  }
-
-  return teaCups;
-};
-
-const tea4TeamFCC = getTea(40); 
 ```
