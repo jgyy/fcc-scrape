@@ -1,53 +1,61 @@
 ---
-id: 587d7dab367417b2b2512b6f
-title: Use the some Method to Check that Any Elements in an Array Meet a Criteria
-challengeType: 1
-forumTopicId: 301314
-dashedName: use-the-some-method-to-check-that-any-elements-in-an-array-meet-a-criteria
+id: a97fd23d9b809dac9921074f
+title: Arguments Optional
+challengeType: 5
+forumTopicId: 14271
+dashedName: arguments-optional
 ---
 
 # --description--
 
-The `some` method works with arrays to check if *any* element passes a particular test. It returns a Boolean value - `true` if any of the values meet the criteria, `false` if not.
+Create a function that sums two arguments together. If only one argument is provided, then return a function that expects one argument and returns the sum.
 
-For example, the following code would check if any element in the `numbers` array is less than 10:
+For example, `addTogether(2, 3)` should return `5`, and `addTogether(2)` should return a function.
 
-```js
-var numbers = [10, 50, 8, 220, 110, 11];
-numbers.some(function(currentValue) {
-  return currentValue < 10;
-});
-// Returns true
-```
+Calling this returned function with a single argument will then return the sum:
 
-# --instructions--
+`var sumTwoAnd = addTogether(2);`
 
-Use the `some` method inside the `checkPositive` function to check if any element in `arr` is positive. The function should return a Boolean value.
+`sumTwoAnd(3)` returns `5`.
+
+If either argument isn't a valid number, return undefined.
 
 # --hints--
 
-Your code should use the `some` method.
+`addTogether(2, 3)` should return 5.
 
 ```js
-assert(code.match(/\.some/g));
+assert.deepEqual(addTogether(2, 3), 5);
 ```
 
-`checkPositive([1, 2, 3, -4, 5])` should return `true`.
+`addTogether(23, 30)` should return 53.
 
 ```js
-assert(checkPositive([1, 2, 3, -4, 5]));
+assert.deepEqual(addTogether(23, 30), 53);
 ```
 
-`checkPositive([1, 2, 3, 4, 5])` should return `true`.
+`addTogether(5)(7)` should return 12.
 
 ```js
-assert(checkPositive([1, 2, 3, 4, 5]));
+assert.deepEqual(addTogether(5)(7), 12);
 ```
 
-`checkPositive([-1, -2, -3, -4, -5])` should return `false`.
+`addTogether("http://bit.ly/IqT6zt")` should return undefined.
 
 ```js
-assert(!checkPositive([-1, -2, -3, -4, -5]));
+assert.isUndefined(addTogether('http://bit.ly/IqT6zt'));
+```
+
+`addTogether(2, "3")` should return undefined.
+
+```js
+assert.isUndefined(addTogether(2, '3'));
+```
+
+`addTogether(2)([3])` should return undefined.
+
+```js
+assert.isUndefined(addTogether(2)([3]));
 ```
 
 # --seed--
@@ -55,22 +63,27 @@ assert(!checkPositive([-1, -2, -3, -4, -5]));
 ## --seed-contents--
 
 ```js
-function checkPositive(arr) {
-  // Only change code below this line
-
-
-  // Only change code above this line
+function addTogether() {
+  return false;
 }
-checkPositive([1, 2, 3, -4, 5]);
+
+addTogether(2,3);
 ```
 
 # --solutions--
 
 ```js
-function checkPositive(arr) {
-  // Only change code below this line
-  return arr.some(elem => elem > 0);
-  // Only change code above this line
+function addTogether() {
+  var a = arguments[0];
+  if (toString.call(a) !== '[object Number]') return;
+  if (arguments.length === 1) {
+    return function(b) {
+      if (toString.call(b) !== '[object Number]') return;
+      return a + b;
+    };
+  }
+  var b = arguments[1];
+  if (toString.call(b) !== '[object Number]') return;
+  return a + arguments[1];
 }
-checkPositive([1, 2, 3, -4, 5]);
 ```
