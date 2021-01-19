@@ -1,64 +1,54 @@
 ---
-id: 587d7dab367417b2b2512b6d
-title: Apply Functional Programming to Convert Strings to URL Slugs
+id: 587d7b8e367417b2b2512b5e
+title: Avoid Mutations and Side Effects Using Functional Programming
 challengeType: 1
-forumTopicId: 301227
-dashedName: apply-functional-programming-to-convert-strings-to-url-slugs
+forumTopicId: 301228
+dashedName: avoid-mutations-and-side-effects-using-functional-programming
 ---
 
 # --description--
 
-The last several challenges covered a number of useful array and string methods that follow functional programming principles. We've also learned about `reduce`, which is a powerful method used to reduce problems to simpler forms. From computing averages to sorting, any array operation can be achieved by applying it. Recall that `map` and `filter` are special cases of `reduce`.
+If you haven't already figured it out, the issue in the previous challenge was with the `splice` call in the `tabClose()` function. Unfortunately, `splice` changes the original array it is called on, so the second call to it used a modified array, and gave unexpected results.
 
-Let's combine what we've learned to solve a practical problem.
+This is a small example of a much larger pattern - you call a function on a variable, array, or an object, and the function changes the variable or something in the object.
 
-Many content management sites (CMS) have the titles of a post added to part of the URL for simple bookmarking purposes. For example, if you write a Medium post titled "Stop Using Reduce", it's likely the URL would have some form of the title string in it (".../stop-using-reduce"). You may have already noticed this on the freeCodeCamp site.
+One of the core principles of functional programming is to not change things. Changes lead to bugs. It's easier to prevent bugs knowing that your functions don't change anything, including the function arguments or any global variable.
+
+The previous example didn't have any complicated operations but the `splice` method changed the original array, and resulted in a bug.
+
+Recall that in functional programming, changing or altering things is called <dfn>mutation</dfn>, and the outcome is called a <dfn>side effect</dfn>. A function, ideally, should be a <dfn>pure function</dfn>, meaning that it does not cause any side effects.
+
+Let's try to master this discipline and not alter any variable or object in our code.
 
 # --instructions--
 
-Fill in the `urlSlug` function so it converts a string `title` and returns the hyphenated version for the URL. You can use any of the methods covered in this section, and don't use `replace`. Here are the requirements:
-
-The input is a string with spaces and title-cased words
-
-The output is a string with the spaces between words replaced by a hyphen (`-`)
-
-The output should be all lower-cased letters
-
-The output should not have any spaces
+Fill in the code for the function `incrementer` so it returns the value of the global variable `fixedValue` increased by one.
 
 # --hints--
 
-Your code should not use the `replace` method for this challenge.
+Your function `incrementer` should not change the value of `fixedValue` (which is `4`).
 
 ```js
-assert(!code.match(/\.?[\s\S]*?replace/g));
+incrementer();
+assert(fixedValue === 4);
 ```
 
-`urlSlug("Winter Is Coming")` should return `"winter-is-coming"`.
+Your `incrementer` function should return a value that is one larger than the `fixedValue` value.
 
 ```js
-assert(urlSlug('Winter Is Coming') === 'winter-is-coming');
+const __newValue = incrementer();
+assert(__newValue === 5);
 ```
 
-`urlSlug(" Winter Is  Coming")` should return `"winter-is-coming"`.
+Your `incrementer` function should return a value based on the global `fixedValue` variable value.
 
 ```js
-assert(urlSlug(' Winter Is  Coming') === 'winter-is-coming');
-```
-
-`urlSlug("A Mind Needs Books Like A Sword Needs A Whetstone")` should return `"a-mind-needs-books-like-a-sword-needs-a-whetstone"`.
-
-```js
-assert(
-  urlSlug('A Mind Needs Books Like A Sword Needs A Whetstone') ===
-    'a-mind-needs-books-like-a-sword-needs-a-whetstone'
-);
-```
-
-`urlSlug("Hold The Door")` should return `"hold-the-door"`.
-
-```js
-assert(urlSlug('Hold The Door') === 'hold-the-door');
+(function () {
+  fixedValue = 10;
+  const newValue = incrementer();
+  assert(fixedValue === 10 && newValue === 11);
+  fixedValue = 4;
+})();
 ```
 
 # --seed--
@@ -66,19 +56,23 @@ assert(urlSlug('Hold The Door') === 'hold-the-door');
 ## --seed-contents--
 
 ```js
-// Only change code below this line
-function urlSlug(title) {
+// The global variable
+var fixedValue = 4;
+
+function incrementer () {
+  // Only change code below this line
 
 
+  // Only change code above this line
 }
-// Only change code above this line
 ```
 
 # --solutions--
 
 ```js
-// Only change code below this line
-function urlSlug(title) {
-  return title.trim().split(/\s+/).join("-").toLowerCase();
+var fixedValue = 4
+
+function incrementer() {
+  return fixedValue + 1
 }
 ```
