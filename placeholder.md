@@ -1,73 +1,65 @@
 ---
-id: 587d7da9367417b2b2512b69
-title: Sort an Array Alphabetically using the sort Method
+id: 587d7daa367417b2b2512b6b
+title: Split a String into an Array Using the split Method
 challengeType: 1
-forumTopicId: 18303
-dashedName: sort-an-array-alphabetically-using-the-sort-method
+forumTopicId: 18305
+dashedName: split-a-string-into-an-array-using-the-split-method
 ---
 
 # --description--
 
-The `sort` method sorts the elements of an array according to the callback function.
+The `split` method splits a string into an array of strings. It takes an argument for the delimiter, which can be a character to use to break up the string or a regular expression. For example, if the delimiter is a space, you get an array of words, and if the delimiter is an empty string, you get an array of each character in the string.
 
-For example:
+Here are two examples that split one string by spaces, then another by digits using a regular expression:
 
 ```js
-function ascendingOrder(arr) {
-  return arr.sort(function(a, b) {
-    return a - b;
-  });
-}
-ascendingOrder([1, 5, 2, 3, 4]);
-// Returns [1, 2, 3, 4, 5]
+var str = "Hello World";
+var bySpace = str.split(" ");
+// Sets bySpace to ["Hello", "World"]
 
-function reverseAlpha(arr) {
-  return arr.sort(function(a, b) {
-    return a === b ? 0 : a < b ? 1 : -1;
-  });
-}
-reverseAlpha(['l', 'h', 'z', 'b', 's']);
-// Returns ['z', 's', 'l', 'h', 'b']
+var otherString = "How9are7you2today";
+var byDigits = otherString.split(/\d/);
+// Sets byDigits to ["How", "are", "you", "today"]
 ```
 
-JavaScript's default sorting method is by string Unicode point value, which may return unexpected results. Therefore, it is encouraged to provide a callback function to specify how to sort the array items. When such a callback function, normally called `compareFunction`, is supplied, the array elements are sorted according to the return value of the `compareFunction`: If `compareFunction(a,b)` returns a value less than 0 for two elements `a` and `b`, then `a` will come before `b`. If `compareFunction(a,b)` returns a value greater than 0 for two elements `a` and `b`, then `b` will come before `a`. If `compareFunction(a,b)` returns a value equal to 0 for two elements `a` and `b`, then `a` and `b` will remain unchanged.
+Since strings are immutable, the `split` method makes it easier to work with them.
 
 # --instructions--
 
-Use the `sort` method in the `alphabeticalOrder` function to sort the elements of `arr` in alphabetical order.
+Use the `split` method inside the `splitify` function to split `str` into an array of words. The function should return the array. Note that the words are not always separated by spaces, and the array should not contain punctuation.
 
 # --hints--
 
-Your code should use the `sort` method.
+Your code should use the `split` method.
 
 ```js
-assert(code.match(/\.sort/g));
+assert(code.match(/\.split/g));
 ```
 
-`alphabeticalOrder(["a", "d", "c", "a", "z", "g"])` should return `["a", "a", "c", "d", "g", "z"]`.
+`splitify("Hello World,I-am code")` should return `["Hello", "World", "I", "am", "code"]`.
 
 ```js
 assert(
-  JSON.stringify(alphabeticalOrder(['a', 'd', 'c', 'a', 'z', 'g'])) ===
-    JSON.stringify(['a', 'a', 'c', 'd', 'g', 'z'])
+  JSON.stringify(splitify('Hello World,I-am code')) ===
+    JSON.stringify(['Hello', 'World', 'I', 'am', 'code'])
 );
 ```
 
-`alphabeticalOrder(["x", "h", "a", "m", "n", "m"])` should return `["a", "h", "m", "m", "n", "x"]`.
+`splitify("Earth-is-our home")` should return `["Earth", "is", "our", "home"]`.
 
 ```js
 assert(
-  JSON.stringify(alphabeticalOrder(['x', 'h', 'a', 'm', 'n', 'm'])) ===
-    JSON.stringify(['a', 'h', 'm', 'm', 'n', 'x'])
+  JSON.stringify(splitify('Earth-is-our home')) ===
+    JSON.stringify(['Earth', 'is', 'our', 'home'])
 );
 ```
 
-`alphabeticalOrder(["a", "a", "a", "a", "x", "t"])` should return `["a", "a", "a", "a", "t", "x"]`.
+`splitify("This.is.a-sentence")` should return `["This", "is", "a", "sentence"]`.
 
 ```js
 assert(
-  JSON.stringify(alphabeticalOrder(['a', 'a', 'a', 'a', 'x', 't'])) ===
-    JSON.stringify(['a', 'a', 'a', 'a', 't', 'x'])
+  JSON.stringify(splitify('This.is.a-sentence')) ===
+    JSON.stringify(['This', 'is', 'a', 'sentence'])
 );
 ```
 
@@ -76,22 +68,21 @@ assert(
 ## --seed-contents--
 
 ```js
-function alphabeticalOrder(arr) {
+function splitify(str) {
   // Only change code below this line
 
 
   // Only change code above this line
 }
-alphabeticalOrder(["a", "d", "c", "a", "z", "g"]);
+splitify("Hello World,I-am code");
 ```
 
 # --solutions--
 
 ```js
-function alphabeticalOrder(arr) {
+function splitify(str) {
   // Only change code below this line
-  return arr.sort();
+  return str.split(/\W/);
   // Only change code above this line
 }
-alphabeticalOrder(["a", "d", "c", "a", "z", "g"]);
 ```
