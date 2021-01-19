@@ -1,63 +1,64 @@
 ---
-id: 587d7da9367417b2b2512b67
-title: Add Elements to the End of an Array Using concat Instead of push
+id: 587d7dab367417b2b2512b6d
+title: Apply Functional Programming to Convert Strings to URL Slugs
 challengeType: 1
-forumTopicId: 301226
-dashedName: add-elements-to-the-end-of-an-array-using-concat-instead-of-push
+forumTopicId: 301227
+dashedName: apply-functional-programming-to-convert-strings-to-url-slugs
 ---
 
 # --description--
 
-Functional programming is all about creating and using non-mutating functions.
+The last several challenges covered a number of useful array and string methods that follow functional programming principles. We've also learned about `reduce`, which is a powerful method used to reduce problems to simpler forms. From computing averages to sorting, any array operation can be achieved by applying it. Recall that `map` and `filter` are special cases of `reduce`.
 
-The last challenge introduced the `concat` method as a way to combine arrays into a new one without mutating the original arrays. Compare `concat` to the `push` method. `Push` adds an item to the end of the same array it is called on, which mutates that array. Here's an example:
+Let's combine what we've learned to solve a practical problem.
 
-```js
-var arr = [1, 2, 3];
-arr.push([4, 5, 6]);
-// arr is changed to [1, 2, 3, [4, 5, 6]]
-// Not the functional programming way
-```
-
-`Concat` offers a way to add new items to the end of an array without any mutating side effects.
+Many content management sites (CMS) have the titles of a post added to part of the URL for simple bookmarking purposes. For example, if you write a Medium post titled "Stop Using Reduce", it's likely the URL would have some form of the title string in it (".../stop-using-reduce"). You may have already noticed this on the freeCodeCamp site.
 
 # --instructions--
 
-Change the `nonMutatingPush` function so it uses `concat` to add `newItem` to the end of `original` instead of `push`. The function should return an array.
+Fill in the `urlSlug` function so it converts a string `title` and returns the hyphenated version for the URL. You can use any of the methods covered in this section, and don't use `replace`. Here are the requirements:
+
+The input is a string with spaces and title-cased words
+
+The output is a string with the spaces between words replaced by a hyphen (`-`)
+
+The output should be all lower-cased letters
+
+The output should not have any spaces
 
 # --hints--
 
-Your code should use the `concat` method.
+Your code should not use the `replace` method for this challenge.
 
 ```js
-assert(code.match(/\.concat/g));
+assert(!code.match(/\.?[\s\S]*?replace/g));
 ```
 
-Your code should not use the `push` method.
+`urlSlug("Winter Is Coming")` should return `"winter-is-coming"`.
 
 ```js
-assert(!code.match(/\.?[\s\S]*?push/g));
+assert(urlSlug('Winter Is Coming') === 'winter-is-coming');
 ```
 
-The `first` array should not change.
+`urlSlug(" Winter Is  Coming")` should return `"winter-is-coming"`.
 
 ```js
-assert(JSON.stringify(first) === JSON.stringify([1, 2, 3]));
+assert(urlSlug(' Winter Is  Coming') === 'winter-is-coming');
 ```
 
-The `second` array should not change.
-
-```js
-assert(JSON.stringify(second) === JSON.stringify([4, 5]));
-```
-
-`nonMutatingPush([1, 2, 3], [4, 5])` should return `[1, 2, 3, 4, 5]`.
+`urlSlug("A Mind Needs Books Like A Sword Needs A Whetstone")` should return `"a-mind-needs-books-like-a-sword-needs-a-whetstone"`.
 
 ```js
 assert(
-  JSON.stringify(nonMutatingPush([1, 2, 3], [4, 5])) ===
-    JSON.stringify([1, 2, 3, 4, 5])
+  urlSlug('A Mind Needs Books Like A Sword Needs A Whetstone') ===
+    'a-mind-needs-books-like-a-sword-needs-a-whetstone'
 );
+```
+
+`urlSlug("Hold The Door")` should return `"hold-the-door"`.
+
+```js
+assert(urlSlug('Hold The Door') === 'hold-the-door');
 ```
 
 # --seed--
@@ -65,24 +66,19 @@ assert(
 ## --seed-contents--
 
 ```js
-function nonMutatingPush(original, newItem) {
-  // Only change code below this line
-  return original.push(newItem);
+// Only change code below this line
+function urlSlug(title) {
 
-  // Only change code above this line
+
 }
-var first = [1, 2, 3];
-var second = [4, 5];
-nonMutatingPush(first, second);
+// Only change code above this line
 ```
 
 # --solutions--
 
 ```js
-function nonMutatingPush(original, newItem) {
-  return original.concat(newItem);
+// Only change code below this line
+function urlSlug(title) {
+  return title.trim().split(/\s+/).join("-").toLowerCase();
 }
-var first = [1, 2, 3];
-var second = [4, 5];
-nonMutatingPush(first, second);
 ```
