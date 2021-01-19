@@ -1,55 +1,69 @@
 ---
-id: 587d7b8e367417b2b2512b5d
-title: Understand the Hazards of Using Imperative Code
+id: 587d7b88367417b2b2512b45
+title: 'Use Higher-Order Functions map, filter, or reduce to Solve a Complex Problem'
 challengeType: 1
-forumTopicId: 301241
-dashedName: understand-the-hazards-of-using-imperative-code
+forumTopicId: 301311
+dashedName: use-higher-order-functions-map-filter-or-reduce-to-solve-a-complex-problem
 ---
 
 # --description--
 
-Functional programming is a good habit. It keeps your code easy to manage, and saves you from sneaky bugs. But before we get there, let's look at an imperative approach to programming to highlight where you may have issues.
-
-In English (and many other languages), the imperative tense is used to give commands. Similarly, an imperative style in programming is one that gives the computer a set of statements to perform a task.
-
-Often the statements change the state of the program, like updating global variables. A classic example is writing a `for` loop that gives exact directions to iterate over the indices of an array.
-
-In contrast, functional programming is a form of declarative programming. You tell the computer what you want done by calling a method or function.
-
-JavaScript offers many predefined methods that handle common tasks so you don't need to write out how the computer should perform them. For example, instead of using the `for` loop mentioned above, you could call the `map` method which handles the details of iterating over an array. This helps to avoid semantic errors, like the "Off By One Errors" that were covered in the Debugging section.
-
-Consider the scenario: you are browsing the web in your browser, and want to track the tabs you have opened. Let's try to model this using some simple object-oriented code.
-
-A Window object is made up of tabs, and you usually have more than one Window open. The titles of each open site in each Window object is held in an array. After working in the browser (opening new tabs, merging windows, and closing tabs), you want to print the tabs that are still open. Closed tabs are removed from the array and new tabs (for simplicity) get added to the end of it.
-
-The code editor shows an implementation of this functionality with functions for `tabOpen()`, `tabClose()`, and `join()`. The array `tabs` is part of the Window object that stores the name of the open pages.
+Now that you have worked through a few challenges using higher-order functions like `map()`, `filter()`, and `reduce()`, you now get to apply them to solve a more complex challenge.
 
 # --instructions--
 
-Examine the code in the editor. It's using a method that has side effects in the program, causing incorrect behaviour. The final list of open tabs, stored in `finalTabs.tabs`, should be `['FB', 'Gitter', 'Reddit', 'Twitter', 'Medium', 'new tab', 'Netflix', 'YouTube', 'Vine', 'GMail', 'Work mail', 'Docs', 'freeCodeCamp', 'new tab']` but the list produced by the code is slightly different.
+We have defined a function named `squareList`. You need to complete the code for the `squareList` function using any combination of `map()`, `filter()`, and `reduce()` so that it returns a new array containing only the square of *only* the positive integers (decimal numbers are not integers) when an array of real numbers is passed to it. An example of an array containing only real numbers is `[-3, 4.8, 5, 3, -3.2]`.
 
-Change `Window.prototype.tabClose` so that it removes the correct tab.
+**Note:** Your function should not use any kind of `for` or `while` loops or the `forEach()` function.
 
 # --hints--
 
-`finalTabs.tabs` should be `['FB', 'Gitter', 'Reddit', 'Twitter', 'Medium', 'new tab', 'Netflix', 'YouTube', 'Vine', 'GMail', 'Work mail', 'Docs', 'freeCodeCamp', 'new tab']`
+`squareList` should be a `function`.
 
 ```js
-assert.deepEqual(finalTabs.tabs, [
-  'FB',
-  'Gitter',
-  'Reddit',
-  'Twitter',
-  'Medium',
-  'new tab',
-  'Netflix',
-  'YouTube',
-  'Vine',
-  'GMail',
-  'Work mail',
-  'Docs',
-  'freeCodeCamp',
-  'new tab'
+assert.typeOf(squareList, 'function'),
+  '<code>squareList</code> should be a <code>function</code>';
+```
+
+`for`, `while`, and `forEach` should not be used.
+
+```js
+assert(!__helpers.removeJSComments(code).match(/for|while|forEach/g));
+```
+
+`map`, `filter`, or `reduce` should be used.
+
+```js
+assert(
+  __helpers
+    .removeWhiteSpace(__helpers.removeJSComments(code))
+    .match(/\.(map|filter|reduce)\(/g)
+);
+```
+
+The function should return an `array`.
+
+```js
+assert(Array.isArray(squareList([4, 5.6, -9.8, 3.14, 42, 6, 8.34, -2])));
+```
+
+`squareList([4, 5.6, -9.8, 3.14, 42, 6, 8.34, -2])` should return `[16, 1764, 36]`.
+
+```js
+assert.deepStrictEqual(squareList([4, 5.6, -9.8, 3.14, 42, 6, 8.34, -2]), [
+  16,
+  1764,
+  36
+]);
+```
+
+`squareList([-3.7, -5, 3, 10, 12.5, 7, -4.5, -17, 0.3])` should return `[9, 100, 49]`.
+
+```js
+assert.deepStrictEqual(squareList([-3.7, -5, 3, 10, 12.5, 7, -4.5, -17, 0.3]), [
+  9,
+  100,
+  49
 ]);
 ```
 
@@ -58,88 +72,26 @@ assert.deepEqual(finalTabs.tabs, [
 ## --seed-contents--
 
 ```js
-// tabs is an array of titles of each site open within the window
-var Window = function(tabs) {
-  this.tabs = tabs; // We keep a record of the array inside the object
-};
-
-// When you join two windows into one window
-Window.prototype.join = function (otherWindow) {
-  this.tabs = this.tabs.concat(otherWindow.tabs);
-  return this;
-};
-
-// When you open a new tab at the end
-Window.prototype.tabOpen = function (tab) {
-  this.tabs.push('new tab'); // Let's open a new tab for now
-  return this;
-};
-
-// When you close a tab
-Window.prototype.tabClose = function (index) {
-
+const squareList = arr => {
   // Only change code below this line
-
-  var tabsBeforeIndex = this.tabs.splice(0, index); // Get the tabs before the tab
-  var tabsAfterIndex = this.tabs.splice(index + 1); // Get the tabs after the tab
-
-  this.tabs = tabsBeforeIndex.concat(tabsAfterIndex); // Join them together
-
+  return arr;
   // Only change code above this line
+};
 
-  return this;
- };
-
-// Let's create three browser windows
-var workWindow = new Window(['GMail', 'Inbox', 'Work mail', 'Docs', 'freeCodeCamp']); // Your mailbox, drive, and other work sites
-var socialWindow = new Window(['FB', 'Gitter', 'Reddit', 'Twitter', 'Medium']); // Social sites
-var videoWindow = new Window(['Netflix', 'YouTube', 'Vimeo', 'Vine']); // Entertainment sites
-
-// Now perform the tab opening, closing, and other operations
-var finalTabs = socialWindow
-  .tabOpen() // Open a new tab for cat memes
-  .join(videoWindow.tabClose(2)) // Close third tab in video window, and join
-  .join(workWindow.tabClose(1).tabOpen());
-console.log(finalTabs.tabs);
+const squaredIntegers = squareList([-3, 4.8, 5, 3, -3.2]);
+console.log(squaredIntegers);
 ```
 
 # --solutions--
 
 ```js
-// tabs is an array of titles of each site open within the window
-var Window = function(tabs) {
-  this.tabs = tabs; // We keep a record of the array inside the object
+const squareList = arr => {
+  const positiveIntegers = arr.filter(num => {
+    return num >= 0 && Number.isInteger(num);
+  });
+  const squaredIntegers = positiveIntegers.map(num => {
+    return num ** 2;
+  });
+  return squaredIntegers;
 };
-
-// When you join two windows into one window
-Window.prototype.join = function (otherWindow) {
-  this.tabs = this.tabs.concat(otherWindow.tabs);
-  return this;
-};
-
-// When you open a new tab at the end
-Window.prototype.tabOpen = function (tab) {
-  this.tabs.push('new tab'); // Let's open a new tab for now
-  return this;
-};
-
-// When you close a tab
-Window.prototype.tabClose = function (index) {
-  var tabsBeforeIndex = this.tabs.slice(0, index); // Get the tabs before the tab
-  var tabsAfterIndex = this.tabs.slice(index + 1); // Get the tabs after the tab
-
-  this.tabs = tabsBeforeIndex.concat(tabsAfterIndex); // Join them together
-  return this;
- };
-
-// Let's create three browser windows
-var workWindow = new Window(['GMail', 'Inbox', 'Work mail', 'Docs', 'freeCodeCamp']); // Your mailbox, drive, and other work sites
-var socialWindow = new Window(['FB', 'Gitter', 'Reddit', 'Twitter', 'Medium']); // Social sites
-var videoWindow = new Window(['Netflix', 'YouTube', 'Vimeo', 'Vine']); //  Entertainment sites
-
-// Now perform the tab opening, closing, and other operations
-var finalTabs = socialWindow
-  .tabOpen() // Open a new tab for cat memes
-  .join(videoWindow.tabClose(2)) // Close third tab in video window, and join
-  .join(workWindow.tabClose(1).tabOpen());
 ```
