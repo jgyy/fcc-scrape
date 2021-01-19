@@ -1,52 +1,69 @@
 ---
-id: 587d7da9367417b2b2512b6a
-title: Return a Sorted Array Without Changing the Original Array
+id: 587d7b90367417b2b2512b65
+title: Return Part of an Array Using the slice Method
 challengeType: 1
-forumTopicId: 301237
-dashedName: return-a-sorted-array-without-changing-the-original-array
+forumTopicId: 301239
+dashedName: return-part-of-an-array-using-the-slice-method
 ---
 
 # --description--
 
-A side effect of the `sort` method is that it changes the order of the elements in the original array. In other words, it mutates the array in place. One way to avoid this is to first concatenate an empty array to the one being sorted (remember that `slice` and `concat` return a new array), then run the `sort` method.
+The `slice` method returns a copy of certain elements of an array. It can take two arguments, the first gives the index of where to begin the slice, the second is the index for where to end the slice (and it's non-inclusive). If the arguments are not provided, the default is to start at the beginning of the array through the end, which is an easy way to make a copy of the entire array. The `slice` method does not mutate the original array, but returns a new one.
+
+Here's an example:
+
+```js
+var arr = ["Cat", "Dog", "Tiger", "Zebra"];
+var newArray = arr.slice(1, 3);
+// Sets newArray to ["Dog", "Tiger"]
+```
 
 # --instructions--
 
-Use the `sort` method in the `nonMutatingSort` function to sort the elements of an array in ascending order. The function should return a new array, and not mutate the `globalArray` variable.
+Use the `slice` method in the `sliceArray` function to return part of the `anim` array given the provided `beginSlice` and `endSlice` indices. The function should return an array.
 
 # --hints--
 
-Your code should use the `sort` method.
+Your code should use the `slice` method.
 
 ```js
-assert(nonMutatingSort.toString().match(/\.sort/g));
+assert(code.match(/\.slice/g));
 ```
 
-The `globalArray` variable should not change.
-
-```js
-assert(JSON.stringify(globalArray) === JSON.stringify([5, 6, 3, 2, 9]));
-```
-
-`nonMutatingSort(globalArray)` should return `[2, 3, 5, 6, 9]`.
+The `inputAnim` variable should not change.
 
 ```js
 assert(
-  JSON.stringify(nonMutatingSort(globalArray)) ===
-    JSON.stringify([2, 3, 5, 6, 9])
+  JSON.stringify(inputAnim) ===
+    JSON.stringify(['Cat', 'Dog', 'Tiger', 'Zebra', 'Ant'])
 );
 ```
 
-`nonMutatingSort(globalArray)` should not be hard coded.
+`sliceArray(["Cat", "Dog", "Tiger", "Zebra", "Ant"], 1, 3)` should return `["Dog", "Tiger"]`.
 
 ```js
-assert(!nonMutatingSort.toString().match(/[23569]/g));
+assert(
+  JSON.stringify(sliceArray(['Cat', 'Dog', 'Tiger', 'Zebra', 'Ant'], 1, 3)) ===
+    JSON.stringify(['Dog', 'Tiger'])
+);
 ```
 
-The function should return a new array, not the array passed to it.
+`sliceArray(["Cat", "Dog", "Tiger", "Zebra", "Ant"], 0, 1)` should return `["Cat"]`.
 
 ```js
-assert(nonMutatingSort(globalArray) !== globalArray);
+assert(
+  JSON.stringify(sliceArray(['Cat', 'Dog', 'Tiger', 'Zebra', 'Ant'], 0, 1)) ===
+    JSON.stringify(['Cat'])
+);
+```
+
+`sliceArray(["Cat", "Dog", "Tiger", "Zebra", "Ant"], 1, 4)` should return `["Dog", "Tiger", "Zebra"]`.
+
+```js
+assert(
+  JSON.stringify(sliceArray(['Cat', 'Dog', 'Tiger', 'Zebra', 'Ant'], 1, 4)) ===
+    JSON.stringify(['Dog', 'Tiger', 'Zebra'])
+);
 ```
 
 # --seed--
@@ -54,24 +71,24 @@ assert(nonMutatingSort(globalArray) !== globalArray);
 ## --seed-contents--
 
 ```js
-var globalArray = [5, 6, 3, 2, 9];
-function nonMutatingSort(arr) {
+function sliceArray(anim, beginSlice, endSlice) {
   // Only change code below this line
 
 
   // Only change code above this line
 }
-nonMutatingSort(globalArray);
+var inputAnim = ["Cat", "Dog", "Tiger", "Zebra", "Ant"];
+sliceArray(inputAnim, 1, 3);
 ```
 
 # --solutions--
 
 ```js
-var globalArray = [5, 6, 3, 2, 9];
-function nonMutatingSort(arr) {
+function sliceArray(anim, beginSlice, endSlice) {
   // Only change code below this line
-  return [].concat(arr).sort((a,b) => a-b);
+  return anim.slice(beginSlice, endSlice)
   // Only change code above this line
 }
-nonMutatingSort(globalArray);
+var inputAnim = ["Cat", "Dog", "Tiger", "Zebra", "Ant"];
+sliceArray(inputAnim, 1, 3);
 ```
