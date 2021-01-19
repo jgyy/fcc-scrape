@@ -1,67 +1,50 @@
 ---
-id: 587d7daa367417b2b2512b6c
-title: Combine an Array into a String Using the join Method
+id: 587d7da9367417b2b2512b66
+title: Combine Two Arrays Using the concat Method
 challengeType: 1
-forumTopicId: 18221
-dashedName: combine-an-array-into-a-string-using-the-join-method
+forumTopicId: 301229
+dashedName: combine-two-arrays-using-the-concat-method
 ---
 
 # --description--
 
-The `join` method is used to join the elements of an array together to create a string. It takes an argument for the delimiter that is used to separate the array elements in the string.
-
-Here's an example:
+<dfn>Concatenation</dfn> means to join items end to end. JavaScript offers the `concat` method for both strings and arrays that work in the same way. For arrays, the method is called on one, then another array is provided as the argument to `concat`, which is added to the end of the first array. It returns a new array and does not mutate either of the original arrays. Here's an example:
 
 ```js
-var arr = ["Hello", "World"];
-var str = arr.join(" ");
-// Sets str to "Hello World"
+[1, 2, 3].concat([4, 5, 6]);
+// Returns a new array [1, 2, 3, 4, 5, 6]
 ```
 
 # --instructions--
 
-Use the `join` method (among others) inside the `sentensify` function to make a sentence from the words in the string `str`. The function should return a string. For example, "I-like-Star-Wars" would be converted to "I like Star Wars". For this challenge, do not use the `replace` method.
+Use the `concat` method in the `nonMutatingConcat` function to concatenate `attach` to the end of `original`. The function should return the concatenated array.
 
 # --hints--
 
-Your code should use the `join` method.
+Your code should use the `concat` method.
 
 ```js
-assert(code.match(/\.join/g));
+assert(code.match(/\.concat/g));
 ```
 
-Your code should not use the `replace` method.
+The `first` array should not change.
 
 ```js
-assert(!code.match(/\.?[\s\S]*?replace/g));
+assert(JSON.stringify(first) === JSON.stringify([1, 2, 3]));
 ```
 
-`sentensify("May-the-force-be-with-you")` should return a string.
+The `second` array should not change.
 
 ```js
-assert(typeof sentensify('May-the-force-be-with-you') === 'string');
+assert(JSON.stringify(second) === JSON.stringify([4, 5]));
 ```
 
-`sentensify("May-the-force-be-with-you")` should return `"May the force be with you"`.
-
-```js
-assert(sentensify('May-the-force-be-with-you') === 'May the force be with you');
-```
-
-`sentensify("The.force.is.strong.with.this.one")` should return `"The force is strong with this one"`.
+`nonMutatingConcat([1, 2, 3], [4, 5])` should return `[1, 2, 3, 4, 5]`.
 
 ```js
 assert(
-  sentensify('The.force.is.strong.with.this.one') ===
-    'The force is strong with this one'
-);
-```
-
-`sentensify("There,has,been,an,awakening")` should return `"There has been an awakening"`.
-
-```js
-assert(
-  sentensify('There,has,been,an,awakening') === 'There has been an awakening'
+  JSON.stringify(nonMutatingConcat([1, 2, 3], [4, 5])) ===
+    JSON.stringify([1, 2, 3, 4, 5])
 );
 ```
 
@@ -70,21 +53,26 @@ assert(
 ## --seed-contents--
 
 ```js
-function sentensify(str) {
+function nonMutatingConcat(original, attach) {
   // Only change code below this line
 
 
   // Only change code above this line
 }
-sentensify("May-the-force-be-with-you");
+var first = [1, 2, 3];
+var second = [4, 5];
+nonMutatingConcat(first, second);
 ```
 
 # --solutions--
 
 ```js
-function sentensify(str) {
+function nonMutatingConcat(original, attach) {
   // Only change code below this line
-  return str.split(/\W/).join(' ');
+  return original.concat(attach);
   // Only change code above this line
 }
+var first = [1, 2, 3];
+var second = [4, 5];
+nonMutatingConcat(first, second);
 ```
