@@ -1,70 +1,53 @@
 ---
-id: 587d7b88367417b2b2512b45
-title: 'Use Higher-Order Functions map, filter, or reduce to Solve a Complex Problem'
+id: 587d7dab367417b2b2512b6e
+title: Use the every Method to Check that Every Element in an Array Meets a Criteria
 challengeType: 1
-forumTopicId: 301311
-dashedName: use-higher-order-functions-map-filter-or-reduce-to-solve-a-complex-problem
+forumTopicId: 301312
+dashedName: use-the-every-method-to-check-that-every-element-in-an-array-meets-a-criteria
 ---
 
 # --description--
 
-Now that you have worked through a few challenges using higher-order functions like `map()`, `filter()`, and `reduce()`, you now get to apply them to solve a more complex challenge.
+The `every` method works with arrays to check if *every* element passes a particular test. It returns a Boolean value - `true` if all values meet the criteria, `false` if not.
+
+For example, the following code would check if every element in the `numbers` array is less than 10:
+
+```js
+var numbers = [1, 5, 8, 0, 10, 11];
+numbers.every(function(currentValue) {
+  return currentValue < 10;
+});
+// Returns false
+```
 
 # --instructions--
 
-We have defined a function named `squareList`. You need to complete the code for the `squareList` function using any combination of `map()`, `filter()`, and `reduce()` so that it returns a new array containing only the square of *only* the positive integers (decimal numbers are not integers) when an array of real numbers is passed to it. An example of an array containing only real numbers is `[-3, 4.8, 5, 3, -3.2]`.
-
-**Note:** Your function should not use any kind of `for` or `while` loops or the `forEach()` function.
+Use the `every` method inside the `checkPositive` function to check if every element in `arr` is positive. The function should return a Boolean value.
 
 # --hints--
 
-`squareList` should be a `function`.
+Your code should use the `every` method.
 
 ```js
-assert.typeOf(squareList, 'function'),
-  '<code>squareList</code> should be a <code>function</code>';
+assert(code.match(/\.every/g));
 ```
 
-`for`, `while`, and `forEach` should not be used.
+`checkPositive([1, 2, 3, -4, 5])` should return `false`.
 
 ```js
-assert(!__helpers.removeJSComments(code).match(/for|while|forEach/g));
+assert.isFalse(checkPositive([1, 2, 3, -4, 5]));
 ```
 
-`map`, `filter`, or `reduce` should be used.
+`checkPositive([1, 2, 3, 4, 5])` should return `true`.
 
 ```js
-assert(
-  __helpers
-    .removeWhiteSpace(__helpers.removeJSComments(code))
-    .match(/\.(map|filter|reduce)\(/g)
-);
+assert.isTrue(checkPositive([1, 2, 3, 4, 5]));
 ```
 
-The function should return an `array`.
+`checkPositive([1, -2, 3, -4, 5])` should return `false`.
 
 ```js
-assert(Array.isArray(squareList([4, 5.6, -9.8, 3.14, 42, 6, 8.34, -2])));
-```
-
-`squareList([4, 5.6, -9.8, 3.14, 42, 6, 8.34, -2])` should return `[16, 1764, 36]`.
-
-```js
-assert.deepStrictEqual(squareList([4, 5.6, -9.8, 3.14, 42, 6, 8.34, -2]), [
-  16,
-  1764,
-  36
-]);
-```
-
-`squareList([-3.7, -5, 3, 10, 12.5, 7, -4.5, -17, 0.3])` should return `[9, 100, 49]`.
-
-```js
-assert.deepStrictEqual(squareList([-3.7, -5, 3, 10, 12.5, 7, -4.5, -17, 0.3]), [
-  9,
-  100,
-  49
-]);
+assert.isFalse(checkPositive([1, -2, 3, -4, 5]));
 ```
 
 # --seed--
@@ -72,26 +55,22 @@ assert.deepStrictEqual(squareList([-3.7, -5, 3, 10, 12.5, 7, -4.5, -17, 0.3]), [
 ## --seed-contents--
 
 ```js
-const squareList = arr => {
+function checkPositive(arr) {
   // Only change code below this line
-  return arr;
-  // Only change code above this line
-};
 
-const squaredIntegers = squareList([-3, 4.8, 5, 3, -3.2]);
-console.log(squaredIntegers);
+
+  // Only change code above this line
+}
+checkPositive([1, 2, 3, -4, 5]);
 ```
 
 # --solutions--
 
 ```js
-const squareList = arr => {
-  const positiveIntegers = arr.filter(num => {
-    return num >= 0 && Number.isInteger(num);
-  });
-  const squaredIntegers = positiveIntegers.map(num => {
-    return num ** 2;
-  });
-  return squaredIntegers;
-};
+function checkPositive(arr) {
+  // Only change code below this line
+  return arr.every(num => num > 0);
+  // Only change code above this line
+}
+checkPositive([1, 2, 3, -4, 5]);
 ```
