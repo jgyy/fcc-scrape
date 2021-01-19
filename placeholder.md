@@ -1,82 +1,59 @@
 ---
-id: 587d7b8f367417b2b2512b60
-title: Refactor Global Variables Out of Functions
+id: 9d7123c8c441eeafaeb5bdef
+title: Remove Elements from an Array Using slice Instead of splice
 challengeType: 1
-forumTopicId: 301235
-dashedName: refactor-global-variables-out-of-functions
+forumTopicId: 301236
+dashedName: remove-elements-from-an-array-using-slice-instead-of-splice
 ---
 
 # --description--
 
-So far, we have seen two distinct principles for functional programming:
+A common pattern while working with arrays is when you want to remove items and keep the rest of the array. JavaScript offers the `splice` method for this, which takes arguments for the index of where to start removing items, then the number of items to remove. If the second argument is not provided, the default is to remove items through the end. However, the `splice` method mutates the original array it is called on. Here's an example:
 
-1) Don't alter a variable or object - create new variables and objects and return them if need be from a function. Hint: using something like `var newArr = arrVar`, where `arrVar` is an array will simply create a reference to the existing variable and not a copy. So changing a value in `newArr` would change the value in `arrVar`.
+```js
+var cities = ["Chicago", "Delhi", "Islamabad", "London", "Berlin"];
+cities.splice(3, 1); // Returns "London" and deletes it from the cities array
+// cities is now ["Chicago", "Delhi", "Islamabad", "Berlin"]
+```
 
-2) Declare function parameters - any computation inside a function depends only on the arguments passed to the function, and not on any global object or variable.
-
-Adding one to a number is not very exciting, but we can apply these principles when working with arrays or more complex objects.
+As we saw in the last challenge, the `slice` method does not mutate the original array, but returns a new one which can be saved into a variable. Recall that the `slice` method takes two arguments for the indices to begin and end the slice (the end is non-inclusive), and returns those items in a new array. Using the `slice` method instead of `splice` helps to avoid any array-mutating side effects.
 
 # --instructions--
 
-Rewrite the code so the global array `bookList` is not changed inside either function. The `add` function should add the given `bookName` to the end of the array passed to it and return a new array (list). The `remove` function should remove the given `bookName` from the array passed to it.
+Rewrite the function `nonMutatingSplice` by using `slice` instead of `splice`. It should limit the provided `cities` array to a length of 3, and return a new array with only the first three items.
 
-**Note:** Both functions should return an array, and any new parameters should be added before the `bookName` parameter.
+Do not mutate the original array provided to the function.
 
 # --hints--
 
-`bookList` should not change and still equal `["The Hound of the Baskervilles", "On The Electrodynamics of Moving Bodies", "Philosophiæ Naturalis Principia Mathematica", "Disquisitiones Arithmeticae"]`.
+Your code should use the `slice` method.
+
+```js
+assert(code.match(/\.slice/g));
+```
+
+Your code should not use the `splice` method.
+
+```js
+assert(!code.match(/\.?[\s\S]*?splice/g));
+```
+
+The `inputCities` array should not change.
 
 ```js
 assert(
-  JSON.stringify(bookList) ===
-    JSON.stringify([
-      'The Hound of the Baskervilles',
-      'On The Electrodynamics of Moving Bodies',
-      'Philosophiæ Naturalis Principia Mathematica',
-      'Disquisitiones Arithmeticae'
-    ])
+  JSON.stringify(inputCities) ===
+    JSON.stringify(['Chicago', 'Delhi', 'Islamabad', 'London', 'Berlin'])
 );
 ```
 
-`newBookList` should equal `["The Hound of the Baskervilles", "On The Electrodynamics of Moving Bodies", "Philosophiæ Naturalis Principia Mathematica", "Disquisitiones Arithmeticae", "A Brief History of Time"]`.
+`nonMutatingSplice(["Chicago", "Delhi", "Islamabad", "London", "Berlin"])` should return `["Chicago", "Delhi", "Islamabad"]`.
 
 ```js
 assert(
-  JSON.stringify(newBookList) ===
-    JSON.stringify([
-      'The Hound of the Baskervilles',
-      'On The Electrodynamics of Moving Bodies',
-      'Philosophiæ Naturalis Principia Mathematica',
-      'Disquisitiones Arithmeticae',
-      'A Brief History of Time'
-    ])
-);
-```
-
-`newerBookList` should equal `["The Hound of the Baskervilles", "Philosophiæ Naturalis Principia Mathematica", "Disquisitiones Arithmeticae"]`.
-
-```js
-assert(
-  JSON.stringify(newerBookList) ===
-    JSON.stringify([
-      'The Hound of the Baskervilles',
-      'Philosophiæ Naturalis Principia Mathematica',
-      'Disquisitiones Arithmeticae'
-    ])
-);
-```
-
-`newestBookList` should equal `["The Hound of the Baskervilles", "Philosophiæ Naturalis Principia Mathematica", "Disquisitiones Arithmeticae", "A Brief History of Time"]`.
-
-```js
-assert(
-  JSON.stringify(newestBookList) ===
-    JSON.stringify([
-      'The Hound of the Baskervilles',
-      'Philosophiæ Naturalis Principia Mathematica',
-      'Disquisitiones Arithmeticae',
-      'A Brief History of Time'
-    ])
+  JSON.stringify(
+    nonMutatingSplice(['Chicago', 'Delhi', 'Islamabad', 'London', 'Berlin'])
+  ) === JSON.stringify(['Chicago', 'Delhi', 'Islamabad'])
 );
 ```
 
@@ -85,57 +62,24 @@ assert(
 ## --seed-contents--
 
 ```js
-// The global variable
-var bookList = ["The Hound of the Baskervilles", "On The Electrodynamics of Moving Bodies", "Philosophiæ Naturalis Principia Mathematica", "Disquisitiones Arithmeticae"];
+function nonMutatingSplice(cities) {
+  // Only change code below this line
+  return cities.splice(3);
 
-// Change code below this line
-function add (bookName) {
-
-  bookList.push(bookName);
-  return bookList;
-  
-  // Change code above this line
+  // Only change code above this line
 }
-
-// Change code below this line
-function remove (bookName) {
-  var book_index = bookList.indexOf(bookName);
-  if (book_index >= 0) {
-
-    bookList.splice(book_index, 1);
-    return bookList;
-
-    // Change code above this line
-    }
-}
-
-var newBookList = add(bookList, 'A Brief History of Time');
-var newerBookList = remove(bookList, 'On The Electrodynamics of Moving Bodies');
-var newestBookList = remove(add(bookList, 'A Brief History of Time'), 'On The Electrodynamics of Moving Bodies');
-
-console.log(bookList);
+var inputCities = ["Chicago", "Delhi", "Islamabad", "London", "Berlin"];
+nonMutatingSplice(inputCities);
 ```
 
 # --solutions--
 
 ```js
-// The global variable
-var bookList = ["The Hound of the Baskervilles", "On The Electrodynamics of Moving Bodies", "Philosophiæ Naturalis Principia Mathematica", "Disquisitiones Arithmeticae"];
-
-function add (bookList, bookName) {
-  return [...bookList, bookName];
+function nonMutatingSplice(cities) {
+  // Only change code below this line
+  return cities.slice(0,3);
+  // Only change code above this line
 }
-
-function remove (bookList, bookName) {
-  const bookListCopy = [...bookList];
-  const bookNameIndex = bookList.indexOf(bookName);
-  if (bookNameIndex >= 0) {
-    bookListCopy.splice(bookNameIndex, 1);
-  }
-  return bookListCopy;
-}
-
-var newBookList = add(bookList, 'A Brief History of Time');
-var newerBookList = remove(bookList, 'On The Electrodynamics of Moving Bodies');
-var newestBookList = remove(add(bookList, 'A Brief History of Time'), 'On The Electrodynamics of Moving Bodies');
+var inputCities = ["Chicago", "Delhi", "Islamabad", "London", "Berlin"];
+nonMutatingSplice(inputCities);
 ```
