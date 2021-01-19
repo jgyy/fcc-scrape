@@ -1,51 +1,35 @@
 ---
-id: 587d7da9367417b2b2512b66
-title: Combine Two Arrays Using the concat Method
+id: 587d7b8f367417b2b2512b62
+title: Implement map on a Prototype
 challengeType: 1
-forumTopicId: 301229
-dashedName: combine-two-arrays-using-the-concat-method
+forumTopicId: 301230
+dashedName: implement-map-on-a-prototype
 ---
 
 # --description--
 
-<dfn>Concatenation</dfn> means to join items end to end. JavaScript offers the `concat` method for both strings and arrays that work in the same way. For arrays, the method is called on one, then another array is provided as the argument to `concat`, which is added to the end of the first array. It returns a new array and does not mutate either of the original arrays. Here's an example:
+As you have seen from applying `Array.prototype.map()`, or simply `map()` earlier, the `map` method returns an array of the same length as the one it was called on. It also doesn't alter the original array, as long as its callback function doesn't.
 
-```js
-[1, 2, 3].concat([4, 5, 6]);
-// Returns a new array [1, 2, 3, 4, 5, 6]
-```
+In other words, `map` is a pure function, and its output depends solely on its inputs. Plus, it takes another function as its argument.
+
+You might learn a lot about the `map` method if you implement your own version of it. It is recommended you use a `for` loop or `Array.prototype.forEach()`.
 
 # --instructions--
 
-Use the `concat` method in the `nonMutatingConcat` function to concatenate `attach` to the end of `original`. The function should return the concatenated array.
+Write your own `Array.prototype.myMap()`, which should behave exactly like `Array.prototype.map()`. You should not use the built-in `map` method. The `Array` instance can be accessed in the `myMap` method using `this`.
 
 # --hints--
 
-Your code should use the `concat` method.
+`new_s` should equal `[46, 130, 196, 10]`.
 
 ```js
-assert(code.match(/\.concat/g));
+assert(JSON.stringify(new_s) === JSON.stringify([46, 130, 196, 10]));
 ```
 
-The `first` array should not change.
+Your code should not use the `map` method.
 
 ```js
-assert(JSON.stringify(first) === JSON.stringify([1, 2, 3]));
-```
-
-The `second` array should not change.
-
-```js
-assert(JSON.stringify(second) === JSON.stringify([4, 5]));
-```
-
-`nonMutatingConcat([1, 2, 3], [4, 5])` should return `[1, 2, 3, 4, 5]`.
-
-```js
-assert(
-  JSON.stringify(nonMutatingConcat([1, 2, 3], [4, 5])) ===
-    JSON.stringify([1, 2, 3, 4, 5])
-);
+assert(!code.match(/\.?[\s\S]*?map/g));
 ```
 
 # --seed--
@@ -53,26 +37,39 @@ assert(
 ## --seed-contents--
 
 ```js
-function nonMutatingConcat(original, attach) {
+// The global variable
+var s = [23, 65, 98, 5];
+
+Array.prototype.myMap = function(callback) {
+  var newArray = [];
   // Only change code below this line
 
-
   // Only change code above this line
-}
-var first = [1, 2, 3];
-var second = [4, 5];
-nonMutatingConcat(first, second);
+  return newArray;
+};
+
+var new_s = s.myMap(function(item) {
+  return item * 2;
+});
 ```
 
 # --solutions--
 
 ```js
-function nonMutatingConcat(original, attach) {
+// the global Array
+var s = [23, 65, 98, 5];
+
+Array.prototype.myMap = function(callback) {
+  var newArray = [];
   // Only change code below this line
-  return original.concat(attach);
+  for (var elem of this) {
+    newArray.push(callback(elem));
+  }
   // Only change code above this line
-}
-var first = [1, 2, 3];
-var second = [4, 5];
-nonMutatingConcat(first, second);
+  return newArray;
+};
+
+var new_s = s.myMap(function(item) {
+  return item * 2;
+});
 ```
