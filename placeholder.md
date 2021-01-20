@@ -1,61 +1,39 @@
 ---
-id: a97fd23d9b809dac9921074f
-title: Arguments Optional
+id: a8d97bd4c764e91f9d2bda01
+title: Binary Agents
 challengeType: 5
-forumTopicId: 14271
-dashedName: arguments-optional
+forumTopicId: 14273
+dashedName: binary-agents
 ---
 
 # --description--
 
-Create a function that sums two arguments together. If only one argument is provided, then return a function that expects one argument and returns the sum.
+Return an English translated sentence of the passed binary string.
 
-For example, `addTogether(2, 3)` should return `5`, and `addTogether(2)` should return a function.
-
-Calling this returned function with a single argument will then return the sum:
-
-`var sumTwoAnd = addTogether(2);`
-
-`sumTwoAnd(3)` returns `5`.
-
-If either argument isn't a valid number, return undefined.
+The binary string will be space separated.
 
 # --hints--
 
-`addTogether(2, 3)` should return 5.
+`binaryAgent("01000001 01110010 01100101 01101110 00100111 01110100 00100000 01100010 01101111 01101110 01100110 01101001 01110010 01100101 01110011 00100000 01100110 01110101 01101110 00100001 00111111")` should return "Aren't bonfires fun!?"
 
 ```js
-assert.deepEqual(addTogether(2, 3), 5);
+assert.deepEqual(
+  binaryAgent(
+    '01000001 01110010 01100101 01101110 00100111 01110100 00100000 01100010 01101111 01101110 01100110 01101001 01110010 01100101 01110011 00100000 01100110 01110101 01101110 00100001 00111111'
+  ),
+  "Aren't bonfires fun!?"
+);
 ```
 
-`addTogether(23, 30)` should return 53.
+`binaryAgent("01001001 00100000 01101100 01101111 01110110 01100101 00100000 01000110 01110010 01100101 01100101 01000011 01101111 01100100 01100101 01000011 01100001 01101101 01110000 00100001")` should return "I love FreeCodeCamp!"
 
 ```js
-assert.deepEqual(addTogether(23, 30), 53);
-```
-
-`addTogether(5)(7)` should return 12.
-
-```js
-assert.deepEqual(addTogether(5)(7), 12);
-```
-
-`addTogether("http://bit.ly/IqT6zt")` should return undefined.
-
-```js
-assert.isUndefined(addTogether('http://bit.ly/IqT6zt'));
-```
-
-`addTogether(2, "3")` should return undefined.
-
-```js
-assert.isUndefined(addTogether(2, '3'));
-```
-
-`addTogether(2)([3])` should return undefined.
-
-```js
-assert.isUndefined(addTogether(2)([3]));
+assert.deepEqual(
+  binaryAgent(
+    '01001001 00100000 01101100 01101111 01110110 01100101 00100000 01000110 01110010 01100101 01100101 01000011 01101111 01100100 01100101 01000011 01100001 01101101 01110000 00100001'
+  ),
+  'I love FreeCodeCamp!'
+);
 ```
 
 # --seed--
@@ -63,27 +41,17 @@ assert.isUndefined(addTogether(2)([3]));
 ## --seed-contents--
 
 ```js
-function addTogether() {
-  return false;
+function binaryAgent(str) {
+  return str;
 }
 
-addTogether(2,3);
+binaryAgent("01000001 01110010 01100101 01101110 00100111 01110100 00100000 01100010 01101111 01101110 01100110 01101001 01110010 01100101 01110011 00100000 01100110 01110101 01101110 00100001 00111111");
 ```
 
 # --solutions--
 
 ```js
-function addTogether() {
-  var a = arguments[0];
-  if (toString.call(a) !== '[object Number]') return;
-  if (arguments.length === 1) {
-    return function(b) {
-      if (toString.call(b) !== '[object Number]') return;
-      return a + b;
-    };
-  }
-  var b = arguments[1];
-  if (toString.call(b) !== '[object Number]') return;
-  return a + arguments[1];
+function binaryAgent(str) {
+  return str.split(' ').map(function(s) { return parseInt(s, 2); }).map(function(b) { return String.fromCharCode(b);}).join('');
 }
 ```
