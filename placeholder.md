@@ -1,48 +1,47 @@
 ---
-id: af4afb223120f7348cdfc9fd
-title: Map the Debris
+id: af7588ade1100bde429baf20
+title: Missing letters
 challengeType: 5
-forumTopicId: 16021
-dashedName: map-the-debris
+forumTopicId: 16023
+dashedName: missing-letters
 ---
 
 # --description--
 
-Return a new array that transforms the elements' average altitude into their orbital periods (in seconds).
+Find the missing letter in the passed letter range and return it.
 
-The array will contain objects in the format `{name: 'name', avgAlt: avgAlt}`.
-
-You can read about orbital periods [on Wikipedia](http://en.wikipedia.org/wiki/Orbital_period).
-
-The values should be rounded to the nearest whole number. The body being orbited is Earth.
-
-The radius of the earth is 6367.4447 kilometers, and the GM value of earth is 398600.4418 km<sup>3</sup>s<sup>-2</sup>.
+If all letters are present in the range, return undefined.
 
 # --hints--
 
-`orbitalPeriod([{name : "sputnik", avgAlt : 35873.5553}])` should return `[{name: "sputnik", orbitalPeriod: 86400}]`.
+`fearNotLetter("abce")` should return "d".
 
 ```js
-assert.deepEqual(orbitalPeriod([{ name: 'sputnik', avgAlt: 35873.5553 }]), [
-  { name: 'sputnik', orbitalPeriod: 86400 }
-]);
+assert.deepEqual(fearNotLetter('abce'), 'd');
 ```
 
-`orbitalPeriod([{name: "iss", avgAlt: 413.6}, {name: "hubble", avgAlt: 556.7}, {name: "moon", avgAlt: 378632.553}])` should return `[{name : "iss", orbitalPeriod: 5557}, {name: "hubble", orbitalPeriod: 5734}, {name: "moon", orbitalPeriod: 2377399}]`.
+`fearNotLetter("abcdefghjklmno")` should return "i".
 
 ```js
-assert.deepEqual(
-  orbitalPeriod([
-    { name: 'iss', avgAlt: 413.6 },
-    { name: 'hubble', avgAlt: 556.7 },
-    { name: 'moon', avgAlt: 378632.553 }
-  ]),
-  [
-    { name: 'iss', orbitalPeriod: 5557 },
-    { name: 'hubble', orbitalPeriod: 5734 },
-    { name: 'moon', orbitalPeriod: 2377399 }
-  ]
-);
+assert.deepEqual(fearNotLetter('abcdefghjklmno'), 'i');
+```
+
+`fearNotLetter("stvwx")` should return "u".
+
+```js
+assert.deepEqual(fearNotLetter('stvwx'), 'u');
+```
+
+`fearNotLetter("bcdf")` should return "e".
+
+```js
+assert.deepEqual(fearNotLetter('bcdf'), 'e');
+```
+
+`fearNotLetter("abcdefghijklmnopqrstuvwxyz")` should return undefined.
+
+```js
+assert.isUndefined(fearNotLetter('abcdefghijklmnopqrstuvwxyz'));
 ```
 
 # --seed--
@@ -50,29 +49,24 @@ assert.deepEqual(
 ## --seed-contents--
 
 ```js
-function orbitalPeriod(arr) {
-  var GM = 398600.4418;
-  var earthRadius = 6367.4447;
-  return arr;
+function fearNotLetter(str) {
+  return str;
 }
 
-orbitalPeriod([{name : "sputnik", avgAlt : 35873.5553}]);
+fearNotLetter("abce");
 ```
 
 # --solutions--
 
 ```js
-function orbitalPeriod(arr) {
-  var GM = 398600.4418;
-  var earthRadius = 6367.4447;
-  var TAU = 2 * Math.PI;
-  return arr.map(function(obj) {
-    return {
-      name: obj.name,
-      orbitalPeriod: Math.round(TAU * Math.sqrt(Math.pow(obj.avgAlt+earthRadius, 3)/GM))
-    };
-  });
-}
+function fearNotLetter (str) {
+  for (var i = str.charCodeAt(0); i <= str.charCodeAt(str.length - 1); i++) {
+    var letter = String.fromCharCode(i);
+    if (str.indexOf(letter) === -1) {
+      return letter;
+    }
+  }
 
-orbitalPeriod([{name : "sputkin", avgAlt : 35873.5553}]);
+  return undefined;
+}
 ```
