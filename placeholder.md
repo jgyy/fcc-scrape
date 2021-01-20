@@ -1,197 +1,78 @@
 ---
-id: a2f1d72d9b908d0bd72bb9f6
-title: Make a Person
+id: af4afb223120f7348cdfc9fd
+title: Map the Debris
 challengeType: 5
-forumTopicId: 16020
-dashedName: make-a-person
+forumTopicId: 16021
+dashedName: map-the-debris
 ---
 
 # --description--
 
-Fill in the object constructor with the following methods below:
+Return a new array that transforms the elements' average altitude into their orbital periods (in seconds).
 
-```js
-getFirstName()
-getLastName()
-getFullName()
-setFirstName(first)
-setLastName(last)
-setFullName(firstAndLast)
-```
+The array will contain objects in the format `{name: 'name', avgAlt: avgAlt}`.
 
-Run the tests to see the expected output for each method. The methods that take an argument must accept only one argument and it has to be a string. These methods must be the only available means of interacting with the object.
+You can read about orbital periods [on Wikipedia](http://en.wikipedia.org/wiki/Orbital_period).
+
+The values should be rounded to the nearest whole number. The body being orbited is Earth.
+
+The radius of the earth is 6367.4447 kilometers, and the GM value of earth is 398600.4418 km<sup>3</sup>s<sup>-2</sup>.
 
 # --hints--
 
-`Object.keys(bob).length` should return 6.
+`orbitalPeriod([{name : "sputnik", avgAlt : 35873.5553}])` should return `[{name: "sputnik", orbitalPeriod: 86400}]`.
 
 ```js
-assert.deepEqual(Object.keys(bob).length, 6);
+assert.deepEqual(orbitalPeriod([{ name: 'sputnik', avgAlt: 35873.5553 }]), [
+  { name: 'sputnik', orbitalPeriod: 86400 }
+]);
 ```
 
-`bob instanceof Person` should return true.
+`orbitalPeriod([{name: "iss", avgAlt: 413.6}, {name: "hubble", avgAlt: 556.7}, {name: "moon", avgAlt: 378632.553}])` should return `[{name : "iss", orbitalPeriod: 5557}, {name: "hubble", orbitalPeriod: 5734}, {name: "moon", orbitalPeriod: 2377399}]`.
 
 ```js
-assert.deepEqual(bob instanceof Person, true);
-```
-
-`bob.firstName` should return undefined.
-
-```js
-assert.deepEqual(bob.firstName, undefined);
-```
-
-`bob.lastName` should return undefined.
-
-```js
-assert.deepEqual(bob.lastName, undefined);
-```
-
-`bob.getFirstName()` should return "Bob".
-
-```js
-assert.deepEqual(bob.getFirstName(), 'Bob');
-```
-
-`bob.getLastName()` should return "Ross".
-
-```js
-assert.deepEqual(bob.getLastName(), 'Ross');
-```
-
-`bob.getFullName()` should return "Bob Ross".
-
-```js
-assert.deepEqual(bob.getFullName(), 'Bob Ross');
-```
-
-`bob.getFullName()` should return "Haskell Ross" after `bob.setFirstName("Haskell")`.
-
-```js
-assert.strictEqual(
-  (function () {
-    bob.setFirstName('Haskell');
-    return bob.getFullName();
-  })(),
-  'Haskell Ross'
-);
-```
-
-`bob.getFullName()` should return "Haskell Curry" after `bob.setLastName("Curry")`.
-
-```js
-assert.strictEqual(
-  (function () {
-    var _bob = new Person('Haskell Ross');
-    _bob.setLastName('Curry');
-    return _bob.getFullName();
-  })(),
-  'Haskell Curry'
-);
-```
-
-`bob.getFullName()` should return "Haskell Curry" after `bob.setFullName("Haskell Curry")`.
-
-```js
-assert.strictEqual(
-  (function () {
-    bob.setFullName('Haskell Curry');
-    return bob.getFullName();
-  })(),
-  'Haskell Curry'
-);
-```
-
-`bob.getFirstName()` should return "Haskell" after `bob.setFullName("Haskell Curry")`.
-
-```js
-assert.strictEqual(
-  (function () {
-    bob.setFullName('Haskell Curry');
-    return bob.getFirstName();
-  })(),
-  'Haskell'
-);
-```
-
-`bob.getLastName()` should return "Curry" after `bob.setFullName("Haskell Curry")`.
-
-```js
-assert.strictEqual(
-  (function () {
-    bob.setFullName('Haskell Curry');
-    return bob.getLastName();
-  })(),
-  'Curry'
+assert.deepEqual(
+  orbitalPeriod([
+    { name: 'iss', avgAlt: 413.6 },
+    { name: 'hubble', avgAlt: 556.7 },
+    { name: 'moon', avgAlt: 378632.553 }
+  ]),
+  [
+    { name: 'iss', orbitalPeriod: 5557 },
+    { name: 'hubble', orbitalPeriod: 5734 },
+    { name: 'moon', orbitalPeriod: 2377399 }
+  ]
 );
 ```
 
 # --seed--
 
-## --after-user-code--
-
-```js
-if(bob){
-  bob = new Person("Bob Ross");
-}
-```
-
 ## --seed-contents--
 
 ```js
-var Person = function(firstAndLast) {
-  // Only change code below this line
-  // Complete the method below and implement the others similarly
-  this.getFullName = function() {
-    return "";
-  };
-  return firstAndLast;
-};
+function orbitalPeriod(arr) {
+  var GM = 398600.4418;
+  var earthRadius = 6367.4447;
+  return arr;
+}
 
-var bob = new Person('Bob Ross');
-bob.getFullName();
+orbitalPeriod([{name : "sputnik", avgAlt : 35873.5553}]);
 ```
 
 # --solutions--
 
 ```js
-var Person = function(firstAndLast) {
+function orbitalPeriod(arr) {
+  var GM = 398600.4418;
+  var earthRadius = 6367.4447;
+  var TAU = 2 * Math.PI;
+  return arr.map(function(obj) {
+    return {
+      name: obj.name,
+      orbitalPeriod: Math.round(TAU * Math.sqrt(Math.pow(obj.avgAlt+earthRadius, 3)/GM))
+    };
+  });
+}
 
-  var firstName, lastName;
-
-  function updateName(str) {
-    firstName = str.split(" ")[0];
-    lastName = str.split(" ")[1];
-  }
-
-  updateName(firstAndLast);
-
-  this.getFirstName = function(){
-    return firstName;
-  };
-
-  this.getLastName = function(){
-    return lastName;
-  };
-
-  this.getFullName = function(){
-    return firstName + " " + lastName;
-  };
-
-  this.setFirstName = function(str){
-    firstName = str;
-  };
-
-
-  this.setLastName = function(str){
-    lastName = str;
-  };
-
-  this.setFullName = function(str){
-    updateName(str);
-  };
-};
-
-var bob = new Person('Bob Ross');
-bob.getFullName();
+orbitalPeriod([{name : "sputkin", avgAlt : 35873.5553}]);
 ```
