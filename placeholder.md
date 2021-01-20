@@ -1,65 +1,78 @@
 ---
-id: aa7697ea2477d1316795783b
-title: Pig Latin
+id: a0b5010f579e69b815e7c5d6
+title: Search and Replace
 challengeType: 5
-forumTopicId: 16039
-dashedName: pig-latin
+forumTopicId: 16045
+dashedName: search-and-replace
 ---
 
 # --description--
 
-Pig Latin is a way of altering English Words. The rules are as follows:
+Perform a search and replace on the sentence using the arguments provided and return the new sentence.
 
-\- If a word begins with a consonant, take the first consonant or consonant cluster, move it to the end of the word, and add "ay" to it.
+First argument is the sentence to perform the search and replace on.
 
-\- If a word begins with a vowel, just add "way" at the end.
+Second argument is the word that you will be replacing (before).
 
-# --instructions--
+Third argument is what you will be replacing the second argument with (after).
 
-Translate the provided string to Pig Latin. Input strings are guaranteed to be English words in all lowercase.
+**Note**  
+Preserve the case of the first character in the original word when you are replacing it. For example if you mean to replace the word "Book" with the word "dog", it should be replaced as "Dog"
 
 # --hints--
 
-`translatePigLatin("california")` should return "aliforniacay".
+`myReplace("Let us go to the store", "store", "mall")` should return "Let us go to the mall".
 
 ```js
-assert.deepEqual(translatePigLatin('california'), 'aliforniacay');
+assert.deepEqual(
+  myReplace('Let us go to the store', 'store', 'mall'),
+  'Let us go to the mall'
+);
 ```
 
-`translatePigLatin("paragraphs")` should return "aragraphspay".
+`myReplace("He is Sleeping on the couch", "Sleeping", "sitting")` should return "He is Sitting on the couch".
 
 ```js
-assert.deepEqual(translatePigLatin('paragraphs'), 'aragraphspay');
+assert.deepEqual(
+  myReplace('He is Sleeping on the couch', 'Sleeping', 'sitting'),
+  'He is Sitting on the couch'
+);
 ```
 
-`translatePigLatin("glove")` should return "oveglay".
+`myReplace("I think we should look up there", "up", "Down")` should return "I think we should look down there".
 
 ```js
-assert.deepEqual(translatePigLatin('glove'), 'oveglay');
+assert.deepEqual(
+  myReplace('I think we should look up there', 'up', 'Down'),
+  'I think we should look down there'
+);
 ```
 
-`translatePigLatin("algorithm")` should return "algorithmway".
+`myReplace("This has a spellngi error", "spellngi", "spelling")` should return "This has a spelling error".
 
 ```js
-assert.deepEqual(translatePigLatin('algorithm'), 'algorithmway');
+assert.deepEqual(
+  myReplace('This has a spellngi error', 'spellngi', 'spelling'),
+  'This has a spelling error'
+);
 ```
 
-`translatePigLatin("eight")` should return "eightway".
+`myReplace("His name is Tom", "Tom", "john")` should return "His name is John".
 
 ```js
-assert.deepEqual(translatePigLatin('eight'), 'eightway');
+assert.deepEqual(
+  myReplace('His name is Tom', 'Tom', 'john'),
+  'His name is John'
+);
 ```
 
-Should handle words where the first vowel comes in the middle of the word.  `translatePigLatin("schwartz")` should return "artzschway".
+`myReplace("Let us get back to more Coding", "Coding", "algorithms")` should return "Let us get back to more Algorithms".
 
 ```js
-assert.deepEqual(translatePigLatin('schwartz'), 'artzschway');
-```
-
-Should handle words without vowels. `translatePigLatin("rhythm")` should return "rhythmay".
-
-```js
-assert.deepEqual(translatePigLatin('rhythm'), 'rhythmay');
+assert.deepEqual(
+  myReplace('Let us get back to more Coding', 'Coding', 'algorithms'),
+  'Let us get back to more Algorithms'
+);
 ```
 
 # --seed--
@@ -67,27 +80,22 @@ assert.deepEqual(translatePigLatin('rhythm'), 'rhythmay');
 ## --seed-contents--
 
 ```js
-function translatePigLatin(str) {
+function myReplace(str, before, after) {
   return str;
 }
 
-translatePigLatin("consonant");
+myReplace("A quick brown fox jumped over the lazy dog", "jumped", "leaped");
 ```
 
 # --solutions--
 
 ```js
-function translatePigLatin(str) {
-  if (isVowel(str.charAt(0))) return str + "way";
-  var front = [];
-  str = str.split('');
-  while (str.length && !isVowel(str[0])) {
-    front.push(str.shift());
+function myReplace(str, before, after) {
+  if (before.charAt(0) === before.charAt(0).toUpperCase()) {
+    after = after.charAt(0).toUpperCase() + after.substring(1);
+  } else {
+    after = after.charAt(0).toLowerCase() + after.substring(1);
   }
-  return [].concat(str, front).join('') + 'ay';
-}
-
-function isVowel(c) {
-  return ['a', 'e', 'i', 'o', 'u'].indexOf(c.toLowerCase()) !== -1;
+  return str.replace(before, after);
 }
 ```
