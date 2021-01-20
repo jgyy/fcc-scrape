@@ -1,59 +1,83 @@
 ---
-id: afd15382cdfb22c9efe8b7de
-title: DNA Pairing
+id: a5deed1811a43193f9f1c841
+title: Drop it
 challengeType: 5
-forumTopicId: 16009
-dashedName: dna-pairing
+forumTopicId: 16010
+dashedName: drop-it
 ---
 
 # --description--
 
-The DNA strand is missing the pairing element. Take each character, get its pair, and return the results as a 2d array.
+Given the array `arr`, iterate through and remove each element starting from the first element (the 0 index) until the function `func` returns `true` when the iterated element is passed through it.
 
-[Base pairs](http://en.wikipedia.org/wiki/Base_pair) are a pair of AT and CG. Match the missing element to the provided character.
-
-Return the provided character as the first element in each array.
-
-For example, for the input GCG, return \[\["G", "C"], \["C","G"],\["G", "C"]]
-
-The character and its pair are paired up in an array, and all the arrays are grouped into one encapsulating array.
+Then return the rest of the array once the condition is satisfied, otherwise, `arr` should be returned as an empty array.
 
 # --hints--
 
-`pairElement("ATCGA")` should return `[["A","T"],["T","A"],["C","G"],["G","C"],["A","T"]]`.
+`dropElements([1, 2, 3, 4], function(n) {return n >= 3;})` should return `[3, 4]`.
 
 ```js
-assert.deepEqual(pairElement('ATCGA'), [
-  ['A', 'T'],
-  ['T', 'A'],
-  ['C', 'G'],
-  ['G', 'C'],
-  ['A', 'T']
-]);
+assert.deepEqual(
+  dropElements([1, 2, 3, 4], function (n) {
+    return n >= 3;
+  }),
+  [3, 4]
+);
 ```
 
-`pairElement("TTGAG")` should return `[["T","A"],["T","A"],["G","C"],["A","T"],["G","C"]]`.
+`dropElements([0, 1, 0, 1], function(n) {return n === 1;})` should return `[1, 0, 1]`.
 
 ```js
-assert.deepEqual(pairElement('TTGAG'), [
-  ['T', 'A'],
-  ['T', 'A'],
-  ['G', 'C'],
-  ['A', 'T'],
-  ['G', 'C']
-]);
+assert.deepEqual(
+  dropElements([0, 1, 0, 1], function (n) {
+    return n === 1;
+  }),
+  [1, 0, 1]
+);
 ```
 
-`pairElement("CTCTA")` should return `[["C","G"],["T","A"],["C","G"],["T","A"],["A","T"]]`.
+`dropElements([1, 2, 3], function(n) {return n > 0;})` should return `[1, 2, 3]`.
 
 ```js
-assert.deepEqual(pairElement('CTCTA'), [
-  ['C', 'G'],
-  ['T', 'A'],
-  ['C', 'G'],
-  ['T', 'A'],
-  ['A', 'T']
-]);
+assert.deepEqual(
+  dropElements([1, 2, 3], function (n) {
+    return n > 0;
+  }),
+  [1, 2, 3]
+);
+```
+
+`dropElements([1, 2, 3, 4], function(n) {return n > 5;})` should return `[]`.
+
+```js
+assert.deepEqual(
+  dropElements([1, 2, 3, 4], function (n) {
+    return n > 5;
+  }),
+  []
+);
+```
+
+`dropElements([1, 2, 3, 7, 4], function(n) {return n > 3;})` should return `[7, 4]`.
+
+```js
+assert.deepEqual(
+  dropElements([1, 2, 3, 7, 4], function (n) {
+    return n > 3;
+  }),
+  [7, 4]
+);
+```
+
+`dropElements([1, 2, 3, 9, 2], function(n) {return n > 2;})` should return `[3, 9, 2]`.
+
+```js
+assert.deepEqual(
+  dropElements([1, 2, 3, 9, 2], function (n) {
+    return n > 2;
+  }),
+  [3, 9, 2]
+);
 ```
 
 # --seed--
@@ -61,23 +85,20 @@ assert.deepEqual(pairElement('CTCTA'), [
 ## --seed-contents--
 
 ```js
-function pairElement(str) {
-  return str;
+function dropElements(arr, func) {
+  return arr;
 }
 
-pairElement("GCG");
+dropElements([1, 2, 3], function(n) {return n < 3; });
 ```
 
 # --solutions--
 
 ```js
-var lookup = Object.create(null);
-lookup.A = 'T';
-lookup.T = 'A';
-lookup.C = 'G';
-lookup.G = 'C';
-
-function pairElement(str) {
- return str.split('').map(function(p) {return [p, lookup[p]];});
+function dropElements(arr, func) {
+  while (arr.length && !func(arr[0])) {
+    arr.shift();
+  }
+  return arr;
 }
 ```
