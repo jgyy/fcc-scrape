@@ -1,45 +1,47 @@
 ---
-id: ab306dbdcc907c7ddfc30830
-title: Steamroller
+id: a3566b1109230028080c9345
+title: Sum All Numbers in a Range
 challengeType: 5
-forumTopicId: 16079
-dashedName: steamroller
+forumTopicId: 16083
+dashedName: sum-all-numbers-in-a-range
 ---
 
 # --description--
 
-Flatten a nested array. You must account for varying levels of nesting.
+We'll pass you an array of two numbers. Return the sum of those two numbers plus the sum of all the numbers between them. The lowest number will not always come first.
+
+For example, `sumAll([4,1])` should return `10` because sum of all the numbers between 1 and 4 (both inclusive) is `10`.
 
 # --hints--
 
-`steamrollArray([[["a"]], [["b"]]])` should return `["a", "b"]`.
+`sumAll([1, 4])` should return a number.
 
 ```js
-assert.deepEqual(steamrollArray([[['a']], [['b']]]), ['a', 'b']);
+assert(typeof sumAll([1, 4]) === 'number');
 ```
 
-`steamrollArray([1, [2], [3, [[4]]]])` should return `[1, 2, 3, 4]`.
+`sumAll([1, 4])` should return 10.
 
 ```js
-assert.deepEqual(steamrollArray([1, [2], [3, [[4]]]]), [1, 2, 3, 4]);
+assert.deepEqual(sumAll([1, 4]), 10);
 ```
 
-`steamrollArray([1, [], [3, [[4]]]])` should return `[1, 3, 4]`.
+`sumAll([4, 1])` should return 10.
 
 ```js
-assert.deepEqual(steamrollArray([1, [], [3, [[4]]]]), [1, 3, 4]);
+assert.deepEqual(sumAll([4, 1]), 10);
 ```
 
-`steamrollArray([1, {}, [3, [[4]]]])` should return `[1, {}, 3, 4]`.
+`sumAll([5, 10])` should return 45.
 
 ```js
-assert.deepEqual(steamrollArray([1, {}, [3, [[4]]]]), [1, {}, 3, 4]);
+assert.deepEqual(sumAll([5, 10]), 45);
 ```
 
-Your solution should not use the `Array.prototype.flat()` or `Array.prototype.flatMap()` methods.
+`sumAll([10, 5])` should return 45.
 
 ```js
-assert(!code.match(/\.\s*flat\s*\(/) && !code.match(/\.\s*flatMap\s*\(/));
+assert.deepEqual(sumAll([10, 5]), 45);
 ```
 
 # --seed--
@@ -47,26 +49,22 @@ assert(!code.match(/\.\s*flat\s*\(/) && !code.match(/\.\s*flatMap\s*\(/));
 ## --seed-contents--
 
 ```js
-function steamrollArray(arr) {
-  return arr;
+function sumAll(arr) {
+  return 1;
 }
 
-steamrollArray([1, [2], [3, [[4]]]]);
+sumAll([1, 4]);
 ```
 
 # --solutions--
 
 ```js
-function steamrollArray(arr) {
-  if (!Array.isArray(arr)) {
-    return [arr];
+function sumAll(arr) {
+  var sum = 0;
+  arr.sort(function(a,b) {return a-b;});
+  for (var i = arr[0]; i <= arr[1]; i++) {
+    sum += i;
   }
-  var out = [];
-  arr.forEach(function(e) {
-    steamrollArray(e).forEach(function(v) {
-      out.push(v);
-    });
-  });
-  return out;
+  return sum;
 }
 ```
