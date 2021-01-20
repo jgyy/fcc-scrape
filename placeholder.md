@@ -1,155 +1,197 @@
 ---
-id: a10d2431ad0c6a099a4b8b52
-title: Everything Be True
+id: a2f1d72d9b908d0bd72bb9f6
+title: Make a Person
 challengeType: 5
-forumTopicId: 16011
-dashedName: everything-be-true
+forumTopicId: 16020
+dashedName: make-a-person
 ---
 
 # --description--
 
-Check if the predicate (second argument) is <dfn>truthy</dfn> on all elements of a collection (first argument).
+Fill in the object constructor with the following methods below:
 
-In other words, you are given an array collection of objects. The predicate `pre` will be an object property and you need to return `true` if its value is `truthy`. Otherwise, return `false`.
+```js
+getFirstName()
+getLastName()
+getFullName()
+setFirstName(first)
+setLastName(last)
+setFullName(firstAndLast)
+```
 
-In JavaScript, `truthy` values are values that translate to `true` when evaluated in a Boolean context.
-
-Remember, you can access object properties through either dot notation or `[]` notation.
+Run the tests to see the expected output for each method. The methods that take an argument must accept only one argument and it has to be a string. These methods must be the only available means of interacting with the object.
 
 # --hints--
 
-`truthCheck([{"user": "Tinky-Winky", "sex": "male"}, {"user": "Dipsy", "sex": "male"}, {"user": "Laa-Laa", "sex": "female"}, {"user": "Po", "sex": "female"}], "sex")` should return true.
+`Object.keys(bob).length` should return 6.
+
+```js
+assert.deepEqual(Object.keys(bob).length, 6);
+```
+
+`bob instanceof Person` should return true.
+
+```js
+assert.deepEqual(bob instanceof Person, true);
+```
+
+`bob.firstName` should return undefined.
+
+```js
+assert.deepEqual(bob.firstName, undefined);
+```
+
+`bob.lastName` should return undefined.
+
+```js
+assert.deepEqual(bob.lastName, undefined);
+```
+
+`bob.getFirstName()` should return "Bob".
+
+```js
+assert.deepEqual(bob.getFirstName(), 'Bob');
+```
+
+`bob.getLastName()` should return "Ross".
+
+```js
+assert.deepEqual(bob.getLastName(), 'Ross');
+```
+
+`bob.getFullName()` should return "Bob Ross".
+
+```js
+assert.deepEqual(bob.getFullName(), 'Bob Ross');
+```
+
+`bob.getFullName()` should return "Haskell Ross" after `bob.setFirstName("Haskell")`.
 
 ```js
 assert.strictEqual(
-  truthCheck(
-    [
-      { user: 'Tinky-Winky', sex: 'male' },
-      { user: 'Dipsy', sex: 'male' },
-      { user: 'Laa-Laa', sex: 'female' },
-      { user: 'Po', sex: 'female' }
-    ],
-    'sex'
-  ),
-  true
+  (function () {
+    bob.setFirstName('Haskell');
+    return bob.getFullName();
+  })(),
+  'Haskell Ross'
 );
 ```
 
-`truthCheck([{"user": "Tinky-Winky", "sex": "male"}, {"user": "Dipsy"}, {"user": "Laa-Laa", "sex": "female"}, {"user": "Po", "sex": "female"}], "sex")` should return false.
+`bob.getFullName()` should return "Haskell Curry" after `bob.setLastName("Curry")`.
 
 ```js
 assert.strictEqual(
-  truthCheck(
-    [
-      { user: 'Tinky-Winky', sex: 'male' },
-      { user: 'Dipsy' },
-      { user: 'Laa-Laa', sex: 'female' },
-      { user: 'Po', sex: 'female' }
-    ],
-    'sex'
-  ),
-  false
+  (function () {
+    var _bob = new Person('Haskell Ross');
+    _bob.setLastName('Curry');
+    return _bob.getFullName();
+  })(),
+  'Haskell Curry'
 );
 ```
 
-`truthCheck([{"user": "Tinky-Winky", "sex": "male", "age": 0}, {"user": "Dipsy", "sex": "male", "age": 3}, {"user": "Laa-Laa", "sex": "female", "age": 5}, {"user": "Po", "sex": "female", "age": 4}], "age")` should return false.
+`bob.getFullName()` should return "Haskell Curry" after `bob.setFullName("Haskell Curry")`.
 
 ```js
 assert.strictEqual(
-  truthCheck(
-    [
-      { user: 'Tinky-Winky', sex: 'male', age: 2 },
-      { user: 'Dipsy', sex: 'male', age: 0 },
-      { user: 'Laa-Laa', sex: 'female', age: 5 },
-      { user: 'Po', sex: 'female', age: 4 }
-    ],
-    'age'
-  ),
-  false
+  (function () {
+    bob.setFullName('Haskell Curry');
+    return bob.getFullName();
+  })(),
+  'Haskell Curry'
 );
 ```
 
-`truthCheck([{"name": "Pete", "onBoat": true}, {"name": "Repeat", "onBoat": true}, {"name": "FastForward", "onBoat": null}], "onBoat")` should return false
+`bob.getFirstName()` should return "Haskell" after `bob.setFullName("Haskell Curry")`.
 
 ```js
 assert.strictEqual(
-  truthCheck(
-    [
-      { name: 'Pete', onBoat: true },
-      { name: 'Repeat', onBoat: true },
-      { name: 'FastForward', onBoat: null }
-    ],
-    'onBoat'
-  ),
-  false
+  (function () {
+    bob.setFullName('Haskell Curry');
+    return bob.getFirstName();
+  })(),
+  'Haskell'
 );
 ```
 
-`truthCheck([{"name": "Pete", "onBoat": true}, {"name": "Repeat", "onBoat": true, "alias": "Repete"}, {"name": "FastForward", "onBoat": true}], "onBoat")` should return true
+`bob.getLastName()` should return "Curry" after `bob.setFullName("Haskell Curry")`.
 
 ```js
 assert.strictEqual(
-  truthCheck(
-    [
-      { name: 'Pete', onBoat: true },
-      { name: 'Repeat', onBoat: true, alias: 'Repete' },
-      { name: 'FastForward', onBoat: true }
-    ],
-    'onBoat'
-  ),
-  true
-);
-```
-
-`truthCheck([{"single": "yes"}], "single")` should return true
-
-```js
-assert.strictEqual(truthCheck([{ single: 'yes' }], 'single'), true);
-```
-
-`truthCheck([{"single": ""}, {"single": "double"}], "single")` should return false
-
-```js
-assert.strictEqual(
-  truthCheck([{ single: '' }, { single: 'double' }], 'single'),
-  false
-);
-```
-
-`truthCheck([{"single": "double"}, {"single": undefined}], "single")` should return false
-
-```js
-assert.strictEqual(
-  truthCheck([{ single: 'double' }, { single: undefined }], 'single'),
-  false
-);
-```
-
-`truthCheck([{"single": "double"}, {"single": NaN}], "single")` should return false
-
-```js
-assert.strictEqual(
-  truthCheck([{ single: 'double' }, { single: NaN }], 'single'),
-  false
+  (function () {
+    bob.setFullName('Haskell Curry');
+    return bob.getLastName();
+  })(),
+  'Curry'
 );
 ```
 
 # --seed--
 
+## --after-user-code--
+
+```js
+if(bob){
+  bob = new Person("Bob Ross");
+}
+```
+
 ## --seed-contents--
 
 ```js
-function truthCheck(collection, pre) {
-  return pre;
-}
+var Person = function(firstAndLast) {
+  // Only change code below this line
+  // Complete the method below and implement the others similarly
+  this.getFullName = function() {
+    return "";
+  };
+  return firstAndLast;
+};
 
-truthCheck([{"user": "Tinky-Winky", "sex": "male"}, {"user": "Dipsy", "sex": "male"}, {"user": "Laa-Laa", "sex": "female"}, {"user": "Po", "sex": "female"}], "sex");
+var bob = new Person('Bob Ross');
+bob.getFullName();
 ```
 
 # --solutions--
 
 ```js
-function truthCheck(collection, pre) {
-  return collection.every(function(e) { return e[pre]; });
-}
+var Person = function(firstAndLast) {
+
+  var firstName, lastName;
+
+  function updateName(str) {
+    firstName = str.split(" ")[0];
+    lastName = str.split(" ")[1];
+  }
+
+  updateName(firstAndLast);
+
+  this.getFirstName = function(){
+    return firstName;
+  };
+
+  this.getLastName = function(){
+    return lastName;
+  };
+
+  this.getFullName = function(){
+    return firstName + " " + lastName;
+  };
+
+  this.setFirstName = function(str){
+    firstName = str;
+  };
+
+
+  this.setLastName = function(str){
+    lastName = str;
+  };
+
+  this.setFullName = function(str){
+    updateName(str);
+  };
+};
+
+var bob = new Person('Bob Ross');
+bob.getFullName();
 ```
