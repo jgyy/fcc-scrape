@@ -1,82 +1,136 @@
 ---
-id: a5deed1811a43193f9f1c841
-title: Drop it
+id: a10d2431ad0c6a099a4b8b52
+title: Everything Be True
 challengeType: 5
-forumTopicId: 16010
-dashedName: drop-it
+forumTopicId: 16011
+dashedName: everything-be-true
 ---
 
 # --description--
 
-Given the array `arr`, iterate through and remove each element starting from the first element (the 0 index) until the function `func` returns `true` when the iterated element is passed through it.
+Check if the predicate (second argument) is <dfn>truthy</dfn> on all elements of a collection (first argument).
 
-Then return the rest of the array once the condition is satisfied, otherwise, `arr` should be returned as an empty array.
+In other words, you are given an array collection of objects. The predicate `pre` will be an object property and you need to return `true` if its value is `truthy`. Otherwise, return `false`.
+
+In JavaScript, `truthy` values are values that translate to `true` when evaluated in a Boolean context.
+
+Remember, you can access object properties through either dot notation or `[]` notation.
 
 # --hints--
 
-`dropElements([1, 2, 3, 4], function(n) {return n >= 3;})` should return `[3, 4]`.
+`truthCheck([{"user": "Tinky-Winky", "sex": "male"}, {"user": "Dipsy", "sex": "male"}, {"user": "Laa-Laa", "sex": "female"}, {"user": "Po", "sex": "female"}], "sex")` should return true.
 
 ```js
-assert.deepEqual(
-  dropElements([1, 2, 3, 4], function (n) {
-    return n >= 3;
-  }),
-  [3, 4]
+assert.strictEqual(
+  truthCheck(
+    [
+      { user: 'Tinky-Winky', sex: 'male' },
+      { user: 'Dipsy', sex: 'male' },
+      { user: 'Laa-Laa', sex: 'female' },
+      { user: 'Po', sex: 'female' }
+    ],
+    'sex'
+  ),
+  true
 );
 ```
 
-`dropElements([0, 1, 0, 1], function(n) {return n === 1;})` should return `[1, 0, 1]`.
+`truthCheck([{"user": "Tinky-Winky", "sex": "male"}, {"user": "Dipsy"}, {"user": "Laa-Laa", "sex": "female"}, {"user": "Po", "sex": "female"}], "sex")` should return false.
 
 ```js
-assert.deepEqual(
-  dropElements([0, 1, 0, 1], function (n) {
-    return n === 1;
-  }),
-  [1, 0, 1]
+assert.strictEqual(
+  truthCheck(
+    [
+      { user: 'Tinky-Winky', sex: 'male' },
+      { user: 'Dipsy' },
+      { user: 'Laa-Laa', sex: 'female' },
+      { user: 'Po', sex: 'female' }
+    ],
+    'sex'
+  ),
+  false
 );
 ```
 
-`dropElements([1, 2, 3], function(n) {return n > 0;})` should return `[1, 2, 3]`.
+`truthCheck([{"user": "Tinky-Winky", "sex": "male", "age": 0}, {"user": "Dipsy", "sex": "male", "age": 3}, {"user": "Laa-Laa", "sex": "female", "age": 5}, {"user": "Po", "sex": "female", "age": 4}], "age")` should return false.
 
 ```js
-assert.deepEqual(
-  dropElements([1, 2, 3], function (n) {
-    return n > 0;
-  }),
-  [1, 2, 3]
+assert.strictEqual(
+  truthCheck(
+    [
+      { user: 'Tinky-Winky', sex: 'male', age: 2 },
+      { user: 'Dipsy', sex: 'male', age: 0 },
+      { user: 'Laa-Laa', sex: 'female', age: 5 },
+      { user: 'Po', sex: 'female', age: 4 }
+    ],
+    'age'
+  ),
+  false
 );
 ```
 
-`dropElements([1, 2, 3, 4], function(n) {return n > 5;})` should return `[]`.
+`truthCheck([{"name": "Pete", "onBoat": true}, {"name": "Repeat", "onBoat": true}, {"name": "FastForward", "onBoat": null}], "onBoat")` should return false
 
 ```js
-assert.deepEqual(
-  dropElements([1, 2, 3, 4], function (n) {
-    return n > 5;
-  }),
-  []
+assert.strictEqual(
+  truthCheck(
+    [
+      { name: 'Pete', onBoat: true },
+      { name: 'Repeat', onBoat: true },
+      { name: 'FastForward', onBoat: null }
+    ],
+    'onBoat'
+  ),
+  false
 );
 ```
 
-`dropElements([1, 2, 3, 7, 4], function(n) {return n > 3;})` should return `[7, 4]`.
+`truthCheck([{"name": "Pete", "onBoat": true}, {"name": "Repeat", "onBoat": true, "alias": "Repete"}, {"name": "FastForward", "onBoat": true}], "onBoat")` should return true
 
 ```js
-assert.deepEqual(
-  dropElements([1, 2, 3, 7, 4], function (n) {
-    return n > 3;
-  }),
-  [7, 4]
+assert.strictEqual(
+  truthCheck(
+    [
+      { name: 'Pete', onBoat: true },
+      { name: 'Repeat', onBoat: true, alias: 'Repete' },
+      { name: 'FastForward', onBoat: true }
+    ],
+    'onBoat'
+  ),
+  true
 );
 ```
 
-`dropElements([1, 2, 3, 9, 2], function(n) {return n > 2;})` should return `[3, 9, 2]`.
+`truthCheck([{"single": "yes"}], "single")` should return true
 
 ```js
-assert.deepEqual(
-  dropElements([1, 2, 3, 9, 2], function (n) {
-    return n > 2;
-  }),
-  [3, 9, 2]
+assert.strictEqual(truthCheck([{ single: 'yes' }], 'single'), true);
+```
+
+`truthCheck([{"single": ""}, {"single": "double"}], "single")` should return false
+
+```js
+assert.strictEqual(
+  truthCheck([{ single: '' }, { single: 'double' }], 'single'),
+  false
+);
+```
+
+`truthCheck([{"single": "double"}, {"single": undefined}], "single")` should return false
+
+```js
+assert.strictEqual(
+  truthCheck([{ single: 'double' }, { single: undefined }], 'single'),
+  false
+);
+```
+
+`truthCheck([{"single": "double"}, {"single": NaN}], "single")` should return false
+
+```js
+assert.strictEqual(
+  truthCheck([{ single: 'double' }, { single: NaN }], 'single'),
+  false
 );
 ```
 
@@ -85,20 +139,17 @@ assert.deepEqual(
 ## --seed-contents--
 
 ```js
-function dropElements(arr, func) {
-  return arr;
+function truthCheck(collection, pre) {
+  return pre;
 }
 
-dropElements([1, 2, 3], function(n) {return n < 3; });
+truthCheck([{"user": "Tinky-Winky", "sex": "male"}, {"user": "Dipsy", "sex": "male"}, {"user": "Laa-Laa", "sex": "female"}, {"user": "Po", "sex": "female"}], "sex");
 ```
 
 # --solutions--
 
 ```js
-function dropElements(arr, func) {
-  while (arr.length && !func(arr[0])) {
-    arr.shift();
-  }
-  return arr;
+function truthCheck(collection, pre) {
+  return collection.every(function(e) { return e[pre]; });
 }
 ```
