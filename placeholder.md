@@ -1,55 +1,48 @@
 ---
-id: ae9defd7acaf69703ab432ea
-title: Smallest Common Multiple
+id: a105e963526e7de52b219be9
+title: Sorted Union
 challengeType: 5
-forumTopicId: 16075
-dashedName: smallest-common-multiple
+forumTopicId: 16077
+dashedName: sorted-union
 ---
 
 # --description--
 
-Find the smallest common multiple of the provided parameters that can be evenly divided by both, as well as by all sequential numbers in the range between these parameters.
+Write a function that takes two or more arrays and returns a new array of unique values in the order of the original provided arrays.
 
-The range will be an array of two numbers that will not necessarily be in numerical order.
+In other words, all values present from all arrays should be included in their original order, but with no duplicates in the final array.
 
-For example, if given 1 and 3, find the smallest common multiple of both 1 and 3 that is also evenly divisible by all numbers *between* 1 and 3. The answer here would be 6.
+The unique numbers should be sorted by their original order, but the final array should not be sorted in numerical order.
+
+Check the assertion tests for examples.
 
 # --hints--
 
-`smallestCommons([1, 5])` should return a number.
+`uniteUnique([1, 3, 2], [5, 2, 1, 4], [2, 1])` should return `[1, 3, 2, 5, 4]`.
 
 ```js
-assert.deepEqual(typeof smallestCommons([1, 5]), 'number');
+assert.deepEqual(uniteUnique([1, 3, 2], [5, 2, 1, 4], [2, 1]), [1, 3, 2, 5, 4]);
 ```
 
-`smallestCommons([1, 5])` should return 60.
+`uniteUnique([1, 2, 3], [5, 2, 1])` should return `[1, 2, 3, 5]`.
 
 ```js
-assert.deepEqual(smallestCommons([1, 5]), 60);
+assert.deepEqual(uniteUnique([1, 2, 3], [5, 2, 1]), [1, 2, 3, 5]);
 ```
 
-`smallestCommons([5, 1])` should return 60.
+`uniteUnique([1, 2, 3], [5, 2, 1, 4], [2, 1], [6, 7, 8])` should return `[1, 2, 3, 5, 4, 6, 7, 8]`.
 
 ```js
-assert.deepEqual(smallestCommons([5, 1]), 60);
-```
-
-`smallestCommons([2, 10])` should return 2520.
-
-```js
-assert.deepEqual(smallestCommons([2, 10]), 2520);
-```
-
-`smallestCommons([1, 13])` should return 360360.
-
-```js
-assert.deepEqual(smallestCommons([1, 13]), 360360);
-```
-
-`smallestCommons([23, 18])` should return 6056820.
-
-```js
-assert.deepEqual(smallestCommons([23, 18]), 6056820);
+assert.deepEqual(uniteUnique([1, 2, 3], [5, 2, 1, 4], [2, 1], [6, 7, 8]), [
+  1,
+  2,
+  3,
+  5,
+  4,
+  6,
+  7,
+  8
+]);
 ```
 
 # --seed--
@@ -57,34 +50,19 @@ assert.deepEqual(smallestCommons([23, 18]), 6056820);
 ## --seed-contents--
 
 ```js
-function smallestCommons(arr) {
+function uniteUnique(arr) {
   return arr;
 }
 
-
-smallestCommons([1,5]);
+uniteUnique([1, 3, 2], [5, 2, 1, 4], [2, 1]);
 ```
 
 # --solutions--
 
 ```js
-function gcd(a, b) {
-    while (b !== 0) {
-        a = [b, b = a % b][0];
-    }
-    return a;
-}
-
-function lcm(a, b) {
-    return (a * b) / gcd(a, b);
-}
-
-function smallestCommons(arr) {
-  arr.sort(function(a,b) {return a-b;});
-  var rng = [];
-  for (var i = arr[0]; i <= arr[1]; i++) {
-    rng.push(i);
-  }
-  return rng.reduce(lcm);
+function uniteUnique(arr) {
+  return [].slice.call(arguments).reduce(function(a, b) {
+    return [].concat(a, b.filter(function(e) {return a.indexOf(e) === -1;}));
+  }, []);
 }
 ```
