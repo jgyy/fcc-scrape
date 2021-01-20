@@ -1,35 +1,100 @@
 ---
-id: a3bfc1673c0526e06d3ac698
-title: Sum All Primes
+id: a8e512fbe388ac2f9198f0fa
+title: Wherefore art thou
 challengeType: 5
-forumTopicId: 16085
-dashedName: sum-all-primes
+forumTopicId: 16092
+dashedName: wherefore-art-thou
 ---
 
 # --description--
 
-A <dfn>prime number</dfn> is a whole number greater than 1 with exactly two divisors: 1 and itself. For example, 2 is a prime number because it is only divisible by 1 and 2. In contrast, 4 is not prime since it is divisible by 1, 2 and 4.
+Make a function that looks through an array of objects (first argument) and returns an array of all objects that have matching name and value pairs (second argument). Each name and value pair of the source object has to be present in the object from the collection if it is to be included in the returned array.
 
-Rewrite `sumPrimes` so it returns the sum of all prime numbers that are less than or equal to num.
+For example, if the first argument is `[{ first: "Romeo", last: "Montague" }, { first: "Mercutio", last: null }, { first: "Tybalt", last: "Capulet" }]`, and the second argument is `{ last: "Capulet" }`, then you must return the third object from the array (the first argument), because it contains the name and its value, that was passed on as the second argument.
 
 # --hints--
 
-`sumPrimes(10)` should return a number.
+`whatIsInAName([{ first: "Romeo", last: "Montague" }, { first: "Mercutio", last: null }, { first: "Tybalt", last: "Capulet" }], { last: "Capulet" })` should return `[{ first: "Tybalt", last: "Capulet" }]`.
 
 ```js
-assert.deepEqual(typeof sumPrimes(10), 'number');
+assert.deepEqual(
+  whatIsInAName(
+    [
+      { first: 'Romeo', last: 'Montague' },
+      { first: 'Mercutio', last: null },
+      { first: 'Tybalt', last: 'Capulet' }
+    ],
+    { last: 'Capulet' }
+  ),
+  [{ first: 'Tybalt', last: 'Capulet' }]
+);
 ```
 
-`sumPrimes(10)` should return 17.
+`whatIsInAName([{ "apple": 1 }, { "apple": 1 }, { "apple": 1, "bat": 2 }], { "apple": 1 })` should return `[{ "apple": 1 }, { "apple": 1 }, { "apple": 1, "bat": 2 }]`.
 
 ```js
-assert.deepEqual(sumPrimes(10), 17);
+assert.deepEqual(
+  whatIsInAName([{ apple: 1 }, { apple: 1 }, { apple: 1, bat: 2 }], {
+    apple: 1
+  }),
+  [{ apple: 1 }, { apple: 1 }, { apple: 1, bat: 2 }]
+);
 ```
 
-`sumPrimes(977)` should return 73156.
+`whatIsInAName([{ "apple": 1, "bat": 2 }, { "bat": 2 }, { "apple": 1, "bat": 2, "cookie": 2 }], { "apple": 1, "bat": 2 })` should return `[{ "apple": 1, "bat": 2 }, { "apple": 1, "bat": 2, "cookie": 2 }]`.
 
 ```js
-assert.deepEqual(sumPrimes(977), 73156);
+assert.deepEqual(
+  whatIsInAName(
+    [{ apple: 1, bat: 2 }, { bat: 2 }, { apple: 1, bat: 2, cookie: 2 }],
+    { apple: 1, bat: 2 }
+  ),
+  [
+    { apple: 1, bat: 2 },
+    { apple: 1, bat: 2, cookie: 2 }
+  ]
+);
+```
+
+`whatIsInAName([{ "apple": 1, "bat": 2 }, { "apple": 1 }, { "apple": 1, "bat": 2, "cookie": 2 }], { "apple": 1, "cookie": 2 })` should return `[{ "apple": 1, "bat": 2, "cookie": 2 }]`.
+
+```js
+assert.deepEqual(
+  whatIsInAName(
+    [{ apple: 1, bat: 2 }, { apple: 1 }, { apple: 1, bat: 2, cookie: 2 }],
+    { apple: 1, cookie: 2 }
+  ),
+  [{ apple: 1, bat: 2, cookie: 2 }]
+);
+```
+
+`whatIsInAName([{ "apple": 1, "bat": 2 }, { "apple": 1 }, { "apple": 1, "bat": 2, "cookie": 2 }, { "bat":2 }], { "apple": 1, "bat": 2 })` should return `[{ "apple": 1, "bat": 2 }, { "apple": 1, "bat": 2, "cookie":2 }]`.
+
+```js
+assert.deepEqual(
+  whatIsInAName(
+    [
+      { apple: 1, bat: 2 },
+      { apple: 1 },
+      { apple: 1, bat: 2, cookie: 2 },
+      { bat: 2 }
+    ],
+    { apple: 1, bat: 2 }
+  ),
+  [
+    { apple: 1, bat: 2 },
+    { apple: 1, bat: 2, cookie: 2 }
+  ]
+);
+```
+
+`whatIsInAName([{"a": 1, "b": 2, "c": 3}], {"a": 1, "b": 9999, "c": 3})` should return `[]`
+
+```js
+assert.deepEqual(
+  whatIsInAName([{ a: 1, b: 2, c: 3 }], { a: 1, b: 9999, c: 3 }),
+  []
+);
 ```
 
 # --seed--
@@ -37,39 +102,29 @@ assert.deepEqual(sumPrimes(977), 73156);
 ## --seed-contents--
 
 ```js
-function sumPrimes(num) {
-  return num;
+function whatIsInAName(collection, source) {
+  var arr = [];
+  // Only change code below this line
+
+
+  // Only change code above this line
+  return arr;
 }
 
-sumPrimes(10);
+whatIsInAName([{ first: "Romeo", last: "Montague" }, { first: "Mercutio", last: null }, { first: "Tybalt", last: "Capulet" }], { last: "Capulet" });
 ```
 
 # --solutions--
 
 ```js
-function eratosthenesArray(n) {
-    var primes = [];
-    if (n > 2) {
-        var half = n>>1;
-        var sieve = Array(half);
-        for (var i = 1, limit = Math.sqrt(n)>>1; i <= limit; i++) {
-            if (!sieve[i]) {
-                for (var step = 2*i+1, j = (step*step)>>1; j < half; j+=step) {
-                    sieve[j] = true;
-                }
-            }
-        }
-        primes.push(2);
-        for (var p = 1; p < half; p++) {
-            if (!sieve[p]) primes.push(2*p+1);
-        }
+function whatIsInAName(collection, source) {
+  var arr = [];
+  var keys = Object.keys(source);
+  collection.forEach(function(e) {
+    if(keys.every(function(key) {return e[key] === source[key];})) {
+      arr.push(e);
     }
-    return primes;
+  });
+  return arr;
 }
-
-function sumPrimes(num) {
-  return eratosthenesArray(num+1).reduce(function(a,b) {return a+b;}, 0);
-}
-
-sumPrimes(10);
 ```
