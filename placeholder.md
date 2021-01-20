@@ -1,55 +1,35 @@
 ---
-id: a5229172f011153519423690
-title: Sum All Odd Fibonacci Numbers
+id: a3bfc1673c0526e06d3ac698
+title: Sum All Primes
 challengeType: 5
-forumTopicId: 16084
-dashedName: sum-all-odd-fibonacci-numbers
+forumTopicId: 16085
+dashedName: sum-all-primes
 ---
 
 # --description--
 
-Given a positive integer `num`, return the sum of all odd Fibonacci numbers that are less than or equal to `num`.
+A <dfn>prime number</dfn> is a whole number greater than 1 with exactly two divisors: 1 and itself. For example, 2 is a prime number because it is only divisible by 1 and 2. In contrast, 4 is not prime since it is divisible by 1, 2 and 4.
 
-The first two numbers in the Fibonacci sequence are 1 and 1. Every additional number in the sequence is the sum of the two previous numbers. The first six numbers of the Fibonacci sequence are 1, 1, 2, 3, 5 and 8.
-
-For example, `sumFibs(10)` should return `10` because all odd Fibonacci numbers less than or equal to `10` are 1, 1, 3, and 5.
+Rewrite `sumPrimes` so it returns the sum of all prime numbers that are less than or equal to num.
 
 # --hints--
 
-`sumFibs(1)` should return a number.
+`sumPrimes(10)` should return a number.
 
 ```js
-assert(typeof sumFibs(1) === 'number');
+assert.deepEqual(typeof sumPrimes(10), 'number');
 ```
 
-`sumFibs(1000)` should return 1785.
+`sumPrimes(10)` should return 17.
 
 ```js
-assert(sumFibs(1000) === 1785);
+assert.deepEqual(sumPrimes(10), 17);
 ```
 
-`sumFibs(4000000)` should return 4613732.
+`sumPrimes(977)` should return 73156.
 
 ```js
-assert(sumFibs(4000000) === 4613732);
-```
-
-`sumFibs(4)` should return 5.
-
-```js
-assert(sumFibs(4) === 5);
-```
-
-`sumFibs(75024)` should return 60696.
-
-```js
-assert(sumFibs(75024) === 60696);
-```
-
-`sumFibs(75025)` should return 135721.
-
-```js
-assert(sumFibs(75025) === 135721);
+assert.deepEqual(sumPrimes(977), 73156);
 ```
 
 # --seed--
@@ -57,26 +37,39 @@ assert(sumFibs(75025) === 135721);
 ## --seed-contents--
 
 ```js
-function sumFibs(num) {
+function sumPrimes(num) {
   return num;
 }
 
-sumFibs(4);
+sumPrimes(10);
 ```
 
 # --solutions--
 
 ```js
-function sumFibs(num) {
-  var a = 1;
-  var b = 1;
-  var s = 0;
-  while (a <= num) {
-    if (a % 2 !== 0) {
-      s += a;
+function eratosthenesArray(n) {
+    var primes = [];
+    if (n > 2) {
+        var half = n>>1;
+        var sieve = Array(half);
+        for (var i = 1, limit = Math.sqrt(n)>>1; i <= limit; i++) {
+            if (!sieve[i]) {
+                for (var step = 2*i+1, j = (step*step)>>1; j < half; j+=step) {
+                    sieve[j] = true;
+                }
+            }
+        }
+        primes.push(2);
+        for (var p = 1; p < half; p++) {
+            if (!sieve[p]) primes.push(2*p+1);
+        }
     }
-    a = [b, b=b+a][0];
-  }
-  return s;
+    return primes;
 }
+
+function sumPrimes(num) {
+  return eratosthenesArray(num+1).reduce(function(a,b) {return a+b;}, 0);
+}
+
+sumPrimes(10);
 ```
