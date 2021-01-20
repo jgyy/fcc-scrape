@@ -1,47 +1,65 @@
 ---
-id: af7588ade1100bde429baf20
-title: Missing letters
+id: aa7697ea2477d1316795783b
+title: Pig Latin
 challengeType: 5
-forumTopicId: 16023
-dashedName: missing-letters
+forumTopicId: 16039
+dashedName: pig-latin
 ---
 
 # --description--
 
-Find the missing letter in the passed letter range and return it.
+Pig Latin is a way of altering English Words. The rules are as follows:
 
-If all letters are present in the range, return undefined.
+\- If a word begins with a consonant, take the first consonant or consonant cluster, move it to the end of the word, and add "ay" to it.
+
+\- If a word begins with a vowel, just add "way" at the end.
+
+# --instructions--
+
+Translate the provided string to Pig Latin. Input strings are guaranteed to be English words in all lowercase.
 
 # --hints--
 
-`fearNotLetter("abce")` should return "d".
+`translatePigLatin("california")` should return "aliforniacay".
 
 ```js
-assert.deepEqual(fearNotLetter('abce'), 'd');
+assert.deepEqual(translatePigLatin('california'), 'aliforniacay');
 ```
 
-`fearNotLetter("abcdefghjklmno")` should return "i".
+`translatePigLatin("paragraphs")` should return "aragraphspay".
 
 ```js
-assert.deepEqual(fearNotLetter('abcdefghjklmno'), 'i');
+assert.deepEqual(translatePigLatin('paragraphs'), 'aragraphspay');
 ```
 
-`fearNotLetter("stvwx")` should return "u".
+`translatePigLatin("glove")` should return "oveglay".
 
 ```js
-assert.deepEqual(fearNotLetter('stvwx'), 'u');
+assert.deepEqual(translatePigLatin('glove'), 'oveglay');
 ```
 
-`fearNotLetter("bcdf")` should return "e".
+`translatePigLatin("algorithm")` should return "algorithmway".
 
 ```js
-assert.deepEqual(fearNotLetter('bcdf'), 'e');
+assert.deepEqual(translatePigLatin('algorithm'), 'algorithmway');
 ```
 
-`fearNotLetter("abcdefghijklmnopqrstuvwxyz")` should return undefined.
+`translatePigLatin("eight")` should return "eightway".
 
 ```js
-assert.isUndefined(fearNotLetter('abcdefghijklmnopqrstuvwxyz'));
+assert.deepEqual(translatePigLatin('eight'), 'eightway');
+```
+
+Should handle words where the first vowel comes in the middle of the word.  `translatePigLatin("schwartz")` should return "artzschway".
+
+```js
+assert.deepEqual(translatePigLatin('schwartz'), 'artzschway');
+```
+
+Should handle words without vowels. `translatePigLatin("rhythm")` should return "rhythmay".
+
+```js
+assert.deepEqual(translatePigLatin('rhythm'), 'rhythmay');
 ```
 
 # --seed--
@@ -49,24 +67,27 @@ assert.isUndefined(fearNotLetter('abcdefghijklmnopqrstuvwxyz'));
 ## --seed-contents--
 
 ```js
-function fearNotLetter(str) {
+function translatePigLatin(str) {
   return str;
 }
 
-fearNotLetter("abce");
+translatePigLatin("consonant");
 ```
 
 # --solutions--
 
 ```js
-function fearNotLetter (str) {
-  for (var i = str.charCodeAt(0); i <= str.charCodeAt(str.length - 1); i++) {
-    var letter = String.fromCharCode(i);
-    if (str.indexOf(letter) === -1) {
-      return letter;
-    }
+function translatePigLatin(str) {
+  if (isVowel(str.charAt(0))) return str + "way";
+  var front = [];
+  str = str.split('');
+  while (str.length && !isVowel(str[0])) {
+    front.push(str.shift());
   }
+  return [].concat(str, front).join('') + 'ay';
+}
 
-  return undefined;
+function isVowel(c) {
+  return ['a', 'e', 'i', 'o', 'u'].indexOf(c.toLowerCase()) !== -1;
 }
 ```
