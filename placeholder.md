@@ -1,39 +1,63 @@
 ---
-id: a8d97bd4c764e91f9d2bda01
-title: Binary Agents
+id: a6b0bb188d873cb2c8729495
+title: Convert HTML Entities
 challengeType: 5
-forumTopicId: 14273
-dashedName: binary-agents
+forumTopicId: 16007
+dashedName: convert-html-entities
 ---
 
 # --description--
 
-Return an English translated sentence of the passed binary string.
-
-The binary string will be space separated.
+Convert the characters `&`, `<`, `>`, `"` (double quote), and `'` (apostrophe), in a string to their corresponding HTML entities.
 
 # --hints--
 
-`binaryAgent("01000001 01110010 01100101 01101110 00100111 01110100 00100000 01100010 01101111 01101110 01100110 01101001 01110010 01100101 01110011 00100000 01100110 01110101 01101110 00100001 00111111")` should return "Aren't bonfires fun!?"
+`convertHTML("Dolce & Gabbana")` should return `"Dolce &amp; Gabbana"`.
 
 ```js
-assert.deepEqual(
-  binaryAgent(
-    '01000001 01110010 01100101 01101110 00100111 01110100 00100000 01100010 01101111 01101110 01100110 01101001 01110010 01100101 01110011 00100000 01100110 01110101 01101110 00100001 00111111'
-  ),
-  "Aren't bonfires fun!?"
+assert.match(convertHTML('Dolce & Gabbana'), /Dolce &amp; Gabbana/);
+```
+
+`convertHTML("Hamburgers < Pizza < Tacos")` should return `"Hamburgers &lt; Pizza &lt; Tacos"`.
+
+```js
+assert.match(
+  convertHTML('Hamburgers < Pizza < Tacos'),
+  /Hamburgers &lt; Pizza &lt; Tacos/
 );
 ```
 
-`binaryAgent("01001001 00100000 01101100 01101111 01110110 01100101 00100000 01000110 01110010 01100101 01100101 01000011 01101111 01100100 01100101 01000011 01100001 01101101 01110000 00100001")` should return "I love FreeCodeCamp!"
+`convertHTML("Sixty > twelve")` should return `"Sixty &gt; twelve"`.
 
 ```js
-assert.deepEqual(
-  binaryAgent(
-    '01001001 00100000 01101100 01101111 01110110 01100101 00100000 01000110 01110010 01100101 01100101 01000011 01101111 01100100 01100101 01000011 01100001 01101101 01110000 00100001'
-  ),
-  'I love FreeCodeCamp!'
+assert.match(convertHTML('Sixty > twelve'), /Sixty &gt; twelve/);
+```
+
+`convertHTML('Stuff in "quotation marks"')` should return `"Stuff in &quot;quotation marks&quot;"`.
+
+```js
+assert.match(
+  convertHTML('Stuff in "quotation marks"'),
+  /Stuff in &quot;quotation marks&quot;/
 );
+```
+
+`convertHTML("Schindler's List")` should return `"Schindler&apos;s List"`.
+
+```js
+assert.match(convertHTML("Schindler's List"), /Schindler&apos;s List/);
+```
+
+`convertHTML("<>")` should return `"&lt;&gt;"`.
+
+```js
+assert.match(convertHTML('<>'), /&lt;&gt;/);
+```
+
+`convertHTML("abc")` should return `"abc"`.
+
+```js
+assert.strictEqual(convertHTML('abc'), 'abc');
 ```
 
 # --seed--
@@ -41,17 +65,25 @@ assert.deepEqual(
 ## --seed-contents--
 
 ```js
-function binaryAgent(str) {
+function convertHTML(str) {
   return str;
 }
 
-binaryAgent("01000001 01110010 01100101 01101110 00100111 01110100 00100000 01100010 01101111 01101110 01100110 01101001 01110010 01100101 01110011 00100000 01100110 01110101 01101110 00100001 00111111");
+convertHTML("Dolce & Gabbana");
 ```
 
 # --solutions--
 
 ```js
-function binaryAgent(str) {
-  return str.split(' ').map(function(s) { return parseInt(s, 2); }).map(function(b) { return String.fromCharCode(b);}).join('');
+var MAP = { '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;',
+            '"': '&quot;',
+            "'": '&apos;'};
+
+function convertHTML(str) {
+  return str.replace(/[&<>"']/g, function(c) {
+    return MAP[c];
+  });
 }
 ```
