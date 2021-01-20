@@ -1,77 +1,80 @@
 ---
-id: a0b5010f579e69b815e7c5d6
-title: Search and Replace
+id: a39963a4c10bc8b4d4f06d7e
+title: Seek and Destroy
 challengeType: 5
-forumTopicId: 16045
-dashedName: search-and-replace
+forumTopicId: 16046
+dashedName: seek-and-destroy
 ---
 
 # --description--
 
-Perform a search and replace on the sentence using the arguments provided and return the new sentence.
-
-First argument is the sentence to perform the search and replace on.
-
-Second argument is the word that you will be replacing (before).
-
-Third argument is what you will be replacing the second argument with (after).
+You will be provided with an initial array (the first argument in the destroyer function), followed by one or more arguments. Remove all elements from the initial array that are of the same value as these arguments.
 
 **Note**  
-Preserve the case of the first character in the original word when you are replacing it. For example if you mean to replace the word "Book" with the word "dog", it should be replaced as "Dog"
+You have to use the `arguments` object.
 
 # --hints--
 
-`myReplace("Let us go to the store", "store", "mall")` should return "Let us go to the mall".
+`destroyer([1, 2, 3, 1, 2, 3], 2, 3)` should return `[1, 1]`.
 
 ```js
-assert.deepEqual(
-  myReplace('Let us go to the store', 'store', 'mall'),
-  'Let us go to the mall'
-);
+assert.deepEqual(destroyer([1, 2, 3, 1, 2, 3], 2, 3), [1, 1]);
 ```
 
-`myReplace("He is Sleeping on the couch", "Sleeping", "sitting")` should return "He is Sitting on the couch".
+`destroyer([1, 2, 3, 5, 1, 2, 3], 2, 3)` should return `[1, 5, 1]`.
 
 ```js
-assert.deepEqual(
-  myReplace('He is Sleeping on the couch', 'Sleeping', 'sitting'),
-  'He is Sitting on the couch'
-);
+assert.deepEqual(destroyer([1, 2, 3, 5, 1, 2, 3], 2, 3), [1, 5, 1]);
 ```
 
-`myReplace("I think we should look up there", "up", "Down")` should return "I think we should look down there".
+`destroyer([3, 5, 1, 2, 2], 2, 3, 5)` should return `[1]`.
 
 ```js
-assert.deepEqual(
-  myReplace('I think we should look up there', 'up', 'Down'),
-  'I think we should look down there'
-);
+assert.deepEqual(destroyer([3, 5, 1, 2, 2], 2, 3, 5), [1]);
 ```
 
-`myReplace("This has a spellngi error", "spellngi", "spelling")` should return "This has a spelling error".
+`destroyer([2, 3, 2, 3], 2, 3)` should return `[]`.
 
 ```js
-assert.deepEqual(
-  myReplace('This has a spellngi error', 'spellngi', 'spelling'),
-  'This has a spelling error'
-);
+assert.deepEqual(destroyer([2, 3, 2, 3], 2, 3), []);
 ```
 
-`myReplace("His name is Tom", "Tom", "john")` should return "His name is John".
+`destroyer(["tree", "hamburger", 53], "tree", 53)` should return `["hamburger"]`.
 
 ```js
-assert.deepEqual(
-  myReplace('His name is Tom', 'Tom', 'john'),
-  'His name is John'
-);
+assert.deepEqual(destroyer(['tree', 'hamburger', 53], 'tree', 53), [
+  'hamburger'
+]);
 ```
 
-`myReplace("Let us get back to more Coding", "Coding", "algorithms")` should return "Let us get back to more Algorithms".
+`destroyer(["possum", "trollo", 12, "safari", "hotdog", 92, 65, "grandma", "bugati", "trojan", "yacht"], "yacht", "possum", "trollo", "safari", "hotdog", "grandma", "bugati", "trojan")` should return `[12,92,65]`.
 
 ```js
 assert.deepEqual(
-  myReplace('Let us get back to more Coding', 'Coding', 'algorithms'),
-  'Let us get back to more Algorithms'
+  destroyer(
+    [
+      'possum',
+      'trollo',
+      12,
+      'safari',
+      'hotdog',
+      92,
+      65,
+      'grandma',
+      'bugati',
+      'trojan',
+      'yacht'
+    ],
+    'yacht',
+    'possum',
+    'trollo',
+    'safari',
+    'hotdog',
+    'grandma',
+    'bugati',
+    'trojan'
+  ),
+  [12, 92, 65]
 );
 ```
 
@@ -80,22 +83,23 @@ assert.deepEqual(
 ## --seed-contents--
 
 ```js
-function myReplace(str, before, after) {
-  return str;
+function destroyer(arr) {
+  return arr;
 }
 
-myReplace("A quick brown fox jumped over the lazy dog", "jumped", "leaped");
+destroyer([1, 2, 3, 1, 2, 3], 2, 3);
 ```
 
 # --solutions--
 
 ```js
-function myReplace(str, before, after) {
-  if (before.charAt(0) === before.charAt(0).toUpperCase()) {
-    after = after.charAt(0).toUpperCase() + after.substring(1);
-  } else {
-    after = after.charAt(0).toLowerCase() + after.substring(1);
-  }
-  return str.replace(before, after);
+function destroyer(arr) {
+  var hash = Object.create(null);
+  [].slice.call(arguments, 1).forEach(function(e) {
+    hash[e] = true;
+  });
+  return arr.filter(function(e) { return !(e in hash);});
 }
+
+destroyer([1, 2, 3, 1, 2, 3], 2, 3);
 ```
