@@ -1,51 +1,45 @@
 ---
-id: a103376db3ba46b2d50db289
-title: Spinal Tap Case
+id: ab306dbdcc907c7ddfc30830
+title: Steamroller
 challengeType: 5
-forumTopicId: 16078
-dashedName: spinal-tap-case
+forumTopicId: 16079
+dashedName: steamroller
 ---
 
 # --description--
 
-Convert a string to spinal case. Spinal case is all-lowercase-words-joined-by-dashes.
+Flatten a nested array. You must account for varying levels of nesting.
 
 # --hints--
 
-`spinalCase("This Is Spinal Tap")` should return `"this-is-spinal-tap"`.
+`steamrollArray([[["a"]], [["b"]]])` should return `["a", "b"]`.
 
 ```js
-assert.deepEqual(spinalCase('This Is Spinal Tap'), 'this-is-spinal-tap');
+assert.deepEqual(steamrollArray([[['a']], [['b']]]), ['a', 'b']);
 ```
 
-`spinalCase("thisIsSpinalTap")` should return `"this-is-spinal-tap"`.
+`steamrollArray([1, [2], [3, [[4]]]])` should return `[1, 2, 3, 4]`.
 
 ```js
-assert.strictEqual(spinalCase('thisIsSpinalTap'), 'this-is-spinal-tap');
+assert.deepEqual(steamrollArray([1, [2], [3, [[4]]]]), [1, 2, 3, 4]);
 ```
 
-`spinalCase("The_Andy_Griffith_Show")` should return `"the-andy-griffith-show"`.
+`steamrollArray([1, [], [3, [[4]]]])` should return `[1, 3, 4]`.
 
 ```js
-assert.strictEqual(
-  spinalCase('The_Andy_Griffith_Show'),
-  'the-andy-griffith-show'
-);
+assert.deepEqual(steamrollArray([1, [], [3, [[4]]]]), [1, 3, 4]);
 ```
 
-`spinalCase("Teletubbies say Eh-oh")` should return `"teletubbies-say-eh-oh"`.
+`steamrollArray([1, {}, [3, [[4]]]])` should return `[1, {}, 3, 4]`.
 
 ```js
-assert.strictEqual(
-  spinalCase('Teletubbies say Eh-oh'),
-  'teletubbies-say-eh-oh'
-);
+assert.deepEqual(steamrollArray([1, {}, [3, [[4]]]]), [1, {}, 3, 4]);
 ```
 
-`spinalCase("AllThe-small Things")` should return `"all-the-small-things"`.
+Your solution should not use the `Array.prototype.flat()` or `Array.prototype.flatMap()` methods.
 
 ```js
-assert.strictEqual(spinalCase('AllThe-small Things'), 'all-the-small-things');
+assert(!code.match(/\.\s*flat\s*\(/) && !code.match(/\.\s*flatMap\s*\(/));
 ```
 
 # --seed--
@@ -53,18 +47,26 @@ assert.strictEqual(spinalCase('AllThe-small Things'), 'all-the-small-things');
 ## --seed-contents--
 
 ```js
-function spinalCase(str) {
-  return str;
+function steamrollArray(arr) {
+  return arr;
 }
 
-spinalCase('This Is Spinal Tap');
+steamrollArray([1, [2], [3, [[4]]]]);
 ```
 
 # --solutions--
 
 ```js
-function spinalCase(str) {
-  str = str.replace(/([a-z](?=[A-Z]))/g, '$1 ');
-  return str.toLowerCase().replace(/\ |\_/g, '-');
+function steamrollArray(arr) {
+  if (!Array.isArray(arr)) {
+    return [arr];
+  }
+  var out = [];
+  arr.forEach(function(e) {
+    steamrollArray(e).forEach(function(v) {
+      out.push(v);
+    });
+  });
+  return out;
 }
 ```
