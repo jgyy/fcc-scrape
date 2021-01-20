@@ -1,81 +1,55 @@
 ---
-id: a39963a4c10bc8b4d4f06d7e
-title: Seek and Destroy
+id: ae9defd7acaf69703ab432ea
+title: Smallest Common Multiple
 challengeType: 5
-forumTopicId: 16046
-dashedName: seek-and-destroy
+forumTopicId: 16075
+dashedName: smallest-common-multiple
 ---
 
 # --description--
 
-You will be provided with an initial array (the first argument in the destroyer function), followed by one or more arguments. Remove all elements from the initial array that are of the same value as these arguments.
+Find the smallest common multiple of the provided parameters that can be evenly divided by both, as well as by all sequential numbers in the range between these parameters.
 
-**Note**  
-You have to use the `arguments` object.
+The range will be an array of two numbers that will not necessarily be in numerical order.
+
+For example, if given 1 and 3, find the smallest common multiple of both 1 and 3 that is also evenly divisible by all numbers *between* 1 and 3. The answer here would be 6.
 
 # --hints--
 
-`destroyer([1, 2, 3, 1, 2, 3], 2, 3)` should return `[1, 1]`.
+`smallestCommons([1, 5])` should return a number.
 
 ```js
-assert.deepEqual(destroyer([1, 2, 3, 1, 2, 3], 2, 3), [1, 1]);
+assert.deepEqual(typeof smallestCommons([1, 5]), 'number');
 ```
 
-`destroyer([1, 2, 3, 5, 1, 2, 3], 2, 3)` should return `[1, 5, 1]`.
+`smallestCommons([1, 5])` should return 60.
 
 ```js
-assert.deepEqual(destroyer([1, 2, 3, 5, 1, 2, 3], 2, 3), [1, 5, 1]);
+assert.deepEqual(smallestCommons([1, 5]), 60);
 ```
 
-`destroyer([3, 5, 1, 2, 2], 2, 3, 5)` should return `[1]`.
+`smallestCommons([5, 1])` should return 60.
 
 ```js
-assert.deepEqual(destroyer([3, 5, 1, 2, 2], 2, 3, 5), [1]);
+assert.deepEqual(smallestCommons([5, 1]), 60);
 ```
 
-`destroyer([2, 3, 2, 3], 2, 3)` should return `[]`.
+`smallestCommons([2, 10])` should return 2520.
 
 ```js
-assert.deepEqual(destroyer([2, 3, 2, 3], 2, 3), []);
+assert.deepEqual(smallestCommons([2, 10]), 2520);
 ```
 
-`destroyer(["tree", "hamburger", 53], "tree", 53)` should return `["hamburger"]`.
+`smallestCommons([1, 13])` should return 360360.
 
 ```js
-assert.deepEqual(destroyer(['tree', 'hamburger', 53], 'tree', 53), [
-  'hamburger'
-]);
+assert.deepEqual(smallestCommons([1, 13]), 360360);
 ```
 
-`destroyer(["possum", "trollo", 12, "safari", "hotdog", 92, 65, "grandma", "bugati", "trojan", "yacht"], "yacht", "possum", "trollo", "safari", "hotdog", "grandma", "bugati", "trojan")` should return `[12,92,65]`.
+`smallestCommons([23, 18])` should return 6056820.
 
 ```js
-assert.deepEqual(
-  destroyer(
-    [
-      'possum',
-      'trollo',
-      12,
-      'safari',
-      'hotdog',
-      92,
-      65,
-      'grandma',
-      'bugati',
-      'trojan',
-      'yacht'
-    ],
-    'yacht',
-    'possum',
-    'trollo',
-    'safari',
-    'hotdog',
-    'grandma',
-    'bugati',
-    'trojan'
-  ),
-  [12, 92, 65]
-);
+assert.deepEqual(smallestCommons([23, 18]), 6056820);
 ```
 
 # --seed--
@@ -83,23 +57,34 @@ assert.deepEqual(
 ## --seed-contents--
 
 ```js
-function destroyer(arr) {
+function smallestCommons(arr) {
   return arr;
 }
 
-destroyer([1, 2, 3, 1, 2, 3], 2, 3);
+
+smallestCommons([1,5]);
 ```
 
 # --solutions--
 
 ```js
-function destroyer(arr) {
-  var hash = Object.create(null);
-  [].slice.call(arguments, 1).forEach(function(e) {
-    hash[e] = true;
-  });
-  return arr.filter(function(e) { return !(e in hash);});
+function gcd(a, b) {
+    while (b !== 0) {
+        a = [b, b = a % b][0];
+    }
+    return a;
 }
 
-destroyer([1, 2, 3, 1, 2, 3], 2, 3);
+function lcm(a, b) {
+    return (a * b) / gcd(a, b);
+}
+
+function smallestCommons(arr) {
+  arr.sort(function(a,b) {return a-b;});
+  var rng = [];
+  for (var i = arr[0]; i <= arr[1]; i++) {
+    rng.push(i);
+  }
+  return rng.reduce(lcm);
+}
 ```
