@@ -1,155 +1,59 @@
 ---
-id: a5de63ebea8dbee56860f4f2
-title: Diff Two Arrays
+id: afd15382cdfb22c9efe8b7de
+title: DNA Pairing
 challengeType: 5
-forumTopicId: 16008
-dashedName: diff-two-arrays
+forumTopicId: 16009
+dashedName: dna-pairing
 ---
 
 # --description--
 
-Compare two arrays and return a new array with any items only found in one of the two given arrays, but not both. In other words, return the symmetric difference of the two arrays.
+The DNA strand is missing the pairing element. Take each character, get its pair, and return the results as a 2d array.
 
-**Note**  
-You can return the array with its elements in any order.
+[Base pairs](http://en.wikipedia.org/wiki/Base_pair) are a pair of AT and CG. Match the missing element to the provided character.
+
+Return the provided character as the first element in each array.
+
+For example, for the input GCG, return \[\["G", "C"], \["C","G"],\["G", "C"]]
+
+The character and its pair are paired up in an array, and all the arrays are grouped into one encapsulating array.
 
 # --hints--
 
-`diffArray([1, 2, 3, 5], [1, 2, 3, 4, 5])` should return an array.
+`pairElement("ATCGA")` should return `[["A","T"],["T","A"],["C","G"],["G","C"],["A","T"]]`.
 
 ```js
-assert(typeof diffArray([1, 2, 3, 5], [1, 2, 3, 4, 5]) === 'object');
-```
-
-`["diorite", "andesite", "grass", "dirt", "pink wool", "dead shrub"], ["diorite", "andesite", "grass", "dirt", "dead shrub"]` should return `["pink wool"]`.
-
-```js
-assert.sameMembers(
-  diffArray(
-    ['diorite', 'andesite', 'grass', 'dirt', 'pink wool', 'dead shrub'],
-    ['diorite', 'andesite', 'grass', 'dirt', 'dead shrub']
-  ),
-  ['pink wool']
-);
-```
-
-`["diorite", "andesite", "grass", "dirt", "pink wool", "dead shrub"], ["diorite", "andesite", "grass", "dirt", "dead shrub"]` should return an array with one item.
-
-```js
-assert(
-  diffArray(
-    ['diorite', 'andesite', 'grass', 'dirt', 'pink wool', 'dead shrub'],
-    ['diorite', 'andesite', 'grass', 'dirt', 'dead shrub']
-  ).length === 1
-);
-```
-
-`["andesite", "grass", "dirt", "pink wool", "dead shrub"], ["diorite", "andesite", "grass", "dirt", "dead shrub"]` should return `["diorite", "pink wool"]`.
-
-```js
-assert.sameMembers(
-  diffArray(
-    ['andesite', 'grass', 'dirt', 'pink wool', 'dead shrub'],
-    ['diorite', 'andesite', 'grass', 'dirt', 'dead shrub']
-  ),
-  ['diorite', 'pink wool']
-);
-```
-
-`["andesite", "grass", "dirt", "pink wool", "dead shrub"], ["diorite", "andesite", "grass", "dirt", "dead shrub"]` should return an array with two items.
-
-```js
-assert(
-  diffArray(
-    ['andesite', 'grass', 'dirt', 'pink wool', 'dead shrub'],
-    ['diorite', 'andesite', 'grass', 'dirt', 'dead shrub']
-  ).length === 2
-);
-```
-
-`["andesite", "grass", "dirt", "dead shrub"], ["andesite", "grass", "dirt", "dead shrub"]` should return `[]`.
-
-```js
-assert.sameMembers(
-  diffArray(
-    ['andesite', 'grass', 'dirt', 'dead shrub'],
-    ['andesite', 'grass', 'dirt', 'dead shrub']
-  ),
-  []
-);
-```
-
-`["andesite", "grass", "dirt", "dead shrub"], ["andesite", "grass", "dirt", "dead shrub"]` should return an empty array.
-
-```js
-assert(
-  diffArray(
-    ['andesite', 'grass', 'dirt', 'dead shrub'],
-    ['andesite', 'grass', 'dirt', 'dead shrub']
-  ).length === 0
-);
-```
-
-`[1, 2, 3, 5], [1, 2, 3, 4, 5]` should return `[4]`.
-
-```js
-assert.sameMembers(diffArray([1, 2, 3, 5], [1, 2, 3, 4, 5]), [4]);
-```
-
-`[1, 2, 3, 5], [1, 2, 3, 4, 5]` should return an array with one item.
-
-```js
-assert(diffArray([1, 2, 3, 5], [1, 2, 3, 4, 5]).length === 1);
-```
-
-`[1, "calf", 3, "piglet"], [1, "calf", 3, 4]` should return `["piglet", 4]`.
-
-```js
-assert.sameMembers(diffArray([1, 'calf', 3, 'piglet'], [1, 'calf', 3, 4]), [
-  'piglet',
-  4
+assert.deepEqual(pairElement('ATCGA'), [
+  ['A', 'T'],
+  ['T', 'A'],
+  ['C', 'G'],
+  ['G', 'C'],
+  ['A', 'T']
 ]);
 ```
 
-`[1, "calf", 3, "piglet"], [1, "calf", 3, 4]` should return an array with two items.
+`pairElement("TTGAG")` should return `[["T","A"],["T","A"],["G","C"],["A","T"],["G","C"]]`.
 
 ```js
-assert(diffArray([1, 'calf', 3, 'piglet'], [1, 'calf', 3, 4]).length === 2);
-```
-
-`[], ["snuffleupagus", "cookie monster", "elmo"]` should return `["snuffleupagus", "cookie monster", "elmo"]`.
-
-```js
-assert.sameMembers(diffArray([], ['snuffleupagus', 'cookie monster', 'elmo']), [
-  'snuffleupagus',
-  'cookie monster',
-  'elmo'
+assert.deepEqual(pairElement('TTGAG'), [
+  ['T', 'A'],
+  ['T', 'A'],
+  ['G', 'C'],
+  ['A', 'T'],
+  ['G', 'C']
 ]);
 ```
 
-`[], ["snuffleupagus", "cookie monster", "elmo"]` should return an array with three items.
+`pairElement("CTCTA")` should return `[["C","G"],["T","A"],["C","G"],["T","A"],["A","T"]]`.
 
 ```js
-assert(diffArray([], ['snuffleupagus', 'cookie monster', 'elmo']).length === 3);
-```
-
-`[1, "calf", 3, "piglet"], [7, "filly"]` should return `[1, "calf", 3, "piglet", 7, "filly"]`.
-
-```js
-assert.sameMembers(diffArray([1, 'calf', 3, 'piglet'], [7, 'filly']), [
-  1,
-  'calf',
-  3,
-  'piglet',
-  7,
-  'filly'
+assert.deepEqual(pairElement('CTCTA'), [
+  ['C', 'G'],
+  ['T', 'A'],
+  ['C', 'G'],
+  ['T', 'A'],
+  ['A', 'T']
 ]);
-```
-
-`[1, "calf", 3, "piglet"], [7, "filly"]` should return an array with six items.
-
-```js
-assert(diffArray([1, 'calf', 3, 'piglet'], [7, 'filly']).length === 6);
 ```
 
 # --seed--
@@ -157,35 +61,23 @@ assert(diffArray([1, 'calf', 3, 'piglet'], [7, 'filly']).length === 6);
 ## --seed-contents--
 
 ```js
-function diffArray(arr1, arr2) {
-  var newArr = [];
-  return newArr;
+function pairElement(str) {
+  return str;
 }
 
-diffArray([1, 2, 3, 5], [1, 2, 3, 4, 5]);
+pairElement("GCG");
 ```
 
 # --solutions--
 
 ```js
-function diffArray(arr1, arr2) {
-  var newArr = [];
-  var h1 = Object.create(null);
-  arr1.forEach(function(e) {
-    h1[e] = e;
-  });
+var lookup = Object.create(null);
+lookup.A = 'T';
+lookup.T = 'A';
+lookup.C = 'G';
+lookup.G = 'C';
 
-  var h2 = Object.create(null);
-  arr2.forEach(function(e) {
-    h2[e] = e;
-  });
-
-  Object.keys(h1).forEach(function(e) {
-     if (!(e in h2)) newArr.push(h1[e]);
-  });
-  Object.keys(h2).forEach(function(e) {
-     if (!(e in h1)) newArr.push(h2[e]);
-  });
-  return newArr;
+function pairElement(str) {
+ return str.split('').map(function(p) {return [p, lookup[p]];});
 }
 ```
