@@ -1,48 +1,51 @@
 ---
-id: a105e963526e7de52b219be9
-title: Sorted Union
+id: a103376db3ba46b2d50db289
+title: Spinal Tap Case
 challengeType: 5
-forumTopicId: 16077
-dashedName: sorted-union
+forumTopicId: 16078
+dashedName: spinal-tap-case
 ---
 
 # --description--
 
-Write a function that takes two or more arrays and returns a new array of unique values in the order of the original provided arrays.
-
-In other words, all values present from all arrays should be included in their original order, but with no duplicates in the final array.
-
-The unique numbers should be sorted by their original order, but the final array should not be sorted in numerical order.
-
-Check the assertion tests for examples.
+Convert a string to spinal case. Spinal case is all-lowercase-words-joined-by-dashes.
 
 # --hints--
 
-`uniteUnique([1, 3, 2], [5, 2, 1, 4], [2, 1])` should return `[1, 3, 2, 5, 4]`.
+`spinalCase("This Is Spinal Tap")` should return `"this-is-spinal-tap"`.
 
 ```js
-assert.deepEqual(uniteUnique([1, 3, 2], [5, 2, 1, 4], [2, 1]), [1, 3, 2, 5, 4]);
+assert.deepEqual(spinalCase('This Is Spinal Tap'), 'this-is-spinal-tap');
 ```
 
-`uniteUnique([1, 2, 3], [5, 2, 1])` should return `[1, 2, 3, 5]`.
+`spinalCase("thisIsSpinalTap")` should return `"this-is-spinal-tap"`.
 
 ```js
-assert.deepEqual(uniteUnique([1, 2, 3], [5, 2, 1]), [1, 2, 3, 5]);
+assert.strictEqual(spinalCase('thisIsSpinalTap'), 'this-is-spinal-tap');
 ```
 
-`uniteUnique([1, 2, 3], [5, 2, 1, 4], [2, 1], [6, 7, 8])` should return `[1, 2, 3, 5, 4, 6, 7, 8]`.
+`spinalCase("The_Andy_Griffith_Show")` should return `"the-andy-griffith-show"`.
 
 ```js
-assert.deepEqual(uniteUnique([1, 2, 3], [5, 2, 1, 4], [2, 1], [6, 7, 8]), [
-  1,
-  2,
-  3,
-  5,
-  4,
-  6,
-  7,
-  8
-]);
+assert.strictEqual(
+  spinalCase('The_Andy_Griffith_Show'),
+  'the-andy-griffith-show'
+);
+```
+
+`spinalCase("Teletubbies say Eh-oh")` should return `"teletubbies-say-eh-oh"`.
+
+```js
+assert.strictEqual(
+  spinalCase('Teletubbies say Eh-oh'),
+  'teletubbies-say-eh-oh'
+);
+```
+
+`spinalCase("AllThe-small Things")` should return `"all-the-small-things"`.
+
+```js
+assert.strictEqual(spinalCase('AllThe-small Things'), 'all-the-small-things');
 ```
 
 # --seed--
@@ -50,19 +53,18 @@ assert.deepEqual(uniteUnique([1, 2, 3], [5, 2, 1, 4], [2, 1], [6, 7, 8]), [
 ## --seed-contents--
 
 ```js
-function uniteUnique(arr) {
-  return arr;
+function spinalCase(str) {
+  return str;
 }
 
-uniteUnique([1, 3, 2], [5, 2, 1, 4], [2, 1]);
+spinalCase('This Is Spinal Tap');
 ```
 
 # --solutions--
 
 ```js
-function uniteUnique(arr) {
-  return [].slice.call(arguments).reduce(function(a, b) {
-    return [].concat(a, b.filter(function(e) {return a.indexOf(e) === -1;}));
-  }, []);
+function spinalCase(str) {
+  str = str.replace(/([a-z](?=[A-Z]))/g, '$1 ');
+  return str.toLowerCase().replace(/\ |\_/g, '-');
 }
 ```
