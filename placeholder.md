@@ -1,130 +1,98 @@
 ---
-id: a8e512fbe388ac2f9198f0fa
-title: Wherefore art thou
-challengeType: 5
-forumTopicId: 16092
-dashedName: wherefore-art-thou
+id: 5ddb965c65d27e1512d44d9a
+title: Part 1
+challengeType: 0
+dashedName: part-1
 ---
 
 # --description--
 
-Make a function that looks through an array of objects (first argument) and returns an array of all objects that have matching name and value pairs (second argument). Each name and value pair of the source object has to be present in the object from the collection if it is to be included in the returned array.
+When a browser loads a page, it creates a Document Object Model (DOM) representation of the page which includes all of the HTML elements in a tree structure.
 
-For example, if the first argument is `[{ first: "Romeo", last: "Montague" }, { first: "Mercutio", last: null }, { first: "Tybalt", last: "Capulet" }]`, and the second argument is `{ last: "Capulet" }`, then you must return the third object from the array (the first argument), because it contains the name and its value, that was passed on as the second argument.
+In JavaScript, you can access the DOM by referencing the global `document` object.
+
+To view the DOM, log it to the console with `console.log(document)`.
 
 # --hints--
 
-`whatIsInAName([{ first: "Romeo", last: "Montague" }, { first: "Mercutio", last: null }, { first: "Tybalt", last: "Capulet" }], { last: "Capulet" })` should return `[{ first: "Tybalt", last: "Capulet" }]`.
+See description above for instructions.
 
 ```js
-assert.deepEqual(
-  whatIsInAName(
-    [
-      { first: 'Romeo', last: 'Montague' },
-      { first: 'Mercutio', last: null },
-      { first: 'Tybalt', last: 'Capulet' }
-    ],
-    { last: 'Capulet' }
-  ),
-  [{ first: 'Tybalt', last: 'Capulet' }]
-);
-```
-
-`whatIsInAName([{ "apple": 1 }, { "apple": 1 }, { "apple": 1, "bat": 2 }], { "apple": 1 })` should return `[{ "apple": 1 }, { "apple": 1 }, { "apple": 1, "bat": 2 }]`.
-
-```js
-assert.deepEqual(
-  whatIsInAName([{ apple: 1 }, { apple: 1 }, { apple: 1, bat: 2 }], {
-    apple: 1
-  }),
-  [{ apple: 1 }, { apple: 1 }, { apple: 1, bat: 2 }]
-);
-```
-
-`whatIsInAName([{ "apple": 1, "bat": 2 }, { "bat": 2 }, { "apple": 1, "bat": 2, "cookie": 2 }], { "apple": 1, "bat": 2 })` should return `[{ "apple": 1, "bat": 2 }, { "apple": 1, "bat": 2, "cookie": 2 }]`.
-
-```js
-assert.deepEqual(
-  whatIsInAName(
-    [{ apple: 1, bat: 2 }, { bat: 2 }, { apple: 1, bat: 2, cookie: 2 }],
-    { apple: 1, bat: 2 }
-  ),
-  [
-    { apple: 1, bat: 2 },
-    { apple: 1, bat: 2, cookie: 2 }
-  ]
-);
-```
-
-`whatIsInAName([{ "apple": 1, "bat": 2 }, { "apple": 1 }, { "apple": 1, "bat": 2, "cookie": 2 }], { "apple": 1, "cookie": 2 })` should return `[{ "apple": 1, "bat": 2, "cookie": 2 }]`.
-
-```js
-assert.deepEqual(
-  whatIsInAName(
-    [{ apple: 1, bat: 2 }, { apple: 1 }, { apple: 1, bat: 2, cookie: 2 }],
-    { apple: 1, cookie: 2 }
-  ),
-  [{ apple: 1, bat: 2, cookie: 2 }]
-);
-```
-
-`whatIsInAName([{ "apple": 1, "bat": 2 }, { "apple": 1 }, { "apple": 1, "bat": 2, "cookie": 2 }, { "bat":2 }], { "apple": 1, "bat": 2 })` should return `[{ "apple": 1, "bat": 2 }, { "apple": 1, "bat": 2, "cookie":2 }]`.
-
-```js
-assert.deepEqual(
-  whatIsInAName(
-    [
-      { apple: 1, bat: 2 },
-      { apple: 1 },
-      { apple: 1, bat: 2, cookie: 2 },
-      { bat: 2 }
-    ],
-    { apple: 1, bat: 2 }
-  ),
-  [
-    { apple: 1, bat: 2 },
-    { apple: 1, bat: 2, cookie: 2 }
-  ]
-);
-```
-
-`whatIsInAName([{"a": 1, "b": 2, "c": 3}], {"a": 1, "b": 9999, "c": 3})` should return `[]`
-
-```js
-assert.deepEqual(
-  whatIsInAName([{ a: 1, b: 2, c: 3 }], { a: 1, b: 9999, c: 3 }),
-  []
-);
+assert(code.replace(/\s/g, '').match(/console\.log\(document\)/));
 ```
 
 # --seed--
 
+## --before-user-code--
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title></title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <form id="calorie-form">
+        <h2 class="center">Calorie Counter</h2>
+        <div class="grid">
+          <legend>Sex</legend>
+          <div>
+            <input type="radio" name="sex" id="female" value="F" checked />
+            <label for="female">
+              Female (2,000 calories)
+            </label>
+
+            <div>
+              <input type="radio" name="sex" id="male" value="M" />
+              <label for="male">
+                Male (2,500 calories)
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="grid" id="entries">
+          Breakfast <input type="number" min="0" class="cal-control" id="breakfast" /><br>
+          Lunch <input type="number" min="0" class="cal-control" id="lunch" /><br>
+          Dinner <input type="number" min="0" class="cal-control" id="dinner" />
+        </div>
+        <button type="button" class="btn-add" id="add">
+          Add Entry
+        </button>
+        <button type="submit" class="btn-solid" id="calculate">
+          Calculate
+        </button>
+        <button type="button" class="btn-outline" id="clear">
+          Clear
+        </button>
+      </form>
+      <div id="output"></div>
+    </div>
+```
+
+## --after-user-code--
+
+```html
+  </body>
+</html>
+```
+
 ## --seed-contents--
 
-```js
-function whatIsInAName(collection, source) {
-  var arr = [];
-  // Only change code below this line
+```html
+<script>
 
-
-  // Only change code above this line
-  return arr;
-}
-
-whatIsInAName([{ first: "Romeo", last: "Montague" }, { first: "Mercutio", last: null }, { first: "Tybalt", last: "Capulet" }], { last: "Capulet" });
+</script>
 ```
 
 # --solutions--
 
-```js
-function whatIsInAName(collection, source) {
-  var arr = [];
-  var keys = Object.keys(source);
-  collection.forEach(function(e) {
-    if(keys.every(function(key) {return e[key] === source[key];})) {
-      arr.push(e);
-    }
-  });
-  return arr;
-}
+```html
+<script>
+console.log(document);
+</script>
 ```
