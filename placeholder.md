@@ -1,19 +1,17 @@
 ---
-id: 5ddb965c65d27e1512d44dc7
-title: Part 48
+id: 5ddb965c65d27e1512d44dc8
+title: Part 49
 challengeType: 0
-dashedName: part-48
+dashedName: part-49
 ---
 
 # --description--
 
-Now it's time to add some styling which can be added directly as attributes or classes.
+You can also add styling with the `setAttribute()` method. This method takes two arguments: the name of the attribute and the value that the attribute should be.
 
-In our CSS file, we have a styling rule for any elements with the class name `green-text`.
+For example, if you want to set the `width` of an `input` element to 100px, you would write `input.setAttribute('width', '100px')`.
 
-On line **20**, right after creating the `result` element, set the `className` property of `result` to be equal to `'green-text'`.
-
-Now if you submit the form again and inspect the `result` element, you will see it as `<h3 class="green-text">` and notice that the text is now green.
+Set the `class` attribute of the `output` element equal to a class named `bordered-class`.
 
 # --hints--
 
@@ -21,7 +19,11 @@ See description above for instructions.
 
 ```js
 assert(
-  code.replace(/\s/g, '').match(/result\.className\=[\'\"\`]green-text[\'\"\`]/)
+  code
+    .replace(/\s/g, '')
+    .match(
+      /output\.setAttribute\([\'\"\`]class[\'\"\`]\,[\'\"\`]bordered-class[\'\"\`]\)/
+    )
 );
 ```
 
@@ -116,7 +118,7 @@ assert(
     const output = document.getElementById('output');
 
     const result = document.createElement('h3');
-    //put your code here
+    result.className = 'green-text';
     const resultText = document.createTextNode(
       `${Math.abs(difference)} Calorie ${surplusOrDeficit}`
     );
@@ -138,6 +140,8 @@ assert(
     const consumed = document.createElement('h4');
     consumed.innerHTML = `${total} Consumed Calories`;
     output.appendChild(consumed);
+
+    //put your code here
   }
 </script>
 ```
@@ -186,6 +190,8 @@ assert(
     const consumed = document.createElement('h4');
     consumed.innerHTML = `${total} Consumed Calories`;
     output.appendChild(consumed);
+
+    output.setAttribute('class', 'bordered-class');
   }
 </script>
 ```
