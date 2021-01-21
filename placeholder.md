@@ -1,17 +1,13 @@
 ---
-id: 5ddb965c65d27e1512d44da0
-title: Part 7
+id: 5ddb965c65d27e1512d44da1
+title: Part 8
 challengeType: 0
-dashedName: part-7
+dashedName: part-8
 ---
 
 # --description--
 
-If you inspect the inputs in the form, you will notice that they have the class name `cal-control`.
-
-To access elements with a certain class name, we use the `getElementsByClassName()` method.
-
-Similar to how you referenced the calorie form above (`document.getElementById('calorie-form')`), create a reference to the elements with the class name `cal-control` below `e.preventDefault()`.
+Now assign the document object you just referenced to a variable named `total`. Since this variable will not change, use `const` to create it.
 
 # --hints--
 
@@ -19,9 +15,9 @@ See description above for instructions.
 
 ```js
 assert(
-  code
-    .replace(/\s/g, '')
-    .match(/document\.getElementsByClassName\([\'\"\`]cal\-control[\'\"\`]\)/)
+  /const\s*total\s*=\s*document\.getElementsByClassName\([\'\"\`]cal\-control[\'\"\`]\)/.test(
+    code
+  )
 );
 ```
 
@@ -102,6 +98,7 @@ assert(
 
   function calculate(e) {
     e.preventDefault();
+    document.getElementsByClassName('cal-control');
   }
 </script>
 ```
@@ -114,7 +111,7 @@ assert(
 
   function calculate(e) {
     e.preventDefault();
-    document.getElementsByClassName('cal-control');
+    const total = document.getElementsByClassName('cal-control');
   }
 </script>
 ```
