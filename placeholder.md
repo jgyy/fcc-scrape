@@ -1,17 +1,13 @@
 ---
-id: 5ddb965c65d27e1512d44dcf
-title: Part 56
+id: 5ddb965c65d27e1512d44dd0
+title: Part 57
 challengeType: 0
-dashedName: part-56
+dashedName: part-57
 ---
 
 # --description--
 
-Notice that parent container of all of the inputs has an `id` of `entries`: `<div class="grid" id="entries">`.
-
-Get a reference to the document element with the `id` attribute `entries` and append the `foodInput` element to it by chaining on the `.appendChild()` function.
-
-This is similar to the other `appendChild()` methods that you have used previously.
+Create a variable named `calorieInput` and set it equal to another `input` document element. This is similar to how you created the `foodInput`.
 
 # --hints--
 
@@ -19,11 +15,9 @@ See description above for instructions.
 
 ```js
 assert(
-  code
-    .replace(/\s/g, '')
-    .match(
-      /document\.getElementById\([\'\"\`]entries[\'\"\`]\)\.appendChild\(foodInput\)/
-    )
+  /const\s*calorieInput\s*=\s*document\.createElement\([\'\"\`]input[\'\"\`]\)/.test(
+    code
+  )
 );
 ```
 
@@ -149,6 +143,7 @@ assert(
     const foodInput = document.createElement('input');
     foodInput.placeholder = 'food name';
     foodInput.classList.add('food-control');
+    document.getElementById('entries').appendChild(foodInput);
   };
 </script>
 ```
@@ -207,6 +202,8 @@ assert(
     foodInput.placeholder = 'food name';
     foodInput.classList.add('food-control');
     document.getElementById('entries').appendChild(foodInput);
+
+    const calorieInput = document.createElement('input');
   };
 </script>
 ```
