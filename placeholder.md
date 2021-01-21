@@ -1,13 +1,15 @@
 ---
-id: 5ddb965c65d27e1512d44db8
-title: Part 33
+id: 5ddb965c65d27e1512d44db9
+title: Part 34
 challengeType: 0
-dashedName: part-33
+dashedName: part-34
 ---
 
 # --description--
 
-Inside the parentheses of `.createTextNode()`, add `+ ' Calorie '` after `Math.abs(difference))`.
+Next we want to add the text from the `surplusOrDeficit` variable that we previously created.
+
+Inside the parentheses of `.createTextNode()` add `+ surplusOrDeficit` after `Math.abs(difference) + ' Calorie '`.
 
 # --hints--
 
@@ -15,7 +17,7 @@ See description above for instructions.
 
 ```js
 assert(
-  /const\s*resultText\s*=\s*document\.createTextNode\(\s*Math\.abs\(\s*difference\s*\)\s*\+\s*[\'\"\`]\s*Calorie\s*[\'\"\`]\s*\)/.test(
+  /const\s*resultText\s*=\s*document\.createTextNode\(\s*Math\.abs\(\s*difference\s*\)\s*\+\s*[\'\"\`]\s*Calorie\s*[\'\"\`]\s*\+\s*surplusOrDeficit\s*\)/.test(
     code
   )
 );
@@ -112,7 +114,9 @@ assert(
     const output = document.getElementById('output');
 
     const result = document.createElement('h3');
-    const resultText = document.createTextNode(Math.abs(difference));
+    const resultText = document.createTextNode(
+      Math.abs(difference) + ' Calorie '
+    );
   }
 </script>
 ```
@@ -140,7 +144,7 @@ assert(
 
     const result = document.createElement('h3');
     const resultText = document.createTextNode(
-      Math.abs(difference) + ' Calorie '
+      Math.abs(difference) + ' Calorie ' + surplusOrDeficit
     );
   }
 </script>
