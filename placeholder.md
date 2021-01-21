@@ -1,13 +1,15 @@
 ---
-id: 5ddb965c65d27e1512d44dd0
-title: Part 57
+id: 5ddb965c65d27e1512d44dd1
+title: Part 58
 challengeType: 0
-dashedName: part-57
+dashedName: part-58
 ---
 
 # --description--
 
-Create a variable named `calorieInput` and set it equal to another `input` document element. This is similar to how you created the `foodInput`.
+Use the `setAttribute()` method of `calorieInput` to set the `type` of this input to `number`.
+
+This is similar to how to set the class of the `output` element previously.
 
 # --hints--
 
@@ -15,9 +17,11 @@ See description above for instructions.
 
 ```js
 assert(
-  /const\s*calorieInput\s*=\s*document\.createElement\([\'\"\`]input[\'\"\`]\)/.test(
-    code
-  )
+  code
+    .replace(/\s/g, '')
+    .match(
+      /calorieInput\.setAttribute\([\'\"\`]type[\'\"\`]\,[\'\"\`]number[\'\"\`]\)/
+    )
 );
 ```
 
@@ -144,6 +148,8 @@ assert(
     foodInput.placeholder = 'food name';
     foodInput.classList.add('food-control');
     document.getElementById('entries').appendChild(foodInput);
+
+    const calorieInput = document.createElement('input');
   };
 </script>
 ```
@@ -204,6 +210,7 @@ assert(
     document.getElementById('entries').appendChild(foodInput);
 
     const calorieInput = document.createElement('input');
+    calorieInput.setAttribute('type', 'number');
   };
 </script>
 ```
