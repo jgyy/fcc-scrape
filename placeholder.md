@@ -1,20 +1,30 @@
 ---
-id: 5ddb965c65d27e1512d44ddc
-title: Part 69
+id: 5ddb965c65d27e1512d44ddd
+title: Part 70
 challengeType: 0
-dashedName: part-69
+dashedName: part-70
 ---
 
 # --description--
 
-Create a variable named `clearForm` and set it equal to a blank arrow function like you did with `clearOutput`.
+We need to remove all elements with the class name `food-control` that are added when the user clicks the "Add" button.
+
+Inside the function body of `clearForm`, create a variable named `foodInputs` and set it equal to an array of elements with the class name `food-control`.
+
+This is similar to how you declared the `total` variable previously in the `calculate` method.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(typeof clearForm === 'function');
+assert(
+  code
+    .replace(/\s/g, '')
+    .match(
+      /const\s*foodInputs\s*=Array\.from\(document\.getElementsByClassName\([\'\"\`]food\-control[\'\"\`]\)\)/
+    )
+);
 ```
 
 # --seed--
@@ -159,6 +169,8 @@ assert(typeof clearForm === 'function');
     document.getElementById('output').innerHTML = '';
     document.getElementById('output').classList.remove('bordered-class');
   };
+
+  const clearForm = () => {};
 </script>
 ```
 
@@ -236,6 +248,10 @@ assert(typeof clearForm === 'function');
     document.getElementById('output').classList.remove('bordered-class');
   };
 
-  const clearForm = () => {};
+  const clearForm = () => {
+    const foodInputs = Array.from(
+      document.getElementsByClassName('food-control')
+    );
+  };
 </script>
 ```
