@@ -1,21 +1,19 @@
 ---
-id: 5ddb965c65d27e1512d44dca
-title: Part 51
+id: 5ddb965c65d27e1512d44dcb
+title: Part 52
 challengeType: 0
-dashedName: part-51
+dashedName: part-52
 ---
 
 # --description--
 
-When the user clicks the "Add Entry" button, they should be provided with additional text inputs to enter in a food name and calorie amount. These will be included in the `calculate()` function.
+We want a function to run every time the user clicks the "Add Entry" button.
 
-In the HTML document, notice that the "Add Entry" button has the `id` attribute `add`:
+Chain the `onclick` property to the end of `document.getElementById('add')` and set it equal to an empty function:
 
-```html
-<button type="button" class="btn-add" id="add">
+```js
+function() {}
 ```
-
-Get a reference to the `document` element with the `id` attribute `add`. This is similar to the reference to the `calorie-form` element that you wrote near the top of this document.
 
 # --hints--
 
@@ -25,7 +23,9 @@ See description above for instructions.
 assert(
   code
     .replace(/\s/g, '')
-    .match(/document\.getElementById\([\'\"\`]add[\'\"\`]\)/)
+    .match(
+      /document\.getElementById\([\'\"\`]add[\'\"\`]\)\.onclick\=function\(\)\{\}/
+    )
 );
 ```
 
@@ -146,6 +146,8 @@ assert(
     output.setAttribute('class', 'bordered-class');
     output.style.backgroundColor = '#FFF9C4';
   }
+
+  document.getElementById('add');
 </script>
 ```
 
@@ -198,6 +200,6 @@ assert(
     output.style.backgroundColor = '#FFF9C4';
   }
 
-  document.getElementById('add');
+  document.getElementById('add').onclick = function() {};
 </script>
 ```
