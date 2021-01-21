@@ -1,19 +1,15 @@
 ---
-id: 5ddb965c65d27e1512d44dae
-title: Part 23
+id: 5ddb965c65d27e1512d44daf
+title: Part 24
 challengeType: 0
-dashedName: part-23
+dashedName: part-24
 ---
 
 # --description--
 
-Now that we have the `total` number of calories that the user entered, we need to determine the maximum calories they should consume.
+Inspect the Female radio button again and notice that it has a `checked` attribute if it's checked: `<input type="radio" name="sex" id="female" value="F" checked>`
 
-Look at the form and notice that there are radio buttons for Female and Male. If Female is selected, the maximum calories consumed should be 2000, and if Male is selected, the maximum should be 2500.
-
-If you inspect the Female radio button you will notice its id: `<input type="radio" name="sex" id="female" value="F" checked="">`
-
-Create a variable named `maxCalories` and set it equal to the document element with the id of `female`.
+Check to see if the Female radio button is checked or not by chaining on the `.checked` attribute to `document.getElementById('female')`.
 
 # --hints--
 
@@ -21,7 +17,7 @@ See description above for instructions.
 
 ```js
 assert(
-  /const\s*maxCalories\s*=\s*document\.getElementById\([\'\"\`]female[\'\"\`]\)/.test(
+  /const\s*maxCalories\s*=\s*document\.getElementById\([\'\"\`]female[\'\"\`]\)\.checked/.test(
     code
   )
 );
@@ -108,6 +104,8 @@ assert(
     const total = Array.from(document.getElementsByClassName('cal-control'))
       .map(meal => Number(meal.value))
       .reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+
+    const maxCalories = document.getElementById('female');
   }
 </script>
 ```
@@ -125,7 +123,7 @@ assert(
       .map(meal => Number(meal.value))
       .reduce((accumulator, currentValue) => accumulator + currentValue, 0);
 
-    const maxCalories = document.getElementById('female');
+    const maxCalories = document.getElementById('female').checked;
   }
 </script>
 ```
