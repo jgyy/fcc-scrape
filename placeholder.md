@@ -1,22 +1,28 @@
 ---
-id: 5ddb965c65d27e1512d44d9f
-title: Part 6
+id: 5ddb965c65d27e1512d44da0
+title: Part 7
 challengeType: 0
-dashedName: part-6
+dashedName: part-7
 ---
 
 # --description--
 
-When a form is submitted, the browser will try to submit it to a server and reload the page. We want to prevent this from happening and do our own processing on the client side.
+If you inspect the inputs in the form, you will notice that they have the class name `cal-control`.
 
-Prevent the default behavior of the form submit event by calling `e.preventDefault()` inside of the `calculate` function.
+To access elements with a certain class name, we use the `getElementsByClassName()` method.
+
+Similar to how you referenced the calorie form above (`document.getElementById('calorie-form')`), create a reference to the elements with the class name `cal-control` below `e.preventDefault()`.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(calculate.toString().match(/e\.preventDefault\(\s*\)/));
+assert(
+  code
+    .replace(/\s/g, '')
+    .match(/document\.getElementsByClassName\([\'\"\`]cal\-control[\'\"\`]\)/)
+);
 ```
 
 # --seed--
@@ -94,7 +100,9 @@ assert(calculate.toString().match(/e\.preventDefault\(\s*\)/));
 <script>
   document.getElementById('calorie-form').onsubmit = calculate;
 
-  function calculate(e) {}
+  function calculate(e) {
+    e.preventDefault();
+  }
 </script>
 ```
 
@@ -106,6 +114,7 @@ assert(calculate.toString().match(/e\.preventDefault\(\s*\)/));
 
   function calculate(e) {
     e.preventDefault();
+    document.getElementsByClassName('cal-control');
   }
 </script>
 ```
