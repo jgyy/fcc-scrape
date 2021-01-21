@@ -1,21 +1,21 @@
 ---
-id: 5ddb965c65d27e1512d44dab
-title: Part 18
+id: 5ddb965c65d27e1512d44dac
+title: Part 19
 challengeType: 0
-dashedName: part-18
+dashedName: part-19
 ---
 
 # --description--
 
-The `reduce()` method takes a callback function with at least two arguments, an accumulator and a current value:
+Provide the number zero as the initial value of the `reduce()` method by passing it as the second argument.
 
-`function(accumulator, currentValue) { /* code to run */ }`
+Here is an example of a `reduce()` method with an empty object as its initial value:
 
-or using arrow functions:
-
-`(accumulator, currentValue) => { /* code to run */ }`
-
-Insert the above callback function as an argument in the `.reduce()` method.
+```js
+arr.reduce((accumulator, currentValue) => {
+  /* code to run */
+}, {});
+```
 
 # --hints--
 
@@ -25,7 +25,9 @@ See description above for instructions.
 assert(
   code
     .replace(/\s/g, '')
-    .match(/reduce\(\(accumulator\,currentValue\)\=\>\{\/\*codetorun\*\/\}\)/)
+    .match(
+      /reduce\(\(accumulator\,currentValue\)\=\>\{\/\*codetorun\*\/\}\,0\)/
+    )
 );
 ```
 
@@ -109,7 +111,9 @@ assert(
 
     const total = Array.from(document.getElementsByClassName('cal-control'))
       .map(meal => Number(meal.value))
-      .reduce();
+      .reduce((accumulator, currentValue) => {
+        /* code to run */
+      });
   }
 </script>
 ```
@@ -127,7 +131,7 @@ assert(
       .map(meal => Number(meal.value))
       .reduce((accumulator, currentValue) => {
         /*code to run*/
-      });
+      }, 0);
   }
 </script>
 ```
