@@ -1,15 +1,17 @@
 ---
-id: 5ddb965c65d27e1512d44dc0
-title: Part 41
+id: 5ddb965c65d27e1512d44dc1
+title: Part 42
 challengeType: 0
-dashedName: part-41
+dashedName: part-42
 ---
 
 # --description--
 
-Create a text node and assign it to a variable named `recommendedText`.
+We want the `recommendedText` to say "XX Calories Recommended" where "XX" is the `maxCalories` variable that was previously created.
 
-This is similar to how your created the `resultText` element previously.
+Update text of `recommendedText` to use the `maxCalories` variable in a template literal along with the text "Calories Recommended".
+
+This is similar to template literal syntax previously used to create `resultText`.
 
 # --hints--
 
@@ -17,9 +19,9 @@ See description above for instructions.
 
 ```js
 assert(
-  /const\s*recommendedText\s*=\s*document\.createTextNode\([\'\"\`]?\s*[\'\"\`]?\)/.test(
-    code
-  )
+  code
+    .replace(/\s/g, '')
+    .match(/document\.createTextNode\(\`\$\{maxCalories\}RecommendedCalories\`/)
 );
 ```
 
@@ -125,6 +127,7 @@ assert(
     output.appendChild(line);
 
     const recommended = document.createElement('h4');
+    const recommendedText = document.createTextNode();
   }
 </script>
 ```
@@ -162,7 +165,9 @@ assert(
     output.appendChild(line);
 
     const recommended = document.createElement('h4');
-    const recommendedText = document.createTextNode();
+    const recommendedText = document.createTextNode(
+      `${maxCalories} Recommended Calories`
+    );
   }
 </script>
 ```
