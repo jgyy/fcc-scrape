@@ -1,19 +1,17 @@
 ---
-id: 5ddb965c65d27e1512d44db2
-title: Part 27
+id: 5ddb965c65d27e1512d44db3
+title: Part 28
 challengeType: 0
-dashedName: part-27
+dashedName: part-28
 ---
 
 # --description--
 
-If `difference` is positive, the total calories the user ate is more than the `maxCalories` recommended, or a calories surplus -- otherwise, if `difference` is negative, the user has a calorie deficit.
+If you look near the bottom of the HTML page, notice that there is currently an empty `div` element: `<div id="output"></div>`.
 
-To determine if this is a calorie surplus or deficit, create a variable named `surplusOrDeficit` to determine if the difference is positive (`difference > 0`).
+We will be inserting output inside this `div`, telling the user if they are in a calorie surplus or deficit.
 
-If it is positive, `surplusOrDeficit` should be set equal to the string "Surplus", and "Deficit" if negative.
-
-Use the same ternary syntax that you used to determine `maxCalories`.
+Create a variable named `output` and set it equal to this division element with the `id` of `output`.
 
 # --hints--
 
@@ -21,7 +19,7 @@ See description above for instructions.
 
 ```js
 assert(
-  /const\s*surplusOrDeficit\s*\=\s*difference\s*\>\s*0\s*\?\s*[\'\"\`]Surplus[\'\"\`]\s*\:\s*[\'\"\`]Deficit[\'\"\`]/.test(
+  /const\s*output\s*=\s*document\.getElementById\([\'\"\`]output[\'\"\`]\)/.test(
     code
   )
 );
@@ -112,6 +110,8 @@ assert(
     const maxCalories = document.getElementById('female').checked ? 2000 : 2500;
 
     const difference = total - maxCalories;
+
+    const surplusOrDeficit = difference > 0 ? 'Surplus' : 'Deficit';
   }
 </script>
 ```
@@ -134,6 +134,8 @@ assert(
     const difference = total - maxCalories;
 
     const surplusOrDeficit = difference > 0 ? 'Surplus' : 'Deficit';
+
+    const output = document.getElementById('output');
   }
 </script>
 ```
