@@ -1,20 +1,28 @@
 ---
-id: 5ddb965c65d27e1512d44dc6
-title: Part 47
+id: 5ddb965c65d27e1512d44dc7
+title: Part 48
 challengeType: 0
-dashedName: part-47
+dashedName: part-48
 ---
 
 # --description--
 
-Append the `consumed` element to `output`.
+Now it's time to add some styling which can be added directly as attributes or classes.
+
+In our CSS file, we have a styling rule for any elements with the class name `green-text`.
+
+On line **20**, right after creating the `result` element, set the `className` property of `result` to be equal to `'green-text'`.
+
+Now if you submit the form again and inspect the `result` element, you will see it as `<h3 class="green-text">` and notice that the text is now green.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(code.replace(/\s/g, '').match(/output\.appendChild\(consumed\)/));
+assert(
+  code.replace(/\s/g, '').match(/result\.className\=[\'\"\`]green-text[\'\"\`]/)
+);
 ```
 
 # --seed--
@@ -108,6 +116,7 @@ assert(code.replace(/\s/g, '').match(/output\.appendChild\(consumed\)/));
     const output = document.getElementById('output');
 
     const result = document.createElement('h3');
+    //put your code here
     const resultText = document.createTextNode(
       `${Math.abs(difference)} Calorie ${surplusOrDeficit}`
     );
@@ -128,6 +137,7 @@ assert(code.replace(/\s/g, '').match(/output\.appendChild\(consumed\)/));
 
     const consumed = document.createElement('h4');
     consumed.innerHTML = `${total} Consumed Calories`;
+    output.appendChild(consumed);
   }
 </script>
 ```
@@ -154,6 +164,7 @@ assert(code.replace(/\s/g, '').match(/output\.appendChild\(consumed\)/));
     const output = document.getElementById('output');
 
     const result = document.createElement('h3');
+    result.className = 'green-text';
     const resultText = document.createTextNode(
       `${Math.abs(difference)} Calorie ${surplusOrDeficit}`
     );
