@@ -1,22 +1,26 @@
 ---
-id: 5ddb965c65d27e1512d44dde
-title: Part 71
+id: 5ddb965c65d27e1512d44ddf
+title: Part 72
 challengeType: 0
-dashedName: part-71
+dashedName: part-72
 ---
 
 # --description--
 
-To remove the items `foodInputs` array, we will iterate through them by using the `forEach()` function.
+We need to provide a callback function in the parentheses of `forEach()`.
 
-Add `foodInputs.forEach()`.
+This function will take each input item, in our case we'll call it `input`, as an argument. Then inside the function body, we need to call the `remove()` method.
+
+In between the parentheses of the `.forEach()` function, enter `input => input.remove()`.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(code.replace(/\s/g, '').match(/foodInputs.forEach\(\)/));
+assert(
+  code.replace(/\s/g, '').match(/foodInputs.forEach\(input=>input.remove\(\)\)/)
+);
 ```
 
 # --seed--
@@ -166,6 +170,8 @@ assert(code.replace(/\s/g, '').match(/foodInputs.forEach\(\)/));
     const foodInputs = Array.from(
       document.getElementsByClassName('food-control')
     );
+
+    foodInputs.forEach();
   };
 </script>
 ```
@@ -249,7 +255,7 @@ assert(code.replace(/\s/g, '').match(/foodInputs.forEach\(\)/));
       document.getElementsByClassName('food-control')
     );
 
-    foodInputs.forEach();
+    foodInputs.forEach(input => input.remove());
   };
 </script>
 ```
