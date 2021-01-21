@@ -1,24 +1,28 @@
 ---
-id: 5ddb965c65d27e1512d44d9a
-title: Part 1
+id: 5ddb965c65d27e1512d44d9b
+title: Part 2
 challengeType: 0
-dashedName: part-1
+dashedName: part-2
 ---
 
 # --description--
 
-When a browser loads a page, it creates a Document Object Model (DOM) representation of the page which includes all of the HTML elements in a tree structure.
+In our HTML document, we have a form element with an `id` attribute: `<form id="calorie-form">`
 
-In JavaScript, you can access the DOM by referencing the global `document` object.
+To reference and access this particular form in JavaScript, we can use the getElementById() method on the document and provide the ID.
 
-To view the DOM, log it to the console with `console.log(document)`.
+The code `document.getElementById('my-form')` gets a reference to an HTML element with an `id` of `my-form`. Get a reference to the HTML element with the `id` of `calorie-form`.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(code.replace(/\s/g, '').match(/console\.log\(document\)/));
+assert(
+  code
+    .replace(/\s/g, '')
+    .match(/document\.getElementById\([\'\"\`]calorie\-form[\'\"\`]\)/)
+);
 ```
 
 # --seed--
@@ -56,8 +60,15 @@ assert(code.replace(/\s/g, '').match(/console\.log\(document\)/));
           </div>
         </div>
         <div class="grid" id="entries">
-          Breakfast <input type="number" min="0" class="cal-control" id="breakfast" /><br>
-          Lunch <input type="number" min="0" class="cal-control" id="lunch" /><br>
+          Breakfast
+          <input
+            type="number"
+            min="0"
+            class="cal-control"
+            id="breakfast"
+          /><br />
+          Lunch
+          <input type="number" min="0" class="cal-control" id="lunch" /><br />
           Dinner <input type="number" min="0" class="cal-control" id="dinner" />
         </div>
         <button type="button" class="btn-add" id="add">
@@ -72,6 +83,8 @@ assert(code.replace(/\s/g, '').match(/console\.log\(document\)/));
       </form>
       <div id="output"></div>
     </div>
+  </body>
+</html>
 ```
 
 ## --after-user-code--
@@ -85,7 +98,7 @@ assert(code.replace(/\s/g, '').match(/console\.log\(document\)/));
 
 ```html
 <script>
-
+  //console.log(document);
 </script>
 ```
 
@@ -93,6 +106,7 @@ assert(code.replace(/\s/g, '').match(/console\.log\(document\)/));
 
 ```html
 <script>
-console.log(document);
+  //console.log(document);
+  document.getElementById('calorie-form');
 </script>
 ```
