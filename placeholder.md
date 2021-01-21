@@ -1,15 +1,21 @@
 ---
-id: 5ddb965c65d27e1512d44dc4
-title: Part 45
+id: 5ddb965c65d27e1512d44dc5
+title: Part 46
 challengeType: 0
-dashedName: part-45
+dashedName: part-46
 ---
 
 # --description--
 
-Similar to the `recommended` element, we are going to create a `consumed` element that will display the amount of calories consumed.
+Another way that we can set the text of the `consumed` element is to set the `innerHTML` property.
 
-Create an `h4` element and assign it to a variable named `consumed`.
+For example:
+
+```js
+consumed.innerHTML = `Hello world`;
+```
+
+Set the inner HTML of `consumed` to "XX Consumed Calories", where "XX" is the `total` variable that was previously created. Use template literals.
 
 # --hints--
 
@@ -17,9 +23,9 @@ See description above for instructions.
 
 ```js
 assert(
-  /const\s*consumed\s*=\s*document\.createElement\([\'\"\`]h4[\'\"\`]\)/.test(
-    code
-  )
+  code
+    .replace(/\s/g, '')
+    .match(/consumed\.innerHTML\=\`\$\{total\}ConsumedCalories\`/)
 );
 ```
 
@@ -131,6 +137,8 @@ assert(
 
     recommended.appendChild(recommendedText);
     output.appendChild(recommended);
+
+    const consumed = document.createElement('h4');
   }
 </script>
 ```
@@ -176,6 +184,7 @@ assert(
     output.appendChild(recommended);
 
     const consumed = document.createElement('h4');
+    consumed.innerHTML = `${total} Consumed Calories`;
   }
 </script>
 ```
