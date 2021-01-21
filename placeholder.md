@@ -1,15 +1,15 @@
 ---
-id: 5ddb965c65d27e1512d44dd1
-title: Part 58
+id: 5ddb965c65d27e1512d44dd2
+title: Part 59
 challengeType: 0
-dashedName: part-58
+dashedName: part-59
 ---
 
 # --description--
 
-Use the `setAttribute()` method of `calorieInput` to set the `type` of this input to `number`.
+The `calorieInput` element should only accept numbers that are 0 or above.
 
-This is similar to how to set the class of the `output` element previously.
+Set the `min` attribute of `calorieInput` to `0`.
 
 # --hints--
 
@@ -20,7 +20,7 @@ assert(
   code
     .replace(/\s/g, '')
     .match(
-      /calorieInput\.setAttribute\([\'\"\`]type[\'\"\`]\,[\'\"\`]number[\'\"\`]\)/
+      /calorieInput\.setAttribute\([\'\"\`]min[\'\"\`]\,[\'\"\`]0[\'\"\`]\)/
     )
 );
 ```
@@ -150,6 +150,7 @@ assert(
     document.getElementById('entries').appendChild(foodInput);
 
     const calorieInput = document.createElement('input');
+    calorieInput.setAttribute('type', 'number');
   };
 </script>
 ```
@@ -211,6 +212,7 @@ assert(
 
     const calorieInput = document.createElement('input');
     calorieInput.setAttribute('type', 'number');
+    calorieInput.setAttribute('min', '0');
   };
 </script>
 ```
