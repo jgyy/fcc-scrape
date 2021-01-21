@@ -1,20 +1,26 @@
 ---
-id: 5ddb965c65d27e1512d44dd7
-title: Part 64
+id: 5ddb965c65d27e1512d44dd8
+title: Part 65
 challengeType: 0
-dashedName: part-64
+dashedName: part-65
 ---
 
 # --description--
 
-Inside the `function` body, instruct your code to call two other functions, `clearOutput()` and `clearForm()`. We will create these functions shortly.
+Create a variable named `clearOutput` and set it equal to a blank arrow function:
+
+```js
+const clearOutput = () => {}
+```
+
+This is similar to `function clearOutput () {}`.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(/clearOutput\(\)/.test(code) && /clearForm\(\)/.test(code));
+assert(typeof clearOutput === 'function');
 ```
 
 # --seed--
@@ -149,7 +155,10 @@ assert(/clearOutput\(\)/.test(code) && /clearForm\(\)/.test(code));
     document.getElementById('entries').appendChild(calorieInput);
   };
 
-  document.getElementById('clear').onclick = function() {};
+  document.getElementById('clear').onclick = function() {
+    clearOutput();
+    clearForm();
+  };
 </script>
 ```
 
@@ -220,5 +229,7 @@ assert(/clearOutput\(\)/.test(code) && /clearForm\(\)/.test(code));
     clearOutput();
     clearForm();
   };
+
+  const clearOutput = () => {};
 </script>
 ```
