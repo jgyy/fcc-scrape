@@ -1,24 +1,22 @@
 ---
-id: 5ddb965c65d27e1512d44dbb
-title: Part 36
+id: 5ddb965c65d27e1512d44dbc
+title: Part 37
 challengeType: 0
-dashedName: part-36
+dashedName: part-37
 ---
 
 # --description--
 
-Now you can append the `resultText` to the `result` with the `appendChild()` method, like this:
+Similarly, append the `result` to the `output` element with the `appendChild()` method.
 
-```js
-result.appendChild(resultText);
-```
+Now if you enter in data and push the Calculate button, you will see the text added to the HTML document!
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(code.replace(/\s/g, '').match(/result\.appendChild\(resultText\)/));
+assert(code.replace(/\s/g, '').match(/output\.appendChild\(result\)/));
 ```
 
 # --seed--
@@ -115,6 +113,8 @@ assert(code.replace(/\s/g, '').match(/result\.appendChild\(resultText\)/));
     const resultText = document.createTextNode(
       `${Math.abs(difference)} Calorie ${surplusOrDeficit}`
     );
+
+    result.appendChild(resultText);
   }
 </script>
 ```
@@ -146,6 +146,7 @@ assert(code.replace(/\s/g, '').match(/result\.appendChild\(resultText\)/));
     );
 
     result.appendChild(resultText);
+    output.appendChild(result);
   }
 </script>
 ```
