@@ -1,34 +1,24 @@
 ---
-id: 5ddb965c65d27e1512d44dba
-title: Part 35
+id: 5ddb965c65d27e1512d44dbb
+title: Part 36
 challengeType: 0
-dashedName: part-35
+dashedName: part-36
 ---
 
 # --description--
 
-The data that we currently pass to `createTextNode()` is `Math.abs(difference) + ' Calorie ' + surplusOrDeficit`.
+Now you can append the `resultText` to the `result` with the `appendChild()` method, like this:
 
-Some people consider this a little cumbersome and prefer to use template literals instead.
-
-Template literals are enclosed in backticks (\`\`), and JavaScript expressions and variables can be embedded by enclosing them in `${}`.
-
-For example, ``console.log(`Hello ${firstName}, today is ${Date.now()}`)`` is the same as writing `console.log('Hello ' + firstName + ', today is ' + Date.now())`.
-
-Convert the data inside of `createTextNode()` to be a template literal.
+```js
+result.appendChild(resultText);
+```
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(
-  code
-    .replace(/\s/g, '')
-    .match(
-      /document\.createTextNode\(\`\$\{Math\.abs\(difference\)\}Calorie\$\{surplusOrDeficit\}\`/
-    )
-);
+assert(code.replace(/\s/g, '').match(/result\.appendChild\(resultText\)/));
 ```
 
 # --seed--
@@ -123,7 +113,7 @@ assert(
 
     const result = document.createElement('h3');
     const resultText = document.createTextNode(
-      Math.abs(difference) + ' Calorie ' + surplusOrDeficit
+      `${Math.abs(difference)} Calorie ${surplusOrDeficit}`
     );
   }
 </script>
@@ -154,6 +144,8 @@ assert(
     const resultText = document.createTextNode(
       `${Math.abs(difference)} Calorie ${surplusOrDeficit}`
     );
+
+    result.appendChild(resultText);
   }
 </script>
 ```
