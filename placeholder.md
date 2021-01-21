@@ -1,15 +1,13 @@
 ---
-id: 5ddb965c65d27e1512d44dcc
-title: Part 53
+id: 5ddb965c65d27e1512d44dcd
+title: Part 54
 challengeType: 0
-dashedName: part-53
+dashedName: part-54
 ---
 
 # --description--
 
-Inside the function, create an `input` document element and assign it to a variable named `foodInput`.
-
-This is similar to how you created the `result` element previously.
+Set the `placeholder` property of the `foodInput` equal to `'food name'`.
 
 # --hints--
 
@@ -17,9 +15,9 @@ See description above for instructions.
 
 ```js
 assert(
-  /const\s*foodInput\s*=\s*document\.createElement\([\'\"\`]input[\'\"\`]\)/.test(
-    code
-  )
+  code
+    .replace(/\s/g, '')
+    .match(/foodInput\.placeholder\=[\'\"\`]foodname[\'\"\`]/)
 );
 ```
 
@@ -141,7 +139,9 @@ assert(
     output.style.backgroundColor = '#FFF9C4';
   }
 
-  document.getElementById('add').onclick = function() {};
+  document.getElementById('add').onclick = function() {
+    const foodInput = document.createElement('input');
+  };
 </script>
 ```
 
@@ -196,6 +196,7 @@ assert(
 
   document.getElementById('add').onclick = function() {
     const foodInput = document.createElement('input');
+    foodInput.placeholder = 'food name';
   };
 </script>
 ```
