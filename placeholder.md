@@ -1,32 +1,20 @@
 ---
-id: 5ddb965c65d27e1512d44dc5
-title: Part 46
+id: 5ddb965c65d27e1512d44dc6
+title: Part 47
 challengeType: 0
-dashedName: part-46
+dashedName: part-47
 ---
 
 # --description--
 
-Another way that we can set the text of the `consumed` element is to set the `innerHTML` property.
-
-For example:
-
-```js
-consumed.innerHTML = `Hello world`;
-```
-
-Set the inner HTML of `consumed` to "XX Consumed Calories", where "XX" is the `total` variable that was previously created. Use template literals.
+Append the `consumed` element to `output`.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(
-  code
-    .replace(/\s/g, '')
-    .match(/consumed\.innerHTML\=\`\$\{total\}ConsumedCalories\`/)
-);
+assert(code.replace(/\s/g, '').match(/output\.appendChild\(consumed\)/));
 ```
 
 # --seed--
@@ -139,6 +127,7 @@ assert(
     output.appendChild(recommended);
 
     const consumed = document.createElement('h4');
+    consumed.innerHTML = `${total} Consumed Calories`;
   }
 </script>
 ```
@@ -185,6 +174,7 @@ assert(
 
     const consumed = document.createElement('h4');
     consumed.innerHTML = `${total} Consumed Calories`;
+    output.appendChild(consumed);
   }
 </script>
 ```
