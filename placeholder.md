@@ -1,22 +1,24 @@
 ---
-id: 5ddb965c65d27e1512d44dbc
-title: Part 37
+id: 5ddb965c65d27e1512d44dbd
+title: Part 38
 challengeType: 0
-dashedName: part-37
+dashedName: part-38
 ---
 
 # --description--
 
-Similarly, append the `result` to the `output` element with the `appendChild()` method.
+Next, let's create and add a horizontal rule (`hr`) element to the output.
 
-Now if you enter in data and push the Calculate button, you will see the text added to the HTML document!
+Create an `hr` element and assign it to a variable named `line`.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(code.replace(/\s/g, '').match(/output\.appendChild\(result\)/));
+assert(
+  /const\s*line\s*=\s*document\.createElement\([\'\"\`]hr[\'\"\`]\)/.test(code)
+);
 ```
 
 # --seed--
@@ -115,6 +117,7 @@ assert(code.replace(/\s/g, '').match(/output\.appendChild\(result\)/));
     );
 
     result.appendChild(resultText);
+    output.appendChild(result);
   }
 </script>
 ```
@@ -147,6 +150,8 @@ assert(code.replace(/\s/g, '').match(/output\.appendChild\(result\)/));
 
     result.appendChild(resultText);
     output.appendChild(result);
+
+    const line = document.createElement('hr');
   }
 </script>
 ```
