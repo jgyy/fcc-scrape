@@ -1,20 +1,31 @@
 ---
-id: 5ddb965c65d27e1512d44da4
-title: Part 11
+id: 5ddb965c65d27e1512d44da5
+title: Part 12
 challengeType: 0
-dashedName: part-11
+dashedName: part-12
 ---
 
 # --description--
 
-Log `meal.value` to the console, enter a number in the Breakfast input and hit the Calculate button. You'll notice that it displays what you entered.
+We need a way to iterate through all the `meal` items in the `total` array and return the values that the user entered as an array.
+
+The `map()` method allows us to do exactly that.
+
+Delete `const meal = total[0];` and chain the `.map()` method to the end of your `Array.from()` method. Here's an example of `.map()` chained to an array: `[3, 2, 1].map()`
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-
+assert(
+  code
+    .toString()
+    .replace(/\s/g, '')
+    .match(
+      /Array\.from\(document\.getElementsByClassName\([\'\"\`]cal\-control[\'\"\`]\)\)\.map\(\)\;?/
+    )
+);
 ```
 
 # --seed--
@@ -108,8 +119,9 @@ See description above for instructions.
 
   function calculate(e) {
     e.preventDefault();
-    const total = Array.from(document.getElementsByClassName('cal-control'));
-    const meal = total[0];
+    const total = Array.from(
+      document.getElementsByClassName('cal-control')
+    ).map();
   }
 </script>
 ```
