@@ -1,15 +1,15 @@
 ---
-id: 5ddb965c65d27e1512d44dd5
-title: Part 62
+id: 5ddb965c65d27e1512d44dd6
+title: Part 63
 challengeType: 0
-dashedName: part-62
+dashedName: part-63
 ---
 
 # --description--
 
-Add the `calorieInput` element to the element with the `id` of `entries` by using the `appendChild()` method.
+Next we need a way to reset the form back to its original state. To do this, we specify what to do when the user clicks the "Clear" button.
 
-The Add Entry functionality is now finished. You can test it by clicking the "Add Entry" button, entering in food names and their calories, and then clicking the "Calculate" button.
+Get a reference to the `document` element with the `id` of `clear` and set its `onclick` property to equal to an empty function, `function(){}`.
 
 # --hints--
 
@@ -20,7 +20,7 @@ assert(
   code
     .replace(/\s/g, '')
     .match(
-      /document\.getElementById\([\'\"\`]entries[\'\"\`]\)\.appendChild\(calorieInput\)/
+      /document\.getElementById\([\'\"\`]clear[\'\"\`]\)\.onclick\=function\(\)\{\}/
     )
 );
 ```
@@ -154,6 +154,7 @@ assert(
     calorieInput.setAttribute('min', '0');
     calorieInput.classList.add('cal-control');
     calorieInput.classList.add('extra-cal-control');
+    document.getElementById('entries').appendChild(calorieInput);
   };
 </script>
 ```
@@ -220,5 +221,7 @@ assert(
     calorieInput.classList.add('extra-cal-control');
     document.getElementById('entries').appendChild(calorieInput);
   };
+
+  document.getElementById('clear').onclick = function() {};
 </script>
 ```
