@@ -1,20 +1,20 @@
 ---
-id: 5ddb965c65d27e1512d44da8
-title: Part 15
+id: 5ddb965c65d27e1512d44da9
+title: Part 16
 challengeType: 0
-dashedName: part-15
+dashedName: part-16
 ---
 
 # --description--
 
-Since eventually we'll be adding all of the meal calories in the `total` array, explicitly convert `meal.value` into a number by wrapping it in the `Number()` function.
+Now let's simplify the function by refactoring it to use arrow functions. As an example, `function(x) {return x*x}` can be refactored as`x => x*x`.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(code.replace(/\s/g, '').match(/Number\(meal\.value\)\;?/));
+assert(code.replace(/\s/g, '').match(/meal\=\>Number\(meal\.value\)/));
 ```
 
 # --seed--
@@ -97,7 +97,7 @@ assert(code.replace(/\s/g, '').match(/Number\(meal\.value\)\;?/));
     const total = Array.from(
       document.getElementsByClassName('cal-control')
     ).map(function(meal) {
-      return meal.value;
+      return Number(meal.value);
     });
   }
 </script>
@@ -111,11 +111,10 @@ assert(code.replace(/\s/g, '').match(/Number\(meal\.value\)\;?/));
 
   function calculate(e) {
     e.preventDefault();
+
     const total = Array.from(
       document.getElementsByClassName('cal-control')
-    ).map(function(meal) {
-      return Number(meal.value);
-    });
+    ).map(meal => Number(meal.value));
   }
 </script>
 ```
