@@ -1,17 +1,21 @@
 ---
-id: 5ddb965c65d27e1512d44db3
-title: Part 28
+id: 5ddb965c65d27e1512d44db4
+title: Part 29
 challengeType: 0
-dashedName: part-28
+dashedName: part-29
 ---
 
 # --description--
 
-If you look near the bottom of the HTML page, notice that there is currently an empty `div` element: `<div id="output"></div>`.
+Now it's time to create the HTML elements that we will add inside of `output`.
 
-We will be inserting output inside this `div`, telling the user if they are in a calorie surplus or deficit.
+To create an element, use `createElement()`. For example:
 
-Create a variable named `output` and set it equal to this division element with the `id` of `output`.
+```js
+const myHeading1 = document.createElement('h1')
+```
+
+Create an `h3` element and assign it to a variable named `result`.
 
 # --hints--
 
@@ -19,7 +23,7 @@ See description above for instructions.
 
 ```js
 assert(
-  /const\s*output\s*=\s*document\.getElementById\([\'\"\`]output[\'\"\`]\)/.test(
+  /const\s*result\s*=\s*document\.createElement\([\'\"\`]h3[\'\"\`]\)/.test(
     code
   )
 );
@@ -112,6 +116,8 @@ assert(
     const difference = total - maxCalories;
 
     const surplusOrDeficit = difference > 0 ? 'Surplus' : 'Deficit';
+
+    const output = document.getElementById('output');
   }
 </script>
 ```
@@ -136,6 +142,8 @@ assert(
     const surplusOrDeficit = difference > 0 ? 'Surplus' : 'Deficit';
 
     const output = document.getElementById('output');
+
+    const result = document.createElement('h3');
   }
 </script>
 ```
