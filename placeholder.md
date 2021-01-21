@@ -1,17 +1,17 @@
 ---
-id: 5ddb965c65d27e1512d44ddf
-title: Part 72
+id: 5ddb965c65d27e1512d44de0
+title: Part 73
 challengeType: 0
-dashedName: part-72
+dashedName: part-73
 ---
 
 # --description--
 
-We need to provide a callback function in the parentheses of `forEach()`.
+We also need to remove all elements with the class name `extra-cal-control` that are added when the user clicks the "Add" button.
 
-This function will take each input item, in our case we'll call it `input`, as an argument. Then inside the function body, we need to call the `remove()` method.
+Create a variable named `calInputs` and set it equal to an array of elements with the class name `extra-cal-control`.
 
-In between the parentheses of the `.forEach()` function, enter `input => input.remove()`.
+This is similar to how you declared the `foodInputs` variable previously.
 
 # --hints--
 
@@ -19,7 +19,11 @@ See description above for instructions.
 
 ```js
 assert(
-  code.replace(/\s/g, '').match(/foodInputs.forEach\(input=>input.remove\(\)\)/)
+  code
+    .replace(/\s/g, '')
+    .match(
+      /const\s*calInputs\s*=Array\.from\(document\.getElementsByClassName\([\'\"\`]extra-cal-control[\'\"\`]\)\)/
+    )
 );
 ```
 
@@ -171,7 +175,7 @@ assert(
       document.getElementsByClassName('food-control')
     );
 
-    foodInputs.forEach();
+    foodInputs.forEach(input => input.remove());
   };
 </script>
 ```
@@ -256,6 +260,10 @@ assert(
     );
 
     foodInputs.forEach(input => input.remove());
+
+    const calInputs = Array.from(
+      document.getElementsByClassName('extra-cal-control')
+    );
   };
 </script>
 ```
