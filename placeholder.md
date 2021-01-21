@@ -1,15 +1,15 @@
 ---
-id: 5ddb965c65d27e1512d44dd3
-title: Part 60
+id: 5ddb965c65d27e1512d44dd4
+title: Part 61
 challengeType: 0
-dashedName: part-60
+dashedName: part-61
 ---
 
 # --description--
 
-Add a class named `cal-control` to the `calorieInput` element. This is similar to how you added a class name to the `foodInput` element previously.
+Later we will want to remove these extra `calorieInput` elements that we added. This will happen when the user pushes the "Clear" button.
 
-We are adding this class name because in the `calculate()` function you created previously, the `total` is calculated from the elements with the class name `cal-control`.
+To keep track of them, add the class name `extra-cal-control` to the `calorieInput` element.
 
 # --hints--
 
@@ -19,7 +19,7 @@ See description above for instructions.
 assert(
   code
     .replace(/\s/g, '')
-    .match(/calorieInput\.classList\.add\([\'\"\`]cal\-control[\'\"\`]\)/)
+    .match(/calorieInput\.classList\.add\([\'\"\`]extra-cal\-control[\'\"\`]\)/)
 );
 ```
 
@@ -150,6 +150,7 @@ assert(
     const calorieInput = document.createElement('input');
     calorieInput.setAttribute('type', 'number');
     calorieInput.setAttribute('min', '0');
+    calorieInput.classList.add('cal-control');
   };
 </script>
 ```
@@ -213,6 +214,7 @@ assert(
     calorieInput.setAttribute('type', 'number');
     calorieInput.setAttribute('min', '0');
     calorieInput.classList.add('cal-control');
+    calorieInput.classList.add('extra-cal-control');
   };
 </script>
 ```
