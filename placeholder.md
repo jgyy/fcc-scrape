@@ -1,15 +1,25 @@
 ---
-id: 5ddb965c65d27e1512d44daf
-title: Part 24
+id: 5ddb965c65d27e1512d44db0
+title: Part 25
 challengeType: 0
-dashedName: part-24
+dashedName: part-25
 ---
 
 # --description--
 
-Inspect the Female radio button again and notice that it has a `checked` attribute if it's checked: `<input type="radio" name="sex" id="female" value="F" checked>`
+Use a ternary operator to assign the value of `maxCalories`. A ternary operator has the following syntax: `condition ? expressionTrue : expressionFalse`.
 
-Check to see if the Female radio button is checked or not by chaining on the `.checked` attribute to `document.getElementById('female')`.
+For example, `(5 - 3 === 4) ? "Yes" : "No"` does the same thing as the following if else statement:
+
+```js
+if (5 - 3 === 4) {
+  return 'Yes';
+} else {
+  return 'No';
+}
+```
+
+`document.getElementById('female').checked` will return either `true` if it is checked or `false` if it isn't. Use a ternary operator to return 2000 if it is is checked and 2500 if it is not.
 
 # --hints--
 
@@ -17,7 +27,7 @@ See description above for instructions.
 
 ```js
 assert(
-  /const\s*maxCalories\s*=\s*document\.getElementById\([\'\"\`]female[\'\"\`]\)\.checked/.test(
+  /const\s*maxCalories\s*=\s*document\.getElementById\([\'\"\`]female[\'\"\`]\)\.checked\s*\?\s*2000\s*\:\s*2500/.test(
     code
   )
 );
@@ -105,7 +115,7 @@ assert(
       .map(meal => Number(meal.value))
       .reduce((accumulator, currentValue) => accumulator + currentValue, 0);
 
-    const maxCalories = document.getElementById('female');
+    const maxCalories = document.getElementById('female').checked;
   }
 </script>
 ```
@@ -123,7 +133,7 @@ assert(
       .map(meal => Number(meal.value))
       .reduce((accumulator, currentValue) => accumulator + currentValue, 0);
 
-    const maxCalories = document.getElementById('female').checked;
+    const maxCalories = document.getElementById('female').checked ? 2000 : 2500;
   }
 </script>
 ```
