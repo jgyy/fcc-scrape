@@ -1,13 +1,13 @@
 ---
-id: 5ddb965c65d27e1512d44da1
-title: Part 8
+id: 5ddb965c65d27e1512d44da2
+title: Part 9
 challengeType: 0
-dashedName: part-8
+dashedName: part-9
 ---
 
 # --description--
 
-Now assign the document object you just referenced to a variable named `total`. Since this variable will not change, use `const` to create it.
+To make the document objects easier to handle, let's turn them into an array. Wrap the `document.getElementsByClassName('cal-control')` portion of your code in an `Array.from()` method.
 
 # --hints--
 
@@ -15,9 +15,11 @@ See description above for instructions.
 
 ```js
 assert(
-  /const\s*total\s*=\s*document\.getElementsByClassName\([\'\"\`]cal\-control[\'\"\`]\)/.test(
-    code
-  )
+  code
+    .replace(/\s/g, '')
+    .match(
+      /Array\.from\(document\.getElementsByClassName\([\'\"\`]cal\-control[\'\"\`]\)\)/
+    )
 );
 ```
 
@@ -98,7 +100,7 @@ assert(
 
   function calculate(e) {
     e.preventDefault();
-    document.getElementsByClassName('cal-control');
+    const total = document.getElementsByClassName('cal-control');
   }
 </script>
 ```
@@ -111,7 +113,7 @@ assert(
 
   function calculate(e) {
     e.preventDefault();
-    const total = document.getElementsByClassName('cal-control');
+    const total = Array.from(document.getElementsByClassName('cal-control'));
   }
 </script>
 ```
