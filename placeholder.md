@@ -1,17 +1,17 @@
 ---
-id: 5ddb965c65d27e1512d44dce
-title: Part 55
+id: 5ddb965c65d27e1512d44dcf
+title: Part 56
 challengeType: 0
-dashedName: part-55
+dashedName: part-56
 ---
 
 # --description--
 
-We want to add the class name `food-control` to the `foodInput` element. We will reference this class name when we remove these inputs later on.
+Notice that parent container of all of the inputs has an `id` of `entries`: `<div class="grid" id="entries">`.
 
-In addition to using the `setAttribute` method, we can also update the `classList` property to add a class name, like `myInput.classList.add('my-class)`.
+Get a reference to the document element with the `id` attribute `entries` and append the `foodInput` element to it by chaining on the `.appendChild()` function.
 
-Add the class name `food-control` to the `foodInput` element.
+This is similar to the other `appendChild()` methods that you have used previously.
 
 # --hints--
 
@@ -21,7 +21,9 @@ See description above for instructions.
 assert(
   code
     .replace(/\s/g, '')
-    .match(/foodInput\.classList\.add\([\'\"\`]food\-control[\'\"\`]\)/)
+    .match(
+      /document\.getElementById\([\'\"\`]entries[\'\"\`]\)\.appendChild\(foodInput\)/
+    )
 );
 ```
 
@@ -146,6 +148,7 @@ assert(
   document.getElementById('add').onclick = function() {
     const foodInput = document.createElement('input');
     foodInput.placeholder = 'food name';
+    foodInput.classList.add('food-control');
   };
 </script>
 ```
@@ -203,6 +206,7 @@ assert(
     const foodInput = document.createElement('input');
     foodInput.placeholder = 'food name';
     foodInput.classList.add('food-control');
+    document.getElementById('entries').appendChild(foodInput);
   };
 </script>
 ```
