@@ -1,17 +1,17 @@
 ---
-id: 5ddb965c65d27e1512d44dc8
-title: Part 49
+id: 5ddb965c65d27e1512d44dc9
+title: Part 50
 challengeType: 0
-dashedName: part-49
+dashedName: part-50
 ---
 
 # --description--
 
-You can also add styling with the `setAttribute()` method. This method takes two arguments: the name of the attribute and the value that the attribute should be.
+Another way to add styling is to use the `style` property directly, like `output.style.width = '300px'`.
 
-For example, if you want to set the `width` of an `input` element to 100px, you would write `input.setAttribute('width', '100px')`.
+Add a `backgroundColor` style to `output` and set it equal to `'#FFF9C4'`.
 
-Set the `class` attribute of the `output` element equal to a class named `bordered-class`.
+The `calculate()` function is now finished!
 
 # --hints--
 
@@ -21,9 +21,7 @@ See description above for instructions.
 assert(
   code
     .replace(/\s/g, '')
-    .match(
-      /output\.setAttribute\([\'\"\`]class[\'\"\`]\,[\'\"\`]bordered-class[\'\"\`]\)/
-    )
+    .match(/output\.style\.backgroundColor\=[\'\"\`]\#FFF9C4[\'\"\`]/)
 );
 ```
 
@@ -141,7 +139,7 @@ assert(
     consumed.innerHTML = `${total} Consumed Calories`;
     output.appendChild(consumed);
 
-    //put your code here
+    output.setAttribute('class', 'bordered-class');
   }
 </script>
 ```
@@ -192,6 +190,7 @@ assert(
     output.appendChild(consumed);
 
     output.setAttribute('class', 'bordered-class');
+    output.style.backgroundColor = '#FFF9C4';
   }
 </script>
 ```
