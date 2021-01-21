@@ -1,31 +1,28 @@
 ---
-id: 5ddb965c65d27e1512d44da5
-title: Part 12
+id: 5ddb965c65d27e1512d44da6
+title: Part 13
 challengeType: 0
-dashedName: part-12
+dashedName: part-13
 ---
 
 # --description--
 
-We need a way to iterate through all the `meal` items in the `total` array and return the values that the user entered as an array.
+Now we need to provide a function to `map()` that will be performed on each item of the array.
 
-The `map()` method allows us to do exactly that.
+This function will take the original item as an argument, in our case we'll call it `meal`. Inside the `.map()` parentheses, insert an empty function that takes `meal` as a parameter, like:
 
-Delete `const meal = total[0];` and chain the `.map()` method to the end of your `Array.from()` method. Here's an example of `.map()` chained to an array: `[3, 2, 1].map()`
+```js
+function(meal){}
+```
+
+Enter in the above function as an argument in between the parentheses of the `.map()` function.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(
-  code
-    .toString()
-    .replace(/\s/g, '')
-    .match(
-      /Array\.from\(document\.getElementsByClassName\([\'\"\`]cal\-control[\'\"\`]\)\)\.map\(\)\;?/
-    )
-);
+assert(code.replace(/\s/g, '').match(/map\(function\(\s*meal\)\{\}\)/));
 ```
 
 # --seed--
@@ -105,8 +102,9 @@ assert(
 
   function calculate(e) {
     e.preventDefault();
-    const total = Array.from(document.getElementsByClassName('cal-control'));
-    const meal = total[0];
+    const total = Array.from(
+      document.getElementsByClassName('cal-control')
+    ).map();
   }
 </script>
 ```
@@ -121,7 +119,7 @@ assert(
     e.preventDefault();
     const total = Array.from(
       document.getElementsByClassName('cal-control')
-    ).map();
+    ).map(function(meal) {});
   }
 </script>
 ```
