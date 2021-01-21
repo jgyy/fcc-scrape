@@ -1,24 +1,20 @@
 ---
-id: 5ddb965c65d27e1512d44dc2
-title: Part 43
+id: 5ddb965c65d27e1512d44dc3
+title: Part 44
 challengeType: 0
-dashedName: part-43
+dashedName: part-44
 ---
 
 # --description--
 
-Append the `recommendedText` node to the `recommended` element.
-
-This is similar to how the `resultText` is appended to `result` previously.
+Append the `recommended` element to `output`.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(
-  code.replace(/\s/g, '').match(/recommended\.appendChild\(recommendedText\)/)
-);
+assert(code.replace(/\s/g, '').match(/output\.appendChild\(recommended\)/));
 ```
 
 # --seed--
@@ -126,6 +122,8 @@ assert(
     const recommendedText = document.createTextNode(
       `${maxCalories} Recommended Calories`
     );
+
+    recommended.appendChild(recommendedText);
   }
 </script>
 ```
@@ -168,6 +166,7 @@ assert(
     );
 
     recommended.appendChild(recommendedText);
+    output.appendChild(recommended);
   }
 </script>
 ```
