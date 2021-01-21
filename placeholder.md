@@ -1,26 +1,28 @@
 ---
-id: 5ddb965c65d27e1512d44dd8
-title: Part 65
+id: 5ddb965c65d27e1512d44dd9
+title: Part 66
 challengeType: 0
-dashedName: part-65
+dashedName: part-66
 ---
 
 # --description--
 
-Create a variable named `clearOutput` and set it equal to a blank arrow function:
+We need to remove the contents inside of element with the `id` of `output`.
 
-```js
-const clearOutput = () => {}
-```
-
-This is similar to `function clearOutput () {}`.
+In the body of the `clearOutput()` function, set the `innerHTML` property of that element equal to an empty string, `''`.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(typeof clearOutput === 'function');
+assert(
+  code
+    .replace(/\s/g, '')
+    .match(
+      /document\.getElementById\([\'\"\`]output[\'\"\`]\)\.innerHTML\=[\'\"\`][\'\"\`]/
+    )
+);
 ```
 
 # --seed--
@@ -159,6 +161,8 @@ assert(typeof clearOutput === 'function');
     clearOutput();
     clearForm();
   };
+
+  const clearOutput = () => {};
 </script>
 ```
 
@@ -230,6 +234,8 @@ assert(typeof clearOutput === 'function');
     clearForm();
   };
 
-  const clearOutput = () => {};
+  const clearOutput = () => {
+    document.getElementById('output').innerHTML = '';
+  };
 </script>
 ```
