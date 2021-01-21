@@ -1,17 +1,17 @@
 ---
-id: 5ddb965c65d27e1512d44db6
-title: Part 31
+id: 5ddb965c65d27e1512d44db7
+title: Part 32
 challengeType: 0
-dashedName: part-31
+dashedName: part-32
 ---
 
 # --description--
 
-We can now use the `difference` variable that we created above.
+Notice how if `total` is less than `maxCalories`, `difference` is a negative number.
 
-Insert the `difference` variable inside the parentheses of `.createTextNode()`
+We want to show the absolute value of the difference so it displays "300" rather than "-300".
 
-If you want to see what the text currently looks like, try `console.log(resultText)`.
+Wrap the `difference` in a `Math.abs()` function.
 
 # --hints--
 
@@ -19,7 +19,7 @@ See description above for instructions.
 
 ```js
 assert(
-  /const\s*resultText\s*=\s*document\.createTextNode\(\s*difference\s*?\)/.test(
+  /const\s*resultText\s*=\s*document\.createTextNode\(\s*Math\.abs\(\s*difference\s*\)\s*\)/.test(
     code
   )
 );
@@ -116,7 +116,7 @@ assert(
     const output = document.getElementById('output');
 
     const result = document.createElement('h3');
-    const resultText = document.createTextNode();
+    const resultText = document.createTextNode(difference);
   }
 </script>
 ```
@@ -143,7 +143,7 @@ assert(
     const output = document.getElementById('output');
 
     const result = document.createElement('h3');
-    const resultText = document.createTextNode(difference);
+    const resultText = document.createTextNode(Math.abs(difference));
   }
 </script>
 ```
