@@ -1,28 +1,24 @@
 ---
-id: 5ddb965c65d27e1512d44da6
-title: Part 13
+id: 5ddb965c65d27e1512d44da7
+title: Part 14
 challengeType: 0
-dashedName: part-13
+dashedName: part-14
 ---
 
 # --description--
 
-Now we need to provide a function to `map()` that will be performed on each item of the array.
+Inside the function body, insert `return meal.value`, since it is the value of the individual `cal-control` inputs that we want.
 
-This function will take the original item as an argument, in our case we'll call it `meal`. Inside the `.map()` parentheses, insert an empty function that takes `meal` as a parameter, like:
-
-```js
-function(meal){}
-```
-
-Enter in the above function as an argument in between the parentheses of the `.map()` function.
+If you want, console log `total` to see what results you are getting.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(code.replace(/\s/g, '').match(/map\(function\(\s*meal\)\{\}\)/));
+assert(
+  code.replace(/\s/g, '').match(/\(function\(meal\)\{returnmeal\.value\;?\}\)/)
+);
 ```
 
 # --seed--
@@ -104,7 +100,7 @@ assert(code.replace(/\s/g, '').match(/map\(function\(\s*meal\)\{\}\)/));
     e.preventDefault();
     const total = Array.from(
       document.getElementsByClassName('cal-control')
-    ).map();
+    ).map(function(meal) {});
   }
 </script>
 ```
@@ -119,7 +115,9 @@ assert(code.replace(/\s/g, '').match(/map\(function\(\s*meal\)\{\}\)/));
     e.preventDefault();
     const total = Array.from(
       document.getElementsByClassName('cal-control')
-    ).map(function(meal) {});
+    ).map(function(meal) {
+      return meal.value;
+    });
   }
 </script>
 ```
