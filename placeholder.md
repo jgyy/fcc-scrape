@@ -1,24 +1,20 @@
 ---
-id: 5ddb965c65d27e1512d44da7
-title: Part 14
+id: 5ddb965c65d27e1512d44da8
+title: Part 15
 challengeType: 0
-dashedName: part-14
+dashedName: part-15
 ---
 
 # --description--
 
-Inside the function body, insert `return meal.value`, since it is the value of the individual `cal-control` inputs that we want.
-
-If you want, console log `total` to see what results you are getting.
+Since eventually we'll be adding all of the meal calories in the `total` array, explicitly convert `meal.value` into a number by wrapping it in the `Number()` function.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(
-  code.replace(/\s/g, '').match(/\(function\(meal\)\{returnmeal\.value\;?\}\)/)
-);
+assert(code.replace(/\s/g, '').match(/Number\(meal\.value\)\;?/));
 ```
 
 # --seed--
@@ -100,7 +96,9 @@ assert(
     e.preventDefault();
     const total = Array.from(
       document.getElementsByClassName('cal-control')
-    ).map(function(meal) {});
+    ).map(function(meal) {
+      return meal.value;
+    });
   }
 </script>
 ```
@@ -116,7 +114,7 @@ assert(
     const total = Array.from(
       document.getElementsByClassName('cal-control')
     ).map(function(meal) {
-      return meal.value;
+      return Number(meal.value);
     });
   }
 </script>
