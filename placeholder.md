@@ -1,22 +1,32 @@
 ---
-id: 5ddb965c65d27e1512d44daa
-title: Part 17
+id: 5ddb965c65d27e1512d44dab
+title: Part 18
 challengeType: 0
-dashedName: part-17
+dashedName: part-18
 ---
 
 # --description--
 
-While you can use a loop to add everything in the `total` array to a variable, JavaScript provides the useful `reduce()` method.
+The `reduce()` method takes a callback function with at least two arguments, an accumulator and a current value:
 
-Chain the `reduce()` method to the `Array.from()` expression.
+`function(accumulator, currentValue) { /* code to run */ }`
+
+or using arrow functions:
+
+`(accumulator, currentValue) => { /* code to run */ }`
+
+Insert the above callback function as an argument in the `.reduce()` method.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(code.replace(/\s/g, '').match(/Number\(meal\.value\)\)\.reduce\(\)/));
+assert(
+  code
+    .replace(/\s/g, '')
+    .match(/reduce\(\(accumulator\,currentValue\)\=\>\{\/\*codetorun\*\/\}\)/)
+);
 ```
 
 # --seed--
@@ -97,9 +107,9 @@ assert(code.replace(/\s/g, '').match(/Number\(meal\.value\)\)\.reduce\(\)/));
   function calculate(e) {
     e.preventDefault();
 
-    const total = Array.from(
-      document.getElementsByClassName('cal-control')
-    ).map(meal => Number(meal.value));
+    const total = Array.from(document.getElementsByClassName('cal-control'))
+      .map(meal => Number(meal.value))
+      .reduce();
   }
 </script>
 ```
@@ -113,9 +123,11 @@ assert(code.replace(/\s/g, '').match(/Number\(meal\.value\)\)\.reduce\(\)/));
   function calculate(e) {
     e.preventDefault();
 
-  const total = Array.from(document.getElementsByClassName('cal-control'))
-    .map(meal => Number(meal.value))
-    .reduce();
+    const total = Array.from(document.getElementsByClassName('cal-control'))
+      .map(meal => Number(meal.value))
+      .reduce((accumulator, currentValue) => {
+        /*code to run*/
+      });
   }
 </script>
 ```
