@@ -1,36 +1,22 @@
 ---
-id: 5ddb965c65d27e1512d44db0
-title: Part 25
+id: 5ddb965c65d27e1512d44db1
+title: Part 26
 challengeType: 0
-dashedName: part-25
+dashedName: part-26
 ---
 
 # --description--
 
-Use a ternary operator to assign the value of `maxCalories`. A ternary operator has the following syntax: `condition ? expressionTrue : expressionFalse`.
+Now that we have `total` and `maxCalories`, we need to find out the difference between them.
 
-For example, `(5 - 3 === 4) ? "Yes" : "No"` does the same thing as the following if else statement:
-
-```js
-if (5 - 3 === 4) {
-  return 'Yes';
-} else {
-  return 'No';
-}
-```
-
-`document.getElementById('female').checked` will return either `true` if it is checked or `false` if it isn't. Use a ternary operator to return 2000 if it is is checked and 2500 if it is not.
+Create a variable named `difference` and set it equal to `total - maxCalories`
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(
-  /const\s*maxCalories\s*=\s*document\.getElementById\([\'\"\`]female[\'\"\`]\)\.checked\s*\?\s*2000\s*\:\s*2500/.test(
-    code
-  )
-);
+assert(/const\s*difference\s*\=\s*total\s*\-\s*maxCalories?/.test(code));
 ```
 
 # --seed--
@@ -115,7 +101,7 @@ assert(
       .map(meal => Number(meal.value))
       .reduce((accumulator, currentValue) => accumulator + currentValue, 0);
 
-    const maxCalories = document.getElementById('female').checked;
+    const maxCalories = document.getElementById('female').checked ? 2000 : 2500;
   }
 </script>
 ```
@@ -134,6 +120,8 @@ assert(
       .reduce((accumulator, currentValue) => accumulator + currentValue, 0);
 
     const maxCalories = document.getElementById('female').checked ? 2000 : 2500;
+
+    const difference = total - maxCalories;
   }
 </script>
 ```
