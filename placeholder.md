@@ -1,24 +1,20 @@
 ---
-id: 5ddb965c65d27e1512d44dbd
-title: Part 38
+id: 5ddb965c65d27e1512d44dbe
+title: Part 39
 challengeType: 0
-dashedName: part-38
+dashedName: part-39
 ---
 
 # --description--
 
-Next, let's create and add a horizontal rule (`hr`) element to the output.
-
-Create an `hr` element and assign it to a variable named `line`.
+Add the `line` to the `output` element using the `appendChild()` method.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(
-  /const\s*line\s*=\s*document\.createElement\([\'\"\`]hr[\'\"\`]\)/.test(code)
-);
+assert(code.replace(/\s/g, '').match(/output\.appendChild\(line\)/));
 ```
 
 # --seed--
@@ -118,6 +114,8 @@ assert(
 
     result.appendChild(resultText);
     output.appendChild(result);
+    
+    const line = document.createElement('hr');
   }
 </script>
 ```
@@ -152,6 +150,7 @@ assert(
     output.appendChild(result);
 
     const line = document.createElement('hr');
+    output.appendChild(line);
   }
 </script>
 ```
