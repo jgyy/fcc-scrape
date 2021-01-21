@@ -1,15 +1,15 @@
 ---
-id: 5ddb965c65d27e1512d44dd4
-title: Part 61
+id: 5ddb965c65d27e1512d44dd5
+title: Part 62
 challengeType: 0
-dashedName: part-61
+dashedName: part-62
 ---
 
 # --description--
 
-Later we will want to remove these extra `calorieInput` elements that we added. This will happen when the user pushes the "Clear" button.
+Add the `calorieInput` element to the element with the `id` of `entries` by using the `appendChild()` method.
 
-To keep track of them, add the class name `extra-cal-control` to the `calorieInput` element.
+The Add Entry functionality is now finished. You can test it by clicking the "Add Entry" button, entering in food names and their calories, and then clicking the "Calculate" button.
 
 # --hints--
 
@@ -19,7 +19,9 @@ See description above for instructions.
 assert(
   code
     .replace(/\s/g, '')
-    .match(/calorieInput\.classList\.add\([\'\"\`]extra-cal\-control[\'\"\`]\)/)
+    .match(
+      /document\.getElementById\([\'\"\`]entries[\'\"\`]\)\.appendChild\(calorieInput\)/
+    )
 );
 ```
 
@@ -151,6 +153,7 @@ assert(
     calorieInput.setAttribute('type', 'number');
     calorieInput.setAttribute('min', '0');
     calorieInput.classList.add('cal-control');
+    calorieInput.classList.add('extra-cal-control');
   };
 </script>
 ```
@@ -215,6 +218,7 @@ assert(
     calorieInput.setAttribute('min', '0');
     calorieInput.classList.add('cal-control');
     calorieInput.classList.add('extra-cal-control');
+    document.getElementById('entries').appendChild(calorieInput);
   };
 </script>
 ```
