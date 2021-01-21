@@ -1,15 +1,15 @@
 ---
-id: 5ddb965c65d27e1512d44dbf
-title: Part 40
+id: 5ddb965c65d27e1512d44dc0
+title: Part 41
 challengeType: 0
-dashedName: part-40
+dashedName: part-41
 ---
 
 # --description--
 
-Let's create a few more HTML elements to add to the `output`.
+Create a text node and assign it to a variable named `recommendedText`.
 
-Create an `h4` element and assign it to a variable named `recommended`.
+This is similar to how your created the `resultText` element previously.
 
 # --hints--
 
@@ -17,7 +17,7 @@ See description above for instructions.
 
 ```js
 assert(
-  /const\s*recommended\s*=\s*document\.createElement\([\'\"\`]h4[\'\"\`]\)/.test(
+  /const\s*recommendedText\s*=\s*document\.createTextNode\([\'\"\`]?\s*[\'\"\`]?\)/.test(
     code
   )
 );
@@ -123,6 +123,8 @@ assert(
 
     const line = document.createElement('hr');
     output.appendChild(line);
+
+    const recommended = document.createElement('h4');
   }
 </script>
 ```
@@ -160,6 +162,7 @@ assert(
     output.appendChild(line);
 
     const recommended = document.createElement('h4');
+    const recommendedText = document.createTextNode();
   }
 </script>
 ```
