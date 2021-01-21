@@ -1,21 +1,29 @@
 ---
-id: 5ddb965c65d27e1512d44dac
-title: Part 19
+id: 5ddb965c65d27e1512d44dad
+title: Part 20
 challengeType: 0
-dashedName: part-19
+dashedName: part-20
 ---
 
 # --description--
 
-Provide the number zero as the initial value of the `reduce()` method by passing it as the second argument.
+Let's says we have an array `[1, 3, 5]` named `arr` and we want to sum up all the numbers.
 
-Here is an example of a `reduce()` method with an empty object as its initial value:
+We can use the reduce function as follows:
 
 ```js
 arr.reduce((accumulator, currentValue) => {
-  /* code to run */
-}, {});
+  return accumulator + currentValue;
+}, 0);
 ```
+
+At `arr[0]`, the function is `(0, 1) => { return 0 + 1 }`, since `arr[0] = 1 = currentValue`.
+
+At `arr[1]`, the function is `(1, 3) => 1 + 3`,
+
+Finally at `arr[2]`, the function is `(4, 5) => 4 + 5`. Now the accumulator is `9` and since we have gone through all of the items in `arr`, the `reduce()` method will return `9`.
+
+In the body of the callback function, replace `/* code to run */` with `return accumulator + currentValue`.
 
 # --hints--
 
@@ -26,7 +34,7 @@ assert(
   code
     .replace(/\s/g, '')
     .match(
-      /reduce\(\(accumulator\,currentValue\)\=\>\{\/\*codetorun\*\/\}\,0\)/
+      /reduce\(\(accumulator\,currentValue\)\=\>{returnaccumulator\+currentValue\;?},0\)/
     )
 );
 ```
@@ -113,7 +121,7 @@ assert(
       .map(meal => Number(meal.value))
       .reduce((accumulator, currentValue) => {
         /* code to run */
-      });
+      }, 0);
   }
 </script>
 ```
@@ -130,7 +138,7 @@ assert(
     const total = Array.from(document.getElementsByClassName('cal-control'))
       .map(meal => Number(meal.value))
       .reduce((accumulator, currentValue) => {
-        /*code to run*/
+        return accumulator + currentValue;
       }, 0);
   }
 </script>
