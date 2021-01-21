@@ -1,42 +1,24 @@
 ---
-id: 5ddb965c65d27e1512d44dad
-title: Part 20
+id: 5e302e80e003129199103c78
+title: Part 21
 challengeType: 0
-dashedName: part-20
+dashedName: part-21
 ---
 
 # --description--
 
-Let's says we have an array `[1, 3, 5]` named `arr` and we want to sum up all the numbers.
+To track how the `reduce()` function works, log the values of the `accumulator` and `currentValue` in the callback function before the `return` statement like this: `console.log({ accumulator })`
 
-We can use the reduce function as follows:
+You can also check your progress by adding `console.log({ total })` at the end of the `calculate()` function.
 
-```js
-arr.reduce((accumulator, currentValue) => {
-  return accumulator + currentValue;
-}, 0);
-```
-
-At `arr[0]`, the function is `(0, 1) => { return 0 + 1 }`, since `arr[0] = 1 = currentValue`.
-
-At `arr[1]`, the function is `(1, 3) => 1 + 3`,
-
-Finally at `arr[2]`, the function is `(4, 5) => 4 + 5`. Now the accumulator is `9` and since we have gone through all of the items in `arr`, the `reduce()` method will return `9`.
-
-In the body of the callback function, replace `/* code to run */` with `return accumulator + currentValue`.
+When you enter calorie values in the form and push the Calculate button, you will see the values of `accumulator` and `currentValue` in each iteration of the `reduce()` callback function.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(
-  code
-    .replace(/\s/g, '')
-    .match(
-      /reduce\(\(accumulator\,currentValue\)\=\>{returnaccumulator\+currentValue\;?},0\)/
-    )
-);
+assert(code.replace(/\s/g, '').match(/console.log\({accumulator}\)/));
 ```
 
 # --seed--
@@ -120,8 +102,11 @@ assert(
     const total = Array.from(document.getElementsByClassName('cal-control'))
       .map(meal => Number(meal.value))
       .reduce((accumulator, currentValue) => {
-        /* code to run */
+        // log the values of the `accumulator` and `currentValue` here
+        return accumulator + currentValue;
       }, 0);
+
+    // log the value of `total` here
   }
 </script>
 ```
@@ -138,8 +123,12 @@ assert(
     const total = Array.from(document.getElementsByClassName('cal-control'))
       .map(meal => Number(meal.value))
       .reduce((accumulator, currentValue) => {
+        console.log({ accumulator });
+        console.log({ currentValue });
         return accumulator + currentValue;
       }, 0);
+
+    console.log({ total });
   }
 </script>
 ```
