@@ -1,30 +1,22 @@
 ---
-id: 5ddb965c65d27e1512d44ddd
-title: Part 70
+id: 5ddb965c65d27e1512d44dde
+title: Part 71
 challengeType: 0
-dashedName: part-70
+dashedName: part-71
 ---
 
 # --description--
 
-We need to remove all elements with the class name `food-control` that are added when the user clicks the "Add" button.
+To remove the items `foodInputs` array, we will iterate through them by using the `forEach()` function.
 
-Inside the function body of `clearForm`, create a variable named `foodInputs` and set it equal to an array of elements with the class name `food-control`.
-
-This is similar to how you declared the `total` variable previously in the `calculate` method.
+Add `foodInputs.forEach()`.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(
-  code
-    .replace(/\s/g, '')
-    .match(
-      /const\s*foodInputs\s*=Array\.from\(document\.getElementsByClassName\([\'\"\`]food\-control[\'\"\`]\)\)/
-    )
-);
+assert(code.replace(/\s/g, '').match(/foodInputs.forEach\(\)/));
 ```
 
 # --seed--
@@ -170,7 +162,11 @@ assert(
     document.getElementById('output').classList.remove('bordered-class');
   };
 
-  const clearForm = () => {};
+  const clearForm = () => {
+    const foodInputs = Array.from(
+      document.getElementsByClassName('food-control')
+    );
+  };
 </script>
 ```
 
@@ -252,6 +248,8 @@ assert(
     const foodInputs = Array.from(
       document.getElementsByClassName('food-control')
     );
+
+    foodInputs.forEach();
   };
 </script>
 ```
