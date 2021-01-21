@@ -1,34 +1,24 @@
 ---
-id: 5ddb965c65d27e1512d44d9c
-title: Part 3
+id: 5ddb965c65d27e1512d44d9d
+title: Part 4
 challengeType: 0
-dashedName: part-3
+dashedName: part-4
 ---
 
 # --description--
 
-Now we need to specify what should be done with the form when the user submits it by clicking the Calculate button.
+Create the `calculate` function that will hold the code to sum up the user's calorie inputs. Leave the body blank for now. Here is an example of an empty function called `square`:
 
-Forms have an `onsubmit` event that can execute a function when the form is submitted.
-
-For example, in `document.getElementById('my-form').onsubmit = processForm;`, the function `processForm` will run when the form is submitted.
-
-Assign a function named `calculate` to the `onsubmit` event of your form.
-
-You will create the `calculate` function later.
+```js
+function square() {}
+```
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(
-  code
-    .replace(/\s/g, '')
-    .match(
-      /document\.getElementById\([\'\"\`]calorie\-form[\'\"\`]\)\.onsubmit\=calculate/
-    )
-);
+assert(typeof calculate === 'function');
 ```
 
 # --seed--
@@ -104,7 +94,7 @@ assert(
 
 ```html
 <script>
-  document.getElementById('calorie-form');
+  document.getElementById('calorie-form').onsubmit = calculate;
 </script>
 ```
 
@@ -113,5 +103,7 @@ assert(
 ```html
 <script>
   document.getElementById('calorie-form').onsubmit = calculate;
+
+  function calculate() {}
 </script>
 ```
