@@ -1,17 +1,21 @@
 ---
-id: 5ddb965c65d27e1512d44dc9
-title: Part 50
+id: 5ddb965c65d27e1512d44dca
+title: Part 51
 challengeType: 0
-dashedName: part-50
+dashedName: part-51
 ---
 
 # --description--
 
-Another way to add styling is to use the `style` property directly, like `output.style.width = '300px'`.
+When the user clicks the "Add Entry" button, they should be provided with additional text inputs to enter in a food name and calorie amount. These will be included in the `calculate()` function.
 
-Add a `backgroundColor` style to `output` and set it equal to `'#FFF9C4'`.
+In the HTML document, notice that the "Add Entry" button has the `id` attribute `add`:
 
-The `calculate()` function is now finished!
+```html
+<button type="button" class="btn-add" id="add">
+```
+
+Get a reference to the `document` element with the `id` attribute `add`. This is similar to the reference to the `calorie-form` element that you wrote near the top of this document.
 
 # --hints--
 
@@ -21,7 +25,7 @@ See description above for instructions.
 assert(
   code
     .replace(/\s/g, '')
-    .match(/output\.style\.backgroundColor\=[\'\"\`]\#FFF9C4[\'\"\`]/)
+    .match(/document\.getElementById\([\'\"\`]add[\'\"\`]\)/)
 );
 ```
 
@@ -140,6 +144,7 @@ assert(
     output.appendChild(consumed);
 
     output.setAttribute('class', 'bordered-class');
+    output.style.backgroundColor = '#FFF9C4';
   }
 </script>
 ```
@@ -192,5 +197,7 @@ assert(
     output.setAttribute('class', 'bordered-class');
     output.style.backgroundColor = '#FFF9C4';
   }
+
+  document.getElementById('add');
 </script>
 ```
