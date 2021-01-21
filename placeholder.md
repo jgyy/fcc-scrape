@@ -1,17 +1,13 @@
 ---
-id: 5ddb965c65d27e1512d44de0
-title: Part 73
+id: 5ddb965c65d27e1512d44de1
+title: Part 74
 challengeType: 0
-dashedName: part-73
+dashedName: part-74
 ---
 
 # --description--
 
-We also need to remove all elements with the class name `extra-cal-control` that are added when the user clicks the "Add" button.
-
-Create a variable named `calInputs` and set it equal to an array of elements with the class name `extra-cal-control`.
-
-This is similar to how you declared the `foodInputs` variable previously.
+Similar to how you removed each `foodInputs` elements, use the `forEach()` function to remove each `calInputs` element.
 
 # --hints--
 
@@ -19,11 +15,7 @@ See description above for instructions.
 
 ```js
 assert(
-  code
-    .replace(/\s/g, '')
-    .match(
-      /const\s*calInputs\s*=Array\.from\(document\.getElementsByClassName\([\'\"\`]extra-cal-control[\'\"\`]\)\)/
-    )
+  code.replace(/\s/g, '').match(/calInputs.forEach\(input=>input.remove\(\)\)/)
 );
 ```
 
@@ -176,6 +168,10 @@ assert(
     );
 
     foodInputs.forEach(input => input.remove());
+
+    const calInputs = Array.from(
+      document.getElementsByClassName('extra-cal-control')
+    );
   };
 </script>
 ```
@@ -264,6 +260,8 @@ assert(
     const calInputs = Array.from(
       document.getElementsByClassName('extra-cal-control')
     );
+
+    calInputs.forEach(input => input.remove());
   };
 </script>
 ```
