@@ -1,20 +1,26 @@
 ---
-id: 5ddb965c65d27e1512d44dc3
-title: Part 44
+id: 5ddb965c65d27e1512d44dc4
+title: Part 45
 challengeType: 0
-dashedName: part-44
+dashedName: part-45
 ---
 
 # --description--
 
-Append the `recommended` element to `output`.
+Similar to the `recommended` element, we are going to create a `consumed` element that will display the amount of calories consumed.
+
+Create an `h4` element and assign it to a variable named `consumed`.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(code.replace(/\s/g, '').match(/output\.appendChild\(recommended\)/));
+assert(
+  /const\s*consumed\s*=\s*document\.createElement\([\'\"\`]h4[\'\"\`]\)/.test(
+    code
+  )
+);
 ```
 
 # --seed--
@@ -124,6 +130,7 @@ assert(code.replace(/\s/g, '').match(/output\.appendChild\(recommended\)/));
     );
 
     recommended.appendChild(recommendedText);
+    output.appendChild(recommended);
   }
 </script>
 ```
@@ -167,6 +174,8 @@ assert(code.replace(/\s/g, '').match(/output\.appendChild\(recommended\)/));
 
     recommended.appendChild(recommendedText);
     output.appendChild(recommended);
+
+    const consumed = document.createElement('h4');
   }
 </script>
 ```
