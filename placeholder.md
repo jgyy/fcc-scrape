@@ -1,21 +1,21 @@
 ---
-id: 5ddb965c65d27e1512d44db4
-title: Part 29
+id: 5ddb965c65d27e1512d44db5
+title: Part 30
 challengeType: 0
-dashedName: part-29
+dashedName: part-30
 ---
 
 # --description--
 
-Now it's time to create the HTML elements that we will add inside of `output`.
+Next, we will create a text node that we will later append to the `result` element.
 
-To create an element, use `createElement()`. For example:
+JavaScript has a function called `createTextNode()` to accomplish this. For example:
 
 ```js
-const myHeading1 = document.createElement('h1')
+const myText = document.createTextNode("Hello world!")
 ```
 
-Create an `h3` element and assign it to a variable named `result`.
+Create a variable named `resultText` and set it equal to a text node. Leave the string empty for now.
 
 # --hints--
 
@@ -23,7 +23,7 @@ See description above for instructions.
 
 ```js
 assert(
-  /const\s*result\s*=\s*document\.createElement\([\'\"\`]h3[\'\"\`]\)/.test(
+  /const\s*resultText\s*=\s*document\.createTextNode\([\'\"\`]?\s*[\'\"\`]?\)/.test(
     code
   )
 );
@@ -118,6 +118,8 @@ assert(
     const surplusOrDeficit = difference > 0 ? 'Surplus' : 'Deficit';
 
     const output = document.getElementById('output');
+
+    const result = document.createElement('h3');
   }
 </script>
 ```
@@ -144,6 +146,7 @@ assert(
     const output = document.getElementById('output');
 
     const result = document.createElement('h3');
+    const resultText = document.createTextNode();
   }
 </script>
 ```
