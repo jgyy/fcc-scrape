@@ -1,20 +1,26 @@
 ---
-id: 5ddb965c65d27e1512d44dbe
-title: Part 39
+id: 5ddb965c65d27e1512d44dbf
+title: Part 40
 challengeType: 0
-dashedName: part-39
+dashedName: part-40
 ---
 
 # --description--
 
-Add the `line` to the `output` element using the `appendChild()` method.
+Let's create a few more HTML elements to add to the `output`.
+
+Create an `h4` element and assign it to a variable named `recommended`.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(code.replace(/\s/g, '').match(/output\.appendChild\(line\)/));
+assert(
+  /const\s*recommended\s*=\s*document\.createElement\([\'\"\`]h4[\'\"\`]\)/.test(
+    code
+  )
+);
 ```
 
 # --seed--
@@ -114,8 +120,9 @@ assert(code.replace(/\s/g, '').match(/output\.appendChild\(line\)/));
 
     result.appendChild(resultText);
     output.appendChild(result);
-    
+
     const line = document.createElement('hr');
+    output.appendChild(line);
   }
 </script>
 ```
@@ -151,6 +158,8 @@ assert(code.replace(/\s/g, '').match(/output\.appendChild\(line\)/));
 
     const line = document.createElement('hr');
     output.appendChild(line);
+
+    const recommended = document.createElement('h4');
   }
 </script>
 ```
