@@ -1,21 +1,17 @@
 ---
-id: 5ddb965c65d27e1512d44db5
-title: Part 30
+id: 5ddb965c65d27e1512d44db6
+title: Part 31
 challengeType: 0
-dashedName: part-30
+dashedName: part-31
 ---
 
 # --description--
 
-Next, we will create a text node that we will later append to the `result` element.
+We can now use the `difference` variable that we created above.
 
-JavaScript has a function called `createTextNode()` to accomplish this. For example:
+Insert the `difference` variable inside the parentheses of `.createTextNode()`
 
-```js
-const myText = document.createTextNode("Hello world!")
-```
-
-Create a variable named `resultText` and set it equal to a text node. Leave the string empty for now.
+If you want to see what the text currently looks like, try `console.log(resultText)`.
 
 # --hints--
 
@@ -23,7 +19,7 @@ See description above for instructions.
 
 ```js
 assert(
-  /const\s*resultText\s*=\s*document\.createTextNode\([\'\"\`]?\s*[\'\"\`]?\)/.test(
+  /const\s*resultText\s*=\s*document\.createTextNode\(\s*difference\s*?\)/.test(
     code
   )
 );
@@ -120,6 +116,7 @@ assert(
     const output = document.getElementById('output');
 
     const result = document.createElement('h3');
+    const resultText = document.createTextNode();
   }
 </script>
 ```
@@ -146,7 +143,7 @@ assert(
     const output = document.getElementById('output');
 
     const result = document.createElement('h3');
-    const resultText = document.createTextNode();
+    const resultText = document.createTextNode(difference);
   }
 </script>
 ```
