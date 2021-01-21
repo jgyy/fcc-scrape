@@ -1,20 +1,20 @@
 ---
-id: 5ddb965c65d27e1512d44da3
-title: Part 10
+id: 5ddb965c65d27e1512d44da4
+title: Part 11
 challengeType: 0
-dashedName: part-10
+dashedName: part-11
 ---
 
 # --description--
 
-Create a variable named `meal` and set it equal to the first index of `total` (`total[0]`). This would be the input for Breakfast on the form.
+Log `meal.value` to the console, enter a number in the Breakfast input and hit the Calculate button. You'll notice that it displays what you entered.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(/const\s*meal\s*=\s*total\[0\]/.test(code));
+
 ```
 
 # --seed--
@@ -95,6 +95,7 @@ assert(/const\s*meal\s*=\s*total\[0\]/.test(code));
   function calculate(e) {
     e.preventDefault();
     const total = Array.from(document.getElementsByClassName('cal-control'));
+    const meal = total[0];
   }
 </script>
 ```
