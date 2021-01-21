@@ -1,19 +1,15 @@
 ---
-id: 5ddb965c65d27e1512d44dcb
-title: Part 52
+id: 5ddb965c65d27e1512d44dcc
+title: Part 53
 challengeType: 0
-dashedName: part-52
+dashedName: part-53
 ---
 
 # --description--
 
-We want a function to run every time the user clicks the "Add Entry" button.
+Inside the function, create an `input` document element and assign it to a variable named `foodInput`.
 
-Chain the `onclick` property to the end of `document.getElementById('add')` and set it equal to an empty function:
-
-```js
-function() {}
-```
+This is similar to how you created the `result` element previously.
 
 # --hints--
 
@@ -21,11 +17,9 @@ See description above for instructions.
 
 ```js
 assert(
-  code
-    .replace(/\s/g, '')
-    .match(
-      /document\.getElementById\([\'\"\`]add[\'\"\`]\)\.onclick\=function\(\)\{\}/
-    )
+  /const\s*foodInput\s*=\s*document\.createElement\([\'\"\`]input[\'\"\`]\)/.test(
+    code
+  )
 );
 ```
 
@@ -147,7 +141,7 @@ assert(
     output.style.backgroundColor = '#FFF9C4';
   }
 
-  document.getElementById('add');
+  document.getElementById('add').onclick = function() {};
 </script>
 ```
 
@@ -200,6 +194,8 @@ assert(
     output.style.backgroundColor = '#FFF9C4';
   }
 
-  document.getElementById('add').onclick = function() {};
+  document.getElementById('add').onclick = function() {
+    const foodInput = document.createElement('input');
+  };
 </script>
 ```
