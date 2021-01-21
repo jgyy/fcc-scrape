@@ -1,32 +1,22 @@
 ---
-id: 5ddb965c65d27e1512d44dda
-title: Part 67
+id: 5ddb965c65d27e1512d44ddb
+title: Part 68
 challengeType: 0
-dashedName: part-67
+dashedName: part-68
 ---
 
 # --description--
 
-Now notice that if you click the "Clear" button, the `output` element is empty, but it still has a border around it. This is because we previously added the `bordered-class` class to this element.
+The `clearOutput` function is called when the user clicks the "Clear" button. But it also needs to be run when the user clicks the "Calculate" button.
 
-Remove the `bordered-class` class. For example:
-
-```js
-document.getElementById('my-div').classList.remove('my-class')
-```
+In the `calculate()` function, right after `event.preventDefault()`, call the `clearOutput` function.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(
-  code
-    .replace(/\s/g, '')
-    .match(
-      /document\.getElementById\([\'\"\`]output[\'\"\`]\)\.classList\.remove\([\'\"\`]bordered-class[\'\"\`]\)/
-    )
-);
+assert(calculate.toString().match(/clearOutput\(\)/));
 ```
 
 # --seed--
@@ -106,6 +96,7 @@ assert(
 
   function calculate(e) {
     e.preventDefault();
+    //put your code here
 
     const total = Array.from(document.getElementsByClassName('cal-control'))
       .map(meal => Number(meal.value))
@@ -168,6 +159,7 @@ assert(
 
   const clearOutput = () => {
     document.getElementById('output').innerHTML = '';
+    document.getElementById('output').classList.remove('bordered-class');
   };
 </script>
 ```
@@ -180,6 +172,7 @@ assert(
 
   function calculate(e) {
     e.preventDefault();
+    clearOutput();
 
     const total = Array.from(document.getElementsByClassName('cal-control'))
       .map(meal => Number(meal.value))
