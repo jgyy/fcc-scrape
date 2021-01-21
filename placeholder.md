@@ -1,26 +1,20 @@
 ---
-id: 5ddb965c65d27e1512d44da2
-title: Part 9
+id: 5ddb965c65d27e1512d44da3
+title: Part 10
 challengeType: 0
-dashedName: part-9
+dashedName: part-10
 ---
 
 # --description--
 
-To make the document objects easier to handle, let's turn them into an array. Wrap the `document.getElementsByClassName('cal-control')` portion of your code in an `Array.from()` method.
+Create a variable named `meal` and set it equal to the first index of `total` (`total[0]`). This would be the input for Breakfast on the form.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(
-  code
-    .replace(/\s/g, '')
-    .match(
-      /Array\.from\(document\.getElementsByClassName\([\'\"\`]cal\-control[\'\"\`]\)\)/
-    )
-);
+assert(/const\s*meal\s*=\s*total\[0\]/.test(code));
 ```
 
 # --seed--
@@ -100,7 +94,7 @@ assert(
 
   function calculate(e) {
     e.preventDefault();
-    const total = document.getElementsByClassName('cal-control');
+    const total = Array.from(document.getElementsByClassName('cal-control'));
   }
 </script>
 ```
@@ -114,6 +108,7 @@ assert(
   function calculate(e) {
     e.preventDefault();
     const total = Array.from(document.getElementsByClassName('cal-control'));
+    const meal = total[0];
   }
 </script>
 ```
