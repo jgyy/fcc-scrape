@@ -1,13 +1,15 @@
 ---
-id: 5ddb965c65d27e1512d44de1
-title: Part 74
+id: 5ddb965c65d27e1512d44de2
+title: Part 75
 challengeType: 0
-dashedName: part-74
+dashedName: part-75
 ---
 
 # --description--
 
-Similar to how you removed each `foodInputs` elements, use the `forEach()` function to remove each `calInputs` element.
+Finally, it's time to clear the other calories that may have been entered for Breakfast, Lunch, and Dinner. This can be achieved by calling the `reset()` method on the form.
+
+Get a reference to the document element with the `id` of `calorie-form` and chain the `reset()` method to it.
 
 # --hints--
 
@@ -15,7 +17,9 @@ See description above for instructions.
 
 ```js
 assert(
-  code.replace(/\s/g, '').match(/calInputs.forEach\(input=>input.remove\(\)\)/)
+  code
+    .replace(/\s/g, '')
+    .match(/document\.getElementById\([\'\"\`]calorie-form[\'\"\`]\).reset\(\)/)
 );
 ```
 
@@ -172,6 +176,8 @@ assert(
     const calInputs = Array.from(
       document.getElementsByClassName('extra-cal-control')
     );
+
+    calInputs.forEach(input => input.remove());
   };
 </script>
 ```
@@ -262,6 +268,8 @@ assert(
     );
 
     calInputs.forEach(input => input.remove());
+
+    document.getElementById('calorie-form').reset();
   };
 </script>
 ```
