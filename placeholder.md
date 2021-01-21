@@ -1,15 +1,15 @@
 ---
-id: 5ddb965c65d27e1512d44dd2
-title: Part 59
+id: 5ddb965c65d27e1512d44dd3
+title: Part 60
 challengeType: 0
-dashedName: part-59
+dashedName: part-60
 ---
 
 # --description--
 
-The `calorieInput` element should only accept numbers that are 0 or above.
+Add a class named `cal-control` to the `calorieInput` element. This is similar to how you added a class name to the `foodInput` element previously.
 
-Set the `min` attribute of `calorieInput` to `0`.
+We are adding this class name because in the `calculate()` function you created previously, the `total` is calculated from the elements with the class name `cal-control`.
 
 # --hints--
 
@@ -19,9 +19,7 @@ See description above for instructions.
 assert(
   code
     .replace(/\s/g, '')
-    .match(
-      /calorieInput\.setAttribute\([\'\"\`]min[\'\"\`]\,[\'\"\`]0[\'\"\`]\)/
-    )
+    .match(/calorieInput\.classList\.add\([\'\"\`]cal\-control[\'\"\`]\)/)
 );
 ```
 
@@ -151,6 +149,7 @@ assert(
 
     const calorieInput = document.createElement('input');
     calorieInput.setAttribute('type', 'number');
+    calorieInput.setAttribute('min', '0');
   };
 </script>
 ```
@@ -213,6 +212,7 @@ assert(
     const calorieInput = document.createElement('input');
     calorieInput.setAttribute('type', 'number');
     calorieInput.setAttribute('min', '0');
+    calorieInput.classList.add('cal-control');
   };
 </script>
 ```
