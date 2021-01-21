@@ -1,28 +1,20 @@
 ---
-id: 5ddb965c65d27e1512d44dd6
-title: Part 63
+id: 5ddb965c65d27e1512d44dd7
+title: Part 64
 challengeType: 0
-dashedName: part-63
+dashedName: part-64
 ---
 
 # --description--
 
-Next we need a way to reset the form back to its original state. To do this, we specify what to do when the user clicks the "Clear" button.
-
-Get a reference to the `document` element with the `id` of `clear` and set its `onclick` property to equal to an empty function, `function(){}`.
+Inside the `function` body, instruct your code to call two other functions, `clearOutput()` and `clearForm()`. We will create these functions shortly.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(
-  code
-    .replace(/\s/g, '')
-    .match(
-      /document\.getElementById\([\'\"\`]clear[\'\"\`]\)\.onclick\=function\(\)\{\}/
-    )
-);
+assert(/clearOutput\(\)/.test(code) && /clearForm\(\)/.test(code));
 ```
 
 # --seed--
@@ -156,6 +148,8 @@ assert(
     calorieInput.classList.add('extra-cal-control');
     document.getElementById('entries').appendChild(calorieInput);
   };
+
+  document.getElementById('clear').onclick = function() {};
 </script>
 ```
 
@@ -222,6 +216,9 @@ assert(
     document.getElementById('entries').appendChild(calorieInput);
   };
 
-  document.getElementById('clear').onclick = function() {};
+  document.getElementById('clear').onclick = function() {
+    clearOutput();
+    clearForm();
+  };
 </script>
 ```
