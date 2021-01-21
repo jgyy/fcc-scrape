@@ -1,19 +1,19 @@
 ---
-id: 5e302e8ce003129199103c79
-title: Part 22
+id: 5ddb965c65d27e1512d44dae
+title: Part 23
 challengeType: 0
-dashedName: part-22
+dashedName: part-23
 ---
 
 # --description--
 
-Now let's simplify the `reduce()` callback function by refactoring it.
+Now that we have the `total` number of calories that the user entered, we need to determine the maximum calories they should consume.
 
-Essentially, the current callback function is `(accumulator, currentValue) => { return accumulator + currentValue }`. Since there's only one expression in the function body, we can omit the `{}`. Additionally, we can omit the `return` keyword since that is implicit when using arrow function syntax.
+Look at the form and notice that there are radio buttons for Female and Male. If Female is selected, the maximum calories consumed should be 2000, and if Male is selected, the maximum should be 2500.
 
-So the function can be simplified to just `(accumulator, currentValue) => accumulator + currentValue`.
+If you inspect the Female radio button you will notice its id: `<input type="radio" name="sex" id="female" value="F" checked="">`
 
-Replace the current callback function argument in the `reduce()` function with the simplified callback function from above.
+Create a variable named `maxCalories` and set it equal to the document element with the id of `female`.
 
 # --hints--
 
@@ -21,11 +21,9 @@ See description above for instructions.
 
 ```js
 assert(
-  code
-    .replace(/\s/g, '')
-    .match(
-      /reduce\(\(accumulator\,currentValue\)\=\>accumulator\+currentValue\,0\)/
-    )
+  /const\s*maxCalories\s*=\s*document\.getElementById\([\'\"\`]female[\'\"\`]\)/.test(
+    code
+  )
 );
 ```
 
@@ -109,13 +107,7 @@ assert(
 
     const total = Array.from(document.getElementsByClassName('cal-control'))
       .map(meal => Number(meal.value))
-      .reduce((accumulator, currentValue) => {
-        //console.log({ accumulator });
-        //console.log({ currentValue });
-        return accumulator + currentValue;
-      }, 0);
-
-    //console.log({ total });
+      .reduce((accumulator, currentValue) => accumulator + currentValue, 0);
   }
 </script>
 ```
@@ -132,6 +124,8 @@ assert(
     const total = Array.from(document.getElementsByClassName('cal-control'))
       .map(meal => Number(meal.value))
       .reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+
+    const maxCalories = document.getElementById('female');
   }
 </script>
 ```
