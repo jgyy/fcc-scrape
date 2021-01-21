@@ -1,26 +1,22 @@
 ---
-id: 5ddb965c65d27e1512d44d9e
-title: Part 5
+id: 5ddb965c65d27e1512d44d9f
+title: Part 6
 challengeType: 0
-dashedName: part-5
+dashedName: part-6
 ---
 
 # --description--
 
-By default, `onsubmit` will pass the event object as a parameter to the function it calls. People usually call it `e`, short for event. Update the `calculate()` function to accept `e` as parameter.
+When a form is submitted, the browser will try to submit it to a server and reload the page. We want to prevent this from happening and do our own processing on the client side.
 
-Here is an example of an empty function called `square` that takes a `number` as a parameter:
-
-```js
-function square(number) {}
-```
+Prevent the default behavior of the form submit event by calling `e.preventDefault()` inside of the `calculate` function.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(calculate.toString().match(/function calculate\(\s*e\)\s*\{\s*\}/));
+assert(calculate.toString().match(/e\.preventDefault\(\s*\)/));
 ```
 
 # --seed--
@@ -98,7 +94,7 @@ assert(calculate.toString().match(/function calculate\(\s*e\)\s*\{\s*\}/));
 <script>
   document.getElementById('calorie-form').onsubmit = calculate;
 
-  function calculate() {}
+  function calculate(e) {}
 </script>
 ```
 
@@ -108,6 +104,8 @@ assert(calculate.toString().match(/function calculate\(\s*e\)\s*\{\s*\}/));
 <script>
   document.getElementById('calorie-form').onsubmit = calculate;
 
-  function calculate(e) {}
+  function calculate(e) {
+    e.preventDefault();
+  }
 </script>
 ```
