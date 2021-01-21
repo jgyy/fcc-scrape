@@ -1,20 +1,22 @@
 ---
-id: 5ddb965c65d27e1512d44da9
-title: Part 16
+id: 5ddb965c65d27e1512d44daa
+title: Part 17
 challengeType: 0
-dashedName: part-16
+dashedName: part-17
 ---
 
 # --description--
 
-Now let's simplify the function by refactoring it to use arrow functions. As an example, `function(x) {return x*x}` can be refactored as`x => x*x`.
+While you can use a loop to add everything in the `total` array to a variable, JavaScript provides the useful `reduce()` method.
+
+Chain the `reduce()` method to the `Array.from()` expression.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(code.replace(/\s/g, '').match(/meal\=\>Number\(meal\.value\)/));
+assert(code.replace(/\s/g, '').match(/Number\(meal\.value\)\)\.reduce\(\)/));
 ```
 
 # --seed--
@@ -94,11 +96,10 @@ assert(code.replace(/\s/g, '').match(/meal\=\>Number\(meal\.value\)/));
 
   function calculate(e) {
     e.preventDefault();
+
     const total = Array.from(
       document.getElementsByClassName('cal-control')
-    ).map(function(meal) {
-      return Number(meal.value);
-    });
+    ).map(meal => Number(meal.value));
   }
 </script>
 ```
@@ -112,9 +113,9 @@ assert(code.replace(/\s/g, '').match(/meal\=\>Number\(meal\.value\)/));
   function calculate(e) {
     e.preventDefault();
 
-    const total = Array.from(
-      document.getElementsByClassName('cal-control')
-    ).map(meal => Number(meal.value));
+  const total = Array.from(document.getElementsByClassName('cal-control'))
+    .map(meal => Number(meal.value))
+    .reduce();
   }
 </script>
 ```
