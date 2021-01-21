@@ -1,22 +1,30 @@
 ---
-id: 5ddb965c65d27e1512d44db1
-title: Part 26
+id: 5ddb965c65d27e1512d44db2
+title: Part 27
 challengeType: 0
-dashedName: part-26
+dashedName: part-27
 ---
 
 # --description--
 
-Now that we have `total` and `maxCalories`, we need to find out the difference between them.
+If `difference` is positive, the total calories the user ate is more than the `maxCalories` recommended, or a calories surplus -- otherwise, if `difference` is negative, the user has a calorie deficit.
 
-Create a variable named `difference` and set it equal to `total - maxCalories`
+To determine if this is a calorie surplus or deficit, create a variable named `surplusOrDeficit` to determine if the difference is positive (`difference > 0`).
+
+If it is positive, `surplusOrDeficit` should be set equal to the string "Surplus", and "Deficit" if negative.
+
+Use the same ternary syntax that you used to determine `maxCalories`.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(/const\s*difference\s*\=\s*total\s*\-\s*maxCalories?/.test(code));
+assert(
+  /const\s*surplusOrDeficit\s*\=\s*difference\s*\>\s*0\s*\?\s*[\'\"\`]Surplus[\'\"\`]\s*\:\s*[\'\"\`]Deficit[\'\"\`]/.test(
+    code
+  )
+);
 ```
 
 # --seed--
@@ -102,6 +110,8 @@ assert(/const\s*difference\s*\=\s*total\s*\-\s*maxCalories?/.test(code));
       .reduce((accumulator, currentValue) => accumulator + currentValue, 0);
 
     const maxCalories = document.getElementById('female').checked ? 2000 : 2500;
+
+    const difference = total - maxCalories;
   }
 </script>
 ```
@@ -122,6 +132,8 @@ assert(/const\s*difference\s*\=\s*total\s*\-\s*maxCalories?/.test(code));
     const maxCalories = document.getElementById('female').checked ? 2000 : 2500;
 
     const difference = total - maxCalories;
+
+    const surplusOrDeficit = difference > 0 ? 'Surplus' : 'Deficit';
   }
 </script>
 ```
