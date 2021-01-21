@@ -1,22 +1,20 @@
 ---
-id: 5ddb965c65d27e1512d44ddb
-title: Part 68
+id: 5ddb965c65d27e1512d44ddc
+title: Part 69
 challengeType: 0
-dashedName: part-68
+dashedName: part-69
 ---
 
 # --description--
 
-The `clearOutput` function is called when the user clicks the "Clear" button. But it also needs to be run when the user clicks the "Calculate" button.
-
-In the `calculate()` function, right after `event.preventDefault()`, call the `clearOutput` function.
+Create a variable named `clearForm` and set it equal to a blank arrow function like you did with `clearOutput`.
 
 # --hints--
 
 See description above for instructions.
 
 ```js
-assert(calculate.toString().match(/clearOutput\(\)/));
+assert(typeof clearForm === 'function');
 ```
 
 # --seed--
@@ -96,7 +94,7 @@ assert(calculate.toString().match(/clearOutput\(\)/));
 
   function calculate(e) {
     e.preventDefault();
-    //put your code here
+    clearOutput();
 
     const total = Array.from(document.getElementsByClassName('cal-control'))
       .map(meal => Number(meal.value))
@@ -237,5 +235,7 @@ assert(calculate.toString().match(/clearOutput\(\)/));
     document.getElementById('output').innerHTML = '';
     document.getElementById('output').classList.remove('bordered-class');
   };
+
+  const clearForm = () => {};
 </script>
 ```
