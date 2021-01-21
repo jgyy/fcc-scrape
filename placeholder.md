@@ -1,15 +1,21 @@
 ---
-id: 5ddb965c65d27e1512d44db9
-title: Part 34
+id: 5ddb965c65d27e1512d44dba
+title: Part 35
 challengeType: 0
-dashedName: part-34
+dashedName: part-35
 ---
 
 # --description--
 
-Next we want to add the text from the `surplusOrDeficit` variable that we previously created.
+The data that we currently pass to `createTextNode()` is `Math.abs(difference) + ' Calorie ' + surplusOrDeficit`.
 
-Inside the parentheses of `.createTextNode()` add `+ surplusOrDeficit` after `Math.abs(difference) + ' Calorie '`.
+Some people consider this a little cumbersome and prefer to use template literals instead.
+
+Template literals are enclosed in backticks (\`\`), and JavaScript expressions and variables can be embedded by enclosing them in `${}`.
+
+For example, ``console.log(`Hello ${firstName}, today is ${Date.now()}`)`` is the same as writing `console.log('Hello ' + firstName + ', today is ' + Date.now())`.
+
+Convert the data inside of `createTextNode()` to be a template literal.
 
 # --hints--
 
@@ -17,9 +23,11 @@ See description above for instructions.
 
 ```js
 assert(
-  /const\s*resultText\s*=\s*document\.createTextNode\(\s*Math\.abs\(\s*difference\s*\)\s*\+\s*[\'\"\`]\s*Calorie\s*[\'\"\`]\s*\+\s*surplusOrDeficit\s*\)/.test(
-    code
-  )
+  code
+    .replace(/\s/g, '')
+    .match(
+      /document\.createTextNode\(\`\$\{Math\.abs\(difference\)\}Calorie\$\{surplusOrDeficit\}\`/
+    )
 );
 ```
 
@@ -115,7 +123,7 @@ assert(
 
     const result = document.createElement('h3');
     const resultText = document.createTextNode(
-      Math.abs(difference) + ' Calorie '
+      Math.abs(difference) + ' Calorie ' + surplusOrDeficit
     );
   }
 </script>
@@ -144,7 +152,7 @@ assert(
 
     const result = document.createElement('h3');
     const resultText = document.createTextNode(
-      Math.abs(difference) + ' Calorie ' + surplusOrDeficit
+      `${Math.abs(difference)} Calorie ${surplusOrDeficit}`
     );
   }
 </script>
