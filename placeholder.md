@@ -1,16 +1,18 @@
 ---
-id: 5ddb965c65d27e1512d44d9d
-title: Part 4
+id: 5ddb965c65d27e1512d44d9e
+title: Part 5
 challengeType: 0
-dashedName: part-4
+dashedName: part-5
 ---
 
 # --description--
 
-Create the `calculate` function that will hold the code to sum up the user's calorie inputs. Leave the body blank for now. Here is an example of an empty function called `square`:
+By default, `onsubmit` will pass the event object as a parameter to the function it calls. People usually call it `e`, short for event. Update the `calculate()` function to accept `e` as parameter.
+
+Here is an example of an empty function called `square` that takes a `number` as a parameter:
 
 ```js
-function square() {}
+function square(number) {}
 ```
 
 # --hints--
@@ -18,7 +20,7 @@ function square() {}
 See description above for instructions.
 
 ```js
-assert(typeof calculate === 'function');
+assert(calculate.toString().match(/function calculate\(\s*e\)\s*\{\s*\}/));
 ```
 
 # --seed--
@@ -95,6 +97,8 @@ assert(typeof calculate === 'function');
 ```html
 <script>
   document.getElementById('calorie-form').onsubmit = calculate;
+
+  function calculate() {}
 </script>
 ```
 
@@ -104,6 +108,6 @@ assert(typeof calculate === 'function');
 <script>
   document.getElementById('calorie-form').onsubmit = calculate;
 
-  function calculate() {}
+  function calculate(e) {}
 </script>
 ```
