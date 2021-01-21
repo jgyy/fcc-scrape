@@ -1,15 +1,19 @@
 ---
-id: 5ddb965c65d27e1512d44dd9
-title: Part 66
+id: 5ddb965c65d27e1512d44dda
+title: Part 67
 challengeType: 0
-dashedName: part-66
+dashedName: part-67
 ---
 
 # --description--
 
-We need to remove the contents inside of element with the `id` of `output`.
+Now notice that if you click the "Clear" button, the `output` element is empty, but it still has a border around it. This is because we previously added the `bordered-class` class to this element.
 
-In the body of the `clearOutput()` function, set the `innerHTML` property of that element equal to an empty string, `''`.
+Remove the `bordered-class` class. For example:
+
+```js
+document.getElementById('my-div').classList.remove('my-class')
+```
 
 # --hints--
 
@@ -20,7 +24,7 @@ assert(
   code
     .replace(/\s/g, '')
     .match(
-      /document\.getElementById\([\'\"\`]output[\'\"\`]\)\.innerHTML\=[\'\"\`][\'\"\`]/
+      /document\.getElementById\([\'\"\`]output[\'\"\`]\)\.classList\.remove\([\'\"\`]bordered-class[\'\"\`]\)/
     )
 );
 ```
@@ -162,7 +166,9 @@ assert(
     clearForm();
   };
 
-  const clearOutput = () => {};
+  const clearOutput = () => {
+    document.getElementById('output').innerHTML = '';
+  };
 </script>
 ```
 
@@ -236,6 +242,7 @@ assert(
 
   const clearOutput = () => {
     document.getElementById('output').innerHTML = '';
+    document.getElementById('output').classList.remove('bordered-class');
   };
 </script>
 ```
