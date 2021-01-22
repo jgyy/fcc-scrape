@@ -1,173 +1,183 @@
 ---
-id: a7f4d8f2483413a6ce226cac
-title: Roman Numeral Converter
+id: aff0395860f5d3034dc0bfc9
+title: Telephone Number Validator
 challengeType: 5
-forumTopicId: 16044
-dashedName: roman-numeral-converter
+forumTopicId: 16090
+dashedName: telephone-number-validator
 ---
 
 # --description--
 
-Convert the given number into a roman numeral.
+Return `true` if the passed string looks like a valid US phone number.
 
-All [roman numerals](http://www.mathsisfun.com/roman-numerals.html) answers should be provided in upper-case.
+The user may fill out the form field any way they choose as long as it has the format of a valid US number. The following are examples of valid formats for US numbers (refer to the tests below for other variants):
+
+<blockquote>555-555-5555<br>(555)555-5555<br>(555) 555-5555<br>555 555 5555<br>5555555555<br>1 555 555 5555</blockquote>
+
+For this challenge you will be presented with a string such as `800-692-7753` or `8oo-six427676;laskdjf`. Your job is to validate or reject the US phone number based on any combination of the formats provided above. The area code is required. If the country code is provided, you must confirm that the country code is `1`. Return `true` if the string is a valid US phone number; otherwise return `false`.
 
 # --hints--
 
-`convertToRoman(2)` should return "II".
+`telephoneCheck("555-555-5555")` should return a boolean.
 
 ```js
-assert.deepEqual(convertToRoman(2), 'II');
+assert(typeof telephoneCheck('555-555-5555') === 'boolean');
 ```
 
-`convertToRoman(3)` should return "III".
+`telephoneCheck("1 555-555-5555")` should return true.
 
 ```js
-assert.deepEqual(convertToRoman(3), 'III');
+assert(telephoneCheck('1 555-555-5555') === true);
 ```
 
-`convertToRoman(4)` should return "IV".
+`telephoneCheck("1 (555) 555-5555")` should return true.
 
 ```js
-assert.deepEqual(convertToRoman(4), 'IV');
+assert(telephoneCheck('1 (555) 555-5555') === true);
 ```
 
-`convertToRoman(5)` should return "V".
+`telephoneCheck("5555555555")` should return true.
 
 ```js
-assert.deepEqual(convertToRoman(5), 'V');
+assert(telephoneCheck('5555555555') === true);
 ```
 
-`convertToRoman(9)` should return "IX".
+`telephoneCheck("555-555-5555")` should return true.
 
 ```js
-assert.deepEqual(convertToRoman(9), 'IX');
+assert(telephoneCheck('555-555-5555') === true);
 ```
 
-`convertToRoman(12)` should return "XII".
+`telephoneCheck("(555)555-5555")` should return true.
 
 ```js
-assert.deepEqual(convertToRoman(12), 'XII');
+assert(telephoneCheck('(555)555-5555') === true);
 ```
 
-`convertToRoman(16)` should return "XVI".
+`telephoneCheck("1(555)555-5555")` should return true.
 
 ```js
-assert.deepEqual(convertToRoman(16), 'XVI');
+assert(telephoneCheck('1(555)555-5555') === true);
 ```
 
-`convertToRoman(29)` should return "XXIX".
+`telephoneCheck("555-5555")` should return false.
 
 ```js
-assert.deepEqual(convertToRoman(29), 'XXIX');
+assert(telephoneCheck('555-5555') === false);
 ```
 
-`convertToRoman(44)` should return "XLIV".
+`telephoneCheck("5555555")` should return false.
 
 ```js
-assert.deepEqual(convertToRoman(44), 'XLIV');
+assert(telephoneCheck('5555555') === false);
 ```
 
-`convertToRoman(45)` should return "XLV"
+`telephoneCheck("1 555)555-5555")` should return false.
 
 ```js
-assert.deepEqual(convertToRoman(45), 'XLV');
+assert(telephoneCheck('1 555)555-5555') === false);
 ```
 
-`convertToRoman(68)` should return "LXVIII"
+`telephoneCheck("1 555 555 5555")` should return true.
 
 ```js
-assert.deepEqual(convertToRoman(68), 'LXVIII');
+assert(telephoneCheck('1 555 555 5555') === true);
 ```
 
-`convertToRoman(83)` should return "LXXXIII"
+`telephoneCheck("1 456 789 4444")` should return true.
 
 ```js
-assert.deepEqual(convertToRoman(83), 'LXXXIII');
+assert(telephoneCheck('1 456 789 4444') === true);
 ```
 
-`convertToRoman(97)` should return "XCVII"
+`telephoneCheck("123**&!!asdf#")` should return false.
 
 ```js
-assert.deepEqual(convertToRoman(97), 'XCVII');
+assert(telephoneCheck('123**&!!asdf#') === false);
 ```
 
-`convertToRoman(99)` should return "XCIX"
+`telephoneCheck("55555555")` should return false.
 
 ```js
-assert.deepEqual(convertToRoman(99), 'XCIX');
+assert(telephoneCheck('55555555') === false);
 ```
 
-`convertToRoman(400)` should return "CD"
+`telephoneCheck("(6054756961)")` should return false
 
 ```js
-assert.deepEqual(convertToRoman(400), 'CD');
+assert(telephoneCheck('(6054756961)') === false);
 ```
 
-`convertToRoman(500)` should return "D"
+`telephoneCheck("2 (757) 622-7382")` should return false.
 
 ```js
-assert.deepEqual(convertToRoman(500), 'D');
+assert(telephoneCheck('2 (757) 622-7382') === false);
 ```
 
-`convertToRoman(501)` should return "DI"
+`telephoneCheck("0 (757) 622-7382")` should return false.
 
 ```js
-assert.deepEqual(convertToRoman(501), 'DI');
+assert(telephoneCheck('0 (757) 622-7382') === false);
 ```
 
-`convertToRoman(649)` should return "DCXLIX"
+`telephoneCheck("-1 (757) 622-7382")` should return false
 
 ```js
-assert.deepEqual(convertToRoman(649), 'DCXLIX');
+assert(telephoneCheck('-1 (757) 622-7382') === false);
 ```
 
-`convertToRoman(798)` should return "DCCXCVIII"
+`telephoneCheck("2 757 622-7382")` should return false.
 
 ```js
-assert.deepEqual(convertToRoman(798), 'DCCXCVIII');
+assert(telephoneCheck('2 757 622-7382') === false);
 ```
 
-`convertToRoman(891)` should return "DCCCXCI"
+`telephoneCheck("10 (757) 622-7382")` should return false.
 
 ```js
-assert.deepEqual(convertToRoman(891), 'DCCCXCI');
+assert(telephoneCheck('10 (757) 622-7382') === false);
 ```
 
-`convertToRoman(1000)` should return "M"
+`telephoneCheck("27576227382")` should return false.
 
 ```js
-assert.deepEqual(convertToRoman(1000), 'M');
+assert(telephoneCheck('27576227382') === false);
 ```
 
-`convertToRoman(1004)` should return "MIV"
+`telephoneCheck("(275)76227382")` should return false.
 
 ```js
-assert.deepEqual(convertToRoman(1004), 'MIV');
+assert(telephoneCheck('(275)76227382') === false);
 ```
 
-`convertToRoman(1006)` should return "MVI"
+`telephoneCheck("2(757)6227382")` should return false.
 
 ```js
-assert.deepEqual(convertToRoman(1006), 'MVI');
+assert(telephoneCheck('2(757)6227382') === false);
 ```
 
-`convertToRoman(1023)` should return "MXXIII"
+`telephoneCheck("2(757)622-7382")` should return false.
 
 ```js
-assert.deepEqual(convertToRoman(1023), 'MXXIII');
+assert(telephoneCheck('2(757)622-7382') === false);
 ```
 
-`convertToRoman(2014)` should return "MMXIV"
+`telephoneCheck("555)-555-5555")` should return false.
 
 ```js
-assert.deepEqual(convertToRoman(2014), 'MMXIV');
+assert(telephoneCheck('555)-555-5555') === false);
 ```
 
-`convertToRoman(3999)` should return "MMMCMXCIX"
+`telephoneCheck("(555-555-5555")` should return false.
 
 ```js
-assert.deepEqual(convertToRoman(3999), 'MMMCMXCIX');
+assert(telephoneCheck('(555-555-5555') === false);
+```
+
+`telephoneCheck("(555)5(55?)-5555")` should return false.
+
+```js
+assert(telephoneCheck('(555)5(55?)-5555') === false);
 ```
 
 # --seed--
@@ -175,25 +185,21 @@ assert.deepEqual(convertToRoman(3999), 'MMMCMXCIX');
 ## --seed-contents--
 
 ```js
-function convertToRoman(num) {
- return num;
+function telephoneCheck(str) {
+  return true;
 }
 
-convertToRoman(36);
+telephoneCheck("555-555-5555");
 ```
 
 # --solutions--
 
 ```js
-function convertToRoman(num) {
-  var ref = [['M', 1000], ['CM', 900], ['D', 500], ['CD', 400], ['C', 100], ['XC', 90], ['L', 50], ['XL', 40], ['X', 10], ['IX', 9], ['V', 5], ['IV', 4], ['I', 1]];
-  var res = [];
-  ref.forEach(function(p) {
-    while (num >= p[1]) {
-      res.push(p[0]);
-      num -= p[1];
-    }
-  });
-  return res.join('');
+var re = /^([+]?1[\s]?)?((?:[(](?:[2-9]1[02-9]|[2-9][02-8][0-9])[)][\s]?)|(?:(?:[2-9]1[02-9]|[2-9][02-8][0-9])[\s.-]?)){1}([2-9]1[02-9]|[2-9][02-9]1|[2-9][02-9]{2}[\s.-]?){1}([0-9]{4}){1}$/;
+
+function telephoneCheck(str) {
+  return re.test(str);
 }
+
+telephoneCheck("555-555-5555");
 ```
