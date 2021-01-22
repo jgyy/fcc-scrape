@@ -1,183 +1,101 @@
 ---
-id: aa2e6f85cab2ab736c9a9b24
-title: Cash Register
+id: aaa48de84e1ecc7c742e1124
+title: Palindrome Checker
 challengeType: 5
-forumTopicId: 16012
-dashedName: cash-register
+forumTopicId: 16004
+dashedName: palindrome-checker
 ---
 
 # --description--
 
-Design a cash register drawer function `checkCashRegister()` that accepts purchase price as the first argument (`price`), payment as the second argument (`cash`), and cash-in-drawer (`cid`) as the third argument.
+Return `true` if the given string is a palindrome. Otherwise, return `false`.
 
-`cid` is a 2D array listing available currency.
+A <dfn>palindrome</dfn> is a word or sentence that's spelled the same way both forward and backward, ignoring punctuation, case, and spacing.
 
-The `checkCashRegister()` function should always return an object with a `status` key and a `change` key.
+**Note:** You'll need to remove **all non-alphanumeric characters** (punctuation, spaces and symbols) and turn everything into the same case (lower or upper case) in order to check for palindromes.
 
-Return `{status: "INSUFFICIENT_FUNDS", change: []}` if cash-in-drawer is less than the change due, or if you cannot return the exact change.
+We'll pass strings with varying formats, such as `"racecar"`, `"RaceCar"`, and `"race CAR"` among others.
 
-Return `{status: "CLOSED", change: [...]}` with cash-in-drawer as the value for the key `change` if it is equal to the change due.
-
-Otherwise, return `{status: "OPEN", change: [...]}`, with the change due in coins and bills, sorted in highest to lowest order, as the value of the `change` key.
-
-<table class='table table-striped'><tbody><tr><th>Currency Unit</th><th>Amount</th></tr><tr><td>Penny</td><td>$0.01 (PENNY)</td></tr><tr><td>Nickel</td><td>$0.05 (NICKEL)</td></tr><tr><td>Dime</td><td>$0.1 (DIME)</td></tr><tr><td>Quarter</td><td>$0.25 (QUARTER)</td></tr><tr><td>Dollar</td><td>$1 (ONE)</td></tr><tr><td>Five Dollars</td><td>$5 (FIVE)</td></tr><tr><td>Ten Dollars</td><td>$10 (TEN)</td></tr><tr><td>Twenty Dollars</td><td>$20 (TWENTY)</td></tr><tr><td>One-hundred Dollars</td><td>$100 (ONE HUNDRED)</td></tr></tbody></table>
-
-See below for an example of a cash-in-drawer array:
-
-```js
-[
-  ["PENNY", 1.01],
-  ["NICKEL", 2.05],
-  ["DIME", 3.1],
-  ["QUARTER", 4.25],
-  ["ONE", 90],
-  ["FIVE", 55],
-  ["TEN", 20],
-  ["TWENTY", 60],
-  ["ONE HUNDRED", 100]
-]
-```
+We'll also pass strings with special symbols, such as `"2A3*3a2"`, `"2A3 3a2"`, and `"2_A3*3#A2"`.
 
 # --hints--
 
-`checkCashRegister(19.5, 20, [["PENNY", 1.01], ["NICKEL", 2.05], ["DIME", 3.1], ["QUARTER", 4.25], ["ONE", 90], ["FIVE", 55], ["TEN", 20], ["TWENTY", 60], ["ONE HUNDRED", 100]])` should return an object.
+`palindrome("eye")` should return a boolean.
 
 ```js
-assert.deepEqual(
-  Object.prototype.toString.call(
-    checkCashRegister(19.5, 20, [
-      ['PENNY', 1.01],
-      ['NICKEL', 2.05],
-      ['DIME', 3.1],
-      ['QUARTER', 4.25],
-      ['ONE', 90],
-      ['FIVE', 55],
-      ['TEN', 20],
-      ['TWENTY', 60],
-      ['ONE HUNDRED', 100]
-    ])
-  ),
-  '[object Object]'
-);
+assert(typeof palindrome('eye') === 'boolean');
 ```
 
-`checkCashRegister(19.5, 20, [["PENNY", 1.01], ["NICKEL", 2.05], ["DIME", 3.1], ["QUARTER", 4.25], ["ONE", 90], ["FIVE", 55], ["TEN", 20], ["TWENTY", 60], ["ONE HUNDRED", 100]])` should return `{status: "OPEN", change: [["QUARTER", 0.5]]}`.
+`palindrome("eye")` should return true.
 
 ```js
-assert.deepEqual(
-  checkCashRegister(19.5, 20, [
-    ['PENNY', 1.01],
-    ['NICKEL', 2.05],
-    ['DIME', 3.1],
-    ['QUARTER', 4.25],
-    ['ONE', 90],
-    ['FIVE', 55],
-    ['TEN', 20],
-    ['TWENTY', 60],
-    ['ONE HUNDRED', 100]
-  ]),
-  { status: 'OPEN', change: [['QUARTER', 0.5]] }
-);
+assert(palindrome('eye') === true);
 ```
 
-`checkCashRegister(3.26, 100, [["PENNY", 1.01], ["NICKEL", 2.05], ["DIME", 3.1], ["QUARTER", 4.25], ["ONE", 90], ["FIVE", 55], ["TEN", 20], ["TWENTY", 60], ["ONE HUNDRED", 100]])` should return `{status: "OPEN", change: [["TWENTY", 60], ["TEN", 20], ["FIVE", 15], ["ONE", 1], ["QUARTER", 0.5], ["DIME", 0.2], ["PENNY", 0.04]]}`.
+`palindrome("_eye")` should return true.
 
 ```js
-assert.deepEqual(
-  checkCashRegister(3.26, 100, [
-    ['PENNY', 1.01],
-    ['NICKEL', 2.05],
-    ['DIME', 3.1],
-    ['QUARTER', 4.25],
-    ['ONE', 90],
-    ['FIVE', 55],
-    ['TEN', 20],
-    ['TWENTY', 60],
-    ['ONE HUNDRED', 100]
-  ]),
-  {
-    status: 'OPEN',
-    change: [
-      ['TWENTY', 60],
-      ['TEN', 20],
-      ['FIVE', 15],
-      ['ONE', 1],
-      ['QUARTER', 0.5],
-      ['DIME', 0.2],
-      ['PENNY', 0.04]
-    ]
-  }
-);
+assert(palindrome('_eye') === true);
 ```
 
-`checkCashRegister(19.5, 20, [["PENNY", 0.01], ["NICKEL", 0], ["DIME", 0], ["QUARTER", 0], ["ONE", 0], ["FIVE", 0], ["TEN", 0], ["TWENTY", 0], ["ONE HUNDRED", 0]])` should return `{status: "INSUFFICIENT_FUNDS", change: []}`.
+`palindrome("race car")` should return true.
 
 ```js
-assert.deepEqual(
-  checkCashRegister(19.5, 20, [
-    ['PENNY', 0.01],
-    ['NICKEL', 0],
-    ['DIME', 0],
-    ['QUARTER', 0],
-    ['ONE', 0],
-    ['FIVE', 0],
-    ['TEN', 0],
-    ['TWENTY', 0],
-    ['ONE HUNDRED', 0]
-  ]),
-  { status: 'INSUFFICIENT_FUNDS', change: [] }
-);
+assert(palindrome('race car') === true);
 ```
 
-`checkCashRegister(19.5, 20, [["PENNY", 0.01], ["NICKEL", 0], ["DIME", 0], ["QUARTER", 0], ["ONE", 1], ["FIVE", 0], ["TEN", 0], ["TWENTY", 0], ["ONE HUNDRED", 0]])` should return `{status: "INSUFFICIENT_FUNDS", change: []}`.
+`palindrome("not a palindrome")` should return false.
 
 ```js
-assert.deepEqual(
-  checkCashRegister(19.5, 20, [
-    ['PENNY', 0.01],
-    ['NICKEL', 0],
-    ['DIME', 0],
-    ['QUARTER', 0],
-    ['ONE', 1],
-    ['FIVE', 0],
-    ['TEN', 0],
-    ['TWENTY', 0],
-    ['ONE HUNDRED', 0]
-  ]),
-  { status: 'INSUFFICIENT_FUNDS', change: [] }
-);
+assert(palindrome('not a palindrome') === false);
 ```
 
-`checkCashRegister(19.5, 20, [["PENNY", 0.5], ["NICKEL", 0], ["DIME", 0], ["QUARTER", 0], ["ONE", 0], ["FIVE", 0], ["TEN", 0], ["TWENTY", 0], ["ONE HUNDRED", 0]])` should return `{status: "CLOSED", change: [["PENNY", 0.5], ["NICKEL", 0], ["DIME", 0], ["QUARTER", 0], ["ONE", 0], ["FIVE", 0], ["TEN", 0], ["TWENTY", 0], ["ONE HUNDRED", 0]]}`.
+`palindrome("A man, a plan, a canal. Panama")` should return true.
 
 ```js
-assert.deepEqual(
-  checkCashRegister(19.5, 20, [
-    ['PENNY', 0.5],
-    ['NICKEL', 0],
-    ['DIME', 0],
-    ['QUARTER', 0],
-    ['ONE', 0],
-    ['FIVE', 0],
-    ['TEN', 0],
-    ['TWENTY', 0],
-    ['ONE HUNDRED', 0]
-  ]),
-  {
-    status: 'CLOSED',
-    change: [
-      ['PENNY', 0.5],
-      ['NICKEL', 0],
-      ['DIME', 0],
-      ['QUARTER', 0],
-      ['ONE', 0],
-      ['FIVE', 0],
-      ['TEN', 0],
-      ['TWENTY', 0],
-      ['ONE HUNDRED', 0]
-    ]
-  }
-);
+assert(palindrome('A man, a plan, a canal. Panama') === true);
+```
+
+`palindrome("never odd or even")` should return true.
+
+```js
+assert(palindrome('never odd or even') === true);
+```
+
+`palindrome("nope")` should return false.
+
+```js
+assert(palindrome('nope') === false);
+```
+
+`palindrome("almostomla")` should return false.
+
+```js
+assert(palindrome('almostomla') === false);
+```
+
+`palindrome("My age is 0, 0 si ega ym.")` should return true.
+
+```js
+assert(palindrome('My age is 0, 0 si ega ym.') === true);
+```
+
+`palindrome("1 eye for of 1 eye.")` should return false.
+
+```js
+assert(palindrome('1 eye for of 1 eye.') === false);
+```
+
+`palindrome("0_0 (: /-\ :) 0-0")` should return true.
+
+```js
+assert(palindrome('0_0 (: /- :) 0-0') === true);
+```
+
+`palindrome("five|\_/|four")` should return false.
+
+```js
+assert(palindrome('five|_/|four') === false);
 ```
 
 # --seed--
@@ -185,65 +103,25 @@ assert.deepEqual(
 ## --seed-contents--
 
 ```js
-function checkCashRegister(price, cash, cid) {
-  var change;
-  return change;
+function palindrome(str) {
+  return true;
 }
 
-checkCashRegister(19.5, 20, [["PENNY", 1.01], ["NICKEL", 2.05], ["DIME", 3.1], ["QUARTER", 4.25], ["ONE", 90], ["FIVE", 55], ["TEN", 20], ["TWENTY", 60], ["ONE HUNDRED", 100]]);
+
+
+palindrome("eye");
 ```
 
 # --solutions--
 
 ```js
-var denom = [
-    { name: 'ONE HUNDRED', val: 100},
-    { name: 'TWENTY', val: 20},
-    { name: 'TEN', val: 10},
-    { name: 'FIVE', val: 5},
-    { name: 'ONE', val: 1},
-    { name: 'QUARTER', val: 0.25},
-    { name: 'DIME', val: 0.1},
-    { name: 'NICKEL', val: 0.05},
-    { name: 'PENNY', val: 0.01}
-];
+function palindrome(str) {
+  var string = str.toLowerCase().split(/[^A-Za-z0-9]/gi).join('');
+  var aux = string.split('');
+  if (aux.join('') === aux.reverse().join('')){
+    return true;
+  }
 
-function checkCashRegister(price, cash, cid) {
-  var output = {status: null, change: []};
-  var change = cash - price;
-  var register = cid.reduce(function(acc, curr) {
-    acc.total += curr[1];
-    acc[curr[0]] = curr[1];
-    return acc;
-  }, {total: 0});
-  if(register.total === change) {
-    output.status = 'CLOSED';
-    output.change = cid;
-    return output;
-  }
-  if(register.total < change) {
-    output.status = 'INSUFFICIENT_FUNDS';
-    return output;
-  }
-  var change_arr = denom.reduce(function(acc, curr) {
-    var value = 0;
-    while(register[curr.name] > 0 && change >= curr.val) {
-      change -= curr.val;
-      register[curr.name] -= curr.val;
-      value += curr.val;
-      change = Math.round(change * 100) / 100;
-    }
-    if(value > 0) {
-      acc.push([ curr.name, value ]);
-    }
-    return acc;
-  }, []);
-  if(change_arr.length < 1 || change > 0) {
-    output.status = 'INSUFFICIENT_FUNDS';
-    return output;
-  }
-  output.status = 'OPEN';
-  output.change = change_arr;
-  return output;
+  return false;
 }
 ```
