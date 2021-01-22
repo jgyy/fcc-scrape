@@ -1,95 +1,73 @@
 ---
-id: 587d7db1367417b2b2512b87
-title: Add Methods After Inheritance
+id: 587d7daf367417b2b2512b7f
+title: Change the Prototype to a New Object
 challengeType: 1
-forumTopicId: 301315
-dashedName: add-methods-after-inheritance
+forumTopicId: 301316
+dashedName: change-the-prototype-to-a-new-object
 ---
 
 # --description--
 
-A constructor function that inherits its `prototype` object from a supertype constructor function can still have its own methods in addition to inherited methods.
-
-For example, `Bird` is a constructor that inherits its `prototype` from `Animal`:
+Up until now you have been adding properties to the `prototype` individually:
 
 ```js
-function Animal() { }
-Animal.prototype.eat = function() {
+Bird.prototype.numLegs = 2;
+```
+
+This becomes tedious after more than a few properties.
+
+```js
+Bird.prototype.eat = function() {
   console.log("nom nom nom");
-};
-function Bird() { }
-Bird.prototype = Object.create(Animal.prototype);
-Bird.prototype.constructor = Bird;
+}
+
+Bird.prototype.describe = function() {
+  console.log("My name is " + this.name);
+}
 ```
 
-In addition to what is inherited from `Animal`, you want to add behavior that is unique to `Bird` objects. Here, `Bird` will get a `fly()` function. Functions are added to `Bird's` `prototype` the same way as any constructor function:
+A more efficient way is to set the `prototype` to a new object that already contains the properties. This way, the properties are added all at once:
 
 ```js
-Bird.prototype.fly = function() {
-  console.log("I'm flying!");
+Bird.prototype = {
+  numLegs: 2, 
+  eat: function() {
+    console.log("nom nom nom");
+  },
+  describe: function() {
+    console.log("My name is " + this.name);
+  }
 };
-```
-
-Now instances of `Bird` will have both `eat()` and `fly()` methods:
-
-```js
-let duck = new Bird();
-duck.eat(); // prints "nom nom nom"
-duck.fly(); // prints "I'm flying!"
 ```
 
 # --instructions--
 
-Add all necessary code so the `Dog` object inherits from `Animal` and the `Dog's` `prototype` constructor is set to Dog. Then add a `bark()` method to the `Dog` object so that `beagle` can both `eat()` and `bark()`. The `bark()` method should print "Woof!" to the console.
+Add the property `numLegs` and the two methods `eat()` and `describe()` to the `prototype` of `Dog` by setting the `prototype` to a new object.
 
 # --hints--
 
-`Animal` should not respond to the `bark()` method.
+`Dog.prototype` should be set to a new object.
 
 ```js
-assert(typeof Animal.prototype.bark == 'undefined');
+assert(/Dog\.prototype\s*?=\s*?{/.test(code));
 ```
 
-`Dog` should inherit the `eat()` method from `Animal`.
+`Dog.prototype` should have the property `numLegs`.
 
 ```js
-assert(typeof Dog.prototype.eat == 'function');
+assert(Dog.prototype.numLegs !== undefined);
 ```
 
-`Dog` should have the `bark()` method as an `own` property.
+`Dog.prototype` should have the method `eat()`.
 
 ```js
-assert(Dog.prototype.hasOwnProperty('bark'));
+assert(typeof Dog.prototype.eat === 'function');
 ```
 
-`beagle` should be an `instanceof` `Animal`.
+`Dog.prototype` should have the method `describe()`.
 
 ```js
-assert(beagle instanceof Animal);
-```
-
-The constructor for `beagle` should be set to `Dog`.
-
-```js
-assert(beagle.constructor === Dog);
-```
-
-`beagle.eat()` should log `"nom nom nom"`
-
-```js
-console.log = function (msg) {
-  throw msg;
-};
-assert.throws(() => beagle.eat(), 'nom nom nom');
-```
-
-`beagle.bark()` should log `"Woof!"`
-
-```js
-console.log = function (msg) {
-  throw msg;
-};
-assert.throws(() => beagle.bark(), 'Woof!');
+assert(typeof Dog.prototype.describe === 'function');
 ```
 
 # --seed--
@@ -97,35 +75,29 @@ assert.throws(() => beagle.bark(), 'Woof!');
 ## --seed-contents--
 
 ```js
-function Animal() { }
-Animal.prototype.eat = function() { console.log("nom nom nom"); };
+function Dog(name) {
+  this.name = name;
+}
 
-function Dog() { }
+Dog.prototype = {
+  // Only change code below this line
 
-// Only change code below this line
-
-
-
-
-// Only change code above this line
-
-let beagle = new Dog();
+};
 ```
 
 # --solutions--
 
 ```js
-function Animal() { }
-Animal.prototype.eat = function() { console.log("nom nom nom"); };
-
-function Dog() { }
-Dog.prototype = Object.create(Animal.prototype);
-Dog.prototype.constructor = Dog;
-Dog.prototype.bark = function () {
-  console.log('Woof!');
+function Dog(name) {
+  this.name = name;
+}
+Dog.prototype = {
+numLegs: 4,
+  eat () {
+    console.log('nom nom nom');
+  },
+  describe () {
+    console.log('My name is ' + this.name);
+  }
 };
-let beagle = new Dog();
-
-beagle.eat();
-beagle.bark();
 ```
