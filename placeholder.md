@@ -1,101 +1,173 @@
 ---
-id: aaa48de84e1ecc7c742e1124
-title: Palindrome Checker
+id: a7f4d8f2483413a6ce226cac
+title: Roman Numeral Converter
 challengeType: 5
-forumTopicId: 16004
-dashedName: palindrome-checker
+forumTopicId: 16044
+dashedName: roman-numeral-converter
 ---
 
 # --description--
 
-Return `true` if the given string is a palindrome. Otherwise, return `false`.
+Convert the given number into a roman numeral.
 
-A <dfn>palindrome</dfn> is a word or sentence that's spelled the same way both forward and backward, ignoring punctuation, case, and spacing.
-
-**Note:** You'll need to remove **all non-alphanumeric characters** (punctuation, spaces and symbols) and turn everything into the same case (lower or upper case) in order to check for palindromes.
-
-We'll pass strings with varying formats, such as `"racecar"`, `"RaceCar"`, and `"race CAR"` among others.
-
-We'll also pass strings with special symbols, such as `"2A3*3a2"`, `"2A3 3a2"`, and `"2_A3*3#A2"`.
+All [roman numerals](http://www.mathsisfun.com/roman-numerals.html) answers should be provided in upper-case.
 
 # --hints--
 
-`palindrome("eye")` should return a boolean.
+`convertToRoman(2)` should return "II".
 
 ```js
-assert(typeof palindrome('eye') === 'boolean');
+assert.deepEqual(convertToRoman(2), 'II');
 ```
 
-`palindrome("eye")` should return true.
+`convertToRoman(3)` should return "III".
 
 ```js
-assert(palindrome('eye') === true);
+assert.deepEqual(convertToRoman(3), 'III');
 ```
 
-`palindrome("_eye")` should return true.
+`convertToRoman(4)` should return "IV".
 
 ```js
-assert(palindrome('_eye') === true);
+assert.deepEqual(convertToRoman(4), 'IV');
 ```
 
-`palindrome("race car")` should return true.
+`convertToRoman(5)` should return "V".
 
 ```js
-assert(palindrome('race car') === true);
+assert.deepEqual(convertToRoman(5), 'V');
 ```
 
-`palindrome("not a palindrome")` should return false.
+`convertToRoman(9)` should return "IX".
 
 ```js
-assert(palindrome('not a palindrome') === false);
+assert.deepEqual(convertToRoman(9), 'IX');
 ```
 
-`palindrome("A man, a plan, a canal. Panama")` should return true.
+`convertToRoman(12)` should return "XII".
 
 ```js
-assert(palindrome('A man, a plan, a canal. Panama') === true);
+assert.deepEqual(convertToRoman(12), 'XII');
 ```
 
-`palindrome("never odd or even")` should return true.
+`convertToRoman(16)` should return "XVI".
 
 ```js
-assert(palindrome('never odd or even') === true);
+assert.deepEqual(convertToRoman(16), 'XVI');
 ```
 
-`palindrome("nope")` should return false.
+`convertToRoman(29)` should return "XXIX".
 
 ```js
-assert(palindrome('nope') === false);
+assert.deepEqual(convertToRoman(29), 'XXIX');
 ```
 
-`palindrome("almostomla")` should return false.
+`convertToRoman(44)` should return "XLIV".
 
 ```js
-assert(palindrome('almostomla') === false);
+assert.deepEqual(convertToRoman(44), 'XLIV');
 ```
 
-`palindrome("My age is 0, 0 si ega ym.")` should return true.
+`convertToRoman(45)` should return "XLV"
 
 ```js
-assert(palindrome('My age is 0, 0 si ega ym.') === true);
+assert.deepEqual(convertToRoman(45), 'XLV');
 ```
 
-`palindrome("1 eye for of 1 eye.")` should return false.
+`convertToRoman(68)` should return "LXVIII"
 
 ```js
-assert(palindrome('1 eye for of 1 eye.') === false);
+assert.deepEqual(convertToRoman(68), 'LXVIII');
 ```
 
-`palindrome("0_0 (: /-\ :) 0-0")` should return true.
+`convertToRoman(83)` should return "LXXXIII"
 
 ```js
-assert(palindrome('0_0 (: /- :) 0-0') === true);
+assert.deepEqual(convertToRoman(83), 'LXXXIII');
 ```
 
-`palindrome("five|\_/|four")` should return false.
+`convertToRoman(97)` should return "XCVII"
 
 ```js
-assert(palindrome('five|_/|four') === false);
+assert.deepEqual(convertToRoman(97), 'XCVII');
+```
+
+`convertToRoman(99)` should return "XCIX"
+
+```js
+assert.deepEqual(convertToRoman(99), 'XCIX');
+```
+
+`convertToRoman(400)` should return "CD"
+
+```js
+assert.deepEqual(convertToRoman(400), 'CD');
+```
+
+`convertToRoman(500)` should return "D"
+
+```js
+assert.deepEqual(convertToRoman(500), 'D');
+```
+
+`convertToRoman(501)` should return "DI"
+
+```js
+assert.deepEqual(convertToRoman(501), 'DI');
+```
+
+`convertToRoman(649)` should return "DCXLIX"
+
+```js
+assert.deepEqual(convertToRoman(649), 'DCXLIX');
+```
+
+`convertToRoman(798)` should return "DCCXCVIII"
+
+```js
+assert.deepEqual(convertToRoman(798), 'DCCXCVIII');
+```
+
+`convertToRoman(891)` should return "DCCCXCI"
+
+```js
+assert.deepEqual(convertToRoman(891), 'DCCCXCI');
+```
+
+`convertToRoman(1000)` should return "M"
+
+```js
+assert.deepEqual(convertToRoman(1000), 'M');
+```
+
+`convertToRoman(1004)` should return "MIV"
+
+```js
+assert.deepEqual(convertToRoman(1004), 'MIV');
+```
+
+`convertToRoman(1006)` should return "MVI"
+
+```js
+assert.deepEqual(convertToRoman(1006), 'MVI');
+```
+
+`convertToRoman(1023)` should return "MXXIII"
+
+```js
+assert.deepEqual(convertToRoman(1023), 'MXXIII');
+```
+
+`convertToRoman(2014)` should return "MMXIV"
+
+```js
+assert.deepEqual(convertToRoman(2014), 'MMXIV');
+```
+
+`convertToRoman(3999)` should return "MMMCMXCIX"
+
+```js
+assert.deepEqual(convertToRoman(3999), 'MMMCMXCIX');
 ```
 
 # --seed--
@@ -103,25 +175,25 @@ assert(palindrome('five|_/|four') === false);
 ## --seed-contents--
 
 ```js
-function palindrome(str) {
-  return true;
+function convertToRoman(num) {
+ return num;
 }
 
-
-
-palindrome("eye");
+convertToRoman(36);
 ```
 
 # --solutions--
 
 ```js
-function palindrome(str) {
-  var string = str.toLowerCase().split(/[^A-Za-z0-9]/gi).join('');
-  var aux = string.split('');
-  if (aux.join('') === aux.reverse().join('')){
-    return true;
-  }
-
-  return false;
+function convertToRoman(num) {
+  var ref = [['M', 1000], ['CM', 900], ['D', 500], ['CD', 400], ['C', 100], ['XC', 90], ['L', 50], ['XL', 40], ['X', 10], ['IX', 9], ['V', 5], ['IV', 4], ['I', 1]];
+  var res = [];
+  ref.forEach(function(p) {
+    while (num >= p[1]) {
+      res.push(p[0]);
+      num -= p[1];
+    }
+  });
+  return res.join('');
 }
 ```
