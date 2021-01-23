@@ -1,76 +1,63 @@
 ---
-id: 587d7db2367417b2b2512b8c
-title: Use an IIFE to Create a Module
+id: 587d7db2367417b2b2512b8a
+title: >-
+  Use Closure to Protect Properties Within an Object from Being Modified
+  Externally
 challengeType: 1
-forumTopicId: 301332
-dashedName: use-an-iife-to-create-a-module
+forumTopicId: 18234
+dashedName: >-
+  use-closure-to-protect-properties-within-an-object-from-being-modified-externally
 ---
 
 # --description--
 
-An immediately invoked function expression (IIFE) is often used to group related functionality into a single object or <dfn>module</dfn>. For example, an earlier challenge defined two mixins:
+In the previous challenge, `bird` had a public property `name`. It is considered public because it can be accessed and changed outside of `bird`'s definition.
 
 ```js
-function glideMixin(obj) {
-  obj.glide = function() {
-    console.log("Gliding on the water");
+bird.name = "Duffy";
+```
+
+Therefore, any part of your code can easily change the name of `bird` to any value. Think about things like passwords and bank accounts being easily changeable by any part of your codebase. That could cause a lot of issues.
+
+The simplest way to make this public property private is by creating a variable within the constructor function. This changes the scope of that variable to be within the constructor function versus available globally. This way, the variable can only be accessed and changed by methods also within the constructor function.
+
+```js
+function Bird() {
+  let hatchedEgg = 10; // private variable
+
+  /* publicly available method that a bird object can use */
+  this.getHatchedEggCount = function() { 
+    return hatchedEgg;
   };
 }
-function flyMixin(obj) {
-  obj.fly = function() {
-    console.log("Flying, wooosh!");
-  };
-}
+let ducky = new Bird();
+ducky.getHatchedEggCount(); // returns 10
 ```
 
-We can group these mixins into a module as follows:
-
-```js
-let motionModule = (function () {
-  return {
-    glideMixin: function(obj) {
-      obj.glide = function() {
-        console.log("Gliding on the water");
-      };
-    },
-    flyMixin: function(obj) {
-      obj.fly = function() {
-        console.log("Flying, wooosh!");
-      };
-    }
-  }
-})(); // The two parentheses cause the function to be immediately invoked
-```
-
-Note that you have an immediately invoked function expression (IIFE) that returns an object `motionModule`. This returned object contains all of the mixin behaviors as properties of the object. The advantage of the module pattern is that all of the motion behaviors can be packaged into a single object that can then be used by other parts of your code. Here is an example using it:
-
-```js
-motionModule.glideMixin(duck);
-duck.glide();
-```
+Here `getHatchedEggCount` is a privileged method, because it has access to the private variable `hatchedEgg`. This is possible because `hatchedEgg` is declared in the same context as `getHatchedEggCount`. In JavaScript, a function always has access to the context in which it was created. This is called `closure`.
 
 # --instructions--
 
-Create a module named `funModule` to wrap the two mixins `isCuteMixin` and `singMixin`. `funModule` should return an object.
+Change how `weight` is declared in the `Bird` function so it is a private variable. Then, create a method `getWeight` that returns the value of `weight` 15.
 
 # --hints--
 
-`funModule` should be defined and return an object.
+The `weight` property should be a private variable and should be assigned the value of `15`.
 
 ```js
-assert(typeof funModule === 'object');
+assert(code.match(/(var|let|const)\s+weight\s*\=\s*15\;?/g));
 ```
 
-`funModule.isCuteMixin` should access a function.
+Your code should create a method in `Bird` called `getWeight` that returns the value of the private variable `weight`.
 
 ```js
-assert(typeof funModule.isCuteMixin === 'function');
+assert(new Bird().getWeight() === 15);
 ```
 
-`funModule.singMixin` should access a function.
+Your `getWeight` function should return the private variable `weight`.
 
 ```js
-assert(typeof funModule.singMixin === 'function');
+assert(code.match(/((return\s+)|(\(\s*\)\s*\=\>\s*))weight\;?/g));
 ```
 
 # --seed--
@@ -78,29 +65,19 @@ assert(typeof funModule.singMixin === 'function');
 ## --seed-contents--
 
 ```js
-let isCuteMixin = function(obj) {
-  obj.isCute = function() {
-    return true;
-  };
-};
-let singMixin = function(obj) {
-  obj.sing = function() {
-    console.log("Singing to an awesome tune");
-  };
-};
+function Bird() {
+  this.weight = 15;
+
+
+}
 ```
 
 # --solutions--
 
 ```js
-const funModule = (function () {
-  return {
-    isCuteMixin: obj => {
-      obj.isCute = () => true;
-    },
-    singMixin: obj => {
-      obj.sing = () => console.log("Singing to an awesome tune");
-    }
-  };
-})();
+function Bird() {
+  let weight = 15;
+
+  this.getWeight = () => weight;
+}
 ```
