@@ -1,89 +1,65 @@
 ---
-id: 587d7db0367417b2b2512b84
-title: Inherit Behaviors from a Supertype
+id: 587d7daf367417b2b2512b7d
+title: Iterate Over All Properties
 challengeType: 1
-forumTopicId: 301319
-dashedName: inherit-behaviors-from-a-supertype
+forumTopicId: 301320
+dashedName: iterate-over-all-properties
 ---
 
 # --description--
 
-In the previous challenge, you created a `supertype` called `Animal` that defined behaviors shared by all animals:
+You have now seen two kinds of properties: `own` properties and `prototype` properties. `Own` properties are defined directly on the object instance itself. And `prototype` properties are defined on the `prototype`.
 
 ```js
-function Animal() { }
-Animal.prototype.eat = function() {
-  console.log("nom nom nom");
-};
+function Bird(name) {
+  this.name = name;  //own property
+}
+
+Bird.prototype.numLegs = 2; // prototype property
+
+let duck = new Bird("Donald");
 ```
 
-This and the next challenge will cover how to reuse `Animal's` methods inside `Bird` and `Dog` without defining them again. It uses a technique called inheritance. This challenge covers the first step: make an instance of the `supertype` (or parent). You already know one way to create an instance of `Animal` using the `new` operator:
+Here is how you add `duck`'s `own` properties to the array `ownProps` and `prototype` properties to the array `prototypeProps`:
 
 ```js
-let animal = new Animal();
-```
+let ownProps = [];
+let prototypeProps = [];
 
-There are some disadvantages when using this syntax for inheritance, which are too complex for the scope of this challenge. Instead, here's an alternative approach without those disadvantages:
+for (let property in duck) {
+  if(duck.hasOwnProperty(property)) {
+    ownProps.push(property);
+  } else {
+    prototypeProps.push(property);
+  }
+}
 
-```js
-let animal = Object.create(Animal.prototype);
-```
-
-`Object.create(obj)` creates a new object, and sets `obj` as the new object's `prototype`. Recall that the `prototype` is like the "recipe" for creating an object. By setting the `prototype` of `animal` to be `Animal's` `prototype`, you are effectively giving the `animal` instance the same "recipe" as any other instance of `Animal`.
-
-```js
-animal.eat(); // prints "nom nom nom"
-animal instanceof Animal; // => true
+console.log(ownProps); // prints ["name"]
+console.log(prototypeProps); // prints ["numLegs"]
 ```
 
 # --instructions--
 
-Use `Object.create` to make two instances of `Animal` named `duck` and `beagle`.
+Add all of the `own` properties of `beagle` to the array `ownProps`. Add all of the `prototype` properties of `Dog` to the array `prototypeProps`.
 
 # --hints--
 
-The `duck` variable should be defined.
+The `ownProps` array should only contain `"name"`.
 
 ```js
-assert(typeof duck !== 'undefined');
+assert.deepEqual(ownProps, ['name']);
 ```
 
-The `beagle` variable should be defined.
+The `prototypeProps` array should only contain `"numLegs"`.
 
 ```js
-assert(typeof beagle !== 'undefined');
+assert.deepEqual(prototypeProps, ['numLegs']);
 ```
 
-The `duck` variable should be initialised with `Object.create`.
+You should solve this challenge without using the built in method `Object.keys()`.
 
 ```js
-assert(
-  /(let|const|var)\s{1,}duck\s*=\s*Object\.create\s*\(\s*Animal\.prototype\s*\)\s*/.test(
-    code
-  )
-);
-```
-
-The `beagle` variable should be initialised with `Object.create`.
-
-```js
-assert(
-  /(let|const|var)\s{1,}beagle\s*=\s*Object\.create\s*\(\s*Animal\.prototype\s*\)\s*/.test(
-    code
-  )
-);
-```
-
-`duck` should have a `prototype` of `Animal`.
-
-```js
-assert(duck instanceof Animal);
-```
-
-`beagle` should have a `prototype` of `Animal`.
-
-```js
-assert(beagle instanceof Animal);
+assert(!/\Object.keys/.test(code));
 ```
 
 # --seed--
@@ -91,35 +67,38 @@ assert(beagle instanceof Animal);
 ## --seed-contents--
 
 ```js
-function Animal() { }
+function Dog(name) {
+  this.name = name;
+}
 
-Animal.prototype = {
-  constructor: Animal,
-  eat: function() {
-    console.log("nom nom nom");
-  }
-};
+Dog.prototype.numLegs = 4;
+
+let beagle = new Dog("Snoopy");
+
+let ownProps = [];
+let prototypeProps = [];
 
 // Only change code below this line
-
-let duck; // Change this line
-let beagle; // Change this line
 ```
 
 # --solutions--
 
 ```js
-function Animal() { }
+function Dog(name) {
+  this.name = name;
+}
 
-Animal.prototype = {
-  constructor: Animal,
-  eat: function() {
-    console.log("nom nom nom");
+Dog.prototype.numLegs = 4;
+
+let beagle = new Dog("Snoopy");
+
+let ownProps = [];
+let prototypeProps = [];
+for (let prop in beagle) {
+  if (beagle.hasOwnProperty(prop)) {
+    ownProps.push(prop);
+  } else {
+    prototypeProps.push(prop);
   }
-};
-let duck = Object.create(Animal.prototype);
-let beagle = Object.create(Animal.prototype);
-
-duck.eat();
-beagle.eat();
+}
 ```
