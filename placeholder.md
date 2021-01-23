@@ -1,59 +1,72 @@
 ---
-id: 587d7dba367417b2b2512ba8
-title: Check for All or None
+id: 5c3dda8b4d8df89bea71600f
+title: Check For Mixed Grouping of Characters
 challengeType: 1
-forumTopicId: 301338
-dashedName: check-for-all-or-none
+forumTopicId: 301339
+dashedName: check-for-mixed-grouping-of-characters
 ---
 
 # --description--
 
-Sometimes the patterns you want to search for may have parts of it that may or may not exist. However, it may be important to check for them nonetheless.
+Sometimes we want to check for groups of characters using a Regular Expression and to achieve that we use parentheses `()`.
 
-You can specify the possible existence of an element with a question mark, `?`. This checks for zero or one of the preceding element. You can think of this symbol as saying the previous element is optional.
+If you want to find either `Penguin` or `Pumpkin` in a string, you can use the following Regular Expression: `/P(engu|umpk)in/g`
 
-For example, there are slight differences in American and British English and you can use the question mark to match both spellings.
+Then check whether the desired string groups are in the test string by using the `test()` method.
 
 ```js
-let american = "color";
-let british = "colour";
-let rainbowRegex= /colou?r/;
-rainbowRegex.test(american); // Returns true
-rainbowRegex.test(british); // Returns true
+let testStr = "Pumpkin";
+let testRegex = /P(engu|umpk)in/;
+testRegex.test(testStr);
+// Returns true
 ```
 
 # --instructions--
 
-Change the regex `favRegex` to match both the American English (favorite) and the British English (favourite) version of the word.
+Fix the regex so that it checks for the names of `Franklin Roosevelt` or `Eleanor Roosevelt` in a case sensitive manner and it should make concessions for middle names.
+
+Then fix the code so that the regex that you have created is checked against `myString` and either `true` or `false` is returned depending on whether the regex matches.
 
 # --hints--
 
-Your regex should use the optional symbol, `?`.
+Your regex `myRegex` should return `true` for the string `Franklin D. Roosevelt`
 
 ```js
-favRegex.lastIndex = 0;
-assert(favRegex.source.match(/\?/).length > 0);
+myRegex.lastIndex = 0;
+assert(myRegex.test('Franklin D. Roosevelt'));
 ```
 
-Your regex should match `"favorite"`
+Your regex `myRegex` should return `true` for the string `Eleanor Roosevelt`
 
 ```js
-favRegex.lastIndex = 0;
-assert(favRegex.test('favorite'));
+myRegex.lastIndex = 0;
+assert(myRegex.test('Eleanor Roosevelt'));
 ```
 
-Your regex should match `"favourite"`
+Your regex `myRegex` should return `false` for the string `Franklin Rosevelt`
 
 ```js
-favRegex.lastIndex = 0;
-assert(favRegex.test('favourite'));
+myRegex.lastIndex = 0;
+assert(!myRegex.test('Franklin Rosevelt'));
 ```
 
-Your regex should not match `"fav"`
+Your regex `myRegex` should return `false` for the string `Frank Roosevelt`
 
 ```js
-favRegex.lastIndex = 0;
-assert(!favRegex.test('fav'));
+myRegex.lastIndex = 0;
+assert(!myRegex.test('Frank Roosevelt'));
+```
+
+You should use `.test()` to test the regex.
+
+```js
+assert(code.match(/myRegex.test\(\s*myString\s*\)/));
+```
+
+Your result should return `true`.
+
+```js
+assert(result === true);
 ```
 
 # --seed--
@@ -61,15 +74,16 @@ assert(!favRegex.test('fav'));
 ## --seed-contents--
 
 ```js
-let favWord = "favorite";
-let favRegex = /change/; // Change this line
-let result = favRegex.test(favWord);
+let myString = "Eleanor Roosevelt";
+let myRegex = /False/; // Change this line
+let result = false; // Change this line
+// After passing the challenge experiment with myString and see how the grouping works
 ```
 
 # --solutions--
 
 ```js
-let favWord = "favorite";
-let favRegex = /favou?r/;
-let result = favRegex.test(favWord);
+let myString = "Eleanor Roosevelt";
+let myRegex = /(Franklin|Eleanor).*Roosevelt/;
+let result = myRegex.test(myString);
 ```
