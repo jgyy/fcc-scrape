@@ -1,46 +1,59 @@
 ---
-id: 587d7daf367417b2b2512b80
-title: Remember to Set the Constructor Property when Changing the Prototype
+id: 587d7db1367417b2b2512b86
+title: Reset an Inherited Constructor Property
 challengeType: 1
-forumTopicId: 301323
-dashedName: remember-to-set-the-constructor-property-when-changing-the-prototype
+forumTopicId: 301324
+dashedName: reset-an-inherited-constructor-property
 ---
 
 # --description--
 
-There is one crucial side effect of manually setting the prototype to a new object. It erases the `constructor` property! This property can be used to check which constructor function created the instance, but since the property has been overwritten, it now gives false results:
+When an object inherits its `prototype` from another object, it also inherits the supertype's constructor property.
+
+Here's an example:
 
 ```js
-duck.constructor === Bird; // false -- Oops
-duck.constructor === Object; // true, all objects inherit from Object.prototype
-duck instanceof Bird; // true, still works
+function Bird() { }
+Bird.prototype = Object.create(Animal.prototype);
+let duck = new Bird();
+duck.constructor // function Animal(){...}
 ```
 
-To fix this, whenever a prototype is manually set to a new object, remember to define the `constructor` property:
+But `duck` and all instances of `Bird` should show that they were constructed by `Bird` and not `Animal`. To do so, you can manually set `Bird's` constructor property to the `Bird` object:
 
 ```js
-Bird.prototype = {
-  constructor: Bird, // define the constructor property
-  numLegs: 2,
-  eat: function() {
-    console.log("nom nom nom");
-  },
-  describe: function() {
-    console.log("My name is " + this.name); 
-  }
-};
+Bird.prototype.constructor = Bird;
+duck.constructor // function Bird(){...}
 ```
 
 # --instructions--
 
-Define the `constructor` property on the `Dog` `prototype`.
+Fix the code so `duck.constructor` and `beagle.constructor` return their respective constructors.
 
 # --hints--
 
-`Dog.prototype` should set the `constructor` property.
+`Bird.prototype` should be an instance of `Animal`.
 
 ```js
-assert(Dog.prototype.constructor === Dog);
+assert(Animal.prototype.isPrototypeOf(Bird.prototype));
+```
+
+`duck.constructor` should return `Bird`.
+
+```js
+assert(duck.constructor === Bird);
+```
+
+`Dog.prototype` should be an instance of `Animal`.
+
+```js
+assert(Animal.prototype.isPrototypeOf(Dog.prototype));
+```
+
+`beagle.constructor` should return `Dog`.
+
+```js
+assert(beagle.constructor === Dog);
 ```
 
 # --seed--
@@ -48,37 +61,31 @@ assert(Dog.prototype.constructor === Dog);
 ## --seed-contents--
 
 ```js
-function Dog(name) {
-  this.name = name;
-}
+function Animal() { }
+function Bird() { }
+function Dog() { }
+
+Bird.prototype = Object.create(Animal.prototype);
+Dog.prototype = Object.create(Animal.prototype);
 
 // Only change code below this line
-Dog.prototype = {
 
-  numLegs: 4,
-  eat: function() {
-    console.log("nom nom nom");
-  },
-  describe: function() {
-    console.log("My name is " + this.name);
-  }
-};
+
+
+let duck = new Bird();
+let beagle = new Dog();
 ```
 
 # --solutions--
 
 ```js
-function Dog(name) {
-  this.name = name;
-}
-Dog.prototype = {
-  constructor: Dog,
-  numLegs: 4,
-  eat: function() {
-    console.log("nom nom nom");
-  },
-  describe: function() {
-    console.log("My name is " + this.name);
-  }
-};
+function Animal() { }
+function Bird() { }
+function Dog() { }
+Bird.prototype = Object.create(Animal.prototype);
+Dog.prototype = Object.create(Animal.prototype);
+Dog.prototype.constructor = Dog;
+Bird.prototype.constructor = Bird;
+let duck = new Bird();
+let beagle = new Dog();
 ```
