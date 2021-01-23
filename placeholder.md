@@ -1,57 +1,73 @@
 ---
-id: 587d7dad367417b2b2512b78
-title: Use a Constructor to Create Objects
+id: 587d7db2367417b2b2512b89
+title: Use a Mixin to Add Common Behavior Between Unrelated Objects
 challengeType: 1
-forumTopicId: 18233
-dashedName: use-a-constructor-to-create-objects
+forumTopicId: 301331
+dashedName: use-a-mixin-to-add-common-behavior-between-unrelated-objects
 ---
 
 # --description--
 
-Here's the `Bird` constructor from the previous challenge:
+As you have seen, behavior is shared through inheritance. However, there are cases when inheritance is not the best solution. Inheritance does not work well for unrelated objects like `Bird` and `Airplane`. They can both fly, but a `Bird` is not a type of `Airplane` and vice versa.
+
+For unrelated objects, it's better to use <dfn>mixins</dfn>. A mixin allows other objects to use a collection of functions.
 
 ```js
-function Bird() {
-  this.name = "Albert";
-  this.color  = "blue";
-  this.numLegs = 2;
-  // "this" inside the constructor always refers to the object being created
-}
-
-let blueBird = new Bird();
+let flyMixin = function(obj) {
+  obj.fly = function() {
+    console.log("Flying, wooosh!");
+  }
+};
 ```
 
-Notice that the `new` operator is used when calling a constructor. This tells JavaScript to create a new instance of `Bird` called `blueBird`. Without the `new` operator, `this` inside the constructor would not point to the newly created object, giving unexpected results. Now `blueBird` has all the properties defined inside the `Bird` constructor:
+The `flyMixin` takes any object and gives it the `fly` method.
 
 ```js
-blueBird.name; // => Albert
-blueBird.color; // => blue
-blueBird.numLegs; // => 2
+let bird = {
+  name: "Donald",
+  numLegs: 2
+};
+
+let plane = {
+  model: "777",
+  numPassengers: 524
+};
+
+flyMixin(bird);
+flyMixin(plane);
 ```
 
-Just like any other object, its properties can be accessed and modified:
+Here `bird` and `plane` are passed into `flyMixin`, which then assigns the `fly` function to each object. Now `bird` and `plane` can both fly:
 
 ```js
-blueBird.name = 'Elvira';
-blueBird.name; // => Elvira
+bird.fly(); // prints "Flying, wooosh!"
+plane.fly(); // prints "Flying, wooosh!"
 ```
+
+Note how the mixin allows for the same `fly` method to be reused by unrelated objects `bird` and `plane`.
 
 # --instructions--
 
-Use the `Dog` constructor from the last lesson to create a new instance of `Dog`, assigning it to a variable `hound`.
+Create a mixin named `glideMixin` that defines a method named `glide`. Then use the `glideMixin` to give both `bird` and `boat` the ability to glide.
 
 # --hints--
 
-`hound` should be created using the `Dog` constructor.
+Your code should declare a `glideMixin` variable that is a function.
 
 ```js
-assert(hound instanceof Dog);
+assert(typeof glideMixin === 'function');
 ```
 
-Your code should use the `new` operator to create an instance of `Dog`.
+Your code should use the `glideMixin` on the `bird` object to give it the `glide` method.
 
 ```js
-assert(code.match(/new/g));
+assert(typeof bird.glide === 'function');
+```
+
+Your code should use the `glideMixin` on the `boat` object to give it the `glide` method.
+
+```js
+assert(typeof boat.glide === 'function');
 ```
 
 # --seed--
@@ -59,21 +75,35 @@ assert(code.match(/new/g));
 ## --seed-contents--
 
 ```js
-function Dog() {
-  this.name = "Rupert";
-  this.color = "brown";
-  this.numLegs = 4;
-}
+let bird = {
+  name: "Donald",
+  numLegs: 2
+};
+
+let boat = {
+  name: "Warrior",
+  type: "race-boat"
+};
+
 // Only change code below this line
 ```
 
 # --solutions--
 
 ```js
-function Dog() {
-  this.name = "Rupert";
-  this.color = "brown";
-  this.numLegs = 4;
+let bird = {
+  name: "Donald",
+  numLegs: 2
+};
+
+let boat = {
+  name: "Warrior",
+  type: "race-boat"
+};
+function glideMixin (obj) {
+  obj.glide = () => 'Gliding!';
 }
-const hound = new Dog();
+
+glideMixin(bird);
+glideMixin(boat);
 ```
