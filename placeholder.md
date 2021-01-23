@@ -1,73 +1,76 @@
 ---
-id: 587d7db2367417b2b2512b89
-title: Use a Mixin to Add Common Behavior Between Unrelated Objects
+id: 587d7db2367417b2b2512b8c
+title: Use an IIFE to Create a Module
 challengeType: 1
-forumTopicId: 301331
-dashedName: use-a-mixin-to-add-common-behavior-between-unrelated-objects
+forumTopicId: 301332
+dashedName: use-an-iife-to-create-a-module
 ---
 
 # --description--
 
-As you have seen, behavior is shared through inheritance. However, there are cases when inheritance is not the best solution. Inheritance does not work well for unrelated objects like `Bird` and `Airplane`. They can both fly, but a `Bird` is not a type of `Airplane` and vice versa.
-
-For unrelated objects, it's better to use <dfn>mixins</dfn>. A mixin allows other objects to use a collection of functions.
+An immediately invoked function expression (IIFE) is often used to group related functionality into a single object or <dfn>module</dfn>. For example, an earlier challenge defined two mixins:
 
 ```js
-let flyMixin = function(obj) {
+function glideMixin(obj) {
+  obj.glide = function() {
+    console.log("Gliding on the water");
+  };
+}
+function flyMixin(obj) {
   obj.fly = function() {
     console.log("Flying, wooosh!");
+  };
+}
+```
+
+We can group these mixins into a module as follows:
+
+```js
+let motionModule = (function () {
+  return {
+    glideMixin: function(obj) {
+      obj.glide = function() {
+        console.log("Gliding on the water");
+      };
+    },
+    flyMixin: function(obj) {
+      obj.fly = function() {
+        console.log("Flying, wooosh!");
+      };
+    }
   }
-};
+})(); // The two parentheses cause the function to be immediately invoked
 ```
 
-The `flyMixin` takes any object and gives it the `fly` method.
+Note that you have an immediately invoked function expression (IIFE) that returns an object `motionModule`. This returned object contains all of the mixin behaviors as properties of the object. The advantage of the module pattern is that all of the motion behaviors can be packaged into a single object that can then be used by other parts of your code. Here is an example using it:
 
 ```js
-let bird = {
-  name: "Donald",
-  numLegs: 2
-};
-
-let plane = {
-  model: "777",
-  numPassengers: 524
-};
-
-flyMixin(bird);
-flyMixin(plane);
+motionModule.glideMixin(duck);
+duck.glide();
 ```
-
-Here `bird` and `plane` are passed into `flyMixin`, which then assigns the `fly` function to each object. Now `bird` and `plane` can both fly:
-
-```js
-bird.fly(); // prints "Flying, wooosh!"
-plane.fly(); // prints "Flying, wooosh!"
-```
-
-Note how the mixin allows for the same `fly` method to be reused by unrelated objects `bird` and `plane`.
 
 # --instructions--
 
-Create a mixin named `glideMixin` that defines a method named `glide`. Then use the `glideMixin` to give both `bird` and `boat` the ability to glide.
+Create a module named `funModule` to wrap the two mixins `isCuteMixin` and `singMixin`. `funModule` should return an object.
 
 # --hints--
 
-Your code should declare a `glideMixin` variable that is a function.
+`funModule` should be defined and return an object.
 
 ```js
-assert(typeof glideMixin === 'function');
+assert(typeof funModule === 'object');
 ```
 
-Your code should use the `glideMixin` on the `bird` object to give it the `glide` method.
+`funModule.isCuteMixin` should access a function.
 
 ```js
-assert(typeof bird.glide === 'function');
+assert(typeof funModule.isCuteMixin === 'function');
 ```
 
-Your code should use the `glideMixin` on the `boat` object to give it the `glide` method.
+`funModule.singMixin` should access a function.
 
 ```js
-assert(typeof boat.glide === 'function');
+assert(typeof funModule.singMixin === 'function');
 ```
 
 # --seed--
@@ -75,35 +78,29 @@ assert(typeof boat.glide === 'function');
 ## --seed-contents--
 
 ```js
-let bird = {
-  name: "Donald",
-  numLegs: 2
+let isCuteMixin = function(obj) {
+  obj.isCute = function() {
+    return true;
+  };
 };
-
-let boat = {
-  name: "Warrior",
-  type: "race-boat"
+let singMixin = function(obj) {
+  obj.sing = function() {
+    console.log("Singing to an awesome tune");
+  };
 };
-
-// Only change code below this line
 ```
 
 # --solutions--
 
 ```js
-let bird = {
-  name: "Donald",
-  numLegs: 2
-};
-
-let boat = {
-  name: "Warrior",
-  type: "race-boat"
-};
-function glideMixin (obj) {
-  obj.glide = () => 'Gliding!';
-}
-
-glideMixin(bird);
-glideMixin(boat);
+const funModule = (function () {
+  return {
+    isCuteMixin: obj => {
+      obj.isCute = () => true;
+    },
+    singMixin: obj => {
+      obj.sing = () => console.log("Singing to an awesome tune");
+    }
+  };
+})();
 ```
