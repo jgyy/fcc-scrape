@@ -1,55 +1,59 @@
 ---
-id: 587d7dae367417b2b2512b7a
-title: Verify an Object's Constructor with instanceof
+id: 587d7dba367417b2b2512ba8
+title: Check for All or None
 challengeType: 1
-forumTopicId: 301337
-dashedName: verify-an-objects-constructor-with-instanceof
+forumTopicId: 301338
+dashedName: check-for-all-or-none
 ---
 
 # --description--
 
-Anytime a constructor function creates a new object, that object is said to be an <dfn>instance</dfn> of its constructor. JavaScript gives a convenient way to verify this with the `instanceof` operator. `instanceof` allows you to compare an object to a constructor, returning `true` or `false` based on whether or not that object was created with the constructor. Here's an example:
+Sometimes the patterns you want to search for may have parts of it that may or may not exist. However, it may be important to check for them nonetheless.
+
+You can specify the possible existence of an element with a question mark, `?`. This checks for zero or one of the preceding element. You can think of this symbol as saying the previous element is optional.
+
+For example, there are slight differences in American and British English and you can use the question mark to match both spellings.
 
 ```js
-let Bird = function(name, color) {
-  this.name = name;
-  this.color = color;
-  this.numLegs = 2;
-}
-
-let crow = new Bird("Alexis", "black");
-
-crow instanceof Bird; // => true
-```
-
-If an object is created without using a constructor, `instanceof` will verify that it is not an instance of that constructor:
-
-```js
-let canary = {
-  name: "Mildred",
-  color: "Yellow",
-  numLegs: 2
-};
-
-canary instanceof Bird; // => false
+let american = "color";
+let british = "colour";
+let rainbowRegex= /colou?r/;
+rainbowRegex.test(american); // Returns true
+rainbowRegex.test(british); // Returns true
 ```
 
 # --instructions--
 
-Create a new instance of the `House` constructor, calling it `myHouse` and passing a number of bedrooms. Then, use `instanceof` to verify that it is an instance of `House`.
+Change the regex `favRegex` to match both the American English (favorite) and the British English (favourite) version of the word.
 
 # --hints--
 
-`myHouse` should have a `numBedrooms` attribute set to a number.
+Your regex should use the optional symbol, `?`.
 
 ```js
-assert(typeof myHouse.numBedrooms === 'number');
+favRegex.lastIndex = 0;
+assert(favRegex.source.match(/\?/).length > 0);
 ```
 
-You should verify that `myHouse` is an instance of `House` using the `instanceof` operator.
+Your regex should match `"favorite"`
 
 ```js
-assert(/myHouse\s*instanceof\s*House/.test(code));
+favRegex.lastIndex = 0;
+assert(favRegex.test('favorite'));
+```
+
+Your regex should match `"favourite"`
+
+```js
+favRegex.lastIndex = 0;
+assert(favRegex.test('favourite'));
+```
+
+Your regex should not match `"fav"`
+
+```js
+favRegex.lastIndex = 0;
+assert(!favRegex.test('fav'));
 ```
 
 # --seed--
@@ -57,19 +61,15 @@ assert(/myHouse\s*instanceof\s*House/.test(code));
 ## --seed-contents--
 
 ```js
-function House(numBedrooms) {
-  this.numBedrooms = numBedrooms;
-}
-
-// Only change code below this line
+let favWord = "favorite";
+let favRegex = /change/; // Change this line
+let result = favRegex.test(favWord);
 ```
 
 # --solutions--
 
 ```js
-function House(numBedrooms) {
-  this.numBedrooms = numBedrooms;
-}
-const myHouse = new House(4);
-console.log(myHouse instanceof House);
+let favWord = "favorite";
+let favRegex = /favou?r/;
+let result = favRegex.test(favWord);
 ```
