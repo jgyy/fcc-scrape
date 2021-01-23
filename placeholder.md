@@ -1,54 +1,55 @@
 ---
-id: 587d7dae367417b2b2512b7c
-title: Use Prototype Properties to Reduce Duplicate Code
+id: 587d7dae367417b2b2512b7a
+title: Verify an Object's Constructor with instanceof
 challengeType: 1
-forumTopicId: 301336
-dashedName: use-prototype-properties-to-reduce-duplicate-code
+forumTopicId: 301337
+dashedName: verify-an-objects-constructor-with-instanceof
 ---
 
 # --description--
 
-Since `numLegs` will probably have the same value for all instances of `Bird`, you essentially have a duplicated variable `numLegs` inside each `Bird` instance.
-
-This may not be an issue when there are only two instances, but imagine if there are millions of instances. That would be a lot of duplicated variables.
-
-A better way is to use `Bird’s` `prototype`. Properties in the `prototype` are shared among ALL instances of `Bird`. Here's how to add `numLegs` to the `Bird prototype`:
+Anytime a constructor function creates a new object, that object is said to be an <dfn>instance</dfn> of its constructor. JavaScript gives a convenient way to verify this with the `instanceof` operator. `instanceof` allows you to compare an object to a constructor, returning `true` or `false` based on whether or not that object was created with the constructor. Here's an example:
 
 ```js
-Bird.prototype.numLegs = 2;
+let Bird = function(name, color) {
+  this.name = name;
+  this.color = color;
+  this.numLegs = 2;
+}
+
+let crow = new Bird("Alexis", "black");
+
+crow instanceof Bird; // => true
 ```
 
-Now all instances of `Bird` have the `numLegs` property.
+If an object is created without using a constructor, `instanceof` will verify that it is not an instance of that constructor:
 
 ```js
-console.log(duck.numLegs);  // prints 2
-console.log(canary.numLegs);  // prints 2
-```
+let canary = {
+  name: "Mildred",
+  color: "Yellow",
+  numLegs: 2
+};
 
-Since all instances automatically have the properties on the `prototype`, think of a `prototype` as a "recipe" for creating objects. Note that the `prototype` for `duck` and `canary` is part of the `Bird` constructor as `Bird.prototype`. Nearly every object in JavaScript has a `prototype` property which is part of the constructor function that created it.
+canary instanceof Bird; // => false
+```
 
 # --instructions--
 
-Add a `numLegs` property to the `prototype` of `Dog`
+Create a new instance of the `House` constructor, calling it `myHouse` and passing a number of bedrooms. Then, use `instanceof` to verify that it is an instance of `House`.
 
 # --hints--
 
-`beagle` should have a `numLegs` property.
+`myHouse` should have a `numBedrooms` attribute set to a number.
 
 ```js
-assert(beagle.numLegs !== undefined);
+assert(typeof myHouse.numBedrooms === 'number');
 ```
 
-`beagle.numLegs` should be a number.
+You should verify that `myHouse` is an instance of `House` using the `instanceof` operator.
 
 ```js
-assert(typeof beagle.numLegs === 'number');
-```
-
-`numLegs` should be a `prototype` property not an `own` property.
-
-```js
-assert(beagle.hasOwnProperty('numLegs') === false);
+assert(/myHouse\s*instanceof\s*House/.test(code));
 ```
 
 # --seed--
@@ -56,22 +57,19 @@ assert(beagle.hasOwnProperty('numLegs') === false);
 ## --seed-contents--
 
 ```js
-function Dog(name) {
-  this.name = name;
+function House(numBedrooms) {
+  this.numBedrooms = numBedrooms;
 }
 
-
-
-// Only change code above this line
-let beagle = new Dog("Snoopy");
+// Only change code below this line
 ```
 
 # --solutions--
 
 ```js
-function Dog (name) {
-  this.name = name;
+function House(numBedrooms) {
+  this.numBedrooms = numBedrooms;
 }
-Dog.prototype.numLegs = 4;
-let beagle = new Dog("Snoopy");
+const myHouse = new House(4);
+console.log(myHouse instanceof House);
 ```
