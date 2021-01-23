@@ -1,65 +1,47 @@
 ---
-id: 587d7daf367417b2b2512b7d
-title: Iterate Over All Properties
+id: 587d7dad367417b2b2512b76
+title: Make Code More Reusable with the this Keyword
 challengeType: 1
-forumTopicId: 301320
-dashedName: iterate-over-all-properties
+forumTopicId: 301321
+dashedName: make-code-more-reusable-with-the-this-keyword
 ---
 
 # --description--
 
-You have now seen two kinds of properties: `own` properties and `prototype` properties. `Own` properties are defined directly on the object instance itself. And `prototype` properties are defined on the `prototype`.
+The last challenge introduced a method to the `duck` object. It used `duck.name` dot notation to access the value for the `name` property within the return statement:
+
+`sayName: function() {return "The name of this duck is " + duck.name + ".";}`
+
+While this is a valid way to access the object's property, there is a pitfall here. If the variable name changes, any code referencing the original name would need to be updated as well. In a short object definition, it isn't a problem, but if an object has many references to its properties there is a greater chance for error.
+
+A way to avoid these issues is with the `this` keyword:
 
 ```js
-function Bird(name) {
-  this.name = name;  //own property
-}
-
-Bird.prototype.numLegs = 2; // prototype property
-
-let duck = new Bird("Donald");
+let duck = {
+  name: "Aflac",
+  numLegs: 2,
+  sayName: function() {return "The name of this duck is " + this.name + ".";}
+};
 ```
 
-Here is how you add `duck`'s `own` properties to the array `ownProps` and `prototype` properties to the array `prototypeProps`:
-
-```js
-let ownProps = [];
-let prototypeProps = [];
-
-for (let property in duck) {
-  if(duck.hasOwnProperty(property)) {
-    ownProps.push(property);
-  } else {
-    prototypeProps.push(property);
-  }
-}
-
-console.log(ownProps); // prints ["name"]
-console.log(prototypeProps); // prints ["numLegs"]
-```
+`this` is a deep topic, and the above example is only one way to use it. In the current context, `this` refers to the object that the method is associated with: `duck`. If the object's name is changed to `mallard`, it is not necessary to find all the references to `duck` in the code. It makes the code reusable and easier to read.
 
 # --instructions--
 
-Add all of the `own` properties of `beagle` to the array `ownProps`. Add all of the `prototype` properties of `Dog` to the array `prototypeProps`.
+Modify the `dog.sayLegs` method to remove any references to `dog`. Use the `duck` example for guidance.
 
 # --hints--
 
-The `ownProps` array should only contain `"name"`.
+`dog.sayLegs()` should return the given string.
 
 ```js
-assert.deepEqual(ownProps, ['name']);
+assert(dog.sayLegs() === 'This dog has 4 legs.');
 ```
 
-The `prototypeProps` array should only contain `"numLegs"`.
+Your code should use the `this` keyword to access the `numLegs` property of `dog`.
 
 ```js
-assert.deepEqual(prototypeProps, ['numLegs']);
-```
-
-You should solve this challenge without using the built in method `Object.keys()`.
-
-```js
-assert(!/\Object.keys/.test(code));
+assert(code.match(/this\.numLegs/g));
 ```
 
 # --seed--
@@ -67,38 +49,25 @@ assert(!/\Object.keys/.test(code));
 ## --seed-contents--
 
 ```js
-function Dog(name) {
-  this.name = name;
-}
+let dog = {
+  name: "Spot",
+  numLegs: 4,
+  sayLegs: function() {return "This dog has " + dog.numLegs + " legs.";}
+};
 
-Dog.prototype.numLegs = 4;
-
-let beagle = new Dog("Snoopy");
-
-let ownProps = [];
-let prototypeProps = [];
-
-// Only change code below this line
+dog.sayLegs();
 ```
 
 # --solutions--
 
 ```js
-function Dog(name) {
-  this.name = name;
-}
-
-Dog.prototype.numLegs = 4;
-
-let beagle = new Dog("Snoopy");
-
-let ownProps = [];
-let prototypeProps = [];
-for (let prop in beagle) {
-  if (beagle.hasOwnProperty(prop)) {
-    ownProps.push(prop);
-  } else {
-    prototypeProps.push(prop);
+let dog = {
+  name: "Spot",
+  numLegs: 4,
+  sayLegs () {
+    return 'This dog has ' + this.numLegs + ' legs.';
   }
-}
+};
+
+dog.sayLegs();
 ```
