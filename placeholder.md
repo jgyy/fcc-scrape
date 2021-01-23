@@ -1,67 +1,80 @@
 ---
-id: 587d7db4367417b2b2512b90
-title: Match a Literal String with Different Possibilities
+id: 587d7db7367417b2b2512b9f
+title: Match All Letters and Numbers
 challengeType: 1
-forumTopicId: 301345
-dashedName: match-a-literal-string-with-different-possibilities
+forumTopicId: 301346
+dashedName: match-all-letters-and-numbers
 ---
 
 # --description--
 
-Using regexes like `/coding/`, you can look for the pattern `"coding"` in another string.
+Using character classes, you were able to search for all letters of the alphabet with `[a-z]`. This kind of character class is common enough that there is a shortcut for it, although it includes a few extra characters as well.
 
-This is powerful to search single strings, but it's limited to only one pattern. You can search for multiple patterns using the `alternation` or `OR` operator: `|`.
+The closest character class in JavaScript to match the alphabet is `\w`. This shortcut is equal to `[A-Za-z0-9_]`. This character class matches upper and lowercase letters plus numbers. Note, this character class also includes the underscore character (`_`).
 
-This operator matches patterns either before or after it. For example, if you wanted to match `"yes"` or `"no"`, the regex you want is `/yes|no/`.
+```js
+let longHand = /[A-Za-z0-9_]+/;
+let shortHand = /\w+/;
+let numbers = "42";
+let varNames = "important_var";
+longHand.test(numbers); // Returns true
+shortHand.test(numbers); // Returns true
+longHand.test(varNames); // Returns true
+shortHand.test(varNames); // Returns true
+```
 
-You can also search for more than just two patterns. You can do this by adding more patterns with more `OR` operators separating them, like `/yes|no|maybe/`.
+These shortcut character classes are also known as <dfn>shorthand character classes</dfn>.
 
 # --instructions--
 
-Complete the regex `petRegex` to match the pets `"dog"`, `"cat"`, `"bird"`, or `"fish"`.
+Use the shorthand character class `\w` to count the number of alphanumeric characters in various quotes and strings.
 
 # --hints--
 
-Your regex `petRegex` should return `true` for the string `"John has a pet dog."`
+Your regex should use the global flag.
 
 ```js
-assert(petRegex.test('John has a pet dog.'));
+assert(alphabetRegexV2.global);
 ```
 
-Your regex `petRegex` should return `false` for the string `"Emma has a pet rock."`
+Your regex should use the shorthand character `\w` to match all characters which are alphanumeric.
 
 ```js
-assert(!petRegex.test('Emma has a pet rock.'));
+assert(/\\w/.test(alphabetRegexV2.source));
 ```
 
-Your regex `petRegex` should return `true` for the string `"Emma has a pet bird."`
+Your regex should find 31 alphanumeric characters in `"The five boxing wizards jump quickly."`
 
 ```js
-assert(petRegex.test('Emma has a pet bird.'));
+assert(
+  'The five boxing wizards jump quickly.'.match(alphabetRegexV2).length === 31
+);
 ```
 
-Your regex `petRegex` should return `true` for the string `"Liz has a pet cat."`
+Your regex should find 32 alphanumeric characters in `"Pack my box with five dozen liquor jugs."`
 
 ```js
-assert(petRegex.test('Liz has a pet cat.'));
+assert(
+  'Pack my box with five dozen liquor jugs.'.match(alphabetRegexV2).length ===
+    32
+);
 ```
 
-Your regex `petRegex` should return `false` for the string `"Kara has a pet dolphin."`
+Your regex should find 30 alphanumeric characters in `"How vexingly quick daft zebras jump!"`
 
 ```js
-assert(!petRegex.test('Kara has a pet dolphin.'));
+assert(
+  'How vexingly quick daft zebras jump!'.match(alphabetRegexV2).length === 30
+);
 ```
 
-Your regex `petRegex` should return `true` for the string `"Alice has a pet fish."`
+Your regex should find 36 alphanumeric characters in `"123 456 7890 ABC def GHI jkl MNO pqr STU vwx YZ."`
 
 ```js
-assert(petRegex.test('Alice has a pet fish.'));
-```
-
-Your regex `petRegex` should return `false` for the string `"Jimmy has a pet computer."`
-
-```js
-assert(!petRegex.test('Jimmy has a pet computer.'));
+assert(
+  '123 456 7890 ABC def GHI jkl MNO pqr STU vwx YZ.'.match(alphabetRegexV2)
+    .length === 36
+);
 ```
 
 # --seed--
@@ -69,15 +82,15 @@ assert(!petRegex.test('Jimmy has a pet computer.'));
 ## --seed-contents--
 
 ```js
-let petString = "James has a pet cat.";
-let petRegex = /change/; // Change this line
-let result = petRegex.test(petString);
+let quoteSample = "The five boxing wizards jump quickly.";
+let alphabetRegexV2 = /change/; // Change this line
+let result = quoteSample.match(alphabetRegexV2).length;
 ```
 
 # --solutions--
 
 ```js
-let petString = "James has a pet cat.";
-let petRegex = /dog|cat|bird|fish/; // Change this line
-let result = petRegex.test(petString);
+let quoteSample = "The five boxing wizards jump quickly.";
+let alphabetRegexV2 = /\w/g; // Change this line
+let result = quoteSample.match(alphabetRegexV2).length;
 ```
