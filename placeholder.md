@@ -1,67 +1,94 @@
 ---
-id: 587d7db4367417b2b2512b93
-title: Find More Than the First Match
+id: 587d7db7367417b2b2512b9c
+title: Find One or More Criminals in a Hunt
 challengeType: 1
-forumTopicId: 301342
-dashedName: find-more-than-the-first-match
+forumTopicId: 301343
+dashedName: find-one-or-more-criminals-in-a-hunt
 ---
 
 # --description--
 
-So far, you have only been able to extract or search a pattern once.
+Time to pause and test your new regex writing skills. A group of criminals escaped from jail and ran away, but you don't know how many. However, you do know that they stay close together when they are around other people. You are responsible for finding all of the criminals at once.
+
+Here's an example to review how to do this:
+
+The regex `/z+/` matches the letter `z` when it appears one or more times in a row. It would find matches in all of the following strings:
 
 ```js
-let testStr = "Repeat, Repeat, Repeat";
-let ourRegex = /Repeat/;
-testStr.match(ourRegex);
-// Returns ["Repeat"]
+"z"
+"zzzzzz"
+"ABCzzzz"
+"zzzzABC"
+"abczzzzzzzzzzzzzzzzzzzzzabc"
 ```
 
-To search or extract a pattern more than once, you can use the `g` flag.
+But it does not find matches in the following strings since there are no letter `z` characters:
 
 ```js
-let repeatRegex = /Repeat/g;
-testStr.match(repeatRegex);
-// Returns ["Repeat", "Repeat", "Repeat"]
+""
+"ABC"
+"abcabc"
 ```
 
 # --instructions--
 
-Using the regex `starRegex`, find and extract both `"Twinkle"` words from the string `twinkleStar`.
-
-**Note**  
-You can have multiple flags on your regex like `/search/gi`
+Write a greedy regex that finds one or more criminals within a group of other people. A criminal is represented by the capital letter `C`.
 
 # --hints--
 
-Your regex `starRegex` should use the global flag `g`
+Your regex should match one criminal (`C`) in `"C"`
 
 ```js
-assert(starRegex.flags.match(/g/).length == 1);
+assert('C'.match(reCriminals) && 'C'.match(reCriminals)[0] == 'C');
 ```
 
-Your regex `starRegex` should use the case insensitive flag `i`
+Your regex should match two criminals (`CC`) in `"CC"`
 
 ```js
-assert(starRegex.flags.match(/i/).length == 1);
+assert('CC'.match(reCriminals) && 'CC'.match(reCriminals)[0] == 'CC');
 ```
 
-Your match should match both occurrences of the word `"Twinkle"`
+Your regex should match three criminals (`CCC`) in `"P1P5P4CCCP2P6P3"`
 
 ```js
 assert(
-  result.sort().join() ==
-    twinkleStar
-      .match(/twinkle/gi)
-      .sort()
-      .join()
+  'P1P5P4CCCP2P6P3'.match(reCriminals) &&
+    'P1P5P4CCCP2P6P3'.match(reCriminals)[0] == 'CCC'
 );
 ```
 
-Your match `result` should have two elements in it.
+Your regex should match five criminals (`CCCCC`) in `"P6P2P7P4P5CCCCCP3P1"`
 
 ```js
-assert(result.length == 2);
+assert(
+  'P6P2P7P4P5CCCCCP3P1'.match(reCriminals) &&
+    'P6P2P7P4P5CCCCCP3P1'.match(reCriminals)[0] == 'CCCCC'
+);
+```
+
+Your regex should not match any criminals in `""`
+
+```js
+assert(!reCriminals.test(''));
+```
+
+Your regex should not match any criminals in `"P1P2P3"`
+
+```js
+assert(!reCriminals.test('P1P2P3'));
+```
+
+Your regex should match fifty criminals (`CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC`) in `"P2P1P5P4CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCP3"`.
+
+```js
+assert(
+  'P2P1P5P4CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCP3'.match(
+    reCriminals
+  ) &&
+    'P2P1P5P4CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCP3'.match(
+      reCriminals
+    )[0] == 'CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC'
+);
 ```
 
 # --seed--
@@ -69,15 +96,11 @@ assert(result.length == 2);
 ## --seed-contents--
 
 ```js
-let twinkleStar = "Twinkle, twinkle, little star";
-let starRegex = /change/; // Change this line
-let result = twinkleStar; // Change this line
+let reCriminals = /./; // Change this line
 ```
 
 # --solutions--
 
 ```js
-let twinkleStar = "Twinkle, twinkle, little star";
-let starRegex = /twinkle/gi;
-let result = twinkleStar.match(starRegex);
+let reCriminals = /C+/; // Change this line
 ```
