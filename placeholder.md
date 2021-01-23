@@ -1,45 +1,51 @@
 ---
-id: 587d7dad367417b2b2512b75
-title: Create a Method on an Object
+id: 587d7dad367417b2b2512b77
+title: Define a Constructor Function
 challengeType: 1
-forumTopicId: 301318
-dashedName: create-a-method-on-an-object
+forumTopicId: 16804
+dashedName: define-a-constructor-function
 ---
 
 # --description--
 
-Objects can have a special type of property, called a <dfn>method</dfn>.
+<dfn>Constructors</dfn> are functions that create new objects. They define properties and behaviors that will belong to the new object. Think of them as a blueprint for the creation of new objects.
 
-Methods are properties that are functions. This adds different behavior to an object. Here is the `duck` example with a method:
+Here is an example of a constructor:
 
 ```js
-let duck = {
-  name: "Aflac",
-  numLegs: 2,
-  sayName: function() {return "The name of this duck is " + duck.name + ".";}
-};
-duck.sayName();
-// Returns "The name of this duck is Aflac."
+function Bird() {
+  this.name = "Albert";
+  this.color = "blue";
+  this.numLegs = 2;
+}
 ```
 
-The example adds the `sayName` method, which is a function that returns a sentence giving the name of the `duck`. Notice that the method accessed the `name` property in the return statement using `duck.name`. The next challenge will cover another way to do this.
+This constructor defines a `Bird` object with properties `name`, `color`, and `numLegs` set to Albert, blue, and 2, respectively. Constructors follow a few conventions:
+
+<ul><li>Constructors are defined with a capitalized name to distinguish them from other functions that are not <code>constructors</code>.</li><li>Constructors use the keyword <code>this</code> to set properties of the object they will create. Inside the constructor, <code>this</code> refers to the new object it will create.</li><li>Constructors define properties and behaviors instead of returning a value as other functions might.</li></ul>
 
 # --instructions--
 
-Using the `dog` object, give it a method called `sayLegs`. The method should return the sentence "This dog has 4 legs."
+Create a constructor, `Dog`, with properties `name`, `color`, and `numLegs` that are set to a string, a string, and a number, respectively.
 
 # --hints--
 
-`dog.sayLegs()` should be a function.
+`Dog` should have a `name` property set to a string.
 
 ```js
-assert(typeof dog.sayLegs === 'function');
+assert(typeof new Dog().name === 'string');
 ```
 
-`dog.sayLegs()` should return the given string - note that punctuation and spacing matter.
+`Dog` should have a `color` property set to a string.
 
 ```js
-assert(dog.sayLegs() === 'This dog has 4 legs.');
+assert(typeof new Dog().color === 'string');
+```
+
+`Dog` should have a `numLegs` property set to a number.
+
+```js
+assert(typeof new Dog().numLegs === 'number');
 ```
 
 # --seed--
@@ -47,25 +53,14 @@ assert(dog.sayLegs() === 'This dog has 4 legs.');
 ## --seed-contents--
 
 ```js
-let dog = {
-  name: "Spot",
-  numLegs: 4,
-
-};
-
-dog.sayLegs();
 ```
 
 # --solutions--
 
 ```js
-let dog = {
-  name: "Spot",
-  numLegs: 4,
-  sayLegs () {
-    return 'This dog has ' + this.numLegs + ' legs.';
-  }
-};
-
-dog.sayLegs();
+function Dog (name, color, numLegs) {
+  this.name = 'name';
+  this.color = 'color';
+  this.numLegs = 4;
+}
 ```
