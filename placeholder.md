@@ -1,83 +1,67 @@
 ---
-id: 587d7db4367417b2b2512b91
-title: Ignore Case While Matching
+id: 587d7db4367417b2b2512b90
+title: Match a Literal String with Different Possibilities
 challengeType: 1
-forumTopicId: 301344
-dashedName: ignore-case-while-matching
+forumTopicId: 301345
+dashedName: match-a-literal-string-with-different-possibilities
 ---
 
 # --description--
 
-Up until now, you've looked at regexes to do literal matches of strings. But sometimes, you might want to also match case differences.
+Using regexes like `/coding/`, you can look for the pattern `"coding"` in another string.
 
-Case (or sometimes letter case) is the difference between uppercase letters and lowercase letters. Examples of uppercase are `"A"`, `"B"`, and `"C"`. Examples of lowercase are `"a"`, `"b"`, and `"c"`.
+This is powerful to search single strings, but it's limited to only one pattern. You can search for multiple patterns using the `alternation` or `OR` operator: `|`.
 
-You can match both cases using what is called a flag. There are other flags but here you'll focus on the flag that ignores case - the `i` flag. You can use it by appending it to the regex. An example of using this flag is `/ignorecase/i`. This regex can match the strings `"ignorecase"`, `"igNoreCase"`, and `"IgnoreCase"`.
+This operator matches patterns either before or after it. For example, if you wanted to match `"yes"` or `"no"`, the regex you want is `/yes|no/`.
+
+You can also search for more than just two patterns. You can do this by adding more patterns with more `OR` operators separating them, like `/yes|no|maybe/`.
 
 # --instructions--
 
-Write a regex `fccRegex` to match `"freeCodeCamp"`, no matter its case. Your regex should not match any abbreviations or variations with spaces.
+Complete the regex `petRegex` to match the pets `"dog"`, `"cat"`, `"bird"`, or `"fish"`.
 
 # --hints--
 
-Your regex should match `freeCodeCamp`
+Your regex `petRegex` should return `true` for the string `"John has a pet dog."`
 
 ```js
-assert(fccRegex.test('freeCodeCamp'));
+assert(petRegex.test('John has a pet dog.'));
 ```
 
-Your regex should match `FreeCodeCamp`
+Your regex `petRegex` should return `false` for the string `"Emma has a pet rock."`
 
 ```js
-assert(fccRegex.test('FreeCodeCamp'));
+assert(!petRegex.test('Emma has a pet rock.'));
 ```
 
-Your regex should match `FreecodeCamp`
+Your regex `petRegex` should return `true` for the string `"Emma has a pet bird."`
 
 ```js
-assert(fccRegex.test('FreecodeCamp'));
+assert(petRegex.test('Emma has a pet bird.'));
 ```
 
-Your regex should match `FreeCodecamp`
+Your regex `petRegex` should return `true` for the string `"Liz has a pet cat."`
 
 ```js
-assert(fccRegex.test('FreeCodecamp'));
+assert(petRegex.test('Liz has a pet cat.'));
 ```
 
-Your regex should not match `Free Code Camp`
+Your regex `petRegex` should return `false` for the string `"Kara has a pet dolphin."`
 
 ```js
-assert(!fccRegex.test('Free Code Camp'));
+assert(!petRegex.test('Kara has a pet dolphin.'));
 ```
 
-Your regex should match `FreeCOdeCamp`
+Your regex `petRegex` should return `true` for the string `"Alice has a pet fish."`
 
 ```js
-assert(fccRegex.test('FreeCOdeCamp'));
+assert(petRegex.test('Alice has a pet fish.'));
 ```
 
-Your regex should not match `FCC`
+Your regex `petRegex` should return `false` for the string `"Jimmy has a pet computer."`
 
 ```js
-assert(!fccRegex.test('FCC'));
-```
-
-Your regex should match `FrEeCoDeCamp`
-
-```js
-assert(fccRegex.test('FrEeCoDeCamp'));
-```
-
-Your regex should match `FrEeCodECamp`
-
-```js
-assert(fccRegex.test('FrEeCodECamp'));
-```
-
-Your regex should match `FReeCodeCAmp`
-
-```js
-assert(fccRegex.test('FReeCodeCAmp'));
+assert(!petRegex.test('Jimmy has a pet computer.'));
 ```
 
 # --seed--
@@ -85,15 +69,15 @@ assert(fccRegex.test('FReeCodeCAmp'));
 ## --seed-contents--
 
 ```js
-let myString = "freeCodeCamp";
-let fccRegex = /change/; // Change this line
-let result = fccRegex.test(myString);
+let petString = "James has a pet cat.";
+let petRegex = /change/; // Change this line
+let result = petRegex.test(petString);
 ```
 
 # --solutions--
 
 ```js
-let myString = "freeCodeCamp";
-let fccRegex = /freecodecamp/i; // Change this line
-let result = fccRegex.test(myString);
+let petString = "James has a pet cat.";
+let petRegex = /dog|cat|bird|fish/; // Change this line
+let result = petRegex.test(petString);
 ```
