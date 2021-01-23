@@ -1,42 +1,80 @@
 ---
-id: 587d7dac367417b2b2512b74
-title: Use Dot Notation to Access the Properties of an Object
+id: 587d7db0367417b2b2512b83
+title: Use Inheritance So You Don't Repeat Yourself
 challengeType: 1
-forumTopicId: 301333
-dashedName: use-dot-notation-to-access-the-properties-of-an-object
+forumTopicId: 301334
+dashedName: use-inheritance-so-you-dont-repeat-yourself
 ---
 
 # --description--
 
-The last challenge created an object with various properties. Now you'll see how to access the values of those properties. Here's an example:
+There's a principle in programming called <dfn>Don't Repeat Yourself (DRY)</dfn>. The reason repeated code is a problem is because any change requires fixing code in multiple places. This usually means more work for programmers and more room for errors.
+
+Notice in the example below that the `describe` method is shared by `Bird` and `Dog`:
 
 ```js
-let duck = {
-  name: "Aflac",
-  numLegs: 2
+Bird.prototype = {
+  constructor: Bird,
+  describe: function() {
+    console.log("My name is " + this.name);
+  }
 };
-console.log(duck.name);
-// This prints "Aflac" to the console
+
+Dog.prototype = {
+  constructor: Dog,
+  describe: function() {
+    console.log("My name is " + this.name);
+  }
+};
 ```
 
-Dot notation is used on the object name, `duck`, followed by the name of the property, `name`, to access the value of "Aflac".
+The `describe` method is repeated in two places. The code can be edited to follow the DRY principle by creating a `supertype` (or parent) called `Animal`:
+
+```js
+function Animal() { };
+
+Animal.prototype = {
+  constructor: Animal, 
+  describe: function() {
+    console.log("My name is " + this.name);
+  }
+};
+```
+
+Since `Animal` includes the `describe` method, you can remove it from `Bird` and `Dog`:
+
+```js
+Bird.prototype = {
+  constructor: Bird
+};
+
+Dog.prototype = {
+  constructor: Dog
+};
+```
 
 # --instructions--
 
-Print both properties of the `dog` object to your console.
+The `eat` method is repeated in both `Cat` and `Bear`. Edit the code in the spirit of DRY by moving the `eat` method to the `Animal` `supertype`.
 
 # --hints--
 
-Your code should use `console.log` to print the value for the `name` property of the `dog` object.
+`Animal.prototype` should have the `eat` property.
 
 ```js
-assert(/console.log\(.*dog\.name.*\)/g.test(code));
+assert(Animal.prototype.hasOwnProperty('eat'));
 ```
 
-Your code should use `console.log` to print the value for the `numLegs` property of the `dog` object.
+`Bear.prototype` should not have the `eat` property.
 
 ```js
-assert(/console.log\(.*dog\.numLegs.*\)/g.test(code));
+assert(!Bear.prototype.hasOwnProperty('eat'));
+```
+
+`Cat.prototype` should not have the `eat` property.
+
+```js
+assert(!Cat.prototype.hasOwnProperty('eat'));
 ```
 
 # --seed--
@@ -44,20 +82,61 @@ assert(/console.log\(.*dog\.numLegs.*\)/g.test(code));
 ## --seed-contents--
 
 ```js
-let dog = {
-  name: "Spot",
-  numLegs: 4
+function Cat(name) {
+  this.name = name;
+}
+
+Cat.prototype = {
+  constructor: Cat,
+  eat: function() {
+    console.log("nom nom nom");
+  }
 };
-// Only change code below this line
+
+function Bear(name) {
+  this.name = name;
+}
+
+Bear.prototype = {
+  constructor: Bear,
+  eat: function() {
+    console.log("nom nom nom");
+  }
+};
+
+function Animal() { }
+
+Animal.prototype = {
+  constructor: Animal,
+
+};
 ```
 
 # --solutions--
 
 ```js
-let dog = {
-  name: "Spot",
-  numLegs: 4
+function Cat(name) {
+  this.name = name;
+}
+
+Cat.prototype = {
+  constructor: Cat
 };
-console.log(dog.name);
-console.log(dog.numLegs);
+
+function Bear(name) {
+  this.name = name;
+}
+
+Bear.prototype = {
+  constructor: Bear
+};
+
+function Animal() { }
+
+Animal.prototype = {
+  constructor: Animal,
+  eat: function() {
+    console.log("nom nom nom");
+  }
+};
 ```
