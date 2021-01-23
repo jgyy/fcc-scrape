@@ -1,40 +1,57 @@
 ---
-id: 587d7db0367417b2b2512b81
-title: Understand Where an Object’s Prototype Comes From
+id: 587d7dad367417b2b2512b78
+title: Use a Constructor to Create Objects
 challengeType: 1
-forumTopicId: 301330
-dashedName: understand-where-an-objects-prototype-comes-from
+forumTopicId: 18233
+dashedName: use-a-constructor-to-create-objects
 ---
 
 # --description--
 
-Just like people inherit genes from their parents, an object inherits its `prototype` directly from the constructor function that created it. For example, here the `Bird` constructor creates the `duck` object:
+Here's the `Bird` constructor from the previous challenge:
 
 ```js
-function Bird(name) {
-  this.name = name;
+function Bird() {
+  this.name = "Albert";
+  this.color  = "blue";
+  this.numLegs = 2;
+  // "this" inside the constructor always refers to the object being created
 }
 
-let duck = new Bird("Donald");
+let blueBird = new Bird();
 ```
 
-`duck` inherits its `prototype` from the `Bird` constructor function. You can show this relationship with the `isPrototypeOf` method:
+Notice that the `new` operator is used when calling a constructor. This tells JavaScript to create a new instance of `Bird` called `blueBird`. Without the `new` operator, `this` inside the constructor would not point to the newly created object, giving unexpected results. Now `blueBird` has all the properties defined inside the `Bird` constructor:
 
 ```js
-Bird.prototype.isPrototypeOf(duck);
-// returns true
+blueBird.name; // => Albert
+blueBird.color; // => blue
+blueBird.numLegs; // => 2
+```
+
+Just like any other object, its properties can be accessed and modified:
+
+```js
+blueBird.name = 'Elvira';
+blueBird.name; // => Elvira
 ```
 
 # --instructions--
 
-Use `isPrototypeOf` to check the `prototype` of `beagle`.
+Use the `Dog` constructor from the last lesson to create a new instance of `Dog`, assigning it to a variable `hound`.
 
 # --hints--
 
-You should show that `Dog.prototype` is the `prototype` of `beagle`
+`hound` should be created using the `Dog` constructor.
 
 ```js
-assert(/Dog\.prototype\.isPrototypeOf\(beagle\)/.test(code));
+assert(hound instanceof Dog);
+```
+
+Your code should use the `new` operator to create an instance of `Dog`.
+
+```js
+assert(code.match(/new/g));
 ```
 
 # --seed--
@@ -42,21 +59,21 @@ assert(/Dog\.prototype\.isPrototypeOf\(beagle\)/.test(code));
 ## --seed-contents--
 
 ```js
-function Dog(name) {
-  this.name = name;
+function Dog() {
+  this.name = "Rupert";
+  this.color = "brown";
+  this.numLegs = 4;
 }
-
-let beagle = new Dog("Snoopy");
-
 // Only change code below this line
 ```
 
 # --solutions--
 
 ```js
-function Dog(name) {
-  this.name = name;
+function Dog() {
+  this.name = "Rupert";
+  this.color = "brown";
+  this.numLegs = 4;
 }
-let beagle = new Dog("Snoopy");
-Dog.prototype.isPrototypeOf(beagle);
+const hound = new Dog();
 ```
