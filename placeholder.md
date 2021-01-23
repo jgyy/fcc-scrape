@@ -1,40 +1,65 @@
 ---
-id: 587d7db1367417b2b2512b85
-title: Set the Child's Prototype to an Instance of the Parent
+id: 587d7dae367417b2b2512b7b
+title: Understand Own Properties
 challengeType: 1
-forumTopicId: 301325
-dashedName: set-the-childs-prototype-to-an-instance-of-the-parent
+forumTopicId: 301326
+dashedName: understand-own-properties
 ---
 
 # --description--
 
-In the previous challenge you saw the first step for inheriting behavior from the supertype (or parent) `Animal`: making a new instance of `Animal`.
-
-This challenge covers the next step: set the `prototype` of the subtype (or child)—in this case, `Bird`—to be an instance of `Animal`.
+In the following example, the `Bird` constructor defines two properties: `name` and `numLegs`:
 
 ```js
-Bird.prototype = Object.create(Animal.prototype);
-```
+function Bird(name) {
+  this.name  = name;
+  this.numLegs = 2;
+}
 
-Remember that the `prototype` is like the "recipe" for creating an object. In a way, the recipe for `Bird` now includes all the key "ingredients" from `Animal`.
-
-```js
 let duck = new Bird("Donald");
-duck.eat(); // prints "nom nom nom"
+let canary = new Bird("Tweety");
 ```
 
-`duck` inherits all of `Animal`'s properties, including the `eat` method.
+`name` and `numLegs` are called `own` properties, because they are defined directly on the instance object. That means that `duck` and `canary` each has its own separate copy of these properties. In fact every instance of `Bird` will have its own copy of these properties. The following code adds all of the `own` properties of `duck` to the array `ownProps`:
+
+```js
+let ownProps = [];
+
+for (let property in duck) {
+  if(duck.hasOwnProperty(property)) {
+    ownProps.push(property);
+  }
+}
+
+console.log(ownProps); // prints [ "name", "numLegs" ]
+```
 
 # --instructions--
 
-Modify the code so that instances of `Dog` inherit from `Animal`.
+Add the `own` properties of `canary` to the array `ownProps`.
 
 # --hints--
 
-`Dog.prototype` should be an instance of `Animal`.
+`ownProps` should include the values `"numLegs"` and `"name"`.
 
 ```js
-assert(Animal.prototype.isPrototypeOf(Dog.prototype));
+assert(ownProps.indexOf('name') !== -1 && ownProps.indexOf('numLegs') !== -1);
+```
+
+You should solve this challenge without using the built in method `Object.keys()`.
+
+```js
+assert(!/Object(\.keys|\[(['"`])keys\2\])/.test(code));
+```
+
+You should solve this challenge without hardcoding the `ownProps` array.
+
+```js
+assert(
+  !/\[\s*(?:'|")(?:name|numLegs)|(?:push|concat)\(\s*(?:'|")(?:name|numLegs)/.test(
+    code
+  )
+);
 ```
 
 # --seed--
@@ -42,38 +67,36 @@ assert(Animal.prototype.isPrototypeOf(Dog.prototype));
 ## --seed-contents--
 
 ```js
-function Animal() { }
+function Bird(name) {
+  this.name = name;
+  this.numLegs = 2;
+}
 
-Animal.prototype = {
-  constructor: Animal,
-  eat: function() {
-    console.log("nom nom nom");
-  }
-};
-
-function Dog() { }
-
+let canary = new Bird("Tweety");
+let ownProps = [];
 // Only change code below this line
-
-
-let beagle = new Dog();
 ```
 
 # --solutions--
 
 ```js
-function Animal() { }
+function Bird(name) {
+  this.name = name;
+  this.numLegs = 2;
+}
 
-Animal.prototype = {
-  constructor: Animal,
-  eat: function() {
-    console.log("nom nom nom");
+let canary = new Bird("Tweety");
+function getOwnProps (obj) {
+  const props = [];
+
+  for (let prop in obj) {
+    if (obj.hasOwnProperty(prop)) {
+      props.push(prop);
+    }
   }
-};
 
-function Dog() { }
-Dog.prototype = Object.create(Animal.prototype);
+  return props;
+}
 
-let beagle = new Dog();
-beagle.eat();
+const ownProps = getOwnProps(canary);
 ```
