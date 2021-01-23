@@ -1,94 +1,83 @@
 ---
-id: 587d7db7367417b2b2512b9c
-title: Find One or More Criminals in a Hunt
+id: 587d7db4367417b2b2512b91
+title: Ignore Case While Matching
 challengeType: 1
-forumTopicId: 301343
-dashedName: find-one-or-more-criminals-in-a-hunt
+forumTopicId: 301344
+dashedName: ignore-case-while-matching
 ---
 
 # --description--
 
-Time to pause and test your new regex writing skills. A group of criminals escaped from jail and ran away, but you don't know how many. However, you do know that they stay close together when they are around other people. You are responsible for finding all of the criminals at once.
+Up until now, you've looked at regexes to do literal matches of strings. But sometimes, you might want to also match case differences.
 
-Here's an example to review how to do this:
+Case (or sometimes letter case) is the difference between uppercase letters and lowercase letters. Examples of uppercase are `"A"`, `"B"`, and `"C"`. Examples of lowercase are `"a"`, `"b"`, and `"c"`.
 
-The regex `/z+/` matches the letter `z` when it appears one or more times in a row. It would find matches in all of the following strings:
-
-```js
-"z"
-"zzzzzz"
-"ABCzzzz"
-"zzzzABC"
-"abczzzzzzzzzzzzzzzzzzzzzabc"
-```
-
-But it does not find matches in the following strings since there are no letter `z` characters:
-
-```js
-""
-"ABC"
-"abcabc"
-```
+You can match both cases using what is called a flag. There are other flags but here you'll focus on the flag that ignores case - the `i` flag. You can use it by appending it to the regex. An example of using this flag is `/ignorecase/i`. This regex can match the strings `"ignorecase"`, `"igNoreCase"`, and `"IgnoreCase"`.
 
 # --instructions--
 
-Write a greedy regex that finds one or more criminals within a group of other people. A criminal is represented by the capital letter `C`.
+Write a regex `fccRegex` to match `"freeCodeCamp"`, no matter its case. Your regex should not match any abbreviations or variations with spaces.
 
 # --hints--
 
-Your regex should match one criminal (`C`) in `"C"`
+Your regex should match `freeCodeCamp`
 
 ```js
-assert('C'.match(reCriminals) && 'C'.match(reCriminals)[0] == 'C');
+assert(fccRegex.test('freeCodeCamp'));
 ```
 
-Your regex should match two criminals (`CC`) in `"CC"`
+Your regex should match `FreeCodeCamp`
 
 ```js
-assert('CC'.match(reCriminals) && 'CC'.match(reCriminals)[0] == 'CC');
+assert(fccRegex.test('FreeCodeCamp'));
 ```
 
-Your regex should match three criminals (`CCC`) in `"P1P5P4CCCP2P6P3"`
+Your regex should match `FreecodeCamp`
 
 ```js
-assert(
-  'P1P5P4CCCP2P6P3'.match(reCriminals) &&
-    'P1P5P4CCCP2P6P3'.match(reCriminals)[0] == 'CCC'
-);
+assert(fccRegex.test('FreecodeCamp'));
 ```
 
-Your regex should match five criminals (`CCCCC`) in `"P6P2P7P4P5CCCCCP3P1"`
+Your regex should match `FreeCodecamp`
 
 ```js
-assert(
-  'P6P2P7P4P5CCCCCP3P1'.match(reCriminals) &&
-    'P6P2P7P4P5CCCCCP3P1'.match(reCriminals)[0] == 'CCCCC'
-);
+assert(fccRegex.test('FreeCodecamp'));
 ```
 
-Your regex should not match any criminals in `""`
+Your regex should not match `Free Code Camp`
 
 ```js
-assert(!reCriminals.test(''));
+assert(!fccRegex.test('Free Code Camp'));
 ```
 
-Your regex should not match any criminals in `"P1P2P3"`
+Your regex should match `FreeCOdeCamp`
 
 ```js
-assert(!reCriminals.test('P1P2P3'));
+assert(fccRegex.test('FreeCOdeCamp'));
 ```
 
-Your regex should match fifty criminals (`CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC`) in `"P2P1P5P4CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCP3"`.
+Your regex should not match `FCC`
 
 ```js
-assert(
-  'P2P1P5P4CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCP3'.match(
-    reCriminals
-  ) &&
-    'P2P1P5P4CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCP3'.match(
-      reCriminals
-    )[0] == 'CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC'
-);
+assert(!fccRegex.test('FCC'));
+```
+
+Your regex should match `FrEeCoDeCamp`
+
+```js
+assert(fccRegex.test('FrEeCoDeCamp'));
+```
+
+Your regex should match `FrEeCodECamp`
+
+```js
+assert(fccRegex.test('FrEeCodECamp'));
+```
+
+Your regex should match `FReeCodeCAmp`
+
+```js
+assert(fccRegex.test('FReeCodeCAmp'));
 ```
 
 # --seed--
@@ -96,11 +85,15 @@ assert(
 ## --seed-contents--
 
 ```js
-let reCriminals = /./; // Change this line
+let myString = "freeCodeCamp";
+let fccRegex = /change/; // Change this line
+let result = fccRegex.test(myString);
 ```
 
 # --solutions--
 
 ```js
-let reCriminals = /C+/; // Change this line
+let myString = "freeCodeCamp";
+let fccRegex = /freecodecamp/i; // Change this line
+let result = fccRegex.test(myString);
 ```
