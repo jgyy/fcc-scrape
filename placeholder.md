@@ -1,46 +1,67 @@
 ---
-id: 587d7db6367417b2b2512b9b
-title: Find Characters with Lazy Matching
+id: 587d7db4367417b2b2512b93
+title: Find More Than the First Match
 challengeType: 1
-forumTopicId: 301341
-dashedName: find-characters-with-lazy-matching
+forumTopicId: 301342
+dashedName: find-more-than-the-first-match
 ---
 
 # --description--
 
-In regular expressions, a <dfn>greedy</dfn> match finds the longest possible part of a string that fits the regex pattern and returns it as a match. The alternative is called a <dfn>lazy</dfn> match, which finds the smallest possible part of the string that satisfies the regex pattern.
+So far, you have only been able to extract or search a pattern once.
 
-You can apply the regex `/t[a-z]*i/` to the string `"titanic"`. This regex is basically a pattern that starts with `t`, ends with `i`, and has some letters in between.
+```js
+let testStr = "Repeat, Repeat, Repeat";
+let ourRegex = /Repeat/;
+testStr.match(ourRegex);
+// Returns ["Repeat"]
+```
 
-Regular expressions are by default greedy, so the match would return `["titani"]`. It finds the largest sub-string possible to fit the pattern.
+To search or extract a pattern more than once, you can use the `g` flag.
 
-However, you can use the `?` character to change it to lazy matching. `"titanic"` matched against the adjusted regex of `/t[a-z]*?i/` returns `["ti"]`.
-
-**Note**  
-Parsing HTML with regular expressions should be avoided, but pattern matching an HTML string with regular expressions is completely fine.
+```js
+let repeatRegex = /Repeat/g;
+testStr.match(repeatRegex);
+// Returns ["Repeat", "Repeat", "Repeat"]
+```
 
 # --instructions--
 
-Fix the regex `/<.*>/` to return the HTML tag `<h1>` and not the text `"<h1>Winter is coming</h1>"`. Remember the wildcard `.` in a regular expression matches any character.
+Using the regex `starRegex`, find and extract both `"Twinkle"` words from the string `twinkleStar`.
+
+**Note**  
+You can have multiple flags on your regex like `/search/gi`
 
 # --hints--
 
-The `result` variable should be an array with `<h1>` in it
+Your regex `starRegex` should use the global flag `g`
 
 ```js
-assert(result[0] == '<h1>');
+assert(starRegex.flags.match(/g/).length == 1);
 ```
 
-`myRegex` should use lazy matching
+Your regex `starRegex` should use the case insensitive flag `i`
 
 ```js
-assert(/\?/g.test(myRegex));
+assert(starRegex.flags.match(/i/).length == 1);
 ```
 
-`myRegex` should not include the string 'h1'
+Your match should match both occurrences of the word `"Twinkle"`
 
 ```js
-assert(!myRegex.source.match('h1'));
+assert(
+  result.sort().join() ==
+    twinkleStar
+      .match(/twinkle/gi)
+      .sort()
+      .join()
+);
+```
+
+Your match `result` should have two elements in it.
+
+```js
+assert(result.length == 2);
 ```
 
 # --seed--
@@ -48,15 +69,15 @@ assert(!myRegex.source.match('h1'));
 ## --seed-contents--
 
 ```js
-let text = "<h1>Winter is coming</h1>";
-let myRegex = /<.*>/; // Change this line
-let result = text.match(myRegex);
+let twinkleStar = "Twinkle, twinkle, little star";
+let starRegex = /change/; // Change this line
+let result = twinkleStar; // Change this line
 ```
 
 # --solutions--
 
 ```js
-let text = "<h1>Winter is coming</h1>";
-let myRegex = /<.*?>/; // Change this line
-let result = text.match(myRegex);
+let twinkleStar = "Twinkle, twinkle, little star";
+let starRegex = /twinkle/gi;
+let result = twinkleStar.match(starRegex);
 ```
