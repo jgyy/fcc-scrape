@@ -1,66 +1,46 @@
 ---
-id: 587d7db1367417b2b2512b88
-title: Override Inherited Methods
+id: 587d7daf367417b2b2512b80
+title: Remember to Set the Constructor Property when Changing the Prototype
 challengeType: 1
-forumTopicId: 301322
-dashedName: override-inherited-methods
+forumTopicId: 301323
+dashedName: remember-to-set-the-constructor-property-when-changing-the-prototype
 ---
 
 # --description--
 
-In previous lessons, you learned that an object can inherit its behavior (methods) from another object by referencing its `prototype` object:
+There is one crucial side effect of manually setting the prototype to a new object. It erases the `constructor` property! This property can be used to check which constructor function created the instance, but since the property has been overwritten, it now gives false results:
 
 ```js
-ChildObject.prototype = Object.create(ParentObject.prototype);
+duck.constructor === Bird; // false -- Oops
+duck.constructor === Object; // true, all objects inherit from Object.prototype
+duck instanceof Bird; // true, still works
 ```
 
-Then the `ChildObject` received its own methods by chaining them onto its `prototype`:
+To fix this, whenever a prototype is manually set to a new object, remember to define the `constructor` property:
 
 ```js
-ChildObject.prototype.methodName = function() {...};
-```
-
-It's possible to override an inherited method. It's done the same way - by adding a method to `ChildObject.prototype` using the same method name as the one to override. Here's an example of `Bird` overriding the `eat()` method inherited from `Animal`:
-
-```js
-function Animal() { }
-Animal.prototype.eat = function() {
-  return "nom nom nom";
-};
-function Bird() { }
-
-// Inherit all methods from Animal
-Bird.prototype = Object.create(Animal.prototype);
-
-// Bird.eat() overrides Animal.eat()
-Bird.prototype.eat = function() {
-  return "peck peck peck";
+Bird.prototype = {
+  constructor: Bird, // define the constructor property
+  numLegs: 2,
+  eat: function() {
+    console.log("nom nom nom");
+  },
+  describe: function() {
+    console.log("My name is " + this.name); 
+  }
 };
 ```
-
-If you have an instance `let duck = new Bird();` and you call `duck.eat()`, this is how JavaScript looks for the method on `duck’s` `prototype` chain:
-
-1.  duck => Is eat() defined here? No.
-2.  Bird => Is eat() defined here? => Yes. Execute it and stop searching.
-3.  Animal => eat() is also defined, but JavaScript stopped searching before reaching this level.
-4.  Object => JavaScript stopped searching before reaching this level.
 
 # --instructions--
 
-Override the `fly()` method for `Penguin` so that it returns "Alas, this is a flightless bird."
+Define the `constructor` property on the `Dog` `prototype`.
 
 # --hints--
 
-`penguin.fly()` should return the string "Alas, this is a flightless bird."
+`Dog.prototype` should set the `constructor` property.
 
 ```js
-assert(penguin.fly() === 'Alas, this is a flightless bird.');
-```
-
-The `bird.fly()` method should return "I am flying!"
-
-```js
-assert(new Bird().fly() === 'I am flying!');
+assert(Dog.prototype.constructor === Dog);
 ```
 
 # --seed--
@@ -68,35 +48,37 @@ assert(new Bird().fly() === 'I am flying!');
 ## --seed-contents--
 
 ```js
-function Bird() { }
-
-Bird.prototype.fly = function() { return "I am flying!"; };
-
-function Penguin() { }
-Penguin.prototype = Object.create(Bird.prototype);
-Penguin.prototype.constructor = Penguin;
+function Dog(name) {
+  this.name = name;
+}
 
 // Only change code below this line
+Dog.prototype = {
 
-
-
-// Only change code above this line
-
-let penguin = new Penguin();
-console.log(penguin.fly());
+  numLegs: 4,
+  eat: function() {
+    console.log("nom nom nom");
+  },
+  describe: function() {
+    console.log("My name is " + this.name);
+  }
+};
 ```
 
 # --solutions--
 
 ```js
-function Bird() { }
-
-Bird.prototype.fly = function() { return "I am flying!"; };
-
-function Penguin() { }
-Penguin.prototype = Object.create(Bird.prototype);
-Penguin.prototype.constructor = Penguin;
-Penguin.prototype.fly = () => 'Alas, this is a flightless bird.';
-let penguin = new Penguin();
-console.log(penguin.fly());
+function Dog(name) {
+  this.name = name;
+}
+Dog.prototype = {
+  constructor: Dog,
+  numLegs: 4,
+  eat: function() {
+    console.log("nom nom nom");
+  },
+  describe: function() {
+    console.log("My name is " + this.name);
+  }
+};
 ```
