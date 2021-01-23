@@ -1,57 +1,46 @@
 ---
-id: 587d7db4367417b2b2512b92
-title: Extract Matches
+id: 587d7db6367417b2b2512b9b
+title: Find Characters with Lazy Matching
 challengeType: 1
-forumTopicId: 301340
-dashedName: extract-matches
+forumTopicId: 301341
+dashedName: find-characters-with-lazy-matching
 ---
 
 # --description--
 
-So far, you have only been checking if a pattern exists or not within a string. You can also extract the actual matches you found with the `.match()` method.
+In regular expressions, a <dfn>greedy</dfn> match finds the longest possible part of a string that fits the regex pattern and returns it as a match. The alternative is called a <dfn>lazy</dfn> match, which finds the smallest possible part of the string that satisfies the regex pattern.
 
-To use the `.match()` method, apply the method on a string and pass in the regex inside the parentheses.
+You can apply the regex `/t[a-z]*i/` to the string `"titanic"`. This regex is basically a pattern that starts with `t`, ends with `i`, and has some letters in between.
 
-Here's an example:
+Regular expressions are by default greedy, so the match would return `["titani"]`. It finds the largest sub-string possible to fit the pattern.
 
-```js
-"Hello, World!".match(/Hello/);
-// Returns ["Hello"]
-let ourStr = "Regular expressions";
-let ourRegex = /expressions/;
-ourStr.match(ourRegex);
-// Returns ["expressions"]
-```
+However, you can use the `?` character to change it to lazy matching. `"titanic"` matched against the adjusted regex of `/t[a-z]*?i/` returns `["ti"]`.
 
-Note that the `.match` syntax is the "opposite" of the `.test` method you have been using thus far:
-
-```js
-'string'.match(/regex/);
-/regex/.test('string');
-```
+**Note**  
+Parsing HTML with regular expressions should be avoided, but pattern matching an HTML string with regular expressions is completely fine.
 
 # --instructions--
 
-Apply the `.match()` method to extract the word `coding`.
+Fix the regex `/<.*>/` to return the HTML tag `<h1>` and not the text `"<h1>Winter is coming</h1>"`. Remember the wildcard `.` in a regular expression matches any character.
 
 # --hints--
 
-The `result` should have the word `coding`
+The `result` variable should be an array with `<h1>` in it
 
 ```js
-assert(result.join() === 'coding');
+assert(result[0] == '<h1>');
 ```
 
-Your regex `codingRegex` should search for `coding`
+`myRegex` should use lazy matching
 
 ```js
-assert(codingRegex.source === 'coding');
+assert(/\?/g.test(myRegex));
 ```
 
-You should use the `.match()` method.
+`myRegex` should not include the string 'h1'
 
 ```js
-assert(code.match(/\.match\(.*\)/));
+assert(!myRegex.source.match('h1'));
 ```
 
 # --seed--
@@ -59,15 +48,15 @@ assert(code.match(/\.match\(.*\)/));
 ## --seed-contents--
 
 ```js
-let extractStr = "Extract the word 'coding' from this string.";
-let codingRegex = /change/; // Change this line
-let result = extractStr; // Change this line
+let text = "<h1>Winter is coming</h1>";
+let myRegex = /<.*>/; // Change this line
+let result = text.match(myRegex);
 ```
 
 # --solutions--
 
 ```js
-let extractStr = "Extract the word 'coding' from this string.";
-let codingRegex = /coding/; // Change this line
-let result = extractStr.match(codingRegex); // Change this line
+let text = "<h1>Winter is coming</h1>";
+let myRegex = /<.*?>/; // Change this line
+let result = text.match(myRegex);
 ```
