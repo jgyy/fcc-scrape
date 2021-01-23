@@ -1,73 +1,52 @@
 ---
-id: 587d7daf367417b2b2512b7f
-title: Change the Prototype to a New Object
+id: 587d7dac367417b2b2512b73
+title: Create a Basic JavaScript Object
 challengeType: 1
-forumTopicId: 301316
-dashedName: change-the-prototype-to-a-new-object
+forumTopicId: 301317
+dashedName: create-a-basic-javascript-object
 ---
 
 # --description--
 
-Up until now you have been adding properties to the `prototype` individually:
+Think about things people see every day, like cars, shops, and birds. These are all <dfn>objects</dfn>: tangible things people can observe and interact with.
+
+What are some qualities of these objects? A car has wheels. Shops sell items. Birds have wings.
+
+These qualities, or <dfn>properties</dfn>, define what makes up an object. Note that similar objects share the same properties, but may have different values for those properties. For example, all cars have wheels, but not all cars have the same number of wheels.
+
+Objects in JavaScript are used to model real-world objects, giving them properties and behavior just like their real-world counterparts. Here's an example using these concepts to create a `duck` object:
 
 ```js
-Bird.prototype.numLegs = 2;
-```
-
-This becomes tedious after more than a few properties.
-
-```js
-Bird.prototype.eat = function() {
-  console.log("nom nom nom");
-}
-
-Bird.prototype.describe = function() {
-  console.log("My name is " + this.name);
-}
-```
-
-A more efficient way is to set the `prototype` to a new object that already contains the properties. This way, the properties are added all at once:
-
-```js
-Bird.prototype = {
-  numLegs: 2, 
-  eat: function() {
-    console.log("nom nom nom");
-  },
-  describe: function() {
-    console.log("My name is " + this.name);
-  }
+let duck = {
+  name: "Aflac",
+  numLegs: 2
 };
 ```
 
+This `duck` object has two property/value pairs: a `name` of "Aflac" and a `numLegs` of 2.
+
 # --instructions--
 
-Add the property `numLegs` and the two methods `eat()` and `describe()` to the `prototype` of `Dog` by setting the `prototype` to a new object.
+Create a `dog` object with `name` and `numLegs` properties, and set them to a string and a number, respectively.
 
 # --hints--
 
-`Dog.prototype` should be set to a new object.
+`dog` should be an object.
 
 ```js
-assert(/Dog\.prototype\s*?=\s*?{/.test(code));
+assert(typeof dog === 'object');
 ```
 
-`Dog.prototype` should have the property `numLegs`.
+`dog` should have a `name` property set to a `string`.
 
 ```js
-assert(Dog.prototype.numLegs !== undefined);
+assert(typeof dog.name === 'string');
 ```
 
-`Dog.prototype` should have the method `eat()`.
+`dog` should have a `numLegs` property set to a `number`.
 
 ```js
-assert(typeof Dog.prototype.eat === 'function');
-```
-
-`Dog.prototype` should have the method `describe()`.
-
-```js
-assert(typeof Dog.prototype.describe === 'function');
+assert(typeof dog.numLegs === 'number');
 ```
 
 # --seed--
@@ -75,12 +54,7 @@ assert(typeof Dog.prototype.describe === 'function');
 ## --seed-contents--
 
 ```js
-function Dog(name) {
-  this.name = name;
-}
-
-Dog.prototype = {
-  // Only change code below this line
+let dog = {
 
 };
 ```
@@ -88,16 +62,8 @@ Dog.prototype = {
 # --solutions--
 
 ```js
-function Dog(name) {
-  this.name = name;
-}
-Dog.prototype = {
-numLegs: 4,
-  eat () {
-    console.log('nom nom nom');
-  },
-  describe () {
-    console.log('My name is ' + this.name);
-  }
+let dog = {
+  name: '',
+  numLegs: 4
 };
 ```
