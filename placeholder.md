@@ -1,63 +1,42 @@
 ---
-id: 587d7db2367417b2b2512b8a
-title: >-
-  Use Closure to Protect Properties Within an Object from Being Modified
-  Externally
+id: 587d7dac367417b2b2512b74
+title: Use Dot Notation to Access the Properties of an Object
 challengeType: 1
-forumTopicId: 18234
-dashedName: >-
-  use-closure-to-protect-properties-within-an-object-from-being-modified-externally
+forumTopicId: 301333
+dashedName: use-dot-notation-to-access-the-properties-of-an-object
 ---
 
 # --description--
 
-In the previous challenge, `bird` had a public property `name`. It is considered public because it can be accessed and changed outside of `bird`'s definition.
+The last challenge created an object with various properties. Now you'll see how to access the values of those properties. Here's an example:
 
 ```js
-bird.name = "Duffy";
+let duck = {
+  name: "Aflac",
+  numLegs: 2
+};
+console.log(duck.name);
+// This prints "Aflac" to the console
 ```
 
-Therefore, any part of your code can easily change the name of `bird` to any value. Think about things like passwords and bank accounts being easily changeable by any part of your codebase. That could cause a lot of issues.
-
-The simplest way to make this public property private is by creating a variable within the constructor function. This changes the scope of that variable to be within the constructor function versus available globally. This way, the variable can only be accessed and changed by methods also within the constructor function.
-
-```js
-function Bird() {
-  let hatchedEgg = 10; // private variable
-
-  /* publicly available method that a bird object can use */
-  this.getHatchedEggCount = function() { 
-    return hatchedEgg;
-  };
-}
-let ducky = new Bird();
-ducky.getHatchedEggCount(); // returns 10
-```
-
-Here `getHatchedEggCount` is a privileged method, because it has access to the private variable `hatchedEgg`. This is possible because `hatchedEgg` is declared in the same context as `getHatchedEggCount`. In JavaScript, a function always has access to the context in which it was created. This is called `closure`.
+Dot notation is used on the object name, `duck`, followed by the name of the property, `name`, to access the value of "Aflac".
 
 # --instructions--
 
-Change how `weight` is declared in the `Bird` function so it is a private variable. Then, create a method `getWeight` that returns the value of `weight` 15.
+Print both properties of the `dog` object to your console.
 
 # --hints--
 
-The `weight` property should be a private variable and should be assigned the value of `15`.
+Your code should use `console.log` to print the value for the `name` property of the `dog` object.
 
 ```js
-assert(code.match(/(var|let|const)\s+weight\s*\=\s*15\;?/g));
+assert(/console.log\(.*dog\.name.*\)/g.test(code));
 ```
 
-Your code should create a method in `Bird` called `getWeight` that returns the value of the private variable `weight`.
+Your code should use `console.log` to print the value for the `numLegs` property of the `dog` object.
 
 ```js
-assert(new Bird().getWeight() === 15);
-```
-
-Your `getWeight` function should return the private variable `weight`.
-
-```js
-assert(code.match(/((return\s+)|(\(\s*\)\s*\=\>\s*))weight\;?/g));
+assert(/console.log\(.*dog\.numLegs.*\)/g.test(code));
 ```
 
 # --seed--
@@ -65,19 +44,20 @@ assert(code.match(/((return\s+)|(\(\s*\)\s*\=\>\s*))weight\;?/g));
 ## --seed-contents--
 
 ```js
-function Bird() {
-  this.weight = 15;
-
-
-}
+let dog = {
+  name: "Spot",
+  numLegs: 4
+};
+// Only change code below this line
 ```
 
 # --solutions--
 
 ```js
-function Bird() {
-  let weight = 15;
-
-  this.getWeight = () => weight;
-}
+let dog = {
+  name: "Spot",
+  numLegs: 4
+};
+console.log(dog.name);
+console.log(dog.numLegs);
 ```
