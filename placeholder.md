@@ -1,72 +1,57 @@
 ---
-id: 5c3dda8b4d8df89bea71600f
-title: Check For Mixed Grouping of Characters
+id: 587d7db4367417b2b2512b92
+title: Extract Matches
 challengeType: 1
-forumTopicId: 301339
-dashedName: check-for-mixed-grouping-of-characters
+forumTopicId: 301340
+dashedName: extract-matches
 ---
 
 # --description--
 
-Sometimes we want to check for groups of characters using a Regular Expression and to achieve that we use parentheses `()`.
+So far, you have only been checking if a pattern exists or not within a string. You can also extract the actual matches you found with the `.match()` method.
 
-If you want to find either `Penguin` or `Pumpkin` in a string, you can use the following Regular Expression: `/P(engu|umpk)in/g`
+To use the `.match()` method, apply the method on a string and pass in the regex inside the parentheses.
 
-Then check whether the desired string groups are in the test string by using the `test()` method.
+Here's an example:
 
 ```js
-let testStr = "Pumpkin";
-let testRegex = /P(engu|umpk)in/;
-testRegex.test(testStr);
-// Returns true
+"Hello, World!".match(/Hello/);
+// Returns ["Hello"]
+let ourStr = "Regular expressions";
+let ourRegex = /expressions/;
+ourStr.match(ourRegex);
+// Returns ["expressions"]
+```
+
+Note that the `.match` syntax is the "opposite" of the `.test` method you have been using thus far:
+
+```js
+'string'.match(/regex/);
+/regex/.test('string');
 ```
 
 # --instructions--
 
-Fix the regex so that it checks for the names of `Franklin Roosevelt` or `Eleanor Roosevelt` in a case sensitive manner and it should make concessions for middle names.
-
-Then fix the code so that the regex that you have created is checked against `myString` and either `true` or `false` is returned depending on whether the regex matches.
+Apply the `.match()` method to extract the word `coding`.
 
 # --hints--
 
-Your regex `myRegex` should return `true` for the string `Franklin D. Roosevelt`
+The `result` should have the word `coding`
 
 ```js
-myRegex.lastIndex = 0;
-assert(myRegex.test('Franklin D. Roosevelt'));
+assert(result.join() === 'coding');
 ```
 
-Your regex `myRegex` should return `true` for the string `Eleanor Roosevelt`
+Your regex `codingRegex` should search for `coding`
 
 ```js
-myRegex.lastIndex = 0;
-assert(myRegex.test('Eleanor Roosevelt'));
+assert(codingRegex.source === 'coding');
 ```
 
-Your regex `myRegex` should return `false` for the string `Franklin Rosevelt`
+You should use the `.match()` method.
 
 ```js
-myRegex.lastIndex = 0;
-assert(!myRegex.test('Franklin Rosevelt'));
-```
-
-Your regex `myRegex` should return `false` for the string `Frank Roosevelt`
-
-```js
-myRegex.lastIndex = 0;
-assert(!myRegex.test('Frank Roosevelt'));
-```
-
-You should use `.test()` to test the regex.
-
-```js
-assert(code.match(/myRegex.test\(\s*myString\s*\)/));
-```
-
-Your result should return `true`.
-
-```js
-assert(result === true);
+assert(code.match(/\.match\(.*\)/));
 ```
 
 # --seed--
@@ -74,16 +59,15 @@ assert(result === true);
 ## --seed-contents--
 
 ```js
-let myString = "Eleanor Roosevelt";
-let myRegex = /False/; // Change this line
-let result = false; // Change this line
-// After passing the challenge experiment with myString and see how the grouping works
+let extractStr = "Extract the word 'coding' from this string.";
+let codingRegex = /change/; // Change this line
+let result = extractStr; // Change this line
 ```
 
 # --solutions--
 
 ```js
-let myString = "Eleanor Roosevelt";
-let myRegex = /(Franklin|Eleanor).*Roosevelt/;
-let result = myRegex.test(myString);
+let extractStr = "Extract the word 'coding' from this string.";
+let codingRegex = /coding/; // Change this line
+let result = extractStr.match(codingRegex); // Change this line
 ```
