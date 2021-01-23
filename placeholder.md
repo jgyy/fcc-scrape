@@ -1,65 +1,60 @@
 ---
-id: 587d7dae367417b2b2512b7b
-title: Understand Own Properties
+id: 587d7daf367417b2b2512b7e
+title: Understand the Constructor Property
 challengeType: 1
-forumTopicId: 301326
-dashedName: understand-own-properties
+forumTopicId: 301327
+dashedName: understand-the-constructor-property
 ---
 
 # --description--
 
-In the following example, the `Bird` constructor defines two properties: `name` and `numLegs`:
+There is a special `constructor` property located on the object instances `duck` and `beagle` that were created in the previous challenges:
 
 ```js
-function Bird(name) {
-  this.name  = name;
-  this.numLegs = 2;
-}
+let duck = new Bird();
+let beagle = new Dog();
 
-let duck = new Bird("Donald");
-let canary = new Bird("Tweety");
+console.log(duck.constructor === Bird);  //prints true
+console.log(beagle.constructor === Dog);  //prints true
 ```
 
-`name` and `numLegs` are called `own` properties, because they are defined directly on the instance object. That means that `duck` and `canary` each has its own separate copy of these properties. In fact every instance of `Bird` will have its own copy of these properties. The following code adds all of the `own` properties of `duck` to the array `ownProps`:
+Note that the `constructor` property is a reference to the constructor function that created the instance. The advantage of the `constructor` property is that it's possible to check for this property to find out what kind of object it is. Here's an example of how this could be used:
 
 ```js
-let ownProps = [];
-
-for (let property in duck) {
-  if(duck.hasOwnProperty(property)) {
-    ownProps.push(property);
+function joinBirdFraternity(candidate) {
+  if (candidate.constructor === Bird) {
+    return true;
+  } else {
+    return false;
   }
 }
-
-console.log(ownProps); // prints [ "name", "numLegs" ]
 ```
+
+**Note**  
+Since the `constructor` property can be overwritten (which will be covered in the next two challenges) it’s generally better to use the `instanceof` method to check the type of an object.
 
 # --instructions--
 
-Add the `own` properties of `canary` to the array `ownProps`.
+Write a `joinDogFraternity` function that takes a `candidate` parameter and, using the `constructor` property, return `true` if the candidate is a `Dog`, otherwise return `false`.
 
 # --hints--
 
-`ownProps` should include the values `"numLegs"` and `"name"`.
+`joinDogFraternity` should be defined as a function.
 
 ```js
-assert(ownProps.indexOf('name') !== -1 && ownProps.indexOf('numLegs') !== -1);
+assert(typeof joinDogFraternity === 'function');
 ```
 
-You should solve this challenge without using the built in method `Object.keys()`.
+`joinDogFraternity` should return true if`candidate` is an instance of `Dog`.
 
 ```js
-assert(!/Object(\.keys|\[(['"`])keys\2\])/.test(code));
+assert(joinDogFraternity(new Dog('')) === true);
 ```
 
-You should solve this challenge without hardcoding the `ownProps` array.
+`joinDogFraternity` should use the `constructor` property.
 
 ```js
-assert(
-  !/\[\s*(?:'|")(?:name|numLegs)|(?:push|concat)\(\s*(?:'|")(?:name|numLegs)/.test(
-    code
-  )
-);
+assert(/\.constructor/.test(code) && !/instanceof/.test(code));
 ```
 
 # --seed--
@@ -67,36 +62,23 @@ assert(
 ## --seed-contents--
 
 ```js
-function Bird(name) {
+function Dog(name) {
   this.name = name;
-  this.numLegs = 2;
 }
 
-let canary = new Bird("Tweety");
-let ownProps = [];
 // Only change code below this line
+function joinDogFraternity(candidate) {
+
+}
 ```
 
 # --solutions--
 
 ```js
-function Bird(name) {
+function Dog(name) {
   this.name = name;
-  this.numLegs = 2;
 }
-
-let canary = new Bird("Tweety");
-function getOwnProps (obj) {
-  const props = [];
-
-  for (let prop in obj) {
-    if (obj.hasOwnProperty(prop)) {
-      props.push(prop);
-    }
-  }
-
-  return props;
+function joinDogFraternity(candidate) {
+  return candidate.constructor === Dog;
 }
-
-const ownProps = getOwnProps(canary);
 ```
