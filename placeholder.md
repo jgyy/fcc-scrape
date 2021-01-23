@@ -1,47 +1,66 @@
 ---
-id: 587d7dad367417b2b2512b76
-title: Make Code More Reusable with the this Keyword
+id: 587d7db1367417b2b2512b88
+title: Override Inherited Methods
 challengeType: 1
-forumTopicId: 301321
-dashedName: make-code-more-reusable-with-the-this-keyword
+forumTopicId: 301322
+dashedName: override-inherited-methods
 ---
 
 # --description--
 
-The last challenge introduced a method to the `duck` object. It used `duck.name` dot notation to access the value for the `name` property within the return statement:
-
-`sayName: function() {return "The name of this duck is " + duck.name + ".";}`
-
-While this is a valid way to access the object's property, there is a pitfall here. If the variable name changes, any code referencing the original name would need to be updated as well. In a short object definition, it isn't a problem, but if an object has many references to its properties there is a greater chance for error.
-
-A way to avoid these issues is with the `this` keyword:
+In previous lessons, you learned that an object can inherit its behavior (methods) from another object by referencing its `prototype` object:
 
 ```js
-let duck = {
-  name: "Aflac",
-  numLegs: 2,
-  sayName: function() {return "The name of this duck is " + this.name + ".";}
+ChildObject.prototype = Object.create(ParentObject.prototype);
+```
+
+Then the `ChildObject` received its own methods by chaining them onto its `prototype`:
+
+```js
+ChildObject.prototype.methodName = function() {...};
+```
+
+It's possible to override an inherited method. It's done the same way - by adding a method to `ChildObject.prototype` using the same method name as the one to override. Here's an example of `Bird` overriding the `eat()` method inherited from `Animal`:
+
+```js
+function Animal() { }
+Animal.prototype.eat = function() {
+  return "nom nom nom";
+};
+function Bird() { }
+
+// Inherit all methods from Animal
+Bird.prototype = Object.create(Animal.prototype);
+
+// Bird.eat() overrides Animal.eat()
+Bird.prototype.eat = function() {
+  return "peck peck peck";
 };
 ```
 
-`this` is a deep topic, and the above example is only one way to use it. In the current context, `this` refers to the object that the method is associated with: `duck`. If the object's name is changed to `mallard`, it is not necessary to find all the references to `duck` in the code. It makes the code reusable and easier to read.
+If you have an instance `let duck = new Bird();` and you call `duck.eat()`, this is how JavaScript looks for the method on `duck’s` `prototype` chain:
+
+1.  duck => Is eat() defined here? No.
+2.  Bird => Is eat() defined here? => Yes. Execute it and stop searching.
+3.  Animal => eat() is also defined, but JavaScript stopped searching before reaching this level.
+4.  Object => JavaScript stopped searching before reaching this level.
 
 # --instructions--
 
-Modify the `dog.sayLegs` method to remove any references to `dog`. Use the `duck` example for guidance.
+Override the `fly()` method for `Penguin` so that it returns "Alas, this is a flightless bird."
 
 # --hints--
 
-`dog.sayLegs()` should return the given string.
+`penguin.fly()` should return the string "Alas, this is a flightless bird."
 
 ```js
-assert(dog.sayLegs() === 'This dog has 4 legs.');
+assert(penguin.fly() === 'Alas, this is a flightless bird.');
 ```
 
-Your code should use the `this` keyword to access the `numLegs` property of `dog`.
+The `bird.fly()` method should return "I am flying!"
 
 ```js
-assert(code.match(/this\.numLegs/g));
+assert(new Bird().fly() === 'I am flying!');
 ```
 
 # --seed--
@@ -49,25 +68,35 @@ assert(code.match(/this\.numLegs/g));
 ## --seed-contents--
 
 ```js
-let dog = {
-  name: "Spot",
-  numLegs: 4,
-  sayLegs: function() {return "This dog has " + dog.numLegs + " legs.";}
-};
+function Bird() { }
 
-dog.sayLegs();
+Bird.prototype.fly = function() { return "I am flying!"; };
+
+function Penguin() { }
+Penguin.prototype = Object.create(Bird.prototype);
+Penguin.prototype.constructor = Penguin;
+
+// Only change code below this line
+
+
+
+// Only change code above this line
+
+let penguin = new Penguin();
+console.log(penguin.fly());
 ```
 
 # --solutions--
 
 ```js
-let dog = {
-  name: "Spot",
-  numLegs: 4,
-  sayLegs () {
-    return 'This dog has ' + this.numLegs + ' legs.';
-  }
-};
+function Bird() { }
 
-dog.sayLegs();
+Bird.prototype.fly = function() { return "I am flying!"; };
+
+function Penguin() { }
+Penguin.prototype = Object.create(Bird.prototype);
+Penguin.prototype.constructor = Penguin;
+Penguin.prototype.fly = () => 'Alas, this is a flightless bird.';
+let penguin = new Penguin();
+console.log(penguin.fly());
 ```
