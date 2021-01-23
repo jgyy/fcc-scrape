@@ -1,60 +1,40 @@
 ---
-id: 587d7daf367417b2b2512b7e
-title: Understand the Constructor Property
+id: 587d7db2367417b2b2512b8b
+title: Understand the Immediately Invoked Function Expression (IIFE)
 challengeType: 1
-forumTopicId: 301327
-dashedName: understand-the-constructor-property
+forumTopicId: 301328
+dashedName: understand-the-immediately-invoked-function-expression-iife
 ---
 
 # --description--
 
-There is a special `constructor` property located on the object instances `duck` and `beagle` that were created in the previous challenges:
+A common pattern in JavaScript is to execute a function as soon as it is declared:
 
 ```js
-let duck = new Bird();
-let beagle = new Dog();
-
-console.log(duck.constructor === Bird);  //prints true
-console.log(beagle.constructor === Dog);  //prints true
+(function () {
+  console.log("Chirp, chirp!");
+})(); // this is an anonymous function expression that executes right away
+// Outputs "Chirp, chirp!" immediately
 ```
 
-Note that the `constructor` property is a reference to the constructor function that created the instance. The advantage of the `constructor` property is that it's possible to check for this property to find out what kind of object it is. Here's an example of how this could be used:
-
-```js
-function joinBirdFraternity(candidate) {
-  if (candidate.constructor === Bird) {
-    return true;
-  } else {
-    return false;
-  }
-}
-```
-
-**Note**  
-Since the `constructor` property can be overwritten (which will be covered in the next two challenges) it’s generally better to use the `instanceof` method to check the type of an object.
+Note that the function has no name and is not stored in a variable. The two parentheses () at the end of the function expression cause it to be immediately executed or invoked. This pattern is known as an <dfn>immediately invoked function expression</dfn> or <dfn>IIFE</dfn>.
 
 # --instructions--
 
-Write a `joinDogFraternity` function that takes a `candidate` parameter and, using the `constructor` property, return `true` if the candidate is a `Dog`, otherwise return `false`.
+Rewrite the function `makeNest` and remove its call so instead it's an anonymous immediately invoked function expression (IIFE).
 
 # --hints--
 
-`joinDogFraternity` should be defined as a function.
+The function should be anonymous.
 
 ```js
-assert(typeof joinDogFraternity === 'function');
+assert(/\((function|\(\))(=>|\(\)){?/.test(code.replace(/\s/g, '')));
 ```
 
-`joinDogFraternity` should return true if`candidate` is an instance of `Dog`.
+Your function should have parentheses at the end of the expression to call it immediately.
 
 ```js
-assert(joinDogFraternity(new Dog('')) === true);
-```
-
-`joinDogFraternity` should use the `constructor` property.
-
-```js
-assert(/\.constructor/.test(code) && !/instanceof/.test(code));
+assert(/\(.*(\)\(|\}\(\))\)/.test(code.replace(/[\s;]/g, '')));
 ```
 
 # --seed--
@@ -62,23 +42,41 @@ assert(/\.constructor/.test(code) && !/instanceof/.test(code));
 ## --seed-contents--
 
 ```js
-function Dog(name) {
-  this.name = name;
+function makeNest() {
+  console.log("A cozy nest is ready");
 }
 
-// Only change code below this line
-function joinDogFraternity(candidate) {
-
-}
+makeNest();
 ```
 
 # --solutions--
 
 ```js
-function Dog(name) {
-  this.name = name;
-}
-function joinDogFraternity(candidate) {
-  return candidate.constructor === Dog;
-}
+(function () {
+  console.log("A cozy nest is ready");
+})();
+```
+
+---
+
+```js
+(function () {
+  console.log("A cozy nest is ready");
+}());
+```
+
+---
+
+```js
+(() => {
+  console.log("A cozy nest is ready");
+})();
+```
+
+---
+
+```js
+(() =>
+  console.log("A cozy nest is ready")
+)();
 ```
