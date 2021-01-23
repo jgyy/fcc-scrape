@@ -1,48 +1,40 @@
 ---
-id: 587d7db0367417b2b2512b82
-title: Understand the Prototype Chain
+id: 587d7db0367417b2b2512b81
+title: Understand Where an Object’s Prototype Comes From
 challengeType: 1
-forumTopicId: 301329
-dashedName: understand-the-prototype-chain
+forumTopicId: 301330
+dashedName: understand-where-an-objects-prototype-comes-from
 ---
 
 # --description--
 
-All objects in JavaScript (with a few exceptions) have a `prototype`. Also, an object’s `prototype` itself is an object.
+Just like people inherit genes from their parents, an object inherits its `prototype` directly from the constructor function that created it. For example, here the `Bird` constructor creates the `duck` object:
 
 ```js
 function Bird(name) {
   this.name = name;
 }
 
-typeof Bird.prototype; // yields 'object'
-```
-
-Because a `prototype` is an object, a `prototype` can have its own `prototype`! In this case, the `prototype` of `Bird.prototype` is `Object.prototype`:
-
-```js
-Object.prototype.isPrototypeOf(Bird.prototype); // returns true
-```
-
-How is this useful? You may recall the `hasOwnProperty` method from a previous challenge:
-
-```js
 let duck = new Bird("Donald");
-duck.hasOwnProperty("name"); // yields true
 ```
 
-The `hasOwnProperty` method is defined in `Object.prototype`, which can be accessed by `Bird.prototype`, which can then be accessed by `duck`. This is an example of the `prototype` chain. In this `prototype` chain, `Bird` is the `supertype` for `duck`, while `duck` is the `subtype`. `Object` is a `supertype` for both `Bird` and `duck`. `Object` is a `supertype` for all objects in JavaScript. Therefore, any object can use the `hasOwnProperty` method.
+`duck` inherits its `prototype` from the `Bird` constructor function. You can show this relationship with the `isPrototypeOf` method:
+
+```js
+Bird.prototype.isPrototypeOf(duck);
+// returns true
+```
 
 # --instructions--
 
-Modify the code to show the correct prototype chain.
+Use `isPrototypeOf` to check the `prototype` of `beagle`.
 
 # --hints--
 
-Your code should show that `Object.prototype` is the prototype of `Dog.prototype`
+You should show that `Dog.prototype` is the `prototype` of `beagle`
 
 ```js
-assert(/Object\.prototype\.isPrototypeOf/.test(code));
+assert(/Dog\.prototype\.isPrototypeOf\(beagle\)/.test(code));
 ```
 
 # --seed--
@@ -56,10 +48,7 @@ function Dog(name) {
 
 let beagle = new Dog("Snoopy");
 
-Dog.prototype.isPrototypeOf(beagle);  // yields true
-
-// Fix the code below so that it evaluates to true
-???.isPrototypeOf(Dog.prototype);
+// Only change code below this line
 ```
 
 # --solutions--
@@ -70,5 +59,4 @@ function Dog(name) {
 }
 let beagle = new Dog("Snoopy");
 Dog.prototype.isPrototypeOf(beagle);
-Object.prototype.isPrototypeOf(Dog.prototype);
 ```
