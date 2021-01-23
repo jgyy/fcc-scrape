@@ -1,69 +1,89 @@
 ---
-id: 587d7dae367417b2b2512b79
-title: Extend Constructors to Receive Arguments
+id: 587d7db0367417b2b2512b84
+title: Inherit Behaviors from a Supertype
 challengeType: 1
-forumTopicId: 18235
-dashedName: extend-constructors-to-receive-arguments
+forumTopicId: 301319
+dashedName: inherit-behaviors-from-a-supertype
 ---
 
 # --description--
 
-The `Bird` and `Dog` constructors from last challenge worked well. However, notice that all `Birds` that are created with the `Bird` constructor are automatically named Albert, are blue in color, and have two legs. What if you want birds with different values for name and color? It's possible to change the properties of each bird manually but that would be a lot of work:
+In the previous challenge, you created a `supertype` called `Animal` that defined behaviors shared by all animals:
 
 ```js
-let swan = new Bird();
-swan.name = "Carlos";
-swan.color = "white";
+function Animal() { }
+Animal.prototype.eat = function() {
+  console.log("nom nom nom");
+};
 ```
 
-Suppose you were writing a program to keep track of hundreds or even thousands of different birds in an aviary. It would take a lot of time to create all the birds, then change the properties to different values for every one. To more easily create different `Bird` objects, you can design your Bird constructor to accept parameters:
+This and the next challenge will cover how to reuse `Animal's` methods inside `Bird` and `Dog` without defining them again. It uses a technique called inheritance. This challenge covers the first step: make an instance of the `supertype` (or parent). You already know one way to create an instance of `Animal` using the `new` operator:
 
 ```js
-function Bird(name, color) {
-  this.name = name;
-  this.color = color;
-  this.numLegs = 2;
-}
+let animal = new Animal();
 ```
 
-Then pass in the values as arguments to define each unique bird into the `Bird` constructor: `let cardinal = new Bird("Bruce", "red");` This gives a new instance of `Bird` with name and color properties set to Bruce and red, respectively. The `numLegs` property is still set to 2. The `cardinal` has these properties:
+There are some disadvantages when using this syntax for inheritance, which are too complex for the scope of this challenge. Instead, here's an alternative approach without those disadvantages:
 
 ```js
-cardinal.name // => Bruce
-cardinal.color // => red
-cardinal.numLegs // => 2
+let animal = Object.create(Animal.prototype);
 ```
 
-The constructor is more flexible. It's now possible to define the properties for each `Bird` at the time it is created, which is one way that JavaScript constructors are so useful. They group objects together based on shared characteristics and behavior and define a blueprint that automates their creation.
+`Object.create(obj)` creates a new object, and sets `obj` as the new object's `prototype`. Recall that the `prototype` is like the "recipe" for creating an object. By setting the `prototype` of `animal` to be `Animal's` `prototype`, you are effectively giving the `animal` instance the same "recipe" as any other instance of `Animal`.
+
+```js
+animal.eat(); // prints "nom nom nom"
+animal instanceof Animal; // => true
+```
 
 # --instructions--
 
-Create another `Dog` constructor. This time, set it up to take the parameters `name` and `color`, and have the property `numLegs` fixed at 4. Then create a new `Dog` saved in a variable `terrier`. Pass it two strings as arguments for the `name` and `color` properties.
+Use `Object.create` to make two instances of `Animal` named `duck` and `beagle`.
 
 # --hints--
 
-`Dog` should receive an argument for `name`.
+The `duck` variable should be defined.
 
 ```js
-assert(new Dog('Clifford').name === 'Clifford');
+assert(typeof duck !== 'undefined');
 ```
 
-`Dog` should receive an argument for `color`.
+The `beagle` variable should be defined.
 
 ```js
-assert(new Dog('Clifford', 'yellow').color === 'yellow');
+assert(typeof beagle !== 'undefined');
 ```
 
-`Dog` should have property `numLegs` set to 4.
+The `duck` variable should be initialised with `Object.create`.
 
 ```js
-assert(new Dog('Clifford').numLegs === 4);
+assert(
+  /(let|const|var)\s{1,}duck\s*=\s*Object\.create\s*\(\s*Animal\.prototype\s*\)\s*/.test(
+    code
+  )
+);
 ```
 
-`terrier` should be created using the `Dog` constructor.
+The `beagle` variable should be initialised with `Object.create`.
 
 ```js
-assert(terrier instanceof Dog);
+assert(
+  /(let|const|var)\s{1,}beagle\s*=\s*Object\.create\s*\(\s*Animal\.prototype\s*\)\s*/.test(
+    code
+  )
+);
+```
+
+`duck` should have a `prototype` of `Animal`.
+
+```js
+assert(duck instanceof Animal);
+```
+
+`beagle` should have a `prototype` of `Animal`.
+
+```js
+assert(beagle instanceof Animal);
 ```
 
 # --seed--
@@ -71,19 +91,35 @@ assert(terrier instanceof Dog);
 ## --seed-contents--
 
 ```js
-function Dog() {
+function Animal() { }
 
-}
+Animal.prototype = {
+  constructor: Animal,
+  eat: function() {
+    console.log("nom nom nom");
+  }
+};
+
+// Only change code below this line
+
+let duck; // Change this line
+let beagle; // Change this line
 ```
 
 # --solutions--
 
 ```js
-function Dog (name, color) {
-  this.numLegs = 4;
-  this.name = name;
-  this.color = color;
-}
+function Animal() { }
 
-const terrier = new Dog();
+Animal.prototype = {
+  constructor: Animal,
+  eat: function() {
+    console.log("nom nom nom");
+  }
+};
+let duck = Object.create(Animal.prototype);
+let beagle = Object.create(Animal.prototype);
+
+duck.eat();
+beagle.eat();
 ```
