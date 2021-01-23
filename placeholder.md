@@ -1,80 +1,54 @@
 ---
-id: 587d7db0367417b2b2512b83
-title: Use Inheritance So You Don't Repeat Yourself
+id: 587d7dae367417b2b2512b7c
+title: Use Prototype Properties to Reduce Duplicate Code
 challengeType: 1
-forumTopicId: 301334
-dashedName: use-inheritance-so-you-dont-repeat-yourself
+forumTopicId: 301336
+dashedName: use-prototype-properties-to-reduce-duplicate-code
 ---
 
 # --description--
 
-There's a principle in programming called <dfn>Don't Repeat Yourself (DRY)</dfn>. The reason repeated code is a problem is because any change requires fixing code in multiple places. This usually means more work for programmers and more room for errors.
+Since `numLegs` will probably have the same value for all instances of `Bird`, you essentially have a duplicated variable `numLegs` inside each `Bird` instance.
 
-Notice in the example below that the `describe` method is shared by `Bird` and `Dog`:
+This may not be an issue when there are only two instances, but imagine if there are millions of instances. That would be a lot of duplicated variables.
 
-```js
-Bird.prototype = {
-  constructor: Bird,
-  describe: function() {
-    console.log("My name is " + this.name);
-  }
-};
-
-Dog.prototype = {
-  constructor: Dog,
-  describe: function() {
-    console.log("My name is " + this.name);
-  }
-};
-```
-
-The `describe` method is repeated in two places. The code can be edited to follow the DRY principle by creating a `supertype` (or parent) called `Animal`:
+A better way is to use `Bird’s` `prototype`. Properties in the `prototype` are shared among ALL instances of `Bird`. Here's how to add `numLegs` to the `Bird prototype`:
 
 ```js
-function Animal() { };
-
-Animal.prototype = {
-  constructor: Animal, 
-  describe: function() {
-    console.log("My name is " + this.name);
-  }
-};
+Bird.prototype.numLegs = 2;
 ```
 
-Since `Animal` includes the `describe` method, you can remove it from `Bird` and `Dog`:
+Now all instances of `Bird` have the `numLegs` property.
 
 ```js
-Bird.prototype = {
-  constructor: Bird
-};
-
-Dog.prototype = {
-  constructor: Dog
-};
+console.log(duck.numLegs);  // prints 2
+console.log(canary.numLegs);  // prints 2
 ```
+
+Since all instances automatically have the properties on the `prototype`, think of a `prototype` as a "recipe" for creating objects. Note that the `prototype` for `duck` and `canary` is part of the `Bird` constructor as `Bird.prototype`. Nearly every object in JavaScript has a `prototype` property which is part of the constructor function that created it.
 
 # --instructions--
 
-The `eat` method is repeated in both `Cat` and `Bear`. Edit the code in the spirit of DRY by moving the `eat` method to the `Animal` `supertype`.
+Add a `numLegs` property to the `prototype` of `Dog`
 
 # --hints--
 
-`Animal.prototype` should have the `eat` property.
+`beagle` should have a `numLegs` property.
 
 ```js
-assert(Animal.prototype.hasOwnProperty('eat'));
+assert(beagle.numLegs !== undefined);
 ```
 
-`Bear.prototype` should not have the `eat` property.
+`beagle.numLegs` should be a number.
 
 ```js
-assert(!Bear.prototype.hasOwnProperty('eat'));
+assert(typeof beagle.numLegs === 'number');
 ```
 
-`Cat.prototype` should not have the `eat` property.
+`numLegs` should be a `prototype` property not an `own` property.
 
 ```js
-assert(!Cat.prototype.hasOwnProperty('eat'));
+assert(beagle.hasOwnProperty('numLegs') === false);
 ```
 
 # --seed--
@@ -82,61 +56,22 @@ assert(!Cat.prototype.hasOwnProperty('eat'));
 ## --seed-contents--
 
 ```js
-function Cat(name) {
+function Dog(name) {
   this.name = name;
 }
 
-Cat.prototype = {
-  constructor: Cat,
-  eat: function() {
-    console.log("nom nom nom");
-  }
-};
 
-function Bear(name) {
-  this.name = name;
-}
 
-Bear.prototype = {
-  constructor: Bear,
-  eat: function() {
-    console.log("nom nom nom");
-  }
-};
-
-function Animal() { }
-
-Animal.prototype = {
-  constructor: Animal,
-
-};
+// Only change code above this line
+let beagle = new Dog("Snoopy");
 ```
 
 # --solutions--
 
 ```js
-function Cat(name) {
+function Dog (name) {
   this.name = name;
 }
-
-Cat.prototype = {
-  constructor: Cat
-};
-
-function Bear(name) {
-  this.name = name;
-}
-
-Bear.prototype = {
-  constructor: Bear
-};
-
-function Animal() { }
-
-Animal.prototype = {
-  constructor: Animal,
-  eat: function() {
-    console.log("nom nom nom");
-  }
-};
+Dog.prototype.numLegs = 4;
+let beagle = new Dog("Snoopy");
 ```
