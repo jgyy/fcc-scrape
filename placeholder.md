@@ -1,60 +1,48 @@
 ---
-id: 587d7db9367417b2b2512ba4
-title: Match Non-Whitespace Characters
+id: 587d7db5367417b2b2512b97
+title: Match Numbers and Letters of the Alphabet
 challengeType: 1
-forumTopicId: 18210
-dashedName: match-non-whitespace-characters
+forumTopicId: 301356
+dashedName: match-numbers-and-letters-of-the-alphabet
 ---
 
 # --description--
 
-You learned about searching for whitespace using `\s`, with a lowercase `s`. You can also search for everything except whitespace.
+Using the hyphen (`-`) to match a range of characters is not limited to letters. It also works to match a range of numbers.
 
-Search for non-whitespace using `\S`, which is an uppercase `s`. This pattern will not match whitespace, carriage return, tab, form feed, and new line characters. You can think of it being similar to the character class `[^ \r\t\f\n\v]`.
+For example, `/[0-5]/` matches any number between `0` and `5`, including the `0` and `5`.
+
+Also, it is possible to combine a range of letters and numbers in a single character set.
 
 ```js
-let whiteSpace = "Whitespace. Whitespace everywhere!"
-let nonSpaceRegex = /\S/g;
-whiteSpace.match(nonSpaceRegex).length; // Returns 32
+let jennyStr = "Jenny8675309";
+let myRegex = /[a-z0-9]/ig;
+// matches all letters and numbers in jennyStr
+jennyStr.match(myRegex);
 ```
 
 # --instructions--
 
-Change the regex `countNonWhiteSpace` to look for multiple non-whitespace characters in a string.
+Create a single regex that matches a range of letters between `h` and `s`, and a range of numbers between `2` and `6`. Remember to include the appropriate flags in the regex.
 
 # --hints--
 
-Your regex should use the global flag.
+Your regex `myRegex` should match 17 items.
 
 ```js
-assert(countNonWhiteSpace.global);
+assert(result.length == 17);
 ```
 
-Your regex should use the shorthand character `\S` to match all non-whitespace characters.
+Your regex `myRegex` should use the global flag.
 
 ```js
-assert(/\\S/.test(countNonWhiteSpace.source));
+assert(myRegex.flags.match(/g/).length == 1);
 ```
 
-Your regex should find 35 non-spaces in `"Men are from Mars and women are from Venus."`
+Your regex `myRegex` should use the case insensitive flag.
 
 ```js
-assert(
-  'Men are from Mars and women are from Venus.'.match(countNonWhiteSpace)
-    .length == 35
-);
-```
-
-Your regex should find 23 non-spaces in `"Space: the final frontier."`
-
-```js
-assert('Space: the final frontier.'.match(countNonWhiteSpace).length == 23);
-```
-
-Your regex should find 21 non-spaces in `"MindYourPersonalSpace"`
-
-```js
-assert('MindYourPersonalSpace'.match(countNonWhiteSpace).length == 21);
+assert(myRegex.flags.match(/i/).length == 1);
 ```
 
 # --seed--
@@ -62,15 +50,15 @@ assert('MindYourPersonalSpace'.match(countNonWhiteSpace).length == 21);
 ## --seed-contents--
 
 ```js
-let sample = "Whitespace is important in separating words";
-let countNonWhiteSpace = /change/; // Change this line
-let result = sample.match(countNonWhiteSpace);
+let quoteSample = "Blueberry 3.141592653s are delicious.";
+let myRegex = /change/; // Change this line
+let result = myRegex; // Change this line
 ```
 
 # --solutions--
 
 ```js
-let sample = "Whitespace is important in separating words";
-let countNonWhiteSpace = /\S/g; // Change this line
-let result = sample.match(countNonWhiteSpace);
+let quoteSample = "Blueberry 3.141592653s are delicious.";
+let myRegex = /[h-s2-6]/gi; // Change this line
+let result = quoteSample.match(myRegex); // Change this line
 ```
