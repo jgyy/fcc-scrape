@@ -1,69 +1,101 @@
 ---
-id: 5d712346c441eddfaeb5bdef
-title: Match All Numbers
+id: 587d7db5367417b2b2512b94
+title: Match Anything with Wildcard Period
 challengeType: 1
-forumTopicId: 18181
-dashedName: match-all-numbers
+forumTopicId: 301348
+dashedName: match-anything-with-wildcard-period
 ---
 
 # --description--
 
-You've learned shortcuts for common string patterns like alphanumerics. Another common pattern is looking for just digits or numbers.
+Sometimes you won't (or don't need to) know the exact characters in your patterns. Thinking of all words that match, say, a misspelling would take a long time. Luckily, you can save time using the wildcard character: `.`
 
-The shortcut to look for digit characters is `\d`, with a lowercase `d`. This is equal to the character class `[0-9]`, which looks for a single character of any number between zero and nine.
+The wildcard character `.` will match any one character. The wildcard is also called `dot` and `period`. You can use the wildcard character just like any other character in the regex. For example, if you wanted to match `"hug"`, `"huh"`, `"hut"`, and `"hum"`, you can use the regex `/hu./` to match all four words.
+
+```js
+let humStr = "I'll hum a song";
+let hugStr = "Bear hug";
+let huRegex = /hu./;
+huRegex.test(humStr); // Returns true
+huRegex.test(hugStr); // Returns true
+```
 
 # --instructions--
 
-Use the shorthand character class `\d` to count how many digits are in movie titles. Written out numbers ("six" instead of 6) do not count.
+Complete the regex `unRegex` so that it matches the strings `"run"`, `"sun"`, `"fun"`, `"pun"`, `"nun"`, and `"bun"`. Your regex should use the wildcard character.
 
 # --hints--
 
-Your regex should use the shortcut character to match digit characters
+You should use the `.test()` method.
 
 ```js
-assert(/\\d/.test(numRegex.source));
+assert(code.match(/\.test\(.*\)/));
 ```
 
-Your regex should use the global flag.
+You should use the wildcard character in your regex `unRegex`
 
 ```js
-assert(numRegex.global);
+assert(/\./.test(unRegex.source));
 ```
 
-Your regex should find 1 digit in `"9"`.
+Your regex `unRegex` should match `"run"` in `"Let us go on a run."`
 
 ```js
-assert('9'.match(numRegex).length == 1);
+unRegex.lastIndex = 0;
+assert(unRegex.test('Let us go on a run.'));
 ```
 
-Your regex should find 2 digits in `"Catch 22"`.
+Your regex `unRegex` should match `"sun"` in `"The sun is out today."`
 
 ```js
-assert('Catch 22'.match(numRegex).length == 2);
+unRegex.lastIndex = 0;
+assert(unRegex.test('The sun is out today.'));
 ```
 
-Your regex should find 3 digits in `"101 Dalmatians"`.
+Your regex `unRegex` should match `"fun"` in `"Coding is a lot of fun."`
 
 ```js
-assert('101 Dalmatians'.match(numRegex).length == 3);
+unRegex.lastIndex = 0;
+assert(unRegex.test('Coding is a lot of fun.'));
 ```
 
-Your regex should find no digits in `"One, Two, Three"`.
+Your regex `unRegex` should match `"pun"` in `"Seven days without a pun makes one weak."`
 
 ```js
-assert('One, Two, Three'.match(numRegex) == null);
+unRegex.lastIndex = 0;
+assert(unRegex.test('Seven days without a pun makes one weak.'));
 ```
 
-Your regex should find 2 digits in `"21 Jump Street"`.
+Your regex `unRegex` should match `"nun"` in `"One takes a vow to be a nun."`
 
 ```js
-assert('21 Jump Street'.match(numRegex).length == 2);
+unRegex.lastIndex = 0;
+assert(unRegex.test('One takes a vow to be a nun.'));
 ```
 
-Your regex should find 4 digits in `"2001: A Space Odyssey"`.
+Your regex `unRegex` should match `"bun"` in `"She got fired from the hot dog stand for putting her hair in a bun."`
 
 ```js
-assert('2001: A Space Odyssey'.match(numRegex).length == 4);
+unRegex.lastIndex = 0;
+assert(
+  unRegex.test(
+    'She got fired from the hot dog stand for putting her hair in a bun.'
+  )
+);
+```
+
+Your regex `unRegex` should not match `"There is a bug in my code."`
+
+```js
+unRegex.lastIndex = 0;
+assert(!unRegex.test('There is a bug in my code.'));
+```
+
+Your regex `unRegex` should not match `"Catch me if you can."`
+
+```js
+unRegex.lastIndex = 0;
+assert(!unRegex.test('Catch me if you can.'));
 ```
 
 # --seed--
@@ -71,15 +103,15 @@ assert('2001: A Space Odyssey'.match(numRegex).length == 4);
 ## --seed-contents--
 
 ```js
-let movieName = "2001: A Space Odyssey";
-let numRegex = /change/; // Change this line
-let result = movieName.match(numRegex).length;
+let exampleStr = "Let's have fun with regular expressions!";
+let unRegex = /change/; // Change this line
+let result = unRegex.test(exampleStr);
 ```
 
 # --solutions--
 
 ```js
-let movieName = "2001: A Space Odyssey";
-let numRegex = /\d/g; // Change this line
-let result = movieName.match(numRegex).length;
+let exampleStr = "Let's have fun with regular expressions!";
+let unRegex = /.un/; // Change this line
+let result = unRegex.test(exampleStr);
 ```
