@@ -1,101 +1,88 @@
 ---
-id: 587d7db8367417b2b2512ba2
-title: Restrict Possible Usernames
+id: 587d7dbb367417b2b2512baa
+title: Reuse Patterns Using Capture Groups
 challengeType: 1
-forumTopicId: 301363
-dashedName: restrict-possible-usernames
+forumTopicId: 301364
+dashedName: reuse-patterns-using-capture-groups
 ---
 
 # --description--
 
-Usernames are used everywhere on the internet. They are what give users a unique identity on their favorite sites.
+Some patterns you search for will occur multiple times in a string. It is wasteful to manually repeat that regex. There is a better way to specify when you have multiple repeat substrings in your string.
 
-You need to check all the usernames in a database. Here are some simple rules that users have to follow when creating their username.
+You can search for repeat substrings using <dfn>capture groups</dfn>. Parentheses, `(` and `)`, are used to find repeat substrings. You put the regex of the pattern that will repeat in between the parentheses.
 
-1) Usernames can only use alpha-numeric characters.
+To specify where that repeat string will appear, you use a backslash (<code>\\</code>) and then a number. This number starts at 1 and increases with each additional capture group you use. An example would be `\1` to match the first group.
 
-2) The only numbers in the username have to be at the end. There can be zero or more of them at the end. Username cannot start with the number.
+The example below matches any word that occurs twice separated by a space:
 
-3) Username letters can be lowercase and uppercase.
+```js
+let repeatStr = "regex regex";
+let repeatRegex = /(\w+)\s\1/;
+repeatRegex.test(repeatStr); // Returns true
+repeatStr.match(repeatRegex); // Returns ["regex regex", "regex"]
+```
 
-4) Usernames have to be at least two characters long. A two-character username can only use alphabet letters as characters.
+Using the `.match()` method on a string will return an array with the string it matches, along with its capture group.
 
 # --instructions--
 
-Change the regex `userCheck` to fit the constraints listed above.
+Use capture groups in `reRegex` to match a string that consists of only the same number repeated exactly three times separated by single spaces.
 
 # --hints--
 
-Your regex should match `JACK`
+Your regex should use the shorthand character class for digits.
 
 ```js
-assert(userCheck.test('JACK'));
+assert(reRegex.source.match(/\\d/));
 ```
 
-Your regex should not match `J`
+Your regex should reuse a capture group twice.
 
 ```js
-assert(!userCheck.test('J'));
+assert(reRegex.source.match(/\\1|\\2/g).length >= 2);
 ```
 
-Your regex should match `Jo`
+Your regex should match `"42 42 42"`.
 
 ```js
-assert(userCheck.test('Jo'));
+assert(reRegex.test('42 42 42'));
 ```
 
-Your regex should match `Oceans11`
+Your regex should match `"100 100 100"`.
 
 ```js
-assert(userCheck.test('Oceans11'));
+assert(reRegex.test('100 100 100'));
 ```
 
-Your regex should match `RegexGuru`
+Your regex should not match `"42 42 42 42"`.
 
 ```js
-assert(userCheck.test('RegexGuru'));
+assert.equal('42 42 42 42'.match(reRegex.source), null);
 ```
 
-Your regex should not match `007`
+Your regex should not match `"42 42"`.
 
 ```js
-assert(!userCheck.test('007'));
+assert.equal('42 42'.match(reRegex.source), null);
 ```
 
-Your regex should not match `9`
+Your regex should not match `"101 102 103"`.
 
 ```js
-assert(!userCheck.test('9'));
+assert(!reRegex.test('101 102 103'));
 ```
 
-Your regex should not match `A1`
+Your regex should not match `"1 2 3"`.
 
 ```js
-assert(!userCheck.test('A1'));
+assert(!reRegex.test('1 2 3'));
 ```
 
-Your regex should not match `BadUs3rnam3`
+Your regex should match `"10 10 10"`.
 
 ```js
-assert(!userCheck.test('BadUs3rnam3'));
-```
-
-Your regex should match `Z97`
-
-```js
-assert(userCheck.test('Z97'));
-```
-
-Your regex should not match `c57bT3`
-
-```js
-assert(!userCheck.test('c57bT3'));
-```
-
-Your regex should match `AB1`
-
-```js
-assert(userCheck.test('AB1'));
+assert(reRegex.test('10 10 10'));
 ```
 
 # --seed--
@@ -103,15 +90,15 @@ assert(userCheck.test('AB1'));
 ## --seed-contents--
 
 ```js
-let username = "JackOfAllTrades";
-let userCheck = /change/; // Change this line
-let result = userCheck.test(username);
+let repeatNum = "42 42 42";
+let reRegex = /change/; // Change this line
+let result = reRegex.test(repeatNum);
 ```
 
 # --solutions--
 
 ```js
-let username = "JackOfAllTrades";
-const userCheck = /^[a-z]([0-9]{2,}|[a-z]+\d*)$/i;
-let result = userCheck.test(username);
+let repeatNum = "42 42 42";
+let reRegex = /^(\d+)\s\1\s\1$/;
+let result = reRegex.test(repeatNum);
 ```
