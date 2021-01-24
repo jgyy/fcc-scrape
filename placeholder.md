@@ -1,58 +1,90 @@
 ---
-id: 587d7db3367417b2b2512b8e
-title: Using the Test Method
-challengeType: 1
-forumTopicId: 301369
-dashedName: using-the-test-method
+id: bad87fee1348bd9aec908849
+title: Add Elements within Your Bootstrap Wells
+challengeType: 0
+forumTopicId: 16636
+dashedName: add-elements-within-your-bootstrap-wells
 ---
 
 # --description--
 
-Regular expressions are used in programming languages to match parts of strings. You create patterns to help you do that matching.
+Now we're several `div` elements deep on each column of our row. This is as deep as we'll need to go. Now we can add our `button` elements.
 
-If you want to find the word `"the"` in the string `"The dog chased the cat"`, you could use the following regular expression: `/the/`. Notice that quote marks are not required within the regular expression.
-
-JavaScript has multiple ways to use regexes. One way to test a regex is using the `.test()` method. The `.test()` method takes the regex, applies it to a string (which is placed inside the parentheses), and returns `true` or `false` if your pattern finds something or not.
-
-```js
-let testStr = "freeCodeCamp";
-let testRegex = /Code/;
-testRegex.test(testStr);
-// Returns true
-```
-
-# --instructions--
-
-Apply the regex `myRegex` on the string `myString` using the `.test()` method.
+Nest three `button` elements within each of your `div` elements having the class name `well`.
 
 # --hints--
 
-You should use `.test()` to test the regex.
+Three `button` elements should be nested within each of your `div` elements with class `well`.
 
 ```js
-assert(code.match(/myRegex.test\(\s*myString\s*\)/));
+assert(
+  $('div.well:eq(0)').children('button').length === 3 &&
+    $('div.well:eq(1)').children('button').length === 3
+);
 ```
 
-Your result should return `true`.
+You should have a total of 6 `button` elements.
 
 ```js
-assert(result === true);
+assert($('button') && $('button').length > 5);
+```
+
+All of your `button` elements should have closing tags.
+
+```js
+assert(
+  code.match(/<\/button>/g) &&
+    code.match(/<button/g) &&
+    code.match(/<\/button>/g).length === code.match(/<button/g).length
+);
 ```
 
 # --seed--
 
 ## --seed-contents--
 
-```js
-let myString = "Hello, World!";
-let myRegex = /Hello/;
-let result = myRegex; // Change this line
+```html
+<div class="container-fluid">
+  <h3 class="text-primary text-center">jQuery Playground</h3>
+  <div class="row">
+    <div class="col-xs-6">
+      <div class="well">
+
+
+
+      </div>
+    </div>
+    <div class="col-xs-6">
+      <div class="well">
+
+
+
+      </div>
+    </div>
+  </div>
+</div>
 ```
 
 # --solutions--
 
-```js
-let myString = "Hello, World!";
-let myRegex = /Hello/;
-let result = myRegex.test(myString); // Change this line
+```html
+<div class="container-fluid">
+  <h3 class="text-primary text-center">jQuery Playground</h3>
+  <div class="row">
+    <div class="col-xs-6">
+      <div class="well">
+        <button></button>
+        <button></button>
+        <button></button>
+      </div>
+    </div>
+    <div class="col-xs-6">
+      <div class="well">
+        <button></button>
+        <button></button>
+        <button></button>
+      </div>
+    </div>
+  </div>
+</div>
 ```
