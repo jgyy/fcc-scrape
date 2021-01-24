@@ -1,50 +1,74 @@
 ---
-id: 587d7db7367417b2b2512b9e
-title: Match Ending String Patterns
+id: 587d7db8367417b2b2512ba0
+title: Match Everything But Letters and Numbers
 challengeType: 1
-forumTopicId: 301352
-dashedName: match-ending-string-patterns
+forumTopicId: 301353
+dashedName: match-everything-but-letters-and-numbers
 ---
 
 # --description--
 
-In the last challenge, you learned to use the caret character to search for patterns at the beginning of strings. There is also a way to search for patterns at the end of strings.
+You've learned that you can use a shortcut to match alphanumerics `[A-Za-z0-9_]` using `\w`. A natural pattern you might want to search for is the opposite of alphanumerics.
 
-You can search the end of strings using the dollar sign character `$` at the end of the regex.
+You can search for the opposite of the `\w` with `\W`. Note, the opposite pattern uses a capital letter. This shortcut is the same as `[^A-Za-z0-9_]`.
 
 ```js
-let theEnding = "This is a never ending story";
-let storyRegex = /story$/;
-storyRegex.test(theEnding);
-// Returns true
-let noEnding = "Sometimes a story will have to end";
-storyRegex.test(noEnding);
-// Returns false
-
+let shortHand = /\W/;
+let numbers = "42%";
+let sentence = "Coding!";
+numbers.match(shortHand); // Returns ["%"]
+sentence.match(shortHand); // Returns ["!"]
 ```
 
 # --instructions--
 
-Use the anchor character (`$`) to match the string `"caboose"` at the end of the string `caboose`.
+Use the shorthand character class `\W` to count the number of non-alphanumeric characters in various quotes and strings.
 
 # --hints--
 
-You should search for `"caboose"` with the dollar sign `$` anchor in your regex.
+Your regex should use the global flag.
 
 ```js
-assert(lastRegex.source == 'caboose$');
+assert(nonAlphabetRegex.global);
 ```
 
-Your regex should not use any flags.
+Your regex should find 6 non-alphanumeric characters in `"The five boxing wizards jump quickly."`.
 
 ```js
-assert(lastRegex.flags == '');
+assert(
+  'The five boxing wizards jump quickly.'.match(nonAlphabetRegex).length == 6
+);
 ```
 
-You should match `"caboose"` at the end of the string `"The last car on a train is the caboose"`
+Your regex should use the shorthand character to match characters which are non-alphanumeric.
 
 ```js
-assert(lastRegex.test('The last car on a train is the caboose'));
+assert(/\\W/.test(nonAlphabetRegex.source));
+```
+
+Your regex should find 8 non-alphanumeric characters in `"Pack my box with five dozen liquor jugs."`
+
+```js
+assert(
+  'Pack my box with five dozen liquor jugs.'.match(nonAlphabetRegex).length == 8
+);
+```
+
+Your regex should find 6 non-alphanumeric characters in `"How vexingly quick daft zebras jump!"`
+
+```js
+assert(
+  'How vexingly quick daft zebras jump!'.match(nonAlphabetRegex).length == 6
+);
+```
+
+Your regex should find 12 non-alphanumeric characters in `"123 456 7890 ABC def GHI jkl MNO pqr STU vwx YZ."`
+
+```js
+assert(
+  '123 456 7890 ABC def GHI jkl MNO pqr STU vwx YZ.'.match(nonAlphabetRegex)
+    .length == 12
+);
 ```
 
 # --seed--
@@ -52,15 +76,15 @@ assert(lastRegex.test('The last car on a train is the caboose'));
 ## --seed-contents--
 
 ```js
-let caboose = "The last car on a train is the caboose";
-let lastRegex = /change/; // Change this line
-let result = lastRegex.test(caboose);
+let quoteSample = "The five boxing wizards jump quickly.";
+let nonAlphabetRegex = /change/; // Change this line
+let result = quoteSample.match(nonAlphabetRegex).length;
 ```
 
 # --solutions--
 
 ```js
-let caboose = "The last car on a train is the caboose";
-let lastRegex = /caboose$/; // Change this line
-let result = lastRegex.test(caboose);
+let quoteSample = "The five boxing wizards_jump quickly.";
+let nonAlphabetRegex = /\W/g; // Change this line
+let result = quoteSample.match(nonAlphabetRegex).length;
 ```
