@@ -1,88 +1,74 @@
 ---
-id: 587d7dbb367417b2b2512baa
-title: Reuse Patterns Using Capture Groups
+id: 587d7db9367417b2b2512ba7
+title: Specify Exact Number of Matches
 challengeType: 1
-forumTopicId: 301364
-dashedName: reuse-patterns-using-capture-groups
+forumTopicId: 301365
+dashedName: specify-exact-number-of-matches
 ---
 
 # --description--
 
-Some patterns you search for will occur multiple times in a string. It is wasteful to manually repeat that regex. There is a better way to specify when you have multiple repeat substrings in your string.
+You can specify the lower and upper number of patterns with quantity specifiers using curly brackets. Sometimes you only want a specific number of matches.
 
-You can search for repeat substrings using <dfn>capture groups</dfn>. Parentheses, `(` and `)`, are used to find repeat substrings. You put the regex of the pattern that will repeat in between the parentheses.
+To specify a certain number of patterns, just have that one number between the curly brackets.
 
-To specify where that repeat string will appear, you use a backslash (<code>\\</code>) and then a number. This number starts at 1 and increases with each additional capture group you use. An example would be `\1` to match the first group.
-
-The example below matches any word that occurs twice separated by a space:
+For example, to match only the word `"hah"` with the letter `a` `3` times, your regex would be `/ha{3}h/`.
 
 ```js
-let repeatStr = "regex regex";
-let repeatRegex = /(\w+)\s\1/;
-repeatRegex.test(repeatStr); // Returns true
-repeatStr.match(repeatRegex); // Returns ["regex regex", "regex"]
+let A4 = "haaaah";
+let A3 = "haaah";
+let A100 = "h" + "a".repeat(100) + "h";
+let multipleHA = /ha{3}h/;
+multipleHA.test(A4); // Returns false
+multipleHA.test(A3); // Returns true
+multipleHA.test(A100); // Returns false
 ```
-
-Using the `.match()` method on a string will return an array with the string it matches, along with its capture group.
 
 # --instructions--
 
-Use capture groups in `reRegex` to match a string that consists of only the same number repeated exactly three times separated by single spaces.
+Change the regex `timRegex` to match the word `"Timber"` only when it has four letter `m`'s.
 
 # --hints--
 
-Your regex should use the shorthand character class for digits.
+Your regex should use curly brackets.
 
 ```js
-assert(reRegex.source.match(/\\d/));
+assert(timRegex.source.match(/{.*?}/).length > 0);
 ```
 
-Your regex should reuse a capture group twice.
+Your regex should not match `"Timber"`
 
 ```js
-assert(reRegex.source.match(/\\1|\\2/g).length >= 2);
+timRegex.lastIndex = 0;
+assert(!timRegex.test('Timber'));
 ```
 
-Your regex should match `"42 42 42"`.
+Your regex should not match `"Timmber"`
 
 ```js
-assert(reRegex.test('42 42 42'));
+timRegex.lastIndex = 0;
+assert(!timRegex.test('Timmber'));
 ```
 
-Your regex should match `"100 100 100"`.
+Your regex should not match `"Timmmber"`
 
 ```js
-assert(reRegex.test('100 100 100'));
+timRegex.lastIndex = 0;
+assert(!timRegex.test('Timmmber'));
 ```
 
-Your regex should not match `"42 42 42 42"`.
+Your regex should match `"Timmmmber"`
 
 ```js
-assert.equal('42 42 42 42'.match(reRegex.source), null);
+timRegex.lastIndex = 0;
+assert(timRegex.test('Timmmmber'));
 ```
 
-Your regex should not match `"42 42"`.
+Your regex should not match `"Timber"` with 30 `m`'s in it.
 
 ```js
-assert.equal('42 42'.match(reRegex.source), null);
-```
-
-Your regex should not match `"101 102 103"`.
-
-```js
-assert(!reRegex.test('101 102 103'));
-```
-
-Your regex should not match `"1 2 3"`.
-
-```js
-assert(!reRegex.test('1 2 3'));
-```
-
-Your regex should match `"10 10 10"`.
-
-```js
-assert(reRegex.test('10 10 10'));
+timRegex.lastIndex = 0;
+assert(!timRegex.test('Ti' + 'm'.repeat(30) + 'ber'));
 ```
 
 # --seed--
@@ -90,15 +76,15 @@ assert(reRegex.test('10 10 10'));
 ## --seed-contents--
 
 ```js
-let repeatNum = "42 42 42";
-let reRegex = /change/; // Change this line
-let result = reRegex.test(repeatNum);
+let timStr = "Timmmmber";
+let timRegex = /change/; // Change this line
+let result = timRegex.test(timStr);
 ```
 
 # --solutions--
 
 ```js
-let repeatNum = "42 42 42";
-let reRegex = /^(\d+)\s\1\s\1$/;
-let result = reRegex.test(repeatNum);
+let timStr = "Timmmmber";
+let timRegex = /Tim{4}ber/; // Change this line
+let result = timRegex.test(timStr);
 ```
