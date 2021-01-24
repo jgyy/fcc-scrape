@@ -1,94 +1,66 @@
 ---
-id: 587d7db6367417b2b2512b9a
-title: Match Characters that Occur Zero or More Times
+id: 587d7db7367417b2b2512b9e
+title: Match Ending String Patterns
 challengeType: 1
-forumTopicId: 301351
-dashedName: match-characters-that-occur-zero-or-more-times
+forumTopicId: 301352
+dashedName: match-ending-string-patterns
 ---
 
 # --description--
 
-The last challenge used the plus `+` sign to look for characters that occur one or more times. There's also an option that matches characters that occur zero or more times.
+In the last challenge, you learned to use the caret character to search for patterns at the beginning of strings. There is also a way to search for patterns at the end of strings.
 
-The character to do this is the asterisk or star: `*`.
+You can search the end of strings using the dollar sign character `$` at the end of the regex.
 
 ```js
-let soccerWord = "gooooooooal!";
-let gPhrase = "gut feeling";
-let oPhrase = "over the moon";
-let goRegex = /go*/;
-soccerWord.match(goRegex); // Returns ["goooooooo"]
-gPhrase.match(goRegex); // Returns ["g"]
-oPhrase.match(goRegex); // Returns null
+let theEnding = "This is a never ending story";
+let storyRegex = /story$/;
+storyRegex.test(theEnding);
+// Returns true
+let noEnding = "Sometimes a story will have to end";
+storyRegex.test(noEnding);
+// Returns false
+
 ```
 
 # --instructions--
 
-For this challenge, `chewieQuote` has been initialized as "Aaaaaaaaaaaaaaaarrrgh!" behind the scenes. Create a regex `chewieRegex` that uses the `*` character to match an uppercase `"A"` character immediately followed by zero or more lowercase `"a"` characters in `chewieQuote`. Your regex does not need flags or character classes, and it should not match any of the other quotes.
+Use the anchor character (`$`) to match the string `"caboose"` at the end of the string `caboose`.
 
 # --hints--
 
-Your regex `chewieRegex` should use the `*` character to match zero or more `a` characters.
+You should search for `"caboose"` with the dollar sign `$` anchor in your regex.
 
 ```js
-assert(/\*/.test(chewieRegex.source));
+assert(lastRegex.source == 'caboose$');
 ```
 
-Your regex should match `"A"` in `chewieQuote`.
+Your regex should not use any flags.
 
 ```js
-assert(result[0][0] === 'A');
+assert(lastRegex.flags == '');
 ```
 
-Your regex should match `"Aaaaaaaaaaaaaaaa"` in `chewieQuote`.
+You should match `"caboose"` at the end of the string `"The last car on a train is the caboose"`
 
 ```js
-assert(result[0] === 'Aaaaaaaaaaaaaaaa');
-```
-
-Your regex `chewieRegex` should match 16 characters in `chewieQuote`.
-
-```js
-assert(result[0].length === 16);
-```
-
-Your regex should not match any characters in "He made a fair move. Screaming about it can't help you."
-
-```js
-assert(
-  !"He made a fair move. Screaming about it can't help you.".match(chewieRegex)
-);
-```
-
-Your regex should not match any characters in "Let him have it. It's not wise to upset a Wookiee."
-
-```js
-assert(
-  !"Let him have it. It's not wise to upset a Wookiee.".match(chewieRegex)
-);
+assert(lastRegex.test('The last car on a train is the caboose'));
 ```
 
 # --seed--
 
-## --before-user-code--
-
-```js
-const chewieQuote = "Aaaaaaaaaaaaaaaarrrgh!";
-```
-
 ## --seed-contents--
 
 ```js
-// Only change code below this line
-let chewieRegex = /change/; // Change this line
-// Only change code above this line
-
-let result = chewieQuote.match(chewieRegex);
+let caboose = "The last car on a train is the caboose";
+let lastRegex = /change/; // Change this line
+let result = lastRegex.test(caboose);
 ```
 
 # --solutions--
 
 ```js
-  let chewieRegex = /Aa*/;
-  let result = chewieQuote.match(chewieRegex);
+let caboose = "The last car on a train is the caboose";
+let lastRegex = /caboose$/; // Change this line
+let result = lastRegex.test(caboose);
 ```
