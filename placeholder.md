@@ -1,75 +1,73 @@
 ---
-id: 587d7db9367417b2b2512ba6
-title: Specify Only the Lower Number of Matches
+id: 587d7db9367417b2b2512ba5
+title: Specify Upper and Lower Number of Matches
 challengeType: 1
-forumTopicId: 301366
-dashedName: specify-only-the-lower-number-of-matches
+forumTopicId: 301367
+dashedName: specify-upper-and-lower-number-of-matches
 ---
 
 # --description--
 
-You can specify the lower and upper number of patterns with quantity specifiers using curly brackets. Sometimes you only want to specify the lower number of patterns with no upper limit.
+Recall that you use the plus sign `+` to look for one or more characters and the asterisk `*` to look for zero or more characters. These are convenient but sometimes you want to match a certain range of patterns.
 
-To only specify the lower number of patterns, keep the first number followed by a comma.
+You can specify the lower and upper number of patterns with <dfn>quantity specifiers</dfn>. Quantity specifiers are used with curly brackets (`{` and `}`). You put two numbers between the curly brackets - for the lower and upper number of patterns.
 
-For example, to match only the string `"hah"` with the letter `a` appearing at least `3` times, your regex would be `/ha{3,}h/`.
+For example, to match only the letter `a` appearing between `3` and `5` times in the string `"ah"`, your regex would be `/a{3,5}h/`.
 
 ```js
-let A4 = "haaaah";
-let A2 = "haah";
-let A100 = "h" + "a".repeat(100) + "h";
-let multipleA = /ha{3,}h/;
+let A4 = "aaaah";
+let A2 = "aah";
+let multipleA = /a{3,5}h/;
 multipleA.test(A4); // Returns true
 multipleA.test(A2); // Returns false
-multipleA.test(A100); // Returns true
 ```
 
 # --instructions--
 
-Change the regex `haRegex` to match the word `"Hazzah"` only when it has four or more letter `z`'s.
+Change the regex `ohRegex` to match the entire phrase `"Oh no"` only when it has `3` to `6` letter `h`'s.
 
 # --hints--
 
 Your regex should use curly brackets.
 
 ```js
-assert(haRegex.source.match(/{.*?}/).length > 0);
+assert(ohRegex.source.match(/{.*?}/).length > 0);
 ```
 
-Your regex should not match `"Hazzah"`
+Your regex should not match `"Ohh no"`
 
 ```js
-assert(!haRegex.test('Hazzah'));
+assert(!ohRegex.test('Ohh no'));
 ```
 
-Your regex should not match `"Hazzzah"`
+Your regex should match `"Ohhh no"`
 
 ```js
-assert(!haRegex.test('Hazzzah'));
+assert('Ohhh no'.match(ohRegex)[0].length === 7);
 ```
 
-Your regex should match `"Hazzzzah"`
+Your regex should match `"Ohhhh no"`
 
 ```js
-assert('Hazzzzah'.match(haRegex)[0].length === 8);
+assert('Ohhhh no'.match(ohRegex)[0].length === 8);
 ```
 
-Your regex should match `"Hazzzzzah"`
+Your regex should match `"Ohhhhh no"`
 
 ```js
-assert('Hazzzzzah'.match(haRegex)[0].length === 9);
+assert('Ohhhhh no'.match(ohRegex)[0].length === 9);
 ```
 
-Your regex should match `"Hazzzzzzah"`
+Your regex should match `"Ohhhhhh no"`
 
 ```js
-assert('Hazzzzzzah'.match(haRegex)[0].length === 10);
+assert('Ohhhhhh no'.match(ohRegex)[0].length === 10);
 ```
 
-Your regex should match `"Hazzah"` with 30 `z`'s in it.
+Your regex should not match `"Ohhhhhhh no"`
 
 ```js
-assert('Hazzzzzzzzzzzzzzzzzzzzzzzzzzzzzzah'.match(haRegex)[0].length === 34);
+assert(!ohRegex.test('Ohhhhhhh no'));
 ```
 
 # --seed--
@@ -77,15 +75,15 @@ assert('Hazzzzzzzzzzzzzzzzzzzzzzzzzzzzzzah'.match(haRegex)[0].length === 34);
 ## --seed-contents--
 
 ```js
-let haStr = "Hazzzzah";
-let haRegex = /change/; // Change this line
-let result = haRegex.test(haStr);
+let ohStr = "Ohhh no";
+let ohRegex = /change/; // Change this line
+let result = ohRegex.test(ohStr);
 ```
 
 # --solutions--
 
 ```js
-let haStr = "Hazzzzah";
-let haRegex = /Haz{4,}ah/; // Change this line
-let result = haRegex.test(haStr);
+let ohStr = "Ohhh no";
+let ohRegex = /Oh{3,6} no/; // Change this line
+let result = ohRegex.test(ohStr);
 ```
