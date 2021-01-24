@@ -1,68 +1,41 @@
 ---
-id: 587d7db5367417b2b2512b95
-title: Match Single Character with Multiple Possibilities
+id: 587d7db6367417b2b2512b98
+title: Match Single Characters Not Specified
 challengeType: 1
-forumTopicId: 301357
-dashedName: match-single-character-with-multiple-possibilities
+forumTopicId: 301358
+dashedName: match-single-characters-not-specified
 ---
 
 # --description--
 
-You learned how to match literal patterns (`/literal/`) and wildcard character (`/./`). Those are the extremes of regular expressions, where one finds exact matches and the other matches everything. There are options that are a balance between the two extremes.
+So far, you have created a set of characters that you want to match, but you could also create a set of characters that you do not want to match. These types of character sets are called <dfn>negated character sets</dfn>.
 
-You can search for a literal pattern with some flexibility with <dfn>character classes</dfn>. Character classes allow you to define a group of characters you wish to match by placing them inside square (`[` and `]`) brackets.
+To create a negated character set, you place a caret character (`^`) after the opening bracket and before the characters you do not want to match.
 
-For example, you want to match `"bag"`, `"big"`, and `"bug"` but not `"bog"`. You can create the regex `/b[aiu]g/` to do this. The `[aiu]` is the character class that will only match the characters `"a"`, `"i"`, or `"u"`.
-
-```js
-let bigStr = "big";
-let bagStr = "bag";
-let bugStr = "bug";
-let bogStr = "bog";
-let bgRegex = /b[aiu]g/;
-bigStr.match(bgRegex); // Returns ["big"]
-bagStr.match(bgRegex); // Returns ["bag"]
-bugStr.match(bgRegex); // Returns ["bug"]
-bogStr.match(bgRegex); // Returns null
-```
+For example, `/[^aeiou]/gi` matches all characters that are not a vowel. Note that characters like `.`, `!`, `[`, `@`, `/` and white space are matched - the negated vowel character set only excludes the vowel characters.
 
 # --instructions--
 
-Use a character class with vowels (`a`, `e`, `i`, `o`, `u`) in your regex `vowelRegex` to find all the vowels in the string `quoteSample`.
-
-**Note**  
-Be sure to match both upper- and lowercase vowels.
+Create a single regex that matches all characters that are not a number or a vowel. Remember to include the appropriate flags in the regex.
 
 # --hints--
 
-You should find all 25 vowels.
+Your regex `myRegex` should match 9 items.
 
 ```js
-assert(result.length == 25);
+assert(result.length == 9);
 ```
 
-Your regex `vowelRegex` should use a character class.
+Your regex `myRegex` should use the global flag.
 
 ```js
-assert(/\[.*\]/.test(vowelRegex.source));
+assert(myRegex.flags.match(/g/).length == 1);
 ```
 
-Your regex `vowelRegex` should use the global flag.
+Your regex `myRegex` should use the case insensitive flag.
 
 ```js
-assert(vowelRegex.flags.match(/g/).length == 1);
-```
-
-Your regex `vowelRegex` should use the case insensitive flag.
-
-```js
-assert(vowelRegex.flags.match(/i/).length == 1);
-```
-
-Your regex should not match any consonants.
-
-```js
-assert(!/[b-df-hj-np-tv-z]/gi.test(result.join()));
+assert(myRegex.flags.match(/i/).length == 1);
 ```
 
 # --seed--
@@ -70,15 +43,15 @@ assert(!/[b-df-hj-np-tv-z]/gi.test(result.join()));
 ## --seed-contents--
 
 ```js
-let quoteSample = "Beware of bugs in the above code; I have only proved it correct, not tried it.";
-let vowelRegex = /change/; // Change this line
-let result = vowelRegex; // Change this line
+let quoteSample = "3 blind mice.";
+let myRegex = /change/; // Change this line
+let result = myRegex; // Change this line
 ```
 
 # --solutions--
 
 ```js
-let quoteSample = "Beware of bugs in the above code; I have only proved it correct, not tried it.";
-let vowelRegex = /[aeiou]/gi; // Change this line
-let result = quoteSample.match(vowelRegex); // Change this line
+let quoteSample = "3 blind mice.";
+let myRegex = /[^0-9aeiou]/gi; // Change this line
+let result = quoteSample.match(myRegex); // Change this line
 ```
