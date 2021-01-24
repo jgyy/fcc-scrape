@@ -1,55 +1,43 @@
 ---
-id: 587d7db7367417b2b2512b9d
-title: Match Beginning String Patterns
+id: 587d7db6367417b2b2512b99
+title: Match Characters that Occur One or More Times
 challengeType: 1
-forumTopicId: 301349
-dashedName: match-beginning-string-patterns
+forumTopicId: 301350
+dashedName: match-characters-that-occur-one-or-more-times
 ---
 
 # --description--
 
-Prior challenges showed that regular expressions can be used to look for a number of matches. They are also used to search for patterns in specific positions in strings.
+Sometimes, you need to match a character (or group of characters) that appears one or more times in a row. This means it occurs at least once, and may be repeated.
 
-In an earlier challenge, you used the caret character (`^`) inside a character set to create a negated character set in the form `[^thingsThatWillNotBeMatched]`. Outside of a character set, the caret is used to search for patterns at the beginning of strings.
+You can use the `+` character to check if that is the case. Remember, the character or pattern has to be present consecutively. That is, the character has to repeat one after the other.
 
-```js
-let firstString = "Ricky is first and can be found.";
-let firstRegex = /^Ricky/;
-firstRegex.test(firstString);
-// Returns true
-let notFirst = "You can't find Ricky now.";
-firstRegex.test(notFirst);
-// Returns false
-```
+For example, `/a+/g` would find one match in `"abc"` and return `["a"]`. Because of the `+`, it would also find a single match in `"aabc"` and return `["aa"]`.
+
+If it were instead checking the string `"abab"`, it would find two matches and return `["a", "a"]` because the `a` characters are not in a row - there is a `b` between them. Finally, since there is no `"a"` in the string `"bcd"`, it wouldn't find a match.
 
 # --instructions--
 
-Use the caret character in a regex to find `"Cal"` only in the beginning of the string `rickyAndCal`.
+You want to find matches when the letter `s` occurs one or more times in `"Mississippi"`. Write a regex that uses the `+` sign.
 
 # --hints--
 
-Your regex should search for `"Cal"` with a capital letter.
+Your regex `myRegex` should use the `+` sign to match one or more `s` characters.
 
 ```js
-assert(calRegex.source == '^Cal');
+assert(/\+/.test(myRegex.source));
 ```
 
-Your regex should not use any flags.
+Your regex `myRegex` should match 2 items.
 
 ```js
-assert(calRegex.flags == '');
+assert(result.length == 2);
 ```
 
-Your regex should match `"Cal"` at the beginning of the string.
+The `result` variable should be an array with two matches of `"ss"`
 
 ```js
-assert(calRegex.test('Cal and Ricky both like racing.'));
-```
-
-Your regex should not match `"Cal"` in the middle of a string.
-
-```js
-assert(!calRegex.test('Ricky and Cal both like racing.'));
+assert(result[0] == 'ss' && result[1] == 'ss');
 ```
 
 # --seed--
@@ -57,15 +45,15 @@ assert(!calRegex.test('Ricky and Cal both like racing.'));
 ## --seed-contents--
 
 ```js
-let rickyAndCal = "Cal and Ricky both like racing.";
-let calRegex = /change/; // Change this line
-let result = calRegex.test(rickyAndCal);
+let difficultSpelling = "Mississippi";
+let myRegex = /change/; // Change this line
+let result = difficultSpelling.match(myRegex);
 ```
 
 # --solutions--
 
 ```js
-let rickyAndCal = "Cal and Ricky both like racing.";
-let calRegex = /^Cal/; // Change this line
-let result = calRegex.test(rickyAndCal);
+let difficultSpelling = "Mississippi";
+let myRegex = /s+/g; // Change this line
+let result = difficultSpelling.match(myRegex);
 ```
