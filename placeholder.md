@@ -1,61 +1,98 @@
 ---
-id: 587d7db8367417b2b2512ba3
-title: Match Whitespace
+id: 587d7dba367417b2b2512ba9
+title: Positive and Negative Lookahead
 challengeType: 1
-forumTopicId: 301359
-dashedName: match-whitespace
+forumTopicId: 301360
+dashedName: positive-and-negative-lookahead
 ---
 
 # --description--
 
-The challenges so far have covered matching letters of the alphabet and numbers. You can also match the whitespace or spaces between letters.
+<dfn>Lookaheads</dfn> are patterns that tell JavaScript to look-ahead in your string to check for patterns further along. This can be useful when you want to search for multiple patterns over the same string.
 
-You can search for whitespace using `\s`, which is a lowercase `s`. This pattern not only matches whitespace, but also carriage return, tab, form feed, and new line characters. You can think of it as similar to the character class `[ \r\t\f\n\v]`.
+There are two kinds of lookaheads: <dfn>positive lookahead</dfn> and <dfn>negative lookahead</dfn>.
+
+A positive lookahead will look to make sure the element in the search pattern is there, but won't actually match it. A positive lookahead is used as `(?=...)` where the `...` is the required part that is not matched.
+
+On the other hand, a negative lookahead will look to make sure the element in the search pattern is not there. A negative lookahead is used as `(?!...)` where the `...` is the pattern that you do not want to be there. The rest of the pattern is returned if the negative lookahead part is not present.
+
+Lookaheads are a bit confusing but some examples will help.
 
 ```js
-let whiteSpace = "Whitespace. Whitespace everywhere!"
-let spaceRegex = /\s/g;
-whiteSpace.match(spaceRegex);
-// Returns [" ", " "]
+let quit = "qu";
+let noquit = "qt";
+let quRegex= /q(?=u)/;
+let qRegex = /q(?!u)/;
+quit.match(quRegex); // Returns ["q"]
+noquit.match(qRegex); // Returns ["q"]
+```
+
+A more practical use of lookaheads is to check two or more patterns in one string. Here is a (naively) simple password checker that looks for between 3 and 6 characters and at least one number:
+
+```js
+let password = "abc123";
+let checkPass = /(?=\w{3,6})(?=\D*\d)/;
+checkPass.test(password); // Returns true
 ```
 
 # --instructions--
 
-Change the regex `countWhiteSpace` to look for multiple whitespace characters in a string.
+Use lookaheads in the `pwRegex` to match passwords that are greater than 5 characters long, and have two consecutive digits.
 
 # --hints--
 
-Your regex should use the global flag.
+Your regex should use two positive `lookaheads`.
 
 ```js
-assert(countWhiteSpace.global);
+assert(pwRegex.source.match(/\(\?=.*?\)\(\?=.*?\)/) !== null);
 ```
 
-Your regex should use the shorthand character `\s` to match all whitespace characters.
+Your regex should not match `"astronaut"`
 
 ```js
-assert(/\\s/.test(countWhiteSpace.source));
+assert(!pwRegex.test('astronaut'));
 ```
 
-Your regex should find eight spaces in `"Men are from Mars and women are from Venus."`
+Your regex should not match `"banan1"`
 
 ```js
-assert(
-  'Men are from Mars and women are from Venus.'.match(countWhiteSpace).length ==
-    8
-);
+assert(!pwRegex.test('banan1'));
 ```
 
-Your regex should find three spaces in `"Space: the final frontier."`
+Your regex should match `"bana12"`
 
 ```js
-assert('Space: the final frontier.'.match(countWhiteSpace).length == 3);
+assert(pwRegex.test('bana12'));
 ```
 
-Your regex should find no spaces in `"MindYourPersonalSpace"`
+Your regex should match `"abc123"`
 
 ```js
-assert('MindYourPersonalSpace'.match(countWhiteSpace) == null);
+assert(pwRegex.test('abc123'));
+```
+
+Your regex should not match `"12345"`
+
+```js
+assert(!pwRegex.test('12345'));
+```
+
+Your regex should match `"8pass99"`
+
+```js
+assert(pwRegex.test('8pass99'));
+```
+
+Your regex should not match `"1a2bcde"`
+
+```js
+assert(!pwRegex.test('1a2bcde'));
+```
+
+Your regex should match `"astr1on11aut"`
+
+```js
+assert(pwRegex.test('astr1on11aut'));
 ```
 
 # --seed--
@@ -63,15 +100,13 @@ assert('MindYourPersonalSpace'.match(countWhiteSpace) == null);
 ## --seed-contents--
 
 ```js
-let sample = "Whitespace is important in separating words";
-let countWhiteSpace = /change/; // Change this line
-let result = sample.match(countWhiteSpace);
+let sampleWord = "astronaut";
+let pwRegex = /change/; // Change this line
+let result = pwRegex.test(sampleWord);
 ```
 
 # --solutions--
 
 ```js
-let sample = "Whitespace is important in separating words";
-let countWhiteSpace = /\s/g;
-let result = sample.match(countWhiteSpace);
+let pwRegex =  /(?=\w{6})(?=\w*\d{2})/;
 ```
