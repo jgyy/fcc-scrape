@@ -1,41 +1,61 @@
 ---
-id: 587d7db6367417b2b2512b98
-title: Match Single Characters Not Specified
+id: 587d7db8367417b2b2512ba3
+title: Match Whitespace
 challengeType: 1
-forumTopicId: 301358
-dashedName: match-single-characters-not-specified
+forumTopicId: 301359
+dashedName: match-whitespace
 ---
 
 # --description--
 
-So far, you have created a set of characters that you want to match, but you could also create a set of characters that you do not want to match. These types of character sets are called <dfn>negated character sets</dfn>.
+The challenges so far have covered matching letters of the alphabet and numbers. You can also match the whitespace or spaces between letters.
 
-To create a negated character set, you place a caret character (`^`) after the opening bracket and before the characters you do not want to match.
+You can search for whitespace using `\s`, which is a lowercase `s`. This pattern not only matches whitespace, but also carriage return, tab, form feed, and new line characters. You can think of it as similar to the character class `[ \r\t\f\n\v]`.
 
-For example, `/[^aeiou]/gi` matches all characters that are not a vowel. Note that characters like `.`, `!`, `[`, `@`, `/` and white space are matched - the negated vowel character set only excludes the vowel characters.
+```js
+let whiteSpace = "Whitespace. Whitespace everywhere!"
+let spaceRegex = /\s/g;
+whiteSpace.match(spaceRegex);
+// Returns [" ", " "]
+```
 
 # --instructions--
 
-Create a single regex that matches all characters that are not a number or a vowel. Remember to include the appropriate flags in the regex.
+Change the regex `countWhiteSpace` to look for multiple whitespace characters in a string.
 
 # --hints--
 
-Your regex `myRegex` should match 9 items.
+Your regex should use the global flag.
 
 ```js
-assert(result.length == 9);
+assert(countWhiteSpace.global);
 ```
 
-Your regex `myRegex` should use the global flag.
+Your regex should use the shorthand character `\s` to match all whitespace characters.
 
 ```js
-assert(myRegex.flags.match(/g/).length == 1);
+assert(/\\s/.test(countWhiteSpace.source));
 ```
 
-Your regex `myRegex` should use the case insensitive flag.
+Your regex should find eight spaces in `"Men are from Mars and women are from Venus."`
 
 ```js
-assert(myRegex.flags.match(/i/).length == 1);
+assert(
+  'Men are from Mars and women are from Venus.'.match(countWhiteSpace).length ==
+    8
+);
+```
+
+Your regex should find three spaces in `"Space: the final frontier."`
+
+```js
+assert('Space: the final frontier.'.match(countWhiteSpace).length == 3);
+```
+
+Your regex should find no spaces in `"MindYourPersonalSpace"`
+
+```js
+assert('MindYourPersonalSpace'.match(countWhiteSpace) == null);
 ```
 
 # --seed--
@@ -43,15 +63,15 @@ assert(myRegex.flags.match(/i/).length == 1);
 ## --seed-contents--
 
 ```js
-let quoteSample = "3 blind mice.";
-let myRegex = /change/; // Change this line
-let result = myRegex; // Change this line
+let sample = "Whitespace is important in separating words";
+let countWhiteSpace = /change/; // Change this line
+let result = sample.match(countWhiteSpace);
 ```
 
 # --solutions--
 
 ```js
-let quoteSample = "3 blind mice.";
-let myRegex = /[^0-9aeiou]/gi; // Change this line
-let result = quoteSample.match(myRegex); // Change this line
+let sample = "Whitespace is important in separating words";
+let countWhiteSpace = /\s/g;
+let result = sample.match(countWhiteSpace);
 ```
