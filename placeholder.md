@@ -1,101 +1,55 @@
 ---
-id: 587d7db5367417b2b2512b94
-title: Match Anything with Wildcard Period
+id: 587d7db7367417b2b2512b9d
+title: Match Beginning String Patterns
 challengeType: 1
-forumTopicId: 301348
-dashedName: match-anything-with-wildcard-period
+forumTopicId: 301349
+dashedName: match-beginning-string-patterns
 ---
 
 # --description--
 
-Sometimes you won't (or don't need to) know the exact characters in your patterns. Thinking of all words that match, say, a misspelling would take a long time. Luckily, you can save time using the wildcard character: `.`
+Prior challenges showed that regular expressions can be used to look for a number of matches. They are also used to search for patterns in specific positions in strings.
 
-The wildcard character `.` will match any one character. The wildcard is also called `dot` and `period`. You can use the wildcard character just like any other character in the regex. For example, if you wanted to match `"hug"`, `"huh"`, `"hut"`, and `"hum"`, you can use the regex `/hu./` to match all four words.
+In an earlier challenge, you used the caret character (`^`) inside a character set to create a negated character set in the form `[^thingsThatWillNotBeMatched]`. Outside of a character set, the caret is used to search for patterns at the beginning of strings.
 
 ```js
-let humStr = "I'll hum a song";
-let hugStr = "Bear hug";
-let huRegex = /hu./;
-huRegex.test(humStr); // Returns true
-huRegex.test(hugStr); // Returns true
+let firstString = "Ricky is first and can be found.";
+let firstRegex = /^Ricky/;
+firstRegex.test(firstString);
+// Returns true
+let notFirst = "You can't find Ricky now.";
+firstRegex.test(notFirst);
+// Returns false
 ```
 
 # --instructions--
 
-Complete the regex `unRegex` so that it matches the strings `"run"`, `"sun"`, `"fun"`, `"pun"`, `"nun"`, and `"bun"`. Your regex should use the wildcard character.
+Use the caret character in a regex to find `"Cal"` only in the beginning of the string `rickyAndCal`.
 
 # --hints--
 
-You should use the `.test()` method.
+Your regex should search for `"Cal"` with a capital letter.
 
 ```js
-assert(code.match(/\.test\(.*\)/));
+assert(calRegex.source == '^Cal');
 ```
 
-You should use the wildcard character in your regex `unRegex`
+Your regex should not use any flags.
 
 ```js
-assert(/\./.test(unRegex.source));
+assert(calRegex.flags == '');
 ```
 
-Your regex `unRegex` should match `"run"` in `"Let us go on a run."`
+Your regex should match `"Cal"` at the beginning of the string.
 
 ```js
-unRegex.lastIndex = 0;
-assert(unRegex.test('Let us go on a run.'));
+assert(calRegex.test('Cal and Ricky both like racing.'));
 ```
 
-Your regex `unRegex` should match `"sun"` in `"The sun is out today."`
+Your regex should not match `"Cal"` in the middle of a string.
 
 ```js
-unRegex.lastIndex = 0;
-assert(unRegex.test('The sun is out today.'));
-```
-
-Your regex `unRegex` should match `"fun"` in `"Coding is a lot of fun."`
-
-```js
-unRegex.lastIndex = 0;
-assert(unRegex.test('Coding is a lot of fun.'));
-```
-
-Your regex `unRegex` should match `"pun"` in `"Seven days without a pun makes one weak."`
-
-```js
-unRegex.lastIndex = 0;
-assert(unRegex.test('Seven days without a pun makes one weak.'));
-```
-
-Your regex `unRegex` should match `"nun"` in `"One takes a vow to be a nun."`
-
-```js
-unRegex.lastIndex = 0;
-assert(unRegex.test('One takes a vow to be a nun.'));
-```
-
-Your regex `unRegex` should match `"bun"` in `"She got fired from the hot dog stand for putting her hair in a bun."`
-
-```js
-unRegex.lastIndex = 0;
-assert(
-  unRegex.test(
-    'She got fired from the hot dog stand for putting her hair in a bun.'
-  )
-);
-```
-
-Your regex `unRegex` should not match `"There is a bug in my code."`
-
-```js
-unRegex.lastIndex = 0;
-assert(!unRegex.test('There is a bug in my code.'));
-```
-
-Your regex `unRegex` should not match `"Catch me if you can."`
-
-```js
-unRegex.lastIndex = 0;
-assert(!unRegex.test('Catch me if you can.'));
+assert(!calRegex.test('Ricky and Cal both like racing.'));
 ```
 
 # --seed--
@@ -103,15 +57,15 @@ assert(!unRegex.test('Catch me if you can.'));
 ## --seed-contents--
 
 ```js
-let exampleStr = "Let's have fun with regular expressions!";
-let unRegex = /change/; // Change this line
-let result = unRegex.test(exampleStr);
+let rickyAndCal = "Cal and Ricky both like racing.";
+let calRegex = /change/; // Change this line
+let result = calRegex.test(rickyAndCal);
 ```
 
 # --solutions--
 
 ```js
-let exampleStr = "Let's have fun with regular expressions!";
-let unRegex = /.un/; // Change this line
-let result = unRegex.test(exampleStr);
+let rickyAndCal = "Cal and Ricky both like racing.";
+let calRegex = /^Cal/; // Change this line
+let result = calRegex.test(rickyAndCal);
 ```
