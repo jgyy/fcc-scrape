@@ -1,73 +1,68 @@
 ---
-id: 587d7db9367417b2b2512ba5
-title: Specify Upper and Lower Number of Matches
+id: 587d7dbb367417b2b2512bab
+title: Use Capture Groups to Search and Replace
 challengeType: 1
-forumTopicId: 301367
-dashedName: specify-upper-and-lower-number-of-matches
+forumTopicId: 301368
+dashedName: use-capture-groups-to-search-and-replace
 ---
 
 # --description--
 
-Recall that you use the plus sign `+` to look for one or more characters and the asterisk `*` to look for zero or more characters. These are convenient but sometimes you want to match a certain range of patterns.
+Searching is useful. However, you can make searching even more powerful when it also changes (or replaces) the text you match.
 
-You can specify the lower and upper number of patterns with <dfn>quantity specifiers</dfn>. Quantity specifiers are used with curly brackets (`{` and `}`). You put two numbers between the curly brackets - for the lower and upper number of patterns.
-
-For example, to match only the letter `a` appearing between `3` and `5` times in the string `"ah"`, your regex would be `/a{3,5}h/`.
+You can search and replace text in a string using `.replace()` on a string. The inputs for `.replace()` is first the regex pattern you want to search for. The second parameter is the string to replace the match or a function to do something.
 
 ```js
-let A4 = "aaaah";
-let A2 = "aah";
-let multipleA = /a{3,5}h/;
-multipleA.test(A4); // Returns true
-multipleA.test(A2); // Returns false
+let wrongText = "The sky is silver.";
+let silverRegex = /silver/;
+wrongText.replace(silverRegex, "blue");
+// Returns "The sky is blue."
+```
+
+You can also access capture groups in the replacement string with dollar signs (`$`).
+
+```js
+"Code Camp".replace(/(\w+)\s(\w+)/, '$2 $1');
+// Returns "Camp Code"
 ```
 
 # --instructions--
 
-Change the regex `ohRegex` to match the entire phrase `"Oh no"` only when it has `3` to `6` letter `h`'s.
+Write a regex `fixRegex` using three capture groups that will search for each word in the string "one two three". Then update the `replaceText` variable to replace "one two three" with the string "three two one" and assign the result to the `result` variable. Make sure you are utilizing capture groups in the replacement string using the dollar sign (`$`) syntax.
 
 # --hints--
 
-Your regex should use curly brackets.
+You should use `.replace()` to search and replace.
 
 ```js
-assert(ohRegex.source.match(/{.*?}/).length > 0);
+assert(code.match(/\.replace\(.*\)/));
 ```
 
-Your regex should not match `"Ohh no"`
+Your regex should change `"one two three"` to `"three two one"`
 
 ```js
-assert(!ohRegex.test('Ohh no'));
+assert(result === 'three two one');
 ```
 
-Your regex should match `"Ohhh no"`
+You should not change the last line.
 
 ```js
-assert('Ohhh no'.match(ohRegex)[0].length === 7);
+assert(code.match(/result\s*=\s*str\.replace\(.*?\)/));
 ```
 
-Your regex should match `"Ohhhh no"`
+`fixRegex` should use at least three capture groups.
 
 ```js
-assert('Ohhhh no'.match(ohRegex)[0].length === 8);
+assert(new RegExp(fixRegex.source + '|').exec('').length - 1 >= 3);
 ```
 
-Your regex should match `"Ohhhhh no"`
+`replaceText` should use parenthesized submatch string(s) (i.e. the nth parenthesized submatch string, $n, corresponds to the nth capture group).
 
 ```js
-assert('Ohhhhh no'.match(ohRegex)[0].length === 9);
-```
-
-Your regex should match `"Ohhhhhh no"`
-
-```js
-assert('Ohhhhhh no'.match(ohRegex)[0].length === 10);
-```
-
-Your regex should not match `"Ohhhhhhh no"`
-
-```js
-assert(!ohRegex.test('Ohhhhhhh no'));
+{
+  const re = /(\$\d{1,2})+(?:[\D]|\b)/g;
+  assert(replaceText.match(re).length >= 3);
+}
 ```
 
 # --seed--
@@ -75,15 +70,17 @@ assert(!ohRegex.test('Ohhhhhhh no'));
 ## --seed-contents--
 
 ```js
-let ohStr = "Ohhh no";
-let ohRegex = /change/; // Change this line
-let result = ohRegex.test(ohStr);
+let str = "one two three";
+let fixRegex = /change/; // Change this line
+let replaceText = ""; // Change this line
+let result = str.replace(fixRegex, replaceText);
 ```
 
 # --solutions--
 
 ```js
-let ohStr = "Ohhh no";
-let ohRegex = /Oh{3,6} no/; // Change this line
-let result = ohRegex.test(ohStr);
+let str = "one two three";
+let fixRegex = /(\w+) (\w+) (\w+)/g; // Change this line
+let replaceText = "$3 $2 $1"; // Change this line
+let result = str.replace(fixRegex, replaceText);
 ```
