@@ -1,68 +1,42 @@
 ---
-id: 587d7dbb367417b2b2512bab
-title: Use Capture Groups to Search and Replace
+id: 587d7db3367417b2b2512b8e
+title: Using the Test Method
 challengeType: 1
-forumTopicId: 301368
-dashedName: use-capture-groups-to-search-and-replace
+forumTopicId: 301369
+dashedName: using-the-test-method
 ---
 
 # --description--
 
-Searching is useful. However, you can make searching even more powerful when it also changes (or replaces) the text you match.
+Regular expressions are used in programming languages to match parts of strings. You create patterns to help you do that matching.
 
-You can search and replace text in a string using `.replace()` on a string. The inputs for `.replace()` is first the regex pattern you want to search for. The second parameter is the string to replace the match or a function to do something.
+If you want to find the word `"the"` in the string `"The dog chased the cat"`, you could use the following regular expression: `/the/`. Notice that quote marks are not required within the regular expression.
 
-```js
-let wrongText = "The sky is silver.";
-let silverRegex = /silver/;
-wrongText.replace(silverRegex, "blue");
-// Returns "The sky is blue."
-```
-
-You can also access capture groups in the replacement string with dollar signs (`$`).
+JavaScript has multiple ways to use regexes. One way to test a regex is using the `.test()` method. The `.test()` method takes the regex, applies it to a string (which is placed inside the parentheses), and returns `true` or `false` if your pattern finds something or not.
 
 ```js
-"Code Camp".replace(/(\w+)\s(\w+)/, '$2 $1');
-// Returns "Camp Code"
+let testStr = "freeCodeCamp";
+let testRegex = /Code/;
+testRegex.test(testStr);
+// Returns true
 ```
 
 # --instructions--
 
-Write a regex `fixRegex` using three capture groups that will search for each word in the string "one two three". Then update the `replaceText` variable to replace "one two three" with the string "three two one" and assign the result to the `result` variable. Make sure you are utilizing capture groups in the replacement string using the dollar sign (`$`) syntax.
+Apply the regex `myRegex` on the string `myString` using the `.test()` method.
 
 # --hints--
 
-You should use `.replace()` to search and replace.
+You should use `.test()` to test the regex.
 
 ```js
-assert(code.match(/\.replace\(.*\)/));
+assert(code.match(/myRegex.test\(\s*myString\s*\)/));
 ```
 
-Your regex should change `"one two three"` to `"three two one"`
+Your result should return `true`.
 
 ```js
-assert(result === 'three two one');
-```
-
-You should not change the last line.
-
-```js
-assert(code.match(/result\s*=\s*str\.replace\(.*?\)/));
-```
-
-`fixRegex` should use at least three capture groups.
-
-```js
-assert(new RegExp(fixRegex.source + '|').exec('').length - 1 >= 3);
-```
-
-`replaceText` should use parenthesized submatch string(s) (i.e. the nth parenthesized submatch string, $n, corresponds to the nth capture group).
-
-```js
-{
-  const re = /(\$\d{1,2})+(?:[\D]|\b)/g;
-  assert(replaceText.match(re).length >= 3);
-}
+assert(result === true);
 ```
 
 # --seed--
@@ -70,17 +44,15 @@ assert(new RegExp(fixRegex.source + '|').exec('').length - 1 >= 3);
 ## --seed-contents--
 
 ```js
-let str = "one two three";
-let fixRegex = /change/; // Change this line
-let replaceText = ""; // Change this line
-let result = str.replace(fixRegex, replaceText);
+let myString = "Hello, World!";
+let myRegex = /Hello/;
+let result = myRegex; // Change this line
 ```
 
 # --solutions--
 
 ```js
-let str = "one two three";
-let fixRegex = /(\w+) (\w+) (\w+)/g; // Change this line
-let replaceText = "$3 $2 $1"; // Change this line
-let result = str.replace(fixRegex, replaceText);
+let myString = "Hello, World!";
+let myRegex = /Hello/;
+let result = myRegex.test(myString); // Change this line
 ```
