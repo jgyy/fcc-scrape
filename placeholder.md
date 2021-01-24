@@ -1,53 +1,54 @@
 ---
-id: 587d7db5367417b2b2512b96
-title: Match Letters of the Alphabet
+id: 587d7db3367417b2b2512b8f
+title: Match Literal Strings
 challengeType: 1
-forumTopicId: 301354
-dashedName: match-letters-of-the-alphabet
+forumTopicId: 301355
+dashedName: match-literal-strings
 ---
 
 # --description--
 
-You saw how you can use <dfn>character sets</dfn> to specify a group of characters to match, but that's a lot of typing when you need to match a large range of characters (for example, every letter in the alphabet). Fortunately, there is a built-in feature that makes this short and simple.
-
-Inside a character set, you can define a range of characters to match using a hyphen character: `-`.
-
-For example, to match lowercase letters `a` through `e` you would use `[a-e]`.
+In the last challenge, you searched for the word `"Hello"` using the regular expression `/Hello/`. That regex searched for a literal match of the string `"Hello"`. Here's another example searching for a literal match of the string `"Kevin"`:
 
 ```js
-let catStr = "cat";
-let batStr = "bat";
-let matStr = "mat";
-let bgRegex = /[a-e]at/;
-catStr.match(bgRegex); // Returns ["cat"]
-batStr.match(bgRegex); // Returns ["bat"]
-matStr.match(bgRegex); // Returns null
+let testStr = "Hello, my name is Kevin.";
+let testRegex = /Kevin/;
+testRegex.test(testStr);
+// Returns true
 ```
+
+Any other forms of `"Kevin"` will not match. For example, the regex `/Kevin/` will not match `"kevin"` or `"KEVIN"`.
+
+```js
+let wrongRegex = /kevin/;
+wrongRegex.test(testStr);
+// Returns false
+```
+
+A future challenge will show how to match those other forms as well.
 
 # --instructions--
 
-Match all the letters in the string `quoteSample`.
-
-**Note**: Be sure to match both uppercase and lowercase letters.
+Complete the regex `waldoRegex` to find `"Waldo"` in the string `waldoIsHiding` with a literal match.
 
 # --hints--
 
-Your regex `alphabetRegex` should match 35 items.
+Your regex `waldoRegex` should find `"Waldo"`
 
 ```js
-assert(result.length == 35);
+assert(waldoRegex.test(waldoIsHiding));
 ```
 
-Your regex `alphabetRegex` should use the global flag.
+Your regex `waldoRegex` should not search for anything else.
 
 ```js
-assert(alphabetRegex.flags.match(/g/).length == 1);
+assert(!waldoRegex.test('Somewhere is hiding in this text.'));
 ```
 
-Your regex `alphabetRegex` should use the case insensitive flag.
+You should perform a literal string match with your regex.
 
 ```js
-assert(alphabetRegex.flags.match(/i/).length == 1);
+assert(!/\/.*\/i/.test(code));
 ```
 
 # --seed--
@@ -55,15 +56,15 @@ assert(alphabetRegex.flags.match(/i/).length == 1);
 ## --seed-contents--
 
 ```js
-let quoteSample = "The quick brown fox jumps over the lazy dog.";
-let alphabetRegex = /change/; // Change this line
-let result = alphabetRegex; // Change this line
+let waldoIsHiding = "Somewhere Waldo is hiding in this text.";
+let waldoRegex = /search/; // Change this line
+let result = waldoRegex.test(waldoIsHiding);
 ```
 
 # --solutions--
 
 ```js
-let quoteSample = "The quick brown fox jumps over the lazy dog.";
-let alphabetRegex = /[a-z]/gi; // Change this line
-let result = quoteSample.match(alphabetRegex); // Change this line
+let waldoIsHiding = "Somewhere Waldo is hiding in this text.";
+let waldoRegex = /Waldo/; // Change this line
+let result = waldoRegex.test(waldoIsHiding);
 ```
