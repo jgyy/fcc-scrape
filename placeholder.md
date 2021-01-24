@@ -1,74 +1,53 @@
 ---
-id: 587d7db8367417b2b2512ba0
-title: Match Everything But Letters and Numbers
+id: 587d7db5367417b2b2512b96
+title: Match Letters of the Alphabet
 challengeType: 1
-forumTopicId: 301353
-dashedName: match-everything-but-letters-and-numbers
+forumTopicId: 301354
+dashedName: match-letters-of-the-alphabet
 ---
 
 # --description--
 
-You've learned that you can use a shortcut to match alphanumerics `[A-Za-z0-9_]` using `\w`. A natural pattern you might want to search for is the opposite of alphanumerics.
+You saw how you can use <dfn>character sets</dfn> to specify a group of characters to match, but that's a lot of typing when you need to match a large range of characters (for example, every letter in the alphabet). Fortunately, there is a built-in feature that makes this short and simple.
 
-You can search for the opposite of the `\w` with `\W`. Note, the opposite pattern uses a capital letter. This shortcut is the same as `[^A-Za-z0-9_]`.
+Inside a character set, you can define a range of characters to match using a hyphen character: `-`.
+
+For example, to match lowercase letters `a` through `e` you would use `[a-e]`.
 
 ```js
-let shortHand = /\W/;
-let numbers = "42%";
-let sentence = "Coding!";
-numbers.match(shortHand); // Returns ["%"]
-sentence.match(shortHand); // Returns ["!"]
+let catStr = "cat";
+let batStr = "bat";
+let matStr = "mat";
+let bgRegex = /[a-e]at/;
+catStr.match(bgRegex); // Returns ["cat"]
+batStr.match(bgRegex); // Returns ["bat"]
+matStr.match(bgRegex); // Returns null
 ```
 
 # --instructions--
 
-Use the shorthand character class `\W` to count the number of non-alphanumeric characters in various quotes and strings.
+Match all the letters in the string `quoteSample`.
+
+**Note**: Be sure to match both uppercase and lowercase letters.
 
 # --hints--
 
-Your regex should use the global flag.
+Your regex `alphabetRegex` should match 35 items.
 
 ```js
-assert(nonAlphabetRegex.global);
+assert(result.length == 35);
 ```
 
-Your regex should find 6 non-alphanumeric characters in `"The five boxing wizards jump quickly."`.
+Your regex `alphabetRegex` should use the global flag.
 
 ```js
-assert(
-  'The five boxing wizards jump quickly.'.match(nonAlphabetRegex).length == 6
-);
+assert(alphabetRegex.flags.match(/g/).length == 1);
 ```
 
-Your regex should use the shorthand character to match characters which are non-alphanumeric.
+Your regex `alphabetRegex` should use the case insensitive flag.
 
 ```js
-assert(/\\W/.test(nonAlphabetRegex.source));
-```
-
-Your regex should find 8 non-alphanumeric characters in `"Pack my box with five dozen liquor jugs."`
-
-```js
-assert(
-  'Pack my box with five dozen liquor jugs.'.match(nonAlphabetRegex).length == 8
-);
-```
-
-Your regex should find 6 non-alphanumeric characters in `"How vexingly quick daft zebras jump!"`
-
-```js
-assert(
-  'How vexingly quick daft zebras jump!'.match(nonAlphabetRegex).length == 6
-);
-```
-
-Your regex should find 12 non-alphanumeric characters in `"123 456 7890 ABC def GHI jkl MNO pqr STU vwx YZ."`
-
-```js
-assert(
-  '123 456 7890 ABC def GHI jkl MNO pqr STU vwx YZ.'.match(nonAlphabetRegex)
-    .length == 12
-);
+assert(alphabetRegex.flags.match(/i/).length == 1);
 ```
 
 # --seed--
@@ -76,15 +55,15 @@ assert(
 ## --seed-contents--
 
 ```js
-let quoteSample = "The five boxing wizards jump quickly.";
-let nonAlphabetRegex = /change/; // Change this line
-let result = quoteSample.match(nonAlphabetRegex).length;
+let quoteSample = "The quick brown fox jumps over the lazy dog.";
+let alphabetRegex = /change/; // Change this line
+let result = alphabetRegex; // Change this line
 ```
 
 # --solutions--
 
 ```js
-let quoteSample = "The five boxing wizards_jump quickly.";
-let nonAlphabetRegex = /\W/g; // Change this line
-let result = quoteSample.match(nonAlphabetRegex).length;
+let quoteSample = "The quick brown fox jumps over the lazy dog.";
+let alphabetRegex = /[a-z]/gi; // Change this line
+let result = quoteSample.match(alphabetRegex); // Change this line
 ```
