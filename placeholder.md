@@ -1,74 +1,75 @@
 ---
-id: 587d7db9367417b2b2512ba7
-title: Specify Exact Number of Matches
+id: 587d7db9367417b2b2512ba6
+title: Specify Only the Lower Number of Matches
 challengeType: 1
-forumTopicId: 301365
-dashedName: specify-exact-number-of-matches
+forumTopicId: 301366
+dashedName: specify-only-the-lower-number-of-matches
 ---
 
 # --description--
 
-You can specify the lower and upper number of patterns with quantity specifiers using curly brackets. Sometimes you only want a specific number of matches.
+You can specify the lower and upper number of patterns with quantity specifiers using curly brackets. Sometimes you only want to specify the lower number of patterns with no upper limit.
 
-To specify a certain number of patterns, just have that one number between the curly brackets.
+To only specify the lower number of patterns, keep the first number followed by a comma.
 
-For example, to match only the word `"hah"` with the letter `a` `3` times, your regex would be `/ha{3}h/`.
+For example, to match only the string `"hah"` with the letter `a` appearing at least `3` times, your regex would be `/ha{3,}h/`.
 
 ```js
 let A4 = "haaaah";
-let A3 = "haaah";
+let A2 = "haah";
 let A100 = "h" + "a".repeat(100) + "h";
-let multipleHA = /ha{3}h/;
-multipleHA.test(A4); // Returns false
-multipleHA.test(A3); // Returns true
-multipleHA.test(A100); // Returns false
+let multipleA = /ha{3,}h/;
+multipleA.test(A4); // Returns true
+multipleA.test(A2); // Returns false
+multipleA.test(A100); // Returns true
 ```
 
 # --instructions--
 
-Change the regex `timRegex` to match the word `"Timber"` only when it has four letter `m`'s.
+Change the regex `haRegex` to match the word `"Hazzah"` only when it has four or more letter `z`'s.
 
 # --hints--
 
 Your regex should use curly brackets.
 
 ```js
-assert(timRegex.source.match(/{.*?}/).length > 0);
+assert(haRegex.source.match(/{.*?}/).length > 0);
 ```
 
-Your regex should not match `"Timber"`
+Your regex should not match `"Hazzah"`
 
 ```js
-timRegex.lastIndex = 0;
-assert(!timRegex.test('Timber'));
+assert(!haRegex.test('Hazzah'));
 ```
 
-Your regex should not match `"Timmber"`
+Your regex should not match `"Hazzzah"`
 
 ```js
-timRegex.lastIndex = 0;
-assert(!timRegex.test('Timmber'));
+assert(!haRegex.test('Hazzzah'));
 ```
 
-Your regex should not match `"Timmmber"`
+Your regex should match `"Hazzzzah"`
 
 ```js
-timRegex.lastIndex = 0;
-assert(!timRegex.test('Timmmber'));
+assert('Hazzzzah'.match(haRegex)[0].length === 8);
 ```
 
-Your regex should match `"Timmmmber"`
+Your regex should match `"Hazzzzzah"`
 
 ```js
-timRegex.lastIndex = 0;
-assert(timRegex.test('Timmmmber'));
+assert('Hazzzzzah'.match(haRegex)[0].length === 9);
 ```
 
-Your regex should not match `"Timber"` with 30 `m`'s in it.
+Your regex should match `"Hazzzzzzah"`
 
 ```js
-timRegex.lastIndex = 0;
-assert(!timRegex.test('Ti' + 'm'.repeat(30) + 'ber'));
+assert('Hazzzzzzah'.match(haRegex)[0].length === 10);
+```
+
+Your regex should match `"Hazzah"` with 30 `z`'s in it.
+
+```js
+assert('Hazzzzzzzzzzzzzzzzzzzzzzzzzzzzzzah'.match(haRegex)[0].length === 34);
 ```
 
 # --seed--
@@ -76,15 +77,15 @@ assert(!timRegex.test('Ti' + 'm'.repeat(30) + 'ber'));
 ## --seed-contents--
 
 ```js
-let timStr = "Timmmmber";
-let timRegex = /change/; // Change this line
-let result = timRegex.test(timStr);
+let haStr = "Hazzzzah";
+let haRegex = /change/; // Change this line
+let result = haRegex.test(haStr);
 ```
 
 # --solutions--
 
 ```js
-let timStr = "Timmmmber";
-let timRegex = /Tim{4}ber/; // Change this line
-let result = timRegex.test(timStr);
+let haStr = "Hazzzzah";
+let haRegex = /Haz{4,}ah/; // Change this line
+let result = haRegex.test(haStr);
 ```
