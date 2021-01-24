@@ -1,80 +1,69 @@
 ---
-id: 587d7db7367417b2b2512b9f
-title: Match All Letters and Numbers
+id: 587d7db8367417b2b2512ba1
+title: Match All Non-Numbers
 challengeType: 1
-forumTopicId: 301346
-dashedName: match-all-letters-and-numbers
+forumTopicId: 301347
+dashedName: match-all-non-numbers
 ---
 
 # --description--
 
-Using character classes, you were able to search for all letters of the alphabet with `[a-z]`. This kind of character class is common enough that there is a shortcut for it, although it includes a few extra characters as well.
+The last challenge showed how to search for digits using the shortcut `\d` with a lowercase `d`. You can also search for non-digits using a similar shortcut that uses an uppercase `D` instead.
 
-The closest character class in JavaScript to match the alphabet is `\w`. This shortcut is equal to `[A-Za-z0-9_]`. This character class matches upper and lowercase letters plus numbers. Note, this character class also includes the underscore character (`_`).
-
-```js
-let longHand = /[A-Za-z0-9_]+/;
-let shortHand = /\w+/;
-let numbers = "42";
-let varNames = "important_var";
-longHand.test(numbers); // Returns true
-shortHand.test(numbers); // Returns true
-longHand.test(varNames); // Returns true
-shortHand.test(varNames); // Returns true
-```
-
-These shortcut character classes are also known as <dfn>shorthand character classes</dfn>.
+The shortcut to look for non-digit characters is `\D`. This is equal to the character class `[^0-9]`, which looks for a single character that is not a number between zero and nine.
 
 # --instructions--
 
-Use the shorthand character class `\w` to count the number of alphanumeric characters in various quotes and strings.
+Use the shorthand character class for non-digits `\D` to count how many non-digits are in movie titles.
 
 # --hints--
+
+Your regex should use the shortcut character to match non-digit characters
+
+```js
+assert(/\\D/.test(noNumRegex.source));
+```
 
 Your regex should use the global flag.
 
 ```js
-assert(alphabetRegexV2.global);
+assert(noNumRegex.global);
 ```
 
-Your regex should use the shorthand character `\w` to match all characters which are alphanumeric.
+Your regex should find no non-digits in `"9"`.
 
 ```js
-assert(/\\w/.test(alphabetRegexV2.source));
+assert('9'.match(noNumRegex) == null);
 ```
 
-Your regex should find 31 alphanumeric characters in `"The five boxing wizards jump quickly."`
+Your regex should find 6 non-digits in `"Catch 22"`.
 
 ```js
-assert(
-  'The five boxing wizards jump quickly.'.match(alphabetRegexV2).length === 31
-);
+assert('Catch 22'.match(noNumRegex).length == 6);
 ```
 
-Your regex should find 32 alphanumeric characters in `"Pack my box with five dozen liquor jugs."`
+Your regex should find 11 non-digits in `"101 Dalmatians"`.
 
 ```js
-assert(
-  'Pack my box with five dozen liquor jugs.'.match(alphabetRegexV2).length ===
-    32
-);
+assert('101 Dalmatians'.match(noNumRegex).length == 11);
 ```
 
-Your regex should find 30 alphanumeric characters in `"How vexingly quick daft zebras jump!"`
+Your regex should find 15 non-digits in `"One, Two, Three"`.
 
 ```js
-assert(
-  'How vexingly quick daft zebras jump!'.match(alphabetRegexV2).length === 30
-);
+assert('One, Two, Three'.match(noNumRegex).length == 15);
 ```
 
-Your regex should find 36 alphanumeric characters in `"123 456 7890 ABC def GHI jkl MNO pqr STU vwx YZ."`
+Your regex should find 12 non-digits in `"21 Jump Street"`.
 
 ```js
-assert(
-  '123 456 7890 ABC def GHI jkl MNO pqr STU vwx YZ.'.match(alphabetRegexV2)
-    .length === 36
-);
+assert('21 Jump Street'.match(noNumRegex).length == 12);
+```
+
+Your regex should find 17 non-digits in `"2001: A Space Odyssey"`.
+
+```js
+assert('2001: A Space Odyssey'.match(noNumRegex).length == 17);
 ```
 
 # --seed--
@@ -82,15 +71,15 @@ assert(
 ## --seed-contents--
 
 ```js
-let quoteSample = "The five boxing wizards jump quickly.";
-let alphabetRegexV2 = /change/; // Change this line
-let result = quoteSample.match(alphabetRegexV2).length;
+let movieName = "2001: A Space Odyssey";
+let noNumRegex = /change/; // Change this line
+let result = movieName.match(noNumRegex).length;
 ```
 
 # --solutions--
 
 ```js
-let quoteSample = "The five boxing wizards jump quickly.";
-let alphabetRegexV2 = /\w/g; // Change this line
-let result = quoteSample.match(alphabetRegexV2).length;
+let movieName = "2001: A Space Odyssey";
+let noNumRegex = /\D/g; // Change this line
+let result = movieName.match(noNumRegex).length;
 ```
