@@ -1,69 +1,69 @@
 ---
-id: 587d7db8367417b2b2512ba1
-title: Match All Non-Numbers
+id: 5d712346c441eddfaeb5bdef
+title: Match All Numbers
 challengeType: 1
-forumTopicId: 301347
-dashedName: match-all-non-numbers
+forumTopicId: 18181
+dashedName: match-all-numbers
 ---
 
 # --description--
 
-The last challenge showed how to search for digits using the shortcut `\d` with a lowercase `d`. You can also search for non-digits using a similar shortcut that uses an uppercase `D` instead.
+You've learned shortcuts for common string patterns like alphanumerics. Another common pattern is looking for just digits or numbers.
 
-The shortcut to look for non-digit characters is `\D`. This is equal to the character class `[^0-9]`, which looks for a single character that is not a number between zero and nine.
+The shortcut to look for digit characters is `\d`, with a lowercase `d`. This is equal to the character class `[0-9]`, which looks for a single character of any number between zero and nine.
 
 # --instructions--
 
-Use the shorthand character class for non-digits `\D` to count how many non-digits are in movie titles.
+Use the shorthand character class `\d` to count how many digits are in movie titles. Written out numbers ("six" instead of 6) do not count.
 
 # --hints--
 
-Your regex should use the shortcut character to match non-digit characters
+Your regex should use the shortcut character to match digit characters
 
 ```js
-assert(/\\D/.test(noNumRegex.source));
+assert(/\\d/.test(numRegex.source));
 ```
 
 Your regex should use the global flag.
 
 ```js
-assert(noNumRegex.global);
+assert(numRegex.global);
 ```
 
-Your regex should find no non-digits in `"9"`.
+Your regex should find 1 digit in `"9"`.
 
 ```js
-assert('9'.match(noNumRegex) == null);
+assert('9'.match(numRegex).length == 1);
 ```
 
-Your regex should find 6 non-digits in `"Catch 22"`.
+Your regex should find 2 digits in `"Catch 22"`.
 
 ```js
-assert('Catch 22'.match(noNumRegex).length == 6);
+assert('Catch 22'.match(numRegex).length == 2);
 ```
 
-Your regex should find 11 non-digits in `"101 Dalmatians"`.
+Your regex should find 3 digits in `"101 Dalmatians"`.
 
 ```js
-assert('101 Dalmatians'.match(noNumRegex).length == 11);
+assert('101 Dalmatians'.match(numRegex).length == 3);
 ```
 
-Your regex should find 15 non-digits in `"One, Two, Three"`.
+Your regex should find no digits in `"One, Two, Three"`.
 
 ```js
-assert('One, Two, Three'.match(noNumRegex).length == 15);
+assert('One, Two, Three'.match(numRegex) == null);
 ```
 
-Your regex should find 12 non-digits in `"21 Jump Street"`.
+Your regex should find 2 digits in `"21 Jump Street"`.
 
 ```js
-assert('21 Jump Street'.match(noNumRegex).length == 12);
+assert('21 Jump Street'.match(numRegex).length == 2);
 ```
 
-Your regex should find 17 non-digits in `"2001: A Space Odyssey"`.
+Your regex should find 4 digits in `"2001: A Space Odyssey"`.
 
 ```js
-assert('2001: A Space Odyssey'.match(noNumRegex).length == 17);
+assert('2001: A Space Odyssey'.match(numRegex).length == 4);
 ```
 
 # --seed--
@@ -72,14 +72,14 @@ assert('2001: A Space Odyssey'.match(noNumRegex).length == 17);
 
 ```js
 let movieName = "2001: A Space Odyssey";
-let noNumRegex = /change/; // Change this line
-let result = movieName.match(noNumRegex).length;
+let numRegex = /change/; // Change this line
+let result = movieName.match(numRegex).length;
 ```
 
 # --solutions--
 
 ```js
 let movieName = "2001: A Space Odyssey";
-let noNumRegex = /\D/g; // Change this line
-let result = movieName.match(noNumRegex).length;
+let numRegex = /\d/g; // Change this line
+let result = movieName.match(numRegex).length;
 ```
