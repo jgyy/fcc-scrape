@@ -1,54 +1,60 @@
 ---
-id: 587d7db3367417b2b2512b8f
-title: Match Literal Strings
+id: 587d7db9367417b2b2512ba4
+title: Match Non-Whitespace Characters
 challengeType: 1
-forumTopicId: 301355
-dashedName: match-literal-strings
+forumTopicId: 18210
+dashedName: match-non-whitespace-characters
 ---
 
 # --description--
 
-In the last challenge, you searched for the word `"Hello"` using the regular expression `/Hello/`. That regex searched for a literal match of the string `"Hello"`. Here's another example searching for a literal match of the string `"Kevin"`:
+You learned about searching for whitespace using `\s`, with a lowercase `s`. You can also search for everything except whitespace.
+
+Search for non-whitespace using `\S`, which is an uppercase `s`. This pattern will not match whitespace, carriage return, tab, form feed, and new line characters. You can think of it being similar to the character class `[^ \r\t\f\n\v]`.
 
 ```js
-let testStr = "Hello, my name is Kevin.";
-let testRegex = /Kevin/;
-testRegex.test(testStr);
-// Returns true
+let whiteSpace = "Whitespace. Whitespace everywhere!"
+let nonSpaceRegex = /\S/g;
+whiteSpace.match(nonSpaceRegex).length; // Returns 32
 ```
-
-Any other forms of `"Kevin"` will not match. For example, the regex `/Kevin/` will not match `"kevin"` or `"KEVIN"`.
-
-```js
-let wrongRegex = /kevin/;
-wrongRegex.test(testStr);
-// Returns false
-```
-
-A future challenge will show how to match those other forms as well.
 
 # --instructions--
 
-Complete the regex `waldoRegex` to find `"Waldo"` in the string `waldoIsHiding` with a literal match.
+Change the regex `countNonWhiteSpace` to look for multiple non-whitespace characters in a string.
 
 # --hints--
 
-Your regex `waldoRegex` should find `"Waldo"`
+Your regex should use the global flag.
 
 ```js
-assert(waldoRegex.test(waldoIsHiding));
+assert(countNonWhiteSpace.global);
 ```
 
-Your regex `waldoRegex` should not search for anything else.
+Your regex should use the shorthand character `\S` to match all non-whitespace characters.
 
 ```js
-assert(!waldoRegex.test('Somewhere is hiding in this text.'));
+assert(/\\S/.test(countNonWhiteSpace.source));
 ```
 
-You should perform a literal string match with your regex.
+Your regex should find 35 non-spaces in `"Men are from Mars and women are from Venus."`
 
 ```js
-assert(!/\/.*\/i/.test(code));
+assert(
+  'Men are from Mars and women are from Venus.'.match(countNonWhiteSpace)
+    .length == 35
+);
+```
+
+Your regex should find 23 non-spaces in `"Space: the final frontier."`
+
+```js
+assert('Space: the final frontier.'.match(countNonWhiteSpace).length == 23);
+```
+
+Your regex should find 21 non-spaces in `"MindYourPersonalSpace"`
+
+```js
+assert('MindYourPersonalSpace'.match(countNonWhiteSpace).length == 21);
 ```
 
 # --seed--
@@ -56,15 +62,15 @@ assert(!/\/.*\/i/.test(code));
 ## --seed-contents--
 
 ```js
-let waldoIsHiding = "Somewhere Waldo is hiding in this text.";
-let waldoRegex = /search/; // Change this line
-let result = waldoRegex.test(waldoIsHiding);
+let sample = "Whitespace is important in separating words";
+let countNonWhiteSpace = /change/; // Change this line
+let result = sample.match(countNonWhiteSpace);
 ```
 
 # --solutions--
 
 ```js
-let waldoIsHiding = "Somewhere Waldo is hiding in this text.";
-let waldoRegex = /Waldo/; // Change this line
-let result = waldoRegex.test(waldoIsHiding);
+let sample = "Whitespace is important in separating words";
+let countNonWhiteSpace = /\S/g; // Change this line
+let result = sample.match(countNonWhiteSpace);
 ```
