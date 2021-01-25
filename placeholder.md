@@ -1,53 +1,66 @@
 ---
-id: bad87fee1348bd9aedc08845
-title: Add Font Awesome Icons to all of our Buttons
+id: bad87fee1348bd9aedd08845
+title: Add Font Awesome Icons to our Buttons
 challengeType: 0
-forumTopicId: 16637
+forumTopicId: 16638
 required:
   - link: 'https://use.fontawesome.com/releases/v5.8.1/css/all.css'
     raw: true
-dashedName: add-font-awesome-icons-to-all-of-our-buttons
+dashedName: add-font-awesome-icons-to-our-buttons
 ---
 
 # --description--
 
-Font Awesome is a convenient library of icons. These icons can be web fonts or vector graphics. These icons are treated just like fonts. You can specify their size using pixels, and they will assume the font size of their parent HTML elements.
+Font Awesome is a convenient library of icons. These icons can be webfonts or vector graphics. These icons are treated just like fonts. You can specify their size using pixels, and they will assume the font size of their parent HTML elements.
+
+You can include Font Awesome in any app by adding the following code to the top of your HTML:
+
+`<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">`
+
+In this case, we've already added it for you to this page behind the scenes.
+
+The `i` element was originally used to make other elements italic, but is now commonly used for icons. You can add the Font Awesome classes to the `i` element to turn it into an icon, for example:
+
+`<i class="fas fa-info-circle"></i>`
+
+Note that the `span` element is also acceptable for use with icons.
 
 # --instructions--
 
-Use Font Awesome to add an `info-circle` icon to your info button and a `trash` icon to your delete button.
-
-**Note:** The `span` element is an acceptable alternative to the `i` element for the directions below.
+Use Font Awesome to add a `thumbs-up` icon to your like button by giving it an `i` element with the classes `fas` and `fa-thumbs-up`. Make sure to keep the text "Like" next to the icon.
 
 # --hints--
 
-You should add a `<i class="fas fa-info-circle"></i>` within your info button element.
+You should add an `i` element with the classes `fas` and `fa-thumbs-up`.
 
 ```js
-assert(
-  $('.btn-info > i').is('.fas.fa-info-circle') ||
-    $('.btn-info > span').is('.fas.fa-info-circle')
-);
+assert($('i').is('.fas.fa-thumbs-up') || $('span').is('.fas.fa-thumbs-up'));
 ```
 
-You should add a `<i class="fas fa-trash"></i>` within your delete button element.
+Your `fa-thumbs-up` icon should be located within the Like button.
 
 ```js
 assert(
-  $('.btn-danger > i').is('.fas.fa-trash') ||
-    $('.btn-danger > span').is('.fas.fa-trash')
-);
-```
-
-Each of your `i` elements should have a closing tag and `<i class="fas fa-thumbs-up"></i>` is in your like button element.
-
-```js
-assert(
-  code.match(/<\/i>|<\/span/g) &&
-    code.match(/<\/i|<\/span>/g).length > 2 &&
-    ($('.btn-primary > i').is('.fas.fa-thumbs-up') ||
+  ($('i.fa-thumbs-up').parent().text().match(/Like/gi) &&
+    $('.btn-primary > i').is('.fas.fa-thumbs-up')) ||
+    ($('span.fa-thumbs-up').parent().text().match(/Like/gi) &&
       $('.btn-primary > span').is('.fas.fa-thumbs-up'))
 );
+```
+
+Your `i` element should be nested within your `button` element.
+
+```js
+assert(
+  $('button').children('i').length > 0 ||
+    $('button').children('span').length > 0
+);
+```
+
+Your icon element should have a closing tag.
+
+```js
+assert(code.match(/<\/i>|<\/span>/g));
 ```
 
 # --seed--
@@ -81,7 +94,7 @@ assert(
   <img src="https://bit.ly/fcc-running-cats" class="img-responsive" alt="Three kittens running towards the camera.">
   <div class="row">
     <div class="col-xs-4">
-      <button class="btn btn-block btn-primary"><i class="fas fa-thumbs-up"></i> Like</button>
+      <button class="btn btn-block btn-primary">Like</button>
     </div>
     <div class="col-xs-4">
       <button class="btn btn-block btn-info">Info</button>
@@ -146,10 +159,10 @@ assert(
       <button class="btn btn-block btn-primary"><i class="fas fa-thumbs-up"></i> Like</button>
     </div>
     <div class="col-xs-4">
-      <button class="btn btn-block btn-info"><i class="fas fa-info-circle"></i> Info</button>
+      <button class="btn btn-block btn-info">Info</button>
     </div>
     <div class="col-xs-4">
-      <button class="btn btn-block btn-danger"><i class="fas fa-trash"></i> Delete</button>
+      <button class="btn btn-block btn-danger">Delete</button>
     </div>
   </div>
   <p>Things cats <span class="text-danger">love:</span></p>
