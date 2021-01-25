@@ -1,56 +1,46 @@
 ---
-id: bad88fee1348ce8acef08815
-title: Use the Bootstrap Grid to Put Elements Side By Side
+id: bad87fee1348ce8acef08814
+title: Warn Your Users of a Dangerous Action with btn-danger
 challengeType: 0
-forumTopicId: 18371
-dashedName: use-the-bootstrap-grid-to-put-elements-side-by-side
+forumTopicId: 18375
+dashedName: warn-your-users-of-a-dangerous-action-with-btn-danger
 ---
 
 # --description--
 
-Bootstrap uses a responsive 12-column grid system, which makes it easy to put elements into rows and specify each element's relative width. Most of Bootstrap's classes can be applied to a `div` element.
+Bootstrap comes with several pre-defined colors for buttons. The `btn-danger` class is the button color you'll use to notify users that the button performs a destructive action, such as deleting a cat photo.
 
-Bootstrap has different column width attributes that it uses depending on how wide the user's screen is. For example, phones have narrow screens, and laptops have wider screens.
+Create a button with the text "Delete" and give it the class `btn-danger`.
 
-Take for example Bootstrap's `col-md-*` class. Here, `md` means medium, and `*` is a number specifying how many columns wide the element should be. In this case, the column width of an element on a medium-sized screen, such as a laptop, is being specified.
-
-In the Cat Photo App that we're building, we'll use `col-xs-*`, where `xs` means extra small (like an extra-small mobile phone screen), and `*` is the number of columns specifying how many columns wide the element should be.
-
-Put the `Like`, `Info` and `Delete` buttons side-by-side by nesting all three of them within one `<div class="row">` element, then each of them within a `<div class="col-xs-4">` element.
-
-The `row` class is applied to a `div`, and the buttons themselves can be nested within it.
+Note that these buttons still need the `btn` and `btn-block` classes.
 
 # --hints--
 
-Your buttons should all be nested within the same `div` element with the class `row`.
+You should create a new `button` element with the text "Delete".
 
 ```js
-assert($('div.row:has(button)').length > 0);
+assert(new RegExp('Delete', 'gi').test($('button').text()));
 ```
 
-Each of your Bootstrap buttons should be nested within its own `div` element with the class `col-xs-4`.
+All of your Bootstrap buttons should have the `btn` and `btn-block` classes.
 
 ```js
-assert($('div.col-xs-4:has(button)').length > 2);
+assert($('button.btn-block.btn').length > 2);
 ```
 
-Each of your `button` elements should have a closing tag.
+Your new button should have the class `btn-danger`.
+
+```js
+assert($('button').hasClass('btn-danger'));
+```
+
+All of your `button` elements should have closing tags.
 
 ```js
 assert(
   code.match(/<\/button>/g) &&
     code.match(/<button/g) &&
     code.match(/<\/button>/g).length === code.match(/<button/g).length
-);
-```
-
-Each of your `div` elements should have a closing tag.
-
-```js
-assert(
-  code.match(/<\/div>/g) &&
-    code.match(/<div/g) &&
-    code.match(/<\/div>/g).length === code.match(/<div/g).length
 );
 ```
 
@@ -96,7 +86,6 @@ assert(
   <img src="https://bit.ly/fcc-running-cats" class="img-responsive" alt="Three kittens running towards the camera.">
   <button class="btn btn-block btn-primary">Like</button>
   <button class="btn btn-block btn-info">Info</button>
-  <button class="btn btn-block btn-danger">Delete</button>
   <p>Things cats love:</p>
   <ul>
     <li>cat nip</li>
@@ -159,18 +148,9 @@ assert(
   <a href="#"><img class="smaller-image thick-green-border" src="https://bit.ly/fcc-relaxing-cat" alt="A cute orange cat lying on its back."></a>
 
   <img src="https://bit.ly/fcc-running-cats" class="img-responsive" alt="Three kittens running towards the camera.">
-  <div class="row">
-    <div class="col-xs-4">
-      <button class="btn btn-block btn-primary">Like</button>
-    </div>
-    <div class="col-xs-4">
-      <button class="btn btn-block btn-info">Info</button>
-    </div>
-    <div class="col-xs-4">
-      <button class="btn btn-block btn-danger">Delete</button>
-    </div>
-  </div>
-  
+  <button class="btn btn-block btn-primary">Like</button>
+  <button class="btn btn-block btn-info">Info</button>
+  <button class="btn btn-block btn-danger">Delete</button>
   <p>Things cats love:</p>
   <ul>
     <li>cat nip</li>
