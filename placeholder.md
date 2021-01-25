@@ -1,50 +1,23 @@
 ---
-id: bad87fee1348bd9bec908846
-title: Create a Bootstrap Row
+id: bad87fee1348bd9aec908852
+title: Create a Class to Target with jQuery Selectors
 challengeType: 0
-forumTopicId: 16813
-dashedName: create-a-bootstrap-row
+forumTopicId: 16815
+dashedName: create-a-class-to-target-with-jquery-selectors
 ---
 
 # --description--
 
-Now we'll create a Bootstrap row for our inline elements.
+Not every class needs to have corresponding CSS. Sometimes we create classes just for the purpose of selecting these elements more easily using jQuery.
 
-Create a `div` element below the `h3` tag, with a class of `row`.
+Give each of your `button` elements the class `target`.
 
 # --hints--
 
-You should add a `div` element below your `h3` element.
+You should apply the `target` class to each of your `button` elements.
 
 ```js
-assert(
-  $('div').length > 1 &&
-    $('div.row h3.text-primary').length == 0 &&
-    $('div.row + h3.text-primary').length == 0 &&
-    $('h3.text-primary + div.row').length > 0
-);
-```
-
-Your `div` element should have the class `row`
-
-```js
-assert($('div').hasClass('row'));
-```
-
-Your `row div` should be nested inside the `container-fluid div`
-
-```js
-assert($('div.container-fluid div.row').length > 0);
-```
-
-Your `div` element should have a closing tag.
-
-```js
-assert(
-  code.match(/<\/div>/g) &&
-    code.match(/<div/g) &&
-    code.match(/<\/div>/g).length === code.match(/<div/g).length
-);
+assert($('.target').length > 5);
 ```
 
 # --seed--
@@ -54,7 +27,22 @@ assert(
 ```html
 <div class="container-fluid">
   <h3 class="text-primary text-center">jQuery Playground</h3>
-
+  <div class="row">
+    <div class="col-xs-6">
+      <div class="well">
+        <button class="btn btn-default"></button>
+        <button class="btn btn-default"></button>
+        <button class="btn btn-default"></button>
+      </div>
+    </div>
+    <div class="col-xs-6">
+      <div class="well">
+        <button class="btn btn-default"></button>
+        <button class="btn btn-default"></button>
+        <button class="btn btn-default"></button>
+      </div>
+    </div>
+  </div>
 </div>
 ```
 
@@ -63,6 +51,21 @@ assert(
 ```html
 <div class="container-fluid">
   <h3 class="text-primary text-center">jQuery Playground</h3>
-  <div class="row"></div>
+  <div class="row">
+    <div class="col-xs-6">
+      <div class="well">
+        <button class="target btn btn-default"></button>
+        <button class="target btn btn-default"></button>
+        <button class="target btn btn-default"></button>
+      </div>
+    </div>
+    <div class="col-xs-6">
+      <div class="well">
+        <button class="target btn btn-default"></button>
+        <button class="target btn btn-default"></button>
+        <button class="target btn btn-default"></button>
+      </div>
+    </div>
+  </div>
 </div>
 ```
