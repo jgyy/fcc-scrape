@@ -1,55 +1,50 @@
 ---
-id: bad87fee1348bd9aec908846
-title: Create a Bootstrap Headline
+id: bad87fee1348bd9bec908846
+title: Create a Bootstrap Row
 challengeType: 0
-forumTopicId: 16812
-dashedName: create-a-bootstrap-headline
+forumTopicId: 16813
+dashedName: create-a-bootstrap-row
 ---
 
 # --description--
 
-Now let's build something from scratch to practice our HTML, CSS and Bootstrap skills.
+Now we'll create a Bootstrap row for our inline elements.
 
-We'll build a jQuery playground, which we'll soon put to use in our jQuery challenges.
-
-To start with, create an `h3` element, with the text `jQuery Playground`.
-
-Color your `h3` element with the `text-primary` Bootstrap class, and center it with the `text-center` Bootstrap class.
+Create a `div` element below the `h3` tag, with a class of `row`.
 
 # --hints--
 
-You should add an `h3` element to your page.
-
-```js
-assert($('h3') && $('h3').length > 0);
-```
-
-Your `h3` element should have a closing tag.
+You should add a `div` element below your `h3` element.
 
 ```js
 assert(
-  code.match(/<\/h3>/g) &&
-    code.match(/<h3/g) &&
-    code.match(/<\/h3>/g).length === code.match(/<h3/g).length
+  $('div').length > 1 &&
+    $('div.row h3.text-primary').length == 0 &&
+    $('div.row + h3.text-primary').length == 0 &&
+    $('h3.text-primary + div.row').length > 0
 );
 ```
 
-Your `h3` element should be colored by applying the class `text-primary`
+Your `div` element should have the class `row`
 
 ```js
-assert($('h3').hasClass('text-primary'));
+assert($('div').hasClass('row'));
 ```
 
-Your `h3` element should be centered by applying the class `text-center`
+Your `row div` should be nested inside the `container-fluid div`
 
 ```js
-assert($('h3').hasClass('text-center'));
+assert($('div.container-fluid div.row').length > 0);
 ```
 
-Your `h3` element should have the text `jQuery Playground`.
+Your `div` element should have a closing tag.
 
 ```js
-assert.isTrue(/jquery(\s)+playground/gi.test($('h3').text()));
+assert(
+  code.match(/<\/div>/g) &&
+    code.match(/<div/g) &&
+    code.match(/<\/div>/g).length === code.match(/<div/g).length
+);
 ```
 
 # --seed--
@@ -57,10 +52,17 @@ assert.isTrue(/jquery(\s)+playground/gi.test($('h3').text()));
 ## --seed-contents--
 
 ```html
+<div class="container-fluid">
+  <h3 class="text-primary text-center">jQuery Playground</h3>
+
+</div>
 ```
 
 # --solutions--
 
 ```html
-<h3 class="text-primary text-center">jQuery Playground</h3>
+<div class="container-fluid">
+  <h3 class="text-primary text-center">jQuery Playground</h3>
+  <div class="row"></div>
+</div>
 ```
