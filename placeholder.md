@@ -1,45 +1,32 @@
 ---
-id: bad87fee1348cd8acef08812
-title: Create a Block Element Bootstrap Button
+id: bad87fee1348cd8acdf08812
+title: Create a Bootstrap Button
 challengeType: 0
-forumTopicId: 16810
-dashedName: create-a-block-element-bootstrap-button
+forumTopicId: 16811
+dashedName: create-a-bootstrap-button
 ---
 
 # --description--
 
-Normally, your `button` elements with the `btn` and `btn-default` classes are only as wide as the text that they contain. For example:
+Bootstrap has its own styles for `button` elements, which look much better than the plain HTML ones.
 
-`<button class="btn btn-default">Submit</button>`
-
-This button would only be as wide as the word "Submit".
-
-<button class='btn btn-default'>Submit</button>
-
-By making them block elements with the additional class of `btn-block`, your button will stretch to fill your page's entire horizontal space and any elements following it will flow onto a "new line" below the block.
-
-`<button class="btn btn-default btn-block">Submit</button>`
-
-This button would take up 100% of the available width.
-
-<button class='btn btn-default btn-block'>Submit</button>
-
-Note that these buttons still need the `btn` class.
-
-Add Bootstrap's `btn-block` class to your Bootstrap button.
+Create a new `button` element below your large kitten photo. Give it the `btn` and `btn-default` classes, as well as the text of "Like".
 
 # --hints--
 
-Your button should still have the `btn` and `btn-default` classes.
+You should create a new `button` element with the text "Like".
+
+```js
+assert(
+  new RegExp('like', 'gi').test($('button').text()) &&
+    $('img.img-responsive + button.btn').length > 0
+);
+```
+
+Your new button should have two classes: `btn` and `btn-default`.
 
 ```js
 assert($('button').hasClass('btn') && $('button').hasClass('btn-default'));
-```
-
-Your button should have the class `btn-block`.
-
-```js
-assert($('button').hasClass('btn-block'));
 ```
 
 All of your `button` elements should have closing tags.
@@ -92,7 +79,7 @@ assert(
   <a href="#"><img class="smaller-image thick-green-border" src="https://bit.ly/fcc-relaxing-cat" alt="A cute orange cat lying on its back."></a>
 
   <img src="https://bit.ly/fcc-running-cats" class="img-responsive" alt="Three kittens running towards the camera.">
-  <button class="btn btn-default">Like</button>
+
   <p>Things cats love:</p>
   <ul>
     <li>cat nip</li>
@@ -120,6 +107,9 @@ assert(
 # --solutions--
 
 ```html
+<html>
+<head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css">
 <style>
   .red-text {
@@ -146,7 +136,8 @@ assert(
     width: 100px;
   }
 </style>
-
+</head>
+<body>
 <div class="container-fluid">
   <h2 class="red-text text-center">CatPhotoApp</h2>
 
@@ -155,7 +146,10 @@ assert(
   <a href="#"><img class="smaller-image thick-green-border" src="https://bit.ly/fcc-relaxing-cat" alt="A cute orange cat lying on its back."></a>
 
   <img src="https://bit.ly/fcc-running-cats" class="img-responsive" alt="Three kittens running towards the camera.">
-  <button class="btn btn-block btn-default">Like</button>
+
+   <!-- ADD Bootstrap Styled Button -->
+  <button class="btn btn-default">Like</button> 
+
   <p>Things cats love:</p>
   <ul>
     <li>cat nip</li>
@@ -178,4 +172,5 @@ assert(
     <button type="submit">Submit</button>
   </form>
 </div>
+</html>
 ```
