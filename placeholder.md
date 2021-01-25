@@ -1,47 +1,31 @@
 ---
-id: bad87fee1348cd8acef08813
-title: Call out Optional Actions with btn-info
+id: bad87fee1348bd8acde08812
+title: Center Text with Bootstrap
 challengeType: 0
-forumTopicId: 16770
-dashedName: call-out-optional-actions-with-btn-info
+forumTopicId: 16771
+dashedName: center-text-with-bootstrap
 ---
 
 # --description--
 
-Bootstrap comes with several pre-defined colors for buttons. The `btn-info` class is used to call attention to optional actions that the user can take.
+Now that we're using Bootstrap, we can center our heading element to make it look better. All we need to do is add the class `text-center` to our `h2` element.
 
-Create a new block-level Bootstrap button below your "Like" button with the text "Info", and add Bootstrap's `btn-info` and `btn-block` classes to it.
+Remember that you can add several classes to the same element by separating each of them with a space, like this:
 
-Note that these buttons still need the `btn` and `btn-block` classes.
+`<h2 class="red-text text-center">your text</h2>`
 
 # --hints--
 
-You should create a new `button` element with the text "Info".
+Your `h2` element should be centered by applying the class `text-center`
 
 ```js
-assert(new RegExp('info', 'gi').test($('button').text()));
+assert($('h2').hasClass('text-center'));
 ```
 
-Both of your Bootstrap buttons should have the `btn` and `btn-block` classes.
+Your `h2` element should still have the class `red-text`
 
 ```js
-assert($('button.btn-block.btn').length > 1);
-```
-
-Your new button should have the class `btn-info`.
-
-```js
-assert($('button').hasClass('btn-info'));
-```
-
-All of your `button` elements should have closing tags.
-
-```js
-assert(
-  code.match(/<\/button>/g) &&
-    code.match(/<button/g) &&
-    code.match(/<\/button>/g).length === code.match(/<button/g).length
-);
+assert($('h2').hasClass('red-text'));
 ```
 
 # --seed--
@@ -77,14 +61,13 @@ assert(
 </style>
 
 <div class="container-fluid">
-  <h2 class="red-text text-center">CatPhotoApp</h2>
+  <h2 class="red-text">CatPhotoApp</h2>
 
   <p>Click here for <a href="#">cat photos</a>.</p>
 
   <a href="#"><img class="smaller-image thick-green-border" src="https://bit.ly/fcc-relaxing-cat" alt="A cute orange cat lying on its back."></a>
 
   <img src="https://bit.ly/fcc-running-cats" class="img-responsive" alt="Three kittens running towards the camera.">
-  <button class="btn btn-block btn-primary">Like</button>
   <p>Things cats love:</p>
   <ul>
     <li>cat nip</li>
@@ -147,9 +130,6 @@ assert(
   <a href="#"><img class="smaller-image thick-green-border" src="https://bit.ly/fcc-relaxing-cat" alt="A cute orange cat lying on its back."></a>
 
   <img src="https://bit.ly/fcc-running-cats" class="img-responsive" alt="Three kittens running towards the camera.">
-  <button class="btn btn-block btn-primary">Like</button>
-  <button class="btn btn-block btn-info">Info</button>
-
   <p>Things cats love:</p>
   <ul>
     <li>cat nip</li>
