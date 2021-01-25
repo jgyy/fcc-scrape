@@ -1,31 +1,55 @@
 ---
-id: bad87fee1348bd8acde08812
-title: Center Text with Bootstrap
+id: bad87fee1348cd8acef08812
+title: Create a Block Element Bootstrap Button
 challengeType: 0
-forumTopicId: 16771
-dashedName: center-text-with-bootstrap
+forumTopicId: 16810
+dashedName: create-a-block-element-bootstrap-button
 ---
 
 # --description--
 
-Now that we're using Bootstrap, we can center our heading element to make it look better. All we need to do is add the class `text-center` to our `h2` element.
+Normally, your `button` elements with the `btn` and `btn-default` classes are only as wide as the text that they contain. For example:
 
-Remember that you can add several classes to the same element by separating each of them with a space, like this:
+`<button class="btn btn-default">Submit</button>`
 
-`<h2 class="red-text text-center">your text</h2>`
+This button would only be as wide as the word "Submit".
+
+<button class='btn btn-default'>Submit</button>
+
+By making them block elements with the additional class of `btn-block`, your button will stretch to fill your page's entire horizontal space and any elements following it will flow onto a "new line" below the block.
+
+`<button class="btn btn-default btn-block">Submit</button>`
+
+This button would take up 100% of the available width.
+
+<button class='btn btn-default btn-block'>Submit</button>
+
+Note that these buttons still need the `btn` class.
+
+Add Bootstrap's `btn-block` class to your Bootstrap button.
 
 # --hints--
 
-Your `h2` element should be centered by applying the class `text-center`
+Your button should still have the `btn` and `btn-default` classes.
 
 ```js
-assert($('h2').hasClass('text-center'));
+assert($('button').hasClass('btn') && $('button').hasClass('btn-default'));
 ```
 
-Your `h2` element should still have the class `red-text`
+Your button should have the class `btn-block`.
 
 ```js
-assert($('h2').hasClass('red-text'));
+assert($('button').hasClass('btn-block'));
+```
+
+All of your `button` elements should have closing tags.
+
+```js
+assert(
+  code.match(/<\/button>/g) &&
+    code.match(/<button/g) &&
+    code.match(/<\/button>/g).length === code.match(/<button/g).length
+);
 ```
 
 # --seed--
@@ -61,13 +85,14 @@ assert($('h2').hasClass('red-text'));
 </style>
 
 <div class="container-fluid">
-  <h2 class="red-text">CatPhotoApp</h2>
+  <h2 class="red-text text-center">CatPhotoApp</h2>
 
   <p>Click here for <a href="#">cat photos</a>.</p>
 
   <a href="#"><img class="smaller-image thick-green-border" src="https://bit.ly/fcc-relaxing-cat" alt="A cute orange cat lying on its back."></a>
 
   <img src="https://bit.ly/fcc-running-cats" class="img-responsive" alt="Three kittens running towards the camera.">
+  <button class="btn btn-default">Like</button>
   <p>Things cats love:</p>
   <ul>
     <li>cat nip</li>
@@ -130,6 +155,7 @@ assert($('h2').hasClass('red-text'));
   <a href="#"><img class="smaller-image thick-green-border" src="https://bit.ly/fcc-relaxing-cat" alt="A cute orange cat lying on its back."></a>
 
   <img src="https://bit.ly/fcc-running-cats" class="img-responsive" alt="Three kittens running towards the camera.">
+  <button class="btn btn-block btn-default">Like</button>
   <p>Things cats love:</p>
   <ul>
     <li>cat nip</li>
