@@ -1,35 +1,35 @@
 ---
-id: bad87fee1348bd9aeda08845
-title: Responsively Style Checkboxes
+id: bad87fee1348bd9aedb08845
+title: Responsively Style Radio Buttons
 challengeType: 0
-forumTopicId: 18269
+forumTopicId: 18270
 required:
   - link: >-
       https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.css
     raw: true
-dashedName: responsively-style-checkboxes
+dashedName: responsively-style-radio-buttons
 ---
 
 # --description--
 
-Since Bootstrap's `col-xs-*` classes are applicable to all `form` elements, you can use them on your checkboxes too! This way, the checkboxes will be evenly spread out across the page, regardless of how wide the screen resolution is.
+You can use Bootstrap's `col-xs-*` classes on `form` elements, too! This way, our radio buttons will be evenly spread out across the page, regardless of how wide the screen resolution is.
 
-# --instructions--
+Nest both your radio buttons within a `<div class="row">` element. Then nest each of them within a `<div class="col-xs-6">` element.
 
-Nest all three of your checkboxes in a `<div class="row">` element. Then nest each of them in a `<div class="col-xs-4">` element.
+**Note:** As a reminder, radio buttons are `input` elements of type `radio`.
 
 # --hints--
 
-All of your checkboxes should be nested inside one `div` with the class `row`.
+All of your radio buttons should be nested inside one `div` with the class `row`.
 
 ```js
-assert($('div.row:has(input[type="checkbox"])').length > 0);
+assert($('div.row:has(input[type="radio"])').length > 0);
 ```
 
-Each of your checkboxes should be nested inside its own `div` with the class `col-xs-4`.
+Each of your radio buttons should be nested inside its own `div` with the class `col-xs-6`.
 
 ```js
-assert($('div.col-xs-4:has(input[type="checkbox"])').length > 2);
+assert($('div.col-xs-6:has(input[type="radio"])').length > 1);
 ```
 
 All of your `div` elements should have closing tags.
@@ -59,7 +59,6 @@ assert(
     border-style: solid;
     border-radius: 50%;
   }
-
 </style>
 
 <div class="container-fluid">
@@ -96,14 +95,8 @@ assert(
     <li>other cats</li>
   </ol>
   <form action="https://freecatphotoapp.com/submit-cat-photo">
-    <div class="row">
-      <div class="col-xs-6">
-        <label><input type="radio" name="indoor-outdoor"> Indoor</label>
-      </div>
-      <div class="col-xs-6">
-        <label><input type="radio" name="indoor-outdoor"> Outdoor</label>
-      </div>
-    </div>
+    <label><input type="radio" name="indoor-outdoor"> Indoor</label>
+    <label><input type="radio" name="indoor-outdoor"> Outdoor</label>
     <label><input type="checkbox" name="personality"> Loving</label>
     <label><input type="checkbox" name="personality"> Lazy</label>
     <label><input type="checkbox" name="personality"> Crazy</label>
@@ -128,7 +121,6 @@ assert(
     border-style: solid;
     border-radius: 50%;
   }
-
 </style>
 
 <div class="container-fluid">
@@ -165,7 +157,7 @@ assert(
     <li>other cats</li>
   </ol>
   <form action="https://freecatphotoapp.com/submit-cat-photo">
-    <div class="row">
+  <div class="row">
       <div class="col-xs-6">
         <label><input type="radio" name="indoor-outdoor"> Indoor</label>
       </div>
@@ -173,17 +165,9 @@ assert(
         <label><input type="radio" name="indoor-outdoor"> Outdoor</label>
       </div>
     </div>
-    <div class="row">
-      <div class="col-xs-4">
-        <label><input type="checkbox" name="personality"> Loving</label>   
-      </div>
-      <div class="col-xs-4">
-         <label><input type="checkbox" name="personality"> Lazy</label>
-      </div>
-      <div class="col-xs-4">
-         <label><input type="checkbox" name="personality"> Crazy</label>
-      </div>
-    </div>
+    <label><input type="checkbox" name="personality"> Loving</label>
+    <label><input type="checkbox" name="personality"> Lazy</label>
+    <label><input type="checkbox" name="personality"> Crazy</label>
     <input type="text" placeholder="cat photo URL" required>
     <button type="submit">Submit</button>
   </form>
