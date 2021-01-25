@@ -1,43 +1,29 @@
 ---
-id: bad87fee1348bd9aec908853
-title: Add id Attributes to Bootstrap Elements
+id: bad87fee1348bd9aec908850
+title: Apply the Default Bootstrap Button Style
 challengeType: 0
-forumTopicId: 16639
-dashedName: add-id-attributes-to-bootstrap-elements
+forumTopicId: 16657
+dashedName: apply-the-default-bootstrap-button-style
 ---
 
 # --description--
 
-Recall that in addition to class attributes, you can give each of your elements an `id` attribute.
+Bootstrap has another button class called `btn-default`.
 
-Each id must be unique to a specific element and used only once per page.
-
-Let's give a unique id to each of our `div` elements of class `well`.
-
-Remember that you can give an element an id like this:
-
-`<div class="well" id="center-well">`
-
-Give the well on the left the id of `left-well`. Give the well on the right the id of `right-well`.
+Apply both the `btn` and `btn-default` classes to each of your `button` elements.
 
 # --hints--
 
-Your left `well` should have the id of `left-well`.
+You should apply the `btn` class to each of your `button` elements.
 
 ```js
-assert(
-  $('.col-xs-6').children('#left-well') &&
-    $('.col-xs-6').children('#left-well').length > 0
-);
+assert($('.btn').length > 5);
 ```
 
-Your right `well` should have the id of `right-well`.
+You should apply the `btn-default` class to each of your `button` elements.
 
 ```js
-assert(
-  $('.col-xs-6').children('#right-well') &&
-    $('.col-xs-6').children('#right-well').length > 0
-);
+assert($('.btn-default').length > 5);
 ```
 
 # --seed--
@@ -50,16 +36,16 @@ assert(
   <div class="row">
     <div class="col-xs-6">
       <div class="well">
-        <button class="btn btn-default target"></button>
-        <button class="btn btn-default target"></button>
-        <button class="btn btn-default target"></button>
+        <button></button>
+        <button></button>
+        <button></button>
       </div>
     </div>
     <div class="col-xs-6">
       <div class="well">
-        <button class="btn btn-default target"></button>
-        <button class="btn btn-default target"></button>
-        <button class="btn btn-default target"></button>
+        <button></button>
+        <button></button>
+        <button></button>
       </div>
     </div>
   </div>
@@ -73,17 +59,17 @@ assert(
   <h3 class="text-primary text-center">jQuery Playground</h3>
   <div class="row">
     <div class="col-xs-6">
-      <div class="well" id="left-well">
-        <button class="btn btn-default target"></button>
-        <button class="btn btn-default target"></button>
-        <button class="btn btn-default target"></button>
+      <div class="well">
+        <button class="btn btn-default"></button>
+        <button class="btn btn-default"></button>
+        <button class="btn btn-default"></button>
       </div>
     </div>
     <div class="col-xs-6">
-      <div class="well" id="right-well">
-        <button class="btn btn-default target"></button>
-        <button class="btn btn-default target"></button>
-        <button class="btn btn-default target"></button>
+      <div class="well">
+        <button class="btn btn-default"></button>
+        <button class="btn btn-default"></button>
+        <button class="btn btn-default"></button>
       </div>
     </div>
   </div>
