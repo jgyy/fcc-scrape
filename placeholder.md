@@ -1,40 +1,62 @@
 ---
-id: bad87fee1348cd8acef08811
-title: Taste the Bootstrap Button Color Rainbow
+id: bad87fee1348bd9aedf08845
+title: Use a span to Target Inline Elements
 challengeType: 0
-forumTopicId: 18323
-dashedName: taste-the-bootstrap-button-color-rainbow
+forumTopicId: 18370
+dashedName: use-a-span-to-target-inline-elements
 ---
 
 # --description--
 
-The `btn-primary` class is the main color you'll use in your app. It is useful for highlighting actions you want your user to take.
+You can use spans to create inline elements. Remember when we used the `btn-block` class to make the button fill the entire row?
 
-Replace Bootstrap's `btn-default` class with `btn-primary` in your button.
+<button class='btn' style='background-color: rgb(0, 100, 0);  color: rgb(255, 255, 255);'>normal button</button>
 
-Note that this button will still need the `btn` and `btn-block` classes.
+<button class='btn btn-block' style='background-color: rgb(0, 100, 0);  color: rgb(255, 255, 255);'>btn-block button</button>
+
+That illustrates the difference between an "inline" element and a "block" element.
+
+By using the inline `span` element, you can put several elements on the same line, and even style different parts of the same line differently.
+
+Nest the word "love" in your "Things cats love" element below within a `span` element. Then give that `span` the class `text-danger` to make the text red.
+
+Here's how you would do this with the "Top 3 things cats hate" element:
+
+`<p>Top 3 things cats <span class="text-danger">hate:</span></p>`
 
 # --hints--
 
-Your button should have the class `btn-primary`.
+Your `span` element should be inside your `p` element.
 
 ```js
-assert($('button').hasClass('btn-primary'));
+assert($('p span') && $('p span').length > 0);
 ```
 
-Your button should still have the `btn` and `btn-block` classes.
-
-```js
-assert($('button').hasClass('btn-block') && $('button').hasClass('btn'));
-```
-
-All your `button` elements should have closing tags.
+Your `span` element should have just the text `love`.
 
 ```js
 assert(
-  code.match(/<\/button>/g) &&
-    code.match(/<button/g) &&
-    code.match(/<\/button>/g).length === code.match(/<button/g).length
+  $('p span') &&
+    $('p span').text().match(/love/i) &&
+    !$('p span')
+      .text()
+      .match(/Things cats/i)
+);
+```
+
+Your `span` element should have class `text-danger`.
+
+```js
+assert($('span').hasClass('text-danger'));
+```
+
+Your `span` element should have a closing tag.
+
+```js
+assert(
+  code.match(/<\/span>/g) &&
+    code.match(/<span/g) &&
+    code.match(/<\/span>/g).length === code.match(/<span/g).length
 );
 ```
 
@@ -45,17 +67,9 @@ assert(
 ```html
 <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css">
 <style>
-  .red-text {
-    color: red;
-  }
 
   h2 {
     font-family: Lobster, Monospace;
-  }
-
-  p {
-    font-size: 16px;
-    font-family: Monospace;
   }
 
   .thick-green-border {
@@ -65,20 +79,25 @@ assert(
     border-radius: 50%;
   }
 
-  .smaller-image {
-    width: 100px;
-  }
 </style>
 
 <div class="container-fluid">
-  <h2 class="red-text text-center">CatPhotoApp</h2>
+  <h2 class="text-primary text-center">CatPhotoApp</h2>
 
-  <p>Click here for <a href="#">cat photos</a>.</p>
-
-  <a href="#"><img class="smaller-image thick-green-border" src="https://bit.ly/fcc-relaxing-cat" alt="A cute orange cat lying on its back."></a>
+  <a href="#"><img class="img-responsive thick-green-border" src="https://bit.ly/fcc-relaxing-cat" alt="A cute orange cat lying on its back."></a>
 
   <img src="https://bit.ly/fcc-running-cats" class="img-responsive" alt="Three kittens running towards the camera.">
-  <button class="btn btn-default btn-block">Like</button>
+  <div class="row">
+    <div class="col-xs-4">
+      <button class="btn btn-block btn-primary">Like</button>
+    </div>
+    <div class="col-xs-4">
+      <button class="btn btn-block btn-info">Info</button>
+    </div>
+    <div class="col-xs-4">
+      <button class="btn btn-block btn-danger">Delete</button>
+    </div>
+  </div>
   <p>Things cats love:</p>
   <ul>
     <li>cat nip</li>
@@ -108,17 +127,9 @@ assert(
 ```html
 <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css">
 <style>
-  .red-text {
-    color: red;
-  }
 
   h2 {
     font-family: Lobster, Monospace;
-  }
-
-  p {
-    font-size: 16px;
-    font-family: Monospace;
   }
 
   .thick-green-border {
@@ -128,21 +139,26 @@ assert(
     border-radius: 50%;
   }
 
-  .smaller-image {
-    width: 100px;
-  }
 </style>
 
 <div class="container-fluid">
-  <h2 class="red-text text-center">CatPhotoApp</h2>
+  <h2 class="text-primary text-center">CatPhotoApp</h2>
 
-  <p>Click here for <a href="#">cat photos</a>.</p>
-
-  <a href="#"><img class="smaller-image thick-green-border" src="https://bit.ly/fcc-relaxing-cat" alt="A cute orange cat lying on its back."></a>
+  <a href="#"><img class="img-responsive thick-green-border" src="https://bit.ly/fcc-relaxing-cat" alt="A cute orange cat lying on its back."></a>
 
   <img src="https://bit.ly/fcc-running-cats" class="img-responsive" alt="Three kittens running towards the camera.">
-  <button class="btn btn-primary btn-block">Like</button>
-  <p>Things cats love:</p>
+  <div class="row">
+    <div class="col-xs-4">
+      <button class="btn btn-block btn-primary">Like</button>
+    </div>
+    <div class="col-xs-4">
+      <button class="btn btn-block btn-info">Info</button>
+    </div>
+    <div class="col-xs-4">
+      <button class="btn btn-block btn-danger">Delete</button>
+    </div>
+  </div>
+  <p>Things cats <span class="text-danger">love</span>:</p>
   <ul>
     <li>cat nip</li>
     <li>laser pointers</li>
