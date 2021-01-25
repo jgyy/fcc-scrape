@@ -1,39 +1,53 @@
 ---
-id: bad87fee1348bd9aec908746
-title: House our page within a Bootstrap container-fluid div
+id: bad87fee1348bd9aec908856
+title: Label Bootstrap Buttons
 challengeType: 0
-forumTopicId: 18198
-dashedName: house-our-page-within-a-bootstrap-container-fluid-div
+forumTopicId: 18222
+dashedName: label-bootstrap-buttons
 ---
 
 # --description--
 
-Now let's make sure all the content on your page is mobile-responsive.
+Just like we labeled our wells, we want to label our buttons.
 
-Let's nest your `h3` element within a `div` element with the class `container-fluid`.
+Give each of your `button` elements text that corresponds to its `id`'s selector.
 
 # --hints--
 
-Your `div` element should have the class `container-fluid`.
+Your `button` element with the id `target1` should have the text `#target1`.
 
 ```js
-assert($('div').hasClass('container-fluid'));
+assert(new RegExp('#target1', 'gi').test($('#target1').text()));
 ```
 
-Each of your `div` elements should have closing tags.
+Your `button` element with the id `target2` should have the text `#target2`.
 
 ```js
-assert(
-  code.match(/<\/div>/g) &&
-    code.match(/<div/g) &&
-    code.match(/<\/div>/g).length === code.match(/<div/g).length
-);
+assert(new RegExp('#target2', 'gi').test($('#target2').text()));
 ```
 
-Your `h3` element should be nested inside a `div` element.
+Your `button` element with the id `target3` should have the text `#target3`.
 
 ```js
-assert($('div').children('h3').length > 0);
+assert(new RegExp('#target3', 'gi').test($('#target3').text()));
+```
+
+Your `button` element with the id `target4` should have the text `#target4`.
+
+```js
+assert(new RegExp('#target4', 'gi').test($('#target4').text()));
+```
+
+Your `button` element with the id `target5` should have the text `#target5`.
+
+```js
+assert(new RegExp('#target5', 'gi').test($('#target5').text()));
+```
+
+Your `button` element with the id `target6` should have the text `#target6`.
+
+```js
+assert(new RegExp('#target6', 'gi').test($('#target6').text()));
 ```
 
 # --seed--
@@ -41,13 +55,51 @@ assert($('div').children('h3').length > 0);
 ## --seed-contents--
 
 ```html
-<h3 class="text-primary text-center">jQuery Playground</h3>
+<div class="container-fluid">
+  <h3 class="text-primary text-center">jQuery Playground</h3>
+  <div class="row">
+    <div class="col-xs-6">
+      <h4>#left-well</h4>
+      <div class="well" id="left-well">
+        <button class="btn btn-default target" id="target1"></button>
+        <button class="btn btn-default target" id="target2"></button>
+        <button class="btn btn-default target" id="target3"></button>
+      </div>
+    </div>
+    <div class="col-xs-6">
+      <h4>#right-well</h4>
+      <div class="well" id="right-well">
+        <button class="btn btn-default target" id="target4"></button>
+        <button class="btn btn-default target" id="target5"></button>
+        <button class="btn btn-default target" id="target6"></button>
+      </div>
+    </div>
+  </div>
+</div>
 ```
 
 # --solutions--
 
 ```html
 <div class="container-fluid">
-    <h3 class="text-primary text-center">jQuery Playground</h3>
+  <h3 class="text-primary text-center">jQuery Playground</h3>
+  <div class="row">
+    <div class="col-xs-6">
+      <h4>#left-well</h4>
+      <div class="well" id="left-well">
+        <button class="btn btn-default target" id="target1">#target1</button>
+        <button class="btn btn-default target" id="target2">#target2</button>
+        <button class="btn btn-default target" id="target3">#target3</button>
+      </div>
+    </div>
+    <div class="col-xs-6">
+      <h4>#right-well</h4>
+      <div class="well" id="right-well">
+        <button class="btn btn-default target" id="target4">#target4</button>
+        <button class="btn btn-default target" id="target5">#target5</button>
+        <button class="btn btn-default target" id="target6">#target6</button>
+      </div>
+    </div>
+  </div>
 </div>
 ```
