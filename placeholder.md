@@ -1,63 +1,45 @@
 ---
-id: bad87fee1348bd9aedf08845
-title: Use a span to Target Inline Elements
+id: bad87fee1348bd9aec908857
+title: Use Comments to Clarify Code
 challengeType: 0
-forumTopicId: 18370
-dashedName: use-a-span-to-target-inline-elements
+forumTopicId: 18347
+dashedName: use-comments-to-clarify-code
 ---
 
 # --description--
 
-You can use spans to create inline elements. Remember when we used the `btn-block` class to make the button fill the entire row?
+When we start using jQuery, we will modify HTML elements without needing to actually change them in HTML.
 
-<button class='btn' style='background-color: rgb(0, 100, 0);  color: rgb(255, 255, 255);'>normal button</button>
+Let's make sure that everyone knows they shouldn't actually modify any of this code directly.
 
-<button class='btn btn-block' style='background-color: rgb(0, 100, 0);  color: rgb(255, 255, 255);'>btn-block button</button>
+Remember that you can start a comment with `<!--` and end a comment with `-->`
 
-That illustrates the difference between an "inline" element and a "block" element.
-
-By using the inline `span` element, you can put several elements on the same line, and even style different parts of the same line differently.
-
-Nest the word "love" in your "Things cats love" element below within a `span` element. Then give that `span` the class `text-danger` to make the text red.
-
-Here's how you would do this with the "Top 3 things cats hate" element:
-
-`<p>Top 3 things cats <span class="text-danger">hate:</span></p>`
+Add a comment at the top of your HTML that says `Code below this line should not be changed`
 
 # --hints--
 
-Your `span` element should be inside your `p` element.
+You should start a comment with `<!--` at the top of your HTML.
 
 ```js
-assert($('p span') && $('p span').length > 0);
+assert(code.match(/^\s*<!--/));
 ```
 
-Your `span` element should have just the text `love`.
+Your comment should have the text `Code below this line should not be changed`.
 
 ```js
-assert(
-  $('p span') &&
-    $('p span').text().match(/love/i) &&
-    !$('p span')
-      .text()
-      .match(/Things cats/i)
-);
+assert(code.match(/<!--(?!(>|->|.*-->.*this line))\s*.*this line.*\s*-->/gi));
 ```
 
-Your `span` element should have class `text-danger`.
+You should close your comment with `-->`.
 
 ```js
-assert($('span').hasClass('text-danger'));
+assert(code.match(/-->.*\n+.+/g));
 ```
 
-Your `span` element should have a closing tag.
+You should have the same number of comment openers and closers.
 
 ```js
-assert(
-  code.match(/<\/span>/g) &&
-    code.match(/<span/g) &&
-    code.match(/<\/span>/g).length === code.match(/<span/g).length
-);
+assert(code.match(/<!--/g).length === code.match(/-->/g).length);
 ```
 
 # --seed--
@@ -65,119 +47,52 @@ assert(
 ## --seed-contents--
 
 ```html
-<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css">
-<style>
-
-  h2 {
-    font-family: Lobster, Monospace;
-  }
-
-  .thick-green-border {
-    border-color: green;
-    border-width: 10px;
-    border-style: solid;
-    border-radius: 50%;
-  }
-
-</style>
-
 <div class="container-fluid">
-  <h2 class="text-primary text-center">CatPhotoApp</h2>
-
-  <a href="#"><img class="img-responsive thick-green-border" src="https://bit.ly/fcc-relaxing-cat" alt="A cute orange cat lying on its back."></a>
-
-  <img src="https://bit.ly/fcc-running-cats" class="img-responsive" alt="Three kittens running towards the camera.">
+  <h3 class="text-primary text-center">jQuery Playground</h3>
   <div class="row">
-    <div class="col-xs-4">
-      <button class="btn btn-block btn-primary">Like</button>
+    <div class="col-xs-6">
+      <h4>#left-well</h4>
+      <div class="well" id="left-well">
+        <button class="btn btn-default target" id="target1">#target1</button>
+        <button class="btn btn-default target" id="target2">#target2</button>
+        <button class="btn btn-default target" id="target3">#target3</button>
+      </div>
     </div>
-    <div class="col-xs-4">
-      <button class="btn btn-block btn-info">Info</button>
-    </div>
-    <div class="col-xs-4">
-      <button class="btn btn-block btn-danger">Delete</button>
+    <div class="col-xs-6">
+      <h4>#right-well</h4>
+      <div class="well" id="right-well">
+        <button class="btn btn-default target" id="target4">#target4</button>
+        <button class="btn btn-default target" id="target5">#target5</button>
+        <button class="btn btn-default target" id="target6">#target6</button>
+      </div>
     </div>
   </div>
-  <p>Things cats love:</p>
-  <ul>
-    <li>cat nip</li>
-    <li>laser pointers</li>
-    <li>lasagna</li>
-  </ul>
-  <p>Top 3 things cats hate:</p>
-  <ol>
-    <li>flea treatment</li>
-    <li>thunder</li>
-    <li>other cats</li>
-  </ol>
-  <form action="https://freecatphotoapp.com/submit-cat-photo">
-    <label><input type="radio" name="indoor-outdoor"> Indoor</label>
-    <label><input type="radio" name="indoor-outdoor"> Outdoor</label>
-    <label><input type="checkbox" name="personality"> Loving</label>
-    <label><input type="checkbox" name="personality"> Lazy</label>
-    <label><input type="checkbox" name="personality"> Crazy</label>
-    <input type="text" placeholder="cat photo URL" required>
-    <button type="submit">Submit</button>
-  </form>
 </div>
 ```
 
 # --solutions--
 
 ```html
-<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css">
-<style>
-
-  h2 {
-    font-family: Lobster, Monospace;
-  }
-
-  .thick-green-border {
-    border-color: green;
-    border-width: 10px;
-    border-style: solid;
-    border-radius: 50%;
-  }
-
-</style>
-
+<!-- Code below this line should not be changed -->
 <div class="container-fluid">
-  <h2 class="text-primary text-center">CatPhotoApp</h2>
-
-  <a href="#"><img class="img-responsive thick-green-border" src="https://bit.ly/fcc-relaxing-cat" alt="A cute orange cat lying on its back."></a>
-
-  <img src="https://bit.ly/fcc-running-cats" class="img-responsive" alt="Three kittens running towards the camera.">
+  <h3 class="text-primary text-center">jQuery Playground</h3>
   <div class="row">
-    <div class="col-xs-4">
-      <button class="btn btn-block btn-primary">Like</button>
+    <div class="col-xs-6">
+      <h4>#left-well</h4>
+      <div class="well" id="left-well">
+        <button class="btn btn-default target" id="target1">#target1</button>
+        <button class="btn btn-default target" id="target2">#target2</button>
+        <button class="btn btn-default target" id="target3">#target3</button>
+      </div>
     </div>
-    <div class="col-xs-4">
-      <button class="btn btn-block btn-info">Info</button>
-    </div>
-    <div class="col-xs-4">
-      <button class="btn btn-block btn-danger">Delete</button>
+    <div class="col-xs-6">
+      <h4>#right-well</h4>
+      <div class="well" id="right-well">
+        <button class="btn btn-default target" id="target4">#target4</button>
+        <button class="btn btn-default target" id="target5">#target5</button>
+        <button class="btn btn-default target" id="target6">#target6</button>
+      </div>
     </div>
   </div>
-  <p>Things cats <span class="text-danger">love</span>:</p>
-  <ul>
-    <li>cat nip</li>
-    <li>laser pointers</li>
-    <li>lasagna</li>
-  </ul>
-  <p>Top 3 things cats hate:</p>
-  <ol>
-    <li>flea treatment</li>
-    <li>thunder</li>
-    <li>other cats</li>
-  </ol>
-  <form action="https://freecatphotoapp.com/submit-cat-photo">
-    <label><input type="radio" name="indoor-outdoor"> Indoor</label>
-    <label><input type="radio" name="indoor-outdoor"> Outdoor</label>
-    <label><input type="checkbox" name="personality"> Loving</label>
-    <label><input type="checkbox" name="personality"> Lazy</label>
-    <label><input type="checkbox" name="personality"> Crazy</label>
-    <input type="text" placeholder="cat photo URL" required>
-    <button type="submit">Submit</button>
-  </form>
 </div>
 ```
