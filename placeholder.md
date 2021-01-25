@@ -1,50 +1,36 @@
 ---
-id: bad88fee1348ce8acef08815
-title: Use the Bootstrap Grid to Put Elements Side By Side
+id: bad87fee1348bd9acde08712
+title: Use Responsive Design with Bootstrap Fluid Containers
 challengeType: 0
-forumTopicId: 18371
-dashedName: use-the-bootstrap-grid-to-put-elements-side-by-side
+forumTopicId: 18362
+dashedName: use-responsive-design-with-bootstrap-fluid-containers
 ---
 
 # --description--
 
-Bootstrap uses a responsive 12-column grid system, which makes it easy to put elements into rows and specify each element's relative width. Most of Bootstrap's classes can be applied to a `div` element.
+In the HTML5 and CSS section of freeCodeCamp we built a Cat Photo App. Now let's go back to it. This time, we'll style it using the popular Bootstrap responsive CSS framework.
 
-Bootstrap has different column width attributes that it uses depending on how wide the user's screen is. For example, phones have narrow screens, and laptops have wider screens.
+Bootstrap will figure out how wide your screen is and respond by resizing your HTML elements - hence the name <dfn>responsive design</dfn>.
 
-Take for example Bootstrap's `col-md-*` class. Here, `md` means medium, and `*` is a number specifying how many columns wide the element should be. In this case, the column width of an element on a medium-sized screen, such as a laptop, is being specified.
+With responsive design, there is no need to design a mobile version of your website. It will look good on devices with screens of any width.
 
-In the Cat Photo App that we're building, we'll use `col-xs-*`, where `xs` means extra small (like an extra-small mobile phone screen), and `*` is the number of columns specifying how many columns wide the element should be.
+You can add Bootstrap to any app by adding the following code to the top of your HTML:
 
-Put the `Like`, `Info` and `Delete` buttons side-by-side by nesting all three of them within one `<div class="row">` element, then each of them within a `<div class="col-xs-4">` element.
+`<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>`
 
-The `row` class is applied to a `div`, and the buttons themselves can be nested within it.
+In this case, we've already added it for you to this page behind the scenes. Note that using either `>` or `/>` to close the `link` tag is acceptable.
+
+To get started, we should nest all of our HTML (except the `link` tag and the `style` element) in a `div` element with the class `container-fluid`.
 
 # --hints--
 
-Your buttons should all be nested within the same `div` element with the class `row`.
+Your `div` element should have the class `container-fluid`.
 
 ```js
-assert($('div.row:has(button)').length > 0);
+assert($('div').hasClass('container-fluid'));
 ```
 
-Each of your Bootstrap buttons should be nested within its own `div` element with the class `col-xs-4`.
-
-```js
-assert($('div.col-xs-4:has(button)').length > 2);
-```
-
-Each of your `button` elements should have a closing tag.
-
-```js
-assert(
-  code.match(/<\/button>/g) &&
-    code.match(/<button/g) &&
-    code.match(/<\/button>/g).length === code.match(/<button/g).length
-);
-```
-
-Each of your `div` elements should have a closing tag.
+Your `div` element should have a closing tag.
 
 ```js
 assert(
@@ -52,6 +38,12 @@ assert(
     code.match(/<div/g) &&
     code.match(/<\/div>/g).length === code.match(/<div/g).length
 );
+```
+
+All HTML elements after the closing `style` tag should be nested in `.container-fluid`.
+
+```js
+assert($('.container-fluid').children().length >= 8);
 ```
 
 # --seed--
@@ -86,39 +78,33 @@ assert(
   }
 </style>
 
-<div class="container-fluid">
-  <h2 class="red-text text-center">CatPhotoApp</h2>
+<h2 class="red-text">CatPhotoApp</h2>
 
-  <p>Click here for <a href="#">cat photos</a>.</p>
+<p>Click here for <a href="#">cat photos</a>.</p>
 
-  <a href="#"><img class="smaller-image thick-green-border" src="https://bit.ly/fcc-relaxing-cat" alt="A cute orange cat lying on its back."></a>
+<a href="#"><img class="smaller-image thick-green-border" src="https://bit.ly/fcc-relaxing-cat" alt="A cute orange cat lying on its back."></a>
 
-  <img src="https://bit.ly/fcc-running-cats" class="img-responsive" alt="Three kittens running towards the camera.">
-  <button class="btn btn-block btn-primary">Like</button>
-  <button class="btn btn-block btn-info">Info</button>
-  <button class="btn btn-block btn-danger">Delete</button>
-  <p>Things cats love:</p>
-  <ul>
-    <li>cat nip</li>
-    <li>laser pointers</li>
-    <li>lasagna</li>
-  </ul>
-  <p>Top 3 things cats hate:</p>
-  <ol>
-    <li>flea treatment</li>
-    <li>thunder</li>
-    <li>other cats</li>
-  </ol>
-  <form action="https://freecatphotoapp.com/submit-cat-photo">
-    <label><input type="radio" name="indoor-outdoor"> Indoor</label>
-    <label><input type="radio" name="indoor-outdoor"> Outdoor</label>
-    <label><input type="checkbox" name="personality"> Loving</label>
-    <label><input type="checkbox" name="personality"> Lazy</label>
-    <label><input type="checkbox" name="personality"> Crazy</label>
-    <input type="text" placeholder="cat photo URL" required>
-    <button type="submit">Submit</button>
-  </form>
-</div>
+<p>Things cats love:</p>
+<ul>
+  <li>cat nip</li>
+  <li>laser pointers</li>
+  <li>lasagna</li>
+</ul>
+<p>Top 3 things cats hate:</p>
+<ol>
+  <li>flea treatment</li>
+  <li>thunder</li>
+  <li>other cats</li>
+</ol>
+<form action="https://freecatphotoapp.com/submit-cat-photo">
+  <label><input type="radio" name="indoor-outdoor"> Indoor</label>
+  <label><input type="radio" name="indoor-outdoor"> Outdoor</label>
+  <label><input type="checkbox" name="personality"> Loving</label>
+  <label><input type="checkbox" name="personality"> Lazy</label>
+  <label><input type="checkbox" name="personality"> Crazy</label>
+  <input type="text" placeholder="cat photo URL" required>
+  <button type="submit">Submit</button>
+</form>
 ```
 
 # --solutions--
@@ -150,47 +136,33 @@ assert(
     width: 100px;
   }
 </style>
-
 <div class="container-fluid">
-  <h2 class="red-text text-center">CatPhotoApp</h2>
+  <h2 class="red-text">CatPhotoApp</h2>
 
-  <p>Click here for <a href="#">cat photos</a>.</p>
+<p>Click here for <a href="#">cat photos</a>.</p>
 
-  <a href="#"><img class="smaller-image thick-green-border" src="https://bit.ly/fcc-relaxing-cat" alt="A cute orange cat lying on its back."></a>
+<a href="#"><img class="smaller-image thick-green-border" src="https://bit.ly/fcc-relaxing-cat" alt="A cute orange cat lying on its back."></a>
 
-  <img src="https://bit.ly/fcc-running-cats" class="img-responsive" alt="Three kittens running towards the camera.">
-  <div class="row">
-    <div class="col-xs-4">
-      <button class="btn btn-block btn-primary">Like</button>
-    </div>
-    <div class="col-xs-4">
-      <button class="btn btn-block btn-info">Info</button>
-    </div>
-    <div class="col-xs-4">
-      <button class="btn btn-block btn-danger">Delete</button>
-    </div>
-  </div>
-  
-  <p>Things cats love:</p>
-  <ul>
-    <li>cat nip</li>
-    <li>laser pointers</li>
-    <li>lasagna</li>
-  </ul>
-  <p>Top 3 things cats hate:</p>
-  <ol>
-    <li>flea treatment</li>
-    <li>thunder</li>
-    <li>other cats</li>
-  </ol>
-  <form action="https://freecatphotoapp.com/submit-cat-photo">
-    <label><input type="radio" name="indoor-outdoor"> Indoor</label>
-    <label><input type="radio" name="indoor-outdoor"> Outdoor</label>
-    <label><input type="checkbox" name="personality"> Loving</label>
-    <label><input type="checkbox" name="personality"> Lazy</label>
-    <label><input type="checkbox" name="personality"> Crazy</label>
-    <input type="text" placeholder="cat photo URL" required>
-    <button type="submit">Submit</button>
-  </form>
+<p>Things cats love:</p>
+<ul>
+  <li>cat nip</li>
+  <li>laser pointers</li>
+  <li>lasagna</li>
+</ul>
+<p>Top 3 things cats hate:</p>
+<ol>
+  <li>flea treatment</li>
+  <li>thunder</li>
+  <li>other cats</li>
+</ol>
+<form action="https://freecatphotoapp.com/submit-cat-photo">
+  <label><input type="radio" name="indoor-outdoor"> Indoor</label>
+  <label><input type="radio" name="indoor-outdoor"> Outdoor</label>
+  <label><input type="checkbox" name="personality"> Loving</label>
+  <label><input type="checkbox" name="personality"> Lazy</label>
+  <label><input type="checkbox" name="personality"> Crazy</label>
+  <input type="text" placeholder="cat photo URL" required>
+  <button type="submit">Submit</button>
+</form>
 </div>
 ```
