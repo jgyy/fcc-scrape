@@ -1,49 +1,129 @@
 ---
-id: bd7158d8c442eddfaeb5bd13
-title: Build a Random Quote Machine
-challengeType: 3
-forumTopicId: 301374
-dashedName: build-a-random-quote-machine
+id: 564944c91be2204b269d51e3
+title: Change Text Inside an Element Using jQuery
+challengeType: 6
+forumTopicId: 16773
+dashedName: change-text-inside-an-element-using-jquery
 ---
 
 # --description--
 
-**Objective:** Build a [CodePen.io](https://codepen.io) app that is functionally similar to this: <https://codepen.io/freeCodeCamp/full/qRZeGZ>.
+Using jQuery, you can change the text between the start and end tags of an element. You can even change HTML markup.
 
-Fulfill the below [user stories](https://en.wikipedia.org/wiki/User_story) and get all of the tests to pass. Give it your own personal style.
+jQuery has a function called `.html()` that lets you add HTML tags and text within an element. Any content previously within the element will be completely replaced with the content you provide using this function.
 
-You can use any mix of HTML, JavaScript, CSS, Bootstrap, SASS, React, Redux, and jQuery to complete this project. You should use a frontend framework (like React for example) because this section is about learning frontend frameworks. Additional technologies not listed above are not recommended and using them is at your own risk. We are looking at supporting other frontend frameworks like Angular and Vue, but they are not currently supported. We will accept and try to fix all issue reports that use the suggested technology stack for this project. Happy coding!
+Here's how you would rewrite and emphasize the text of our heading:
 
-**User Story #1:** I can see a wrapper element with a corresponding `id="quote-box"`.
+`$("h3").html("<em>jQuery Playground</em>");`
 
-**User Story #2:** Within `#quote-box`, I can see an element with a corresponding `id="text"`.
+jQuery also has a similar function called `.text()` that only alters text without adding tags. In other words, this function will not evaluate any HTML tags passed to it, but will instead treat it as the text you want to replace the existing content with.
 
-**User Story #3:** Within `#quote-box`, I can see an element with a corresponding `id="author"`.
+Change the button with id `target4` by emphasizing its text.
 
-**User Story #4:** Within `#quote-box`, I can see a clickable element with a corresponding `id="new-quote"`.
+[View our news article for &lt;em>](https://www.freecodecamp.org/news/html-elements-explained-what-are-html-tags/#em-element) to learn the difference between `<i>` and `<em>` and their uses.
 
-**User Story #5:** Within `#quote-box`, I can see a clickable `a` element with a corresponding `id="tweet-quote"`.
+Note that while the `<i>` tag has traditionally been used to emphasize text, it has since been adopted for use as a tag for icons. The `<em>` tag is now widely accepted as the tag for emphasis. Either will work for this challenge.
 
-**User Story #6:** On first load, my quote machine displays a random quote in the element with `id="text"`.
+# --hints--
 
-**User Story #7:** On first load, my quote machine displays the random quote's author in the element with `id="author"`.
+You should emphasize the text in your `target4` button by adding HTML tags.
 
-**User Story #8:** When the `#new-quote` button is clicked, my quote machine should fetch a new quote and display it in the `#text` element.
+```js
+assert.isTrue(
+  /<em>|<i>\s*#target4\s*<\/em>|<\/i>/gi.test($('#target4').html())
+);
+```
 
-**User Story #9:** My quote machine should fetch the new quote's author when the `#new-quote` button is clicked and display it in the `#author` element.
+The text should otherwise remain unchanged.
 
-**User Story #10:** I can tweet the current quote by clicking on the ```#tweet-quote``a``` element. This `a` element should include the `"twitter.com/intent/tweet"` path in its `href` attribute to tweet the current quote.
+```js
+assert($('#target4') && $('#target4').text().trim() === '#target4');
+```
 
-**User Story #11:** The `#quote-box` wrapper element should be horizontally centered. Please run tests with browser's zoom level at 100% and page maximized.
+You should not alter any other text.
 
-You can build your project by forking [this CodePen pen](https://codepen.io/freeCodeCamp/pen/MJjpwO). Or you can use this CDN link to run the tests in any environment you like: `https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js`
+```js
+assert.isFalse(/<em>|<i>/gi.test($('h3').html()));
+```
 
-Once you're done, submit the URL to your working project with all its tests passing.
+You should be using `.html()` and not `.text()`.
 
-**Note:** Twitter does not allow links to be loaded in an iframe. Try using the `target="_blank"` or `target="_top"` attribute on the `#tweet-quote` element if your tweet won't load. `target="_top"` will replace the current tab so make sure your work is saved.
+```js
+assert(code.match(/\.html\(/g));
+```
+
+You should select `button id="target4"` with jQuery.
+
+```js
+assert(code.match(/\$\(\s*?(\"|\')#target4(\"|\')\s*?\)\.html\(/));
+```
+
+# --seed--
+
+## --seed-contents--
+
+```html
+<script>
+  $(document).ready(function() {
+    $("#target1").css("color", "red");
+
+  });
+</script>
+
+<!-- Only change code above this line -->
+
+<div class="container-fluid">
+  <h3 class="text-primary text-center">jQuery Playground</h3>
+  <div class="row">
+    <div class="col-xs-6">
+      <h4>#left-well</h4>
+      <div class="well" id="left-well">
+        <button class="btn btn-default target" id="target1">#target1</button>
+        <button class="btn btn-default target" id="target2">#target2</button>
+        <button class="btn btn-default target" id="target3">#target3</button>
+      </div>
+    </div>
+    <div class="col-xs-6">
+      <h4>#right-well</h4>
+      <div class="well" id="right-well">
+        <button class="btn btn-default target" id="target4">#target4</button>
+        <button class="btn btn-default target" id="target5">#target5</button>
+        <button class="btn btn-default target" id="target6">#target6</button>
+      </div>
+    </div>
+  </div>
+</div>
+```
 
 # --solutions--
 
-```js
-// solution required
+```html
+<script>
+  $(document).ready(function() {
+    $("#target1").css("color", "red");
+    $("#target4").html('<em>#target4</em>');
+  });
+</script>
+
+<div class="container-fluid">
+  <h3 class="text-primary text-center">jQuery Playground</h3>
+  <div class="row">
+    <div class="col-xs-6">
+      <h4>#left-well</h4>
+      <div class="well" id="left-well">
+        <button class="btn btn-default target" id="target1">#target1</button>
+        <button class="btn btn-default target" id="target2">#target2</button>
+        <button class="btn btn-default target" id="target3">#target3</button>
+      </div>
+    </div>
+    <div class="col-xs-6">
+      <h4>#right-well</h4>
+      <div class="well" id="right-well">
+        <button class="btn btn-default target" id="target4">#target4</button>
+        <button class="btn btn-default target" id="target5">#target5</button>
+        <button class="btn btn-default target" id="target6">#target6</button>
+      </div>
+    </div>
+  </div>
+</div>
 ```
