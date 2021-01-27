@@ -1,43 +1,56 @@
 ---
-id: bad87fee1348bd9aed208826
-title: Target the Children of an Element Using jQuery
+id: bad87fee1348bd9aed308826
+title: Target the Parent of an Element Using jQuery
 challengeType: 6
-forumTopicId: 18320
-dashedName: target-the-children-of-an-element-using-jquery
+forumTopicId: 18321
+dashedName: target-the-parent-of-an-element-using-jquery
 ---
 
 # --description--
 
-When HTML elements are placed one level below another they are called <dfn>children</dfn> of that element. For example, the button elements in this challenge with the text "#target1", "#target2", and "#target3" are all children of the `<div class="well" id="left-well">` element.
+Every HTML element has a `parent` element from which it `inherits` properties.
 
-jQuery has a function called `children()` that allows you to access the children of whichever element you've selected.
+For example, your `jQuery Playground` `h3` element has the parent element of `<div class="container-fluid">`, which itself has the parent `body`.
 
-Here's an example of how you would use the `children()` function to give the children of your `left-well` element the color `blue`:
+jQuery has a function called `parent()` that allows you to access the parent of whichever element you've selected.
 
-`$("#left-well").children().css("color", "blue")`
+Here's an example of how you would use the `parent()` function if you wanted to give the parent element of the `left-well` element a background color of blue:
 
-# --instructions--
+`$("#left-well").parent().css("background-color", "blue")`
 
-Give all the children of your `right-well` element the color orange.
+Give the parent of the `#target1` element a background-color of red.
 
 # --hints--
 
-All children of `#right-well` should have orange text.
+Your `left-well` element should have a red background.
 
 ```js
-assert($('#right-well').children().css('color') === 'rgb(255, 165, 0)');
+assert(
+  $('#left-well').css('background-color') === 'red' ||
+    $('#left-well').css('background-color') === 'rgb(255, 0, 0)' ||
+    $('#left-well').css('background-color').toLowerCase() === '#ff0000' ||
+    $('#left-well').css('background-color').toLowerCase() === '#f00'
+);
 ```
 
-You should use the `children()` function to modify these elements.
+You should use the `.parent()` function to modify this element.
 
 ```js
-assert(code.match(/\.children\(\)\.css/g));
+assert(code.match(/\.parent\s*\(\s*\)\s*\.css/g));
+```
+
+The `.parent()` method should be called on the `#target1` element.
+
+```js
+assert(
+  code.match(/\$\s*?\(\s*?(?:'|")\s*?#target1\s*?(?:'|")\s*?\)\s*?\.parent/gi)
+);
 ```
 
 You should only use jQuery to add these classes to the element.
 
 ```js
-assert(code.match(/<div class="well" id="right-well">/g));
+assert(code.match(/<div class="well" id="left-well">/g));
 ```
 
 # --seed--
@@ -52,34 +65,35 @@ assert(code.match(/<div class="well" id="right-well">/g));
     $("#target4").remove();
     $("#target2").appendTo("#right-well");
     $("#target5").clone().appendTo("#left-well");
-    $("#target1").parent().css("background-color", "red");
 
   });
 </script>
 
 <!-- Only change code above this line -->
 
-<div class="container-fluid">
-  <h3 class="text-primary text-center">jQuery Playground</h3>
-  <div class="row">
-    <div class="col-xs-6">
-      <h4>#left-well</h4>
-      <div class="well" id="left-well">
-        <button class="btn btn-default target" id="target1">#target1</button>
-        <button class="btn btn-default target" id="target2">#target2</button>
-        <button class="btn btn-default target" id="target3">#target3</button>
+<body>
+  <div class="container-fluid">
+    <h3 class="text-primary text-center">jQuery Playground</h3>
+    <div class="row">
+      <div class="col-xs-6">
+        <h4>#left-well</h4>
+        <div class="well" id="left-well">
+          <button class="btn btn-default target" id="target1">#target1</button>
+          <button class="btn btn-default target" id="target2">#target2</button>
+          <button class="btn btn-default target" id="target3">#target3</button>
+        </div>
       </div>
-    </div>
-    <div class="col-xs-6">
-      <h4>#right-well</h4>
-      <div class="well" id="right-well">
-        <button class="btn btn-default target" id="target4">#target4</button>
-        <button class="btn btn-default target" id="target5">#target5</button>
-        <button class="btn btn-default target" id="target6">#target6</button>
+      <div class="col-xs-6">
+        <h4>#right-well</h4>
+        <div class="well" id="right-well">
+          <button class="btn btn-default target" id="target4">#target4</button>
+          <button class="btn btn-default target" id="target5">#target5</button>
+          <button class="btn btn-default target" id="target6">#target6</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
+</body>
 ```
 
 # --solutions--
@@ -93,31 +107,32 @@ assert(code.match(/<div class="well" id="right-well">/g));
     $("#target2").appendTo("#right-well");
     $("#target5").clone().appendTo("#left-well");
     $("#target1").parent().css("background-color", "red");
-    $("#right-well").children().css("color", "orange");
   });
 </script>
 
 <!-- Only change code above this line -->
 
-<div class="container-fluid">
-  <h3 class="text-primary text-center">jQuery Playground</h3>
-  <div class="row">
-    <div class="col-xs-6">
-      <h4>#left-well</h4>
-      <div class="well" id="left-well">
-        <button class="btn btn-default target" id="target1">#target1</button>
-        <button class="btn btn-default target" id="target2">#target2</button>
-        <button class="btn btn-default target" id="target3">#target3</button>
+<body>
+  <div class="container-fluid">
+    <h3 class="text-primary text-center">jQuery Playground</h3>
+    <div class="row">
+      <div class="col-xs-6">
+        <h4>#left-well</h4>
+        <div class="well" id="left-well">
+          <button class="btn btn-default target" id="target1">#target1</button>
+          <button class="btn btn-default target" id="target2">#target2</button>
+          <button class="btn btn-default target" id="target3">#target3</button>
+        </div>
       </div>
-    </div>
-    <div class="col-xs-6">
-      <h4>#right-well</h4>
-      <div class="well" id="right-well">
-        <button class="btn btn-default target" id="target4">#target4</button>
-        <button class="btn btn-default target" id="target5">#target5</button>
-        <button class="btn btn-default target" id="target6">#target6</button>
+      <div class="col-xs-6">
+        <h4>#right-well</h4>
+        <div class="well" id="right-well">
+          <button class="btn btn-default target" id="target4">#target4</button>
+          <button class="btn btn-default target" id="target5">#target5</button>
+          <button class="btn btn-default target" id="target6">#target6</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
+</body>
 ```
