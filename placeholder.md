@@ -1,41 +1,29 @@
 ---
-id: bad87fee1348bd9aed608826
-title: Use appendTo to Move Elements with jQuery
+id: bad87fee1348bd9aecb08826
+title: Use jQuery to Modify the Entire Page
 challengeType: 6
-forumTopicId: 18340
-dashedName: use-appendto-to-move-elements-with-jquery
+forumTopicId: 18361
+required:
+  - link: 'https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.0/animate.css'
+dashedName: use-jquery-to-modify-the-entire-page
 ---
 
 # --description--
 
-Now let's try moving elements from one `div` to another.
+We're done playing with our jQuery playground. Let's tear it down!
 
-jQuery has a function called `appendTo()` that allows you to select HTML elements and append them to another element.
+jQuery can target the `body` element as well.
 
-For example, if we wanted to move `target4` from our right well to our left well, we would use:
+Here's how we would make the entire body fade out: `$("body").addClass("animated fadeOut");`
 
-`$("#target4").appendTo("#left-well");`
-
-Move your `target2` element from your `left-well` to your `right-well`.
+But let's do something more dramatic. Add the classes `animated` and `hinge` to your `body` element.
 
 # --hints--
 
-Your `target2` element should not be inside your `left-well`.
+You should add the classes `animated` and `hinge` to your `body` element.
 
 ```js
-assert($('#left-well').children('#target2').length === 0);
-```
-
-Your `target2` element should be inside your `right-well`.
-
-```js
-assert($('#right-well').children('#target2').length > 0);
-```
-
-You should only use jQuery to move these elements.
-
-```js
-assert(!code.match(/class.*animated/g));
+assert($('body').hasClass('animated') && $('body').hasClass('hinge'));
 ```
 
 # --seed--
@@ -48,6 +36,13 @@ assert(!code.match(/class.*animated/g));
     $("#target1").css("color", "red");
     $("#target1").prop("disabled", true);
     $("#target4").remove();
+    $("#target2").appendTo("#right-well");
+    $("#target5").clone().appendTo("#left-well");
+    $("#target1").parent().css("background-color", "red");
+    $("#right-well").children().css("color", "orange");
+    $("#left-well").children().css("color", "green");
+    $(".target:nth-child(2)").addClass("animated bounce");
+    $(".target:even").addClass("animated shake");
 
   });
 </script>
@@ -86,6 +81,13 @@ assert(!code.match(/class.*animated/g));
     $("#target1").prop("disabled", true);
     $("#target4").remove();
     $("#target2").appendTo("#right-well");
+    $("#target5").clone().appendTo("#left-well");
+    $("#target1").parent().css("background-color", "red");
+    $("#right-well").children().css("color", "orange");
+    $("#left-well").children().css("color", "green");
+    $(".target:nth-child(2)").addClass("animated bounce");
+    $(".target:even").addClass("animated shake");
+    $("body").addClass("animated hinge");
   });
 </script>
 
