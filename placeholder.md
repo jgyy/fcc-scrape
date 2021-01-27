@@ -1,43 +1,53 @@
 ---
-id: bad87fee1348bd9aed508826
-title: Clone an Element Using jQuery
+id: bad87fee1348bd9aeda08726
+title: Delete Your jQuery Functions
 challengeType: 6
-forumTopicId: 16780
-dashedName: clone-an-element-using-jquery
+forumTopicId: 17561
+required:
+  - link: 'https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.0/animate.css'
+dashedName: delete-your-jquery-functions
 ---
 
 # --description--
 
-In addition to moving elements, you can also copy them from one place to another.
+These animations were cool at first, but now they're getting kind of distracting.
 
-jQuery has a function called `clone()` that makes a copy of an element.
-
-For example, if we wanted to copy `target2` from our `left-well` to our `right-well`, we would use:
-
-`$("#target2").clone().appendTo("#right-well");`
-
-Did you notice this involves sticking two jQuery functions together? This is called <dfn>function chaining</dfn> and it's a convenient way to get things done with jQuery.
-
-Clone your `target5` element and append it to your `left-well`.
+Delete all three of these jQuery functions from your `document ready function`, but leave your `document ready function` itself intact.
 
 # --hints--
 
-Your `target5` element should be inside your `right-well`.
+All three of your jQuery functions should be deleted from your `document ready function`.
 
 ```js
-assert($('#right-well').children('#target5').length > 0);
+assert(code.match(/\{\s*\}\);/g));
 ```
 
-A copy of your `target5` element should also be inside your `left-well`.
+You should leave your `script` element intact.
 
 ```js
-assert($('#left-well').children('#target5').length > 0);
+assert(code.match(/<script>/g));
 ```
 
-You should only use jQuery to move these elements.
+You should leave your `$(document).ready(function() {` at the beginning of your `script` element.
 
 ```js
-assert(!code.match(/class.*animated/g));
+assert(code.match(/\$\(document\)\.ready\(function\(\)\s?\{/g));
+```
+
+You should leave your "document ready function" closing `})` intact.
+
+```js
+assert(code.match(/.*\s*\}\);/g));
+```
+
+You should leave your `script` element closing tag intact.
+
+```js
+assert(
+  code.match(/<\/script>/g) &&
+    code.match(/<script/g) &&
+    code.match(/<\/script>/g).length === code.match(/<script/g).length
+);
 ```
 
 # --seed--
@@ -47,10 +57,9 @@ assert(!code.match(/class.*animated/g));
 ```html
 <script>
   $(document).ready(function() {
-    $("#target1").css("color", "red");
-    $("#target1").prop("disabled", true);
-    $("#target4").remove();
-    $("#target2").appendTo("#right-well");
+    $("button").addClass("animated bounce");
+    $(".well").addClass("animated shake");
+    $("#target3").addClass("animated fadeOut");
 
   });
 </script>
@@ -85,11 +94,7 @@ assert(!code.match(/class.*animated/g));
 ```html
 <script>
   $(document).ready(function() {
-    $("#target1").css("color", "red");
-    $("#target1").prop("disabled", true);
-    $("#target4").remove();
-    $("#target2").appendTo("#right-well");
-    $("#target5").clone().appendTo("#left-well");
+
   });
 </script>
 
