@@ -1,38 +1,40 @@
 ---
-id: bad87fee1348bd9aed908826
-title: Change the CSS of an Element Using jQuery
+id: bad87fee1348bd9aed508826
+title: Clone an Element Using jQuery
 challengeType: 6
-forumTopicId: 16776
-required:
-  - link: 'https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.0/animate.css'
-dashedName: change-the-css-of-an-element-using-jquery
+forumTopicId: 16780
+dashedName: clone-an-element-using-jquery
 ---
 
 # --description--
 
-We can also change the CSS of an HTML element directly with jQuery.
+In addition to moving elements, you can also copy them from one place to another.
 
-jQuery has a function called `.css()` that allows you to change the CSS of an element.
+jQuery has a function called `clone()` that makes a copy of an element.
 
-Here's how we would change its color to blue:
+For example, if we wanted to copy `target2` from our `left-well` to our `right-well`, we would use:
 
-`$("#target1").css("color", "blue");`
+`$("#target2").clone().appendTo("#right-well");`
 
-This is slightly different from a normal CSS declaration, because the CSS property and its value are in quotes, and separated with a comma instead of a colon.
+Did you notice this involves sticking two jQuery functions together? This is called <dfn>function chaining</dfn> and it's a convenient way to get things done with jQuery.
 
-Delete your jQuery selectors, leaving an empty `document ready function`.
-
-Select `target1` and change its color to red.
+Clone your `target5` element and append it to your `left-well`.
 
 # --hints--
 
-Your `target1` element should have red text.
+Your `target5` element should be inside your `right-well`.
 
 ```js
-assert($('#target1').css('color') === 'rgb(255, 0, 0)');
+assert($('#right-well').children('#target5').length > 0);
 ```
 
-You should only use jQuery to add these classes to the element.
+A copy of your `target5` element should also be inside your `left-well`.
+
+```js
+assert($('#left-well').children('#target5').length > 0);
+```
+
+You should only use jQuery to move these elements.
 
 ```js
 assert(!code.match(/class.*animated/g));
@@ -45,10 +47,10 @@ assert(!code.match(/class.*animated/g));
 ```html
 <script>
   $(document).ready(function() {
-    $("button").addClass("animated bounce");
-    $(".well").addClass("animated shake");
-    $("#target3").addClass("animated fadeOut");
-    $("button").removeClass("btn-default");
+    $("#target1").css("color", "red");
+    $("#target1").prop("disabled", true);
+    $("#target4").remove();
+    $("#target2").appendTo("#right-well");
 
   });
 </script>
@@ -83,15 +85,16 @@ assert(!code.match(/class.*animated/g));
 ```html
 <script>
   $(document).ready(function() {
-    $("button").addClass("animated bounce");
-    $(".well").addClass("animated shake");
-    $("#target3").addClass("animated fadeOut");
-    $("button").removeClass("btn-default");
     $("#target1").css("color", "red");
+    $("#target1").prop("disabled", true);
+    $("#target4").remove();
+    $("#target2").appendTo("#right-well");
+    $("#target5").clone().appendTo("#left-well");
   });
 </script>
 
 <!-- Only change code above this line -->
+
 <div class="container-fluid">
   <h3 class="text-primary text-center">jQuery Playground</h3>
   <div class="row">
