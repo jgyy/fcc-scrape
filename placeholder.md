@@ -1,44 +1,58 @@
 ---
-id: bad87fee1348bd9aed918626
-title: Remove Classes from an Element with jQuery
+id: bad87fee1348bd9aed108826
+title: Target a Specific Child of an Element Using jQuery
 challengeType: 6
-forumTopicId: 18264
+forumTopicId: 18315
 required:
   - link: 'https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.0/animate.css'
-dashedName: remove-classes-from-an-element-with-jquery
+dashedName: target-a-specific-child-of-an-element-using-jquery
 ---
 
 # --description--
 
-In the same way you can add classes to an element with jQuery's `addClass()` function, you can remove them with jQuery's `removeClass()` function.
+You've seen why id attributes are so convenient for targeting with jQuery selectors. But you won't always have such neat ids to work with.
 
-Here's how you would do this for a specific button:
+Fortunately, jQuery has some other tricks for targeting the right elements.
 
-`$("#target2").removeClass("btn-default");`
+jQuery uses CSS Selectors to target elements. The `target:nth-child(n)` CSS selector allows you to select all the nth elements with the target class or element type.
 
-Let's remove the `btn-default` class from all of our `button` elements.
+Here's how you would give the third element in each well the bounce class:
+
+`$(".target:nth-child(3)").addClass("animated bounce");`
+
+Make the second child in each of your well elements bounce. You must select the elements' children with the `target` class.
 
 # --hints--
 
-The `btn-default` class should be removed from all of your `button` elements.
-
-```js
-assert($('.btn-default').length === 0);
-```
-
-You should only use jQuery to remove this class from the element.
-
-```js
-assert(code.match(/btn btn-default/g));
-```
-
-You should only remove the `btn-default` class.
+The second element in your `target` elements should bounce.
 
 ```js
 assert(
-  code.match(
-    /\.[\v\s]*removeClass[\s\v]*\([\s\v]*('|")\s*btn-default\s*('|")[\s\v]*\)/gm
-  )
+  $('.target:nth-child(2)').hasClass('animated') &&
+    $('.target:nth-child(2)').hasClass('bounce')
+);
+```
+
+Only two elements should bounce.
+
+```js
+assert($('.animated.bounce').length === 2);
+```
+
+You should use the `:nth-child()` selector to modify these elements.
+
+```js
+assert(code.match(/\:nth-child\(/g));
+```
+
+You should only use jQuery to add these classes to the element.
+
+```js
+assert(
+  code.match(/\$\(".target:nth-child\(2\)"\)/g) ||
+    code.match(/\$\('.target:nth-child\(2\)'\)/g) ||
+    code.match(/\$\(".target"\).filter\(":nth-child\(2\)"\)/g) ||
+    code.match(/\$\('.target'\).filter\(':nth-child\(2\)'\)/g)
 );
 ```
 
@@ -49,9 +63,13 @@ assert(
 ```html
 <script>
   $(document).ready(function() {
-    $("button").addClass("animated bounce");
-    $(".well").addClass("animated shake");
-    $("#target3").addClass("animated fadeOut");
+    $("#target1").css("color", "red");
+    $("#target1").prop("disabled", true);
+    $("#target4").remove();
+    $("#target2").appendTo("#right-well");
+    $("#target5").clone().appendTo("#left-well");
+    $("#target1").parent().css("background-color", "red");
+    $("#right-well").children().css("color", "orange");
 
   });
 </script>
@@ -86,10 +104,14 @@ assert(
 ```html
 <script>
   $(document).ready(function() {
-    $("button").addClass("animated bounce");
-    $(".well").addClass("animated shake");
-    $("#target3").addClass("animated fadeOut");
-    $("button").removeClass("btn-default");
+    $("#target1").css("color", "red");
+    $("#target1").prop("disabled", true);
+    $("#target4").remove();
+    $("#target2").appendTo("#right-well");
+    $("#target5").clone().appendTo("#left-well");
+    $("#target1").parent().css("background-color", "red");
+    $("#right-well").children().css("color", "orange");
+    $(".target:nth-child(2)").addClass("animated bounce");
   });
 </script>
 
