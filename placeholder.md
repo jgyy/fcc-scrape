@@ -1,53 +1,47 @@
 ---
-id: bad87fee1348bd9aeda08726
-title: Delete Your jQuery Functions
+id: bad87fee1348bd9aed808826
+title: Disable an Element Using jQuery
 challengeType: 6
-forumTopicId: 17561
-required:
-  - link: 'https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.0/animate.css'
-dashedName: delete-your-jquery-functions
+forumTopicId: 17563
+dashedName: disable-an-element-using-jquery
 ---
 
 # --description--
 
-These animations were cool at first, but now they're getting kind of distracting.
+You can also change the non-CSS properties of HTML elements with jQuery. For example, you can disable buttons.
 
-Delete all three of these jQuery functions from your `document ready function`, but leave your `document ready function` itself intact.
+When you disable a button, it will become grayed-out and can no longer be clicked.
+
+jQuery has a function called `.prop()` that allows you to adjust the properties of elements.
+
+Here's how you would disable all buttons:
+
+`$("button").prop("disabled", true);`
+
+Disable only the `target1` button.
 
 # --hints--
 
-All three of your jQuery functions should be deleted from your `document ready function`.
-
-```js
-assert(code.match(/\{\s*\}\);/g));
-```
-
-You should leave your `script` element intact.
-
-```js
-assert(code.match(/<script>/g));
-```
-
-You should leave your `$(document).ready(function() {` at the beginning of your `script` element.
-
-```js
-assert(code.match(/\$\(document\)\.ready\(function\(\)\s?\{/g));
-```
-
-You should leave your "document ready function" closing `})` intact.
-
-```js
-assert(code.match(/.*\s*\}\);/g));
-```
-
-You should leave your `script` element closing tag intact.
+Your `target1` button should be disabled.
 
 ```js
 assert(
-  code.match(/<\/script>/g) &&
-    code.match(/<script/g) &&
-    code.match(/<\/script>/g).length === code.match(/<script/g).length
+  $('#target1') &&
+    $('#target1').prop('disabled') &&
+    code.match(/["']disabled["'],( true|true)/g)
 );
+```
+
+No other buttons should be disabled.
+
+```js
+assert($('#target2') && !$('#target2').prop('disabled'));
+```
+
+You should only use jQuery to add these classes to the element.
+
+```js
+assert(!code.match(/disabled[^<]*>/g));
 ```
 
 # --seed--
@@ -57,9 +51,7 @@ assert(
 ```html
 <script>
   $(document).ready(function() {
-    $("button").addClass("animated bounce");
-    $(".well").addClass("animated shake");
-    $("#target3").addClass("animated fadeOut");
+    $("#target1").css("color", "red");
 
   });
 </script>
@@ -94,6 +86,8 @@ assert(
 ```html
 <script>
   $(document).ready(function() {
+    $("#target1").css("color", "red");
+    $("#target1").prop("disabled", true);
 
   });
 </script>
