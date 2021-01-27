@@ -1,47 +1,43 @@
 ---
-id: bad87fee1348bd9bedc08826
-title: Target HTML Elements with Selectors Using jQuery
+id: bad87fee1348bd9aed208826
+title: Target the Children of an Element Using jQuery
 challengeType: 6
-forumTopicId: 18319
-required:
-  - link: 'https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.0/animate.css'
-dashedName: target-html-elements-with-selectors-using-jquery
+forumTopicId: 18320
+dashedName: target-the-children-of-an-element-using-jquery
 ---
 
 # --description--
 
-Now we have a `document ready function`.
+When HTML elements are placed one level below another they are called <dfn>children</dfn> of that element. For example, the button elements in this challenge with the text "#target1", "#target2", and "#target3" are all children of the `<div class="well" id="left-well">` element.
 
-Now let's write our first jQuery statement. All jQuery functions start with a `$`, usually referred to as a dollar sign operator, or as bling.
+jQuery has a function called `children()` that allows you to access the children of whichever element you've selected.
 
-jQuery often selects an HTML element with a <dfn>selector</dfn>, then does something to that element.
+Here's an example of how you would use the `children()` function to give the children of your `left-well` element the color `blue`:
 
-For example, let's make all of your `button` elements bounce. Just add this code inside your document ready function:
+`$("#left-well").children().css("color", "blue")`
 
-`$("button").addClass("animated bounce");`
+# --instructions--
 
-Note that we've already included both the jQuery library and the Animate.css library in the background so that you can use them in the editor. So you are using jQuery to apply the Animate.css `bounce` class to your `button` elements.
+Give all the children of your `right-well` element the color orange.
 
 # --hints--
 
-You should use the jQuery `addClass()` function to give the classes `animated` and `bounce` to your `button` elements.
+All children of `#right-well` should have orange text.
 
 ```js
-assert($('button').hasClass('animated') && $('button').hasClass('bounce'));
+assert($('#right-well').children().css('color') === 'rgb(255, 165, 0)');
+```
+
+You should use the `children()` function to modify these elements.
+
+```js
+assert(code.match(/\.children\(\)\.css/g));
 ```
 
 You should only use jQuery to add these classes to the element.
 
 ```js
-assert(!code.match(/class.*animated/g));
-```
-
-Your jQuery code should be within the `$(document).ready();` function.
-
-```js
-assert(
-  code.replace(/\s/g, '').match(/\$\(document\)\.ready\(function\(\)\{\$/g)
-);
+assert(code.match(/<div class="well" id="right-well">/g));
 ```
 
 # --seed--
@@ -51,6 +47,12 @@ assert(
 ```html
 <script>
   $(document).ready(function() {
+    $("#target1").css("color", "red");
+    $("#target1").prop("disabled", true);
+    $("#target4").remove();
+    $("#target2").appendTo("#right-well");
+    $("#target5").clone().appendTo("#left-well");
+    $("#target1").parent().css("background-color", "red");
 
   });
 </script>
@@ -85,7 +87,13 @@ assert(
 ```html
 <script>
   $(document).ready(function() {
-    $("button").addClass("animated bounce");
+    $("#target1").css("color", "red");
+    $("#target1").prop("disabled", true);
+    $("#target4").remove();
+    $("#target2").appendTo("#right-well");
+    $("#target5").clone().appendTo("#left-well");
+    $("#target1").parent().css("background-color", "red");
+    $("#right-well").children().css("color", "orange");
   });
 </script>
 
