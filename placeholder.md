@@ -1,61 +1,41 @@
 ---
-id: 564944c91be2204b269d51e3
-title: Change Text Inside an Element Using jQuery
+id: bad87fee1348bd9aed908826
+title: Change the CSS of an Element Using jQuery
 challengeType: 6
-forumTopicId: 16773
-dashedName: change-text-inside-an-element-using-jquery
+forumTopicId: 16776
+required:
+  - link: 'https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.0/animate.css'
+dashedName: change-the-css-of-an-element-using-jquery
 ---
 
 # --description--
 
-Using jQuery, you can change the text between the start and end tags of an element. You can even change HTML markup.
+We can also change the CSS of an HTML element directly with jQuery.
 
-jQuery has a function called `.html()` that lets you add HTML tags and text within an element. Any content previously within the element will be completely replaced with the content you provide using this function.
+jQuery has a function called `.css()` that allows you to change the CSS of an element.
 
-Here's how you would rewrite and emphasize the text of our heading:
+Here's how we would change its color to blue:
 
-`$("h3").html("<em>jQuery Playground</em>");`
+`$("#target1").css("color", "blue");`
 
-jQuery also has a similar function called `.text()` that only alters text without adding tags. In other words, this function will not evaluate any HTML tags passed to it, but will instead treat it as the text you want to replace the existing content with.
+This is slightly different from a normal CSS declaration, because the CSS property and its value are in quotes, and separated with a comma instead of a colon.
 
-Change the button with id `target4` by emphasizing its text.
+Delete your jQuery selectors, leaving an empty `document ready function`.
 
-[View our news article for &lt;em>](https://www.freecodecamp.org/news/html-elements-explained-what-are-html-tags/#em-element) to learn the difference between `<i>` and `<em>` and their uses.
-
-Note that while the `<i>` tag has traditionally been used to emphasize text, it has since been adopted for use as a tag for icons. The `<em>` tag is now widely accepted as the tag for emphasis. Either will work for this challenge.
+Select `target1` and change its color to red.
 
 # --hints--
 
-You should emphasize the text in your `target4` button by adding HTML tags.
+Your `target1` element should have red text.
 
 ```js
-assert.isTrue(
-  /<em>|<i>\s*#target4\s*<\/em>|<\/i>/gi.test($('#target4').html())
-);
+assert($('#target1').css('color') === 'rgb(255, 0, 0)');
 ```
 
-The text should otherwise remain unchanged.
+You should only use jQuery to add these classes to the element.
 
 ```js
-assert($('#target4') && $('#target4').text().trim() === '#target4');
-```
-
-You should not alter any other text.
-
-```js
-assert.isFalse(/<em>|<i>/gi.test($('h3').html()));
-```
-
-You should be using `.html()` and not `.text()`.
-
-```js
-assert(code.match(/\.html\(/g));
-```
-
-You should select `button id="target4"` with jQuery.
-
-```js
-assert(code.match(/\$\(\s*?(\"|\')#target4(\"|\')\s*?\)\.html\(/));
+assert(!code.match(/class.*animated/g));
 ```
 
 # --seed--
@@ -65,7 +45,10 @@ assert(code.match(/\$\(\s*?(\"|\')#target4(\"|\')\s*?\)\.html\(/));
 ```html
 <script>
   $(document).ready(function() {
-    $("#target1").css("color", "red");
+    $("button").addClass("animated bounce");
+    $(".well").addClass("animated shake");
+    $("#target3").addClass("animated fadeOut");
+    $("button").removeClass("btn-default");
 
   });
 </script>
@@ -100,11 +83,15 @@ assert(code.match(/\$\(\s*?(\"|\')#target4(\"|\')\s*?\)\.html\(/));
 ```html
 <script>
   $(document).ready(function() {
+    $("button").addClass("animated bounce");
+    $(".well").addClass("animated shake");
+    $("#target3").addClass("animated fadeOut");
+    $("button").removeClass("btn-default");
     $("#target1").css("color", "red");
-    $("#target4").html('<em>#target4</em>');
   });
 </script>
 
+<!-- Only change code above this line -->
 <div class="container-fluid">
   <h3 class="text-primary text-center">jQuery Playground</h3>
   <div class="row">
