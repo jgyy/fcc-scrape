@@ -1,70 +1,38 @@
 ---
-id: bad87fee1348bd9aed908626
-title: Target the Same Element with Multiple jQuery Selectors
+id: bad87fee1348bd9aed608826
+title: Use appendTo to Move Elements with jQuery
 challengeType: 6
-forumTopicId: 18322
-required:
-  - link: 'https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.0/animate.css'
-dashedName: target-the-same-element-with-multiple-jquery-selectors
+forumTopicId: 18340
+dashedName: use-appendto-to-move-elements-with-jquery
 ---
 
 # --description--
 
-Now you know three ways of targeting elements: by type: `$("button")`, by class: `$(".btn")`, and by id `$("#target1")`.
+Now let's try moving elements from one `div` to another.
 
-Although it is possible to add multiple classes in a single `.addClass()` call, let's add them to the same element in *three separate ways*.
+jQuery has a function called `appendTo()` that allows you to select HTML elements and append them to another element.
 
-Using `.addClass()`, add only one class at a time to the same element, three different ways:
+For example, if we wanted to move `target4` from our right well to our left well, we would use:
 
-Add the `animated` class to all elements with type `button`.
+`$("#target4").appendTo("#left-well");`
 
-Add the `shake` class to all the buttons with class `.btn`.
-
-Add the `btn-primary` class to the button with id `#target1`.
-
-**Note**  
-You should only be targeting one element and adding only one class at a time. Altogether, your three individual selectors will end up adding the three classes `shake`, `animated`, and `btn-primary` to `#target1`.
+Move your `target2` element from your `left-well` to your `right-well`.
 
 # --hints--
 
-Your code should use the `$("button")` selector.
+Your `target2` element should not be inside your `left-well`.
 
 ```js
-assert(code.match(/\$\s*?\(\s*?(?:'|")\s*?button\s*?(?:'|")/gi));
+assert($('#left-well').children('#target2').length === 0);
 ```
 
-Your code should use the `$(".btn")` selector.
+Your `target2` element should be inside your `right-well`.
 
 ```js
-assert(code.match(/\$\s*?\(\s*?(?:'|")\s*?\.btn\s*?(?:'|")/gi));
+assert($('#right-well').children('#target2').length > 0);
 ```
 
-Your code should use the `$("#target1")` selector.
-
-```js
-assert(code.match(/\$\s*?\(\s*?(?:'|")\s*?#target1\s*?(?:'|")/gi));
-```
-
-You should only add one class with each of your three selectors.
-
-```js
-assert(
-  code.match(/addClass/g) &&
-    code.match(/addClass\s*?\(\s*?('|")\s*?[\w-]+\s*?\1\s*?\)/g).length > 2
-);
-```
-
-Your `#target1` element should have the classes `animated`‚ `shake` and `btn-primary`.
-
-```js
-assert(
-  $('#target1').hasClass('animated') &&
-    $('#target1').hasClass('shake') &&
-    $('#target1').hasClass('btn-primary')
-);
-```
-
-You should only use jQuery to add these classes to the element.
+You should only use jQuery to move these elements.
 
 ```js
 assert(!code.match(/class.*animated/g));
@@ -77,6 +45,9 @@ assert(!code.match(/class.*animated/g));
 ```html
 <script>
   $(document).ready(function() {
+    $("#target1").css("color", "red");
+    $("#target1").prop("disabled", true);
+    $("#target4").remove();
 
   });
 </script>
@@ -111,9 +82,10 @@ assert(!code.match(/class.*animated/g));
 ```html
 <script>
   $(document).ready(function() {
-    $("button").addClass("animated");
-    $(".btn").addClass("shake");
-    $("#target1").addClass("btn-primary");
+    $("#target1").css("color", "red");
+    $("#target1").prop("disabled", true);
+    $("#target4").remove();
+    $("#target2").appendTo("#right-well");
   });
 </script>
 
