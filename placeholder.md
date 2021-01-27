@@ -1,59 +1,41 @@
 ---
-id: bad87fee1348bd9aed108826
-title: Target a Specific Child of an Element Using jQuery
+id: bad87fee1348bd9aedc08826
+title: Target Elements by Class Using jQuery
 challengeType: 6
-forumTopicId: 18315
+forumTopicId: 18316
 required:
   - link: 'https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.0/animate.css'
-dashedName: target-a-specific-child-of-an-element-using-jquery
+dashedName: target-elements-by-class-using-jquery
 ---
 
 # --description--
 
-You've seen why id attributes are so convenient for targeting with jQuery selectors. But you won't always have such neat ids to work with.
+You see how we made all of your `button` elements bounce? We selected them with `$("button")`, then we added some CSS classes to them with `.addClass("animated bounce");`.
 
-Fortunately, jQuery has some other tricks for targeting the right elements.
+You just used jQuery's `.addClass()` function, which allows you to add classes to elements.
 
-jQuery uses CSS Selectors to target elements. The `target:nth-child(n)` CSS selector allows you to select all the nth elements with the target class or element type.
+First, let's target your `div` elements with the class `well` by using the `$(".well")` selector.
 
-Here's how you would give the third element in each well the bounce class:
+Note that, just like with CSS declarations, you type a `.` before the class's name.
 
-`$(".target:nth-child(3)").addClass("animated bounce");`
+Then use jQuery's `.addClass()` function to add the classes `animated` and `shake`.
 
-Make the second child in each of your well elements bounce. You must select the elements' children with the `target` class.
+For example, you could make all the elements with the class `text-primary` shake by adding the following to your `document ready function`:
+
+`$(".text-primary").addClass("animated shake");`
 
 # --hints--
 
-The second element in your `target` elements should bounce.
+You should use the jQuery `addClass()` function to give the classes `animated` and `shake` to all your elements with the class `well`.
 
 ```js
-assert(
-  $('.target:nth-child(2)').hasClass('animated') &&
-    $('.target:nth-child(2)').hasClass('bounce')
-);
-```
-
-Only two elements should bounce.
-
-```js
-assert($('.animated.bounce').length === 2);
-```
-
-You should use the `:nth-child()` selector to modify these elements.
-
-```js
-assert(code.match(/\:nth-child\(/g));
+assert($('.well').hasClass('animated') && $('.well').hasClass('shake'));
 ```
 
 You should only use jQuery to add these classes to the element.
 
 ```js
-assert(
-  code.match(/\$\(".target:nth-child\(2\)"\)/g) ||
-    code.match(/\$\('.target:nth-child\(2\)'\)/g) ||
-    code.match(/\$\(".target"\).filter\(":nth-child\(2\)"\)/g) ||
-    code.match(/\$\('.target'\).filter\(':nth-child\(2\)'\)/g)
-);
+assert(!code.match(/class\.\*animated/g));
 ```
 
 # --seed--
@@ -63,14 +45,7 @@ assert(
 ```html
 <script>
   $(document).ready(function() {
-    $("#target1").css("color", "red");
-    $("#target1").prop("disabled", true);
-    $("#target4").remove();
-    $("#target2").appendTo("#right-well");
-    $("#target5").clone().appendTo("#left-well");
-    $("#target1").parent().css("background-color", "red");
-    $("#right-well").children().css("color", "orange");
-
+    $("button").addClass("animated bounce");
   });
 </script>
 
@@ -104,14 +79,8 @@ assert(
 ```html
 <script>
   $(document).ready(function() {
-    $("#target1").css("color", "red");
-    $("#target1").prop("disabled", true);
-    $("#target4").remove();
-    $("#target2").appendTo("#right-well");
-    $("#target5").clone().appendTo("#left-well");
-    $("#target1").parent().css("background-color", "red");
-    $("#right-well").children().css("color", "orange");
-    $(".target:nth-child(2)").addClass("animated bounce");
+    $("button").addClass("animated bounce");
+    $(".well").addClass("animated shake");
   });
 </script>
 
