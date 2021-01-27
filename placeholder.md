@@ -1,117 +1,154 @@
 ---
-id: bad87fee1348bd9aecb08826
-title: Use jQuery to Modify the Entire Page
+id: 5a24c314108439a4d4036147
+title: Connect Redux to React
 challengeType: 6
-forumTopicId: 18361
-required:
-  - link: 'https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.0/animate.css'
-dashedName: use-jquery-to-modify-the-entire-page
+forumTopicId: 301426
+dashedName: connect-redux-to-react
 ---
 
 # --description--
 
-We're done playing with our jQuery playground. Let's tear it down!
+Now that you've written both the `mapStateToProps()` and the `mapDispatchToProps()` functions, you can use them to map `state` and `dispatch` to the `props` of one of your React components. The `connect` method from React Redux can handle this task. This method takes two optional arguments, `mapStateToProps()` and `mapDispatchToProps()`. They are optional because you may have a component that only needs access to `state` but doesn't need to dispatch any actions, or vice versa.
 
-jQuery can target the `body` element as well.
+To use this method, pass in the functions as arguments, and immediately call the result with your component. This syntax is a little unusual and looks like:
 
-Here's how we would make the entire body fade out: `$("body").addClass("animated fadeOut");`
+`connect(mapStateToProps, mapDispatchToProps)(MyComponent)`
 
-But let's do something more dramatic. Add the classes `animated` and `hinge` to your `body` element.
+**Note:** If you want to omit one of the arguments to the `connect` method, you pass `null` in its place.
+
+# --instructions--
+
+The code editor has the `mapStateToProps()` and `mapDispatchToProps()` functions and a new React component called `Presentational`. Connect this component to Redux with the `connect` method from the `ReactRedux` global object, and call it immediately on the `Presentational` component. Assign the result to a new `const` called `ConnectedComponent` that represents the connected component. That's it, now you're connected to Redux! Try changing either of `connect`'s arguments to `null` and observe the test results.
 
 # --hints--
 
-You should add the classes `animated` and `hinge` to your `body` element.
+The `Presentational` component should render.
 
 ```js
-assert($('body').hasClass('animated') && $('body').hasClass('hinge'));
+assert(
+  (function () {
+    const mockedComponent = Enzyme.mount(React.createElement(AppWrapper));
+    return mockedComponent.find('Presentational').length === 1;
+  })()
+);
+```
+
+The `Presentational` component should receive a prop `messages` via `connect`.
+
+```js
+assert(
+  (function () {
+    const mockedComponent = Enzyme.mount(React.createElement(AppWrapper));
+    const props = mockedComponent.find('Presentational').props();
+    return props.messages === '__INITIAL__STATE__';
+  })()
+);
+```
+
+The `Presentational` component should receive a prop `submitNewMessage` via `connect`.
+
+```js
+assert(
+  (function () {
+    const mockedComponent = Enzyme.mount(React.createElement(AppWrapper));
+    const props = mockedComponent.find('Presentational').props();
+    return typeof props.submitNewMessage === 'function';
+  })()
+);
 ```
 
 # --seed--
 
+## --after-user-code--
+
+```jsx
+const store = Redux.createStore(
+  (state = '__INITIAL__STATE__', action) => state
+);
+class AppWrapper extends React.Component {
+  render() {
+    return (
+      <ReactRedux.Provider store = {store}>
+        <ConnectedComponent/>
+      </ReactRedux.Provider>
+    );
+  }
+};
+ReactDOM.render(<AppWrapper />, document.getElementById('root'))
+```
+
 ## --seed-contents--
 
-```html
-<script>
-  $(document).ready(function() {
-    $("#target1").css("color", "red");
-    $("#target1").prop("disabled", true);
-    $("#target4").remove();
-    $("#target2").appendTo("#right-well");
-    $("#target5").clone().appendTo("#left-well");
-    $("#target1").parent().css("background-color", "red");
-    $("#right-well").children().css("color", "orange");
-    $("#left-well").children().css("color", "green");
-    $(".target:nth-child(2)").addClass("animated bounce");
-    $(".target:even").addClass("animated shake");
+```jsx
+const addMessage = (message) => {
+  return {
+    type: 'ADD',
+    message: message
+  }
+};
 
-  });
-</script>
+const mapStateToProps = (state) => {
+  return {
+    messages: state
+  }
+};
 
-<!-- Only change code above this line -->
+const mapDispatchToProps = (dispatch) => {
+  return {
+    submitNewMessage: (message) => {
+      dispatch(addMessage(message));
+    }
+  }
+};
 
-<div class="container-fluid">
-  <h3 class="text-primary text-center">jQuery Playground</h3>
-  <div class="row">
-    <div class="col-xs-6">
-      <h4>#left-well</h4>
-      <div class="well" id="left-well">
-        <button class="btn btn-default target" id="target1">#target1</button>
-        <button class="btn btn-default target" id="target2">#target2</button>
-        <button class="btn btn-default target" id="target3">#target3</button>
-      </div>
-    </div>
-    <div class="col-xs-6">
-      <h4>#right-well</h4>
-      <div class="well" id="right-well">
-        <button class="btn btn-default target" id="target4">#target4</button>
-        <button class="btn btn-default target" id="target5">#target5</button>
-        <button class="btn btn-default target" id="target6">#target6</button>
-      </div>
-    </div>
-  </div>
-</div>
+class Presentational extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return <h3>This is a Presentational Component</h3>
+  }
+};
+
+const connect = ReactRedux.connect;
+// Change code below this line
 ```
 
 # --solutions--
 
-```html
-<script>
-  $(document).ready(function() {
-    $("#target1").css("color", "red");
-    $("#target1").prop("disabled", true);
-    $("#target4").remove();
-    $("#target2").appendTo("#right-well");
-    $("#target5").clone().appendTo("#left-well");
-    $("#target1").parent().css("background-color", "red");
-    $("#right-well").children().css("color", "orange");
-    $("#left-well").children().css("color", "green");
-    $(".target:nth-child(2)").addClass("animated bounce");
-    $(".target:even").addClass("animated shake");
-    $("body").addClass("animated hinge");
-  });
-</script>
+```jsx
+const addMessage = (message) => {
+  return {
+    type: 'ADD',
+    message: message
+  }
+};
 
-<!-- Only change code above this line -->
+const mapStateToProps = (state) => {
+  return {
+    messages: state
+  }
+};
 
-<div class="container-fluid">
-  <h3 class="text-primary text-center">jQuery Playground</h3>
-  <div class="row">
-    <div class="col-xs-6">
-      <h4>#left-well</h4>
-      <div class="well" id="left-well">
-        <button class="btn btn-default target" id="target1">#target1</button>
-        <button class="btn btn-default target" id="target2">#target2</button>
-        <button class="btn btn-default target" id="target3">#target3</button>
-      </div>
-    </div>
-    <div class="col-xs-6">
-      <h4>#right-well</h4>
-      <div class="well" id="right-well">
-        <button class="btn btn-default target" id="target4">#target4</button>
-        <button class="btn btn-default target" id="target5">#target5</button>
-        <button class="btn btn-default target" id="target6">#target6</button>
-      </div>
-    </div>
-  </div>
-</div>
+const mapDispatchToProps = (dispatch) => {
+  return {
+    submitNewMessage: (message) => {
+      dispatch(addMessage(message));
+    }
+  }
+};
+
+class Presentational extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return <h3>This is a Presentational Component</h3>
+  }
+};
+
+const connect = ReactRedux.connect;
+// Change code below this line
+
+const ConnectedComponent = connect(mapStateToProps, mapDispatchToProps)(Presentational);
 ```
