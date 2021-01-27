@@ -1,47 +1,37 @@
 ---
-id: bad87fee1348bd9aed808826
-title: Disable an Element Using jQuery
+id: bad87fee1348bd9aed708826
+title: Remove an Element Using jQuery
 challengeType: 6
-forumTopicId: 17563
-dashedName: disable-an-element-using-jquery
+forumTopicId: 18262
+dashedName: remove-an-element-using-jquery
 ---
 
 # --description--
 
-You can also change the non-CSS properties of HTML elements with jQuery. For example, you can disable buttons.
+Now let's remove an HTML element from your page using jQuery.
 
-When you disable a button, it will become grayed-out and can no longer be clicked.
+jQuery has a function called `.remove()` that will remove an HTML element entirely
 
-jQuery has a function called `.prop()` that allows you to adjust the properties of elements.
-
-Here's how you would disable all buttons:
-
-`$("button").prop("disabled", true);`
-
-Disable only the `target1` button.
+Remove element `target4` from the page by using the `.remove()` function.
 
 # --hints--
 
-Your `target1` button should be disabled.
+You should use jQuery to remove your `target4` element from your page.
 
 ```js
 assert(
-  $('#target1') &&
-    $('#target1').prop('disabled') &&
-    code.match(/["']disabled["'],( true|true)/g)
+  $('#target4').length === 0 && code.match(/\$\(["']#target4["']\).remove\(\)/g)
 );
 ```
 
-No other buttons should be disabled.
+You should only use jQuery to remove this element.
 
 ```js
-assert($('#target2') && !$('#target2').prop('disabled'));
-```
-
-You should only use jQuery to add these classes to the element.
-
-```js
-assert(!code.match(/disabled[^<]*>/g));
+assert(
+  code.match(/id="target4/g) &&
+    !code.match(/<!--.*id="target4".*-->/g) &&
+    $('#right-well').length > 0
+);
 ```
 
 # --seed--
@@ -52,6 +42,7 @@ assert(!code.match(/disabled[^<]*>/g));
 <script>
   $(document).ready(function() {
     $("#target1").css("color", "red");
+    $("#target1").prop("disabled", true);
 
   });
 </script>
@@ -88,7 +79,7 @@ assert(!code.match(/disabled[^<]*>/g));
   $(document).ready(function() {
     $("#target1").css("color", "red");
     $("#target1").prop("disabled", true);
-
+    $("#target4").remove();
   });
 </script>
 
