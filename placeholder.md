@@ -1,48 +1,50 @@
 ---
-id: bad87fee1348bd9aeda08826
-title: Target Elements by id Using jQuery
+id: bad87fee1348bd9aed008826
+title: Target Even Elements Using jQuery
 challengeType: 6
-forumTopicId: 18317
+forumTopicId: 18318
 required:
   - link: 'https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.0/animate.css'
-dashedName: target-elements-by-id-using-jquery
+dashedName: target-even-elements-using-jquery
 ---
 
 # --description--
 
-You can also target elements by their id attributes.
+You can also target elements based on their positions using `:odd` or `:even` selectors.
 
-First target your `button` element with the id `target3` by using the `$("#target3")` selector.
+Note that jQuery is zero-indexed which means the first element in a selection has a position of 0. This can be a little confusing as, counter-intuitively, `:odd` selects the second element (position 1), fourth element (position 3), and so on.
 
-Note that, just like with CSS declarations, you type a `#` before the id's name.
+Here's how you would target all the odd elements with class `target` and give them classes:
 
-Then use jQuery's `.addClass()` function to add the classes `animated` and `fadeOut`.
+`$(".target:odd").addClass("animated shake");`
 
-Here's how you'd make the `button` element with the id `target6` fade out:
-
-`$("#target6").addClass("animated fadeOut")`.
+Try selecting all the even `target` elements and giving them the classes of `animated` and `shake`. Remember that **even** refers to the position of elements with a zero-based system in mind.
 
 # --hints--
 
-You should select the `button` element with the `id` of `target3` and use the jQuery `addClass()` function to give it the class of `animated`.
-
-```js
-assert($('#target3').hasClass('animated'));
-```
-
-You should target the element with the id `target3` and use the jQuery `addClass()` function to give it the class `fadeOut`.
+All of the `target` elements that jQuery considers to be even should shake.
 
 ```js
 assert(
-  ($('#target3').hasClass('fadeOut') || $('#target3').hasClass('fadeout')) &&
-    code.match(/\$\(\s*.#target3.\s*\)/g)
+  $('.target:even').hasClass('animated') && $('.target:even').hasClass('shake')
 );
+```
+
+You should use the `:even` selector to modify these elements.
+
+```js
+assert(code.match(/\:even/g));
 ```
 
 You should only use jQuery to add these classes to the element.
 
 ```js
-assert(!code.match(/class.*animated/g));
+assert(
+  code.match(/\$\(".target:even"\)/g) ||
+    code.match(/\$\('.target:even'\)/g) ||
+    code.match(/\$\(".target"\).filter\(":even"\)/g) ||
+    code.match(/\$\('.target'\).filter\(':even'\)/g)
+);
 ```
 
 # --seed--
@@ -52,8 +54,15 @@ assert(!code.match(/class.*animated/g));
 ```html
 <script>
   $(document).ready(function() {
-    $("button").addClass("animated bounce");
-    $(".well").addClass("animated shake");
+    $("#target1").css("color", "red");
+    $("#target1").prop("disabled", true);
+    $("#target4").remove();
+    $("#target2").appendTo("#right-well");
+    $("#target5").clone().appendTo("#left-well");
+    $("#target1").parent().css("background-color", "red");
+    $("#right-well").children().css("color", "orange");
+    $("#left-well").children().css("color", "green");
+    $(".target:nth-child(2)").addClass("animated bounce");
 
   });
 </script>
@@ -88,9 +97,16 @@ assert(!code.match(/class.*animated/g));
 ```html
 <script>
   $(document).ready(function() {
-    $("button").addClass("animated bounce");
-    $(".well").addClass("animated shake");
-    $("#target3").addClass("animated fadeOut");
+    $("#target1").css("color", "red");
+    $("#target1").prop("disabled", true);
+    $("#target4").remove();
+    $("#target2").appendTo("#right-well");
+    $("#target5").clone().appendTo("#left-well");
+    $("#target1").parent().css("background-color", "red");
+    $("#right-well").children().css("color", "orange");
+    $("#left-well").children().css("color", "green");
+    $(".target:nth-child(2)").addClass("animated bounce");
+    $(".target:even").addClass("animated shake");
   });
 </script>
 
