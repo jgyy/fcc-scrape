@@ -1,41 +1,48 @@
 ---
-id: bad87fee1348bd9aedc08826
-title: Target Elements by Class Using jQuery
+id: bad87fee1348bd9aeda08826
+title: Target Elements by id Using jQuery
 challengeType: 6
-forumTopicId: 18316
+forumTopicId: 18317
 required:
   - link: 'https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.0/animate.css'
-dashedName: target-elements-by-class-using-jquery
+dashedName: target-elements-by-id-using-jquery
 ---
 
 # --description--
 
-You see how we made all of your `button` elements bounce? We selected them with `$("button")`, then we added some CSS classes to them with `.addClass("animated bounce");`.
+You can also target elements by their id attributes.
 
-You just used jQuery's `.addClass()` function, which allows you to add classes to elements.
+First target your `button` element with the id `target3` by using the `$("#target3")` selector.
 
-First, let's target your `div` elements with the class `well` by using the `$(".well")` selector.
+Note that, just like with CSS declarations, you type a `#` before the id's name.
 
-Note that, just like with CSS declarations, you type a `.` before the class's name.
+Then use jQuery's `.addClass()` function to add the classes `animated` and `fadeOut`.
 
-Then use jQuery's `.addClass()` function to add the classes `animated` and `shake`.
+Here's how you'd make the `button` element with the id `target6` fade out:
 
-For example, you could make all the elements with the class `text-primary` shake by adding the following to your `document ready function`:
-
-`$(".text-primary").addClass("animated shake");`
+`$("#target6").addClass("animated fadeOut")`.
 
 # --hints--
 
-You should use the jQuery `addClass()` function to give the classes `animated` and `shake` to all your elements with the class `well`.
+You should select the `button` element with the `id` of `target3` and use the jQuery `addClass()` function to give it the class of `animated`.
 
 ```js
-assert($('.well').hasClass('animated') && $('.well').hasClass('shake'));
+assert($('#target3').hasClass('animated'));
+```
+
+You should target the element with the id `target3` and use the jQuery `addClass()` function to give it the class `fadeOut`.
+
+```js
+assert(
+  ($('#target3').hasClass('fadeOut') || $('#target3').hasClass('fadeout')) &&
+    code.match(/\$\(\s*.#target3.\s*\)/g)
+);
 ```
 
 You should only use jQuery to add these classes to the element.
 
 ```js
-assert(!code.match(/class\.\*animated/g));
+assert(!code.match(/class.*animated/g));
 ```
 
 # --seed--
@@ -46,6 +53,8 @@ assert(!code.match(/class\.\*animated/g));
 <script>
   $(document).ready(function() {
     $("button").addClass("animated bounce");
+    $(".well").addClass("animated shake");
+
   });
 </script>
 
@@ -81,6 +90,7 @@ assert(!code.match(/class\.\*animated/g));
   $(document).ready(function() {
     $("button").addClass("animated bounce");
     $(".well").addClass("animated shake");
+    $("#target3").addClass("animated fadeOut");
   });
 </script>
 
