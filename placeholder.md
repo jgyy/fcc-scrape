@@ -1,36 +1,44 @@
 ---
-id: bad87fee1348bd9aed708826
-title: Remove an Element Using jQuery
+id: bad87fee1348bd9aed918626
+title: Remove Classes from an Element with jQuery
 challengeType: 6
-forumTopicId: 18262
-dashedName: remove-an-element-using-jquery
+forumTopicId: 18264
+required:
+  - link: 'https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.0/animate.css'
+dashedName: remove-classes-from-an-element-with-jquery
 ---
 
 # --description--
 
-Now let's remove an HTML element from your page using jQuery.
+In the same way you can add classes to an element with jQuery's `addClass()` function, you can remove them with jQuery's `removeClass()` function.
 
-jQuery has a function called `.remove()` that will remove an HTML element entirely
+Here's how you would do this for a specific button:
 
-Remove element `target4` from the page by using the `.remove()` function.
+`$("#target2").removeClass("btn-default");`
+
+Let's remove the `btn-default` class from all of our `button` elements.
 
 # --hints--
 
-You should use jQuery to remove your `target4` element from your page.
+The `btn-default` class should be removed from all of your `button` elements.
 
 ```js
-assert(
-  $('#target4').length === 0 && code.match(/\$\(["']#target4["']\).remove\(\)/g)
-);
+assert($('.btn-default').length === 0);
 ```
 
-You should only use jQuery to remove this element.
+You should only use jQuery to remove this class from the element.
+
+```js
+assert(code.match(/btn btn-default/g));
+```
+
+You should only remove the `btn-default` class.
 
 ```js
 assert(
-  code.match(/id="target4/g) &&
-    !code.match(/<!--.*id="target4".*-->/g) &&
-    $('#right-well').length > 0
+  code.match(
+    /\.[\v\s]*removeClass[\s\v]*\([\s\v]*('|")\s*btn-default\s*('|")[\s\v]*\)/gm
+  )
 );
 ```
 
@@ -41,8 +49,9 @@ assert(
 ```html
 <script>
   $(document).ready(function() {
-    $("#target1").css("color", "red");
-    $("#target1").prop("disabled", true);
+    $("button").addClass("animated bounce");
+    $(".well").addClass("animated shake");
+    $("#target3").addClass("animated fadeOut");
 
   });
 </script>
@@ -77,9 +86,10 @@ assert(
 ```html
 <script>
   $(document).ready(function() {
-    $("#target1").css("color", "red");
-    $("#target1").prop("disabled", true);
-    $("#target4").remove();
+    $("button").addClass("animated bounce");
+    $(".well").addClass("animated shake");
+    $("#target3").addClass("animated fadeOut");
+    $("button").removeClass("btn-default");
   });
 </script>
 
