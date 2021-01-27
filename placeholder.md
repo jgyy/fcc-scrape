@@ -1,49 +1,46 @@
 ---
-id: bad87fee1348bd9aed008826
-title: Target Even Elements Using jQuery
+id: bad87fee1348bd9bedc08826
+title: Target HTML Elements with Selectors Using jQuery
 challengeType: 6
-forumTopicId: 18318
+forumTopicId: 18319
 required:
   - link: 'https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.0/animate.css'
-dashedName: target-even-elements-using-jquery
+dashedName: target-html-elements-with-selectors-using-jquery
 ---
 
 # --description--
 
-You can also target elements based on their positions using `:odd` or `:even` selectors.
+Now we have a `document ready function`.
 
-Note that jQuery is zero-indexed which means the first element in a selection has a position of 0. This can be a little confusing as, counter-intuitively, `:odd` selects the second element (position 1), fourth element (position 3), and so on.
+Now let's write our first jQuery statement. All jQuery functions start with a `$`, usually referred to as a dollar sign operator, or as bling.
 
-Here's how you would target all the odd elements with class `target` and give them classes:
+jQuery often selects an HTML element with a <dfn>selector</dfn>, then does something to that element.
 
-`$(".target:odd").addClass("animated shake");`
+For example, let's make all of your `button` elements bounce. Just add this code inside your document ready function:
 
-Try selecting all the even `target` elements and giving them the classes of `animated` and `shake`. Remember that **even** refers to the position of elements with a zero-based system in mind.
+`$("button").addClass("animated bounce");`
+
+Note that we've already included both the jQuery library and the Animate.css library in the background so that you can use them in the editor. So you are using jQuery to apply the Animate.css `bounce` class to your `button` elements.
 
 # --hints--
 
-All of the `target` elements that jQuery considers to be even should shake.
+You should use the jQuery `addClass()` function to give the classes `animated` and `bounce` to your `button` elements.
 
 ```js
-assert(
-  $('.target:even').hasClass('animated') && $('.target:even').hasClass('shake')
-);
-```
-
-You should use the `:even` selector to modify these elements.
-
-```js
-assert(code.match(/\:even/g));
+assert($('button').hasClass('animated') && $('button').hasClass('bounce'));
 ```
 
 You should only use jQuery to add these classes to the element.
 
 ```js
+assert(!code.match(/class.*animated/g));
+```
+
+Your jQuery code should be within the `$(document).ready();` function.
+
+```js
 assert(
-  code.match(/\$\(".target:even"\)/g) ||
-    code.match(/\$\('.target:even'\)/g) ||
-    code.match(/\$\(".target"\).filter\(":even"\)/g) ||
-    code.match(/\$\('.target'\).filter\(':even'\)/g)
+  code.replace(/\s/g, '').match(/\$\(document\)\.ready\(function\(\)\{\$/g)
 );
 ```
 
@@ -54,15 +51,6 @@ assert(
 ```html
 <script>
   $(document).ready(function() {
-    $("#target1").css("color", "red");
-    $("#target1").prop("disabled", true);
-    $("#target4").remove();
-    $("#target2").appendTo("#right-well");
-    $("#target5").clone().appendTo("#left-well");
-    $("#target1").parent().css("background-color", "red");
-    $("#right-well").children().css("color", "orange");
-    $("#left-well").children().css("color", "green");
-    $(".target:nth-child(2)").addClass("animated bounce");
 
   });
 </script>
@@ -97,16 +85,7 @@ assert(
 ```html
 <script>
   $(document).ready(function() {
-    $("#target1").css("color", "red");
-    $("#target1").prop("disabled", true);
-    $("#target4").remove();
-    $("#target2").appendTo("#right-well");
-    $("#target5").clone().appendTo("#left-well");
-    $("#target1").parent().css("background-color", "red");
-    $("#right-well").children().css("color", "orange");
-    $("#left-well").children().css("color", "green");
-    $(".target:nth-child(2)").addClass("animated bounce");
-    $(".target:even").addClass("animated shake");
+    $("button").addClass("animated bounce");
   });
 </script>
 
