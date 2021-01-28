@@ -1,260 +1,107 @@
 ---
-id: 5a24c314108439a4d4036142
-title: Manage State Locally First
+id: 5a24c314108439a4d4036146
+title: Map Dispatch to Props
 challengeType: 6
-forumTopicId: 301431
-dashedName: manage-state-locally-first
+forumTopicId: 301432
+dashedName: map-dispatch-to-props
 ---
 
 # --description--
 
-Here you'll finish creating the `DisplayMessages` component.
+The `mapDispatchToProps()` function is used to provide specific action creators to your React components so they can dispatch actions against the Redux store. It's similar in structure to the `mapStateToProps()` function you wrote in the last challenge. It returns an object that maps dispatch actions to property names, which become component `props`. However, instead of returning a piece of `state`, each property returns a function that calls `dispatch` with an action creator and any relevant action data. You have access to this `dispatch` because it's passed in to `mapDispatchToProps()` as a parameter when you define the function, just like you passed `state` to `mapStateToProps()`. Behind the scenes, React Redux is using Redux's `store.dispatch()` to conduct these dispatches with `mapDispatchToProps()`. This is similar to how it uses `store.subscribe()` for components that are mapped to `state`.
+
+For example, you have a `loginUser()` action creator that takes a `username` as an action payload. The object returned from `mapDispatchToProps()` for this action creator would look something like:
+
+```jsx
+{
+  submitLoginUser: function(username) {
+    dispatch(loginUser(username));
+  }
+}
+```
 
 # --instructions--
 
-First, in the `render()` method, have the component render an `input` element, `button` element, and `ul` element. When the `input` element changes, it should trigger a `handleChange()` method. Also, the `input` element should render the value of `input` that's in the component's state. The `button` element should trigger a `submitMessage()` method when it's clicked.
-
-Second, write these two methods. The `handleChange()` method should update the `input` with what the user is typing. The `submitMessage()` method should concatenate the current message (stored in `input`) to the `messages` array in local state, and clear the value of the `input`.
-
-Finally, use the `ul` to map over the array of `messages` and render it to the screen as a list of `li` elements.
+The code editor provides an action creator called `addMessage()`. Write the function `mapDispatchToProps()` that takes `dispatch` as an argument, then returns an object. The object should have a property `submitNewMessage` set to the dispatch function, which takes a parameter for the new message to add when it dispatches `addMessage()`.
 
 # --hints--
 
-The `DisplayMessages` component should initialize with a state equal to `{ input: "", messages: [] }`.
+`addMessage` should return an object with keys `type` and `message`.
 
 ```js
 assert(
   (function () {
-    const mockedComponent = Enzyme.mount(React.createElement(DisplayMessages));
-    const initialState = mockedComponent.state();
+    const addMessageTest = addMessage();
     return (
-      typeof initialState === 'object' &&
-      initialState.input === '' &&
-      initialState.messages.length === 0
+      addMessageTest.hasOwnProperty('type') &&
+      addMessageTest.hasOwnProperty('message')
     );
   })()
 );
 ```
 
-The `DisplayMessages` component should render a `div` containing an `h2` element, a `button` element, a `ul` element, and `li` elements as children.
+`mapDispatchToProps` should be a function.
 
 ```js
-async () => {
-  const mockedComponent = Enzyme.mount(React.createElement(DisplayMessages));
-  const waitForIt = (fn) =>
-    new Promise((resolve, reject) => setTimeout(() => resolve(fn()), 100));
-  const state = () => {
-    mockedComponent.setState({ messages: ['__TEST__MESSAGE'] });
-    return waitForIt(() => mockedComponent);
-  };
-  const updated = await state();
-  assert(
-    updated.find('div').length === 1 &&
-      updated.find('h2').length === 1 &&
-      updated.find('button').length === 1 &&
-      updated.find('ul').length === 1 &&
-      updated.find('li').length > 0
-  );
-};
+assert(typeof mapDispatchToProps === 'function');
 ```
 
-`.map` should be used on the `messages` array.
+`mapDispatchToProps` should return an object.
 
 ```js
-assert(code.match(/this\.state\.messages\.map/g));
+assert(typeof mapDispatchToProps() === 'object');
 ```
 
-The `input` element should render the value of `input` in local state.
+Dispatching `addMessage` with `submitNewMessage` from `mapDispatchToProps` should return a message to the dispatch function.
 
 ```js
-async () => {
-  const mockedComponent = Enzyme.mount(React.createElement(DisplayMessages));
-  const waitForIt = (fn) =>
-    new Promise((resolve, reject) => setTimeout(() => resolve(fn()), 100));
-  const causeChange = (c, v) =>
-    c.find('input').simulate('change', { target: { value: v } });
-  const testValue = '__TEST__EVENT__INPUT';
-  const changed = () => {
-    causeChange(mockedComponent, testValue);
-    return waitForIt(() => mockedComponent);
-  };
-  const updated = await changed();
-  assert(updated.find('input').props().value === testValue);
-};
-```
-
-Calling the method `handleChange` should update the `input` value in state to the current input.
-
-```js
-async () => {
-  const mockedComponent = Enzyme.mount(React.createElement(DisplayMessages));
-  const waitForIt = (fn) =>
-    new Promise((resolve, reject) => setTimeout(() => resolve(fn()), 100));
-  const causeChange = (c, v) =>
-    c.find('input').simulate('change', { target: { value: v } });
-  const initialState = mockedComponent.state();
-  const testMessage = '__TEST__EVENT__MESSAGE__';
-  const changed = () => {
-    causeChange(mockedComponent, testMessage);
-    return waitForIt(() => mockedComponent);
-  };
-  const afterInput = await changed();
-  assert(
-    initialState.input === '' &&
-      afterInput.state().input === '__TEST__EVENT__MESSAGE__'
-  );
-};
-```
-
-Clicking the `Add message` button should call the method `submitMessage` which should add the current `input` to the `messages` array in state.
-
-```js
-async () => {
-  const mockedComponent = Enzyme.mount(React.createElement(DisplayMessages));
-  const waitForIt = (fn) =>
-    new Promise((resolve, reject) => setTimeout(() => resolve(fn()), 100));
-  const causeChange = (c, v) =>
-    c.find('input').simulate('change', { target: { value: v } });
-  const initialState = mockedComponent.state();
-  const testMessage_1 = '__FIRST__MESSAGE__';
-  const firstChange = () => {
-    causeChange(mockedComponent, testMessage_1);
-    return waitForIt(() => mockedComponent);
-  };
-  const firstResult = await firstChange();
-  const firstSubmit = () => {
-    mockedComponent.find('button').simulate('click');
-    return waitForIt(() => mockedComponent);
-  };
-  const afterSubmit_1 = await firstSubmit();
-  const submitState_1 = afterSubmit_1.state();
-  const testMessage_2 = '__SECOND__MESSAGE__';
-  const secondChange = () => {
-    causeChange(mockedComponent, testMessage_2);
-    return waitForIt(() => mockedComponent);
-  };
-  const secondResult = await secondChange();
-  const secondSubmit = () => {
-    mockedComponent.find('button').simulate('click');
-    return waitForIt(() => mockedComponent);
-  };
-  const afterSubmit_2 = await secondSubmit();
-  const submitState_2 = afterSubmit_2.state();
-  assert(
-    initialState.messages.length === 0 &&
-      submitState_1.messages.length === 1 &&
-      submitState_2.messages.length === 2 &&
-      submitState_2.messages[1] === testMessage_2
-  );
-};
-```
-
-The `submitMessage` method should clear the current input.
-
-```js
-async () => {
-  const mockedComponent = Enzyme.mount(React.createElement(DisplayMessages));
-  const waitForIt = (fn) =>
-    new Promise((resolve, reject) => setTimeout(() => resolve(fn()), 100));
-  const causeChange = (c, v) =>
-    c.find('input').simulate('change', { target: { value: v } });
-  const initialState = mockedComponent.state();
-  const testMessage = '__FIRST__MESSAGE__';
-  const firstChange = () => {
-    causeChange(mockedComponent, testMessage);
-    return waitForIt(() => mockedComponent);
-  };
-  const firstResult = await firstChange();
-  const firstState = firstResult.state();
-  const firstSubmit = () => {
-    mockedComponent.find('button').simulate('click');
-    return waitForIt(() => mockedComponent);
-  };
-  const afterSubmit = await firstSubmit();
-  const submitState = afterSubmit.state();
-  assert(firstState.input === testMessage && submitState.input === '');
-};
+assert(
+  (function () {
+    let testAction;
+    const dispatch = (fn) => {
+      testAction = fn;
+    };
+    let dispatchFn = mapDispatchToProps(dispatch);
+    dispatchFn.submitNewMessage('__TEST__MESSAGE__');
+    return (
+      testAction.type === 'ADD' && testAction.message === '__TEST__MESSAGE__'
+    );
+  })()
+);
 ```
 
 # --seed--
 
-## --after-user-code--
-
-```jsx
-ReactDOM.render(<DisplayMessages />, document.getElementById('root'))
-```
-
 ## --seed-contents--
 
 ```jsx
-class DisplayMessages extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      input: '',
-      messages: []
-    }
-  }
-  // Add handleChange() and submitMessage() methods here
-
-  render() {
-    return (
-      <div>
-        <h2>Type in a new Message:</h2>
-        { /* Render an input, button, and ul below this line */ }
-
-        { /* Change code above this line */ }
-      </div>
-    );
+const addMessage = (message) => {
+  return {
+    type: 'ADD',
+    message: message
   }
 };
+
+// Change code below this line
 ```
 
 # --solutions--
 
 ```jsx
-class DisplayMessages extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      input: '',
-      messages: []
+const addMessage = (message) => {
+  return {
+    type: 'ADD',
+    message: message
+  }
+};
+
+// Change code below this line
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    submitNewMessage: function(message) {
+      dispatch(addMessage(message));
     }
- this.handleChange = this.handleChange.bind(this);
-   this.submitMessage = this.submitMessage.bind(this);
- }
-  handleChange(event) {
-    this.setState({
-      input: event.target.value
-    });
-  }
-  submitMessage() {
-    this.setState((state) => {
-      const currentMessage = state.input;
-      return {
-        input: '',
-        messages: state.messages.concat(currentMessage)
-      };  
-    });
-  }
-  render() {
-    return (
-      <div>
-        <h2>Type in a new Message:</h2>
-        <input
-          value={this.state.input}
-          onChange={this.handleChange}/><br/>
-        <button onClick={this.submitMessage}>Submit</button>
-        <ul>
-          {this.state.messages.map( (message, idx) => {
-              return (
-                 <li key={idx}>{message}</li>
-              )
-            })
-          }
-        </ul>
-      </div>
-    );
   }
 };
 ```
