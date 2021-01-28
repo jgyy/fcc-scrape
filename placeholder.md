@@ -1,80 +1,80 @@
 ---
-id: 5a24c314108439a4d4036144
-title: Use Provider to Connect Redux to React
+id: 5a24c314108439a4d403616e
+title: Access Props Using this.props
 challengeType: 6
-forumTopicId: 301435
-dashedName: use-provider-to-connect-redux-to-react
+forumTopicId: 301375
+dashedName: access-props-using-this-props
 ---
 
 # --description--
 
-In the last challenge, you created a Redux store to handle the messages array and created an action for adding new messages. The next step is to provide React access to the Redux store and the actions it needs to dispatch updates. React Redux provides its `react-redux` package to help accomplish these tasks.
+The last several challenges covered the basic ways to pass props to child components. But what if the child component that you're passing a prop to is an ES6 class component, rather than a stateless functional component? The ES6 class component uses a slightly different convention to access props.
 
-React Redux provides a small API with two key features: `Provider` and `connect`. Another challenge covers `connect`. The `Provider` is a wrapper component from React Redux that wraps your React app. This wrapper then allows you to access the Redux `store` and `dispatch` functions throughout your component tree. `Provider` takes two props, the Redux store and the child components of your app. Defining the `Provider` for an App component might look like this:
-
-```jsx
-<Provider store={store}>
-  <App/>
-</Provider>
-```
+Anytime you refer to a class component within itself, you use the `this` keyword. To access props within a class component, you preface the code that you use to access it with `this`. For example, if an ES6 class component has a prop called `data`, you write `{this.props.data}` in JSX.
 
 # --instructions--
 
-The code editor now shows all your Redux and React code from the past several challenges. It includes the Redux store, actions, and the `DisplayMessages` component. The only new piece is the `AppWrapper` component at the bottom. Use this top level component to render the `Provider` from `ReactRedux`, and pass the Redux store as a prop. Then render the `DisplayMessages` component as a child. Once you are finished, you should see your React component rendered to the page.
-
-**Note:** React Redux is available as a global variable here, so you can access the Provider with dot notation. The code in the editor takes advantage of this and sets it to a constant `Provider` for you to use in the `AppWrapper` render method.
+Render an instance of the `ReturnTempPassword` component in the parent component `ResetPassword`. Here, give `ReturnTempPassword` a prop of `tempPassword` and assign it a value of a string that is at least 8 characters long. Within the child, `ReturnTempPassword`, access the `tempPassword` prop within the `strong` tags to make sure the user sees the temporary password.
 
 # --hints--
 
-The `AppWrapper` should render.
+The `ResetPassword` component should return a single `div` element.
 
 ```js
 assert(
   (function () {
-    const mockedComponent = Enzyme.mount(React.createElement(AppWrapper));
-    return mockedComponent.find('AppWrapper').length === 1;
+    const mockedComponent = Enzyme.mount(React.createElement(ResetPassword));
+    return mockedComponent.children().type() === 'div';
   })()
 );
 ```
 
-The `Provider` wrapper component should have a prop of `store` passed to it, equal to the Redux store.
-
-```js
-(getUserInput) =>
-  assert(
-    (function () {
-      const mockedComponent = Enzyme.mount(React.createElement(AppWrapper));
-      return __helpers
-        .removeWhiteSpace(getUserInput('index'))
-        .includes('<Providerstore={store}>');
-    })()
-  );
-```
-
-`DisplayMessages` should render as a child of `AppWrapper`.
+The fourth child of `ResetPassword` should be the `ReturnTempPassword` component.
 
 ```js
 assert(
   (function () {
-    const mockedComponent = Enzyme.mount(React.createElement(AppWrapper));
+    const mockedComponent = Enzyme.mount(React.createElement(ResetPassword));
     return (
-      mockedComponent.find('AppWrapper').find('DisplayMessages').length === 1
+      mockedComponent.children().childAt(3).name() === 'ReturnTempPassword'
     );
   })()
 );
 ```
 
-The `DisplayMessages` component should render an h2, input, button, and `ul` element.
+The `ReturnTempPassword` component should have a prop called `tempPassword`.
 
 ```js
 assert(
   (function () {
-    const mockedComponent = Enzyme.mount(React.createElement(AppWrapper));
+    const mockedComponent = Enzyme.mount(React.createElement(ResetPassword));
+    return mockedComponent.find('ReturnTempPassword').props().tempPassword;
+  })()
+);
+```
+
+The `tempPassword` prop of `ReturnTempPassword` should be equal to a string of at least `8` characters.
+
+```js
+assert(
+  (function () {
+    const mockedComponent = Enzyme.mount(React.createElement(ResetPassword));
+    const temp = mockedComponent.find('ReturnTempPassword').props()
+      .tempPassword;
+    return typeof temp === 'string' && temp.length >= 8;
+  })()
+);
+```
+
+The `ReturnTempPassword` component should display the password you create as the `tempPassword` prop within `strong` tags.
+
+```js
+assert(
+  (function () {
+    const mockedComponent = Enzyme.mount(React.createElement(ResetPassword));
     return (
-      mockedComponent.find('div').length === 1 &&
-      mockedComponent.find('h2').length === 1 &&
-      mockedComponent.find('button').length === 1 &&
-      mockedComponent.find('ul').length === 1
+      mockedComponent.find('strong').text() ===
+      mockedComponent.find('ReturnTempPassword').props().tempPassword
     );
   })()
 );
@@ -85,179 +85,81 @@ assert(
 ## --after-user-code--
 
 ```jsx
-ReactDOM.render(<AppWrapper />, document.getElementById('root'))
+ReactDOM.render(<ResetPassword />, document.getElementById('root'))
 ```
 
 ## --seed-contents--
 
 ```jsx
-// Redux:
-const ADD = 'ADD';
-
-const addMessage = (message) => {
-  return {
-    type: ADD,
-    message
-  }
-};
-
-const messageReducer = (state = [], action) => {
-  switch (action.type) {
-    case ADD:
-      return [
-        ...state,
-        action.message
-      ];
-    default:
-      return state;
-  }
-};
-
-
-
-const store = Redux.createStore(messageReducer);
-
-// React:
-
-class DisplayMessages extends React.Component {
+class ReturnTempPassword extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      input: '',
-      messages: []
-    }
-    this.handleChange = this.handleChange.bind(this);
-    this.submitMessage = this.submitMessage.bind(this);
-  }
-  handleChange(event) {
-    this.setState({
-      input: event.target.value
-    });
-  }
-  submitMessage() {  
-    this.setState((state) => {
-      const currentMessage = state.input;
-      return {
-        input: '',
-        messages: state.messages.concat(currentMessage)
-      };
-    });
+
   }
   render() {
     return (
-      <div>
-        <h2>Type in a new Message:</h2>
-        <input
-          value={this.state.input}
-          onChange={this.handleChange}/><br/>
-        <button onClick={this.submitMessage}>Submit</button>
-        <ul>
-          {this.state.messages.map( (message, idx) => {
-              return (
-                 <li key={idx}>{message}</li>
-              )
-            })
-          }
-        </ul>
-      </div>
+        <div>
+            { /* Change code below this line */ }
+            <p>Your temporary password is: <strong></strong></p>
+            { /* Change code above this line */ }
+        </div>
     );
   }
 };
 
-const Provider = ReactRedux.Provider;
+class ResetPassword extends React.Component {
+  constructor(props) {
+    super(props);
 
-class AppWrapper extends React.Component {
-  // Render the Provider below this line
+  }
+  render() {
+    return (
+        <div>
+          <h2>Reset Password</h2>
+          <h3>We've generated a new temporary password for you.</h3>
+          <h3>Please reset this password from your account settings ASAP.</h3>
+          { /* Change code below this line */ }
 
-  // Change code above this line
+          { /* Change code above this line */ }
+        </div>
+    );
+  }
 };
 ```
 
 # --solutions--
 
 ```jsx
-// Redux:
-const ADD = 'ADD';
-
-const addMessage = (message) => {
-  return {
-    type: ADD,
-    message
-  }
-};
-
-const messageReducer = (state = [], action) => {
-  switch (action.type) {
-    case ADD:
-      return [
-        ...state,
-        action.message
-      ];
-    default:
-      return state;
-  }
-};
-
-const store = Redux.createStore(messageReducer);
-
-// React:
-
-class DisplayMessages extends React.Component {
+class ReturnTempPassword extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      input: '',
-      messages: []
-    }
- this.handleChange = this.handleChange.bind(this);
- this.submitMessage = this.submitMessage.bind(this);
- }
-  handleChange(event) {
-    this.setState({
-      input: event.target.value
-    });
-  }
-  submitMessage() {
-    this.setState((state) => {
-      const currentMessage = state.input;
-      return {
-        input: '',
-        messages: state.messages.concat(currentMessage)
-      };  
-    });
+
   }
   render() {
     return (
-      <div>
-        <h2>Type in a new Message:</h2>
-        <input
-          value={this.state.input}
-          onChange={this.handleChange}/><br/>
-        <button onClick={this.submitMessage}>Submit</button>
-        <ul>
-          {this.state.messages.map( (message, idx) => {
-              return (
-                 <li key={idx}>{message}</li>
-              )
-            })
-          }
-        </ul>
-      </div>
+        <div>
+            <p>Your temporary password is: <strong>{this.props.tempPassword}</strong></p>
+        </div>
     );
   }
 };
 
-const Provider = ReactRedux.Provider;
+class ResetPassword extends React.Component {
+  constructor(props) {
+    super(props);
 
-class AppWrapper extends React.Component {
-  // Change code below this line
+  }
   render() {
     return (
-      <Provider store = {store}>
-        <DisplayMessages/>
-      </Provider>
+        <div>
+          <h2>Reset Password</h2>
+          <h3>We've generated a new temporary password for you.</h3>
+          <h3>Please reset this password from your account settings ASAP.</h3>
+          { /* Change code below this line */ }
+          <ReturnTempPassword tempPassword="serrPbqrPnzc" />
+          { /* Change code above this line */ }
+        </div>
     );
   }
-  // Change code above this line
 };
 ```
