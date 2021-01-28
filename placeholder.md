@@ -1,115 +1,102 @@
 ---
-id: 5a24c314108439a4d4036143
-title: Extract State Logic to Redux
+id: 5a24c314108439a4d4036141
+title: Getting Started with React Redux
 challengeType: 6
-forumTopicId: 301429
-dashedName: extract-state-logic-to-redux
+forumTopicId: 301430
+dashedName: getting-started-with-react-redux
 ---
 
 # --description--
 
-Now that you finished the React component, you need to move the logic it's performing locally in its `state` into Redux. This is the first step to connect the simple React app to Redux. The only functionality your app has is to add new messages from the user to an unordered list. The example is simple in order to demonstrate how React and Redux work together.
+This series of challenges introduces how to use Redux with React. First, here's a review of some of the key principles of each technology. React is a view library that you provide with data, then it renders the view in an efficient, predictable way. Redux is a state management framework that you can use to simplify the management of your application's state. Typically, in a React Redux app, you create a single Redux store that manages the state of your entire app. Your React components subscribe to only the pieces of data in the store that are relevant to their role. Then, you dispatch actions directly from React components, which then trigger store updates.
+
+Although React components can manage their own state locally, when you have a complex app, it's generally better to keep the app state in a single location with Redux. There are exceptions when individual components may have local state specific only to them. Finally, because Redux is not designed to work with React out of the box, you need to use the `react-redux` package. It provides a way for you to pass Redux `state` and `dispatch` to your React components as `props`.
+
+Over the next few challenges, first, you'll create a simple React component which allows you to input new text messages. These are added to an array that's displayed in the view. This should be a nice review of what you learned in the React lessons. Next, you'll create a Redux store and actions that manage the state of the messages array. Finally, you'll use `react-redux` to connect the Redux store with your component, thereby extracting the local state into the Redux store.
 
 # --instructions--
 
-First, define an action type 'ADD' and set it to a const `ADD`. Next, define an action creator `addMessage()` which creates the action to add a message. You'll need to pass a `message` to this action creator and include the message in the returned `action`.
-
-Then create a reducer called `messageReducer()` that handles the state for the messages. The initial state should equal an empty array. This reducer should add a message to the array of messages held in state, or return the current state. Finally, create your Redux store and pass it the reducer.
+Start with a `DisplayMessages` component. Add a constructor to this component and initialize it with a state that has two properties: `input`, that's set to an empty string, and `messages`, that's set to an empty array.
 
 # --hints--
 
-The const `ADD` should exist and hold a value equal to the string `ADD`
-
-```js
-assert(ADD === 'ADD');
-```
-
-The action creator `addMessage` should return an object with `type` equal to `ADD` and `message` equal to the message that is passed in.
+The `DisplayMessages` component should render an empty `div` element.
 
 ```js
 assert(
   (function () {
-    const addAction = addMessage('__TEST__MESSAGE__');
-    return addAction.type === ADD && addAction.message === '__TEST__MESSAGE__';
+    const mockedComponent = Enzyme.mount(React.createElement(DisplayMessages));
+    return mockedComponent.find('div').text() === '';
   })()
 );
 ```
 
-`messageReducer` should be a function.
+The `DisplayMessages` constructor should be called properly with `super`, passing in `props`.
 
 ```js
-assert(typeof messageReducer === 'function');
+(getUserInput) =>
+  assert(
+    (function () {
+      const noWhiteSpace = __helpers.removeWhiteSpace(getUserInput('index'));
+      return (
+        noWhiteSpace.includes('constructor(props)') &&
+        noWhiteSpace.includes('super(props')
+      );
+    })()
+  );
 ```
 
-The store should exist and have an initial state set to an empty array.
+The `DisplayMessages` component should have an initial state equal to `{input: "", messages: []}`.
 
 ```js
 assert(
   (function () {
-    const initialState = store.getState();
-    return typeof store === 'object' && initialState.length === 0;
-  })()
-);
-```
-
-Dispatching `addMessage` against the store should immutably add a new message to the array of messages held in state.
-
-```js
-assert(
-  (function () {
-    const initialState = store.getState();
-    const isFrozen = DeepFreeze(initialState);
-    store.dispatch(addMessage('__A__TEST__MESSAGE'));
-    const addState = store.getState();
-    return isFrozen && addState[0] === '__A__TEST__MESSAGE';
-  })()
-);
-```
-
-The `messageReducer` should return the current state if called with any other actions.
-
-```js
-assert(
-  (function () {
-    const addState = store.getState();
-    store.dispatch({ type: 'FAKE_ACTION' });
-    const testState = store.getState();
-    return addState === testState;
+    const mockedComponent = Enzyme.mount(React.createElement(DisplayMessages));
+    const initialState = mockedComponent.state();
+    return (
+      typeof initialState === 'object' &&
+      initialState.input === '' &&
+      Array.isArray(initialState.messages) &&
+      initialState.messages.length === 0
+    );
   })()
 );
 ```
 
 # --seed--
 
+## --after-user-code--
+
+```jsx
+ReactDOM.render(<DisplayMessages />, document.getElementById('root'))
+```
+
 ## --seed-contents--
 
 ```jsx
-// Define ADD, addMessage(), messageReducer(), and store here:
+class DisplayMessages extends React.Component {
+  // Change code below this line
+
+  // Change code above this line
+  render() {
+    return <div />
+  }
+};
 ```
 
 # --solutions--
 
 ```jsx
-const ADD = 'ADD';
-
-const addMessage = (message) => {
-  return {
-    type: ADD,
-    message
+class DisplayMessages extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      input: '',
+      messages: []
+    }
+  }
+  render() {
+    return <div/>
   }
 };
-
-const messageReducer = (state = [], action) => {
-  switch (action.type) {
-    case ADD:
-      return [
-        ...state,
-        action.message
-      ];
-    default:
-      return state;
-  }
-};
-
-const store = Redux.createStore(messageReducer);
 ```
