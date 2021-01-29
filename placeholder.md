@@ -1,155 +1,145 @@
 ---
-id: 5a24c314108439a4d4036184
-title: Render with an If-Else Condition
+id: 5a24c314108439a4d403616f
+title: Review Using Props with Stateless Functional Components
 challengeType: 6
-forumTopicId: 301410
-dashedName: render-with-an-if-else-condition
+forumTopicId: 301411
+dashedName: review-using-props-with-stateless-functional-components
 ---
 
 # --description--
 
-Another application of using JavaScript to control your rendered view is to tie the elements that are rendered to a condition. When the condition is true, one view renders. When it's false, it's a different view. You can do this with a standard `if/else` statement in the `render()` method of a React component.
+Except for the last challenge, you've been passing props to stateless functional components. These components act like pure functions. They accept props as input and return the same view every time they are passed the same props. You may be wondering what state is, and the next challenge will cover it in more detail. Before that, here's a review of the terminology for components.
+
+A *stateless functional component* is any function you write which accepts props and returns JSX. A *stateless component*, on the other hand, is a class that extends `React.Component`, but does not use internal state (covered in the next challenge). Finally, a *stateful component* is a class component that does maintain its own internal state. You may see stateful components referred to simply as components or React components.
+
+A common pattern is to try to minimize statefulness and to create stateless functional components wherever possible. This helps contain your state management to a specific area of your application. In turn, this improves development and maintenance of your app by making it easier to follow how changes to state affect its behavior.
 
 # --instructions--
 
-MyComponent contains a `boolean` in its state which tracks whether you want to display some element in the UI or not. The `button` toggles the state of this value. Currently, it renders the same UI every time. Rewrite the `render()` method with an `if/else` statement so that if `display` is `true`, you return the current markup. Otherwise, return the markup without the `h1` element.
-
-**Note:** You must write an `if/else` to pass the tests. Use of the ternary operator will not pass here.
+The code editor has a `CampSite` component that renders a `Camper` component as a child. Define the `Camper` component and assign it default props of `{ name: 'CamperBot' }`. Inside the `Camper` component, render any code that you want, but make sure to have one `p` element that includes only the `name` value that is passed in as a `prop`. Finally, define `propTypes` on the `Camper` component to require `name` to be provided as a prop and verify that it is of type `string`.
 
 # --hints--
 
-`MyComponent` should exist and render.
+The `CampSite` component should render.
 
 ```js
 assert(
   (function () {
-    const mockedComponent = Enzyme.mount(React.createElement(MyComponent));
-    return mockedComponent.find('MyComponent').length === 1;
+    const mockedComponent = Enzyme.mount(React.createElement(CampSite));
+    return mockedComponent.find('CampSite').length === 1;
   })()
 );
 ```
 
-When `display` is set to `true`, a `div`, `button`, and `h1` should render.
+The `Camper` component should render.
 
 ```js
-async () => {
-  const waitForIt = (fn) =>
-    new Promise((resolve, reject) => setTimeout(() => resolve(fn()), 250));
-  const mockedComponent = Enzyme.mount(React.createElement(MyComponent));
-  const state_1 = () => {
-    mockedComponent.setState({ display: true });
-    return waitForIt(() => mockedComponent);
-  };
-  const updated = await state_1();
-  assert(
-    mockedComponent.find('div').length === 1 &&
-      mockedComponent.find('div').children().length === 2 &&
-      mockedComponent.find('button').length === 1 &&
-      mockedComponent.find('h1').length === 1
-  );
-};
+assert(
+  (function () {
+    const mockedComponent = Enzyme.mount(React.createElement(CampSite));
+    return mockedComponent.find('Camper').length === 1;
+  })()
+);
 ```
 
-When `display` is set to `false`, only a `div` and `button` should render.
+The `Camper` component should include default props which assign the string `CamperBot` to the key `name`.
 
 ```js
-async () => {
-  const waitForIt = (fn) =>
-    new Promise((resolve, reject) => setTimeout(() => resolve(fn()), 250));
-  const mockedComponent = Enzyme.mount(React.createElement(MyComponent));
-  const state_1 = () => {
-    mockedComponent.setState({ display: false });
-    return waitForIt(() => mockedComponent);
-  };
-  const updated = await state_1();
-  assert(
-    mockedComponent.find('div').length === 1 &&
-      mockedComponent.find('div').children().length === 1 &&
-      mockedComponent.find('button').length === 1 &&
-      mockedComponent.find('h1').length === 0
-  );
-};
+assert(
+  /Camper.defaultProps={name:(['"`])CamperBot\1,?}/.test(
+    __helpers.removeWhiteSpace(code)
+  )
+);
 ```
 
-The render method should use an `if/else` statement to check the condition of `this.state.display`.
+The `Camper` component should include prop types which require the `name` prop to be of type `string`.
 
 ```js
-(getUserInput) =>
-  assert(
-    getUserInput('index').includes('if') &&
-      getUserInput('index').includes('else')
-  );
+assert(
+  /Camper.propTypes={name:PropTypes.string.isRequired,?}/.test(
+    __helpers.removeWhiteSpace(code)
+  )
+);
+```
+
+The `Camper` component should contain a `p` element with only the text from the `name` prop.
+
+```js
+assert(
+  (function () {
+    const mockedComponent = Enzyme.mount(React.createElement(CampSite));
+    return (
+      mockedComponent.find('p').text() ===
+      mockedComponent.find('Camper').props().name
+    );
+  })()
+);
 ```
 
 # --seed--
 
+## --before-user-code--
+
+```jsx
+var PropTypes = {
+   string: { isRequired: true }
+};
+```
+
 ## --after-user-code--
 
 ```jsx
-ReactDOM.render(<MyComponent />, document.getElementById('root'))
+ReactDOM.render(<CampSite />, document.getElementById('root'))
 ```
 
 ## --seed-contents--
 
 ```jsx
-class MyComponent extends React.Component {
+class CampSite extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      display: true
-    }
-    this.toggleDisplay = this.toggleDisplay.bind(this);
-  }
-  toggleDisplay() {
-    this.setState((state) => ({
-      display: !state.display
-    }));
   }
   render() {
-    // Change code below this line
-
     return (
-       <div>
-         <button onClick={this.toggleDisplay}>Toggle Display</button>
-         <h1>Displayed!</h1>
-       </div>
+      <div>
+        <Camper/>
+      </div>
     );
   }
 };
+// Change code below this line
 ```
 
 # --solutions--
 
 ```jsx
-class MyComponent extends React.Component {
+class CampSite extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      display: true
-    }
- this.toggleDisplay = this.toggleDisplay.bind(this);
- }
-  toggleDisplay() {
-    this.setState((state) => ({
-      display: !state.display
-    }));
   }
   render() {
-    // Change code below this line
-    if (this.state.display) {
-      return (
-         <div>
-           <button onClick={this.toggleDisplay}>Toggle Display</button>
-           <h1>Displayed!</h1>
-         </div>
-      );
-    } else {
-      return (
-        <div>
-           <button onClick={this.toggleDisplay}>Toggle Display</button>
-         </div>
-      );
-    }
+    return (
+      <div>
+        <Camper/>
+      </div>
+    );
   }
+};
+// Change code below this line
+
+const Camper = (props) => {
+   return (
+     <div>
+       <p>{props.name}</p>
+     </div>
+   );
+};
+
+Camper.propTypes = {
+  name: PropTypes.string.isRequired
+};
+
+Camper.defaultProps = {
+  name: 'CamperBot'
 };
 ```
