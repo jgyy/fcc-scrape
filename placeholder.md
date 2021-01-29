@@ -1,69 +1,37 @@
 ---
-id: 5a24c314108439a4d4036162
-title: Create a Stateless Functional Component
+id: 5a24c314108439a4d4036160
+title: Define an HTML Class in JSX
 challengeType: 6
-forumTopicId: 301392
-dashedName: create-a-stateless-functional-component
+forumTopicId: 301393
+dashedName: define-an-html-class-in-jsx
 ---
 
 # --description--
 
-Components are the core of React. Everything in React is a component and here you will learn how to create one.
+Now that you're getting comfortable writing JSX, you may be wondering how it differs from HTML.
 
-There are two ways to create a React component. The first way is to use a JavaScript function. Defining a component in this way creates a *stateless functional component*. The concept of state in an application will be covered in later challenges. For now, think of a stateless component as one that can receive data and render it, but does not manage or track changes to that data. (We'll cover the second way to create a React component in the next challenge.)
+So far, it may seem that HTML and JSX are exactly the same.
 
-To create a component with a function, you simply write a JavaScript function that returns either JSX or `null`. One important thing to note is that React requires your function name to begin with a capital letter. Here's an example of a stateless functional component that assigns an HTML class in JSX:
+One key difference in JSX is that you can no longer use the word `class` to define HTML classes. This is because `class` is a reserved word in JavaScript. Instead, JSX uses `className`.
 
-```jsx
-// After being transpiled, the <div> will have a CSS class of 'customClass'
-const DemoComponent = function() {
-  return (
-    <div className='customClass' />
-  );
-};
-```
-
-Because a JSX component represents HTML, you could put several components together to create a more complex HTML page. This is one of the key advantages of the component architecture React provides. It allows you to compose your UI from many separate, isolated components. This makes it easier to build and maintain complex user interfaces.
+In fact, the naming convention for all HTML attributes and event references in JSX become camelCase. For example, a click event in JSX is `onClick`, instead of `onclick`. Likewise, `onchange` becomes `onChange`. While this is a subtle difference, it is an important one to keep in mind moving forward.
 
 # --instructions--
 
-The code editor has a function called `MyComponent`. Complete this function so it returns a single `div` element which contains some string of text.
-
-**Note:** The text is considered a child of the `div` element, so you will not be able to use a self-closing tag.
+Apply a class of `myDiv` to the `div` provided in the JSX code.
 
 # --hints--
 
-`MyComponent` should return JSX.
+The constant `JSX` should return a `div` element.
 
 ```js
-assert(
-  (function () {
-    const mockedComponent = Enzyme.mount(React.createElement(MyComponent));
-    return mockedComponent.length === 1;
-  })()
-);
+assert.strictEqual(JSX.type, 'div');
 ```
 
-`MyComponent` should return a `div` element.
+The `div` should have a class of `myDiv`.
 
 ```js
-assert(
-  (function () {
-    const mockedComponent = Enzyme.mount(React.createElement(MyComponent));
-    return mockedComponent.children().type() === 'div';
-  })()
-);
-```
-
-The `div` element should contain a string of text.
-
-```js
-assert(
-  (function () {
-    const mockedComponent = Enzyme.mount(React.createElement(MyComponent));
-    return mockedComponent.find('div').text() !== '';
-  })()
-);
+assert.strictEqual(JSX.props.className, 'myDiv');
 ```
 
 # --seed--
@@ -71,31 +39,24 @@ assert(
 ## --after-user-code--
 
 ```jsx
-ReactDOM.render(<MyComponent />, document.getElementById('root'))
+ReactDOM.render(JSX, document.getElementById('root'))
 ```
 
 ## --seed-contents--
 
 ```jsx
-const MyComponent = function() {
-  // Change code below this line
-
-
-
-  // Change code above this line
-}
+const JSX = (
+  <div>
+    <h1>Add a class to this div</h1>
+  </div>
+);
 ```
 
 # --solutions--
 
 ```jsx
-const MyComponent = function() {
-  // Change code below this line
-  return (
-    <div>
-      Demo Solution
-    </div>
-  );
-  // Change code above this line
-}
+const JSX = (
+<div className = 'myDiv'>
+  <h1>Add a class to this div</h1>
+</div>);
 ```
