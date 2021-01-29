@@ -1,84 +1,146 @@
 ---
-id: 5a24c314108439a4d4036168
-title: Write a React Component from Scratch
+id: 5a24c314108439a4d4036177
+title: Write a Simple Counter
 challengeType: 6
-forumTopicId: 301424
-dashedName: write-a-react-component-from-scratch
+forumTopicId: 301425
+dashedName: write-a-simple-counter
 ---
 
 # --description--
 
-Now that you've learned the basics of JSX and React components, it's time to write a component on your own. React components are the core building blocks of React applications so it's important to become very familiar with writing them. Remember, a typical React component is an ES6 `class` which extends `React.Component`. It has a render method that returns HTML (from JSX) or `null`. This is the basic form of a React component. Once you understand this well, you will be prepared to start building more complex React projects.
+You can design a more complex stateful component by combining the concepts covered so far. These include initializing `state`, writing methods that set `state`, and assigning click handlers to trigger these methods.
 
 # --instructions--
 
-Define a class `MyComponent` that extends `React.Component`. Its render method should return a `div` that contains an `h1` tag with the text: `My First React Component!` in it. Use this text exactly, the case and punctuation matter. Make sure to call the constructor for your component, too.
+The `Counter` component keeps track of a `count` value in `state`. There are two buttons which call methods `increment()` and `decrement()`. Write these methods so the counter value is incremented or decremented by 1 when the appropriate button is clicked. Also, create a `reset()` method so when the reset button is clicked, the count is set to 0.
 
-Render this component to the DOM using `ReactDOM.render()`. There is a `div` with `id='challenge-node'` available for you to use.
+**Note:** Make sure you don't modify the `classNames` of the buttons. Also, remember to add the necessary bindings for the newly-created methods in the constructor.
 
 # --hints--
 
-There should be a React component called `MyComponent`.
-
-```js
-(getUserInput) =>
-  assert(
-    __helpers
-      .removeWhiteSpace(getUserInput('index'))
-      .includes('classMyComponentextendsReact.Component{')
-  );
-```
-
-`MyComponent` should contain an `h1` tag with text `My First React Component!` Case and punctuation matter.
+`Counter` should return a `div` element which contains three buttons with text content in this order `Increment!`, `Decrement!`, `Reset`.
 
 ```js
 assert(
-  (function () {
-    const mockedComponent = Enzyme.mount(React.createElement(MyComponent));
-    return mockedComponent.find('h1').text() === 'My First React Component!';
+  (() => {
+    const mockedComponent = Enzyme.mount(React.createElement(Counter));
+    return (
+      mockedComponent.find('.inc').text() === 'Increment!' &&
+      mockedComponent.find('.dec').text() === 'Decrement!' &&
+      mockedComponent.find('.reset').text() === 'Reset'
+    );
   })()
 );
 ```
 
-`MyComponent` should render to the DOM.
+The state of `Counter` should initialize with a `count` property set to `0`.
 
 ```js
-assert(document.getElementById('challenge-node').childNodes.length === 1);
+const mockedComponent = Enzyme.mount(React.createElement(Counter));
+assert(mockedComponent.find('h1').text() === 'Current Count: 0');
 ```
 
-`MyComponent` should have a constructor calling `super` with `props`.
+Clicking the increment button should increment the count by `1`.
 
 ```js
-assert(
-  MyComponent.toString().includes('MyComponent(props)') &&
-    MyComponent.toString().includes('_super.call(this, props)')
-);
+const mockedComponent = Enzyme.mount(React.createElement(Counter));
+mockedComponent.find('.inc').simulate('click');
+assert(mockedComponent.find('h1').text() === 'Current Count: 1');
+```
+
+Clicking the decrement button should decrement the count by `1`.
+
+```js
+const mockedComponent = Enzyme.mount(React.createElement(Counter));
+mockedComponent.find('.dec').simulate('click');
+assert(mockedComponent.find('h1').text() === 'Current Count: -1');
+```
+
+Clicking the reset button should reset the count to `0`.
+
+```js
+const mockedComponent = Enzyme.mount(React.createElement(Counter));
+mockedComponent.setState({ count: 5 });
+const currentCountElement = mockedComponent.find('h1');
+assert(currentCountElement.text() === 'Current Count: 5');
+mockedComponent.find('.reset').simulate('click');
+assert(currentCountElement.text() === 'Current Count: 0');
 ```
 
 # --seed--
 
+## --after-user-code--
+
+```jsx
+ReactDOM.render(<Counter />, document.getElementById('root'))
+```
+
 ## --seed-contents--
 
 ```jsx
-// Change code below this line
+class Counter extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      count: 0
+    };
+    // Change code below this line
+
+    // Change code above this line
+  }
+  // Change code below this line
+
+  // Change code above this line
+  render() {
+    return (
+      <div>
+        <button className='inc' onClick={this.increment}>Increment!</button>
+        <button className='dec' onClick={this.decrement}>Decrement!</button>
+        <button className='reset' onClick={this.reset}>Reset</button>
+        <h1>Current Count: {this.state.count}</h1>
+      </div>
+    );
+  }
+};
 ```
 
 # --solutions--
 
 ```jsx
-// Change code below this line
-class MyComponent extends React.Component {
+class Counter extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      count: 0
+    };
+  this.increment = this.increment.bind(this);
+ this.decrement = this.decrement.bind(this);
+ this.reset = this.reset.bind(this);
+ }
+  reset() {
+    this.setState({
+      count: 0
+    });
+  }
+  increment() {
+    this.setState(state => ({
+      count: state.count + 1
+    }));
+  }
+  decrement() {
+    this.setState(state => ({
+      count: state.count - 1
+    }));
   }
   render() {
     return (
       <div>
-        <h1>My First React Component!</h1>
+        <button className='inc' onClick={this.increment}>Increment!</button>
+        <button className='dec' onClick={this.decrement}>Decrement!</button>
+        <button className='reset' onClick={this.reset}>Reset</button>
+        <h1>Current Count: {this.state.count}</h1>
       </div>
     );
   }
 };
-
-ReactDOM.render(<MyComponent />, document.getElementById('challenge-node'));
 ```
