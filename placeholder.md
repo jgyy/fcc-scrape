@@ -1,169 +1,154 @@
 ---
-id: 5a24c314108439a4d4036187
-title: Use a Ternary Expression for Conditional Rendering
+id: 5a24c314108439a4d4036183
+title: Use Advanced JavaScript in React Render Method
 challengeType: 6
-forumTopicId: 301414
-dashedName: use-a-ternary-expression-for-conditional-rendering
+forumTopicId: 301415
+dashedName: use-advanced-javascript-in-react-render-method
 ---
 
 # --description--
 
-Before moving on to dynamic rendering techniques, there's one last way to use built-in JavaScript conditionals to render what you want: the <dfn>ternary operator</dfn>. The ternary operator is often utilized as a shortcut for `if/else` statements in JavaScript. They're not quite as robust as traditional `if/else` statements, but they are very popular among React developers. One reason for this is because of how JSX is compiled, `if/else` statements can't be inserted directly into JSX code. You might have noticed this a couple challenges ago — when an `if/else` statement was required, it was always *outside* the `return` statement. Ternary expressions can be an excellent alternative if you want to implement conditional logic within your JSX. Recall that a ternary operator has three parts, but you can combine several ternary expressions together. Here's the basic syntax:
+In previous challenges, you learned how to inject JavaScript code into JSX code using curly braces, `{ }`, for tasks like accessing props, passing props, accessing state, inserting comments into your code, and most recently, styling your components. These are all common use cases to put JavaScript in JSX, but they aren't the only way that you can utilize JavaScript code in your React components.
 
-```jsx
-condition ? expressionIfTrue : expressionIfFalse;
-```
+You can also write JavaScript directly in your `render` methods, before the `return` statement, ***without*** inserting it inside of curly braces. This is because it is not yet within the JSX code. When you want to use a variable later in the JSX code *inside* the `return` statement, you place the variable name inside curly braces.
 
 # --instructions--
 
-The code editor has three constants defined within the `CheckUserAge` component's `render()` method. They are called `buttonOne`, `buttonTwo`, and `buttonThree`. Each of these is assigned a simple JSX expression representing a button element. First, initialize the state of `CheckUserAge` with `input` and `userAge` both set to values of an empty string.
-
-Once the component is rendering information to the page, users should have a way to interact with it. Within the component's `return` statement, set up a ternary expression that implements the following logic: when the page first loads, render the submit button, `buttonOne`, to the page. Then, when a user enters their age and clicks the button, render a different button based on the age. If a user enters a number less than `18`, render `buttonThree`. If a user enters a number greater than or equal to `18`, render `buttonTwo`.
+In the code provided, the `render` method has an array that contains 20 phrases to represent the answers found in the classic 1980's Magic Eight Ball toy. The button click event is bound to the `ask` method, so each time the button is clicked a random number will be generated and stored as the `randomIndex` in state. On line 52, delete the string `"change me!"` and reassign the `answer` const so your code randomly accesses a different index of the `possibleAnswers` array each time the component updates. Finally, insert the `answer` const inside the `p` tags.
 
 # --hints--
 
-The `CheckUserAge` component should render with a single `input` element and a single `button` element.
+The `MagicEightBall` component should exist and should render to the page.
 
 ```js
-assert(
-  Enzyme.mount(React.createElement(CheckUserAge)).find('div').find('input')
-    .length === 1 &&
-    Enzyme.mount(React.createElement(CheckUserAge)).find('div').find('button')
-      .length === 1
+assert.strictEqual(
+  Enzyme.mount(React.createElement(MagicEightBall)).find('MagicEightBall')
+    .length,
+  1
 );
 ```
 
-The `CheckUserAge` component's state should be initialized with a property of `userAge` and a property of `input`, both set to a value of an empty string.
+`MagicEightBall`'s first child should be an `input` element.
 
 ```js
-assert(
-  Enzyme.mount(React.createElement(CheckUserAge)).state().input === '' &&
-    Enzyme.mount(React.createElement(CheckUserAge)).state().userAge === ''
+assert.strictEqual(
+  Enzyme.mount(React.createElement(MagicEightBall))
+    .children()
+    .childAt(0)
+    .name(),
+  'input'
 );
 ```
 
-When the `CheckUserAge` component is first rendered to the DOM, the `button`'s inner text should be Submit.
+`MagicEightBall`'s third child should be a `button` element.
 
 ```js
-assert(
-  Enzyme.mount(React.createElement(CheckUserAge)).find('button').text() ===
-    'Submit'
+assert.strictEqual(
+  Enzyme.mount(React.createElement(MagicEightBall))
+    .children()
+    .childAt(2)
+    .name(),
+  'button'
 );
 ```
 
-When a number of less than 18 is entered into the `input` element and the `button` is clicked, the `button`'s inner text should read `You Shall Not Pass`.
+`MagicEightBall`'s state should be initialized with a property of `userInput` and a property of `randomIndex` both set to a value of an empty string.
+
+```js
+assert(
+  Enzyme.mount(React.createElement(MagicEightBall)).state('randomIndex') ===
+    '' &&
+    Enzyme.mount(React.createElement(MagicEightBall)).state('userInput') === ''
+);
+```
+
+When `MagicEightBall` is first mounted to the DOM, it should return an empty `p` element.
+
+```js
+assert(
+  Enzyme.mount(React.createElement(MagicEightBall)).find('p').length === 1 &&
+    Enzyme.mount(React.createElement(MagicEightBall)).find('p').text() === ''
+);
+```
+
+When text is entered into the `input` element and the button is clicked, the `MagicEightBall` component should return a `p` element that contains a random element from the `possibleAnswers` array.
 
 ```js
 (() => {
-  const mockedComponent = Enzyme.mount(React.createElement(CheckUserAge));
-  const initialButton = mockedComponent.find('button').text();
-  const enter3AndClickButton = () => {
-    mockedComponent
-      .find('input')
-      .simulate('change', { target: { value: '3' } });
-    mockedComponent.find('button').simulate('click');
-    mockedComponent.update();
-    return mockedComponent.find('button').text();
+  const comp = Enzyme.mount(React.createElement(MagicEightBall));
+  const simulate = () => {
+    comp.find('input').simulate('change', { target: { value: 'test?' } });
+    comp.find('button').simulate('click');
   };
-  const enter17AndClickButton = () => {
-    mockedComponent
-      .find('input')
-      .simulate('change', { target: { value: '17' } });
-    mockedComponent.find('button').simulate('click');
-    mockedComponent.update();
-    return mockedComponent.find('button').text();
+  const result = () => comp.find('p').text();
+  const _1 = () => {
+    simulate();
+    return result();
   };
-  const userAge3 = enter3AndClickButton();
-  const userAge17 = enter17AndClickButton();
-  assert(
-    initialButton === 'Submit' &&
-      userAge3 === 'You Shall Not Pass' &&
-      userAge17 === 'You Shall Not Pass'
+  const _2 = () => {
+    simulate();
+    return result();
+  };
+  const _3 = () => {
+    simulate();
+    return result();
+  };
+  const _4 = () => {
+    simulate();
+    return result();
+  };
+  const _5 = () => {
+    simulate();
+    return result();
+  };
+  const _6 = () => {
+    simulate();
+    return result();
+  };
+  const _7 = () => {
+    simulate();
+    return result();
+  };
+  const _8 = () => {
+    simulate();
+    return result();
+  };
+  const _9 = () => {
+    simulate();
+    return result();
+  };
+  const _10 = () => {
+    simulate();
+    return result();
+  };
+  const _1_val = _1();
+  const _2_val = _2();
+  const _3_val = _3();
+  const _4_val = _4();
+  const _5_val = _5();
+  const _6_val = _6();
+  const _7_val = _7();
+  const _8_val = _8();
+  const _9_val = _9();
+  const _10_val = _10();
+  const actualAnswers = [
+    _1_val,
+    _2_val,
+    _3_val,
+    _4_val,
+    _5_val,
+    _6_val,
+    _7_val,
+    _8_val,
+    _9_val,
+    _10_val
+  ];
+  const hasIndex = actualAnswers.filter(
+    (answer, i) => possibleAnswers.indexOf(answer) !== -1
   );
+  const notAllEqual = new Set(actualAnswers);
+  assert(notAllEqual.size > 1 && hasIndex.length === 10);
 })();
-```
-
-When a number greater than or equal to 18 is entered into the `input` element and the `button` is clicked, the `button`'s inner text should read `You May Enter`.
-
-```js
-(() => {
-  const mockedComponent = Enzyme.mount(React.createElement(CheckUserAge));
-  const initialButton = mockedComponent.find('button').text();
-  const enter18AndClickButton = () => {
-    mockedComponent
-      .find('input')
-      .simulate('change', { target: { value: '18' } });
-    mockedComponent.find('button').simulate('click');
-    mockedComponent.update();
-    return mockedComponent.find('button').text();
-  };
-  const enter35AndClickButton = () => {
-    mockedComponent
-      .find('input')
-      .simulate('change', { target: { value: '35' } });
-    mockedComponent.find('button').simulate('click');
-    mockedComponent.update();
-    return mockedComponent.find('button').text();
-  };
-  const userAge18 = enter18AndClickButton();
-  const userAge35 = enter35AndClickButton();
-  assert(
-    initialButton === 'Submit' &&
-      userAge18 === 'You May Enter' &&
-      userAge35 === 'You May Enter'
-  );
-})();
-```
-
-Once a number has been submitted, and the value of the `input` is once again changed, the `button` should return to reading `Submit`.
-
-```js
-(() => {
-  const mockedComponent = Enzyme.mount(React.createElement(CheckUserAge));
-  const enter18AndClickButton = () => {
-    mockedComponent
-      .find('input')
-      .simulate('change', { target: { value: '18' } });
-    mockedComponent.find('button').simulate('click');
-    mockedComponent.update();
-    return mockedComponent.find('button').text();
-  };
-  const changeInputDontClickButton = () => {
-    mockedComponent
-      .find('input')
-      .simulate('change', { target: { value: '5' } });
-    mockedComponent.update();
-    return mockedComponent.find('button').text();
-  };
-  const enter10AndClickButton = () => {
-    mockedComponent
-      .find('input')
-      .simulate('change', { target: { value: '10' } });
-    mockedComponent.find('button').simulate('click');
-    mockedComponent.update();
-    return mockedComponent.find('button').text();
-  };
-  const userAge18 = enter18AndClickButton();
-  const changeInput1 = changeInputDontClickButton();
-  const userAge10 = enter10AndClickButton();
-  const changeInput2 = changeInputDontClickButton();
-  assert(
-    userAge18 === 'You May Enter' &&
-      changeInput1 === 'Submit' &&
-      userAge10 === 'You Shall Not Pass' &&
-      changeInput2 === 'Submit'
-  );
-})();
-```
-
-Your code should not contain any `if/else` statements.
-
-```js
-assert(
-  new RegExp(/(\s|;)if(\s|\()/).test(
-    Enzyme.mount(React.createElement(CheckUserAge)).instance().render.toString()
-  ) === false
-);
 ```
 
 # --seed--
@@ -171,7 +156,29 @@ assert(
 ## --after-user-code--
 
 ```jsx
-ReactDOM.render(<CheckUserAge />, document.getElementById('root'));
+var possibleAnswers = [
+  'It is certain',
+  'It is decidedly so',
+  'Without a doubt',
+  'Yes, definitely',
+  'You may rely on it',
+  'As I see it, yes',
+  'Outlook good',
+  'Yes',
+  'Signs point to yes',
+  'Reply hazy try again',
+  'Ask again later',
+  'Better not tell you now',
+  'Cannot predict now',
+  'Concentrate and ask again',
+  "Don't count on it",
+  'My reply is no',
+  'My sources say no',
+  'Outlook not so good',
+  'Very doubtful',
+  'Most likely'
+];
+ReactDOM.render(<MagicEightBall />, document.getElementById('root'));
 ```
 
 ## --seed-contents--
@@ -182,43 +189,70 @@ const inputStyle = {
   margin: 5
 };
 
-class CheckUserAge extends React.Component {
+class MagicEightBall extends React.Component {
   constructor(props) {
     super(props);
-    // Change code below this line
-
-    // Change code above this line
-    this.submit = this.submit.bind(this);
+    this.state = {
+      userInput: '',
+      randomIndex: ''
+    };
+    this.ask = this.ask.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
-  handleChange(e) {
+  ask() {
+    if (this.state.userInput) {
+      this.setState({
+        randomIndex: Math.floor(Math.random() * 20),
+        userInput: ''
+      });
+    }
+  }
+  handleChange(event) {
     this.setState({
-      input: e.target.value,
-      userAge: ''
+      userInput: event.target.value
     });
   }
-  submit() {
-    this.setState(state => ({
-      userAge: state.input
-    }));
-  }
   render() {
-    const buttonOne = <button onClick={this.submit}>Submit</button>;
-    const buttonTwo = <button>You May Enter</button>;
-    const buttonThree = <button>You Shall Not Pass</button>;
+    const possibleAnswers = [
+      'It is certain',
+      'It is decidedly so',
+      'Without a doubt',
+      'Yes, definitely',
+      'You may rely on it',
+      'As I see it, yes',
+      'Outlook good',
+      'Yes',
+      'Signs point to yes',
+      'Reply hazy try again',
+      'Ask again later',
+      'Better not tell you now',
+      'Cannot predict now',
+      'Concentrate and ask again',
+      "Don't count on it",
+      'My reply is no',
+      'My sources say no',
+      'Most likely',
+      'Outlook not so good',
+      'Very doubtful'
+    ];
+    const answer = 'change me!'; // Change this line
     return (
       <div>
-        <h3>Enter Your Age to Continue</h3>
         <input
-          style={inputStyle}
-          type='number'
-          value={this.state.input}
+          type='text'
+          value={this.state.userInput}
           onChange={this.handleChange}
+          style={inputStyle}
         />
         <br />
-        {/* Change code below this line */}
+        <button onClick={this.ask}>Ask the Magic Eight Ball!</button>
+        <br />
+        <h3>Answer:</h3>
+        <p>
+          {/* Change code below this line */}
 
-        {/* Change code above this line */}
+          {/* Change code above this line */}
+        </p>
       </div>
     );
   }
@@ -233,46 +267,66 @@ const inputStyle = {
   margin: 5
 };
 
-class CheckUserAge extends React.Component {
+class MagicEightBall extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      userAge: '',
-      input: ''
+      userInput: '',
+      randomIndex: ''
     };
-    this.submit = this.submit.bind(this);
+    this.ask = this.ask.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
-  handleChange(e) {
+  ask() {
+    if (this.state.userInput) {
+      this.setState({
+        randomIndex: Math.floor(Math.random() * 20),
+        userInput: ''
+      });
+    }
+  }
+  handleChange(event) {
     this.setState({
-      input: e.target.value,
-      userAge: ''
+      userInput: event.target.value
     });
   }
-  submit() {
-    this.setState(state => ({
-      userAge: state.input
-    }));
-  }
   render() {
-    const buttonOne = <button onClick={this.submit}>Submit</button>;
-    const buttonTwo = <button>You May Enter</button>;
-    const buttonThree = <button>You Shall Not Pass</button>;
+    const possibleAnswers = [
+      'It is certain',
+      'It is decidedly so',
+      'Without a doubt',
+      'Yes, definitely',
+      'You may rely on it',
+      'As I see it, yes',
+      'Outlook good',
+      'Yes',
+      'Signs point to yes',
+      'Reply hazy try again',
+      'Ask again later',
+      'Better not tell you now',
+      'Cannot predict now',
+      'Concentrate and ask again',
+      "Don't count on it",
+      'My reply is no',
+      'My sources say no',
+      'Outlook not so good',
+      'Very doubtful',
+      'Most likely'
+    ];
+    const answer = possibleAnswers[this.state.randomIndex];
     return (
       <div>
-        <h3>Enter Your Age to Continue</h3>
         <input
-          style={inputStyle}
-          type='number'
-          value={this.state.input}
+          type='text'
+          value={this.state.userInput}
           onChange={this.handleChange}
+          style={inputStyle}
         />
         <br />
-        {this.state.userAge === ''
-          ? buttonOne
-          : this.state.userAge >= 18
-          ? buttonTwo
-          : buttonThree}
+        <button onClick={this.ask}>Ask the Magic Eight Ball!</button>
+        <br />
+        <h3>Answer:</h3>
+        <p>{answer}</p>
       </div>
     );
   }
