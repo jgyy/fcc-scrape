@@ -1,63 +1,84 @@
 ---
-id: 5a24c314108439a4d4036171
-title: Render State in the User Interface
+id: 5a24c314108439a4d4036184
+title: Render with an If-Else Condition
 challengeType: 6
-forumTopicId: 301409
-dashedName: render-state-in-the-user-interface
+forumTopicId: 301410
+dashedName: render-with-an-if-else-condition
 ---
 
 # --description--
 
-Once you define a component's initial state, you can display any part of it in the UI that is rendered. If a component is stateful, it will always have access to the data in `state` in its `render()` method. You can access the data with `this.state`.
-
-If you want to access a state value within the `return` of the render method, you have to enclose the value in curly braces.
-
-`State` is one of the most powerful features of components in React. It allows you to track important data in your app and render a UI in response to changes in this data. If your data changes, your UI will change. React uses what is called a virtual DOM, to keep track of changes behind the scenes. When state data updates, it triggers a re-render of the components using that data - including child components that received the data as a prop. React updates the actual DOM, but only where necessary. This means you don't have to worry about changing the DOM. You simply declare what the UI should look like.
-
-Note that if you make a component stateful, no other components are aware of its `state`. Its `state` is completely encapsulated, or local to that component, unless you pass state data to a child component as `props`. This notion of encapsulated `state` is very important because it allows you to write certain logic, then have that logic contained and isolated in one place in your code.
+Another application of using JavaScript to control your rendered view is to tie the elements that are rendered to a condition. When the condition is true, one view renders. When it's false, it's a different view. You can do this with a standard `if/else` statement in the `render()` method of a React component.
 
 # --instructions--
 
-In the code editor, `MyComponent` is already stateful. Define an `h1` tag in the component's render method which renders the value of `name` from the component's state.
+MyComponent contains a `boolean` in its state which tracks whether you want to display some element in the UI or not. The `button` toggles the state of this value. Currently, it renders the same UI every time. Rewrite the `render()` method with an `if/else` statement so that if `display` is `true`, you return the current markup. Otherwise, return the markup without the `h1` element.
 
-**Note:** The `h1` should only render the value from `state` and nothing else. In JSX, any code you write with curly braces `{ }` will be treated as JavaScript. So to access the value from `state` just enclose the reference in curly braces.
+**Note:** You must write an `if/else` to pass the tests. Use of the ternary operator will not pass here.
 
 # --hints--
 
-`MyComponent` should have a key `name` with value `freeCodeCamp` stored in its state.
+`MyComponent` should exist and render.
 
 ```js
 assert(
-  Enzyme.mount(React.createElement(MyComponent)).state('name') ===
-    'freeCodeCamp'
+  (function () {
+    const mockedComponent = Enzyme.mount(React.createElement(MyComponent));
+    return mockedComponent.find('MyComponent').length === 1;
+  })()
 );
 ```
 
-`MyComponent` should render an `h1` header enclosed in a single `div`.
-
-```js
-assert(
-  /<div><h1>.*<\/h1><\/div>/.test(
-    Enzyme.mount(React.createElement(MyComponent)).html()
-  )
-);
-```
-
-The rendered `h1` header should contain text rendered from the component's state.
+When `display` is set to `true`, a `div`, `button`, and `h1` should render.
 
 ```js
 async () => {
   const waitForIt = (fn) =>
     new Promise((resolve, reject) => setTimeout(() => resolve(fn()), 250));
   const mockedComponent = Enzyme.mount(React.createElement(MyComponent));
-  const first = () => {
-    mockedComponent.setState({ name: 'TestName' });
-    return waitForIt(() => mockedComponent.html());
+  const state_1 = () => {
+    mockedComponent.setState({ display: true });
+    return waitForIt(() => mockedComponent);
   };
-  const firstValue = await first();
-  const getValue = firstValue.replace(/\s/g, '');
-  assert(getValue === '<div><h1>TestName</h1></div>');
+  const updated = await state_1();
+  assert(
+    mockedComponent.find('div').length === 1 &&
+      mockedComponent.find('div').children().length === 2 &&
+      mockedComponent.find('button').length === 1 &&
+      mockedComponent.find('h1').length === 1
+  );
 };
+```
+
+When `display` is set to `false`, only a `div` and `button` should render.
+
+```js
+async () => {
+  const waitForIt = (fn) =>
+    new Promise((resolve, reject) => setTimeout(() => resolve(fn()), 250));
+  const mockedComponent = Enzyme.mount(React.createElement(MyComponent));
+  const state_1 = () => {
+    mockedComponent.setState({ display: false });
+    return waitForIt(() => mockedComponent);
+  };
+  const updated = await state_1();
+  assert(
+    mockedComponent.find('div').length === 1 &&
+      mockedComponent.find('div').children().length === 1 &&
+      mockedComponent.find('button').length === 1 &&
+      mockedComponent.find('h1').length === 0
+  );
+};
+```
+
+The render method should use an `if/else` statement to check the condition of `this.state.display`.
+
+```js
+(getUserInput) =>
+  assert(
+    getUserInput('index').includes('if') &&
+      getUserInput('index').includes('else')
+  );
 ```
 
 # --seed--
@@ -75,16 +96,23 @@ class MyComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: 'freeCodeCamp'
+      display: true
     }
+    this.toggleDisplay = this.toggleDisplay.bind(this);
+  }
+  toggleDisplay() {
+    this.setState((state) => ({
+      display: !state.display
+    }));
   }
   render() {
-    return (
-      <div>
-        { /* Change code below this line */ }
+    // Change code below this line
 
-        { /* Change code above this line */ }
-      </div>
+    return (
+       <div>
+         <button onClick={this.toggleDisplay}>Toggle Display</button>
+         <h1>Displayed!</h1>
+       </div>
     );
   }
 };
@@ -97,17 +125,31 @@ class MyComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: 'freeCodeCamp'
+      display: true
     }
+ this.toggleDisplay = this.toggleDisplay.bind(this);
+ }
+  toggleDisplay() {
+    this.setState((state) => ({
+      display: !state.display
+    }));
   }
   render() {
-    return (
-      <div>
-        { /* Change code below this line */ }
-        <h1>{this.state.name}</h1>
-        { /* Change code above this line */ }
-      </div>
-    );
+    // Change code below this line
+    if (this.state.display) {
+      return (
+         <div>
+           <button onClick={this.toggleDisplay}>Toggle Display</button>
+           <h1>Displayed!</h1>
+         </div>
+      );
+    } else {
+      return (
+        <div>
+           <button onClick={this.toggleDisplay}>Toggle Display</button>
+         </div>
+      );
+    }
   }
 };
 ```
