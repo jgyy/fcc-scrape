@@ -1,103 +1,105 @@
 ---
-id: 5a24c314108439a4d403616d
-title: Use PropTypes to Define the Props You Expect
+id: 5a24c314108439a4d4036165
+title: Use React to Render Nested Components
 challengeType: 6
-forumTopicId: 301419
-dashedName: use-proptypes-to-define-the-props-you-expect
+forumTopicId: 301420
+dashedName: use-react-to-render-nested-components
 ---
 
 # --description--
 
-React provides useful type-checking features to verify that components receive props of the correct type. For example, your application makes an API call to retrieve data that you expect to be in an array, which is then passed to a component as a prop. You can set `propTypes` on your component to require the data to be of type `array`. This will throw a useful warning when the data is of any other type.
+The last challenge showed a simple way to compose two components, but there are many different ways you can compose components with React.
 
-It's considered a best practice to set `propTypes` when you know the type of a prop ahead of time. You can define a `propTypes` property for a component in the same way you defined `defaultProps`. Doing this will check that props of a given key are present with a given type. Here's an example to require the type `function` for a prop called `handleClick`:
-
-`MyComponent.propTypes = { handleClick: PropTypes.func.isRequired }`
-
-In the example above, the `PropTypes.func` part checks that `handleClick` is a function. Adding `isRequired` tells React that `handleClick` is a required property for that component. You will see a warning if that prop isn't provided. Also notice that `func` represents `function`. Among the seven JavaScript primitive types, `function` and `boolean` (written as `bool`) are the only two that use unusual spelling. In addition to the primitive types, there are other types available. For example, you can check that a prop is a React element. Please refer to the [documentation](https://reactjs.org/docs/jsx-in-depth.html#specifying-the-react-element-type) for all of the options.
-
-**Note:** As of React v15.5.0, `PropTypes` is imported independently from React, like this: `import PropTypes from 'prop-types';`
+Component composition is one of React's powerful features. When you work with React, it is important to start thinking about your user interface in terms of components like the App example in the last challenge. You break down your UI into its basic building blocks, and those pieces become the components. This helps to separate the code responsible for the UI from the code responsible for handling your application logic. It can greatly simplify the development and maintenance of complex projects.
 
 # --instructions--
 
-Define `propTypes` for the `Items` component to require `quantity` as a prop and verify that it is of type `number`.
+There are two functional components defined in the code editor, called `TypesOfFruit` and `Fruits`. Take the `TypesOfFruit` component and compose it, or *nest* it, within the `Fruits` component. Then take the `Fruits` component and nest it within the `TypesOfFood` component. The result should be a child component, nested within a parent component, which is nested within a parent component of its own!
 
 # --hints--
 
-The `ShoppingCart` component should render.
+The `TypesOfFood` component should return a single `div` element.
+
+```js
+assert(Enzyme.shallow(React.createElement(TypesOfFood)).type() === 'div');
+```
+
+The `TypesOfFood` component should return the `Fruits` component.
 
 ```js
 assert(
-  (function () {
-    const mockedComponent = Enzyme.mount(React.createElement(ShoppingCart));
-    return mockedComponent.find('ShoppingCart').length === 1;
-  })()
+  Enzyme.shallow(React.createElement(TypesOfFood)).props().children[1].type
+    .name === 'Fruits'
 );
 ```
 
-The `Items` component should render.
+The `Fruits` component should return the `TypesOfFruit` component.
 
 ```js
 assert(
-  (function () {
-    const mockedComponent = Enzyme.mount(React.createElement(ShoppingCart));
-    return mockedComponent.find('Items').length === 1;
-  })()
+  Enzyme.mount(React.createElement(TypesOfFood)).find('h2').html() ===
+    '<h2>Fruits:</h2>'
 );
 ```
 
-The `Items` component should include a `propTypes` check to require a value for `quantity` and ensure that its value is a number.
+The `TypesOfFruit` component should return the `h2` and `ul` elements.
 
 ```js
-(getUserInput) =>
-  assert(
-    (function () {
-      const noWhiteSpace = __helpers.removeWhiteSpace(getUserInput('index'));
-      return (
-        noWhiteSpace.includes('quantity:PropTypes.number.isRequired') &&
-        noWhiteSpace.includes('Items.propTypes=')
-      );
-    })()
-  );
+assert(
+  Enzyme.mount(React.createElement(TypesOfFood)).find('ul').text() ===
+    'ApplesBlueberriesStrawberriesBananas'
+);
 ```
 
 # --seed--
 
-## --before-user-code--
-
-```jsx
-var PropTypes = {
-  number: { isRequired: true }
-};
-```
-
 ## --after-user-code--
 
 ```jsx
-ReactDOM.render(<ShoppingCart />, document.getElementById('root'))
+ReactDOM.render(<TypesOfFood />, document.getElementById('root'))
 ```
 
 ## --seed-contents--
 
 ```jsx
-const Items = (props) => {
-  return <h1>Current Quantity of Items in Cart: {props.quantity}</h1>
+const TypesOfFruit = () => {
+  return (
+    <div>
+      <h2>Fruits:</h2>
+      <ul>
+        <li>Apples</li>
+        <li>Blueberries</li>
+        <li>Strawberries</li>
+        <li>Bananas</li>
+      </ul>
+    </div>
+  );
 };
 
-// Change code below this line
+const Fruits = () => {
+  return (
+    <div>
+      { /* Change code below this line */ }
 
-// Change code above this line
-
-Items.defaultProps = {
-  quantity: 0
+      { /* Change code above this line */ }
+    </div>
+  );
 };
 
-class ShoppingCart extends React.Component {
+class TypesOfFood extends React.Component {
   constructor(props) {
     super(props);
   }
+
   render() {
-    return <Items />
+    return (
+      <div>
+        <h1>Types of Food:</h1>
+        { /* Change code below this line */ }
+
+        { /* Change code above this line */ }
+      </div>
+    );
   }
 };
 ```
@@ -105,26 +107,44 @@ class ShoppingCart extends React.Component {
 # --solutions--
 
 ```jsx
-const Items = (props) => {
-  return <h1>Current Quantity of Items in Cart: {props.quantity}</h1>
+const TypesOfFruit = () => {
+  return (
+    <div>
+      <h2>Fruits:</h2>
+      <ul>
+        <li>Apples</li>
+        <li>Blueberries</li>
+        <li>Strawberries</li>
+        <li>Bananas</li>
+      </ul>
+    </div>
+  );
 };
 
-// Change code below this line
-Items.propTypes = {
-  quantity: PropTypes.number.isRequired
+const Fruits = () => {
+  return (
+    <div>
+      { /* Change code below this line */ }
+        <TypesOfFruit />
+      { /* Change code above this line */ }
+    </div>
+  );
 };
-// Change code above this line
 
-Items.defaultProps = {
-  quantity: 0
-};
-
-class ShoppingCart extends React.Component {
+class TypesOfFood extends React.Component {
   constructor(props) {
     super(props);
   }
+
   render() {
-    return <Items />
+    return (
+      <div>
+        <h1>Types of Food:</h1>
+        { /* Change code below this line */ }
+        <Fruits />
+        { /* Change code above this line */ }
+      </div>
+    );
   }
 };
 ```
