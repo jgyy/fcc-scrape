@@ -1,128 +1,160 @@
 ---
-id: 5a24c314108439a4d403618c
-title: Use Array.filter() to Dynamically Filter an Array
+id: 5a24c314108439a4d403618a
+title: Use Array.map() to Dynamically Render Elements
 challengeType: 6
-forumTopicId: 301416
-dashedName: use-array-filter-to-dynamically-filter-an-array
+forumTopicId: 301417
+dashedName: use-array-map-to-dynamically-render-elements
 ---
 
 # --description--
 
-The `map` array method is a powerful tool that you will use often when working with React. Another method related to `map` is `filter`, which filters the contents of an array based on a condition, then returns a new array. For example, if you have an array of users that all have a property `online` which can be set to `true` or `false`, you can filter only those users that are online by writing:
+Conditional rendering is useful, but you may need your components to render an unknown number of elements. Often in reactive programming, a programmer has no way to know what the state of an application is until runtime, because so much depends on a user's interaction with that program. Programmers need to write their code to correctly handle that unknown state ahead of time. Using `Array.map()` in React illustrates this concept.
 
-`let onlineUsers = users.filter(user => user.online);`
+For example, you create a simple "To Do List" app. As the programmer, you have no way of knowing how many items a user might have on their list. You need to set up your component to dynamically render the correct number of list elements long before someone using the program decides that today is laundry day.
 
 # --instructions--
 
-In the code editor, `MyComponent`'s `state` is initialized with an array of users. Some users are online and some aren't. Filter the array so you see only the users who are online. To do this, first use `filter` to return a new array containing only the users whose `online` property is `true`. Then, in the `renderOnline` variable, map over the filtered array, and return a `li` element for each user that contains the text of their `username`. Be sure to include a unique `key` as well, like in the last challenges.
+The code editor has most of the `MyToDoList` component set up. Some of this code should look familiar if you completed the controlled form challenge. You'll notice a `textarea` and a `button`, along with a couple of methods that track their states, but nothing is rendered to the page yet.
+
+Inside the `constructor`, create a `this.state` object and define two states: `userInput` should be initialized as an empty string, and `toDoList` should be initialized as an empty array. Next, delete the comment in the `render()` method next to the `items` variable. In its place, map over the `toDoList` array stored in the component's internal state and dynamically render a `li` for each item. Try entering the string `eat, code, sleep, repeat` into the `textarea`, then click the button and see what happens.
+
+**Note:** You may know that all sibling child elements created by a mapping operation like this do need to be supplied with a unique `key` attribute. Don't worry, this is the topic of the next challenge.
 
 # --hints--
 
-`MyComponent` should exist and render to the page.
-
-```js
-assert.strictEqual(
-  Enzyme.mount(React.createElement(MyComponent)).find('MyComponent').length,
-  1
-);
-```
-
-`MyComponent`'s state should be initialized to an array of six users.")
+The MyToDoList component should exist and render to the page.
 
 ```js
 assert(
-  Array.isArray(
-    Enzyme.mount(React.createElement(MyComponent)).state('users')
-  ) === true &&
-    Enzyme.mount(React.createElement(MyComponent)).state('users').length === 6
-);
-```
-
-`MyComponent` should return a `div`, an `h1`, and then an unordered list containing `li` elements for every user whose online status is set to `true`.
-
-```js
-(() => {
-  const comp = Enzyme.mount(React.createElement(MyComponent));
-  const users = (bool) => ({
-    users: [
-      { username: 'Jeff', online: bool },
-      { username: 'Alan', online: bool },
-      { username: 'Mary', online: bool },
-      { username: 'Jim', online: bool },
-      { username: 'Laura', online: bool }
-    ]
-  });
-  const result = () => comp.find('li').length;
-  const _1 = result();
-  const _2 = () => {
-    comp.setState(users(true));
-    return result();
-  };
-  const _3 = () => {
-    comp.setState(users(false));
-    return result();
-  };
-  const _4 = () => {
-    comp.setState({ users: [] });
-    return result();
-  };
-  const _2_val = _2();
-  const _3_val = _3();
-  const _4_val = _4();
-  assert(
-    comp.find('div').length === 1 &&
-      comp.find('h1').length === 1 &&
-      comp.find('ul').length === 1 &&
-      _1 === 4 &&
-      _2_val === 5 &&
-      _3_val === 0 &&
-      _4_val === 0
-  );
-})();
-```
-
-`MyComponent` should render `li` elements that contain the username of each online user.
-
-```js
-(() => {
-  const comp = Enzyme.mount(React.createElement(MyComponent));
-  const users = (bool) => ({
-    users: [
-      { username: 'Jeff', online: bool },
-      { username: 'Alan', online: bool },
-      { username: 'Mary', online: bool },
-      { username: 'Jim', online: bool },
-      { username: 'Laura', online: bool }
-    ]
-  });
-  const ul = () => {
-    comp.setState(users(true));
-    return comp.find('ul').html();
-  };
-  const html = ul();
-  assert(
-    html ===
-      '<ul><li>Jeff</li><li>Alan</li><li>Mary</li><li>Jim</li><li>Laura</li></ul>'
-  );
-})();
-```
-
-Each list item element should have a unique `key` attribute.
-
-```js
-assert(
-  (() => {
-    const ul = Enzyme.mount(React.createElement(MyComponent)).find('ul');
-    console.log(ul.debug());
-    const keys = new Set([
-      ul.childAt(0).key(),
-      ul.childAt(1).key(),
-      ul.childAt(2).key(),
-      ul.childAt(3).key()
-    ]);
-    return keys.size === 4;
+  (function () {
+    const mockedComponent = Enzyme.mount(React.createElement(MyToDoList));
+    return mockedComponent.find('MyToDoList').length === 1;
   })()
 );
+```
+
+The first child of `MyToDoList` should be a `textarea` element.
+
+```js
+assert(
+  (function () {
+    const mockedComponent = Enzyme.mount(React.createElement(MyToDoList));
+    return (
+      mockedComponent.find('MyToDoList').children().childAt(0).type() ===
+      'textarea'
+    );
+  })()
+);
+```
+
+The second child of `MyToDoList` should be a `br` element.
+
+```js
+assert(
+  (function () {
+    const mockedComponent = Enzyme.mount(React.createElement(MyToDoList));
+    return (
+      mockedComponent.find('MyToDoList').children().childAt(1).type() === 'br'
+    );
+  })()
+);
+```
+
+The third child of `MyToDoList` should be a `button` element.
+
+```js
+assert(
+  (function () {
+    const mockedComponent = Enzyme.mount(React.createElement(MyToDoList));
+    return (
+      mockedComponent.find('MyToDoList').children().childAt(2).type() ===
+      'button'
+    );
+  })()
+);
+```
+
+The state of `MyToDoList` should be initialized with `toDoList` as an empty array.
+
+```js
+assert(
+  (function () {
+    const mockedComponent = Enzyme.mount(React.createElement(MyToDoList));
+    const initialState = mockedComponent.state();
+    return (
+      Array.isArray(initialState.toDoList) === true &&
+      initialState.toDoList.length === 0
+    );
+  })()
+);
+```
+
+The state of `MyToDoList` should be initialized with `userInput` as an empty string.
+
+```js
+assert(
+  (function () {
+    const mockedComponent = Enzyme.mount(React.createElement(MyToDoList));
+    const initialState = mockedComponent.state();
+    return (
+      typeof initialState.userInput === 'string' &&
+      initialState.userInput.length === 0
+    );
+  })()
+);
+```
+
+When the `Create List` button is clicked, the `MyToDoList` component should dynamically return an unordered list that contains a list item element for every item of a comma-separated list entered into the `textarea` element.
+
+```js
+(() => {
+  const mockedComponent = Enzyme.mount(React.createElement(MyToDoList));
+  const simulateChange = (el, value) =>
+    el.simulate('change', { target: { value } });
+  const state_1 = () => {
+    return mockedComponent.find('ul').find('li');
+  };
+  const setInput = () => {
+    return simulateChange(
+      mockedComponent.find('textarea'),
+      'testA, testB, testC'
+    );
+  };
+  const click = () => {
+    return mockedComponent.find('button').simulate('click');
+  };
+  const state_2 = () => {
+    const nodes = mockedComponent.find('ul').find('li');
+    return { nodes, text: nodes.reduce((t, n) => t + n.text().trim(), '') };
+  };
+  const setInput_2 = () => {
+    return simulateChange(
+      mockedComponent.find('textarea'),
+      't1, t2, t3, t4, t5, t6'
+    );
+  };
+  const click_1 = () => {
+    return mockedComponent.find('button').simulate('click');
+  };
+  const state_3 = () => {
+    const nodes = mockedComponent.find('ul').find('li');
+    return { nodes, text: nodes.reduce((t, n) => t + n.text().trim(), '') };
+  };
+  const awaited_state_1 = state_1();
+  const awaited_setInput = setInput();
+  const awaited_click = click();
+  const awaited_state_2 = state_2();
+  const awaited_setInput_2 = setInput_2();
+  const awaited_click_1 = click_1();
+  const awaited_state_3 = state_3();
+  assert(
+    awaited_state_1.length === 0 &&
+      awaited_state_2.nodes.length === 3 &&
+      awaited_state_3.nodes.length === 6 &&
+      awaited_state_2.text === 'testAtestBtestC' &&
+      awaited_state_3.text === 't1t2t3t4t5t6'
+  );
+})();
 ```
 
 # --seed--
@@ -130,51 +162,51 @@ assert(
 ## --after-user-code--
 
 ```jsx
-ReactDOM.render(<MyComponent />, document.getElementById('root'));
+ReactDOM.render(<MyToDoList />, document.getElementById('root'));
 ```
 
 ## --seed-contents--
 
 ```jsx
-class MyComponent extends React.Component {
+const textAreaStyles = {
+  width: 235,
+  margin: 5
+};
+
+class MyToDoList extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      users: [
-        {
-          username: 'Jeff',
-          online: true
-        },
-        {
-          username: 'Alan',
-          online: false
-        },
-        {
-          username: 'Mary',
-          online: true
-        },
-        {
-          username: 'Jim',
-          online: false
-        },
-        {
-          username: 'Sara',
-          online: true
-        },
-        {
-          username: 'Laura',
-          online: true
-        }
-      ]
-    };
+    // Change code below this line
+
+    // Change code above this line
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+  }
+  handleSubmit() {
+    const itemsArray = this.state.userInput.split(',');
+    this.setState({
+      toDoList: itemsArray
+    });
+  }
+  handleChange(e) {
+    this.setState({
+      userInput: e.target.value
+    });
   }
   render() {
-    const usersOnline = null; // Change this line
-    const renderOnline = null; // Change this line
+    const items = null; // Change this line
     return (
       <div>
-        <h1>Current Online Users:</h1>
-        <ul>{renderOnline}</ul>
+        <textarea
+          onChange={this.handleChange}
+          value={this.state.userInput}
+          style={textAreaStyles}
+          placeholder='Separate Items With Commas'
+        />
+        <br />
+        <button onClick={this.handleSubmit}>Create List</button>
+        <h1>My "To Do" List:</h1>
+        <ul>{items}</ul>
       </div>
     );
   }
@@ -184,49 +216,48 @@ class MyComponent extends React.Component {
 # --solutions--
 
 ```jsx
-class MyComponent extends React.Component {
+const textAreaStyles = {
+  width: 235,
+  margin: 5
+};
+
+class MyToDoList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      users: [
-        {
-          username: 'Jeff',
-          online: true
-        },
-        {
-          username: 'Alan',
-          online: false
-        },
-        {
-          username: 'Mary',
-          online: true
-        },
-        {
-          username: 'Jim',
-          online: false
-        },
-        {
-          username: 'Sara',
-          online: true
-        },
-        {
-          username: 'Laura',
-          online: true
-        }
-      ]
+      toDoList: [],
+      userInput: ''
     };
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+  }
+  handleSubmit() {
+    const itemsArray = this.state.userInput.split(',');
+    this.setState({
+      toDoList: itemsArray
+    });
+  }
+  handleChange(e) {
+    this.setState({
+      userInput: e.target.value
+    });
   }
   render() {
-    const usersOnline = this.state.users.filter(user => {
-      return user.online;
-    });
-    const renderOnline = usersOnline.map(user => {
-      return <li key={user.username}>{user.username}</li>;
+    const items = this.state.toDoList.map((item, i) => {
+      return <li key={i}>{item}</li>;
     });
     return (
       <div>
-        <h1>Current Online Users:</h1>
-        <ul>{renderOnline}</ul>
+        <textarea
+          onChange={this.handleChange}
+          value={this.state.userInput}
+          style={textAreaStyles}
+          placeholder='Separate Items With Commas'
+        />
+        <br />
+        <button onClick={this.handleSubmit}>Create List</button>
+        <h1>My "To Do" List:</h1>
+        <ul>{items}</ul>
       </div>
     );
   }
