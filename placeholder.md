@@ -1,81 +1,82 @@
 ---
-id: 5a24c314108439a4d4036173
-title: Set State with this.setState
+id: 5a24c314108439a4d4036185
+title: Use && for a More Concise Conditional
 challengeType: 6
-forumTopicId: 301412
-dashedName: set-state-with-this-setstate
+forumTopicId: 301413
+dashedName: use--for-a-more-concise-conditional
 ---
 
 # --description--
 
-The previous challenges covered component `state` and how to initialize state in the `constructor`. There is also a way to change the component's `state`. React provides a method for updating component `state` called `setState`. You call the `setState` method within your component class like so: `this.setState()`, passing in an object with key-value pairs. The keys are your state properties and the values are the updated state data. For instance, if we were storing a `username` in state and wanted to update it, it would look like this:
+The if/else statements worked in the last challenge, but there's a more concise way to achieve the same result. Imagine that you are tracking several conditions in a component and you want different elements to render depending on each of these conditions. If you write a lot of `else if` statements to return slightly different UIs, you may repeat code which leaves room for error. Instead, you can use the `&&` logical operator to perform conditional logic in a more concise way. This is possible because you want to check if a condition is `true`, and if it is, return some markup. Here's an example:
 
-```jsx
-this.setState({
-  username: 'Lewis'
-});
-```
+`{condition && <p>markup</p>}`
 
-React expects you to never modify `state` directly, instead always use `this.setState()` when state changes occur. Also, you should note that React may batch multiple state updates in order to improve performance. What this means is that state updates through the `setState` method can be asynchronous. There is an alternative syntax for the `setState` method which provides a way around this problem. This is rarely needed but it's good to keep it in mind! Please consult the [React documentation](https://facebook.github.io/react/docs/state-and-lifecycle.html) for further details.
+If the `condition` is `true`, the markup will be returned. If the condition is `false`, the operation will immediately return `false` after evaluating the `condition` and return nothing. You can include these statements directly in your JSX and string multiple conditions together by writing `&&` after each one. This allows you to handle more complex conditional logic in your `render()` method without repeating a lot of code.
 
 # --instructions--
 
-There is a `button` element in the code editor which has an `onClick()` handler. This handler is triggered when the `button` receives a click event in the browser, and runs the `handleClick` method defined on `MyComponent`. Within the `handleClick` method, update the component `state` using `this.setState()`. Set the `name` property in `state` to equal the string `React Rocks!`.
-
-Click the button and watch the rendered state update. Don't worry if you don't fully understand how the click handler code works at this point. It's covered in upcoming challenges.
+Solve the previous example again, so the `h1` only renders if `display` is `true`, but use the `&&` logical operator instead of an `if/else` statement.
 
 # --hints--
 
-The state of `MyComponent` should initialize with the key value pair `{ name: Initial State }`.
+`MyComponent` should exist and render.
 
 ```js
 assert(
-  Enzyme.mount(React.createElement(MyComponent)).state('name') ===
-    'Initial State'
+  (function () {
+    const mockedComponent = Enzyme.mount(React.createElement(MyComponent));
+    return mockedComponent.find('MyComponent').length;
+  })()
 );
 ```
 
-`MyComponent` should render an `h1` header.
-
-```js
-assert(Enzyme.mount(React.createElement(MyComponent)).find('h1').length === 1);
-```
-
-The rendered `h1` header should contain text rendered from the component's state.
+When `display` is set to `true`, a `div`, `button`, and `h1` should render.
 
 ```js
 async () => {
   const waitForIt = (fn) =>
     new Promise((resolve, reject) => setTimeout(() => resolve(fn()), 250));
   const mockedComponent = Enzyme.mount(React.createElement(MyComponent));
-  const first = () => {
-    mockedComponent.setState({ name: 'TestName' });
-    return waitForIt(() => mockedComponent.html());
+  const state_1 = () => {
+    mockedComponent.setState({ display: true });
+    return waitForIt(() => mockedComponent);
   };
-  const firstValue = await first();
-  assert(/<h1>TestName<\/h1>/.test(firstValue));
+  const updated = await state_1();
+  assert(
+    updated.find('div').length === 1 &&
+      updated.find('div').children().length === 2 &&
+      updated.find('button').length === 1 &&
+      updated.find('h1').length === 1
+  );
 };
 ```
 
-Calling the `handleClick` method on `MyComponent` should set the name property in state to equal `React Rocks!`.
+When `display` is set to `false`, only a `div` and `button` should render.
 
 ```js
 async () => {
   const waitForIt = (fn) =>
     new Promise((resolve, reject) => setTimeout(() => resolve(fn()), 250));
   const mockedComponent = Enzyme.mount(React.createElement(MyComponent));
-  const first = () => {
-    mockedComponent.setState({ name: 'Before' });
-    return waitForIt(() => mockedComponent.state('name'));
+  const state_1 = () => {
+    mockedComponent.setState({ display: false });
+    return waitForIt(() => mockedComponent);
   };
-  const second = () => {
-    mockedComponent.instance().handleClick();
-    return waitForIt(() => mockedComponent.state('name'));
-  };
-  const firstValue = await first();
-  const secondValue = await second();
-  assert(firstValue === 'Before' && secondValue === 'React Rocks!');
+  const updated = await state_1();
+  assert(
+    updated.find('div').length === 1 &&
+      updated.find('div').children().length === 1 &&
+      updated.find('button').length === 1 &&
+      updated.find('h1').length === 0
+  );
 };
+```
+
+The render method should use the && logical operator to check the condition of this.state.display.
+
+```js
+(getUserInput) => assert(getUserInput('index').includes('&&'));
 ```
 
 # --seed--
@@ -93,21 +94,22 @@ class MyComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: 'Initial State'
-    };
-    this.handleClick = this.handleClick.bind(this);
+      display: true
+    }
+    this.toggleDisplay = this.toggleDisplay.bind(this);
   }
-  handleClick() {
-    // Change code below this line
-
-    // Change code above this line
+  toggleDisplay() {
+    this.setState(state => ({
+      display: !state.display
+    }));
   }
   render() {
+    // Change code below this line
     return (
-      <div>
-        <button onClick={this.handleClick}>Click Me</button>
-        <h1>{this.state.name}</h1>
-      </div>
+       <div>
+         <button onClick={this.toggleDisplay}>Toggle Display</button>
+         <h1>Displayed!</h1>
+       </div>
     );
   }
 };
@@ -120,23 +122,22 @@ class MyComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: 'Initial State'
-    };
-    this.handleClick = this.handleClick.bind(this);
+      display: true
+    }
+ this.toggleDisplay = this.toggleDisplay.bind(this);
   }
-  handleClick() {
-     // Change code below this line
-    this.setState({
-      name: 'React Rocks!'
-    });
-    // Change code above this line
+  toggleDisplay() {
+    this.setState(state => ({
+      display: !state.display
+    }));
   }
   render() {
+    // Change code below this line
     return (
-      <div>
-        <button onClick = {this.handleClick}>Click Me</button>
-        <h1>{this.state.name}</h1>
-      </div>
+       <div>
+         <button onClick={this.toggleDisplay}>Toggle Display</button>
+         {this.state.display && <h1>Displayed!</h1>}
+       </div>
     );
   }
 };
