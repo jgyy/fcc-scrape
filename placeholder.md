@@ -1,60 +1,39 @@
 ---
-id: 5a24c314108439a4d4036163
-title: Create a React Component
+id: 587d7dbc367417b2b2512bb1
+title: Create a Simple JSX Element
 challengeType: 6
-forumTopicId: 301386
-dashedName: create-a-react-component
+forumTopicId: 301390
+dashedName: create-a-simple-jsx-element
 ---
 
 # --description--
 
-The other way to define a React component is with the ES6 `class` syntax. In the following example, `Kitten` extends `React.Component`:
+**Intro:** React is an Open Source view library created and maintained by Facebook. It's a great tool to render the User Interface (UI) of modern web applications.
 
-```jsx
-class Kitten extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+React uses a syntax extension of JavaScript called JSX that allows you to write HTML directly within JavaScript. This has several benefits. It lets you use the full programmatic power of JavaScript within HTML, and helps to keep your code readable. For the most part, JSX is similar to the HTML that you have already learned, however there are a few key differences that will be covered throughout these challenges.
 
-  render() {
-    return (
-      <h1>Hi</h1>
-    );
-  }
-}
-```
+For instance, because JSX is a syntactic extension of JavaScript, you can actually write JavaScript directly within JSX. To do this, you simply include the code you want to be treated as JavaScript within curly braces: `{ 'this is treated as JavaScript code' }`. Keep this in mind, since it's used in several future challenges.
 
-This creates an ES6 class `Kitten` which extends the `React.Component` class. So the `Kitten` class now has access to many useful React features, such as local state and lifecycle hooks. Don't worry if you aren't familiar with these terms yet, they will be covered in greater detail in later challenges. Also notice the `Kitten` class has a `constructor` defined within it that calls `super()`. It uses `super()` to call the constructor of the parent class, in this case `React.Component`. The constructor is a special method used during the initialization of objects that are created with the `class` keyword. It is best practice to call a component's `constructor` with `super`, and pass `props` to both. This makes sure the component is initialized properly. For now, know that it is standard for this code to be included. Soon you will see other uses for the constructor as well as `props`.
+However, because JSX is not valid JavaScript, JSX code must be compiled into JavaScript. The transpiler Babel is a popular tool for this process. For your convenience, it's already added behind the scenes for these challenges. If you happen to write syntactically invalid JSX, you will see the first test in these challenges fail.
+
+It's worth noting that under the hood the challenges are calling `ReactDOM.render(JSX, document.getElementById('root'))`. This function call is what places your JSX into React's own lightweight representation of the DOM. React then uses snapshots of its own DOM to optimize updating only specific parts of the actual DOM.
 
 # --instructions--
 
-`MyComponent` is defined in the code editor using class syntax. Finish writing the `render` method so it returns a `div` element that contains an `h1` with the text `Hello React!`.
+**Instructions:** The current code uses JSX to assign a `div` element to the constant `JSX`. Replace the `div` with an `h1` element and add the text `Hello JSX!` inside it.
 
 # --hints--
 
-The React component should return a `div` element.
+The constant `JSX` should return an `h1` element.
 
 ```js
-assert(Enzyme.shallow(React.createElement(MyComponent)).type() === 'div');
+assert(JSX.type === 'h1');
 ```
 
-The returned `div` should render an `h1` header within it.
+The `h1` tag should include the text `Hello JSX!`
 
 ```js
-assert(
-  /<div><h1>.*<\/h1><\/div>/.test(
-    Enzyme.shallow(React.createElement(MyComponent)).html()
-  )
-);
-```
-
-The `h1` header should contain the string `Hello React!`.
-
-```js
-assert(
-  Enzyme.shallow(React.createElement(MyComponent)).html() ===
-    '<div><h1>Hello React!</h1></div>'
-);
+assert(Enzyme.shallow(JSX).contains('Hello JSX!'));
 ```
 
 # --seed--
@@ -62,41 +41,17 @@ assert(
 ## --after-user-code--
 
 ```jsx
-ReactDOM.render(<MyComponent />, document.getElementById('root'))
+ReactDOM.render(JSX, document.getElementById('root'))
 ```
 
 ## --seed-contents--
 
 ```jsx
-class MyComponent extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-  render() {
-    // Change code below this line
-
-
-
-    // Change code above this line
-  }
-};
+const JSX = <div></div>;
 ```
 
 # --solutions--
 
 ```jsx
-class MyComponent extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-  render() {
-    // Change code below this line
-    return (
-      <div>
-        <h1>Hello React!</h1>
-      </div>
-    );
-    // Change code above this line
-  }
-};
+const JSX = <h1>Hello JSX!</h1>;
 ```
