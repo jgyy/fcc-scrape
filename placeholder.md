@@ -1,92 +1,71 @@
 ---
-id: 5a24c314108439a4d403617e
-title: Add Event Listeners
+id: 5a24c314108439a4d4036182
+title: Add Inline Styles in React
 challengeType: 6
-forumTopicId: 301377
-dashedName: add-event-listeners
+forumTopicId: 301378
+dashedName: add-inline-styles-in-react
 ---
 
 # --description--
 
-The `componentDidMount()` method is also the best place to attach any event listeners you need to add for specific functionality. React provides a synthetic event system which wraps the native event system present in browsers. This means that the synthetic event system behaves exactly the same regardless of the user's browser - even if the native events may behave differently between different browsers.
+You may have noticed in the last challenge that there were several other syntax differences from HTML inline styles in addition to the `style` attribute set to a JavaScript object. First, the names of certain CSS style properties use camel case. For example, the last challenge set the size of the font with `fontSize` instead of `font-size`. Hyphenated words like `font-size` are invalid syntax for JavaScript object properties, so React uses camel case. As a rule, any hyphenated style properties are written using camel case in JSX.
 
-You've already been using some of these synthetic event handlers such as `onClick()`. React's synthetic event system is great to use for most interactions you'll manage on DOM elements. However, if you want to attach an event handler to the document or window objects, you have to do this directly.
+All property value length units (like `height`, `width`, and `fontSize`) are assumed to be in `px` unless otherwise specified. If you want to use `em`, for example, you wrap the value and the units in quotes, like `{fontSize: "4em"}`. Other than the length values that default to `px`, all other property values should be wrapped in quotes.
 
 # --instructions--
 
-Attach an event listener in the `componentDidMount()` method for `keydown` events and have these events trigger the callback `handleKeyPress()`. You can use `document.addEventListener()` which takes the event (in quotes) as the first argument and the callback as the second argument.
-
-Then, in `componentWillUnmount()`, remove this same event listener. You can pass the same arguments to `document.removeEventListener()`. It's good practice to use this lifecycle method to do any clean up on React components before they are unmounted and destroyed. Removing event listeners is an example of one such clean up action.
+If you have a large set of styles, you can assign a style `object` to a constant to keep your code organized. Initialize a `styles` constant and assign an `object` with three style properties and their values to it. Give the `div` a color of `"purple"`, a font-size of `40`, and a border of `"2px solid purple"`. Then set the `style` attribute equal to the `styles` constant.
 
 # --hints--
 
-`MyComponent` should render a `div` element which wraps an `h1` tag.
+The `styles` variable should be an `object` with three properties.
+
+```js
+assert(Object.keys(styles).length === 3);
+```
+
+The `styles` variable should have a `color` property set to a value of `purple`.
+
+```js
+assert(styles.color === 'purple');
+```
+
+The `styles` variable should have a `fontSize` property set to a value of `40`.
+
+```js
+assert(styles.fontSize === 40);
+```
+
+The `styles` variable should have a `border` property set to a value of `2px solid purple`.
+
+```js
+assert(styles.border === '2px solid purple');
+```
+
+The component should render a `div` element.
 
 ```js
 assert(
-  (() => {
-    const mockedComponent = Enzyme.mount(React.createElement(MyComponent));
-    return mockedComponent.find('div').children().find('h1').length === 1;
+  (function () {
+    const mockedComponent = Enzyme.shallow(React.createElement(Colorful));
+    return mockedComponent.type() === 'div';
   })()
 );
 ```
 
-A keydown listener should be attached to the document in `componentDidMount`.
+The `div` element should have its styles defined by the `styles` object.
 
 ```js
 assert(
-  (() => {
-    const mockedComponent = Enzyme.mount(React.createElement(MyComponent));
-    const didMountString = mockedComponent
-      .instance()
-      .componentDidMount.toString();
-    return new RegExp(
-      'document.addEventListener(.|\n|\r)+keydown(.|\n|\r)+this.handleKeyPress'
-    ).test(didMountString);
+  (function () {
+    const mockedComponent = Enzyme.shallow(React.createElement(Colorful));
+    return (
+      mockedComponent.props().style.color === 'purple' &&
+      mockedComponent.props().style.fontSize === 40 &&
+      mockedComponent.props().style.border === '2px solid purple'
+    );
   })()
 );
-```
-
-The keydown listener should be removed from the document in `componentWillUnmount`.
-
-```js
-assert(
-  (() => {
-    const mockedComponent = Enzyme.mount(React.createElement(MyComponent));
-    const willUnmountString = mockedComponent
-      .instance()
-      .componentWillUnmount.toString();
-    return new RegExp(
-      'document.removeEventListener(.|\n|\r)+keydown(.|\n|\r)+this.handleKeyPress'
-    ).test(willUnmountString);
-  })()
-);
-```
-
-Once the component has mounted, pressing `enter` should update its state and the rendered `h1` tag.
-
-```js
-async () => {
-  const waitForIt = (fn) =>
-    new Promise((resolve, reject) => setTimeout(() => resolve(fn()), 250));
-  const mockedComponent = Enzyme.mount(React.createElement(MyComponent));
-  const beforeState = mockedComponent.state('message');
-  const beforeText = mockedComponent.find('h1').text();
-  const pressEnterKey = () => {
-    mockedComponent.instance().handleKeyPress({ keyCode: 13 });
-    return waitForIt(() => {
-      mockedComponent.update();
-      return {
-        state: mockedComponent.state('message'),
-        text: mockedComponent.find('h1').text()
-      };
-    });
-  };
-  const afterKeyPress = await pressEnterKey();
-  assert(
-    beforeState !== afterKeyPress.state && beforeText !== afterKeyPress.text
-  );
-};
 ```
 
 # --seed--
@@ -94,45 +73,20 @@ async () => {
 ## --after-user-code--
 
 ```jsx
-ReactDOM.render(<MyComponent />, document.getElementById('root'))
+ReactDOM.render(<Colorful />, document.getElementById('root'))
 ```
 
 ## --seed-contents--
 
 ```jsx
-class MyComponent extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      message: ''
-    };
-    this.handleEnter = this.handleEnter.bind(this);
-    this.handleKeyPress = this.handleKeyPress.bind(this);
-  }
-  // Change code below this line
-  componentDidMount() {
-
-  }
-  componentWillUnmount() {
-
-  }
-  // Change code above this line
-  handleEnter() {
-    this.setState((state) => ({
-      message: state.message + 'You pressed the enter key! '
-    }));
-  }
-  handleKeyPress(event) {
-    if (event.keyCode === 13) {
-      this.handleEnter();
-    }
-  }
+// Change code above this line
+class Colorful extends React.Component {
   render() {
+    // Change code below this line
     return (
-      <div>
-        <h1>{this.state.message}</h1>
-      </div>
+      <div style={{color: "yellow", fontSize: 24}}>Style Me!</div>
     );
+    // Change code above this line
   }
 };
 ```
@@ -140,40 +94,19 @@ class MyComponent extends React.Component {
 # --solutions--
 
 ```jsx
-class MyComponent extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      message: ''
-    };
-    this.handleKeyPress = this.handleKeyPress.bind(this);
-    this.handleEnter = this.handleEnter.bind(this);  }
-  componentDidMount() {
-    // Change code below this line
-    document.addEventListener('keydown', this.handleKeyPress);
-    // Change code above this line
-  }
-  componentWillUnmount() {
-    // Change code below this line
-    document.removeEventListener('keydown', this.handleKeyPress);
-    // Change code above this line
-  }
-  handleEnter() {
-    this.setState((state) => ({
-      message: state.message + 'You pressed the enter key! '
-    }));
-  }
-  handleKeyPress(event) {
-    if (event.keyCode === 13) {
-      this.handleEnter();
-    }
-  }
+const styles = {
+  color: "purple",
+  fontSize: 40,
+  border: "2px solid purple"
+};
+// Change code above this line
+class Colorful extends React.Component {
   render() {
+    // Change code below this line
     return (
-      <div>
-        <h1>{this.state.message}</h1>
-      </div>
+      <div style={styles}>Style Me!</div>
     );
+    // Change code above this line
   }
 };
 ```
