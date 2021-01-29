@@ -1,145 +1,143 @@
 ---
-id: 5a24c314108439a4d403616f
-title: Review Using Props with Stateless Functional Components
+id: 5a24c314108439a4d4036173
+title: Set State with this.setState
 challengeType: 6
-forumTopicId: 301411
-dashedName: review-using-props-with-stateless-functional-components
+forumTopicId: 301412
+dashedName: set-state-with-this-setstate
 ---
 
 # --description--
 
-Except for the last challenge, you've been passing props to stateless functional components. These components act like pure functions. They accept props as input and return the same view every time they are passed the same props. You may be wondering what state is, and the next challenge will cover it in more detail. Before that, here's a review of the terminology for components.
+The previous challenges covered component `state` and how to initialize state in the `constructor`. There is also a way to change the component's `state`. React provides a method for updating component `state` called `setState`. You call the `setState` method within your component class like so: `this.setState()`, passing in an object with key-value pairs. The keys are your state properties and the values are the updated state data. For instance, if we were storing a `username` in state and wanted to update it, it would look like this:
 
-A *stateless functional component* is any function you write which accepts props and returns JSX. A *stateless component*, on the other hand, is a class that extends `React.Component`, but does not use internal state (covered in the next challenge). Finally, a *stateful component* is a class component that does maintain its own internal state. You may see stateful components referred to simply as components or React components.
+```jsx
+this.setState({
+  username: 'Lewis'
+});
+```
 
-A common pattern is to try to minimize statefulness and to create stateless functional components wherever possible. This helps contain your state management to a specific area of your application. In turn, this improves development and maintenance of your app by making it easier to follow how changes to state affect its behavior.
+React expects you to never modify `state` directly, instead always use `this.setState()` when state changes occur. Also, you should note that React may batch multiple state updates in order to improve performance. What this means is that state updates through the `setState` method can be asynchronous. There is an alternative syntax for the `setState` method which provides a way around this problem. This is rarely needed but it's good to keep it in mind! Please consult the [React documentation](https://facebook.github.io/react/docs/state-and-lifecycle.html) for further details.
 
 # --instructions--
 
-The code editor has a `CampSite` component that renders a `Camper` component as a child. Define the `Camper` component and assign it default props of `{ name: 'CamperBot' }`. Inside the `Camper` component, render any code that you want, but make sure to have one `p` element that includes only the `name` value that is passed in as a `prop`. Finally, define `propTypes` on the `Camper` component to require `name` to be provided as a prop and verify that it is of type `string`.
+There is a `button` element in the code editor which has an `onClick()` handler. This handler is triggered when the `button` receives a click event in the browser, and runs the `handleClick` method defined on `MyComponent`. Within the `handleClick` method, update the component `state` using `this.setState()`. Set the `name` property in `state` to equal the string `React Rocks!`.
+
+Click the button and watch the rendered state update. Don't worry if you don't fully understand how the click handler code works at this point. It's covered in upcoming challenges.
 
 # --hints--
 
-The `CampSite` component should render.
+The state of `MyComponent` should initialize with the key value pair `{ name: Initial State }`.
 
 ```js
 assert(
-  (function () {
-    const mockedComponent = Enzyme.mount(React.createElement(CampSite));
-    return mockedComponent.find('CampSite').length === 1;
-  })()
+  Enzyme.mount(React.createElement(MyComponent)).state('name') ===
+    'Initial State'
 );
 ```
 
-The `Camper` component should render.
+`MyComponent` should render an `h1` header.
 
 ```js
-assert(
-  (function () {
-    const mockedComponent = Enzyme.mount(React.createElement(CampSite));
-    return mockedComponent.find('Camper').length === 1;
-  })()
-);
+assert(Enzyme.mount(React.createElement(MyComponent)).find('h1').length === 1);
 ```
 
-The `Camper` component should include default props which assign the string `CamperBot` to the key `name`.
+The rendered `h1` header should contain text rendered from the component's state.
 
 ```js
-assert(
-  /Camper.defaultProps={name:(['"`])CamperBot\1,?}/.test(
-    __helpers.removeWhiteSpace(code)
-  )
-);
+async () => {
+  const waitForIt = (fn) =>
+    new Promise((resolve, reject) => setTimeout(() => resolve(fn()), 250));
+  const mockedComponent = Enzyme.mount(React.createElement(MyComponent));
+  const first = () => {
+    mockedComponent.setState({ name: 'TestName' });
+    return waitForIt(() => mockedComponent.html());
+  };
+  const firstValue = await first();
+  assert(/<h1>TestName<\/h1>/.test(firstValue));
+};
 ```
 
-The `Camper` component should include prop types which require the `name` prop to be of type `string`.
+Calling the `handleClick` method on `MyComponent` should set the name property in state to equal `React Rocks!`.
 
 ```js
-assert(
-  /Camper.propTypes={name:PropTypes.string.isRequired,?}/.test(
-    __helpers.removeWhiteSpace(code)
-  )
-);
-```
-
-The `Camper` component should contain a `p` element with only the text from the `name` prop.
-
-```js
-assert(
-  (function () {
-    const mockedComponent = Enzyme.mount(React.createElement(CampSite));
-    return (
-      mockedComponent.find('p').text() ===
-      mockedComponent.find('Camper').props().name
-    );
-  })()
-);
+async () => {
+  const waitForIt = (fn) =>
+    new Promise((resolve, reject) => setTimeout(() => resolve(fn()), 250));
+  const mockedComponent = Enzyme.mount(React.createElement(MyComponent));
+  const first = () => {
+    mockedComponent.setState({ name: 'Before' });
+    return waitForIt(() => mockedComponent.state('name'));
+  };
+  const second = () => {
+    mockedComponent.instance().handleClick();
+    return waitForIt(() => mockedComponent.state('name'));
+  };
+  const firstValue = await first();
+  const secondValue = await second();
+  assert(firstValue === 'Before' && secondValue === 'React Rocks!');
+};
 ```
 
 # --seed--
 
-## --before-user-code--
-
-```jsx
-var PropTypes = {
-   string: { isRequired: true }
-};
-```
-
 ## --after-user-code--
 
 ```jsx
-ReactDOM.render(<CampSite />, document.getElementById('root'))
+ReactDOM.render(<MyComponent />, document.getElementById('root'))
 ```
 
 ## --seed-contents--
 
 ```jsx
-class CampSite extends React.Component {
+class MyComponent extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      name: 'Initial State'
+    };
+    this.handleClick = this.handleClick.bind(this);
+  }
+  handleClick() {
+    // Change code below this line
+
+    // Change code above this line
   }
   render() {
     return (
       <div>
-        <Camper/>
+        <button onClick={this.handleClick}>Click Me</button>
+        <h1>{this.state.name}</h1>
       </div>
     );
   }
 };
-// Change code below this line
 ```
 
 # --solutions--
 
 ```jsx
-class CampSite extends React.Component {
+class MyComponent extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      name: 'Initial State'
+    };
+    this.handleClick = this.handleClick.bind(this);
+  }
+  handleClick() {
+     // Change code below this line
+    this.setState({
+      name: 'React Rocks!'
+    });
+    // Change code above this line
   }
   render() {
     return (
       <div>
-        <Camper/>
+        <button onClick = {this.handleClick}>Click Me</button>
+        <h1>{this.state.name}</h1>
       </div>
     );
   }
-};
-// Change code below this line
-
-const Camper = (props) => {
-   return (
-     <div>
-       <p>{props.name}</p>
-     </div>
-   );
-};
-
-Camper.propTypes = {
-  name: PropTypes.string.isRequired
-};
-
-Camper.defaultProps = {
-  name: 'CamperBot'
 };
 ```
