@@ -1,71 +1,99 @@
 ---
-id: 5a24c314108439a4d4036174
-title: Bind 'this' to a Class Method
+id: 5a24c314108439a4d4036189
+title: Change Inline CSS Conditionally Based on Component State
 challengeType: 6
-forumTopicId: 301379
-dashedName: bind-this-to-a-class-method
+forumTopicId: 301380
+dashedName: change-inline-css-conditionally-based-on-component-state
 ---
 
 # --description--
 
-In addition to setting and updating `state`, you can also define methods for your component class. A class method typically needs to use the `this` keyword so it can access properties on the class (such as `state` and `props`) inside the scope of the method. There are a few ways to allow your class methods to access `this`.
+At this point, you've seen several applications of conditional rendering and the use of inline styles. Here's one more example that combines both of these topics. You can also render CSS conditionally based on the state of a React component. To do this, you check for a condition, and if that condition is met, you modify the styles object that's assigned to the JSX elements in the render method.
 
-One common way is to explicitly bind `this` in the constructor so `this` becomes bound to the class methods when the component is initialized. You may have noticed the last challenge used `this.handleClick = this.handleClick.bind(this)` for its `handleClick` method in the constructor. Then, when you call a function like `this.setState()` within your class method, `this` refers to the class and will not be `undefined`.
-
-**Note:** The `this` keyword is one of the most confusing aspects of JavaScript but it plays an important role in React. Although its behavior here is totally normal, these lessons aren't the place for an in-depth review of `this` so please refer to other lessons if the above is confusing!
+This paradigm is important to understand because it is a dramatic shift from the more traditional approach of applying styles by modifying DOM elements directly (which is very common with jQuery, for example). In that approach, you must keep track of when elements change and also handle the actual manipulation directly. It can become difficult to keep track of changes, potentially making your UI unpredictable. When you set a style object based on a condition, you describe how the UI should look as a function of the application's state. There is a clear flow of information that only moves in one direction. This is the preferred method when writing applications with React.
 
 # --instructions--
 
-The code editor has a component with a `state` that keeps track of the text. It also has a method which allows you to set the text to `"You clicked!"`. However, the method doesn't work because it's using the `this` keyword that is undefined. Fix it by explicitly binding `this` to the `handleClick()` method in the component's constructor.
-
-Next, add a click handler to the `button` element in the render method. It should trigger the `handleClick()` method when the button receives a click event. Remember that the method you pass to the `onClick` handler needs curly braces because it should be interpreted directly as JavaScript.
-
-Once you complete the above steps you should be able to click the button and see `You clicked!`.
+The code editor has a simple controlled input component with a styled border. You want to style this border red if the user types more than 15 characters of text in the input box. Add a condition to check for this and, if the condition is valid, set the input border style to `3px solid red`. You can try it out by entering text in the input.
 
 # --hints--
 
-`MyComponent` should return a `div` element which wraps two elements, a button and an `h1` element, in that order.
+The `GateKeeper` component should render a `div` element.
 
 ```js
 assert(
-  Enzyme.mount(React.createElement(MyComponent)).find('div').length === 1 &&
-    Enzyme.mount(React.createElement(MyComponent))
-      .find('div')
-      .childAt(0)
-      .type() === 'button' &&
-    Enzyme.mount(React.createElement(MyComponent))
-      .find('div')
-      .childAt(1)
-      .type() === 'h1'
+  (function () {
+    const mockedComponent = Enzyme.mount(React.createElement(GateKeeper));
+    return mockedComponent.find('div').length === 1;
+  })()
 );
 ```
 
-The state of `MyComponent` should initialize with the key value pair `{ text: "Hello" }`.
+The `GateKeeper` component should be initialized with a state key `input` set to an empty string.
 
 ```js
 assert(
-  Enzyme.mount(React.createElement(MyComponent)).state('text') === 'Hello'
+  (function () {
+    const mockedComponent = Enzyme.mount(React.createElement(GateKeeper));
+    return mockedComponent.state().input === '';
+  })()
 );
 ```
 
-Clicking the `button` element should run the `handleClick` method and set the state `text` to `"You clicked!"`.
+The `GateKeeper` component should render an `h3` tag and an `input` tag.
+
+```js
+assert(
+  (function () {
+    const mockedComponent = Enzyme.mount(React.createElement(GateKeeper));
+    return (
+      mockedComponent.find('h3').length === 1 &&
+      mockedComponent.find('input').length === 1
+    );
+  })()
+);
+```
+
+The `input` tag should initially have a style of `1px solid black` for the `border` property.
+
+```js
+assert(
+  (function () {
+    const mockedComponent = Enzyme.mount(React.createElement(GateKeeper));
+    return (
+      mockedComponent.find('input').props().style.border === '1px solid black'
+    );
+  })()
+);
+```
+
+The `input` tag should be styled with a border of `3px solid red` if the input value in state is longer than 15 characters.
 
 ```js
 async () => {
   const waitForIt = (fn) =>
-    new Promise((resolve, reject) => setTimeout(() => resolve(fn()), 250));
-  const mockedComponent = Enzyme.mount(React.createElement(MyComponent));
-  const first = () => {
-    mockedComponent.setState({ text: 'Hello' });
-    return waitForIt(() => mockedComponent.state('text'));
+    new Promise((resolve, reject) => setTimeout(() => resolve(fn()), 100));
+  const mockedComponent = Enzyme.mount(React.createElement(GateKeeper));
+  const simulateChange = (el, value) =>
+    el.simulate('change', { target: { value } });
+  let initialStyle = mockedComponent.find('input').props().style.border;
+  const state_1 = () => {
+    mockedComponent.setState({ input: 'this is 15 char' });
+    return waitForIt(() => mockedComponent.find('input').props().style.border);
   };
-  const second = () => {
-    mockedComponent.find('button').simulate('click');
-    return waitForIt(() => mockedComponent.state('text'));
+  const state_2 = () => {
+    mockedComponent.setState({
+      input: 'A very long string longer than 15 characters.'
+    });
+    return waitForIt(() => mockedComponent.find('input').props().style.border);
   };
-  const firstValue = await first();
-  const secondValue = await second();
-  assert(firstValue === 'Hello' && secondValue === 'You clicked!');
+  const style_1 = await state_1();
+  const style_2 = await state_2();
+  assert(
+    initialStyle === '1px solid black' &&
+      style_1 === '1px solid black' &&
+      style_2 === '3px solid red'
+  );
 };
 ```
 
@@ -74,34 +102,38 @@ async () => {
 ## --after-user-code--
 
 ```jsx
-ReactDOM.render(<MyComponent />, document.getElementById('root'))
+ReactDOM.render(<GateKeeper />, document.getElementById('root'))
 ```
 
 ## --seed-contents--
 
 ```jsx
-class MyComponent extends React.Component {
+class GateKeeper extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      text: "Hello"
+      input: ''
+    };
+    this.handleChange = this.handleChange.bind(this);
+  }
+  handleChange(event) {
+    this.setState({ input: event.target.value })
+  }
+  render() {
+    let inputStyle = {
+      border: '1px solid black'
     };
     // Change code below this line
 
     // Change code above this line
-  }
-  handleClick() {
-    this.setState({
-      text: "You clicked!"
-    });
-  }
-  render() {
     return (
       <div>
-        { /* Change code below this line */ }
-        <button>Click Me</button>
-        { /* Change code above this line */ }
-        <h1>{this.state.text}</h1>
+        <h3>Don't Type Too Much:</h3>
+        <input
+          type="text"
+          style={inputStyle}
+          value={this.state.input}
+          onChange={this.handleChange} />
       </div>
     );
   }
@@ -111,24 +143,32 @@ class MyComponent extends React.Component {
 # --solutions--
 
 ```jsx
-class MyComponent extends React.Component {
+class GateKeeper extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      text: "Hello"
+      input: ''
     };
-    this.handleClick = this.handleClick.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
-  handleClick() {
-    this.setState({
-      text: "You clicked!"
-    });
+  handleChange(event) {
+    this.setState({ input: event.target.value })
   }
   render() {
+    let inputStyle = {
+      border: '1px solid black'
+    };
+    if (this.state.input.length > 15) {
+      inputStyle.border = '3px solid red';
+    };
     return (
       <div>
-        <button onClick = {this.handleClick}>Click Me</button>
-        <h1>{this.state.text}</h1>
+        <h3>Don't Type Too Much:</h3>
+        <input
+          type="text"
+          style={inputStyle}
+          value={this.state.input}
+          onChange={this.handleChange} />
       </div>
     );
   }
