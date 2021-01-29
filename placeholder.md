@@ -1,75 +1,76 @@
 ---
-id: 5a24bbe0dba28a8d3cbd4c5f
-title: Render HTML Elements to the DOM
+id: 5a24c314108439a4d403618d
+title: Render React on the Server with renderToString
 challengeType: 6
-forumTopicId: 301406
-dashedName: render-html-elements-to-the-dom
+forumTopicId: 301407
+dashedName: render-react-on-the-server-with-rendertostring
 ---
 
 # --description--
 
-So far, you've learned that JSX is a convenient tool to write readable HTML within JavaScript. With React, we can render this JSX directly to the HTML DOM using React's rendering API known as ReactDOM.
+So far, you have been rendering React components on the client. Normally, this is what you will always do. However, there are some use cases where it makes sense to render a React component on the server. Since React is a JavaScript view library and you can run JavaScript on the server with Node, this is possible. In fact, React provides a `renderToString()` method you can use for this purpose.
 
-ReactDOM offers a simple method to render React elements to the DOM which looks like this: `ReactDOM.render(componentToRender, targetNode)`, where the first argument is the React element or component that you want to render, and the second argument is the DOM node that you want to render the component to.
-
-As you would expect, `ReactDOM.render()` must be called after the JSX element declarations, just like how you must declare variables before using them.
+There are two key reasons why rendering on the server may be used in a real world app. First, without doing this, your React apps would consist of a relatively empty HTML file and a large bundle of JavaScript when it's initially loaded to the browser. This may not be ideal for search engines that are trying to index the content of your pages so people can find you. If you render the initial HTML markup on the server and send this to the client, the initial page load contains all of the page's markup which can be crawled by search engines. Second, this creates a faster initial page load experience because the rendered HTML is smaller than the JavaScript code of the entire app. React will still be able to recognize your app and manage it after the initial load.
 
 # --instructions--
 
-The code editor has a simple JSX component. Use the `ReactDOM.render()` method to render this component to the page. You can pass defined JSX elements directly in as the first argument and use `document.getElementById()` to select the DOM node to render them to. There is a `div` with `id='challenge-node'` available for you to use. Make sure you don't change the `JSX` constant.
+The `renderToString()` method is provided on `ReactDOMServer`, which is available here as a global object. The method takes one argument which is a React element. Use this to render `App` to a string.
 
 # --hints--
 
-The constant `JSX` should return a `div` element.
+The `App` component should render to a string using `ReactDOMServer.renderToString`.
 
 ```js
-assert(JSX.type === 'div');
-```
-
-The `div` should contain an `h1` tag as the first element.
-
-```js
-assert(JSX.props.children[0].type === 'h1');
-```
-
-The `div` should contain a `p` tag as the second element.
-
-```js
-assert(JSX.props.children[1].type === 'p');
-```
-
-The provided JSX element should render to the DOM node with id `challenge-node`.
-
-```js
-assert(
-  document.getElementById('challenge-node').childNodes[0].innerHTML ===
-    '<h1>Hello World</h1><p>Lets render this to the DOM</p>'
-);
+(getUserInput) =>
+  assert(
+    getUserInput('index')
+      .replace(/ /g, '')
+      .includes('ReactDOMServer.renderToString(<App/>)') &&
+      Enzyme.mount(React.createElement(App)).children().name() === 'div'
+  );
 ```
 
 # --seed--
 
+## --before-user-code--
+
+```jsx
+var ReactDOMServer = { renderToString(x) { return null; } };
+```
+
+## --after-user-code--
+
+```jsx
+ReactDOM.render(<App />, document.getElementById('root'))
+```
+
 ## --seed-contents--
 
 ```jsx
-const JSX = (
-  <div>
-    <h1>Hello World</h1>
-    <p>Lets render this to the DOM</p>
-  </div>
-);
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return <div/>
+  }
+};
+
 // Change code below this line
 ```
 
 # --solutions--
 
 ```jsx
-const JSX = (
-<div>
-  <h1>Hello World</h1>
-  <p>Lets render this to the DOM</p>
-</div>
-);
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return <div/>
+  }
+};
+
 // Change code below this line
-ReactDOM.render(JSX, document.getElementById('challenge-node'));
+ReactDOMServer.renderToString(<App/>);
 ```
