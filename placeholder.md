@@ -1,86 +1,67 @@
 ---
-id: 5a24c314108439a4d4036170
-title: Create a Stateful Component
+id: 5a24c314108439a4d4036162
+title: Create a Stateless Functional Component
 challengeType: 6
-forumTopicId: 301391
-dashedName: create-a-stateful-component
+forumTopicId: 301392
+dashedName: create-a-stateless-functional-component
 ---
 
 # --description--
 
-One of the most important topics in React is `state`. State consists of any data your application needs to know about, that can change over time. You want your apps to respond to state changes and present an updated UI when necessary. React offers a nice solution for the state management of modern web applications.
+Components are the core of React. Everything in React is a component and here you will learn how to create one.
 
-You create state in a React component by declaring a `state` property on the component class in its `constructor`. This initializes the component with `state` when it is created. The `state` property must be set to a JavaScript `object`. Declaring it looks like this:
+There are two ways to create a React component. The first way is to use a JavaScript function. Defining a component in this way creates a *stateless functional component*. The concept of state in an application will be covered in later challenges. For now, think of a stateless component as one that can receive data and render it, but does not manage or track changes to that data. (We'll cover the second way to create a React component in the next challenge.)
+
+To create a component with a function, you simply write a JavaScript function that returns either JSX or `null`. One important thing to note is that React requires your function name to begin with a capital letter. Here's an example of a stateless functional component that assigns an HTML class in JSX:
 
 ```jsx
-this.state = {
-  // describe your state here
-}
+// After being transpiled, the <div> will have a CSS class of 'customClass'
+const DemoComponent = function() {
+  return (
+    <div className='customClass' />
+  );
+};
 ```
 
-You have access to the `state` object throughout the life of your component. You can update it, render it in your UI, and pass it as props to child components. The `state` object can be as complex or as simple as you need it to be. Note that you must create a class component by extending `React.Component` in order to create `state` like this.
+Because a JSX component represents HTML, you could put several components together to create a more complex HTML page. This is one of the key advantages of the component architecture React provides. It allows you to compose your UI from many separate, isolated components. This makes it easier to build and maintain complex user interfaces.
 
 # --instructions--
 
-There is a component in the code editor that is trying to render a `name` property from its `state`. However, there is no `state` defined. Initialize the component with `state` in the `constructor` and assign your name to a property of `name`.
+The code editor has a function called `MyComponent`. Complete this function so it returns a single `div` element which contains some string of text.
+
+**Note:** The text is considered a child of the `div` element, so you will not be able to use a self-closing tag.
 
 # --hints--
 
-`StatefulComponent` should exist and render.
+`MyComponent` should return JSX.
 
 ```js
 assert(
   (function () {
-    const mockedComponent = Enzyme.mount(
-      React.createElement(StatefulComponent)
-    );
-    return mockedComponent.find('StatefulComponent').length === 1;
+    const mockedComponent = Enzyme.mount(React.createElement(MyComponent));
+    return mockedComponent.length === 1;
   })()
 );
 ```
 
-`StatefulComponent` should render a `div` and an `h1` element.
+`MyComponent` should return a `div` element.
 
 ```js
 assert(
   (function () {
-    const mockedComponent = Enzyme.mount(
-      React.createElement(StatefulComponent)
-    );
-    return (
-      mockedComponent.find('div').length === 1 &&
-      mockedComponent.find('h1').length === 1
-    );
+    const mockedComponent = Enzyme.mount(React.createElement(MyComponent));
+    return mockedComponent.children().type() === 'div';
   })()
 );
 ```
 
-The state of `StatefulComponent` should be initialized with a property `name` set to a string.
+The `div` element should contain a string of text.
 
 ```js
 assert(
   (function () {
-    const mockedComponent = Enzyme.mount(
-      React.createElement(StatefulComponent)
-    );
-    const initialState = mockedComponent.state();
-    return (
-      typeof initialState === 'object' && typeof initialState.name === 'string'
-    );
-  })()
-);
-```
-
-The property `name` in the state of `StatefulComponent` should render in the `h1` element.
-
-```js
-assert(
-  (function () {
-    const mockedComponent = Enzyme.mount(
-      React.createElement(StatefulComponent)
-    );
-    const initialState = mockedComponent.state();
-    return mockedComponent.find('h1').text() === initialState.name;
+    const mockedComponent = Enzyme.mount(React.createElement(MyComponent));
+    return mockedComponent.find('div').text() !== '';
   })()
 );
 ```
@@ -90,45 +71,31 @@ assert(
 ## --after-user-code--
 
 ```jsx
-ReactDOM.render(<StatefulComponent />, document.getElementById('root'))
+ReactDOM.render(<MyComponent />, document.getElementById('root'))
 ```
 
 ## --seed-contents--
 
 ```jsx
-class StatefulComponent extends React.Component {
-  constructor(props) {
-    super(props);
-    // Only change code below this line
+const MyComponent = function() {
+  // Change code below this line
 
-    // Only change code above this line
-  }
-  render() {
-    return (
-      <div>
-        <h1>{this.state.name}</h1>
-      </div>
-    );
-  }
-};
+
+
+  // Change code above this line
+}
 ```
 
 # --solutions--
 
 ```jsx
-class StatefulComponent extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      name: 'freeCodeCamp!'
-    }
-  }
-  render() {
-    return (
-      <div>
-        <h1>{this.state.name}</h1>
-      </div>
-    );
-  }
-};
+const MyComponent = function() {
+  // Change code below this line
+  return (
+    <div>
+      Demo Solution
+    </div>
+  );
+  // Change code above this line
+}
 ```
