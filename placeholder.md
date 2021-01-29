@@ -1,37 +1,91 @@
 ---
-id: 5a24c314108439a4d4036160
-title: Define an HTML Class in JSX
+id: 5a24c314108439a4d403618b
+title: Give Sibling Elements a Unique Key Attribute
 challengeType: 6
-forumTopicId: 301393
-dashedName: define-an-html-class-in-jsx
+forumTopicId: 301394
+dashedName: give-sibling-elements-a-unique-key-attribute
 ---
 
 # --description--
 
-Now that you're getting comfortable writing JSX, you may be wondering how it differs from HTML.
+The last challenge showed how the `map` method is used to dynamically render a number of elements based on user input. However, there was an important piece missing from that example. When you create an array of elements, each one needs a `key` attribute set to a unique value. React uses these keys to keep track of which items are added, changed, or removed. This helps make the re-rendering process more efficient when the list is modified in any way.  
 
-So far, it may seem that HTML and JSX are exactly the same.
-
-One key difference in JSX is that you can no longer use the word `class` to define HTML classes. This is because `class` is a reserved word in JavaScript. Instead, JSX uses `className`.
-
-In fact, the naming convention for all HTML attributes and event references in JSX become camelCase. For example, a click event in JSX is `onClick`, instead of `onclick`. Likewise, `onchange` becomes `onChange`. While this is a subtle difference, it is an important one to keep in mind moving forward.
+**Note:** Keys only need to be unique between sibling elements, they don't need to be globally unique in your application.
 
 # --instructions--
 
-Apply a class of `myDiv` to the `div` provided in the JSX code.
+The code editor has an array with some front end frameworks and a stateless functional component named `Frameworks()`. `Frameworks()` needs to map the array to an unordered list, much like in the last challenge. Finish writing the `map` callback to return an `li` element for each framework in the `frontEndFrameworks` array. This time, make sure to give each `li` a `key` attribute, set to a unique value. The `li` elements should also contain text from `frontEndFrameworks`.
+
+Normally, you want to make the key something that uniquely identifies the element being rendered. As a last resort the array index may be used, but typically you should try to use a unique identification.
 
 # --hints--
 
-The constant `JSX` should return a `div` element.
+The `Frameworks` component should exist and render to the page.
 
 ```js
-assert.strictEqual(JSX.type, 'div');
+assert(
+  Enzyme.mount(React.createElement(Frameworks)).find('Frameworks').length === 1
+);
 ```
 
-The `div` should have a class of `myDiv`.
+`Frameworks` should render an `h1` element.
 
 ```js
-assert.strictEqual(JSX.props.className, 'myDiv');
+assert(Enzyme.mount(React.createElement(Frameworks)).find('h1').length === 1);
+```
+
+`Frameworks` should render a `ul` element.
+
+```js
+assert(Enzyme.mount(React.createElement(Frameworks)).find('ul').length === 1);
+```
+
+The `ul` tag should render 6 child `li` elements.
+
+```js
+assert(
+  Enzyme.mount(React.createElement(Frameworks)).find('ul').children().length ===
+    6 &&
+    Enzyme.mount(React.createElement(Frameworks))
+      .find('ul')
+      .childAt(0)
+      .name() === 'li' &&
+    Enzyme.mount(React.createElement(Frameworks)).find('li').length === 6
+);
+```
+
+Each list item element should have a unique `key` attribute.
+
+```js
+assert(
+  (() => {
+    const ul = Enzyme.mount(React.createElement(Frameworks)).find('ul');
+    const keys = new Set([
+      ul.childAt(0).key(),
+      ul.childAt(1).key(),
+      ul.childAt(2).key(),
+      ul.childAt(3).key(),
+      ul.childAt(4).key(),
+      ul.childAt(5).key()
+    ]);
+    return keys.size === 6;
+  })()
+);
+```
+
+Each list item element should contain text from `frontEndFrameworks`.
+
+```js
+assert(
+  (() => {
+    const li = Enzyme.mount(React.createElement(Frameworks))
+      .find('ul')
+      .children();
+    return [...Array(5)].every((_, i) =>
+      frontEndFrameworks.includes(li.at(i).text())
+    );
+  })()
+);
 ```
 
 # --seed--
@@ -39,24 +93,55 @@ assert.strictEqual(JSX.props.className, 'myDiv');
 ## --after-user-code--
 
 ```jsx
-ReactDOM.render(JSX, document.getElementById('root'))
+ReactDOM.render(<Frameworks />, document.getElementById('root'))
 ```
 
 ## --seed-contents--
 
 ```jsx
-const JSX = (
-  <div>
-    <h1>Add a class to this div</h1>
-  </div>
-);
+const frontEndFrameworks = [
+  'React',
+  'Angular',
+  'Ember',
+  'Knockout',
+  'Backbone',
+  'Vue'
+];
+
+function Frameworks() {
+  const renderFrameworks = null; // Change this line
+  return (
+    <div>
+      <h1>Popular Front End JavaScript Frameworks</h1>
+      <ul>
+        {renderFrameworks}
+      </ul>
+    </div>
+  );
+};
 ```
 
 # --solutions--
 
 ```jsx
-const JSX = (
-<div className = 'myDiv'>
-  <h1>Add a class to this div</h1>
-</div>);
+const frontEndFrameworks = [
+  'React',
+  'Angular',
+  'Ember',
+  'Knockout',
+  'Backbone',
+  'Vue'
+];
+
+function Frameworks() {
+  const renderFrameworks = frontEndFrameworks.map((fw, i) => <li key={i}>{fw}</li>);
+  return (
+    <div>
+      <h1>Popular Front End JavaScript Frameworks</h1>
+      <ul>
+        {renderFrameworks}
+      </ul>
+    </div>
+  );
+};
 ```
