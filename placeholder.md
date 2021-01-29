@@ -1,154 +1,128 @@
 ---
-id: 5a24c314108439a4d4036183
-title: Use Advanced JavaScript in React Render Method
+id: 5a24c314108439a4d403618c
+title: Use Array.filter() to Dynamically Filter an Array
 challengeType: 6
-forumTopicId: 301415
-dashedName: use-advanced-javascript-in-react-render-method
+forumTopicId: 301416
+dashedName: use-array-filter-to-dynamically-filter-an-array
 ---
 
 # --description--
 
-In previous challenges, you learned how to inject JavaScript code into JSX code using curly braces, `{ }`, for tasks like accessing props, passing props, accessing state, inserting comments into your code, and most recently, styling your components. These are all common use cases to put JavaScript in JSX, but they aren't the only way that you can utilize JavaScript code in your React components.
+The `map` array method is a powerful tool that you will use often when working with React. Another method related to `map` is `filter`, which filters the contents of an array based on a condition, then returns a new array. For example, if you have an array of users that all have a property `online` which can be set to `true` or `false`, you can filter only those users that are online by writing:
 
-You can also write JavaScript directly in your `render` methods, before the `return` statement, ***without*** inserting it inside of curly braces. This is because it is not yet within the JSX code. When you want to use a variable later in the JSX code *inside* the `return` statement, you place the variable name inside curly braces.
+`let onlineUsers = users.filter(user => user.online);`
 
 # --instructions--
 
-In the code provided, the `render` method has an array that contains 20 phrases to represent the answers found in the classic 1980's Magic Eight Ball toy. The button click event is bound to the `ask` method, so each time the button is clicked a random number will be generated and stored as the `randomIndex` in state. On line 52, delete the string `"change me!"` and reassign the `answer` const so your code randomly accesses a different index of the `possibleAnswers` array each time the component updates. Finally, insert the `answer` const inside the `p` tags.
+In the code editor, `MyComponent`'s `state` is initialized with an array of users. Some users are online and some aren't. Filter the array so you see only the users who are online. To do this, first use `filter` to return a new array containing only the users whose `online` property is `true`. Then, in the `renderOnline` variable, map over the filtered array, and return a `li` element for each user that contains the text of their `username`. Be sure to include a unique `key` as well, like in the last challenges.
 
 # --hints--
 
-The `MagicEightBall` component should exist and should render to the page.
+`MyComponent` should exist and render to the page.
 
 ```js
 assert.strictEqual(
-  Enzyme.mount(React.createElement(MagicEightBall)).find('MagicEightBall')
-    .length,
+  Enzyme.mount(React.createElement(MyComponent)).find('MyComponent').length,
   1
 );
 ```
 
-`MagicEightBall`'s first child should be an `input` element.
-
-```js
-assert.strictEqual(
-  Enzyme.mount(React.createElement(MagicEightBall))
-    .children()
-    .childAt(0)
-    .name(),
-  'input'
-);
-```
-
-`MagicEightBall`'s third child should be a `button` element.
-
-```js
-assert.strictEqual(
-  Enzyme.mount(React.createElement(MagicEightBall))
-    .children()
-    .childAt(2)
-    .name(),
-  'button'
-);
-```
-
-`MagicEightBall`'s state should be initialized with a property of `userInput` and a property of `randomIndex` both set to a value of an empty string.
+`MyComponent`'s state should be initialized to an array of six users.")
 
 ```js
 assert(
-  Enzyme.mount(React.createElement(MagicEightBall)).state('randomIndex') ===
-    '' &&
-    Enzyme.mount(React.createElement(MagicEightBall)).state('userInput') === ''
+  Array.isArray(
+    Enzyme.mount(React.createElement(MyComponent)).state('users')
+  ) === true &&
+    Enzyme.mount(React.createElement(MyComponent)).state('users').length === 6
 );
 ```
 
-When `MagicEightBall` is first mounted to the DOM, it should return an empty `p` element.
-
-```js
-assert(
-  Enzyme.mount(React.createElement(MagicEightBall)).find('p').length === 1 &&
-    Enzyme.mount(React.createElement(MagicEightBall)).find('p').text() === ''
-);
-```
-
-When text is entered into the `input` element and the button is clicked, the `MagicEightBall` component should return a `p` element that contains a random element from the `possibleAnswers` array.
+`MyComponent` should return a `div`, an `h1`, and then an unordered list containing `li` elements for every user whose online status is set to `true`.
 
 ```js
 (() => {
-  const comp = Enzyme.mount(React.createElement(MagicEightBall));
-  const simulate = () => {
-    comp.find('input').simulate('change', { target: { value: 'test?' } });
-    comp.find('button').simulate('click');
-  };
-  const result = () => comp.find('p').text();
-  const _1 = () => {
-    simulate();
-    return result();
-  };
+  const comp = Enzyme.mount(React.createElement(MyComponent));
+  const users = (bool) => ({
+    users: [
+      { username: 'Jeff', online: bool },
+      { username: 'Alan', online: bool },
+      { username: 'Mary', online: bool },
+      { username: 'Jim', online: bool },
+      { username: 'Laura', online: bool }
+    ]
+  });
+  const result = () => comp.find('li').length;
+  const _1 = result();
   const _2 = () => {
-    simulate();
+    comp.setState(users(true));
     return result();
   };
   const _3 = () => {
-    simulate();
+    comp.setState(users(false));
     return result();
   };
   const _4 = () => {
-    simulate();
+    comp.setState({ users: [] });
     return result();
   };
-  const _5 = () => {
-    simulate();
-    return result();
-  };
-  const _6 = () => {
-    simulate();
-    return result();
-  };
-  const _7 = () => {
-    simulate();
-    return result();
-  };
-  const _8 = () => {
-    simulate();
-    return result();
-  };
-  const _9 = () => {
-    simulate();
-    return result();
-  };
-  const _10 = () => {
-    simulate();
-    return result();
-  };
-  const _1_val = _1();
   const _2_val = _2();
   const _3_val = _3();
   const _4_val = _4();
-  const _5_val = _5();
-  const _6_val = _6();
-  const _7_val = _7();
-  const _8_val = _8();
-  const _9_val = _9();
-  const _10_val = _10();
-  const actualAnswers = [
-    _1_val,
-    _2_val,
-    _3_val,
-    _4_val,
-    _5_val,
-    _6_val,
-    _7_val,
-    _8_val,
-    _9_val,
-    _10_val
-  ];
-  const hasIndex = actualAnswers.filter(
-    (answer, i) => possibleAnswers.indexOf(answer) !== -1
+  assert(
+    comp.find('div').length === 1 &&
+      comp.find('h1').length === 1 &&
+      comp.find('ul').length === 1 &&
+      _1 === 4 &&
+      _2_val === 5 &&
+      _3_val === 0 &&
+      _4_val === 0
   );
-  const notAllEqual = new Set(actualAnswers);
-  assert(notAllEqual.size > 1 && hasIndex.length === 10);
 })();
+```
+
+`MyComponent` should render `li` elements that contain the username of each online user.
+
+```js
+(() => {
+  const comp = Enzyme.mount(React.createElement(MyComponent));
+  const users = (bool) => ({
+    users: [
+      { username: 'Jeff', online: bool },
+      { username: 'Alan', online: bool },
+      { username: 'Mary', online: bool },
+      { username: 'Jim', online: bool },
+      { username: 'Laura', online: bool }
+    ]
+  });
+  const ul = () => {
+    comp.setState(users(true));
+    return comp.find('ul').html();
+  };
+  const html = ul();
+  assert(
+    html ===
+      '<ul><li>Jeff</li><li>Alan</li><li>Mary</li><li>Jim</li><li>Laura</li></ul>'
+  );
+})();
+```
+
+Each list item element should have a unique `key` attribute.
+
+```js
+assert(
+  (() => {
+    const ul = Enzyme.mount(React.createElement(MyComponent)).find('ul');
+    console.log(ul.debug());
+    const keys = new Set([
+      ul.childAt(0).key(),
+      ul.childAt(1).key(),
+      ul.childAt(2).key(),
+      ul.childAt(3).key()
+    ]);
+    return keys.size === 4;
+  })()
+);
 ```
 
 # --seed--
@@ -156,103 +130,51 @@ When text is entered into the `input` element and the button is clicked, the `Ma
 ## --after-user-code--
 
 ```jsx
-var possibleAnswers = [
-  'It is certain',
-  'It is decidedly so',
-  'Without a doubt',
-  'Yes, definitely',
-  'You may rely on it',
-  'As I see it, yes',
-  'Outlook good',
-  'Yes',
-  'Signs point to yes',
-  'Reply hazy try again',
-  'Ask again later',
-  'Better not tell you now',
-  'Cannot predict now',
-  'Concentrate and ask again',
-  "Don't count on it",
-  'My reply is no',
-  'My sources say no',
-  'Outlook not so good',
-  'Very doubtful',
-  'Most likely'
-];
-ReactDOM.render(<MagicEightBall />, document.getElementById('root'));
+ReactDOM.render(<MyComponent />, document.getElementById('root'));
 ```
 
 ## --seed-contents--
 
 ```jsx
-const inputStyle = {
-  width: 235,
-  margin: 5
-};
-
-class MagicEightBall extends React.Component {
+class MyComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      userInput: '',
-      randomIndex: ''
+      users: [
+        {
+          username: 'Jeff',
+          online: true
+        },
+        {
+          username: 'Alan',
+          online: false
+        },
+        {
+          username: 'Mary',
+          online: true
+        },
+        {
+          username: 'Jim',
+          online: false
+        },
+        {
+          username: 'Sara',
+          online: true
+        },
+        {
+          username: 'Laura',
+          online: true
+        }
+      ]
     };
-    this.ask = this.ask.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-  }
-  ask() {
-    if (this.state.userInput) {
-      this.setState({
-        randomIndex: Math.floor(Math.random() * 20),
-        userInput: ''
-      });
-    }
-  }
-  handleChange(event) {
-    this.setState({
-      userInput: event.target.value
-    });
   }
   render() {
-    const possibleAnswers = [
-      'It is certain',
-      'It is decidedly so',
-      'Without a doubt',
-      'Yes, definitely',
-      'You may rely on it',
-      'As I see it, yes',
-      'Outlook good',
-      'Yes',
-      'Signs point to yes',
-      'Reply hazy try again',
-      'Ask again later',
-      'Better not tell you now',
-      'Cannot predict now',
-      'Concentrate and ask again',
-      "Don't count on it",
-      'My reply is no',
-      'My sources say no',
-      'Most likely',
-      'Outlook not so good',
-      'Very doubtful'
-    ];
-    const answer = 'change me!'; // Change this line
+    const usersOnline = null; // Change this line
+    const renderOnline = null; // Change this line
     return (
       <div>
-        <input
-          type='text'
-          value={this.state.userInput}
-          onChange={this.handleChange}
-          style={inputStyle}
-        />
-        <br />
-        <button onClick={this.ask}>Ask the Magic Eight Ball!</button>
-        <br />
-        <h3>Answer:</h3>
-        <p>
-          {/* Change code below this line */}
-
-          {/* Change code above this line */}
-        </p>
+        <h1>Current Online Users:</h1>
+        <ul>{renderOnline}</ul>
       </div>
     );
   }
@@ -262,71 +184,49 @@ class MagicEightBall extends React.Component {
 # --solutions--
 
 ```jsx
-const inputStyle = {
-  width: 235,
-  margin: 5
-};
-
-class MagicEightBall extends React.Component {
+class MyComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      userInput: '',
-      randomIndex: ''
+      users: [
+        {
+          username: 'Jeff',
+          online: true
+        },
+        {
+          username: 'Alan',
+          online: false
+        },
+        {
+          username: 'Mary',
+          online: true
+        },
+        {
+          username: 'Jim',
+          online: false
+        },
+        {
+          username: 'Sara',
+          online: true
+        },
+        {
+          username: 'Laura',
+          online: true
+        }
+      ]
     };
-    this.ask = this.ask.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-  }
-  ask() {
-    if (this.state.userInput) {
-      this.setState({
-        randomIndex: Math.floor(Math.random() * 20),
-        userInput: ''
-      });
-    }
-  }
-  handleChange(event) {
-    this.setState({
-      userInput: event.target.value
-    });
   }
   render() {
-    const possibleAnswers = [
-      'It is certain',
-      'It is decidedly so',
-      'Without a doubt',
-      'Yes, definitely',
-      'You may rely on it',
-      'As I see it, yes',
-      'Outlook good',
-      'Yes',
-      'Signs point to yes',
-      'Reply hazy try again',
-      'Ask again later',
-      'Better not tell you now',
-      'Cannot predict now',
-      'Concentrate and ask again',
-      "Don't count on it",
-      'My reply is no',
-      'My sources say no',
-      'Outlook not so good',
-      'Very doubtful',
-      'Most likely'
-    ];
-    const answer = possibleAnswers[this.state.randomIndex];
+    const usersOnline = this.state.users.filter(user => {
+      return user.online;
+    });
+    const renderOnline = usersOnline.map(user => {
+      return <li key={user.username}>{user.username}</li>;
+    });
     return (
       <div>
-        <input
-          type='text'
-          value={this.state.userInput}
-          onChange={this.handleChange}
-          style={inputStyle}
-        />
-        <br />
-        <button onClick={this.ask}>Ask the Magic Eight Ball!</button>
-        <br />
-        <h3>Answer:</h3>
-        <p>{answer}</p>
+        <h1>Current Online Users:</h1>
+        <ul>{renderOnline}</ul>
       </div>
     );
   }
