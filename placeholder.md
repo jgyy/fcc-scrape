@@ -1,98 +1,70 @@
 ---
-id: 5a24c314108439a4d4036169
-title: Pass Props to a Stateless Functional Component
+id: 5a24c314108439a4d403617a
+title: Pass State as Props to Child Components
 challengeType: 6
-forumTopicId: 301402
-dashedName: pass-props-to-a-stateless-functional-component
+forumTopicId: 301403
+dashedName: pass-state-as-props-to-child-components
 ---
 
 # --description--
 
-The previous challenges covered a lot about creating and composing JSX elements, functional components, and ES6 style class components in React. With this foundation, it's time to look at another feature very common in React: **props**. In React, you can pass props, or properties, to child components. Say you have an `App` component which renders a child component called `Welcome` which is a stateless functional component. You can pass `Welcome` a `user` property by writing:
+You saw a lot of examples that passed props to child JSX elements and child React components in previous challenges. You may be wondering where those props come from. A common pattern is to have a stateful component containing the `state` important to your app, that then renders child components. You want these components to have access to some pieces of that `state`, which are passed in as props.
 
-```jsx
-<App>
-  <Welcome user='Mark' />
-</App>
-```
+For example, maybe you have an `App` component that renders a `Navbar`, among other components. In your `App`, you have `state` that contains a lot of user information, but the `Navbar` only needs access to the user's username so it can display it. You pass that piece of `state` to the `Navbar` component as a prop.
 
-You use **custom HTML attributes** created by you and supported by React to be passed to the component. In this case, the created property `user` is passed to the component `Welcome`. Since `Welcome` is a stateless functional component, it has access to this value like so:
-
-```jsx
-const Welcome = (props) => <h1>Hello, {props.user}!</h1>
-```
-
-It is standard to call this value `props` and when dealing with stateless functional components, you basically consider it as an argument to a function which returns JSX. You can access the value of the argument in the function body. With class components, you will see this is a little different.
+This pattern illustrates some important paradigms in React. The first is *unidirectional data flow*. State flows in one direction down the tree of your application's components, from the stateful parent component to child components. The child components only receive the state data they need. The second is that complex stateful apps can be broken down into just a few, or maybe a single, stateful component. The rest of your components simply receive state from the parent as props, and render a UI from that state. It begins to create a separation where state management is handled in one part of code and UI rendering in another. This principle of separating state logic from UI logic is one of React's key principles. When it's used correctly, it makes the design of complex, stateful applications much easier to manage.
 
 # --instructions--
 
-There are `Calendar` and `CurrentDate` components in the code editor. When rendering `CurrentDate` from the `Calendar` component, pass in a property of `date` assigned to the current date from JavaScript's `Date` object. Then access this `prop` in the `CurrentDate` component, showing its value within the `p` tags. Note that for `prop` values to be evaluated as JavaScript, they must be enclosed in curly brackets, for instance `date={Date()}`.
+The `MyApp` component is stateful and renders a `Navbar` component as a child. Pass the `name` property in its `state` down to the child component, then show the `name` in the `h1` tag that's part of the `Navbar` render method. `name` should appear after the text `Hello, my name is:`.
 
 # --hints--
 
-The `Calendar` component should return a single `div` element.
+The `MyApp` component should render with a `Navbar` component inside.
 
 ```js
 assert(
   (function () {
-    const mockedComponent = Enzyme.mount(React.createElement(Calendar));
-    return mockedComponent.children().type() === 'div';
-  })()
-);
-```
-
-The second child of the `Calendar` component should be the `CurrentDate` component.
-
-```js
-assert(
-  (function () {
-    const mockedComponent = Enzyme.mount(React.createElement(Calendar));
-    return mockedComponent.children().childAt(1).name() === 'CurrentDate';
-  })()
-);
-```
-
-The `CurrentDate` component should have a prop called `date`.
-
-```js
-assert(
-  (function () {
-    const mockedComponent = Enzyme.mount(React.createElement(Calendar));
-    return mockedComponent.children().childAt(1).props().date;
-  })()
-);
-```
-
-The `date` prop of the `CurrentDate` should contain a string of text.
-
-```js
-assert(
-  (function () {
-    const mockedComponent = Enzyme.mount(React.createElement(Calendar));
-    const prop = mockedComponent.children().childAt(1).props().date;
-    return typeof prop === 'string' && prop.length > 0;
-  })()
-);
-```
-
-The `date` prop should be generated by calling `Date()`
-
-```js
-assert(/<CurrentDatedate={Date\(\)}\/>/.test(__helpers.removeWhiteSpace(code)));
-```
-
-The `CurrentDate` component should render the value from the `date` prop in the `p` tag.
-
-```js
-let date = 'dummy date';
-assert(
-  (function () {
-    const mockedComponent = Enzyme.mount(
-      React.createElement(CurrentDate, { date })
+    const mockedComponent = Enzyme.mount(React.createElement(MyApp));
+    return (
+      mockedComponent.find('MyApp').length === 1 &&
+      mockedComponent.find('Navbar').length === 1
     );
-    return mockedComponent.find('p').html().includes(date);
   })()
 );
+```
+
+The `Navbar` component should receive the `MyApp` state property `name` as props.
+
+```js
+async () => {
+  const waitForIt = (fn) =>
+    new Promise((resolve, reject) => setTimeout(() => resolve(fn()), 250));
+  const mockedComponent = Enzyme.mount(React.createElement(MyApp));
+  const setState = () => {
+    mockedComponent.setState({ name: 'TestName' });
+    return waitForIt(() => mockedComponent.find('Navbar').props());
+  };
+  const navProps = await setState();
+  assert(navProps.name === 'TestName');
+};
+```
+
+The `h1` element in `Navbar` should render the `name` prop.
+
+```js
+async () => {
+  const waitForIt = (fn) =>
+    new Promise((resolve, reject) => setTimeout(() => resolve(fn()), 250));
+  const mockedComponent = Enzyme.mount(React.createElement(MyApp));
+  const navH1Before = mockedComponent.find('Navbar').find('h1').text();
+  const setState = () => {
+    mockedComponent.setState({ name: 'TestName' });
+    return waitForIt(() => mockedComponent.find('Navbar').find('h1').text());
+  };
+  const navH1After = await setState();
+  assert(new RegExp('TestName').test(navH1After) && navH1After !== navH1Before);
+};
 ```
 
 # --seed--
@@ -100,34 +72,41 @@ assert(
 ## --after-user-code--
 
 ```jsx
-ReactDOM.render(<Calendar />, document.getElementById('root'))
+ReactDOM.render(<MyApp />, document.getElementById('root'))
 ```
 
 ## --seed-contents--
 
 ```jsx
-const CurrentDate = (props) => {
-  return (
-    <div>
-      { /* Change code below this line */ }
-      <p>The current date is: </p>
-      { /* Change code above this line */ }
-    </div>
-  );
+class MyApp extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: 'CamperBot'
+    }
+  }
+  render() {
+    return (
+       <div>
+         {/* Change code below this line */}
+         <Navbar />
+         {/* Change code above this line */}
+       </div>
+    );
+  }
 };
 
-class Calendar extends React.Component {
+class Navbar extends React.Component {
   constructor(props) {
     super(props);
   }
   render() {
     return (
-      <div>
-        <h3>What date is it?</h3>
-        { /* Change code below this line */ }
-        <CurrentDate />
-        { /* Change code above this line */ }
-      </div>
+    <div>
+      {/* Change code below this line */}
+      <h1>Hello, my name is: </h1>
+      {/* Change code above this line */}
+    </div>
     );
   }
 };
@@ -136,28 +115,30 @@ class Calendar extends React.Component {
 # --solutions--
 
 ```jsx
-const CurrentDate = (props) => {
-  return (
-    <div>
-      { /* Change code below this line */ }
-      <p>The current date is: {props.date}</p>
-      { /* Change code above this line */ }
-    </div>
-  );
+class MyApp extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: 'CamperBot'
+    }
+  }
+  render() {
+    return (
+       <div>
+         <Navbar name={this.state.name}/>
+       </div>
+    );
+  }
 };
-
-class Calendar extends React.Component {
+class Navbar extends React.Component {
   constructor(props) {
     super(props);
   }
   render() {
     return (
-      <div>
-        <h3>What date is it?</h3>
-        { /* Change code below this line */ }
-        <CurrentDate date={Date()} />
-        { /* Change code above this line */ }
-      </div>
+    <div>
+      <h1>Hello, my name is: {this.props.name}</h1>
+    </div>
     );
   }
 };
