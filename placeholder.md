@@ -1,39 +1,88 @@
 ---
-id: 587d7dbc367417b2b2512bb1
-title: Create a Simple JSX Element
+id: 5a24c314108439a4d4036170
+title: Create a Stateful Component
 challengeType: 6
-forumTopicId: 301390
-dashedName: create-a-simple-jsx-element
+forumTopicId: 301391
+dashedName: create-a-stateful-component
 ---
 
 # --description--
 
-**Intro:** React is an Open Source view library created and maintained by Facebook. It's a great tool to render the User Interface (UI) of modern web applications.
+One of the most important topics in React is `state`. State consists of any data your application needs to know about, that can change over time. You want your apps to respond to state changes and present an updated UI when necessary. React offers a nice solution for the state management of modern web applications.
 
-React uses a syntax extension of JavaScript called JSX that allows you to write HTML directly within JavaScript. This has several benefits. It lets you use the full programmatic power of JavaScript within HTML, and helps to keep your code readable. For the most part, JSX is similar to the HTML that you have already learned, however there are a few key differences that will be covered throughout these challenges.
+You create state in a React component by declaring a `state` property on the component class in its `constructor`. This initializes the component with `state` when it is created. The `state` property must be set to a JavaScript `object`. Declaring it looks like this:
 
-For instance, because JSX is a syntactic extension of JavaScript, you can actually write JavaScript directly within JSX. To do this, you simply include the code you want to be treated as JavaScript within curly braces: `{ 'this is treated as JavaScript code' }`. Keep this in mind, since it's used in several future challenges.
+```jsx
+this.state = {
+  // describe your state here
+}
+```
 
-However, because JSX is not valid JavaScript, JSX code must be compiled into JavaScript. The transpiler Babel is a popular tool for this process. For your convenience, it's already added behind the scenes for these challenges. If you happen to write syntactically invalid JSX, you will see the first test in these challenges fail.
-
-It's worth noting that under the hood the challenges are calling `ReactDOM.render(JSX, document.getElementById('root'))`. This function call is what places your JSX into React's own lightweight representation of the DOM. React then uses snapshots of its own DOM to optimize updating only specific parts of the actual DOM.
+You have access to the `state` object throughout the life of your component. You can update it, render it in your UI, and pass it as props to child components. The `state` object can be as complex or as simple as you need it to be. Note that you must create a class component by extending `React.Component` in order to create `state` like this.
 
 # --instructions--
 
-**Instructions:** The current code uses JSX to assign a `div` element to the constant `JSX`. Replace the `div` with an `h1` element and add the text `Hello JSX!` inside it.
+There is a component in the code editor that is trying to render a `name` property from its `state`. However, there is no `state` defined. Initialize the component with `state` in the `constructor` and assign your name to a property of `name`.
 
 # --hints--
 
-The constant `JSX` should return an `h1` element.
+`StatefulComponent` should exist and render.
 
 ```js
-assert(JSX.type === 'h1');
+assert(
+  (function () {
+    const mockedComponent = Enzyme.mount(
+      React.createElement(StatefulComponent)
+    );
+    return mockedComponent.find('StatefulComponent').length === 1;
+  })()
+);
 ```
 
-The `h1` tag should include the text `Hello JSX!`
+`StatefulComponent` should render a `div` and an `h1` element.
 
 ```js
-assert(Enzyme.shallow(JSX).contains('Hello JSX!'));
+assert(
+  (function () {
+    const mockedComponent = Enzyme.mount(
+      React.createElement(StatefulComponent)
+    );
+    return (
+      mockedComponent.find('div').length === 1 &&
+      mockedComponent.find('h1').length === 1
+    );
+  })()
+);
+```
+
+The state of `StatefulComponent` should be initialized with a property `name` set to a string.
+
+```js
+assert(
+  (function () {
+    const mockedComponent = Enzyme.mount(
+      React.createElement(StatefulComponent)
+    );
+    const initialState = mockedComponent.state();
+    return (
+      typeof initialState === 'object' && typeof initialState.name === 'string'
+    );
+  })()
+);
+```
+
+The property `name` in the state of `StatefulComponent` should render in the `h1` element.
+
+```js
+assert(
+  (function () {
+    const mockedComponent = Enzyme.mount(
+      React.createElement(StatefulComponent)
+    );
+    const initialState = mockedComponent.state();
+    return mockedComponent.find('h1').text() === initialState.name;
+  })()
+);
 ```
 
 # --seed--
@@ -41,17 +90,45 @@ assert(Enzyme.shallow(JSX).contains('Hello JSX!'));
 ## --after-user-code--
 
 ```jsx
-ReactDOM.render(JSX, document.getElementById('root'))
+ReactDOM.render(<StatefulComponent />, document.getElementById('root'))
 ```
 
 ## --seed-contents--
 
 ```jsx
-const JSX = <div></div>;
+class StatefulComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    // Only change code below this line
+
+    // Only change code above this line
+  }
+  render() {
+    return (
+      <div>
+        <h1>{this.state.name}</h1>
+      </div>
+    );
+  }
+};
 ```
 
 # --solutions--
 
 ```jsx
-const JSX = <h1>Hello JSX!</h1>;
+class StatefulComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: 'freeCodeCamp!'
+    }
+  }
+  render() {
+    return (
+      <div>
+        <h1>{this.state.name}</h1>
+      </div>
+    );
+  }
+};
 ```
