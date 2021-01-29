@@ -1,88 +1,67 @@
 ---
-id: 5a24c314108439a4d403618b
-title: Give Sibling Elements a Unique Key Attribute
+id: 5a24c314108439a4d4036181
+title: Introducing Inline Styles
 challengeType: 6
-forumTopicId: 301394
-dashedName: give-sibling-elements-a-unique-key-attribute
+forumTopicId: 301395
+dashedName: introducing-inline-styles
 ---
 
 # --description--
 
-The last challenge showed how the `map` method is used to dynamically render a number of elements based on user input. However, there was an important piece missing from that example. When you create an array of elements, each one needs a `key` attribute set to a unique value. React uses these keys to keep track of which items are added, changed, or removed. This helps make the re-rendering process more efficient when the list is modified in any way.  
+There are other complex concepts that add powerful capabilities to your React code. But you may be wondering about the more simple problem of how to style those JSX elements you create in React. You likely know that it won't be exactly the same as working with HTML because of [the way you apply classes to JSX elements](/learn/front-end-libraries/react/define-an-html-class-in-jsx).
 
-**Note:** Keys only need to be unique between sibling elements, they don't need to be globally unique in your application.
+If you import styles from a stylesheet, it isn't much different at all. You apply a class to your JSX element using the `className` attribute, and apply styles to the class in your stylesheet. Another option is to apply inline styles, which are very common in ReactJS development.
+
+You apply inline styles to JSX elements similar to how you do it in HTML, but with a few JSX differences. Here's an example of an inline style in HTML:
+
+`<div style="color: yellow; font-size: 16px">Mellow Yellow</div>`
+
+JSX elements use the `style` attribute, but because of the way JSX is transpiled, you can't set the value to a `string`. Instead, you set it equal to a JavaScript `object`. Here's an example:
+
+`<div style={{color: "yellow", fontSize: 16}}>Mellow Yellow</div>`
+
+Notice how we camelCase the "fontSize" property? This is because React will not accept kebab-case keys in the style object. React will apply the correct property name for us in the HTML.
 
 # --instructions--
 
-The code editor has an array with some front end frameworks and a stateless functional component named `Frameworks()`. `Frameworks()` needs to map the array to an unordered list, much like in the last challenge. Finish writing the `map` callback to return an `li` element for each framework in the `frontEndFrameworks` array. This time, make sure to give each `li` a `key` attribute, set to a unique value. The `li` elements should also contain text from `frontEndFrameworks`.
+Add a `style` attribute to the `div` in the code editor to give the text a color of red and font size of 72px.
 
-Normally, you want to make the key something that uniquely identifies the element being rendered. As a last resort the array index may be used, but typically you should try to use a unique identification.
+Note that you can optionally set the font size to be a number, omitting the units "px", or write it as "72px".
 
 # --hints--
 
-The `Frameworks` component should exist and render to the page.
+The component should render a `div` element.
 
 ```js
 assert(
-  Enzyme.mount(React.createElement(Frameworks)).find('Frameworks').length === 1
-);
-```
-
-`Frameworks` should render an `h1` element.
-
-```js
-assert(Enzyme.mount(React.createElement(Frameworks)).find('h1').length === 1);
-```
-
-`Frameworks` should render a `ul` element.
-
-```js
-assert(Enzyme.mount(React.createElement(Frameworks)).find('ul').length === 1);
-```
-
-The `ul` tag should render 6 child `li` elements.
-
-```js
-assert(
-  Enzyme.mount(React.createElement(Frameworks)).find('ul').children().length ===
-    6 &&
-    Enzyme.mount(React.createElement(Frameworks))
-      .find('ul')
-      .childAt(0)
-      .name() === 'li' &&
-    Enzyme.mount(React.createElement(Frameworks)).find('li').length === 6
-);
-```
-
-Each list item element should have a unique `key` attribute.
-
-```js
-assert(
-  (() => {
-    const ul = Enzyme.mount(React.createElement(Frameworks)).find('ul');
-    const keys = new Set([
-      ul.childAt(0).key(),
-      ul.childAt(1).key(),
-      ul.childAt(2).key(),
-      ul.childAt(3).key(),
-      ul.childAt(4).key(),
-      ul.childAt(5).key()
-    ]);
-    return keys.size === 6;
+  (function () {
+    const mockedComponent = Enzyme.mount(React.createElement(Colorful));
+    return mockedComponent.children().type() === 'div';
   })()
 );
 ```
 
-Each list item element should contain text from `frontEndFrameworks`.
+The `div` element should have a color of `red`.
 
 ```js
 assert(
-  (() => {
-    const li = Enzyme.mount(React.createElement(Frameworks))
-      .find('ul')
-      .children();
-    return [...Array(5)].every((_, i) =>
-      frontEndFrameworks.includes(li.at(i).text())
+  (function () {
+    const mockedComponent = Enzyme.mount(React.createElement(Colorful));
+    return mockedComponent.children().props().style.color === 'red';
+  })()
+);
+```
+
+The `div` element should have a font size of `72px`.
+
+```js
+assert(
+  (function () {
+    const mockedComponent = Enzyme.mount(React.createElement(Colorful));
+    return (
+      mockedComponent.children().props().style.fontSize === 72 ||
+      mockedComponent.children().props().style.fontSize === '72' ||
+      mockedComponent.children().props().style.fontSize === '72px'
     );
   })()
 );
@@ -93,55 +72,29 @@ assert(
 ## --after-user-code--
 
 ```jsx
-ReactDOM.render(<Frameworks />, document.getElementById('root'))
+ReactDOM.render(<Colorful />, document.getElementById('root'))
 ```
 
 ## --seed-contents--
 
 ```jsx
-const frontEndFrameworks = [
-  'React',
-  'Angular',
-  'Ember',
-  'Knockout',
-  'Backbone',
-  'Vue'
-];
-
-function Frameworks() {
-  const renderFrameworks = null; // Change this line
-  return (
-    <div>
-      <h1>Popular Front End JavaScript Frameworks</h1>
-      <ul>
-        {renderFrameworks}
-      </ul>
-    </div>
-  );
+class Colorful extends React.Component {
+  render() {
+    return (
+      <div>Big Red</div>
+    );
+  }
 };
 ```
 
 # --solutions--
 
 ```jsx
-const frontEndFrameworks = [
-  'React',
-  'Angular',
-  'Ember',
-  'Knockout',
-  'Backbone',
-  'Vue'
-];
-
-function Frameworks() {
-  const renderFrameworks = frontEndFrameworks.map((fw, i) => <li key={i}>{fw}</li>);
-  return (
-    <div>
-      <h1>Popular Front End JavaScript Frameworks</h1>
-      <ul>
-        {renderFrameworks}
-      </ul>
-    </div>
-  );
+class Colorful extends React.Component {
+  render() {
+    return (
+      <div style={{color: "red", fontSize: 72}}>Big Red</div>
+    );
+  }
 };
 ```
