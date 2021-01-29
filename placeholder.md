@@ -1,60 +1,93 @@
 ---
-id: 5a24c314108439a4d403616c
-title: Override Default Props
+id: 5a24c314108439a4d403617b
+title: Pass a Callback as Props
 challengeType: 6
-forumTopicId: 301399
-dashedName: override-default-props
+forumTopicId: 301400
+dashedName: pass-a-callback-as-props
 ---
 
 # --description--
 
-The ability to set default props is a useful feature in React. The way to override the default props is to explicitly set the prop values for a component.
+You can pass `state` as props to child components, but you're not limited to passing data. You can also pass handler functions or any method that's defined on a React component to a child component. This is how you allow child components to interact with their parent components. You pass methods to a child just like a regular prop. It's assigned a name and you have access to that method name under `this.props` in the child component.
 
 # --instructions--
 
-The `ShoppingCart` component now renders a child component `Items`. This `Items` component has a default prop `quantity` set to the integer `0`. Override the default prop by passing in a value of `10` for `quantity`.
+There are three components outlined in the code editor. The `MyApp` component is the parent that will render the `GetInput` and `RenderInput` child components. Add the `GetInput` component to the render method in `MyApp`, then pass it a prop called `input` assigned to `inputValue` from `MyApp`'s `state`. Also create a prop called `handleChange` and pass the input handler `handleChange` to it.
 
-**Note:** Remember that the syntax to add a prop to a component looks similar to how you add HTML attributes. However, since the value for `quantity` is an integer, it won't go in quotes but it should be wrapped in curly braces. For example, `{100}`. This syntax tells JSX to interpret the value within the braces directly as JavaScript.
+Next, add `RenderInput` to the render method in `MyApp`, then create a prop called `input` and pass the `inputValue` from `state` to it. Once you are finished you will be able to type in the `input` field in the `GetInput` component, which then calls the handler method in its parent via props. This updates the input in the `state` of the parent, which is passed as props to both children. Observe how the data flows between the components and how the single source of truth remains the `state` of the parent component. Admittedly, this example is a bit contrived, but should serve to illustrate how data and callbacks can be passed between React components.
 
 # --hints--
 
-The component `ShoppingCart` should render.
+The `MyApp` component should render.
 
 ```js
 assert(
   (function () {
-    const mockedComponent = Enzyme.mount(React.createElement(ShoppingCart));
-    return mockedComponent.find('ShoppingCart').length === 1;
+    const mockedComponent = Enzyme.mount(React.createElement(MyApp));
+    return mockedComponent.find('MyApp').length === 1;
   })()
 );
 ```
 
-The component `Items` should render.
+The `GetInput` component should render.
 
 ```js
 assert(
   (function () {
-    const mockedComponent = Enzyme.mount(React.createElement(ShoppingCart));
-    return mockedComponent.find('Items').length === 1;
+    const mockedComponent = Enzyme.mount(React.createElement(MyApp));
+    return mockedComponent.find('GetInput').length === 1;
   })()
 );
 ```
 
-The `Items` component should have a prop of `{ quantity: 10 }` passed from the `ShoppingCart` component.
+The `RenderInput` component should render.
 
 ```js
-(getUserInput) =>
-  assert(
-    (function () {
-      const mockedComponent = Enzyme.mount(React.createElement(ShoppingCart));
-      return (
-        mockedComponent.find('Items').props().quantity == 10 &&
-        getUserInput('index')
-          .replace(/ /g, '')
-          .includes('<Itemsquantity={10}/>')
-      );
-    })()
-  );
+assert(
+  (function () {
+    const mockedComponent = Enzyme.mount(React.createElement(MyApp));
+    return mockedComponent.find('RenderInput').length === 1;
+  })()
+);
+```
+
+The `GetInput` component should receive the `MyApp` state property `inputValue` as props and contain an `input` element which modifies `MyApp` state.
+
+```js
+async () => {
+  const waitForIt = (fn) =>
+    new Promise((resolve, reject) => setTimeout(() => resolve(fn()), 250));
+  const mockedComponent = Enzyme.mount(React.createElement(MyApp));
+  const state_1 = () => {
+    mockedComponent.setState({ inputValue: '' });
+    return waitForIt(() => mockedComponent.state());
+  };
+  const state_2 = () => {
+    mockedComponent
+      .find('input')
+      .simulate('change', { target: { value: 'TestInput' } });
+    return waitForIt(() => mockedComponent.state());
+  };
+  const updated_1 = await state_1();
+  const updated_2 = await state_2();
+  assert(updated_1.inputValue === '' && updated_2.inputValue === 'TestInput');
+};
+```
+
+The `RenderInput` component should receive the `MyApp` state property `inputValue` as props.
+
+```js
+async () => {
+  const waitForIt = (fn) =>
+    new Promise((resolve, reject) => setTimeout(() => resolve(fn()), 250));
+  const mockedComponent = Enzyme.mount(React.createElement(MyApp));
+  const state_1 = () => {
+    mockedComponent.setState({ inputValue: 'TestName' });
+    return waitForIt(() => mockedComponent);
+  };
+  const updated_1 = await state_1();
+  assert(updated_1.find('p').text().includes('TestName'));
+};
 ```
 
 # --seed--
@@ -62,28 +95,63 @@ The `Items` component should have a prop of `{ quantity: 10 }` passed from the `
 ## --after-user-code--
 
 ```jsx
-ReactDOM.render(<ShoppingCart />, document.getElementById('root'))
+ReactDOM.render(<MyApp />, document.getElementById('root'))
 ```
 
 ## --seed-contents--
 
 ```jsx
-const Items = (props) => {
-  return <h1>Current Quantity of Items in Cart: {props.quantity}</h1>
-}
+class MyApp extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      inputValue: ''
+    }
+    this.handleChange = this.handleChange.bind(this);
+  }
+  handleChange(event) {
+    this.setState({
+      inputValue: event.target.value
+    });
+  }
+  render() {
+    return (
+       <div>
+        { /* Change code below this line */ }
 
-Items.defaultProps = {
-  quantity: 0
-}
+        { /* Change code above this line */ }
+       </div>
+    );
+  }
+};
 
-class ShoppingCart extends React.Component {
+class GetInput extends React.Component {
   constructor(props) {
     super(props);
   }
   render() {
-    { /* Change code below this line */ }
-    return <Items />
-    { /* Change code above this line */ }
+    return (
+      <div>
+        <h3>Get Input:</h3>
+        <input
+          value={this.props.input}
+          onChange={this.props.handleChange}/>
+      </div>
+    );
+  }
+};
+
+class RenderInput extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return (
+      <div>
+        <h3>Input Render:</h3>
+        <p>{this.props.input}</p>
+      </div>
+    );
   }
 };
 ```
@@ -91,22 +159,59 @@ class ShoppingCart extends React.Component {
 # --solutions--
 
 ```jsx
-const Items = (props) => {
-  return <h1>Current Quantity of Items in Cart: {props.quantity}</h1>
-}
+class MyApp extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      inputValue: ''
+    }
+  this.handleChange = this.handleChange.bind(this);
+  }
+  handleChange(event) {
+    this.setState({
+      inputValue: event.target.value
+    });
+  }
+  render() {
+    return (
+       <div>
+         <GetInput
+           input={this.state.inputValue}
+           handleChange={this.handleChange}/>
+         <RenderInput
+           input={this.state.inputValue}/>
+       </div>
+    );
+  }
+};
 
-Items.defaultProps = {
-  quantity: 0
-}
-
-class ShoppingCart extends React.Component {
+class GetInput extends React.Component {
   constructor(props) {
     super(props);
   }
   render() {
-    { /* Change code below this line */ }
-    return <Items quantity = {10} />
-    { /* Change code above this line */ }
+    return (
+      <div>
+        <h3>Get Input:</h3>
+        <input
+          value={this.props.input}
+          onChange={this.props.handleChange}/>
+      </div>
+    );
+  }
+};
+
+class RenderInput extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return (
+      <div>
+        <h3>Input Render:</h3>
+        <p>{this.props.input}</p>
+      </div>
+    );
   }
 };
 ```
