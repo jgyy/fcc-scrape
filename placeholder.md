@@ -1,113 +1,65 @@
 ---
-id: 5a24c314108439a4d4036176
-title: Use State to Toggle an Element
+id: 5a24c314108439a4d403617d
+title: Use the Lifecycle Method componentDidMount
 challengeType: 6
-forumTopicId: 301421
-dashedName: use-state-to-toggle-an-element
+forumTopicId: 301422
+dashedName: use-the-lifecycle-method-componentdidmount
 ---
 
 # --description--
 
-Sometimes you might need to know the previous state when updating the state. However, state updates may be asynchronous - this means React may batch multiple `setState()` calls into a single update. This means you can't rely on the previous value of `this.state` or `this.props` when calculating the next value. So, you should not use code like this:
+Most web developers, at some point, need to call an API endpoint to retrieve data. If you're working with React, it's important to know where to perform this action.
 
-```jsx
-this.setState({
-  counter: this.state.counter + this.props.increment
-});
-```
-
-Instead, you should pass `setState` a function that allows you to access state and props. Using a function with `setState` guarantees you are working with the most current values of state and props. This means that the above should be rewritten as:
-
-```jsx
-this.setState((state, props) => ({
-  counter: state.counter + props.increment
-}));
-```
-
-You can also use a form without `props` if you need only the `state`:
-
-```jsx
-this.setState(state => ({
-  counter: state.counter + 1
-}));
-```
-
-Note that you have to wrap the object literal in parentheses, otherwise JavaScript thinks it's a block of code.
+The best practice with React is to place API calls or any calls to your server in the lifecycle method `componentDidMount()`. This method is called after a component is mounted to the DOM. Any calls to `setState()` here will trigger a re-rendering of your component. When you call an API in this method, and set your state with the data that the API returns, it will automatically trigger an update once you receive the data.
 
 # --instructions--
 
-`MyComponent` has a `visibility` property which is initialized to `false`. The render method returns one view if the value of `visibility` is true, and a different view if it is false.
-
-Currently, there is no way of updating the `visibility` property in the component's `state`. The value should toggle back and forth between true and false. There is a click handler on the button which triggers a class method called `toggleVisibility()`. Pass a function to `setState` to define this method so that the `state` of `visibility` toggles to the opposite value when the method is called. If `visibility` is `false`, the method sets it to `true`, and vice versa.
-
-Finally, click the button to see the conditional rendering of the component based on its `state`.
-
-**Hint:** Don't forget to bind the `this` keyword to the method in the constructor!
+There is a mock API call in `componentDidMount()`. It sets state after 2.5 seconds to simulate calling a server to retrieve data. This example requests the current total active users for a site. In the render method, render the value of `activeUsers` in the `h1` after the text `Active Users:`. Watch what happens in the preview, and feel free to change the timeout to see the different effects.
 
 # --hints--
 
-`MyComponent` should return a `div` element which contains a `button`.
+`MyComponent` should render a `div` element which wraps an `h1` tag.
 
 ```js
-assert.strictEqual(
-  Enzyme.mount(React.createElement(MyComponent)).find('div').find('button')
-    .length,
-  1
+assert(
+  (() => {
+    const mockedComponent = Enzyme.mount(React.createElement(MyComponent));
+    return (
+      mockedComponent.find('div').length === 1 &&
+      mockedComponent.find('h1').length === 1
+    );
+  })()
 );
 ```
 
-The state of `MyComponent` should initialize with a `visibility` property set to `false`.
+Component state should be updated with a timeout function in `componentDidMount`.
 
 ```js
-assert.strictEqual(
-  Enzyme.mount(React.createElement(MyComponent)).state('visibility'),
-  false
+assert(
+  (() => {
+    const mockedComponent = Enzyme.mount(React.createElement(MyComponent));
+    return new RegExp('setTimeout(.|\n)+setState(.|\n)+activeUsers').test(
+      String(mockedComponent.instance().componentDidMount)
+    );
+  })()
 );
 ```
 
-Clicking the button element should toggle the `visibility` property in state between `true` and `false`.
+The `h1` tag should render the `activeUsers` value from `MyComponent`'s state.
 
 ```js
 (() => {
   const mockedComponent = Enzyme.mount(React.createElement(MyComponent));
   const first = () => {
-    mockedComponent.setState({ visibility: false });
-    return mockedComponent.state('visibility');
+    mockedComponent.setState({ activeUsers: 1237 });
+    return mockedComponent.find('h1').text();
   };
   const second = () => {
-    mockedComponent.find('button').simulate('click');
-    return mockedComponent.state('visibility');
+    mockedComponent.setState({ activeUsers: 1000 });
+    return mockedComponent.find('h1').text();
   };
-  const third = () => {
-    mockedComponent.find('button').simulate('click');
-    return mockedComponent.state('visibility');
-  };
-  const firstValue = first();
-  const secondValue = second();
-  const thirdValue = third();
-  assert(!firstValue && secondValue && !thirdValue);
+  assert(new RegExp('1237').test(first()) && new RegExp('1000').test(second()));
 })();
-```
-
-An anonymous function should be passed to `setState`.
-
-```js
-const paramRegex = '[a-zA-Z$_]\\w*(,[a-zA-Z$_]\\w*)?';
-assert(
-  new RegExp(
-    'this\\.setState\\((function\\(' +
-      paramRegex +
-      '\\){|([a-zA-Z$_]\\w*|\\(' +
-      paramRegex +
-      '\\))=>)'
-  ).test(__helpers.removeWhiteSpace(code))
-);
-```
-
-`this` should not be used inside `setState`
-
-```js
-assert(!/this\.setState\([^}]*this/.test(code));
 ```
 
 # --seed--
@@ -125,30 +77,24 @@ class MyComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      visibility: false
+      activeUsers: null
     };
-    // Change code below this line
-
-    // Change code above this line
   }
-  // Change code below this line
-
-  // Change code above this line
+  componentDidMount() {
+    setTimeout(() => {
+      this.setState({
+        activeUsers: 1273
+      });
+    }, 2500);
+  }
   render() {
-    if (this.state.visibility) {
-      return (
-        <div>
-          <button onClick={this.toggleVisibility}>Click Me</button>
-          <h1>Now you see me!</h1>
-        </div>
-      );
-    } else {
-      return (
-        <div>
-          <button onClick={this.toggleVisibility}>Click Me</button>
-        </div>
-      );
-    }
+    return (
+      <div>
+        {/* Change code below this line */}
+        <h1>Active Users: </h1>
+        {/* Change code above this line */}
+      </div>
+    );
   }
 }
 ```
@@ -160,30 +106,22 @@ class MyComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      visibility: false
+      activeUsers: null
     };
-    this.toggleVisibility = this.toggleVisibility.bind(this);
   }
-  toggleVisibility() {
-    this.setState(state => ({
-      visibility: !state.visibility
-    }));
+  componentDidMount() {
+    setTimeout(() => {
+      this.setState({
+        activeUsers: 1273
+      });
+    }, 2500);
   }
   render() {
-    if (this.state.visibility) {
-      return (
-        <div>
-          <button onClick={this.toggleVisibility}>Click Me</button>
-          <h1>Now you see me!</h1>
-        </div>
-      );
-    } else {
-      return (
-        <div>
-          <button onClick={this.toggleVisibility}>Click Me</button>
-        </div>
-      );
-    }
+    return (
+      <div>
+        <h1>Active Users: {this.state.activeUsers}</h1>
+      </div>
+    );
   }
 }
 ```
