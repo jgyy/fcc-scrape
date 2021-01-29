@@ -1,45 +1,91 @@
 ---
-id: 5a24c314108439a4d4036161
-title: Learn About Self-Closing JSX Tags
+id: 5a24c314108439a4d4036180
+title: Optimize Re-Renders with shouldComponentUpdate
 challengeType: 6
-forumTopicId: 301396
-dashedName: learn-about-self-closing-jsx-tags
+forumTopicId: 301398
+dashedName: optimize-re-renders-with-shouldcomponentupdate
 ---
 
 # --description--
 
-So far, you’ve seen how JSX differs from HTML in a key way with the use of `className` vs. `class` for defining HTML classes.
+So far, if any component receives new `state` or new `props`, it re-renders itself and all its children. This is usually okay. But React provides a lifecycle method you can call when child components receive new `state` or `props`, and declare specifically if the components should update or not. The method is `shouldComponentUpdate()`, and it takes `nextProps` and `nextState` as parameters.
 
-Another important way in which JSX differs from HTML is in the idea of the self-closing tag.
-
-In HTML, almost all tags have both an opening and closing tag: `<div></div>`; the closing tag always has a forward slash before the tag name that you are closing. However, there are special instances in HTML called “self-closing tags”, or tags that don’t require both an opening and closing tag before another tag can start.
-
-For example the line-break tag can be written as `<br>` or as `<br />`, but should never be written as `<br></br>`, since it doesn't contain any content.
-
-In JSX, the rules are a little different. Any JSX element can be written with a self-closing tag, and every element must be closed. The line-break tag, for example, must always be written as `<br />` in order to be valid JSX that can be transpiled. A `<div>`, on the other hand, can be written as `<div />` or `<div></div>`. The difference is that in the first syntax version there is no way to include anything in the `<div />`. You will see in later challenges that this syntax is useful when rendering React components.
+This method is a useful way to optimize performance. For example, the default behavior is that your component re-renders when it receives new `props`, even if the `props` haven't changed. You can use `shouldComponentUpdate()` to prevent this by comparing the `props`. The method must return a `boolean` value that tells React whether or not to update the component. You can compare the current props (`this.props`) to the next props (`nextProps`) to determine if you need to update or not, and return `true` or `false` accordingly.
 
 # --instructions--
 
-Fix the errors in the code editor so that it is valid JSX and successfully transpiles. Make sure you don't change any of the content - you only need to close tags where they are needed.
+The `shouldComponentUpdate()` method is added in a component called `OnlyEvens`. Currently, this method returns `true` so `OnlyEvens` re-renders every time it receives new `props`. Modify the method so `OnlyEvens` updates only if the `value` of its new props is even. Click the `Add` button and watch the order of events in your browser's console as the lifecycle hooks are triggered.
 
 # --hints--
 
-The constant `JSX` should return a `div` element.
+The `Controller` component should render the `OnlyEvens` component as a child.
 
 ```js
-assert.strictEqual(JSX.type, 'div');
+assert(
+  (() => {
+    const mockedComponent = Enzyme.mount(React.createElement(Controller));
+    return (
+      mockedComponent.find('Controller').length === 1 &&
+      mockedComponent.find('OnlyEvens').length === 1
+    );
+  })()
+);
 ```
 
-The `div` should contain a `br` tag.
+The `shouldComponentUpdate` method should be defined on the `OnlyEvens` component.
 
 ```js
-assert(Enzyme.shallow(JSX).find('br').length === 1);
+assert(
+  (() => {
+    const child = React.createElement(OnlyEvens)
+      .type.prototype.shouldComponentUpdate.toString()
+      .replace(/s/g, '');
+    return child !== 'undefined';
+  })()
+);
 ```
 
-The `div` should contain an `hr` tag.
+The `OnlyEvens` component should return an `h1` tag which renders the value of `this.props.value`.
 
 ```js
-assert(Enzyme.shallow(JSX).find('hr').length === 1);
+(() => {
+  const mockedComponent = Enzyme.mount(React.createElement(Controller));
+  const first = () => {
+    mockedComponent.setState({ value: 1000 });
+    return mockedComponent.find('h1').html();
+  };
+  const second = () => {
+    mockedComponent.setState({ value: 10 });
+    return mockedComponent.find('h1').html();
+  };
+  const firstValue = first();
+  const secondValue = second();
+  assert(firstValue === '<h1>1000</h1>' && secondValue === '<h1>10</h1>');
+})();
+```
+
+`OnlyEvens` should re-render only when `nextProps.value` is even.
+
+```js
+(() => {
+  const mockedComponent = Enzyme.mount(React.createElement(Controller));
+  const first = () => {
+    mockedComponent.setState({ value: 8 });
+    return mockedComponent.find('h1').text();
+  };
+  const second = () => {
+    mockedComponent.setState({ value: 7 });
+    return mockedComponent.find('h1').text();
+  };
+  const third = () => {
+    mockedComponent.setState({ value: 42 });
+    return mockedComponent.find('h1').text();
+  };
+  const firstValue = first();
+  const secondValue = second();
+  const thirdValue = third();
+  assert(firstValue === '8' && secondValue === '8' && thirdValue === '42');
+})();
 ```
 
 # --seed--
@@ -47,29 +93,95 @@ assert(Enzyme.shallow(JSX).find('hr').length === 1);
 ## --after-user-code--
 
 ```jsx
-ReactDOM.render(JSX, document.getElementById('root'))
+ReactDOM.render(<Controller />, document.getElementById('root'));
 ```
 
 ## --seed-contents--
 
 ```jsx
-const JSX = (
-  <div>
-    <h2>Welcome to React!</h2> <br >
-    <p>Be sure to close all tags!</p>
-    <hr >
-  </div>
-);
+class OnlyEvens extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log('Should I update?');
+    // Change code below this line
+    return true;
+    // Change code above this line
+  }
+  componentDidUpdate() {
+    console.log('Component re-rendered.');
+  }
+  render() {
+    return <h1>{this.props.value}</h1>;
+  }
+}
+
+class Controller extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: 0
+    };
+    this.addValue = this.addValue.bind(this);
+  }
+  addValue() {
+    this.setState(state => ({
+      value: state.value + 1
+    }));
+  }
+  render() {
+    return (
+      <div>
+        <button onClick={this.addValue}>Add</button>
+        <OnlyEvens value={this.state.value} />
+      </div>
+    );
+  }
+}
 ```
 
 # --solutions--
 
 ```jsx
-const JSX = (
-<div>
-  <h2>Welcome to React!</h2> <br />
-  <p>Be sure to close all tags!</p>
-  <hr />
-</div>
-);
+class OnlyEvens extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log('Should I update?');
+    // Change code below this line
+    return nextProps.value % 2 === 0;
+    // Change code above this line
+  }
+  componentDidUpdate() {
+    console.log('Component re-rendered.');
+  }
+  render() {
+    return <h1>{this.props.value}</h1>;
+  }
+}
+
+class Controller extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: 0
+    };
+    this.addValue = this.addValue.bind(this);
+  }
+  addValue() {
+    this.setState(state => ({
+      value: state.value + 1
+    }));
+  }
+  render() {
+    return (
+      <div>
+        <button onClick={this.addValue}>Add</button>
+        <OnlyEvens value={this.state.value} />
+      </div>
+    );
+  }
+}
 ```
