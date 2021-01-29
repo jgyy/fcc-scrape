@@ -1,82 +1,70 @@
 ---
-id: 5a24bbe0dba28a8d3cbd4c5d
-title: Create a Complex JSX Element
+id: 5a24c314108439a4d4036164
+title: Create a Component with Composition
 challengeType: 6
-forumTopicId: 301382
-dashedName: create-a-complex-jsx-element
+forumTopicId: 301383
+dashedName: create-a-component-with-composition
 ---
 
 # --description--
 
-The last challenge was a simple example of JSX, but JSX can represent more complex HTML as well.
+Now we will look at how we can compose multiple React components together. Imagine you are building an App and have created three components, a `Navbar`, `Dashboard`, and `Footer`.
 
-One important thing to know about nested JSX is that it must return a single element.
-
-This one parent element would wrap all of the other levels of nested elements.
-
-For instance, several JSX elements written as siblings with no parent wrapper element will not transpile.
-
-Here's an example:
-
-**Valid JSX:**
+To compose these components together, you could create an `App` *parent* component which renders each of these three components as *children*. To render a component as a child in a React component, you include the component name written as a custom HTML tag in the JSX. For example, in the `render` method you could write:
 
 ```jsx
-<div>
-  <p>Paragraph One</p>
-  <p>Paragraph Two</p>
-  <p>Paragraph Three</p>
-</div>
+return (
+ <App>
+  <Navbar />
+  <Dashboard />
+  <Footer />
+ </App>
+)
 ```
 
-**Invalid JSX:**
-
-```jsx
-<p>Paragraph One</p>
-<p>Paragraph Two</p>
-<p>Paragraph Three</p>
-```
+When React encounters a custom HTML tag that references another component (a component name wrapped in `< />` like in this example), it renders the markup for that component in the location of the tag. This should illustrate the parent/child relationship between the `App` component and the `Navbar`, `Dashboard`, and `Footer`.
 
 # --instructions--
 
-Define a new constant `JSX` that renders a `div` which contains the following elements in order:
+In the code editor, there is a simple functional component called `ChildComponent` and a class component called `ParentComponent`. Compose the two together by rendering the `ChildComponent` within the `ParentComponent`. Make sure to close the `ChildComponent` tag with a forward slash.
 
-An `h1`, a `p`, and an unordered list that contains three `li` items. You can include any text you want within each element.
-
-**Note:** When rendering multiple elements like this, you can wrap them all in parentheses, but it's not strictly required. Also notice this challenge uses a `div` tag to wrap all the child elements within a single parent element. If you remove the `div`, the JSX will no longer transpile. Keep this in mind, since it will also apply when you return JSX elements in React components.
+**Note:** `ChildComponent` is defined with an ES6 arrow function because this is a very common practice when using React. However, know that this is just a function. If you aren't familiar with the arrow function syntax, please refer to the JavaScript section.
 
 # --hints--
 
-The constant `JSX` should return a `div` element.
-
-```js
-assert(JSX.type === 'div');
-```
-
-The `div` should contain an `h1` tag as the first element.
-
-```js
-assert(JSX.props.children[0].type === 'h1');
-```
-
-The `div` should contain a `p` tag as the second element.
-
-```js
-assert(JSX.props.children[1].type === 'p');
-```
-
-The `div` should contain a `ul` tag as the third element.
-
-```js
-assert(JSX.props.children[2].type === 'ul');
-```
-
-The `ul` should contain three `li` elements.
+The React component should return a single `div` element.
 
 ```js
 assert(
-  JSX.props.children
-    .filter((ele) => ele.type === 'ul')[0]
-    .props.children.filter((ele) => ele.type === 'li').length === 3
+  (function () {
+    var shallowRender = Enzyme.shallow(React.createElement(ParentComponent));
+    return shallowRender.type() === 'div';
+  })()
+);
+```
+
+The component should return two nested elements.
+
+```js
+assert(
+  (function () {
+    var shallowRender = Enzyme.shallow(React.createElement(ParentComponent));
+    return shallowRender.children().length === 2;
+  })()
+);
+```
+
+The component should return the ChildComponent as its second child.
+
+```js
+assert(
+  (function () {
+    const mockedComponent = Enzyme.mount(React.createElement(ParentComponent));
+    return (
+      mockedComponent.find('ParentComponent').find('ChildComponent').length ===
+      1
+    );
+  })()
 );
 ```
 
@@ -85,25 +73,62 @@ assert(
 ## --after-user-code--
 
 ```jsx
-ReactDOM.render(JSX, document.getElementById('root'))
+ReactDOM.render(<ParentComponent />, document.getElementById('root'))
 ```
 
 ## --seed-contents--
 
 ```jsx
+const ChildComponent = () => {
+  return (
+    <div>
+      <p>I am the child</p>
+    </div>
+  );
+};
+
+class ParentComponent extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return (
+      <div>
+        <h1>I am the parent</h1>
+        { /* Change code below this line */ }
+
+
+        { /* Change code above this line */ }
+      </div>
+    );
+  }
+};
 ```
 
 # --solutions--
 
 ```jsx
-const JSX = (
-<div>
-  <h1>Hello JSX!</h1>
-  <p>Some info</p>
-  <ul>
-    <li>An item</li>
-    <li>Another item</li>
-    <li>A third item</li>
-  </ul>
-</div>);
+const ChildComponent = () => {
+  return (
+    <div>
+      <p>I am the child</p>
+    </div>
+  );
+};
+
+class ParentComponent extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return (
+      <div>
+        <h1>I am the parent</h1>
+        { /* Change code below this line */ }
+        <ChildComponent />
+        { /* Change code above this line */ }
+      </div>
+    );
+  }
+};
 ```
