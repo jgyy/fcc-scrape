@@ -1,139 +1,159 @@
 ---
-id: 5a24c314108439a4d4036189
-title: Change Inline CSS Conditionally Based on Component State
+id: 5a24c314108439a4d4036166
+title: Compose React Components
 challengeType: 6
-forumTopicId: 301380
-dashedName: change-inline-css-conditionally-based-on-component-state
+forumTopicId: 301381
+dashedName: compose-react-components
 ---
 
 # --description--
 
-At this point, you've seen several applications of conditional rendering and the use of inline styles. Here's one more example that combines both of these topics. You can also render CSS conditionally based on the state of a React component. To do this, you check for a condition, and if that condition is met, you modify the styles object that's assigned to the JSX elements in the render method.
-
-This paradigm is important to understand because it is a dramatic shift from the more traditional approach of applying styles by modifying DOM elements directly (which is very common with jQuery, for example). In that approach, you must keep track of when elements change and also handle the actual manipulation directly. It can become difficult to keep track of changes, potentially making your UI unpredictable. When you set a style object based on a condition, you describe how the UI should look as a function of the application's state. There is a clear flow of information that only moves in one direction. This is the preferred method when writing applications with React.
+As the challenges continue to use more complex compositions with React components and JSX, there is one important point to note. Rendering ES6 style class components within other components is no different than rendering the simple components you used in the last few challenges. You can render JSX elements, stateless functional components, and ES6 class components within other components.
 
 # --instructions--
 
-The code editor has a simple controlled input component with a styled border. You want to style this border red if the user types more than 15 characters of text in the input box. Add a condition to check for this and, if the condition is valid, set the input border style to `3px solid red`. You can try it out by entering text in the input.
+In the code editor, the `TypesOfFood` component is already rendering a component called `Vegetables`. Also, there is the `Fruits` component from the last challenge.
+
+Nest two components inside of `Fruits` — first `NonCitrus`, and then `Citrus`. Both of these components are provided for you behind the scenes. Next, nest the `Fruits` class component into the `TypesOfFood` component, below the `h1` header and above `Vegetables`. The result should be a series of nested components, which uses two different component types.
 
 # --hints--
 
-The `GateKeeper` component should render a `div` element.
+The `TypesOfFood` component should return a single `div` element.
 
 ```js
 assert(
   (function () {
-    const mockedComponent = Enzyme.mount(React.createElement(GateKeeper));
-    return mockedComponent.find('div').length === 1;
+    const mockedComponent = Enzyme.mount(React.createElement(TypesOfFood));
+    return mockedComponent.children().type() === 'div';
   })()
 );
 ```
 
-The `GateKeeper` component should be initialized with a state key `input` set to an empty string.
+The `TypesOfFood` component should return the `Fruits` component.
 
 ```js
 assert(
   (function () {
-    const mockedComponent = Enzyme.mount(React.createElement(GateKeeper));
-    return mockedComponent.state().input === '';
+    const mockedComponent = Enzyme.mount(React.createElement(TypesOfFood));
+    return mockedComponent.children().childAt(1).name() === 'Fruits';
   })()
 );
 ```
 
-The `GateKeeper` component should render an `h3` tag and an `input` tag.
+The `Fruits` component should return the `NonCitrus` component and the `Citrus` component.
 
 ```js
 assert(
   (function () {
-    const mockedComponent = Enzyme.mount(React.createElement(GateKeeper));
+    const mockedComponent = Enzyme.mount(React.createElement(TypesOfFood));
     return (
-      mockedComponent.find('h3').length === 1 &&
-      mockedComponent.find('input').length === 1
+      mockedComponent.find('Fruits').children().find('NonCitrus').length ===
+        1 &&
+      mockedComponent.find('Fruits').children().find('Citrus').length === 1
     );
   })()
 );
 ```
 
-The `input` tag should initially have a style of `1px solid black` for the `border` property.
+The `TypesOfFood` component should return the `Vegetables` component below the `Fruits` component.
 
 ```js
 assert(
   (function () {
-    const mockedComponent = Enzyme.mount(React.createElement(GateKeeper));
-    return (
-      mockedComponent.find('input').props().style.border === '1px solid black'
-    );
+    const mockedComponent = Enzyme.mount(React.createElement(TypesOfFood));
+    return mockedComponent.children().childAt(2).name() === 'Vegetables';
   })()
 );
-```
-
-The `input` tag should be styled with a border of `3px solid red` if the input value in state is longer than 15 characters.
-
-```js
-async () => {
-  const waitForIt = (fn) =>
-    new Promise((resolve, reject) => setTimeout(() => resolve(fn()), 100));
-  const mockedComponent = Enzyme.mount(React.createElement(GateKeeper));
-  const simulateChange = (el, value) =>
-    el.simulate('change', { target: { value } });
-  let initialStyle = mockedComponent.find('input').props().style.border;
-  const state_1 = () => {
-    mockedComponent.setState({ input: 'this is 15 char' });
-    return waitForIt(() => mockedComponent.find('input').props().style.border);
-  };
-  const state_2 = () => {
-    mockedComponent.setState({
-      input: 'A very long string longer than 15 characters.'
-    });
-    return waitForIt(() => mockedComponent.find('input').props().style.border);
-  };
-  const style_1 = await state_1();
-  const style_2 = await state_2();
-  assert(
-    initialStyle === '1px solid black' &&
-      style_1 === '1px solid black' &&
-      style_2 === '3px solid red'
-  );
-};
 ```
 
 # --seed--
 
+## --before-user-code--
+
+```jsx
+class NonCitrus extends React.Component {
+  render() {
+    return (
+      <div>
+        <h4>Non-Citrus:</h4>
+        <ul>
+          <li>Apples</li>
+          <li>Blueberries</li>
+          <li>Strawberries</li>
+          <li>Bananas</li>
+        </ul>
+      </div>
+    );
+  }
+};
+class Citrus extends React.Component {
+  render() {
+    return (
+      <div>
+        <h4>Citrus:</h4>
+        <ul>
+          <li>Lemon</li>
+          <li>Lime</li>
+          <li>Orange</li>
+          <li>Grapefruit</li>
+        </ul>
+      </div>
+    );
+  }
+};
+class Vegetables extends React.Component {
+  render() {
+    return (
+      <div>
+        <h2>Vegetables:</h2>
+        <ul>
+          <li>Brussel Sprouts</li>
+          <li>Broccoli</li>
+          <li>Squash</li>
+        </ul>
+      </div>
+    );
+     }
+};
+```
+
 ## --after-user-code--
 
 ```jsx
-ReactDOM.render(<GateKeeper />, document.getElementById('root'))
+ReactDOM.render(<TypesOfFood />, document.getElementById('root'))
 ```
 
 ## --seed-contents--
 
 ```jsx
-class GateKeeper extends React.Component {
+class Fruits extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      input: ''
-    };
-    this.handleChange = this.handleChange.bind(this);
-  }
-  handleChange(event) {
-    this.setState({ input: event.target.value })
   }
   render() {
-    let inputStyle = {
-      border: '1px solid black'
-    };
-    // Change code below this line
-
-    // Change code above this line
     return (
       <div>
-        <h3>Don't Type Too Much:</h3>
-        <input
-          type="text"
-          style={inputStyle}
-          value={this.state.input}
-          onChange={this.handleChange} />
+        <h2>Fruits:</h2>
+        { /* Change code below this line */ }
+
+        { /* Change code above this line */ }
+      </div>
+    );
+  }
+};
+
+class TypesOfFood extends React.Component {
+  constructor(props) {
+     super(props);
+  }
+  render() {
+    return (
+      <div>
+        <h1>Types of Food:</h1>
+        { /* Change code below this line */ }
+
+        { /* Change code above this line */ }
+        <Vegetables />
       </div>
     );
   }
@@ -143,34 +163,37 @@ class GateKeeper extends React.Component {
 # --solutions--
 
 ```jsx
-class GateKeeper extends React.Component {
+class Fruits extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      input: ''
-    };
-    this.handleChange = this.handleChange.bind(this);
-  }
-  handleChange(event) {
-    this.setState({ input: event.target.value })
   }
   render() {
-    let inputStyle = {
-      border: '1px solid black'
-    };
-    if (this.state.input.length > 15) {
-      inputStyle.border = '3px solid red';
-    };
     return (
       <div>
-        <h3>Don't Type Too Much:</h3>
-        <input
-          type="text"
-          style={inputStyle}
-          value={this.state.input}
-          onChange={this.handleChange} />
+        <h2>Fruits:</h2>
+        { /* Change code below this line */ }
+        <NonCitrus />
+        <Citrus />
+        { /* Change code above this line */ }
       </div>
-    );
+    )
   }
+}
+
+class TypesOfFood extends React.Component {
+  constructor(props) {
+     super(props);
+  }
+    render() {
+      return (
+        <div>
+        <h1>Types of Food:</h1>
+          { /* Change code below this line */ }
+          <Fruits />
+          { /* Change code above this line */ }
+          <Vegetables />
+        </div>
+      );
+    }
 };
 ```
