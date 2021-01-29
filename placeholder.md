@@ -1,93 +1,126 @@
 ---
-id: 5a24c314108439a4d403617b
-title: Pass a Callback as Props
+id: 5a24c314108439a4d403616a
+title: Pass an Array as Props
 challengeType: 6
-forumTopicId: 301400
-dashedName: pass-a-callback-as-props
+forumTopicId: 301401
+dashedName: pass-an-array-as-props
 ---
 
 # --description--
 
-You can pass `state` as props to child components, but you're not limited to passing data. You can also pass handler functions or any method that's defined on a React component to a child component. This is how you allow child components to interact with their parent components. You pass methods to a child just like a regular prop. It's assigned a name and you have access to that method name under `this.props` in the child component.
+The last challenge demonstrated how to pass information from a parent component to a child component as `props` or properties. This challenge looks at how arrays can be passed as `props`. To pass an array to a JSX element, it must be treated as JavaScript and wrapped in curly braces.
+
+```jsx
+<ParentComponent>
+  <ChildComponent colors={["green", "blue", "red"]} />
+</ParentComponent>
+```
+
+The child component then has access to the array property `colors`. Array methods such as `join()` can be used when accessing the property. `const ChildComponent = (props) => <p>{props.colors.join(', ')}</p>` This will join all `colors` array items into a comma separated string and produce: `<p>green, blue, red</p>` Later, we will learn about other common methods to render arrays of data in React.
 
 # --instructions--
 
-There are three components outlined in the code editor. The `MyApp` component is the parent that will render the `GetInput` and `RenderInput` child components. Add the `GetInput` component to the render method in `MyApp`, then pass it a prop called `input` assigned to `inputValue` from `MyApp`'s `state`. Also create a prop called `handleChange` and pass the input handler `handleChange` to it.
-
-Next, add `RenderInput` to the render method in `MyApp`, then create a prop called `input` and pass the `inputValue` from `state` to it. Once you are finished you will be able to type in the `input` field in the `GetInput` component, which then calls the handler method in its parent via props. This updates the input in the `state` of the parent, which is passed as props to both children. Observe how the data flows between the components and how the single source of truth remains the `state` of the parent component. Admittedly, this example is a bit contrived, but should serve to illustrate how data and callbacks can be passed between React components.
+There are `List` and `ToDo` components in the code editor. When rendering each `List` from the `ToDo` component, pass in a `tasks` property assigned to an array of to-do tasks, for example `["walk dog", "workout"]`. Then access this `tasks` array in the `List` component, showing its value within the `p` element. Use `join(", ")` to display the `props.tasks`array in the `p` element as a comma separated list. Today's list should have at least 2 tasks and tomorrow's should have at least 3 tasks.
 
 # --hints--
 
-The `MyApp` component should render.
+The `ToDo` component should return a single outer `div`.
 
 ```js
 assert(
   (function () {
-    const mockedComponent = Enzyme.mount(React.createElement(MyApp));
-    return mockedComponent.find('MyApp').length === 1;
+    const mockedComponent = Enzyme.mount(React.createElement(ToDo));
+    return mockedComponent.children().first().type() === 'div';
   })()
 );
 ```
 
-The `GetInput` component should render.
+The third child of the `ToDo` component should be an instance of the `List` component.
 
 ```js
 assert(
   (function () {
-    const mockedComponent = Enzyme.mount(React.createElement(MyApp));
-    return mockedComponent.find('GetInput').length === 1;
+    const mockedComponent = Enzyme.mount(React.createElement(ToDo));
+    return mockedComponent.children().first().childAt(2).name() === 'List';
   })()
 );
 ```
 
-The `RenderInput` component should render.
+The fifth child of the `ToDo` component should be an instance of the `List` component.
 
 ```js
 assert(
   (function () {
-    const mockedComponent = Enzyme.mount(React.createElement(MyApp));
-    return mockedComponent.find('RenderInput').length === 1;
+    const mockedComponent = Enzyme.mount(React.createElement(ToDo));
+    return mockedComponent.children().first().childAt(4).name() === 'List';
   })()
 );
 ```
 
-The `GetInput` component should receive the `MyApp` state property `inputValue` as props and contain an `input` element which modifies `MyApp` state.
+Both instances of the `List` component should have a property called `tasks` and `tasks` should be of type array.
 
 ```js
-async () => {
-  const waitForIt = (fn) =>
-    new Promise((resolve, reject) => setTimeout(() => resolve(fn()), 250));
-  const mockedComponent = Enzyme.mount(React.createElement(MyApp));
-  const state_1 = () => {
-    mockedComponent.setState({ inputValue: '' });
-    return waitForIt(() => mockedComponent.state());
-  };
-  const state_2 = () => {
-    mockedComponent
-      .find('input')
-      .simulate('change', { target: { value: 'TestInput' } });
-    return waitForIt(() => mockedComponent.state());
-  };
-  const updated_1 = await state_1();
-  const updated_2 = await state_2();
-  assert(updated_1.inputValue === '' && updated_2.inputValue === 'TestInput');
-};
+assert(
+  (function () {
+    const mockedComponent = Enzyme.mount(React.createElement(ToDo));
+    return (
+      Array.isArray(mockedComponent.find('List').get(0).props.tasks) &&
+      Array.isArray(mockedComponent.find('List').get(1).props.tasks)
+    );
+  })()
+);
 ```
 
-The `RenderInput` component should receive the `MyApp` state property `inputValue` as props.
+The first `List` component representing the tasks for today should have 2 or more items.
 
 ```js
-async () => {
-  const waitForIt = (fn) =>
-    new Promise((resolve, reject) => setTimeout(() => resolve(fn()), 250));
-  const mockedComponent = Enzyme.mount(React.createElement(MyApp));
-  const state_1 = () => {
-    mockedComponent.setState({ inputValue: 'TestName' });
-    return waitForIt(() => mockedComponent);
-  };
-  const updated_1 = await state_1();
-  assert(updated_1.find('p').text().includes('TestName'));
-};
+assert(
+  (function () {
+    const mockedComponent = Enzyme.mount(React.createElement(ToDo));
+    return mockedComponent.find('List').get(0).props.tasks.length >= 2;
+  })()
+);
+```
+
+The second `List` component representing the tasks for tomorrow should have 3 or more items.
+
+```js
+assert(
+  (function () {
+    const mockedComponent = Enzyme.mount(React.createElement(ToDo));
+    return mockedComponent.find('List').get(1).props.tasks.length >= 3;
+  })()
+);
+```
+
+The `List` component should render the value from the `tasks` prop in the `p` tag.
+
+```js
+assert(
+  (function () {
+    const mockedComponent = Enzyme.mount(React.createElement(ToDo));
+    return (
+      mockedComponent
+        .find('p')
+        .get(0)
+        .props.children.replace(/\s*,\s*/g, ',') ===
+        mockedComponent
+          .find('List')
+          .get(0)
+          .props.tasks.join(',')
+          .replace(/\s*,\s*/g, ',') &&
+      mockedComponent
+        .find('p')
+        .get(1)
+        .props.children.replace(/\s*,\s*/g, ',') ===
+        mockedComponent
+          .find('List')
+          .get(1)
+          .props.tasks.join(',')
+          .replace(/\s*,\s*/g, ',')
+    );
+  })()
+);
 ```
 
 # --seed--
@@ -95,61 +128,32 @@ async () => {
 ## --after-user-code--
 
 ```jsx
-ReactDOM.render(<MyApp />, document.getElementById('root'))
+ReactDOM.render(<ToDo />, document.getElementById('root'))
 ```
 
 ## --seed-contents--
 
 ```jsx
-class MyApp extends React.Component {
+const List = (props) => {
+  { /* Change code below this line */ }
+  return <p>{}</p>
+  { /* Change code above this line */ }
+};
+
+class ToDo extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      inputValue: ''
-    }
-    this.handleChange = this.handleChange.bind(this);
-  }
-  handleChange(event) {
-    this.setState({
-      inputValue: event.target.value
-    });
   }
   render() {
     return (
-       <div>
+      <div>
+        <h1>To Do Lists</h1>
+        <h2>Today</h2>
         { /* Change code below this line */ }
-
+        <List/>
+        <h2>Tomorrow</h2>
+        <List/>
         { /* Change code above this line */ }
-       </div>
-    );
-  }
-};
-
-class GetInput extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-  render() {
-    return (
-      <div>
-        <h3>Get Input:</h3>
-        <input
-          value={this.props.input}
-          onChange={this.props.handleChange}/>
-      </div>
-    );
-  }
-};
-
-class RenderInput extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-  render() {
-    return (
-      <div>
-        <h3>Input Render:</h3>
-        <p>{this.props.input}</p>
       </div>
     );
   }
@@ -159,57 +163,22 @@ class RenderInput extends React.Component {
 # --solutions--
 
 ```jsx
-class MyApp extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      inputValue: ''
-    }
-  this.handleChange = this.handleChange.bind(this);
-  }
-  handleChange(event) {
-    this.setState({
-      inputValue: event.target.value
-    });
-  }
-  render() {
-    return (
-       <div>
-         <GetInput
-           input={this.state.inputValue}
-           handleChange={this.handleChange}/>
-         <RenderInput
-           input={this.state.inputValue}/>
-       </div>
-    );
-  }
+const List= (props) => {
+  return <p>{props.tasks.join(', ')}</p>
 };
 
-class GetInput extends React.Component {
+class ToDo extends React.Component {
   constructor(props) {
     super(props);
   }
   render() {
     return (
       <div>
-        <h3>Get Input:</h3>
-        <input
-          value={this.props.input}
-          onChange={this.props.handleChange}/>
-      </div>
-    );
-  }
-};
-
-class RenderInput extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-  render() {
-    return (
-      <div>
-        <h3>Input Render:</h3>
-        <p>{this.props.input}</p>
+        <h1>To Do Lists</h1>
+        <h2>Today</h2>
+        <List tasks={['study', 'exercise']} />
+        <h2>Tomorrow</h2>
+        <List tasks={['call Sam', 'grocery shopping', 'order tickets']} />
       </div>
     );
   }
