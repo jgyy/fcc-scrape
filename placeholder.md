@@ -1,199 +1,109 @@
 ---
-id: 5a24c314108439a4d4036166
-title: Compose React Components
+id: 5a24bbe0dba28a8d3cbd4c5d
+title: Create a Complex JSX Element
 challengeType: 6
-forumTopicId: 301381
-dashedName: compose-react-components
+forumTopicId: 301382
+dashedName: create-a-complex-jsx-element
 ---
 
 # --description--
 
-As the challenges continue to use more complex compositions with React components and JSX, there is one important point to note. Rendering ES6 style class components within other components is no different than rendering the simple components you used in the last few challenges. You can render JSX elements, stateless functional components, and ES6 class components within other components.
+The last challenge was a simple example of JSX, but JSX can represent more complex HTML as well.
+
+One important thing to know about nested JSX is that it must return a single element.
+
+This one parent element would wrap all of the other levels of nested elements.
+
+For instance, several JSX elements written as siblings with no parent wrapper element will not transpile.
+
+Here's an example:
+
+**Valid JSX:**
+
+```jsx
+<div>
+  <p>Paragraph One</p>
+  <p>Paragraph Two</p>
+  <p>Paragraph Three</p>
+</div>
+```
+
+**Invalid JSX:**
+
+```jsx
+<p>Paragraph One</p>
+<p>Paragraph Two</p>
+<p>Paragraph Three</p>
+```
 
 # --instructions--
 
-In the code editor, the `TypesOfFood` component is already rendering a component called `Vegetables`. Also, there is the `Fruits` component from the last challenge.
+Define a new constant `JSX` that renders a `div` which contains the following elements in order:
 
-Nest two components inside of `Fruits` — first `NonCitrus`, and then `Citrus`. Both of these components are provided for you behind the scenes. Next, nest the `Fruits` class component into the `TypesOfFood` component, below the `h1` header and above `Vegetables`. The result should be a series of nested components, which uses two different component types.
+An `h1`, a `p`, and an unordered list that contains three `li` items. You can include any text you want within each element.
+
+**Note:** When rendering multiple elements like this, you can wrap them all in parentheses, but it's not strictly required. Also notice this challenge uses a `div` tag to wrap all the child elements within a single parent element. If you remove the `div`, the JSX will no longer transpile. Keep this in mind, since it will also apply when you return JSX elements in React components.
 
 # --hints--
 
-The `TypesOfFood` component should return a single `div` element.
+The constant `JSX` should return a `div` element.
 
 ```js
-assert(
-  (function () {
-    const mockedComponent = Enzyme.mount(React.createElement(TypesOfFood));
-    return mockedComponent.children().type() === 'div';
-  })()
-);
+assert(JSX.type === 'div');
 ```
 
-The `TypesOfFood` component should return the `Fruits` component.
+The `div` should contain an `h1` tag as the first element.
 
 ```js
-assert(
-  (function () {
-    const mockedComponent = Enzyme.mount(React.createElement(TypesOfFood));
-    return mockedComponent.children().childAt(1).name() === 'Fruits';
-  })()
-);
+assert(JSX.props.children[0].type === 'h1');
 ```
 
-The `Fruits` component should return the `NonCitrus` component and the `Citrus` component.
+The `div` should contain a `p` tag as the second element.
 
 ```js
-assert(
-  (function () {
-    const mockedComponent = Enzyme.mount(React.createElement(TypesOfFood));
-    return (
-      mockedComponent.find('Fruits').children().find('NonCitrus').length ===
-        1 &&
-      mockedComponent.find('Fruits').children().find('Citrus').length === 1
-    );
-  })()
-);
+assert(JSX.props.children[1].type === 'p');
 ```
 
-The `TypesOfFood` component should return the `Vegetables` component below the `Fruits` component.
+The `div` should contain a `ul` tag as the third element.
+
+```js
+assert(JSX.props.children[2].type === 'ul');
+```
+
+The `ul` should contain three `li` elements.
 
 ```js
 assert(
-  (function () {
-    const mockedComponent = Enzyme.mount(React.createElement(TypesOfFood));
-    return mockedComponent.children().childAt(2).name() === 'Vegetables';
-  })()
+  JSX.props.children
+    .filter((ele) => ele.type === 'ul')[0]
+    .props.children.filter((ele) => ele.type === 'li').length === 3
 );
 ```
 
 # --seed--
 
-## --before-user-code--
-
-```jsx
-class NonCitrus extends React.Component {
-  render() {
-    return (
-      <div>
-        <h4>Non-Citrus:</h4>
-        <ul>
-          <li>Apples</li>
-          <li>Blueberries</li>
-          <li>Strawberries</li>
-          <li>Bananas</li>
-        </ul>
-      </div>
-    );
-  }
-};
-class Citrus extends React.Component {
-  render() {
-    return (
-      <div>
-        <h4>Citrus:</h4>
-        <ul>
-          <li>Lemon</li>
-          <li>Lime</li>
-          <li>Orange</li>
-          <li>Grapefruit</li>
-        </ul>
-      </div>
-    );
-  }
-};
-class Vegetables extends React.Component {
-  render() {
-    return (
-      <div>
-        <h2>Vegetables:</h2>
-        <ul>
-          <li>Brussel Sprouts</li>
-          <li>Broccoli</li>
-          <li>Squash</li>
-        </ul>
-      </div>
-    );
-     }
-};
-```
-
 ## --after-user-code--
 
 ```jsx
-ReactDOM.render(<TypesOfFood />, document.getElementById('root'))
+ReactDOM.render(JSX, document.getElementById('root'))
 ```
 
 ## --seed-contents--
 
 ```jsx
-class Fruits extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-  render() {
-    return (
-      <div>
-        <h2>Fruits:</h2>
-        { /* Change code below this line */ }
-
-        { /* Change code above this line */ }
-      </div>
-    );
-  }
-};
-
-class TypesOfFood extends React.Component {
-  constructor(props) {
-     super(props);
-  }
-  render() {
-    return (
-      <div>
-        <h1>Types of Food:</h1>
-        { /* Change code below this line */ }
-
-        { /* Change code above this line */ }
-        <Vegetables />
-      </div>
-    );
-  }
-};
 ```
 
 # --solutions--
 
 ```jsx
-class Fruits extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-  render() {
-    return (
-      <div>
-        <h2>Fruits:</h2>
-        { /* Change code below this line */ }
-        <NonCitrus />
-        <Citrus />
-        { /* Change code above this line */ }
-      </div>
-    )
-  }
-}
-
-class TypesOfFood extends React.Component {
-  constructor(props) {
-     super(props);
-  }
-    render() {
-      return (
-        <div>
-        <h1>Types of Food:</h1>
-          { /* Change code below this line */ }
-          <Fruits />
-          { /* Change code above this line */ }
-          <Vegetables />
-        </div>
-      );
-    }
-};
+const JSX = (
+<div>
+  <h1>Hello JSX!</h1>
+  <p>Some info</p>
+  <ul>
+    <li>An item</li>
+    <li>Another item</li>
+    <li>A third item</li>
+  </ul>
+</div>);
 ```
