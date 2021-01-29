@@ -1,70 +1,45 @@
 ---
-id: 5a24c314108439a4d4036181
-title: Introducing Inline Styles
+id: 5a24c314108439a4d4036161
+title: Learn About Self-Closing JSX Tags
 challengeType: 6
-forumTopicId: 301395
-dashedName: introducing-inline-styles
+forumTopicId: 301396
+dashedName: learn-about-self-closing-jsx-tags
 ---
 
 # --description--
 
-There are other complex concepts that add powerful capabilities to your React code. But you may be wondering about the more simple problem of how to style those JSX elements you create in React. You likely know that it won't be exactly the same as working with HTML because of [the way you apply classes to JSX elements](/learn/front-end-libraries/react/define-an-html-class-in-jsx).
+So far, you’ve seen how JSX differs from HTML in a key way with the use of `className` vs. `class` for defining HTML classes.
 
-If you import styles from a stylesheet, it isn't much different at all. You apply a class to your JSX element using the `className` attribute, and apply styles to the class in your stylesheet. Another option is to apply inline styles, which are very common in ReactJS development.
+Another important way in which JSX differs from HTML is in the idea of the self-closing tag.
 
-You apply inline styles to JSX elements similar to how you do it in HTML, but with a few JSX differences. Here's an example of an inline style in HTML:
+In HTML, almost all tags have both an opening and closing tag: `<div></div>`; the closing tag always has a forward slash before the tag name that you are closing. However, there are special instances in HTML called “self-closing tags”, or tags that don’t require both an opening and closing tag before another tag can start.
 
-`<div style="color: yellow; font-size: 16px">Mellow Yellow</div>`
+For example the line-break tag can be written as `<br>` or as `<br />`, but should never be written as `<br></br>`, since it doesn't contain any content.
 
-JSX elements use the `style` attribute, but because of the way JSX is transpiled, you can't set the value to a `string`. Instead, you set it equal to a JavaScript `object`. Here's an example:
-
-`<div style={{color: "yellow", fontSize: 16}}>Mellow Yellow</div>`
-
-Notice how we camelCase the "fontSize" property? This is because React will not accept kebab-case keys in the style object. React will apply the correct property name for us in the HTML.
+In JSX, the rules are a little different. Any JSX element can be written with a self-closing tag, and every element must be closed. The line-break tag, for example, must always be written as `<br />` in order to be valid JSX that can be transpiled. A `<div>`, on the other hand, can be written as `<div />` or `<div></div>`. The difference is that in the first syntax version there is no way to include anything in the `<div />`. You will see in later challenges that this syntax is useful when rendering React components.
 
 # --instructions--
 
-Add a `style` attribute to the `div` in the code editor to give the text a color of red and font size of 72px.
-
-Note that you can optionally set the font size to be a number, omitting the units "px", or write it as "72px".
+Fix the errors in the code editor so that it is valid JSX and successfully transpiles. Make sure you don't change any of the content - you only need to close tags where they are needed.
 
 # --hints--
 
-The component should render a `div` element.
+The constant `JSX` should return a `div` element.
 
 ```js
-assert(
-  (function () {
-    const mockedComponent = Enzyme.mount(React.createElement(Colorful));
-    return mockedComponent.children().type() === 'div';
-  })()
-);
+assert.strictEqual(JSX.type, 'div');
 ```
 
-The `div` element should have a color of `red`.
+The `div` should contain a `br` tag.
 
 ```js
-assert(
-  (function () {
-    const mockedComponent = Enzyme.mount(React.createElement(Colorful));
-    return mockedComponent.children().props().style.color === 'red';
-  })()
-);
+assert(Enzyme.shallow(JSX).find('br').length === 1);
 ```
 
-The `div` element should have a font size of `72px`.
+The `div` should contain an `hr` tag.
 
 ```js
-assert(
-  (function () {
-    const mockedComponent = Enzyme.mount(React.createElement(Colorful));
-    return (
-      mockedComponent.children().props().style.fontSize === 72 ||
-      mockedComponent.children().props().style.fontSize === '72' ||
-      mockedComponent.children().props().style.fontSize === '72px'
-    );
-  })()
-);
+assert(Enzyme.shallow(JSX).find('hr').length === 1);
 ```
 
 # --seed--
@@ -72,29 +47,29 @@ assert(
 ## --after-user-code--
 
 ```jsx
-ReactDOM.render(<Colorful />, document.getElementById('root'))
+ReactDOM.render(JSX, document.getElementById('root'))
 ```
 
 ## --seed-contents--
 
 ```jsx
-class Colorful extends React.Component {
-  render() {
-    return (
-      <div>Big Red</div>
-    );
-  }
-};
+const JSX = (
+  <div>
+    <h2>Welcome to React!</h2> <br >
+    <p>Be sure to close all tags!</p>
+    <hr >
+  </div>
+);
 ```
 
 # --solutions--
 
 ```jsx
-class Colorful extends React.Component {
-  render() {
-    return (
-      <div style={{color: "red", fontSize: 72}}>Big Red</div>
-    );
-  }
-};
+const JSX = (
+<div>
+  <h2>Welcome to React!</h2> <br />
+  <p>Be sure to close all tags!</p>
+  <hr />
+</div>
+);
 ```
