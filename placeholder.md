@@ -1,47 +1,81 @@
 ---
-id: 5a24c314108439a4d4036155
-title: Send Action Data to the Store
+id: 5a24c314108439a4d4036151
+title: Use a Switch Statement to Handle Multiple Actions
 challengeType: 6
-forumTopicId: 301448
-dashedName: send-action-data-to-the-store
+forumTopicId: 301449
+dashedName: use-a-switch-statement-to-handle-multiple-actions
 ---
 
 # --description--
 
-By now you've learned how to dispatch actions to the Redux store, but so far these actions have not contained any information other than a `type`. You can also send specific data along with your actions. In fact, this is very common because actions usually originate from some user interaction and tend to carry some data with them. The Redux store often needs to know about this data.
+You can tell the Redux store how to handle multiple action types. Say you are managing user authentication in your Redux store. You want to have a state representation for when users are logged in and when they are logged out. You represent this with a single state object with the property `authenticated`. You also need action creators that create actions corresponding to user login and user logout, along with the action objects themselves.
 
 # --instructions--
 
-There's a basic `notesReducer()` and an `addNoteText()` action creator defined in the code editor. Finish the body of the `addNoteText()` function so that it returns an `action` object. The object should include a `type` property with a value of `ADD_NOTE`, and also a `text` property set to the `note` data that's passed into the action creator. When you call the action creator, you'll pass in specific note information that you can access for the object.
+The code editor has a store, actions, and action creators set up for you. Fill in the `reducer` function to handle multiple authentication actions. Use a JavaScript `switch` statement in the `reducer` to respond to different action events. This is a standard pattern in writing Redux reducers. The switch statement should switch over `action.type` and return the appropriate authentication state.
 
-Next, finish writing the `switch` statement in the `notesReducer()`. You need to add a case that handles the `addNoteText()` actions. This case should be triggered whenever there is an action of type `ADD_NOTE` and it should return the `text` property on the incoming `action` as the new `state`.
-
-The action is dispatched at the bottom of the code. Once you're finished, run the code and watch the console. That's all it takes to send action-specific data to the store and use it when you update store `state`.
+**Note:** At this point, don't worry about state immutability, since it is small and simple in this example. For each action, you can return a new object — for example, `{authenticated: true}`. Also, don't forget to write a `default` case in your switch statement that returns the current `state`. This is important because once your app has multiple reducers, they are all run any time an action dispatch is made, even when the action isn't related to that reducer. In such a case, you want to make sure that you return the current `state`.
 
 # --hints--
 
-The action creator `addNoteText` should return an object with keys `type` and `text`.
+Calling the function `loginUser` should return an object with type property set to the string `LOGIN`.
 
 ```js
-assert(
-  (function () {
-    const addNoteFn = addNoteText('__TEST__NOTE');
-    return addNoteFn.type === ADD_NOTE && addNoteFn.text === '__TEST__NOTE';
-  })()
-);
+assert(loginUser().type === 'LOGIN');
 ```
 
-Dispatching an action of type `ADD_NOTE` with the `addNoteText` action creator should update the `state` to the string passed to the action creator.
+Calling the function `logoutUser` should return an object with type property set to the string `LOGOUT`.
+
+```js
+assert(logoutUser().type === 'LOGOUT');
+```
+
+The store should be initialized with an object with an `authenticated` property set to `false`.
+
+```js
+assert(store.getState().authenticated === false);
+```
+
+Dispatching `loginUser` should update the `authenticated` property in the store state to `true`.
 
 ```js
 assert(
   (function () {
     const initialState = store.getState();
-    store.dispatch(addNoteText('__TEST__NOTE'));
-    const newState = store.getState();
-    return initialState !== newState && newState === '__TEST__NOTE';
+    store.dispatch(loginUser());
+    const afterLogin = store.getState();
+    return (
+      initialState.authenticated === false && afterLogin.authenticated === true
+    );
   })()
 );
+```
+
+Dispatching `logoutUser` should update the `authenticated` property in the store state to `false`.
+
+```js
+assert(
+  (function () {
+    store.dispatch(loginUser());
+    const loggedIn = store.getState();
+    store.dispatch(logoutUser());
+    const afterLogout = store.getState();
+    return (
+      loggedIn.authenticated === true && afterLogout.authenticated === false
+    );
+  })()
+);
+```
+
+The `authReducer` function should handle multiple action types with a `switch` statement.
+
+```js
+(getUserInput) =>
+  assert(
+    getUserInput('index').toString().includes('switch') &&
+      getUserInput('index').toString().includes('case') &&
+      getUserInput('index').toString().includes('default')
+  );
 ```
 
 # --seed--
@@ -49,59 +83,70 @@ assert(
 ## --seed-contents--
 
 ```js
-const ADD_NOTE = 'ADD_NOTE';
-
-const notesReducer = (state = 'Initial State', action) => {
-  switch(action.type) {
-    // Change code below this line
-
-    // Change code above this line
-    default:
-      return state;
-  }
+const defaultState = {
+  authenticated: false
 };
 
-const addNoteText = (note) => {
+const authReducer = (state = defaultState, action) => {
   // Change code below this line
 
   // Change code above this line
 };
 
-const store = Redux.createStore(notesReducer);
+const store = Redux.createStore(authReducer);
 
-console.log(store.getState());
-store.dispatch(addNoteText('Hello!'));
-console.log(store.getState());
+const loginUser = () => {
+  return {
+    type: 'LOGIN'
+  }
+};
+
+const logoutUser = () => {
+  return {
+    type: 'LOGOUT'
+  }
+};
 ```
 
 # --solutions--
 
 ```js
-const ADD_NOTE = 'ADD_NOTE';
+const defaultState = {
+  authenticated: false
+};
 
-const notesReducer = (state = 'Initial State', action) => {
-  switch(action.type) {
-    // Change code below this line
-    case ADD_NOTE:
-      return action.text;
-    // Change code above this line
+const authReducer = (state = defaultState, action) => {
+
+  switch (action.type) {
+
+    case 'LOGIN':
+      return {
+        authenticated: true
+      }
+
+    case 'LOGOUT':
+      return {
+        authenticated: false
+      }
+
     default:
       return state;
+
   }
+
 };
 
-const addNoteText = (note) => {
-  // Change code below this line
+const store = Redux.createStore(authReducer);
+
+const loginUser = () => {
   return {
-    type: ADD_NOTE,
-    text: note
+    type: 'LOGIN'
   }
-  // Change code above this line
 };
 
-const store = Redux.createStore(notesReducer);
-
-console.log(store.getState());
-store.dispatch(addNoteText('Hello Redux!'));
-console.log(store.getState());
+const logoutUser = () => {
+  return {
+    type: 'LOGOUT'
+  }
+};
 ```
