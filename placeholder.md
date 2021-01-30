@@ -1,64 +1,45 @@
 ---
-id: 5a24c314108439a4d403615a
-title: Remove an Item from an Array
+id: 5a24c314108439a4d4036155
+title: Send Action Data to the Store
 challengeType: 6
-forumTopicId: 301447
-dashedName: remove-an-item-from-an-array
+forumTopicId: 301448
+dashedName: send-action-data-to-the-store
 ---
 
 # --description--
 
-Time to practice removing items from an array. The spread operator can be used here as well. Other useful JavaScript methods include `slice()` and `concat()`.
+By now you've learned how to dispatch actions to the Redux store, but so far these actions have not contained any information other than a `type`. You can also send specific data along with your actions. In fact, this is very common because actions usually originate from some user interaction and tend to carry some data with them. The Redux store often needs to know about this data.
 
 # --instructions--
 
-The reducer and action creator were modified to remove an item from an array based on the index of the item. Finish writing the reducer so a new state array is returned with the item at the specific index removed.
+There's a basic `notesReducer()` and an `addNoteText()` action creator defined in the code editor. Finish the body of the `addNoteText()` function so that it returns an `action` object. The object should include a `type` property with a value of `ADD_NOTE`, and also a `text` property set to the `note` data that's passed into the action creator. When you call the action creator, you'll pass in specific note information that you can access for the object.
+
+Next, finish writing the `switch` statement in the `notesReducer()`. You need to add a case that handles the `addNoteText()` actions. This case should be triggered whenever there is an action of type `ADD_NOTE` and it should return the `text` property on the incoming `action` as the new `state`.
+
+The action is dispatched at the bottom of the code. Once you're finished, run the code and watch the console. That's all it takes to send action-specific data to the store and use it when you update store `state`.
 
 # --hints--
 
-The Redux store should exist and initialize with a state equal to `[0,1,2,3,4,5]`
+The action creator `addNoteText` should return an object with keys `type` and `text`.
 
 ```js
 assert(
   (function () {
-    const initialState = store.getState();
-    return (
-      Array.isArray(initialState) === true &&
-      DeepEqual(initialState, [0, 1, 2, 3, 4, 5])
-    );
+    const addNoteFn = addNoteText('__TEST__NOTE');
+    return addNoteFn.type === ADD_NOTE && addNoteFn.text === '__TEST__NOTE';
   })()
 );
 ```
 
-`removeItem` and `immutableReducer` both should be functions.
-
-```js
-assert(
-  typeof removeItem === 'function' && typeof immutableReducer === 'function'
-);
-```
-
-Dispatching the `removeItem` action creator should remove items from the state and should NOT mutate state.
+Dispatching an action of type `ADD_NOTE` with the `addNoteText` action creator should update the `state` to the string passed to the action creator.
 
 ```js
 assert(
   (function () {
     const initialState = store.getState();
-    const isFrozen = DeepFreeze(initialState);
-    store.dispatch(removeItem(3));
-    const state_1 = store.getState();
-    store.dispatch(removeItem(2));
-    const state_2 = store.getState();
-    store.dispatch(removeItem(0));
-    store.dispatch(removeItem(0));
-    store.dispatch(removeItem(0));
-    const state_3 = store.getState();
-    return (
-      isFrozen &&
-      DeepEqual(state_1, [0, 1, 2, 4, 5]) &&
-      DeepEqual(state_2, [0, 1, 4, 5]) &&
-      DeepEqual(state_3, [5])
-    );
+    store.dispatch(addNoteText('__TEST__NOTE'));
+    const newState = store.getState();
+    return initialState !== newState && newState === '__TEST__NOTE';
   })()
 );
 ```
@@ -68,47 +49,59 @@ assert(
 ## --seed-contents--
 
 ```js
-const immutableReducer = (state = [0,1,2,3,4,5], action) => {
+const ADD_NOTE = 'ADD_NOTE';
+
+const notesReducer = (state = 'Initial State', action) => {
   switch(action.type) {
-    case 'REMOVE_ITEM':
-      // Don't mutate state here or the tests will fail
-      return
+    // Change code below this line
+
+    // Change code above this line
     default:
       return state;
   }
 };
 
-const removeItem = (index) => {
-  return {
-    type: 'REMOVE_ITEM',
-    index
-  }
-}
+const addNoteText = (note) => {
+  // Change code below this line
 
-const store = Redux.createStore(immutableReducer);
+  // Change code above this line
+};
+
+const store = Redux.createStore(notesReducer);
+
+console.log(store.getState());
+store.dispatch(addNoteText('Hello!'));
+console.log(store.getState());
 ```
 
 # --solutions--
 
 ```js
-const immutableReducer = (state = [0,1,2,3,4,5], action) => {
+const ADD_NOTE = 'ADD_NOTE';
+
+const notesReducer = (state = 'Initial State', action) => {
   switch(action.type) {
-    case 'REMOVE_ITEM':
-      return [
-        ...state.slice(0, action.index),
-        ...state.slice(action.index + 1)
-      ];
+    // Change code below this line
+    case ADD_NOTE:
+      return action.text;
+    // Change code above this line
     default:
       return state;
   }
 };
 
-const removeItem = (index) => {
+const addNoteText = (note) => {
+  // Change code below this line
   return {
-    type: 'REMOVE_ITEM',
-    index
+    type: ADD_NOTE,
+    text: note
   }
-}
+  // Change code above this line
+};
 
-const store = Redux.createStore(immutableReducer);
+const store = Redux.createStore(notesReducer);
+
+console.log(store.getState());
+store.dispatch(addNoteText('Hello Redux!'));
+console.log(store.getState());
 ```
