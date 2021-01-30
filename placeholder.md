@@ -1,39 +1,41 @@
 ---
-id: 5a24c314108439a4d403614b
-title: Create a Redux Store
+id: 5a24c314108439a4d403614d
+title: Define a Redux Action
 challengeType: 6
-forumTopicId: 301439
-dashedName: create-a-redux-store
+forumTopicId: 301440
+dashedName: define-a-redux-action
 ---
 
 # --description--
 
-Redux is a state management framework that can be used with a number of different web technologies, including React.
+Since Redux is a state management framework, updating state is one of its core tasks. In Redux, all state updates are triggered by dispatching actions. An action is simply a JavaScript object that contains information about an action event that has occurred. The Redux store receives these action objects, then updates its state accordingly. Sometimes a Redux action also carries some data. For example, the action carries a username after a user logs in. While the data is optional, actions must carry a `type` property that specifies the 'type' of action that occurred.
 
-In Redux, there is a single state object that's responsible for the entire state of your application. This means if you had a React app with ten components, and each component had its own local state, the entire state of your app would be defined by a single state object housed in the Redux `store`. This is the first important principle to understand when learning Redux: the Redux store is the single source of truth when it comes to application state.
-
-This also means that any time any piece of your app wants to update state, it **must** do so through the Redux store. The unidirectional data flow makes it easier to track state management in your app.
+Think of Redux actions as messengers that deliver information about events happening in your app to the Redux store. The store then conducts the business of updating state based on the action that occurred.
 
 # --instructions--
 
-The Redux `store` is an object which holds and manages application `state`. There is a method called `createStore()` on the Redux object, which you use to create the Redux `store`. This method takes a `reducer` function as a required argument. The `reducer` function is covered in a later challenge, and is already defined for you in the code editor. It simply takes `state` as an argument and returns `state`.
-
-Declare a `store` variable and assign it to the `createStore()` method, passing in the `reducer` as an argument.
-
-**Note:** The code in the editor uses ES6 default argument syntax to initialize this state to hold a value of `5`. If you're not familiar with default arguments, you can refer to the [ES6 section in the Curriculum](https://learn.freecodecamp.org/javascript-algorithms-and-data-structures/es6/set-default-parameters-for-your-functions) which covers this topic.
+Writing a Redux action is as simple as declaring an object with a type property. Declare an object `action` and give it a property `type` set to the string `'LOGIN'`.
 
 # --hints--
 
-The redux store should exist.
+An action object should exist.
 
 ```js
-assert(typeof store.getState === 'function');
+assert(
+  (function () {
+    return typeof action === 'object';
+  })()
+);
 ```
 
-The redux store should have a value of 5 for the state.
+The action should have a key property type with value `LOGIN`.
 
 ```js
-assert(store.getState() === 5);
+assert(
+  (function () {
+    return action.type === 'LOGIN';
+  })()
+);
 ```
 
 # --seed--
@@ -41,21 +43,13 @@ assert(store.getState() === 5);
 ## --seed-contents--
 
 ```js
-const reducer = (state = 5) => {
-  return state;
-}
-
-// Redux methods are available from a Redux object
-// For example: Redux.createStore()
-// Define the store here:
+// Define an action here:
 ```
 
 # --solutions--
 
 ```js
-const reducer = (state = 5) => {
-  return state;
+const action = {
+  type: 'LOGIN'
 }
-
-const store = Redux.createStore(reducer);
 ```
