@@ -1,116 +1,117 @@
 ---
-id: 5a24c314108439a4d4036157
-title: Write a Counter with Redux
-challengeType: 6
-forumTopicId: 301453
-dashedName: write-a-counter-with-redux
+id: 587d7dbf367417b2b2512bbb
+title: Apply a Style Until a Condition is Met with @while
+challengeType: 0
+forumTopicId: 301454
+dashedName: apply-a-style-until-a-condition-is-met-with-while
 ---
 
 # --description--
 
-Now you've learned all the core principles of Redux! You've seen how to create actions and action creators, create a Redux store, dispatch your actions against the store, and design state updates with pure reducers. You've even seen how to manage complex state with reducer composition and handle asynchronous actions. These examples are simplistic, but these concepts are the core principles of Redux. If you understand them well, you're ready to start building your own Redux app. The next challenges cover some of the details regarding `state` immutability, but first, here's a review of everything you've learned so far.
+The `@while` directive is an option with similar functionality to the JavaScript `while` loop. It creates CSS rules until a condition is met.
+
+The `@for` challenge gave an example to create a simple grid system. This can also work with `@while`.
+
+```scss
+$x: 1;
+@while $x < 13 {
+  .col-#{$x} { width: 100%/12 * $x;}
+  $x: $x + 1;
+}
+```
+
+First, define a variable `$x` and set it to 1. Next, use the `@while` directive to create the grid system *while* `$x` is less than 13. After setting the CSS rule for `width`, `$x` is incremented by 1 to avoid an infinite loop.
 
 # --instructions--
 
-In this lesson, you'll implement a simple counter with Redux from scratch. The basics are provided in the code editor, but you'll have to fill in the details! Use the names that are provided and define `incAction` and `decAction` action creators, the `counterReducer()`, `INCREMENT` and `DECREMENT` action types, and finally the Redux `store`. Once you're finished you should be able to dispatch `INCREMENT` or `DECREMENT` actions to increment or decrement the state held in the `store`. Good luck building your first Redux app!
+Use `@while` to create a series of classes with different `font-sizes`.
+
+There should be 5 different classes from `text-1` to `text-5`. Then set `font-size` to `15px` multiplied by the current index number. Make sure to avoid an infinite loop!
 
 # --hints--
 
-The action creator `incAction` should return an action object with `type` equal to the value of `INCREMENT`
+Your code should use the `@while` directive.
 
 ```js
-assert(incAction().type === INCREMENT);
+assert(code.match(/@while /g));
 ```
 
-The action creator `decAction` should return an action object with `type` equal to the value of `DECREMENT`
+Your code should use an index variable which starts at an index of 1.
 
 ```js
-assert(decAction().type === DECREMENT);
+assert(code.match(/\$.*:\s*?1;/gi));
 ```
 
-The Redux store should initialize with a `state` of 0.
+Your code should increment the counter variable.
 
 ```js
-assert(store.getState() === 0);
+assert(code.match(/\$(.*)\s*?:\s*\$\1\s*\+\s*1\s*;/gi));
 ```
 
-Dispatching `incAction` on the Redux store should increment the `state` by 1.
+Your `.text-1` class should have a `font-size` of 15px.
 
 ```js
-assert(
-  (function () {
-    const initialState = store.getState();
-    store.dispatch(incAction());
-    const incState = store.getState();
-    return initialState + 1 === incState;
-  })()
-);
+assert($('.text-1').css('font-size') == '15px');
 ```
 
-Dispatching `decAction` on the Redux store should decrement the `state` by 1.
+Your `.text-2` class should have a `font-size` of 30px.
 
 ```js
-assert(
-  (function () {
-    const initialState = store.getState();
-    store.dispatch(decAction());
-    const decState = store.getState();
-    return initialState - 1 === decState;
-  })()
-);
+assert($('.text-2').css('font-size') == '30px');
 ```
 
-`counterReducer` should be a function
+Your `.text-3` class should have a `font-size` of 45px.
 
 ```js
-assert(typeof counterReducer === 'function');
+assert($('.text-3').css('font-size') == '45px');
+```
+
+Your `.text-4` class should have a `font-size` of 60px.
+
+```js
+assert($('.text-4').css('font-size') == '60px');
+```
+
+Your `.text-5` class should have a `font-size` of 75px.
+
+```js
+assert($('.text-5').css('font-size') == '75px');
 ```
 
 # --seed--
 
 ## --seed-contents--
 
-```js
-const INCREMENT = null; // Define a constant for increment action types
-const DECREMENT = null; // Define a constant for decrement action types
+```html
+<style type='text/scss'>
 
-const counterReducer = null; // Define the counter reducer which will increment or decrement the state based on the action it receives
 
-const incAction = null; // Define an action creator for incrementing
 
-const decAction = null; // Define an action creator for decrementing
+</style>
 
-const store = null; // Define the Redux store here, passing in your reducers
+<p class="text-1">Hello</p>
+<p class="text-2">Hello</p>
+<p class="text-3">Hello</p>
+<p class="text-4">Hello</p>
+<p class="text-5">Hello</p>
 ```
 
 # --solutions--
 
-```js
-const INCREMENT = 'INCREMENT';
-const DECREMENT = 'DECREMENT';
-
-const counterReducer = (state = 0, action) => {
-  switch(action.type) {
-    case INCREMENT:
-      return state + 1;
-    case DECREMENT:
-      return state - 1;
-    default:
-      return state;
+```html
+<style type='text/scss'>
+  $x: 1;
+  @while $x < 6 {
+    .text-#{$x}{
+      font-size: 15px * $x;
+    }
+    $x: $x + 1;
   }
-};
+</style>
 
-const incAction = () => {
-  return {
-    type: INCREMENT
-  }
-};
-
-const decAction = () => {
-  return {
-    type: DECREMENT
-  }
-};
-
-const store = Redux.createStore(counterReducer);
+<p class="text-1">Hello</p>
+<p class="text-2">Hello</p>
+<p class="text-3">Hello</p>
+<p class="text-4">Hello</p>
+<p class="text-5">Hello</p>
 ```
