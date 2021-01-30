@@ -1,42 +1,42 @@
 ---
-id: 5a24c314108439a4d4036151
-title: Use a Switch Statement to Handle Multiple Actions
+id: 5a24c314108439a4d4036152
+title: Use const for Action Types
 challengeType: 6
-forumTopicId: 301449
-dashedName: use-a-switch-statement-to-handle-multiple-actions
+forumTopicId: 301450
+dashedName: use-const-for-action-types
 ---
 
 # --description--
 
-You can tell the Redux store how to handle multiple action types. Say you are managing user authentication in your Redux store. You want to have a state representation for when users are logged in and when they are logged out. You represent this with a single state object with the property `authenticated`. You also need action creators that create actions corresponding to user login and user logout, along with the action objects themselves.
+A common practice when working with Redux is to assign action types as read-only constants, then reference these constants wherever they are used. You can refactor the code you're working with to write the action types as `const` declarations.
 
 # --instructions--
 
-The code editor has a store, actions, and action creators set up for you. Fill in the `reducer` function to handle multiple authentication actions. Use a JavaScript `switch` statement in the `reducer` to respond to different action events. This is a standard pattern in writing Redux reducers. The switch statement should switch over `action.type` and return the appropriate authentication state.
+Declare `LOGIN` and `LOGOUT` as `const` values and assign them to the strings `'LOGIN'` and `'LOGOUT'`, respectively. Then, edit the `authReducer()` and the action creators to reference these constants instead of string values.
 
-**Note:** At this point, don't worry about state immutability, since it is small and simple in this example. For each action, you can return a new object — for example, `{authenticated: true}`. Also, don't forget to write a `default` case in your switch statement that returns the current `state`. This is important because once your app has multiple reducers, they are all run any time an action dispatch is made, even when the action isn't related to that reducer. In such a case, you want to make sure that you return the current `state`.
+**Note:** It's generally a convention to write constants in all uppercase, and this is standard practice in Redux as well.
 
 # --hints--
 
-Calling the function `loginUser` should return an object with type property set to the string `LOGIN`.
+Calling the function `loginUser` should return an object with `type` property set to the string `LOGIN`.
 
 ```js
 assert(loginUser().type === 'LOGIN');
 ```
 
-Calling the function `logoutUser` should return an object with type property set to the string `LOGOUT`.
+Calling the function `logoutUser` should return an object with `type` property set to the string `LOGOUT`.
 
 ```js
 assert(logoutUser().type === 'LOGOUT');
 ```
 
-The store should be initialized with an object with an `authenticated` property set to `false`.
+The store should be initialized with an object with property `login` set to `false`.
 
 ```js
 assert(store.getState().authenticated === false);
 ```
 
-Dispatching `loginUser` should update the `authenticated` property in the store state to `true`.
+Dispatching `loginUser` should update the `login` property in the store state to `true`.
 
 ```js
 assert(
@@ -51,7 +51,7 @@ assert(
 );
 ```
 
-Dispatching `logoutUser` should update the `authenticated` property in the store state to `false`.
+Dispatching `logoutUser` should update the `login` property in the store state to `false`.
 
 ```js
 assert(
@@ -67,14 +67,48 @@ assert(
 );
 ```
 
-The `authReducer` function should handle multiple action types with a `switch` statement.
+The `authReducer` function should handle multiple action types with a switch statement.
 
 ```js
 (getUserInput) =>
   assert(
-    getUserInput('index').toString().includes('switch') &&
-      getUserInput('index').toString().includes('case') &&
-      getUserInput('index').toString().includes('default')
+    (function () {
+      return (
+        typeof authReducer === 'function' &&
+        getUserInput('index').toString().includes('switch') &&
+        getUserInput('index').toString().includes('case') &&
+        getUserInput('index').toString().includes('default')
+      );
+    })()
+  );
+```
+
+`LOGIN` and `LOGOUT` should be declared as `const` values and should be assigned strings of `LOGIN`and `LOGOUT`.
+
+```js
+const noWhiteSpace = __helpers.removeWhiteSpace(code);
+assert(
+  /constLOGIN=(['"`])LOGIN\1/.test(noWhiteSpace) &&
+    /constLOGOUT=(['"`])LOGOUT\1/.test(noWhiteSpace)
+);
+```
+
+The action creators and the reducer should reference the `LOGIN` and `LOGOUT` constants.
+
+```js
+(getUserInput) =>
+  assert(
+    (function () {
+      const noWhiteSpace = __helpers.removeWhiteSpace(
+        getUserInput('index').toString()
+      );
+      return (
+        noWhiteSpace.includes('caseLOGIN:') &&
+        noWhiteSpace.includes('caseLOGOUT:') &&
+        noWhiteSpace.includes('type:LOGIN') &&
+        noWhiteSpace.includes('type:LOGOUT')
+      );
+    })()
   );
 ```
 
@@ -83,34 +117,10 @@ The `authReducer` function should handle multiple action types with a `switch` s
 ## --seed-contents--
 
 ```js
-const defaultState = {
-  authenticated: false
-};
+// Change code below this line
 
-const authReducer = (state = defaultState, action) => {
-  // Change code below this line
+// Change code above this line
 
-  // Change code above this line
-};
-
-const store = Redux.createStore(authReducer);
-
-const loginUser = () => {
-  return {
-    type: 'LOGIN'
-  }
-};
-
-const logoutUser = () => {
-  return {
-    type: 'LOGOUT'
-  }
-};
-```
-
-# --solutions--
-
-```js
 const defaultState = {
   authenticated: false
 };
@@ -118,13 +128,11 @@ const defaultState = {
 const authReducer = (state = defaultState, action) => {
 
   switch (action.type) {
-
-    case 'LOGIN':
+    case 'LOGIN': // Change this line
       return {
         authenticated: true
       }
-
-    case 'LOGOUT':
+    case 'LOGOUT': // Change this line
       return {
         authenticated: false
       }
@@ -147,6 +155,52 @@ const loginUser = () => {
 const logoutUser = () => {
   return {
     type: 'LOGOUT'
+  }
+};
+```
+
+# --solutions--
+
+```js
+const LOGIN = 'LOGIN';
+const LOGOUT = 'LOGOUT';
+
+const defaultState = {
+  authenticated: false
+};
+
+const authReducer = (state = defaultState, action) => {
+
+  switch (action.type) {
+
+    case LOGIN:
+      return {
+        authenticated: true
+      }
+
+    case LOGOUT:
+      return {
+        authenticated: false
+      }
+
+    default:
+      return state;
+
+  }
+
+};
+
+const store = Redux.createStore(authReducer);
+
+const loginUser = () => {
+  return {
+    type: LOGIN
+  }
+};
+
+const logoutUser = () => {
+  return {
+    type: LOGOUT
   }
 };
 ```
