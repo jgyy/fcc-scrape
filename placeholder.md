@@ -1,72 +1,39 @@
 ---
-id: 5a24c314108439a4d403615b
-title: Copy an Object with Object.assign
+id: 5a24c314108439a4d403614b
+title: Create a Redux Store
 challengeType: 6
-forumTopicId: 301437
-dashedName: copy-an-object-with-object-assign
+forumTopicId: 301439
+dashedName: create-a-redux-store
 ---
 
 # --description--
 
-The last several challenges worked with arrays, but there are ways to help enforce state immutability when state is an `object`, too. A useful tool for handling objects is the `Object.assign()` utility. `Object.assign()` takes a target object and source objects and maps properties from the source objects to the target object. Any matching properties are overwritten by properties in the source objects. This behavior is commonly used to make shallow copies of objects by passing an empty object as the first argument followed by the object(s) you want to copy. Here's an example:
+Redux is a state management framework that can be used with a number of different web technologies, including React.
 
-`const newObject = Object.assign({}, obj1, obj2);`
+In Redux, there is a single state object that's responsible for the entire state of your application. This means if you had a React app with ten components, and each component had its own local state, the entire state of your app would be defined by a single state object housed in the Redux `store`. This is the first important principle to understand when learning Redux: the Redux store is the single source of truth when it comes to application state.
 
-This creates `newObject` as a new `object`, which contains the properties that currently exist in `obj1` and `obj2`.
+This also means that any time any piece of your app wants to update state, it **must** do so through the Redux store. The unidirectional data flow makes it easier to track state management in your app.
 
 # --instructions--
 
-The Redux state and actions were modified to handle an `object` for the `state`. Edit the code to return a new `state` object for actions with type `ONLINE`, which set the `status` property to the string `online`. Try to use `Object.assign()` to complete the challenge.
+The Redux `store` is an object which holds and manages application `state`. There is a method called `createStore()` on the Redux object, which you use to create the Redux `store`. This method takes a `reducer` function as a required argument. The `reducer` function is covered in a later challenge, and is already defined for you in the code editor. It simply takes `state` as an argument and returns `state`.
+
+Declare a `store` variable and assign it to the `createStore()` method, passing in the `reducer` as an argument.
+
+**Note:** The code in the editor uses ES6 default argument syntax to initialize this state to hold a value of `5`. If you're not familiar with default arguments, you can refer to the [ES6 section in the Curriculum](https://learn.freecodecamp.org/javascript-algorithms-and-data-structures/es6/set-default-parameters-for-your-functions) which covers this topic.
 
 # --hints--
 
-The Redux store should exist and initialize with a state that is equivalent to the `defaultState` object declared on line 1.
+The redux store should exist.
 
 ```js
-assert(
-  (function () {
-    const expectedState = {
-      user: 'CamperBot',
-      status: 'offline',
-      friends: '732,982',
-      community: 'freeCodeCamp'
-    };
-    const initialState = store.getState();
-    return DeepEqual(expectedState, initialState);
-  })()
-);
+assert(typeof store.getState === 'function');
 ```
 
-`wakeUp` and `immutableReducer` both should be functions.
+The redux store should have a value of 5 for the state.
 
 ```js
-assert(typeof wakeUp === 'function' && typeof immutableReducer === 'function');
-```
-
-Dispatching an action of type `ONLINE` should update the property `status` in state to `online` and should NOT mutate state.
-
-```js
-assert(
-  (function () {
-    const initialState = store.getState();
-    const isFrozen = DeepFreeze(initialState);
-    store.dispatch({ type: 'ONLINE' });
-    const finalState = store.getState();
-    const expectedState = {
-      user: 'CamperBot',
-      status: 'online',
-      friends: '732,982',
-      community: 'freeCodeCamp'
-    };
-    return isFrozen && DeepEqual(finalState, expectedState);
-  })()
-);
-```
-
-`Object.assign` should be used to return new state.
-
-```js
-(getUserInput) => assert(getUserInput('index').includes('Object.assign'));
+assert(store.getState() === 5);
 ```
 
 # --seed--
@@ -74,58 +41,21 @@ assert(
 ## --seed-contents--
 
 ```js
-const defaultState = {
-  user: 'CamperBot',
-  status: 'offline',
-  friends: '732,982',
-  community: 'freeCodeCamp'
-};
+const reducer = (state = 5) => {
+  return state;
+}
 
-const immutableReducer = (state = defaultState, action) => {
-  switch(action.type) {
-    case 'ONLINE':
-      // Don't mutate state here or the tests will fail
-      return
-    default:
-      return state;
-  }
-};
-
-const wakeUp = () => {
-  return {
-    type: 'ONLINE'
-  }
-};
-
-const store = Redux.createStore(immutableReducer);
+// Redux methods are available from a Redux object
+// For example: Redux.createStore()
+// Define the store here:
 ```
 
 # --solutions--
 
 ```js
-const defaultState = {
-  user: 'CamperBot',
-  status: 'offline',
-  friends: '732,982',
-  community: 'freeCodeCamp'
-};
+const reducer = (state = 5) => {
+  return state;
+}
 
-const immutableReducer = (state = defaultState, action) => {
-  switch(action.type) {
-    case 'ONLINE':
-      return Object.assign({}, state, {
-        status: 'online'
-      });
-    default:
-      return state;
-  }
-};
-
-const wakeUp = () => {
-  return {
-    type: 'ONLINE'
-  }
-};
-
-const store = Redux.createStore(immutableReducer);
+const store = Redux.createStore(reducer);
 ```
