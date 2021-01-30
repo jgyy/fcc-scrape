@@ -1,37 +1,53 @@
 ---
-id: 5a24c314108439a4d403614e
-title: Define an Action Creator
+id: 5a24c314108439a4d403614f
+title: Dispatch an Action Event
 challengeType: 6
-forumTopicId: 301441
-dashedName: define-an-action-creator
+forumTopicId: 301442
+dashedName: dispatch-an-action-event
 ---
 
 # --description--
 
-After creating an action, the next step is sending the action to the Redux store so it can update its state. In Redux, you define action creators to accomplish this. An action creator is simply a JavaScript function that returns an action. In other words, action creators create objects that represent action events.
+`dispatch` method is what you use to dispatch actions to the Redux store. Calling `store.dispatch()` and passing the value returned from an action creator sends an action back to the store.
+
+Recall that action creators return an object with a type property that specifies the action that has occurred. Then the method dispatches an action object to the Redux store. Based on the previous challenge's example, the following lines are equivalent, and both dispatch the action of type `LOGIN`:
+
+```js
+store.dispatch(actionCreator());
+store.dispatch({ type: 'LOGIN' });
+```
 
 # --instructions--
 
-Define a function named `actionCreator()` that returns the `action` object when called.
+The Redux store in the code editor has an initialized state that's an object containing a `login` property currently set to `false`. There's also an action creator called `loginAction()` which returns an action of type `LOGIN`. Dispatch the `LOGIN` action to the Redux store by calling the `dispatch` method, and pass in the action created by `loginAction()`.
 
 # --hints--
 
-The function `actionCreator` should exist.
+Calling the function `loginAction` should return an object with `type` property set to the string `LOGIN`.
 
 ```js
-assert(typeof actionCreator === 'function');
+assert(loginAction().type === 'LOGIN');
 ```
 
-Running the `actionCreator` function should return the action object.
+The store should be initialized with an object with property `login` set to `false`.
 
 ```js
-assert(typeof action === 'object');
+assert(store.getState().login === false);
 ```
 
-The returned action should have a key property type with value `LOGIN`.
+The `store.dispatch()` method should be used to dispatch an action of type `LOGIN`.
 
 ```js
-assert(action.type === 'LOGIN');
+(getUserInput) =>
+  assert(
+    (function () {
+      let noWhiteSpace = getUserInput('index').replace(/\s/g, '');
+      return (
+        noWhiteSpace.includes('store.dispatch(loginAction())') ||
+        noWhiteSpace.includes("store.dispatch({type: 'LOGIN'})") === true
+      );
+    })()
+  );
 ```
 
 # --seed--
@@ -39,19 +55,31 @@ assert(action.type === 'LOGIN');
 ## --seed-contents--
 
 ```js
-const action = {
-  type: 'LOGIN'
-}
-// Define an action creator here:
+const store = Redux.createStore(
+  (state = {login: false}) => state
+);
+
+const loginAction = () => {
+  return {
+    type: 'LOGIN'
+  }
+};
+
+// Dispatch the action here:
 ```
 
 # --solutions--
 
 ```js
-const action = {
-  type: 'LOGIN'
-}
-const actionCreator = () => {
-  return action;
+const store = Redux.createStore(
+  (state = {login: false}) => state
+);
+
+const loginAction = () => {
+  return {
+    type: 'LOGIN'
+  }
 };
+
+store.dispatch(loginAction());
 ```
