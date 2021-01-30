@@ -1,92 +1,72 @@
 ---
-id: 5a24c314108439a4d4036154
-title: Combine Multiple Reducers
+id: 5a24c314108439a4d403615b
+title: Copy an Object with Object.assign
 challengeType: 6
-forumTopicId: 301436
-dashedName: combine-multiple-reducers
+forumTopicId: 301437
+dashedName: copy-an-object-with-object-assign
 ---
 
 # --description--
 
-When the state of your app begins to grow more complex, it may be tempting to divide state into multiple pieces. Instead, remember the first principle of Redux: all app state is held in a single state object in the store. Therefore, Redux provides reducer composition as a solution for a complex state model. You define multiple reducers to handle different pieces of your application's state, then compose these reducers together into one root reducer. The root reducer is then passed into the Redux `createStore()` method.
+The last several challenges worked with arrays, but there are ways to help enforce state immutability when state is an `object`, too. A useful tool for handling objects is the `Object.assign()` utility. `Object.assign()` takes a target object and source objects and maps properties from the source objects to the target object. Any matching properties are overwritten by properties in the source objects. This behavior is commonly used to make shallow copies of objects by passing an empty object as the first argument followed by the object(s) you want to copy. Here's an example:
 
-In order to let us combine multiple reducers together, Redux provides the `combineReducers()` method. This method accepts an object as an argument in which you define properties which associate keys to specific reducer functions. The name you give to the keys will be used by Redux as the name for the associated piece of state.
+`const newObject = Object.assign({}, obj1, obj2);`
 
-Typically, it is a good practice to create a reducer for each piece of application state when they are distinct or unique in some way. For example, in a note-taking app with user authentication, one reducer could handle authentication while another handles the text and notes that the user is submitting. For such an application, we might write the `combineReducers()` method like this:
-
-```js
-const rootReducer = Redux.combineReducers({
-  auth: authenticationReducer,
-  notes: notesReducer
-});
-```
-
-Now, the key `notes` will contain all of the state associated with our notes and handled by our `notesReducer`. This is how multiple reducers can be composed to manage more complex application state. In this example, the state held in the Redux store would then be a single object containing `auth` and `notes` properties.
+This creates `newObject` as a new `object`, which contains the properties that currently exist in `obj1` and `obj2`.
 
 # --instructions--
 
-There are `counterReducer()` and `authReducer()` functions provided in the code editor, along with a Redux store. Finish writing the `rootReducer()` function using the `Redux.combineReducers()` method. Assign `counterReducer` to a key called `count` and `authReducer` to a key called `auth`.
+The Redux state and actions were modified to handle an `object` for the `state`. Edit the code to return a new `state` object for actions with type `ONLINE`, which set the `status` property to the string `online`. Try to use `Object.assign()` to complete the challenge.
 
 # --hints--
 
-The `counterReducer` should increment and decrement the `state`.
+The Redux store should exist and initialize with a state that is equivalent to the `defaultState` object declared on line 1.
 
 ```js
 assert(
   (function () {
-    const initialState = store.getState().count;
-    store.dispatch({ type: INCREMENT });
-    store.dispatch({ type: INCREMENT });
-    const firstState = store.getState().count;
-    store.dispatch({ type: DECREMENT });
-    const secondState = store.getState().count;
-    return firstState === initialState + 2 && secondState === firstState - 1;
+    const expectedState = {
+      user: 'CamperBot',
+      status: 'offline',
+      friends: '732,982',
+      community: 'freeCodeCamp'
+    };
+    const initialState = store.getState();
+    return DeepEqual(expectedState, initialState);
   })()
 );
 ```
 
-The `authReducer` should toggle the `state` of `authenticated` between `true` and `false`.
+`wakeUp` and `immutableReducer` both should be functions.
+
+```js
+assert(typeof wakeUp === 'function' && typeof immutableReducer === 'function');
+```
+
+Dispatching an action of type `ONLINE` should update the property `status` in state to `online` and should NOT mutate state.
 
 ```js
 assert(
   (function () {
-    store.dispatch({ type: LOGIN });
-    const loggedIn = store.getState().auth.authenticated;
-    store.dispatch({ type: LOGOUT });
-    const loggedOut = store.getState().auth.authenticated;
-    return loggedIn === true && loggedOut === false;
+    const initialState = store.getState();
+    const isFrozen = DeepFreeze(initialState);
+    store.dispatch({ type: 'ONLINE' });
+    const finalState = store.getState();
+    const expectedState = {
+      user: 'CamperBot',
+      status: 'online',
+      friends: '732,982',
+      community: 'freeCodeCamp'
+    };
+    return isFrozen && DeepEqual(finalState, expectedState);
   })()
 );
 ```
 
-The store `state` should have two keys: `count`, which holds a number, and `auth`, which holds an object. The `auth` object should have a property of `authenticated`, which holds a boolean.
+`Object.assign` should be used to return new state.
 
 ```js
-assert(
-  (function () {
-    const state = store.getState();
-    return (
-      typeof state.auth === 'object' &&
-      typeof state.auth.authenticated === 'boolean' &&
-      typeof state.count === 'number'
-    );
-  })()
-);
-```
-
-The `rootReducer` should be a function that combines the `counterReducer` and the `authReducer`.
-
-```js
-(getUserInput) =>
-  assert(
-    (function () {
-      const noWhiteSpace = __helpers.removeWhiteSpace(getUserInput('index'));
-      return (
-        typeof rootReducer === 'function' &&
-        noWhiteSpace.includes('Redux.combineReducers')
-      );
-    })()
-  );
+(getUserInput) => assert(getUserInput('index').includes('Object.assign'));
 ```
 
 # --seed--
@@ -94,82 +74,58 @@ The `rootReducer` should be a function that combines the `counterReducer` and th
 ## --seed-contents--
 
 ```js
-const INCREMENT = 'INCREMENT';
-const DECREMENT = 'DECREMENT';
+const defaultState = {
+  user: 'CamperBot',
+  status: 'offline',
+  friends: '732,982',
+  community: 'freeCodeCamp'
+};
 
-const counterReducer = (state = 0, action) => {
+const immutableReducer = (state = defaultState, action) => {
   switch(action.type) {
-    case INCREMENT:
-      return state + 1;
-    case DECREMENT:
-      return state - 1;
+    case 'ONLINE':
+      // Don't mutate state here or the tests will fail
+      return
     default:
       return state;
   }
 };
 
-const LOGIN = 'LOGIN';
-const LOGOUT = 'LOGOUT';
-
-const authReducer = (state = {authenticated: false}, action) => {
-  switch(action.type) {
-    case LOGIN:
-      return {
-        authenticated: true
-      }
-    case LOGOUT:
-      return {
-        authenticated: false
-      }
-    default:
-      return state;
+const wakeUp = () => {
+  return {
+    type: 'ONLINE'
   }
 };
 
-const rootReducer = // Define the root reducer here
-
-const store = Redux.createStore(rootReducer);
+const store = Redux.createStore(immutableReducer);
 ```
 
 # --solutions--
 
 ```js
-const INCREMENT = 'INCREMENT';
-const DECREMENT = 'DECREMENT';
+const defaultState = {
+  user: 'CamperBot',
+  status: 'offline',
+  friends: '732,982',
+  community: 'freeCodeCamp'
+};
 
-const counterReducer = (state = 0, action) => {
+const immutableReducer = (state = defaultState, action) => {
   switch(action.type) {
-    case INCREMENT:
-      return state + 1;
-    case DECREMENT:
-      return state - 1;
+    case 'ONLINE':
+      return Object.assign({}, state, {
+        status: 'online'
+      });
     default:
       return state;
   }
 };
 
-const LOGIN = 'LOGIN';
-const LOGOUT = 'LOGOUT';
-
-const authReducer = (state = {authenticated: false}, action) => {
-  switch(action.type) {
-    case LOGIN:
-      return {
-        authenticated: true
-      }
-    case LOGOUT:
-      return {
-        authenticated: false
-      }
-    default:
-      return state;
+const wakeUp = () => {
+  return {
+    type: 'ONLINE'
   }
 };
 
-const rootReducer = Redux.combineReducers({
-  count: counterReducer,
-  auth: authReducer
-});
-
-const store = Redux.createStore(rootReducer);
+const store = Redux.createStore(immutableReducer);
 ```
