@@ -1,52 +1,33 @@
 ---
-id: 5a24c314108439a4d403614f
-title: Dispatch an Action Event
+id: 5a24c314108439a4d403614c
+title: Get State from the Redux Store
 challengeType: 6
-forumTopicId: 301442
-dashedName: dispatch-an-action-event
+forumTopicId: 301443
+dashedName: get-state-from-the-redux-store
 ---
 
 # --description--
 
-`dispatch` method is what you use to dispatch actions to the Redux store. Calling `store.dispatch()` and passing the value returned from an action creator sends an action back to the store.
-
-Recall that action creators return an object with a type property that specifies the action that has occurred. Then the method dispatches an action object to the Redux store. Based on the previous challenge's example, the following lines are equivalent, and both dispatch the action of type `LOGIN`:
-
-```js
-store.dispatch(actionCreator());
-store.dispatch({ type: 'LOGIN' });
-```
+The Redux store object provides several methods that allow you to interact with it. For example, you can retrieve the current `state` held in the Redux store object with the `getState()` method.
 
 # --instructions--
 
-The Redux store in the code editor has an initialized state that's an object containing a `login` property currently set to `false`. There's also an action creator called `loginAction()` which returns an action of type `LOGIN`. Dispatch the `LOGIN` action to the Redux store by calling the `dispatch` method, and pass in the action created by `loginAction()`.
+The code from the previous challenge is re-written more concisely in the code editor. Use `store.getState()` to retrieve the `state` from the `store`, and assign this to a new variable `currentState`.
 
 # --hints--
 
-Calling the function `loginAction` should return an object with `type` property set to the string `LOGIN`.
+The redux store should have a value of 5 for the initial state.
 
 ```js
-assert(loginAction().type === 'LOGIN');
+assert(store.getState() === 5);
 ```
 
-The store should be initialized with an object with property `login` set to `false`.
-
-```js
-assert(store.getState().login === false);
-```
-
-The `store.dispatch()` method should be used to dispatch an action of type `LOGIN`.
+A variable `currentState` should exist and should be assigned the current state of the Redux store.
 
 ```js
 (getUserInput) =>
   assert(
-    (function () {
-      let noWhiteSpace = getUserInput('index').replace(/\s/g, '');
-      return (
-        noWhiteSpace.includes('store.dispatch(loginAction())') ||
-        noWhiteSpace.includes("store.dispatch({type: 'LOGIN'})") === true
-      );
-    })()
+    currentState === 5 && getUserInput('index').includes('store.getState()')
   );
 ```
 
@@ -56,30 +37,19 @@ The `store.dispatch()` method should be used to dispatch an action of type `LOGI
 
 ```js
 const store = Redux.createStore(
-  (state = {login: false}) => state
+  (state = 5) => state
 );
 
-const loginAction = () => {
-  return {
-    type: 'LOGIN'
-  }
-};
-
-// Dispatch the action here:
+// Change code below this line
 ```
 
 # --solutions--
 
 ```js
 const store = Redux.createStore(
-  (state = {login: false}) => state
+  (state = 5) => state
 );
 
-const loginAction = () => {
-  return {
-    type: 'LOGIN'
-  }
-};
-
-store.dispatch(loginAction());
+// Change code below this line
+const currentState = store.getState();
 ```
