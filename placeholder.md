@@ -1,112 +1,114 @@
 ---
-id: 5a24c314108439a4d4036153
-title: Register a Store Listener
+id: 5a24c314108439a4d403615a
+title: Remove an Item from an Array
 challengeType: 6
-forumTopicId: 301446
-dashedName: register-a-store-listener
+forumTopicId: 301447
+dashedName: remove-an-item-from-an-array
 ---
 
 # --description--
 
-Another method you have access to on the Redux `store` object is `store.subscribe()`. This allows you to subscribe listener functions to the store, which are called whenever an action is dispatched against the store. One simple use for this method is to subscribe a function to your store that simply logs a message every time an action is received and the store is updated.
+Time to practice removing items from an array. The spread operator can be used here as well. Other useful JavaScript methods include `slice()` and `concat()`.
 
 # --instructions--
 
-Write a callback function that increments the global variable `count` every time the store receives an action, and pass this function in to the `store.subscribe()` method. You'll see that `store.dispatch()` is called three times in a row, each time directly passing in an action object. Watch the console output between the action dispatches to see the updates take place.
+The reducer and action creator were modified to remove an item from an array based on the index of the item. Finish writing the reducer so a new state array is returned with the item at the specific index removed.
 
 # --hints--
 
-Dispatching the `ADD` action on the store should increment the state by `1`.
+The Redux store should exist and initialize with a state equal to `[0,1,2,3,4,5]`
 
 ```js
 assert(
   (function () {
     const initialState = store.getState();
-    store.dispatch({ type: 'ADD' });
-    const newState = store.getState();
-    return newState === initialState + 1;
+    return (
+      Array.isArray(initialState) === true &&
+      DeepEqual(initialState, [0, 1, 2, 3, 4, 5])
+    );
   })()
 );
 ```
 
-There should be a listener function subscribed to the store using `store.subscribe`.
+`removeItem` and `immutableReducer` both should be functions.
 
 ```js
-(getUserInput) => assert(getUserInput('index').includes('store.subscribe('));
+assert(
+  typeof removeItem === 'function' && typeof immutableReducer === 'function'
+);
 ```
 
-The callback to `store.subscribe` should also increment the global `count` variable as the store is updated.
+Dispatching the `removeItem` action creator should remove items from the state and should NOT mutate state.
 
 ```js
-assert(store.getState() === count);
+assert(
+  (function () {
+    const initialState = store.getState();
+    const isFrozen = DeepFreeze(initialState);
+    store.dispatch(removeItem(3));
+    const state_1 = store.getState();
+    store.dispatch(removeItem(2));
+    const state_2 = store.getState();
+    store.dispatch(removeItem(0));
+    store.dispatch(removeItem(0));
+    store.dispatch(removeItem(0));
+    const state_3 = store.getState();
+    return (
+      isFrozen &&
+      DeepEqual(state_1, [0, 1, 2, 4, 5]) &&
+      DeepEqual(state_2, [0, 1, 4, 5]) &&
+      DeepEqual(state_3, [5])
+    );
+  })()
+);
 ```
 
 # --seed--
 
-## --before-user-code--
-
-```js
-count = 0;
-```
-
 ## --seed-contents--
 
 ```js
-const ADD = 'ADD';
-
-const reducer = (state = 0, action) => {
+const immutableReducer = (state = [0,1,2,3,4,5], action) => {
   switch(action.type) {
-    case ADD:
-      return state + 1;
+    case 'REMOVE_ITEM':
+      // Don't mutate state here or the tests will fail
+      return
     default:
       return state;
   }
 };
 
-const store = Redux.createStore(reducer);
+const removeItem = (index) => {
+  return {
+    type: 'REMOVE_ITEM',
+    index
+  }
+}
 
-// Global count variable:
-let count = 0;
-
-// Change code below this line
-
-// Change code above this line
-
-store.dispatch({type: ADD});
-console.log(count);
-store.dispatch({type: ADD});
-console.log(count);
-store.dispatch({type: ADD});
-console.log(count);
+const store = Redux.createStore(immutableReducer);
 ```
 
 # --solutions--
 
 ```js
-const ADD = 'ADD';
-
-const reducer = (state = 0, action) => {
+const immutableReducer = (state = [0,1,2,3,4,5], action) => {
   switch(action.type) {
-    case ADD:
-      return state + 1;
+    case 'REMOVE_ITEM':
+      return [
+        ...state.slice(0, action.index),
+        ...state.slice(action.index + 1)
+      ];
     default:
       return state;
   }
 };
 
-const store = Redux.createStore(reducer);
- let count = 0;
-// Change code below this line
+const removeItem = (index) => {
+  return {
+    type: 'REMOVE_ITEM',
+    index
+  }
+}
 
-store.subscribe( () =>
- {
- count++;
- }
-);
-
-// Change code above this line
-
-store.dispatch({type: ADD});
-store.dispatch({type: ADD});
-store.dispatch({type: ADD});
+const store = Redux.createStore(immutableReducer);
 ```
