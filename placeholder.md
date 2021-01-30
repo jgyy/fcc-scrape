@@ -1,115 +1,70 @@
 ---
-id: 5a24c314108439a4d4036152
-title: Use const for Action Types
+id: 5a24c314108439a4d4036156
+title: Use Middleware to Handle Asynchronous Actions
 challengeType: 6
-forumTopicId: 301450
-dashedName: use-const-for-action-types
+forumTopicId: 301451
+dashedName: use-middleware-to-handle-asynchronous-actions
 ---
 
 # --description--
 
-A common practice when working with Redux is to assign action types as read-only constants, then reference these constants wherever they are used. You can refactor the code you're working with to write the action types as `const` declarations.
+So far these challenges have avoided discussing asynchronous actions, but they are an unavoidable part of web development. At some point you'll need to call asynchronous endpoints in your Redux app, so how do you handle these types of requests? Redux provides middleware designed specifically for this purpose, called Redux Thunk middleware. Here's a brief description how to use this with Redux.
+
+To include Redux Thunk middleware, you pass it as an argument to `Redux.applyMiddleware()`. This statement is then provided as a second optional parameter to the `createStore()` function. Take a look at the code at the bottom of the editor to see this. Then, to create an asynchronous action, you return a function in the action creator that takes `dispatch` as an argument. Within this function, you can dispatch actions and perform asynchronous requests.
+
+In this example, an asynchronous request is simulated with a `setTimeout()` call. It's common to dispatch an action before initiating any asynchronous behavior so that your application state knows that some data is being requested (this state could display a loading icon, for instance). Then, once you receive the data, you dispatch another action which carries the data as a payload along with information that the action is completed.
+
+Remember that you're passing `dispatch` as a parameter to this special action creator. This is what you'll use to dispatch your actions, you simply pass the action directly to dispatch and the middleware takes care of the rest.
 
 # --instructions--
 
-Declare `LOGIN` and `LOGOUT` as `const` values and assign them to the strings `'LOGIN'` and `'LOGOUT'`, respectively. Then, edit the `authReducer()` and the action creators to reference these constants instead of string values.
-
-**Note:** It's generally a convention to write constants in all uppercase, and this is standard practice in Redux as well.
+Write both dispatches in the `handleAsync()` action creator. Dispatch `requestingData()` before the `setTimeout()` (the simulated API call). Then, after you receive the (pretend) data, dispatch the `receivedData()` action, passing in this data. Now you know how to handle asynchronous actions in Redux. Everything else continues to behave as before.
 
 # --hints--
 
-Calling the function `loginUser` should return an object with `type` property set to the string `LOGIN`.
+The `requestingData` action creator should return an object of type equal to the value of `REQUESTING_DATA`.
 
 ```js
-assert(loginUser().type === 'LOGIN');
+assert(requestingData().type === REQUESTING_DATA);
 ```
 
-Calling the function `logoutUser` should return an object with `type` property set to the string `LOGOUT`.
+The `receivedData` action creator should return an object of type equal to the value of `RECEIVED_DATA`.
 
 ```js
-assert(logoutUser().type === 'LOGOUT');
+assert(receivedData('data').type === RECEIVED_DATA);
 ```
 
-The store should be initialized with an object with property `login` set to `false`.
+`asyncDataReducer` should be a function.
 
 ```js
-assert(store.getState().authenticated === false);
+assert(typeof asyncDataReducer === 'function');
 ```
 
-Dispatching `loginUser` should update the `login` property in the store state to `true`.
+Dispatching the requestingData action creator should update the store `state` property of fetching to `true`.
 
 ```js
 assert(
   (function () {
     const initialState = store.getState();
-    store.dispatch(loginUser());
-    const afterLogin = store.getState();
-    return (
-      initialState.authenticated === false && afterLogin.authenticated === true
-    );
+    store.dispatch(requestingData());
+    const reqState = store.getState();
+    return initialState.fetching === false && reqState.fetching === true;
   })()
 );
 ```
 
-Dispatching `logoutUser` should update the `login` property in the store state to `false`.
+Dispatching `handleAsync` should dispatch the data request action and then dispatch the received data action after a delay.
 
 ```js
 assert(
   (function () {
-    store.dispatch(loginUser());
-    const loggedIn = store.getState();
-    store.dispatch(logoutUser());
-    const afterLogout = store.getState();
+    const noWhiteSpace = __helpers.removeWhiteSpace(handleAsync.toString());
     return (
-      loggedIn.authenticated === true && afterLogout.authenticated === false
+      noWhiteSpace.includes('dispatch(requestingData())') === true &&
+      noWhiteSpace.includes('dispatch(receivedData(data))') === true
     );
   })()
 );
-```
-
-The `authReducer` function should handle multiple action types with a switch statement.
-
-```js
-(getUserInput) =>
-  assert(
-    (function () {
-      return (
-        typeof authReducer === 'function' &&
-        getUserInput('index').toString().includes('switch') &&
-        getUserInput('index').toString().includes('case') &&
-        getUserInput('index').toString().includes('default')
-      );
-    })()
-  );
-```
-
-`LOGIN` and `LOGOUT` should be declared as `const` values and should be assigned strings of `LOGIN`and `LOGOUT`.
-
-```js
-const noWhiteSpace = __helpers.removeWhiteSpace(code);
-assert(
-  /constLOGIN=(['"`])LOGIN\1/.test(noWhiteSpace) &&
-    /constLOGOUT=(['"`])LOGOUT\1/.test(noWhiteSpace)
-);
-```
-
-The action creators and the reducer should reference the `LOGIN` and `LOGOUT` constants.
-
-```js
-(getUserInput) =>
-  assert(
-    (function () {
-      const noWhiteSpace = __helpers.removeWhiteSpace(
-        getUserInput('index').toString()
-      );
-      return (
-        noWhiteSpace.includes('caseLOGIN:') &&
-        noWhiteSpace.includes('caseLOGOUT:') &&
-        noWhiteSpace.includes('type:LOGIN') &&
-        noWhiteSpace.includes('type:LOGOUT')
-      );
-    })()
-  );
 ```
 
 # --seed--
@@ -117,90 +72,99 @@ The action creators and the reducer should reference the `LOGIN` and `LOGOUT` co
 ## --seed-contents--
 
 ```js
-// Change code below this line
+const REQUESTING_DATA = 'REQUESTING_DATA'
+const RECEIVED_DATA = 'RECEIVED_DATA'
 
-// Change code above this line
+const requestingData = () => { return {type: REQUESTING_DATA} }
+const receivedData = (data) => { return {type: RECEIVED_DATA, users: data.users} }
+
+const handleAsync = () => {
+  return function(dispatch) {
+    // Dispatch request action here
+
+    setTimeout(function() {
+      let data = {
+        users: ['Jeff', 'William', 'Alice']
+      }
+      // Dispatch received data action here
+
+    }, 2500);
+  }
+};
 
 const defaultState = {
-  authenticated: false
+  fetching: false,
+  users: []
 };
 
-const authReducer = (state = defaultState, action) => {
-
-  switch (action.type) {
-    case 'LOGIN': // Change this line
+const asyncDataReducer = (state = defaultState, action) => {
+  switch(action.type) {
+    case REQUESTING_DATA:
       return {
-        authenticated: true
+        fetching: true,
+        users: []
       }
-    case 'LOGOUT': // Change this line
+    case RECEIVED_DATA:
       return {
-        authenticated: false
+        fetching: false,
+        users: action.users
       }
-
     default:
       return state;
-
-  }
-
-};
-
-const store = Redux.createStore(authReducer);
-
-const loginUser = () => {
-  return {
-    type: 'LOGIN'
   }
 };
 
-const logoutUser = () => {
-  return {
-    type: 'LOGOUT'
-  }
-};
+const store = Redux.createStore(
+  asyncDataReducer,
+  Redux.applyMiddleware(ReduxThunk.default)
+);
 ```
 
 # --solutions--
 
 ```js
-const LOGIN = 'LOGIN';
-const LOGOUT = 'LOGOUT';
+const REQUESTING_DATA = 'REQUESTING_DATA'
+const RECEIVED_DATA = 'RECEIVED_DATA'
+
+const requestingData = () => { return {type: REQUESTING_DATA} }
+const receivedData = (data) => { return {type: RECEIVED_DATA, users: data.users} }
+
+const handleAsync = () => {
+  return function(dispatch) {
+    dispatch(requestingData());
+    setTimeout(function() {
+      let data = {
+        users: ['Jeff', 'William', 'Alice']
+      }
+      dispatch(receivedData(data));
+    }, 2500);
+  }
+};
 
 const defaultState = {
-  authenticated: false
+  fetching: false,
+  users: []
 };
 
-const authReducer = (state = defaultState, action) => {
-
-  switch (action.type) {
-
-    case LOGIN:
+const asyncDataReducer = (state = defaultState, action) => {
+  switch(action.type) {
+    case REQUESTING_DATA:
       return {
-        authenticated: true
+        fetching: true,
+        users: []
       }
-
-    case LOGOUT:
+    case RECEIVED_DATA:
       return {
-        authenticated: false
+        fetching: false,
+        users: action.users
       }
-
     default:
       return state;
-
-  }
-
-};
-
-const store = Redux.createStore(authReducer);
-
-const loginUser = () => {
-  return {
-    type: LOGIN
   }
 };
 
-const logoutUser = () => {
-  return {
-    type: LOGOUT
-  }
-};
+const store = Redux.createStore(
+  asyncDataReducer,
+  Redux.applyMiddleware(ReduxThunk.default)
+);
 ```
