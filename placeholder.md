@@ -1,133 +1,112 @@
 ---
-id: 5a24c314108439a4d4036158
-title: Never Mutate State
+id: 5a24c314108439a4d4036153
+title: Register a Store Listener
 challengeType: 6
-forumTopicId: 301445
-dashedName: never-mutate-state
+forumTopicId: 301446
+dashedName: register-a-store-listener
 ---
 
 # --description--
 
-These final challenges describe several methods of enforcing the key principle of state immutability in Redux. Immutable state means that you never modify state directly, instead, you return a new copy of state.
-
-If you took a snapshot of the state of a Redux app over time, you would see something like `state 1`, `state 2`, `state 3`,`state 4`, `...` and so on where each state may be similar to the last, but each is a distinct piece of data. This immutability, in fact, is what provides such features as time-travel debugging that you may have heard about.
-
-Redux does not actively enforce state immutability in its store or reducers, that responsibility falls on the programmer. Fortunately, JavaScript (especially ES6) provides several useful tools you can use to enforce the immutability of your state, whether it is a `string`, `number`, `array`, or `object`. Note that strings and numbers are primitive values and are immutable by nature. In other words, 3 is always 3. You cannot change the value of the number 3. An `array` or `object`, however, is mutable. In practice, your state will probably consist of an `array` or `object`, as these are useful data structures for representing many types of information.
+Another method you have access to on the Redux `store` object is `store.subscribe()`. This allows you to subscribe listener functions to the store, which are called whenever an action is dispatched against the store. One simple use for this method is to subscribe a function to your store that simply logs a message every time an action is received and the store is updated.
 
 # --instructions--
 
-There is a `store` and `reducer` in the code editor for managing to-do items. Finish writing the `ADD_TO_DO` case in the reducer to append a new to-do to the state. There are a few ways to accomplish this with standard JavaScript or ES6. See if you can find a way to return a new array with the item from `action.todo` appended to the end.
+Write a callback function that increments the global variable `count` every time the store receives an action, and pass this function in to the `store.subscribe()` method. You'll see that `store.dispatch()` is called three times in a row, each time directly passing in an action object. Watch the console output between the action dispatches to see the updates take place.
 
 # --hints--
 
-The Redux store should exist and initialize with a state equal to the `todos` array in the code editor.
-
-```js
-assert(
-  (function () {
-    const todos = [
-      'Go to the store',
-      'Clean the house',
-      'Cook dinner',
-      'Learn to code'
-    ];
-    const initialState = store.getState();
-    return (
-      Array.isArray(initialState) && initialState.join(',') === todos.join(',')
-    );
-  })()
-);
-```
-
-`addToDo` and `immutableReducer` both should be functions.
-
-```js
-assert(typeof addToDo === 'function' && typeof immutableReducer === 'function');
-```
-
-Dispatching an action of type `ADD_TO_DO` on the Redux store should add a `todo` item and should NOT mutate state.
+Dispatching the `ADD` action on the store should increment the state by `1`.
 
 ```js
 assert(
   (function () {
     const initialState = store.getState();
-    const isFrozen = DeepFreeze(initialState);
-    store.dispatch(addToDo('__TEST__TO__DO__'));
-    const finalState = store.getState();
-    const expectedState = [
-      'Go to the store',
-      'Clean the house',
-      'Cook dinner',
-      'Learn to code',
-      '__TEST__TO__DO__'
-    ];
-    return isFrozen && DeepEqual(finalState, expectedState);
+    store.dispatch({ type: 'ADD' });
+    const newState = store.getState();
+    return newState === initialState + 1;
   })()
 );
+```
+
+There should be a listener function subscribed to the store using `store.subscribe`.
+
+```js
+(getUserInput) => assert(getUserInput('index').includes('store.subscribe('));
+```
+
+The callback to `store.subscribe` should also increment the global `count` variable as the store is updated.
+
+```js
+assert(store.getState() === count);
 ```
 
 # --seed--
 
+## --before-user-code--
+
+```js
+count = 0;
+```
+
 ## --seed-contents--
 
 ```js
-const ADD_TO_DO = 'ADD_TO_DO';
+const ADD = 'ADD';
 
-// A list of strings representing tasks to do:
-const todos = [
-  'Go to the store',
-  'Clean the house',
-  'Cook dinner',
-  'Learn to code',
-];
-
-const immutableReducer = (state = todos, action) => {
+const reducer = (state = 0, action) => {
   switch(action.type) {
-    case ADD_TO_DO:
-      // Don't mutate state here or the tests will fail
-      return
+    case ADD:
+      return state + 1;
     default:
       return state;
   }
 };
 
-const addToDo = (todo) => {
-  return {
-    type: ADD_TO_DO,
-    todo
-  }
-}
+const store = Redux.createStore(reducer);
 
-const store = Redux.createStore(immutableReducer);
+// Global count variable:
+let count = 0;
+
+// Change code below this line
+
+// Change code above this line
+
+store.dispatch({type: ADD});
+console.log(count);
+store.dispatch({type: ADD});
+console.log(count);
+store.dispatch({type: ADD});
+console.log(count);
 ```
 
 # --solutions--
 
 ```js
-const ADD_TO_DO = 'ADD_TO_DO';
+const ADD = 'ADD';
 
-const todos = [
-  'Go to the store',
-  'Clean the house',
-  'Cook dinner',
-  'Learn to code',
-];
-
-const immutableReducer = (state = todos, action) => {
+const reducer = (state = 0, action) => {
   switch(action.type) {
-    case ADD_TO_DO:
-      return state.concat(action.todo);
+    case ADD:
+      return state + 1;
     default:
       return state;
   }
 };
 
-const addToDo = (todo) => {
-  return {
-    type: ADD_TO_DO,
-    todo
-  }
-}
+const store = Redux.createStore(reducer);
+ let count = 0;
+// Change code below this line
 
-const store = Redux.createStore(immutableReducer);
+store.subscribe( () =>
+ {
+ count++;
+ }
+);
+
+// Change code above this line
+
+store.dispatch({type: ADD});
+store.dispatch({type: ADD});
+store.dispatch({type: ADD});
 ```
