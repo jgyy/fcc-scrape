@@ -1,56 +1,67 @@
 ---
-id: 5a24c314108439a4d4036150
-title: Handle an Action in the Store
+id: 5a24c314108439a4d4036158
+title: Never Mutate State
 challengeType: 6
-forumTopicId: 301444
-dashedName: handle-an-action-in-the-store
+forumTopicId: 301445
+dashedName: never-mutate-state
 ---
 
 # --description--
 
-After an action is created and dispatched, the Redux store needs to know how to respond to that action. This is the job of a `reducer` function. Reducers in Redux are responsible for the state modifications that take place in response to actions. A `reducer` takes `state` and `action` as arguments, and it always returns a new `state`. It is important to see that this is the **only** role of the reducer. It has no side effects — it never calls an API endpoint and it never has any hidden surprises. The reducer is simply a pure function that takes state and action, then returns new state.
+These final challenges describe several methods of enforcing the key principle of state immutability in Redux. Immutable state means that you never modify state directly, instead, you return a new copy of state.
 
-Another key principle in Redux is that `state` is read-only. In other words, the `reducer` function must **always** return a new copy of `state` and never modify state directly. Redux does not enforce state immutability, however, you are responsible for enforcing it in the code of your reducer functions. You'll practice this in later challenges.
+If you took a snapshot of the state of a Redux app over time, you would see something like `state 1`, `state 2`, `state 3`,`state 4`, `...` and so on where each state may be similar to the last, but each is a distinct piece of data. This immutability, in fact, is what provides such features as time-travel debugging that you may have heard about.
+
+Redux does not actively enforce state immutability in its store or reducers, that responsibility falls on the programmer. Fortunately, JavaScript (especially ES6) provides several useful tools you can use to enforce the immutability of your state, whether it is a `string`, `number`, `array`, or `object`. Note that strings and numbers are primitive values and are immutable by nature. In other words, 3 is always 3. You cannot change the value of the number 3. An `array` or `object`, however, is mutable. In practice, your state will probably consist of an `array` or `object`, as these are useful data structures for representing many types of information.
 
 # --instructions--
 
-The code editor has the previous example as well as the start of a `reducer` function for you. Fill in the body of the `reducer` function so that if it receives an action of type `'LOGIN'` it returns a state object with `login` set to `true`. Otherwise, it returns the current `state`. Note that the current `state` and the dispatched `action` are passed to the reducer, so you can access the action's type directly with `action.type`.
+There is a `store` and `reducer` in the code editor for managing to-do items. Finish writing the `ADD_TO_DO` case in the reducer to append a new to-do to the state. There are a few ways to accomplish this with standard JavaScript or ES6. See if you can find a way to return a new array with the item from `action.todo` appended to the end.
 
 # --hints--
 
-Calling the function `loginAction` should return an object with type property set to the string `LOGIN`.
+The Redux store should exist and initialize with a state equal to the `todos` array in the code editor.
 
 ```js
-assert(loginAction().type === 'LOGIN');
+assert(
+  (function () {
+    const todos = [
+      'Go to the store',
+      'Clean the house',
+      'Cook dinner',
+      'Learn to code'
+    ];
+    const initialState = store.getState();
+    return (
+      Array.isArray(initialState) && initialState.join(',') === todos.join(',')
+    );
+  })()
+);
 ```
 
-The store should be initialized with an object with property `login` set to `false`.
+`addToDo` and `immutableReducer` both should be functions.
 
 ```js
-assert(store.getState().login === false);
+assert(typeof addToDo === 'function' && typeof immutableReducer === 'function');
 ```
 
-Dispatching `loginAction` should update the `login` property in the store state to `true`.
+Dispatching an action of type `ADD_TO_DO` on the Redux store should add a `todo` item and should NOT mutate state.
 
 ```js
 assert(
   (function () {
     const initialState = store.getState();
-    store.dispatch(loginAction());
-    const afterState = store.getState();
-    return initialState.login === false && afterState.login === true;
-  })()
-);
-```
-
-If the action is not of type `LOGIN`, the store should return the current state.
-
-```js
-assert(
-  (function () {
-    store.dispatch({ type: '__TEST__ACTION__' });
-    let afterTest = store.getState();
-    return typeof afterTest === 'object' && afterTest.hasOwnProperty('login');
+    const isFrozen = DeepFreeze(initialState);
+    store.dispatch(addToDo('__TEST__TO__DO__'));
+    const finalState = store.getState();
+    const expectedState = [
+      'Go to the store',
+      'Clean the house',
+      'Cook dinner',
+      'Learn to code',
+      '__TEST__TO__DO__'
+    ];
+    return isFrozen && DeepEqual(finalState, expectedState);
   })()
 );
 ```
@@ -60,49 +71,63 @@ assert(
 ## --seed-contents--
 
 ```js
-const defaultState = {
-  login: false
-};
+const ADD_TO_DO = 'ADD_TO_DO';
 
-const reducer = (state = defaultState, action) => {
-  // Change code below this line
+// A list of strings representing tasks to do:
+const todos = [
+  'Go to the store',
+  'Clean the house',
+  'Cook dinner',
+  'Learn to code',
+];
 
-  // Change code above this line
-};
-
-const store = Redux.createStore(reducer);
-
-const loginAction = () => {
-  return {
-    type: 'LOGIN'
+const immutableReducer = (state = todos, action) => {
+  switch(action.type) {
+    case ADD_TO_DO:
+      // Don't mutate state here or the tests will fail
+      return
+    default:
+      return state;
   }
 };
+
+const addToDo = (todo) => {
+  return {
+    type: ADD_TO_DO,
+    todo
+  }
+}
+
+const store = Redux.createStore(immutableReducer);
 ```
 
 # --solutions--
 
 ```js
-const defaultState = {
-  login: false
+const ADD_TO_DO = 'ADD_TO_DO';
+
+const todos = [
+  'Go to the store',
+  'Clean the house',
+  'Cook dinner',
+  'Learn to code',
+];
+
+const immutableReducer = (state = todos, action) => {
+  switch(action.type) {
+    case ADD_TO_DO:
+      return state.concat(action.todo);
+    default:
+      return state;
+  }
 };
 
-const reducer = (state = defaultState, action) => {
-
-  if (action.type === 'LOGIN') {
-    return {login: true}
-  }
-
-  else {
-    return state
-  }
-
-};
-
-const store = Redux.createStore(reducer);
-
-const loginAction = () => {
+const addToDo = (todo) => {
   return {
-    type: 'LOGIN'
+    type: ADD_TO_DO,
+    todo
   }
-};
+}
+
+const store = Redux.createStore(immutableReducer);
 ```
