@@ -1,25 +1,22 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1c9f4
-title: Part 23
+id: 5d8a4cfbe6b6180ed9a1c9f5
+title: Part 24
 challengeType: 0
-dashedName: part-23
+dashedName: part-24
 ---
 
 # --description--
 
-The `range` function describes how to map the domain values for display on the graph. For example, a value of 5000 followers can't use 5000 as it y-coordinate on the SVG or it would be off the graph. You need to tell the range where the top and bottom of the graph is so the scale can give appropriate values for the y-coordinate.
-
-Chain the `range` function below the `domain` and pass it an array with `svgHeight - svgMargin` and `svgMargin` as the values. That will translate to `[430, 70]`. This is where the top and bottom of the graph are. So a data point of 5000 followers will map to a value of 430 to use as its y-coordinate and 0 followers will use 70 as its y-coordinate. Any value in between will scale linearly.
-
-Your graph will have a margin around it for things like axes and labels. The actual line data will display on the inside of this margin area, which is why you use those values. This will become more clear as you progress through the project.
+Create a new `const` named `xScale`. Use it to create another linear scale like you did for the y-scale. This will be the horizontal or "x" axis.
 
 # --hints--
 
 test-text
 
 ```js
-const range = yScale.range();
-assert(range.length === 2 && range[0] === 430 && range[1] === 70);
+assert(
+  typeof xScale === 'function' && /xScale\s*=\s*d3\.scaleLinear/.test(code)
+);
 ```
 
 # --seed--
@@ -86,9 +83,10 @@ assert(range.length === 2 && range[0] === 430 && range[1] === 70);
 
   const yScale = d3.scaleLinear()
     .domain([0, 5000])
+    .range([svgHeight - svgMargin, svgMargin]);
 
 
-</script>
+</script>  
 ```
 
 # --solutions--
@@ -124,6 +122,8 @@ assert(range.length === 2 && range[0] === 430 && range[1] === 70);
     .domain([0, 5000])
     .range([svgHeight - svgMargin, svgMargin]);
 
+  const xScale = d3.scaleLinear()
 
-</script>  
+
+</script>
 ```
