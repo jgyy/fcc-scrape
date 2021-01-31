@@ -1,13 +1,13 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1c9e4
-title: Part 7
+id: 5d8a4cfbe6b6180ed9a1c9e5
+title: Part 8
 challengeType: 0
-dashedName: part-7
+dashedName: part-8
 ---
 
 # --description--
 
-Next, target the `dashboard` class you created and give it a `width` of `980px` and a `height` of `500px`.
+Give the dashboard a `background-color` of `white` and a `box-shadow` of `5px 5px 5px 5px #888` to give it a little depth.
 
 # --hints--
 
@@ -16,7 +16,8 @@ test-text
 ```js
 const dashboard = $('.dashboard');
 assert(
-  dashboard.css('width') === '980px' && dashboard.css('height') === '500px'
+  dashboard.css('background-color') === 'rgb(255, 255, 255)' &&
+    dashboard.css('box-shadow') === 'rgb(136, 136, 136) 5px 5px 5px 5px'
 );
 ```
 
@@ -45,8 +46,12 @@ body {
   background-color: #ccc;
 }
 
+.dashboard {
+  width: 980px;
+  height: 500px;
 
-
+  
+}
 </style>
 ```
 
@@ -60,7 +65,9 @@ body {
 
 .dashboard {
   width: 980px;
-  height: 500px;  
+  height: 500px;
+  background-color: white;
+  box-shadow: 5px 5px 5px 5px #888;
 }
 </style>
 ```
