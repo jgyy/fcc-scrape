@@ -1,24 +1,25 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1ca0d
-title: Part 48
+id: 5d8a4cfbe6b6180ed9a1ca0e
+title: Part 49
 challengeType: 0
-dashedName: part-48
+dashedName: part-49
 ---
 
 # --description--
 
-Tell the path what data to use. Add an `attr` function and set the `d` to `twitterLine(data)`. This will the build the path using the `twitterLine` function you created and your data variable.
-
-Note that the `d` in this case is a path attribute for drawing a line and is different from a "d function".
-
-After you have added your code, take a look at the data flow to help understand what is happening. You pass the data array to your `twitterLine` function where it sets the x and y values using your "d functions". The "d functions" go through each item in the array, passing part of the item to each scale to find the appropriate coordinates. When it's done, the value you are setting here is created and sent back. The result ends up being a confusing string of numbers and coordinates to tell the path how to be drawn.
+Add three more `attr` functions to the path; one to set the `stroke` to your `twitterColor` variable, another to set the `stroke-width` to `3`, and a third to set the `fill` to `transparent`.
 
 # --hints--
 
 test-text
 
 ```js
-assert($('svg path')[2].getAttribute('d').length === 151);
+const twitterPath = $('svg path')[2];
+assert(
+  twitterPath.getAttribute('stroke') === '#7cd9d1' &&
+    twitterPath.getAttribute('stroke-width') == '3' &&
+    twitterPath.getAttribute('fill') === 'transparent'
+);
 ```
 
 # --seed--
@@ -117,6 +118,8 @@ assert($('svg path')[2].getAttribute('d').length === 151);
     .y(d => yScale(d.followers.twitter));
 
   lineGraph.append('path')
+    .attr('d', twitterLine(data))
+
 
 
 </script>
@@ -178,7 +181,7 @@ assert($('svg path')[2].getAttribute('d').length === 151);
     .style('transform', 'translate(-12px, 0) rotate(-50deg)')
     .style('text-anchor', 'end')
     .style('cursor', 'pointer')
-    .style('font', '10px verdana');
+    .style('font', '10px verdana')
 
   const twitterLine = d3.line()
     .x(d => xScale(d.year))
@@ -186,6 +189,9 @@ assert($('svg path')[2].getAttribute('d').length === 151);
 
   lineGraph.append('path')
     .attr('d', twitterLine(data))
+    .attr('stroke', twitterColor)
+    .attr('stroke-width', 3)
+    .attr('fill', 'transparent');
 
 
 
