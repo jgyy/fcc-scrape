@@ -1,21 +1,25 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1c9f3
-title: Part 22
+id: 5d8a4cfbe6b6180ed9a1c9f4
+title: Part 23
 challengeType: 0
-dashedName: part-22
+dashedName: part-23
 ---
 
 # --description--
 
-D3 has a bunch of functions for working with scales as well. One of them is `domain`. It takes an array that is used to describe the highest and lowest values of the data for this scale. After a quick look at the data, the values of the "followers" go from about 0 to 5000. Chain the `domain` function to the `yScale` and pass it the array `[0, 5000]`.
+The `range` function describes how to map the domain values for display on the graph. For example, a value of 5000 followers can't use 5000 as it y-coordinate on the SVG or it would be off the graph. You need to tell the range where the top and bottom of the graph is so the scale can give appropriate values for the y-coordinate.
+
+Chain the `range` function below the `domain` and pass it an array with `svgHeight - svgMargin` and `svgMargin` as the values. That will translate to `[430, 70]`. This is where the top and bottom of the graph are. So a data point of 5000 followers will map to a value of 430 to use as its y-coordinate and 0 followers will use 70 as its y-coordinate. Any value in between will scale linearly.
+
+Your graph will have a margin around it for things like axes and labels. The actual line data will display on the inside of this margin area, which is why you use those values. This will become more clear as you progress through the project.
 
 # --hints--
 
 test-text
 
 ```js
-const domain = yScale.domain();
-assert(domain.length === 2 && domain[0] === 0 && domain[1] === 5000);
+const range = yScale.range();
+assert(range.length === 2 && range[0] === 430 && range[1] === 70);
 ```
 
 # --seed--
@@ -81,6 +85,7 @@ assert(domain.length === 2 && domain[0] === 0 && domain[1] === 5000);
     .attr('height', svgHeight);
 
   const yScale = d3.scaleLinear()
+    .domain([0, 5000])
 
 
 </script>
@@ -117,7 +122,8 @@ assert(domain.length === 2 && domain[0] === 0 && domain[1] === 5000);
 
   const yScale = d3.scaleLinear()
     .domain([0, 5000])
+    .range([svgHeight - svgMargin, svgMargin]);
 
 
-</script>
+</script>  
 ```
