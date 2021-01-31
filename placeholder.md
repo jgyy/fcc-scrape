@@ -1,20 +1,24 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1ca15
-title: Part 56
+id: 5d8a4cfbe6b6180ed9a1ca16
+title: Part 57
 challengeType: 0
-dashedName: part-56
+dashedName: part-57
 ---
 
 # --description--
 
-Two lines down, only one more to add for the Instagram followers. On a new line, create a new `const` named `instagramLine` and use the D3 `line` function to create another line like you did for the other two.
+Appropriately set the `x` values for `instagramLine` like you did for the other two lines.
 
 # --hints--
 
 test-text
 
 ```js
-assert(/const\s*instagramLine\s*=\s*d3\s*\.\s*line\s*\(\s*\)/g.test(code));
+assert(
+  /const instagramLine = d3\.line\(\)\s*\.x\s*\(\s*d\s*=>\s*xScale\s*\(\s*d\.year\s*\)\s*\)/g.test(
+    code
+  )
+);
 ```
 
 # --seed--
@@ -128,6 +132,9 @@ assert(/const\s*instagramLine\s*=\s*d3\s*\.\s*line\s*\(\s*\)/g.test(code));
     .attr('stroke-width', 3)
     .attr('fill', 'transparent');
 
+  const instagramLine = d3.line()  
+
+
 
 </script>
 ```
@@ -210,7 +217,8 @@ assert(/const\s*instagramLine\s*=\s*d3\s*\.\s*line\s*\(\s*\)/g.test(code));
     .attr('stroke-width', 3)
     .attr('fill', 'transparent');
 
-  const instagramLine = d3.line()  
+  const instagramLine = d3.line()
+    .x(d => xScale(d.year))
 
 
 
