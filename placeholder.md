@@ -1,20 +1,24 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1ca2d
-title: Part 80
+id: 5d8a4cfbe6b6180ed9a1ca2e
+title: Part 81
 challengeType: 0
-dashedName: part-80
+dashedName: part-81
 ---
 
 # --description--
 
-Apply the appropriate `cursor` style for these circles.
+The line graph is looking good. All the empty space to the right will be for the pie graph and legend. Create a new `const` named `rightDashboard` and set equal to `d3.select('.dashboard')`. This will select your dashboard container again which currently only has the SVG element as a child.
 
 # --hints--
 
 test-text
 
 ```js
-assert($('svg circle')[18].style.cursor === 'pointer');
+assert(
+  /const\s*rightDashboard\s*=\s*d3\.select\s*\((`|'|")\.dashboard\1\s*\)/g.test(
+    code
+  )
+);
 ```
 
 # --seed--
@@ -169,6 +173,7 @@ assert($('svg circle')[18].style.cursor === 'pointer');
     .attr('r', 6)
     .attr('fill', 'white')
     .attr('stroke', instagramColor)
+    .style('cursor', 'pointer')
 
 
 
@@ -295,6 +300,8 @@ assert($('svg circle')[18].style.cursor === 'pointer');
     .attr('fill', 'white')
     .attr('stroke', instagramColor)
     .style('cursor', 'pointer')
+
+  const rightDashboard = d3.select('.dashboard')
 
 
 
