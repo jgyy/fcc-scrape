@@ -1,21 +1,23 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1c9e3
-title: Part 6
+id: 5d8a4cfbe6b6180ed9a1c9e4
+title: Part 7
 challengeType: 0
-dashedName: part-6
+dashedName: part-7
 ---
 
 # --description--
 
-You are now looking at the stylesheet that you linked to earlier. At the top of this file, target the `body` of the HTML document and give it a `background-color` of `#ccc`.
+Next, target the `dashboard` class you created and give it a `width` of `980px` and a `height` of `500px`.
 
 # --hints--
 
 test-text
 
 ```js
-const body = code.match(/body\s*{[\s\S]+?[^}]}/g)[0];
-assert(/background-color\s*:\s*#ccc\s*(;|})/gi.test(body));
+const dashboard = $('.dashboard');
+assert(
+  dashboard.css('width') === '980px' && dashboard.css('height') === '500px'
+);
 ```
 
 # --seed--
@@ -39,6 +41,10 @@ assert(/background-color\s*:\s*#ccc\s*(;|})/gi.test(body));
 
 ```html
 <style>
+body {
+  background-color: #ccc;
+}
+
 
 
 </style>
@@ -50,6 +56,11 @@ assert(/background-color\s*:\s*#ccc\s*(;|})/gi.test(body));
 <style>
 body {
   background-color: #ccc;
+}
+
+.dashboard {
+  width: 980px;
+  height: 500px;  
 }
 </style>
 ```
