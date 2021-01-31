@@ -1,13 +1,31 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1ca3b
-title: Part 94
+id: 5d8a4cfbe6b6180ed9a1ca3c
+title: Part 95
 challengeType: 0
-dashedName: part-94
+dashedName: part-95
 ---
 
 # --description--
 
-Add the `data` function to the selection. Pass it your `pie` function with an empty array as its argument for now. The next step will get the correct array to put there.
+You want the array passed to `pie` to be an array of key/value objects for the 2020 followers. `d3.entries` will build that array for you. Here's how that looks:
+
+```js
+d3.entries(data[8].followers))
+```
+
+The array it builds looks like this:
+
+```js
+[
+  { key: 'twitter', value: 2845 },
+  { key: 'tumblr', value: 2040 },
+  { key: 'instagram', value: 4801 }
+]
+```
+
+This is where the `value` comes from in your `pie` variable.
+
+Add the `d3.entries` function as your `pie` argument. Use it to create the above array.
 
 # --hints--
 
@@ -15,7 +33,7 @@ test-text
 
 ```js
 assert(
-  /const pieGraphData = pieGraph\.selectAll\((`|'|")pieSlices\1\)\s*\.\s*data\s*\(pie\s*\(\s*\[\s*\]\s*\)\s*\)/g.test(
+  /const pieGraphData = pieGraph\.selectAll\((`|'|")pieSlices\1\)\s*\.\s*data\s*\(pie\s*\(\s*d3\s*\.\s*entries\s*\(\s*data\s*\[\s*8\s*\]\s*\.\s*followers\s*\)\s*\)\s*\)/g.test(
     code
   )
 );
@@ -194,6 +212,7 @@ assert(
     .value(d => d.value);
     
   const pieGraphData = pieGraph.selectAll('pieSlices')
+    .data(pie([]))
 
 
 
@@ -340,7 +359,7 @@ assert(
     .value(d => d.value);
     
   const pieGraphData = pieGraph.selectAll('pieSlices')
-    .data(pie([]))
+    .data(pie(d3.entries(data[8].followers)))
 
 
 
