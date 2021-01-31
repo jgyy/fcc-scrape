@@ -1,20 +1,22 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1ca1e
-title: Part 65
+id: 5d8a4cfbe6b6180ed9a1ca1f
+title: Part 66
 challengeType: 0
-dashedName: part-65
+dashedName: part-66
 ---
 
 # --description--
 
-Add the `append` function to the selection, and use it to add `circle` elements. This will add the nine `circle` elements for your Twitter circles. They will be invisible to start, but the elements are there.
+Each circle needs a `cx` and `cy` attribute so it knows where to display on the SVG. These are similar to the x and y coordinates for the lines and will be calculated in the same way. The difference is that, for circles, the `cx` and `cy` are attributes, so you need to use the `attr` function.
+
+Use the `attr` function to set the `cx` to `d => xScale(d.year)`.
 
 # --hints--
 
 test-text
 
 ```js
-assert($('svg circle').length === 9);
+assert($('svg circle')[0].getAttribute('cx') == '70');
 ```
 
 # --seed--
@@ -138,11 +140,12 @@ assert($('svg circle').length === 9);
     .attr('stroke-width', 3)
     .attr('fill', 'transparent');
     
-  lineGraph.selectAll('twitter-circles')  
+  lineGraph.selectAll('twitter-circles')
     .data(data)
     .enter()
+    .append('circle')
 
-  
+    
 
 </script>
 ```
@@ -239,7 +242,8 @@ assert($('svg circle').length === 9);
     .data(data)
     .enter()
     .append('circle')
-
+    .attr('cx', d => xScale(d.year))
+    
     
 
 </script>
