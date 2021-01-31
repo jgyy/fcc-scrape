@@ -1,17 +1,13 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1ca01
-title: Part 36
+id: 5d8a4cfbe6b6180ed9a1ca02
+title: Part 37
 challengeType: 0
-dashedName: part-36
+dashedName: part-37
 ---
 
 # --description--
 
-The axis labels are `text` elements within the `g`, you can use the `selectAll` function to select them. Chain the `selectAll` function to select the `text` elements in this group. You can do that like this:
-
-```js
-.selectAll('element')
-```
+I want the text elements to be rotated slightly. Chain the `style` function to set the `transform` to `translate(-12px, 0) rotate(-50deg)`. This will put them at an angle.
 
 # --hints--
 
@@ -19,9 +15,11 @@ test-text
 
 ```js
 assert(
-  /\.attr\('transform', `translate\(0, \$\{svgHeight - svgMargin\}\)`\)\s*\.selectAll\s*\(\s*('|"|`)text\1\s*\)/g.test(
-    code
-  )
+  $('.tick > text').filter(
+    (node, index) =>
+      index.style.transform === 'translate(-12px) rotate(-50deg)' ||
+      index.style.transform === 'translate(-12px, 0px) rotate(-50deg)'
+  ).length === 9
 );
 ```
 
@@ -107,6 +105,7 @@ assert(
   lineGraph.append('g')
     .call(xAxis)
     .attr('transform', `translate(0, ${svgHeight - svgMargin})`)
+    .selectAll('text')
     
 
 </script>
@@ -162,7 +161,8 @@ assert(
     .call(xAxis)
     .attr('transform', `translate(0, ${svgHeight - svgMargin})`)
     .selectAll('text')
-    
+    .style('transform', 'translate(-12px, 0) rotate(-50deg)')
 
+  
 </script>
 ```
