@@ -1,24 +1,21 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1c9f2
-title: Part 21
+id: 5d8a4cfbe6b6180ed9a1c9f3
+title: Part 22
 challengeType: 0
-dashedName: part-21
+dashedName: part-22
 ---
 
 # --description--
 
-Your line graph needs some scales so it knows how to translate the data into visual distances. The first one is the scale for the y-axis. It will be to show the number of followers. D3 has many utilities for creating scales. You want to use it's `scaleLinear` method for this scale.
-
-Create a new `const` named `yScale`, and set it equal to `d3.scaleLinear()`.
+D3 has a bunch of functions for working with scales as well. One of them is `domain`. It takes an array that is used to describe the highest and lowest values of the data for this scale. After a quick look at the data, the values of the "followers" go from about 0 to 5000. Chain the `domain` function to the `yScale` and pass it the array `[0, 5000]`.
 
 # --hints--
 
 test-text
 
 ```js
-assert(
-  typeof yScale === 'function' && /yScale\s*=\s*d3\.scaleLinear/.test(code)
-);
+const domain = yScale.domain();
+assert(domain.length === 2 && domain[0] === 0 && domain[1] === 5000);
 ```
 
 # --seed--
@@ -83,6 +80,8 @@ assert(
     .attr('width', svgWidth)
     .attr('height', svgHeight);
 
+  const yScale = d3.scaleLinear()
+
 
 </script>
 ```
@@ -117,6 +116,7 @@ assert(
     .attr('height', svgHeight);
 
   const yScale = d3.scaleLinear()
+    .domain([0, 5000])
 
 
 </script>
