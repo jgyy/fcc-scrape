@@ -1,26 +1,29 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1ca04
-title: Part 39
+id: 5d8a4cfbe6b6180ed9a1ca05
+title: Part 40
 challengeType: 0
-dashedName: part-39
+dashedName: part-40
 ---
 
 # --description--
 
-Add two more `style` functions; one to set the `cursor` to `pointer`, and another to set the `font` to `10px verdana`.
+There are a number of D3 functions to work with how the "ticks" or your axis labels are displayed; one of them is `ticks`. Go back to where you defined the `yAxis` variable and chain a `ticks` function to it and pass it these two arguments: `6, '~s'`.
 
-You will add some hover effects later, so the pointer will make for a better experience.
+The `6` will set the number of ticks used to 6, and the `~s` will make the labels display the number of thousands followed by a `k`. For example, `4000` will become `4k`.
 
 # --hints--
 
 test-text
 
 ```js
+const ticks = $('.tick > text');
 assert(
-  $('.tick > text').filter(
-    (node, index) =>
-      index.style.cursor === 'pointer' && index.style.font === '10px verdana'
-  ).length === 9
+  ticks[0].innerHTML === '0k' &&
+    ticks[1].innerHTML === '1k' &&
+    ticks[2].innerHTML === '2k' &&
+    ticks[3].innerHTML === '3k' &&
+    ticks[4].innerHTML === '4k' &&
+    ticks[5].innerHTML === '5k'
 );
 ```
 
@@ -96,6 +99,7 @@ assert(
 
   const yAxis = d3.axisLeft(yScale)
 
+
   const xAxis = d3.axisBottom(xScale)
 
   lineGraph.append('g')
@@ -109,8 +113,8 @@ assert(
     .selectAll('text')
     .style('transform', 'translate(-12px, 0) rotate(-50deg)')
     .style('text-anchor', 'end')
-
-  
+    .style('cursor', 'pointer')
+    .style('font', '10px verdana');
 </script>
 ```
 
@@ -152,9 +156,10 @@ assert(
     .range([svgMargin, svgWidth - svgMargin]);
 
   const yAxis = d3.axisLeft(yScale)
-
+    .ticks(6, '~s');
 
   const xAxis = d3.axisBottom(xScale)
+
 
   lineGraph.append('g')
     .call(yAxis)
