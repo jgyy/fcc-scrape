@@ -1,22 +1,24 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1ca35
-title: Part 88
+id: 5d8a4cfbe6b6180ed9a1ca36
+title: Part 89
 challengeType: 0
-dashedName: part-88
+dashedName: part-89
 ---
 
 # --description--
 
-The pie chart needs a new scale to set the colors. Create a new `const` named `pieColors` and set it equal to `d3.scaleOrdinal()`. An ordinal scale is for a set of data that will have exactly one item in the range specifically for it.
-
-In this case, each platform of followers you have will map directly to a single color with nothing in between.
+Set the `domain` of the scale to `data[8].followers`. This will be three items, one for each platform.
 
 # --hints--
 
 test-text
 
 ```js
-assert(/const\s*pieColors\s*=\s*d3\s*\.\s*scaleOrdinal\s*\(\s*\)/g.test(code));
+assert(
+  /const pieColors = d3\.scaleOrdinal\(\)\s*\.\s*domain\s*\(\s*data\s*\[\s*8\s*\]\s*\.\s*followers\s*\)/g.test(
+    code
+  )
+);
 ```
 
 # --seed--
@@ -184,6 +186,8 @@ assert(/const\s*pieColors\s*=\s*d3\s*\.\s*scaleOrdinal\s*\(\s*\)/g.test(code));
     .outerRadius(100)
     .innerRadius(0);
 
+  const pieColors = d3.scaleOrdinal()  
+
 
 
 </script>
@@ -322,6 +326,7 @@ assert(/const\s*pieColors\s*=\s*d3\s*\.\s*scaleOrdinal\s*\(\s*\)/g.test(code));
     .innerRadius(0);
 
   const pieColors = d3.scaleOrdinal()  
+    .domain(data[8].followers)
 
 
 
