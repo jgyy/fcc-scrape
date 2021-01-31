@@ -1,75 +1,87 @@
 ---
-id: 587d7dbf367417b2b2512bba
-title: Use @each to Map Over Items in a List
+id: 587d7dbe367417b2b2512bb9
+title: Use @for to Create a Sass Loop
 challengeType: 0
-forumTopicId: 301461
-dashedName: use-each-to-map-over-items-in-a-list
+forumTopicId: 301462
+dashedName: use-for-to-create-a-sass-loop
 ---
 
 # --description--
 
-The last challenge showed how the `@for` directive uses a starting and ending value to loop a certain number of times. Sass also offers the `@each` directive which loops over each item in a list or map. On each iteration, the variable gets assigned to the current value from the list or map.
+The `@for` directive adds styles in a loop, very similar to a `for` loop in JavaScript.
+
+`@for` is used in two ways: "start through end" or "start to end". The main difference is that the "start **to** end" *excludes* the end number as part of the count, and "start **through** end" *includes* the end number as part of the count.
+
+Here's a start **through** end example:
 
 ```scss
-@each $color in blue, red, green {
-  .#{$color}-text {color: $color;}
+@for $i from 1 through 12 {
+  .col-#{$i} { width: 100%/12 * $i; }
 }
 ```
 
-A map has slightly different syntax. Here's an example:
+The `#{$i}` part is the syntax to combine a variable (`i`) with text to make a string. When the Sass file is converted to CSS, it looks like this:
 
 ```scss
-$colors: (color1: blue, color2: red, color3: green);
+.col-1 {
+  width: 8.33333%;
+}
 
-@each $key, $color in $colors {
-  .#{$color}-text {color: $color;}
+.col-2 {
+  width: 16.66667%;
+}
+
+...
+
+.col-12 {
+  width: 100%;
 }
 ```
 
-Note that the `$key` variable is needed to reference the keys in the map. Otherwise, the compiled CSS would have `color1`, `color2`... in it. Both of the above code examples are converted into the following CSS:
-
-```scss
-.blue-text {
-  color: blue;
-}
-
-.red-text {
-  color: red;
-}
-
-.green-text {
-  color: green;
-}
-```
+This is a powerful way to create a grid layout. Now you have twelve options for column widths available as CSS classes.
 
 # --instructions--
 
-Write an `@each` directive that goes through a list: `blue, black, red` and assigns each variable to a `.color-bg` class, where the "color" part changes for each item. Each class should set the `background-color` the respective color.
+Write a `@for` directive that takes a variable `$j` that goes from 1 **to** 6.
+
+It should create 5 classes called `.text-1` to `.text-5` where each has a `font-size` set to 15px multiplied by the index.
 
 # --hints--
 
-Your code should use the `@each` directive.
+Your code should use the `@for` directive.
 
 ```js
-assert(code.match(/@each /g));
+assert(code.match(/@for /g));
 ```
 
-Your `.blue-bg` class should have a `background-color` of blue.
+Your `.text-1` class should have a `font-size` of 15px.
 
 ```js
-assert($('.blue-bg').css('background-color') == 'rgb(0, 0, 255)');
+assert($('.text-1').css('font-size') == '15px');
 ```
 
-Your `.black-bg` class should have a `background-color` of black.
+Your `.text-2` class should have a `font-size` of 30px.
 
 ```js
-assert($('.black-bg').css('background-color') == 'rgb(0, 0, 0)');
+assert($('.text-2').css('font-size') == '30px');
 ```
 
-Your `.red-bg` class should have a `background-color` of red.
+Your `.text-3` class should have a `font-size` of 45px.
 
 ```js
-assert($('.red-bg').css('background-color') == 'rgb(255, 0, 0)');
+assert($('.text-3').css('font-size') == '45px');
+```
+
+Your `.text-4` class should have a `font-size` of 60px.
+
+```js
+assert($('.text-4').css('font-size') == '60px');
+```
+
+Your `.text-5` class should have a `font-size` of 75px.
+
+```js
+assert($('.text-5').css('font-size') == '75px');
 ```
 
 # --seed--
@@ -81,15 +93,13 @@ assert($('.red-bg').css('background-color') == 'rgb(255, 0, 0)');
 
 
 
-  div {
-    height: 200px;
-    width: 200px;
-  }
 </style>
 
-<div class="blue-bg"></div>
-<div class="black-bg"></div>
-<div class="red-bg"></div>
+<p class="text-1">Hello</p>
+<p class="text-2">Hello</p>
+<p class="text-3">Hello</p>
+<p class="text-4">Hello</p>
+<p class="text-5">Hello</p>
 ```
 
 # --solutions--
@@ -97,19 +107,17 @@ assert($('.red-bg').css('background-color') == 'rgb(255, 0, 0)');
 ```html
 <style type='text/scss'>
 
-  @each $color in blue, black, red {
-    .#{$color}-bg {background-color: $color;}
-  }
+@for $i from 1 through 5 {
+  .text-#{$i} { font-size: 15px * $i; }
+}
 
-  div {
-    height: 200px;
-    width: 200px;
-  }
 </style>
 
-<div class="blue-bg"></div>
-<div class="black-bg"></div>
-<div class="red-bg"></div>
+<p class="text-1">Hello</p>
+<p class="text-2">Hello</p>
+<p class="text-3">Hello</p>
+<p class="text-4">Hello</p>
+<p class="text-5">Hello</p>
 ```
 
 ---
@@ -117,19 +125,15 @@ assert($('.red-bg').css('background-color') == 'rgb(255, 0, 0)');
 ```html
 <style type='text/scss'>
 
-  $colors: (color1: blue, color2: black, color3: red);
+@for $i from 1 to 6 {
+  .text-#{$i} { font-size: 15px * $i; }
+}
 
-  @each $key, $color in $colors {
-    .#{$color}-bg {background-color: $color;}
-  }
-
-  div {
-    height: 200px;
-    width: 200px;
-  }
 </style>
 
-<div class="blue-bg"></div>
-<div class="black-bg"></div>
-<div class="red-bg"></div>
+<p class="text-1">Hello</p>
+<p class="text-2">Hello</p>
+<p class="text-3">Hello</p>
+<p class="text-4">Hello</p>
+<p class="text-5">Hello</p>
 ```
