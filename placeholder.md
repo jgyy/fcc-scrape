@@ -1,13 +1,13 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1ca3a
-title: Part 93
+id: 5d8a4cfbe6b6180ed9a1ca3b
+title: Part 94
 challengeType: 0
-dashedName: part-93
+dashedName: part-94
 ---
 
 # --description--
 
-Create a new `const` named `pieGraphData` and set the value equal to `pieGraph.selectAll('pieSlices')`. This is an empty selection similar circles you created earlier.
+Add the `data` function to the selection. Pass it your `pie` function with an empty array as its argument for now. The next step will get the correct array to put there.
 
 # --hints--
 
@@ -15,7 +15,7 @@ test-text
 
 ```js
 assert(
-  /const\s*pieGraphData\s*=\s*pieGraph\s*\.\s*selectAll\s*\(\s*(`|'|")pieSlices\1\s*\)/g.test(
+  /const pieGraphData = pieGraph\.selectAll\((`|'|")pieSlices\1\)\s*\.\s*data\s*\(pie\s*\(\s*\[\s*\]\s*\)\s*\)/g.test(
     code
   )
 );
@@ -192,9 +192,11 @@ assert(
 
   const pie = d3.pie()
     .value(d => d.value);
-
     
-  
+  const pieGraphData = pieGraph.selectAll('pieSlices')
+
+
+
 </script>
 ```
 
@@ -338,6 +340,7 @@ assert(
     .value(d => d.value);
     
   const pieGraphData = pieGraph.selectAll('pieSlices')
+    .data(pie([]))
 
 
 
