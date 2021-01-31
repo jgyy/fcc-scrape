@@ -1,23 +1,21 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1c9ea
-title: Part 13
+id: 5d8a4cfbe6b6180ed9a1c9eb
+title: Part 14
 challengeType: 0
-dashedName: part-13
+dashedName: part-14
 ---
 
 # --description--
 
-Add another `script` below the one you just added. Give it a `src` attribute of `./data.js`.
-
-This adds a `data` variable to your project that contains your number of social media followers, it is an array of objects. Each object has the year and your followers for three different platforms. You will see what it looks like shortly.
+Add a third script just before the closing body tag. It will be the JavaScript file you will use to create the rest of the dashboard. Give the script a `src` of `./dashboard.js`.
 
 # --hints--
 
 test-text
 
 ```js
-const script = code.match(/<script\s+[\s\S]+?[^>]>\s*<\/script\s*>/gi)[1];
-assert(/src\s*=\s*('|")\s*(\.\/)?data.js\s*\1/gi.test(script));
+const script = code.match(/<script\s+[\s\S]+?[^>]>\s*<\/script\s*>/gi)[2];
+assert(/src\s*=\s*('|")\s*(\.\/)?dashboard.js\s*\1/gi.test(script));
 ```
 
 # --seed--
@@ -65,12 +63,13 @@ assert(/src\s*=\s*('|")\s*(\.\/)?data.js\s*\1/gi.test(script));
     <title>D3 Dashboard</title>
     <link rel="stylesheet" href="./dashboard.css">
     <script src="./d3-5.9.2.min.js"></script>
-
-    
- </head>
+    <script src="./data.js"></script>
+  </head>
 
   <body>
     <div class="dashboard"></div>
+
+    
   </body>
 </html>
 ```
@@ -90,7 +89,7 @@ assert(/src\s*=\s*('|")\s*(\.\/)?data.js\s*\1/gi.test(script));
   <body>
     <div class="dashboard"></div>
 
-    
+    <script src="dashboard.js"></script>
   </body>
 </html>
 ```
