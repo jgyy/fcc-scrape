@@ -1,20 +1,26 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1ca38
-title: Part 91
+id: 5d8a4cfbe6b6180ed9a1ca39
+title: Part 92
 challengeType: 0
-dashedName: part-91
+dashedName: part-92
 ---
 
 # --description--
 
-Create a new `const` named `pie` and set it equal to `d3.pie()`. This is the D3 pie chart generator.
+Chain a `value` function to `pie` and pass it `d => d.value`. Each piece of data(`d`) will have a `key`(platform) and a `value`(number of followers), you want to return the number of followers here. The pie function will create an array of objects from these values that describe the angles and sizes the pie chart needs.
+
+In a few steps, you will make an array out of your data variable that will be passed to this function.
 
 # --hints--
 
 test-text
 
 ```js
-assert(/const\s*pie\s*=\s*d3\s*\.\s*pie\s*\(\s*\)/g.test(code));
+assert(
+  /const pie = d3\.pie\(\)\s*\.\s*value\s*\(\s*d\s*=>\s*d\.value\s*\)/g.test(
+    code
+  )
+);
 ```
 
 # --seed--
@@ -186,6 +192,8 @@ assert(/const\s*pie\s*=\s*d3\s*\.\s*pie\s*\(\s*\)/g.test(code));
     .domain(data[8].followers)
     .range([twitterColor, tumblrColor, instagramColor]);
 
+  const pie = d3.pie()
+
 
 
 </script>
@@ -328,8 +336,9 @@ assert(/const\s*pie\s*=\s*d3\s*\.\s*pie\s*\(\s*\)/g.test(code));
     .range([twitterColor, tumblrColor, instagramColor]);
 
   const pie = d3.pie()
+    .value(d => d.value);
 
-
-
+    
+  
 </script>
 ```
