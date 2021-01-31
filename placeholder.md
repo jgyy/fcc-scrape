@@ -1,13 +1,13 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1ca33
-title: Part 86
+id: 5d8a4cfbe6b6180ed9a1ca34
+title: Part 87
 challengeType: 0
-dashedName: part-86
+dashedName: part-87
 ---
 
 # --description--
 
-Chain the function `outerRadius(100)` to the arc. This will set the outer radius of the pie chart to 100.
+Chain `innerRadius` to the arc and pass it `0` (zero). This is set to zero to make a traditional pie chart, you would use a larger inner radius to create a doughnut chart.
 
 # --hints--
 
@@ -15,7 +15,9 @@ test-text
 
 ```js
 assert(
-  /const pieArc = d3\.arc\(\)\s*\.\s*outerRadius\s*\(\s*100\s*\)/g.test(code)
+  /const pieArc = d3\.arc\(\)\s*\.outerRadius\(100\)\s*\.\s*innerRadius\s*\(\s*0\s*\)/g.test(
+    code
+  )
 );
 ```
 
@@ -181,7 +183,8 @@ assert(
     .attr('height', 200)
 
   const pieArc = d3.arc()
-
+    .outerRadius(100)
+    
 
 
 </script>
@@ -317,7 +320,8 @@ assert(
 
   const pieArc = d3.arc()
     .outerRadius(100)
-    
+    .innerRadius(0);
+
 
 
 </script>
