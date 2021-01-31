@@ -1,24 +1,24 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1c9ec
-title: Part 15
+id: 5d8a4cfbe6b6180ed9a1c9ed
+title: Part 16
 challengeType: 0
-dashedName: part-15
+dashedName: part-16
 ---
 
 # --description--
 
-The script at the top is the `data.js` file you added. I have placed it here so you can see the data and recommend taking a look at it. The second script is the one you just added and where you will build the rest of the project.
-
-In the second script, create three `const` variables; `svgMargin` with a value of `70`, `svgWidth` with a value of `700`, and `svgHeight` equal to `500`. The first part of the dashboard will be a line graph. It will use these variables as its dimensions.
-
-The line graph will have the years from your data variable across the bottom, and a scale on the left to show the numbers of followers. Each platform will have a line going across the graph that shows how many followers you had for each year.
+Add three more variables; `twitterColor` with a value of `#7cd9d1`, `tumblrColor` equal to `#f6dd71`, and `instagramColor` at `#fd9b98`. Make sure those Hex values are strings. These will be colors used to represent the different platforms throughout the project.
 
 # --hints--
 
 test-text
 
 ```js
-assert(svgMargin === 70 && svgWidth === 700 && svgHeight === 500);
+assert(
+  twitterColor === '#7cd9d1' &&
+    tumblrColor === '#f6dd71' &&
+    instagramColor === '#fd9b98'
+);
 ```
 
 # --seed--
@@ -71,10 +71,12 @@ assert(svgMargin === 70 && svgWidth === 700 && svgHeight === 500);
   ];
 </script>
 <script>
+  const svgMargin = 70,
+    svgWidth = 700,
+    svgHeight = 500;
+  
 
-
-
-</script>
+</script>  
 ```
 
 # --solutions--
@@ -96,8 +98,11 @@ assert(svgMargin === 70 && svgWidth === 700 && svgHeight === 500);
 <script>
   const svgMargin = 70,
     svgWidth = 700,
-    svgHeight = 500;
-  
+    svgHeight = 500,
+    twitterColor = '#7cd9d1',
+    tumblrColor = '#f6dd71',
+    instagramColor = '#fd9b98';
 
-</script>  
+
+</script>
 ```
