@@ -1,24 +1,21 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1c9e8
-title: Part 11
+id: 5d8a4cfbe6b6180ed9a1c9e9
+title: Part 12
 challengeType: 0
-dashedName: part-11
+dashedName: part-12
 ---
 
 # --description--
 
-Later on, you will be adding more elements to the dashboard container. Set the `display` to `flex` and the `align-items` to `center` so those items will be vertically centered.
+Back in the HTML file, add a `script` tag at the bottom of the head element and give it a `src` attribute of `./d3-5.9.2.min.js`. Don't forget the closing tag. This will add the D3 library to your project from a downloaded copy.
 
 # --hints--
 
 test-text
 
 ```js
-const dashboard = $('.dashboard');
-assert(
-  dashboard.css('display') === 'flex' &&
-    dashboard.css('align-items') === 'center'
-);
+const script = code.match(/<script\s+[\s\S]+?[^>]>\s*<\/script\s*>/gi)[0];
+assert(/src\s*=\s*('|")\s*(\.\/)?d3-5.9.2.min.js\s*\1/gi.test(script));
 ```
 
 # --seed--
@@ -26,10 +23,34 @@ assert(
 ## --before-user-code--
 
 ```html
+<style>
+  body {
+    background-color: #ccc;
+    padding: 100px 10px;
+  }
+
+  .dashboard {
+    width: 980px;
+    height: 500px;
+    background-color: white;
+    box-shadow: 5px 5px 5px 5px #888;
+    margin: auto;
+    display: flex;
+    align-items: center;
+  }
+</style>
+```
+
+## --seed-contents--
+
+```html
 <!DOCTYPE html>
 <html>
   <head>
     <title>D3 Dashboard</title>
+    <link rel="stylesheet" href="./dashboard.css">
+
+    
   </head>
 
   <body>
@@ -38,44 +59,21 @@ assert(
 </html>
 ```
 
-## --seed-contents--
-
-```html
-<style>
-body {
-  background-color: #ccc;
-  padding: 100px 10px;
-}
-
-.dashboard {
-  width: 980px;
-  height: 500px;
-  background-color: white;
-  box-shadow: 5px 5px 5px 5px #888;
-  margin: auto;
-
-  
-}
-</style>
-```
-
 # --solutions--
 
 ```html
-<style>
-body {
-  background-color: #ccc;
-  padding: 100px 10px;
-}
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>D3 Dashboard</title>
+    <link rel="stylesheet" href="./dashboard.css">
+    <script src="./d3-5.9.2.min.js"></script>
 
-.dashboard {
-  width: 980px;
-  height: 500px;
-  background-color: white;
-  box-shadow: 5px 5px 5px 5px #888;
-  margin: auto;
-  display: flex;
-  align-items: center;  
-}
-</style>
+    
+ </head>
+
+  <body>
+    <div class="dashboard"></div>
+  </body>
+</html>
 ```
