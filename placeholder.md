@@ -1,20 +1,22 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1ca32
-title: Part 85
+id: 5d8a4cfbe6b6180ed9a1ca33
+title: Part 86
 challengeType: 0
-dashedName: part-85
+dashedName: part-86
 ---
 
 # --description--
 
-Create a new `const` named `pieArc` and set it equal to `d3.arc()`. This will be used to create the angles for the lines of the pie chart using the D3 arc generator.
+Chain the function `outerRadius(100)` to the arc. This will set the outer radius of the pie chart to 100.
 
 # --hints--
 
 test-text
 
 ```js
-assert(/const\s*pieArc\s*=\s*d3\s*\.\s*arc\s*\(\s*\)/g.test(code));
+assert(
+  /const pieArc = d3\.arc\(\)\s*\.\s*outerRadius\s*\(\s*100\s*\)/g.test(code)
+);
 ```
 
 # --seed--
@@ -178,7 +180,9 @@ assert(/const\s*pieArc\s*=\s*d3\s*\.\s*arc\s*\(\s*\)/g.test(code));
     .attr('width', 200)
     .attr('height', 200)
 
-    
+  const pieArc = d3.arc()
+
+
 
 </script>
 ```
@@ -312,7 +316,8 @@ assert(/const\s*pieArc\s*=\s*d3\s*\.\s*arc\s*\(\s*\)/g.test(code));
     .attr('height', 200)
 
   const pieArc = d3.arc()
-
+    .outerRadius(100)
+    
 
 
 </script>
