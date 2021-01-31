@@ -1,20 +1,25 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1ca19
-title: Part 60
+id: 5d8a4cfbe6b6180ed9a1ca1a
+title: Part 61
 challengeType: 0
-dashedName: part-60
+dashedName: part-61
 ---
 
 # --description--
 
-Use your `instagramLine` variable and your data to set the `d` attribute for this path like you did for the other two.
+Set the `stroke`, `stroke-width`, and `fill` attributes to their appropriate values for this line. The `stroke-width` and `fill` are the same as the other two.
 
 # --hints--
 
 test-text
 
 ```js
-assert($('svg path')[4].getAttribute('d').length === 171);
+const instagramPath = $('svg path')[4];
+assert(
+  instagramPath.getAttribute('stroke') === '#fd9b98' &&
+    instagramPath.getAttribute('stroke-width') == '3' &&
+    instagramPath.getAttribute('fill') === 'transparent'
+);
 ```
 
 # --seed--
@@ -133,8 +138,9 @@ assert($('svg path')[4].getAttribute('d').length === 171);
     .y(d => yScale(d.followers.instagram));
 
   lineGraph.append('path')
+    .attr('d', instagramLine(data))
 
-
+    
 
 </script>
 ```
@@ -223,8 +229,11 @@ assert($('svg path')[4].getAttribute('d').length === 171);
 
   lineGraph.append('path')
     .attr('d', instagramLine(data))
-
+    .attr('stroke', instagramColor)
+    .attr('stroke-width', 3)
+    .attr('fill', 'transparent');
     
 
+  
 </script>
 ```
