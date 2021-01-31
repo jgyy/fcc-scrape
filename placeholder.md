@@ -1,13 +1,13 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1ca2f
-title: Part 82
+id: 5d8a4cfbe6b6180ed9a1ca30
+title: Part 83
 challengeType: 0
-dashedName: part-82
+dashedName: part-83
 ---
 
 # --description--
 
-Use `append` to add a `div` element to the selection. This will put a div as another child of the dashboard container to hold the pie graph and legend.
+Create a new `const` named `pieGraph` and set it equal to `rightDashboard.append('svg')`. This will add an SVG element for the pie graph as a child of the div you just added. The pie graph will have three slices, one for each platform. It will display a percentage of how many followers each platform has for the displayed year.
 
 # --hints--
 
@@ -15,7 +15,7 @@ test-text
 
 ```js
 assert(
-  /const rightDashboard = d3\.select\((`|'|")\.dashboard\1\)\s*\.append\s*\(\s*(`|'|")div\2\)/g.test(
+  /const\s*pieGraph\s*=\s*rightDashboard\s*\.\s*append\s*\((`|'|")svg\1\s*\)/g.test(
     code
   )
 );
@@ -176,8 +176,9 @@ assert(
     .style('cursor', 'pointer')
 
   const rightDashboard = d3.select('.dashboard')
+    .append('div');
 
-
+    
 
 </script>
 ```
@@ -306,7 +307,9 @@ assert(
   const rightDashboard = d3.select('.dashboard')
     .append('div');
 
-    
+  const pieGraph = rightDashboard.append('svg')
+
+
 
 </script>
 ```
