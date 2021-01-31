@@ -1,13 +1,13 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1ca02
-title: Part 37
+id: 5d8a4cfbe6b6180ed9a1ca03
+title: Part 38
 challengeType: 0
-dashedName: part-37
+dashedName: part-38
 ---
 
 # --description--
 
-I want the text elements to be rotated slightly. Chain the `style` function to set the `transform` to `translate(-12px, 0) rotate(-50deg)`. This will put them at an angle.
+Add another `style` function to set the `text-anchor` to `end`. This will change the spot that each text element rotates around to the `end` of the element so they will align better.
 
 # --hints--
 
@@ -16,9 +16,7 @@ test-text
 ```js
 assert(
   $('.tick > text').filter(
-    (node, index) =>
-      index.style.transform === 'translate(-12px) rotate(-50deg)' ||
-      index.style.transform === 'translate(-12px, 0px) rotate(-50deg)'
+    (node, index) => index.style['text-anchor'] === 'end'
   ).length === 9
 );
 ```
@@ -106,8 +104,9 @@ assert(
     .call(xAxis)
     .attr('transform', `translate(0, ${svgHeight - svgMargin})`)
     .selectAll('text')
-    
+    .style('transform', 'translate(-12px, 0) rotate(-50deg)')
 
+  
 </script>
 ```
 
@@ -162,6 +161,7 @@ assert(
     .attr('transform', `translate(0, ${svgHeight - svgMargin})`)
     .selectAll('text')
     .style('transform', 'translate(-12px, 0) rotate(-50deg)')
+    .style('text-anchor', 'end')
 
   
 </script>
