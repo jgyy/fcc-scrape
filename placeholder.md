@@ -1,24 +1,27 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1ca1a
-title: Part 61
+id: 5d8a4cfbe6b6180ed9a1ca1b
+title: Part 62
 challengeType: 0
-dashedName: part-61
+dashedName: part-62
 ---
 
 # --description--
 
-Set the `stroke`, `stroke-width`, and `fill` attributes to their appropriate values for this line. The `stroke-width` and `fill` are the same as the other two.
+Okay, your graph is coming along. All the lines are drawn, but they look a little plain. The next series of code additions will add circles to each point on each line. First is the Twitter line. On a new line, use the `selectAll` function on your `lineGraph` variable and pass it the string `twitter-circles`. It will look like this:
+
+```js
+lineGraph.selectAll('twitter-circles')
+```
+
+`twitter-circles` don't exist and this selection will be an empty array, but it's needed. For now, you can just think of this string as a reference, similar to a variable name, so you know what elements you are working with.
 
 # --hints--
 
 test-text
 
 ```js
-const instagramPath = $('svg path')[4];
 assert(
-  instagramPath.getAttribute('stroke') === '#fd9b98' &&
-    instagramPath.getAttribute('stroke-width') == '3' &&
-    instagramPath.getAttribute('fill') === 'transparent'
+  /lineGraph\s*\.\s*selectAll\s*\((`|'|")\s*twitter-circles\1\s*\)/g.test(code)
 );
 ```
 
@@ -139,9 +142,12 @@ assert(
 
   lineGraph.append('path')
     .attr('d', instagramLine(data))
-
+    .attr('stroke', instagramColor)
+    .attr('stroke-width', 3)
+    .attr('fill', 'transparent');
     
 
+  
 </script>
 ```
 
@@ -210,7 +216,7 @@ assert(
   lineGraph.append('path')
     .attr('d', twitterLine(data))
     .attr('stroke', twitterColor)
-    .attr('stroke-width', 3)
+    .attr('stroke-width', '3')
     .attr('fill', 'transparent');
 
   const tumblrLine = d3.line()
@@ -220,7 +226,7 @@ assert(
   lineGraph.append('path')
     .attr('d', tumblrLine(data))
     .attr('stroke', tumblrColor)
-    .attr('stroke-width', 3)
+    .attr('stroke-width', '3')
     .attr('fill', 'transparent');
 
   const instagramLine = d3.line()
@@ -230,10 +236,12 @@ assert(
   lineGraph.append('path')
     .attr('d', instagramLine(data))
     .attr('stroke', instagramColor)
-    .attr('stroke-width', 3)
+    .attr('stroke-width', '3')
     .attr('fill', 'transparent');
     
+  lineGraph.selectAll('twitter-circles')  
 
-  
+
+
 </script>
 ```
