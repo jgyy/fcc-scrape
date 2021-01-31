@@ -1,25 +1,20 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1ca14
-title: Part 55
+id: 5d8a4cfbe6b6180ed9a1ca15
+title: Part 56
 challengeType: 0
-dashedName: part-55
+dashedName: part-56
 ---
 
 # --description--
 
-Add three `attr` functions to the selection; one to set the `stroke` to your `tumblrColor` variable, another to set the `stroke-width` to `3`, and a third to set the `fill` to `transparent`.
+Two lines down, only one more to add for the Instagram followers. On a new line, create a new `const` named `instagramLine` and use the D3 `line` function to create another line like you did for the other two.
 
 # --hints--
 
 test-text
 
 ```js
-const tumblrPath = $('svg path')[3];
-assert(
-  tumblrPath.getAttribute('stroke') === '#f6dd71' &&
-    tumblrPath.getAttribute('stroke-width') == '3' &&
-    tumblrPath.getAttribute('fill') === 'transparent'
-);
+assert(/const\s*instagramLine\s*=\s*d3\s*\.\s*line\s*\(\s*\)/g.test(code));
 ```
 
 # --seed--
@@ -129,8 +124,10 @@ assert(
 
   lineGraph.append('path')
     .attr('d', tumblrLine(data))
+    .attr('stroke', tumblrColor)
+    .attr('stroke-width', 3)
+    .attr('fill', 'transparent');
 
-  
 
 </script>
 ```
@@ -212,6 +209,9 @@ assert(
     .attr('stroke', tumblrColor)
     .attr('stroke-width', 3)
     .attr('fill', 'transparent');
+
+  const instagramLine = d3.line()  
+
 
 
 </script>
