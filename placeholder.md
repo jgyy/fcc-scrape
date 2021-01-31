@@ -1,24 +1,20 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1ca3d
-title: Part 96
+id: 5d8a4cfbe6b6180ed9a1ca3e
+title: Part 97
 challengeType: 0
-dashedName: part-96
+dashedName: part-97
 ---
 
 # --description--
 
-Add the `enter` function to the current selection. Just like before, the initial selection here has a length of zero and the data has a length of three. So when you append elements in the next step, three will be created; one for each slice of the pie.
+Use `append` to add three `g` elements for the pie.
 
 # --hints--
 
 test-text
 
 ```js
-assert(
-  /\.data\(pie\(d3\.entries\(data\[8\]\.followers\)\)\)\s*\.\s*enter\s*\(\s*\)/g.test(
-    code
-  )
-);
+assert($('svg g').length === 20);
 ```
 
 # --seed--
@@ -195,6 +191,7 @@ assert(
     
   const pieGraphData = pieGraph.selectAll('pieSlices')
     .data(pie(d3.entries(data[8].followers)))
+    .enter()
 
 
 
@@ -343,8 +340,9 @@ assert(
   const pieGraphData = pieGraph.selectAll('pieSlices')
     .data(pie(d3.entries(data[8].followers)))
     .enter()
+    .append('g')
 
-
+  
 
 </script>
 ```
