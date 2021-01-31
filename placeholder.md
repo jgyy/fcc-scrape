@@ -1,22 +1,22 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1ca1f
-title: Part 66
+id: 5d8a4cfbe6b6180ed9a1ca20
+title: Part 67
 challengeType: 0
-dashedName: part-66
+dashedName: part-67
 ---
 
 # --description--
 
-Each circle needs a `cx` and `cy` attribute so it knows where to display on the SVG. These are similar to the x and y coordinates for the lines and will be calculated in the same way. The difference is that, for circles, the `cx` and `cy` are attributes, so you need to use the `attr` function.
+Next, set the `cy` attribute to `d => xScale(d.followers.twitter)`.
 
-Use the `attr` function to set the `cx` to `d => xScale(d.year)`.
+As a reminder, this will pass each value of your Twitter followers to the `xScale` function where it will determine the y coordinate to use.
 
 # --hints--
 
 test-text
 
 ```js
-assert($('svg circle')[0].getAttribute('cx') == '70');
+assert($('svg circle')[0].getAttribute('cy') == '243.232');
 ```
 
 # --seed--
@@ -144,7 +144,8 @@ assert($('svg circle')[0].getAttribute('cx') == '70');
     .data(data)
     .enter()
     .append('circle')
-
+    .attr('cx', d => xScale(d.year))
+    
     
 
 </script>
@@ -243,8 +244,9 @@ assert($('svg circle')[0].getAttribute('cx') == '70');
     .enter()
     .append('circle')
     .attr('cx', d => xScale(d.year))
+    .attr('cy', d => yScale(d.followers.twitter))
     
-    
+
 
 </script>
 ```
