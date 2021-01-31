@@ -1,20 +1,24 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1ca0f
-title: Part 50
+id: 5d8a4cfbe6b6180ed9a1ca10
+title: Part 51
 challengeType: 0
-dashedName: part-50
+dashedName: part-51
 ---
 
 # --description--
 
-On a new line, create a new `const` named `tumblrLine` and set it equal to `d3.line()`.
+Set the `x` values for `tumblrLine` using another "d function". Use your `xScale` and the `d.year` to calculcate their values just like you did for the Twitter line.
 
 # --hints--
 
 test-text
 
 ```js
-assert(/const\s*tumblrLine\s*=\s*d3\s*\.\s*line\s*\(\s*\)/g.test(code));
+assert(
+  /const tumblrLine = d3\.line\(\)\s*\.x\s*\(\s*d\s*=>\s*xScale\s*\(\s*d\.year\s*\)\s*\)/g.test(
+    code
+  )
+);
 ```
 
 # --seed--
@@ -118,6 +122,7 @@ assert(/const\s*tumblrLine\s*=\s*d3\s*\.\s*line\s*\(\s*\)/g.test(code));
     .attr('stroke-width', 3)
     .attr('fill', 'transparent');
 
+  const tumblrLine = d3.line()
 
 
 </script>
@@ -192,7 +197,8 @@ assert(/const\s*tumblrLine\s*=\s*d3\s*\.\s*line\s*\(\s*\)/g.test(code));
     .attr('fill', 'transparent');
 
   const tumblrLine = d3.line()
-
+    .x(d => xScale(d.year))
+    
 
 </script>
 ```
