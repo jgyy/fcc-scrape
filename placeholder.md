@@ -1,13 +1,15 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1ca03
-title: Part 38
+id: 5d8a4cfbe6b6180ed9a1ca04
+title: Part 39
 challengeType: 0
-dashedName: part-38
+dashedName: part-39
 ---
 
 # --description--
 
-Add another `style` function to set the `text-anchor` to `end`. This will change the spot that each text element rotates around to the `end` of the element so they will align better.
+Add two more `style` functions; one to set the `cursor` to `pointer`, and another to set the `font` to `10px verdana`.
+
+You will add some hover effects later, so the pointer will make for a better experience.
 
 # --hints--
 
@@ -16,7 +18,8 @@ test-text
 ```js
 assert(
   $('.tick > text').filter(
-    (node, index) => index.style['text-anchor'] === 'end'
+    (node, index) =>
+      index.style.cursor === 'pointer' && index.style.font === '10px verdana'
   ).length === 9
 );
 ```
@@ -105,6 +108,7 @@ assert(
     .attr('transform', `translate(0, ${svgHeight - svgMargin})`)
     .selectAll('text')
     .style('transform', 'translate(-12px, 0) rotate(-50deg)')
+    .style('text-anchor', 'end')
 
   
 </script>
@@ -149,6 +153,7 @@ assert(
 
   const yAxis = d3.axisLeft(yScale)
 
+
   const xAxis = d3.axisBottom(xScale)
 
   lineGraph.append('g')
@@ -162,7 +167,7 @@ assert(
     .selectAll('text')
     .style('transform', 'translate(-12px, 0) rotate(-50deg)')
     .style('text-anchor', 'end')
-
-  
+    .style('cursor', 'pointer')
+    .style('font', '10px verdana');
 </script>
 ```
