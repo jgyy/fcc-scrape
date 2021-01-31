@@ -1,21 +1,24 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1c9e7
-title: Part 10
+id: 5d8a4cfbe6b6180ed9a1c9e8
+title: Part 11
 challengeType: 0
-dashedName: part-10
+dashedName: part-11
 ---
 
 # --description--
 
-Give the container some space by adding a `padding` of `100px 10px` to the `body` element.
+Later on, you will be adding more elements to the dashboard container. Set the `display` to `flex` and the `align-items` to `center` so those items will be vertically centered.
 
 # --hints--
 
 test-text
 
 ```js
-const body = code.match(/body\s*{[\s\S]+?[^}]}/g)[0];
-assert(/padding\s*:\s*100px\s*10px\s*(;|})/g.test(body));
+const dashboard = $('.dashboard');
+assert(
+  dashboard.css('display') === 'flex' &&
+    dashboard.css('align-items') === 'center'
+);
 ```
 
 # --seed--
@@ -41,8 +44,7 @@ assert(/padding\s*:\s*100px\s*10px\s*(;|})/g.test(body));
 <style>
 body {
   background-color: #ccc;
-
-  
+  padding: 100px 10px;
 }
 
 .dashboard {
@@ -51,6 +53,8 @@ body {
   background-color: white;
   box-shadow: 5px 5px 5px 5px #888;
   margin: auto;
+
+  
 }
 </style>
 ```
@@ -70,6 +74,8 @@ body {
   background-color: white;
   box-shadow: 5px 5px 5px 5px #888;
   margin: auto;
+  display: flex;
+  align-items: center;  
 }
 </style>
 ```
