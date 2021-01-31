@@ -1,23 +1,20 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1ca31
-title: Part 84
+id: 5d8a4cfbe6b6180ed9a1ca32
+title: Part 85
 challengeType: 0
-dashedName: part-84
+dashedName: part-85
 ---
 
 # --description--
 
-Add two `attr` functions that set the `width` and `height` of the new SVG to `200`.
+Create a new `const` named `pieArc` and set it equal to `d3.arc()`. This will be used to create the angles for the lines of the pie chart using the D3 arc generator.
 
 # --hints--
 
 test-text
 
 ```js
-assert(
-  $('svg')[1].getAttribute('width') == '200' &&
-    $('svg')[1].getAttribute('height') == '200'
-);
+assert(/const\s*pieArc\s*=\s*d3\s*\.\s*arc\s*\(\s*\)/g.test(code));
 ```
 
 # --seed--
@@ -178,8 +175,10 @@ assert(
     .append('div');
 
   const pieGraph = rightDashboard.append('svg')
+    .attr('width', 200)
+    .attr('height', 200)
 
-
+    
 
 </script>
 ```
@@ -312,7 +311,9 @@ assert(
     .attr('width', 200)
     .attr('height', 200)
 
-    
+  const pieArc = d3.arc()
+
+
 
 </script>
 ```
