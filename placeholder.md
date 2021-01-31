@@ -1,20 +1,20 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1ca3f
-title: Part 98
+id: 5d8a4cfbe6b6180ed9a1ca40
+title: Part 99
 challengeType: 0
-dashedName: part-98
+dashedName: part-99
 ---
 
 # --description--
 
-On a new line, `append` a `path` element to your `pieGraphData` variable. This is where you will start to draw the pie chart.
+Set the `d` attribute to your `pieArc` variable. Just like the `d` in your lines, this is an SVG attribute for path elements that describes how to draw things. Your `pieArc` variable will determine what this value is for you.
 
 # --hints--
 
 test-text
 
 ```js
-assert(/pieGraphData\s*\.\s*append\s*\((`|'|")path\1\s*\)/g.test(code));
+assert($('.dashboard div svg path')[0].getAttribute('d').length === 94);
 ```
 
 # --seed--
@@ -194,7 +194,9 @@ assert(/pieGraphData\s*\.\s*append\s*\((`|'|")path\1\s*\)/g.test(code));
     .enter()
     .append('g')
 
-  
+  pieGraphData.append('path')
+
+
 
 </script>
 ```
@@ -343,9 +345,8 @@ assert(/pieGraphData\s*\.\s*append\s*\((`|'|")path\1\s*\)/g.test(code));
     .enter()
     .append('g')
 
+
   pieGraphData.append('path')
-
-
-
+    .attr('d', pieArc)
 </script>
 ```
