@@ -1,25 +1,20 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1ca0e
-title: Part 49
+id: 5d8a4cfbe6b6180ed9a1ca0f
+title: Part 50
 challengeType: 0
-dashedName: part-49
+dashedName: part-50
 ---
 
 # --description--
 
-Add three more `attr` functions to the path; one to set the `stroke` to your `twitterColor` variable, another to set the `stroke-width` to `3`, and a third to set the `fill` to `transparent`.
+On a new line, create a new `const` named `tumblrLine` and set it equal to `d3.line()`.
 
 # --hints--
 
 test-text
 
 ```js
-const twitterPath = $('svg path')[2];
-assert(
-  twitterPath.getAttribute('stroke') === '#7cd9d1' &&
-    twitterPath.getAttribute('stroke-width') == '3' &&
-    twitterPath.getAttribute('fill') === 'transparent'
-);
+assert(/const\s*tumblrLine\s*=\s*d3\s*\.\s*line\s*\(\s*\)/g.test(code));
 ```
 
 # --seed--
@@ -111,7 +106,7 @@ assert(
     .style('transform', 'translate(-12px, 0) rotate(-50deg)')
     .style('text-anchor', 'end')
     .style('cursor', 'pointer')
-    .style('font', '10px verdana');
+    .style('font', '10px verdana')
 
   const twitterLine = d3.line()
     .x(d => xScale(d.year))
@@ -119,6 +114,9 @@ assert(
 
   lineGraph.append('path')
     .attr('d', twitterLine(data))
+    .attr('stroke', twitterColor)
+    .attr('stroke-width', 3)
+    .attr('fill', 'transparent');
 
 
 
@@ -193,6 +191,7 @@ assert(
     .attr('stroke-width', 3)
     .attr('fill', 'transparent');
 
+  const tumblrLine = d3.line()
 
 
 </script>
