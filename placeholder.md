@@ -1,21 +1,23 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1c9f7
-title: Part 26
+id: 5d8a4cfbe6b6180ed9a1c9f8
+title: Part 27
 challengeType: 0
-dashedName: part-26
+dashedName: part-27
 ---
 
 # --description--
 
-The range for this scale will go from the left of your graph to the right, with 2012 on the left and 2020 on the right. Add the `range` function to the `xScale` and pass it an array with the values: `svgMargin` and `svgWidth - svgMargin`. This will translate to `[70, 630]`. So 2012 will use 70 as is x-coordinate and 2020 will use 630 as its x-coordinate.
+The two scales you defined will be used to create the axes and lines. First is the y-axis, it will be a line with some labels on the left of the graph. Create a new `const` named `yAxis` and set it equal to `d3.axisLeft(yScale)`. This will use the information from the `yScale` variable to build the axis.
 
 # --hints--
 
 test-text
 
 ```js
-const range = xScale.range();
-assert(range.length === 2 && range[0] === 70 && range[1] === 630);
+assert(
+  typeof yAxis === 'function' &&
+    /yAxis\s*=\s*d3\.axisLeft\(\s*yScale\)/.test(code)
+);
 ```
 
 # --seed--
@@ -86,9 +88,10 @@ assert(range.length === 2 && range[0] === 70 && range[1] === 630);
 
   const xScale = d3.scaleLinear()
     .domain([2012, 2020])
+    .range([svgMargin, svgWidth - svgMargin]);
 
 
-</script>
+</script>  
 ```
 
 # --solutions--
@@ -128,6 +131,8 @@ assert(range.length === 2 && range[0] === 70 && range[1] === 630);
     .domain([2012, 2020])
     .range([svgMargin, svgWidth - svgMargin]);
 
+  const yAxis = d3.axisLeft(yScale)
 
-</script>  
+
+</script>
 ```
