@@ -1,20 +1,20 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1c9fa
-title: Part 29
+id: 5d8a4cfbe6b6180ed9a1c9fb
+title: Part 30
 challengeType: 0
-dashedName: part-29
+dashedName: part-30
 ---
 
 # --description--
 
-On a new line, append a new `g` element to your `lineGraph` variable. `lineGraph.append('g')` will do that for you. This will add a `g` to your SVG and be for displaying the y-axis. `g` is an SVG element that stands for "group".
+`call` is another function to use with selections. Chain a `call` function to the selection and pass your `yAxis` variable to it. This will draw your y-axis on the SVG.
 
 # --hints--
 
 test-text
 
 ```js
-assert($('svg')[0].children[0] === $('g')[0] && $('g').length === 1);
+assert($('.tick').length === 11 && /\.call\(\s*yAxis\s*\)/.test(code));
 ```
 
 # --seed--
@@ -91,6 +91,8 @@ assert($('svg')[0].children[0] === $('g')[0] && $('g').length === 1);
 
   const xAxis = d3.axisBottom(xScale)
 
+  lineGraph.append('g')
+
 
 </script>
 ```
@@ -137,6 +139,8 @@ assert($('svg')[0].children[0] === $('g')[0] && $('g').length === 1);
   const xAxis = d3.axisBottom(xScale)
 
   lineGraph.append('g')
+    .call(yAxis)
+    
 
 
 </script>
