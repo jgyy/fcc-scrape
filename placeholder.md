@@ -1,23 +1,20 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1c9f9
-title: Part 28
+id: 5d8a4cfbe6b6180ed9a1c9fa
+title: Part 29
 challengeType: 0
-dashedName: part-28
+dashedName: part-29
 ---
 
 # --description--
 
-Create a new `const` named `xAxis` and set the value equal to `d3.axisBottom(xScale)`. This will create another axis for the bottom of the graph using the information from `xScale`. Although the axes do not display yet, they have the information they need to display correctly.
+On a new line, append a new `g` element to your `lineGraph` variable. `lineGraph.append('g')` will do that for you. This will add a `g` to your SVG and be for displaying the y-axis. `g` is an SVG element that stands for "group".
 
 # --hints--
 
 test-text
 
 ```js
-assert(
-  typeof xAxis === 'function' &&
-    /xAxis\s*=\s*d3\.axisBottom\(\s*xScale\)/.test(code)
-);
+assert($('svg')[0].children[0] === $('g')[0] && $('g').length === 1);
 ```
 
 # --seed--
@@ -92,6 +89,8 @@ assert(
 
   const yAxis = d3.axisLeft(yScale)
 
+  const xAxis = d3.axisBottom(xScale)
+
 
 </script>
 ```
@@ -136,6 +135,8 @@ assert(
   const yAxis = d3.axisLeft(yScale)
 
   const xAxis = d3.axisBottom(xScale)
+
+  lineGraph.append('g')
 
 
 </script>
