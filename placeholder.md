@@ -1,81 +1,92 @@
 ---
-id: 587d7dbf367417b2b2512bbb
-title: Apply a Style Until a Condition is Met with @while
+id: 587d7dbd367417b2b2512bb6
+title: Create Reusable CSS with Mixins
 challengeType: 0
-forumTopicId: 301454
-dashedName: apply-a-style-until-a-condition-is-met-with-while
+forumTopicId: 301455
+dashedName: create-reusable-css-with-mixins
 ---
 
 # --description--
 
-The `@while` directive is an option with similar functionality to the JavaScript `while` loop. It creates CSS rules until a condition is met.
+In Sass, a <dfn>mixin</dfn> is a group of CSS declarations that can be reused throughout the style sheet.
 
-The `@for` challenge gave an example to create a simple grid system. This can also work with `@while`.
+Newer CSS features take time before they are fully adopted and ready to use in all browsers. As features are added to browsers, CSS rules using them may need vendor prefixes. Consider "box-shadow":
 
 ```scss
-$x: 1;
-@while $x < 13 {
-  .col-#{$x} { width: 100%/12 * $x;}
-  $x: $x + 1;
+div {
+  -webkit-box-shadow: 0px 0px 4px #fff;
+  -moz-box-shadow: 0px 0px 4px #fff;
+  -ms-box-shadow: 0px 0px 4px #fff;
+  box-shadow: 0px 0px 4px #fff;
 }
 ```
 
-First, define a variable `$x` and set it to 1. Next, use the `@while` directive to create the grid system *while* `$x` is less than 13. After setting the CSS rule for `width`, `$x` is incremented by 1 to avoid an infinite loop.
+It's a lot of typing to re-write this rule for all the elements that have a `box-shadow`, or to change each value to test different effects. Mixins are like functions for CSS. Here is how to write one:
+
+```scss
+@mixin box-shadow($x, $y, $blur, $c){ 
+  -webkit-box-shadow: $x $y $blur $c;
+  -moz-box-shadow: $x $y $blur $c;
+  -ms-box-shadow: $x $y $blur $c;
+  box-shadow: $x $y $blur $c;
+}
+```
+
+The definition starts with `@mixin` followed by a custom name. The parameters (the `$x`, `$y`, `$blur`, and `$c` in the example above) are optional. Now any time a `box-shadow` rule is needed, only a single line calling the mixin replaces having to type all the vendor prefixes. A mixin is called with the `@include` directive:
+
+```scss
+div {
+  @include box-shadow(0px, 0px, 4px, #fff);
+}
+```
 
 # --instructions--
 
-Use `@while` to create a series of classes with different `font-sizes`.
-
-There should be 5 different classes from `text-1` to `text-5`. Then set `font-size` to `15px` multiplied by the current index number. Make sure to avoid an infinite loop!
+Write a mixin for `border-radius` and give it a `$radius` parameter. It should use all the vendor prefixes from the example. Then use the `border-radius` mixin to give the `#awesome` element a border radius of 15px.
 
 # --hints--
 
-Your code should use the `@while` directive.
+Your code should declare a mixin named `border-radius` which has a parameter named `$radius`.
 
 ```js
-assert(code.match(/@while /g));
+assert(code.match(/@mixin\s+?border-radius\s*?\(\s*?\$radius\s*?\)\s*?{/gi));
 ```
 
-Your code should use an index variable which starts at an index of 1.
+Your code should include the `-webkit-border-radius` vendor prefix that uses the `$radius` parameter.
 
 ```js
-assert(code.match(/\$.*:\s*?1;/gi));
+assert(
+  __helpers.removeWhiteSpace(code).match(/-webkit-border-radius:\$radius;/gi)
+);
 ```
 
-Your code should increment the counter variable.
+Your code should include the `-moz-border-radius` vendor prefix that uses the `$radius` parameter.
 
 ```js
-assert(code.match(/\$(.*)\s*?:\s*\$\1\s*\+\s*1\s*;/gi));
+assert(
+  __helpers.removeWhiteSpace(code).match(/-moz-border-radius:\$radius;/gi)
+);
 ```
 
-Your `.text-1` class should have a `font-size` of 15px.
+Your code should include the `-ms-border-radius` vendor prefix that uses the `$radius` parameter.
 
 ```js
-assert($('.text-1').css('font-size') == '15px');
+assert(__helpers.removeWhiteSpace(code).match(/-ms-border-radius:\$radius;/gi));
 ```
 
-Your `.text-2` class should have a `font-size` of 30px.
+Your code should include the general `border-radius` rule that uses the `$radius` parameter.
 
 ```js
-assert($('.text-2').css('font-size') == '30px');
+assert(
+  __helpers.removeWhiteSpace(code).match(/border-radius:\$radius;/gi).length ==
+    4
+);
 ```
 
-Your `.text-3` class should have a `font-size` of 45px.
+Your code should call the `border-radius mixin` using the `@include` keyword, setting it to 15px.
 
 ```js
-assert($('.text-3').css('font-size') == '45px');
-```
-
-Your `.text-4` class should have a `font-size` of 60px.
-
-```js
-assert($('.text-4').css('font-size') == '60px');
-```
-
-Your `.text-5` class should have a `font-size` of 75px.
-
-```js
-assert($('.text-5').css('font-size') == '75px');
+assert(code.match(/@include\s+?border-radius\(\s*?15px\s*?\)\s*;/gi));
 ```
 
 # --seed--
@@ -87,31 +98,35 @@ assert($('.text-5').css('font-size') == '75px');
 
 
 
+  #awesome {
+    width: 150px;
+    height: 150px;
+    background-color: green;
+
+  }
 </style>
 
-<p class="text-1">Hello</p>
-<p class="text-2">Hello</p>
-<p class="text-3">Hello</p>
-<p class="text-4">Hello</p>
-<p class="text-5">Hello</p>
+<div id="awesome"></div>
 ```
 
 # --solutions--
 
 ```html
 <style type='text/scss'>
-  $x: 1;
-  @while $x < 6 {
-    .text-#{$x}{
-      font-size: 15px * $x;
-    }
-    $x: $x + 1;
+  @mixin border-radius($radius) {
+    -webkit-border-radius: $radius;
+    -moz-border-radius: $radius;
+    -ms-border-radius: $radius;
+    border-radius: $radius;
+  }
+
+  #awesome {
+    width: 150px;
+    height: 150px;
+    background-color: green;
+    @include border-radius(15px);
   }
 </style>
 
-<p class="text-1">Hello</p>
-<p class="text-2">Hello</p>
-<p class="text-3">Hello</p>
-<p class="text-4">Hello</p>
-<p class="text-5">Hello</p>
+<div id="awesome"></div>
 ```
