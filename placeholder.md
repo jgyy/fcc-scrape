@@ -1,22 +1,24 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1c9de
-title: Part 1
+id: 5d8a4cfbe6b6180ed9a1c9df
+title: Part 2
 challengeType: 0
-dashedName: part-1
+dashedName: part-2
 ---
 
 # --description--
 
-Welcome to the dashboard project! You will be using the JavaScript data visualization library, D3, to build a visualization of your social media followers. It will consist of a line graph, a pie chart, and a legend.
-
-First, you need to create the HTML file. Start by adding the `<!DOCTYPE html>` declaration at the top of the file to tell the browser what type of document it's reading.
+Next, add opening and closing `html`, `head` and `body` tags below the doctype. Be sure to nest them properly.
 
 # --hints--
 
 test-text
 
 ```js
-assert(/<!DOCTYPE\s+html\s*>/gi.test(code));
+assert(
+  /<!DOCTYPE\s+html\s*>\s*<html\s*>\s*<head\s*>\s*<\/head\s*>\s*<body\s*>\s*<\/body\s*>\s*<\/html\s*>/gi.test(
+    code
+  )
+);
 ```
 
 # --seed--
@@ -24,10 +26,18 @@ assert(/<!DOCTYPE\s+html\s*>/gi.test(code));
 ## --seed-contents--
 
 ```html
+<!DOCTYPE html>
 ```
 
 # --solutions--
 
 ```html
 <!DOCTYPE html>
+<html>
+  <head>
+  </head>
+
+  <body>
+  </body>
+</html>
 ```
