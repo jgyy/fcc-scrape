@@ -1,15 +1,13 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1ca39
-title: Part 92
+id: 5d8a4cfbe6b6180ed9a1ca3a
+title: Part 93
 challengeType: 0
-dashedName: part-92
+dashedName: part-93
 ---
 
 # --description--
 
-Chain a `value` function to `pie` and pass it `d => d.value`. Each piece of data(`d`) will have a `key`(platform) and a `value`(number of followers), you want to return the number of followers here. The pie function will create an array of objects from these values that describe the angles and sizes the pie chart needs.
-
-In a few steps, you will make an array out of your data variable that will be passed to this function.
+Create a new `const` named `pieGraphData` and set the value equal to `pieGraph.selectAll('pieSlices')`. This is an empty selection similar circles you created earlier.
 
 # --hints--
 
@@ -17,7 +15,7 @@ test-text
 
 ```js
 assert(
-  /const pie = d3\.pie\(\)\s*\.\s*value\s*\(\s*d\s*=>\s*d\.value\s*\)/g.test(
+  /const\s*pieGraphData\s*=\s*pieGraph\s*\.\s*selectAll\s*\(\s*(`|'|")pieSlices\1\s*\)/g.test(
     code
   )
 );
@@ -193,9 +191,10 @@ assert(
     .range([twitterColor, tumblrColor, instagramColor]);
 
   const pie = d3.pie()
+    .value(d => d.value);
 
-
-
+    
+  
 </script>
 ```
 
@@ -337,8 +336,10 @@ assert(
 
   const pie = d3.pie()
     .value(d => d.value);
-
     
-  
+  const pieGraphData = pieGraph.selectAll('pieSlices')
+
+
+
 </script>
 ```
