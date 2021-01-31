@@ -1,20 +1,20 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1c9ff
-title: Part 34
+id: 5d8a4cfbe6b6180ed9a1ca00
+title: Part 35
 challengeType: 0
-dashedName: part-34
+dashedName: part-35
 ---
 
 # --description--
 
-Use the `call` function to draw the x-axis onto the SVG like you did for the y-axis.
+The axis has the right size and labels, but needs to be moved down. Use the `attr` function to set the `transform` like you did before. This time move it down your `svgHeight` minus the `svgMargin`.
 
 # --hints--
 
 test-text
 
 ```js
-assert($('g').length === 22);
+assert($('svg > g')[1].attributes.transform.nodeValue === 'translate(0, 430)');
 ```
 
 # --seed--
@@ -95,10 +95,11 @@ assert($('g').length === 22);
     .call(yAxis)
     .attr('transform', `translate(${svgMargin}, 0)`)
     .style('font', '10px verdana');
-
+    
   lineGraph.append('g')
+    .call(xAxis)
 
-
+  
 </script>
 ```
 
@@ -147,10 +148,11 @@ assert($('g').length === 22);
     .call(yAxis)
     .attr('transform', `translate(${svgMargin}, 0)`)
     .style('font', '10px verdana');
-    
+
   lineGraph.append('g')
     .call(xAxis)
+    .attr('transform', `translate(0, ${svgHeight - svgMargin})`)
+    
 
-  
 </script>
 ```
