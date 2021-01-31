@@ -1,24 +1,20 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1ca27
-title: Part 74
+id: 5d8a4cfbe6b6180ed9a1ca28
+title: Part 75
 challengeType: 0
-dashedName: part-74
+dashedName: part-75
 ---
 
 # --description--
 
-Use the `attr` function to set the `r` to `6`, the `fill` to `white`, and the `stroke` to your `tumblrColor` variable.
+Set the `cursor` to `pointer` using the `style` function.
 
 # --hints--
 
 test-text
 
 ```js
-assert(
-  $('svg circle')[9].getAttribute('r') == '6' &&
-    $('svg circle')[9].getAttribute('fill') === 'white' &&
-    $('svg circle')[9].getAttribute('stroke') === '#f6dd71'
-);
+assert($('svg circle')[9].style.cursor === 'pointer');
 ```
 
 # --seed--
@@ -159,8 +155,11 @@ assert(
     .append('circle')
     .attr('cx', d => xScale(d.year))
     .attr('cy', d => yScale(d.followers.tumblr))
+    .attr('r', 6)
+    .attr('fill', 'white')
+    .attr('stroke', tumblrColor)
 
-    
+
 
 </script>
 ```
@@ -273,8 +272,9 @@ assert(
     .attr('r', 6)
     .attr('fill', 'white')
     .attr('stroke', tumblrColor)
+    .style('cursor', 'pointer')
 
-
+  
 
 </script>
 ```
