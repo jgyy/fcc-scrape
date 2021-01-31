@@ -1,17 +1,13 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1ca0b
-title: Part 46
+id: 5d8a4cfbe6b6180ed9a1ca0c
+title: Part 47
 challengeType: 0
-dashedName: part-46
+dashedName: part-47
 ---
 
 # --description--
 
-Chain the `y` function to the line and pass it a "d function" that returns your `yScale` with `d.followers.twitter` as its argument.
-
-This is similar to how you set the x values. It will use the values of your Twitter followers and your `yScale` to set the y coordinate for each item.
-
-These "d functions" use implicit returns. But if you add curly brackets and a return statement, you can put any JavaScript in there that you want. Including `console.log` statements that can be useful for debugging.
+The first line is created and ready to be displayed, which will take a couple steps. On a new line, `append` a `path` element to your `lineGraph` variable. This is similar to how you appended the `g` before.
 
 # --hints--
 
@@ -19,7 +15,8 @@ test-text
 
 ```js
 assert(
-  /\.y\s*\(\s*d\s*=>\s*yScale\s*\(\s*d\.followers.twitter\s*\)\s*\)/g.test(code)
+  $('svg path').length === 3 &&
+    /lineGraph\.append\((`|'|")path\1\)/gi.test(code)
 );
 ```
 
@@ -116,8 +113,10 @@ assert(
 
   const twitterLine = d3.line()
     .x(d => xScale(d.year))
+    .y(d => yScale(d.followers.twitter));
 
 
+    
 </script>
 ```
 
@@ -183,7 +182,8 @@ assert(
     .x(d => xScale(d.year))
     .y(d => yScale(d.followers.twitter));
 
+  lineGraph.append('path')
 
-    
+
 </script>
 ```
