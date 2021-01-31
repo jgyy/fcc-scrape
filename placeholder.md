@@ -1,24 +1,20 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1ca1d
-title: Part 64
+id: 5d8a4cfbe6b6180ed9a1ca1e
+title: Part 65
 challengeType: 0
-dashedName: part-64
+dashedName: part-65
 ---
 
 # --description--
 
-Next, chain the `enter()` function to the selection.
-
-The enter function identifies elements that need to be added when the data array is longer than the selection array. This is why you wanted the `selectAll` to be an empty array before.
-
-In this case, the `twitter-circles` selection has a length of 0, and the data array has a length of 9. So nine elements will be added when you use `append` in the next step.
+Add the `append` function to the selection, and use it to add `circle` elements. This will add the nine `circle` elements for your Twitter circles. They will be invisible to start, but the elements are there.
 
 # --hints--
 
 test-text
 
 ```js
-assert(/\.data\(data\)\s*\.enter\s*\(\s*\)/g.test(code));
+assert($('svg circle').length === 9);
 ```
 
 # --seed--
@@ -142,12 +138,13 @@ assert(/\.data\(data\)\s*\.enter\s*\(\s*\)/g.test(code));
     .attr('stroke-width', 3)
     .attr('fill', 'transparent');
     
-  lineGraph.selectAll('twitter-circles')
+  lineGraph.selectAll('twitter-circles')  
     .data(data)
+    .enter()
 
+  
 
-
-</script> 
+</script>
 ```
 
 # --solutions--
@@ -238,11 +235,12 @@ assert(/\.data\(data\)\s*\.enter\s*\(\s*\)/g.test(code));
     .attr('stroke-width', 3)
     .attr('fill', 'transparent');
     
-  lineGraph.selectAll('twitter-circles')  
+  lineGraph.selectAll('twitter-circles')
     .data(data)
     .enter()
+    .append('circle')
 
-  
+    
 
 </script>
 ```
