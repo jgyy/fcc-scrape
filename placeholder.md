@@ -1,13 +1,13 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1ca16
-title: Part 57
+id: 5d8a4cfbe6b6180ed9a1ca17
+title: Part 58
 challengeType: 0
-dashedName: part-57
+dashedName: part-58
 ---
 
 # --description--
 
-Appropriately set the `x` values for `instagramLine` like you did for the other two lines.
+Appropriately set the `y` values for `instagramLine` like you did for the other two lines. Use the Instagram followers data this time.
 
 # --hints--
 
@@ -15,7 +15,7 @@ test-text
 
 ```js
 assert(
-  /const instagramLine = d3\.line\(\)\s*\.x\s*\(\s*d\s*=>\s*xScale\s*\(\s*d\.year\s*\)\s*\)/g.test(
+  /\.y\s*\(\s*d\s*=>\s*yScale\s*\(\s*d\.followers.instagram\s*\)\s*\)/g.test(
     code
   )
 );
@@ -132,7 +132,8 @@ assert(
     .attr('stroke-width', 3)
     .attr('fill', 'transparent');
 
-  const instagramLine = d3.line()  
+  const instagramLine = d3.line()
+    .x(d => xScale(d.year))
 
 
 
@@ -219,6 +220,8 @@ assert(
 
   const instagramLine = d3.line()
     .x(d => xScale(d.year))
+    .y(d => yScale(d.followers.instagram));
+
 
 
 
