@@ -1,13 +1,13 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1ca17
-title: Part 58
+id: 5d8a4cfbe6b6180ed9a1ca18
+title: Part 59
 challengeType: 0
-dashedName: part-58
+dashedName: part-59
 ---
 
 # --description--
 
-Appropriately set the `y` values for `instagramLine` like you did for the other two lines. Use the Instagram followers data this time.
+On a new line, `append` a new `path` for the Instagram line like you did for the other two lines.
 
 # --hints--
 
@@ -15,9 +15,8 @@ test-text
 
 ```js
 assert(
-  /\.y\s*\(\s*d\s*=>\s*yScale\s*\(\s*d\.followers.instagram\s*\)\s*\)/g.test(
-    code
-  )
+  $('svg path').length === 5 &&
+    code.match(/lineGraph\.append\((`|'|")path\1\)/gi).length === 3
 );
 ```
 
@@ -134,6 +133,8 @@ assert(
 
   const instagramLine = d3.line()
     .x(d => xScale(d.year))
+    .y(d => yScale(d.followers.instagram));
+
 
 
 
@@ -222,6 +223,7 @@ assert(
     .x(d => xScale(d.year))
     .y(d => yScale(d.followers.instagram));
 
+  lineGraph.append('path')
 
 
 
