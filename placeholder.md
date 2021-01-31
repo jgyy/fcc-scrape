@@ -1,20 +1,22 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1ca23
-title: Part 70
+id: 5d8a4cfbe6b6180ed9a1ca24
+title: Part 71
 challengeType: 0
-dashedName: part-70
+dashedName: part-71
 ---
 
 # --description--
 
-Use the `style` function to set the `cursor` to `pointer`. Like your year labels, this will be an indicator for a hover effect you will add later.
+On a new line, use the `selectAll` function on your `lineGraph` variable again and pass it the string `tumblr-circles` this time. The next few steps will be for adding circles to the Tumblr line.
 
 # --hints--
 
 test-text
 
 ```js
-assert($('svg circle')[0].style.cursor === 'pointer');
+assert(
+  /lineGraph\s*\.\s*selectAll\s*\((`|'|")\s*tumblr-circles\1\s*\)/g.test(code)
+);
 ```
 
 # --seed--
@@ -147,8 +149,9 @@ assert($('svg circle')[0].style.cursor === 'pointer');
     .attr('r', 6)
     .attr('fill', 'white')
     .attr('stroke', twitterColor)
+    .style('cursor', 'pointer')
 
-    
+  
 
 </script>
 ```
@@ -252,7 +255,9 @@ assert($('svg circle')[0].style.cursor === 'pointer');
     .attr('stroke', twitterColor)
     .style('cursor', 'pointer')
 
-  
+  lineGraph.selectAll('tumblr-circles')
+
+
 
 </script>
 ```
