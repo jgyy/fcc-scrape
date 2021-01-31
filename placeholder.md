@@ -1,24 +1,20 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1ca2c
-title: Part 79
+id: 5d8a4cfbe6b6180ed9a1ca2d
+title: Part 80
 challengeType: 0
-dashedName: part-79
+dashedName: part-80
 ---
 
 # --description--
 
-Appropriately set the radius (`r`), `fill`, and `stroke` for these circles.
+Apply the appropriate `cursor` style for these circles.
 
 # --hints--
 
 test-text
 
 ```js
-assert(
-  $('svg circle')[18].getAttribute('r') == '6' &&
-    $('svg circle')[18].getAttribute('fill') === 'white' &&
-    $('svg circle')[18].getAttribute('stroke') === '#fd9b98'
-);
+assert($('svg circle')[18].style.cursor === 'pointer');
 ```
 
 # --seed--
@@ -170,7 +166,10 @@ assert(
     .append('circle')
     .attr('cx', d => xScale(d.year))
     .attr('cy', d => yScale(d.followers.instagram))
-    
+    .attr('r', 6)
+    .attr('fill', 'white')
+    .attr('stroke', instagramColor)
+
 
 
 </script>
@@ -295,6 +294,7 @@ assert(
     .attr('r', 6)
     .attr('fill', 'white')
     .attr('stroke', instagramColor)
+    .style('cursor', 'pointer')
 
 
 
