@@ -1,16 +1,17 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1c9ee
-title: Part 17
+id: 5d8a4cfbe6b6180ed9a1c9ef
+title: Part 18
 challengeType: 0
-dashedName: part-17
+dashedName: part-18
 ---
 
 # --description--
 
-When you added the D3 library earlier, it put an object named `d3` in your project with a bunch of functions. One of them is `select`; you can use dot notation to access this and the other functions from the object. Create a new variable named `lineGraph` and use `d3.select` to select the `.dashboard` element. Here's an example of something similar:
+Your dashboard element is now "selected". D3 has a number of functions for working with a selection; one of them is `append`. It is used to add an element. Chain the `append` function to your selection and use it to add an `svg` element. Here's an example of how that might be done:
 
 ```js
-const variableName = d3.select('.className')
+const variableName = d3.select('selectedElement')
+  .append('elementToAdd')
 ```
 
 # --hints--
@@ -18,7 +19,7 @@ const variableName = d3.select('.className')
 test-text
 
 ```js
-assert(lineGraph._groups[0][0] === $('.dashboard')[0]);
+assert(lineGraph._groups[0][0] === $('svg')[0]);
 ```
 
 # --seed--
@@ -78,6 +79,8 @@ assert(lineGraph._groups[0][0] === $('.dashboard')[0]);
     tumblrColor = '#f6dd71',
     instagramColor = '#fd9b98';
 
+  const lineGraph = d3.select('.dashboard')
+
 
 </script>
 ```
@@ -107,6 +110,7 @@ assert(lineGraph._groups[0][0] === $('.dashboard')[0]);
     instagramColor = '#fd9b98';
 
   const lineGraph = d3.select('.dashboard')
+    .append('svg')
 
 
 </script>
