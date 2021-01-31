@@ -1,24 +1,20 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1ca07
-title: Part 42
+id: 5d8a4cfbe6b6180ed9a1ca08
+title: Part 43
 challengeType: 0
-dashedName: part-42
+dashedName: part-43
 ---
 
 # --description--
 
-In the same spot, chain the `tickPadding` function to the `xAxis` and pass it `10`. This will add a little padding to the ticks so the labels are better aligned.
+The axes and labels are looking good. Next, you will start to add some of the lines for the data. First is the line for the Twitter data. On a new line, create a new `const` named `twitterLine` and set it equal to `d3.line()`. `line` is a D3 function for creating a line.
 
 # --hints--
 
 test-text
 
 ```js
-assert(
-  /\.tickFormat\(d3\.format\((''\)\)\s*\.tickPadding\s*\(\s*10\s*\))/g.test(
-    code
-  )
-);
+assert(/const\s*twitterLine\s*=\s*d3\s*\.\s*line\s*\(\s*\)/g.test(code));
 ```
 
 # --seed--
@@ -96,7 +92,7 @@ assert(
 
   const xAxis = d3.axisBottom(xScale)
     .tickFormat(d3.format(''))
-
+    .tickPadding(10);
 
   lineGraph.append('g')
     .call(yAxis)
@@ -111,6 +107,9 @@ assert(
     .style('text-anchor', 'end')
     .style('cursor', 'pointer')
     .style('font', '10px verdana');
+
+
+
 </script>
 ```
 
@@ -172,6 +171,7 @@ assert(
     .style('cursor', 'pointer')
     .style('font', '10px verdana');
 
+  const twitterLine = d3.line()
 
 
 </script>
