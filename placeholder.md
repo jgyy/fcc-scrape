@@ -1,22 +1,23 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1ca25
-title: Part 72
+id: 5d8a4cfbe6b6180ed9a1ca26
+title: Part 73
 challengeType: 0
-dashedName: part-72
+dashedName: part-73
 ---
 
 # --description--
 
-Add the same `data`, `enter`, and `append` functions here that you added for the `twitter-circles`, passing in the same arguments. Make sure they are in the same order.
-
-Remember that this will take the difference in length between the `tumblr-circles` selection(0) and the data array(9) and append that many circle elements.
+Set the `cx` and `cy` attributes for the Tumblr circles to their appropriate values.
 
 # --hints--
 
 test-text
 
 ```js
-assert($('svg circle').length === 18);
+assert(
+  $('svg circle')[9].getAttribute('cx') == '70' &&
+    $('svg circle')[9].getAttribute('cy') == '401.128'
+);
 ```
 
 # --seed--
@@ -152,8 +153,11 @@ assert($('svg circle').length === 18);
     .style('cursor', 'pointer')
 
   lineGraph.selectAll('tumblr-circles')
+    .data(data)
+    .enter()
+    .append('circle')
 
-
+    
 
 </script>
 ```
@@ -261,6 +265,8 @@ assert($('svg circle').length === 18);
     .data(data)
     .enter()
     .append('circle')
+    .attr('cx', d => xScale(d.year))
+    .attr('cy', d => yScale(d.followers.tumblr))
 
     
 
