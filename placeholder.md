@@ -1,20 +1,20 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1ca3e
-title: Part 97
+id: 5d8a4cfbe6b6180ed9a1ca3f
+title: Part 98
 challengeType: 0
-dashedName: part-97
+dashedName: part-98
 ---
 
 # --description--
 
-Use `append` to add three `g` elements for the pie.
+On a new line, `append` a `path` element to your `pieGraphData` variable. This is where you will start to draw the pie chart.
 
 # --hints--
 
 test-text
 
 ```js
-assert($('svg g').length === 20);
+assert(/pieGraphData\s*\.\s*append\s*\((`|'|")path\1\s*\)/g.test(code));
 ```
 
 # --seed--
@@ -192,8 +192,9 @@ assert($('svg g').length === 20);
   const pieGraphData = pieGraph.selectAll('pieSlices')
     .data(pie(d3.entries(data[8].followers)))
     .enter()
+    .append('g')
 
-
+  
 
 </script>
 ```
@@ -342,7 +343,9 @@ assert($('svg g').length === 20);
     .enter()
     .append('g')
 
-  
+  pieGraphData.append('path')
+
+
 
 </script>
 ```
