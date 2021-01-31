@@ -1,24 +1,20 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1ca37
-title: Part 90
+id: 5d8a4cfbe6b6180ed9a1ca38
+title: Part 91
 challengeType: 0
-dashedName: part-90
+dashedName: part-91
 ---
 
 # --description--
 
-Since the domain has three items, the range also needs to have three items. If it had less, the values would repeat, putting the same color on the pie chart multiple times. Add the `range` function to the scale and pass it an array with your three color variables. Put them in the same order in which they are defined.
+Create a new `const` named `pie` and set it equal to `d3.pie()`. This is the D3 pie chart generator.
 
 # --hints--
 
 test-text
 
 ```js
-assert(
-  /\.domain\(data\[8\]\.followers\)\s*\.\s*range\s*\(\s*\[\s*twitterColor\s*,\s*tumblrColor\s*,\s*instagramColor\s*\]\s*\)/g.test(
-    code
-  )
-);
+assert(/const\s*pie\s*=\s*d3\s*\.\s*pie\s*\(\s*\)/g.test(code));
 ```
 
 # --seed--
@@ -188,6 +184,7 @@ assert(
 
   const pieColors = d3.scaleOrdinal()  
     .domain(data[8].followers)
+    .range([twitterColor, tumblrColor, instagramColor]);
 
 
 
@@ -329,6 +326,8 @@ assert(
   const pieColors = d3.scaleOrdinal()  
     .domain(data[8].followers)
     .range([twitterColor, tumblrColor, instagramColor]);
+
+  const pie = d3.pie()
 
 
 
