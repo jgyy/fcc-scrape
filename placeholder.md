@@ -1,20 +1,28 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1ca00
-title: Part 35
+id: 5d8a4cfbe6b6180ed9a1ca01
+title: Part 36
 challengeType: 0
-dashedName: part-35
+dashedName: part-36
 ---
 
 # --description--
 
-The axis has the right size and labels, but needs to be moved down. Use the `attr` function to set the `transform` like you did before. This time move it down your `svgHeight` minus the `svgMargin`.
+The axis labels are `text` elements within the `g`, you can use the `selectAll` function to select them. Chain the `selectAll` function to select the `text` elements in this group. You can do that like this:
+
+```js
+.selectAll('element')
+```
 
 # --hints--
 
 test-text
 
 ```js
-assert($('svg > g')[1].attributes.transform.nodeValue === 'translate(0, 430)');
+assert(
+  /\.attr\('transform', `translate\(0, \$\{svgHeight - svgMargin\}\)`\)\s*\.selectAll\s*\(\s*('|"|`)text\1\s*\)/g.test(
+    code
+  )
+);
 ```
 
 # --seed--
@@ -95,11 +103,12 @@ assert($('svg > g')[1].attributes.transform.nodeValue === 'translate(0, 430)');
     .call(yAxis)
     .attr('transform', `translate(${svgMargin}, 0)`)
     .style('font', '10px verdana');
-    
+
   lineGraph.append('g')
     .call(xAxis)
+    .attr('transform', `translate(0, ${svgHeight - svgMargin})`)
+    
 
-  
 </script>
 ```
 
@@ -152,6 +161,7 @@ assert($('svg > g')[1].attributes.transform.nodeValue === 'translate(0, 430)');
   lineGraph.append('g')
     .call(xAxis)
     .attr('transform', `translate(0, ${svgHeight - svgMargin})`)
+    .selectAll('text')
     
 
 </script>
