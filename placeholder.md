@@ -1,20 +1,22 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1c9fb
-title: Part 30
+id: 5d8a4cfbe6b6180ed9a1c9fc
+title: Part 31
 challengeType: 0
-dashedName: part-30
+dashedName: part-31
 ---
 
 # --description--
 
-`call` is another function to use with selections. Chain a `call` function to the selection and pass your `yAxis` variable to it. This will draw your y-axis on the SVG.
+After all that work, something is finally displayed on the graph. It's the y-axis and all the numbers are hidden on the left.
+
+Move the axis your `svgMargin` to the right by chaining an `attr` function to the selection. Use it to set the `transform` to `translate(${svgMargin}, 0)`. Use a template literal (backticks) to set the value so you can put your variable in there.
 
 # --hints--
 
 test-text
 
 ```js
-assert($('.tick').length === 11 && /\.call\(\s*yAxis\s*\)/.test(code));
+assert($('g')[0].attributes.transform.nodeValue === 'translate(70, 0)');
 ```
 
 # --seed--
@@ -92,6 +94,8 @@ assert($('.tick').length === 11 && /\.call\(\s*yAxis\s*\)/.test(code));
   const xAxis = d3.axisBottom(xScale)
 
   lineGraph.append('g')
+    .call(yAxis)
+    
 
 
 </script>
@@ -140,7 +144,7 @@ assert($('.tick').length === 11 && /\.call\(\s*yAxis\s*\)/.test(code));
 
   lineGraph.append('g')
     .call(yAxis)
-    
+    .attr('transform', `translate(${svgMargin}, 0)`)
 
 
 </script>
