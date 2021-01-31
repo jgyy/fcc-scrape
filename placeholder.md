@@ -1,13 +1,13 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1ca36
-title: Part 89
+id: 5d8a4cfbe6b6180ed9a1ca37
+title: Part 90
 challengeType: 0
-dashedName: part-89
+dashedName: part-90
 ---
 
 # --description--
 
-Set the `domain` of the scale to `data[8].followers`. This will be three items, one for each platform.
+Since the domain has three items, the range also needs to have three items. If it had less, the values would repeat, putting the same color on the pie chart multiple times. Add the `range` function to the scale and pass it an array with your three color variables. Put them in the same order in which they are defined.
 
 # --hints--
 
@@ -15,7 +15,7 @@ test-text
 
 ```js
 assert(
-  /const pieColors = d3\.scaleOrdinal\(\)\s*\.\s*domain\s*\(\s*data\s*\[\s*8\s*\]\s*\.\s*followers\s*\)/g.test(
+  /\.domain\(data\[8\]\.followers\)\s*\.\s*range\s*\(\s*\[\s*twitterColor\s*,\s*tumblrColor\s*,\s*instagramColor\s*\]\s*\)/g.test(
     code
   )
 );
@@ -187,6 +187,7 @@ assert(
     .innerRadius(0);
 
   const pieColors = d3.scaleOrdinal()  
+    .domain(data[8].followers)
 
 
 
@@ -327,6 +328,7 @@ assert(
 
   const pieColors = d3.scaleOrdinal()  
     .domain(data[8].followers)
+    .range([twitterColor, tumblrColor, instagramColor]);
 
 
 
