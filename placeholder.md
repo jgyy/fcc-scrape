@@ -1,23 +1,20 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1ca18
-title: Part 59
+id: 5d8a4cfbe6b6180ed9a1ca19
+title: Part 60
 challengeType: 0
-dashedName: part-59
+dashedName: part-60
 ---
 
 # --description--
 
-On a new line, `append` a new `path` for the Instagram line like you did for the other two lines.
+Use your `instagramLine` variable and your data to set the `d` attribute for this path like you did for the other two.
 
 # --hints--
 
 test-text
 
 ```js
-assert(
-  $('svg path').length === 5 &&
-    code.match(/lineGraph\.append\((`|'|")path\1\)/gi).length === 3
-);
+assert($('svg path')[4].getAttribute('d').length === 171);
 ```
 
 # --seed--
@@ -135,6 +132,7 @@ assert(
     .x(d => xScale(d.year))
     .y(d => yScale(d.followers.instagram));
 
+  lineGraph.append('path')
 
 
 
@@ -224,8 +222,9 @@ assert(
     .y(d => yScale(d.followers.instagram));
 
   lineGraph.append('path')
+    .attr('d', instagramLine(data))
 
-
+    
 
 </script>
 ```
