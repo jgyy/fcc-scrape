@@ -1,22 +1,21 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1c9f5
-title: Part 24
+id: 5d8a4cfbe6b6180ed9a1c9f6
+title: Part 25
 challengeType: 0
-dashedName: part-24
+dashedName: part-25
 ---
 
 # --description--
 
-Create a new `const` named `xScale`. Use it to create another linear scale like you did for the y-scale. This will be the horizontal or "x" axis.
+The `year` values of your data will be used for the x-scale. Chain the `domain` function to `xScale` and pass it an array with the first and last years of your data.
 
 # --hints--
 
 test-text
 
 ```js
-assert(
-  typeof xScale === 'function' && /xScale\s*=\s*d3\.scaleLinear/.test(code)
-);
+const domain = xScale.domain();
+assert(domain.length === 2 && domain[0] === 2012 && domain[1] === 2020);
 ```
 
 # --seed--
@@ -85,8 +84,10 @@ assert(
     .domain([0, 5000])
     .range([svgHeight - svgMargin, svgMargin]);
 
+  const xScale = d3.scaleLinear()
 
-</script>  
+
+</script>
 ```
 
 # --solutions--
@@ -123,6 +124,7 @@ assert(
     .range([svgHeight - svgMargin, svgMargin]);
 
   const xScale = d3.scaleLinear()
+    .domain([2012, 2020])
 
 
 </script>
