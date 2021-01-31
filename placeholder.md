@@ -1,15 +1,13 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1ca11
-title: Part 52
+id: 5d8a4cfbe6b6180ed9a1ca12
+title: Part 53
 challengeType: 0
-dashedName: part-52
+dashedName: part-53
 ---
 
 # --description--
 
-Set the `y` values for `tumblrLine` using a "d function" again. Use your `yScale` and `d.followers.tumblr` to calculcate their values just like you did for the Twitter line.
-
-The x values for each line will be the same, but the y values will use the data from the different platforms.
+On a new line, `append` a `path` element to the `lineGraph` variable. This one will be for displaying the `tumblrLine`.
 
 # --hints--
 
@@ -17,7 +15,8 @@ test-text
 
 ```js
 assert(
-  /\.y\s*\(\s*d\s*=>\s*yScale\s*\(\s*d\.followers.tumblr\s*\)\s*\)/g.test(code)
+  $('svg path').length === 4 &&
+    code.match(/lineGraph\.append\((`|'|")path\1\)/gi).length === 2
 );
 ```
 
@@ -124,7 +123,9 @@ assert(
 
   const tumblrLine = d3.line()
     .x(d => xScale(d.year))
-    
+    .y(d => yScale(d.followers.tumblr));
+
+
 
 </script>
 ```
@@ -201,6 +202,7 @@ assert(
     .x(d => xScale(d.year))
     .y(d => yScale(d.followers.tumblr));
 
+  lineGraph.append('path')
 
 
 </script>
