@@ -1,20 +1,24 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1ca28
-title: Part 75
+id: 5d8a4cfbe6b6180ed9a1ca29
+title: Part 76
 challengeType: 0
-dashedName: part-75
+dashedName: part-76
 ---
 
 # --description--
 
-Set the `cursor` to `pointer` using the `style` function.
+The circles have been added to two of the lines and look good, on to the last one. On a new line, create another empty selection like you did before. Use the string: `instagram-circles` this time.
 
 # --hints--
 
 test-text
 
 ```js
-assert($('svg circle')[9].style.cursor === 'pointer');
+assert(
+  /lineGraph\s*\.\s*selectAll\s*\((`|'|")\s*instagram-circles\1\s*\)/g.test(
+    code
+  )
+);
 ```
 
 # --seed--
@@ -158,8 +162,9 @@ assert($('svg circle')[9].style.cursor === 'pointer');
     .attr('r', 6)
     .attr('fill', 'white')
     .attr('stroke', tumblrColor)
+    .style('cursor', 'pointer')
 
-
+  
 
 </script>
 ```
@@ -274,7 +279,9 @@ assert($('svg circle')[9].style.cursor === 'pointer');
     .attr('stroke', tumblrColor)
     .style('cursor', 'pointer')
 
-  
+  lineGraph.selectAll('instagram-circles')
+
+
 
 </script>
 ```
