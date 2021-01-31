@@ -1,20 +1,25 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1ca13
-title: Part 54
+id: 5d8a4cfbe6b6180ed9a1ca14
+title: Part 55
 challengeType: 0
-dashedName: part-54
+dashedName: part-55
 ---
 
 # --description--
 
-Tell the new path how to be drawn by setting the `d` attribute to `tumblrLine(data)` using the `attr` function.
+Add three `attr` functions to the selection; one to set the `stroke` to your `tumblrColor` variable, another to set the `stroke-width` to `3`, and a third to set the `fill` to `transparent`.
 
 # --hints--
 
 test-text
 
 ```js
-assert($('svg path')[3].getAttribute('d').length === 115);
+const tumblrPath = $('svg path')[3];
+assert(
+  tumblrPath.getAttribute('stroke') === '#f6dd71' &&
+    tumblrPath.getAttribute('stroke-width') == '3' &&
+    tumblrPath.getAttribute('fill') === 'transparent'
+);
 ```
 
 # --seed--
@@ -123,7 +128,9 @@ assert($('svg path')[3].getAttribute('d').length === 115);
     .y(d => yScale(d.followers.tumblr));
 
   lineGraph.append('path')
+    .attr('d', tumblrLine(data))
 
+  
 
 </script>
 ```
@@ -202,8 +209,10 @@ assert($('svg path')[3].getAttribute('d').length === 115);
 
   lineGraph.append('path')
     .attr('d', tumblrLine(data))
+    .attr('stroke', tumblrColor)
+    .attr('stroke-width', 3)
+    .attr('fill', 'transparent');
 
-  
 
 </script>
 ```
