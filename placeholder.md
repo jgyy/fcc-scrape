@@ -1,21 +1,24 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1ca06
-title: Part 41
+id: 5d8a4cfbe6b6180ed9a1ca07
+title: Part 42
 challengeType: 0
-dashedName: part-41
+dashedName: part-42
 ---
 
 # --description--
 
-Go back to where you defined your `xAis` variable and chain the `tickFormat` function to it. Pass it `d3.format('')`. This will remove the commas in the year labels of the x-axis.
+In the same spot, chain the `tickPadding` function to the `xAxis` and pass it `10`. This will add a little padding to the ticks so the labels are better aligned.
 
 # --hints--
 
 test-text
 
 ```js
-const ticks = $('.tick > text');
-assert(ticks[6].innerHTML === '2012' && ticks[14].innerHTML === '2020');
+assert(
+  /\.tickFormat\(d3\.format\((''\)\)\s*\.tickPadding\s*\(\s*10\s*\))/g.test(
+    code
+  )
+);
 ```
 
 # --seed--
@@ -92,6 +95,7 @@ assert(ticks[6].innerHTML === '2012' && ticks[14].innerHTML === '2020');
     .ticks(6, '~s');
 
   const xAxis = d3.axisBottom(xScale)
+    .tickFormat(d3.format(''))
 
 
   lineGraph.append('g')
@@ -152,7 +156,7 @@ assert(ticks[6].innerHTML === '2012' && ticks[14].innerHTML === '2020');
 
   const xAxis = d3.axisBottom(xScale)
     .tickFormat(d3.format(''))
-
+    .tickPadding(10);
 
   lineGraph.append('g')
     .call(yAxis)
@@ -167,5 +171,8 @@ assert(ticks[6].innerHTML === '2012' && ticks[14].innerHTML === '2020');
     .style('text-anchor', 'end')
     .style('cursor', 'pointer')
     .style('font', '10px verdana');
+
+
+
 </script>
 ```
