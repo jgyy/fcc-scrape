@@ -1,23 +1,24 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1ca0c
-title: Part 47
+id: 5d8a4cfbe6b6180ed9a1ca0d
+title: Part 48
 challengeType: 0
-dashedName: part-47
+dashedName: part-48
 ---
 
 # --description--
 
-The first line is created and ready to be displayed, which will take a couple steps. On a new line, `append` a `path` element to your `lineGraph` variable. This is similar to how you appended the `g` before.
+Tell the path what data to use. Add an `attr` function and set the `d` to `twitterLine(data)`. This will the build the path using the `twitterLine` function you created and your data variable.
+
+Note that the `d` in this case is a path attribute for drawing a line and is different from a "d function".
+
+After you have added your code, take a look at the data flow to help understand what is happening. You pass the data array to your `twitterLine` function where it sets the x and y values using your "d functions". The "d functions" go through each item in the array, passing part of the item to each scale to find the appropriate coordinates. When it's done, the value you are setting here is created and sent back. The result ends up being a confusing string of numbers and coordinates to tell the path how to be drawn.
 
 # --hints--
 
 test-text
 
 ```js
-assert(
-  $('svg path').length === 3 &&
-    /lineGraph\.append\((`|'|")path\1\)/gi.test(code)
-);
+assert($('svg path')[2].getAttribute('d').length === 151);
 ```
 
 # --seed--
@@ -115,8 +116,9 @@ assert(
     .x(d => xScale(d.year))
     .y(d => yScale(d.followers.twitter));
 
+  lineGraph.append('path')
 
-    
+
 </script>
 ```
 
@@ -183,6 +185,8 @@ assert(
     .y(d => yScale(d.followers.twitter));
 
   lineGraph.append('path')
+    .attr('d', twitterLine(data))
+
 
 
 </script>
