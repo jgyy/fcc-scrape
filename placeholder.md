@@ -1,37 +1,60 @@
 ---
-id: 587d7dbf367417b2b2512bbc
-title: Split Your Styles into Smaller Chunks with Partials
+id: 587d7dbd367417b2b2512bb4
+title: Store Data with Sass Variables
 challengeType: 0
-forumTopicId: 301459
-dashedName: split-your-styles-into-smaller-chunks-with-partials
+forumTopicId: 301460
+dashedName: store-data-with-sass-variables
 ---
 
 # --description--
 
-<dfn>Partials</dfn> in Sass are separate files that hold segments of CSS code. These are imported and used in other Sass files. This is a great way to group similar code into a module to keep it organized.
+One feature of Sass that's different than CSS is it uses variables. They are declared and set to store data, similar to JavaScript.
 
-Names for partials start with the underscore (`_`) character, which tells Sass it is a small segment of CSS and not to convert it into a CSS file. Also, Sass files end with the `.scss` file extension. To bring the code in the partial into another Sass file, use the `@import` directive.
+In JavaScript, variables are defined using the `let` and `const` keywords. In Sass, variables start with a `$` followed by the variable name.
 
-For example, if all your mixins are saved in a partial named "\_mixins.scss", and they are needed in the "main.scss" file, this is how to use them in the main file:
+Here are a couple examples:
 
 ```scss
-// In the main.scss file
+$main-fonts: Arial, sans-serif;
+$headings-color: green;
 
-@import 'mixins'
+//To use variables:
+h1 {
+  font-family: $main-fonts;
+  color: $headings-color;
+}
 ```
 
-Note that the underscore and file extension are not needed in the `import` statement - Sass understands it is a partial. Once a partial is imported into a file, all variables, mixins, and other code are available to use.
+One example where variables are useful is when a number of elements need to be the same color. If that color is changed, the only place to edit the code is the variable value.
 
 # --instructions--
 
-Write an `@import` statement to import a partial named `_variables.scss` into the main.scss file.
+Create a variable `$text-color` and set it to red. Then change the value of the `color` property for the `.blog-post` and `h2` to the `$text-color` variable.
 
 # --hints--
 
-Your code should use the `@import` directive, and should not include the underscore in the file name.
+Your code should have a Sass variable declared for `$text-color` with a value of red.
 
 ```js
-assert(code.match(/@import\s+?('|")variables\1/gi));
+assert(code.match(/\$text-color:\s*?red;/g));
+```
+
+Your code should use the `$text-color` variable to change the `color` for the `.blog-post` and `h2` items.
+
+```js
+assert(code.match(/color:\s*?\$text-color;/g));
+```
+
+Your `.blog-post` element should have a `color` of red.
+
+```js
+assert($('.blog-post').css('color') == 'rgb(255, 0, 0)');
+```
+
+Your `h2` elements should have a `color` of red.
+
+```js
+assert($('h2').css('color') == 'rgb(255, 0, 0)');
 ```
 
 # --seed--
@@ -39,11 +62,57 @@ assert(code.match(/@import\s+?('|")variables\1/gi));
 ## --seed-contents--
 
 ```html
-<!-- The main.scss file -->
+<style type='text/scss'>
+
+
+  .header{
+    text-align: center;
+  }
+  .blog-post, h2 {
+    color: red;
+  }
+</style>
+
+<h1 class="header">Learn Sass</h1>
+<div class="blog-post">
+  <h2>Some random title</h2>
+  <p>This is a paragraph with some random text in it</p>
+</div>
+<div class="blog-post">
+  <h2>Header #2</h2>
+  <p>Here is some more random text.</p>
+</div>
+<div class="blog-post">
+  <h2>Here is another header</h2>
+  <p>Even more random text within a paragraph</p>
+</div>
 ```
 
 # --solutions--
 
 ```html
-@import 'variables'
+<style type='text/scss'>
+  $text-color: red;
+
+  .header{
+    text-align: center;
+  }
+  .blog-post, h2 {
+    color: $text-color;
+  }
+</style>
+
+<h1 class="header">Learn Sass</h1>
+<div class="blog-post">
+  <h2>Some random title</h2>
+  <p>This is a paragraph with some random text in it</p>
+</div>
+<div class="blog-post">
+  <h2>Header #2</h2>
+  <p>Here is some more random text.</p>
+</div>
+<div class="blog-post">
+  <h2>Here is another header</h2>
+  <p>Even more random text within a paragraph</p>
+</div>
 ```
