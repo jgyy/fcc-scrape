@@ -1,20 +1,23 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1ca21
-title: Part 68
+id: 5d8a4cfbe6b6180ed9a1ca22
+title: Part 69
 challengeType: 0
-dashedName: part-68
+dashedName: part-69
 ---
 
 # --description--
 
-Circles also need an `r` (radius) attribute so they know how big to be. Use the `attr` function to set the `r` to `6`.
+The circles are now visible, but I don't like the color. Use the appropriate function to set the `fill` to `white` and the `stroke` to your `twitterColor` variable.
 
 # --hints--
 
 test-text
 
 ```js
-assert($('svg circle')[0].getAttribute('r') == '6');
+assert(
+  $('svg circle')[0].getAttribute('fill') === 'white' &&
+    $('svg circle')[0].getAttribute('stroke') === '#7cd9d1'
+);
 ```
 
 # --seed--
@@ -144,6 +147,7 @@ assert($('svg circle')[0].getAttribute('r') == '6');
     .append('circle')
     .attr('cx', d => xScale(d.year))
     .attr('cy', d => yScale(d.followers.twitter))
+    .attr('r', 6)
     
 
 
@@ -245,8 +249,10 @@ assert($('svg circle')[0].getAttribute('r') == '6');
     .attr('cx', d => xScale(d.year))
     .attr('cy', d => yScale(d.followers.twitter))
     .attr('r', 6)
-    
+    .attr('fill', 'white')
+    .attr('stroke', twitterColor)
 
+    
 
 </script>
 ```
