@@ -1,24 +1,20 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1ca29
-title: Part 76
+id: 5d8a4cfbe6b6180ed9a1ca2a
+title: Part 77
 challengeType: 0
-dashedName: part-76
+dashedName: part-77
 ---
 
 # --description--
 
-The circles have been added to two of the lines and look good, on to the last one. On a new line, create another empty selection like you did before. Use the string: `instagram-circles` this time.
+Add the three functions necessary to append the new circle elements. Remember that they won't actually be visible yet.
 
 # --hints--
 
 test-text
 
 ```js
-assert(
-  /lineGraph\s*\.\s*selectAll\s*\((`|'|")\s*instagram-circles\1\s*\)/g.test(
-    code
-  )
-);
+assert($('svg circle').length === 27);
 ```
 
 # --seed--
@@ -164,7 +160,9 @@ assert(
     .attr('stroke', tumblrColor)
     .style('cursor', 'pointer')
 
-  
+  lineGraph.selectAll('instagram-circles')
+
+
 
 </script>
 ```
@@ -280,8 +278,11 @@ assert(
     .style('cursor', 'pointer')
 
   lineGraph.selectAll('instagram-circles')
-
-
+    .data(data)
+    .enter()
+    .append('circle')
+    
+    
 
 </script>
 ```
