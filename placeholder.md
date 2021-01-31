@@ -1,13 +1,13 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1ca30
-title: Part 83
+id: 5d8a4cfbe6b6180ed9a1ca31
+title: Part 84
 challengeType: 0
-dashedName: part-83
+dashedName: part-84
 ---
 
 # --description--
 
-Create a new `const` named `pieGraph` and set it equal to `rightDashboard.append('svg')`. This will add an SVG element for the pie graph as a child of the div you just added. The pie graph will have three slices, one for each platform. It will display a percentage of how many followers each platform has for the displayed year.
+Add two `attr` functions that set the `width` and `height` of the new SVG to `200`.
 
 # --hints--
 
@@ -15,9 +15,8 @@ test-text
 
 ```js
 assert(
-  /const\s*pieGraph\s*=\s*rightDashboard\s*\.\s*append\s*\((`|'|")svg\1\s*\)/g.test(
-    code
-  )
+  $('svg')[1].getAttribute('width') == '200' &&
+    $('svg')[1].getAttribute('height') == '200'
 );
 ```
 
@@ -178,7 +177,9 @@ assert(
   const rightDashboard = d3.select('.dashboard')
     .append('div');
 
-    
+  const pieGraph = rightDashboard.append('svg')
+
+
 
 </script>
 ```
@@ -308,8 +309,10 @@ assert(
     .append('div');
 
   const pieGraph = rightDashboard.append('svg')
+    .attr('width', 200)
+    .attr('height', 200)
 
-
+    
 
 </script>
 ```
