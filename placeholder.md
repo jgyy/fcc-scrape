@@ -1,15 +1,13 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1ca05
-title: Part 40
+id: 5d8a4cfbe6b6180ed9a1ca06
+title: Part 41
 challengeType: 0
-dashedName: part-40
+dashedName: part-41
 ---
 
 # --description--
 
-There are a number of D3 functions to work with how the "ticks" or your axis labels are displayed; one of them is `ticks`. Go back to where you defined the `yAxis` variable and chain a `ticks` function to it and pass it these two arguments: `6, '~s'`.
-
-The `6` will set the number of ticks used to 6, and the `~s` will make the labels display the number of thousands followed by a `k`. For example, `4000` will become `4k`.
+Go back to where you defined your `xAis` variable and chain the `tickFormat` function to it. Pass it `d3.format('')`. This will remove the commas in the year labels of the x-axis.
 
 # --hints--
 
@@ -17,14 +15,7 @@ test-text
 
 ```js
 const ticks = $('.tick > text');
-assert(
-  ticks[0].innerHTML === '0k' &&
-    ticks[1].innerHTML === '1k' &&
-    ticks[2].innerHTML === '2k' &&
-    ticks[3].innerHTML === '3k' &&
-    ticks[4].innerHTML === '4k' &&
-    ticks[5].innerHTML === '5k'
-);
+assert(ticks[6].innerHTML === '2012' && ticks[14].innerHTML === '2020');
 ```
 
 # --seed--
@@ -98,9 +89,10 @@ assert(
     .range([svgMargin, svgWidth - svgMargin]);
 
   const yAxis = d3.axisLeft(yScale)
-
+    .ticks(6, '~s');
 
   const xAxis = d3.axisBottom(xScale)
+
 
   lineGraph.append('g')
     .call(yAxis)
@@ -159,6 +151,7 @@ assert(
     .ticks(6, '~s');
 
   const xAxis = d3.axisBottom(xScale)
+    .tickFormat(d3.format(''))
 
 
   lineGraph.append('g')
