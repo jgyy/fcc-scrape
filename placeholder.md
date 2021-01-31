@@ -1,92 +1,59 @@
 ---
-id: 587d7dbd367417b2b2512bb6
-title: Create Reusable CSS with Mixins
+id: 587d7fa5367417b2b2512bbd
+title: Extend One Set of CSS Styles to Another Element
 challengeType: 0
-forumTopicId: 301455
-dashedName: create-reusable-css-with-mixins
+forumTopicId: 301456
+dashedName: extend-one-set-of-css-styles-to-another-element
 ---
 
 # --description--
 
-In Sass, a <dfn>mixin</dfn> is a group of CSS declarations that can be reused throughout the style sheet.
+Sass has a feature called `extend` that makes it easy to borrow the CSS rules from one element and build upon them in another.
 
-Newer CSS features take time before they are fully adopted and ready to use in all browsers. As features are added to browsers, CSS rules using them may need vendor prefixes. Consider "box-shadow":
+For example, the below block of CSS rules style a `.panel` class. It has a `background-color`, `height` and `border`.
 
 ```scss
-div {
-  -webkit-box-shadow: 0px 0px 4px #fff;
-  -moz-box-shadow: 0px 0px 4px #fff;
-  -ms-box-shadow: 0px 0px 4px #fff;
-  box-shadow: 0px 0px 4px #fff;
+.panel{
+  background-color: red;
+  height: 70px;
+  border: 2px solid green;
 }
 ```
 
-It's a lot of typing to re-write this rule for all the elements that have a `box-shadow`, or to change each value to test different effects. Mixins are like functions for CSS. Here is how to write one:
+Now you want another panel called `.big-panel`. It has the same base properties as `.panel`, but also needs a `width` and `font-size`. It's possible to copy and paste the initial CSS rules from `.panel`, but the code becomes repetitive as you add more types of panels. The `extend` directive is a simple way to reuse the rules written for one element, then add more for another:
 
 ```scss
-@mixin box-shadow($x, $y, $blur, $c){ 
-  -webkit-box-shadow: $x $y $blur $c;
-  -moz-box-shadow: $x $y $blur $c;
-  -ms-box-shadow: $x $y $blur $c;
-  box-shadow: $x $y $blur $c;
+.big-panel{
+  @extend .panel;
+  width: 150px;
+  font-size: 2em;
 }
 ```
 
-The definition starts with `@mixin` followed by a custom name. The parameters (the `$x`, `$y`, `$blur`, and `$c` in the example above) are optional. Now any time a `box-shadow` rule is needed, only a single line calling the mixin replaces having to type all the vendor prefixes. A mixin is called with the `@include` directive:
-
-```scss
-div {
-  @include box-shadow(0px, 0px, 4px, #fff);
-}
-```
+The `.big-panel` will have the same properties as `.panel` in addition to the new styles.
 
 # --instructions--
 
-Write a mixin for `border-radius` and give it a `$radius` parameter. It should use all the vendor prefixes from the example. Then use the `border-radius` mixin to give the `#awesome` element a border radius of 15px.
+Make a class `.info-important` that extends `.info` and also has a `background-color` set to magenta.
 
 # --hints--
 
-Your code should declare a mixin named `border-radius` which has a parameter named `$radius`.
-
-```js
-assert(code.match(/@mixin\s+?border-radius\s*?\(\s*?\$radius\s*?\)\s*?{/gi));
-```
-
-Your code should include the `-webkit-border-radius` vendor prefix that uses the `$radius` parameter.
+Your `info-important` class should have a `background-color` set to `magenta`.
 
 ```js
 assert(
-  __helpers.removeWhiteSpace(code).match(/-webkit-border-radius:\$radius;/gi)
+  code.match(
+    /\.info-important\s*?{[\s\S]*background-color\s*?:\s*?magenta\s*?;[\s\S]*}/gi
+  )
 );
 ```
 
-Your code should include the `-moz-border-radius` vendor prefix that uses the `$radius` parameter.
+Your `info-important` class should use `@extend` to inherit the styling from the `info` class.
 
 ```js
 assert(
-  __helpers.removeWhiteSpace(code).match(/-moz-border-radius:\$radius;/gi)
+  code.match(/\.info-important\s*?{[\s\S]*@extend\s*?.info\s*?;[\s\S]*/gi)
 );
-```
-
-Your code should include the `-ms-border-radius` vendor prefix that uses the `$radius` parameter.
-
-```js
-assert(__helpers.removeWhiteSpace(code).match(/-ms-border-radius:\$radius;/gi));
-```
-
-Your code should include the general `border-radius` rule that uses the `$radius` parameter.
-
-```js
-assert(
-  __helpers.removeWhiteSpace(code).match(/border-radius:\$radius;/gi).length ==
-    4
-);
-```
-
-Your code should call the `border-radius mixin` using the `@include` keyword, setting it to 15px.
-
-```js
-assert(code.match(/@include\s+?border-radius\(\s*?15px\s*?\)\s*;/gi));
 ```
 
 # --seed--
@@ -95,38 +62,55 @@ assert(code.match(/@include\s+?border-radius\(\s*?15px\s*?\)\s*;/gi));
 
 ```html
 <style type='text/scss'>
-
-
-
-  #awesome {
-    width: 150px;
-    height: 150px;
-    background-color: green;
-
+  h3{
+    text-align: center;
   }
-</style>
+  .info{
+    width: 200px;
+    border: 1px solid black;
+    margin: 0 auto;
+  }
 
-<div id="awesome"></div>
+
+
+
+</style>
+<h3>Posts</h3>
+<div class="info-important">
+  <p>This is an important post. It should extend the class ".info" and have its own CSS styles.</p>
+</div>
+
+<div class="info">
+  <p>This is a simple post. It has basic styling and can be extended for other uses.</p>
+</div>
 ```
 
 # --solutions--
 
 ```html
 <style type='text/scss'>
-  @mixin border-radius($radius) {
-    -webkit-border-radius: $radius;
-    -moz-border-radius: $radius;
-    -ms-border-radius: $radius;
-    border-radius: $radius;
+  h3{
+    text-align: center;
+  }
+  .info{
+    width: 200px;
+    border: 1px solid black;
+    margin: 0 auto;
+  }
+  .info-important{
+    @extend .info;
+    background-color: magenta;
   }
 
-  #awesome {
-    width: 150px;
-    height: 150px;
-    background-color: green;
-    @include border-radius(15px);
-  }
+
+
 </style>
+<h3>Posts</h3>
+<div class="info-important">
+  <p>This is an important post. It should extend the class ".info" and have its own CSS styles.</p>
+</div>
 
-<div id="awesome"></div>
+<div class="info">
+  <p>This is a simple post. It has basic styling and can be extended for other uses.</p>
+</div>
 ```
