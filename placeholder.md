@@ -1,20 +1,23 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1ca2a
-title: Part 77
+id: 5d8a4cfbe6b6180ed9a1ca2b
+title: Part 78
 challengeType: 0
-dashedName: part-77
+dashedName: part-78
 ---
 
 # --description--
 
-Add the three functions necessary to append the new circle elements. Remember that they won't actually be visible yet.
+Appropriately set the `cx` and `cy` attributes for the Instagram circles.
 
 # --hints--
 
 test-text
 
 ```js
-assert($('svg circle').length === 27);
+assert(
+  $('svg circle')[18].getAttribute('cx') == '70' &&
+    $('svg circle')[18].getAttribute('cy') == '424.024'
+);
 ```
 
 # --seed--
@@ -161,8 +164,11 @@ assert($('svg circle').length === 27);
     .style('cursor', 'pointer')
 
   lineGraph.selectAll('instagram-circles')
-
-
+    .data(data)
+    .enter()
+    .append('circle')
+    
+    
 
 </script>
 ```
@@ -281,8 +287,10 @@ assert($('svg circle').length === 27);
     .data(data)
     .enter()
     .append('circle')
+    .attr('cx', d => xScale(d.year))
+    .attr('cy', d => yScale(d.followers.instagram))
     
-    
+
 
 </script>
 ```
