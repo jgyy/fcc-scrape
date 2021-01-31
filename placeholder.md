@@ -1,22 +1,20 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1ca20
-title: Part 67
+id: 5d8a4cfbe6b6180ed9a1ca21
+title: Part 68
 challengeType: 0
-dashedName: part-67
+dashedName: part-68
 ---
 
 # --description--
 
-Next, set the `cy` attribute to `d => xScale(d.followers.twitter)`.
-
-As a reminder, this will pass each value of your Twitter followers to the `xScale` function where it will determine the y coordinate to use.
+Circles also need an `r` (radius) attribute so they know how big to be. Use the `attr` function to set the `r` to `6`.
 
 # --hints--
 
 test-text
 
 ```js
-assert($('svg circle')[0].getAttribute('cy') == '243.232');
+assert($('svg circle')[0].getAttribute('r') == '6');
 ```
 
 # --seed--
@@ -145,8 +143,9 @@ assert($('svg circle')[0].getAttribute('cy') == '243.232');
     .enter()
     .append('circle')
     .attr('cx', d => xScale(d.year))
+    .attr('cy', d => yScale(d.followers.twitter))
     
-    
+
 
 </script>
 ```
@@ -245,6 +244,7 @@ assert($('svg circle')[0].getAttribute('cy') == '243.232');
     .append('circle')
     .attr('cx', d => xScale(d.year))
     .attr('cy', d => yScale(d.followers.twitter))
+    .attr('r', 6)
     
 
 
