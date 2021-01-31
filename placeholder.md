@@ -1,87 +1,96 @@
 ---
-id: 587d7dbe367417b2b2512bb9
-title: Use @for to Create a Sass Loop
+id: 587d7dbe367417b2b2512bb8
+title: Use @if and @else to Add Logic To Your Styles
 challengeType: 0
-forumTopicId: 301462
-dashedName: use-for-to-create-a-sass-loop
+forumTopicId: 301463
+dashedName: use-if-and-else-to-add-logic-to-your-styles
 ---
 
 # --description--
 
-The `@for` directive adds styles in a loop, very similar to a `for` loop in JavaScript.
-
-`@for` is used in two ways: "start through end" or "start to end". The main difference is that the "start **to** end" *excludes* the end number as part of the count, and "start **through** end" *includes* the end number as part of the count.
-
-Here's a start **through** end example:
+The `@if` directive in Sass is useful to test for a specific case - it works just like the `if` statement in JavaScript.
 
 ```scss
-@for $i from 1 through 12 {
-  .col-#{$i} { width: 100%/12 * $i; }
+@mixin make-bold($bool) {
+  @if $bool == true {
+    font-weight: bold;
+  }
 }
 ```
 
-The `#{$i}` part is the syntax to combine a variable (`i`) with text to make a string. When the Sass file is converted to CSS, it looks like this:
+And just like in JavaScript, `@else if` and `@else` test for more conditions:
 
 ```scss
-.col-1 {
-  width: 8.33333%;
-}
-
-.col-2 {
-  width: 16.66667%;
-}
-
-...
-
-.col-12 {
-  width: 100%;
+@mixin text-effect($val) {
+  @if $val == danger {
+    color: red;
+  }
+  @else if $val == alert {
+    color: yellow;
+  }
+  @else if $val == success {
+    color: green;
+  }
+  @else {
+    color: black;
+  }
 }
 ```
-
-This is a powerful way to create a grid layout. Now you have twelve options for column widths available as CSS classes.
 
 # --instructions--
 
-Write a `@for` directive that takes a variable `$j` that goes from 1 **to** 6.
+Create a mixin called `border-stroke` that takes a parameter `$val`. The mixin should check for the following conditions using `@if`, `@else if`, and `@else`:
 
-It should create 5 classes called `.text-1` to `.text-5` where each has a `font-size` set to 15px multiplied by the index.
+```scss
+light - 1px solid black
+medium - 3px solid black
+heavy - 6px solid black
+```
+
+If `$val` is not `light`, `medium`, or `heavy`, the border should be set to `none`.
 
 # --hints--
 
-Your code should use the `@for` directive.
+Your code should declare a mixin named `border-stroke` which has a parameter named `$val`.
 
 ```js
-assert(code.match(/@for /g));
+assert(code.match(/@mixin\s+?border-stroke\s*?\(\s*?\$val\s*?\)\s*?{/gi));
 ```
 
-Your `.text-1` class should have a `font-size` of 15px.
+Your mixin should have an `@if` statement to check if `$val` is light, and to set the `border` to 1px solid black.
 
 ```js
-assert($('.text-1').css('font-size') == '15px');
+assert(
+  code.match(
+    /@if\s+?\$val\s*?===?\s*?light\s*?{\s*?border\s*?:\s*?1px\s+?solid\s+?black\s*?;\s*?}/gi
+  )
+);
 ```
 
-Your `.text-2` class should have a `font-size` of 30px.
+Your mixin should have an `@else if` statement to check if `$val` is medium, and to set the `border` to 3px solid black.
 
 ```js
-assert($('.text-2').css('font-size') == '30px');
+assert(
+  code.match(
+    /@else\s+?if\s+?\$val\s*?===?\s*?medium\s*?{\s*?border\s*?:\s*?3px\s+?solid\s+?black\s*?;\s*?}/gi
+  )
+);
 ```
 
-Your `.text-3` class should have a `font-size` of 45px.
+Your mixin should have an `@else if` statement to check if `$val` is heavy, and to set the `border` to 6px solid black.
 
 ```js
-assert($('.text-3').css('font-size') == '45px');
+assert(
+  code.match(
+    /@else\s+?if\s+?\$val\s*?===?\s*?heavy\s*?{\s*?border\s*?:\s*?6px\s+?solid\s+?black\s*?;\s*?}/gi
+  )
+);
 ```
 
-Your `.text-4` class should have a `font-size` of 60px.
+Your mixin should have an `@else` statement to set the `border` to none.
 
 ```js
-assert($('.text-4').css('font-size') == '60px');
-```
-
-Your `.text-5` class should have a `font-size` of 75px.
-
-```js
-assert($('.text-5').css('font-size') == '75px');
+assert(code.match(/@else\s*?{\s*?border\s*?:\s*?none\s*?;\s*?}/gi));
 ```
 
 # --seed--
@@ -93,47 +102,44 @@ assert($('.text-5').css('font-size') == '75px');
 
 
 
+  #box {
+    width: 150px;
+    height: 150px;
+    background-color: red;
+    @include border-stroke(medium);
+  }
 </style>
 
-<p class="text-1">Hello</p>
-<p class="text-2">Hello</p>
-<p class="text-3">Hello</p>
-<p class="text-4">Hello</p>
-<p class="text-5">Hello</p>
+<div id="box"></div>
 ```
 
 # --solutions--
 
 ```html
 <style type='text/scss'>
+  @mixin border-stroke($val) {
+    @if $val == light {
+      border: 1px solid black;
+    }
+    @else if $val == medium {
+      border: 3px solid black;
+    }
+    @else if $val == heavy {
+      border: 6px solid black;
+    }
+    @else {
+      border: none;
+    }
+  }
 
-@for $i from 1 through 5 {
-  .text-#{$i} { font-size: 15px * $i; }
-}
 
+  #box {
+    width: 150px;
+    height: 150px;
+    background-color: red;
+    @include border-stroke(medium);
+  }
 </style>
 
-<p class="text-1">Hello</p>
-<p class="text-2">Hello</p>
-<p class="text-3">Hello</p>
-<p class="text-4">Hello</p>
-<p class="text-5">Hello</p>
-```
-
----
-
-```html
-<style type='text/scss'>
-
-@for $i from 1 to 6 {
-  .text-#{$i} { font-size: 15px * $i; }
-}
-
-</style>
-
-<p class="text-1">Hello</p>
-<p class="text-2">Hello</p>
-<p class="text-3">Hello</p>
-<p class="text-4">Hello</p>
-<p class="text-5">Hello</p>
+<div id="box"></div>
 ```
