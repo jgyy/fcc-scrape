@@ -1,22 +1,26 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1ca0a
-title: Part 45
+id: 5d8a4cfbe6b6180ed9a1ca0b
+title: Part 46
 challengeType: 0
-dashedName: part-45
+dashedName: part-46
 ---
 
 # --description--
 
-Instead of simply using the year(`d.year`) for the x-coordinate, you need to pass each year to the `xScale` so it can set the appropriate coordinate based on your scale.
+Chain the `y` function to the line and pass it a "d function" that returns your `yScale` with `d.followers.twitter` as its argument.
 
-In the "d function" you created, return `xScale(d.year)` instead of `d.year`.
+This is similar to how you set the x values. It will use the values of your Twitter followers and your `yScale` to set the y coordinate for each item.
+
+These "d functions" use implicit returns. But if you add curly brackets and a return statement, you can put any JavaScript in there that you want. Including `console.log` statements that can be useful for debugging.
 
 # --hints--
 
 test-text
 
 ```js
-assert(/\.x\s*\(d\s*=>\s*xScale\s*\(\s*d\.year\s*\)\s*\)/g.test(code));
+assert(
+  /\.y\s*\(\s*d\s*=>\s*yScale\s*\(\s*d\.followers.twitter\s*\)\s*\)/g.test(code)
+);
 ```
 
 # --seed--
@@ -111,7 +115,7 @@ assert(/\.x\s*\(d\s*=>\s*xScale\s*\(\s*d\.year\s*\)\s*\)/g.test(code));
     .style('font', '10px verdana');
 
   const twitterLine = d3.line()
-    .x(d => d.year)
+    .x(d => xScale(d.year))
 
 
 </script>
@@ -177,7 +181,9 @@ assert(/\.x\s*\(d\s*=>\s*xScale\s*\(\s*d\.year\s*\)\s*\)/g.test(code));
 
   const twitterLine = d3.line()
     .x(d => xScale(d.year))
+    .y(d => yScale(d.followers.twitter));
 
 
+    
 </script>
 ```
