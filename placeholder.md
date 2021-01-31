@@ -1,62 +1,37 @@
 ---
-id: 587d7dbd367417b2b2512bb5
-title: Nest CSS with Sass
+id: 587d7dbf367417b2b2512bbc
+title: Split Your Styles into Smaller Chunks with Partials
 challengeType: 0
-forumTopicId: 301457
-dashedName: nest-css-with-sass
+forumTopicId: 301459
+dashedName: split-your-styles-into-smaller-chunks-with-partials
 ---
 
 # --description--
 
-Sass allows nesting of CSS rules, which is a useful way of organizing a style sheet.
+<dfn>Partials</dfn> in Sass are separate files that hold segments of CSS code. These are imported and used in other Sass files. This is a great way to group similar code into a module to keep it organized.
 
-Normally, each element is targeted on a different line to style it, like so:
+Names for partials start with the underscore (`_`) character, which tells Sass it is a small segment of CSS and not to convert it into a CSS file. Also, Sass files end with the `.scss` file extension. To bring the code in the partial into another Sass file, use the `@import` directive.
 
-```scss
-nav {
-  background-color: red;
-}
-
-nav ul {
-  list-style: none;
-}
-
-nav ul li {
-  display: inline-block;
-}
-```
-
-For a large project, the CSS file will have many lines and rules. This is where nesting can help organize your code by placing child style rules within the respective parent elements:
+For example, if all your mixins are saved in a partial named "\_mixins.scss", and they are needed in the "main.scss" file, this is how to use them in the main file:
 
 ```scss
-nav {
-  background-color: red;
+// In the main.scss file
 
-  ul {
-    list-style: none;
-
-    li {
-      display: inline-block;
-    }
-  }
-}
-
+@import 'mixins'
 ```
+
+Note that the underscore and file extension are not needed in the `import` statement - Sass understands it is a partial. Once a partial is imported into a file, all variables, mixins, and other code are available to use.
 
 # --instructions--
 
-Use the nesting technique shown above to re-organize the CSS rules for both children of `.blog-post` element. For testing purposes, the `h1` should come before the `p` element.
+Write an `@import` statement to import a partial named `_variables.scss` into the main.scss file.
 
 # --hints--
 
-Your code should re-organize the CSS rules so the `h1` and `p` are nested in the `.blog-post` parent element.
+Your code should use the `@import` directive, and should not include the underscore in the file name.
 
 ```js
-assert(
-  code.match(
-    /\.blog-post\s*?{\s*?h1\s*?{\s*?text-align:\s*?center;\s*?color:\s*?blue;\s*?}\s*?p\s*?{\s*?font-size:\s*?20px;\s*?}\s*?}/gi
-  )
-);
+assert(code.match(/@import\s+?('|")variables\1/gi));
 ```
 
 # --seed--
@@ -64,42 +39,11 @@ assert(
 ## --seed-contents--
 
 ```html
-<style type='text/scss'>
-  .blog-post {
-
-  }
-  h1 {
-    text-align: center;
-    color: blue;
-  }
-  p {
-    font-size: 20px;
-  }
-</style>
-
-<div class="blog-post">
-  <h1>Blog Title</h1>
-  <p>This is a paragraph</p>
-</div>
+<!-- The main.scss file -->
 ```
 
 # --solutions--
 
 ```html
-<style type='text/scss'>
-  .blog-post {
-    h1 {
-      text-align: center;
-      color: blue;
-    }
-    p {
-      font-size: 20px;
-    }
-  }
-</style>
-
-<div class="blog-post">
-  <h1>Blog Title</h1>
-  <p>This is a paragraph</p>
-</div>
+@import 'variables'
 ```
