@@ -1,20 +1,20 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1c9fe
-title: Part 33
+id: 5d8a4cfbe6b6180ed9a1c9ff
+title: Part 34
 challengeType: 0
-dashedName: part-33
+dashedName: part-34
 ---
 
 # --description--
 
-On a new line, append another `g` element to your `lineGraph` variable like you did before. This one will be for the x-axis.
+Use the `call` function to draw the x-axis onto the SVG like you did for the y-axis.
 
 # --hints--
 
 test-text
 
 ```js
-assert($('g').length === 13);
+assert($('g').length === 22);
 ```
 
 # --seed--
@@ -96,6 +96,8 @@ assert($('g').length === 13);
     .attr('transform', `translate(${svgMargin}, 0)`)
     .style('font', '10px verdana');
 
+  lineGraph.append('g')
+
 
 </script>
 ```
@@ -145,9 +147,10 @@ assert($('g').length === 13);
     .call(yAxis)
     .attr('transform', `translate(${svgMargin}, 0)`)
     .style('font', '10px verdana');
-
+    
   lineGraph.append('g')
+    .call(xAxis)
 
-
+  
 </script>
 ```
