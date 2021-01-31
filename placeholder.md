@@ -1,22 +1,20 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1c9fc
-title: Part 31
+id: 5d8a4cfbe6b6180ed9a1c9fd
+title: Part 32
 challengeType: 0
-dashedName: part-31
+dashedName: part-32
 ---
 
 # --description--
 
-After all that work, something is finally displayed on the graph. It's the y-axis and all the numbers are hidden on the left.
-
-Move the axis your `svgMargin` to the right by chaining an `attr` function to the selection. Use it to set the `transform` to `translate(${svgMargin}, 0)`. Use a template literal (backticks) to set the value so you can put your variable in there.
+`style` is a function similar to `attr`, but is more for manipulating CSS styles rather than element attributes. Add a `style` function to the selection that sets the `font` to `10px verdana`.
 
 # --hints--
 
 test-text
 
 ```js
-assert($('g')[0].attributes.transform.nodeValue === 'translate(70, 0)');
+assert($('g')[0].attributes.style.nodeValue === 'font: 10px verdana;');
 ```
 
 # --seed--
@@ -95,7 +93,7 @@ assert($('g')[0].attributes.transform.nodeValue === 'translate(70, 0)');
 
   lineGraph.append('g')
     .call(yAxis)
-    
+    .attr('transform', `translate(${svgMargin}, 0)`)
 
 
 </script>
@@ -145,6 +143,7 @@ assert($('g')[0].attributes.transform.nodeValue === 'translate(70, 0)');
   lineGraph.append('g')
     .call(yAxis)
     .attr('transform', `translate(${svgMargin}, 0)`)
+    .style('font', '10px verdana');
 
 
 </script>
