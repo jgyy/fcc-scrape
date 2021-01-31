@@ -1,22 +1,22 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1ca24
-title: Part 71
+id: 5d8a4cfbe6b6180ed9a1ca25
+title: Part 72
 challengeType: 0
-dashedName: part-71
+dashedName: part-72
 ---
 
 # --description--
 
-On a new line, use the `selectAll` function on your `lineGraph` variable again and pass it the string `tumblr-circles` this time. The next few steps will be for adding circles to the Tumblr line.
+Add the same `data`, `enter`, and `append` functions here that you added for the `twitter-circles`, passing in the same arguments. Make sure they are in the same order.
+
+Remember that this will take the difference in length between the `tumblr-circles` selection(0) and the data array(9) and append that many circle elements.
 
 # --hints--
 
 test-text
 
 ```js
-assert(
-  /lineGraph\s*\.\s*selectAll\s*\((`|'|")\s*tumblr-circles\1\s*\)/g.test(code)
-);
+assert($('svg circle').length === 18);
 ```
 
 # --seed--
@@ -151,7 +151,9 @@ assert(
     .attr('stroke', twitterColor)
     .style('cursor', 'pointer')
 
-  
+  lineGraph.selectAll('tumblr-circles')
+
+
 
 </script>
 ```
@@ -256,8 +258,11 @@ assert(
     .style('cursor', 'pointer')
 
   lineGraph.selectAll('tumblr-circles')
+    .data(data)
+    .enter()
+    .append('circle')
 
-
+    
 
 </script>
 ```
