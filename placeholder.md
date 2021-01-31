@@ -1,20 +1,20 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1c9fd
-title: Part 32
+id: 5d8a4cfbe6b6180ed9a1c9fe
+title: Part 33
 challengeType: 0
-dashedName: part-32
+dashedName: part-33
 ---
 
 # --description--
 
-`style` is a function similar to `attr`, but is more for manipulating CSS styles rather than element attributes. Add a `style` function to the selection that sets the `font` to `10px verdana`.
+On a new line, append another `g` element to your `lineGraph` variable like you did before. This one will be for the x-axis.
 
 # --hints--
 
 test-text
 
 ```js
-assert($('g')[0].attributes.style.nodeValue === 'font: 10px verdana;');
+assert($('g').length === 13);
 ```
 
 # --seed--
@@ -94,6 +94,7 @@ assert($('g')[0].attributes.style.nodeValue === 'font: 10px verdana;');
   lineGraph.append('g')
     .call(yAxis)
     .attr('transform', `translate(${svgMargin}, 0)`)
+    .style('font', '10px verdana');
 
 
 </script>
@@ -144,6 +145,8 @@ assert($('g')[0].attributes.style.nodeValue === 'font: 10px verdana;');
     .call(yAxis)
     .attr('transform', `translate(${svgMargin}, 0)`)
     .style('font', '10px verdana');
+
+  lineGraph.append('g')
 
 
 </script>
