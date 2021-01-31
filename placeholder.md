@@ -1,13 +1,13 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1c9df
-title: Part 2
+id: 5d8a4cfbe6b6180ed9a1c9e0
+title: Part 3
 challengeType: 0
-dashedName: part-2
+dashedName: part-3
 ---
 
 # --description--
 
-Next, add opening and closing `html`, `head` and `body` tags below the doctype. Be sure to nest them properly.
+In the head, add a `title` of `D3 Dashboard`.
 
 # --hints--
 
@@ -15,9 +15,7 @@ test-text
 
 ```js
 assert(
-  /<!DOCTYPE\s+html\s*>\s*<html\s*>\s*<head\s*>\s*<\/head\s*>\s*<body\s*>\s*<\/body\s*>\s*<\/html\s*>/gi.test(
-    code
-  )
+  /<head\s*>\s*<title\s*>D3 Dashboard<\/title\s*>\s*<\/head\s*>/g.test(code)
 );
 ```
 
@@ -27,6 +25,15 @@ assert(
 
 ```html
 <!DOCTYPE html>
+<html>
+  <head>
+
+  
+  </head>
+
+  <body>
+  </body>
+</html>
 ```
 
 # --solutions--
@@ -35,6 +42,7 @@ assert(
 <!DOCTYPE html>
 <html>
   <head>
+    <title>D3 Dashboard</title>
   </head>
 
   <body>
