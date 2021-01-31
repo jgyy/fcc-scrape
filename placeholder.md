@@ -1,13 +1,13 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1ca2e
-title: Part 81
+id: 5d8a4cfbe6b6180ed9a1ca2f
+title: Part 82
 challengeType: 0
-dashedName: part-81
+dashedName: part-82
 ---
 
 # --description--
 
-The line graph is looking good. All the empty space to the right will be for the pie graph and legend. Create a new `const` named `rightDashboard` and set equal to `d3.select('.dashboard')`. This will select your dashboard container again which currently only has the SVG element as a child.
+Use `append` to add a `div` element to the selection. This will put a div as another child of the dashboard container to hold the pie graph and legend.
 
 # --hints--
 
@@ -15,7 +15,7 @@ test-text
 
 ```js
 assert(
-  /const\s*rightDashboard\s*=\s*d3\.select\s*\((`|'|")\.dashboard\1\s*\)/g.test(
+  /const rightDashboard = d3\.select\((`|'|")\.dashboard\1\)\s*\.append\s*\(\s*(`|'|")div\2\)/g.test(
     code
   )
 );
@@ -175,6 +175,8 @@ assert(
     .attr('stroke', instagramColor)
     .style('cursor', 'pointer')
 
+  const rightDashboard = d3.select('.dashboard')
+
 
 
 </script>
@@ -302,8 +304,9 @@ assert(
     .style('cursor', 'pointer')
 
   const rightDashboard = d3.select('.dashboard')
+    .append('div');
 
-
+    
 
 </script>
 ```
