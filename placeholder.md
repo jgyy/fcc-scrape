@@ -1,21 +1,21 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1c9f6
-title: Part 25
+id: 5d8a4cfbe6b6180ed9a1c9f7
+title: Part 26
 challengeType: 0
-dashedName: part-25
+dashedName: part-26
 ---
 
 # --description--
 
-The `year` values of your data will be used for the x-scale. Chain the `domain` function to `xScale` and pass it an array with the first and last years of your data.
+The range for this scale will go from the left of your graph to the right, with 2012 on the left and 2020 on the right. Add the `range` function to the `xScale` and pass it an array with the values: `svgMargin` and `svgWidth - svgMargin`. This will translate to `[70, 630]`. So 2012 will use 70 as is x-coordinate and 2020 will use 630 as its x-coordinate.
 
 # --hints--
 
 test-text
 
 ```js
-const domain = xScale.domain();
-assert(domain.length === 2 && domain[0] === 2012 && domain[1] === 2020);
+const range = xScale.range();
+assert(range.length === 2 && range[0] === 70 && range[1] === 630);
 ```
 
 # --seed--
@@ -85,6 +85,7 @@ assert(domain.length === 2 && domain[0] === 2012 && domain[1] === 2020);
     .range([svgHeight - svgMargin, svgMargin]);
 
   const xScale = d3.scaleLinear()
+    .domain([2012, 2020])
 
 
 </script>
@@ -125,7 +126,8 @@ assert(domain.length === 2 && domain[0] === 2012 && domain[1] === 2020);
 
   const xScale = d3.scaleLinear()
     .domain([2012, 2020])
+    .range([svgMargin, svgWidth - svgMargin]);
 
 
-</script>
+</script>  
 ```
