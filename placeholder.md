@@ -1,24 +1,21 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1c9e5
-title: Part 8
+id: 5d8a4cfbe6b6180ed9a1c9e6
+title: Part 9
 challengeType: 0
-dashedName: part-8
+dashedName: part-9
 ---
 
 # --description--
 
-Give the dashboard a `background-color` of `white` and a `box-shadow` of `5px 5px 5px 5px #888` to give it a little depth.
+Now you can see your dashboard element. Center it by adding a `margin` of `auto` to it.
 
 # --hints--
 
 test-text
 
 ```js
-const dashboard = $('.dashboard');
-assert(
-  dashboard.css('background-color') === 'rgb(255, 255, 255)' &&
-    dashboard.css('box-shadow') === 'rgb(136, 136, 136) 5px 5px 5px 5px'
-);
+const dashboard = code.match(/.dashboard\s*{[\s\S]+?[^}]}/g)[0];
+assert(/margin\s*:\s*auto\s*(;|})/g.test(dashboard));
 ```
 
 # --seed--
@@ -49,8 +46,10 @@ body {
 .dashboard {
   width: 980px;
   height: 500px;
+  background-color: white;
+  box-shadow: 5px 5px 5px 5px #888;
 
-  
+
 }
 </style>
 ```
@@ -68,6 +67,7 @@ body {
   height: 500px;
   background-color: white;
   box-shadow: 5px 5px 5px 5px #888;
+  margin: auto;
 }
 </style>
 ```
