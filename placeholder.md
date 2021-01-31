@@ -1,23 +1,20 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1ca22
-title: Part 69
+id: 5d8a4cfbe6b6180ed9a1ca23
+title: Part 70
 challengeType: 0
-dashedName: part-69
+dashedName: part-70
 ---
 
 # --description--
 
-The circles are now visible, but I don't like the color. Use the appropriate function to set the `fill` to `white` and the `stroke` to your `twitterColor` variable.
+Use the `style` function to set the `cursor` to `pointer`. Like your year labels, this will be an indicator for a hover effect you will add later.
 
 # --hints--
 
 test-text
 
 ```js
-assert(
-  $('svg circle')[0].getAttribute('fill') === 'white' &&
-    $('svg circle')[0].getAttribute('stroke') === '#7cd9d1'
-);
+assert($('svg circle')[0].style.cursor === 'pointer');
 ```
 
 # --seed--
@@ -148,8 +145,10 @@ assert(
     .attr('cx', d => xScale(d.year))
     .attr('cy', d => yScale(d.followers.twitter))
     .attr('r', 6)
-    
+    .attr('fill', 'white')
+    .attr('stroke', twitterColor)
 
+    
 
 </script>
 ```
@@ -251,8 +250,9 @@ assert(
     .attr('r', 6)
     .attr('fill', 'white')
     .attr('stroke', twitterColor)
+    .style('cursor', 'pointer')
 
-    
+  
 
 </script>
 ```
