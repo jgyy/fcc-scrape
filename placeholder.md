@@ -1,13 +1,13 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1ca26
-title: Part 73
+id: 5d8a4cfbe6b6180ed9a1ca27
+title: Part 74
 challengeType: 0
-dashedName: part-73
+dashedName: part-74
 ---
 
 # --description--
 
-Set the `cx` and `cy` attributes for the Tumblr circles to their appropriate values.
+Use the `attr` function to set the `r` to `6`, the `fill` to `white`, and the `stroke` to your `tumblrColor` variable.
 
 # --hints--
 
@@ -15,8 +15,9 @@ test-text
 
 ```js
 assert(
-  $('svg circle')[9].getAttribute('cx') == '70' &&
-    $('svg circle')[9].getAttribute('cy') == '401.128'
+  $('svg circle')[9].getAttribute('r') == '6' &&
+    $('svg circle')[9].getAttribute('fill') === 'white' &&
+    $('svg circle')[9].getAttribute('stroke') === '#f6dd71'
 );
 ```
 
@@ -156,6 +157,8 @@ assert(
     .data(data)
     .enter()
     .append('circle')
+    .attr('cx', d => xScale(d.year))
+    .attr('cy', d => yScale(d.followers.tumblr))
 
     
 
@@ -267,8 +270,11 @@ assert(
     .append('circle')
     .attr('cx', d => xScale(d.year))
     .attr('cy', d => yScale(d.followers.tumblr))
+    .attr('r', 6)
+    .attr('fill', 'white')
+    .attr('stroke', tumblrColor)
 
-    
+
 
 </script>
 ```
