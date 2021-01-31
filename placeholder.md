@@ -1,23 +1,20 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1ca12
-title: Part 53
+id: 5d8a4cfbe6b6180ed9a1ca13
+title: Part 54
 challengeType: 0
-dashedName: part-53
+dashedName: part-54
 ---
 
 # --description--
 
-On a new line, `append` a `path` element to the `lineGraph` variable. This one will be for displaying the `tumblrLine`.
+Tell the new path how to be drawn by setting the `d` attribute to `tumblrLine(data)` using the `attr` function.
 
 # --hints--
 
 test-text
 
 ```js
-assert(
-  $('svg path').length === 4 &&
-    code.match(/lineGraph\.append\((`|'|")path\1\)/gi).length === 2
-);
+assert($('svg path')[3].getAttribute('d').length === 115);
 ```
 
 # --seed--
@@ -125,6 +122,7 @@ assert(
     .x(d => xScale(d.year))
     .y(d => yScale(d.followers.tumblr));
 
+  lineGraph.append('path')
 
 
 </script>
@@ -203,7 +201,9 @@ assert(
     .y(d => yScale(d.followers.tumblr));
 
   lineGraph.append('path')
+    .attr('d', tumblrLine(data))
 
+  
 
 </script>
 ```
