@@ -1,24 +1,20 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1c9e1
-title: Part 4
+id: 5d8a4cfbe6b6180ed9a1c9e2
+title: Part 5
 challengeType: 0
-dashedName: part-4
+dashedName: part-5
 ---
 
 # --description--
 
-Below the title, link to your external stylesheet by adding a `link` element with a `rel` attribute of `stylesheet` and an `href` attribute of `./dashboard.css`. Remember that link elements do not need a closing tag. You will be adding some styles to this file shortly.
+Next, add a container for the dashboard. Put an empty `div` element in the body with class of `dashboard`. You will be appending all the dashboard elements to this div.
 
 # --hints--
 
 test-text
 
 ```js
-const link = code.match(/<link\s+[\s\S]+?[^>]>/gi)[0];
-assert(
-  /rel\s*=\s*('|")\s*stylesheet\s*\1/gi.test(link) &&
-    /href\s*=\s*('|")\s*(.\/)?dashboard\.css\s*\1/gi.test(link)
-);
+assert($('div.dashboard').length === 1);
 ```
 
 # --seed--
@@ -30,11 +26,12 @@ assert(
 <html>
   <head>
     <title>D3 Dashboard</title>
-
-    
+    <link rel="stylesheet" href="./dashboard.css">
   </head>
 
   <body>
+
+  
   </body>
 </html>
 ```
@@ -47,9 +44,12 @@ assert(
   <head>
     <title>D3 Dashboard</title>
     <link rel="stylesheet" href="./dashboard.css">
+
+    
   </head>
 
   <body>
+    <div class="dashboard"></div>
   </body>
 </html>
 ```
