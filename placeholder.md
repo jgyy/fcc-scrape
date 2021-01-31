@@ -1,24 +1,24 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1ca1c
-title: Part 63
+id: 5d8a4cfbe6b6180ed9a1ca1d
+title: Part 64
 challengeType: 0
-dashedName: part-63
+dashedName: part-64
 ---
 
 # --description--
 
-Add the D3 `data` function to your selection and pass it the data array like this:
+Next, chain the `enter()` function to the selection.
 
-```js
-.data(data)
-```
+The enter function identifies elements that need to be added when the data array is longer than the selection array. This is why you wanted the `selectAll` to be an empty array before.
+
+In this case, the `twitter-circles` selection has a length of 0, and the data array has a length of 9. So nine elements will be added when you use `append` in the next step.
 
 # --hints--
 
 test-text
 
 ```js
-assert(/\.data\s*\(\s*data\s*\)/g.test(code));
+assert(/\.data\(data\)\s*\.enter\s*\(\s*\)/g.test(code));
 ```
 
 # --seed--
@@ -119,7 +119,7 @@ assert(/\.data\s*\(\s*data\s*\)/g.test(code));
   lineGraph.append('path')
     .attr('d', twitterLine(data))
     .attr('stroke', twitterColor)
-    .attr('stroke-width', '3')
+    .attr('stroke-width', 3)
     .attr('fill', 'transparent');
 
   const tumblrLine = d3.line()
@@ -129,7 +129,7 @@ assert(/\.data\s*\(\s*data\s*\)/g.test(code));
   lineGraph.append('path')
     .attr('d', tumblrLine(data))
     .attr('stroke', tumblrColor)
-    .attr('stroke-width', '3')
+    .attr('stroke-width', 3)
     .attr('fill', 'transparent');
 
   const instagramLine = d3.line()
@@ -139,14 +139,15 @@ assert(/\.data\s*\(\s*data\s*\)/g.test(code));
   lineGraph.append('path')
     .attr('d', instagramLine(data))
     .attr('stroke', instagramColor)
-    .attr('stroke-width', '3')
+    .attr('stroke-width', 3)
     .attr('fill', 'transparent');
     
-  lineGraph.selectAll('twitter-circles')  
+  lineGraph.selectAll('twitter-circles')
+    .data(data)
 
 
 
-</script>
+</script> 
 ```
 
 # --solutions--
@@ -237,10 +238,11 @@ assert(/\.data\s*\(\s*data\s*\)/g.test(code));
     .attr('stroke-width', 3)
     .attr('fill', 'transparent');
     
-  lineGraph.selectAll('twitter-circles')
+  lineGraph.selectAll('twitter-circles')  
     .data(data)
+    .enter()
 
+  
 
-
-</script> 
+</script>
 ```
