@@ -1,20 +1,24 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1c9f1
-title: Part 20
+id: 5d8a4cfbe6b6180ed9a1c9f2
+title: Part 21
 challengeType: 0
-dashedName: part-20
+dashedName: part-21
 ---
 
 # --description--
 
-Chain another `attr` function that sets the `height` as the `svgHeight` variable you created.
+Your line graph needs some scales so it knows how to translate the data into visual distances. The first one is the scale for the y-axis. It will be to show the number of followers. D3 has many utilities for creating scales. You want to use it's `scaleLinear` method for this scale.
+
+Create a new `const` named `yScale`, and set it equal to `d3.scaleLinear()`.
 
 # --hints--
 
 test-text
 
 ```js
-assert($('svg')[0].attributes.height.value === '500');
+assert(
+  typeof yScale === 'function' && /yScale\s*=\s*d3\.scaleLinear/.test(code)
+);
 ```
 
 # --seed--
@@ -77,6 +81,7 @@ assert($('svg')[0].attributes.height.value === '500');
   const lineGraph = d3.select('.dashboard')
     .append('svg')
     .attr('width', svgWidth)
+    .attr('height', svgHeight);
 
 
 </script>
@@ -110,6 +115,8 @@ assert($('svg')[0].attributes.height.value === '500');
     .append('svg')
     .attr('width', svgWidth)
     .attr('height', svgHeight);
+
+  const yScale = d3.scaleLinear()
 
 
 </script>
