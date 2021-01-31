@@ -1,13 +1,13 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1c9f8
-title: Part 27
+id: 5d8a4cfbe6b6180ed9a1c9f9
+title: Part 28
 challengeType: 0
-dashedName: part-27
+dashedName: part-28
 ---
 
 # --description--
 
-The two scales you defined will be used to create the axes and lines. First is the y-axis, it will be a line with some labels on the left of the graph. Create a new `const` named `yAxis` and set it equal to `d3.axisLeft(yScale)`. This will use the information from the `yScale` variable to build the axis.
+Create a new `const` named `xAxis` and set the value equal to `d3.axisBottom(xScale)`. This will create another axis for the bottom of the graph using the information from `xScale`. Although the axes do not display yet, they have the information they need to display correctly.
 
 # --hints--
 
@@ -15,8 +15,8 @@ test-text
 
 ```js
 assert(
-  typeof yAxis === 'function' &&
-    /yAxis\s*=\s*d3\.axisLeft\(\s*yScale\)/.test(code)
+  typeof xAxis === 'function' &&
+    /xAxis\s*=\s*d3\.axisBottom\(\s*xScale\)/.test(code)
 );
 ```
 
@@ -90,8 +90,10 @@ assert(
     .domain([2012, 2020])
     .range([svgMargin, svgWidth - svgMargin]);
 
+  const yAxis = d3.axisLeft(yScale)
 
-</script>  
+
+</script>
 ```
 
 # --solutions--
@@ -132,6 +134,8 @@ assert(
     .range([svgMargin, svgWidth - svgMargin]);
 
   const yAxis = d3.axisLeft(yScale)
+
+  const xAxis = d3.axisBottom(xScale)
 
 
 </script>
