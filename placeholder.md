@@ -1,21 +1,21 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1c9e6
-title: Part 9
+id: 5d8a4cfbe6b6180ed9a1c9e7
+title: Part 10
 challengeType: 0
-dashedName: part-9
+dashedName: part-10
 ---
 
 # --description--
 
-Now you can see your dashboard element. Center it by adding a `margin` of `auto` to it.
+Give the container some space by adding a `padding` of `100px 10px` to the `body` element.
 
 # --hints--
 
 test-text
 
 ```js
-const dashboard = code.match(/.dashboard\s*{[\s\S]+?[^}]}/g)[0];
-assert(/margin\s*:\s*auto\s*(;|})/g.test(dashboard));
+const body = code.match(/body\s*{[\s\S]+?[^}]}/g)[0];
+assert(/padding\s*:\s*100px\s*10px\s*(;|})/g.test(body));
 ```
 
 # --seed--
@@ -41,6 +41,8 @@ assert(/margin\s*:\s*auto\s*(;|})/g.test(dashboard));
 <style>
 body {
   background-color: #ccc;
+
+  
 }
 
 .dashboard {
@@ -48,8 +50,7 @@ body {
   height: 500px;
   background-color: white;
   box-shadow: 5px 5px 5px 5px #888;
-
-
+  margin: auto;
 }
 </style>
 ```
@@ -60,6 +61,7 @@ body {
 <style>
 body {
   background-color: #ccc;
+  padding: 100px 10px;
 }
 
 .dashboard {
