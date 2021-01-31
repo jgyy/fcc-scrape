@@ -1,32 +1,22 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1ca09
-title: Part 44
+id: 5d8a4cfbe6b6180ed9a1ca0a
+title: Part 45
 challengeType: 0
-dashedName: part-44
+dashedName: part-45
 ---
 
 # --description--
 
-The line needs x and y values for each point of data. Chain `x` to the line and pass it a "d function". Here's how that will look:
+Instead of simply using the year(`d.year`) for the x-coordinate, you need to pass each year to the `xScale` so it can set the appropriate coordinate based on your scale.
 
-```js
-.x(d => d.year)
-```
-
-You will be passing your `data` array to this line function, where it will go through each item in the array(`d`) and create an x value based on the year(`d.year`).
-
-This is the first place you have seen a "d function". These are common in D3 and that is how I will refer to them throughout this project.
+In the "d function" you created, return `xScale(d.year)` instead of `d.year`.
 
 # --hints--
 
 test-text
 
 ```js
-assert(
-  /const twitterLine = d3\.line\(\)\s*\.x\s*\(\s*d\s*=>\s*d\.year\s*\)/g.test(
-    code
-  )
-);
+assert(/\.x\s*\(d\s*=>\s*xScale\s*\(\s*d\.year\s*\)\s*\)/g.test(code));
 ```
 
 # --seed--
@@ -121,6 +111,7 @@ assert(
     .style('font', '10px verdana');
 
   const twitterLine = d3.line()
+    .x(d => d.year)
 
 
 </script>
@@ -185,7 +176,7 @@ assert(
     .style('font', '10px verdana');
 
   const twitterLine = d3.line()
-    .x(d => d.year)
+    .x(d => xScale(d.year))
 
 
 </script>
