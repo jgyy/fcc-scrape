@@ -1,20 +1,32 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1ca08
-title: Part 43
+id: 5d8a4cfbe6b6180ed9a1ca09
+title: Part 44
 challengeType: 0
-dashedName: part-43
+dashedName: part-44
 ---
 
 # --description--
 
-The axes and labels are looking good. Next, you will start to add some of the lines for the data. First is the line for the Twitter data. On a new line, create a new `const` named `twitterLine` and set it equal to `d3.line()`. `line` is a D3 function for creating a line.
+The line needs x and y values for each point of data. Chain `x` to the line and pass it a "d function". Here's how that will look:
+
+```js
+.x(d => d.year)
+```
+
+You will be passing your `data` array to this line function, where it will go through each item in the array(`d`) and create an x value based on the year(`d.year`).
+
+This is the first place you have seen a "d function". These are common in D3 and that is how I will refer to them throughout this project.
 
 # --hints--
 
 test-text
 
 ```js
-assert(/const\s*twitterLine\s*=\s*d3\s*\.\s*line\s*\(\s*\)/g.test(code));
+assert(
+  /const twitterLine = d3\.line\(\)\s*\.x\s*\(\s*d\s*=>\s*d\.year\s*\)/g.test(
+    code
+  )
+);
 ```
 
 # --seed--
@@ -108,6 +120,7 @@ assert(/const\s*twitterLine\s*=\s*d3\s*\.\s*line\s*\(\s*\)/g.test(code));
     .style('cursor', 'pointer')
     .style('font', '10px verdana');
 
+  const twitterLine = d3.line()
 
 
 </script>
@@ -172,6 +185,7 @@ assert(/const\s*twitterLine\s*=\s*d3\s*\.\s*line\s*\(\s*\)/g.test(code));
     .style('font', '10px verdana');
 
   const twitterLine = d3.line()
+    .x(d => d.year)
 
 
 </script>
