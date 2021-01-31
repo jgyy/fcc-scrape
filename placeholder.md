@@ -1,21 +1,23 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1c9e9
-title: Part 12
+id: 5d8a4cfbe6b6180ed9a1c9ea
+title: Part 13
 challengeType: 0
-dashedName: part-12
+dashedName: part-13
 ---
 
 # --description--
 
-Back in the HTML file, add a `script` tag at the bottom of the head element and give it a `src` attribute of `./d3-5.9.2.min.js`. Don't forget the closing tag. This will add the D3 library to your project from a downloaded copy.
+Add another `script` below the one you just added. Give it a `src` attribute of `./data.js`.
+
+This adds a `data` variable to your project that contains your number of social media followers, it is an array of objects. Each object has the year and your followers for three different platforms. You will see what it looks like shortly.
 
 # --hints--
 
 test-text
 
 ```js
-const script = code.match(/<script\s+[\s\S]+?[^>]>\s*<\/script\s*>/gi)[0];
-assert(/src\s*=\s*('|")\s*(\.\/)?d3-5.9.2.min.js\s*\1/gi.test(script));
+const script = code.match(/<script\s+[\s\S]+?[^>]>\s*<\/script\s*>/gi)[1];
+assert(/src\s*=\s*('|")\s*(\.\/)?data.js\s*\1/gi.test(script));
 ```
 
 # --seed--
@@ -39,6 +41,19 @@ assert(/src\s*=\s*('|")\s*(\.\/)?d3-5.9.2.min.js\s*\1/gi.test(script));
     align-items: center;
   }
 </style>
+<script>
+  const data = [ 
+    { year: 2012, followers: { twitter: 2594, tumblr:  401, instagram:   83 }},
+    { year: 2013, followers: { twitter: 3049, tumblr:  440, instagram:  192 }},
+    { year: 2014, followers: { twitter: 3511, tumblr:  415, instagram:  511 }},
+    { year: 2015, followers: { twitter: 3619, tumblr:  492, instagram: 1014 }},
+    { year: 2016, followers: { twitter: 4046, tumblr:  543, instagram: 2066 }},
+    { year: 2017, followers: { twitter: 3991, tumblr:  701, instagram: 3032 }},
+    { year: 2018, followers: { twitter: 3512, tumblr: 1522, instagram: 4512 }},
+    { year: 2019, followers: { twitter: 3274, tumblr: 1989, instagram: 4715 }},
+    { year: 2020, followers: { twitter: 2845, tumblr: 2040, instagram: 4801 }}
+  ];
+</script>
 ```
 
 ## --seed-contents--
@@ -49,9 +64,10 @@ assert(/src\s*=\s*('|")\s*(\.\/)?d3-5.9.2.min.js\s*\1/gi.test(script));
   <head>
     <title>D3 Dashboard</title>
     <link rel="stylesheet" href="./dashboard.css">
+    <script src="./d3-5.9.2.min.js"></script>
 
     
-  </head>
+ </head>
 
   <body>
     <div class="dashboard"></div>
@@ -68,12 +84,13 @@ assert(/src\s*=\s*('|")\s*(\.\/)?d3-5.9.2.min.js\s*\1/gi.test(script));
     <title>D3 Dashboard</title>
     <link rel="stylesheet" href="./dashboard.css">
     <script src="./d3-5.9.2.min.js"></script>
-
-    
- </head>
+    <script src="./data.js"></script>
+  </head>
 
   <body>
     <div class="dashboard"></div>
+
+    
   </body>
 </html>
 ```
