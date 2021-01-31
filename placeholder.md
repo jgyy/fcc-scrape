@@ -1,30 +1,20 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1c9f0
-title: Part 19
+id: 5d8a4cfbe6b6180ed9a1c9f1
+title: Part 20
 challengeType: 0
-dashedName: part-19
+dashedName: part-20
 ---
 
 # --description--
 
-You can't see it, but there is now an `svg` element nested in your dashboard container. When you appended it, it became the "selection" for this area of code. Any functions you chain after it will be used on this selection.
-
-`attr` is a function to set attributes. You need to pass it the attribute you want to set, and the value you want to give it. Here's an example of how to chain `attr` to a selection:
-
-```js
-const variableName = d3.select('element')
-  .append('element')
-  .attr('attribute', 'value')
-```
-
-Chain an `attr` function to the selection that sets the `width` as the `svgWidth` variable you created earlier. When using a variable as a value, you do not need to put it in any kind of quotations.
+Chain another `attr` function that sets the `height` as the `svgHeight` variable you created.
 
 # --hints--
 
 test-text
 
 ```js
-assert($('svg')[0].attributes.width.value === '700');
+assert($('svg')[0].attributes.height.value === '500');
 ```
 
 # --seed--
@@ -86,6 +76,7 @@ assert($('svg')[0].attributes.width.value === '700');
 
   const lineGraph = d3.select('.dashboard')
     .append('svg')
+    .attr('width', svgWidth)
 
 
 </script>
@@ -118,6 +109,7 @@ assert($('svg')[0].attributes.width.value === '700');
   const lineGraph = d3.select('.dashboard')
     .append('svg')
     .attr('width', svgWidth)
+    .attr('height', svgHeight);
 
 
 </script>
