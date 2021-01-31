@@ -1,13 +1,13 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1ca2b
-title: Part 78
+id: 5d8a4cfbe6b6180ed9a1ca2c
+title: Part 79
 challengeType: 0
-dashedName: part-78
+dashedName: part-79
 ---
 
 # --description--
 
-Appropriately set the `cx` and `cy` attributes for the Instagram circles.
+Appropriately set the radius (`r`), `fill`, and `stroke` for these circles.
 
 # --hints--
 
@@ -15,8 +15,9 @@ test-text
 
 ```js
 assert(
-  $('svg circle')[18].getAttribute('cx') == '70' &&
-    $('svg circle')[18].getAttribute('cy') == '424.024'
+  $('svg circle')[18].getAttribute('r') == '6' &&
+    $('svg circle')[18].getAttribute('fill') === 'white' &&
+    $('svg circle')[18].getAttribute('stroke') === '#fd9b98'
 );
 ```
 
@@ -167,8 +168,10 @@ assert(
     .data(data)
     .enter()
     .append('circle')
+    .attr('cx', d => xScale(d.year))
+    .attr('cy', d => yScale(d.followers.instagram))
     
-    
+
 
 </script>
 ```
@@ -289,7 +292,10 @@ assert(
     .append('circle')
     .attr('cx', d => xScale(d.year))
     .attr('cy', d => yScale(d.followers.instagram))
-    
+    .attr('r', 6)
+    .attr('fill', 'white')
+    .attr('stroke', instagramColor)
+
 
 
 </script>
