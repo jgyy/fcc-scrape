@@ -1,20 +1,21 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1ca5e
-title: Part 127
+id: 5d8a4cfbe6b6180ed9a1ca5f
+title: Part 128
 challengeType: 0
-dashedName: part-127
+dashedName: part-128
 ---
 
 # --description--
 
-Append a `div` element to the selection. Each `div` will be a small square for each color.
+Set the `width` to `16px` and the `height` to `16px` using the `style` function.
 
 # --hints--
 
 test-text
 
 ```js
-assert($('.dashboard div table tbody tr td div').length === 3);
+const div = $('.dashboard div table tbody tr td div')[0];
+assert(div.style.width == '16px' && div.style.height === '16px');
 ```
 
 # --seed--
@@ -235,7 +236,7 @@ assert($('.dashboard div table tbody tr td div').length === 3);
 
   legendRows.append('td')
     .attr('align', 'center')
-
+    .append('div')
 
 
 
@@ -428,6 +429,8 @@ assert($('.dashboard div table tbody tr td div').length === 3);
   legendRows.append('td')
     .attr('align', 'center')
     .append('div')
+    .style('width', '16px')
+    .style('height', '16px')
 
 
 
