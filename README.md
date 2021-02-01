@@ -1,21 +1,21 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1ca64
-title: Part 133
+id: 5d8a4cfbe6b6180ed9a1ca65
+title: Part 134
 challengeType: 0
-dashedName: part-133
+dashedName: part-134
 ---
 
 # --description--
 
-The legend has all the information is needs, but the title looks a little misaligned. Go to where you created your `legendTitle` variable and set the `position` to `relative` and the `left` to `20px` using `style` functions.
+The legend and pie graph look a little off as well. Go to where you created your `legend` variable and add a `position` of `relative` and a `top` of `30px` using `style` functions.
 
 # --hints--
 
 test-text
 
 ```js
-const th = $('.dashboard div table thead tr th')[0];
-assert(th.style.position === 'relative' && th.style.left === '20px');
+const table = $('.dashboard div table')[0];
+assert(table.style.position === 'relative' && table.style.top === '30px');
 ```
 
 # --seed--
@@ -218,12 +218,14 @@ assert(th.style.position === 'relative' && th.style.left === '20px');
     .attr('height', 120)
     .style('font', '12px verdana')
 
+
   const legendTitle = legend.append('thead')
     .append('tr')
     .append('th')
     .text('2020 followers')
     .attr('colspan', 3)
-
+    .style('position', 'relative')
+    .style('left', '20px');
 
   const legendRows = legend.append('tbody')
     .selectAll('tr')
@@ -376,6 +378,8 @@ assert(th.style.position === 'relative' && th.style.left === '20px');
     .attr('width', 200)
     .attr('height', 200)
 
+
+
   const pieArc = d3.arc()
     .outerRadius(100)
     .innerRadius(0);
@@ -414,7 +418,8 @@ assert(th.style.position === 'relative' && th.style.left === '20px');
     .attr('width', 200)
     .attr('height', 120)
     .style('font', '12px verdana')
-
+    .style('position', 'relative')
+    .style('top', '30px');
 
   const legendTitle = legend.append('thead')
     .append('tr')
@@ -444,5 +449,5 @@ assert(th.style.position === 'relative' && th.style.left === '20px');
   legendRows.append('td')
     .text(d => d.value)
     .attr('align', 'left');
-</script>
+</script>  
 ```
