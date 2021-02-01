@@ -1,20 +1,22 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1ca49
-title: Part 106
+id: 5d8a4cfbe6b6180ed9a1ca4a
+title: Part 107
 challengeType: 0
-dashedName: part-106
+dashedName: part-107
 ---
 
 # --description--
 
-Since you want to find what percent each of those `values` is, you first need to add them all up. `d3.sum` will do that for you. Create a new `const` named `sum` and set it equal to `d3.sum(values)`.
+Create another variable named `percent` and set it equal to `d.data.value` divided by your `sum` variable.
 
 # --hints--
 
 test-text
 
 ```js
-assert(/const\s*sum\s*=\s*d3\s*\.\s*sum\s*\(\s*values\s*\)\s*;?/g.test(code));
+assert(
+  /const\s*percent\s*=\s*d\s*\.\s*data\s*\.\s*value\s*\/\s*sum;?/g.test(code)
+);
 ```
 
 # --seed--
@@ -204,6 +206,7 @@ assert(/const\s*sum\s*=\s*d3\s*\.\s*sum\s*\(\s*values\s*\)\s*;?/g.test(code));
   pieGraphData.append('text')
     .text(d => {
       const values = d3.values(data[8].followers);
+      const sum = d3.sum(values);
 
 
     })
@@ -365,6 +368,7 @@ assert(/const\s*sum\s*=\s*d3\s*\.\s*sum\s*\(\s*values\s*\)\s*;?/g.test(code));
     .text(d => {
       const values = d3.values(data[8].followers);
       const sum = d3.sum(values);
+      const percent = d.data.value/sum;
 
 
     })
