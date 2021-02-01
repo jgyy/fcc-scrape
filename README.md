@@ -1,20 +1,22 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1ca59
-title: Part 122
+id: 5d8a4cfbe6b6180ed9a1ca5a
+title: Part 123
 challengeType: 0
-dashedName: part-122
+dashedName: part-123
 ---
 
 # --description--
 
-On a new line, `append` a `td` to your `legendRows` variable. `td` is for an individual cell in the row of the table.
+Use the `text` function to set the text of each `td` to the `key` of each data point by using a "d function" to return `d.key`.
 
 # --hints--
 
 test-text
 
 ```js
-assert($('.dashboard div table tbody tr td').length === 3);
+assert(
+  $('.dashboard div table tbody tr td').text() === 'twittertumblrinstagram'
+);
 ```
 
 # --seed--
@@ -229,6 +231,7 @@ assert($('.dashboard div table tbody tr td').length === 3);
     .enter()
     .append('tr');
 
+  legendRows.append('td')
 
 
 
@@ -414,7 +417,8 @@ assert($('.dashboard div table tbody tr td').length === 3);
     .enter()
     .append('tr');
 
-  legendRows.append('td')
+  legendRows.append('td')  
+    .text(d => d.key)
 
 
 
