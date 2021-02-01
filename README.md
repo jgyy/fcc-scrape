@@ -1,20 +1,24 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1ca5c
-title: Part 125
+id: 5d8a4cfbe6b6180ed9a1ca5d
+title: Part 126
 challengeType: 0
-dashedName: part-125
+dashedName: part-126
 ---
 
 # --description--
 
-On a new line, append another `td` element to your `legendRows` variable. This will be for colored squares in the center column.
+Set the `align` attribute to `center`.
 
 # --hints--
 
 test-text
 
 ```js
-assert($('.dashboard div table tbody tr td').length === 6);
+assert(
+  $('.dashboard div table tbody tr td')[1]
+    .getAttribute('align')
+    .toLowerCase() === 'center'
+);
 ```
 
 # --seed--
@@ -233,6 +237,7 @@ assert($('.dashboard div table tbody tr td').length === 6);
     .text(d => d.key)
     .attr('align', 'right');
 
+  legendRows.append('td')
 
 
 
@@ -423,6 +428,8 @@ assert($('.dashboard div table tbody tr td').length === 6);
     .attr('align', 'right');
 
   legendRows.append('td')
+    .attr('align', 'center')
+
 
 
 
