@@ -1,23 +1,26 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1ca6f
-title: Part 143
+id: 5d8a4cfbe6b6180ed9a1ca70
+title: Part 144
 challengeType: 0
-dashedName: part-143
+dashedName: part-144
 ---
 
 # --description--
 
-Similar to how you made the text bold for the label of the displayed year; change the `fill` of the `twitter-circles` to your `twitterColor` for the currently displayed year. To do this, use a "d function" that returns the `twitterColor` when `d.year` equals `year`, and leave it `white` if it doesn't.
+Add a `mouseover` event to the `tumblr-circles` and `instagram-circles` in the same way that you did for the `twitter-circles`.
+
+After that, you will be able hover any of the circles or year labels to get the information for that year.
 
 # --hints--
 
 test-text
 
 ```js
+const script = $('.dashboard').siblings('script')[1].innerHTML;
 assert(
-  Object.values($('.dashboard svg circle')).filter(
-    (el) => el.getAttribute && el.getAttribute('fill') === '#7cd9d1'
-  ).length === 1
+  script.match(
+    /\.on\(('|"|`)mouseover\1, function \(d\) \{\s*return drawDashboard\(d\.year\);\s*\}\)/g
+  ).length === 3
 );
 ```
 
@@ -154,9 +157,7 @@ assert(
       .attr('cx', d => xScale(d.year))
       .attr('cy', d => yScale(d.followers.twitter))
       .attr('r', 6)
-      .attr('fill', 'white')
-
-
+      .attr('fill', d => d.year === year ? twitterColor : 'white')
       .attr('stroke', twitterColor)
       .style('cursor', 'pointer')
       .on('mouseover', d => drawDashboard(d.year));
@@ -172,6 +173,8 @@ assert(
       .attr('stroke', tumblrColor)
       .style('cursor', 'pointer')
 
+
+
     lineGraph.selectAll('instagram-circles')
       .data(data)
       .enter()
@@ -182,6 +185,8 @@ assert(
       .attr('fill', 'white')
       .attr('stroke', instagramColor)
       .style('cursor', 'pointer')
+
+
 
     const rightDashboard = d3.select('.dashboard')
       .append('div');
@@ -380,10 +385,11 @@ assert(
       .attr('cy', d => yScale(d.followers.tumblr))
       .attr('r', 6)
       .attr('fill', 'white')
+
+
       .attr('stroke', tumblrColor)
       .style('cursor', 'pointer')
-
-
+      .on('mouseover', d => drawDashboard(d.year));
 
     lineGraph.selectAll('instagram-circles')
       .data(data)
@@ -393,10 +399,11 @@ assert(
       .attr('cy', d => yScale(d.followers.instagram))
       .attr('r', 6)
       .attr('fill', 'white')
+
+
       .attr('stroke', instagramColor)
       .style('cursor', 'pointer')
-
-
+      .on('mouseover', d => drawDashboard(d.year));
 
     const rightDashboard = d3.select('.dashboard')
       .append('div');
