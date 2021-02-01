@@ -1,13 +1,13 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1ca42
-title: Part 101
+id: 5d8a4cfbe6b6180ed9a1ca43
+title: Part 102
 challengeType: 0
-dashedName: part-101
+dashedName: part-102
 ---
 
 # --description--
 
-Back at the bottom, where you draw the chart. Use the `attr` function to set the `fill` to a "d function". In the "d function", use your `pieColors` scale to get the color value for the platform(`d.data.key`). So when each platform is passed to your scale, is will get the appropriate color to use as the fill from the scales range.
+Next, set the `stroke` to `white` and the `stroke-width` to `2`.
 
 # --hints--
 
@@ -16,9 +16,8 @@ test-text
 ```js
 const pathsArr = $('.dashboard div svg g path');
 assert(
-  pathsArr[0].getAttribute('fill') === '#7cd9d1' &&
-    pathsArr[1].getAttribute('fill') === '#f6dd71' &&
-    pathsArr[2].getAttribute('fill') === '#fd9b98'
+  pathsArr[0].getAttribute('stroke') === 'white' &&
+    pathsArr[0].getAttribute('stroke-width') == 2
 );
 ```
 
@@ -79,83 +78,71 @@ assert(
     tumblrColor = '#f6dd71',
     instagramColor = '#fd9b98';
 
-  const lineGraph = d3
-    .select('.dashboard')
+  const lineGraph = d3.select('.dashboard')
     .append('svg')
     .attr('width', svgWidth)
     .attr('height', svgHeight);
 
-  const yScale = d3
-    .scaleLinear()
+  const yScale = d3.scaleLinear()
     .domain([0, 5000])
     .range([svgHeight - svgMargin, svgMargin]);
 
-  const xScale = d3
-    .scaleLinear()
+  const xScale = d3.scaleLinear()
     .domain([2012, 2020])
     .range([svgMargin, svgWidth - svgMargin]);
 
-  const yAxis = d3.axisLeft(yScale).ticks(6, '~s');
+  const yAxis = d3.axisLeft(yScale)
+    .ticks(6, '~s');
 
-  const xAxis = d3
-    .axisBottom(xScale)
+  const xAxis = d3.axisBottom(xScale)
     .tickFormat(d3.format(''))
     .tickPadding(10);
 
-  lineGraph
-    .append('g')
+  lineGraph.append('g')
     .call(yAxis)
     .attr('transform', `translate(${svgMargin}, 0)`)
     .style('font', '10px verdana');
 
-  lineGraph
-    .append('g')
+  lineGraph.append('g')
     .call(xAxis)
     .attr('transform', `translate(0, ${svgHeight - svgMargin})`)
     .selectAll('text')
     .style('transform', 'translate(-12px, 0) rotate(-50deg)')
     .style('text-anchor', 'end')
     .style('cursor', 'pointer')
-    .style('font', '10px verdana');
+    .style('font', '10px verdana')
 
-  const twitterLine = d3
-    .line()
+  const twitterLine = d3.line()
     .x(d => xScale(d.year))
     .y(d => yScale(d.followers.twitter));
 
-  lineGraph
-    .append('path')
+  lineGraph.append('path')
     .attr('d', twitterLine(data))
     .attr('stroke', twitterColor)
     .attr('stroke-width', 3)
     .attr('fill', 'transparent');
 
-  const tumblrLine = d3
-    .line()
+  const tumblrLine = d3.line()
     .x(d => xScale(d.year))
     .y(d => yScale(d.followers.tumblr));
 
-  lineGraph
-    .append('path')
+  lineGraph.append('path')
     .attr('d', tumblrLine(data))
     .attr('stroke', tumblrColor)
     .attr('stroke-width', 3)
     .attr('fill', 'transparent');
 
-  const instagramLine = d3
-    .line()
+  const instagramLine = d3.line()
     .x(d => xScale(d.year))
     .y(d => yScale(d.followers.instagram));
 
-  lineGraph
-    .append('path')
+  lineGraph.append('path')
     .attr('d', instagramLine(data))
     .attr('stroke', instagramColor)
     .attr('stroke-width', 3)
     .attr('fill', 'transparent');
-
-  lineGraph
-    .selectAll('twitter-circles')
+    
+  lineGraph.selectAll('twitter-circles')
     .data(data)
     .enter()
     .append('circle')
@@ -164,10 +151,9 @@ assert(
     .attr('r', 6)
     .attr('fill', 'white')
     .attr('stroke', twitterColor)
-    .style('cursor', 'pointer');
+    .style('cursor', 'pointer')
 
-  lineGraph
-    .selectAll('tumblr-circles')
+  lineGraph.selectAll('tumblr-circles')
     .data(data)
     .enter()
     .append('circle')
@@ -176,10 +162,9 @@ assert(
     .attr('r', 6)
     .attr('fill', 'white')
     .attr('stroke', tumblrColor)
-    .style('cursor', 'pointer');
+    .style('cursor', 'pointer')
 
-  lineGraph
-    .selectAll('instagram-circles')
+  lineGraph.selectAll('instagram-circles')
     .data(data)
     .enter()
     .append('circle')
@@ -188,29 +173,27 @@ assert(
     .attr('r', 6)
     .attr('fill', 'white')
     .attr('stroke', instagramColor)
-    .style('cursor', 'pointer');
+    .style('cursor', 'pointer')
 
-  const rightDashboard = d3.select('.dashboard').append('div');
+  const rightDashboard = d3.select('.dashboard')
+    .append('div');
 
-  const pieGraph = rightDashboard
-    .append('svg')
+  const pieGraph = rightDashboard.append('svg')
     .attr('width', 200)
-    .attr('height', 200);
+    .attr('height', 200)
 
-  const pieArc = d3
-    .arc()
+  const pieArc = d3.arc()
     .outerRadius(100)
     .innerRadius(0);
 
-  const pieColors = d3
-    .scaleOrdinal()
+  const pieColors = d3.scaleOrdinal()  
     .domain(data[8].followers)
     .range([twitterColor, tumblrColor, instagramColor]);
 
-  const pie = d3.pie().value(d => d.value);
-
-  const pieGraphData = pieGraph
-    .selectAll('pieSlices')
+  const pie = d3.pie()
+    .value(d => d.value);
+    
+  const pieGraphData = pieGraph.selectAll('pieSlices')
     .data(pie(d3.entries(data[8].followers)))
     .enter()
     .append('g')
@@ -218,6 +201,7 @@ assert(
 
   pieGraphData.append('path')
     .attr('d', pieArc)
+    .attr('fill', d => pieColors(d.data.key))
 
 
 </script>
@@ -371,6 +355,9 @@ assert(
   pieGraphData.append('path')
     .attr('d', pieArc)
     .attr('fill', d => pieColors(d.data.key))
+    .attr('stroke', 'white')
+    .attr('stroke-width', 2);
+
 
 
 </script>
