@@ -1,24 +1,20 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1ca5d
-title: Part 126
+id: 5d8a4cfbe6b6180ed9a1ca5e
+title: Part 127
 challengeType: 0
-dashedName: part-126
+dashedName: part-127
 ---
 
 # --description--
 
-Set the `align` attribute to `center`.
+Append a `div` element to the selection. Each `div` will be a small square for each color.
 
 # --hints--
 
 test-text
 
 ```js
-assert(
-  $('.dashboard div table tbody tr td')[1]
-    .getAttribute('align')
-    .toLowerCase() === 'center'
-);
+assert($('.dashboard div table tbody tr td div').length === 3);
 ```
 
 # --seed--
@@ -238,6 +234,8 @@ assert(
     .attr('align', 'right');
 
   legendRows.append('td')
+    .attr('align', 'center')
+
 
 
 
@@ -429,7 +427,7 @@ assert(
 
   legendRows.append('td')
     .attr('align', 'center')
-
+    .append('div')
 
 
 
