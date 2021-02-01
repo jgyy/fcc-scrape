@@ -1,30 +1,27 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1ca4b
-title: Part 108
+id: 5d8a4cfbe6b6180ed9a1ca4c
+title: Part 109
 challengeType: 0
-dashedName: part-108
+dashedName: part-109
 ---
 
 # --description--
 
-Your percent values are numbers less than one. You will need to multiply it by 100, round of the decimals, and add a `%` sign. Use a template literal to return this to the `text` function:
+The text elements are at the center of the pie graph, you need to use the `centroid` from the D3 arc API to tell them where to go. Add an `attr` function to set the `transform` to a `d` function that returns this template literal: `translate(${ pieArc.centroid(d) })`
 
-```js
-${Math.round(percent * 100)}%
-```
-
-Don't forget that you need a `return` statement here since you aren't using an implicit return.
+The `centroid` function will find the midpoint of each slice for each text element.
 
 # --hints--
 
 test-text
 
 ```js
-assert(
-  /return\s*`\$\{\s*Math\s*\.\s*round\s*\(\s*percent\s*\*\s*100\s*\)\s*\}%`;?\s*\}\s*\)/g.test(
-    code
-  )
-);
+const transform = $('.dashboard div svg g text')[0]
+  .getAttribute('transform')
+  .replace('translate(', '')
+  .replace(')', '')
+  .split(',');
+assert(transform[0] < 39 && transform[1] > 31);
 ```
 
 # --seed--
@@ -216,9 +213,12 @@ assert(
       const values = d3.values(data[8].followers);
       const sum = d3.sum(values);
       const percent = d.data.value/sum;
-
-
+      return `${ Math.round(percent*100) }%`;
     })
+
+
+
+
 </script>
 ```
 
@@ -380,7 +380,7 @@ assert(
       const percent = d.data.value/sum;
       return `${ Math.round(percent*100) }%`;
     })
-
+    .attr('transform', d => `translate(${pieArc.centroid(d)})`)
 
 
 
