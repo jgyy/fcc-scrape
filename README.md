@@ -1,31 +1,22 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1ca71
-title: Part 145
+id: 5d8a4cfbe6b6180ed9a1ca72
+title: Part 146
 challengeType: 0
-dashedName: part-145
+dashedName: part-146
 ---
 
 # --description--
 
-Change the `fill` of the `tumblr-circles` and `instagram-circles` to use a "d function" that returns their respective color variables when `d.year` equals `year`, leave it `white` when they don't. This is similar to how you set the fill of the Twitter circles.
+The last thing is that the legend title always shows 2020. Change the `text` of the `legendTitle` to a template literal that shows the currently displayed year followed by a space and `followers`.
 
-Then, all of the circles will get filled in for the currently displayed year.
+That's it, your dashboard is finished! Don't forget to admire your hard work.
 
 # --hints--
 
 test-text
 
 ```js
-const circles = Object.values($('.dashboard svg circle'));
-assert(
-  circles.filter(
-    (el) =>
-      el.getAttribute &&
-      (el.getAttribute('fill') === '#7cd9d1' ||
-        el.getAttribute('fill') === '#f6dd71' ||
-        el.getAttribute('fill') === '#fd9b98')
-  ).length === 3
-);
+assert(/\.text\s*\(\s*`\s*\$\{\s*year\s*\} followers`\s*\)/g.test(code));
 ```
 
 # --seed--
@@ -173,9 +164,7 @@ assert(
       .attr('cx', d => xScale(d.year))
       .attr('cy', d => yScale(d.followers.tumblr))
       .attr('r', 6)
-      .attr('fill', 'white')
-
-
+      .attr('fill', d => d.year === year ? tumblrColor : 'white')
       .attr('stroke', tumblrColor)
       .style('cursor', 'pointer')
       .on('mouseover', d => drawDashboard(d.year));
@@ -187,9 +176,7 @@ assert(
       .attr('cx', d => xScale(d.year))
       .attr('cy', d => yScale(d.followers.instagram))
       .attr('r', 6)
-      .attr('fill', 'white')
-
-
+      .attr('fill', d => d.year === year ? instagramColor : 'white')
       .attr('stroke', instagramColor)
       .style('cursor', 'pointer')
       .on('mouseover', d => drawDashboard(d.year));
@@ -248,6 +235,8 @@ assert(
       .append('tr')
       .append('th')
       .text('2020 followers')
+
+
       .attr('colspan', 3)
       .style('position', 'relative')
       .style('left', '20px');
@@ -460,7 +449,7 @@ assert(
     const legendTitle = legend.append('thead')
       .append('tr')
       .append('th')
-      .text('2020 followers')
+      .text(`${year} followers`)
 
 
       .attr('colspan', 3)
