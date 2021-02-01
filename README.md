@@ -1,19 +1,15 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1ca6b
-title: Part 139
+id: 5d8a4cfbe6b6180ed9a1ca6c
+title: Part 140
 challengeType: 0
-dashedName: part-139
+dashedName: part-140
 ---
 
 # --description--
 
-Go to where you `call` the `xAxis` and create a `mouseover` event for the labels. Chain the `on` function to them, pass it the string `mouseover`, and give it a value of a "d function" that calls `drawDashboard` with `d` as the argument. It will look like this:
+There's a problem, each time you hover a label it adds all the elements to the container again. If you empty the container at the top of the function, it will redraw them where they need to be.
 
-```js
-.on('mouseover', d => drawDashboard(d))
-```
-
-So now, when you hover a label, the function will be called with the year that is being hovered.
+Go back to the top of the function and use `d3.select` to select the `.dashboard` element and chain the `html` function to it with an empty string as it parameter. Empty means no spaces.
 
 # --hints--
 
@@ -21,11 +17,7 @@ test-text
 
 ```js
 const script = $('.dashboard').siblings('script')[1].innerHTML;
-assert(
-  /\.on\(('|"|`)mouseover\1, function \(d\) \{\s*return drawDashboard\(d\);\s*\}\)/g.test(
-    script
-  )
-);
+assert(/d3\.select\(('|"|`)\.dashboard\1\)\.html\(('|"|`)\2\)/g.test(script));
 ```
 
 # --seed--
@@ -79,6 +71,9 @@ assert(
 </script>
 <script>
   function drawDashboard(year) {
+
+
+
     const index = data.findIndex(d => d.year === year);
 
     const svgMargin = 70,
@@ -121,9 +116,7 @@ assert(
       .style('text-anchor', 'end')
       .style('cursor', 'pointer')
       .style('font', '10px verdana')
-
-
-
+      .on('mouseover', d => drawDashboard(d));
 
     const twitterLine = d3.line()
       .x(d => xScale(d.year))
@@ -290,9 +283,7 @@ assert(
 </script>
 <script>
   function drawDashboard(year) {
-
-
-
+    d3.select('.dashboard').html('');
     const index = data.findIndex(d => d.year === year);
 
     const svgMargin = 70,
@@ -335,6 +326,8 @@ assert(
       .style('text-anchor', 'end')
       .style('cursor', 'pointer')
       .style('font', '10px verdana')
+
+
       .on('mouseover', d => drawDashboard(d));
 
     const twitterLine = d3.line()
