@@ -1,23 +1,22 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1ca4e
-title: Part 111
+id: 5d8a4cfbe6b6180ed9a1ca4f
+title: Part 112
 challengeType: 0
-dashedName: part-111
+dashedName: part-112
 ---
 
 # --description--
 
-The last component you are going to add is a legend to display the name of each platform and the number of followers for the year. Create a new `const` named `legend` and use it to `append` a `table` to your `rightDashboard` variable. This looks similar to the code where you created your `pieGraph` variable.
+Give the table a `width` of `200` and a `height` of `120` using `attr`.
 
 # --hints--
 
 test-text
 
 ```js
+const table = $('.dashboard div table')[0];
 assert(
-  /const\s*legend\s*=\s*rightDashboard\s*\.\s*append\s*\(\s*('|"|`)\s*table\s*\1\s*\)/g.test(
-    code
-  )
+  table.getAttribute('width') == 200 && table.getAttribute('height') == 120
 );
 ```
 
@@ -216,6 +215,8 @@ assert(
     .style('text-anchor', 'middle')
     .style('font', '10px verdana');
 
+  const legend = rightDashboard.append('table')
+
 
 
 </script>
@@ -384,6 +385,8 @@ assert(
     .style('font', '10px verdana');
 
   const legend = rightDashboard.append('table')
+    .attr('width', 200)
+    .attr('height', 120)
 
 
 
