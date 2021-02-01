@@ -1,13 +1,13 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1ca55
-title: Part 118
+id: 5d8a4cfbe6b6180ed9a1ca56
+title: Part 119
 challengeType: 0
-dashedName: part-118
+dashedName: part-119
 ---
 
 # --description--
 
-Create a new `const` named `legendRows` and use it to `append` a `tbody` element to your `legend` variable similar to how you added the `thead`. `tbody` is for the main content of an HTML table.
+Add a `selectAll` function to the selection and pass it the string `tr`.
 
 # --hints--
 
@@ -15,7 +15,7 @@ test-text
 
 ```js
 assert(
-  /const\s*legendRows\s*=\s*legend\s*\.\s*append\s*\(\s*('|"|`)\s*tbody\s*\1\s*\)/g.test(
+  /const legendRows = legend\.append\('tbody\s*'\)\s*\.\s*selectAll\s*\(\s*('|"|`)\s*tr\s*\1\s*\)/g.test(
     code
   )
 );
@@ -227,7 +227,8 @@ assert(
     .text('2020 followers')
     .attr('colspan', 3)
 
-    
+  const legendRows = legend.append('tbody')
+
 
 </script>
 ```
@@ -383,7 +384,10 @@ assert(
     .attr('stroke', 'white')
     .attr('stroke-width', 2);
 
-  pieGraphData.append('text')
+  pieGraphData.selectAll('pieSliceText')
+    .data(pie(d3.entries(data[8].followers)))
+    .enter()
+    .append('text')
     .text(d => {
       const values = d3.values(data[8].followers);
       const sum = d3.sum(values);
@@ -406,6 +410,7 @@ assert(
     .attr('colspan', 3)
 
   const legendRows = legend.append('tbody')
+    .selectAll('tr')
 
 
 </script>
