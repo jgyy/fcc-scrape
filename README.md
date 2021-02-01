@@ -1,22 +1,21 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1ca4f
-title: Part 112
+id: 5d8a4cfbe6b6180ed9a1ca50
+title: Part 113
 challengeType: 0
-dashedName: part-112
+dashedName: part-113
 ---
 
 # --description--
 
-Give the table a `width` of `200` and a `height` of `120` using `attr`.
+Set the `font` to `12px verdana` using the `style` function.
 
 # --hints--
 
 test-text
 
 ```js
-const table = $('.dashboard div table')[0];
 assert(
-  table.getAttribute('width') == 200 && table.getAttribute('height') == 120
+  $('.dashboard div table')[0].style.font.toLowerCase() === '12px verdana'
 );
 ```
 
@@ -216,6 +215,8 @@ assert(
     .style('font', '10px verdana');
 
   const legend = rightDashboard.append('table')
+    .attr('width', 200)
+    .attr('height', 120)
 
 
 
@@ -387,8 +388,9 @@ assert(
   const legend = rightDashboard.append('table')
     .attr('width', 200)
     .attr('height', 120)
+    .style('font', '12px verdana')
 
-
+  
 
 </script>
 ```
