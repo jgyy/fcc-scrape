@@ -1,20 +1,32 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1ca44
-title: Part 103
+id: 5d8a4cfbe6b6180ed9a1ca47
+title: Part 104
 challengeType: 0
-dashedName: part-103
+dashedName: part-104
 ---
 
 # --description--
 
-Your chart needs some labels in each slice. On a new line, append `text` elements to your `pieGraphData` variable.
+Chain a `text` function to set the text of each pie slice to a percentage. Set the value to a "d function" with curly brackets and leave the function empty for now. It should look like this:
+
+```js
+.text(d => {
+
+})
+```
+
+The method for getting the percent of each slice will take a few steps:
+
+1.  Find the total number of followers for the displayed year
+2.  Divide the followers of a single platform by that total
+3.  Turn it into a string to display
 
 # --hints--
 
 test-text
 
 ```js
-assert(/pieGraphData\s*\.\s*append\s*\((`|'|")text\1\s*\)/g.test(code));
+assert(/\.append\('text'\)\s*\.text\s*\(\s*d\s*=>\s*\{\s*\}\s*\)/g.test(code));
 ```
 
 # --seed--
@@ -201,6 +213,8 @@ assert(/pieGraphData\s*\.\s*append\s*\((`|'|")text\1\s*\)/g.test(code));
     .attr('stroke', 'white')
     .attr('stroke-width', 2);
 
+  pieGraphData.append('text')
+
 
 
 </script>
@@ -358,8 +372,10 @@ assert(/pieGraphData\s*\.\s*append\s*\((`|'|")text\1\s*\)/g.test(code));
     .attr('stroke-width', 2);
 
   pieGraphData.append('text')
+    .text(d => {
 
 
 
+    })
 </script>
 ```
