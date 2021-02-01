@@ -1,32 +1,32 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1ca47
-title: Part 104
+id: 5d8a4cfbe6b6180ed9a1ca48
+title: Part 105
 challengeType: 0
-dashedName: part-104
+dashedName: part-105
 ---
 
 # --description--
 
-Chain a `text` function to set the text of each pie slice to a percentage. Set the value to a "d function" with curly brackets and leave the function empty for now. It should look like this:
+In the function you just created, create a `const` named `values`. Use the `d3.values` function to get the values of the 2020 followers and set the result to your `values` variable. Here's how to get the values:
 
 ```js
-.text(d => {
-
-})
+d3.values(data[8].followers)
 ```
 
-The method for getting the percent of each slice will take a few steps:
+It will be an array with the values of the followers for the three platforms in 2020.
 
-1.  Find the total number of followers for the displayed year
-2.  Divide the followers of a single platform by that total
-3.  Turn it into a string to display
+Note that this "d function" has curly brackets. So you could `console.log(values)` in there to see it's value.
 
 # --hints--
 
 test-text
 
 ```js
-assert(/\.append\('text'\)\s*\.text\s*\(\s*d\s*=>\s*\{\s*\}\s*\)/g.test(code));
+assert(
+  /const\s*values\s*=\s*d3\s*\.\s*values\s*\(\s*data\s*\[\s*8\s*\]\s*\.\s*followers\s*\);?/g.test(
+    code
+  )
+);
 ```
 
 # --seed--
@@ -214,9 +214,11 @@ assert(/\.append\('text'\)\s*\.text\s*\(\s*d\s*=>\s*\{\s*\}\s*\)/g.test(code));
     .attr('stroke-width', 2);
 
   pieGraphData.append('text')
+    .text(d => {
 
 
 
+    })
 </script>
 ```
 
@@ -373,7 +375,7 @@ assert(/\.append\('text'\)\s*\.text\s*\(\s*d\s*=>\s*\{\s*\}\s*\)/g.test(code));
 
   pieGraphData.append('text')
     .text(d => {
-
+      const values = d3.values(data[8].followers);
 
 
     })
