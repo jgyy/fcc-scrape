@@ -1,24 +1,20 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1ca51
-title: Part 114
+id: 5d8a4cfbe6b6180ed9a1ca52
+title: Part 115
 challengeType: 0
-dashedName: part-114
+dashedName: part-115
 ---
 
 # --description--
 
-Create a new `const` named `legendTitle` and use it to `append` a `thead` to your `legend` variable. `thead` is used with the HTML table element and is for the top row of the table.
+`append` a `tr` element to the selection and then append a `th` element right after it. `tr` is for defining a row of the table, and `th` is for defining the header cells of the table.
 
 # --hints--
 
 test-text
 
 ```js
-assert(
-  /const\s*legendTitle\s*=\s*legend\s*\.\s*append\s*\(\s*('|"|`)\s*thead\s*\1\s*\)/g.test(
-    code
-  )
-);
+assert($('.dashboard div table thead tr th').length === 1);
 ```
 
 # --seed--
@@ -221,7 +217,9 @@ assert(
     .attr('height', 120)
     .style('font', '12px verdana')
 
-  
+  const legendTitle = legend.append('thead')
+
+
 
 </script>
 ```
@@ -394,6 +392,8 @@ assert(
     .style('font', '12px verdana')
 
   const legendTitle = legend.append('thead')
+    .append('tr')
+    .append('th')
 
 
 
