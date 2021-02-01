@@ -1,27 +1,26 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1ca4c
-title: Part 109
+id: 5d8a4cfbe6b6180ed9a1ca4d
+title: Part 110
 challengeType: 0
-dashedName: part-109
+dashedName: part-110
 ---
 
 # --description--
 
-The text elements are at the center of the pie graph, you need to use the `centroid` from the D3 arc API to tell them where to go. Add an `attr` function to set the `transform` to a `d` function that returns this template literal: `translate(${ pieArc.centroid(d) })`
+The function you just added, placed the start of the text at the midpoint of each slice. Change the `style` of the text to give it a `text-anchor` of `middle` so the middle of the text is in the middle of the slice.
 
-The `centroid` function will find the midpoint of each slice for each text element.
+After that, set the `font` to `10px verdana`.
 
 # --hints--
 
 test-text
 
 ```js
-const transform = $('.dashboard div svg g text')[0]
-  .getAttribute('transform')
-  .replace('translate(', '')
-  .replace(')', '')
-  .split(',');
-assert(transform[0] < 39 && transform[1] > 31);
+const text = $('.dashboard div svg g text')[0];
+assert(
+  text.style.textAnchor === 'middle' &&
+    text.style.font.toLowerCase() === '10px verdana'
+);
 ```
 
 # --seed--
@@ -215,7 +214,7 @@ assert(transform[0] < 39 && transform[1] > 31);
       const percent = d.data.value/sum;
       return `${ Math.round(percent*100) }%`;
     })
-
+    .attr('transform', d => `translate(${pieArc.centroid(d)})`)
 
 
 
@@ -381,6 +380,8 @@ assert(transform[0] < 39 && transform[1] > 31);
       return `${ Math.round(percent*100) }%`;
     })
     .attr('transform', d => `translate(${pieArc.centroid(d)})`)
+    .style('text-anchor', 'middle')
+    .style('font', '10px verdana');
 
 
 
