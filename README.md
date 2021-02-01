@@ -1,24 +1,20 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1ca43
-title: Part 102
+id: 5d8a4cfbe6b6180ed9a1ca44
+title: Part 103
 challengeType: 0
-dashedName: part-102
+dashedName: part-103
 ---
 
 # --description--
 
-Next, set the `stroke` to `white` and the `stroke-width` to `2`.
+Your chart needs some labels in each slice. On a new line, append `text` elements to your `pieGraphData` variable.
 
 # --hints--
 
 test-text
 
 ```js
-const pathsArr = $('.dashboard div svg g path');
-assert(
-  pathsArr[0].getAttribute('stroke') === 'white' &&
-    pathsArr[0].getAttribute('stroke-width') == 2
-);
+assert(/pieGraphData\s*\.\s*append\s*\((`|'|")text\1\s*\)/g.test(code));
 ```
 
 # --seed--
@@ -202,6 +198,9 @@ assert(
   pieGraphData.append('path')
     .attr('d', pieArc)
     .attr('fill', d => pieColors(d.data.key))
+    .attr('stroke', 'white')
+    .attr('stroke-width', 2);
+
 
 
 </script>
@@ -357,6 +356,8 @@ assert(
     .attr('fill', d => pieColors(d.data.key))
     .attr('stroke', 'white')
     .attr('stroke-width', 2);
+
+  pieGraphData.append('text')
 
 
 
