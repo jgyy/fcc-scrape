@@ -1,20 +1,20 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1ca53
-title: Part 116
+id: 5d8a4cfbe6b6180ed9a1ca54
+title: Part 117
 challengeType: 0
-dashedName: part-116
+dashedName: part-117
 ---
 
 # --description--
 
-Use the `text` function to set the text of the selection to `2020 followers`.
+Your table is going to have three columns, one for the platform name, one for the color it is using on your dashboard, and a third to display the number of followers. So you want the title to take up all three columns. Set the `colspan` attribute of the `th` to `3` so it spans all three of these columns.
 
 # --hints--
 
 test-text
 
 ```js
-assert($('.dashboard div table thead tr th').text() === '2020 followers');
+assert($('.dashboard div table thead tr th')[0].getAttribute('colspan') == 3);
 ```
 
 # --seed--
@@ -220,6 +220,7 @@ assert($('.dashboard div table thead tr th').text() === '2020 followers');
   const legendTitle = legend.append('thead')
     .append('tr')
     .append('th')
+    .text('2020 followers')
 
 
 
@@ -397,8 +398,9 @@ assert($('.dashboard div table thead tr th').text() === '2020 followers');
     .append('tr')
     .append('th')
     .text('2020 followers')
+    .attr('colspan', 3)
 
-
+    
 
 </script>
 ```
