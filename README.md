@@ -1,13 +1,19 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1ca4a
-title: Part 107
+id: 5d8a4cfbe6b6180ed9a1ca4b
+title: Part 108
 challengeType: 0
-dashedName: part-107
+dashedName: part-108
 ---
 
 # --description--
 
-Create another variable named `percent` and set it equal to `d.data.value` divided by your `sum` variable.
+Your percent values are numbers less than one. You will need to multiply it by 100, round of the decimals, and add a `%` sign. Use a template literal to return this to the `text` function:
+
+```js
+${Math.round(percent * 100)}%
+```
+
+Don't forget that you need a `return` statement here since you aren't using an implicit return.
 
 # --hints--
 
@@ -15,7 +21,9 @@ test-text
 
 ```js
 assert(
-  /const\s*percent\s*=\s*d\s*\.\s*data\s*\.\s*value\s*\/\s*sum;?/g.test(code)
+  /return\s*`\$\{\s*Math\s*\.\s*round\s*\(\s*percent\s*\*\s*100\s*\)\s*\}%`;?\s*\}\s*\)/g.test(
+    code
+  )
 );
 ```
 
@@ -207,6 +215,7 @@ assert(
     .text(d => {
       const values = d3.values(data[8].followers);
       const sum = d3.sum(values);
+      const percent = d.data.value/sum;
 
 
     })
@@ -369,8 +378,11 @@ assert(
       const values = d3.values(data[8].followers);
       const sum = d3.sum(values);
       const percent = d.data.value/sum;
-
-
+      return `${ Math.round(percent*100) }%`;
     })
+
+
+
+
 </script>
 ```
