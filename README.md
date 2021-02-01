@@ -1,24 +1,21 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1ca63
-title: Part 132
+id: 5d8a4cfbe6b6180ed9a1ca64
+title: Part 133
 challengeType: 0
-dashedName: part-132
+dashedName: part-133
 ---
 
 # --description--
 
-Set the `align` attribute to `left` for this selection.
+The legend has all the information is needs, but the title looks a little misaligned. Go to where you created your `legendTitle` variable and set the `position` to `relative` and the `left` to `20px` using `style` functions.
 
 # --hints--
 
 test-text
 
 ```js
-assert(
-  $('.dashboard div table tbody tr td')[2]
-    .getAttribute('align')
-    .toLowerCase() === 'left'
-);
+const th = $('.dashboard div table thead tr th')[0];
+assert(th.style.position === 'relative' && th.style.left === '20px');
 ```
 
 # --seed--
@@ -227,6 +224,7 @@ assert(
     .text('2020 followers')
     .attr('colspan', 3)
 
+
   const legendRows = legend.append('tbody')
     .selectAll('tr')
     .data(d3.entries(data[8].followers))
@@ -246,9 +244,7 @@ assert(
 
   legendRows.append('td')
     .text(d => d.value)
-
-
-
+    .attr('align', 'left');
 </script>
 ```
 
@@ -419,12 +415,14 @@ assert(
     .attr('height', 120)
     .style('font', '12px verdana')
 
+
   const legendTitle = legend.append('thead')
     .append('tr')
     .append('th')
     .text('2020 followers')
     .attr('colspan', 3)
-
+    .style('position', 'relative')
+    .style('left', '20px');
 
   const legendRows = legend.append('tbody')
     .selectAll('tr')
