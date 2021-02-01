@@ -1,21 +1,23 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1ca5f
-title: Part 128
+id: 5d8a4cfbe6b6180ed9a1ca60
+title: Part 129
 challengeType: 0
-dashedName: part-128
+dashedName: part-129
 ---
 
 # --description--
 
-Set the `width` to `16px` and the `height` to `16px` using the `style` function.
+Using the `style` function again, set the `background-color` of each div to a "d function". Using the "d function", pass the key(`d.key`) of each data point to your `pieColors` scale so it knows what color to use.
 
 # --hints--
 
 test-text
 
 ```js
-const div = $('.dashboard div table tbody tr td div')[0];
-assert(div.style.width == '16px' && div.style.height === '16px');
+assert(
+  $('.dashboard div table tbody tr td div')[0].style.backgroundColor ===
+    'rgb(124, 217, 209)'
+);
 ```
 
 # --seed--
@@ -237,6 +239,8 @@ assert(div.style.width == '16px' && div.style.height === '16px');
   legendRows.append('td')
     .attr('align', 'center')
     .append('div')
+    .style('width', '16px')
+    .style('height', '16px')
 
 
 
@@ -431,6 +435,7 @@ assert(div.style.width == '16px' && div.style.height === '16px');
     .append('div')
     .style('width', '16px')
     .style('height', '16px')
+    .style('background-color', d => pieColors(d.key))
 
 
 
