@@ -1,23 +1,25 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1ca4e
-title: Part 111
+id: 5d8a4cfbe6b6180ed9a1ca4d
+title: Part 110
 challengeType: 0
-dashedName: part-111
+dashedName: part-110
 ---
 
 # --description--
 
-The last component you are going to add is a legend to display the name of each platform and the number of followers for the year. Create a new `const` named `legend` and use it to `append` a `table` to your `rightDashboard` variable. This looks similar to the code where you created your `pieGraph` variable.
+The function you just added, placed the start of the text at the midpoint of each slice. Change the `style` of the text to give it a `text-anchor` of `middle` so the middle of the text is in the middle of the slice.
+
+After that, set the `font` to `10px verdana`.
 
 # --hints--
 
 test-text
 
 ```js
+const text = $('.dashboard div svg g text')[0];
 assert(
-  /const\s*legend\s*=\s*rightDashboard\s*\.\s*append\s*\(\s*('|"|`)\s*table\s*\1\s*\)/g.test(
-    code
-  )
+  text.style.textAnchor === 'middle' &&
+    text.style.font.toLowerCase() === '10px verdana'
 );
 ```
 
@@ -213,8 +215,6 @@ assert(
       return `${ Math.round(percent*100) }%`;
     })
     .attr('transform', d => `translate(${pieArc.centroid(d)})`)
-    .style('text-anchor', 'middle')
-    .style('font', '10px verdana');
 
 
 
@@ -382,8 +382,6 @@ assert(
     .attr('transform', d => `translate(${pieArc.centroid(d)})`)
     .style('text-anchor', 'middle')
     .style('font', '10px verdana');
-
-  const legend = rightDashboard.append('table')
 
 
 
