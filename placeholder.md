@@ -1,20 +1,23 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1ca61
-title: Part 130
+id: 5d8a4cfbe6b6180ed9a1ca60
+title: Part 129
 challengeType: 0
-dashedName: part-130
+dashedName: part-129
 ---
 
 # --description--
 
-On a new line, append another `td` to the `legendRows` variable for the last group of items. It will display the number of followers for each platform.
+Using the `style` function again, set the `background-color` of each div to a "d function". Using the "d function", pass the key(`d.key`) of each data point to your `pieColors` scale so it knows what color to use.
 
 # --hints--
 
 test-text
 
 ```js
-assert($('.dashboard div table tbody tr td').length === 9);
+assert(
+  $('.dashboard div table tbody tr td div')[0].style.backgroundColor ===
+    'rgb(124, 217, 209)'
+);
 ```
 
 # --seed--
@@ -238,7 +241,6 @@ assert($('.dashboard div table tbody tr td').length === 9);
     .append('div')
     .style('width', '16px')
     .style('height', '16px')
-    .style('background-color', d => pieColors(d.key))
 
 
 
@@ -434,8 +436,6 @@ assert($('.dashboard div table tbody tr td').length === 9);
     .style('width', '16px')
     .style('height', '16px')
     .style('background-color', d => pieColors(d.key))
-
-  legendRows.append('td')
 
 
 
