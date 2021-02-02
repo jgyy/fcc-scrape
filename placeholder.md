@@ -1,24 +1,33 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1ca6e
-title: Part 142
+id: 5d8a4cfbe6b6180ed9a1ca6d
+title: Part 141
 challengeType: 0
-dashedName: part-142
+dashedName: part-141
 ---
 
 # --description--
 
-Create another `mouseover` event for when you hover one of the `twitter-circles`. It will look like the other `mouseover` event you created except the `drawDashboard` function will take `d.year` instead of `d`.
+Now when you hover a label, you can see the data for the different years.
+
+Where you created the `text` elements for the x-axis labels, change the `font` to `bold 10px verdana` for the currently displayed year.
+
+To do this, create a "d function" in the `font` value area and return the above sting if `d` equals `year`. Otherwise, return the string that is currently there (`10px verdana`). It's easiest to use a ternary operator for this.
+
+Here's a hint:
+
+```js
+.style('font', d => d === year ? )
+```
 
 # --hints--
 
 test-text
 
 ```js
-const script = $('.dashboard').siblings('script')[1].innerHTML;
 assert(
-  /\.on\(('|"|`)mouseover\1, function \(d\) \{\s*return drawDashboard\(d\.year\);\s*\}\)/g.test(
-    script
-  )
+  Object.values($('.dashboard svg g text')).filter(
+    (el) => el.style && el.style.font.toLowerCase() === 'bold 10px verdana'
+  ).length === 1
 );
 ```
 
@@ -115,7 +124,9 @@ assert(
       .style('transform', 'translate(-12px, 0) rotate(-50deg)')
       .style('text-anchor', 'end')
       .style('cursor', 'pointer')
-      .style('font', d => d === year ? 'bold 10px verdana' : '10px verdana')
+      .style('font', '10px verdana')
+
+
       .on('mouseover', d => drawDashboard(d));
 
     const twitterLine = d3.line()
@@ -158,8 +169,6 @@ assert(
       .attr('fill', 'white')
       .attr('stroke', twitterColor)
       .style('cursor', 'pointer')
-
-  
 
     lineGraph.selectAll('tumblr-circles')
       .data(data)
@@ -368,11 +377,10 @@ assert(
       .attr('cy', d => yScale(d.followers.twitter))
       .attr('r', 6)
       .attr('fill', 'white')
-
-
       .attr('stroke', twitterColor)
       .style('cursor', 'pointer')
-      .on('mouseover', d => drawDashboard(d.year));
+
+  
 
     lineGraph.selectAll('tumblr-circles')
       .data(data)
