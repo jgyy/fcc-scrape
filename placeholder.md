@@ -1,34 +1,23 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1ca6d
-title: Part 141
+id: 5d8a4cfbe6b6180ed9a1ca6c
+title: Part 140
 challengeType: 0
-dashedName: part-141
+dashedName: part-140
 ---
 
 # --description--
 
-Now when you hover a label, you can see the data for the different years.
+There's a problem, each time you hover a label it adds all the elements to the container again. If you empty the container at the top of the function, it will redraw them where they need to be.
 
-Where you created the `text` elements for the x-axis labels, change the `font` to `bold 10px verdana` for the currently displayed year.
-
-To do this, create a "d function" in the `font` value area and return the above sting if `d` equals `year`. Otherwise, return the string that is currently there (`10px verdana`). It's easiest to use a ternary operator for this.
-
-Here's a hint:
-
-```js
-.style('font', d => d === year ? )
-```
+Go back to the top of the function and use `d3.select` to select the `.dashboard` element and chain the `html` function to it with an empty string as it parameter. Empty means no spaces.
 
 # --hints--
 
 test-text
 
 ```js
-assert(
-  Object.values($('.dashboard svg g text')).filter(
-    (el) => el.style && el.style.font.toLowerCase() === 'bold 10px verdana'
-  ).length === 1
-);
+const script = $('.dashboard').siblings('script')[1].innerHTML;
+assert(/d3\.select\(('|"|`)\.dashboard\1\)\.html\(('|"|`)\2\)/g.test(script));
 ```
 
 # --seed--
@@ -82,7 +71,9 @@ assert(
 </script>
 <script>
   function drawDashboard(year) {
-    d3.select('.dashboard').html('');
+
+
+
     const index = data.findIndex(d => d.year === year);
 
     const svgMargin = 70,
@@ -125,8 +116,6 @@ assert(
       .style('text-anchor', 'end')
       .style('cursor', 'pointer')
       .style('font', '10px verdana')
-
-
       .on('mouseover', d => drawDashboard(d));
 
     const twitterLine = d3.line()
@@ -336,7 +325,9 @@ assert(
       .style('transform', 'translate(-12px, 0) rotate(-50deg)')
       .style('text-anchor', 'end')
       .style('cursor', 'pointer')
-      .style('font', d => d === year ? 'bold 10px verdana' : '10px verdana')
+      .style('font', '10px verdana')
+
+
       .on('mouseover', d => drawDashboard(d));
 
     const twitterLine = d3.line()
@@ -379,8 +370,6 @@ assert(
       .attr('fill', 'white')
       .attr('stroke', twitterColor)
       .style('cursor', 'pointer')
-
-  
 
     lineGraph.selectAll('tumblr-circles')
       .data(data)
