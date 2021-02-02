@@ -1,22 +1,48 @@
 ---
+<<<<<<< HEAD
 id: 5d8a4cfbe6b6180ed9a1ca72
 title: Part 146
 challengeType: 0
 dashedName: part-146
+=======
+id: 5d8a4cfbe6b6180ed9a1ca71
+title: Part 145
+challengeType: 0
+dashedName: part-145
+>>>>>>> part-145
 ---
 
 # --description--
 
+<<<<<<< HEAD
 The last thing is that the legend title always shows 2020. Change the `text` of the `legendTitle` to a template literal that shows the currently displayed year followed by a space and `followers`.
 
 That's it, your dashboard is finished! Don't forget to admire your hard work.
+=======
+Change the `fill` of the `tumblr-circles` and `instagram-circles` to use a "d function" that returns their respective color variables when `d.year` equals `year`, leave it `white` when they don't. This is similar to how you set the fill of the Twitter circles.
+
+Then, all of the circles will get filled in for the currently displayed year.
+>>>>>>> part-145
 
 # --hints--
 
 test-text
 
 ```js
+<<<<<<< HEAD
 assert(/\.text\s*\(\s*`\s*\$\{\s*year\s*\} followers`\s*\)/g.test(code));
+=======
+const circles = Object.values($('.dashboard svg circle'));
+assert(
+  circles.filter(
+    (el) =>
+      el.getAttribute &&
+      (el.getAttribute('fill') === '#7cd9d1' ||
+        el.getAttribute('fill') === '#f6dd71' ||
+        el.getAttribute('fill') === '#fd9b98')
+  ).length === 3
+);
+>>>>>>> part-145
 ```
 
 # --seed--
@@ -164,7 +190,13 @@ assert(/\.text\s*\(\s*`\s*\$\{\s*year\s*\} followers`\s*\)/g.test(code));
       .attr('cx', d => xScale(d.year))
       .attr('cy', d => yScale(d.followers.tumblr))
       .attr('r', 6)
+<<<<<<< HEAD
       .attr('fill', d => d.year === year ? tumblrColor : 'white')
+=======
+      .attr('fill', 'white')
+
+
+>>>>>>> part-145
       .attr('stroke', tumblrColor)
       .style('cursor', 'pointer')
       .on('mouseover', d => drawDashboard(d.year));
@@ -176,7 +208,13 @@ assert(/\.text\s*\(\s*`\s*\$\{\s*year\s*\} followers`\s*\)/g.test(code));
       .attr('cx', d => xScale(d.year))
       .attr('cy', d => yScale(d.followers.instagram))
       .attr('r', 6)
+<<<<<<< HEAD
       .attr('fill', d => d.year === year ? instagramColor : 'white')
+=======
+      .attr('fill', 'white')
+
+
+>>>>>>> part-145
       .attr('stroke', instagramColor)
       .style('cursor', 'pointer')
       .on('mouseover', d => drawDashboard(d.year));
@@ -235,8 +273,11 @@ assert(/\.text\s*\(\s*`\s*\$\{\s*year\s*\} followers`\s*\)/g.test(code));
       .append('tr')
       .append('th')
       .text('2020 followers')
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> part-145
       .attr('colspan', 3)
       .style('position', 'relative')
       .style('left', '20px');
@@ -449,7 +490,11 @@ assert(/\.text\s*\(\s*`\s*\$\{\s*year\s*\} followers`\s*\)/g.test(code));
     const legendTitle = legend.append('thead')
       .append('tr')
       .append('th')
+<<<<<<< HEAD
       .text(`${year} followers`)
+=======
+      .text('2020 followers')
+>>>>>>> part-145
 
 
       .attr('colspan', 3)
