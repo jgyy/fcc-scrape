@@ -1,24 +1,20 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1ca55
-title: Part 118
+id: 5d8a4cfbe6b6180ed9a1ca54
+title: Part 117
 challengeType: 0
-dashedName: part-118
+dashedName: part-117
 ---
 
 # --description--
 
-Create a new `const` named `legendRows` and use it to `append` a `tbody` element to your `legend` variable similar to how you added the `thead`. `tbody` is for the main content of an HTML table.
+Your table is going to have three columns, one for the platform name, one for the color it is using on your dashboard, and a third to display the number of followers. So you want the title to take up all three columns. Set the `colspan` attribute of the `th` to `3` so it spans all three of these columns.
 
 # --hints--
 
 test-text
 
 ```js
-assert(
-  /const\s*legendRows\s*=\s*legend\s*\.\s*append\s*\(\s*('|"|`)\s*tbody\s*\1\s*\)/g.test(
-    code
-  )
-);
+assert($('.dashboard div table thead tr th')[0].getAttribute('colspan') == 3);
 ```
 
 # --seed--
@@ -225,9 +221,8 @@ assert(
     .append('tr')
     .append('th')
     .text('2020 followers')
-    .attr('colspan', 3)
 
-    
+
 
 </script>
 ```
@@ -405,8 +400,7 @@ assert(
     .text('2020 followers')
     .attr('colspan', 3)
 
-  const legendRows = legend.append('tbody')
-
+    
 
 </script>
 ```
