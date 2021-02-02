@@ -1,20 +1,20 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1ca59
-title: Part 122
+id: 5d8a4cfbe6b6180ed9a1ca58
+title: Part 121
 challengeType: 0
-dashedName: part-122
+dashedName: part-121
 ---
 
 # --description--
 
-On a new line, `append` a `td` to your `legendRows` variable. `td` is for an individual cell in the row of the table.
+Add the `enter` and `append` functions to the selection. Pass the string `tr` to the append function to add three table row elements. These elements will be for displaying each platform's name.
 
 # --hints--
 
 test-text
 
 ```js
-assert($('.dashboard div table tbody tr td').length === 3);
+assert($('.dashboard div table tbody tr').length === 3);
 ```
 
 # --seed--
@@ -226,9 +226,6 @@ assert($('.dashboard div table tbody tr td').length === 3);
   const legendRows = legend.append('tbody')
     .selectAll('tr')
     .data(d3.entries(data[8].followers))
-    .enter()
-    .append('tr');
-
 
 
 
@@ -414,7 +411,6 @@ assert($('.dashboard div table tbody tr td').length === 3);
     .enter()
     .append('tr');
 
-  legendRows.append('td')
 
 
 
