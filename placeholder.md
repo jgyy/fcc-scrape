@@ -1,23 +1,24 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1ca6f
-title: Part 143
+id: 5d8a4cfbe6b6180ed9a1ca6e
+title: Part 142
 challengeType: 0
-dashedName: part-143
+dashedName: part-142
 ---
 
 # --description--
 
-Similar to how you made the text bold for the label of the displayed year; change the `fill` of the `twitter-circles` to your `twitterColor` for the currently displayed year. To do this, use a "d function" that returns the `twitterColor` when `d.year` equals `year`, and leave it `white` if it doesn't.
+Create another `mouseover` event for when you hover one of the `twitter-circles`. It will look like the other `mouseover` event you created except the `drawDashboard` function will take `d.year` instead of `d`.
 
 # --hints--
 
 test-text
 
 ```js
+const script = $('.dashboard').siblings('script')[1].innerHTML;
 assert(
-  Object.values($('.dashboard svg circle')).filter(
-    (el) => el.getAttribute && el.getAttribute('fill') === '#7cd9d1'
-  ).length === 1
+  /\.on\(('|"|`)mouseover\1, function \(d\) \{\s*return drawDashboard\(d\.year\);\s*\}\)/g.test(
+    script
+  )
 );
 ```
 
@@ -155,11 +156,10 @@ assert(
       .attr('cy', d => yScale(d.followers.twitter))
       .attr('r', 6)
       .attr('fill', 'white')
-
-
       .attr('stroke', twitterColor)
       .style('cursor', 'pointer')
-      .on('mouseover', d => drawDashboard(d.year));
+
+  
 
     lineGraph.selectAll('tumblr-circles')
       .data(data)
@@ -367,7 +367,9 @@ assert(
       .attr('cx', d => xScale(d.year))
       .attr('cy', d => yScale(d.followers.twitter))
       .attr('r', 6)
-      .attr('fill', d => d.year === year ? twitterColor : 'white')
+      .attr('fill', 'white')
+
+
       .attr('stroke', twitterColor)
       .style('cursor', 'pointer')
       .on('mouseover', d => drawDashboard(d.year));
@@ -383,8 +385,6 @@ assert(
       .attr('stroke', tumblrColor)
       .style('cursor', 'pointer')
 
-
-
     lineGraph.selectAll('instagram-circles')
       .data(data)
       .enter()
@@ -395,8 +395,6 @@ assert(
       .attr('fill', 'white')
       .attr('stroke', instagramColor)
       .style('cursor', 'pointer')
-
-
 
     const rightDashboard = d3.select('.dashboard')
       .append('div');
