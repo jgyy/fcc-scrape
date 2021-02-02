@@ -1,24 +1,20 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1ca63
-title: Part 132
+id: 5d8a4cfbe6b6180ed9a1ca62
+title: Part 131
 challengeType: 0
-dashedName: part-132
+dashedName: part-131
 ---
 
 # --description--
 
-Set the `align` attribute to `left` for this selection.
+Set the `text` to a "d function" that returns the value(`d.value`) for each data point.
 
 # --hints--
 
 test-text
 
 ```js
-assert(
-  $('.dashboard div table tbody tr td')[2]
-    .getAttribute('align')
-    .toLowerCase() === 'left'
-);
+assert($('.dashboard div table tbody tr td')[2].innerHTML === '2845');
 ```
 
 # --seed--
@@ -245,7 +241,6 @@ assert(
     .style('background-color', d => pieColors(d.key))
 
   legendRows.append('td')
-    .text(d => d.value)
 
 
 
@@ -425,7 +420,6 @@ assert(
     .text('2020 followers')
     .attr('colspan', 3)
 
-
   const legendRows = legend.append('tbody')
     .selectAll('tr')
     .data(d3.entries(data[8].followers))
@@ -445,6 +439,8 @@ assert(
 
   legendRows.append('td')
     .text(d => d.value)
-    .attr('align', 'left');
+
+
+
 </script>
 ```
