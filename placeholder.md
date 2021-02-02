@@ -1,13 +1,13 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1ca5b
-title: Part 124
+id: 5d8a4cfbe6b6180ed9a1ca5a
+title: Part 123
 challengeType: 0
-dashedName: part-124
+dashedName: part-123
 ---
 
 # --description--
 
-This is the first column of your table. Set the `align` attribute to `right` to align the text to the right of each cell.
+Use the `text` function to set the text of each `td` to the `key` of each data point by using a "d function" to return `d.key`.
 
 # --hints--
 
@@ -15,9 +15,7 @@ test-text
 
 ```js
 assert(
-  $('.dashboard div table tbody tr td')[0]
-    .getAttribute('align')
-    .toLowerCase() === 'right'
+  $('.dashboard div table tbody tr td').text() === 'twittertumblrinstagram'
 );
 ```
 
@@ -233,8 +231,7 @@ assert(
     .enter()
     .append('tr');
 
-  legendRows.append('td')  
-    .text(d => d.key)
+  legendRows.append('td')
 
 
 
@@ -422,8 +419,6 @@ assert(
 
   legendRows.append('td')  
     .text(d => d.key)
-    .attr('align', 'right');
-
 
 
 
