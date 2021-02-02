@@ -1,50 +1,46 @@
 ---
-id: bd7178d8c242eddfaeb5bd13
-title: Visualize Data with a Scatterplot Graph
+id: 587d7fa6367417b2b2512bc0
+title: Visualize Data with a Treemap Diagram
 challengeType: 3
-forumTopicId: 301467
-dashedName: visualize-data-with-a-scatterplot-graph
+forumTopicId: 301468
+dashedName: visualize-data-with-a-treemap-diagram
 ---
 
 # --description--
 
-**Objective:** Build a [CodePen.io](https://codepen.io) app that is functionally similar to this: <https://codepen.io/freeCodeCamp/full/bgpXyK>.
+**Objective:** Build a [CodePen.io](https://codepen.io) app that is functionally similar to this: <https://codepen.io/freeCodeCamp/full/KaNGNR>.
 
 Fulfill the below [user stories](https://en.wikipedia.org/wiki/User_story) and get all of the tests to pass. Give it your own personal style.
 
 You can use HTML, JavaScript, CSS, and the D3 svg-based visualization library. The tests require axes to be generated using the D3 axis property, which automatically generates ticks along the axis. These ticks are required for passing the D3 tests because their positions are used to determine alignment of graphed elements. You will find information about generating axes at <https://github.com/d3/d3/blob/master/API.md#axes-d3-axis>. Required (non-virtual) DOM elements are queried on the moment of each test. If you use a frontend framework (like Vue for example), the test results may be inaccurate for dynamic content. We hope to accommodate them eventually, but these frameworks are not currently supported for D3 projects.
 
-**User Story #1:** I can see a title element that has a corresponding `id="title"`.
+**User Story #1:** My tree map should have a title with a corresponding `id="title"`.
 
-**User Story #2:** I can see an x-axis that has a corresponding `id="x-axis"`.
+**User Story #2:** My tree map should have a description with a corresponding `id="description"`.
 
-**User Story #3:** I can see a y-axis that has a corresponding `id="y-axis"`.
+**User Story #3:** My tree map should have `rect` elements with a corresponding `class="tile"` that represent the data.
 
-**User Story #4:** I can see dots, that each have a class of `dot`, which represent the data being plotted.
+**User Story #4:** There should be at least 2 different fill colors used for the tiles.
 
-**User Story #5:** Each dot should have the properties `data-xvalue` and `data-yvalue` containing their corresponding x and y values.
+**User Story #5:** Each tile should have the properties `data-name`, `data-category`, and `data-value` containing their corresponding name, category, and value.
 
-**User Story #6:** The `data-xvalue` and `data-yvalue` of each dot should be within the range of the actual data and in the correct data format. For `data-xvalue`, integers (full years) or Date objects are acceptable for test evaluation. For `data-yvalue` (minutes), use Date objects.
+**User Story #6:** The area of each tile should correspond to the data-value amount: tiles with a larger data-value should have a bigger area.
 
-**User Story #7:** The `data-xvalue` and its corresponding dot should align with the corresponding point/value on the x-axis.
+**User Story #7:** My tree map should have a legend with corresponding `id="legend"`.
 
-**User Story #8:** The `data-yvalue` and its corresponding dot should align with the corresponding point/value on the y-axis.
+**User Story #8:** My legend should have `rect` elements with a corresponding `class="legend-item"`.
 
-**User Story #9:** I can see multiple tick labels on the y-axis with `%M:%S` time format.
+**User Story #9:** The `rect` elements in the legend should use at least 2 different fill colors.
 
-**User Story #10:** I can see multiple tick labels on the x-axis that show the year.
+**User Story #10:** I can mouse over an area and see a tooltip with a corresponding `id="tooltip"` which displays more information about the area.
 
-**User Story #11:** I can see that the range of the x-axis labels are within the range of the actual x-axis data.
+**User Story #11:** My tooltip should have a `data-value` property that corresponds to the `data-value` of the active area.
 
-**User Story #12:** I can see that the range of the y-axis labels are within the range of the actual y-axis data.
+For this project you can use any of the following datasets:  
 
-**User Story #13:** I can see a legend containing descriptive text that has `id="legend"`.
-
-**User Story #14:** I can mouse over an area and see a tooltip with a corresponding `id="tooltip"` which displays more information about the area.
-
-**User Story #15:** My tooltip should have a `data-year` property that corresponds to the `data-xvalue` of the active area.
-
-Here is the dataset you will need to complete this project: `https://raw.githubusercontent.com/freeCodeCamp/ProjectReferenceData/master/cyclist-data.json`
+-   **Kickstarter Pledges:** `https://cdn.freecodecamp.org/testable-projects-fcc/data/tree_map/kickstarter-funding-data.json`
+-   **Movie Sales:** `https://cdn.freecodecamp.org/testable-projects-fcc/data/tree_map/movie-data.json`
+-   **Video Game Sales:** `https://cdn.freecodecamp.org/testable-projects-fcc/data/tree_map/video-game-sales-data.json`
 
 You can build your project by forking [this CodePen pen](https://codepen.io/freeCodeCamp/pen/MJjpwO). Or you can use this CDN link to run the tests in any environment you like: `https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js`
 
