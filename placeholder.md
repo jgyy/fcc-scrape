@@ -1,20 +1,20 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1ca62
-title: Part 131
+id: 5d8a4cfbe6b6180ed9a1ca61
+title: Part 130
 challengeType: 0
-dashedName: part-131
+dashedName: part-130
 ---
 
 # --description--
 
-Set the `text` to a "d function" that returns the value(`d.value`) for each data point.
+On a new line, append another `td` to the `legendRows` variable for the last group of items. It will display the number of followers for each platform.
 
 # --hints--
 
 test-text
 
 ```js
-assert($('.dashboard div table tbody tr td')[2].innerHTML === '2845');
+assert($('.dashboard div table tbody tr td').length === 9);
 ```
 
 # --seed--
@@ -240,8 +240,6 @@ assert($('.dashboard div table tbody tr td')[2].innerHTML === '2845');
     .style('height', '16px')
     .style('background-color', d => pieColors(d.key))
 
-  legendRows.append('td')
-
 
 
 </script>
@@ -438,7 +436,6 @@ assert($('.dashboard div table tbody tr td')[2].innerHTML === '2845');
     .style('background-color', d => pieColors(d.key))
 
   legendRows.append('td')
-    .text(d => d.value)
 
 
 
