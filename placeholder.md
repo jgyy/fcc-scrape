@@ -1,20 +1,24 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1ca5c
-title: Part 125
+id: 5d8a4cfbe6b6180ed9a1ca5b
+title: Part 124
 challengeType: 0
-dashedName: part-125
+dashedName: part-124
 ---
 
 # --description--
 
-On a new line, append another `td` element to your `legendRows` variable. This will be for colored squares in the center column.
+This is the first column of your table. Set the `align` attribute to `right` to align the text to the right of each cell.
 
 # --hints--
 
 test-text
 
 ```js
-assert($('.dashboard div table tbody tr td').length === 6);
+assert(
+  $('.dashboard div table tbody tr td')[0]
+    .getAttribute('align')
+    .toLowerCase() === 'right'
+);
 ```
 
 # --seed--
@@ -231,8 +235,6 @@ assert($('.dashboard div table tbody tr td').length === 6);
 
   legendRows.append('td')  
     .text(d => d.key)
-    .attr('align', 'right');
-
 
 
 
@@ -422,7 +424,6 @@ assert($('.dashboard div table tbody tr td').length === 6);
     .text(d => d.key)
     .attr('align', 'right');
 
-  legendRows.append('td')
 
 
 
