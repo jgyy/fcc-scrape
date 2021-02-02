@@ -1,13 +1,13 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1ca51
-title: Part 114
+id: 5d8a4cfbe6b6180ed9a1ca50
+title: Part 113
 challengeType: 0
-dashedName: part-114
+dashedName: part-113
 ---
 
 # --description--
 
-Create a new `const` named `legendTitle` and use it to `append` a `thead` to your `legend` variable. `thead` is used with the HTML table element and is for the top row of the table.
+Set the `font` to `12px verdana` using the `style` function.
 
 # --hints--
 
@@ -15,9 +15,7 @@ test-text
 
 ```js
 assert(
-  /const\s*legendTitle\s*=\s*legend\s*\.\s*append\s*\(\s*('|"|`)\s*thead\s*\1\s*\)/g.test(
-    code
-  )
+  $('.dashboard div table')[0].style.font.toLowerCase() === '12px verdana'
 );
 ```
 
@@ -219,9 +217,8 @@ assert(
   const legend = rightDashboard.append('table')
     .attr('width', 200)
     .attr('height', 120)
-    .style('font', '12px verdana')
 
-  
+
 
 </script>
 ```
@@ -393,9 +390,7 @@ assert(
     .attr('height', 120)
     .style('font', '12px verdana')
 
-  const legendTitle = legend.append('thead')
-
-
+  
 
 </script>
 ```
