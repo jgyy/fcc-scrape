@@ -1,48 +1,27 @@
 ---
-<<<<<<< HEAD
-id: 5d8a4cfbe6b6180ed9a1ca72
-title: Part 146
+id: 5d8a4cfbe6b6180ed9a1ca70
+title: Part 144
 challengeType: 0
-dashedName: part-146
-=======
-id: 5d8a4cfbe6b6180ed9a1ca71
-title: Part 145
-challengeType: 0
-dashedName: part-145
->>>>>>> part-145
+dashedName: part-144
 ---
 
 # --description--
 
-<<<<<<< HEAD
-The last thing is that the legend title always shows 2020. Change the `text` of the `legendTitle` to a template literal that shows the currently displayed year followed by a space and `followers`.
+Add a `mouseover` event to the `tumblr-circles` and `instagram-circles` in the same way that you did for the `twitter-circles`.
 
-That's it, your dashboard is finished! Don't forget to admire your hard work.
-=======
-Change the `fill` of the `tumblr-circles` and `instagram-circles` to use a "d function" that returns their respective color variables when `d.year` equals `year`, leave it `white` when they don't. This is similar to how you set the fill of the Twitter circles.
-
-Then, all of the circles will get filled in for the currently displayed year.
->>>>>>> part-145
+After that, you will be able hover any of the circles or year labels to get the information for that year.
 
 # --hints--
 
 test-text
 
 ```js
-<<<<<<< HEAD
-assert(/\.text\s*\(\s*`\s*\$\{\s*year\s*\} followers`\s*\)/g.test(code));
-=======
-const circles = Object.values($('.dashboard svg circle'));
+const script = $('.dashboard').siblings('script')[1].innerHTML;
 assert(
-  circles.filter(
-    (el) =>
-      el.getAttribute &&
-      (el.getAttribute('fill') === '#7cd9d1' ||
-        el.getAttribute('fill') === '#f6dd71' ||
-        el.getAttribute('fill') === '#fd9b98')
+  script.match(
+    /\.on\(('|"|`)mouseover\1, function \(d\) \{\s*return drawDashboard\(d\.year\);\s*\}\)/g
   ).length === 3
 );
->>>>>>> part-145
 ```
 
 # --seed--
@@ -190,16 +169,11 @@ assert(
       .attr('cx', d => xScale(d.year))
       .attr('cy', d => yScale(d.followers.tumblr))
       .attr('r', 6)
-<<<<<<< HEAD
-      .attr('fill', d => d.year === year ? tumblrColor : 'white')
-=======
       .attr('fill', 'white')
-
-
->>>>>>> part-145
       .attr('stroke', tumblrColor)
       .style('cursor', 'pointer')
-      .on('mouseover', d => drawDashboard(d.year));
+
+
 
     lineGraph.selectAll('instagram-circles')
       .data(data)
@@ -208,16 +182,11 @@ assert(
       .attr('cx', d => xScale(d.year))
       .attr('cy', d => yScale(d.followers.instagram))
       .attr('r', 6)
-<<<<<<< HEAD
-      .attr('fill', d => d.year === year ? instagramColor : 'white')
-=======
       .attr('fill', 'white')
-
-
->>>>>>> part-145
       .attr('stroke', instagramColor)
       .style('cursor', 'pointer')
-      .on('mouseover', d => drawDashboard(d.year));
+
+
 
     const rightDashboard = d3.select('.dashboard')
       .append('div');
@@ -273,11 +242,6 @@ assert(
       .append('tr')
       .append('th')
       .text('2020 followers')
-<<<<<<< HEAD
-
-
-=======
->>>>>>> part-145
       .attr('colspan', 3)
       .style('position', 'relative')
       .style('left', '20px');
@@ -420,7 +384,9 @@ assert(
       .attr('cx', d => xScale(d.year))
       .attr('cy', d => yScale(d.followers.tumblr))
       .attr('r', 6)
-      .attr('fill', d => d.year === year ? tumblrColor : 'white')
+      .attr('fill', 'white')
+
+
       .attr('stroke', tumblrColor)
       .style('cursor', 'pointer')
       .on('mouseover', d => drawDashboard(d.year));
@@ -432,7 +398,9 @@ assert(
       .attr('cx', d => xScale(d.year))
       .attr('cy', d => yScale(d.followers.instagram))
       .attr('r', 6)
-      .attr('fill', d => d.year === year ? instagramColor : 'white')
+      .attr('fill', 'white')
+
+
       .attr('stroke', instagramColor)
       .style('cursor', 'pointer')
       .on('mouseover', d => drawDashboard(d.year));
@@ -490,13 +458,7 @@ assert(
     const legendTitle = legend.append('thead')
       .append('tr')
       .append('th')
-<<<<<<< HEAD
-      .text(`${year} followers`)
-=======
       .text('2020 followers')
->>>>>>> part-145
-
-
       .attr('colspan', 3)
       .style('position', 'relative')
       .style('left', '20px');
