@@ -1,389 +1,53 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1ca4d
-title: Part 110
-challengeType: 0
-dashedName: part-110
+id: bd7168d8c242eddfaeb5bd13
+title: Visualize Data with a Bar Chart
+challengeType: 3
+forumTopicId: 301464
+dashedName: visualize-data-with-a-bar-chart
 ---
 
 # --description--
 
-The function you just added, placed the start of the text at the midpoint of each slice. Change the `style` of the text to give it a `text-anchor` of `middle` so the middle of the text is in the middle of the slice.
+**Objective:** Build a [CodePen.io](https://codepen.io) app that is functionally similar to this: <https://codepen.io/freeCodeCamp/full/GrZVaM>.
 
-After that, set the `font` to `10px verdana`.
+Fulfill the below [user stories](https://en.wikipedia.org/wiki/User_story) and get all of the tests to pass. Give it your own personal style.
 
-# --hints--
+You can use HTML, JavaScript, CSS, and the D3 svg-based visualization library. The tests require axes to be generated using the D3 axis property, which automatically generates ticks along the axis. These ticks are required for passing the D3 tests because their positions are used to determine alignment of graphed elements. You will find information about generating axes at <https://github.com/d3/d3/blob/master/API.md#axes-d3-axis>. Required (non-virtual) DOM elements are queried on the moment of each test. If you use a frontend framework (like Vue for example), the test results may be inaccurate for dynamic content. We hope to accommodate them eventually, but these frameworks are not currently supported for D3 projects.
 
-test-text
+**User Story #1:** My chart should have a title with a corresponding `id="title"`.
 
-```js
-const text = $('.dashboard div svg g text')[0];
-assert(
-  text.style.textAnchor === 'middle' &&
-    text.style.font.toLowerCase() === '10px verdana'
-);
-```
+**User Story #2:** My chart should have a `g` element x-axis with a corresponding `id="x-axis"`.
 
-# --seed--
+**User Story #3:** My chart should have a `g` element y-axis with a corresponding `id="y-axis"`.
 
-## --before-user-code--
+**User Story #4:** Both axes should contain multiple tick labels, each with the corresponding `class="tick"`.
 
-```html
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>D3 Dashboard</title>
-    <style>
-      body {
-        background-color: #ccc;
-        padding: 100px 10px;
-      }
+**User Story #5:** My chart should have a `rect` element for each data point with a corresponding `class="bar"` displaying the data.
 
-      .dashboard {
-        width: 980px;
-        height: 500px;
-        background-color: white;
-        box-shadow: 5px 5px 5px 5px #888;
-        margin: auto;
-        display: flex;
-        align-items: center;
-      }
-    </style>
-  </head>
+**User Story #6:** Each bar should have the properties `data-date` and `data-gdp` containing date and GDP values.
 
-  <body>
-    <div class="dashboard"></div>
-  </body>
-</html>
-```
+**User Story #7:** The bar elements' `data-date` properties should match the order of the provided data.
 
-## --seed-contents--
+**User Story #8:** The bar elements' `data-gdp` properties should match the order of the provided data.
 
-```html
-<script>
-  const data = [ 
-    { year: 2012, followers: { twitter: 2594, tumblr:  401, instagram:   83 }},
-    { year: 2013, followers: { twitter: 3049, tumblr:  440, instagram:  192 }},
-    { year: 2014, followers: { twitter: 3511, tumblr:  415, instagram:  511 }},
-    { year: 2015, followers: { twitter: 3619, tumblr:  492, instagram: 1014 }},
-    { year: 2016, followers: { twitter: 4046, tumblr:  543, instagram: 2066 }},
-    { year: 2017, followers: { twitter: 3991, tumblr:  701, instagram: 3032 }},
-    { year: 2018, followers: { twitter: 3512, tumblr: 1522, instagram: 4512 }},
-    { year: 2019, followers: { twitter: 3274, tumblr: 1989, instagram: 4715 }},
-    { year: 2020, followers: { twitter: 2845, tumblr: 2040, instagram: 4801 }}
-  ];
-</script>
-<script>
-  const svgMargin = 70,
-    svgWidth = 700,
-    svgHeight = 500,
-    twitterColor = '#7cd9d1',
-    tumblrColor = '#f6dd71',
-    instagramColor = '#fd9b98';
+**User Story #9:** Each bar element's height should accurately represent the data's corresponding GDP.
 
-  const lineGraph = d3.select('.dashboard')
-    .append('svg')
-    .attr('width', svgWidth)
-    .attr('height', svgHeight);
+**User Story #10:** The `data-date` attribute and its corresponding bar element should align with the corresponding value on the x-axis.
 
-  const yScale = d3.scaleLinear()
-    .domain([0, 5000])
-    .range([svgHeight - svgMargin, svgMargin]);
+**User Story #11:** The `data-gdp` attribute and its corresponding bar element should align with the corresponding value on the y-axis.
 
-  const xScale = d3.scaleLinear()
-    .domain([2012, 2020])
-    .range([svgMargin, svgWidth - svgMargin]);
+**User Story #12:** I can mouse over an area and see a tooltip with a corresponding `id="tooltip"` which displays more information about the area.
 
-  const yAxis = d3.axisLeft(yScale)
-    .ticks(6, '~s');
+**User Story #13:** My tooltip should have a `data-date` property that corresponds to the `data-date` of the active area.
 
-  const xAxis = d3.axisBottom(xScale)
-    .tickFormat(d3.format(''))
-    .tickPadding(10);
+Here is the dataset you will need to complete this project: `https://raw.githubusercontent.com/freeCodeCamp/ProjectReferenceData/master/GDP-data.json`
 
-  lineGraph.append('g')
-    .call(yAxis)
-    .attr('transform', `translate(${svgMargin}, 0)`)
-    .style('font', '10px verdana');
+You can build your project by forking [this CodePen pen](https://codepen.io/freeCodeCamp/pen/MJjpwO). Or you can use this CDN link to run the tests in any environment you like: `https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js`.
 
-  lineGraph.append('g')
-    .call(xAxis)
-    .attr('transform', `translate(0, ${svgHeight - svgMargin})`)
-    .selectAll('text')
-    .style('transform', 'translate(-12px, 0) rotate(-50deg)')
-    .style('text-anchor', 'end')
-    .style('cursor', 'pointer')
-    .style('font', '10px verdana')
-
-  const twitterLine = d3.line()
-    .x(d => xScale(d.year))
-    .y(d => yScale(d.followers.twitter));
-
-  lineGraph.append('path')
-    .attr('d', twitterLine(data))
-    .attr('stroke', twitterColor)
-    .attr('stroke-width', 3)
-    .attr('fill', 'transparent');
-
-  const tumblrLine = d3.line()
-    .x(d => xScale(d.year))
-    .y(d => yScale(d.followers.tumblr));
-
-  lineGraph.append('path')
-    .attr('d', tumblrLine(data))
-    .attr('stroke', tumblrColor)
-    .attr('stroke-width', 3)
-    .attr('fill', 'transparent');
-
-  const instagramLine = d3.line()
-    .x(d => xScale(d.year))
-    .y(d => yScale(d.followers.instagram));
-
-  lineGraph.append('path')
-    .attr('d', instagramLine(data))
-    .attr('stroke', instagramColor)
-    .attr('stroke-width', 3)
-    .attr('fill', 'transparent');
-    
-  lineGraph.selectAll('twitter-circles')
-    .data(data)
-    .enter()
-    .append('circle')
-    .attr('cx', d => xScale(d.year))
-    .attr('cy', d => yScale(d.followers.twitter))
-    .attr('r', 6)
-    .attr('fill', 'white')
-    .attr('stroke', twitterColor)
-    .style('cursor', 'pointer')
-
-  lineGraph.selectAll('tumblr-circles')
-    .data(data)
-    .enter()
-    .append('circle')
-    .attr('cx', d => xScale(d.year))
-    .attr('cy', d => yScale(d.followers.tumblr))
-    .attr('r', 6)
-    .attr('fill', 'white')
-    .attr('stroke', tumblrColor)
-    .style('cursor', 'pointer')
-
-  lineGraph.selectAll('instagram-circles')
-    .data(data)
-    .enter()
-    .append('circle')
-    .attr('cx', d => xScale(d.year))
-    .attr('cy', d => yScale(d.followers.instagram))
-    .attr('r', 6)
-    .attr('fill', 'white')
-    .attr('stroke', instagramColor)
-    .style('cursor', 'pointer')
-
-  const rightDashboard = d3.select('.dashboard')
-    .append('div');
-
-  const pieGraph = rightDashboard.append('svg')
-    .attr('width', 200)
-    .attr('height', 200)
-
-  const pieArc = d3.arc()
-    .outerRadius(100)
-    .innerRadius(0);
-
-  const pieColors = d3.scaleOrdinal()  
-    .domain(data[8].followers)
-    .range([twitterColor, tumblrColor, instagramColor]);
-
-  const pie = d3.pie()
-    .value(d => d.value);
-    
-  const pieGraphData = pieGraph.selectAll('pieSlices')
-    .data(pie(d3.entries(data[8].followers)))
-    .enter()
-    .append('g')
-    .attr('transform', 'translate(100, 100)');
-
-  pieGraphData.append('path')
-    .attr('d', pieArc)
-    .attr('fill', d => pieColors(d.data.key))
-    .attr('stroke', 'white')
-    .attr('stroke-width', 2);
-
-  pieGraphData.append('text')
-    .text(d => {
-      const values = d3.values(data[8].followers);
-      const sum = d3.sum(values);
-      const percent = d.data.value/sum;
-      return `${ Math.round(percent*100) }%`;
-    })
-    .attr('transform', d => `translate(${pieArc.centroid(d)})`)
-
-
-
-</script>
-```
+Once you're done, submit the URL to your working project with all its tests passing.
 
 # --solutions--
 
-```html
-<script>
-  const data = [ 
-    { year: 2012, followers: { twitter: 2594, tumblr:  401, instagram:   83 }},
-    { year: 2013, followers: { twitter: 3049, tumblr:  440, instagram:  192 }},
-    { year: 2014, followers: { twitter: 3511, tumblr:  415, instagram:  511 }},
-    { year: 2015, followers: { twitter: 3619, tumblr:  492, instagram: 1014 }},
-    { year: 2016, followers: { twitter: 4046, tumblr:  543, instagram: 2066 }},
-    { year: 2017, followers: { twitter: 3991, tumblr:  701, instagram: 3032 }},
-    { year: 2018, followers: { twitter: 3512, tumblr: 1522, instagram: 4512 }},
-    { year: 2019, followers: { twitter: 3274, tumblr: 1989, instagram: 4715 }},
-    { year: 2020, followers: { twitter: 2845, tumblr: 2040, instagram: 4801 }}
-  ];
-</script>
-<script>
-  const svgMargin = 70,
-    svgWidth = 700,
-    svgHeight = 500,
-    twitterColor = '#7cd9d1',
-    tumblrColor = '#f6dd71',
-    instagramColor = '#fd9b98';
-
-  const lineGraph = d3.select('.dashboard')
-    .append('svg')
-    .attr('width', svgWidth)
-    .attr('height', svgHeight);
-
-  const yScale = d3.scaleLinear()
-    .domain([0, 5000])
-    .range([svgHeight - svgMargin, svgMargin]);
-
-  const xScale = d3.scaleLinear()
-    .domain([2012, 2020])
-    .range([svgMargin, svgWidth - svgMargin]);
-
-  const yAxis = d3.axisLeft(yScale)
-    .ticks(6, '~s');
-
-  const xAxis = d3.axisBottom(xScale)
-    .tickFormat(d3.format(''))
-    .tickPadding(10);
-
-  lineGraph.append('g')
-    .call(yAxis)
-    .attr('transform', `translate(${svgMargin}, 0)`)
-    .style('font', '10px verdana');
-
-  lineGraph.append('g')
-    .call(xAxis)
-    .attr('transform', `translate(0, ${svgHeight - svgMargin})`)
-    .selectAll('text')
-    .style('transform', 'translate(-12px, 0) rotate(-50deg)')
-    .style('text-anchor', 'end')
-    .style('cursor', 'pointer')
-    .style('font', '10px verdana')
-
-  const twitterLine = d3.line()
-    .x(d => xScale(d.year))
-    .y(d => yScale(d.followers.twitter));
-
-  lineGraph.append('path')
-    .attr('d', twitterLine(data))
-    .attr('stroke', twitterColor)
-    .attr('stroke-width', 3)
-    .attr('fill', 'transparent');
-
-  const tumblrLine = d3.line()
-    .x(d => xScale(d.year))
-    .y(d => yScale(d.followers.tumblr));
-
-  lineGraph.append('path')
-    .attr('d', tumblrLine(data))
-    .attr('stroke', tumblrColor)
-    .attr('stroke-width', 3)
-    .attr('fill', 'transparent');
-
-  const instagramLine = d3.line()
-    .x(d => xScale(d.year))
-    .y(d => yScale(d.followers.instagram));
-
-  lineGraph.append('path')
-    .attr('d', instagramLine(data))
-    .attr('stroke', instagramColor)
-    .attr('stroke-width', 3)
-    .attr('fill', 'transparent');
-    
-  lineGraph.selectAll('twitter-circles')
-    .data(data)
-    .enter()
-    .append('circle')
-    .attr('cx', d => xScale(d.year))
-    .attr('cy', d => yScale(d.followers.twitter))
-    .attr('r', 6)
-    .attr('fill', 'white')
-    .attr('stroke', twitterColor)
-    .style('cursor', 'pointer')
-
-  lineGraph.selectAll('tumblr-circles')
-    .data(data)
-    .enter()
-    .append('circle')
-    .attr('cx', d => xScale(d.year))
-    .attr('cy', d => yScale(d.followers.tumblr))
-    .attr('r', 6)
-    .attr('fill', 'white')
-    .attr('stroke', tumblrColor)
-    .style('cursor', 'pointer')
-
-  lineGraph.selectAll('instagram-circles')
-    .data(data)
-    .enter()
-    .append('circle')
-    .attr('cx', d => xScale(d.year))
-    .attr('cy', d => yScale(d.followers.instagram))
-    .attr('r', 6)
-    .attr('fill', 'white')
-    .attr('stroke', instagramColor)
-    .style('cursor', 'pointer')
-
-  const rightDashboard = d3.select('.dashboard')
-    .append('div');
-
-  const pieGraph = rightDashboard.append('svg')
-    .attr('width', 200)
-    .attr('height', 200)
-
-  const pieArc = d3.arc()
-    .outerRadius(100)
-    .innerRadius(0);
-
-  const pieColors = d3.scaleOrdinal()  
-    .domain(data[8].followers)
-    .range([twitterColor, tumblrColor, instagramColor]);
-
-  const pie = d3.pie()
-    .value(d => d.value);
-    
-  const pieGraphData = pieGraph.selectAll('pieSlices')
-    .data(pie(d3.entries(data[8].followers)))
-    .enter()
-    .append('g')
-    .attr('transform', 'translate(100, 100)');
-
-  pieGraphData.append('path')
-    .attr('d', pieArc)
-    .attr('fill', d => pieColors(d.data.key))
-    .attr('stroke', 'white')
-    .attr('stroke-width', 2);
-
-  pieGraphData.append('text')
-    .text(d => {
-      const values = d3.values(data[8].followers);
-      const sum = d3.sum(values);
-      const percent = d.data.value/sum;
-      return `${ Math.round(percent*100) }%`;
-    })
-    .attr('transform', d => `translate(${pieArc.centroid(d)})`)
-    .style('text-anchor', 'middle')
-    .style('font', '10px verdana');
-
-
-
-</script>
+```js
+// solution required
 ```
