@@ -1,20 +1,20 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1ca53
-title: Part 116
+id: 5d8a4cfbe6b6180ed9a1ca52
+title: Part 115
 challengeType: 0
-dashedName: part-116
+dashedName: part-115
 ---
 
 # --description--
 
-Use the `text` function to set the text of the selection to `2020 followers`.
+`append` a `tr` element to the selection and then append a `th` element right after it. `tr` is for defining a row of the table, and `th` is for defining the header cells of the table.
 
 # --hints--
 
 test-text
 
 ```js
-assert($('.dashboard div table thead tr th').text() === '2020 followers');
+assert($('.dashboard div table thead tr th').length === 1);
 ```
 
 # --seed--
@@ -218,8 +218,6 @@ assert($('.dashboard div table thead tr th').text() === '2020 followers');
     .style('font', '12px verdana')
 
   const legendTitle = legend.append('thead')
-    .append('tr')
-    .append('th')
 
 
 
@@ -396,7 +394,6 @@ assert($('.dashboard div table thead tr th').text() === '2020 followers');
   const legendTitle = legend.append('thead')
     .append('tr')
     .append('th')
-    .text('2020 followers')
 
 
 
