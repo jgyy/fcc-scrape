@@ -1,13 +1,13 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1ca57
-title: Part 120
+id: 5d8a4cfbe6b6180ed9a1ca56
+title: Part 119
 challengeType: 0
-dashedName: part-120
+dashedName: part-119
 ---
 
 # --description--
 
-Use the `data` function to set the data for the rows to an array of your 2020 followers. To get the array use `d3.entries(data[8].followers)`. Remember, this will create an array of key/value pairs of your followers for that year.
+Add a `selectAll` function to the selection and pass it the string `tr`.
 
 # --hints--
 
@@ -15,7 +15,7 @@ test-text
 
 ```js
 assert(
-  /\.selectAll\('tr'\)\s*\.\s*data\s*\(\s*d3\s*\.\s*entries\s*\(\s*data\s*\[\s*8\s*\]\s*\.\s*followers\s*\)\s*\)/g.test(
+  /const legendRows = legend\.append\('tbody\s*'\)\s*\.\s*selectAll\s*\(\s*('|"|`)\s*tr\s*\1\s*\)/g.test(
     code
   )
 );
@@ -228,7 +228,6 @@ assert(
     .attr('colspan', 3)
 
   const legendRows = legend.append('tbody')
-    .selectAll('tr')
 
 
 </script>
@@ -385,7 +384,10 @@ assert(
     .attr('stroke', 'white')
     .attr('stroke-width', 2);
 
-  pieGraphData.append('text')
+  pieGraphData.selectAll('pieSliceText')
+    .data(pie(d3.entries(data[8].followers)))
+    .enter()
+    .append('text')
     .text(d => {
       const values = d3.values(data[8].followers);
       const sum = d3.sum(values);
@@ -409,8 +411,6 @@ assert(
 
   const legendRows = legend.append('tbody')
     .selectAll('tr')
-    .data(d3.entries(data[8].followers))
-
 
 
 </script>
