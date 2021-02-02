@@ -1,30 +1,28 @@
 ---
-id: 5d8a4cfbe6b6180ed9a1ca6b
-title: Part 139
+id: 5d8a4cfbe6b6180ed9a1ca6a
+title: Part 138
 challengeType: 0
-dashedName: part-139
+dashedName: part-138
 ---
 
 # --description--
 
-Go to where you `call` the `xAxis` and create a `mouseover` event for the labels. Chain the `on` function to them, pass it the string `mouseover`, and give it a value of a "d function" that calls `drawDashboard` with `d` as the argument. It will look like this:
+There are four places in the file where you used `data[8]` to set data to the year 2020. Change all five of them to `data[index]` so you can pass in any year to the function to display the data from that year.
 
-```js
-.on('mouseover', d => drawDashboard(d))
-```
+The five spots are:
 
-So now, when you hover a label, the function will be called with the year that is being hovered.
+1.  The `domain` for `pieColors`.
+2.  The `data` for `pieGraphData`.
+3.  The `text` for your pie slice text.
+4.  The `data` for your `legendRows`.
 
 # --hints--
 
 test-text
 
 ```js
-const script = $('.dashboard').siblings('script')[1].innerHTML;
 assert(
-  /\.on\(('|"|`)mouseover\1, function \(d\) \{\s*return drawDashboard\(d\);\s*\}\)/g.test(
-    script
-  )
+  !/data\[8\]/g.test(code) && code.match(/data\s*\[\s*index\s*\]/g).length === 4
 );
 ```
 
@@ -122,9 +120,6 @@ assert(
       .style('cursor', 'pointer')
       .style('font', '10px verdana')
 
-
-
-
     const twitterLine = d3.line()
       .x(d => xScale(d.year))
       .y(d => yScale(d.followers.twitter));
@@ -202,14 +197,14 @@ assert(
       .innerRadius(0);
 
     const pieColors = d3.scaleOrdinal()  
-      .domain(data[index].followers)
+      .domain(data[8].followers)
       .range([twitterColor, tumblrColor, instagramColor]);
 
     const pie = d3.pie()
       .value(d => d.value);
       
     const pieGraphData = pieGraph.selectAll('pieSlices')
-      .data(pie(d3.entries(data[index].followers)))
+      .data(pie(d3.entries(data[8].followers)))
       .enter()
       .append('g')
       .attr('transform', 'translate(100, 100)');
@@ -222,7 +217,7 @@ assert(
 
     pieGraphData.append('text')
       .text(d => {
-        const values = d3.values(data[index].followers);
+        const values = d3.values(data[8].followers);
         const sum = d3.sum(values);
         const percent = d.data.value/sum;
         return `${ Math.round(percent*100) }%`;
@@ -248,7 +243,7 @@ assert(
 
     const legendRows = legend.append('tbody')
       .selectAll('tr')
-      .data(d3.entries(data[index].followers))
+      .data(d3.entries(data[8].followers))
       .enter()
       .append('tr');
 
@@ -290,9 +285,6 @@ assert(
 </script>
 <script>
   function drawDashboard(year) {
-
-
-
     const index = data.findIndex(d => d.year === year);
 
     const svgMargin = 70,
@@ -335,7 +327,9 @@ assert(
       .style('text-anchor', 'end')
       .style('cursor', 'pointer')
       .style('font', '10px verdana')
-      .on('mouseover', d => drawDashboard(d));
+
+
+
 
     const twitterLine = d3.line()
       .x(d => xScale(d.year))
