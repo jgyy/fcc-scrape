@@ -1,53 +1,118 @@
 ---
-id: 587d7fa6367417b2b2512bc0
-title: Visualize Data with a Treemap Diagram
-challengeType: 3
-forumTopicId: 301468
-dashedName: visualize-data-with-a-treemap-diagram
+id: 587d7faa367417b2b2512bd4
+title: Add a Hover Effect to a D3 Element
+challengeType: 6
+forumTopicId: 301469
+dashedName: add-a-hover-effect-to-a-d3-element
 ---
 
 # --description--
 
-**Objective:** Build a [CodePen.io](https://codepen.io) app that is functionally similar to this: <https://codepen.io/freeCodeCamp/full/KaNGNR>.
+It's possible to add effects that highlight a bar when the user hovers over it with the mouse. So far, the styling for the rectangles is applied with the built-in D3 and SVG methods, but you can use CSS as well.
 
-Fulfill the below [user stories](https://en.wikipedia.org/wiki/User_story) and get all of the tests to pass. Give it your own personal style.
+You set the CSS class on the SVG elements with the `attr()` method. Then the `:hover` pseudo-class for your new class holds the style rules for any hover effects.
 
-You can use HTML, JavaScript, CSS, and the D3 svg-based visualization library. The tests require axes to be generated using the D3 axis property, which automatically generates ticks along the axis. These ticks are required for passing the D3 tests because their positions are used to determine alignment of graphed elements. You will find information about generating axes at <https://github.com/d3/d3/blob/master/API.md#axes-d3-axis>. Required (non-virtual) DOM elements are queried on the moment of each test. If you use a frontend framework (like Vue for example), the test results may be inaccurate for dynamic content. We hope to accommodate them eventually, but these frameworks are not currently supported for D3 projects.
+# --instructions--
 
-**User Story #1:** My tree map should have a title with a corresponding `id="title"`.
+Use the `attr()` method to add a class of `bar` to all the `rect` elements. This changes the `fill` color of the bar to brown when you mouse over it.
 
-**User Story #2:** My tree map should have a description with a corresponding `id="description"`.
+# --hints--
 
-**User Story #3:** My tree map should have `rect` elements with a corresponding `class="tile"` that represent the data.
+Your `rect` elements should have a class of `bar`.
 
-**User Story #4:** There should be at least 2 different fill colors used for the tiles.
+```js
+assert($('rect').attr('class') == 'bar');
+```
 
-**User Story #5:** Each tile should have the properties `data-name`, `data-category`, and `data-value` containing their corresponding name, category, and value.
+# --seed--
 
-**User Story #6:** The area of each tile should correspond to the data-value amount: tiles with a larger data-value should have a bigger area.
+## --seed-contents--
 
-**User Story #7:** My tree map should have a legend with corresponding `id="legend"`.
+```html
+<style>
+  .bar:hover {
+    fill: brown;
+  }
+</style>
+<body>
+  <script>
+    const dataset = [12, 31, 22, 17, 25, 18, 29, 14, 9];
 
-**User Story #8:** My legend should have `rect` elements with a corresponding `class="legend-item"`.
+    const w = 500;
+    const h = 100;
 
-**User Story #9:** The `rect` elements in the legend should use at least 2 different fill colors.
+    const svg = d3.select("body")
+                  .append("svg")
+                  .attr("width", w)
+                  .attr("height", h);
 
-**User Story #10:** I can mouse over an area and see a tooltip with a corresponding `id="tooltip"` which displays more information about the area.
+    svg.selectAll("rect")
+       .data(dataset)
+       .enter()
+       .append("rect")
+       .attr("x", (d, i) => i * 30)
+       .attr("y", (d, i) => h - 3 * d)
+       .attr("width", 25)
+       .attr("height", (d, i) => 3 * d)
+       .attr("fill", "navy")
+       // Add your code below this line
 
-**User Story #11:** My tooltip should have a `data-value` property that corresponds to the `data-value` of the active area.
 
-For this project you can use any of the following datasets:  
 
--   **Kickstarter Pledges:** `https://cdn.freecodecamp.org/testable-projects-fcc/data/tree_map/kickstarter-funding-data.json`
--   **Movie Sales:** `https://cdn.freecodecamp.org/testable-projects-fcc/data/tree_map/movie-data.json`
--   **Video Game Sales:** `https://cdn.freecodecamp.org/testable-projects-fcc/data/tree_map/video-game-sales-data.json`
+       // Add your code above this line
 
-You can build your project by forking [this CodePen pen](https://codepen.io/freeCodeCamp/pen/MJjpwO). Or you can use this CDN link to run the tests in any environment you like: `https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js`
+    svg.selectAll("text")
+       .data(dataset)
+       .enter()
+       .append("text")
+       .text((d) => d)
+       .attr("x", (d, i) => i * 30)
+       .attr("y", (d, i) => h - (3 * d) - 3);
 
-Once you're done, submit the URL to your working project with all its tests passing.
+  </script>
+</body>
+```
 
 # --solutions--
 
-```js
-// solution required
+```html
+<style>
+  .bar:hover {
+    fill: brown;
+  }
+</style>
+<body>
+  <script>
+    const dataset = [12, 31, 22, 17, 25, 18, 29, 14, 9];
+
+    const w = 500;
+    const h = 100;
+
+    const svg = d3.select("body")
+                  .append("svg")
+                  .attr("width", w)
+                  .attr("height", h);
+
+    svg.selectAll("rect")
+       .data(dataset)
+       .enter()
+       .append("rect")
+       .attr("x", (d, i) => i * 30)
+       .attr("y", (d, i) => h - 3 * d)
+       .attr("width", 25)
+       .attr("height", (d, i) => 3 * d)
+       .attr("fill", "navy")
+       // Add your code below this line
+       .attr('class', 'bar')
+       // Add your code above this line
+
+    svg.selectAll("text")
+       .data(dataset)
+       .enter()
+       .append("text")
+       .text((d) => d)
+       .attr("x", (d, i) => i * 30)
+       .attr("y", (d, i) => h - (3 * d) - 3);
+  </script>
+</body>
 ```
