@@ -1,57 +1,85 @@
 ---
-id: 587d7fa8367417b2b2512bcc
-title: Display Shapes with SVG
+id: 587d7fa9367417b2b2512bcf
+title: Dynamically Change the Height of Each Bar
 challengeType: 6
-forumTopicId: 301485
-dashedName: display-shapes-with-svg
+forumTopicId: 301486
+dashedName: dynamically-change-the-height-of-each-bar
 ---
 
 # --description--
 
-The last challenge created an `svg` element with a given width and height, which was visible because it had a `background-color` applied to it in the `style` tag. The code made space for the given width and height.
+The height of each bar can be set to the value of the data point in the array, similar to how the `x` value was set dynamically.
 
-The next step is to create a shape to put in the `svg` area. There are a number of supported shapes in SVG, such as rectangles and circles. They are used to display data. For example, a rectangle (`<rect>`) SVG shape could create a bar in a bar chart.
-
-When you place a shape into the `svg` area, you can specify where it goes with `x` and `y` coordinates. The origin point of (0, 0) is in the upper-left corner. Positive values for `x` push the shape to the right, and positive values for `y` push the shape down from the origin point.
-
-To place a shape in the middle of the 500 (width) x 100 (height) `svg` from last challenge, the `x` coordinate would be 250 and the `y` coordinate would be 50.
-
-An SVG `rect` has four attributes. There are the `x` and `y` coordinates for where it is placed in the `svg` area. It also has a `height` and `width` to specify the size.
+```js
+selection.attr("property", (d, i) => {
+  /* 
+  * d is the data point value
+  * i is the index of the data point in the array
+  */
+})
+```
 
 # --instructions--
 
-Add a `rect` shape to the `svg` using `append()`, and give it a `width` attribute of 25 and `height` attribute of 100. Also, give the `rect` `x` and `y` attributes each set to 0.
+Change the callback function for the `height` attribute to return the data value times 3.
+
+**Note**  
+Remember that multiplying all data points by the same constant scales the data (like zooming in). It helps to see the differences between bar values in this example.
 
 # --hints--
 
-Your document should have 1 `rect` element.
+The first `rect` should have a `height` of 36.
 
 ```js
-assert($('rect').length == 1);
+assert($('rect').eq(0).attr('height') == '36');
 ```
 
-The `rect` element should have a `width` attribute set to 25.
+The second `rect` should have a `height` of 93.
 
 ```js
-assert($('rect').attr('width') == '25');
+assert($('rect').eq(1).attr('height') == '93');
 ```
 
-The `rect` element should have a `height` attribute set to 100.
+The third `rect` should have a `height` of 66.
 
 ```js
-assert($('rect').attr('height') == '100');
+assert($('rect').eq(2).attr('height') == '66');
 ```
 
-The `rect` element should have an `x` attribute set to 0.
+The fourth `rect` should have a `height` of 51.
 
 ```js
-assert($('rect').attr('x') == '0');
+assert($('rect').eq(3).attr('height') == '51');
 ```
 
-The `rect` element should have a `y` attribute set to 0.
+The fifth `rect` should have a `height` of 75.
 
 ```js
-assert($('rect').attr('y') == '0');
+assert($('rect').eq(4).attr('height') == '75');
+```
+
+The sixth `rect` should have a `height` of 54.
+
+```js
+assert($('rect').eq(5).attr('height') == '54');
+```
+
+The seventh `rect` should have a `height` of 87.
+
+```js
+assert($('rect').eq(6).attr('height') == '87');
+```
+
+The eighth `rect` should have a `height` of 42.
+
+```js
+assert($('rect').eq(7).attr('height') == '42');
+```
+
+The ninth `rect` should have a `height` of 27.
+
+```js
+assert($('rect').eq(8).attr('height') == '27');
 ```
 
 # --seed--
@@ -69,12 +97,22 @@ assert($('rect').attr('y') == '0');
     const svg = d3.select("body")
                   .append("svg")
                   .attr("width", w)
-                  .attr("height", h)
-                  // Add your code below this line
+                  .attr("height", h);
+
+    svg.selectAll("rect")
+       .data(dataset)
+       .enter()
+       .append("rect")
+       .attr("x", (d, i) => i * 30)
+       .attr("y", 0)
+       .attr("width", 25)
+       .attr("height", (d, i) => {
+         // Add your code below this line
 
 
 
-                  // Add your code above this line
+         // Add your code above this line
+       });
   </script>
 </body>
 ```
@@ -92,12 +130,18 @@ assert($('rect').attr('y') == '0');
     const svg = d3.select("body")
                   .append("svg")
                   .attr("width", w)
-                  .attr("height", h)
-                  .append("rect")
-                  .attr("width", 25)
-                  .attr("height", 100)
-                  .attr("x", 0)
-                  .attr("y", 0);
+                  .attr("height", h);
+
+    svg.selectAll("rect")
+       .data(dataset)
+       .enter()
+       .append("rect")
+       .attr("x", (d, i) => i * 30)
+       .attr("y", 0)
+       .attr("width", 25)
+       .attr("height", (d, i) => {
+         return d * 3
+       });
   </script>
 </body>
 ```
