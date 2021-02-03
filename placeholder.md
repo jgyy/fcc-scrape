@@ -1,71 +1,56 @@
 ---
-id: 587d7fac367417b2b2512bdd
-title: Use Dynamic Scales
+id: 587d7fac367417b2b2512bdc
+title: >-
+  Use the d3.max and d3.min Functions to Find Minimum and Maximum Values in a
+  Dataset
 challengeType: 6
-forumTopicId: 301495
-dashedName: use-dynamic-scales
+forumTopicId: 301496
+dashedName: >-
+  use-the-d3-max-and-d3-min-functions-to-find-minimum-and-maximum-values-in-a-dataset
 ---
 
 # --description--
 
-The D3 `min()` and `max()` methods are useful to help set the scale.
+The D3 methods `domain()` and `range()` set that information for your scale based on the data. There are a couple methods to make that easier.
 
-Given a complex data set, one priority is to set the scale so the visualization fits the SVG container's width and height. You want all the data plotted inside the SVG canvas so it's visible on the web page.
+Often when you set the domain, you'll want to use the minimum and maximum values within the data set. Trying to find these values manually, especially in a large data set, may cause errors.
 
-The example below sets the x-axis scale for scatter plot data. The `domain()` method passes information to the scale about the raw data values for the plot. The `range()` method gives it information about the actual space on the web page for the visualization.
-
-In the example, the domain goes from 0 to the maximum in the set. It uses the `max()` method with a callback function based on the x values in the arrays. The range uses the SVG canvas' width (`w`), but it includes some padding, too. This puts space between the scatter plot dots and the edge of the SVG canvas.
+D3 has two methods - `min()` and `max()` to return this information. Here's an example:
 
 ```js
-const dataset = [
-  [ 34,    78 ],
-  [ 109,   280 ],
-  [ 310,   120 ],
-  [ 79,    411 ],
-  [ 420,   220 ],
-  [ 233,   145 ],
-  [ 333,   96 ],
-  [ 222,   333 ],
-  [ 78,    320 ],
-  [ 21,    123 ]
-];
-const w = 500;
-const h = 500;
-
-// Padding between the SVG canvas boundary and the plot
-const padding = 30;
-const xScale = d3.scaleLinear()
-  .domain([0, d3.max(dataset, (d) => d[0])])
-  .range([padding, w - padding]);
+const exampleData = [34, 234, 73, 90, 6, 52];
+d3.min(exampleData) // Returns 6
+d3.max(exampleData) // Returns 234
 ```
 
-The padding may be confusing at first. Picture the x-axis as a horizontal line from 0 to 500 (the width value for the SVG canvas). Including the padding in the `range()` method forces the plot to start at 30 along that line (instead of 0), and end at 470 (instead of 500).
+A dataset may have nested arrays, like the \[x, y] coordinate pairs that were in the scatter plot example. In that case, you need to tell D3 how to calculate the maximum and minimum. Fortunately, both the `min()` and `max()` methods take a callback function. In this example, the callback function's argument `d` is for the current inner array. The callback needs to return the element from the inner array (the x or y value) over which you want to compute the maximum or minimum. Here's an example for how to find the min and max values with an array of arrays:
+
+```js
+const locationData = [[1, 7],[6, 3],[8, 3]];
+// Returns the smallest number out of the first elements
+const minX = d3.min(locationData, (d) => d[0]);
+// minX compared 1, 6, and 8 and is set to 1
+```
 
 # --instructions--
 
-Use the `yScale` variable to create a linear y-axis scale. The domain should start at zero and go to the maximum y value in the set. The range should use the SVG height (`h`) and include padding.
-
-**Note**  
-Remember to keep the plot right-side-up. When you set the range for the y coordinates, the higher value (height minus padding) is the first argument, and the lower value is the second argument.
+The `positionData` array holds sub arrays of x, y, and z coordinates. Use a D3 method to find the maximum value of the z coordinate (the third value) from the arrays and save it in the `output` variable.
 
 # --hints--
 
-The text in the `h2` should be 30.
+The text in the `h2` should be 8.
 
 ```js
-assert(output == 30 && $('h2').text() == '30');
+assert(output == 8 && $('h2').text() == '8');
 ```
 
-The `domain()` of yScale should be equivalent to `[0, 411]`.
+Your code should use the `max()` method.
 
 ```js
-assert(JSON.stringify(yScale.domain()) == JSON.stringify([0, 411]));
-```
-
-The `range()` of yScale should be equivalent to `[470, 30]`.
-
-```js
-assert(JSON.stringify(yScale.range()) == JSON.stringify([470, 30]));
+assert(
+  code.match(/\.max/g),
+  'Your code should use the <code>max()</code> method.'
+);
 ```
 
 # --seed--
@@ -75,39 +60,13 @@ assert(JSON.stringify(yScale.range()) == JSON.stringify([470, 30]));
 ```html
 <body>
   <script>
-    const dataset = [
-                  [ 34,    78 ],
-                  [ 109,   280 ],
-                  [ 310,   120 ],
-                  [ 79,    411 ],
-                  [ 420,   220 ],
-                  [ 233,   145 ],
-                  [ 333,   96 ],
-                  [ 222,   333 ],
-                  [ 78,    320 ],
-                  [ 21,    123 ]
-                ];
-
-    const w = 500;
-    const h = 500;
-
-    // Padding between the SVG canvas boundary and the plot
-    const padding = 30;
-
-    // Create an x and y scale
-
-    const xScale = d3.scaleLinear()
-                    .domain([0, d3.max(dataset, (d) => d[0])])
-                    .range([padding, w - padding]);
-
+    const positionData = [[1, 7, -4],[6, 3, 8],[2, 9, 3]]
     // Add your code below this line
 
-    const yScale = undefined;
-
+    const output = undefined; // Change this line
 
     // Add your code above this line
 
-    const output = yScale(411); // Returns 30
     d3.select("body")
       .append("h2")
       .text(output)
@@ -120,36 +79,10 @@ assert(JSON.stringify(yScale.range()) == JSON.stringify([470, 30]));
 ```html
 <body>
   <script>
-    const dataset = [
-                  [ 34,    78 ],
-                  [ 109,   280 ],
-                  [ 310,   120 ],
-                  [ 79,    411 ],
-                  [ 420,   220 ],
-                  [ 233,   145 ],
-                  [ 333,   96 ],
-                  [ 222,   333 ],
-                  [ 78,    320 ],
-                  [ 21,    123 ]
-                ];
+    const positionData = [[1, 7, -4],[6, 3, 8],[2, 9, 3]]
 
-    const w = 500;
-    const h = 500;
+    const output = d3.max(positionData, (d) => d[2])
 
-
-    const padding = 30;
-
-    const xScale = d3.scaleLinear()
-                    .domain([0, d3.max(dataset, (d) => d[0])])
-                    .range([padding, w - padding]);
-
-
-    const yScale = d3.scaleLinear()
-                     .domain([0, d3.max(dataset, (d) => d[1])])
-                     .range([h - padding, padding]);
-
-
-    const output = yScale(411);
     d3.select("body")
       .append("h2")
       .text(output)
