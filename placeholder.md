@@ -1,54 +1,49 @@
 ---
-id: 587d7fa8367417b2b2512bcd
-title: Create a Bar for Each Data Point in the Set
+id: 587d7fab367417b2b2512bda
+title: Create a Linear Scale with D3
 challengeType: 6
-forumTopicId: 301482
-dashedName: create-a-bar-for-each-data-point-in-the-set
+forumTopicId: 301483
+dashedName: create-a-linear-scale-with-d3
 ---
 
 # --description--
 
-The last challenge added only one rectangle to the `svg` element to represent a bar. Here, you'll combine what you've learned so far about `data()`, `enter()`, and SVG shapes to create and append a rectangle for each data point in `dataset`.
+The bar and scatter plot charts both plotted data directly onto the SVG canvas. However, if the height of a bar or one of the data points were larger than the SVG height or width values, it would go outside the SVG area.
 
-A previous challenge showed the format for how to create and append a `div` for each item in `dataset`:
+In D3, there are scales to help plot data. `Scales` are functions that tell the program how to map a set of raw data points onto the pixels of the SVG canvas.
 
-```js
-d3.select("body").selectAll("div")
-  .data(dataset)
-  .enter()
-  .append("div")
-```
+For example, say you have a 100x500-sized SVG canvas and you want to plot Gross Domestic Product (GDP) for a number of countries. The set of numbers would be in the billion or trillion-dollar range. You provide D3 a type of scale to tell it how to place the large GDP values into that 100x500-sized area.
 
-There are a few differences working with `rect` elements instead of `divs`. The `rects` must be appended to an `svg` element, not directly to the `body`. Also, you need to tell D3 where to place each `rect` within the `svg` area. The bar placement will be covered in the next challenge.
+It's unlikely you would plot raw data as-is. Before plotting it, you set the scale for your entire data set, so that the `x` and `y` values fit your canvas width and height.
+
+D3 has several scale types. For a linear scale (usually used with quantitative data), there is the D3 method `scaleLinear()`:
+
+`const scale = d3.scaleLinear()`
+
+By default, a scale uses the identity relationship. The value of the input is the same as the value of the output. A separate challenge covers how to change this.
 
 # --instructions--
 
-Use the `data()`, `enter()`, and `append()` methods to create and append a `rect` for each item in `dataset`. The bars should display all on top of each other; this will be fixed in the next challenge.
+Change the `scale` variable to create a linear scale. Then set the `output` variable to the scale called with an input argument of 50.
 
 # --hints--
 
-Your document should have 9 `rect` elements.
+The text in the `h2` should be 50.
 
 ```js
-assert($('rect').length == 9);
+assert($('h2').text() == '50');
 ```
 
-Your code should use the `data()` method.
+Your code should use the `scaleLinear()` method.
 
 ```js
-assert(code.match(/\.data/g));
+assert(code.match(/\.scaleLinear/g));
 ```
 
-Your code should use the `enter()` method.
+The `output` variable should call `scale` with an argument of 50.
 
 ```js
-assert(code.match(/\.enter/g));
-```
-
-Your code should use the `append()` method.
-
-```js
-assert(code.match(/\.append/g));
+assert(output == 50 && code.match(/scale\(\s*?50\s*?\)/g));
 ```
 
 # --seed--
@@ -58,26 +53,17 @@ assert(code.match(/\.append/g));
 ```html
 <body>
   <script>
-    const dataset = [12, 31, 22, 17, 25, 18, 29, 14, 9];
+    // Add your code below this line
 
-    const w = 500;
-    const h = 100;
+    const scale = undefined; // Create the scale here
+    const output = scale(); // Call scale with an argument here
 
-    const svg = d3.select("body")
-                  .append("svg")
-                  .attr("width", w)
-                  .attr("height", h);
+    // Add your code above this line
 
-    svg.selectAll("rect")
-       // Add your code below this line
+    d3.select("body")
+      .append("h2")
+      .text(output);
 
-
-
-       // Add your code above this line
-       .attr("x", 0)
-       .attr("y", 0)
-       .attr("width", 25)
-       .attr("height", 100);
   </script>
 </body>
 ```
@@ -87,24 +73,14 @@ assert(code.match(/\.append/g));
 ```html
 <body>
   <script>
-    const dataset = [12, 31, 22, 17, 25, 18, 29, 14, 9];
 
-    const w = 500;
-    const h = 100;
+    const scale = d3.scaleLinear();
+    const output = scale(50); 
 
-    const svg = d3.select("body")
-                  .append("svg")
-                  .attr("width", w)
-                  .attr("height", h);
+    d3.select("body")
+      .append("h2")
+      .text(output);
 
-    svg.selectAll("rect")
-       .data(dataset)
-       .enter()
-       .append("rect")
-       .attr("x", 0)
-       .attr("y", 0)
-       .attr("width", 25)
-       .attr("height", 100);
   </script>
 </body>
 ```
