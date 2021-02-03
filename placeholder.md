@@ -1,74 +1,31 @@
 ---
-id: 587d7fac367417b2b2512bdb
-title: Set a Domain and a Range on a Scale
+id: 587d7faa367417b2b2512bd3
+title: Style D3 Labels
 challengeType: 6
-forumTopicId: 301491
-dashedName: set-a-domain-and-a-range-on-a-scale
+forumTopicId: 301492
+dashedName: style-d3-labels
 ---
 
 # --description--
 
-By default, scales use the identity relationship. This means the input value maps to the output value. However, scales can be much more flexible and interesting.
-
-Say a dataset has values ranging from 50 to 480. This is the input information for a scale, also known as the <dfn>domain</dfn>.
-
-You want to map those points along the `x` axis on the SVG canvas, between 10 units and 500 units. This is the output information, also known as the <dfn>range</dfn>.
-
-The `domain()` and `range()` methods set these values for the scale. Both methods take an array of at least two elements as an argument. Here's an example:
-
-```js
-// Set a domain
-// The domain covers the set of input values
-scale.domain([50, 480]);
-// Set a range
-// The range covers the set of output values
-scale.range([10, 500]);
-scale(50) // Returns 10
-scale(480) // Returns 500
-scale(325) // Returns 323.37
-scale(750) // Returns 807.67
-d3.scaleLinear()
-```
-
-Notice that the scale uses the linear relationship between the domain and range values to figure out what the output should be for a given number. The minimum value in the domain (50) maps to the minimum value (10) in the range.
+D3 methods can add styles to the bar labels. The `fill` attribute sets the color of the text for a `text` node. The `style()` method sets CSS rules for other styles, such as "font-family" or "font-size".
 
 # --instructions--
 
-Create a scale and set its domain to `[250, 500]` and range to `[10, 150]`.
-
-**Note**  
-You can chain the `domain()` and `range()` methods onto the `scale` variable.
+Set the `font-size` of the `text` elements to 25px, and the color of the text to red.
 
 # --hints--
 
-Your code should use the `domain()` method.
+The labels should all have a `fill` color of red.
 
 ```js
-assert(code.match(/\.domain/g));
+assert($('text').css('fill') == 'rgb(255, 0, 0)');
 ```
 
-The `domain()` of the scale should be set to `[250, 500]`.
+The labels should all have a `font-size` of 25 pixels.
 
 ```js
-assert(JSON.stringify(scale.domain()) == JSON.stringify([250, 500]));
-```
-
-Your code should use the `range()` method.
-
-```js
-assert(code.match(/\.range/g));
-```
-
-The `range()` of the scale should be set to `[10, 150]`.
-
-```js
-assert(JSON.stringify(scale.range()) == JSON.stringify([10, 150]));
-```
-
-The text in the `h2` should be -102.
-
-```js
-assert($('h2').text() == '-102');
+assert($('text').css('font-size') == '25px');
 ```
 
 # --seed--
@@ -78,16 +35,38 @@ assert($('h2').text() == '-102');
 ```html
 <body>
   <script>
-    // Add your code below this line
-    const scale = d3.scaleLinear();
+    const dataset = [12, 31, 22, 17, 25, 18, 29, 14, 9];
+
+    const w = 500;
+    const h = 100;
+
+    const svg = d3.select("body")
+                  .append("svg")
+                  .attr("width", w)
+                  .attr("height", h);
+
+    svg.selectAll("rect")
+       .data(dataset)
+       .enter()
+       .append("rect")
+       .attr("x", (d, i) => i * 30)
+       .attr("y", (d, i) => h - 3 * d)
+       .attr("width", 25)
+       .attr("height", (d, i) => d * 3)
+       .attr("fill", "navy");
+
+    svg.selectAll("text")
+       .data(dataset)
+       .enter()
+       .append("text")
+       .text((d) => d)
+       .attr("x", (d, i) => i * 30)
+       .attr("y", (d, i) => h - (3 * d) - 3)
+       // Add your code below this line
 
 
 
-    // Add your code above this line
-    const output = scale(50);
-    d3.select("body")
-      .append("h2")
-      .text(output);
+       // Add your code above this line
   </script>
 </body>
 ```
@@ -97,13 +76,35 @@ assert($('h2').text() == '-102');
 ```html
 <body>
   <script>
-    const scale = d3.scaleLinear();
-    scale.domain([250, 500])
-    scale.range([10, 150])
-    const output = scale(50);
-    d3.select("body")
-      .append("h2")
-      .text(output);
+    const dataset = [12, 31, 22, 17, 25, 18, 29, 14, 9];
+
+    const w = 500;
+    const h = 100;
+
+    const svg = d3.select("body")
+                  .append("svg")
+                  .attr("width", w)
+                  .attr("height", h);
+
+    svg.selectAll("rect")
+       .data(dataset)
+       .enter()
+       .append("rect")
+       .attr("x", (d, i) => i * 30)
+       .attr("y", (d, i) => h - 3 * d)
+       .attr("width", 25)
+       .attr("height", (d, i) => d * 3)
+       .attr("fill", "navy");
+
+    svg.selectAll("text")
+       .data(dataset)
+       .enter()
+       .append("text")
+       .text((d) => d)
+       .attr("x", (d, i) => i * 30)
+       .attr("y", (d, i) => h - (3 * d) - 3)
+       .style("font-size", 25)
+       .attr("fill", "red")
   </script>
 </body>
 ```
