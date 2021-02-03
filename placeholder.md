@@ -1,83 +1,50 @@
 ---
-id: 587d7fa7367417b2b2512bc5
-title: Work with Dynamic Data in D3
+id: 587d7fae367417b2b2512be4
+title: Access the JSON Data from an API
 challengeType: 6
-forumTopicId: 301498
-dashedName: work-with-dynamic-data-in-d3
+forumTopicId: 301499
+dashedName: access-the-json-data-from-an-api
 ---
 
 # --description--
 
-The last two challenges cover the basics of displaying data dynamically with D3 using the `data()` and `enter()` methods. These methods take a data set and, together with the `append()` method, create a new DOM element for each entry in the data set.
+In the previous challenge, you saw how to get JSON data from the freeCodeCamp Cat Photo API.
 
-In the previous challenge, you created a new `h2` element for each item in the `dataset` array, but they all contained the same text, "New Title". This is because you have not made use of the data that is bound to each of the `h2` elements.
+Now you'll take a closer look at the returned data to better understand the JSON format. Recall some notation in JavaScript:
 
-The D3 `text()` method can take a string or a callback function as an argument:
+<blockquote>[ ] -> Square brackets represent an array<br>{ } -> Curly brackets represent an object<br>" " -> Double quotes represent a string. They are also used for key names in JSON</blockquote>
 
-`selection.text((d) => d)`
+Understanding the structure of the data that an API returns is important because it influences how you retrieve the values you need.
 
-In the example above, the parameter `d` refers to a single entry in the dataset that a selection is bound to.
+On the right, click the "Get Message" button to load the freeCodeCamp Cat Photo API JSON into the HTML.
 
-Using the current example as context, the first `h2` element is bound to 12, the second `h2` element is bound to 31, the third `h2` element is bound to 22, and so on.
+The first and last character you see in the JSON data are square brackets `[ ]`. This means that the returned data is an array. The second character in the JSON data is a curly `{` bracket, which starts an object. Looking closely, you can see that there are three separate objects. The JSON data is an array of three objects, where each object contains information about a cat photo.
+
+You learned earlier that objects contain "key-value pairs" that are separated by commas. In the Cat Photo example, the first object has `"id":0` where "id" is a key and 0 is its corresponding value. Similarly, there are keys for "imageLink", "altText", and "codeNames". Each cat photo object has these same keys, but with different values.
+
+Another interesting "key-value pair" in the first object is `"codeNames":["Juggernaut","Mrs. Wallace","ButterCup"]`. Here "codeNames" is the key and its value is an array of three strings. It's possible to have arrays of objects as well as a key with an array as a value.
+
+Remember how to access data in arrays and objects. Arrays use bracket notation to access a specific index of an item. Objects use either bracket or dot notation to access the value of a given property. Here's an example that prints the "altText" of the first cat photo - note that the parsed JSON data in the editor is saved in a variable called `json`:
+
+```js
+console.log(json[0].altText);
+// Prints "A white cat wearing a green helmet shaped melon on its head."
+```
 
 # --instructions--
 
-Change the `text()` method so that each `h2` element displays the corresponding value from the `dataset` array with a single space and "USD". For example, the first heading should be "12 USD".
+For the cat with the "id" of 2, print to the console the second value in the `codeNames` array. You should use bracket and dot notation on the object (which is saved in the variable `json`) to access the value.
 
 # --hints--
 
-The first `h2` should have the text "12 USD".
+Your code should use bracket and dot notation to access the proper code name, and print "Loki" to the console.
 
 ```js
-assert($('h2').eq(0).text() == '12 USD');
-```
-
-The second `h2` should have the text "31 USD".
-
-```js
-assert($('h2').eq(1).text() == '31 USD');
-```
-
-The third `h2` should have the text "22 USD".
-
-```js
-assert($('h2').eq(2).text() == '22 USD');
-```
-
-The fourth `h2` should have the text "17 USD".
-
-```js
-assert($('h2').eq(3).text() == '17 USD');
-```
-
-The fifth `h2` should have the text "25 USD".
-
-```js
-assert($('h2').eq(4).text() == '25 USD');
-```
-
-The sixth `h2` should have the text "18 USD".
-
-```js
-assert($('h2').eq(5).text() == '18 USD');
-```
-
-The seventh `h2` should have the text "29 USD".
-
-```js
-assert($('h2').eq(6).text() == '29 USD');
-```
-
-The eighth `h2` should have the text "14 USD".
-
-```js
-assert($('h2').eq(7).text() == '14 USD');
-```
-
-The ninth `h2` should have the text "9 USD".
-
-```js
-assert($('h2').eq(8).text() == '9 USD');
+assert(
+  code.match(
+    /console\s*\.\s*log\s*\(\s*json\s*\[2\]\s*(\.\s*codeNames|\[\s*('|`|")codeNames\2\s*\])\s*\[\s*1\s*\]\s*\)/g
+  )
+);
 ```
 
 # --seed--
@@ -85,36 +52,115 @@ assert($('h2').eq(8).text() == '9 USD');
 ## --seed-contents--
 
 ```html
-<body>
-  <script>
-    const dataset = [12, 31, 22, 17, 25, 18, 29, 14, 9];
+<script>
+  document.addEventListener('DOMContentLoaded', function(){
+    document.getElementById('getMessage').onclick = function(){
+      const req = new XMLHttpRequest();
+      req.open("GET",'/json/cats.json', true);
+      req.send();
+      req.onload=function(){
+        const json = JSON.parse(req.responseText);
+        document.getElementsByClassName('message')[0].innerHTML = JSON.stringify(json);
+        // Add your code below this line
 
-    d3.select("body").selectAll("h2")
-      .data(dataset)
-      .enter()
-      .append("h2")
-      // Add your code below this line
+        // Add your code above this line
+      };
+    };
+  });
+</script>
 
-      .text("New Title");
+<style>
+  body {
+    text-align: center;
+    font-family: "Helvetica", sans-serif;
+  }
+  h1 {
+    font-size: 2em;
+    font-weight: bold;
+  }
+  .box {
+    border-radius: 5px;
+    background-color: #eee;
+    padding: 20px 5px;
+  }
+  button {
+    color: white;
+    background-color: #4791d0;
+    border-radius: 5px;
+    border: 1px solid #4791d0;
+    padding: 5px 10px 8px 10px;
+  }
+  button:hover {
+    background-color: #0F5897;
+    border: 1px solid #0F5897;
+  }
+</style>
 
-      // Add your code above this line
-  </script>
-</body>
+<h1>Cat Photo Finder</h1>
+<p class="message box">
+  The message will go here
+</p>
+<p>
+  <button id="getMessage">
+    Get Message
+  </button>
+</p>
 ```
 
 # --solutions--
 
 ```html
-<body>
-  <script>
-    const dataset = [12, 31, 22, 17, 25, 18, 29, 14, 9];
+<script>
+  document.addEventListener('DOMContentLoaded', function(){
+    document.getElementById('getMessage').onclick = function(){
+      const req = new XMLHttpRequest();
+      req.open("GET",'/json/cats.json', true);
+      req.send();
+      req.onload=function(){
+        const json = JSON.parse(req.responseText);
+        document.getElementsByClassName('message')[0].innerHTML = JSON.stringify(json);
+        // Add your code below this line
+        console.log(json[2].codeNames[1]);
+        // Add your code above this line
+      };
+    };
+  });
+</script>
 
-    d3.select("body").selectAll("h2")
-      .data(dataset)
-      .enter()
-      .append("h2")
-      .text((d) => `${d} USD`);
+<style>
+  body {
+    text-align: center;
+    font-family: "Helvetica", sans-serif;
+  }
+  h1 {
+    font-size: 2em;
+    font-weight: bold;
+  }
+  .box {
+    border-radius: 5px;
+    background-color: #eee;
+    padding: 20px 5px;
+  }
+  button {
+    color: white;
+    background-color: #4791d0;
+    border-radius: 5px;
+    border: 1px solid #4791d0;
+    padding: 5px 10px 8px 10px;
+  }
+  button:hover {
+    background-color: #0F5897;
+    border: 1px solid #0F5897;
+  }
+</style>
 
-  </script>
-</body>
+<h1>Cat Photo Finder</h1>
+<p class="message">
+  The message will go here
+</p>
+<p>
+  <button id="getMessage">
+    Get Message
+  </button>
+</p>
 ```
