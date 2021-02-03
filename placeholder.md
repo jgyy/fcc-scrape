@@ -1,37 +1,77 @@
 ---
-id: 587d7fa7367417b2b2512bc8
-title: Add Classes with D3
+id: 587d7fa6367417b2b2512bc2
+title: Add Document Elements with D3
 challengeType: 6
-forumTopicId: 301473
-dashedName: add-classes-with-d3
+forumTopicId: 301474
+dashedName: add-document-elements-with-d3
 ---
 
 # --description--
 
-Using a lot of inline styles on HTML elements gets hard to manage, even for smaller apps. It's easier to add a class to elements and style that class one time using CSS rules. D3 has the `attr()` method to add any HTML attribute to an element, including a class name.
+D3 has several methods that let you add and change elements in your document.
 
-The `attr()` method works the same way that `style()` does. It takes comma-separated values, and can use a callback function. Here's an example to add a class of "container" to a selection:
+The `select()` method selects one element from the document. It takes an argument for the name of the element you want and returns an HTML node for the first element in the document that matches the name. Here's an example:
 
-`selection.attr("class", "container");`
+`const anchor = d3.select("a");`
 
-Note that the "class" parameter will remain the same whenever you need to add a class and only the "container" parameter will change.
+The above example finds the first anchor tag on the page and saves an HTML node for it in the variable `anchor`. You can use the selection with other methods. The "d3" part of the example is a reference to the D3 object, which is how you access D3 methods.
+
+Two other useful methods are `append()` and `text()`.
+
+The `append()` method takes an argument for the element you want to add to the document. It appends an HTML node to a selected item, and returns a handle to that node.
+
+The `text()` method either sets the text of the selected node, or gets the current text. To set the value, you pass a string as an argument inside the parentheses of the method.
+
+Here's an example that selects an unordered list, appends a list item, and adds text:
+
+```js
+d3.select("ul")
+  .append("li")
+  .text("Very important item");
+```
+
+D3 allows you to chain several methods together with periods to perform a number of actions in a row.
 
 # --instructions--
 
-Add the `attr()` method to the code in the editor and put a class of `bar` on the `div` elements.
+Use the `select` method to select the `body` tag in the document. Then `append` an `h1` tag to it, and add the text "Learning D3" into the `h1` element.
 
 # --hints--
 
-Your `div` elements should have a class of `bar`.
+The `body` should have one `h1` element.
 
 ```js
-assert($('div').attr('class') == 'bar');
+assert($('body').children('h1').length == 1);
 ```
 
-Your code should use the `attr()` method.
+The `h1` element should have the text "Learning D3" in it.
 
 ```js
-assert(code.match(/\.attr/g));
+assert($('h1').text() == 'Learning D3');
+```
+
+Your code should access the `d3` object.
+
+```js
+assert(code.match(/d3/g));
+```
+
+Your code should use the `select` method.
+
+```js
+assert(code.match(/\.select/g));
+```
+
+Your code should use the `append` method.
+
+```js
+assert(code.match(/\.append/g));
+```
+
+Your code should use the `text` method.
+
+```js
+assert(code.match(/\.text/g));
 ```
 
 # --seed--
@@ -39,27 +79,13 @@ assert(code.match(/\.attr/g));
 ## --seed-contents--
 
 ```html
-<style>
-  .bar {
-    width: 25px;
-    height: 100px;
-    display: inline-block;
-    background-color: blue;
-  }
-</style>
 <body>
   <script>
-    const dataset = [12, 31, 22, 17, 25, 18, 29, 14, 9];
-
-    d3.select("body").selectAll("div")
-      .data(dataset)
-      .enter()
-      .append("div")
-      // Add your code below this line
+    // Add your code below this line
 
 
 
-      // Add your code above this line
+    // Add your code above this line
   </script>
 </body>
 ```
@@ -67,25 +93,11 @@ assert(code.match(/\.attr/g));
 # --solutions--
 
 ```html
-<style>
-  .bar {
-    width: 25px;
-    height: 100px;
-    display: inline-block;
-    background-color: blue;
-  }
-</style>
 <body>
   <script>
-    const dataset = [12, 31, 22, 17, 25, 18, 29, 14, 9];
-
-    d3.select("body").selectAll("div")
-      .data(dataset)
-      .enter()
-      .append("div")
-      // Add your code below this line
-      .attr("class","bar");
-      // Add your code above this line
+    d3.select("body")
+      .append("h1")
+      .text("Learning D3")
   </script>
 </body>
 ```
