@@ -1,27 +1,81 @@
 ---
-id: 587d7faa367417b2b2512bd4
-title: Add a Hover Effect to a D3 Element
+id: 587d7faa367417b2b2512bd6
+title: Add a Tooltip to a D3 Element
 challengeType: 6
-forumTopicId: 301469
-dashedName: add-a-hover-effect-to-a-d3-element
+forumTopicId: 301470
+dashedName: add-a-tooltip-to-a-d3-element
 ---
 
 # --description--
 
-It's possible to add effects that highlight a bar when the user hovers over it with the mouse. So far, the styling for the rectangles is applied with the built-in D3 and SVG methods, but you can use CSS as well.
+A tooltip shows more information about an item on a page when the user hovers over that item. There are several ways to add a tooltip to a visualization, this challenge uses the SVG `title` element.
 
-You set the CSS class on the SVG elements with the `attr()` method. Then the `:hover` pseudo-class for your new class holds the style rules for any hover effects.
+`title` pairs with the `text()` method to dynamically add data to the bars.
 
 # --instructions--
 
-Use the `attr()` method to add a class of `bar` to all the `rect` elements. This changes the `fill` color of the bar to brown when you mouse over it.
+Append a `title` element under each `rect` node. Then call the `text()` method with a callback function so the text displays the data value.
 
 # --hints--
 
-Your `rect` elements should have a class of `bar`.
+Your code should have 9 `title` elements.
 
 ```js
-assert($('rect').attr('class') == 'bar');
+assert($('title').length == 9);
+```
+
+The first `title` element should have tooltip text of 12.
+
+```js
+assert($('title').eq(0).text() == '12');
+```
+
+The second `title` element should have tooltip text of 31.
+
+```js
+assert($('title').eq(1).text() == '31');
+```
+
+The third `title` element should have tooltip text of 22.
+
+```js
+assert($('title').eq(2).text() == '22');
+```
+
+The fourth `title` element should have tooltip text of 17.
+
+```js
+assert($('title').eq(3).text() == '17');
+```
+
+The fifth `title` element should have tooltip text of 25.
+
+```js
+assert($('title').eq(4).text() == '25');
+```
+
+The sixth `title` element should have tooltip text of 18.
+
+```js
+assert($('title').eq(5).text() == '18');
+```
+
+The seventh `title` element should have tooltip text of 29.
+
+```js
+assert($('title').eq(6).text() == '29');
+```
+
+The eighth `title` element should have tooltip text of 14.
+
+```js
+assert($('title').eq(7).text() == '14');
+```
+
+The ninth `title` element should have tooltip text of 9.
+
+```js
+assert($('title').eq(8).text() == '9');
 ```
 
 # --seed--
@@ -53,8 +107,9 @@ assert($('rect').attr('class') == 'bar');
        .attr("x", (d, i) => i * 30)
        .attr("y", (d, i) => h - 3 * d)
        .attr("width", 25)
-       .attr("height", (d, i) => 3 * d)
+       .attr("height", (d, i) => d * 3)
        .attr("fill", "navy")
+       .attr("class", "bar")
        // Add your code below this line
 
 
@@ -67,7 +122,7 @@ assert($('rect').attr('class') == 'bar');
        .append("text")
        .text((d) => d)
        .attr("x", (d, i) => i * 30)
-       .attr("y", (d, i) => h - (3 * d) - 3);
+       .attr("y", (d, i) => h - (d * 3 + 3))
 
   </script>
 </body>
@@ -100,11 +155,12 @@ assert($('rect').attr('class') == 'bar');
        .attr("x", (d, i) => i * 30)
        .attr("y", (d, i) => h - 3 * d)
        .attr("width", 25)
-       .attr("height", (d, i) => 3 * d)
+       .attr("height", (d, i) => d * 3)
        .attr("fill", "navy")
-       // Add your code below this line
-       .attr('class', 'bar')
-       // Add your code above this line
+       .attr("class", "bar")
+       .append("title")
+       .text((d) => d)
+       
 
     svg.selectAll("text")
        .data(dataset)
@@ -112,7 +168,8 @@ assert($('rect').attr('class') == 'bar');
        .append("text")
        .text((d) => d)
        .attr("x", (d, i) => i * 30)
-       .attr("y", (d, i) => h - (3 * d) - 3);
+       .attr("y", (d, i) => h - (d * 3 + 3))
+
   </script>
 </body>
 ```
