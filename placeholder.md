@@ -1,45 +1,74 @@
 ---
-id: 587d7fa6367417b2b2512bc3
-title: Select a Group of Elements with D3
+id: 587d7fac367417b2b2512bdb
+title: Set a Domain and a Range on a Scale
 challengeType: 6
-forumTopicId: 301490
-dashedName: select-a-group-of-elements-with-d3
+forumTopicId: 301491
+dashedName: set-a-domain-and-a-range-on-a-scale
 ---
 
 # --description--
 
-D3 also has the `selectAll()` method to select a group of elements. It returns an array of HTML nodes for all the items in the document that match the input string. Here's an example to select all the anchor tags in a document:
+By default, scales use the identity relationship. This means the input value maps to the output value. However, scales can be much more flexible and interesting.
 
-`const anchors = d3.selectAll("a");`
+Say a dataset has values ranging from 50 to 480. This is the input information for a scale, also known as the <dfn>domain</dfn>.
 
-Like the `select()` method, `selectAll()` supports method chaining, and you can use it with other methods.
+You want to map those points along the `x` axis on the SVG canvas, between 10 units and 500 units. This is the output information, also known as the <dfn>range</dfn>.
+
+The `domain()` and `range()` methods set these values for the scale. Both methods take an array of at least two elements as an argument. Here's an example:
+
+```js
+// Set a domain
+// The domain covers the set of input values
+scale.domain([50, 480]);
+// Set a range
+// The range covers the set of output values
+scale.range([10, 500]);
+scale(50) // Returns 10
+scale(480) // Returns 500
+scale(325) // Returns 323.37
+scale(750) // Returns 807.67
+d3.scaleLinear()
+```
+
+Notice that the scale uses the linear relationship between the domain and range values to figure out what the output should be for a given number. The minimum value in the domain (50) maps to the minimum value (10) in the range.
 
 # --instructions--
 
-Select all of the `li` tags in the document, and change their text to "list item" by chaining the `.text()` method.
+Create a scale and set its domain to `[250, 500]` and range to `[10, 150]`.
+
+**Note**  
+You can chain the `domain()` and `range()` methods onto the `scale` variable.
 
 # --hints--
 
-There should be 3 `li` elements on the page, and the text in each one should say "list item". Capitalization and spacing should match exactly.
+Your code should use the `domain()` method.
 
 ```js
-assert(
-  $('li')
-    .text()
-    .match(/list item/g).length == 3
-);
+assert(code.match(/\.domain/g));
 ```
 
-Your code should access the `d3` object.
+The `domain()` of the scale should be set to `[250, 500]`.
 
 ```js
-assert(code.match(/d3/g));
+assert(JSON.stringify(scale.domain()) == JSON.stringify([250, 500]));
 ```
 
-Your code should use the `selectAll` method.
+Your code should use the `range()` method.
 
 ```js
-assert(code.match(/\.selectAll/g));
+assert(code.match(/\.range/g));
+```
+
+The `range()` of the scale should be set to `[10, 150]`.
+
+```js
+assert(JSON.stringify(scale.range()) == JSON.stringify([10, 150]));
+```
+
+The text in the `h2` should be -102.
+
+```js
+assert($('h2').text() == '-102');
 ```
 
 # --seed--
@@ -48,17 +77,17 @@ assert(code.match(/\.selectAll/g));
 
 ```html
 <body>
-  <ul>
-    <li>Example</li>
-    <li>Example</li>
-    <li>Example</li>
-  </ul>
   <script>
     // Add your code below this line
+    const scale = d3.scaleLinear();
 
 
 
     // Add your code above this line
+    const output = scale(50);
+    d3.select("body")
+      .append("h2")
+      .text(output);
   </script>
 </body>
 ```
@@ -67,14 +96,14 @@ assert(code.match(/\.selectAll/g));
 
 ```html
 <body>
-  <ul>
-    <li>Example</li>
-    <li>Example</li>
-    <li>Example</li>
-  </ul>
   <script>
-    d3.selectAll("li")
-      .text("list item")
+    const scale = d3.scaleLinear();
+    scale.domain([250, 500])
+    scale.range([10, 150])
+    const output = scale(50);
+    d3.select("body")
+      .append("h2")
+      .text(output);
   </script>
 </body>
 ```
