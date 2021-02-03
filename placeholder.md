@@ -1,93 +1,84 @@
 ---
-id: 587d7fa9367417b2b2512bce
-title: Dynamically Set the Coordinates for Each Bar
+id: 587d7fa9367417b2b2512bd0
+title: Invert SVG Elements
 challengeType: 6
-forumTopicId: 301487
-dashedName: dynamically-set-the-coordinates-for-each-bar
+forumTopicId: 301488
+dashedName: invert-svg-elements
 ---
 
 # --description--
 
-The last challenge created and appended a rectangle to the `svg` element for each point in `dataset` to represent a bar. Unfortunately, they were all stacked on top of each other.
+You may have noticed the bar chart looked like it's upside-down, or inverted. This is because of how SVG uses (x, y) coordinates.
 
-The placement of a rectangle is handled by the `x` and `y` attributes. They tell D3 where to start drawing the shape in the `svg` area. The last challenge set them each to 0, so every bar was placed in the upper-left corner.
+In SVG, the origin point for the coordinates is in the upper-left corner. An `x` coordinate of 0 places a shape on the left edge of the SVG area. A `y` coordinate of 0 places a shape on the top edge of the SVG area. Higher `x` values push the rectangle to the right. Higher `y` values push the rectangle down.
 
-For a bar chart, all of the bars should sit on the same vertical level, which means the `y` value stays the same (at 0) for all bars. The `x` value, however, needs to change as you add new bars. Remember that larger `x` values push items farther to the right. As you go through the array elements in `dataset`, the x value should increase.
+To make the bars right-side-up, you need to change the way the `y` coordinate is calculated. It needs to account for both the height of the bar and the total height of the SVG area.
 
-The `attr()` method in D3 accepts a callback function to dynamically set that attribute. The callback function takes two arguments, one for the data point itself (usually `d`) and one for the index of the data point in the array. The second argument for the index is optional. Here's the format:
+The height of the SVG area is 100. If you have a data point of 0 in the set, you would want the bar to start at the bottom of the SVG area (not the top). To do this, the `y` coordinate needs a value of 100. If the data point value were 1, you would start with a `y` coordinate of 100 to set the bar at the bottom. Then you need to account for the height of the bar of 1, so the final `y` coordinate would be 99.
 
-```js
-selection.attr("property", (d, i) => {
-  /* 
-  * d is the data point value
-  * i is the index of the data point in the array
-  */
-})
-```
-
-It's important to note that you do NOT need to write a `for` loop or use `forEach()` to iterate over the items in the data set. Recall that the `data()` method parses the data set, and any method that's chained after `data()` is run once for each item in the data set.
+The `y` coordinate that is `y = heightOfSVG - heightOfBar` would place the bars right-side-up.
 
 # --instructions--
 
-Change the `x` attribute callback function so it returns the index times 30.
+Change the callback function for the `y` attribute to set the bars right-side-up. Remember that the `height` of the bar is 3 times the data value `d`.
 
 **Note**  
-Each bar has a width of 25, so increasing each `x` value by 30 adds some space between the bars. Any value greater than 25 would work in this example.
+In general, the relationship is `y = h - m * d`, where `m` is the constant that scales the data points.
 
 # --hints--
 
-The first `rect` should have an `x` value of 0.
+The first `rect` should have a `y` value of 64.
 
 ```js
-assert($('rect').eq(0).attr('x') == '0');
+assert($('rect').eq(0).attr('y') == h - dataset[0] * 3);
 ```
 
-The second `rect` should have an `x` value of 30.
+The second `rect` should have a `y` value of 7.
 
 ```js
-assert($('rect').eq(1).attr('x') == '30');
+assert($('rect').eq(1).attr('y') == h - dataset[1] * 3);
 ```
 
-The third `rect` should have an `x` value of 60.
+The third `rect` should have a `y` value of 34.
 
 ```js
-assert($('rect').eq(2).attr('x') == '60');
+assert($('rect').eq(2).attr('y') == h - dataset[2] * 3);
 ```
 
-The fourth `rect` should have an `x` value of 90.
+The fourth `rect` should have a `y` value of 49.
 
 ```js
-assert($('rect').eq(3).attr('x') == '90');
+assert($('rect').eq(3).attr('y') == h - dataset[3] * 3);
 ```
 
-The fifth `rect` should have an `x` value of 120.
+The fifth `rect` should have a `y` value of 25.
 
 ```js
-assert($('rect').eq(4).attr('x') == '120');
+assert($('rect').eq(4).attr('y') == h - dataset[4] * 3);
 ```
 
-The sixth `rect` should have an `x` value of 150.
+The sixth `rect` should have a `y` value of 46.
 
 ```js
-assert($('rect').eq(5).attr('x') == '150');
+assert($('rect').eq(5).attr('y') == h - dataset[5] * 3);
 ```
 
-The seventh `rect` should have an `x` value of 180.
+The seventh `rect` should have a `y` value of 13.
 
 ```js
-assert($('rect').eq(6).attr('x') == '180');
+assert($('rect').eq(6).attr('y') == h - dataset[6] * 3);
 ```
 
-The eighth `rect` should have an `x` value of 210.
+The eighth `rect` should have a `y` value of 58.
 
 ```js
-assert($('rect').eq(7).attr('x') == '210');
+assert($('rect').eq(7).attr('y') == h - dataset[7] * 3);
 ```
 
-The ninth `rect` should have an `x` value of 240.
+The ninth `rect` should have a `y` value of 73.
 
 ```js
-assert($('rect').eq(8).attr('x') == '240');
+assert($('rect').eq(8).attr('y') == h - dataset[8] * 3);
 ```
 
 # --seed--
@@ -111,16 +102,16 @@ assert($('rect').eq(8).attr('x') == '240');
        .data(dataset)
        .enter()
        .append("rect")
-       .attr("x", (d, i) => {
+       .attr("x", (d, i) => i * 30)
+       .attr("y", (d, i) => {
          // Add your code below this line
 
 
 
          // Add your code above this line
        })
-       .attr("y", 0)
        .attr("width", 25)
-       .attr("height", 100);
+       .attr("height", (d, i) => 3 * d);
   </script>
 </body>
 ```
@@ -144,12 +135,10 @@ assert($('rect').eq(8).attr('x') == '240');
        .data(dataset)
        .enter()
        .append("rect")
-       .attr("x", (d, i) => {
-         return i * 30
-       })
-       .attr("y", 0)
+       .attr("x", (d, i) => i * 30)
+       .attr("y", (d, i) => h - 3 * d)
        .attr("width", 25)
-       .attr("height", 100);
+       .attr("height", (d, i) => 3 * d);
   </script>
 </body>
 ```
