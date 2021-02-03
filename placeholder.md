@@ -1,49 +1,30 @@
 ---
-id: 587d7fab367417b2b2512bda
-title: Create a Linear Scale with D3
+id: 587d7fab367417b2b2512bd7
+title: Create a Scatterplot with SVG Circles
 challengeType: 6
-forumTopicId: 301483
-dashedName: create-a-linear-scale-with-d3
+forumTopicId: 301484
+dashedName: create-a-scatterplot-with-svg-circles
 ---
 
 # --description--
 
-The bar and scatter plot charts both plotted data directly onto the SVG canvas. However, if the height of a bar or one of the data points were larger than the SVG height or width values, it would go outside the SVG area.
+A scatter plot is another type of visualization. It usually uses circles to map data points, which have two values each. These values tie to the `x` and `y` axes, and are used to position the circle in the visualization.
 
-In D3, there are scales to help plot data. `Scales` are functions that tell the program how to map a set of raw data points onto the pixels of the SVG canvas.
-
-For example, say you have a 100x500-sized SVG canvas and you want to plot Gross Domestic Product (GDP) for a number of countries. The set of numbers would be in the billion or trillion-dollar range. You provide D3 a type of scale to tell it how to place the large GDP values into that 100x500-sized area.
-
-It's unlikely you would plot raw data as-is. Before plotting it, you set the scale for your entire data set, so that the `x` and `y` values fit your canvas width and height.
-
-D3 has several scale types. For a linear scale (usually used with quantitative data), there is the D3 method `scaleLinear()`:
-
-`const scale = d3.scaleLinear()`
-
-By default, a scale uses the identity relationship. The value of the input is the same as the value of the output. A separate challenge covers how to change this.
+SVG has a `circle` tag to create the circle shape. It works a lot like the `rect` elements you used for the bar chart.
 
 # --instructions--
 
-Change the `scale` variable to create a linear scale. Then set the `output` variable to the scale called with an input argument of 50.
+Use the `data()`, `enter()`, and `append()` methods to bind `dataset` to new `circle` elements that are appended to the SVG canvas.
+
+**Note**  
+The circles won't be visible because we haven't set their attributes yet. We'll do that in the next challenge.
 
 # --hints--
 
-The text in the `h2` should be 50.
+Your code should have 10 `circle` elements.
 
 ```js
-assert($('h2').text() == '50');
-```
-
-Your code should use the `scaleLinear()` method.
-
-```js
-assert(code.match(/\.scaleLinear/g));
-```
-
-The `output` variable should call `scale` with an argument of 50.
-
-```js
-assert(output == 50 && code.match(/scale\(\s*?50\s*?\)/g));
+assert($('circle').length == 10);
 ```
 
 # --seed--
@@ -53,16 +34,34 @@ assert(output == 50 && code.match(/scale\(\s*?50\s*?\)/g));
 ```html
 <body>
   <script>
-    // Add your code below this line
+    const dataset = [
+                  [ 34,    78 ],
+                  [ 109,   280 ],
+                  [ 310,   120 ],
+                  [ 79,    411 ],
+                  [ 420,   220 ],
+                  [ 233,   145 ],
+                  [ 333,   96 ],
+                  [ 222,   333 ],
+                  [ 78,    320 ],
+                  [ 21,    123 ]
+                ];
 
-    const scale = undefined; // Create the scale here
-    const output = scale(); // Call scale with an argument here
 
-    // Add your code above this line
+    const w = 500;
+    const h = 500;
 
-    d3.select("body")
-      .append("h2")
-      .text(output);
+    const svg = d3.select("body")
+                  .append("svg")
+                  .attr("width", w)
+                  .attr("height", h);
+
+    svg.selectAll("circle")
+       // Add your code below this line
+
+
+
+       // Add your code above this line
 
   </script>
 </body>
@@ -73,13 +72,32 @@ assert(output == 50 && code.match(/scale\(\s*?50\s*?\)/g));
 ```html
 <body>
   <script>
+    const dataset = [
+                  [ 34,    78 ],
+                  [ 109,   280 ],
+                  [ 310,   120 ],
+                  [ 79,    411 ],
+                  [ 420,   220 ],
+                  [ 233,   145 ],
+                  [ 333,   96 ],
+                  [ 222,   333 ],
+                  [ 78,    320 ],
+                  [ 21,    123 ]
+                ];
 
-    const scale = d3.scaleLinear();
-    const output = scale(50); 
 
-    d3.select("body")
-      .append("h2")
-      .text(output);
+    const w = 500;
+    const h = 500;
+
+    const svg = d3.select("body")
+                  .append("svg")
+                  .attr("width", w)
+                  .attr("height", h);
+
+    svg.selectAll("circle")
+       .data(dataset)
+       .enter()
+       .append("circle")
 
   </script>
 </body>
