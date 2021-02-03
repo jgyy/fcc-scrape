@@ -1,14 +1,20 @@
 ---
-id: 587d7fa9367417b2b2512bcf
-title: Dynamically Change the Height of Each Bar
+id: 587d7fa9367417b2b2512bce
+title: Dynamically Set the Coordinates for Each Bar
 challengeType: 6
-forumTopicId: 301486
-dashedName: dynamically-change-the-height-of-each-bar
+forumTopicId: 301487
+dashedName: dynamically-set-the-coordinates-for-each-bar
 ---
 
 # --description--
 
-The height of each bar can be set to the value of the data point in the array, similar to how the `x` value was set dynamically.
+The last challenge created and appended a rectangle to the `svg` element for each point in `dataset` to represent a bar. Unfortunately, they were all stacked on top of each other.
+
+The placement of a rectangle is handled by the `x` and `y` attributes. They tell D3 where to start drawing the shape in the `svg` area. The last challenge set them each to 0, so every bar was placed in the upper-left corner.
+
+For a bar chart, all of the bars should sit on the same vertical level, which means the `y` value stays the same (at 0) for all bars. The `x` value, however, needs to change as you add new bars. Remember that larger `x` values push items farther to the right. As you go through the array elements in `dataset`, the x value should increase.
+
+The `attr()` method in D3 accepts a callback function to dynamically set that attribute. The callback function takes two arguments, one for the data point itself (usually `d`) and one for the index of the data point in the array. The second argument for the index is optional. Here's the format:
 
 ```js
 selection.attr("property", (d, i) => {
@@ -19,67 +25,69 @@ selection.attr("property", (d, i) => {
 })
 ```
 
+It's important to note that you do NOT need to write a `for` loop or use `forEach()` to iterate over the items in the data set. Recall that the `data()` method parses the data set, and any method that's chained after `data()` is run once for each item in the data set.
+
 # --instructions--
 
-Change the callback function for the `height` attribute to return the data value times 3.
+Change the `x` attribute callback function so it returns the index times 30.
 
 **Note**  
-Remember that multiplying all data points by the same constant scales the data (like zooming in). It helps to see the differences between bar values in this example.
+Each bar has a width of 25, so increasing each `x` value by 30 adds some space between the bars. Any value greater than 25 would work in this example.
 
 # --hints--
 
-The first `rect` should have a `height` of 36.
+The first `rect` should have an `x` value of 0.
 
 ```js
-assert($('rect').eq(0).attr('height') == '36');
+assert($('rect').eq(0).attr('x') == '0');
 ```
 
-The second `rect` should have a `height` of 93.
+The second `rect` should have an `x` value of 30.
 
 ```js
-assert($('rect').eq(1).attr('height') == '93');
+assert($('rect').eq(1).attr('x') == '30');
 ```
 
-The third `rect` should have a `height` of 66.
+The third `rect` should have an `x` value of 60.
 
 ```js
-assert($('rect').eq(2).attr('height') == '66');
+assert($('rect').eq(2).attr('x') == '60');
 ```
 
-The fourth `rect` should have a `height` of 51.
+The fourth `rect` should have an `x` value of 90.
 
 ```js
-assert($('rect').eq(3).attr('height') == '51');
+assert($('rect').eq(3).attr('x') == '90');
 ```
 
-The fifth `rect` should have a `height` of 75.
+The fifth `rect` should have an `x` value of 120.
 
 ```js
-assert($('rect').eq(4).attr('height') == '75');
+assert($('rect').eq(4).attr('x') == '120');
 ```
 
-The sixth `rect` should have a `height` of 54.
+The sixth `rect` should have an `x` value of 150.
 
 ```js
-assert($('rect').eq(5).attr('height') == '54');
+assert($('rect').eq(5).attr('x') == '150');
 ```
 
-The seventh `rect` should have a `height` of 87.
+The seventh `rect` should have an `x` value of 180.
 
 ```js
-assert($('rect').eq(6).attr('height') == '87');
+assert($('rect').eq(6).attr('x') == '180');
 ```
 
-The eighth `rect` should have a `height` of 42.
+The eighth `rect` should have an `x` value of 210.
 
 ```js
-assert($('rect').eq(7).attr('height') == '42');
+assert($('rect').eq(7).attr('x') == '210');
 ```
 
-The ninth `rect` should have a `height` of 27.
+The ninth `rect` should have an `x` value of 240.
 
 ```js
-assert($('rect').eq(8).attr('height') == '27');
+assert($('rect').eq(8).attr('x') == '240');
 ```
 
 # --seed--
@@ -103,16 +111,16 @@ assert($('rect').eq(8).attr('height') == '27');
        .data(dataset)
        .enter()
        .append("rect")
-       .attr("x", (d, i) => i * 30)
-       .attr("y", 0)
-       .attr("width", 25)
-       .attr("height", (d, i) => {
+       .attr("x", (d, i) => {
          // Add your code below this line
 
 
 
          // Add your code above this line
-       });
+       })
+       .attr("y", 0)
+       .attr("width", 25)
+       .attr("height", 100);
   </script>
 </body>
 ```
@@ -136,12 +144,12 @@ assert($('rect').eq(8).attr('height') == '27');
        .data(dataset)
        .enter()
        .append("rect")
-       .attr("x", (d, i) => i * 30)
+       .attr("x", (d, i) => {
+         return i * 30
+       })
        .attr("y", 0)
        .attr("width", 25)
-       .attr("height", (d, i) => {
-         return d * 3
-       });
+       .attr("height", 100);
   </script>
 </body>
 ```
