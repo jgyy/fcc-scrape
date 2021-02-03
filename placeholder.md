@@ -1,56 +1,71 @@
 ---
-id: 587d7fac367417b2b2512bdc
-title: >-
-  Use the d3.max and d3.min Functions to Find Minimum and Maximum Values in a
-  Dataset
+id: 587d7fa7367417b2b2512bc4
+title: Work with Data in D3
 challengeType: 6
-forumTopicId: 301496
-dashedName: >-
-  use-the-d3-max-and-d3-min-functions-to-find-minimum-and-maximum-values-in-a-dataset
+forumTopicId: 301497
+dashedName: work-with-data-in-d3
 ---
 
 # --description--
 
-The D3 methods `domain()` and `range()` set that information for your scale based on the data. There are a couple methods to make that easier.
+The D3 library focuses on a data-driven approach. When you have a set of data, you can apply D3 methods to display it on the page. Data comes in many formats, but this challenge uses a simple array of numbers.
 
-Often when you set the domain, you'll want to use the minimum and maximum values within the data set. Trying to find these values manually, especially in a large data set, may cause errors.
+The first step is to make D3 aware of the data. The `data()` method is used on a selection of DOM elements to attach the data to those elements. The data set is passed as an argument to the method.
 
-D3 has two methods - `min()` and `max()` to return this information. Here's an example:
+A common workflow pattern is to create a new element in the document for each piece of data in the set. D3 has the `enter()` method for this purpose.
 
-```js
-const exampleData = [34, 234, 73, 90, 6, 52];
-d3.min(exampleData) // Returns 6
-d3.max(exampleData) // Returns 234
+When `enter()` is combined with the `data()` method, it looks at the selected elements from the page and compares them to the number of data items in the set. If there are fewer elements than data items, it creates the missing elements.
+
+Here is an example that selects a `ul` element and creates a new list item based on the number of entries in the array:
+
+```html
+<body>
+  <ul></ul>
+  <script>
+    const dataset = ["a", "b", "c"];
+    d3.select("ul").selectAll("li")
+      .data(dataset)
+      .enter()
+      .append("li")
+      .text("New item");
+  </script>
+</body>
 ```
 
-A dataset may have nested arrays, like the \[x, y] coordinate pairs that were in the scatter plot example. In that case, you need to tell D3 how to calculate the maximum and minimum. Fortunately, both the `min()` and `max()` methods take a callback function. In this example, the callback function's argument `d` is for the current inner array. The callback needs to return the element from the inner array (the x or y value) over which you want to compute the maximum or minimum. Here's an example for how to find the min and max values with an array of arrays:
-
-```js
-const locationData = [[1, 7],[6, 3],[8, 3]];
-// Returns the smallest number out of the first elements
-const minX = d3.min(locationData, (d) => d[0]);
-// minX compared 1, 6, and 8 and is set to 1
-```
+It may seem confusing to select elements that don't exist yet. This code is telling D3 to first select the `ul` on the page. Next, select all list items, which returns an empty selection. Then the `data()` method reviews the dataset and runs the following code three times, once for each item in the array. The `enter()` method sees there are no `li` elements on the page, but it needs 3 (one for each piece of data in `dataset`). New `li` elements are appended to the `ul` and have the text "New item".
 
 # --instructions--
 
-The `positionData` array holds sub arrays of x, y, and z coordinates. Use a D3 method to find the maximum value of the z coordinate (the third value) from the arrays and save it in the `output` variable.
+Select the `body` node, then select all `h2` elements. Have D3 create and append an `h2` tag for each item in the `dataset` array. The text in the `h2` should say "New Title". Your code should use the `data()` and `enter()` methods.
 
 # --hints--
 
-The text in the `h2` should be 8.
+Your document should have 9 `h2` elements.
 
 ```js
-assert(output == 8 && $('h2').text() == '8');
+assert($('h2').length == 9);
 ```
 
-Your code should use the `max()` method.
+The text in the `h2` elements should say "New Title". The capitalization and spacing should match exactly.
 
 ```js
 assert(
-  code.match(/\.max/g),
-  'Your code should use the <code>max()</code> method.'
+  $('h2')
+    .text()
+    .match(/New Title/g).length == 9
 );
+```
+
+Your code should use the `data()` method.
+
+```js
+assert(code.match(/\.data/g));
+```
+
+Your code should use the `enter()` method.
+
+```js
+assert(code.match(/\.enter/g));
 ```
 
 # --seed--
@@ -60,16 +75,13 @@ assert(
 ```html
 <body>
   <script>
-    const positionData = [[1, 7, -4],[6, 3, 8],[2, 9, 3]]
+    const dataset = [12, 31, 22, 17, 25, 18, 29, 14, 9];
+
     // Add your code below this line
 
-    const output = undefined; // Change this line
+
 
     // Add your code above this line
-
-    d3.select("body")
-      .append("h2")
-      .text(output)
   </script>
 </body>
 ```
@@ -79,13 +91,15 @@ assert(
 ```html
 <body>
   <script>
-    const positionData = [[1, 7, -4],[6, 3, 8],[2, 9, 3]]
-
-    const output = d3.max(positionData, (d) => d[2])
+    const dataset = [12, 31, 22, 17, 25, 18, 29, 14, 9];
 
     d3.select("body")
+      .selectAll("h2")
+      .data(dataset)
+      .enter()
       .append("h2")
-      .text(output)
+      .text("New Title")
+
   </script>
 </body>
 ```
