@@ -1,84 +1,46 @@
 ---
-id: 587d7fa9367417b2b2512bd0
-title: Invert SVG Elements
+id: 587d7fa8367417b2b2512bcb
+title: Learn About SVG in D3
 challengeType: 6
-forumTopicId: 301488
-dashedName: invert-svg-elements
+forumTopicId: 301489
+dashedName: learn-about-svg-in-d3
 ---
 
 # --description--
 
-You may have noticed the bar chart looked like it's upside-down, or inverted. This is because of how SVG uses (x, y) coordinates.
+<dfn>SVG</dfn> stands for <dfn>Scalable Vector Graphics</dfn>.
 
-In SVG, the origin point for the coordinates is in the upper-left corner. An `x` coordinate of 0 places a shape on the left edge of the SVG area. A `y` coordinate of 0 places a shape on the top edge of the SVG area. Higher `x` values push the rectangle to the right. Higher `y` values push the rectangle down.
+Here "scalable" means that, if you zoom in or out on an object, it would not appear pixelated. It scales with the display system, whether it's on a small mobile screen or a large TV monitor.
 
-To make the bars right-side-up, you need to change the way the `y` coordinate is calculated. It needs to account for both the height of the bar and the total height of the SVG area.
+SVG is used to make common geometric shapes. Since D3 maps data into a visual representation, it uses SVG to create the shapes for the visualization. SVG shapes for a web page must go within an HTML `svg` tag.
 
-The height of the SVG area is 100. If you have a data point of 0 in the set, you would want the bar to start at the bottom of the SVG area (not the top). To do this, the `y` coordinate needs a value of 100. If the data point value were 1, you would start with a `y` coordinate of 100 to set the bar at the bottom. Then you need to account for the height of the bar of 1, so the final `y` coordinate would be 99.
-
-The `y` coordinate that is `y = heightOfSVG - heightOfBar` would place the bars right-side-up.
+CSS can be scalable when styles use relative units (such as `vh`, `vw`, or percentages), but using SVG is more flexible to build data visualizations.
 
 # --instructions--
 
-Change the callback function for the `y` attribute to set the bars right-side-up. Remember that the `height` of the bar is 3 times the data value `d`.
+Add an `svg` node to the `body` using `append()`. Give it a `width` attribute set to the provided `w` constant and a `height` attribute set to the provided `h` constant using the `attr()` or `style()` methods for each. You'll see it in the output because there's a `background-color` of pink applied to it in the `style` tag.
 
 **Note**  
-In general, the relationship is `y = h - m * d`, where `m` is the constant that scales the data points.
+When using `attr()` width and height attributes do not have units. This is the building block of scaling - the element will always have a 5:1 width to height ratio, no matter what the zoom level is.
 
 # --hints--
 
-The first `rect` should have a `y` value of 64.
+Your document should have 1 `svg` element.
 
 ```js
-assert($('rect').eq(0).attr('y') == h - dataset[0] * 3);
+assert($('svg').length == 1);
 ```
 
-The second `rect` should have a `y` value of 7.
+The `svg` element should have a `width` attribute set to 500 or styled to have a width of 500px.
 
 ```js
-assert($('rect').eq(1).attr('y') == h - dataset[1] * 3);
+assert($('svg').attr('width') == '500' || $('svg').css('width') == '500px');
 ```
 
-The third `rect` should have a `y` value of 34.
+The `svg` element should have a `height` attribute set to 100 or styled to have a height of 100px.
 
 ```js
-assert($('rect').eq(2).attr('y') == h - dataset[2] * 3);
-```
-
-The fourth `rect` should have a `y` value of 49.
-
-```js
-assert($('rect').eq(3).attr('y') == h - dataset[3] * 3);
-```
-
-The fifth `rect` should have a `y` value of 25.
-
-```js
-assert($('rect').eq(4).attr('y') == h - dataset[4] * 3);
-```
-
-The sixth `rect` should have a `y` value of 46.
-
-```js
-assert($('rect').eq(5).attr('y') == h - dataset[5] * 3);
-```
-
-The seventh `rect` should have a `y` value of 13.
-
-```js
-assert($('rect').eq(6).attr('y') == h - dataset[6] * 3);
-```
-
-The eighth `rect` should have a `y` value of 58.
-
-```js
-assert($('rect').eq(7).attr('y') == h - dataset[7] * 3);
-```
-
-The ninth `rect` should have a `y` value of 73.
-
-```js
-assert($('rect').eq(8).attr('y') == h - dataset[8] * 3);
+assert($('svg').attr('height') == '100' || $('svg').css('height') == '100px');
 ```
 
 # --seed--
@@ -86,6 +48,11 @@ assert($('rect').eq(8).attr('y') == h - dataset[8] * 3);
 ## --seed-contents--
 
 ```html
+<style>
+  svg {
+    background-color: pink;
+  }
+</style>
 <body>
   <script>
     const dataset = [12, 31, 22, 17, 25, 18, 29, 14, 9];
@@ -94,24 +61,11 @@ assert($('rect').eq(8).attr('y') == h - dataset[8] * 3);
     const h = 100;
 
     const svg = d3.select("body")
-                  .append("svg")
-                  .attr("width", w)
-                  .attr("height", h);
-
-    svg.selectAll("rect")
-       .data(dataset)
-       .enter()
-       .append("rect")
-       .attr("x", (d, i) => i * 30)
-       .attr("y", (d, i) => {
-         // Add your code below this line
+                  // Add your code below this line
 
 
 
-         // Add your code above this line
-       })
-       .attr("width", 25)
-       .attr("height", (d, i) => 3 * d);
+                  // Add your code above this line
   </script>
 </body>
 ```
@@ -119,6 +73,11 @@ assert($('rect').eq(8).attr('y') == h - dataset[8] * 3);
 # --solutions--
 
 ```html
+<style>
+  svg {
+    background-color: pink;
+  }
+</style>
 <body>
   <script>
     const dataset = [12, 31, 22, 17, 25, 18, 29, 14, 9];
@@ -129,16 +88,7 @@ assert($('rect').eq(8).attr('y') == h - dataset[8] * 3);
     const svg = d3.select("body")
                   .append("svg")
                   .attr("width", w)
-                  .attr("height", h);
-
-    svg.selectAll("rect")
-       .data(dataset)
-       .enter()
-       .append("rect")
-       .attr("x", (d, i) => i * 30)
-       .attr("y", (d, i) => h - 3 * d)
-       .attr("width", 25)
-       .attr("height", (d, i) => 3 * d);
+                  .attr("height", h)
   </script>
 </body>
 ```
