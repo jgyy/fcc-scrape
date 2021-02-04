@@ -1,35 +1,73 @@
 ---
-id: 587d7fad367417b2b2512be2
-title: Change Text with click Events
+id: 587d7fae367417b2b2512be5
+title: Convert JSON Data to HTML
 challengeType: 6
-forumTopicId: 301500
-dashedName: change-text-with-click-events
+forumTopicId: 16807
+dashedName: convert-json-data-to-html
 ---
 
 # --description--
 
-When the click event happens, you can use JavaScript to update an HTML element.
+Now that you're getting data from a JSON API, you can display it in the HTML.
 
-For example, when a user clicks the "Get Message" button, it changes the text of the element with the class `message` to say "Here is the message".
+You can use a `forEach` method to loop through the data since the cat photo objects are held in an array. As you get to each item, you can modify the HTML elements.
 
-This works by adding the following code within the click event:
+First, declare an html variable with `let html = "";`.
 
-`document.getElementsByClassName('message')[0].textContent="Here is the message";`
+Then, loop through the JSON, adding HTML to the variable that wraps the key names in `strong` tags, followed by the value. When the loop is finished, you render it.
+
+Here's the code that does this:
+
+```js
+let html = "";
+json.forEach(function(val) {
+  const keys = Object.keys(val);
+  html += "<div class = 'cat'>";
+  keys.forEach(function(key) {
+    html += "<strong>" + key + "</strong>: " + val[key] + "<br>";
+  });
+  html += "</div><br>";
+});
+```
+
+**Note:** For this challenge, you need to add new HTML elements to the page, so you cannot rely on `textContent`. Instead, you need to use `innerHTML`, which can make a site vulnerable to Cross-site scripting attacks.
 
 # --instructions--
 
-Add code inside the `onclick` event handler to change the text inside the `message` element to say "Here is the message".
+Add a `forEach` method to loop over the JSON data and create the HTML elements to display it.
+
+Here is some example JSON
+
+```json
+[
+  {
+    "id":0,
+      "imageLink":"https://s3.amazonaws.com/freecodecamp/funny-cat.jpg",
+      "altText":"A white cat wearing a green helmet shaped melon on its head. ",
+      "codeNames":[ "Juggernaut", "Mrs. Wallace", "Buttercup"
+    ]
+  }
+]
+```
 
 # --hints--
 
-Your code should use the `document.getElementsByClassName` method to select the element with class `message` and set its `textContent` to the given string.
+Your code should store the data in the `html` variable
 
 ```js
-assert(
-  code.match(
-    /document\s*\.getElementsByClassName\(\s*?('|")message\1\s*?\)\[0\]\s*\.textContent\s*?=\s*?('|")Here is the message\2/g
-  )
-);
+assert(code.match(/html\s+?(\+=|=\shtml\s\+)/g));
+```
+
+Your code should use a `forEach` method to loop over the JSON data from the API.
+
+```js
+assert(code.match(/json\.forEach/g));
+```
+
+Your code should wrap the key names in `strong` tags.
+
+```js
+assert(code.match(/<strong>.+<\/strong>/g));
 ```
 
 # --seed--
@@ -40,11 +78,19 @@ assert(
 <script>
   document.addEventListener('DOMContentLoaded', function(){
     document.getElementById('getMessage').onclick = function(){
-      // Add your code below this line
+      const req = new XMLHttpRequest();
+      req.open("GET",'/json/cats.json',true);
+      req.send();
+      req.onload = function(){
+        const json = JSON.parse(req.responseText);
+        let html = "";
+        // Add your code below this line
 
 
-      // Add your code above this line
-    }
+        // Add your code above this line
+        document.getElementsByClassName('message')[0].innerHTML = html;
+      };
+    };
   });
 </script>
 
@@ -90,12 +136,27 @@ assert(
 
 ```html
 <script>
-  document.addEventListener('DOMContentLoaded',function(){
+  document.addEventListener('DOMContentLoaded', function(){
     document.getElementById('getMessage').onclick = function(){
-      // Add your code below this line
-      document.getElementsByClassName('message')[0].textContent = "Here is the message";
-      // Add your code above this line
-    }
+      const req = new XMLHttpRequest();
+      req.open("GET",'/json/cats.json',true);
+      req.send();
+      req.onload = function(){
+        const json = JSON.parse(req.responseText);
+        let html = "";
+        // Add your code below this line
+        json.forEach(function(val) {
+          var keys = Object.keys(val);
+          html += "<div class = 'cat'>";
+          keys.forEach(function(key) {
+          html += "<strong>" + key + "</strong>: " + val[key] + "<br>";
+        });
+        html += "</div><br>";
+        });
+        // Add your code above this line
+        document.getElementsByClassName('message')[0].innerHTML = html;
+      };
+    };
   });
 </script>
 
