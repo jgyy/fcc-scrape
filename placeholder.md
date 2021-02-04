@@ -1,43 +1,81 @@
 ---
-id: 587d7fad367417b2b2512be1
-title: Handle Click Events with JavaScript using the onclick property
+id: 587d7faf367417b2b2512be9
+title: Post Data with the JavaScript XMLHttpRequest Method
 challengeType: 6
-forumTopicId: 301503
-dashedName: handle-click-events-with-javascript-using-the-onclick-property
+forumTopicId: 301504
+dashedName: post-data-with-the-javascript-xmlhttprequest-method
 ---
 
 # --description--
 
-You want your code to execute only once your page has finished loading. For that purpose, you can attach a JavaScript event to the document called `DOMContentLoaded`. Here's the code that does this:
+In the previous examples, you received data from an external resource. You can also send data to an external resource, as long as that resource supports AJAX requests and you know the URL.
+
+JavaScript's `XMLHttpRequest` method is also used to post data to a server. Here's an example:
 
 ```js
-document.addEventListener('DOMContentLoaded', function() {
-
-});
+const xhr = new XMLHttpRequest();
+xhr.open('POST', url, true);
+xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+xhr.onreadystatechange = function () {
+  if (xhr.readyState === 4 && xhr.status === 201){
+    const serverResponse = JSON.parse(xhr.response);
+    document.getElementsByClassName('message')[0].textContent = serverResponse.userName + serverResponse.suffix;
+  }
+};
+const body = JSON.stringify({ userName: userName, suffix: ' loves cats!' });
+xhr.send(body);
 ```
 
-You can implement event handlers that go inside of the `DOMContentLoaded` function. You can implement an `onclick` event handler which triggers when the user clicks on the element with id `getMessage`, by adding the following code:
-
-```js
-document.getElementById('getMessage').onclick = function(){};
-```
+You've seen several of these methods before. Here the `open` method initializes the request as a "POST" to the given URL of the external resource, and uses the `true` Boolean to make it asynchronous. The `setRequestHeader` method sets the value of an HTTP request header, which contains information about the sender and the request. It must be called after the `open` method, but before the `send` method. The two parameters are the name of the header and the value to set as the body of that header. Next, the `onreadystatechange` event listener handles a change in the state of the request. A `readyState` of 4 means the operation is complete, and a `status` of 201 means it was a successful request. The document's HTML can be updated. Finally, the `send` method sends the request with the `body` value, which the `userName` key was given by the user in the `input` field.
 
 # --instructions--
 
-Add a click event handler inside of the `DOMContentLoaded` function for the element with id of `getMessage`.
+Update the code so it makes a "POST" request to the API endpoint. Then type your name in the input field and click "Send Message". Your AJAX function should replace "Reply from Server will be here." with data from the server. Format the response to display your name appended with " loves cats".
 
 # --hints--
 
-Your code should use the `document.getElementById` method to select the `getMessage` element.
+Your code should create a new `XMLHttpRequest`.
 
 ```js
-assert(code.match(/document\s*\.getElementById\(\s*?('|")getMessage\1\s*?\)/g));
+assert(code.match(/new\s+?XMLHttpRequest\(\s*?\)/g));
 ```
 
-Your code should add an `onclick` event handler.
+Your code should use the `open` method to initialize a "POST" request to the server.
 
 ```js
-assert(typeof document.getElementById('getMessage').onclick === 'function');
+assert(code.match(/\.open\(\s*?('|")POST\1\s*?,\s*?url\s*?,\s*?true\s*?\)/g));
+```
+
+Your code should use the `setRequestHeader` method.
+
+```js
+assert(
+  code.match(
+    /\.setRequestHeader\(\s*?('|")Content-Type\1\s*?,\s*?('|")application\/json;\s*charset=UTF-8\2\s*?\)/g
+  )
+);
+```
+
+Your code should have an `onreadystatechange` event handler set to a function.
+
+```js
+assert(code.match(/\.onreadystatechange\s*?=/g));
+```
+
+Your code should get the element with class `message` and change its `textContent` to "`userName` loves cats"
+
+```js
+assert(
+  code.match(
+    /document\.getElementsByClassName\(\s*?('|")message\1\s*?\)\[0\]\.textContent\s*?=\s*?.+?\.userName\s*?\+\s*?.+?\.suffix/g
+  )
+);
+```
+
+Your code should use the `send` method.
+
+```js
+assert(code.match(/\.send\(\s*?body\s*?\)/g));
 ```
 
 # --seed--
@@ -47,10 +85,15 @@ assert(typeof document.getElementById('getMessage').onclick === 'function');
 ```html
 <script>
   document.addEventListener('DOMContentLoaded', function(){
-    // Add your code below this line
+    document.getElementById('sendMessage').onclick = function(){
+
+      const userName = document.getElementById('name').value;
+      const url = 'https://jsonplaceholder.typicode.com/posts';
+      // Add your code below this line
 
 
-    // Add your code above this line
+      // Add your code above this line
+    };
   });
 </script>
 
@@ -80,13 +123,17 @@ assert(typeof document.getElementById('getMessage').onclick === 'function');
     border: 1px solid #0F5897;
   }
 </style>
-<h1>Cat Photo Finder</h1>
+
+<h1>Cat Friends</h1>
 <p class="message box">
-  The message will go here
+  Reply from Server will be here
 </p>
 <p>
-  <button id="getMessage">
-    Get Message
+  <label for="name">Your name:
+    <input type="text" id="name"/>
+  </label>
+  <button id="sendMessage">
+    Send Message
   </button>
 </p>
 ```
@@ -96,9 +143,24 @@ assert(typeof document.getElementById('getMessage').onclick === 'function');
 ```html
 <script>
   document.addEventListener('DOMContentLoaded', function(){
-    // Add your code below this line
-    document.getElementById('getMessage').onclick = function(){ };
-    // Add your code above this line
+    document.getElementById('sendMessage').onclick = function(){
+
+      const userName = document.getElementById('name').value;
+      const url = 'https://jsonplaceholder.typicode.com/posts';
+      // Add your code below this line
+      const xhr = new XMLHttpRequest();
+      xhr.open('POST', url, true);
+      xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 201){
+          const serverResponse = JSON.parse(xhr.response);
+          document.getElementsByClassName('message')[0].textContent = serverResponse.userName + serverResponse.suffix;
+       }
+     };
+     const body = JSON.stringify({ userName: userName, suffix: ' loves cats!' });
+     xhr.send(body);
+      // Add your code above this line
+    };
   });
 </script>
 
@@ -128,13 +190,17 @@ assert(typeof document.getElementById('getMessage').onclick === 'function');
     border: 1px solid #0F5897;
   }
 </style>
-<h1>Cat Photo Finder</h1> 
-<p class="message box">
-  The message will go here
+
+<h1>Cat Friends</h1>
+<p class="message">
+  Reply from Server will be here
 </p>
 <p>
-  <button id="getMessage">
-    Get Message
+  <label for="name">Your name:
+    <input type="text" id="name"/>
+  </label>
+  <button id="sendMessage">
+    Send Message
   </button>
 </p>
 ```
