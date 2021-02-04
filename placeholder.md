@@ -1,89 +1,43 @@
 ---
-id: 587d7fae367417b2b2512be3
-title: Get JSON with the JavaScript XMLHttpRequest Method
+id: 587d7fad367417b2b2512be1
+title: Handle Click Events with JavaScript using the onclick property
 challengeType: 6
-forumTopicId: 301502
-dashedName: get-json-with-the-javascript-xmlhttprequest-method
+forumTopicId: 301503
+dashedName: handle-click-events-with-javascript-using-the-onclick-property
 ---
 
 # --description--
 
-You can also request data from an external source. This is where APIs come into play.
-
-Remember that APIs - or Application Programming Interfaces - are tools that computers use to communicate with one another. You'll learn how to update HTML with the data we get from APIs using a technology called AJAX.
-
-Most web APIs transfer data in a format called JSON. JSON stands for JavaScript Object Notation.
-
-JSON syntax looks very similar to JavaScript object literal notation. JSON has object properties and their current values, sandwiched between a `{` and a `}`.
-
-These properties and their values are often referred to as "key-value pairs".
-
-However, JSON transmitted by APIs are sent as `bytes`, and your application receives it as a `string`. These can be converted into JavaScript objects, but they are not JavaScript objects by default. The `JSON.parse` method parses the string and constructs the JavaScript object described by it.
-
-You can request the JSON from freeCodeCamp's Cat Photo API. Here's the code you can put in your click event to do this:
+You want your code to execute only once your page has finished loading. For that purpose, you can attach a JavaScript event to the document called `DOMContentLoaded`. Here's the code that does this:
 
 ```js
-const req = new XMLHttpRequest();
-req.open("GET",'/json/cats.json',true);
-req.send();
-req.onload = function(){
-  const json = JSON.parse(req.responseText);
-  document.getElementsByClassName('message')[0].innerHTML = JSON.stringify(json);
-};
+document.addEventListener('DOMContentLoaded', function() {
+
+});
 ```
 
-Here's a review of what each piece is doing. The JavaScript `XMLHttpRequest` object has a number of properties and methods that are used to transfer data. First, an instance of the `XMLHttpRequest` object is created and saved in the `req` variable. Next, the `open` method initializes a request - this example is requesting data from an API, therefore is a "GET" request. The second argument for `open` is the URL of the API you are requesting data from. The third argument is a Boolean value where `true` makes it an asynchronous request. The `send` method sends the request. Finally, the `onload` event handler parses the returned data and applies the `JSON.stringify` method to convert the JavaScript object into a string. This string is then inserted as the message text.
+You can implement event handlers that go inside of the `DOMContentLoaded` function. You can implement an `onclick` event handler which triggers when the user clicks on the element with id `getMessage`, by adding the following code:
+
+```js
+document.getElementById('getMessage').onclick = function(){};
+```
 
 # --instructions--
 
-Update the code to create and send a "GET" request to the freeCodeCamp Cat Photo API. Then click the "Get Message" button. Your AJAX function will replace the "The message will go here" text with the raw JSON output from the API.
+Add a click event handler inside of the `DOMContentLoaded` function for the element with id of `getMessage`.
 
 # --hints--
 
-Your code should create a new `XMLHttpRequest`.
+Your code should use the `document.getElementById` method to select the `getMessage` element.
 
 ```js
-assert(code.match(/new\s+?XMLHttpRequest\(\s*?\)/g));
+assert(code.match(/document\s*\.getElementById\(\s*?('|")getMessage\1\s*?\)/g));
 ```
 
-Your code should use the `open` method to initialize a "GET" request to the freeCodeCamp Cat Photo API.
+Your code should add an `onclick` event handler.
 
 ```js
-assert(
-  code.match(
-    /\.open\(\s*?('|")GET\1\s*?,\s*?('|")\/json\/cats\.json\2\s*?,\s*?true\s*?\)/g
-  )
-);
-```
-
-Your code should use the `send` method to send the request.
-
-```js
-assert(code.match(/\.send\(\s*\)/g));
-```
-
-Your code should have an `onload` event handler set to a function.
-
-```js
-assert(
-  code.match(/\.onload\s*=\s*(function|\(\s*?\))\s*?(\(\s*?\)|\=\>)\s*?{/g)
-);
-```
-
-Your code should use the `JSON.parse` method to parse the `responseText`.
-
-```js
-assert(code.match(/JSON\s*\.parse\(\s*.*\.responseText\s*\)/g));
-```
-
-Your code should get the element with class `message` and change its inner HTML to the string of JSON data.
-
-```js
-assert(
-  code.match(
-    /document\s*\.getElementsByClassName\(\s*?('|")message\1\s*?\)\[0\]\s*\.innerHTML\s*?=\s*?JSON\.stringify\(.+?\)/g
-  )
-);
+assert(typeof document.getElementById('getMessage').onclick === 'function');
 ```
 
 # --seed--
@@ -93,12 +47,10 @@ assert(
 ```html
 <script>
   document.addEventListener('DOMContentLoaded', function(){
-    document.getElementById('getMessage').onclick = function(){
-      // Add your code below this line
+    // Add your code below this line
 
 
-      // Add your code above this line
-    };
+    // Add your code above this line
   });
 </script>
 
@@ -128,7 +80,6 @@ assert(
     border: 1px solid #0F5897;
   }
 </style>
-
 <h1>Cat Photo Finder</h1>
 <p class="message box">
   The message will go here
@@ -144,16 +95,10 @@ assert(
 
 ```html
 <script>
-  document.addEventListener('DOMContentLoaded',function(){
-    document.getElementById('getMessage').onclick = function(){
-      const req = new XMLHttpRequest();
-      req.open('GET', '/json/cats.json', true);
-      req.send();
-      req.onload = () => {
-        const json = JSON.parse(req.responseText);
-        document.getElementsByClassName('message')[0].innerHTML = JSON.stringify(json);
-      };
-    };
+  document.addEventListener('DOMContentLoaded', function(){
+    // Add your code below this line
+    document.getElementById('getMessage').onclick = function(){ };
+    // Add your code above this line
   });
 </script>
 
@@ -183,8 +128,7 @@ assert(
     border: 1px solid #0F5897;
   }
 </style>
-
-<h1>Cat Photo Finder</h1>
+<h1>Cat Photo Finder</h1> 
 <p class="message box">
   The message will go here
 </p>
