@@ -1,71 +1,87 @@
 ---
-id: 5ccfad82bb2dc6c965a848e5
-title: Get JSON with the JavaScript fetch method
+id: 587d7fae367417b2b2512be3
+title: Get JSON with the JavaScript XMLHttpRequest Method
 challengeType: 6
-forumTopicId: 301501
-dashedName: get-json-with-the-javascript-fetch-method
+forumTopicId: 301502
+dashedName: get-json-with-the-javascript-xmlhttprequest-method
 ---
 
 # --description--
 
-Another way to request external data is to use the JavaScript `fetch()` method. It is equivalent to XMLHttpRequest, but the syntax is considered easier to understand.
+You can also request data from an external source. This is where APIs come into play.
 
-Here is the code for making a GET request to `/json/cats.json`
+Remember that APIs - or Application Programming Interfaces - are tools that computers use to communicate with one another. You'll learn how to update HTML with the data we get from APIs using a technology called AJAX.
+
+Most web APIs transfer data in a format called JSON. JSON stands for JavaScript Object Notation.
+
+JSON syntax looks very similar to JavaScript object literal notation. JSON has object properties and their current values, sandwiched between a `{` and a `}`.
+
+These properties and their values are often referred to as "key-value pairs".
+
+However, JSON transmitted by APIs are sent as `bytes`, and your application receives it as a `string`. These can be converted into JavaScript objects, but they are not JavaScript objects by default. The `JSON.parse` method parses the string and constructs the JavaScript object described by it.
+
+You can request the JSON from freeCodeCamp's Cat Photo API. Here's the code you can put in your click event to do this:
 
 ```js
-
-fetch('/json/cats.json')
-	.then(response => response.json())
-	.then(data => {
-		document.getElementById('message').innerHTML = JSON.stringify(data);
-	})
-
+const req = new XMLHttpRequest();
+req.open("GET",'/json/cats.json',true);
+req.send();
+req.onload = function(){
+  const json = JSON.parse(req.responseText);
+  document.getElementsByClassName('message')[0].innerHTML = JSON.stringify(json);
+};
 ```
 
-Take a look at each piece of this code.
-
-The first line is the one that makes the request. So, `fetch(URL)` makes a GET request to the URL specified. The method returns a Promise.
-
-After a Promise is returned, if the request was successful, the `then` method is executed, which takes the response and converts it to JSON format.
-
-The `then` method also returns a Promise, which is handled by the next `then` method. The argument in the second `then` is the JSON object you are looking for!
-
-Now, it selects the element that will receive the data by using `document.getElementById()`. Then it modifies the HTML code of the element by inserting a string created from the JSON object returned from the request.
+Here's a review of what each piece is doing. The JavaScript `XMLHttpRequest` object has a number of properties and methods that are used to transfer data. First, an instance of the `XMLHttpRequest` object is created and saved in the `req` variable. Next, the `open` method initializes a request - this example is requesting data from an API, therefore is a "GET" request. The second argument for `open` is the URL of the API you are requesting data from. The third argument is a Boolean value where `true` makes it an asynchronous request. The `send` method sends the request. Finally, the `onload` event handler parses the returned data and applies the `JSON.stringify` method to convert the JavaScript object into a string. This string is then inserted as the message text.
 
 # --instructions--
 
-Update the code to create and send a "GET" request to the freeCodeCamp Cat Photo API. But this time, using the `fetch` method instead of `XMLHttpRequest`.
+Update the code to create and send a "GET" request to the freeCodeCamp Cat Photo API. Then click the "Get Message" button. Your AJAX function will replace the "The message will go here" text with the raw JSON output from the API.
 
 # --hints--
 
-Your code should make a GET request with `fetch`.
+Your code should create a new `XMLHttpRequest`.
 
 ```js
-assert(code.match(/fetch\s*\(\s*('|")\/json\/cats\.json\1\s*\)/g));
+assert(code.match(/new\s+?XMLHttpRequest\(\s*?\)/g));
 ```
 
-Your code should use `then` to convert the response to JSON.
+Your code should use the `open` method to initialize a "GET" request to the freeCodeCamp Cat Photo API.
 
 ```js
 assert(
   code.match(
-    /\.then\s*\(\s*\(?(?<var>\w+)\)?\s*=>\s*\k<var>\s*\.json\s*\(\s*\)\s*\)/g
+    /\.open\(\s*?('|")GET\1\s*?,\s*?('|")\/json\/cats\.json\2\s*?,\s*?true\s*?\)/g
   )
 );
 ```
 
-Your code should use `then` to handle the data converted to JSON by the other `then`.
+Your code should use the `send` method to send the request.
 
 ```js
-assert(code.match(/\.then\s*\(\s*(data|\(\s*data\s*\))\s*=>\s*{[^}]*}\s*\)/g));
+assert(code.match(/\.send\(\s*\)/g));
 ```
 
-Your code should get the element with id `message` and change its inner HTML to the string of JSON data.
+Your code should have an `onload` event handler set to a function.
+
+```js
+assert(
+  code.match(/\.onload\s*=\s*(function|\(\s*?\))\s*?(\(\s*?\)|\=\>)\s*?{/g)
+);
+```
+
+Your code should use the `JSON.parse` method to parse the `responseText`.
+
+```js
+assert(code.match(/JSON\s*\.parse\(\s*.*\.responseText\s*\)/g));
+```
+
+Your code should get the element with class `message` and change its inner HTML to the string of JSON data.
 
 ```js
 assert(
   code.match(
-    /document\s*\.getElementById\s*\(\s*('|")message\1\s*\)\s*\.innerHTML\s*=\s*JSON\s*\.\s*stringify\s*\(\s*data\s*\)/g
+    /document\s*\.getElementsByClassName\(\s*?('|")message\1\s*?\)\[0\]\s*\.innerHTML\s*?=\s*?JSON\.stringify\(.+?\)/g
   )
 );
 ```
@@ -76,8 +92,8 @@ assert(
 
 ```html
 <script>
-  document.addEventListener('DOMContentLoaded',function(){
-    document.getElementById('getMessage').onclick= () => {
+  document.addEventListener('DOMContentLoaded', function(){
+    document.getElementById('getMessage').onclick = function(){
       // Add your code below this line
 
 
@@ -85,6 +101,7 @@ assert(
     };
   });
 </script>
+
 <style>
   body {
     text-align: center;
@@ -111,8 +128,9 @@ assert(
     border: 1px solid #0F5897;
   }
 </style>
+
 <h1>Cat Photo Finder</h1>
-<p id="message" class="box">
+<p class="message box">
   The message will go here
 </p>
 <p>
@@ -127,15 +145,18 @@ assert(
 ```html
 <script>
   document.addEventListener('DOMContentLoaded',function(){
-    document.getElementById('getMessage').onclick= () => {
-      fetch('/json/cats.json')
-        .then(response => response.json())
-        .then(data => {
-          document.getElementById('message').innerHTML=JSON.stringify(data);
-        })
+    document.getElementById('getMessage').onclick = function(){
+      const req = new XMLHttpRequest();
+      req.open('GET', '/json/cats.json', true);
+      req.send();
+      req.onload = () => {
+        const json = JSON.parse(req.responseText);
+        document.getElementsByClassName('message')[0].innerHTML = JSON.stringify(json);
+      };
     };
   });
 </script>
+
 <style>
   body {
     text-align: center;
@@ -162,8 +183,9 @@ assert(
     border: 1px solid #0F5897;
   }
 </style>
+
 <h1>Cat Photo Finder</h1>
-<p id="message" class="box">
+<p class="message box">
   The message will go here
 </p>
 <p>
