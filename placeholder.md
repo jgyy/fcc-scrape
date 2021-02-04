@@ -1,73 +1,63 @@
 ---
-id: 587d7fae367417b2b2512be5
-title: Convert JSON Data to HTML
+id: 587d7faf367417b2b2512be8
+title: Get Geolocation Data to Find A User's GPS Coordinates
 challengeType: 6
-forumTopicId: 16807
-dashedName: convert-json-data-to-html
+forumTopicId: 18188
+dashedName: get-geolocation-data-to-find-a-users-gps-coordinates
 ---
 
 # --description--
 
-Now that you're getting data from a JSON API, you can display it in the HTML.
+Another cool thing you can do is access your user's current location. Every browser has a built in navigator that can give you this information.
 
-You can use a `forEach` method to loop through the data since the cat photo objects are held in an array. As you get to each item, you can modify the HTML elements.
+The navigator will get the user's current longitude and latitude.
 
-First, declare an html variable with `let html = "";`.
+You will see a prompt to allow or block this site from knowing your current location. The challenge can be completed either way, as long as the code is correct.
 
-Then, loop through the JSON, adding HTML to the variable that wraps the key names in `strong` tags, followed by the value. When the loop is finished, you render it.
+By selecting allow, you will see the text on the output phone change to your latitude and longitude.
 
-Here's the code that does this:
+Here's code that does this:
 
 ```js
-let html = "";
-json.forEach(function(val) {
-  const keys = Object.keys(val);
-  html += "<div class = 'cat'>";
-  keys.forEach(function(key) {
-    html += "<strong>" + key + "</strong>: " + val[key] + "<br>";
+if (navigator.geolocation){
+  navigator.geolocation.getCurrentPosition(function(position) {
+    document.getElementById('data').innerHTML="latitude: " + position.coords.latitude + "<br>longitude: " + position.coords.longitude;
   });
-  html += "</div><br>";
-});
+}
 ```
 
-**Note:** For this challenge, you need to add new HTML elements to the page, so you cannot rely on `textContent`. Instead, you need to use `innerHTML`, which can make a site vulnerable to Cross-site scripting attacks.
+First, it checks if the `navigator.geolocation` object exists. If it does, the `getCurrentPosition` method on that object is called, which initiates an asynchronous request for the user's position. If the request is successful, the callback function in the method runs. This function accesses the `position` object's values for latitude and longitude using dot notation and updates the HTML.
 
 # --instructions--
 
-Add a `forEach` method to loop over the JSON data and create the HTML elements to display it.
-
-Here is some example JSON
-
-```json
-[
-  {
-    "id":0,
-      "imageLink":"https://s3.amazonaws.com/freecodecamp/funny-cat.jpg",
-      "altText":"A white cat wearing a green helmet shaped melon on its head. ",
-      "codeNames":[ "Juggernaut", "Mrs. Wallace", "Buttercup"
-    ]
-  }
-]
-```
+Add the example code inside the `script` tags to check a user's current location and insert it into the HTML.
 
 # --hints--
 
-Your code should store the data in the `html` variable
+Your code should use `navigator.geolocation` to access the user's current location.
 
 ```js
-assert(code.match(/html\s+?(\+=|=\shtml\s\+)/g));
+assert(code.match(/navigator\.geolocation\.getCurrentPosition/g));
 ```
 
-Your code should use a `forEach` method to loop over the JSON data from the API.
+Your code should use `position.coords.latitude` to display the user's latitudinal location.
 
 ```js
-assert(code.match(/json\.forEach/g));
+assert(code.match(/position\.coords\.latitude/g));
 ```
 
-Your code should wrap the key names in `strong` tags.
+Your code should use `position.coords.longitude` to display the user's longitudinal location.
 
 ```js
-assert(code.match(/<strong>.+<\/strong>/g));
+assert(code.match(/position\.coords\.longitude/g));
+```
+
+You should display the user's position within the `data` div element.
+
+```js
+assert(
+  code.match(/document\.getElementById\(\s*?('|")data\1\s*?\)\.innerHTML/g)
+);
 ```
 
 # --seed--
@@ -76,124 +66,33 @@ assert(code.match(/<strong>.+<\/strong>/g));
 
 ```html
 <script>
-  document.addEventListener('DOMContentLoaded', function(){
-    document.getElementById('getMessage').onclick = function(){
-      const req = new XMLHttpRequest();
-      req.open("GET",'/json/cats.json',true);
-      req.send();
-      req.onload = function(){
-        const json = JSON.parse(req.responseText);
-        let html = "";
-        // Add your code below this line
+  // Add your code below this line
 
 
-        // Add your code above this line
-        document.getElementsByClassName('message')[0].innerHTML = html;
-      };
-    };
-  });
+  // Add your code above this line
 </script>
+<h4>You are here:</h4>
+<div id="data">
 
-<style>
-  body {
-    text-align: center;
-    font-family: "Helvetica", sans-serif;
-  }
-  h1 {
-    font-size: 2em;
-    font-weight: bold;
-  }
-  .box {
-    border-radius: 5px;
-    background-color: #eee;
-    padding: 20px 5px;
-  }
-  button {
-    color: white;
-    background-color: #4791d0;
-    border-radius: 5px;
-    border: 1px solid #4791d0;
-    padding: 5px 10px 8px 10px;
-  }
-  button:hover {
-    background-color: #0F5897;
-    border: 1px solid #0F5897;
-  }
-</style>
-
-<h1>Cat Photo Finder</h1>
-<p class="message box">
-  The message will go here
-</p>
-<p>
-  <button id="getMessage">
-    Get Message
-  </button>
-</p>
+</div>
 ```
 
 # --solutions--
 
 ```html
 <script>
-  document.addEventListener('DOMContentLoaded', function(){
-    document.getElementById('getMessage').onclick = function(){
-      const req = new XMLHttpRequest();
-      req.open("GET",'/json/cats.json',true);
-      req.send();
-      req.onload = function(){
-        const json = JSON.parse(req.responseText);
-        let html = "";
-        // Add your code below this line
-        json.forEach(function(val) {
-          var keys = Object.keys(val);
-          html += "<div class = 'cat'>";
-          keys.forEach(function(key) {
-          html += "<strong>" + key + "</strong>: " + val[key] + "<br>";
-        });
-        html += "</div><br>";
-        });
-        // Add your code above this line
-        document.getElementsByClassName('message')[0].innerHTML = html;
-      };
-    };
-  });
+  // Add your code below this line
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+      document.getElementById('data').innerHTML = "latitude: " + position.coords.latitude + "<br>longitude: " + position.coords.longitude;
+    });
+  }
+  // Add your code above this line
 </script>
+<h4>You are here:</h4>
+<div id="data">
 
-<style>
-  body {
-    text-align: center;
-    font-family: "Helvetica", sans-serif;
-  }
-  h1 {
-    font-size: 2em;
-    font-weight: bold;
-  }
-  .box {
-    border-radius: 5px;
-    background-color: #eee;
-    padding: 20px 5px;
-  }
-  button {
-    color: white;
-    background-color: #4791d0;
-    border-radius: 5px;
-    border: 1px solid #4791d0;
-    padding: 5px 10px 8px 10px;
-  }
-  button:hover {
-    background-color: #0F5897;
-    border: 1px solid #0F5897;
-  }
-</style>
+</div>
 
-<h1>Cat Photo Finder</h1>
-<p class="message">
-  The message will go here
-</p>
-<p>
-  <button id="getMessage">
-    Get Message
-  </button>
-</p>
+</section>
 ```
