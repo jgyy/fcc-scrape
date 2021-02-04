@@ -1,81 +1,35 @@
 ---
-id: 587d7faf367417b2b2512be9
-title: Post Data with the JavaScript XMLHttpRequest Method
+id: 587d7fae367417b2b2512be7
+title: Pre-filter JSON to Get the Data You Need
 challengeType: 6
-forumTopicId: 301504
-dashedName: post-data-with-the-javascript-xmlhttprequest-method
+forumTopicId: 18257
+dashedName: pre-filter-json-to-get-the-data-you-need
 ---
 
 # --description--
 
-In the previous examples, you received data from an external resource. You can also send data to an external resource, as long as that resource supports AJAX requests and you know the URL.
+If you don't want to render every cat photo you get from the freeCodeCamp Cat Photo API, you can pre-filter the JSON before looping through it.
 
-JavaScript's `XMLHttpRequest` method is also used to post data to a server. Here's an example:
+Given that the JSON data is stored in an array, you can use the `filter` method to filter out the cat whose "id" key has a value of 1.
+
+Here's the code to do this:
 
 ```js
-const xhr = new XMLHttpRequest();
-xhr.open('POST', url, true);
-xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
-xhr.onreadystatechange = function () {
-  if (xhr.readyState === 4 && xhr.status === 201){
-    const serverResponse = JSON.parse(xhr.response);
-    document.getElementsByClassName('message')[0].textContent = serverResponse.userName + serverResponse.suffix;
-  }
-};
-const body = JSON.stringify({ userName: userName, suffix: ' loves cats!' });
-xhr.send(body);
+json = json.filter(function(val) {
+  return (val.id !== 1);
+});
 ```
-
-You've seen several of these methods before. Here the `open` method initializes the request as a "POST" to the given URL of the external resource, and uses the `true` Boolean to make it asynchronous. The `setRequestHeader` method sets the value of an HTTP request header, which contains information about the sender and the request. It must be called after the `open` method, but before the `send` method. The two parameters are the name of the header and the value to set as the body of that header. Next, the `onreadystatechange` event listener handles a change in the state of the request. A `readyState` of 4 means the operation is complete, and a `status` of 201 means it was a successful request. The document's HTML can be updated. Finally, the `send` method sends the request with the `body` value, which the `userName` key was given by the user in the `input` field.
 
 # --instructions--
 
-Update the code so it makes a "POST" request to the API endpoint. Then type your name in the input field and click "Send Message". Your AJAX function should replace "Reply from Server will be here." with data from the server. Format the response to display your name appended with " loves cats".
+Add code to `filter` the json data to remove the cat with the "id" value of 1.
 
 # --hints--
 
-Your code should create a new `XMLHttpRequest`.
+Your code should use the `filter` method.
 
 ```js
-assert(code.match(/new\s+?XMLHttpRequest\(\s*?\)/g));
-```
-
-Your code should use the `open` method to initialize a "POST" request to the server.
-
-```js
-assert(code.match(/\.open\(\s*?('|")POST\1\s*?,\s*?url\s*?,\s*?true\s*?\)/g));
-```
-
-Your code should use the `setRequestHeader` method.
-
-```js
-assert(
-  code.match(
-    /\.setRequestHeader\(\s*?('|")Content-Type\1\s*?,\s*?('|")application\/json;\s*charset=UTF-8\2\s*?\)/g
-  )
-);
-```
-
-Your code should have an `onreadystatechange` event handler set to a function.
-
-```js
-assert(code.match(/\.onreadystatechange\s*?=/g));
-```
-
-Your code should get the element with class `message` and change its `textContent` to "`userName` loves cats"
-
-```js
-assert(
-  code.match(
-    /document\.getElementsByClassName\(\s*?('|")message\1\s*?\)\[0\]\.textContent\s*?=\s*?.+?\.userName\s*?\+\s*?.+?\.suffix/g
-  )
-);
-```
-
-Your code should use the `send` method.
-
-```js
-assert(code.match(/\.send\(\s*?body\s*?\)/g));
+assert(code.match(/json\.filter/g));
 ```
 
 # --seed--
@@ -85,15 +39,27 @@ assert(code.match(/\.send\(\s*?body\s*?\)/g));
 ```html
 <script>
   document.addEventListener('DOMContentLoaded', function(){
-    document.getElementById('sendMessage').onclick = function(){
+    document.getElementById('getMessage').onclick = function(){
+      const req = new XMLHttpRequest();
+      req.open("GET",'/json/cats.json', true);
+      req.send();
+      req.onload=function(){
+        let json = JSON.parse(req.responseText);
+        let html = "";
+        // Add your code below this line
 
-      const userName = document.getElementById('name').value;
-      const url = 'https://jsonplaceholder.typicode.com/posts';
-      // Add your code below this line
 
+        // Add your code above this line
+         json.forEach(function(val) {
+           html += "<div class = 'cat'>"
 
-      // Add your code above this line
-    };
+           html += "<img src = '" + val.imageLink + "' " + "alt='" + val.altText + "'>"
+
+           html += "</div>"
+         });
+         document.getElementsByClassName('message')[0].innerHTML = html;
+       };
+     };
   });
 </script>
 
@@ -124,16 +90,13 @@ assert(code.match(/\.send\(\s*?body\s*?\)/g));
   }
 </style>
 
-<h1>Cat Friends</h1>
+<h1>Cat Photo Finder</h1>
 <p class="message box">
-  Reply from Server will be here
+  The message will go here
 </p>
 <p>
-  <label for="name">Your name:
-    <input type="text" id="name"/>
-  </label>
-  <button id="sendMessage">
-    Send Message
+  <button id="getMessage">
+    Get Message
   </button>
 </p>
 ```
@@ -143,24 +106,29 @@ assert(code.match(/\.send\(\s*?body\s*?\)/g));
 ```html
 <script>
   document.addEventListener('DOMContentLoaded', function(){
-    document.getElementById('sendMessage').onclick = function(){
+    document.getElementById('getMessage').onclick = function(){
+      const req = new XMLHttpRequest();
+      req.open("GET",'/json/cats.json', true);
+      req.send();
+      req.onload = function(){
+        let json = JSON.parse(req.responseText);
+        let html = "";
+        // Add your code below this line
+        json = json.filter(function(val) {
+          return (val.id !== 1);
+        });
 
-      const userName = document.getElementById('name').value;
-      const url = 'https://jsonplaceholder.typicode.com/posts';
-      // Add your code below this line
-      const xhr = new XMLHttpRequest();
-      xhr.open('POST', url, true);
-      xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
-      xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4 && xhr.status === 201){
-          const serverResponse = JSON.parse(xhr.response);
-          document.getElementsByClassName('message')[0].textContent = serverResponse.userName + serverResponse.suffix;
-       }
+        // Add your code above this line
+         json.forEach(function(val) {
+           html += "<div class = 'cat'>"
+
+           html += "<img src = '" + val.imageLink + "' " + "alt='" + val.altText + "'>"
+
+           html += "</div>"
+         });
+         document.getElementsByClassName('message')[0].innerHTML = html;
+       };
      };
-     const body = JSON.stringify({ userName: userName, suffix: ' loves cats!' });
-     xhr.send(body);
-      // Add your code above this line
-    };
   });
 </script>
 
@@ -191,16 +159,13 @@ assert(code.match(/\.send\(\s*?body\s*?\)/g));
   }
 </style>
 
-<h1>Cat Friends</h1>
+<h1>Cat Photo Finder</h1>
 <p class="message">
-  Reply from Server will be here
+  The message will go here
 </p>
 <p>
-  <label for="name">Your name:
-    <input type="text" id="name"/>
-  </label>
-  <button id="sendMessage">
-    Send Message
+  <button id="getMessage">
+    Get Message
   </button>
 </p>
 ```
