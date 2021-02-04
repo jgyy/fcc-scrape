@@ -1,35 +1,37 @@
 ---
-id: 587d7fae367417b2b2512be7
-title: Pre-filter JSON to Get the Data You Need
+id: 587d7fae367417b2b2512be6
+title: Render Images from Data Sources
 challengeType: 6
-forumTopicId: 18257
-dashedName: pre-filter-json-to-get-the-data-you-need
+forumTopicId: 18265
+dashedName: render-images-from-data-sources
 ---
 
 # --description--
 
-If you don't want to render every cat photo you get from the freeCodeCamp Cat Photo API, you can pre-filter the JSON before looping through it.
+The last few challenges showed that each object in the JSON array contains an `imageLink` key with a value that is the URL of a cat's image.
 
-Given that the JSON data is stored in an array, you can use the `filter` method to filter out the cat whose "id" key has a value of 1.
+When you're looping through these objects, you can use this `imageLink` property to display this image in an `img` element.
 
-Here's the code to do this:
+Here's the code that does this:
 
-```js
-json = json.filter(function(val) {
-  return (val.id !== 1);
-});
-```
+`html += "<img src = '" + val.imageLink + "' " + "alt='" + val.altText + "'>";`
 
 # --instructions--
 
-Add code to `filter` the json data to remove the cat with the "id" value of 1.
+Add code to use the `imageLink` and `altText` properties in an `img` tag.
 
 # --hints--
 
-Your code should use the `filter` method.
+You should use the `imageLink` property to display the images.
 
 ```js
-assert(code.match(/json\.filter/g));
+assert(code.match(/val\.imageLink/g));
+```
+
+You should use the `altText` for the alt attribute values of the images.
+
+```js
+assert(code.match(/val\.altText/g));
 ```
 
 # --seed--
@@ -40,25 +42,22 @@ assert(code.match(/json\.filter/g));
 <script>
   document.addEventListener('DOMContentLoaded', function(){
     document.getElementById('getMessage').onclick = function(){
-      const req = new XMLHttpRequest();
-      req.open("GET",'/json/cats.json', true);
+      const req=new XMLHttpRequest();
+      req.open("GET",'/json/cats.json',true);
       req.send();
-      req.onload=function(){
-        let json = JSON.parse(req.responseText);
+      req.onload = function(){
+        const json = JSON.parse(req.responseText);
         let html = "";
-        // Add your code below this line
+        json.forEach(function(val) {
+          html += "<div class = 'cat'>";
+          // Add your code below this line
 
 
-        // Add your code above this line
-         json.forEach(function(val) {
-           html += "<div class = 'cat'>"
-
-           html += "<img src = '" + val.imageLink + "' " + "alt='" + val.altText + "'>"
-
-           html += "</div>"
-         });
-         document.getElementsByClassName('message')[0].innerHTML = html;
-       };
+          // Add your code above this line
+          html += "</div><br>";
+        });
+        document.getElementsByClassName('message')[0].innerHTML=html;
+      };
      };
   });
 </script>
@@ -89,7 +88,6 @@ assert(code.match(/json\.filter/g));
     border: 1px solid #0F5897;
   }
 </style>
-
 <h1>Cat Photo Finder</h1>
 <p class="message box">
   The message will go here
@@ -108,30 +106,23 @@ assert(code.match(/json\.filter/g));
   document.addEventListener('DOMContentLoaded', function(){
     document.getElementById('getMessage').onclick = function(){
       const req = new XMLHttpRequest();
-      req.open("GET",'/json/cats.json', true);
+      req.open("GET",'/json/cats.json',true);
       req.send();
       req.onload = function(){
-        let json = JSON.parse(req.responseText);
+        const json = JSON.parse(req.responseText);
         let html = "";
-        // Add your code below this line
-        json = json.filter(function(val) {
-          return (val.id !== 1);
+        json.forEach(function(val) {
+          html += "<div class = 'cat'>";
+          // Add your code below this line
+          html += "<img src = '" + val.imageLink + "' " + "alt='" + val.altText + "'>";
+          // Add your code above this line
+          html += "</div><br>";
         });
-
-        // Add your code above this line
-         json.forEach(function(val) {
-           html += "<div class = 'cat'>"
-
-           html += "<img src = '" + val.imageLink + "' " + "alt='" + val.altText + "'>"
-
-           html += "</div>"
-         });
-         document.getElementsByClassName('message')[0].innerHTML = html;
-       };
+        document.getElementsByClassName('message')[0].innerHTML = html;
+      };
      };
   });
 </script>
-
 <style>
   body {
     text-align: center;
@@ -158,7 +149,6 @@ assert(code.match(/json\.filter/g));
     border: 1px solid #0F5897;
   }
 </style>
-
 <h1>Cat Photo Finder</h1>
 <p class="message">
   The message will go here
