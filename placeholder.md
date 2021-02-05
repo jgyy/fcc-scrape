@@ -1,161 +1,255 @@
 ---
-id: 587d7fae367417b2b2512be6
-title: Render Images from Data Sources
-challengeType: 6
-forumTopicId: 18265
-dashedName: render-images-from-data-sources
+id: 5a8b073d06fa14fcfde687aa
+title: Exercise Tracker
+challengeType: 4
+forumTopicId: 301505
+dashedName: exercise-tracker
 ---
 
 # --description--
 
-The last few challenges showed that each object in the JSON array contains an `imageLink` key with a value that is the URL of a cat's image.
+Build a full stack JavaScript app that is functionally similar to this: <https://exercise-tracker.freecodecamp.rocks/>. Working on this project will involve you writing your code using one of the following methods:
 
-When you're looping through these objects, you can use this `imageLink` property to display this image in an `img` element.
+-   Clone [this GitHub repo](https://github.com/freeCodeCamp/boilerplate-project-exercisetracker/) and complete your project locally.
+-   Use [our repl.it starter project](https://repl.it/github/freeCodeCamp/boilerplate-project-exercisetracker) to complete your project.
+-   Use a site builder of your choice to complete the project. Be sure to incorporate all the files from our GitHub repo.
 
-Here's the code that does this:
-
-`html += "<img src = '" + val.imageLink + "' " + "alt='" + val.altText + "'>";`
-
-# --instructions--
-
-Add code to use the `imageLink` and `altText` properties in an `img` tag.
+When you are done, make sure a working demo of your project is hosted somewhere public. Then submit the URL to it in the `Solution Link` field. Optionally, also submit a link to your project's source code in the `GitHub Link` field.
 
 # --hints--
 
-You should use the `imageLink` property to display the images.
+You should provide your own project, not the example URL.
 
 ```js
-assert(code.match(/val\.imageLink/g));
+(getUserInput) => {
+  const url = getUserInput('url');
+  assert(
+    !/.*\/exercise-tracker\.freecodecamp\.rocks/.test(getUserInput('url'))
+  );
+};
 ```
 
-You should use the `altText` for the alt attribute values of the images.
+You can `POST` to `/api/exercise/new-user` with form data `username` to create a new user. The returned response will be an object with `username` and `_id` properties.
 
 ```js
-assert(code.match(/val\.altText/g));
-```
-
-# --seed--
-
-## --seed-contents--
-
-```html
-<script>
-  document.addEventListener('DOMContentLoaded', function(){
-    document.getElementById('getMessage').onclick = function(){
-      const req=new XMLHttpRequest();
-      req.open("GET",'/json/cats.json',true);
-      req.send();
-      req.onload = function(){
-        const json = JSON.parse(req.responseText);
-        let html = "";
-        json.forEach(function(val) {
-          html += "<div class = 'cat'>";
-          // Add your code below this line
-
-
-          // Add your code above this line
-          html += "</div><br>";
-        });
-        document.getElementsByClassName('message')[0].innerHTML=html;
-      };
-     };
+async (getUserInput) => {
+  const url = getUserInput('url');
+  const res = await fetch(url + '/api/exercise/new-user', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: `username=fcc_test_${Date.now()}`.substr(0, 29)
   });
-</script>
+  if (res.ok) {
+    const { _id, username } = await res.json();
+    assert.exists(_id);
+    assert.exists(username);
+  } else {
+    throw new Error(`${res.status} ${res.statusText}`);
+  }
+};
+```
 
-<style>
-  body {
-    text-align: center;
-    font-family: "Helvetica", sans-serif;
+You can make a `GET` request to `api/exercise/users` to get an array of all users. Each element in the array is an object containing a user's `username` and `_id`.
+
+```js
+async (getUserInput) => {
+  const url = getUserInput('url');
+  const res = await fetch(url + '/api/exercise/users');
+  if (res.ok) {
+    const data = await res.json();
+    assert.isArray(data);
+    assert.isString(data[0].username);
+    assert.isString(data[0]._id);
+  } else {
+    throw new Error(`${res.status} ${res.statusText}`);
   }
-  h1 {
-    font-size: 2em;
-    font-weight: bold;
+};
+```
+
+You can `POST` to `/api/exercise/add` with form data `userId=_id`, `description`, `duration`, and optionally `date`. If no date is supplied, the current date will be used. The response returned will be the user object with the exercise fields added.
+
+```js
+async (getUserInput) => {
+  const url = getUserInput('url');
+  const res = await fetch(url + '/api/exercise/new-user', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: `username=fcc_test_${Date.now()}`.substr(0, 29)
+  });
+  if (res.ok) {
+    const { _id, username } = await res.json();
+    const expected = {
+      username,
+      description: 'test',
+      duration: 60,
+      _id,
+      date: 'Mon Jan 01 1990'
+    };
+    const addRes = await fetch(url + '/api/exercise/add', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: `userId=${_id}&description=${expected.description}&duration=${expected.duration}&date=1990-01-01`
+    });
+    if (addRes.ok) {
+      const actual = await addRes.json();
+      assert.deepEqual(actual, expected);
+    } else {
+      throw new Error(`${addRes.status} ${addRes.statusText}`);
+    }
+  } else {
+    throw new Error(`${res.status} ${res.statusText}`);
   }
-  .box {
-    border-radius: 5px;
-    background-color: #eee;
-    padding: 20px 5px;
+};
+```
+
+You can make a `GET` request to `/api/exercise/log` with a parameter of `userId=_id` to retrieve a full exercise log of any user. The returned response will be the user object with a `log` array of all the exercises added. Each log item has the `description`, `duration`, and `date` properties.
+
+```js
+async (getUserInput) => {
+  const url = getUserInput('url');
+  const res = await fetch(url + '/api/exercise/new-user', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: `username=fcc_test_${Date.now()}`.substr(0, 29)
+  });
+  if (res.ok) {
+    const { _id, username } = await res.json();
+    const expected = {
+      username,
+      description: 'test',
+      duration: 60,
+      _id,
+      date: new Date().toDateString()
+    };
+    const addRes = await fetch(url + '/api/exercise/add', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: `userId=${_id}&description=${expected.description}&duration=${expected.duration}`
+    });
+    if (addRes.ok) {
+      const logRes = await fetch(url + `/api/exercise/log?userId=${_id}`);
+      if (logRes.ok) {
+        const { log } = await logRes.json();
+        assert.isArray(log);
+        assert.equal(1, log.length);
+      } else {
+        throw new Error(`${logRes.status} ${logRes.statusText}`);
+      }
+    } else {
+      throw new Error(`${addRes.status} ${addRes.statusText}`);
+    }
+  } else {
+    throw new Error(`${res.status} ${res.statusText}`);
   }
-  button {
-    color: white;
-    background-color: #4791d0;
-    border-radius: 5px;
-    border: 1px solid #4791d0;
-    padding: 5px 10px 8px 10px;
+};
+```
+
+A request to a user's log (`/api/exercise/log`) returns an object with a `count` property representing the number of exercises returned.
+
+```js
+async (getUserInput) => {
+  const url = getUserInput('url');
+  const res = await fetch(url + '/api/exercise/new-user', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: `username=fcc_test_${Date.now()}`.substr(0, 29)
+  });
+  if (res.ok) {
+    const { _id, username } = await res.json();
+    const expected = {
+      username,
+      description: 'test',
+      duration: 60,
+      _id,
+      date: new Date().toDateString()
+    };
+    const addRes = await fetch(url + '/api/exercise/add', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: `userId=${_id}&description=${expected.description}&duration=${expected.duration}`
+    });
+    if (addRes.ok) {
+      const logRes = await fetch(url + `/api/exercise/log?userId=${_id}`);
+      if (logRes.ok) {
+        const { count } = await logRes.json();
+        assert(count);
+      } else {
+        throw new Error(`${logRes.status} ${logRes.statusText}`);
+      }
+    } else {
+      throw new Error(`${addRes.status} ${addRes.statusText}`);
+    }
+  } else {
+    throw new Error(`${res.status} ${res.statusText}`);
   }
-  button:hover {
-    background-color: #0F5897;
-    border: 1px solid #0F5897;
+};
+```
+
+You can add `from`, `to` and `limit` parameters to a `/api/exercise/log` request to retrieve part of the log of any user. `from` and `to` are dates in `yyyy-mm-dd` format. `limit` is an integer of how many logs to send back.
+
+```js
+async (getUserInput) => {
+  const url = getUserInput('url');
+  const res = await fetch(url + '/api/exercise/new-user', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: `username=fcc_test_${Date.now()}`.substr(0, 29)
+  });
+  if (res.ok) {
+    const { _id, username } = await res.json();
+    const expected = {
+      username,
+      description: 'test',
+      duration: 60,
+      _id,
+      date: new Date().toDateString()
+    };
+    const addExerciseRes = await fetch(url + '/api/exercise/add', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: `userId=${_id}&description=${expected.description}&duration=${expected.duration}&date=1990-01-01`
+    });
+    const addExerciseTwoRes = await fetch(url + '/api/exercise/add', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: `userId=${_id}&description=${expected.description}&duration=${expected.duration}&date=1990-01-02`
+    });
+    if (addExerciseRes.ok && addExerciseTwoRes.ok) {
+      const logRes = await fetch(
+        url + `/api/exercise/log?userId=${_id}&from=1989-12-31&to=1990-01-03`
+      );
+      if (logRes.ok) {
+        const { log } = await logRes.json();
+        assert.isArray(log);
+        assert.equal(2, log.length);
+      } else {
+        throw new Error(`${logRes.status} ${logRes.statusText}`);
+      }
+      const limitRes = await fetch(
+        url + `/api/exercise/log?userId=${_id}&limit=1`
+      );
+      if (limitRes.ok) {
+        const { log } = await limitRes.json();
+        assert.isArray(log);
+        assert.equal(1, log.length);
+      } else {
+        throw new Error(`${limitRes.status} ${limitRes.statusText}`);
+      }
+    } else {
+      throw new Error(`${res.status} ${res.statusText}`);
+    }
+  } else {
+    throw new Error(`${res.status} ${res.statusText}`);
   }
-</style>
-<h1>Cat Photo Finder</h1>
-<p class="message box">
-  The message will go here
-</p>
-<p>
-  <button id="getMessage">
-    Get Message
-  </button>
-</p>
+};
 ```
 
 # --solutions--
 
-```html
-<script>
-  document.addEventListener('DOMContentLoaded', function(){
-    document.getElementById('getMessage').onclick = function(){
-      const req = new XMLHttpRequest();
-      req.open("GET",'/json/cats.json',true);
-      req.send();
-      req.onload = function(){
-        const json = JSON.parse(req.responseText);
-        let html = "";
-        json.forEach(function(val) {
-          html += "<div class = 'cat'>";
-          // Add your code below this line
-          html += "<img src = '" + val.imageLink + "' " + "alt='" + val.altText + "'>";
-          // Add your code above this line
-          html += "</div><br>";
-        });
-        document.getElementsByClassName('message')[0].innerHTML = html;
-      };
-     };
-  });
-</script>
-<style>
-  body {
-    text-align: center;
-    font-family: "Helvetica", sans-serif;
-  }
-  h1 {
-    font-size: 2em;
-    font-weight: bold;
-  }
-  .box {
-    border-radius: 5px;
-    background-color: #eee;
-    padding: 20px 5px;
-  }
-  button {
-    color: white;
-    background-color: #4791d0;
-    border-radius: 5px;
-    border: 1px solid #4791d0;
-    padding: 5px 10px 8px 10px;
-  }
-  button:hover {
-    background-color: #0F5897;
-    border: 1px solid #0F5897;
-  }
-</style>
-<h1>Cat Photo Finder</h1>
-<p class="message">
-  The message will go here
-</p>
-<p>
-  <button id="getMessage">
-    Get Message
-  </button>
-</p>
+```js
+/**
+  Backend challenges don't need solutions,
+  because they would need to be tested against a full working project.
+  Please check our contributing guidelines to learn more.
+*/
 ```
