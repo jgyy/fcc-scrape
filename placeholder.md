@@ -1,33 +1,43 @@
 ---
-id: 587d7fb0367417b2b2512bf0
-title: Serve Static Assets
+id: 587d7fb0367417b2b2512bee
+title: Start a Working Express Server
 challengeType: 2
-forumTopicId: 301518
-dashedName: serve-static-assets
+forumTopicId: 301519
+dashedName: start-a-working-express-server
 ---
 
 # --description--
 
-An HTML server usually has one or more directories that are accessible by the user. You can place there the static assets needed by your application (stylesheets, scripts, images). In Express, you can put in place this functionality using the middleware `express.static(path)`, where the `path` parameter is the absolute path of the folder containing the assets. If you don’t know what middleware is... don’t worry, we will discuss in detail later. Basically, middleware are functions that intercept route handlers, adding some kind of information. A middleware needs to be mounted using the method `app.use(path, middlewareFunction)`. The first `path` argument is optional. If you don’t pass it, the middleware will be executed for all requests.
+In the first two lines of the file `myApp.js`, you can see how easy it is to create an Express app object. This object has several methods, and you will learn many of them in these challenges. One fundamental method is `app.listen(port)`. It tells your server to listen on a given port, putting it in running state. For testing reasons, we need the app to be running in the background so we added this method in the `server.js` file for you.
+
+Let’s serve our first string! In Express, routes takes the following structure: `app.METHOD(PATH, HANDLER)`. METHOD is an http method in lowercase. PATH is a relative path on the server (it can be a string, or even a regular expression). HANDLER is a function that Express calls when the route is matched. Handlers take the form `function(req, res) {...}`, where req is the request object, and res is the response object. For example, the handler
+
+```js
+function(req, res) {
+  res.send('Response String');
+}
+```
+
+will serve the string 'Response String'.
 
 # --instructions--
 
-Mount the `express.static()` middleware for all requests with `app.use()`. The absolute path to the assets folder is `__dirname + /public`.
+Use the `app.get()` method to serve the string "Hello Express" to GET requests matching the `/` (root) path. Be sure that your code works by looking at the logs, then see the results in the preview if you are using Repl.it.
 
-Now your app should be able to serve a CSS stylesheet. From outside, the public folder will appear mounted to the root directory. Your front-page should look a little better now!
+**Note:** All the code for these lessons should be added in between the few lines of code we have started you off with.
 
 # --hints--
 
-Your app should serve asset files from the `/public` directory
+Your app should serve the string 'Hello Express'
 
 ```js
 (getUserInput) =>
-  $.get(getUserInput('url') + '/style.css').then(
+  $.get(getUserInput('url')).then(
     (data) => {
-      assert.match(
+      assert.equal(
         data,
-        /body\s*\{[^\}]*\}/,
-        'Your app does not serve static assets'
+        'Hello Express',
+        'Your app does not serve the text "Hello Express"'
       );
     },
     (xhr) => {
