@@ -1,34 +1,38 @@
 ---
-id: 587d7fb0367417b2b2512bed
-title: Meet the Node console
+id: 587d7fb0367417b2b2512bef
+title: Serve an HTML File
 challengeType: 2
-forumTopicId: 301515
-dashedName: meet-the-node-console
+forumTopicId: 301516
+dashedName: serve-an-html-file
 ---
 
 # --description--
 
-During the development process, it is important to be able to check what’s going on in your code.
+You can respond to requests with a file using the `res.sendFile(path)` method. You can put it inside the `app.get('/', ...)` route handler. Behind the scenes, this method will set the appropriate headers to instruct your browser on how to handle the file you want to send, according to its type. Then it will read and send the file. This method needs an absolute file path. We recommend you to use the Node global variable `__dirname` to calculate the path like this:
 
-Node is just a JavaScript environment. Like client side JavaScript, you can use the console to display useful debug information. On your local machine, you would see console output in a terminal. On Repl.it, a terminal is open in the right pane by default.
-
-We recommend to keep the terminal open while working at these challenges. By reading the output in the terminal, you can see any errors that may occur.
+```js
+absolutePath = __dirname + relativePath/file.ext
+```
 
 # --instructions--
 
-If you have not already done so, please read the instructions in [the introduction](/learn/apis-and-microservices/basic-node-and-express/) and start a new project on Repl.it using [this link](https://repl.it/github/freeCodeCamp/boilerplate-express).
+Send the `/views/index.html` file as a response to GET requests to the `/` path. If you view your live app, you should see a big HTML heading (and a form that we will use later…), with no style applied.
 
-Modify the `myApp.js` file to log "Hello World" to the console.
+**Note:** You can edit the solution of the previous challenge or create a new one. If you create a new solution, keep in mind that Express evaluates routes from top to bottom, and executes the handler for the first match. You have to comment out the preceding solution, or the server will keep responding with a string.
 
 # --hints--
 
-`"Hello World"` should be in the console
+Your app should serve the file views/index.html
 
 ```js
 (getUserInput) =>
-  $.get(getUserInput('url') + '/_api/hello-console').then(
+  $.get(getUserInput('url')).then(
     (data) => {
-      assert.isTrue(data.passed, '"Hello World" is not in the server console');
+      assert.match(
+        data,
+        /<h1>.*<\/h1>/,
+        'Your app does not serve the expected HTML'
+      );
     },
     (xhr) => {
       throw new Error(xhr.responseText);
