@@ -1,35 +1,39 @@
 ---
-id: 587d7fb1367417b2b2512bf2
-title: Use the .env File
+id: 587d7fb3367417b2b2512bfc
+title: Add a Description to Your package.json
 challengeType: 2
-forumTopicId: 301521
-dashedName: use-the--env-file
+forumTopicId: 301522
+dashedName: add-a-description-to-your-package-json
 ---
 
 # --description--
 
-The `.env` file is a hidden file that is used to pass environment variables to your application. This file is secret, no one but you can access it, and it can be used to store data that you want to keep private or hidden. For example, you can store API keys from external services or your database URI. You can also use it to store configuration options. By setting configuration options, you can change the behavior of your application, without the need to rewrite some code.
+The next part of a good package.json file is the `description` field; where a short, but informative description about your project belongs.
 
-The environment variables are accessible from the app as `process.env.VAR_NAME`. The `process.env` object is a global Node object, and variables are passed as strings. By convention, the variable names are all uppercase, with words separated by an underscore. The `.env` is a shell file, so you don’t need to wrap names or values in quotes. It is also important to note that there cannot be space around the equals sign when you are assigning values to your variables, e.g. `VAR_NAME=value`. Usually, you will put each variable definition on a separate line.
+If you some day plan to publish a package to npm, this is the string that should sell your idea to the user when they decide whether to install your package or not. However, that’s not the only use case for the description, it’s a great way to summarize what a project does. It’s just as important in any Node.js project to help other developers, future maintainers or even your future self understand the project quickly.
+
+Regardless of what you plan for your project, a description is definitely recommended. Here's an example:
+
+```json
+"description": "A project that does something awesome",
+```
 
 # --instructions--
 
-Let's add an environment variable as a configuration option.
+Add a `description` to the package.json file of your project.
 
-Create a `.env` file in the root of your project directory, and store the variable `MESSAGE_STYLE=uppercase` in it. Then, in the GET `/json` route handler that you created in the last challenge, transform the response object’s message to uppercase if `process.env.MESSAGE_STYLE` equals `uppercase`. The response object should become `{"message": "HELLO JSON"}`.
+**Note:** Remember to use double-quotes for field-names (") and commas (,) to separate fields.
 
 # --hints--
 
-The response of the endpoint `/json` should change according to the environment variable `MESSAGE_STYLE`
+package.json should have a valid "description" key
 
 ```js
 (getUserInput) =>
-  $.get(getUserInput('url') + '/_api/use-env-vars').then(
+  $.get(getUserInput('url') + '/_api/package.json').then(
     (data) => {
-      assert.isTrue(
-        data.passed,
-        'The response of "/json" does not change according to MESSAGE_STYLE'
-      );
+      var packJson = JSON.parse(data);
+      assert(packJson.description, '"description" is missing');
     },
     (xhr) => {
       throw new Error(xhr.responseText);
