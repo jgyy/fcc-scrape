@@ -1,117 +1,71 @@
 ---
-id: bd7158d8c443edefaeb5bd0e
-title: URL Shortener Microservice
-challengeType: 4
-forumTopicId: 301509
-dashedName: url-shortener-microservice
+id: 587d7fb1367417b2b2512bf4
+title: Chain Middleware to Create a Time Server
+challengeType: 2
+forumTopicId: 301510
+dashedName: chain-middleware-to-create-a-time-server
 ---
 
 # --description--
 
-Build a full stack JavaScript app that is functionally similar to this: <https://url-shortener-microservice.freecodecamp.rocks/>. Working on this project will involve you writing your code using one of the following methods:
+Middleware can be mounted at a specific route using `app.METHOD(path, middlewareFunction)`. Middleware can also be chained inside route definition.
 
--   Clone [this GitHub repo](https://github.com/freeCodeCamp/boilerplate-project-urlshortener/) and complete your project locally.
--   Use [our repl.it starter project](https://repl.it/github/freeCodeCamp/boilerplate-project-urlshortener) to complete your project.
--   Use a site builder of your choice to complete the project. Be sure to incorporate all the files from our GitHub repo.
+Look at the following example:
 
-When you are done, make sure a working demo of your project is hosted somewhere public. Then submit the URL to it in the `Solution Link` field. Optionally, also submit a link to your projects source code in the `GitHub Link` field.
+```js
+app.get('/user', function(req, res, next) {
+  req.user = getTheUserSync();  // Hypothetical synchronous operation
+  next();
+}, function(req, res) {
+  res.send(req.user);
+});
+```
+
+This approach is useful to split the server operations into smaller units. That leads to a better app structure, and the possibility to reuse code in different places. This approach can also be used to perform some validation on the data. At each point of the middleware stack you can block the execution of the current chain and pass control to functions specifically designed to handle errors. Or you can pass control to the next matching route, to handle special cases. We will see how in the advanced Express section.
 
 # --instructions--
 
-**HINT:** Do not forget to use a body parsing middleware to handle the POST requests. Also, you can use the function `dns.lookup(host, cb)` from the `dns` core module to verify a submitted URL.
+In the route `app.get('/now', ...)` chain a middleware function and the final handler. In the middleware function you should add the current time to the request object in the `req.time` key. You can use `new Date().toString()`. In the handler, respond with a JSON object, taking the structure `{time: req.time}`.
+
+**Note:** The test will not pass if you don’t chain the middleware. If you mount the function somewhere else, the test will fail, even if the output result is correct.
 
 # --hints--
 
-You should provide your own project, not the example URL.
+The /now endpoint should have mounted middleware
 
 ```js
-(getUserInput) => {
-  assert(
-    !/.*\/url-shortener-microservice\.freecodecamp\.rocks/.test(
-      getUserInput('url')
-    )
+(getUserInput) =>
+  $.get(getUserInput('url') + '/_api/chain-middleware-time').then(
+    (data) => {
+      assert.equal(
+        data.stackLength,
+        2,
+        '"/now" route has no mounted middleware'
+      );
+    },
+    (xhr) => {
+      throw new Error(xhr.responseText);
+    }
   );
-};
 ```
 
-You can POST a URL to `/api/shorturl/new` and get a JSON response with `original_url` and `short_url` properties. Here's an example: `{ original_url : 'https://freeCodeCamp.org', short_url : 1}`
+The /now endpoint should return a time that is +/- 20 secs from now
 
 ```js
-async (getUserInput) => {
-  const url = getUserInput('url');
-  const urlVariable = Date.now();
-  const res = await fetch(url + '/api/shorturl/new/', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: `url=https://timestamp-microservice.freecodecamp.rocks/api/timestamp/${urlVariable}`
-  });
-  if (res.ok) {
-    const { short_url, original_url } = await res.json();
-    assert.isNotNull(short_url);
-    assert.match(
-      original_url,
-      new RegExp(
-        `https://timestamp-microservice.freecodecamp.rocks/api/timestamp/${urlVariable}`
-      )
-    );
-  } else {
-    throw new Error(`${res.status} ${res.statusText}`);
-  }
-};
-```
-
-When you visit `/api/shorturl/<short_url>`, you will be redirected to the original URL.
-
-```js
-async (getUserInput) => {
-  const url = getUserInput('url');
-  const urlVariable = Date.now();
-  let shortenedUrlVariable;
-  const postResponse = await fetch(url + '/api/shorturl/new/', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: `url=https://timestamp-microservice.freecodecamp.rocks/api/timestamp/${urlVariable}`
-  });
-  if (postResponse.ok) {
-    const { short_url } = await postResponse.json();
-    shortenedUrlVariable = short_url;
-  } else {
-    throw new Error(`${postResponse.status} ${postResponse.statusText}`);
-  }
-  const getResponse = await fetch(
-    url + '/api/shorturl/' + shortenedUrlVariable
+(getUserInput) =>
+  $.get(getUserInput('url') + '/_api/chain-middleware-time').then(
+    (data) => {
+      var now = new Date();
+      assert.isAtMost(
+        Math.abs(new Date(data.time) - now),
+        20000,
+        'the returned time is not between +- 20 secs from now'
+      );
+    },
+    (xhr) => {
+      throw new Error(xhr.responseText);
+    }
   );
-  if (getResponse) {
-    const { redirected, url } = getResponse;
-    assert.isTrue(redirected);
-    assert.strictEqual(
-      url,
-      `https://timestamp-microservice.freecodecamp.rocks/api/timestamp/${urlVariable}`
-    );
-  } else {
-    throw new Error(`${getResponse.status} ${getResponse.statusText}`);
-  }
-};
-```
-
-If you pass an invalid URL that doesn't follow the valid `http://www.example.com` format, the JSON response will contain `{ error: 'invalid url' }`
-
-```js
-async (getUserInput) => {
-  const url = getUserInput('url');
-  const res = await fetch(url + '/api/shorturl/new/', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: `url=ftp:/john-doe.org`
-  });
-  if (res.ok) {
-    const { error } = await res.json();
-    assert.isNotNull(error);
-    assert.strictEqual(error.toLowerCase(), 'invalid url');
-  } else {
-    throw new Error(`${res.status} ${res.statusText}`);
-  }
-};
 ```
 
 # --solutions--
