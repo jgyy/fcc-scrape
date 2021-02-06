@@ -1,46 +1,43 @@
 ---
-id: 587d7fb1367417b2b2512bf4
-title: Chain Middleware to Create a Time Server
+id: 587d7fb2367417b2b2512bf8
+title: Get Data from POST Requests
 challengeType: 2
-forumTopicId: 301510
-dashedName: chain-middleware-to-create-a-time-server
+forumTopicId: 301511
+dashedName: get-data-from-post-requests
 ---
 
 # --description--
 
-Middleware can be mounted at a specific route using `app.METHOD(path, middlewareFunction)`. Middleware can also be chained inside route definition.
+Mount a POST handler at the path `/name`. It’s the same path as before. We have prepared a form in the html frontpage. It will submit the same data of exercise 10 (Query string). If the body-parser is configured correctly, you should find the parameters in the object `req.body`. Have a look at the usual library example:
 
-Look at the following example:
+<blockquote>route: POST '/library'<br>urlencoded_body: userId=546&#x26;bookId=6754 <br>req.body: {userId: '546', bookId: '6754'}</blockquote>
 
-```js
-app.get('/user', function(req, res, next) {
-  req.user = getTheUserSync();  // Hypothetical synchronous operation
-  next();
-}, function(req, res) {
-  res.send(req.user);
-});
-```
+Respond with the same JSON object as before: `{name: 'firstname lastname'}`. Test if your endpoint works using the html form we provided in the app frontpage.
 
-This approach is useful to split the server operations into smaller units. That leads to a better app structure, and the possibility to reuse code in different places. This approach can also be used to perform some validation on the data. At each point of the middleware stack you can block the execution of the current chain and pass control to functions specifically designed to handle errors. Or you can pass control to the next matching route, to handle special cases. We will see how in the advanced Express section.
+Tip: There are several other http methods other than GET and POST. And by convention there is a correspondence between the http verb, and the operation you are going to execute on the server. The conventional mapping is:
 
-# --instructions--
+POST (sometimes PUT) - Create a new resource using the information sent with the request,
 
-In the route `app.get('/now', ...)` chain a middleware function and the final handler. In the middleware function you should add the current time to the request object in the `req.time` key. You can use `new Date().toString()`. In the handler, respond with a JSON object, taking the structure `{time: req.time}`.
+GET - Read an existing resource without modifying it,
 
-**Note:** The test will not pass if you don’t chain the middleware. If you mount the function somewhere else, the test will fail, even if the output result is correct.
+PUT or PATCH (sometimes POST) - Update a resource using the data sent,
+
+DELETE => Delete a resource.
+
+There are also a couple of other methods which are used to negotiate a connection with the server. Except from GET, all the other methods listed above can have a payload (i.e. the data into the request body). The body-parser middleware works with these methods as well.
 
 # --hints--
 
-The /now endpoint should have mounted middleware
+Test 1 : Your API endpoint should respond with the correct name
 
 ```js
 (getUserInput) =>
-  $.get(getUserInput('url') + '/_api/chain-middleware-time').then(
+  $.post(getUserInput('url') + '/name', { first: 'Mick', last: 'Jagger' }).then(
     (data) => {
       assert.equal(
-        data.stackLength,
-        2,
-        '"/now" route has no mounted middleware'
+        data.name,
+        'Mick Jagger',
+        'Test 1: "POST /name" route does not behave as expected'
       );
     },
     (xhr) => {
@@ -49,17 +46,19 @@ The /now endpoint should have mounted middleware
   );
 ```
 
-The /now endpoint should return a time that is +/- 20 secs from now
+Test 2 : Your API endpoint should respond with the correct name
 
 ```js
 (getUserInput) =>
-  $.get(getUserInput('url') + '/_api/chain-middleware-time').then(
+  $.post(getUserInput('url') + '/name', {
+    first: 'Keith',
+    last: 'Richards'
+  }).then(
     (data) => {
-      var now = new Date();
-      assert.isAtMost(
-        Math.abs(new Date(data.time) - now),
-        20000,
-        'the returned time is not between +- 20 secs from now'
+      assert.equal(
+        data.name,
+        'Keith Richards',
+        'Test 2: "POST /name" route does not behave as expected'
       );
     },
     (xhr) => {
