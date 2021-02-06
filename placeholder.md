@@ -1,44 +1,34 @@
 ---
-id: 587d7fb1367417b2b2512bf3
-title: Implement a Root-Level Request Logger Middleware
+id: 587d7fb0367417b2b2512bed
+title: Meet the Node console
 challengeType: 2
-forumTopicId: 301514
-dashedName: implement-a-root-level-request-logger-middleware
+forumTopicId: 301515
+dashedName: meet-the-node-console
 ---
 
 # --description--
 
-Earlier, you were introduced to the `express.static()` middleware function. Now it’s time to see what middleware is, in more detail. Middleware functions are functions that take 3 arguments: the request object, the response object, and the next function in the application’s request-response cycle. These functions execute some code that can have side effects on the app, and usually add information to the request or response objects. They can also end the cycle by sending a response when some condition is met. If they don’t send the response when they are done, they start the execution of the next function in the stack. This triggers calling the 3rd argument, `next()`.
+During the development process, it is important to be able to check what’s going on in your code.
 
-Look at the following example:
+Node is just a JavaScript environment. Like client side JavaScript, you can use the console to display useful debug information. On your local machine, you would see console output in a terminal. On Repl.it, a terminal is open in the right pane by default.
 
-```js
-function(req, res, next) {
-  console.log("I'm a middleware...");
-  next();
-}
-```
-
-Let’s suppose you mounted this function on a route. When a request matches the route, it displays the string “I’m a middleware…”, then it executes the next function in the stack. In this exercise, you are going to build root-level middleware. As you have seen in challenge 4, to mount a middleware function at root level, you can use the `app.use(<mware-function>)` method. In this case, the function will be executed for all the requests, but you can also set more specific conditions. For example, if you want a function to be executed only for POST requests, you could use `app.post(<mware-function>)`. Analogous methods exist for all the HTTP verbs (GET, DELETE, PUT, …).
+We recommend to keep the terminal open while working at these challenges. By reading the output in the terminal, you can see any errors that may occur.
 
 # --instructions--
 
-Build a simple logger. For every request, it should log to the console a string taking the following format: `method path - ip`. An example would look like this: `GET /json - ::ffff:127.0.0.1`. Note that there is a space between `method` and `path` and that the dash separating `path` and `ip` is surrounded by a space on both sides. You can get the request method (http verb), the relative route path, and the caller’s ip from the request object using `req.method`, `req.path` and `req.ip`. Remember to call `next()` when you are done, or your server will be stuck forever. Be sure to have the ‘Logs’ opened, and see what happens when some request arrives.
+If you have not already done so, please read the instructions in [the introduction](/learn/apis-and-microservices/basic-node-and-express/) and start a new project on Repl.it using [this link](https://repl.it/github/freeCodeCamp/boilerplate-express).
 
-**Note:** Express evaluates functions in the order they appear in the code. This is true for middleware too. If you want it to work for all the routes, it should be mounted before them.
+Modify the `myApp.js` file to log "Hello World" to the console.
 
 # --hints--
 
-Root level logger middleware should be active
+`"Hello World"` should be in the console
 
 ```js
 (getUserInput) =>
-  $.get(getUserInput('url') + '/_api/root-middleware-logger').then(
+  $.get(getUserInput('url') + '/_api/hello-console').then(
     (data) => {
-      assert.isTrue(
-        data.passed,
-        'root-level logger is not working as expected'
-      );
+      assert.isTrue(data.passed, '"Hello World" is not in the server console');
     },
     (xhr) => {
       throw new Error(xhr.responseText);
