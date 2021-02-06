@@ -1,35 +1,33 @@
 ---
-id: 587d7fb2367417b2b2512bf6
-title: Get Query Parameter Input from the Client
+id: 587d7fb2367417b2b2512bf5
+title: Get Route Parameter Input from the Client
 challengeType: 2
-forumTopicId: 301512
-dashedName: get-query-parameter-input-from-the-client
+forumTopicId: 301513
+dashedName: get-route-parameter-input-from-the-client
 ---
 
 # --description--
 
-Another common way to get input from the client is by encoding the data after the route path, using a query string. The query string is delimited by a question mark (?), and includes field=value couples. Each couple is separated by an ampersand (&). Express can parse the data from the query string, and populate the object `req.query`. Some characters, like the percent (%), cannot be in URLs and have to be encoded in a different format before you can send them. If you use the API from JavaScript, you can use specific methods to encode/decode these characters.
+When building an API, we have to allow users to communicate to us what they want to get from our service. For example, if the client is requesting information about a user stored in the database, they need a way to let us know which user they're interested in. One possible way to achieve this result is by using route parameters. Route parameters are named segments of the URL, delimited by slashes (/). Each segment captures the value of the part of the URL which matches its position. The captured values can be found in the `req.params` object.
 
-<blockquote>route_path: '/library'<br>actual_request_URL: '/library?userId=546&#x26;bookId=6754' <br>req.query: {userId: '546', bookId: '6754'}</blockquote>
+<blockquote>route_path: '/user/:userId/book/:bookId'<br>actual_request_URL: '/user/546/book/6754' <br>req.params: {userId: '546', bookId: '6754'}</blockquote>
 
 # --instructions--
 
-Build an API endpoint, mounted at `GET /name`. Respond with a JSON document, taking the structure `{ name: 'firstname lastname'}`. The first and last name parameters should be encoded in a query string e.g. `?first=firstname&last=lastname`.
-
-**Note:** In the following exercise you are going to receive data from a POST request, at the same `/name` route path. If you want, you can use the method `app.route(path).get(handler).post(handler)`. This syntax allows you to chain different verb handlers on the same path route. You can save a bit of typing, and have cleaner code.
+Build an echo server, mounted at the route `GET /:word/echo`. Respond with a JSON object, taking the structure `{echo: word}`. You can find the word to be repeated at `req.params.word`. You can test your route from your browser's address bar, visiting some matching routes, e.g. `your-app-rootpath/freecodecamp/echo`.
 
 # --hints--
 
-Test 1 : Your API endpoint should respond with the correct name
+Test 1 : Your echo server should repeat words correctly
 
 ```js
 (getUserInput) =>
-  $.get(getUserInput('url') + '/name?first=Mick&last=Jagger').then(
+  $.get(getUserInput('url') + '/eChOtEsT/echo').then(
     (data) => {
       assert.equal(
-        data.name,
-        'Mick Jagger',
-        'Test 1: "GET /name" route does not behave as expected'
+        data.echo,
+        'eChOtEsT',
+        'Test 1: the echo server is not working as expected'
       );
     },
     (xhr) => {
@@ -38,16 +36,16 @@ Test 1 : Your API endpoint should respond with the correct name
   );
 ```
 
-Test 2 : Your API endpoint should respond with the correct name
+Test 2 : Your echo server should repeat words correctly
 
 ```js
 (getUserInput) =>
-  $.get(getUserInput('url') + '/name?last=Richards&first=Keith').then(
+  $.get(getUserInput('url') + '/ech0-t3st/echo').then(
     (data) => {
       assert.equal(
-        data.name,
-        'Keith Richards',
-        'Test 2: "GET /name" route does not behave as expected'
+        data.echo,
+        'ech0-t3st',
+        'Test 2: the echo server is not working as expected'
       );
     },
     (xhr) => {
