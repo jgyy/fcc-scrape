@@ -1,30 +1,22 @@
 ---
-id: 587d7fb2367417b2b2512bf8
-title: Get Data from POST Requests
+id: 587d7fb2367417b2b2512bf6
+title: Get Query Parameter Input from the Client
 challengeType: 2
-forumTopicId: 301511
-dashedName: get-data-from-post-requests
+forumTopicId: 301512
+dashedName: get-query-parameter-input-from-the-client
 ---
 
 # --description--
 
-Mount a POST handler at the path `/name`. It’s the same path as before. We have prepared a form in the html frontpage. It will submit the same data of exercise 10 (Query string). If the body-parser is configured correctly, you should find the parameters in the object `req.body`. Have a look at the usual library example:
+Another common way to get input from the client is by encoding the data after the route path, using a query string. The query string is delimited by a question mark (?), and includes field=value couples. Each couple is separated by an ampersand (&). Express can parse the data from the query string, and populate the object `req.query`. Some characters, like the percent (%), cannot be in URLs and have to be encoded in a different format before you can send them. If you use the API from JavaScript, you can use specific methods to encode/decode these characters.
 
-<blockquote>route: POST '/library'<br>urlencoded_body: userId=546&#x26;bookId=6754 <br>req.body: {userId: '546', bookId: '6754'}</blockquote>
+<blockquote>route_path: '/library'<br>actual_request_URL: '/library?userId=546&#x26;bookId=6754' <br>req.query: {userId: '546', bookId: '6754'}</blockquote>
 
-Respond with the same JSON object as before: `{name: 'firstname lastname'}`. Test if your endpoint works using the html form we provided in the app frontpage.
+# --instructions--
 
-Tip: There are several other http methods other than GET and POST. And by convention there is a correspondence between the http verb, and the operation you are going to execute on the server. The conventional mapping is:
+Build an API endpoint, mounted at `GET /name`. Respond with a JSON document, taking the structure `{ name: 'firstname lastname'}`. The first and last name parameters should be encoded in a query string e.g. `?first=firstname&last=lastname`.
 
-POST (sometimes PUT) - Create a new resource using the information sent with the request,
-
-GET - Read an existing resource without modifying it,
-
-PUT or PATCH (sometimes POST) - Update a resource using the data sent,
-
-DELETE => Delete a resource.
-
-There are also a couple of other methods which are used to negotiate a connection with the server. Except from GET, all the other methods listed above can have a payload (i.e. the data into the request body). The body-parser middleware works with these methods as well.
+**Note:** In the following exercise you are going to receive data from a POST request, at the same `/name` route path. If you want, you can use the method `app.route(path).get(handler).post(handler)`. This syntax allows you to chain different verb handlers on the same path route. You can save a bit of typing, and have cleaner code.
 
 # --hints--
 
@@ -32,12 +24,12 @@ Test 1 : Your API endpoint should respond with the correct name
 
 ```js
 (getUserInput) =>
-  $.post(getUserInput('url') + '/name', { first: 'Mick', last: 'Jagger' }).then(
+  $.get(getUserInput('url') + '/name?first=Mick&last=Jagger').then(
     (data) => {
       assert.equal(
         data.name,
         'Mick Jagger',
-        'Test 1: "POST /name" route does not behave as expected'
+        'Test 1: "GET /name" route does not behave as expected'
       );
     },
     (xhr) => {
@@ -50,15 +42,12 @@ Test 2 : Your API endpoint should respond with the correct name
 
 ```js
 (getUserInput) =>
-  $.post(getUserInput('url') + '/name', {
-    first: 'Keith',
-    last: 'Richards'
-  }).then(
+  $.get(getUserInput('url') + '/name?last=Richards&first=Keith').then(
     (data) => {
       assert.equal(
         data.name,
         'Keith Richards',
-        'Test 2: "POST /name" route does not behave as expected'
+        'Test 2: "GET /name" route does not behave as expected'
       );
     },
     (xhr) => {
