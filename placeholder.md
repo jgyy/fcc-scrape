@@ -1,64 +1,39 @@
 ---
-id: 587d7fb4367417b2b2512c00
-title: Expand Your Project with External Packages from npm
+id: 587d7fb3367417b2b2512bfb
+title: 'How to Use package.json, the Core of Any Node.js Project or npm Package'
 challengeType: 2
-forumTopicId: 301527
-dashedName: expand-your-project-with-external-packages-from-npm
+forumTopicId: 301528
+dashedName: how-to-use-package-json-the-core-of-any-node-js-project-or-npm-package
 ---
 
 # --description--
 
-One of the biggest reasons to use a package manager, is their powerful dependency management. Instead of manually having to make sure that you get all dependencies whenever you set up a project on a new computer, npm automatically installs everything for you. But how can npm know exactly what your project needs? Meet the `dependencies` section of your package.json file.
+The `package.json` file is the center of any Node.js project or npm package. It stores information about your project, similar to how the &lt;head> section of an HTML document describes the content of a webpage. It consists of a single JSON object where information is stored in key-value pairs. There are only two required fields; "name" and "version", but it’s good practice to provide additional information about your project that could be useful to future users or maintainers.
 
-In this section, packages your project requires are stored using the following format:
+If you look at the file tree of your project, you will find the package.json file on the top level of the tree. This is the file that you will be improving in the next couple of challenges.
+
+One of the most common pieces of information in this file is the `author` field. It specifies who created the project, and can consist of a string or an object with contact or other details. An object is recommended for bigger projects, but a simple string like the following example will do for this project.
 
 ```json
-"dependencies": {
-  "package-name": "version",
-  "express": "4.14.0"
-}
-
+"author": "Jane Doe",
 ```
 
 # --instructions--
 
-Add version "2.14.0" of the "moment" package to the `dependencies` field of your package.json file.
+Add your name as the `author` of the project in the package.json file.
 
-**Note:** Moment is a handy library for working with time and dates.
+**Note:** Remember that you’re writing JSON, so all field names must use double-quotes (") and be separated with a comma (,).
 
 # --hints--
 
-"dependencies" should include "moment"
+package.json should have a valid "author" key
 
 ```js
 (getUserInput) =>
   $.get(getUserInput('url') + '/_api/package.json').then(
     (data) => {
       var packJson = JSON.parse(data);
-      assert.property(
-        packJson.dependencies,
-        'moment',
-        '"dependencies" does not include "moment"'
-      );
-    },
-    (xhr) => {
-      throw new Error(xhr.responseText);
-    }
-  );
-```
-
-"moment" version should be "2.14.0"
-
-```js
-(getUserInput) =>
-  $.get(getUserInput('url') + '/_api/package.json').then(
-    (data) => {
-      var packJson = JSON.parse(data);
-      assert.match(
-        packJson.dependencies.moment,
-        /^[\^\~]?2\.14\.0/,
-        'Wrong version of "moment" installed. It should be 2.14.0'
-      );
+      assert(packJson.author, '"author" is missing');
     },
     (xhr) => {
       throw new Error(xhr.responseText);
