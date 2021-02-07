@@ -1,26 +1,26 @@
 ---
-id: 587d7fb5367417b2b2512c03
-title: Use the Caret-Character to Use the Latest Minor Version of a Dependency
+id: 587d7fb5367417b2b2512c02
+title: Use the Tilde-Character to Always Use the Latest Patch Version of a Dependency
 challengeType: 2
-forumTopicId: 301531
-dashedName: use-the-caret-character-to-use-the-latest-minor-version-of-a-dependency
+forumTopicId: 301532
+dashedName: use-the-tilde-character-to-always-use-the-latest-patch-version-of-a-dependency
 ---
 
 # --description--
 
-Similar to how the tilde we learned about in the last challenge allows npm to install the latest PATCH for a dependency, the caret (`^`) allows npm to install future updates as well. The difference is that the caret will allow both MINOR updates and PATCHes.
+In the last challenge, you told npm to only include a specific version of a package. That’s a useful way to freeze your dependencies if you need to make sure that different parts of your project stay compatible with each other. But in most use cases, you don’t want to miss bug fixes since they often include important security patches and (hopefully) don’t break things in doing so.
 
-Your current version of moment should be "~2.10.2" which allows npm to install to the latest 2.10.x version. If you were to use the caret (^) as a version prefix instead, npm would be allowed to update to any 2.x.x version.
+To allow an npm dependency to update to the latest PATCH version, you can prefix the dependency’s version with the tilde (`~`) character. Here's an example of how to allow updates to any 1.3.x version.
 
 ```json
-"package": "^1.3.8"
+"package": "~1.3.8"
 ```
-
-This would allow updates to any 1.x.x version of the package.
 
 # --instructions--
 
-Use the caret (`^`) to prefix the version of moment in your dependencies and allow npm to update it to any new MINOR release.
+In the package.json file, your current rule for how npm may upgrade moment is to use a specific version (2.10.2). But now, you want to allow the latest 2.10.x version.
+
+Use the tilde (`~`) character to prefix the version of moment in your dependencies, and allow npm to update it to any new PATCH release.
 
 **Note:** The version numbers themselves should not be changed.
 
@@ -45,7 +45,7 @@ Use the caret (`^`) to prefix the version of moment in your dependencies and all
   );
 ```
 
-"moment" version should match "^2.x.x"
+"moment" version should match "~2.10.2"
 
 ```js
 (getUserInput) =>
@@ -54,8 +54,8 @@ Use the caret (`^`) to prefix the version of moment in your dependencies and all
       var packJson = JSON.parse(data);
       assert.match(
         packJson.dependencies.moment,
-        /^\^2\./,
-        'Wrong version of "moment". It should be ^2.10.2'
+        /^\~2\.10\.2/,
+        'Wrong version of "moment". It should be ~2.10.2'
       );
     },
     (xhr) => {
