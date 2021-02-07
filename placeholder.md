@@ -1,37 +1,45 @@
 ---
-id: 587d7fb4367417b2b2512bfd
-title: Add Keywords to Your package.json
+id: 587d7fb4367417b2b2512c00
+title: Expand Your Project with External Packages from npm
 challengeType: 2
-forumTopicId: 301526
-dashedName: add-keywords-to-your-package-json
+forumTopicId: 301527
+dashedName: expand-your-project-with-external-packages-from-npm
 ---
 
 # --description--
 
-The `keywords` field is where you can describe your project using related keywords. Here's an example:
+One of the biggest reasons to use a package manager, is their powerful dependency management. Instead of manually having to make sure that you get all dependencies whenever you set up a project on a new computer, npm automatically installs everything for you. But how can npm know exactly what your project needs? Meet the `dependencies` section of your package.json file.
+
+In this section, packages your project requires are stored using the following format:
 
 ```json
-"keywords": [ "descriptive", "related", "words" ],
-```
+"dependencies": {
+  "package-name": "version",
+  "express": "4.14.0"
+}
 
-As you can see, this field is structured as an array of double-quoted strings.
+```
 
 # --instructions--
 
-Add an array of suitable strings to the `keywords` field in the package.json file of your project.
+Add version "2.14.0" of the "moment" package to the `dependencies` field of your package.json file.
 
-One of the keywords should be "freecodecamp".
+**Note:** Moment is a handy library for working with time and dates.
 
 # --hints--
 
-package.json should have a valid "keywords" key
+"dependencies" should include "moment"
 
 ```js
 (getUserInput) =>
   $.get(getUserInput('url') + '/_api/package.json').then(
     (data) => {
       var packJson = JSON.parse(data);
-      assert(packJson.keywords, '"keywords" is missing');
+      assert.property(
+        packJson.dependencies,
+        'moment',
+        '"dependencies" does not include "moment"'
+      );
     },
     (xhr) => {
       throw new Error(xhr.responseText);
@@ -39,32 +47,17 @@ package.json should have a valid "keywords" key
   );
 ```
 
-"keywords" field should be an Array
+"moment" version should be "2.14.0"
 
 ```js
 (getUserInput) =>
   $.get(getUserInput('url') + '/_api/package.json').then(
     (data) => {
       var packJson = JSON.parse(data);
-      assert.isArray(packJson.keywords, '"keywords" is not an array');
-    },
-    (xhr) => {
-      throw new Error(xhr.responseText);
-    }
-  );
-```
-
-"keywords" should include "freecodecamp"
-
-```js
-(getUserInput) =>
-  $.get(getUserInput('url') + '/_api/package.json').then(
-    (data) => {
-      var packJson = JSON.parse(data);
-      assert.include(
-        packJson.keywords,
-        'freecodecamp',
-        '"keywords" does not include "freecodecamp"'
+      assert.match(
+        packJson.dependencies.moment,
+        /^[\^\~]?2\.14\.0/,
+        'Wrong version of "moment" installed. It should be 2.14.0'
       );
     },
     (xhr) => {
