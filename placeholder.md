@@ -1,61 +1,62 @@
 ---
-id: 587d7fb5367417b2b2512c02
-title: Use the Tilde-Character to Always Use the Latest Patch Version of a Dependency
+id: 587d7fb9367417b2b2512c12
+title: Chain Search Query Helpers to Narrow Search Results
 challengeType: 2
-forumTopicId: 301532
-dashedName: use-the-tilde-character-to-always-use-the-latest-patch-version-of-a-dependency
+forumTopicId: 301533
+dashedName: chain-search-query-helpers-to-narrow-search-results
 ---
 
 # --description--
 
-In the last challenge, you told npm to only include a specific version of a package. That’s a useful way to freeze your dependencies if you need to make sure that different parts of your project stay compatible with each other. But in most use cases, you don’t want to miss bug fixes since they often include important security patches and (hopefully) don’t break things in doing so.
-
-To allow an npm dependency to update to the latest PATCH version, you can prefix the dependency’s version with the tilde (`~`) character. Here's an example of how to allow updates to any 1.3.x version.
-
-```json
-"package": "~1.3.8"
-```
+If you don’t pass the callback as the last argument to `Model.find()` (or to the other search methods), the query is not executed. You can store the query in a variable for later use. This kind of object enables you to build up a query using chaining syntax. The actual db search is executed when you finally chain the method `.exec()`. You always need to pass your callback to this last method. There are many query helpers, here we'll use the most commonly used.
 
 # --instructions--
 
-In the package.json file, your current rule for how npm may upgrade moment is to use a specific version (2.10.2). But now, you want to allow the latest 2.10.x version.
-
-Use the tilde (`~`) character to prefix the version of moment in your dependencies, and allow npm to update it to any new PATCH release.
-
-**Note:** The version numbers themselves should not be changed.
+Modify the `queryChain` function to find people who like the food specified by the variable named `foodToSearch`. Sort them by `name`, limit the results to two documents, and hide their age. Chain `.find()`, `.sort()`, `.limit()`, `.select()`, and then `.exec()`. Pass the `done(err, data)` callback to `exec()`.
 
 # --hints--
 
-"dependencies" should include "moment"
+Chaining query helpers should succeed
 
 ```js
 (getUserInput) =>
-  $.get(getUserInput('url') + '/_api/package.json').then(
+  $.ajax({
+    url: getUserInput('url') + '/_api/query-tools',
+    type: 'POST',
+    contentType: 'application/json',
+    data: JSON.stringify([
+      { name: 'Pablo', age: 26, favoriteFoods: ['burrito', 'hot-dog'] },
+      { name: 'Bob', age: 23, favoriteFoods: ['pizza', 'nachos'] },
+      { name: 'Ashley', age: 32, favoriteFoods: ['steak', 'burrito'] },
+      { name: 'Mario', age: 51, favoriteFoods: ['burrito', 'prosciutto'] }
+    ])
+  }).then(
     (data) => {
-      var packJson = JSON.parse(data);
-      assert.property(
-        packJson.dependencies,
-        'moment',
-        '"dependencies" does not include "moment"'
+      assert.isArray(data, 'the response should be an Array');
+      assert.equal(
+        data.length,
+        2,
+        'the data array length is not what expected'
       );
-    },
-    (xhr) => {
-      throw new Error(xhr.responseText);
-    }
-  );
-```
-
-"moment" version should match "~2.10.2"
-
-```js
-(getUserInput) =>
-  $.get(getUserInput('url') + '/_api/package.json').then(
-    (data) => {
-      var packJson = JSON.parse(data);
-      assert.match(
-        packJson.dependencies.moment,
-        /^\~2\.10\.2/,
-        'Wrong version of "moment". It should be ~2.10.2'
+      assert.notProperty(
+        data[0],
+        'age',
+        'The returned first item has too many properties'
+      );
+      assert.equal(
+        data[0].name,
+        'Ashley',
+        'The returned first item name is not what expected'
+      );
+      assert.notProperty(
+        data[1],
+        'age',
+        'The returned second item has too many properties'
+      );
+      assert.equal(
+        data[1].name,
+        'Mario',
+        'The returned second item name is not what expected'
       );
     },
     (xhr) => {
