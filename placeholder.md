@@ -1,35 +1,33 @@
 ---
-id: 587d7fb4367417b2b2512bfe
-title: Add a License to Your package.json
+id: 587d7fb4367417b2b2512bff
+title: Add a Version to Your package.json
 challengeType: 2
-forumTopicId: 301523
-dashedName: add-a-license-to-your-package-json
+forumTopicId: 301525
+dashedName: add-a-version-to-your-package-json
 ---
 
 # --description--
 
-The `license` field is where you inform users of what they are allowed to do with your project.
-
-Some common licenses for open source projects include MIT and BSD. License information is not required, and copyright laws in most countries will give you ownership of what you create by default. However, it’s always a good practice to explicitly state what users can and can’t do. Here's an example of the license field:
+A `version` is one of the required fields of your package.json file. This field describes the current version of your project. Here's an example:
 
 ```json
-"license": "MIT",
+"version": "1.2.0",
 ```
 
 # --instructions--
 
-Fill the `license` field in the package.json file of your project as you find suitable.
+Add a `version` to the package.json file of your project.
 
 # --hints--
 
-package.json should have a valid "license" key
+package.json should have a valid "version" key
 
 ```js
 (getUserInput) =>
   $.get(getUserInput('url') + '/_api/package.json').then(
     (data) => {
       var packJson = JSON.parse(data);
-      assert(packJson.license, '"license" is missing');
+      assert(packJson.version, '"version" is missing');
     },
     (xhr) => {
       throw new Error(xhr.responseText);
