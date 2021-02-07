@@ -1,38 +1,61 @@
 ---
-id: 587d7fb5367417b2b2512c04
-title: Remove a Package from Your Dependencies
+id: 587d7fb5367417b2b2512c03
+title: Use the Caret-Character to Use the Latest Minor Version of a Dependency
 challengeType: 2
-forumTopicId: 301530
-dashedName: remove-a-package-from-your-dependencies
+forumTopicId: 301531
+dashedName: use-the-caret-character-to-use-the-latest-minor-version-of-a-dependency
 ---
 
 # --description--
 
-You have now tested a few ways you can manage dependencies of your project by using the package.json's dependencies section. You have also included external packages by adding them to the file and even told npm what types of versions you want, by using special characters such as the tilde or the caret.
+Similar to how the tilde we learned about in the last challenge allows npm to install the latest PATCH for a dependency, the caret (`^`) allows npm to install future updates as well. The difference is that the caret will allow both MINOR updates and PATCHes.
 
-But what if you want to remove an external package that you no longer need? You might already have guessed it, just remove the corresponding key-value pair for that package from your dependencies.
+Your current version of moment should be "~2.10.2" which allows npm to install to the latest 2.10.x version. If you were to use the caret (^) as a version prefix instead, npm would be allowed to update to any 2.x.x version.
 
-This same method applies to removing other fields in your package.json as well
+```json
+"package": "^1.3.8"
+```
+
+This would allow updates to any 1.x.x version of the package.
 
 # --instructions--
 
-Remove the moment package from your dependencies.
+Use the caret (`^`) to prefix the version of moment in your dependencies and allow npm to update it to any new MINOR release.
 
-**Note:** Make sure you have the right amount of commas after removing it.
+**Note:** The version numbers themselves should not be changed.
 
 # --hints--
 
-"dependencies" should not include "moment"
+"dependencies" should include "moment"
 
 ```js
 (getUserInput) =>
   $.get(getUserInput('url') + '/_api/package.json').then(
     (data) => {
       var packJson = JSON.parse(data);
-      assert.notProperty(
+      assert.property(
         packJson.dependencies,
         'moment',
-        '"dependencies" still includes "moment"'
+        '"dependencies" does not include "moment"'
+      );
+    },
+    (xhr) => {
+      throw new Error(xhr.responseText);
+    }
+  );
+```
+
+"moment" version should match "^2.x.x"
+
+```js
+(getUserInput) =>
+  $.get(getUserInput('url') + '/_api/package.json').then(
+    (data) => {
+      var packJson = JSON.parse(data);
+      assert.match(
+        packJson.dependencies.moment,
+        /^\^2\./,
+        'Wrong version of "moment". It should be ^2.10.2'
       );
     },
     (xhr) => {
