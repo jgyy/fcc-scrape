@@ -1,39 +1,35 @@
 ---
-id: 587d7fb3367417b2b2512bfc
-title: Add a Description to Your package.json
+id: 587d7fb4367417b2b2512bfe
+title: Add a License to Your package.json
 challengeType: 2
-forumTopicId: 301522
-dashedName: add-a-description-to-your-package-json
+forumTopicId: 301523
+dashedName: add-a-license-to-your-package-json
 ---
 
 # --description--
 
-The next part of a good package.json file is the `description` field; where a short, but informative description about your project belongs.
+The `license` field is where you inform users of what they are allowed to do with your project.
 
-If you some day plan to publish a package to npm, this is the string that should sell your idea to the user when they decide whether to install your package or not. However, that’s not the only use case for the description, it’s a great way to summarize what a project does. It’s just as important in any Node.js project to help other developers, future maintainers or even your future self understand the project quickly.
-
-Regardless of what you plan for your project, a description is definitely recommended. Here's an example:
+Some common licenses for open source projects include MIT and BSD. License information is not required, and copyright laws in most countries will give you ownership of what you create by default. However, it’s always a good practice to explicitly state what users can and can’t do. Here's an example of the license field:
 
 ```json
-"description": "A project that does something awesome",
+"license": "MIT",
 ```
 
 # --instructions--
 
-Add a `description` to the package.json file of your project.
-
-**Note:** Remember to use double-quotes for field-names (") and commas (,) to separate fields.
+Fill the `license` field in the package.json file of your project as you find suitable.
 
 # --hints--
 
-package.json should have a valid "description" key
+package.json should have a valid "license" key
 
 ```js
 (getUserInput) =>
   $.get(getUserInput('url') + '/_api/package.json').then(
     (data) => {
       var packJson = JSON.parse(data);
-      assert(packJson.description, '"description" is missing');
+      assert(packJson.license, '"license" is missing');
     },
     (xhr) => {
       throw new Error(xhr.responseText);
