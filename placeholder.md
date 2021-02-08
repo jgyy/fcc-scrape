@@ -1,55 +1,44 @@
 ---
-id: 587d7fb7367417b2b2512c0a
-title: Create Many Records with model.create()
+id: 587d7fb8367417b2b2512c11
+title: Delete Many Documents with model.remove()
 challengeType: 2
-forumTopicId: 301537
-dashedName: create-many-records-with-model-create
+forumTopicId: 301538
+dashedName: delete-many-documents-with-model-remove
 ---
 
 # --description--
 
-Sometimes you need to create many instances of your models, e.g. when seeding a database with initial data. `Model.create()` takes an array of objects like `[{name: 'John', ...}, {...}, ...]` as the first argument, and saves them all in the db.
+`Model.remove()` is useful to delete all the documents matching given criteria.
 
 # --instructions--
 
-Modify the `createManyPeople` function to create many people using `Model.create()` with the argument `arrayOfPeople`.
+Modify the `removeManyPeople` function to delete all the people whose name is within the variable `nameToRemove`, using `Model.remove()`. Pass it to a query document with the `name` field set, and a callback.
 
-**Note:** You can reuse the model you instantiated in the previous exercise.
+**Note:** The `Model.remove()` doesn’t return the deleted document, but a JSON object containing the outcome of the operation, and the number of items affected. Don’t forget to pass it to the `done()` callback, since we use it in tests.
 
 # --hints--
 
-Creating many db items at once should succeed
+Deleting many items at once should succeed
 
 ```js
 (getUserInput) =>
   $.ajax({
-    url: getUserInput('url') + '/_api/create-many-people',
+    url: getUserInput('url') + '/_api/remove-many-people',
     type: 'POST',
     contentType: 'application/json',
     data: JSON.stringify([
-      { name: 'John', age: 24, favoriteFoods: ['pizza', 'salad'] },
-      { name: 'Mary', age: 21, favoriteFoods: ['onions', 'chicken'] }
+      { name: 'Mary', age: 16, favoriteFoods: ['lollipop'] },
+      { name: 'Mary', age: 21, favoriteFoods: ['steak'] }
     ])
   }).then(
     (data) => {
-      assert.isArray(data, 'the response should be an array');
+      assert.isTrue(!!data.ok, 'The mongo stats are not what expected');
       assert.equal(
-        data.length,
+        data.n,
         2,
-        'the response does not contain the expected number of items'
+        'The number of items affected is not what expected'
       );
-      assert.equal(data[0].name, 'John', 'The first item is not correct');
-      assert.equal(
-        data[0].__v,
-        0,
-        'The first item should be not previously edited'
-      );
-      assert.equal(data[1].name, 'Mary', 'The second item is not correct');
-      assert.equal(
-        data[1].__v,
-        0,
-        'The second item should be not previously edited'
-      );
+      assert.equal(data.count, 0, 'the db items count is not what expected');
     },
     (xhr) => {
       throw new Error(xhr.responseText);
