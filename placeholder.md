@@ -1,41 +1,45 @@
 ---
-id: 587d7fb8367417b2b2512c0e
-title: 'Perform Classic Updates by Running Find, Edit, then Save'
+id: 587d7fb8367417b2b2512c0f
+title: Perform New Updates on a Document Using model.findOneAndUpdate()
 challengeType: 2
-forumTopicId: 301541
-dashedName: perform-classic-updates-by-running-find-edit-then-save
+forumTopicId: 301542
+dashedName: perform-new-updates-on-a-document-using-model-findoneandupdate
 ---
 
 # --description--
 
-In the good old days, this was what you needed to do if you wanted to edit a document, and be able to use it somehow (e.g. sending it back in a server response). Mongoose has a dedicated updating method: `Model.update()`. It is bound to the low-level mongo driver. It can bulk-edit many documents matching certain criteria, but it doesn’t send back the updated document, only a 'status' message. Furthermore, it makes model validations difficult, because it just directly calls the mongo driver.
+Recent versions of Mongoose have methods to simplify documents updating. Some more advanced features (i.e. pre/post hooks, validation) behave differently with this approach, so the classic method is still useful in many situations. `findByIdAndUpdate()` can be used when searching by id.
 
 # --instructions--
 
-Modify the `findEditThenSave` function to find a person by `_id` (use any of the above methods) with the parameter `personId` as search key. Add `"hamburger"` to the list of the person's `favoriteFoods` (you can use `Array.push()`). Then - inside the find callback - `save()` the updated `Person`.
+Modify the `findAndUpdate` function to find a person by `Name` and set the person's age to `20`. Use the function parameter `personName` as the search key.
 
-**Note:** This may be tricky, if in your Schema, you declared `favoriteFoods` as an Array, without specifying the type (i.e. `[String]`). In that case, `favoriteFoods` defaults to Mixed type, and you have to manually mark it as edited using `document.markModified('edited-field')`. See [Mongoose documentation](https://mongoosejs.com/docs/schematypes.html#Mixed)
+**Note:** You should return the updated document. To do that, you need to pass the options document `{ new: true }` as the 3rd argument to `findOneAndUpdate()`. By default, these methods return the unmodified object.
 
 # --hints--
 
-Find-edit-update an item should succeed
+findOneAndUpdate an item should succeed
 
 ```js
 (getUserInput) =>
-  $.post(getUserInput('url') + '/_api/find-edit-save', {
-    name: 'Poldo',
-    age: 40,
-    favoriteFoods: ['spaghetti']
+  $.post(getUserInput('url') + '/_api/find-one-update', {
+    name: 'Dorian Gray',
+    age: 35,
+    favoriteFoods: ['unknown']
   }).then(
     (data) => {
-      assert.equal(data.name, 'Poldo', 'item.name is not what is expected');
-      assert.equal(data.age, 40, 'item.age is not what expected');
+      assert.equal(data.name, 'Dorian Gray', 'item.name is not what expected');
+      assert.equal(data.age, 20, 'item.age is not what expected');
       assert.deepEqual(
         data.favoriteFoods,
-        ['spaghetti', 'hamburger'],
+        ['unknown'],
         'item.favoriteFoods is not what expected'
       );
-      assert.equal(data.__v, 1, 'The item should be previously edited');
+      assert.equal(
+        data.__v,
+        0,
+        'findOneAndUpdate does not increment version by design!'
+      );
     },
     (xhr) => {
       throw new Error(xhr.responseText);
