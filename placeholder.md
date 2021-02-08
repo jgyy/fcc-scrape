@@ -1,32 +1,35 @@
 ---
-id: 587d7fb7367417b2b2512c0d
-title: Use model.findById() to Search Your Database By _id
+id: 587d7fb7367417b2b2512c0c
+title: Use model.findOne() to Return a Single Matching Document from Your Database
 challengeType: 2
-forumTopicId: 301544
-dashedName: use-model-findbyid-to-search-your-database-by-id
+forumTopicId: 301545
+dashedName: use-model-findone-to-return-a-single-matching-document-from-your-database
 ---
 
 # --description--
 
-When saving a document, MongoDB automatically adds the field `_id`, and set it to a unique alphanumeric key. Searching by `_id` is an extremely frequent operation, so Mongoose provides a dedicated method for it.
+`Model.findOne()` behaves like `Model.find()`, but it returns only one document (not an array), even if there are multiple items. It is especially useful when searching by properties that you have declared as unique.
 
 # --instructions--
 
-Modify the `findPersonById` to find the only person having a given `_id`, using `Model.findById() -> Person`. Use the function argument `personId` as the search key.
+Modify the `findOneByFood` function to find just one person which has a certain food in the person's favorites, using `Model.findOne() -> Person`. Use the function argument `food` as search key.
 
 # --hints--
 
-Find an item by Id should succeed
+Find one item should succeed
 
 ```js
 (getUserInput) =>
-  $.get(getUserInput('url') + '/_api/find-by-id').then(
+  $.post(getUserInput('url') + '/_api/find-one-by-food', {
+    name: 'Gary',
+    age: 46,
+    favoriteFoods: ['chicken salad']
+  }).then(
     (data) => {
-      assert.equal(data.name, 'test', 'item.name is not what expected');
-      assert.equal(data.age, 0, 'item.age is not what expected');
+      assert.equal(data.name, 'Gary', 'item.name is not what expected');
       assert.deepEqual(
         data.favoriteFoods,
-        ['none'],
+        ['chicken salad'],
         'item.favoriteFoods is not what expected'
       );
       assert.equal(data.__v, 0, 'The item should be not previously edited');
