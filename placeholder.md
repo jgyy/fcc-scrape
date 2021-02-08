@@ -1,62 +1,41 @@
 ---
-id: 587d7fb6367417b2b2512c06
-title: Install and Set Up Mongoose
+id: 587d7fb8367417b2b2512c0e
+title: 'Perform Classic Updates by Running Find, Edit, then Save'
 challengeType: 2
-forumTopicId: 301540
-dashedName: install-and-set-up-mongoose
+forumTopicId: 301541
+dashedName: perform-classic-updates-by-running-find-edit-then-save
 ---
 
 # --description--
 
-In this challenge, you will import the required projects, and connect to your Atlas database.
+In the good old days, this was what you needed to do if you wanted to edit a document, and be able to use it somehow (e.g. sending it back in a server response). Mongoose has a dedicated updating method: `Model.update()`. It is bound to the low-level mongo driver. It can bulk-edit many documents matching certain criteria, but it doesn’t send back the updated document, only a 'status' message. Furthermore, it makes model validations difficult, because it just directly calls the mongo driver.
 
 # --instructions--
 
-Add `mongodb` and `mongoose` to the project’s `package.json`. Then, require mongoose as `mongoose` in `myApp.js`. Store your MongoDB Atlas database URI in a private `.env` file as `MONGO_URI`. Surround the the URI with single or double quotes, and make sure no space exists between both the variable and the `=`, and the value and `=`. Connect to the database using the following syntax:
+Modify the `findEditThenSave` function to find a person by `_id` (use any of the above methods) with the parameter `personId` as search key. Add `"hamburger"` to the list of the person's `favoriteFoods` (you can use `Array.push()`). Then - inside the find callback - `save()` the updated `Person`.
 
-```js
-mongoose.connect(<Your URI>, { useNewUrlParser: true, useUnifiedTopology: true });
-```
+**Note:** This may be tricky, if in your Schema, you declared `favoriteFoods` as an Array, without specifying the type (i.e. `[String]`). In that case, `favoriteFoods` defaults to Mixed type, and you have to manually mark it as edited using `document.markModified('edited-field')`. See [Mongoose documentation](https://mongoosejs.com/docs/schematypes.html#Mixed)
 
 # --hints--
 
-"mongodb" dependency should be in package.json
+Find-edit-update an item should succeed
 
 ```js
 (getUserInput) =>
-  $.get(getUserInput('url') + '/_api/file/package.json').then(
+  $.post(getUserInput('url') + '/_api/find-edit-save', {
+    name: 'Poldo',
+    age: 40,
+    favoriteFoods: ['spaghetti']
+  }).then(
     (data) => {
-      var packJson = JSON.parse(data);
-      assert.property(packJson.dependencies, 'mongodb');
-    },
-    (xhr) => {
-      throw new Error(xhr.responseText);
-    }
-  );
-```
-
-"mongoose" dependency should be in package.json
-
-```js
-(getUserInput) =>
-  $.get(getUserInput('url') + '/_api/file/package.json').then(
-    (data) => {
-      var packJson = JSON.parse(data);
-      assert.property(packJson.dependencies, 'mongoose');
-    },
-    (xhr) => {
-      throw new Error(xhr.responseText);
-    }
-  );
-```
-
-"mongoose" should be connected to a database
-
-```js
-(getUserInput) =>
-  $.get(getUserInput('url') + '/_api/is-mongoose-ok').then(
-    (data) => {
-      assert.isTrue(data.isMongooseOk, 'mongoose is not connected');
+      assert.equal(data.name, 'Poldo', 'item.name is not what is expected');
+      assert.equal(data.age, 40, 'item.age is not what expected');
+      assert.deepEqual(
+        data.favoriteFoods,
+        ['spaghetti', 'hamburger'],
+        'item.favoriteFoods is not what expected'
+      );
+      assert.equal(data.__v, 1, 'The item should be previously edited');
     },
     (xhr) => {
       throw new Error(xhr.responseText);
