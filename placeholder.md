@@ -1,43 +1,39 @@
 ---
-id: 587d7fb8367417b2b2512c11
-title: Delete Many Documents with model.remove()
+id: 587d7fb8367417b2b2512c10
+title: Delete One Document Using model.findByIdAndRemove
 challengeType: 2
-forumTopicId: 301538
-dashedName: delete-many-documents-with-model-remove
+forumTopicId: 301539
+dashedName: delete-one-document-using-model-findbyidandremove
 ---
 
 # --description--
 
-`Model.remove()` is useful to delete all the documents matching given criteria.
+`findByIdAndRemove` and `findOneAndRemove` are like the previous update methods. They pass the removed document to the db. As usual, use the function argument `personId` as the search key.
 
 # --instructions--
 
-Modify the `removeManyPeople` function to delete all the people whose name is within the variable `nameToRemove`, using `Model.remove()`. Pass it to a query document with the `name` field set, and a callback.
-
-**Note:** The `Model.remove()` doesn’t return the deleted document, but a JSON object containing the outcome of the operation, and the number of items affected. Don’t forget to pass it to the `done()` callback, since we use it in tests.
+Modify the `removeById` function to delete one person by the person's `_id`. You should use one of the methods `findByIdAndRemove()` or `findOneAndRemove()`.
 
 # --hints--
 
-Deleting many items at once should succeed
+Deleting an item should succeed
 
 ```js
 (getUserInput) =>
-  $.ajax({
-    url: getUserInput('url') + '/_api/remove-many-people',
-    type: 'POST',
-    contentType: 'application/json',
-    data: JSON.stringify([
-      { name: 'Mary', age: 16, favoriteFoods: ['lollipop'] },
-      { name: 'Mary', age: 21, favoriteFoods: ['steak'] }
-    ])
+  $.post(getUserInput('url') + '/_api/remove-one-person', {
+    name: 'Jason Bourne',
+    age: 36,
+    favoriteFoods: ['apples']
   }).then(
     (data) => {
-      assert.isTrue(!!data.ok, 'The mongo stats are not what expected');
-      assert.equal(
-        data.n,
-        2,
-        'The number of items affected is not what expected'
+      assert.equal(data.name, 'Jason Bourne', 'item.name is not what expected');
+      assert.equal(data.age, 36, 'item.age is not what expected');
+      assert.deepEqual(
+        data.favoriteFoods,
+        ['apples'],
+        'item.favoriteFoods is not what expected'
       );
+      assert.equal(data.__v, 0);
       assert.equal(data.count, 0, 'the db items count is not what expected');
     },
     (xhr) => {
