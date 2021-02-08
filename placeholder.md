@@ -1,40 +1,35 @@
 ---
-id: 587d7fb7367417b2b2512c0b
-title: Use model.find() to Search Your Database
+id: 587d7fb7367417b2b2512c0d
+title: Use model.findById() to Search Your Database By _id
 challengeType: 2
-forumTopicId: 301543
-dashedName: use-model-find-to-search-your-database
+forumTopicId: 301544
+dashedName: use-model-findbyid-to-search-your-database-by-id
 ---
 
 # --description--
 
-In its simplest usage, `Model.find()` accepts a query document (a JSON object) as the first argument, then a callback. It returns an array of matches. It supports an extremely wide range of search options. Read more in the docs.
+When saving a document, MongoDB automatically adds the field `_id`, and set it to a unique alphanumeric key. Searching by `_id` is an extremely frequent operation, so Mongoose provides a dedicated method for it.
 
 # --instructions--
 
-Modify the `findPeopleByName` function to find all the people having a given name, using <code>Model.find() -\> [Person]</code>
-
-Use the function argument `personName` as the search key.
+Modify the `findPersonById` to find the only person having a given `_id`, using `Model.findById() -> Person`. Use the function argument `personId` as the search key.
 
 # --hints--
 
-Find all items corresponding to a criteria should succeed
+Find an item by Id should succeed
 
 ```js
 (getUserInput) =>
-  $.post(getUserInput('url') + '/_api/find-all-by-name', {
-    name: 'r@nd0mN4m3',
-    age: 24,
-    favoriteFoods: ['pizza']
-  }).then(
+  $.get(getUserInput('url') + '/_api/find-by-id').then(
     (data) => {
-      assert.isArray(data, 'the response should be an Array');
-      assert.equal(
-        data[0].name,
-        'r@nd0mN4m3',
-        'item.name is not what expected'
+      assert.equal(data.name, 'test', 'item.name is not what expected');
+      assert.equal(data.age, 0, 'item.age is not what expected');
+      assert.deepEqual(
+        data.favoriteFoods,
+        ['none'],
+        'item.favoriteFoods is not what expected'
       );
-      assert.equal(data[0].__v, 0, 'The item should be not previously edited');
+      assert.equal(data.__v, 0, 'The item should be not previously edited');
     },
     (xhr) => {
       throw new Error(xhr.responseText);
