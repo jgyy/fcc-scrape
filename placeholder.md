@@ -1,45 +1,40 @@
 ---
-id: 587d7fb8367417b2b2512c0f
-title: Perform New Updates on a Document Using model.findOneAndUpdate()
+id: 587d7fb7367417b2b2512c0b
+title: Use model.find() to Search Your Database
 challengeType: 2
-forumTopicId: 301542
-dashedName: perform-new-updates-on-a-document-using-model-findoneandupdate
+forumTopicId: 301543
+dashedName: use-model-find-to-search-your-database
 ---
 
 # --description--
 
-Recent versions of Mongoose have methods to simplify documents updating. Some more advanced features (i.e. pre/post hooks, validation) behave differently with this approach, so the classic method is still useful in many situations. `findByIdAndUpdate()` can be used when searching by id.
+In its simplest usage, `Model.find()` accepts a query document (a JSON object) as the first argument, then a callback. It returns an array of matches. It supports an extremely wide range of search options. Read more in the docs.
 
 # --instructions--
 
-Modify the `findAndUpdate` function to find a person by `Name` and set the person's age to `20`. Use the function parameter `personName` as the search key.
+Modify the `findPeopleByName` function to find all the people having a given name, using <code>Model.find() -\> [Person]</code>
 
-**Note:** You should return the updated document. To do that, you need to pass the options document `{ new: true }` as the 3rd argument to `findOneAndUpdate()`. By default, these methods return the unmodified object.
+Use the function argument `personName` as the search key.
 
 # --hints--
 
-findOneAndUpdate an item should succeed
+Find all items corresponding to a criteria should succeed
 
 ```js
 (getUserInput) =>
-  $.post(getUserInput('url') + '/_api/find-one-update', {
-    name: 'Dorian Gray',
-    age: 35,
-    favoriteFoods: ['unknown']
+  $.post(getUserInput('url') + '/_api/find-all-by-name', {
+    name: 'r@nd0mN4m3',
+    age: 24,
+    favoriteFoods: ['pizza']
   }).then(
     (data) => {
-      assert.equal(data.name, 'Dorian Gray', 'item.name is not what expected');
-      assert.equal(data.age, 20, 'item.age is not what expected');
-      assert.deepEqual(
-        data.favoriteFoods,
-        ['unknown'],
-        'item.favoriteFoods is not what expected'
-      );
+      assert.isArray(data, 'the response should be an Array');
       assert.equal(
-        data.__v,
-        0,
-        'findOneAndUpdate does not increment version by design!'
+        data[0].name,
+        'r@nd0mN4m3',
+        'item.name is not what expected'
       );
+      assert.equal(data[0].__v, 0, 'The item should be not previously edited');
     },
     (xhr) => {
       throw new Error(xhr.responseText);
