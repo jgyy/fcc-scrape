@@ -1,43 +1,55 @@
 ---
-id: 587d7fb6367417b2b2512c09
-title: Create and Save a Record of a Model
+id: 587d7fb7367417b2b2512c0a
+title: Create Many Records with model.create()
 challengeType: 2
-forumTopicId: 301536
-dashedName: create-and-save-a-record-of-a-model
+forumTopicId: 301537
+dashedName: create-many-records-with-model-create
 ---
 
 # --description--
 
-In this challenge you will have to create and save a record of a model.
+Sometimes you need to create many instances of your models, e.g. when seeding a database with initial data. `Model.create()` takes an array of objects like `[{name: 'John', ...}, {...}, ...]` as the first argument, and saves them all in the db.
 
 # --instructions--
 
-Within the `createAndSavePerson` function, create a document instance using the `Person` model constructor you built before. Pass to the constructor an object having the fields `name`, `age`, and `favoriteFoods`. Their types must conform to the ones in the `personSchema`. Then, call the method `document.save()` on the returned document instance. Pass to it a callback using the Node convention. This is a common pattern; all the following CRUD methods take a callback function like this as the last argument.
+Modify the `createManyPeople` function to create many people using `Model.create()` with the argument `arrayOfPeople`.
 
-```js
-/* Example */
-
-// ...
-person.save(function(err, data) {
-  //   ...do your stuff here...
-});
-```
+**Note:** You can reuse the model you instantiated in the previous exercise.
 
 # --hints--
 
-Creating and saving a db item should succeed
+Creating many db items at once should succeed
 
 ```js
 (getUserInput) =>
-  $.get(getUserInput('url') + '/_api/create-and-save-person').then(
+  $.ajax({
+    url: getUserInput('url') + '/_api/create-many-people',
+    type: 'POST',
+    contentType: 'application/json',
+    data: JSON.stringify([
+      { name: 'John', age: 24, favoriteFoods: ['pizza', 'salad'] },
+      { name: 'Mary', age: 21, favoriteFoods: ['onions', 'chicken'] }
+    ])
+  }).then(
     (data) => {
-      assert.isString(data.name, '"item.name" should be a String');
-      assert.isNumber(data.age, '28', '"item.age" should be a Number');
-      assert.isArray(
-        data.favoriteFoods,
-        '"item.favoriteFoods" should be an Array'
+      assert.isArray(data, 'the response should be an array');
+      assert.equal(
+        data.length,
+        2,
+        'the response does not contain the expected number of items'
       );
-      assert.equal(data.__v, 0, 'The db item should be not previously edited');
+      assert.equal(data[0].name, 'John', 'The first item is not correct');
+      assert.equal(
+        data[0].__v,
+        0,
+        'The first item should be not previously edited'
+      );
+      assert.equal(data[1].name, 'Mary', 'The second item is not correct');
+      assert.equal(
+        data[1].__v,
+        0,
+        'The second item should be not previously edited'
+      );
     },
     (xhr) => {
       throw new Error(xhr.responseText);
