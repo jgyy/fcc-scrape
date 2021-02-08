@@ -1,62 +1,74 @@
 ---
-id: 587d7fb9367417b2b2512c12
-title: Chain Search Query Helpers to Narrow Search Results
+id: 587d7fb6367417b2b2512c07
+title: Create a Model
 challengeType: 2
-forumTopicId: 301533
-dashedName: chain-search-query-helpers-to-narrow-search-results
+forumTopicId: 301535
+dashedName: create-a-model
 ---
 
 # --description--
 
-If you don’t pass the callback as the last argument to `Model.find()` (or to the other search methods), the query is not executed. You can store the query in a variable for later use. This kind of object enables you to build up a query using chaining syntax. The actual db search is executed when you finally chain the method `.exec()`. You always need to pass your callback to this last method. There are many query helpers, here we'll use the most commonly used.
+**C**RUD Part I - CREATE
+
+First of all we need a Schema. Each schema maps to a MongoDB collection. It defines the shape of the documents within that collection. Schemas are building block for Models. They can be nested to create complex models, but in this case we'll keep things simple. A model allows you to create instances of your objects, called documents.
+
+Repl.it is a real server, and in real servers the interactions with the database happen in handler functions. These functions are executed when some event happens (e.g. someone hits an endpoint on your API). We’ll follow the same approach in these exercises. The `done()` function is a callback that tells us that we can proceed after completing an asynchronous operation such as inserting, searching, updating, or deleting. It's following the Node convention, and should be called as `done(null, data)` on success, or `done(err)` on error.
+
+Warning - When interacting with remote services, errors may occur!
+
+```js
+/* Example */
+
+const someFunc = function(done) {
+  //... do something (risky) ...
+  if (error) return done(error);
+  done(null, result);
+};
+```
 
 # --instructions--
 
-Modify the `queryChain` function to find people who like the food specified by the variable named `foodToSearch`. Sort them by `name`, limit the results to two documents, and hide their age. Chain `.find()`, `.sort()`, `.limit()`, `.select()`, and then `.exec()`. Pass the `done(err, data)` callback to `exec()`.
+Create a person schema called `personSchema` having this prototype:
+
+```markup
+- Person Prototype -
+--------------------
+name : string [required]
+age :  number
+favoriteFoods : array of strings (*)
+```
+
+Use the Mongoose basic schema types. If you want you can also add more fields, use simple validators like required or unique, and set default values. See the [Mongoose docs](http://mongoosejs.com/docs/guide.html).
+
+Now, create a model called `Person` from the `personSchema`.
 
 # --hints--
 
-Chaining query helpers should succeed
+Creating an instance from a mongoose schema should succeed
 
 ```js
 (getUserInput) =>
-  $.ajax({
-    url: getUserInput('url') + '/_api/query-tools',
-    type: 'POST',
-    contentType: 'application/json',
-    data: JSON.stringify([
-      { name: 'Pablo', age: 26, favoriteFoods: ['burrito', 'hot-dog'] },
-      { name: 'Bob', age: 23, favoriteFoods: ['pizza', 'nachos'] },
-      { name: 'Ashley', age: 32, favoriteFoods: ['steak', 'burrito'] },
-      { name: 'Mario', age: 51, favoriteFoods: ['burrito', 'prosciutto'] }
-    ])
+  $.post(getUserInput('url') + '/_api/mongoose-model', {
+    name: 'Mike',
+    age: 28,
+    favoriteFoods: ['pizza', 'cheese']
   }).then(
     (data) => {
-      assert.isArray(data, 'the response should be an Array');
-      assert.equal(
-        data.length,
-        2,
-        'the data array length is not what expected'
+      assert.equal(data.name, 'Mike', '"model.name" is not what expected');
+      assert.equal(data.age, '28', '"model.age" is not what expected');
+      assert.isArray(
+        data.favoriteFoods,
+        '"model.favoriteFoods" is not an Array'
       );
-      assert.notProperty(
-        data[0],
-        'age',
-        'The returned first item has too many properties'
+      assert.include(
+        data.favoriteFoods,
+        'pizza',
+        '"model.favoriteFoods" does not include the expected items'
       );
-      assert.equal(
-        data[0].name,
-        'Ashley',
-        'The returned first item name is not what expected'
-      );
-      assert.notProperty(
-        data[1],
-        'age',
-        'The returned second item has too many properties'
-      );
-      assert.equal(
-        data[1].name,
-        'Mario',
-        'The returned second item name is not what expected'
+      assert.include(
+        data.favoriteFoods,
+        'cheese',
+        '"model.favoriteFoods" does not include the expected items'
       );
     },
     (xhr) => {
