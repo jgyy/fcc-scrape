@@ -1,75 +1,43 @@
 ---
-id: 587d7fb6367417b2b2512c07
-title: Create a Model
+id: 587d7fb6367417b2b2512c09
+title: Create and Save a Record of a Model
 challengeType: 2
-forumTopicId: 301535
-dashedName: create-a-model
+forumTopicId: 301536
+dashedName: create-and-save-a-record-of-a-model
 ---
 
 # --description--
 
-**C**RUD Part I - CREATE
+In this challenge you will have to create and save a record of a model.
 
-First of all we need a Schema. Each schema maps to a MongoDB collection. It defines the shape of the documents within that collection. Schemas are building block for Models. They can be nested to create complex models, but in this case we'll keep things simple. A model allows you to create instances of your objects, called documents.
+# --instructions--
 
-Repl.it is a real server, and in real servers the interactions with the database happen in handler functions. These functions are executed when some event happens (e.g. someone hits an endpoint on your API). We’ll follow the same approach in these exercises. The `done()` function is a callback that tells us that we can proceed after completing an asynchronous operation such as inserting, searching, updating, or deleting. It's following the Node convention, and should be called as `done(null, data)` on success, or `done(err)` on error.
-
-Warning - When interacting with remote services, errors may occur!
+Within the `createAndSavePerson` function, create a document instance using the `Person` model constructor you built before. Pass to the constructor an object having the fields `name`, `age`, and `favoriteFoods`. Their types must conform to the ones in the `personSchema`. Then, call the method `document.save()` on the returned document instance. Pass to it a callback using the Node convention. This is a common pattern; all the following CRUD methods take a callback function like this as the last argument.
 
 ```js
 /* Example */
 
-const someFunc = function(done) {
-  //... do something (risky) ...
-  if (error) return done(error);
-  done(null, result);
-};
+// ...
+person.save(function(err, data) {
+  //   ...do your stuff here...
+});
 ```
-
-# --instructions--
-
-Create a person schema called `personSchema` having this prototype:
-
-```markup
-- Person Prototype -
---------------------
-name : string [required]
-age :  number
-favoriteFoods : array of strings (*)
-```
-
-Use the Mongoose basic schema types. If you want you can also add more fields, use simple validators like required or unique, and set default values. See the [Mongoose docs](http://mongoosejs.com/docs/guide.html).
-
-Now, create a model called `Person` from the `personSchema`.
 
 # --hints--
 
-Creating an instance from a mongoose schema should succeed
+Creating and saving a db item should succeed
 
 ```js
 (getUserInput) =>
-  $.post(getUserInput('url') + '/_api/mongoose-model', {
-    name: 'Mike',
-    age: 28,
-    favoriteFoods: ['pizza', 'cheese']
-  }).then(
+  $.get(getUserInput('url') + '/_api/create-and-save-person').then(
     (data) => {
-      assert.equal(data.name, 'Mike', '"model.name" is not what expected');
-      assert.equal(data.age, '28', '"model.age" is not what expected');
+      assert.isString(data.name, '"item.name" should be a String');
+      assert.isNumber(data.age, '28', '"item.age" should be a Number');
       assert.isArray(
         data.favoriteFoods,
-        '"model.favoriteFoods" is not an Array'
+        '"item.favoriteFoods" should be an Array'
       );
-      assert.include(
-        data.favoriteFoods,
-        'pizza',
-        '"model.favoriteFoods" does not include the expected items'
-      );
-      assert.include(
-        data.favoriteFoods,
-        'cheese',
-        '"model.favoriteFoods" does not include the expected items'
-      );
+      assert.equal(data.__v, 0, 'The db item should be not previously edited');
     },
     (xhr) => {
       throw new Error(xhr.responseText);
