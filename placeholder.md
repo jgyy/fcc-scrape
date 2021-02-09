@@ -1,38 +1,45 @@
 ---
-id: 589fc831f9fc0f352b528e76
-title: Handle a Disconnect
+id: 58a25c98f9fc0f352b528e7f
+title: Hashing Your Passwords
 challengeType: 2
-forumTopicId: 301552
-dashedName: handle-a-disconnect
+forumTopicId: 301553
+dashedName: hashing-your-passwords
 ---
 
 # --description--
 
-You may notice that up to now you have only been increasing the user count. Handling a user disconnecting is just as easy as handling the initial connect, except you have to listen for it on each socket instead of on the whole server.
+Going back to the information security section, you may remember that storing plaintext passwords is *never* okay. Now it is time to implement BCrypt to solve this issue.
 
-To do this, add another listener inside the existing `'connect'` listener that listens for `'disconnect'` on the socket with no data passed through. You can test this functionality by just logging that a user has disconnected to the console.
+Add BCrypt as a dependency, and require it in your server. You will need to handle hashing in 2 key areas: where you handle registering/saving a new account, and when you check to see that a password is correct on login.
+
+Currently on our registration route, you insert a user's password into the database like so: `password: req.body.password`. An easy way to implement saving a hash instead is to add the following before your database logic `const hash = bcrypt.hashSync(req.body.password, 12);`, and replacing the `req.body.password` in the database saving with just `password: hash`.
+
+Finally, on our authentication strategy, we check for the following in our code before completing the process: `if (password !== user.password) { return done(null, false); }`. After making the previous changes, now `user.password` is a hash. Before making a change to the existing code, notice how the statement is checking if the password is **not** equal then return non-authenticated. With this in mind, your code could look as follows to properly check the password entered against the hash:
 
 ```js
-socket.on('disconnect', () => {
-  /*anything you want to do on disconnect*/
-});
+if (!bcrypt.compareSync(password, user.password)) { 
+  return done(null, false);
+}
 ```
 
-To make sure clients continuously have the updated count of current users, you should decrease the currentUsers by 1 when the disconnect happens then emit the 'user count' event with the updated count!
+That is all it takes to implement one of the most important security features when you have to store passwords!
 
-**Note:** Just like `'disconnect'`, all other events that a socket can emit to the server should be handled within the connecting listener where we have 'socket' defined.
-
-Submit your page when you think you've got it right. If you're running into errors, you can check out the project completed up to this point [here](https://gist.github.com/camperbot/ab1007b76069884fb45b215d3c4496fa).
+Submit your page when you think you've got it right. If you're running into errors, you can check out the project completed up to this point [here](https://gist.github.com/camperbot/dc16cca09daea4d4151a9c36a1fab564).
 
 # --hints--
 
-Server should handle the event disconnect from a socket.
+BCrypt should be a dependency.
 
 ```js
 (getUserInput) =>
-  $.get(getUserInput('url') + '/_api/server.js').then(
+  $.get(getUserInput('url') + '/_api/package.json').then(
     (data) => {
-      assert.match(data, /socket.on.*('|")disconnect('|")/gi, '');
+      var packJson = JSON.parse(data);
+      assert.property(
+        packJson.dependencies,
+        'bcrypt',
+        'Your project should list "bcrypt" as a dependency'
+      );
     },
     (xhr) => {
       throw new Error(xhr.statusText);
@@ -40,16 +47,26 @@ Server should handle the event disconnect from a socket.
   );
 ```
 
-Your client should be listening for 'user count' event.
+BCrypt should be correctly required and implemented.
 
 ```js
 (getUserInput) =>
-  $.get(getUserInput('url') + '/public/client.js').then(
+  $.get(getUserInput('url') + '/_api/server.js').then(
     (data) => {
       assert.match(
         data,
-        /socket.on.*('|")user count('|")/gi,
-        'Your client should be connection to server with the connection defined as socket'
+        /require.*("|')bcrypt\1/gi,
+        'You should have required bcrypt'
+      );
+      assert.match(
+        data,
+        /bcrypt.hashSync/gi,
+        'You should use hash the password in the registration'
+      );
+      assert.match(
+        data,
+        /bcrypt.compareSync/gi,
+        'You should compare the password to the hash in your strategy'
       );
     },
     (xhr) => {
