@@ -1,36 +1,48 @@
 ---
-id: 589690e6f9fc0f352b528e6e
-title: Clean Up Your Project with Modules
+id: 589fc831f9fc0f352b528e75
+title: Communicate by Emitting
 challengeType: 2
-forumTopicId: 301549
-dashedName: clean-up-your-project-with-modules
+forumTopicId: 301550
+dashedName: communicate-by-emitting
 ---
 
 # --description--
 
-Right now, everything you have is in your `server.js` file. This can lead to hard to manage code that isn't very expandable. Create 2 new files: `routes.js` and `auth.js`
+<dfn>Emit</dfn> is the most common way of communicating you will use. When you emit something from the server to 'io', you send an event's name and data to all the connected sockets. A good example of this concept would be emitting the current count of connected users each time a new user connects!
 
-Both should start with the following code:
+Start by adding a variable to keep track of the users, just before where you are currently listening for connections.
 
 ```js
-module.exports = function (app, myDataBase) {
-
-}
+let currentUsers = 0;
 ```
 
-Now, in the top of your server file, require these files like so: `const routes = require('./routes.js');` Right after you establish a successful connection with the database, instantiate each of them like so: `routes(app, myDataBase)`
+Now, when someone connects, you should increment the count before emitting the count. So, you will want to add the incrementer within the connection listener.
 
-Finally, take all of the routes in your server and paste them into your new files, and remove them from your server file. Also take the `ensureAuthenticated` function, since it was specifically created for routing. Now, you will have to correctly add the dependencies in which are used, such as `const passport = require('passport');`, at the very top, above the export line in your `routes.js` file.
+```js
+++currentUsers;
+```
 
-Keep adding them until no more errors exist, and your server file no longer has any routing (**except for the route in the catch block**)!
+Finally, after incrementing the count, you should emit the event (still within the connection listener). The event should be named 'user count', and the data should just be the `currentUsers`.
 
-Now do the same thing in your auth.js file with all of the things related to authentication such as the serialization and the setting up of the local strategy and erase them from your server file. Be sure to add the dependencies in and call `auth(app, myDataBase)` in the server in the same spot.
+```js
+io.emit('user count', currentUsers);
+```
 
-Submit your page when you think you've got it right. If you're running into errors, you can check out an example of the completed project [here](https://gist.github.com/camperbot/2d06ac5c7d850d8cf073d2c2c794cc92).
+Now, you can implement a way for your client to listen for this event! Similar to listening for a connection on the server, you will use the `on` keyword.
+
+```js
+socket.on('user count', function(data) {
+  console.log(data);
+});
+```
+
+Now, try loading up your app, authenticate, and you should see in your client console '1' representing the current user count! Try loading more clients up, and authenticating to see the number go up.
+
+Submit your page when you think you've got it right. If you're running into errors, you can check out the project completed up to this point [here](https://gist.github.com/camperbot/28ef7f1078f56eb48c7b1aeea35ba1f5).
 
 # --hints--
 
-Modules should be present.
+currentUsers should be defined.
 
 ```js
 (getUserInput) =>
@@ -38,13 +50,44 @@ Modules should be present.
     (data) => {
       assert.match(
         data,
-        /require\s*\(('|")\.\/routes(\.js)?\1\)/gi,
-        'You should have required your new files'
+        /currentUsers/gi,
+        'You should have variable currentUsers defined'
       );
+    },
+    (xhr) => {
+      throw new Error(xhr.statusText);
+    }
+  );
+```
+
+Server should emit the current user count at each new connection.
+
+```js
+(getUserInput) =>
+  $.get(getUserInput('url') + '/_api/server.js').then(
+    (data) => {
       assert.match(
         data,
-        /client.db[^]*routes/gi,
-        'Your new modules should be called after your connection to the database'
+        /io.emit.*('|")user count('|").*currentUsers/gi,
+        'You should emit "user count" with data currentUsers'
+      );
+    },
+    (xhr) => {
+      throw new Error(xhr.statusText);
+    }
+  );
+```
+
+Your client should be listening for 'user count' event.
+
+```js
+(getUserInput) =>
+  $.get(getUserInput('url') + '/public/client.js').then(
+    (data) => {
+      assert.match(
+        data,
+        /socket.on.*('|")user count('|")/gi,
+        'Your client should be connection to server with the connection defined as socket'
       );
     },
     (xhr) => {
