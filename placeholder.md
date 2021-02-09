@@ -1,48 +1,41 @@
 ---
-id: 589fc831f9fc0f352b528e75
-title: Communicate by Emitting
+id: 5895f70df9fc0f352b528e6a
+title: Create New Middleware
 challengeType: 2
-forumTopicId: 301550
-dashedName: communicate-by-emitting
+forumTopicId: 301551
+dashedName: create-new-middleware
 ---
 
 # --description--
 
-<dfn>Emit</dfn> is the most common way of communicating you will use. When you emit something from the server to 'io', you send an event's name and data to all the connected sockets. A good example of this concept would be emitting the current count of connected users each time a new user connects!
+As is, any user can just go to `/profile` whether they have authenticated or not, by typing in the url. We want to prevent this, by checking if the user is authenticated first before rendering the profile page. This is the perfect example of when to create a middleware.
 
-Start by adding a variable to keep track of the users, just before where you are currently listening for connections.
-
-```js
-let currentUsers = 0;
-```
-
-Now, when someone connects, you should increment the count before emitting the count. So, you will want to add the incrementer within the connection listener.
+The challenge here is creating the middleware function `ensureAuthenticated(req, res, next)`, which will check if a user is authenticated by calling passport's `isAuthenticated` method on the `request` which, in turn, checks if `req.user` is defined. If it is, then `next()` should be called, otherwise, we can just respond to the request with a redirect to our homepage to login. An implementation of this middleware is:
 
 ```js
-++currentUsers;
+function ensureAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) {
+    return next();
+  }
+  res.redirect('/');
+};
 ```
 
-Finally, after incrementing the count, you should emit the event (still within the connection listener). The event should be named 'user count', and the data should just be the `currentUsers`.
+Now add *ensureAuthenticated* as a middleware to the request for the profile page before the argument to the get request containing the function that renders the page.
 
 ```js
-io.emit('user count', currentUsers);
+app
+ .route('/profile')
+ .get(ensureAuthenticated, (req,res) => {
+    res.render(process.cwd() + '/views/pug/profile');
+ });
 ```
 
-Now, you can implement a way for your client to listen for this event! Similar to listening for a connection on the server, you will use the `on` keyword.
-
-```js
-socket.on('user count', function(data) {
-  console.log(data);
-});
-```
-
-Now, try loading up your app, authenticate, and you should see in your client console '1' representing the current user count! Try loading more clients up, and authenticating to see the number go up.
-
-Submit your page when you think you've got it right. If you're running into errors, you can check out the project completed up to this point [here](https://gist.github.com/camperbot/28ef7f1078f56eb48c7b1aeea35ba1f5).
+Submit your page when you think you've got it right. If you're running into errors, you can check out the project completed up to this point [here](https://gist.github.com/camperbot/ae49b8778cab87e93284a91343da0959).
 
 # --hints--
 
-currentUsers should be defined.
+Middleware ensureAuthenticated should be implemented and on our /profile route.
 
 ```js
 (getUserInput) =>
@@ -50,8 +43,13 @@ currentUsers should be defined.
     (data) => {
       assert.match(
         data,
-        /currentUsers/gi,
-        'You should have variable currentUsers defined'
+        /ensureAuthenticated[^]*req.isAuthenticated/gi,
+        'Your ensureAuthenticated middleware should be defined and utilize the req.isAuthenticated function'
+      );
+      assert.match(
+        data,
+        /profile[^]*get[^]*ensureAuthenticated/gi,
+        'Your ensureAuthenticated middleware should be attached to the /profile route'
       );
     },
     (xhr) => {
@@ -60,34 +58,16 @@ currentUsers should be defined.
   );
 ```
 
-Server should emit the current user count at each new connection.
+A Get request to /profile should correctly redirect to / since we are not authenticated.
 
 ```js
 (getUserInput) =>
-  $.get(getUserInput('url') + '/_api/server.js').then(
+  $.get(getUserInput('url') + '/profile').then(
     (data) => {
       assert.match(
         data,
-        /io.emit.*('|")user count('|").*currentUsers/gi,
-        'You should emit "user count" with data currentUsers'
-      );
-    },
-    (xhr) => {
-      throw new Error(xhr.statusText);
-    }
-  );
-```
-
-Your client should be listening for 'user count' event.
-
-```js
-(getUserInput) =>
-  $.get(getUserInput('url') + '/public/client.js').then(
-    (data) => {
-      assert.match(
-        data,
-        /socket.on.*('|")user count('|")/gi,
-        'Your client should be connection to server with the connection defined as socket'
+        /Home page/gi,
+        'An attempt to go to the profile at this point should redirect to the homepage since we are not logged in'
       );
     },
     (xhr) => {
