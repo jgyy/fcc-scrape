@@ -1,109 +1,36 @@
 ---
-id: 589fc831f9fc0f352b528e77
-title: Authentication with Socket.IO
+id: 589690e6f9fc0f352b528e6e
+title: Clean Up Your Project with Modules
 challengeType: 2
-forumTopicId: 301548
-dashedName: authentication-with-socket-io
+forumTopicId: 301549
+dashedName: clean-up-your-project-with-modules
 ---
 
 # --description--
 
-Currently, you cannot determine who is connected to your web socket. While `req.user` contains the user object, that's only when your user interacts with the web server, and with web sockets you have no `req` (request) and therefore no user data. One way to solve the problem of knowing who is connected to your web socket is by parsing and decoding the cookie that contains the passport session then deserializing it to obtain the user object. Luckily, there is a package on NPM just for this that turns a once complex task into something simple!
+Right now, everything you have is in your `server.js` file. This can lead to hard to manage code that isn't very expandable. Create 2 new files: `routes.js` and `auth.js`
 
-Add `passport.socketio`, `connect-mongo`, and `cookie-parser` as dependencies and require them as `passportSocketIo`, `MongoStore`, and `cookieParser` respectively. Also, we need to initialize a new memory store, from `express-session` which we previously required. It should look like this:
-
-```js
-const MongoStore = require('connect-mongo')(session);
-const URI = process.env.MONGO_URI;
-const store = new MongoStore({ url: URI });
-```
-
-Now we just have to tell Socket.IO to use it and set the options. Be sure this is added before the existing socket code and not in the existing connection listener. For your server, it should look like this:
+Both should start with the following code:
 
 ```js
-io.use(
-  passportSocketIo.authorize({
-    cookieParser: cookieParser,
-    key: 'express.sid',
-    secret: process.env.SESSION_SECRET,
-    store: store,
-    success: onAuthorizeSuccess,
-    fail: onAuthorizeFail
-  })
-);
-```
+module.exports = function (app, myDataBase) {
 
-Be sure to add the `key` and `store` to the `session` middleware mounted on the app. This is necessary to tell *SocketIO* which session to relate to.
-
-<hr>
-
-Now, define the `success`, and `fail` callback functions:
-
-```js
-function onAuthorizeSuccess(data, accept) {
-  console.log('successful connection to socket.io');
-
-  accept(null, true);
-}
-
-function onAuthorizeFail(data, message, error, accept) {
-  if (error) throw new Error(message);
-  console.log('failed connection to socket.io:', message);
-  accept(null, false);
 }
 ```
 
-The user object is now accessible on your socket object as `socket.request.user`. For example, now you can add the following:
+Now, in the top of your server file, require these files like so: `const routes = require('./routes.js');` Right after you establish a successful connection with the database, instantiate each of them like so: `routes(app, myDataBase)`
 
-```js
-console.log('user ' + socket.request.user.name + ' connected');
-```
+Finally, take all of the routes in your server and paste them into your new files, and remove them from your server file. Also take the `ensureAuthenticated` function, since it was specifically created for routing. Now, you will have to correctly add the dependencies in which are used, such as `const passport = require('passport');`, at the very top, above the export line in your `routes.js` file.
 
-It will log to the server console who has connected!
+Keep adding them until no more errors exist, and your server file no longer has any routing (**except for the route in the catch block**)!
 
-Submit your page when you think you've got it right. If you're running into errors, you can check out the project up to this point [here](https://gist.github.com/camperbot/1414cc9433044e306dd7fd0caa1c6254).
+Now do the same thing in your auth.js file with all of the things related to authentication such as the serialization and the setting up of the local strategy and erase them from your server file. Be sure to add the dependencies in and call `auth(app, myDataBase)` in the server in the same spot.
+
+Submit your page when you think you've got it right. If you're running into errors, you can check out an example of the completed project [here](https://gist.github.com/camperbot/2d06ac5c7d850d8cf073d2c2c794cc92).
 
 # --hints--
 
-`passport.socketio` should be a dependency.
-
-```js
-(getUserInput) =>
-  $.get(getUserInput('url') + '/_api/package.json').then(
-    (data) => {
-      var packJson = JSON.parse(data);
-      assert.property(
-        packJson.dependencies,
-        'passport.socketio',
-        'Your project should list "passport.socketio" as a dependency'
-      );
-    },
-    (xhr) => {
-      throw new Error(xhr.statusText);
-    }
-  );
-```
-
-`cookie-parser` should be a dependency.
-
-```js
-(getUserInput) =>
-  $.get(getUserInput('url') + '/_api/package.json').then(
-    (data) => {
-      var packJson = JSON.parse(data);
-      assert.property(
-        packJson.dependencies,
-        'cookie-parser',
-        'Your project should list "cookie-parser" as a dependency'
-      );
-    },
-    (xhr) => {
-      throw new Error(xhr.statusText);
-    }
-  );
-```
-
-passportSocketIo should be properly required.
+Modules should be present.
 
 ```js
 (getUserInput) =>
@@ -111,26 +38,13 @@ passportSocketIo should be properly required.
     (data) => {
       assert.match(
         data,
-        /require\((['"])passport\.socketio\1\)/gi,
-        'You should correctly require and instantiate "passport.socketio"'
+        /require\s*\(('|")\.\/routes(\.js)?\1\)/gi,
+        'You should have required your new files'
       );
-    },
-    (xhr) => {
-      throw new Error(xhr.statusText);
-    }
-  );
-```
-
-passportSocketIo should be properly setup.
-
-```js
-(getUserInput) =>
-  $.get(getUserInput('url') + '/_api/server.js').then(
-    (data) => {
       assert.match(
         data,
-        /io\.use\(\s*\w+\.authorize\(/,
-        'You should register "passport.socketio" as socket.io middleware and provide it correct options'
+        /client.db[^]*routes/gi,
+        'Your new modules should be called after your connection to the database'
       );
     },
     (xhr) => {
