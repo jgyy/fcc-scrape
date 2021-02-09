@@ -1,56 +1,38 @@
 ---
-id: 5895f70df9fc0f352b528e6a
-title: Create New Middleware
+id: 589fc831f9fc0f352b528e76
+title: Handle a Disconnect
 challengeType: 2
-forumTopicId: 301551
-dashedName: create-new-middleware
+forumTopicId: 301552
+dashedName: handle-a-disconnect
 ---
 
 # --description--
 
-As is, any user can just go to `/profile` whether they have authenticated or not, by typing in the url. We want to prevent this, by checking if the user is authenticated first before rendering the profile page. This is the perfect example of when to create a middleware.
+You may notice that up to now you have only been increasing the user count. Handling a user disconnecting is just as easy as handling the initial connect, except you have to listen for it on each socket instead of on the whole server.
 
-The challenge here is creating the middleware function `ensureAuthenticated(req, res, next)`, which will check if a user is authenticated by calling passport's `isAuthenticated` method on the `request` which, in turn, checks if `req.user` is defined. If it is, then `next()` should be called, otherwise, we can just respond to the request with a redirect to our homepage to login. An implementation of this middleware is:
-
-```js
-function ensureAuthenticated(req, res, next) {
-  if (req.isAuthenticated()) {
-    return next();
-  }
-  res.redirect('/');
-};
-```
-
-Now add *ensureAuthenticated* as a middleware to the request for the profile page before the argument to the get request containing the function that renders the page.
+To do this, add another listener inside the existing `'connect'` listener that listens for `'disconnect'` on the socket with no data passed through. You can test this functionality by just logging that a user has disconnected to the console.
 
 ```js
-app
- .route('/profile')
- .get(ensureAuthenticated, (req,res) => {
-    res.render(process.cwd() + '/views/pug/profile');
- });
+socket.on('disconnect', () => {
+  /*anything you want to do on disconnect*/
+});
 ```
 
-Submit your page when you think you've got it right. If you're running into errors, you can check out the project completed up to this point [here](https://gist.github.com/camperbot/ae49b8778cab87e93284a91343da0959).
+To make sure clients continuously have the updated count of current users, you should decrease the currentUsers by 1 when the disconnect happens then emit the 'user count' event with the updated count!
+
+**Note:** Just like `'disconnect'`, all other events that a socket can emit to the server should be handled within the connecting listener where we have 'socket' defined.
+
+Submit your page when you think you've got it right. If you're running into errors, you can check out the project completed up to this point [here](https://gist.github.com/camperbot/ab1007b76069884fb45b215d3c4496fa).
 
 # --hints--
 
-Middleware ensureAuthenticated should be implemented and on our /profile route.
+Server should handle the event disconnect from a socket.
 
 ```js
 (getUserInput) =>
   $.get(getUserInput('url') + '/_api/server.js').then(
     (data) => {
-      assert.match(
-        data,
-        /ensureAuthenticated[^]*req.isAuthenticated/gi,
-        'Your ensureAuthenticated middleware should be defined and utilize the req.isAuthenticated function'
-      );
-      assert.match(
-        data,
-        /profile[^]*get[^]*ensureAuthenticated/gi,
-        'Your ensureAuthenticated middleware should be attached to the /profile route'
-      );
+      assert.match(data, /socket.on.*('|")disconnect('|")/gi, '');
     },
     (xhr) => {
       throw new Error(xhr.statusText);
@@ -58,16 +40,16 @@ Middleware ensureAuthenticated should be implemented and on our /profile route.
   );
 ```
 
-A Get request to /profile should correctly redirect to / since we are not authenticated.
+Your client should be listening for 'user count' event.
 
 ```js
 (getUserInput) =>
-  $.get(getUserInput('url') + '/profile').then(
+  $.get(getUserInput('url') + '/public/client.js').then(
     (data) => {
       assert.match(
         data,
-        /Home page/gi,
-        'An attempt to go to the profile at this point should redirect to the homepage since we are not logged in'
+        /socket.on.*('|")user count('|")/gi,
+        'Your client should be connection to server with the connection defined as socket'
       );
     },
     (xhr) => {
