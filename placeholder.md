@@ -1,32 +1,39 @@
 ---
-id: 5895f700f9fc0f352b528e63
-title: Set up a Template Engine
+id: 5895f70cf9fc0f352b528e65
+title: Set up Passport
 challengeType: 2
-forumTopicId: 301564
-dashedName: set-up-a-template-engine
+forumTopicId: 301565
+dashedName: set-up-passport
 ---
 
 # --description--
 
-As a reminder, this project is built upon the following starter project on [Repl.it](https://repl.it/github/freeCodeCamp/boilerplate-advancednode), or clone from [GitHub](https://github.com/freeCodeCamp/boilerplate-advancednode/).
+It's time to set up *Passport* so we can finally start allowing a user to register or login to an account! In addition to Passport, we will use Express-session to handle sessions. Using this middleware saves the session id as a cookie in the client and allows us to access the session data using that id on the server. This way we keep personal account information out of the cookie used by the client to verify to our server they are authenticated and just keep the *key* to access the data stored on the server.
 
-A template engine enables you to use static template files (such as those written in *Pug*) in your app. At runtime, the template engine replaces variables in a template file with actual values which can be supplied by your server. Then it transforms the template into a static HTML file that is sent to the client. This approach makes it easier to design an HTML page and allows for displaying variables on the page without needing to make an API call from the client.
+To set up Passport for use in your project, you will need to add it as a dependency first in your package.json. `"passport": "^0.3.2"`
 
-Add `pug@~3.0.0` as a dependency in your `package.json` file.
+In addition, add Express-session as a dependency now as well. Express-session has a ton of advanced features you can use but for now we're just going to use the basics! `"express-session": "^1.15.0"`
 
-Express needs to know which template engine you are using. We will use the `set` method to assign `pug` as the `view engine` property's value: `app.set('view engine', 'pug')`
+You will need to set up the session settings now and initialize Passport. Be sure to first create the variables 'session' and 'passport' to require 'express-session' and 'passport' respectively.
 
-Your page will not load until you correctly render the index file in the `views/pug` directory.
+To set up your express app to use the session we'll define just a few basic options. Be sure to add 'SESSION_SECRET' to your .env file and give it a random value. This is used to compute the hash used to encrypt your cookie!
 
-Change the argument of the `res.render()` declaration in the `/` route to be the file path to the `views/pug` directory. The path can be a relative path (relative to views), or an absolute path, and does not require a file extension.
+```js
+app.use(session({
+  secret: process.env.SESSION_SECRET,
+  resave: true,
+  saveUninitialized: true,
+  cookie: { secure: false }
+}));
+```
 
-If all went as planned, your app home page will stop showing the message "`Pug template is not defined.`" and will now display a message indicating you've successfully rendered the Pug template!
+As well you can go ahead and tell your express app to **use** 'passport.initialize()' and 'passport.session()'. (For example, `app.use(passport.initialize());`)
 
-Submit your page when you think you've got it right. If you're running into errors, you can check out the project completed up to this point [here](https://gist.github.com/camperbot/3515cd676ea4dfceab4e322f59a37791).
+Submit your page when you think you've got it right. If you're running into errors, you can check out the project completed up to this point [here](https://gist.github.com/camperbot/4068a7662a2f9f5d5011074397d6788c).
 
 # --hints--
 
-Pug should be a dependency.
+Passport and Express-session should be dependencies.
 
 ```js
 (getUserInput) =>
@@ -35,8 +42,13 @@ Pug should be a dependency.
       var packJson = JSON.parse(data);
       assert.property(
         packJson.dependencies,
-        'pug',
-        'Your project should list "pug" as a dependency'
+        'passport',
+        'Your project should list "passport" as a dependency'
+      );
+      assert.property(
+        packJson.dependencies,
+        'express-session',
+        'Your project should list "express-session" as a dependency'
       );
     },
     (xhr) => {
@@ -45,7 +57,7 @@ Pug should be a dependency.
   );
 ```
 
-View engine should be Pug.
+Dependencies should be correctly required.
 
 ```js
 (getUserInput) =>
@@ -53,8 +65,13 @@ View engine should be Pug.
     (data) => {
       assert.match(
         data,
-        /('|")view engine('|"),( |)('|")pug('|")/gi,
-        'Your project should set Pug as a view engine'
+        /require.*("|')passport("|')/gi,
+        'You should have required passport'
+      );
+      assert.match(
+        data,
+        /require.*("|')express-session("|')/gi,
+        'You should have required express-session'
       );
     },
     (xhr) => {
@@ -63,16 +80,21 @@ View engine should be Pug.
   );
 ```
 
-Use the correct ExpressJS method to render the index page from the response.
+Express app should use new dependencies.
 
 ```js
 (getUserInput) =>
-  $.get(getUserInput('url') + '/').then(
+  $.get(getUserInput('url') + '/_api/server.js').then(
     (data) => {
       assert.match(
         data,
-        /FCC Advanced Node and Express/gi,
-        'You successfully rendered the Pug template!'
+        /passport.initialize/gi,
+        'Your express app should use "passport.initialize()"'
+      );
+      assert.match(
+        data,
+        /passport.session/gi,
+        'Your express app should use "passport.session()"'
       );
     },
     (xhr) => {
@@ -81,16 +103,16 @@ Use the correct ExpressJS method to render the index page from the response.
   );
 ```
 
-Pug should be working.
+Session and session secret should be correctly set up.
 
 ```js
 (getUserInput) =>
-  $.get(getUserInput('url') + '/').then(
+  $.get(getUserInput('url') + '/_api/server.js').then(
     (data) => {
       assert.match(
         data,
-        /pug-success-message/gi,
-        'Your projects home page should now be rendered by pug with the projects .pug file unaltered'
+        /secret:( |)process.env.SESSION_SECRET/gi,
+        'Your express app should have express-session set up with your secret as process.env.SESSION_SECRET'
       );
     },
     (xhr) => {
