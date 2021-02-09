@@ -1,53 +1,54 @@
 ---
-id: 589fc832f9fc0f352b528e78
-title: Announce New Users
+id: 5895f70df9fc0f352b528e68
+title: Authentication Strategies
 challengeType: 2
-forumTopicId: 301546
-dashedName: announce-new-users
+forumTopicId: 301547
+dashedName: authentication-strategies
 ---
 
 # --description--
 
-Many chat rooms are able to announce when a user connects or disconnects and then display that to all of the connected users in the chat. Seeing as though you already are emitting an event on connect and disconnect, you will just have to modify this event to support such a feature. The most logical way of doing so is sending 3 pieces of data with the event: the name of the user who connected/disconnected, the current user count, and if that name connected or disconnected.
+A strategy is a way of authenticating a user. You can use a strategy for allowing users to authenticate based on locally saved information (if you have them register first) or from a variety of providers such as Google or GitHub. For this project, we will set up a local strategy. To see a list of the hundreds of strategies, visit Passport's site [here](http://passportjs.org/).
 
-Change the event name to `'user'`, and pass an object along containing the fields 'name', 'currentUsers', and 'connected' (to be `true` in case of connection, or `false` for disconnection of the user sent). Be sure to change both 'user count' events and set the disconnect one to send `false` for the field 'connected' instead of `true` like the event emitted on connect.
+Add `passport-local` as a dependency and add it to your server as follows: `const LocalStrategy = require('passport-local');`
 
-```js
-io.emit('user', {
-  name: socket.request.user.name,
-  currentUsers,
-  connected: true
-});
-```
-
-Now your client will have all the necessary information to correctly display the current user count and announce when a user connects or disconnects! To handle this event on the client side we should listen for `'user'`, then update the current user count by using jQuery to change the text of `#num-users` to `'{NUMBER} users online'`, as well as append a `<li>` to the unordered list with id `messages` with `'{NAME} has {joined/left} the chat.'`.
-
-An implementation of this could look like the following:
+Now you will have to tell passport to **use** an instantiated LocalStrategy object with a few settings defined. Make sure this (as well as everything from this point on) is encapsulated in the database connection since it relies on it!
 
 ```js
-socket.on('user', data => {
-  $('#num-users').text(data.currentUsers + ' users online');
-  let message =
-    data.name +
-    (data.connected ? ' has joined the chat.' : ' has left the chat.');
-  $('#messages').append($('<li>').html('<b>' + message + '</b>'));
-});
+passport.use(new LocalStrategy(
+  function(username, password, done) {
+    myDataBase.findOne({ username: username }, function (err, user) {
+      console.log('User '+ username +' attempted to log in.');
+      if (err) { return done(err); }
+      if (!user) { return done(null, false); }
+      if (password !== user.password) { return done(null, false); }
+      return done(null, user);
+    });
+  }
+));
 ```
 
-Submit your page when you think you've got it right. If you're running into errors, you can check out the project completed up to this point [here](https://gist.github.com/camperbot/bf95a0f74b756cf0771cd62c087b8286).
+This is defining the process to use when we try to authenticate someone locally. First, it tries to find a user in our database with the username entered, then it checks for the password to match, then finally, if no errors have popped up that we checked for, like an incorrect password, the `user`'s object is returned and they are authenticated.
+
+Many strategies are set up using different settings, but generally it is easy to set it up based on the README in that strategy's repository. A good example of this is the GitHub strategy where we don't need to worry about a username or password because the user will be sent to GitHub's auth page to authenticate. As long as they are logged in and agree then GitHub returns their profile for us to use.
+
+In the next step, we will set up how to actually call the authentication strategy to validate a user based on form data!
+
+Submit your page when you think you've got it right. If you're running into errors, you can check out the project completed up to this point [here](https://gist.github.com/camperbot/53b495c02b92adeee0aa1bd3f3be8a4b).
 
 # --hints--
 
-Event `'user'` should be emitted with name, currentUsers, and connected.
+Passport-local should be a dependency.
 
 ```js
 (getUserInput) =>
-  $.get(getUserInput('url') + '/_api/server.js').then(
+  $.get(getUserInput('url') + '/_api/package.json').then(
     (data) => {
-      assert.match(
-        data,
-        /io.emit.*('|")user\1.*name.*currentUsers.*connected/gis,
-        'You should have an event emitted named user sending name, currentUsers, and connected'
+      var packJson = JSON.parse(data);
+      assert.property(
+        packJson.dependencies,
+        'passport-local',
+        'Your project should list "passport-local " as a dependency'
       );
     },
     (xhr) => {
@@ -56,21 +57,26 @@ Event `'user'` should be emitted with name, currentUsers, and connected.
   );
 ```
 
-Client should properly handle and display the new data from event `'user'`.
+Passport-local should be correctly required and setup.
 
 ```js
 (getUserInput) =>
-  $.get(getUserInput('url') + '/public/client.js').then(
+  $.get(getUserInput('url') + '/_api/server.js').then(
     (data) => {
       assert.match(
         data,
-        /socket.on.*('|")user\1[^]*num-users/gi,
-        'You should change the text of "#num-users" within on your client within the "user" event listener to show the current users connected'
+        /require.*("|')passport-local("|')/gi,
+        'You should have required passport-local'
       );
       assert.match(
         data,
-        /socket.on.*('|")user\1[^]*messages.*li/gi,
-        'You should append a list item to "#messages" on your client within the "user" event listener to announce a user came or went'
+        /new LocalStrategy/gi,
+        'You should have told passport to use a new strategy'
+      );
+      assert.match(
+        data,
+        /findOne/gi,
+        'Your new local strategy should use the findOne query to find a username based on the inputs'
       );
     },
     (xhr) => {
