@@ -1,39 +1,52 @@
 ---
-id: 5895f70cf9fc0f352b528e65
-title: Set up Passport
+id: 589fc830f9fc0f352b528e74
+title: Set up the Environment
 challengeType: 2
-forumTopicId: 301565
-dashedName: set-up-passport
+forumTopicId: 301566
+dashedName: set-up-the-environment
 ---
 
 # --description--
 
-It's time to set up *Passport* so we can finally start allowing a user to register or login to an account! In addition to Passport, we will use Express-session to handle sessions. Using this middleware saves the session id as a cookie in the client and allows us to access the session data using that id on the server. This way we keep personal account information out of the cookie used by the client to verify to our server they are authenticated and just keep the *key* to access the data stored on the server.
+The following challenges will make use of the `chat.pug` file. So, in your `routes.js` file, add a GET route pointing to `/chat` which makes use of `ensureAuthenticated`, and renders `chat.pug`, with `{ user: req.user }` passed as an argument to the response. Now, alter your existing `/auth/github/callback` route to set the `req.session.user_id = req.user.id`, and redirect to `/chat`.
 
-To set up Passport for use in your project, you will need to add it as a dependency first in your package.json. `"passport": "^0.3.2"`
+Add `http` and `socket.io` as a dependency and require/instantiate them in your server defined as follows:
 
-In addition, add Express-session as a dependency now as well. Express-session has a ton of advanced features you can use but for now we're just going to use the basics! `"express-session": "^1.15.0"`
-
-You will need to set up the session settings now and initialize Passport. Be sure to first create the variables 'session' and 'passport' to require 'express-session' and 'passport' respectively.
-
-To set up your express app to use the session we'll define just a few basic options. Be sure to add 'SESSION_SECRET' to your .env file and give it a random value. This is used to compute the hash used to encrypt your cookie!
-
-```js
-app.use(session({
-  secret: process.env.SESSION_SECRET,
-  resave: true,
-  saveUninitialized: true,
-  cookie: { secure: false }
-}));
+```javascript
+const http = require('http').createServer(app);
+const io = require('socket.io')(http);
 ```
 
-As well you can go ahead and tell your express app to **use** 'passport.initialize()' and 'passport.session()'. (For example, `app.use(passport.initialize());`)
+Now that the *http* server is mounted on the *express app*, you need to listen from the *http* server. Change the line with `app.listen` to `http.listen`.
 
-Submit your page when you think you've got it right. If you're running into errors, you can check out the project completed up to this point [here](https://gist.github.com/camperbot/4068a7662a2f9f5d5011074397d6788c).
+The first thing needing to be handled is listening for a new connection from the client. The <dfn>on</dfn> keyword does just that- listen for a specific event. It requires 2 arguments: a string containing the title of the event thats emitted, and a function with which the data is passed though. In the case of our connection listener, we use *socket* to define the data in the second argument. A socket is an individual client who is connected.
+
+To listen for connections to your server, add the following within your database connection:
+
+```javascript
+io.on('connection', socket => {
+  console.log('A user has connected');
+});
+```
+
+Now for the client to connect, you just need to add the following to your `client.js` which is loaded by the page after you've authenticated:
+
+```js
+/*global io*/
+let socket = io();
+```
+
+The comment suppresses the error you would normally see since 'io' is not defined in the file. We've already added a reliable CDN to the Socket.IO library on the page in chat.pug.
+
+Now try loading up your app and authenticate and you should see in your server console 'A user has connected'!
+
+**Note:**`io()` works only when connecting to a socket hosted on the same url/server. For connecting to an external socket hosted elsewhere, you would use `io.connect('URL');`.
+
+Submit your page when you think you've got it right. If you're running into errors, you can check out the project completed up to this point [here](https://gist.github.com/camperbot/aae41cf59debc1a4755c9a00ee3859d1).
 
 # --hints--
 
-Passport and Express-session should be dependencies.
+`socket.io` should be a dependency.
 
 ```js
 (getUserInput) =>
@@ -42,13 +55,8 @@ Passport and Express-session should be dependencies.
       var packJson = JSON.parse(data);
       assert.property(
         packJson.dependencies,
-        'passport',
-        'Your project should list "passport" as a dependency'
-      );
-      assert.property(
-        packJson.dependencies,
-        'express-session',
-        'Your project should list "express-session" as a dependency'
+        'socket.io',
+        'Your project should list "socket.io" as a dependency'
       );
     },
     (xhr) => {
@@ -57,7 +65,7 @@ Passport and Express-session should be dependencies.
   );
 ```
 
-Dependencies should be correctly required.
+You should correctly require and instantiate `http` as `http`.
 
 ```js
 (getUserInput) =>
@@ -65,13 +73,8 @@ Dependencies should be correctly required.
     (data) => {
       assert.match(
         data,
-        /require.*("|')passport("|')/gi,
-        'You should have required passport'
-      );
-      assert.match(
-        data,
-        /require.*("|')express-session("|')/gi,
-        'You should have required express-session'
+        /http.*=.*require.*('|")http\1/gi,
+        'Your project should list "http" as a dependency'
       );
     },
     (xhr) => {
@@ -80,7 +83,7 @@ Dependencies should be correctly required.
   );
 ```
 
-Express app should use new dependencies.
+You should correctly require and instantiate `socket.io` as `io`.
 
 ```js
 (getUserInput) =>
@@ -88,13 +91,8 @@ Express app should use new dependencies.
     (data) => {
       assert.match(
         data,
-        /passport.initialize/gi,
-        'Your express app should use "passport.initialize()"'
-      );
-      assert.match(
-        data,
-        /passport.session/gi,
-        'Your express app should use "passport.session()"'
+        /io.*=.*require.*('|")socket.io\1.*http/gi,
+        'You should correctly require and instantiate socket.io as io.'
       );
     },
     (xhr) => {
@@ -103,7 +101,7 @@ Express app should use new dependencies.
   );
 ```
 
-Session and session secret should be correctly set up.
+Socket.IO should be listening for connections.
 
 ```js
 (getUserInput) =>
@@ -111,8 +109,26 @@ Session and session secret should be correctly set up.
     (data) => {
       assert.match(
         data,
-        /secret:( |)process.env.SESSION_SECRET/gi,
-        'Your express app should have express-session set up with your secret as process.env.SESSION_SECRET'
+        /io.on.*('|")connection\1.*socket/gi,
+        'io should listen for "connection" and socket should be the 2nd arguments variable'
+      );
+    },
+    (xhr) => {
+      throw new Error(xhr.statusText);
+    }
+  );
+```
+
+Your client should connect to your server.
+
+```js
+(getUserInput) =>
+  $.get(getUserInput('url') + '/public/client.js').then(
+    (data) => {
+      assert.match(
+        data,
+        /socket.*=.*io/gi,
+        'Your client should be connection to server with the connection defined as socket'
       );
     },
     (xhr) => {
