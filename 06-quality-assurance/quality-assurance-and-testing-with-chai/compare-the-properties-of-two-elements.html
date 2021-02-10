@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>Assert Deep Equality with .deepEqual and .notDeepEqual</title>
+  <title>Compare the Properties of Two Elements</title>
   <style>
     html {
       line-height: 1.5;
@@ -213,17 +213,16 @@
 </head>
 <body>
 <header id="title-block-header">
-<h1 class="title">Assert Deep Equality with .deepEqual and .notDeepEqual</h1>
+<h1 class="title">Compare the Properties of Two Elements</h1>
 </header>
 <h1 id="description">–description–</h1>
 <p>As a reminder, this project is being built upon the following starter project on <a href="https://repl.it/github/freeCodeCamp/boilerplate-mochachai">Repl.it</a>, or cloned from <a href="https://github.com/freeCodeCamp/boilerplate-mochachai/">GitHub</a>.</p>
-<p><code>deepEqual()</code> asserts that two objects are deep equal.</p>
 <h1 id="instructions">–instructions–</h1>
-<p>Within <code>tests/1_unit-tests.js</code> under the test labelled <code>#7</code> in the <code>Equality</code> suite, change each <code>assert</code> to either <code>assert.deepEqual</code> or <code>assert.notDeepEqual</code> to make the test pass (should evaluate to <code>true</code>). Do not alter the arguments passed to the asserts.</p>
+<p>Within <code>tests/1_unit-tests.js</code> under the test labelled <code>#8</code> in the <code>Comparisons</code> suite, change each <code>assert</code> to either <code>assert.isAbove</code> or <code>assert.isAtMost</code> to make the test pass (should evaluate to <code>true</code>). Do not alter the arguments passed to the asserts.</p>
 <h1 id="hints">–hints–</h1>
 <p>All tests should pass.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>(getUserInput) <span class="kw">=&gt;</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  $<span class="op">.</span><span class="fu">get</span>(<span class="fu">getUserInput</span>(<span class="st">&#39;url&#39;</span>) <span class="op">+</span> <span class="st">&#39;/_api/get-tests?type=unit&amp;n=6&#39;</span>)<span class="op">.</span><span class="fu">then</span>(</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  $<span class="op">.</span><span class="fu">get</span>(<span class="fu">getUserInput</span>(<span class="st">&#39;url&#39;</span>) <span class="op">+</span> <span class="st">&#39;/_api/get-tests?type=unit&amp;n=7&#39;</span>)<span class="op">.</span><span class="fu">then</span>(</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    (data) <span class="kw">=&gt;</span> {</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>      assert<span class="op">.</span><span class="fu">equal</span>(data<span class="op">.</span><span class="at">state</span><span class="op">,</span> <span class="st">&#39;passed&#39;</span>)<span class="op">;</span></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    }<span class="op">,</span></span>
@@ -231,39 +230,63 @@
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>      <span class="cf">throw</span> <span class="kw">new</span> <span class="bu">Error</span>(xhr<span class="op">.</span><span class="at">responseText</span>)<span class="op">;</span></span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    }</span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  )<span class="op">;</span></span></code></pre></div>
-<p>You should choose the correct method for the first assertion - <code>deepEqual</code> vs. <code>notDeepEqual</code>.</p>
+<p>You should choose the correct method for the first assertion - <code>isAbove</code> vs. <code>isAtMost</code>.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>(getUserInput) <span class="kw">=&gt;</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  $<span class="op">.</span><span class="fu">get</span>(<span class="fu">getUserInput</span>(<span class="st">&#39;url&#39;</span>) <span class="op">+</span> <span class="st">&#39;/_api/get-tests?type=unit&amp;n=6&#39;</span>)<span class="op">.</span><span class="fu">then</span>(</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  $<span class="op">.</span><span class="fu">get</span>(<span class="fu">getUserInput</span>(<span class="st">&#39;url&#39;</span>) <span class="op">+</span> <span class="st">&#39;/_api/get-tests?type=unit&amp;n=7&#39;</span>)<span class="op">.</span><span class="fu">then</span>(</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    (data) <span class="kw">=&gt;</span> {</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>      assert<span class="op">.</span><span class="fu">equal</span>(</span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>        data<span class="op">.</span><span class="at">assertions</span>[<span class="dv">0</span>]<span class="op">.</span><span class="at">method</span><span class="op">,</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>        <span class="st">&#39;deepEqual&#39;</span><span class="op">,</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>        <span class="st">&#39;The order of the keys does not matter&#39;</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>        <span class="st">&#39;isAtMost&#39;</span><span class="op">,</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>        <span class="st">&#39;5 is at most (&lt;=) 5&#39;</span></span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>      )<span class="op">;</span></span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    }<span class="op">,</span></span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    (xhr) <span class="kw">=&gt;</span> {</span>
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>      <span class="cf">throw</span> <span class="kw">new</span> <span class="bu">Error</span>(xhr<span class="op">.</span><span class="at">responseText</span>)<span class="op">;</span></span>
 <span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    }</span>
 <span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  )<span class="op">;</span></span></code></pre></div>
-<p>You should choose the correct method for the second assertion - <code>deepEqual</code> vs. <code>notDeepEqual</code>.</p>
+<p>You should choose the correct method for the second assertion - <code>isAbove</code> vs. <code>isAtMost</code>.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>(getUserInput) <span class="kw">=&gt;</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  $<span class="op">.</span><span class="fu">get</span>(<span class="fu">getUserInput</span>(<span class="st">&#39;url&#39;</span>) <span class="op">+</span> <span class="st">&#39;/_api/get-tests?type=unit&amp;n=6&#39;</span>)<span class="op">.</span><span class="fu">then</span>(</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  $<span class="op">.</span><span class="fu">get</span>(<span class="fu">getUserInput</span>(<span class="st">&#39;url&#39;</span>) <span class="op">+</span> <span class="st">&#39;/_api/get-tests?type=unit&amp;n=7&#39;</span>)<span class="op">.</span><span class="fu">then</span>(</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    (data) <span class="kw">=&gt;</span> {</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>      assert<span class="op">.</span><span class="fu">equal</span>(</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>        data<span class="op">.</span><span class="at">assertions</span>[<span class="dv">1</span>]<span class="op">.</span><span class="at">method</span><span class="op">,</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>        <span class="st">&#39;notDeepEqual&#39;</span><span class="op">,</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>        <span class="st">&#39;The position of elements within an array does matter&#39;</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>      )<span class="op">;</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    }<span class="op">,</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    (xhr) <span class="kw">=&gt;</span> {</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>      <span class="cf">throw</span> <span class="kw">new</span> <span class="bu">Error</span>(xhr<span class="op">.</span><span class="at">responseText</span>)<span class="op">;</span></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  )<span class="op">;</span></span></code></pre></div>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>      assert<span class="op">.</span><span class="fu">equal</span>(data<span class="op">.</span><span class="at">assertions</span>[<span class="dv">1</span>]<span class="op">.</span><span class="at">method</span><span class="op">,</span> <span class="st">&#39;isAbove&#39;</span><span class="op">,</span> <span class="st">&#39;1 is greater than 0&#39;</span>)<span class="op">;</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    }<span class="op">,</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    (xhr) <span class="kw">=&gt;</span> {</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>      <span class="cf">throw</span> <span class="kw">new</span> <span class="bu">Error</span>(xhr<span class="op">.</span><span class="at">responseText</span>)<span class="op">;</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  )<span class="op">;</span></span></code></pre></div>
+<p>You should choose the correct method for the third assertion - <code>isAbove</code> vs. <code>isAtMost</code>.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>(getUserInput) <span class="kw">=&gt;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  $<span class="op">.</span><span class="fu">get</span>(<span class="fu">getUserInput</span>(<span class="st">&#39;url&#39;</span>) <span class="op">+</span> <span class="st">&#39;/_api/get-tests?type=unit&amp;n=7&#39;</span>)<span class="op">.</span><span class="fu">then</span>(</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    (data) <span class="kw">=&gt;</span> {</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>      assert<span class="op">.</span><span class="fu">equal</span>(</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>        data<span class="op">.</span><span class="at">assertions</span>[<span class="dv">2</span>]<span class="op">.</span><span class="at">method</span><span class="op">,</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>        <span class="st">&#39;isAbove&#39;</span><span class="op">,</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>        <span class="st">&#39;Math.PI = 3.14159265 is greater than 3&#39;</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>      )<span class="op">;</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    }<span class="op">,</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    (xhr) <span class="kw">=&gt;</span> {</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>      <span class="cf">throw</span> <span class="kw">new</span> <span class="bu">Error</span>(xhr<span class="op">.</span><span class="at">responseText</span>)<span class="op">;</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>  )<span class="op">;</span></span></code></pre></div>
+<p>You should choose the correct method for the fourth assertion - <code>isAbove</code> vs. <code>isAtMost</code>.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>(getUserInput) <span class="kw">=&gt;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  $<span class="op">.</span><span class="fu">get</span>(<span class="fu">getUserInput</span>(<span class="st">&#39;url&#39;</span>) <span class="op">+</span> <span class="st">&#39;/_api/get-tests?type=unit&amp;n=7&#39;</span>)<span class="op">.</span><span class="fu">then</span>(</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    (data) <span class="kw">=&gt;</span> {</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>      assert<span class="op">.</span><span class="fu">equal</span>(</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>        data<span class="op">.</span><span class="at">assertions</span>[<span class="dv">3</span>]<span class="op">.</span><span class="at">method</span><span class="op">,</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>        <span class="st">&#39;isAtMost&#39;</span><span class="op">,</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>        <span class="st">&#39;1 - Math.random() is &gt; 0 and &lt;= 1. It is atMost 1 !&#39;</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>      )<span class="op">;</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    }<span class="op">,</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    (xhr) <span class="kw">=&gt;</span> {</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>      <span class="cf">throw</span> <span class="kw">new</span> <span class="bu">Error</span>(xhr<span class="op">.</span><span class="at">responseText</span>)<span class="op">;</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>  )<span class="op">;</span></span></code></pre></div>
 <h1 id="solutions">–solutions–</h1>
-<div class="sourceCode" id="cb4"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">/**</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co">  Backend challenges don&#39;t need solutions, </span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">  because they would need to be tested against a full working project. </span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">  Please check our contributing guidelines to learn more.</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co">*/</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">/**</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co">  Backend challenges don&#39;t need solutions, </span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">  because they would need to be tested against a full working project. </span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co">  Please check our contributing guidelines to learn more.</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co">*/</span></span></code></pre></div>
 </body>
 </html>

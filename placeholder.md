@@ -1,20 +1,18 @@
 ---
-id: 587d824c367417b2b2512c4c
-title: Assert Deep Equality with .deepEqual and .notDeepEqual
+id: 587d824c367417b2b2512c4d
+title: Compare the Properties of Two Elements
 challengeType: 2
-forumTopicId: 301587
-dashedName: assert-deep-equality-with--deepequal-and--notdeepequal
+forumTopicId: 301588
+dashedName: compare-the-properties-of-two-elements
 ---
 
 # --description--
 
 As a reminder, this project is being built upon the following starter project on [Repl.it](https://repl.it/github/freeCodeCamp/boilerplate-mochachai), or cloned from [GitHub](https://github.com/freeCodeCamp/boilerplate-mochachai/).
 
-`deepEqual()` asserts that two objects are deep equal.
-
 # --instructions--
 
-Within `tests/1_unit-tests.js` under the test labelled `#7` in the `Equality` suite, change each `assert` to either `assert.deepEqual` or `assert.notDeepEqual` to make the test pass (should evaluate to `true`). Do not alter the arguments passed to the asserts.
+Within `tests/1_unit-tests.js` under the test labelled `#8` in the `Comparisons` suite, change each `assert` to either `assert.isAbove` or `assert.isAtMost` to make the test pass (should evaluate to `true`). Do not alter the arguments passed to the asserts.
 
 # --hints--
 
@@ -22,7 +20,7 @@ All tests should pass.
 
 ```js
 (getUserInput) =>
-  $.get(getUserInput('url') + '/_api/get-tests?type=unit&n=6').then(
+  $.get(getUserInput('url') + '/_api/get-tests?type=unit&n=7').then(
     (data) => {
       assert.equal(data.state, 'passed');
     },
@@ -32,16 +30,16 @@ All tests should pass.
   );
 ```
 
-You should choose the correct method for the first assertion - `deepEqual` vs. `notDeepEqual`.
+You should choose the correct method for the first assertion - `isAbove` vs. `isAtMost`.
 
 ```js
 (getUserInput) =>
-  $.get(getUserInput('url') + '/_api/get-tests?type=unit&n=6').then(
+  $.get(getUserInput('url') + '/_api/get-tests?type=unit&n=7').then(
     (data) => {
       assert.equal(
         data.assertions[0].method,
-        'deepEqual',
-        'The order of the keys does not matter'
+        'isAtMost',
+        '5 is at most (<=) 5'
       );
     },
     (xhr) => {
@@ -50,16 +48,48 @@ You should choose the correct method for the first assertion - `deepEqual` vs. `
   );
 ```
 
-You should choose the correct method for the second assertion - `deepEqual` vs. `notDeepEqual`.
+You should choose the correct method for the second assertion - `isAbove` vs. `isAtMost`.
 
 ```js
 (getUserInput) =>
-  $.get(getUserInput('url') + '/_api/get-tests?type=unit&n=6').then(
+  $.get(getUserInput('url') + '/_api/get-tests?type=unit&n=7').then(
+    (data) => {
+      assert.equal(data.assertions[1].method, 'isAbove', '1 is greater than 0');
+    },
+    (xhr) => {
+      throw new Error(xhr.responseText);
+    }
+  );
+```
+
+You should choose the correct method for the third assertion - `isAbove` vs. `isAtMost`.
+
+```js
+(getUserInput) =>
+  $.get(getUserInput('url') + '/_api/get-tests?type=unit&n=7').then(
     (data) => {
       assert.equal(
-        data.assertions[1].method,
-        'notDeepEqual',
-        'The position of elements within an array does matter'
+        data.assertions[2].method,
+        'isAbove',
+        'Math.PI = 3.14159265 is greater than 3'
+      );
+    },
+    (xhr) => {
+      throw new Error(xhr.responseText);
+    }
+  );
+```
+
+You should choose the correct method for the fourth assertion - `isAbove` vs. `isAtMost`.
+
+```js
+(getUserInput) =>
+  $.get(getUserInput('url') + '/_api/get-tests?type=unit&n=7').then(
+    (data) => {
+      assert.equal(
+        data.assertions[3].method,
+        'isAtMost',
+        '1 - Math.random() is > 0 and <= 1. It is atMost 1 !'
       );
     },
     (xhr) => {
