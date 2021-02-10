@@ -1,18 +1,20 @@
 ---
-id: 587d824d367417b2b2512c51
-title: Test if an Array Contains an Item
+id: 587d824e367417b2b2512c55
+title: Test if an Object has a Property
 challengeType: 2
-forumTopicId: 301603
-dashedName: test-if-an-array-contains-an-item
+forumTopicId: 301604
+dashedName: test-if-an-object-has-a-property
 ---
 
 # --description--
 
 As a reminder, this project is being built upon the following starter project on [Repl.it](https://repl.it/github/freeCodeCamp/boilerplate-mochachai), or cloned from [GitHub](https://github.com/freeCodeCamp/boilerplate-mochachai/).
 
+`property` asserts that the actual object has a given property.
+
 # --instructions--
 
-Within `tests/1_unit-tests.js` under the test labelled `#12` in the `Arrays` suite, change each `assert` to either `assert.include` or `assert.notInclude` to make the test pass (should evaluate to `true`). Do not alter the arguments passed to the asserts.
+Within `tests/1_unit-tests.js` under the test labelled `#16` in the `Objects` suite, change each `assert` to either `assert.property` or `assert.notProperty` to make the test pass (should evaluate to `true`). Do not alter the arguments passed to the asserts.
 
 # --hints--
 
@@ -20,7 +22,7 @@ All tests should pass.
 
 ```js
 (getUserInput) =>
-  $.get(getUserInput('url') + '/_api/get-tests?type=unit&n=11').then(
+  $.get(getUserInput('url') + '/_api/get-tests?type=unit&n=15').then(
     (data) => {
       assert.equal(data.state, 'passed');
     },
@@ -30,16 +32,16 @@ All tests should pass.
   );
 ```
 
-You should choose the correct method for the first assertion - `include` vs. `notInclude`.
+You should choose the correct method for the first assertion - `property` vs. `notProperty`.
 
 ```js
 (getUserInput) =>
-  $.get(getUserInput('url') + '/_api/get-tests?type=unit&n=11').then(
+  $.get(getUserInput('url') + '/_api/get-tests?type=unit&n=15').then(
     (data) => {
       assert.equal(
         data.assertions[0].method,
-        'notInclude',
-        "It's summer in july..."
+        'notProperty',
+        'A car has not wings'
       );
     },
     (xhr) => {
@@ -48,17 +50,31 @@ You should choose the correct method for the first assertion - `include` vs. `no
   );
 ```
 
-You should choose the correct method for the second assertion - `include` vs. `notInclude`.
+You should choose the correct method for the second assertion - `property` vs. `notProperty`.
 
 ```js
 (getUserInput) =>
-  $.get(getUserInput('url') + '/_api/get-tests?type=unit&n=11').then(
+  $.get(getUserInput('url') + '/_api/get-tests?type=unit&n=15').then(
     (data) => {
       assert.equal(
         data.assertions[1].method,
-        'include',
-        'JavaScript is a backend language !!'
+        'property',
+        'planes have engines'
       );
+    },
+    (xhr) => {
+      throw new Error(xhr.responseText);
+    }
+  );
+```
+
+You should choose the correct method for the third assertion - `property` vs. `notProperty`.
+
+```js
+(getUserInput) =>
+  $.get(getUserInput('url') + '/_api/get-tests?type=unit&n=15').then(
+    (data) => {
+      assert.equal(data.assertions[2].method, 'property', 'Cars have wheels');
     },
     (xhr) => {
       throw new Error(xhr.responseText);
