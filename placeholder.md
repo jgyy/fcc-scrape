@@ -1,20 +1,20 @@
 ---
-id: 587d824b367417b2b2512c4a
-title: Use the Double Equals to Assert Equality
+id: 587d824b367417b2b2512c4b
+title: Use the Triple Equals to Assert Strict Equality
 challengeType: 2
-forumTopicId: 301609
-dashedName: use-the-double-equals-to-assert-equality
+forumTopicId: 301610
+dashedName: use-the-triple-equals-to-assert-strict-equality
 ---
 
 # --description--
 
 As a reminder, this project is being built upon the following starter project on [Repl.it](https://repl.it/github/freeCodeCamp/boilerplate-mochachai), or cloned from [GitHub](https://github.com/freeCodeCamp/boilerplate-mochachai/).
 
-`equal()` compares objects using `==`.
+`strictEqual()` compares objects using `===`.
 
 # --instructions--
 
-Within `tests/1_unit-tests.js` under the test labelled `#5` in the `Equality` suite, change each `assert` to either `assert.equal` or `assert.notEqual` to make the test pass (should evaluate to `true`). Do not alter the arguments passed to the asserts.
+Within `tests/1_unit-tests.js` under the test labelled `#6` in the `Equality` suite, change each `assert` to either `assert.strictEqual` or `assert.notStrictEqual` to make the test pass (should evaluate to `true`). Do not alter the arguments passed to the asserts.
 
 # --hints--
 
@@ -22,7 +22,7 @@ All tests should pass.
 
 ```js
 (getUserInput) =>
-  $.get(getUserInput('url') + '/_api/get-tests?type=unit&n=4').then(
+  $.get(getUserInput('url') + '/_api/get-tests?type=unit&n=5').then(
     (data) => {
       assert.equal(data.state, 'passed');
     },
@@ -32,16 +32,16 @@ All tests should pass.
   );
 ```
 
-You should choose the correct method for the first assertion - `equal` vs. `notEqual`.
+You should choose the correct method for the first assertion - `strictEqual` vs. `notStrictEqual`.
 
 ```js
 (getUserInput) =>
-  $.get(getUserInput('url') + '/_api/get-tests?type=unit&n=4').then(
+  $.get(getUserInput('url') + '/_api/get-tests?type=unit&n=5').then(
     (data) => {
       assert.equal(
         data.assertions[0].method,
-        'equal',
-        'Numbers are coerced into strings with == '
+        'notStrictEqual',
+        'with strictEqual the type must match'
       );
     },
     (xhr) => {
@@ -50,17 +50,13 @@ You should choose the correct method for the first assertion - `equal` vs. `notE
   );
 ```
 
-You should choose the correct method for the second assertion - `equal` vs. `notEqual`.
+You should choose the correct method for the second assertion - `strictEqual` vs. `notStrictEqual`.
 
 ```js
 (getUserInput) =>
-  $.get(getUserInput('url') + '/_api/get-tests?type=unit&n=4').then(
+  $.get(getUserInput('url') + '/_api/get-tests?type=unit&n=5').then(
     (data) => {
-      assert.equal(
-        data.assertions[1].method,
-        'notEqual',
-        ' == compares object references'
-      );
+      assert.equal(data.assertions[1].method, 'strictEqual', '3*2 = 6...');
     },
     (xhr) => {
       throw new Error(xhr.responseText);
@@ -68,16 +64,16 @@ You should choose the correct method for the second assertion - `equal` vs. `not
   );
 ```
 
-You should choose the correct method for the third assertion - `equal` vs. `notEqual`.
+You should choose the correct method for the third assertion - `strictEqual` vs. `notStrictEqual`.
 
 ```js
 (getUserInput) =>
-  $.get(getUserInput('url') + '/_api/get-tests?type=unit&n=4').then(
+  $.get(getUserInput('url') + '/_api/get-tests?type=unit&n=5').then(
     (data) => {
       assert.equal(
         data.assertions[2].method,
-        'equal',
-        "6 * '2' is 12 ! It should be equal to '12'"
+        'strictEqual',
+        "6 * '2' is 12. Types match !"
       );
     },
     (xhr) => {
@@ -86,13 +82,17 @@ You should choose the correct method for the third assertion - `equal` vs. `notE
   );
 ```
 
-You should choose the correct method for the fourth assertion - `equal` vs. `notEqual`.
+You should choose the correct method for the fourth assertion - `strictEqual` vs. `notStrictEqual`.
 
 ```js
 (getUserInput) =>
-  $.get(getUserInput('url') + '/_api/get-tests?type=unit&n=4').then(
+  $.get(getUserInput('url') + '/_api/get-tests?type=unit&n=5').then(
     (data) => {
-      assert.equal(data.assertions[3].method, 'notEqual', "6 + '2' is '62'...");
+      assert.equal(
+        data.assertions[3].method,
+        'notStrictEqual',
+        'Even if they have the same elements, the Arrays are notStrictEqual'
+      );
     },
     (xhr) => {
       throw new Error(xhr.responseText);
