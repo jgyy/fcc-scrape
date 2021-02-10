@@ -1,54 +1,38 @@
 ---
-id: 587d824e367417b2b2512c58
-title: Run Functional Tests on API Endpoints using Chai-HTTP
+id: 5f8884f4c46685731aabfc41
+title: Run Functional Tests Using a Headless Browser II
 challengeType: 2
-forumTopicId: 301593
-dashedName: run-functional-tests-on-api-endpoints-using-chai-http
+forumTopicId: 301594
+dashedName: run-functional-tests-using-a-headless-browser-ii
 ---
 
 # --description--
 
 As a reminder, this project is being built upon the following starter project on [Repl.it](https://repl.it/github/freeCodeCamp/boilerplate-mochachai), or cloned from [GitHub](https://github.com/freeCodeCamp/boilerplate-mochachai/).
 
-Mocha allows testing asyncronous operations. There is a small (BIG) difference. Can you spot it?
-
-We can test our API endpoints using a plugin, called `chai-http`. Let's see how it works. And remember, API calls are asynchronous.
-
-The following is an example of a test using `chai-http` for the `'GET /hello?name=[name] => "hello [name]"'` suite. The test sends a name string in a url query string (`?name=John`) using a `GET`request to the `server`. In the `end` method's callback function, the response object (`res`) is received and contains the `status` property. The first `assert.equal` checks if the status is equal to `200`. The second `assert.equal` checks that the response string (`res.text`) is equal to `"hello John"`.
-
-```js
-suite('GET /hello?name=[name] => "hello [name]"', function () {
-  test("?name=John", function (done) {
-    chai
-      .request(server)
-      .get("/hello?name=John")
-      .end(function (err, res) {
-        assert.equal(res.status, 200, "response status should be 200");
-        assert.equal(
-          res.text,
-          "hello John",
-          'response should be "hello John"'
-        );
-        done();
-      });
-  });
-```
-
-Notice the `done` parameter in the test's callback function. Calling it at the end without an argument is necessary to signal successful asynchronous completion.
-
 # --instructions--
 
-Within `tests/2_functional-tests.js`, alter the `'Test GET /hello with no name'` test (`// #1`) to assert the `status` and the `text` response to make the test pass. Do not alter the arguments passed to the asserts.
+Within `tests/2_functional-tests.js`, in the `'submit "surname" : "Vespucci" - write your e2e test...'` test (`// #6`), automate filling-in and submitting the form from scratch:
 
-There should be no name in the query; the endpoint responds with `hello Guest`.
+1.  Fill in the form with the `surname` of `Vespucci`
+2.  Submit it pressing `'submit'` button
+
+Within the callback:
+
+1.  assert that status is `200`
+2.  assert that the text inside the element `span#name` is `'Amerigo'`
+3.  assert that the text inside the element `span#surname` is `'Vespucci'`
+4.  assert that the element(s) `span#dates` exist and their count is `1`
+
+Do not forget to to remove the `assert.fail()` call.
 
 # --hints--
 
-All tests should pass
+All tests should pass.
 
 ```js
 (getUserInput) =>
-  $.get(getUserInput('url') + '/_api/get-tests?type=functional&n=0').then(
+  $.get(getUserInput('url') + '/_api/get-tests?type=functional&n=5').then(
     (data) => {
       assert.equal(data.state, 'passed');
     },
@@ -58,15 +42,13 @@ All tests should pass
   );
 ```
 
-You should test for 'res.status' == 200
+You should assert that the headless browser request succeeded.
 
 ```js
 (getUserInput) =>
-  $.get(getUserInput('url') + '/_api/get-tests?type=functional&n=0').then(
+  $.get(getUserInput('url') + '/_api/get-tests?type=functional&n=5').then(
     (data) => {
-      assert.equal(data.assertions[0].method, 'equal');
-      assert.equal(data.assertions[0].args[0], 'res.status');
-      assert.equal(data.assertions[0].args[1], '200');
+      assert.equal(data.assertions[0].method, 'browser.success');
     },
     (xhr) => {
       throw new Error(xhr.responseText);
@@ -74,15 +56,47 @@ You should test for 'res.status' == 200
   );
 ```
 
-You should test for 'res.text' == 'hello Guest'
+You should assert that the text inside the element 'span#name' is 'Amerigo'.
 
 ```js
 (getUserInput) =>
-  $.get(getUserInput('url') + '/_api/get-tests?type=functional&n=0').then(
+  $.get(getUserInput('url') + '/_api/get-tests?type=functional&n=5').then(
     (data) => {
-      assert.equal(data.assertions[1].method, 'equal');
-      assert.equal(data.assertions[1].args[0], 'res.text');
-      assert.match(data.assertions[1].args[1], /('|")hello Guest\1/);
+      assert.equal(data.assertions[1].method, 'browser.text');
+      assert.match(data.assertions[1].args[0], /('|")span#name\1/);
+      assert.match(data.assertions[1].args[1], /('|")Amerigo\1/);
+    },
+    (xhr) => {
+      throw new Error(xhr.responseText);
+    }
+  );
+```
+
+You should assert that the text inside the element 'span#surname' is 'Vespucci'.
+
+```js
+(getUserInput) =>
+  $.get(getUserInput('url') + '/_api/get-tests?type=functional&n=5').then(
+    (data) => {
+      assert.equal(data.assertions[2].method, 'browser.text');
+      assert.match(data.assertions[2].args[0], /('|")span#surname\1/);
+      assert.match(data.assertions[2].args[1], /('|")Vespucci\1/);
+    },
+    (xhr) => {
+      throw new Error(xhr.responseText);
+    }
+  );
+```
+
+You should assert that the element 'span#dates' exist and its count is 1.
+
+```js
+(getUserInput) =>
+  $.get(getUserInput('url') + '/_api/get-tests?type=functional&n=5').then(
+    (data) => {
+      assert.equal(data.assertions[3].method, 'browser.element');
+      assert.match(data.assertions[3].args[0], /('|")span#dates\1/);
+      assert.equal(data.assertions[3].args[1], 1);
     },
     (xhr) => {
       throw new Error(xhr.responseText);
