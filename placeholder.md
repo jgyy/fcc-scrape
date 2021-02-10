@@ -1,22 +1,20 @@
 ---
-id: 587d824b367417b2b2512c48
-title: Use Assert.isOK and Assert.isNotOK
+id: 587d824d367417b2b2512c54
+title: Use Regular Expressions to Test a String
 challengeType: 2
-forumTopicId: 301607
-dashedName: use-assert-isok-and-assert-isnotok
+forumTopicId: 301608
+dashedName: use-regular-expressions-to-test-a-string
 ---
 
 # --description--
 
 As a reminder, this project is being built upon the following starter project on [Repl.it](https://repl.it/github/freeCodeCamp/boilerplate-mochachai), or cloned from [GitHub](https://github.com/freeCodeCamp/boilerplate-mochachai/).
 
-`isOk()` will test for a truthy value, and `isNotOk()` will test for a falsy value.
-
-To learn more about truthy and falsy values, try our [Falsy Bouncer](https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/basic-algorithm-scripting/falsy-bouncer) challenge.
+`match()` asserts that the actual value matches the second argument regular expression.
 
 # --instructions--
 
-Within `tests/1_unit-tests.js` under the test labelled `#3` in the `Basic Assertions` suite, change each `assert` to either `assert.isOk()` or `assert.isNotOk()` to make the test pass (should evaluate to `true`). Do not alter the arguments passed to the asserts.
+Within `tests/1_unit-tests.js` under the test labelled `#15` in the `Strings` suite, change each `assert` to either `assert.match` or `assert.notMatch` to make the test pass (should evaluate to `true`). Do not alter the arguments passed to the asserts.
 
 # --hints--
 
@@ -24,7 +22,7 @@ All tests should pass.
 
 ```js
 (getUserInput) =>
-  $.get(getUserInput('url') + '/_api/get-tests?type=unit&n=2').then(
+  $.get(getUserInput('url') + '/_api/get-tests?type=unit&n=14').then(
     (data) => {
       assert.equal(data.state, 'passed');
     },
@@ -34,13 +32,17 @@ All tests should pass.
   );
 ```
 
-You should choose the correct method for the first assertion - `isOk` vs. `isNotOk`.
+You should choose the correct method for the first assertion - `match` vs. `notMatch`.
 
 ```js
 (getUserInput) =>
-  $.get(getUserInput('url') + '/_api/get-tests?type=unit&n=2').then(
+  $.get(getUserInput('url') + '/_api/get-tests?type=unit&n=14').then(
     (data) => {
-      assert.equal(data.assertions[0].method, 'isNotOk', 'Null is falsy');
+      assert.equal(
+        data.assertions[0].method,
+        'match',
+        "'# name:John Doe, age:35' matches the regex"
+      );
     },
     (xhr) => {
       throw new Error(xhr.responseText);
@@ -48,27 +50,17 @@ You should choose the correct method for the first assertion - `isOk` vs. `isNot
   );
 ```
 
-You should choose the correct method for the second assertion - `isOk` vs. `isNotOk`.
+You should choose the correct method for the second assertion - `match` vs. `notMatch`.
 
 ```js
 (getUserInput) =>
-  $.get(getUserInput('url') + '/_api/get-tests?type=unit&n=2').then(
+  $.get(getUserInput('url') + '/_api/get-tests?type=unit&n=14').then(
     (data) => {
-      assert.equal(data.assertions[1].method, 'isOk', 'A string is truthy');
-    },
-    (xhr) => {
-      throw new Error(xhr.responseText);
-    }
-  );
-```
-
-You should choose the correct method for the third assertion - `isOk` vs. `isNotOk`.
-
-```js
-(getUserInput) =>
-  $.get(getUserInput('url') + '/_api/get-tests?type=unit&n=2').then(
-    (data) => {
-      assert.equal(data.assertions[2].method, 'isOk', 'true is truthy');
+      assert.equal(
+        data.assertions[1].method,
+        'notMatch',
+        "'# name:Paul Smith III, age:twenty-four' does not match the regex (the age must be numeric)"
+      );
     },
     (xhr) => {
       throw new Error(xhr.responseText);
