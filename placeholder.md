@@ -1,20 +1,18 @@
 ---
-id: 587d824e367417b2b2512c56
-title: Test if a Value is of a Specific Data Structure Type
+id: 587d824b367417b2b2512c47
+title: Test if a Variable or Function is Defined
 challengeType: 2
-forumTopicId: 301601
-dashedName: test-if-a-value-is-of-a-specific-data-structure-type
+forumTopicId: 301602
+dashedName: test-if-a-variable-or-function-is-defined
 ---
 
 # --description--
 
 As a reminder, this project is being built upon the following starter project on [Repl.it](https://repl.it/github/freeCodeCamp/boilerplate-mochachai), or cloned from [GitHub](https://github.com/freeCodeCamp/boilerplate-mochachai/).
 
-`#typeOf` asserts that value's type is the given string, as determined by `Object.prototype.toString`.
-
 # --instructions--
 
-Within `tests/1_unit-tests.js` under the test labelled `#17` in the `Objects` suite, change each `assert` to either `assert.typeOf` or `assert.notTypeOf` to make the test pass (should evaluate to `true`). Do not alter the arguments passed to the asserts.
+Within `tests/1_unit-tests.js` under the test labelled `#2` in the `Basic Assertions` suite, change each `assert` to either `assert.isDefined()` or `assert.isUndefined()` to make the test pass (should evaluate to `true`). Do not alter the arguments passed to the asserts.
 
 # --hints--
 
@@ -22,7 +20,7 @@ All tests should pass.
 
 ```js
 (getUserInput) =>
-  $.get(getUserInput('url') + '/_api/get-tests?type=unit&n=16').then(
+  $.get(getUserInput('url') + '/_api/get-tests?type=unit&n=1').then(
     (data) => {
       assert.equal(data.state, 'passed');
     },
@@ -32,16 +30,16 @@ All tests should pass.
   );
 ```
 
-You should choose the correct method for the first assertion - `typeOf` vs. `notTypeOf`.
+You should choose the correct method for the first assertion - `isDefined` vs. `isUndefined`.
 
 ```js
 (getUserInput) =>
-  $.get(getUserInput('url') + '/_api/get-tests?type=unit&n=16').then(
+  $.get(getUserInput('url') + '/_api/get-tests?type=unit&n=1').then(
     (data) => {
       assert.equal(
         data.assertions[0].method,
-        'typeOf',
-        'myCar is typeOf Object'
+        'isDefined',
+        'Null is not undefined'
       );
     },
     (xhr) => {
@@ -50,16 +48,16 @@ You should choose the correct method for the first assertion - `typeOf` vs. `not
   );
 ```
 
-You should choose the correct method for the second assertion - `typeOf` vs. `notTypeOf`.
+You should choose the correct method for the second assertion - `isDefined` vs. `isUndefined`.
 
 ```js
 (getUserInput) =>
-  $.get(getUserInput('url') + '/_api/get-tests?type=unit&n=16').then(
+  $.get(getUserInput('url') + '/_api/get-tests?type=unit&n=1').then(
     (data) => {
       assert.equal(
         data.assertions[1].method,
-        'typeOf',
-        'Car.model is a String'
+        'isUndefined',
+        'Undefined is undefined'
       );
     },
     (xhr) => {
@@ -68,52 +66,16 @@ You should choose the correct method for the second assertion - `typeOf` vs. `no
   );
 ```
 
-You should choose the correct method for the third assertion - `typeOf` vs. `notTypeOf`.
+You should choose the correct method for the third assertion - `isDefined` vs. `isUndefined`.
 
 ```js
 (getUserInput) =>
-  $.get(getUserInput('url') + '/_api/get-tests?type=unit&n=16').then(
+  $.get(getUserInput('url') + '/_api/get-tests?type=unit&n=1').then(
     (data) => {
       assert.equal(
         data.assertions[2].method,
-        'notTypeOf',
-        'Plane.wings is a Number (not a String)'
-      );
-    },
-    (xhr) => {
-      throw new Error(xhr.responseText);
-    }
-  );
-```
-
-You should choose the correct method for the fourth assertion - `typeOf` vs. `notTypeOf`.
-
-```js
-(getUserInput) =>
-  $.get(getUserInput('url') + '/_api/get-tests?type=unit&n=16').then(
-    (data) => {
-      assert.equal(
-        data.assertions[3].method,
-        'typeOf',
-        'Plane.engines is an Array'
-      );
-    },
-    (xhr) => {
-      throw new Error(xhr.responseText);
-    }
-  );
-```
-
-You should choose the correct method for the fifth assertion - `typeOf` vs. `notTypeOf`.
-
-```js
-(getUserInput) =>
-  $.get(getUserInput('url') + '/_api/get-tests?type=unit&n=16').then(
-    (data) => {
-      assert.equal(
-        data.assertions[4].method,
-        'typeOf',
-        'Car.wheels is a Number'
+        'isDefined',
+        'A string is not undefined'
       );
     },
     (xhr) => {
