@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Metric-Imperial Converter</title>
+  <style>
+    html {
+      line-height: 1.5;
+      font-family: Georgia, serif;
+      font-size: 20px;
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      word-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 1em;
+      }
+    }
+    @media print {
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
+      font-size: 85%;
+      margin: 0;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Metric-Imperial Converter</h1>
+</header>
+<h1 id="description">–description–</h1>
+<p>Build a full stack JavaScript app that is functionally similar to this: <a href="https://metric-imperial-converter.freecodecamp.rocks/" class="uri">https://metric-imperial-converter.freecodecamp.rocks/</a>. Working on this project will involve you writing your code using one of the following methods:</p>
+<ul>
+<li>Clone <a href="https://github.com/freeCodeCamp/boilerplate-project-metricimpconverter/">this GitHub repo</a> and complete your project locally.</li>
+<li>Use <a href="https://repl.it/github/freeCodeCamp/boilerplate-project-metricimpconverter">our repl.it starter project</a> to complete your project.</li>
+<li>Use a site builder of your choice to complete the project. Be sure to incorporate all the files from our GitHub repo.</li>
+</ul>
+<p>When you are done, make sure a working demo of your project is hosted somewhere public. Then submit the URL to it in the <code>Solution Link</code> field. Optionally, also submit a link to your project’s source code in the <code>GitHub Link</code> field.</p>
+<h1 id="instructions">–instructions–</h1>
+<ul>
+<li>Complete the necessary conversion logic in <code>/controllers/convertHandler.js</code></li>
+<li>Complete the necessary routes in <code>/routes/api.js</code></li>
+<li>Copy the <code>sample.env</code> file to <code>.env</code> and set the variables appropriately</li>
+<li>To run the tests uncomment <code>NODE_ENV=test</code> in your <code>.env</code> file</li>
+<li>To run the tests in the console, use the command <code>npm run test</code>. To open the Repl.it console, press Ctrl+Shift+P (Cmd if on a Mac) and type “open shell”</li>
+</ul>
+<p>Write the following tests in <code>tests/1_unit-tests.js</code>:</p>
+<ul>
+<li><code>convertHandler</code> should correctly read a whole number input.</li>
+<li><code>convertHandler</code> should correctly read a decimal number input.</li>
+<li><code>convertHandler</code> should correctly read a fractional input.</li>
+<li><code>convertHandler</code> should correctly read a fractional input with a decimal.</li>
+<li><code>convertHandler</code> should correctly return an error on a double-fraction (i.e. <code>3/2/3</code>).</li>
+<li><code>convertHandler</code> should correctly default to a numerical input of <code>1</code> when no numerical input is provided.</li>
+<li><code>convertHandler</code> should correctly read each valid input unit.</li>
+<li><code>convertHandler</code> should correctly return an error for an invalid input unit.</li>
+<li><code>convertHandler</code> should return the correct return unit for each valid input unit.</li>
+<li><code>convertHandler</code> should correctly return the spelled-out string unit for each valid input unit.</li>
+<li><code>convertHandler</code> should correctly convert <code>gal</code> to <code>L</code>.</li>
+<li><code>convertHandler</code> should correctly convert <code>L</code> to <code>gal</code>.</li>
+<li><code>convertHandler</code> should correctly convert <code>mi</code> to <code>km</code>.</li>
+<li><code>convertHandler</code> should correctly convert <code>km</code> to <code>mi</code>.</li>
+<li><code>convertHandler</code> should correctly convert <code>lbs</code> to <code>kg</code>.</li>
+<li><code>convertHandler</code> should correctly convert <code>kg</code> to <code>lbs</code>.</li>
+</ul>
+<p>Write the following tests in <code>tests/2_functional-tests.js</code>:</p>
+<ul>
+<li>Convert a valid input such as <code>10L</code>: <code>GET</code> request to <code>/api/convert</code>.</li>
+<li>Convert an invalid input such as <code>32g</code>: <code>GET</code> request to <code>/api/convert</code>.</li>
+<li>Convert an invalid number such as <code>3/7.2/4kg</code>: <code>GET</code> request to <code>/api/convert</code>.</li>
+<li>Convert an invalid number AND unit such as <code>3/7.2/4kilomegagram</code>: <code>GET</code> request to <code>/api/convert</code>.</li>
+<li>Convert with no number such as <code>kg</code>: <code>GET</code> request to <code>/api/convert</code>.</li>
+</ul>
+<h1 id="hints">–hints–</h1>
+<p>You can provide your own project, not the example URL.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>getUserInput <span class="kw">=&gt;</span> {</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">assert</span>(</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">!</span><span class="ss">/.</span><span class="sc">*\/</span><span class="ss">metric-imperial-converter</span><span class="sc">\.</span><span class="ss">freecodecamp</span><span class="sc">\.</span><span class="ss">rocks/</span><span class="op">.</span><span class="fu">test</span>(</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>      <span class="fu">getUserInput</span>(<span class="st">&#39;url&#39;</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  )<span class="op">;</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>}<span class="op">;</span></span></code></pre></div>
+<p>You can <code>GET</code> <code>/api/convert</code> with a single parameter containing an accepted number and unit and have it converted. (Hint: Split the input by looking for the index of the first character which will mark the start of the unit)</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode js"><code class="sourceCode javascript"></code></pre></div>
+<p>You can convert <code>'gal'</code> to <code>'L'</code> and vice versa. (1 gal to 3.78541 L)</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">async</span> getUserInput <span class="kw">=&gt;</span> {</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">try</span> {</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> data1 <span class="op">=</span> <span class="cf">await</span> $<span class="op">.</span><span class="fu">get</span>(<span class="fu">getUserInput</span>(<span class="st">&#39;url&#39;</span>) <span class="op">+</span> <span class="st">&#39;/api/convert?input=1gal&#39;</span>)<span class="op">;</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    assert<span class="op">.</span><span class="fu">equal</span>(data1<span class="op">.</span><span class="at">returnNum</span><span class="op">,</span> <span class="fl">3.78541</span>)<span class="op">;</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    assert<span class="op">.</span><span class="fu">equal</span>(data1<span class="op">.</span><span class="at">returnUnit</span><span class="op">,</span> <span class="st">&#39;L&#39;</span>)<span class="op">;</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> data2 <span class="op">=</span> <span class="cf">await</span> $<span class="op">.</span><span class="fu">get</span>(<span class="fu">getUserInput</span>(<span class="st">&#39;url&#39;</span>) <span class="op">+</span> <span class="st">&#39;/api/convert?input=10gal&#39;</span>)<span class="op">;</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    assert<span class="op">.</span><span class="fu">equal</span>(data2<span class="op">.</span><span class="at">returnNum</span><span class="op">,</span> <span class="fl">37.8541</span>)<span class="op">;</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    assert<span class="op">.</span><span class="fu">equal</span>(data2<span class="op">.</span><span class="at">returnUnit</span><span class="op">,</span> <span class="st">&#39;L&#39;</span>)<span class="op">;</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> data3 <span class="op">=</span> <span class="cf">await</span> $<span class="op">.</span><span class="fu">get</span>(<span class="fu">getUserInput</span>(<span class="st">&#39;url&#39;</span>) <span class="op">+</span> <span class="st">&#39;/api/convert?input=1l&#39;</span>)<span class="op">;</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    assert<span class="op">.</span><span class="fu">equal</span>(data3<span class="op">.</span><span class="at">returnNum</span><span class="op">,</span> <span class="fl">0.26417</span>)<span class="op">;</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    assert<span class="op">.</span><span class="fu">equal</span>(data3<span class="op">.</span><span class="at">returnUnit</span><span class="op">,</span> <span class="st">&#39;gal&#39;</span>)<span class="op">;</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> data4 <span class="op">=</span> <span class="cf">await</span> $<span class="op">.</span><span class="fu">get</span>(<span class="fu">getUserInput</span>(<span class="st">&#39;url&#39;</span>) <span class="op">+</span> <span class="st">&#39;/api/convert?input=10l&#39;</span>)<span class="op">;</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    assert<span class="op">.</span><span class="fu">equal</span>(data4<span class="op">.</span><span class="at">returnNum</span><span class="op">,</span> <span class="fl">2.64172</span>)<span class="op">;</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    assert<span class="op">.</span><span class="fu">equal</span>(data4<span class="op">.</span><span class="at">returnUnit</span><span class="op">,</span> <span class="st">&#39;gal&#39;</span>)<span class="op">;</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">catch</span> (xhr) {</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">throw</span> <span class="kw">new</span> <span class="bu">Error</span>(xhr<span class="op">.</span><span class="at">responseText</span> <span class="op">||</span> xhr<span class="op">.</span><span class="at">message</span>)<span class="op">;</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>}<span class="op">;</span></span></code></pre></div>
+<p>You can convert <code>'lbs'</code> to <code>'kg'</code> and vice versa. (1 lbs to 0.453592 kg)</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">async</span> getUserInput <span class="kw">=&gt;</span> {</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">try</span> {</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> data1 <span class="op">=</span> <span class="cf">await</span> $<span class="op">.</span><span class="fu">get</span>(<span class="fu">getUserInput</span>(<span class="st">&#39;url&#39;</span>) <span class="op">+</span> <span class="st">&#39;/api/convert?input=1lbs&#39;</span>)<span class="op">;</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    assert<span class="op">.</span><span class="fu">equal</span>(data1<span class="op">.</span><span class="at">returnNum</span><span class="op">,</span> <span class="fl">0.45359</span>)<span class="op">;</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    assert<span class="op">.</span><span class="fu">equal</span>(data1<span class="op">.</span><span class="at">returnUnit</span><span class="op">,</span> <span class="st">&#39;kg&#39;</span>)<span class="op">;</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> data2 <span class="op">=</span> <span class="cf">await</span> $<span class="op">.</span><span class="fu">get</span>(<span class="fu">getUserInput</span>(<span class="st">&#39;url&#39;</span>) <span class="op">+</span> <span class="st">&#39;/api/convert?input=10lbs&#39;</span>)<span class="op">;</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    assert<span class="op">.</span><span class="fu">equal</span>(data2<span class="op">.</span><span class="at">returnNum</span><span class="op">,</span> <span class="fl">4.53592</span>)<span class="op">;</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    assert<span class="op">.</span><span class="fu">equal</span>(data2<span class="op">.</span><span class="at">returnUnit</span><span class="op">,</span> <span class="st">&#39;kg&#39;</span>)<span class="op">;</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> data3 <span class="op">=</span> <span class="cf">await</span> $<span class="op">.</span><span class="fu">get</span>(<span class="fu">getUserInput</span>(<span class="st">&#39;url&#39;</span>) <span class="op">+</span> <span class="st">&#39;/api/convert?input=1kg&#39;</span>)<span class="op">;</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    assert<span class="op">.</span><span class="fu">equal</span>(data3<span class="op">.</span><span class="at">returnNum</span><span class="op">,</span> <span class="fl">2.20462</span>)<span class="op">;</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    assert<span class="op">.</span><span class="fu">equal</span>(data3<span class="op">.</span><span class="at">returnUnit</span><span class="op">,</span> <span class="st">&#39;lbs&#39;</span>)<span class="op">;</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> data4 <span class="op">=</span> <span class="cf">await</span> $<span class="op">.</span><span class="fu">get</span>(<span class="fu">getUserInput</span>(<span class="st">&#39;url&#39;</span>) <span class="op">+</span> <span class="st">&#39;/api/convert?input=10kg&#39;</span>)<span class="op">;</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    assert<span class="op">.</span><span class="fu">equal</span>(data4<span class="op">.</span><span class="at">returnNum</span><span class="op">,</span> <span class="fl">22.04624</span>)<span class="op">;</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    assert<span class="op">.</span><span class="fu">equal</span>(data4<span class="op">.</span><span class="at">returnUnit</span><span class="op">,</span> <span class="st">&#39;lbs&#39;</span>)<span class="op">;</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">catch</span> (xhr) {</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">throw</span> <span class="kw">new</span> <span class="bu">Error</span>(xhr<span class="op">.</span><span class="at">responseText</span> <span class="op">||</span> xhr<span class="op">.</span><span class="at">message</span>)<span class="op">;</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>}<span class="op">;</span></span></code></pre></div>
+<p>You can convert <code>'mi'</code> to <code>'km'</code> and vice versa. (1 mi to 1.60934 km)</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">async</span> getUserInput <span class="kw">=&gt;</span> {</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">try</span> {</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> data1 <span class="op">=</span> <span class="cf">await</span> $<span class="op">.</span><span class="fu">get</span>(<span class="fu">getUserInput</span>(<span class="st">&#39;url&#39;</span>) <span class="op">+</span> <span class="st">&#39;/api/convert?input=1mi&#39;</span>)<span class="op">;</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    assert<span class="op">.</span><span class="fu">equal</span>(data1<span class="op">.</span><span class="at">returnNum</span><span class="op">,</span> <span class="fl">1.60934</span>)<span class="op">;</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    assert<span class="op">.</span><span class="fu">equal</span>(data1<span class="op">.</span><span class="at">returnUnit</span><span class="op">,</span> <span class="st">&#39;km&#39;</span>)<span class="op">;</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> data2 <span class="op">=</span> <span class="cf">await</span> $<span class="op">.</span><span class="fu">get</span>(<span class="fu">getUserInput</span>(<span class="st">&#39;url&#39;</span>) <span class="op">+</span> <span class="st">&#39;/api/convert?input=10mi&#39;</span>)<span class="op">;</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    assert<span class="op">.</span><span class="fu">equal</span>(data2<span class="op">.</span><span class="at">returnNum</span><span class="op">,</span> <span class="fl">16.0934</span>)<span class="op">;</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    assert<span class="op">.</span><span class="fu">equal</span>(data2<span class="op">.</span><span class="at">returnUnit</span><span class="op">,</span> <span class="st">&#39;km&#39;</span>)<span class="op">;</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> data3 <span class="op">=</span> <span class="cf">await</span> $<span class="op">.</span><span class="fu">get</span>(<span class="fu">getUserInput</span>(<span class="st">&#39;url&#39;</span>) <span class="op">+</span> <span class="st">&#39;/api/convert?input=1km&#39;</span>)<span class="op">;</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    assert<span class="op">.</span><span class="fu">equal</span>(data3<span class="op">.</span><span class="at">returnNum</span><span class="op">,</span> <span class="fl">0.62137</span>)<span class="op">;</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    assert<span class="op">.</span><span class="fu">equal</span>(data3<span class="op">.</span><span class="at">returnUnit</span><span class="op">,</span> <span class="st">&#39;mi&#39;</span>)<span class="op">;</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> data4 <span class="op">=</span> <span class="cf">await</span> $<span class="op">.</span><span class="fu">get</span>(<span class="fu">getUserInput</span>(<span class="st">&#39;url&#39;</span>) <span class="op">+</span> <span class="st">&#39;/api/convert?input=10km&#39;</span>)<span class="op">;</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    assert<span class="op">.</span><span class="fu">equal</span>(data4<span class="op">.</span><span class="at">returnNum</span><span class="op">,</span> <span class="fl">6.21373</span>)<span class="op">;</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    assert<span class="op">.</span><span class="fu">equal</span>(data4<span class="op">.</span><span class="at">returnUnit</span><span class="op">,</span> <span class="st">&#39;mi&#39;</span>)<span class="op">;</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">catch</span> (xhr) {</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">throw</span> <span class="kw">new</span> <span class="bu">Error</span>(xhr<span class="op">.</span><span class="at">responseText</span> <span class="op">||</span> xhr<span class="op">.</span><span class="at">message</span>)<span class="op">;</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>}<span class="op">;</span></span></code></pre></div>
+<p>All incoming units should be accepted in both upper and lower case, but should be returned in both the <code>initUnit</code> and <code>returnUnit</code> in lower case, except for liter, which should be represented as an uppercase <code>'L'</code>.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">async</span> getUserInput <span class="kw">=&gt;</span> {</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">try</span> {</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> data1 <span class="op">=</span> <span class="cf">await</span> $<span class="op">.</span><span class="fu">get</span>(<span class="fu">getUserInput</span>(<span class="st">&#39;url&#39;</span>) <span class="op">+</span> <span class="st">&#39;/api/convert?input=1gal&#39;</span>)<span class="op">;</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    assert<span class="op">.</span><span class="fu">equal</span>(data1<span class="op">.</span><span class="at">initUnit</span><span class="op">,</span> <span class="st">&#39;gal&#39;</span>)<span class="op">;</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    assert<span class="op">.</span><span class="fu">equal</span>(data1<span class="op">.</span><span class="at">returnUnit</span><span class="op">,</span> <span class="st">&#39;L&#39;</span>)<span class="op">;</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> data2 <span class="op">=</span> <span class="cf">await</span> $<span class="op">.</span><span class="fu">get</span>(<span class="fu">getUserInput</span>(<span class="st">&#39;url&#39;</span>) <span class="op">+</span> <span class="st">&#39;/api/convert?input=10L&#39;</span>)<span class="op">;</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    assert<span class="op">.</span><span class="fu">equal</span>(data2<span class="op">.</span><span class="at">initUnit</span><span class="op">,</span> <span class="st">&#39;L&#39;</span>)<span class="op">;</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    assert<span class="op">.</span><span class="fu">equal</span>(data2<span class="op">.</span><span class="at">returnUnit</span><span class="op">,</span> <span class="st">&#39;gal&#39;</span>)<span class="op">;</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> data3 <span class="op">=</span> <span class="cf">await</span> $<span class="op">.</span><span class="fu">get</span>(<span class="fu">getUserInput</span>(<span class="st">&#39;url&#39;</span>) <span class="op">+</span> <span class="st">&#39;/api/convert?input=1l&#39;</span>)<span class="op">;</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    assert<span class="op">.</span><span class="fu">equal</span>(data3<span class="op">.</span><span class="at">initUnit</span><span class="op">,</span> <span class="st">&#39;L&#39;</span>)<span class="op">;</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    assert<span class="op">.</span><span class="fu">equal</span>(data3<span class="op">.</span><span class="at">returnUnit</span><span class="op">,</span> <span class="st">&#39;gal&#39;</span>)<span class="op">;</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> data4 <span class="op">=</span> <span class="cf">await</span> $<span class="op">.</span><span class="fu">get</span>(<span class="fu">getUserInput</span>(<span class="st">&#39;url&#39;</span>) <span class="op">+</span> <span class="st">&#39;/api/convert?input=10KM&#39;</span>)<span class="op">;</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    assert<span class="op">.</span><span class="fu">equal</span>(data4<span class="op">.</span><span class="at">initUnit</span><span class="op">,</span> <span class="st">&#39;km&#39;</span>)<span class="op">;</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    assert<span class="op">.</span><span class="fu">equal</span>(data4<span class="op">.</span><span class="at">returnUnit</span><span class="op">,</span> <span class="st">&#39;mi&#39;</span>)<span class="op">;</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">catch</span> (xhr) {</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">throw</span> <span class="kw">new</span> <span class="bu">Error</span>(xhr<span class="op">.</span><span class="at">responseText</span> <span class="op">||</span> xhr<span class="op">.</span><span class="at">message</span>)<span class="op">;</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>}<span class="op">;</span></span></code></pre></div>
+<p>If the unit of measurement is invalid, returned will be <code>'invalid unit'</code>.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">async</span> getUserInput <span class="kw">=&gt;</span> {</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">try</span> {</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> data <span class="op">=</span> <span class="cf">await</span> $<span class="op">.</span><span class="fu">get</span>(<span class="fu">getUserInput</span>(<span class="st">&#39;url&#39;</span>) <span class="op">+</span> <span class="st">&#39;/api/convert?input=1min&#39;</span>)<span class="op">;</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">assert</span>(data<span class="op">.</span><span class="at">error</span> <span class="op">===</span> <span class="st">&#39;invalid unit&#39;</span> <span class="op">||</span> data <span class="op">===</span> <span class="st">&#39;invalid unit&#39;</span>)<span class="op">;</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">catch</span> (xhr) {</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">throw</span> <span class="kw">new</span> <span class="bu">Error</span>(xhr<span class="op">.</span><span class="at">responseText</span> <span class="op">||</span> xhr<span class="op">.</span><span class="at">message</span>)<span class="op">;</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>}<span class="op">;</span></span></code></pre></div>
+<p>If the number is invalid, returned will be <code>'invalid number'</code>.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">async</span> getUserInput <span class="kw">=&gt;</span> {</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">try</span> {</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> data <span class="op">=</span> <span class="cf">await</span> $<span class="op">.</span><span class="fu">get</span>(</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>      <span class="fu">getUserInput</span>(<span class="st">&#39;url&#39;</span>) <span class="op">+</span> <span class="st">&#39;/api/convert?input=1//2gal&#39;</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    )<span class="op">;</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">assert</span>(data<span class="op">.</span><span class="at">error</span> <span class="op">===</span> <span class="st">&#39;invalid number&#39;</span> <span class="op">||</span> data <span class="op">===</span> <span class="st">&#39;invalid number&#39;</span>)<span class="op">;</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">catch</span> (xhr) {</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">throw</span> <span class="kw">new</span> <span class="bu">Error</span>(xhr<span class="op">.</span><span class="at">responseText</span> <span class="op">||</span> xhr<span class="op">.</span><span class="at">message</span>)<span class="op">;</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>}<span class="op">;</span></span></code></pre></div>
+<p>If both the unit and number are invalid, returned will be <code>'invalid number and unit'</code>.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">async</span> getUserInput <span class="kw">=&gt;</span> {</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">try</span> {</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> data <span class="op">=</span> <span class="cf">await</span> $<span class="op">.</span><span class="fu">get</span>(</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>      <span class="fu">getUserInput</span>(<span class="st">&#39;url&#39;</span>) <span class="op">+</span> <span class="st">&#39;/api/convert?input=1//2min&#39;</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    )<span class="op">;</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">assert</span>(</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>      data<span class="op">.</span><span class="at">error</span> <span class="op">===</span> <span class="st">&#39;invalid number and unit&#39;</span> <span class="op">||</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>        data <span class="op">===</span> <span class="st">&#39;invalid number and unit&#39;</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    )<span class="op">;</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">catch</span> (xhr) {</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">throw</span> <span class="kw">new</span> <span class="bu">Error</span>(xhr<span class="op">.</span><span class="at">responseText</span> <span class="op">||</span> xhr<span class="op">.</span><span class="at">message</span>)<span class="op">;</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>}<span class="op">;</span></span></code></pre></div>
+<p>You can use fractions, decimals or both in the parameter (ie. 5, 1/2, 2.5/6), but if nothing is provided it will default to 1.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">async</span> getUserInput <span class="kw">=&gt;</span> {</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">try</span> {</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> data1 <span class="op">=</span> <span class="cf">await</span> $<span class="op">.</span><span class="fu">get</span>(<span class="fu">getUserInput</span>(<span class="st">&#39;url&#39;</span>) <span class="op">+</span> <span class="st">&#39;/api/convert?input=mi&#39;</span>)<span class="op">;</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    assert<span class="op">.</span><span class="fu">approximately</span>(data1<span class="op">.</span><span class="at">initNum</span><span class="op">,</span> <span class="dv">1</span><span class="op">,</span> <span class="fl">0.001</span>)<span class="op">;</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    assert<span class="op">.</span><span class="fu">approximately</span>(data1<span class="op">.</span><span class="at">returnNum</span><span class="op">,</span> <span class="fl">1.60934</span><span class="op">,</span> <span class="fl">0.001</span>)<span class="op">;</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    assert<span class="op">.</span><span class="fu">equal</span>(data1<span class="op">.</span><span class="at">returnUnit</span><span class="op">,</span> <span class="st">&#39;km&#39;</span>)<span class="op">;</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> data2 <span class="op">=</span> <span class="cf">await</span> $<span class="op">.</span><span class="fu">get</span>(<span class="fu">getUserInput</span>(<span class="st">&#39;url&#39;</span>) <span class="op">+</span> <span class="st">&#39;/api/convert?input=1/5mi&#39;</span>)<span class="op">;</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    assert<span class="op">.</span><span class="fu">approximately</span>(data2<span class="op">.</span><span class="at">initNum</span><span class="op">,</span> <span class="dv">1</span> <span class="op">/</span> <span class="dv">5</span><span class="op">,</span> <span class="fl">0.1</span>)<span class="op">;</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    assert<span class="op">.</span><span class="fu">approximately</span>(data2<span class="op">.</span><span class="at">returnNum</span><span class="op">,</span> <span class="fl">0.32187</span><span class="op">,</span> <span class="fl">0.001</span>)<span class="op">;</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    assert<span class="op">.</span><span class="fu">equal</span>(data2<span class="op">.</span><span class="at">returnUnit</span><span class="op">,</span> <span class="st">&#39;km&#39;</span>)<span class="op">;</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> data3 <span class="op">=</span> <span class="cf">await</span> $<span class="op">.</span><span class="fu">get</span>(</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>      <span class="fu">getUserInput</span>(<span class="st">&#39;url&#39;</span>) <span class="op">+</span> <span class="st">&#39;/api/convert?input=1.5/7km&#39;</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>    )<span class="op">;</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>    assert<span class="op">.</span><span class="fu">approximately</span>(data3<span class="op">.</span><span class="at">initNum</span><span class="op">,</span> <span class="fl">1.5</span> <span class="op">/</span> <span class="dv">7</span><span class="op">,</span> <span class="fl">0.001</span>)<span class="op">;</span></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>    assert<span class="op">.</span><span class="fu">approximately</span>(data3<span class="op">.</span><span class="at">returnNum</span><span class="op">,</span> <span class="fl">0.13315</span><span class="op">,</span> <span class="fl">0.001</span>)<span class="op">;</span></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>    assert<span class="op">.</span><span class="fu">equal</span>(data3<span class="op">.</span><span class="at">returnUnit</span><span class="op">,</span> <span class="st">&#39;mi&#39;</span>)<span class="op">;</span></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> data4 <span class="op">=</span> <span class="cf">await</span> $<span class="op">.</span><span class="fu">get</span>(</span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>      <span class="fu">getUserInput</span>(<span class="st">&#39;url&#39;</span>) <span class="op">+</span> <span class="st">&#39;/api/convert?input=3/2.7km&#39;</span></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>    )<span class="op">;</span></span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>    assert<span class="op">.</span><span class="fu">approximately</span>(data4<span class="op">.</span><span class="at">initNum</span><span class="op">,</span> <span class="dv">3</span> <span class="op">/</span> <span class="fl">2.7</span><span class="op">,</span> <span class="fl">0.001</span>)<span class="op">;</span></span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>    assert<span class="op">.</span><span class="fu">approximately</span>(data4<span class="op">.</span><span class="at">returnNum</span><span class="op">,</span> <span class="fl">0.69041</span><span class="op">,</span> <span class="fl">0.001</span>)<span class="op">;</span></span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>    assert<span class="op">.</span><span class="fu">equal</span>(data4<span class="op">.</span><span class="at">returnUnit</span><span class="op">,</span> <span class="st">&#39;mi&#39;</span>)<span class="op">;</span></span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">catch</span> (err) {</span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">throw</span> <span class="kw">new</span> <span class="bu">Error</span>(err<span class="op">.</span><span class="at">responseText</span> <span class="op">||</span> err<span class="op">.</span><span class="at">message</span>)<span class="op">;</span></span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>}<span class="op">;</span></span></code></pre></div>
+<p>Your return will consist of the <code>initNum</code>, <code>initUnit</code>, <code>returnNum</code>, <code>returnUnit</code>, and <code>string</code> spelling out units in the format <code>'{initNum} {initUnitString} converts to {returnNum} {returnUnitString}'</code> with the result rounded to 5 decimals.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">async</span> getUserInput <span class="kw">=&gt;</span> {</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">try</span> {</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> data <span class="op">=</span> <span class="cf">await</span> $<span class="op">.</span><span class="fu">get</span>(<span class="fu">getUserInput</span>(<span class="st">&#39;url&#39;</span>) <span class="op">+</span> <span class="st">&#39;/api/convert?input=2mi&#39;</span>)<span class="op">;</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    assert<span class="op">.</span><span class="fu">equal</span>(data<span class="op">.</span><span class="at">initNum</span><span class="op">,</span> <span class="dv">2</span>)<span class="op">;</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    assert<span class="op">.</span><span class="fu">equal</span>(data<span class="op">.</span><span class="at">initUnit</span><span class="op">,</span> <span class="st">&#39;mi&#39;</span>)<span class="op">;</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    assert<span class="op">.</span><span class="fu">approximately</span>(data<span class="op">.</span><span class="at">returnNum</span><span class="op">,</span> <span class="fl">3.21868</span><span class="op">,</span> <span class="fl">0.001</span>)<span class="op">;</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    assert<span class="op">.</span><span class="fu">equal</span>(data<span class="op">.</span><span class="at">returnUnit</span><span class="op">,</span> <span class="st">&#39;km&#39;</span><span class="op">,</span> <span class="st">&#39;returnUnit did not match&#39;</span>)<span class="op">;</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    assert<span class="op">.</span><span class="fu">equal</span>(data<span class="op">.</span><span class="at">string</span><span class="op">,</span> <span class="st">&#39;2 miles converts to 3.21868 kilometers&#39;</span>)<span class="op">;</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">catch</span> (xhr) {</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">throw</span> <span class="kw">new</span> <span class="bu">Error</span>(xhr<span class="op">.</span><span class="at">responseText</span> <span class="op">||</span> xhr<span class="op">.</span><span class="at">message</span>)<span class="op">;</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>}<span class="op">;</span></span></code></pre></div>
+<p>All 16 unit tests are complete and passing.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">async</span> getUserInput <span class="kw">=&gt;</span> {</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">try</span> {</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> getTests <span class="op">=</span> <span class="cf">await</span> $<span class="op">.</span><span class="fu">get</span>(<span class="fu">getUserInput</span>(<span class="st">&#39;url&#39;</span>) <span class="op">+</span> <span class="st">&#39;/_api/get-tests&#39;</span>)<span class="op">;</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    assert<span class="op">.</span><span class="fu">isArray</span>(getTests)<span class="op">;</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> unitTests <span class="op">=</span> getTests<span class="op">.</span><span class="fu">filter</span>(test <span class="kw">=&gt;</span> {</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>      <span class="cf">return</span> <span class="op">!!</span>test<span class="op">.</span><span class="at">context</span><span class="op">.</span><span class="fu">match</span>(<span class="ss">/Unit Tests/gi</span>)<span class="op">;</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    })<span class="op">;</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    assert<span class="op">.</span><span class="fu">isAtLeast</span>(unitTests<span class="op">.</span><span class="at">length</span><span class="op">,</span> <span class="dv">16</span><span class="op">,</span> <span class="st">&#39;At least 16 tests passed&#39;</span>)<span class="op">;</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>    unitTests<span class="op">.</span><span class="fu">forEach</span>(test <span class="kw">=&gt;</span> {</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>      assert<span class="op">.</span><span class="fu">equal</span>(test<span class="op">.</span><span class="at">state</span><span class="op">,</span> <span class="st">&#39;passed&#39;</span><span class="op">,</span> <span class="st">&#39;Tests in Passed State&#39;</span>)<span class="op">;</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>      assert<span class="op">.</span><span class="fu">isAtLeast</span>(</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>        test<span class="op">.</span><span class="at">assertions</span><span class="op">.</span><span class="at">length</span><span class="op">,</span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>        <span class="dv">1</span><span class="op">,</span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>        <span class="st">&#39;At least one assertion per test&#39;</span></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>      )<span class="op">;</span></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>    })<span class="op">;</span></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">catch</span> (err) {</span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">throw</span> <span class="kw">new</span> <span class="bu">Error</span>(err<span class="op">.</span><span class="at">responseText</span> <span class="op">||</span> err<span class="op">.</span><span class="at">message</span>)<span class="op">;</span></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>}<span class="op">;</span></span></code></pre></div>
+<p>All 5 functional tests are complete and passing.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">async</span> getUserInput <span class="kw">=&gt;</span> {</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">try</span> {</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> getTests <span class="op">=</span> <span class="cf">await</span> $<span class="op">.</span><span class="fu">get</span>(<span class="fu">getUserInput</span>(<span class="st">&#39;url&#39;</span>) <span class="op">+</span> <span class="st">&#39;/_api/get-tests&#39;</span>)<span class="op">;</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    assert<span class="op">.</span><span class="fu">isArray</span>(getTests)<span class="op">;</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> functTests <span class="op">=</span> getTests<span class="op">.</span><span class="fu">filter</span>(test <span class="kw">=&gt;</span> {</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>      <span class="cf">return</span> <span class="op">!!</span>test<span class="op">.</span><span class="at">context</span><span class="op">.</span><span class="fu">match</span>(<span class="ss">/Functional Tests/gi</span>)<span class="op">;</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    })<span class="op">;</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>    assert<span class="op">.</span><span class="fu">isAtLeast</span>(functTests<span class="op">.</span><span class="at">length</span><span class="op">,</span> <span class="dv">5</span><span class="op">,</span> <span class="st">&#39;At least 5 tests passed&#39;</span>)<span class="op">;</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>    functTests<span class="op">.</span><span class="fu">forEach</span>(test <span class="kw">=&gt;</span> {</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>      assert<span class="op">.</span><span class="fu">equal</span>(test<span class="op">.</span><span class="at">state</span><span class="op">,</span> <span class="st">&#39;passed&#39;</span><span class="op">,</span> <span class="st">&#39;Tests in Passed State&#39;</span>)<span class="op">;</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>      assert<span class="op">.</span><span class="fu">isAtLeast</span>(</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>        test<span class="op">.</span><span class="at">assertions</span><span class="op">.</span><span class="at">length</span><span class="op">,</span></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>        <span class="dv">1</span><span class="op">,</span></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>        <span class="st">&#39;At least one assertion per test&#39;</span></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>      )<span class="op">;</span></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>    })<span class="op">;</span></span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">catch</span> (err) {</span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">throw</span> <span class="kw">new</span> <span class="bu">Error</span>(err<span class="op">.</span><span class="at">responseText</span> <span class="op">||</span> err<span class="op">.</span><span class="at">message</span>)<span class="op">;</span></span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>}<span class="op">;</span></span></code></pre></div>
+<h1 id="solutions">–solutions–</h1>
+<div class="sourceCode" id="cb14"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">/**</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co">  Backend challenges don&#39;t need solutions, </span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co">  because they would need to be tested against a full working project. </span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co">  Please check our contributing guidelines to learn more.</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co">*/</span></span></code></pre></div>
+</body>
+</html>

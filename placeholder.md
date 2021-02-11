@@ -1,351 +1,299 @@
 ---
-id: 587d8249367417b2b2512c42
-title: Issue Tracker
+id: 587d8249367417b2b2512c41
+title: Metric-Imperial Converter
 challengeType: 4
-forumTopicId: 301569
-dashedName: issue-tracker
+forumTopicId: 301570
+dashedName: metric-imperial-converter
 ---
 
 # --description--
 
-Build a full stack JavaScript app that is functionally similar to this: <https://issue-tracker.freecodecamp.rocks/>. Working on this project will involve you writing your code using one of the following methods:
+Build a full stack JavaScript app that is functionally similar to this: <https://metric-imperial-converter.freecodecamp.rocks/>. Working on this project will involve you writing your code using one of the following methods:
 
--   Clone [this GitHub repo](https://github.com/freeCodeCamp/boilerplate-project-issuetracker/) and complete your project locally.
--   Use [this repl.it starter project](https://repl.it/github/freeCodeCamp/boilerplate-project-issuetracker) to complete your project.
--   Use a site builder of your choice to complete the project. Be sure to incorporate all the files from our GitHub repo.
+- Clone [this GitHub repo](https://github.com/freeCodeCamp/boilerplate-project-metricimpconverter/) and complete your project locally.
+- Use [our repl.it starter project](https://repl.it/github/freeCodeCamp/boilerplate-project-metricimpconverter) to complete your project.
+- Use a site builder of your choice to complete the project. Be sure to incorporate all the files from our GitHub repo.
 
 When you are done, make sure a working demo of your project is hosted somewhere public. Then submit the URL to it in the `Solution Link` field. Optionally, also submit a link to your project's source code in the `GitHub Link` field.
 
 # --instructions--
 
--   Complete the necessary routes in `/routes/api.js`
--   Create all of the functional tests in `tests/2_functional-tests.js`
--   Copy the `sample.env` file to `.env` and set the variables appropriately
--   To run the tests uncomment `NODE_ENV=test` in your `.env` file
--   To run the tests in the console, use the command `npm run test`. To open the Repl.it console, press Ctrl+Shift+P (Cmd if on a Mac) and type "open shell"
+- Complete the necessary conversion logic in `/controllers/convertHandler.js`
+- Complete the necessary routes in `/routes/api.js`
+- Copy the `sample.env` file to `.env` and set the variables appropriately
+- To run the tests uncomment `NODE_ENV=test` in your `.env` file
+- To run the tests in the console, use the command `npm run test`. To open the Repl.it console, press Ctrl+Shift+P (Cmd if on a Mac) and type "open shell"
+
+Write the following tests in `tests/1_unit-tests.js`:
+
+- `convertHandler` should correctly read a whole number input.
+- `convertHandler` should correctly read a decimal number input.
+- `convertHandler` should correctly read a fractional input.
+- `convertHandler` should correctly read a fractional input with a decimal.
+- `convertHandler` should correctly return an error on a double-fraction (i.e. `3/2/3`).
+- `convertHandler` should correctly default to a numerical input of `1` when no numerical input is provided.
+- `convertHandler` should correctly read each valid input unit.
+- `convertHandler` should correctly return an error for an invalid input unit.
+- `convertHandler` should return the correct return unit for each valid input unit.
+- `convertHandler` should correctly return the spelled-out string unit for each valid input unit.
+- `convertHandler` should correctly convert `gal` to `L`.
+- `convertHandler` should correctly convert `L` to `gal`.
+- `convertHandler` should correctly convert `mi` to `km`.
+- `convertHandler` should correctly convert `km` to `mi`.
+- `convertHandler` should correctly convert `lbs` to `kg`.
+- `convertHandler` should correctly convert `kg` to `lbs`.
 
 Write the following tests in `tests/2_functional-tests.js`:
 
--   Create an issue with every field: POST request to `/api/issues/{project}`
--   Create an issue with only required fields: POST request to `/api/issues/{project}`
--   Create an issue with missing required fields: POST request to `/api/issues/{project}`
--   View issues on a project: GET request to `/api/issues/{project}`
--   View issues on a project with one filter: GET request to `/api/issues/{project}`
--   View issues on a project with multiple filters: GET request to `/api/issues/{project}`
--   Update one field on an issue: PUT request to `/api/issues/{project}`
--   Update multiple fields on an issue: PUT request to `/api/issues/{project}`
--   Update an issue with missing `_id`: PUT request to `/api/issues/{project}`
--   Update an issue with no fields to update: PUT request to `/api/issues/{project}`
--   Update an issue with an invalid `_id`: PUT request to `/api/issues/{project}`
--   Delete an issue: DELETE request to `/api/issues/{project}`
--   Delete an issue with an invalid `_id`: DELETE request to `/api/issues/{project}`
--   Delete an issue with missing `_id`: DELETE request to `/api/issues/{project}`
+- Convert a valid input such as `10L`: `GET` request to `/api/convert`.
+- Convert an invalid input such as `32g`: `GET` request to `/api/convert`.
+- Convert an invalid number such as `3/7.2/4kg`: `GET` request to `/api/convert`.
+- Convert an invalid number AND unit such as `3/7.2/4kilomegagram`: `GET` request to `/api/convert`.
+- Convert with no number such as `kg`: `GET` request to `/api/convert`.
 
 # --hints--
 
 You can provide your own project, not the example URL.
 
 ```js
-(getUserInput) => {
-  assert(!/.*\/issue-tracker\.freecodecamp\.rocks/.test(getUserInput('url')));
+getUserInput => {
+  assert(
+    !/.*\/metric-imperial-converter\.freecodecamp\.rocks/.test(
+      getUserInput('url')
+    )
+  );
 };
 ```
 
-You can send a `POST` request to `/api/issues/{projectname}` with form data containing the required fields `issue_title`, `issue_text`, `created_by`, and optionally `assigned_to` and `status_text`.
+You can `GET` `/api/convert` with a single parameter containing an accepted number and unit and have it converted. (Hint: Split the input by looking for the index of the first character which will mark the start of the unit)
 
 ```js
-async (getUserInput) => {
+```
+
+You can convert `'gal'` to `'L'` and vice versa. (1 gal to 3.78541 L)
+
+```js
+async getUserInput => {
   try {
-    let test_data = {
-      issue_title: 'Faux Issue Title',
-      issue_text: 'Functional Test - Required Fields Only',
-      created_by: 'fCC'
-    };
-    const data = await $.post(
-      getUserInput('url') + '/api/issues/fcc-project',
-      test_data
+    const data1 = await $.get(getUserInput('url') + '/api/convert?input=1gal');
+    assert.equal(data1.returnNum, 3.78541);
+    assert.equal(data1.returnUnit, 'L');
+    const data2 = await $.get(getUserInput('url') + '/api/convert?input=10gal');
+    assert.equal(data2.returnNum, 37.8541);
+    assert.equal(data2.returnUnit, 'L');
+    const data3 = await $.get(getUserInput('url') + '/api/convert?input=1l');
+    assert.equal(data3.returnNum, 0.26417);
+    assert.equal(data3.returnUnit, 'gal');
+    const data4 = await $.get(getUserInput('url') + '/api/convert?input=10l');
+    assert.equal(data4.returnNum, 2.64172);
+    assert.equal(data4.returnUnit, 'gal');
+  } catch (xhr) {
+    throw new Error(xhr.responseText || xhr.message);
+  }
+};
+```
+
+You can convert `'lbs'` to `'kg'` and vice versa. (1 lbs to 0.453592 kg)
+
+```js
+async getUserInput => {
+  try {
+    const data1 = await $.get(getUserInput('url') + '/api/convert?input=1lbs');
+    assert.equal(data1.returnNum, 0.45359);
+    assert.equal(data1.returnUnit, 'kg');
+    const data2 = await $.get(getUserInput('url') + '/api/convert?input=10lbs');
+    assert.equal(data2.returnNum, 4.53592);
+    assert.equal(data2.returnUnit, 'kg');
+    const data3 = await $.get(getUserInput('url') + '/api/convert?input=1kg');
+    assert.equal(data3.returnNum, 2.20462);
+    assert.equal(data3.returnUnit, 'lbs');
+    const data4 = await $.get(getUserInput('url') + '/api/convert?input=10kg');
+    assert.equal(data4.returnNum, 22.04624);
+    assert.equal(data4.returnUnit, 'lbs');
+  } catch (xhr) {
+    throw new Error(xhr.responseText || xhr.message);
+  }
+};
+```
+
+You can convert `'mi'` to `'km'` and vice versa. (1 mi to 1.60934 km)
+
+```js
+async getUserInput => {
+  try {
+    const data1 = await $.get(getUserInput('url') + '/api/convert?input=1mi');
+    assert.equal(data1.returnNum, 1.60934);
+    assert.equal(data1.returnUnit, 'km');
+    const data2 = await $.get(getUserInput('url') + '/api/convert?input=10mi');
+    assert.equal(data2.returnNum, 16.0934);
+    assert.equal(data2.returnUnit, 'km');
+    const data3 = await $.get(getUserInput('url') + '/api/convert?input=1km');
+    assert.equal(data3.returnNum, 0.62137);
+    assert.equal(data3.returnUnit, 'mi');
+    const data4 = await $.get(getUserInput('url') + '/api/convert?input=10km');
+    assert.equal(data4.returnNum, 6.21373);
+    assert.equal(data4.returnUnit, 'mi');
+  } catch (xhr) {
+    throw new Error(xhr.responseText || xhr.message);
+  }
+};
+```
+
+All incoming units should be accepted in both upper and lower case, but should be returned in both the `initUnit` and `returnUnit` in lower case, except for liter, which should be represented as an uppercase `'L'`.
+
+```js
+async getUserInput => {
+  try {
+    const data1 = await $.get(getUserInput('url') + '/api/convert?input=1gal');
+    assert.equal(data1.initUnit, 'gal');
+    assert.equal(data1.returnUnit, 'L');
+    const data2 = await $.get(getUserInput('url') + '/api/convert?input=10L');
+    assert.equal(data2.initUnit, 'L');
+    assert.equal(data2.returnUnit, 'gal');
+    const data3 = await $.get(getUserInput('url') + '/api/convert?input=1l');
+    assert.equal(data3.initUnit, 'L');
+    assert.equal(data3.returnUnit, 'gal');
+    const data4 = await $.get(getUserInput('url') + '/api/convert?input=10KM');
+    assert.equal(data4.initUnit, 'km');
+    assert.equal(data4.returnUnit, 'mi');
+  } catch (xhr) {
+    throw new Error(xhr.responseText || xhr.message);
+  }
+};
+```
+
+If the unit of measurement is invalid, returned will be `'invalid unit'`.
+
+```js
+async getUserInput => {
+  try {
+    const data = await $.get(getUserInput('url') + '/api/convert?input=1min');
+    assert(data.error === 'invalid unit' || data === 'invalid unit');
+  } catch (xhr) {
+    throw new Error(xhr.responseText || xhr.message);
+  }
+};
+```
+
+If the number is invalid, returned will be `'invalid number'`.
+
+```js
+async getUserInput => {
+  try {
+    const data = await $.get(
+      getUserInput('url') + '/api/convert?input=1//2gal'
     );
-    assert.isObject(data);
-    assert.nestedInclude(data, test_data);
+    assert(data.error === 'invalid number' || data === 'invalid number');
+  } catch (xhr) {
+    throw new Error(xhr.responseText || xhr.message);
+  }
+};
+```
+
+If both the unit and number are invalid, returned will be `'invalid number and unit'`.
+
+```js
+async getUserInput => {
+  try {
+    const data = await $.get(
+      getUserInput('url') + '/api/convert?input=1//2min'
+    );
+    assert(
+      data.error === 'invalid number and unit' ||
+        data === 'invalid number and unit'
+    );
+  } catch (xhr) {
+    throw new Error(xhr.responseText || xhr.message);
+  }
+};
+```
+
+You can use fractions, decimals or both in the parameter (ie. 5, 1/2, 2.5/6), but if nothing is provided it will default to 1.
+
+```js
+async getUserInput => {
+  try {
+    const data1 = await $.get(getUserInput('url') + '/api/convert?input=mi');
+    assert.approximately(data1.initNum, 1, 0.001);
+    assert.approximately(data1.returnNum, 1.60934, 0.001);
+    assert.equal(data1.returnUnit, 'km');
+    const data2 = await $.get(getUserInput('url') + '/api/convert?input=1/5mi');
+    assert.approximately(data2.initNum, 1 / 5, 0.1);
+    assert.approximately(data2.returnNum, 0.32187, 0.001);
+    assert.equal(data2.returnUnit, 'km');
+    const data3 = await $.get(
+      getUserInput('url') + '/api/convert?input=1.5/7km'
+    );
+    assert.approximately(data3.initNum, 1.5 / 7, 0.001);
+    assert.approximately(data3.returnNum, 0.13315, 0.001);
+    assert.equal(data3.returnUnit, 'mi');
+    const data4 = await $.get(
+      getUserInput('url') + '/api/convert?input=3/2.7km'
+    );
+    assert.approximately(data4.initNum, 3 / 2.7, 0.001);
+    assert.approximately(data4.returnNum, 0.69041, 0.001);
+    assert.equal(data4.returnUnit, 'mi');
   } catch (err) {
     throw new Error(err.responseText || err.message);
   }
 };
 ```
 
-The `POST` request to `/api/issues/{projectname}` will return the created object, and must include all of the submitted fields. Excluded optional fields will be returned as empty strings. Additionally, include `created_on` (date/time), `updated_on` (date/time), `open` (boolean, `true` for open - default value, `false` for closed), and `_id`.
+Your return will consist of the `initNum`, `initUnit`, `returnNum`, `returnUnit`, and `string` spelling out units in the format `'{initNum} {initUnitString} converts to {returnNum} {returnUnitString}'` with the result rounded to 5 decimals.
 
 ```js
-async (getUserInput) => {
+async getUserInput => {
   try {
-    let test_data = {
-      issue_title: 'Faux Issue Title 2',
-      issue_text: 'Functional Test - Every field filled in',
-      created_by: 'fCC',
-      assigned_to: 'Chai and Mocha'
-    };
-    const data = await $.post(
-      getUserInput('url') + '/api/issues/fcc-project',
-      test_data
-    );
-    assert.isObject(data);
-    assert.nestedInclude(data, test_data);
-    assert.property(data, 'created_on');
-    assert.isNumber(Date.parse(data.created_on));
-    assert.property(data, 'updated_on');
-    assert.isNumber(Date.parse(data.updated_on));
-    assert.property(data, 'open');
-    assert.isBoolean(data.open);
-    assert.isTrue(data.open);
-    assert.property(data, '_id');
-    assert.isNotEmpty(data._id);
-    assert.property(data, 'status_text');
-    assert.isEmpty(data.status_text);
-  } catch (err) {
-    throw new Error(err.responseText || err.message);
+    const data = await $.get(getUserInput('url') + '/api/convert?input=2mi');
+    assert.equal(data.initNum, 2);
+    assert.equal(data.initUnit, 'mi');
+    assert.approximately(data.returnNum, 3.21868, 0.001);
+    assert.equal(data.returnUnit, 'km', 'returnUnit did not match');
+    assert.equal(data.string, '2 miles converts to 3.21868 kilometers');
+  } catch (xhr) {
+    throw new Error(xhr.responseText || xhr.message);
   }
 };
 ```
 
-If you send a `POST` request to `/api/issues/{projectname}` without the required fields, returned will be the error `{ error: 'required field(s) missing' }`
+All 16 unit tests are complete and passing.
 
 ```js
-async (getUserInput) => {
-  try {
-    let test_data = { created_by: 'fCC' };
-    const data = await $.post(getUserInput('url') + '/api/issues/fcc-project', {
-      created_by: 'fCC'
-    });
-    assert.isObject(data);
-    assert.property(data, 'error');
-    assert.equal(data.error, 'required field(s) missing');
-  } catch (err) {
-    throw new Error(err.responseText || err.message);
-  }
-};
-```
-
-You can send a `GET` request to `/api/issues/{projectname}` for an array of all issues for that specific `projectname`, with all the fields present for each issue.
-
-```js
-async (getUserInput) => {
-  try {
-    let test_data = { issue_text: 'Get Issues Test', created_by: 'fCC' };
-    const url =
-      getUserInput('url') +
-      '/api/issues/get_issues_test_' +
-      Date.now().toString().substring(7);
-    const data1 = await $.post(
-      url,
-      Object.assign(test_data, { issue_title: 'Faux Issue 1' })
-    );
-    assert.isObject(data1);
-    const data2 = await $.post(
-      url,
-      Object.assign(test_data, { issue_title: 'Faux Issue 2' })
-    );
-    assert.isObject(data2);
-    const data3 = await $.post(
-      url,
-      Object.assign(test_data, { issue_title: 'Faux Issue 3' })
-    );
-    assert.isObject(data3);
-    const getIssues = await $.get(url);
-    assert.isArray(getIssues);
-    assert.lengthOf(getIssues, 3);
-    let re = new RegExp('Faux Issue \\d');
-    getIssues.forEach((issue) => {
-      assert.property(issue, 'issue_title');
-      assert.match(issue.issue_title, re);
-      assert.property(issue, 'issue_text');
-      assert.property(issue, 'created_by');
-      assert.property(issue, 'assigned_to');
-      assert.property(issue, 'status_text');
-      assert.property(issue, 'open');
-      assert.property(issue, 'created_on');
-      assert.property(issue, 'updated_on');
-      assert.property(issue, '_id');
-    });
-  } catch (err) {
-    throw new Error(err.responseText || err.message);
-  }
-};
-```
-
-You can send a `GET` request to `/api/issues/{projectname}` and filter the request by also passing along any field and value as a URL query (ie. `/api/issues/{project}?open=false`). You can pass one or more field/value pairs at once.
-
-```js
-async (getUserInput) => {
-  try {
-    let test_data = {
-      issue_title: 'To be Filtered',
-      issue_text: 'Filter Issues Test'
-    };
-    const url =
-      getUserInput('url') +
-      '/api/issues/get_issues_test_' +
-      Date.now().toString().substring(7);
-    const data1 = await $.post(
-      url,
-      Object.assign(test_data, { created_by: 'Alice', assigned_to: 'Bob' })
-    );
-    const data2 = await $.post(
-      url,
-      Object.assign(test_data, { created_by: 'Alice', assigned_to: 'Bob' })
-    );
-    const data3 = await $.post(
-      url,
-      Object.assign(test_data, { created_by: 'Alice', assigned_to: 'Eric' })
-    );
-    const data4 = await $.post(
-      url,
-      Object.assign(test_data, { created_by: 'Carol', assigned_to: 'Eric' })
-    );
-    const getSingle = await $.get(url + '?created_by=Alice');
-    assert.isArray(getSingle);
-    assert.lengthOf(getSingle, 3);
-    const getMultiple = await $.get(url + '?created_by=Alice&assigned_to=Bob');
-    assert.isArray(getMultiple);
-    assert.lengthOf(getMultiple, 2);
-  } catch (err) {
-    throw new Error(err.responseText || err.message);
-  }
-};
-```
-
-You can send a `PUT` request to `/api/issues/{projectname}` with an `_id` and one or more fields to update. On success, the `updated_on` field should be updated, and returned should be `{  result: 'successfully updated', '_id': _id }`.
-
-```js
-async (getUserInput) => {
-  try {
-    let initialData = {
-      issue_title: 'Issue to be Updated',
-      issue_text: 'Functional Test - Put target',
-      created_by: 'fCC'
-    };
-    const url = getUserInput('url') + '/api/issues/fcc-project';
-    const itemToUpdate = await $.post(url, initialData);
-    const updateSucccess = await $.ajax({
-      url: url,
-      type: 'PUT',
-      data: { _id: itemToUpdate._id, issue_text: 'New Issue Text' }
-    });
-    assert.isObject(updateSucccess);
-    assert.deepEqual(updateSucccess, {
-      result: 'successfully updated',
-      _id: itemToUpdate._id
-    });
-    const getUpdatedId = await $.get(url + '?_id=' + itemToUpdate._id);
-    assert.isArray(getUpdatedId);
-    assert.isObject(getUpdatedId[0]);
-    assert.isAbove(
-      Date.parse(getUpdatedId[0].updated_on),
-      Date.parse(getUpdatedId[0].created_on)
-    );
-  } catch (err) {
-    throw new Error(err.responseText || err.message);
-  }
-};
-```
-
-When the `PUT` request sent to `/api/issues/{projectname}` does not include an `_id`, the return value is `{ error: 'missing _id' }`.
-
-```js
-async (getUserInput) => {
-  try {
-    const url = getUserInput('url') + '/api/issues/fcc-project';
-    const badUpdate = await $.ajax({ url: url, type: 'PUT' });
-    assert.isObject(badUpdate);
-    assert.property(badUpdate, 'error');
-    assert.equal(badUpdate.error, 'missing _id');
-  } catch (err) {
-    throw new Error(err.responseText || err.message);
-  }
-};
-```
-
-When the `PUT` request sent to `/api/issues/{projectname}` does not include update fields, the return value is `{ error: 'no update field(s) sent', '_id': _id }`. On any other error, the return value is `{ error: 'could not update', '_id': _id }`.
-
-```js
-async (getUserInput) => {
-  try {
-    const url = getUserInput('url') + '/api/issues/fcc-project';
-    const badUpdate = await $.ajax({
-      url: url,
-      type: 'PUT',
-      data: { _id: '5f665eb46e296f6b9b6a504d' }
-    });
-    assert.deepEqual(badUpdate, {
-      error: 'no update field(s) sent',
-      _id: '5f665eb46e296f6b9b6a504d'
-    });
-    const badIdUpdate = await $.ajax({
-      url: url,
-      type: 'PUT',
-      data: { _id: '5f665eb46e296f6b9b6a504d', issue_text: 'New Issue Text' }
-    });
-    assert.deepEqual(badIdUpdate, {
-      error: 'could not update',
-      _id: '5f665eb46e296f6b9b6a504d'
-    });
-  } catch (err) {
-    throw new Error(err.responseText || err.message);
-  }
-};
-```
-
-You can send a `DELETE` request to `/api/issues/{projectname}` with an `_id` to delete an issue. If no `_id` is sent, the return value is `{ error: 'missing _id' }`. On success, the return value is `{ result: 'successfully deleted', '_id': _id }`. On failure, the return value is `{ error: 'could not delete', '_id': _id }`.
-
-```js
-async (getUserInput) => {
-  try {
-    let initialData = {
-      issue_title: 'Issue to be Deleted',
-      issue_text: 'Functional Test - Delete target',
-      created_by: 'fCC'
-    };
-    const url = getUserInput('url') + '/api/issues/fcc-project';
-    const itemToDelete = await $.post(url, initialData);
-    assert.isObject(itemToDelete);
-    const deleteSuccess = await $.ajax({
-      url: url,
-      type: 'DELETE',
-      data: { _id: itemToDelete._id }
-    });
-    assert.isObject(deleteSuccess);
-    assert.deepEqual(deleteSuccess, {
-      result: 'successfully deleted',
-      _id: itemToDelete._id
-    });
-    const noId = await $.ajax({ url: url, type: 'DELETE' });
-    assert.isObject(noId);
-    assert.deepEqual(noId, { error: 'missing _id' });
-    const badIdDelete = await $.ajax({
-      url: url,
-      type: 'DELETE',
-      data: { _id: '5f665eb46e296f6b9b6a504d', issue_text: 'New Issue Text' }
-    });
-    assert.isObject(badIdDelete);
-    assert.deepEqual(badIdDelete, {
-      error: 'could not delete',
-      _id: '5f665eb46e296f6b9b6a504d'
-    });
-  } catch (err) {
-    throw new Error(err.responseText || err.message);
-  }
-};
-```
-
-All 14 functional tests are complete and passing.
-
-```js
-async (getUserInput) => {
+async getUserInput => {
   try {
     const getTests = await $.get(getUserInput('url') + '/_api/get-tests');
     assert.isArray(getTests);
-    assert.isAtLeast(getTests.length, 14, 'At least 14 tests passed');
-    getTests.forEach((test) => {
-      assert.equal(test.state, 'passed', 'Test in Passed State');
+    const unitTests = getTests.filter(test => {
+      return !!test.context.match(/Unit Tests/gi);
+    });
+    assert.isAtLeast(unitTests.length, 16, 'At least 16 tests passed');
+    unitTests.forEach(test => {
+      assert.equal(test.state, 'passed', 'Tests in Passed State');
+      assert.isAtLeast(
+        test.assertions.length,
+        1,
+        'At least one assertion per test'
+      );
+    });
+  } catch (err) {
+    throw new Error(err.responseText || err.message);
+  }
+};
+```
+
+All 5 functional tests are complete and passing.
+
+```js
+async getUserInput => {
+  try {
+    const getTests = await $.get(getUserInput('url') + '/_api/get-tests');
+    assert.isArray(getTests);
+    const functTests = getTests.filter(test => {
+      return !!test.context.match(/Functional Tests/gi);
+    });
+    assert.isAtLeast(functTests.length, 5, 'At least 5 tests passed');
+    functTests.forEach(test => {
+      assert.equal(test.state, 'passed', 'Tests in Passed State');
       assert.isAtLeast(
         test.assertions.length,
         1,
