@@ -1,318 +1,351 @@
 ---
-id: 5e601c0d5ac9d0ecd8b94afe
-title: American British Translator
+id: 587d8249367417b2b2512c42
+title: Issue Tracker
 challengeType: 4
-dashedName: american-british-translator
+forumTopicId: 301569
+dashedName: issue-tracker
 ---
 
 # --description--
 
-Build a full stack JavaScript app that is functionally similar to this: <https://american-british-translator.freecodecamp.rocks/>. Working on this project will involve you writing your code using one of the following methods:
+Build a full stack JavaScript app that is functionally similar to this: <https://issue-tracker.freecodecamp.rocks/>. Working on this project will involve you writing your code using one of the following methods:
 
--   Clone [this GitHub repo](https://github.com/freeCodeCamp/boilerplate-project-american-british-english-translator/) and complete your project locally.
--   Use [our repl.it starter project](https://repl.it/github/freeCodeCamp/boilerplate-project-american-british-english-translator) to complete your project.
+-   Clone [this GitHub repo](https://github.com/freeCodeCamp/boilerplate-project-issuetracker/) and complete your project locally.
+-   Use [this repl.it starter project](https://repl.it/github/freeCodeCamp/boilerplate-project-issuetracker) to complete your project.
 -   Use a site builder of your choice to complete the project. Be sure to incorporate all the files from our GitHub repo.
 
 When you are done, make sure a working demo of your project is hosted somewhere public. Then submit the URL to it in the `Solution Link` field. Optionally, also submit a link to your project's source code in the `GitHub Link` field.
 
 # --instructions--
 
--   All logic can go into `/components/translator.js`
--   Complete the `/api/translate` route in `/routes/api.js`
--   Create all of the unit/functional tests in `tests/1_unit-tests.js` and `tests/2_functional-tests.js`
--   See the JavaScript files in `/components` for the different spelling and terms your application should translate
--   To run the tests on Repl.it, set `NODE_ENV` to `test` without quotes in the `.env` file
+-   Complete the necessary routes in `/routes/api.js`
+-   Create all of the functional tests in `tests/2_functional-tests.js`
+-   Copy the `sample.env` file to `.env` and set the variables appropriately
+-   To run the tests uncomment `NODE_ENV=test` in your `.env` file
 -   To run the tests in the console, use the command `npm run test`. To open the Repl.it console, press Ctrl+Shift+P (Cmd if on a Mac) and type "open shell"
-
-Write the following tests in `tests/1_unit-tests.js`:
-
--   Translate `Mangoes are my favorite fruit.` to British English
--   Translate `I ate yogurt for breakfast.` to British English
--   Translate `We had a party at my friend's condo.` to British English
--   Translate `Can you toss this in the trashcan for me?` to British English
--   Translate `The parking lot was full.` to British English
--   Translate `Like a high tech Rube Goldberg machine.` to British English
--   Translate `To play hooky means to skip class or work.` to British English
--   Translate `No Mr. Bond, I expect you to die.` to British English
--   Translate `Dr. Grosh will see you now.` to British English
--   Translate `Lunch is at 12:15 today.` to British English
--   Translate `We watched the footie match for a while.` to American English
--   Translate `Paracetamol takes up to an hour to work.` to American English
--   Translate `First, caramelise the onions.` to American English
--   Translate `I spent the bank holiday at the funfair.` to American English
--   Translate `I had a bicky then went to the chippy.` to American English
--   Translate `I've just got bits and bobs in my bum bag.` to American English
--   Translate `The car boot sale at Boxted Airfield was called off.` to American English
--   Translate `Have you met Mrs Kalyani?` to American English
--   Translate `Prof Joyner of King's College, London.` to American English
--   Translate `Tea time is usually around 4 or 4.30.` to American English
--   Highlight translation in `Mangoes are my favorite fruit.`
--   Highlight translation in `I ate yogurt for breakfast.`
--   Highlight translation in `We watched the footie match for a while.`
--   Highlight translation in `Paracetamol takes up to an hour to work.`
 
 Write the following tests in `tests/2_functional-tests.js`:
 
--   Translation with text and locale fields: POST request to `/api/translate`
--   Translation with text and invalid locale field: POST request to `/api/translate`
--   Translation with missing text field: POST request to `/api/translate`
--   Translation with missing locale field: POST request to `/api/translate`
--   Translation with empty text: POST request to `/api/translate`
--   Translation with text that needs no translation: POST request to `/api/translate`
+-   Create an issue with every field: POST request to `/api/issues/{project}`
+-   Create an issue with only required fields: POST request to `/api/issues/{project}`
+-   Create an issue with missing required fields: POST request to `/api/issues/{project}`
+-   View issues on a project: GET request to `/api/issues/{project}`
+-   View issues on a project with one filter: GET request to `/api/issues/{project}`
+-   View issues on a project with multiple filters: GET request to `/api/issues/{project}`
+-   Update one field on an issue: PUT request to `/api/issues/{project}`
+-   Update multiple fields on an issue: PUT request to `/api/issues/{project}`
+-   Update an issue with missing `_id`: PUT request to `/api/issues/{project}`
+-   Update an issue with no fields to update: PUT request to `/api/issues/{project}`
+-   Update an issue with an invalid `_id`: PUT request to `/api/issues/{project}`
+-   Delete an issue: DELETE request to `/api/issues/{project}`
+-   Delete an issue with an invalid `_id`: DELETE request to `/api/issues/{project}`
+-   Delete an issue with missing `_id`: DELETE request to `/api/issues/{project}`
 
 # --hints--
 
-I can provide my own project, not the example URL.
+You can provide your own project, not the example URL.
 
 ```js
 (getUserInput) => {
-  assert(
-    !/.*\/american-british-translator\.freecodecamp\.rocks/.test(
-      getUserInput('url')
-    )
-  );
+  assert(!/.*\/issue-tracker\.freecodecamp\.rocks/.test(getUserInput('url')));
 };
 ```
 
-You can `POST` to `/api/translate` with a body containing `text` with the text to translate and `locale` with either `american-to-british` or `british-to-american`. The returned object should contain the submitted `text` and `translation` with the translated text.
+You can send a `POST` request to `/api/issues/{projectname}` with form data containing the required fields `issue_title`, `issue_text`, `created_by`, and optionally `assigned_to` and `status_text`.
 
 ```js
 async (getUserInput) => {
   try {
-    const text = 'Mangoes are my favorite fruit.';
-    const locale = 'american-to-british';
-    const output = {
-      text: 'Mangoes are my favorite fruit.',
-      translation:
-        'Mangoes are my <span class="highlight">favourite</span> fruit.'
+    let test_data = {
+      issue_title: 'Faux Issue Title',
+      issue_text: 'Functional Test - Required Fields Only',
+      created_by: 'fCC'
     };
-    let data = await fetch(getUserInput('url') + '/api/translate', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ text, locale })
-    });
-    let parsed = await data.json();
-    assert.isObject(parsed);
-    assert.property(parsed, 'text');
-    assert.property(parsed, 'translation');
-    assert.deepEqual(parsed, output);
+    const data = await $.post(
+      getUserInput('url') + '/api/issues/fcc-project',
+      test_data
+    );
+    assert.isObject(data);
+    assert.nestedInclude(data, test_data);
   } catch (err) {
     throw new Error(err.responseText || err.message);
   }
 };
 ```
 
-The `/api/translate` route should handle the way time is written in American and British English. For example, ten thirty is written as "10.30" in British English and "10:30" in American English. The `span` element should wrap the entire time string, i.e. `<span class="highlight">10:30</span>`.
+The `POST` request to `/api/issues/{projectname}` will return the created object, and must include all of the submitted fields. Excluded optional fields will be returned as empty strings. Additionally, include `created_on` (date/time), `updated_on` (date/time), `open` (boolean, `true` for open - default value, `false` for closed), and `_id`.
 
 ```js
 async (getUserInput) => {
   try {
-    const text = 'Lunch is at 12:15 today.';
-    const locale = 'american-to-british';
-    const output = {
-      text: text,
-      translation: 'Lunch is at <span class="highlight">12.15</span> today.'
+    let test_data = {
+      issue_title: 'Faux Issue Title 2',
+      issue_text: 'Functional Test - Every field filled in',
+      created_by: 'fCC',
+      assigned_to: 'Chai and Mocha'
     };
-    let data = await fetch(getUserInput('url') + '/api/translate', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ text, locale })
-    });
-    let parsed = await data.json();
-    assert.isObject(parsed);
-    assert.property(parsed, 'text');
-    assert.property(parsed, 'translation');
-    assert.deepEqual(parsed, output);
+    const data = await $.post(
+      getUserInput('url') + '/api/issues/fcc-project',
+      test_data
+    );
+    assert.isObject(data);
+    assert.nestedInclude(data, test_data);
+    assert.property(data, 'created_on');
+    assert.isNumber(Date.parse(data.created_on));
+    assert.property(data, 'updated_on');
+    assert.isNumber(Date.parse(data.updated_on));
+    assert.property(data, 'open');
+    assert.isBoolean(data.open);
+    assert.isTrue(data.open);
+    assert.property(data, '_id');
+    assert.isNotEmpty(data._id);
+    assert.property(data, 'status_text');
+    assert.isEmpty(data.status_text);
   } catch (err) {
     throw new Error(err.responseText || err.message);
   }
 };
 ```
 
-The `/api/translate` route should also handle the way titles/honorifics are abbreviated in American and British English. For example, Doctor Wright is abbreviated as "Dr Wright" in British English and "Dr. Wright" in American English. See `/public/american-to-british-titles.js` for the different titles your application should handle.
+If you send a `POST` request to `/api/issues/{projectname}` without the required fields, returned will be the error `{ error: 'required field(s) missing' }`
 
 ```js
 async (getUserInput) => {
   try {
-    const text = 'Dr. Grosh will see you now.';
-    const locale = 'american-to-british';
-    const output = {
-      text: text,
-      translation: '<span class="highlight">Dr</span> Grosh will see you now.'
+    let test_data = { created_by: 'fCC' };
+    const data = await $.post(getUserInput('url') + '/api/issues/fcc-project', {
+      created_by: 'fCC'
+    });
+    assert.isObject(data);
+    assert.property(data, 'error');
+    assert.equal(data.error, 'required field(s) missing');
+  } catch (err) {
+    throw new Error(err.responseText || err.message);
+  }
+};
+```
+
+You can send a `GET` request to `/api/issues/{projectname}` for an array of all issues for that specific `projectname`, with all the fields present for each issue.
+
+```js
+async (getUserInput) => {
+  try {
+    let test_data = { issue_text: 'Get Issues Test', created_by: 'fCC' };
+    const url =
+      getUserInput('url') +
+      '/api/issues/get_issues_test_' +
+      Date.now().toString().substring(7);
+    const data1 = await $.post(
+      url,
+      Object.assign(test_data, { issue_title: 'Faux Issue 1' })
+    );
+    assert.isObject(data1);
+    const data2 = await $.post(
+      url,
+      Object.assign(test_data, { issue_title: 'Faux Issue 2' })
+    );
+    assert.isObject(data2);
+    const data3 = await $.post(
+      url,
+      Object.assign(test_data, { issue_title: 'Faux Issue 3' })
+    );
+    assert.isObject(data3);
+    const getIssues = await $.get(url);
+    assert.isArray(getIssues);
+    assert.lengthOf(getIssues, 3);
+    let re = new RegExp('Faux Issue \\d');
+    getIssues.forEach((issue) => {
+      assert.property(issue, 'issue_title');
+      assert.match(issue.issue_title, re);
+      assert.property(issue, 'issue_text');
+      assert.property(issue, 'created_by');
+      assert.property(issue, 'assigned_to');
+      assert.property(issue, 'status_text');
+      assert.property(issue, 'open');
+      assert.property(issue, 'created_on');
+      assert.property(issue, 'updated_on');
+      assert.property(issue, '_id');
+    });
+  } catch (err) {
+    throw new Error(err.responseText || err.message);
+  }
+};
+```
+
+You can send a `GET` request to `/api/issues/{projectname}` and filter the request by also passing along any field and value as a URL query (ie. `/api/issues/{project}?open=false`). You can pass one or more field/value pairs at once.
+
+```js
+async (getUserInput) => {
+  try {
+    let test_data = {
+      issue_title: 'To be Filtered',
+      issue_text: 'Filter Issues Test'
     };
-    let data = await fetch(getUserInput('url') + '/api/translate', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ text, locale })
-    });
-    let parsed = await data.json();
-    assert.isObject(parsed);
-    assert.property(parsed, 'text');
-    assert.property(parsed, 'translation');
-    assert.deepEqual(parsed, output);
+    const url =
+      getUserInput('url') +
+      '/api/issues/get_issues_test_' +
+      Date.now().toString().substring(7);
+    const data1 = await $.post(
+      url,
+      Object.assign(test_data, { created_by: 'Alice', assigned_to: 'Bob' })
+    );
+    const data2 = await $.post(
+      url,
+      Object.assign(test_data, { created_by: 'Alice', assigned_to: 'Bob' })
+    );
+    const data3 = await $.post(
+      url,
+      Object.assign(test_data, { created_by: 'Alice', assigned_to: 'Eric' })
+    );
+    const data4 = await $.post(
+      url,
+      Object.assign(test_data, { created_by: 'Carol', assigned_to: 'Eric' })
+    );
+    const getSingle = await $.get(url + '?created_by=Alice');
+    assert.isArray(getSingle);
+    assert.lengthOf(getSingle, 3);
+    const getMultiple = await $.get(url + '?created_by=Alice&assigned_to=Bob');
+    assert.isArray(getMultiple);
+    assert.lengthOf(getMultiple, 2);
   } catch (err) {
     throw new Error(err.responseText || err.message);
   }
 };
 ```
 
-Wrap any translated spelling or terms with `<span class="highlight">...</span>` tags so they appear in green.
+You can send a `PUT` request to `/api/issues/{projectname}` with an `_id` and one or more fields to update. On success, the `updated_on` field should be updated, and returned should be `{  result: 'successfully updated', '_id': _id }`.
 
 ```js
 async (getUserInput) => {
   try {
-    const text = 'Mangoes are my favorite fruit.';
-    const locale = 'american-to-british';
-    const output = {
-      text: 'Mangoes are my favorite fruit.',
-      translation:
-        'Mangoes are my <span class="highlight">favourite</span> fruit.'
+    let initialData = {
+      issue_title: 'Issue to be Updated',
+      issue_text: 'Functional Test - Put target',
+      created_by: 'fCC'
     };
-    let data = await fetch(getUserInput('url') + '/api/translate', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ text, locale })
+    const url = getUserInput('url') + '/api/issues/fcc-project';
+    const itemToUpdate = await $.post(url, initialData);
+    const updateSucccess = await $.ajax({
+      url: url,
+      type: 'PUT',
+      data: { _id: itemToUpdate._id, issue_text: 'New Issue Text' }
     });
-    let parsed = await data.json();
-    assert.isObject(parsed);
-    assert.property(parsed, 'text');
-    assert.property(parsed, 'translation');
-    assert.deepEqual(parsed, output);
+    assert.isObject(updateSucccess);
+    assert.deepEqual(updateSucccess, {
+      result: 'successfully updated',
+      _id: itemToUpdate._id
+    });
+    const getUpdatedId = await $.get(url + '?_id=' + itemToUpdate._id);
+    assert.isArray(getUpdatedId);
+    assert.isObject(getUpdatedId[0]);
+    assert.isAbove(
+      Date.parse(getUpdatedId[0].updated_on),
+      Date.parse(getUpdatedId[0].created_on)
+    );
   } catch (err) {
     throw new Error(err.responseText || err.message);
   }
 };
 ```
 
-If one or more of the required fields is missing, return `{ error: 'Required field(s) missing' }`.
+When the `PUT` request sent to `/api/issues/{projectname}` does not include an `_id`, the return value is `{ error: 'missing _id' }`.
 
 ```js
 async (getUserInput) => {
   try {
-    const locale = 'american-to-british';
-    let data = await fetch(getUserInput('url') + '/api/translate', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ locale })
-    });
-    let parsed = await data.json();
-    assert.isObject(parsed);
-    assert.property(parsed, 'error');
-    assert.equal(parsed.error, 'Required field(s) missing');
+    const url = getUserInput('url') + '/api/issues/fcc-project';
+    const badUpdate = await $.ajax({ url: url, type: 'PUT' });
+    assert.isObject(badUpdate);
+    assert.property(badUpdate, 'error');
+    assert.equal(badUpdate.error, 'missing _id');
   } catch (err) {
     throw new Error(err.responseText || err.message);
   }
 };
 ```
 
-If `text` is empty, return `{ error: 'No text to translate' }`
+When the `PUT` request sent to `/api/issues/{projectname}` does not include update fields, the return value is `{ error: 'no update field(s) sent', '_id': _id }`. On any other error, the return value is `{ error: 'could not update', '_id': _id }`.
 
 ```js
 async (getUserInput) => {
   try {
-    const locale = 'american-to-british';
-    let data = await fetch(getUserInput('url') + '/api/translate', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ text: '', locale })
+    const url = getUserInput('url') + '/api/issues/fcc-project';
+    const badUpdate = await $.ajax({
+      url: url,
+      type: 'PUT',
+      data: { _id: '5f665eb46e296f6b9b6a504d' }
     });
-    let parsed = await data.json();
-    assert.isObject(parsed);
-    assert.property(parsed, 'error');
-    assert.equal(parsed.error, 'No text to translate');
+    assert.deepEqual(badUpdate, {
+      error: 'no update field(s) sent',
+      _id: '5f665eb46e296f6b9b6a504d'
+    });
+    const badIdUpdate = await $.ajax({
+      url: url,
+      type: 'PUT',
+      data: { _id: '5f665eb46e296f6b9b6a504d', issue_text: 'New Issue Text' }
+    });
+    assert.deepEqual(badIdUpdate, {
+      error: 'could not update',
+      _id: '5f665eb46e296f6b9b6a504d'
+    });
   } catch (err) {
     throw new Error(err.responseText || err.message);
   }
 };
 ```
 
-If `locale` does not match one of the two specified locales, return `{ error: 'Invalid value for locale field' }`.
+You can send a `DELETE` request to `/api/issues/{projectname}` with an `_id` to delete an issue. If no `_id` is sent, the return value is `{ error: 'missing _id' }`. On success, the return value is `{ result: 'successfully deleted', '_id': _id }`. On failure, the return value is `{ error: 'could not delete', '_id': _id }`.
 
 ```js
 async (getUserInput) => {
   try {
-    const text = "Ceci n'est pas une pipe";
-    const locale = 'french-to-american';
-    let data = await fetch(getUserInput('url') + '/api/translate', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ text, locale })
-    });
-    let parsed = await data.json();
-    assert.isObject(parsed);
-    assert.property(parsed, 'error');
-    assert.equal(parsed.error, 'Invalid value for locale field');
-  } catch (err) {
-    throw new Error(err.responseText || err.message);
-  }
-};
-```
-
-If `text` requires no translation, return `"Everything looks good to me!"` for the `translation` value.
-
-```js
-async (getUserInput) => {
-  try {
-    const locale = 'british-to-american';
-    const output = {
-      text: 'SaintPeter and nhcarrigan give their regards!',
-      translation: 'Everything looks good to me!'
+    let initialData = {
+      issue_title: 'Issue to be Deleted',
+      issue_text: 'Functional Test - Delete target',
+      created_by: 'fCC'
     };
-    let data = await fetch(getUserInput('url') + '/api/translate', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ text: output.text, locale })
+    const url = getUserInput('url') + '/api/issues/fcc-project';
+    const itemToDelete = await $.post(url, initialData);
+    assert.isObject(itemToDelete);
+    const deleteSuccess = await $.ajax({
+      url: url,
+      type: 'DELETE',
+      data: { _id: itemToDelete._id }
     });
-    let parsed = await data.json();
-    assert.isObject(parsed);
-    assert.isObject(parsed);
-    assert.property(parsed, 'text');
-    assert.property(parsed, 'translation');
-    assert.deepEqual(parsed, output);
+    assert.isObject(deleteSuccess);
+    assert.deepEqual(deleteSuccess, {
+      result: 'successfully deleted',
+      _id: itemToDelete._id
+    });
+    const noId = await $.ajax({ url: url, type: 'DELETE' });
+    assert.isObject(noId);
+    assert.deepEqual(noId, { error: 'missing _id' });
+    const badIdDelete = await $.ajax({
+      url: url,
+      type: 'DELETE',
+      data: { _id: '5f665eb46e296f6b9b6a504d', issue_text: 'New Issue Text' }
+    });
+    assert.isObject(badIdDelete);
+    assert.deepEqual(badIdDelete, {
+      error: 'could not delete',
+      _id: '5f665eb46e296f6b9b6a504d'
+    });
   } catch (err) {
     throw new Error(err.responseText || err.message);
   }
 };
 ```
 
-All 24 unit tests are complete and passing. See `/tests/1_unit-tests.js` for the expected behavior you should write tests for.
+All 14 functional tests are complete and passing.
 
 ```js
 async (getUserInput) => {
   try {
     const getTests = await $.get(getUserInput('url') + '/_api/get-tests');
     assert.isArray(getTests);
-    const unitTests = getTests.filter((test) => {
-      return !!test.context.match(/Unit Tests/gi);
-    });
-    assert.isAtLeast(unitTests.length, 24, 'At least 24 tests passed');
-    unitTests.forEach((test) => {
-      assert.equal(test.state, 'passed', 'Tests in Passed State');
-      assert.isAtLeast(
-        test.assertions.length,
-        1,
-        'At least one assertion per test'
-      );
-    });
-  } catch (err) {
-    throw new Error(err.responseText || err.message);
-  }
-};
-```
-
-All 6 functional tests are complete and passing. See `/tests/2_functional-tests.js` for the functionality you should write tests for.
-
-```js
-async (getUserInput) => {
-  try {
-    const getTests = await $.get(getUserInput('url') + '/_api/get-tests');
-    assert.isArray(getTests);
-    const functTests = getTests.filter((test) => {
-      return !!test.context.match(/Functional Tests/gi);
-    });
-    assert.isAtLeast(functTests.length, 6, 'At least 6 tests passed');
-    functTests.forEach((test) => {
-      assert.equal(test.state, 'passed', 'Tests in Passed State');
+    assert.isAtLeast(getTests.length, 14, 'At least 14 tests passed');
+    getTests.forEach((test) => {
+      assert.equal(test.state, 'passed', 'Test in Passed State');
       assert.isAtLeast(
         test.assertions.length,
         1,
@@ -329,8 +362,8 @@ async (getUserInput) => {
 
 ```js
 /**
-  Backend challenges don't need solutions,
-  because they would need to be tested against a full working project.
+  Backend challenges don't need solutions, 
+  because they would need to be tested against a full working project. 
   Please check our contributing guidelines to learn more.
 */
 ```
