@@ -1,66 +1,56 @@
 ---
-id: 5e7b9f060b6c005b0e76f05b
-title: Build your own Functions
+id: 5e7b9f0b0b6c005b0e76f06d
+title: Comparing and Sorting Tuples
 challengeType: 11
-videoId: nLDychdBwUg
-dashedName: build-your-own-functions
+videoId: dZXzBXUxxCs
+dashedName: comparing-and-sorting-tuples
 ---
 
 # --description--
 
 More resources:
 
-\- [Exercise](https://www.youtube.com/watch?v=ksvGhDsjtpw)
+\- [Exercise](https://www.youtube.com/watch?v=EhQxwzyT16E)
 
 # --question--
 
 ## --text--
 
-What will the following Python program print out?:
+Which does the same thing as the following code?:
 
 ```python
-def fred():
-    print("Zap")
-def jane():
-    print("ABC")
-
-jane()
-fred()
-jane()
+lst = []
+for key, val in counts.items():
+    newtup = (val, key)
+    lst.append(newtup)
+lst = sorted(lst, reverse=True)
+print(lst)
 ```
 
 ## --answers--
 
-<pre>Zap
-ABC
-jane
-fred
-jane</pre>
+```python
+print( sorted( [ (v,k) for k,v in counts.items() ], reverse=True ) )
+```
 
 ---
 
-<pre>Zap
-ABC
-Zap</pre>
+```python
+print( [ (k,v) for k,v in counts.items().sorted() ] )
+```
 
 ---
 
-<pre>ABC
-Zap
-jane</pre>
+```python
+print( sorted( [ (v,k) for k,v in counts.keys() ] ) )
+```
 
 ---
 
-<pre>ABC
-Zap
-ABC</pre>
-
----
-
-<pre>Zap
-Zap
-Zap</pre>
+```python
+print( [ (k,v) for k,v in counts.values().sort() ] )
+```
 
 ## --video-solution--
 
-4
+1
