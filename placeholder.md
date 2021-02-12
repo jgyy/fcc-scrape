@@ -1,37 +1,43 @@
 ---
-id: 5e7b9f070b6c005b0e76f05d
-title: 'Iterations: Definite Loops'
+id: 5e7b9f070b6c005b0e76f05e
+title: 'Iterations: Loop Idioms'
 challengeType: 11
-videoId: hiRTRAqNlpE
-dashedName: iterations-definite-loops
+videoId: AelGAcoMXbI
+dashedName: iterations-loop-idioms
 ---
 
 # --question--
 
 ## --text--
 
-How many lines will the following code print?:
+Below is code to find the smallest value from a list of values. One line has an error that will cause the code to not work as expected. Which line is it?:
 
 ```python
-for i in [2,1,5]:
-    print(i)
+smallest = None
+print("Before:", smallest)
+for itervar in [3, 41, 12, 9, 74, 15]:
+    if smallest is None or itervar < smallest:
+        smallest = itervar
+        break
+    print("Loop:", itervar, smallest)
+print("Smallest:", smallest)
 ```
 
 ## --answers--
-
-1
-
----
-
-2
-
----
 
 3
 
 ---
 
-5
+4
+
+---
+
+6
+
+---
+
+7
 
 ## --video-solution--
 
