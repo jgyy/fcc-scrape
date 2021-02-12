@@ -1,38 +1,33 @@
 ---
-id: 5e7b9f080b6c005b0e76f064
-title: Python Lists
+id: 5e7b9f160b6c005b0e76f085
+title: Python Objects
 challengeType: 11
-videoId: Y0cvfDpYC_c
-dashedName: python-lists
+videoId: uJxGeTYy0us
+dashedName: python-objects
 ---
 
 # --question--
 
 ## --text--
 
-What is the value of x after running this code:
-
-```python
-fruit = "banana"
-x = fruit[1]
-```
+Which is NOT true about objects in Python?
 
 ## --answers--
 
-banana
+Objects get created and used.
 
 ---
 
-a
+Objects are bits of code and data.
 
 ---
 
-b
+Objects hide detail.
 
 ---
 
-True
+Objects are one of the five standard data types.
 
 ## --video-solution--
 
-2
+4
