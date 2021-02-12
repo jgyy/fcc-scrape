@@ -1,33 +1,54 @@
 ---
-id: 5e7b9f170b6c005b0e76f088
-title: 'Objects: Inheritance'
+id: 5e7b9f090b6c005b0e76f067
+title: Python Dictionaries
 challengeType: 11
-videoId: FBL3alYrxRM
-dashedName: objects-inheritance
+videoId: dnzvfimrRMg
+dashedName: python-dictionaries
 ---
 
 # --question--
 
 ## --text--
 
-What is inheritance in object-oriented programming?
+What does dict equal after running this code?:
+
+```python
+dict = {"Fri": 20, "Thu": 6, "Sat": 1}
+dict["Thu"] = 13
+dict["Sat"] = 2
+dict["Sun"] = 9
+```
 
 ## --answers--
 
-A new class created when a parent class is extended.
+```python
+{'Fri': 20, 'Thu': 6, 'Sat': 1}
+```
 
 ---
 
-A constructed instance of a class.
+```python
+{'Fri': 20, 'Thu': 6, 'Sat': 1, 'Thu': 13, 'Sat': 2, 'Sun': 9}
+```
 
 ---
 
-The ability to create a new class by extending an existing class.
+```python
+{'Sun': 9}
+```
 
 ---
 
-A method that is called at the moment when a class is being used to construct an object.
+```python
+{'Thu': 13, 'Sat': 2, 'Sun': 9}
+```
+
+---
+
+```python
+{'Fri': 20, 'Thu': 13, 'Sat': 2, 'Sun': 9}
+```
 
 ## --video-solution--
 
-3
+5
