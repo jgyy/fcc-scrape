@@ -1,55 +1,33 @@
 ---
-id: 5e7b9f060b6c005b0e76f059
-title: More Conditional Structures
+id: 5e7b9f0c0b6c005b0e76f072
+title: Networking Protocol
 challengeType: 11
-videoId: HdL82tAZR20
-dashedName: more-conditional-structures
+videoId: c6vZGescaSc
+dashedName: networking-protocol
 ---
-
-# --description--
-
-More resources:
-
-\- [Exercise 1](https://www.youtube.com/watch?v=crLerB4ZxMI)
-
-\- [Exercise 2](https://www.youtube.com/watch?v=KJN3-7HH6yk)
 
 # --question--
 
 ## --text--
 
-Given the following code:
-
-```python
-temp = "5 degrees"
-cel = 0
-fahr = float(temp)
-cel = (fahr - 32.0) * 5.0 / 9.0
-print(cel)
-```
-
-Which line/lines should be surrounded by `try` block?
+What type of HTTP request is usually used to access a website?
 
 ## --answers--
 
-1
+POST
 
 ---
 
-3
+GET
 
 ---
 
-3,4
+WEB
 
 ---
 
-4
-
----
-
-None
+ACCESS
 
 ## --video-solution--
 
-3
+2
