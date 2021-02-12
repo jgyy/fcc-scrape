@@ -1,33 +1,33 @@
 ---
-id: 5e7b9f180b6c005b0e76f08c
-title: Relational Database Design
+id: 5e7b9f170b6c005b0e76f08a
+title: Relational Databases and SQLite
 challengeType: 11
-videoId: AqdfbrpkbHk
-dashedName: relational-database-design
+videoId: QlNod5-kFpA
+dashedName: relational-databases-and-sqlite
 ---
 
 # --question--
 
 ## --text--
 
-What is the best practice for how many times a piece of string data should be stored in a database?
+Which is NOT a primary data structure in a database?
 
 ## --answers--
 
-0
+index
 
 ---
 
-1
+table
 
 ---
 
-2
+row
 
 ---
 
-3
+column
 
 ## --video-solution--
 
-2
+1
