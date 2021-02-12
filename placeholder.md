@@ -1,49 +1,42 @@
 ---
-id: 5e7b9f0a0b6c005b0e76f069
-title: Dictionaries and Loops
+id: 5e7b9f090b6c005b0e76f068
+title: 'Dictionaries: Common Applications'
 challengeType: 11
-videoId: EEmekKiKG70
-dashedName: dictionaries-and-loops
+videoId: f17xPfIXct0
+dashedName: dictionaries-common-applications
 ---
-
-# --description--
-
-More resources:
-
-\- [Exercise](https://www.youtube.com/watch?v=PrhZ9qwBDD8)
 
 # --question--
 
 ## --text--
 
-What will the following code print?:
+What will the following code print?
 
 ```python
-counts = { 'chuck' : 1 , 'annie' : 42, 'jan': 100}
-for key in counts:
-    if counts[key] > 10:
-        print(key, counts[key])
+counts = { 'quincy' : 1 , 'mrugesh' : 42, 'beau': 100, '0': 10}
+print(counts.get('kris', 0))
 ```
 
 ## --answers--
 
-<pre>annie 42
-jan 100</pre>
+2
 
 ---
 
-<pre>chuck 1
-annie 42
-jan 100</pre>
+quincy
 
 ---
 
-<pre>chuck 1</pre>
+0
 
 ---
 
-<pre>[Error]</pre>
+10
+
+---
+
+[will return error]
 
 ## --video-solution--
 
-1
+3
