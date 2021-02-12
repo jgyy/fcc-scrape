@@ -1,50 +1,47 @@
 ---
-id: 5e7b9f060b6c005b0e76f05c
-title: Loops and Iterations
+id: 5e7b9f170b6c005b0e76f08b
+title: Make a Relational Database
 challengeType: 11
-videoId: dLA-szNRnUY
-dashedName: loops-and-iterations
+videoId: MQ5z4bdF92U
+dashedName: make-a-relational-database
 ---
 
 # --question--
 
 ## --text--
 
-What will the following code print out?:
-
-```python
-n = 0
-while True:
-    if n == 3:
-        break
-    print(n)
-    n = n + 1
-```
+What SQL command would you use to retrieve all users that have the email address `quincy@freecodecamp.org`?
 
 ## --answers--
 
-<pre>0
-1
-2</pre>
+```sql
+SELECT Users WHERE email="quincy@freecodecamp.org"
+```
 
 ---
 
-<pre>0
-1
-2
-3</pre>
+```sql
+SELECT Users WHERE email IS "quincy@freecodecamp.org"
+```
 
 ---
 
-<pre>1
-2</pre>
+```sql
+SELECT ALL Users WHERE email="quincy@freecodecamp.org"
+```
 
 ---
 
-<pre>1
-2
-3</pre>
+```sql
+SELECT * FROM Users WHERE email IS "quincy@freecodecamp.org"
+```
+
+---
+
+```sql
+SELECT * FROM Users WHERE email="quincy@freecodecamp.org"
+```
 
 ## --video-solution--
 
-1
+5
