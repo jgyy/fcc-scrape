@@ -1,44 +1,47 @@
 ---
-id: 5e7b9f070b6c005b0e76f05e
-title: 'Iterations: Loop Idioms'
+id: 5e7b9f070b6c005b0e76f05f
+title: 'Iterations: More Patterns'
 challengeType: 11
-videoId: AelGAcoMXbI
-dashedName: iterations-loop-idioms
+videoId: 9Wtqo6vha1M
+dashedName: iterations-more-patterns
 ---
+
+# --description--
+
+More resources:
+
+\- [Exercise](https://www.youtube.com/watch?v=kjxXZQw0uPg)
 
 # --question--
 
 ## --text--
 
-Below is code to find the smallest value from a list of values. One line has an error that will cause the code to not work as expected. Which line is it?:
-
-```python
-smallest = None
-print("Before:", smallest)
-for itervar in [3, 41, 12, 9, 74, 15]:
-    if smallest is None or itervar < smallest:
-        smallest = itervar
-        break
-    print("Loop:", itervar, smallest)
-print("Smallest:", smallest)
-```
+Which of these evaluates to False?
 
 ## --answers--
 
-3
+```python
+0 == 0.0
+```
 
 ---
 
-4
+```python
+0 is 0.0
+```
 
 ---
 
-6
+```python
+0 is not 0.0
+```
 
 ---
 
-7
+```python
+0 = 0.0
+```
 
 ## --video-solution--
 
-3
+2
