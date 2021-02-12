@@ -1,57 +1,33 @@
 ---
-id: 5e7b9f160b6c005b0e76f086
-title: 'Objects: A Sample Class'
+id: 5e7b9f170b6c005b0e76f088
+title: 'Objects: Inheritance'
 challengeType: 11
-videoId: FiABKEuaSJ8
-dashedName: objects-a-sample-class
+videoId: FBL3alYrxRM
+dashedName: objects-inheritance
 ---
 
 # --question--
 
 ## --text--
 
-What will the following program print?:
-
-```python
-class PartyAnimal:
-    x = 0
-    def party(self):
-        self.x = self.x + 2
-        print(self.x)
-
-an = PartyAnimal()
-an.party()
-an.party()
-```
+What is inheritance in object-oriented programming?
 
 ## --answers--
 
-<pre>
-So far 1
-So far 2
-</pre>
+A new class created when a parent class is extended.
 
 ---
 
-<pre>
-0
-0
-</pre>
+A constructed instance of a class.
 
 ---
 
-<pre>
-2
-2
-</pre>
+The ability to create a new class by extending an existing class.
 
 ---
 
-<pre>
-2
-4
-</pre>
+A method that is called at the moment when a class is being used to construct an object.
 
 ## --video-solution--
 
-4
+3
