@@ -1,49 +1,66 @@
 ---
-id: 5e7b9f0c0b6c005b0e76f073
-title: 'Networking: Write a Web Browser'
+id: 5e7b9f170b6c005b0e76f087
+title: Object Lifecycle
 challengeType: 11
-videoId: zjyT9DaAjx4
-dashedName: networking-write-a-web-browser
+videoId: p1r3h_AMMIM
+dashedName: object-lifecycle
 ---
 
 # --question--
 
 ## --text--
 
-What does the following code create?:
+What will the following program print?:
 
-```py
-import socket
+```python
+class PartyAnimal:
+    x = 0
+    name = ''
+    def __init__(self, nam):
+        self.name = nam
+        print(self.name,'constructed')
+    def party(self):
+        self.x = self.x + 1
+        print(self.name,'party count',self.x)
 
-mysock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-mysock.connect(('data.pr4e.org', 80))
-cmd = 'GET http://data.pr4e.org/romeo.txt HTTP/1.0\r\n\r\n'.encode()
-mysock.send(cmd)
+q = PartyAnimal('Quincy')
+m = PartyAnimal('Miya')
 
-while True:
-    data = mysock.recv(512)
-    if len(data) < 1:
-        break
-    print(data.decode(),end='')
-mysock.close()
+q.party()
+m.party()
+q.party()
 ```
 
 ## --answers--
 
-A simple web server.
+<pre>
+Quincy constructed
+Miya constructed
+Quincy party count 1
+Miya party count 2
+Quincy party count 3
+</pre>
 
 ---
 
-A simple email client.
+<pre>
+Quincy constructed
+Miya constructed
+Quincy party count 1
+Miya party count 1
+Quincy party count 2
+</pre>
 
 ---
 
-A simple todo list.
-
----
-
-A simple web browser.
+<pre>
+Quincy constructed
+Quincy party count 1
+Quincy party count 2
+Miya constructed
+Miya party count 1
+</pre>
 
 ## --video-solution--
 
-4
+2
