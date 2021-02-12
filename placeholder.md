@@ -1,28 +1,35 @@
 ---
-id: 5e7b9f0c0b6c005b0e76f074
-title: 'Networking: Text Processing'
+id: 5e7b9f0d0b6c005b0e76f075
+title: 'Networking: Using urllib in Python'
 challengeType: 11
-videoId: Pv_pJgVu8WI
-dashedName: networking-text-processing
+videoId: 7lFM1T_CxBs
+dashedName: networking-using-urllib-in-python
 ---
 
 # --question--
 
 ## --text--
 
-Which type of encoding do most websites use?
+What will the output of the following code be like?:
+
+```python
+import urllib.request
+fhand = urllib.request.urlopen('http://data.pr4e.org/romeo.txt')
+for line in fhand:
+    print(line.decode().strip())
+```
 
 ## --answers--
 
-UTF-8
+Just contents of "romeo.txt".
 
 ---
 
-UTF-16
+A header and the contents of "romeo.txt".
 
 ---
 
-UTF-32
+A header, a footer, and the contents of "romeo.txt".
 
 ## --video-solution--
 
