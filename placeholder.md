@@ -1,29 +1,47 @@
 ---
-id: 5e7b9f180b6c005b0e76f08f
-title: 'Relational Databases: Join Operation'
+id: 5e7b9f190b6c005b0e76f090
+title: 'Relational Databases: Many-to-many Relationships'
 challengeType: 11
-videoId: jvDw3D9GKac
-dashedName: relational-databases-join-operation
+videoId: z-SBYcvEQOc
+dashedName: relational-databases-many-to-many-relationships
 ---
+
+# --description--
+
+More resources:
+
+\- [Exercise: Email](https://www.youtube.com/watch?v=uQ3Qv1z_Vao)
+
+\- [Exercise: Roster](https://www.youtube.com/watch?v=qEkUEAz8j3o)
+
+\- [Exercise: Tracks](https://www.youtube.com/watch?v=I-E7avcPeSE)
+
+\- [Exercise: Twfriends](https://www.youtube.com/watch?v=RZRAoBFIH6A)
+
+\- [Exercise: Twspider](https://www.youtube.com/watch?v=xBaJddvJL4A)
 
 # --question--
 
 ## --text--
 
-When using a JOIN clause in an SQL statement, what does ON do?
+Which is an example of a many-to-many relationship?
 
 ## --answers--
 
-It indicates what tables to perform the JOIN on.
+teacher to student
 
 ---
 
-It specifies the fields to use for the JOIN.
+customer to order
 
 ---
 
-It indicates how the two tables are to be joined.
+book to pages
+
+---
+
+city to country
 
 ## --video-solution--
 
-3
+1
