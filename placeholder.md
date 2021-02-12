@@ -1,33 +1,55 @@
 ---
-id: 5e7b9f150b6c005b0e76f07f
-title: 'Web Services: APIs'
+id: 5e7b9f140b6c005b0e76f07d
+title: 'Web Services: JSON'
 challengeType: 11
-videoId: oUNn1psfBJg
-dashedName: web-services-apis
+videoId: ZJE-U56BppM
+dashedName: web-services-json
 ---
 
 # --question--
 
 ## --text--
 
-What does API stand for?
+What will the following code print?:
+
+```python
+import json
+data = '''
+  [
+    { "id" : "001",
+      "x" : "2",
+     "name" : "Quincy"
+    } ,
+    { "id" : "009",
+      "x" : "7",
+      "name" : "Mrugesh"
+    }
+  ]
+'''
+info = json.loads(data)
+print(info[1]['name'])
+```
 
 ## --answers--
 
-Application Portable Intelligence
+Quincy
 
 ---
 
-Associate Programming International
+Mrugesh
 
 ---
 
-Application Program Interface
+001
 
 ---
 
-Action Portable Interface
+009
+
+---
+
+[Error]
 
 ## --video-solution--
 
-3
+2
