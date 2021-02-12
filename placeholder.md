@@ -1,37 +1,33 @@
 ---
-id: 5e7b9f0e0b6c005b0e76f07a
-title: Using Web Services
+id: 5e7b9f050b6c005b0e76f056
+title: 'Variables, Expressions, and Statements'
 challengeType: 11
-videoId: oNl1OVDPGKE
-dashedName: using-web-services
+videoId: nELR-uyyrok
+dashedName: variables-expressions-and-statements
 ---
 
 # --question--
 
 ## --text--
 
-What are the two most common ways to send data over the internet?
+What is the symbol used in an assignment statement?
 
 ## --answers--
 
-JSON and TXT
+~
 
 ---
 
-JSON and XML
+&
 
 ---
 
-XML and TXT
+=
 
 ---
 
-XML and PHP
-
----
-
-PHP and TXT
+\|
 
 ## --video-solution--
 
-2
+3
