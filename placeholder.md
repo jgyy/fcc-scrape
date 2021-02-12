@@ -1,36 +1,37 @@
 ---
-id: 5e6a54a558d3af90110a60a0
-title: 'Introduction: Why Program?'
+id: 5e7b9f070b6c005b0e76f05d
+title: 'Iterations: Definite Loops'
 challengeType: 11
-videoId: 3muQV-Im3Z0
-dashedName: introduction-why-program
+videoId: hiRTRAqNlpE
+dashedName: iterations-definite-loops
 ---
-
-# --description--
-
-More resources:
-
-\- [Install Python on Windows](https://youtu.be/F7mtLrYzZP8)
-
-\- [Install Python on MacOS](https://youtu.be/wfLnZP-4sZw)
 
 # --question--
 
 ## --text--
 
-Who should learn to program?
+How many lines will the following code print?:
+
+```python
+for i in [2,1,5]:
+    print(i)
+```
 
 ## --answers--
 
-College students.
+1
 
 ---
 
-People who want to become software developers.
+2
 
 ---
 
-Everyone.
+3
+
+---
+
+5
 
 ## --video-solution--
 
