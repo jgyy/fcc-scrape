@@ -1,55 +1,29 @@
 ---
-id: 5e7b9f140b6c005b0e76f07d
-title: 'Web Services: JSON'
+id: 5e7b9f140b6c005b0e76f07e
+title: 'Web Services: Service Oriented Approach'
 challengeType: 11
-videoId: ZJE-U56BppM
-dashedName: web-services-json
+videoId: muerlsCHExI
+dashedName: web-services-service-oriented-approach
 ---
 
 # --question--
 
 ## --text--
 
-What will the following code print?:
-
-```python
-import json
-data = '''
-  [
-    { "id" : "001",
-      "x" : "2",
-     "name" : "Quincy"
-    } ,
-    { "id" : "009",
-      "x" : "7",
-      "name" : "Mrugesh"
-    }
-  ]
-'''
-info = json.loads(data)
-print(info[1]['name'])
-```
+With a services oriented approach to developing web apps, where is the data located?
 
 ## --answers--
 
-Quincy
+Spread across many computer systems connected via the internet or internal network.
 
 ---
 
-Mrugesh
+Within different services on the main web server.
 
 ---
 
-001
-
----
-
-009
-
----
-
-[Error]
+On a separate database server.
 
 ## --video-solution--
 
-2
+1
