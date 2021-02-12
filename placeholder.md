@@ -1,37 +1,38 @@
 ---
-id: 5e7b9f060b6c005b0e76f05a
-title: Python Functions
+id: 5e7b9f080b6c005b0e76f064
+title: Python Lists
 challengeType: 11
-videoId: 3JGF-n3tDPU
-dashedName: python-functions
+videoId: Y0cvfDpYC_c
+dashedName: python-lists
 ---
 
 # --question--
 
 ## --text--
 
-What is the purpose of the "def" keyword in Python?
+What is the value of x after running this code:
+
+```python
+fruit = "banana"
+x = fruit[1]
+```
 
 ## --answers--
 
-It is slang that means "The following code is really cool."
+banana
 
 ---
 
-It indicates the start of a function.
+a
 
 ---
 
-It indicates that the following indented section of code is to be stored for later.
+b
 
 ---
 
-It indicates the start of a function, and the following indented section of code is to be stored for later.
-
----
-
-None of the above.
+True
 
 ## --video-solution--
 
-4
+2
