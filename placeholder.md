@@ -1,48 +1,35 @@
 ---
-id: 5e7b9f070b6c005b0e76f061
-title: Intermediate Strings
+id: 5e6a54c358d3af90110a60a3
+title: 'Introduction: Elements of Python'
 challengeType: 11
-videoId: KgT_fYLXnyk
-dashedName: intermediate-strings
+videoId: aRY_xjL35v0
+dashedName: introduction-elements-of-python
 ---
-
-# --description--
-
-More resources:
-
-\- [Exercise](https://www.youtube.com/watch?v=1bSqHot-KwE)
 
 # --question--
 
 ## --text--
 
-What is the value of i in the following code?
+What will the following program print out:
 
 ```python
-word = "bananana"
-i = word.find("na")
+x = 43
+x = x + 1
+print(x)
 ```
 
 ## --answers--
 
-nanana
+x
 
 ---
 
-2
+x + 1
 
 ---
 
-3
-
----
-
-True
-
----
-
-na
+44
 
 ## --video-solution--
 
-2
+3
