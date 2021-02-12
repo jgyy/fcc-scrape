@@ -1,28 +1,37 @@
 ---
-id: 5e6a54af58d3af90110a60a1
-title: 'Introduction: Hardware Architecture'
+id: 5e6a54ba58d3af90110a60a2
+title: 'Introduction: Python as a Language'
 challengeType: 11
-videoId: H6qtjRTfSog
-dashedName: introduction-hardware-architecture
+videoId: 0QeGbZNS_bY
+dashedName: introduction-python-as-a-language
 ---
 
 # --question--
 
 ## --text--
 
-Where are your programs stored when they are running?
+What will print out after running these two lines of code:
+
+```python
+x = 6
+print(x)
+```
 
 ## --answers--
 
-Hard Drive.
+x
 
 ---
 
-Memory.
+6
 
 ---
 
-Central Processing Unit.
+x = 6
+
+---
+
+(x)
 
 ## --video-solution--
 
