@@ -1,41 +1,38 @@
 ---
-id: 5e7b9f090b6c005b0e76f068
-title: 'Dictionaries: Common Applications'
+id: 5e7b9f080b6c005b0e76f063
+title: Files as a Sequence
 challengeType: 11
-videoId: f17xPfIXct0
-dashedName: dictionaries-common-applications
+videoId: cIA0EokbaHE
+dashedName: files-as-a-sequence
 ---
+
+# --description--
+
+More resources:
+
+\- [Exercise](https://www.youtube.com/watch?v=il1j4wkte2E)
 
 # --question--
 
 ## --text--
 
-What will the following code print?
-
-```python
-counts = { 'quincy' : 1 , 'mrugesh' : 42, 'beau': 100, '0': 10}
-print(counts.get('kris', 0))
-```
+What does the word 'continue' do in the middle of a loop?
 
 ## --answers--
 
-2
+Skips to the code directly after the loop.
 
 ---
 
-quincy
+Skips to the next line in the code.
 
 ---
 
-0
+Skips to the next iteration of the loop.
 
 ---
 
-10
-
----
-
-[will return error]
+Skips the next block of code.
 
 ## --video-solution--
 
