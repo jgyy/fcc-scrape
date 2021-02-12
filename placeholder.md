@@ -1,32 +1,36 @@
 ---
-id: 5e7b9f050b6c005b0e76f056
-title: 'Variables, Expressions, and Statements'
+id: 5e7b9f690b6c005b0e76f095
+title: Visualizing Data with Python
 challengeType: 11
-videoId: nELR-uyyrok
-dashedName: variables-expressions-and-statements
+videoId: e3lydkH0prw
+dashedName: visualizing-data-with-python
 ---
 
 # --question--
 
 ## --text--
 
-What is the symbol used in an assignment statement?
+Most data needs to be \_\_\_\_\_\_ before using it.
 
 ## --answers--
 
-~
+converted to JSON format
 
 ---
 
-&
+graphed
 
 ---
 
-=
+cleaned
 
 ---
 
-\|
+memorized
+
+---
+
+turned into song
 
 ## --video-solution--
 
