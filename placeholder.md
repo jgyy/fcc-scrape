@@ -1,33 +1,37 @@
 ---
-id: 5e7b9f160b6c005b0e76f085
-title: Python Objects
+id: 5e7b9f080b6c005b0e76f062
+title: Reading Files
 challengeType: 11
-videoId: uJxGeTYy0us
-dashedName: python-objects
+videoId: Fo1tW09KIwo
+dashedName: reading-files
 ---
 
 # --question--
 
 ## --text--
 
-Which is NOT true about objects in Python?
+What is used to indicate a new line in a string?
 
 ## --answers--
 
-Objects get created and used.
+\\n
 
 ---
 
-Objects are bits of code and data.
+{new_line}
 
 ---
 
-Objects hide detail.
+{n}
 
 ---
 
-Objects are one of the five standard data types.
+/n
+
+---
+
+/new
 
 ## --video-solution--
 
-4
+1
