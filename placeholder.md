@@ -1,47 +1,50 @@
 ---
-id: 5e7b9f070b6c005b0e76f05f
-title: 'Iterations: More Patterns'
+id: 5e7b9f060b6c005b0e76f05c
+title: Loops and Iterations
 challengeType: 11
-videoId: 9Wtqo6vha1M
-dashedName: iterations-more-patterns
+videoId: dLA-szNRnUY
+dashedName: loops-and-iterations
 ---
-
-# --description--
-
-More resources:
-
-\- [Exercise](https://www.youtube.com/watch?v=kjxXZQw0uPg)
 
 # --question--
 
 ## --text--
 
-Which of these evaluates to False?
+What will the following code print out?:
+
+```python
+n = 0
+while True:
+    if n == 3:
+        break
+    print(n)
+    n = n + 1
+```
 
 ## --answers--
 
-```python
-0 == 0.0
-```
+<pre>0
+1
+2</pre>
 
 ---
 
-```python
-0 is 0.0
-```
+<pre>0
+1
+2
+3</pre>
 
 ---
 
-```python
-0 is not 0.0
-```
+<pre>1
+2</pre>
 
 ---
 
-```python
-0 = 0.0
-```
+<pre>1
+2
+3</pre>
 
 ## --video-solution--
 
-2
+1
