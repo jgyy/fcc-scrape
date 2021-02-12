@@ -1,33 +1,29 @@
 ---
-id: 5e7b9f170b6c005b0e76f08a
-title: Relational Databases and SQLite
+id: 5e7b9f180b6c005b0e76f08f
+title: 'Relational Databases: Join Operation'
 challengeType: 11
-videoId: QlNod5-kFpA
-dashedName: relational-databases-and-sqlite
+videoId: jvDw3D9GKac
+dashedName: relational-databases-join-operation
 ---
 
 # --question--
 
 ## --text--
 
-Which is NOT a primary data structure in a database?
+When using a JOIN clause in an SQL statement, what does ON do?
 
 ## --answers--
 
-index
+It indicates what tables to perform the JOIN on.
 
 ---
 
-table
+It specifies the fields to use for the JOIN.
 
 ---
 
-row
-
----
-
-column
+It indicates how the two tables are to be joined.
 
 ## --video-solution--
 
-1
+3
