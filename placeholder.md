@@ -1,28 +1,28 @@
 ---
-id: 5e7b9f140b6c005b0e76f07e
-title: 'Web Services: Service Oriented Approach'
+id: 5e7b9f0e0b6c005b0e76f07c
+title: 'Web Services: XML Schema'
 challengeType: 11
-videoId: muerlsCHExI
-dashedName: web-services-service-oriented-approach
+videoId: yWU9kTxW-nc
+dashedName: web-services-xml-schema
 ---
 
 # --question--
 
 ## --text--
 
-With a services oriented approach to developing web apps, where is the data located?
+What is XSD?
 
 ## --answers--
 
-Spread across many computer systems connected via the internet or internal network.
+The W3C Schema specification for XML.
 
 ---
 
-Within different services on the main web server.
+The standard JSON schema from MOZ.
 
 ---
 
-On a separate database server.
+Extensible Situational Driver
 
 ## --video-solution--
 
