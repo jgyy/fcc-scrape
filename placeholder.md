@@ -1,46 +1,28 @@
 ---
-id: 5e7b9f190b6c005b0e76f090
-title: 'Relational Databases: Many-to-many Relationships'
+id: 5e7b9f180b6c005b0e76f08e
+title: 'Relational Databases: Relationship Building'
 challengeType: 11
-videoId: z-SBYcvEQOc
-dashedName: relational-databases-many-to-many-relationships
+videoId: CSbqczsHVnc
+dashedName: relational-databases-relationship-building
 ---
-
-# --description--
-
-More resources:
-
-\- [Exercise: Email](https://www.youtube.com/watch?v=uQ3Qv1z_Vao)
-
-\- [Exercise: Roster](https://www.youtube.com/watch?v=qEkUEAz8j3o)
-
-\- [Exercise: Tracks](https://www.youtube.com/watch?v=I-E7avcPeSE)
-
-\- [Exercise: Twfriends](https://www.youtube.com/watch?v=RZRAoBFIH6A)
-
-\- [Exercise: Twspider](https://www.youtube.com/watch?v=xBaJddvJL4A)
 
 # --question--
 
 ## --text--
 
-Which is an example of a many-to-many relationship?
+What does the INSERT command do in SQL?
 
 ## --answers--
 
-teacher to student
+It defines a new row by listing the fields we want to include followed by the values we want placed in the new row.
 
 ---
 
-customer to order
+It defines a new column by listing the rows we want to include followed by the values we want placed in the new column.
 
 ---
 
-book to pages
-
----
-
-city to country
+It defines a new table by listing the rows and fields we want to include followed by the values that we want placed in the table.
 
 ## --video-solution--
 
