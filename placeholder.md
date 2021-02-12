@@ -1,15 +1,15 @@
 ---
-id: 5e44412c903586ffb414c94c
-title: Arithmetic Formatter
+id: 5e44413e903586ffb414c94e
+title: Budget App
 challengeType: 10
-dashedName: arithmetic-formatter
+dashedName: budget-app
 ---
 
 # --description--
 
-Create a function that receives a list of strings that are arithmetic problems and returns the problems arranged vertically and side-by-side.
+Create a "Category" class that can be used to create different budget categories.
 
-You can access [the full project description and starter code on Repl.it](https://repl.it/github/freeCodeCamp/boilerplate-arithmetic-formatter).
+You can access [the full project description and starter code on Repl.it](https://repl.it/github/freeCodeCamp/boilerplate-budget-app).
 
 After going to that link, fork the project. Once you complete the project based on the instructions in 'README.md', submit your project link below.
 
@@ -22,11 +22,11 @@ We are still developing the interactive instructional part of the Python curricu
   <li>
     <a href='https://www.freecodecamp.org/news/learn-python-basics-in-depth-video-course/'>Learn Python Video Course</a> (2 hours)
   </li>
-<ul>
+</ul>
 
 # --hints--
 
-It should correctly format an arithmetic problem and pass all tests.
+It should create a Category class and pass all tests.
 
 ```js
 
