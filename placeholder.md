@@ -1,35 +1,29 @@
 ---
-id: 5e6a54c358d3af90110a60a3
-title: 'Introduction: Elements of Python'
+id: 5e6a54af58d3af90110a60a1
+title: 'Introduction: Hardware Architecture'
 challengeType: 11
-videoId: aRY_xjL35v0
-dashedName: introduction-elements-of-python
+videoId: H6qtjRTfSog
+dashedName: introduction-hardware-architecture
 ---
 
 # --question--
 
 ## --text--
 
-What will the following program print out:
-
-```python
-x = 43
-x = x + 1
-print(x)
-```
+Where are your programs stored when they are running?
 
 ## --answers--
 
-x
+Hard Drive.
 
 ---
 
-x + 1
+Memory.
 
 ---
 
-44
+Central Processing Unit.
 
 ## --video-solution--
 
-3
+2
