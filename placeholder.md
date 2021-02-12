@@ -1,33 +1,29 @@
 ---
-id: 5e7b9f0c0b6c005b0e76f072
-title: Networking Protocol
+id: 5e7b9f0c0b6c005b0e76f074
+title: 'Networking: Text Processing'
 challengeType: 11
-videoId: c6vZGescaSc
-dashedName: networking-protocol
+videoId: Pv_pJgVu8WI
+dashedName: networking-text-processing
 ---
 
 # --question--
 
 ## --text--
 
-What type of HTTP request is usually used to access a website?
+Which type of encoding do most websites use?
 
 ## --answers--
 
-POST
+UTF-8
 
 ---
 
-GET
+UTF-16
 
 ---
 
-WEB
-
----
-
-ACCESS
+UTF-32
 
 ## --video-solution--
 
-2
+1
