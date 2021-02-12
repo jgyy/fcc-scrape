@@ -1,29 +1,33 @@
 ---
-id: 5e7b9f180b6c005b0e76f08e
-title: 'Relational Databases: Relationship Building'
+id: 5e7b9f180b6c005b0e76f08d
+title: Representing Relationships in a Relational Database
 challengeType: 11
-videoId: CSbqczsHVnc
-dashedName: relational-databases-relationship-building
+videoId: '-orenCNdC2Q'
+dashedName: representing-relationships-in-a-relational-database
 ---
 
 # --question--
 
 ## --text--
 
-What does the INSERT command do in SQL?
+What is a foreign key?
 
 ## --answers--
 
-It defines a new row by listing the fields we want to include followed by the values we want placed in the new row.
+A key that is not supposed to be there.
 
 ---
 
-It defines a new column by listing the rows we want to include followed by the values we want placed in the new column.
+A key that uses non-latin characters.
 
 ---
 
-It defines a new table by listing the rows and fields we want to include followed by the values that we want placed in the table.
+A number that points to the primary key of an associated row in a different table.
+
+---
+
+A key that the "real world" might use to look up a row.
 
 ## --video-solution--
 
-1
+3
