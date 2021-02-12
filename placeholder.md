@@ -1,38 +1,50 @@
 ---
-id: 5e7b9f080b6c005b0e76f063
-title: Files as a Sequence
+id: 5e7b9f050b6c005b0e76f057
+title: Intermediate Expressions
 challengeType: 11
-videoId: cIA0EokbaHE
-dashedName: files-as-a-sequence
+videoId: dKgUaIa5ATg
+dashedName: intermediate-expressions
 ---
 
 # --description--
 
 More resources:
 
-\- [Exercise](https://www.youtube.com/watch?v=il1j4wkte2E)
+\- [Exercise 1](https://youtu.be/t_4DPwsaGDY)
+
+\- [Exercise 2](https://youtu.be/wgkC8SxraAQ)
 
 # --question--
 
 ## --text--
 
-What does the word 'continue' do in the middle of a loop?
+What will print out after running this code:
+
+```python
+width = 15
+height = 12.0
+print(height/3)
+```
 
 ## --answers--
 
-Skips to the code directly after the loop.
+39
 
 ---
 
-Skips to the next line in the code.
+4
 
 ---
 
-Skips to the next iteration of the loop.
+4.0
 
 ---
 
-Skips the next block of code.
+5.0
+
+---
+
+5
 
 ## --video-solution--
 
