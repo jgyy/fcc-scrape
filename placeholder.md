@@ -1,41 +1,32 @@
 ---
-id: 5e7b9f0e0b6c005b0e76f07b
-title: 'Web Services: XML'
+id: 5e7b9f090b6c005b0e76f065
+title: Working with Lists
 challengeType: 11
-videoId: _pZ0srbg7So
-dashedName: web-services-xml
+videoId: lCnHfTHkhbE
+dashedName: working-with-lists
 ---
 
 # --question--
 
 ## --text--
 
-What is wrong with the following XML?:
-
-```xml
-<person>
-  <name>Chuck</name>
-  <phone type="intl">
-    +1 734 303 4456
-  <email hide="yes" />
-</person>
-```
+Which method is used to add an item at the end of a list?
 
 ## --answers--
 
-Email tag is missing closing tag.
+insert
 
 ---
 
-Spacing will cause XML to be invalid.
+push
 
 ---
 
-Phone tag is missing closing tag.
+append
 
 ---
 
-Plain text should be encoded using UTF-8.
+new
 
 ## --video-solution--
 
