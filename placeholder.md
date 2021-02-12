@@ -1,9 +1,9 @@
 ---
-id: 5e7b9f070b6c005b0e76f060
-title: Strings in Python
+id: 5e7b9f0a0b6c005b0e76f06c
+title: The Tuples Collection
 challengeType: 11
-videoId: LYZj207fKpQ
-dashedName: strings-in-python
+videoId: 3Lxpladfh2k
+dashedName: the-tuples-collection
 ---
 
 # --question--
@@ -13,46 +13,46 @@ dashedName: strings-in-python
 What will the following code print?:
 
 ```python
-for n in "banana":
-    print(n)
+d = dict()
+d['quincy'] = 1
+d['beau'] = 5
+d['kris'] = 9
+for (k,i) in d.items():
+    print(k, i)
 ```
 
 ## --answers--
 
 <pre>
-n
-n
+k i
+k i
+k i
 </pre>
 
 ---
 
 <pre>
-0
-1
+quincy 0
+beau 1
+kris 2
 </pre>
 
 ---
 
 <pre>
-0
-1
-2
-3
-4
-5
+quincy 1
+beau 5
+kris 9
 </pre>
 
 ---
 
 <pre>
-b
-a
-n
-a
-n
-a
+1 quincy
+5 beau
+9 kris
 </pre>
 
 ## --video-solution--
 
-4
+3
