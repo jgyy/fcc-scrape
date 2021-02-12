@@ -1,51 +1,48 @@
 ---
-id: 5e7b9f050b6c005b0e76f057
-title: Intermediate Expressions
+id: 5e7b9f070b6c005b0e76f061
+title: Intermediate Strings
 challengeType: 11
-videoId: dKgUaIa5ATg
-dashedName: intermediate-expressions
+videoId: KgT_fYLXnyk
+dashedName: intermediate-strings
 ---
 
 # --description--
 
 More resources:
 
-\- [Exercise 1](https://youtu.be/t_4DPwsaGDY)
-
-\- [Exercise 2](https://youtu.be/wgkC8SxraAQ)
+\- [Exercise](https://www.youtube.com/watch?v=1bSqHot-KwE)
 
 # --question--
 
 ## --text--
 
-What will print out after running this code:
+What is the value of i in the following code?
 
 ```python
-width = 15
-height = 12.0
-print(height/3)
+word = "bananana"
+i = word.find("na")
 ```
 
 ## --answers--
 
-39
+nanana
 
 ---
 
-4
+2
 
 ---
 
-4.0
+3
 
 ---
 
-5.0
+True
 
 ---
 
-5
+na
 
 ## --video-solution--
 
-3
+2
