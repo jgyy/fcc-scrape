@@ -1,54 +1,37 @@
 ---
-id: 5e7b9f090b6c005b0e76f067
-title: Python Dictionaries
+id: 5e7b9f060b6c005b0e76f05a
+title: Python Functions
 challengeType: 11
-videoId: dnzvfimrRMg
-dashedName: python-dictionaries
+videoId: 3JGF-n3tDPU
+dashedName: python-functions
 ---
 
 # --question--
 
 ## --text--
 
-What does dict equal after running this code?:
-
-```python
-dict = {"Fri": 20, "Thu": 6, "Sat": 1}
-dict["Thu"] = 13
-dict["Sat"] = 2
-dict["Sun"] = 9
-```
+What is the purpose of the "def" keyword in Python?
 
 ## --answers--
 
-```python
-{'Fri': 20, 'Thu': 6, 'Sat': 1}
-```
+It is slang that means "The following code is really cool."
 
 ---
 
-```python
-{'Fri': 20, 'Thu': 6, 'Sat': 1, 'Thu': 13, 'Sat': 2, 'Sun': 9}
-```
+It indicates the start of a function.
 
 ---
 
-```python
-{'Sun': 9}
-```
+It indicates that the following indented section of code is to be stored for later.
 
 ---
 
-```python
-{'Thu': 13, 'Sat': 2, 'Sun': 9}
-```
+It indicates the start of a function, and the following indented section of code is to be stored for later.
 
 ---
 
-```python
-{'Fri': 20, 'Thu': 13, 'Sat': 2, 'Sun': 9}
-```
+None of the above.
 
 ## --video-solution--
 
-5
+4
