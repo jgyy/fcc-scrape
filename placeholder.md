@@ -1,58 +1,37 @@
 ---
-id: 5e7b9f0a0b6c005b0e76f06c
-title: The Tuples Collection
+id: 5e7b9f0e0b6c005b0e76f07a
+title: Using Web Services
 challengeType: 11
-videoId: 3Lxpladfh2k
-dashedName: the-tuples-collection
+videoId: oNl1OVDPGKE
+dashedName: using-web-services
 ---
 
 # --question--
 
 ## --text--
 
-What will the following code print?:
-
-```python
-d = dict()
-d['quincy'] = 1
-d['beau'] = 5
-d['kris'] = 9
-for (k,i) in d.items():
-    print(k, i)
-```
+What are the two most common ways to send data over the internet?
 
 ## --answers--
 
-<pre>
-k i
-k i
-k i
-</pre>
+JSON and TXT
 
 ---
 
-<pre>
-quincy 0
-beau 1
-kris 2
-</pre>
+JSON and XML
 
 ---
 
-<pre>
-quincy 1
-beau 5
-kris 9
-</pre>
+XML and TXT
 
 ---
 
-<pre>
-1 quincy
-5 beau
-9 kris
-</pre>
+XML and PHP
+
+---
+
+PHP and TXT
 
 ## --video-solution--
 
-3
+2
