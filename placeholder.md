@@ -1,15 +1,15 @@
 ---
-id: 5e44413e903586ffb414c94e
-title: Budget App
+id: 5e444147903586ffb414c94f
+title: Polygon Area Calculator
 challengeType: 10
-dashedName: budget-app
+dashedName: polygon-area-calculator
 ---
 
 # --description--
 
-Create a "Category" class that can be used to create different budget categories.
+In this project you will use object oriented programming to create a Rectangle class and a Square class. The Square class should be a subclass of Rectangle and inherit methods and attributes.
 
-You can access [the full project description and starter code on Repl.it](https://repl.it/github/freeCodeCamp/boilerplate-budget-app).
+You can access [the full project description and starter code on Repl.it](https://repl.it/github/freeCodeCamp/boilerplate-polygon-area-calculator).
 
 After going to that link, fork the project. Once you complete the project based on the instructions in 'README.md', submit your project link below.
 
@@ -26,7 +26,7 @@ We are still developing the interactive instructional part of the Python curricu
 
 # --hints--
 
-It should create a Category class and pass all tests.
+It should create a Rectangle class and Square class and pass all tests.
 
 ```js
 
