@@ -1,38 +1,37 @@
 ---
-id: 5e6a54ba58d3af90110a60a2
-title: 'Introduction: Python as a Language'
+id: 5e6a54a558d3af90110a60a0
+title: 'Introduction: Why Program?'
 challengeType: 11
-videoId: 0QeGbZNS_bY
-dashedName: introduction-python-as-a-language
+videoId: 3muQV-Im3Z0
+dashedName: introduction-why-program
 ---
+
+# --description--
+
+More resources:
+
+\- [Install Python on Windows](https://youtu.be/F7mtLrYzZP8)
+
+\- [Install Python on MacOS](https://youtu.be/wfLnZP-4sZw)
 
 # --question--
 
 ## --text--
 
-What will print out after running these two lines of code:
-
-```python
-x = 6
-print(x)
-```
+Who should learn to program?
 
 ## --answers--
 
-x
+College students.
 
 ---
 
-6
+People who want to become software developers.
 
 ---
 
-x = 6
-
----
-
-(x)
+Everyone.
 
 ## --video-solution--
 
-2
+3
