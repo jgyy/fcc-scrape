@@ -1,28 +1,48 @@
 ---
-id: 5e7b9f6a0b6c005b0e76f096
-title: 'Data Visualization: Page Rank'
+id: 5e7b9f0a0b6c005b0e76f069
+title: Dictionaries and Loops
 challengeType: 11
-videoId: 6-w_qIUwaxU
-dashedName: data-visualization-page-rank
+videoId: EEmekKiKG70
+dashedName: dictionaries-and-loops
 ---
+
+# --description--
+
+More resources:
+
+\- [Exercise](https://www.youtube.com/watch?v=PrhZ9qwBDD8)
 
 # --question--
 
 ## --text--
 
-How does the PageRank algorithm work?
+What will the following code print?:
+
+```python
+counts = { 'chuck' : 1 , 'annie' : 42, 'jan': 100}
+for key in counts:
+    if counts[key] > 10:
+        print(key, counts[key])
+```
 
 ## --answers--
 
-It determines which pages are most highly connected.
+<pre>annie 42
+jan 100</pre>
 
 ---
 
-It ranks pages based on view counts.
+<pre>chuck 1
+annie 42
+jan 100</pre>
 
 ---
 
-It figures out which pages contain the most important content.
+<pre>chuck 1</pre>
+
+---
+
+<pre>[Error]</pre>
 
 ## --video-solution--
 
