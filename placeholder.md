@@ -1,40 +1,33 @@
 ---
-id: 5e7b9f0b0b6c005b0e76f06f
-title: 'Regular Expressions: Matching and Extracting Data'
+id: 5e7b9f180b6c005b0e76f08c
+title: Relational Database Design
 challengeType: 11
-videoId: LaCZnTbQGkE
-dashedName: regular-expressions-matching-and-extracting-data
+videoId: AqdfbrpkbHk
+dashedName: relational-database-design
 ---
 
 # --question--
 
 ## --text--
 
-What will the following program print?:
-
-```python
-import re
-s = 'A message from csev@umich.edu to cwen@iupui.edu about meeting @2PM'
-lst = re.findall('\\S+@\\S+', s)
-print(lst)
-```
+What is the best practice for how many times a piece of string data should be stored in a database?
 
 ## --answers--
 
-['csev@umich.edu', 'cwen@iupui.edu']
+0
 
 ---
 
-['csev@umich.edu']
+1
 
 ---
 
-['umich.edu', 'iupui.edu']
+2
 
 ---
 
-['csev@', 'cwen@']
+3
 
 ## --video-solution--
 
-1
+2
