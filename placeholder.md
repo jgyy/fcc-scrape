@@ -1,38 +1,38 @@
 ---
-id: 5e9a093a74c4063ca6f7c14c
-title: Introduction to Data Analysis
+id: 5e9a093a74c4063ca6f7c150
+title: Jupyter Notebooks Cells
 challengeType: 11
-videoId: VJrP2FUzKP0
-dashedName: introduction-to-data-analysis
+videoId: 5PPegAs9aLA
+dashedName: jupyter-notebooks-cells
 ---
 
 # --description--
 
+*Instead of using notebooks.ai like it shows in the video, you can use Google Colab instead.*
+
 More resources:
 
-\- [Slides](https://docs.google.com/presentation/d/1fDpjlyMiOMJyuc7_jMekcYLPP2XlSl1eWw9F7yE7byk)
+-   [Notebooks on GitHub](https://github.com/ine-rmotr-curriculum/ds-content-interactive-jupyterlab-tutorial)
+-   [How to open Notebooks from GitHub using Google Colab.](https://colab.research.google.com/github/googlecolab/colabtools/blob/master/notebooks/colab-github-demo.ipynb)
+-   [Twitter Cheat Sheet](https://twitter.com/rmotr_com/status/1122176794696847361)
 
 # --question--
 
 ## --text--
 
-Why should you choose R over Python for data analysis?
+What are the three main types of Jupyter Notebook Cell?
 
 ## --answers--
 
-It's simple to learn.
+Code, Markdown, and Python
 
 ---
 
-It's better at dealing with advanced statistical methods.
+Code, Markdown, and Raw
 
 ---
 
-There are many powerful libraries that support R.
-
----
-
-It's free and open source.
+Markdown, Python, and Raw
 
 ## --video-solution--
 
