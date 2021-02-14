@@ -1,9 +1,9 @@
 ---
-id: 5e9a093a74c4063ca6f7c151
-title: Jupyter Notebooks Importing and Exporting Data
+id: 5e9a093a74c4063ca6f7c157
+title: Numpy Algebra and Size
 challengeType: 11
-videoId: k1msxD3JIxE
-dashedName: jupyter-notebooks-importing-and-exporting-data
+videoId: XAT97YLOKD8
+dashedName: numpy-algebra-and-size
 ---
 
 # --description--
@@ -12,36 +12,31 @@ dashedName: jupyter-notebooks-importing-and-exporting-data
 
 More resources:
 
--   [Notebooks on GitHub](https://github.com/ine-rmotr-curriculum/ds-content-interactive-jupyterlab-tutorial)
+-   [Notebooks on GitHub](https://github.com/ine-rmotr-curriculum/freecodecamp-intro-to-numpy)
 -   [How to open Notebooks from GitHub using Google Colab.](https://colab.research.google.com/github/googlecolab/colabtools/blob/master/notebooks/colab-github-demo.ipynb)
--   [Twitter Cheat Sheet](https://twitter.com/rmotr_com/status/1122176794696847361)
 
 # --question--
 
 ## --text--
 
-What kind of data can you import and work with in a Jupyter Notebook?
+What is the relationship between size of objects (such as lists and datatypes) in memory in Python's standard library and the NumPy library? Knowing this, what are the implications for performance?
 
 ## --answers--
 
-Excel files.
+Standard Python objects take up much more memory to store than NumPy objects; operations on comparable standard Python and NumPy objects complete in roughly the same time.
 
 ---
 
-CSV files.
+NumPy objects take up much more memory than standard Python objects; operations on NumPy objects complete very quickly compared to comparable objects in standard Python.
 
 ---
 
-XML files.
+NumPy objects take up much less memory than Standard Python objects; operations on Standard Python objects complete very quickly compared to comparable objects on NumPy Object.
 
 ---
 
-Data from an API.
-
----
-
-All of the above.
+Standard Python objects take up more memory than NumPy objects; operations on NumPy objects complete very quickly compared to comparable objects in standard Python.
 
 ## --video-solution--
 
-5
+4
