@@ -1,9 +1,9 @@
 ---
-id: 5e9a093a74c4063ca6f7c159
-title: Pandas Indexing and Conditional Selection
+id: 5e9a093a74c4063ca6f7c158
+title: Pandas Introduction
 challengeType: 11
-videoId: '-ZOrgV_aA9A'
-dashedName: pandas-indexing-and-conditional-selection
+videoId: 0xACW-8cZU0
+dashedName: pandas-introduction
 ---
 
 # --description--
@@ -29,36 +29,39 @@ certificates_earned = pd.Series(
     index=['Tom', 'Kris', 'Ahmad', 'Beau']
 )
 
-print(certificates_earned[certificates_earned > 5])
+print(certificates_earned)
 ```
 
 ## --answers--
 
-<pre>
-Tom      True
-Kris     False
-Ahmad    False
-Beau     True
-dtype: int64
-</pre>
-
----
-
-<pre>
+```
 Tom      8
+Kris     2
 Ahmad    5
 Beau     6
 dtype: int64
-</pre>
+```
 
 ---
 
-<pre>
-Tom      8
+```
+Kris     2
+Ahmad    5
 Beau     6
+Tom      8
 dtype: int64
-</pre>
+```
+
+---
+
+```
+Tom      8
+Kris     2
+Ahmad    5
+Beau     6
+Name: certificates_earned dtype: int64
+```
 
 ## --video-solution--
 
-3
+1
