@@ -1,9 +1,9 @@
 ---
-id: 5e9a093a74c4063ca6f7c14d
-title: Data Analysis Example A
+id: 5e9a093a74c4063ca6f7c14e
+title: Data Analysis Example B
 challengeType: 11
-videoId: nVAaxZ34khk
-dashedName: data-analysis-example-a
+videoId: 0kJz0q0pvgQ
+dashedName: data-analysis-example-b
 ---
 
 # --description--
@@ -19,23 +19,19 @@ More resources:
 
 ## --text--
 
-What does the shape of our dataframe tell us?
+What does the `loc` method allow you to do?
 
 ## --answers--
 
-The size in gigabytes the dataframe we loaded into memory is.
+Retrieve a subset of rows and columns by supplying integer-location arguments.
 
 ---
 
-How many rows and columns our dataframe has.
+Access a group of rows and columns by supplying label(s) arguments.
 
 ---
 
-How many rows the source data had before loading.
-
----
-
-How many columns the source data had before loading.
+Returns the first `n` rows based on the integer argument supplied.
 
 ## --video-solution--
 
