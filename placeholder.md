@@ -1,9 +1,9 @@
 ---
-id: 5e9a093a74c4063ca6f7c164
-title: Parsing HTML and Saving Data
+id: 5e9a093a74c4063ca6f7c166
+title: Python Functions and Collections
 challengeType: 11
-videoId: bJaqnTWQmb0
-dashedName: parsing-html-and-saving-data
+videoId: NzpU17ZVlUw
+dashedName: python-functions-and-collections
 ---
 
 # --description--
@@ -12,31 +12,27 @@ dashedName: parsing-html-and-saving-data
 
 More resources:
 
--   [Notebooks on GitHub](https://github.com/ine-rmotr-curriculum/RDP-Reading-Data-with-Python-and-Pandas)
+-   [Notebooks on GitHub](https://github.com/ine-rmotr-curriculum/ds-content-python-under-10-minutes)
 -   [How to open Notebooks from GitHub using Google Colab.](https://colab.research.google.com/github/googlecolab/colabtools/blob/master/notebooks/colab-github-demo.ipynb)
 
 # --question--
 
 ## --text--
 
-What Python library has the `.read_html()` method we can we use for parsing HTML documents and extracting tables?
+What is the main difference between lists and tuples in Python?
 
 ## --answers--
 
-BeautifierSoupy
+Tuples are immutable.
 
 ---
 
-WebReader
+Lists are ordered.
 
 ---
 
-HTTP-master
-
----
-
-Pandas
+Tuples are unordered.
 
 ## --video-solution--
 
-4
+1
