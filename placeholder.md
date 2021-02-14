@@ -1,41 +1,42 @@
 ---
-id: 5e444136903586ffb414c94d
-title: Time Calculator
-challengeType: 10
-dashedName: time-calculator
+id: 5e9a093a74c4063ca6f7c14d
+title: Data Analysis Example A
+challengeType: 11
+videoId: nVAaxZ34khk
+dashedName: data-analysis-example-a
 ---
 
 # --description--
 
-Write a function named "add_time" that can add a duration to a start time and return the result.
+*Instead of using notebooks.ai like it shows in the video, you can use Google Colab instead.*
 
-You can access [the full project description and starter code on Repl.it](https://repl.it/github/freeCodeCamp/boilerplate-time-calculator). After going to that link, fork the project. Once you complete the project based on the instructions in 'README.md', submit your project link below.
+More resources:
 
-We are still developing the interactive instructional part of the Python curriculum. For now, here are some videos on the freeCodeCamp.org YouTube channel that will teach you everything you need to know to complete this project:
+-   [Notebooks on GitHub](https://github.com/ine-rmotr-curriculum/FreeCodeCamp-Pandas-Real-Life-Example)
+-   [How to open Notebooks from GitHub using Google Colab.](https://colab.research.google.com/github/googlecolab/colabtools/blob/master/notebooks/colab-github-demo.ipynb)
 
-<ul>
-  <li>
-    <a href='https://www.freecodecamp.org/news/python-for-everybody/'>Python for Everybody Video Course</a> (14 hours)
-  </li>
-  <li>
-    <a href='https://www.freecodecamp.org/news/learn-python-basics-in-depth-video-course/'>Learn Python Video Course</a> (2 hours)
-  </li>
-</ul>
+# --question--
 
-# --hints--
+## --text--
 
-It should correctly add times and pass all tests.
+What does the shape of our dataframe tell us?
 
-```js
+## --answers--
 
-```
+The size in gigabytes the dataframe we loaded into memory is.
 
-# --solutions--
+---
 
-```js
-/**
-  Backend challenges don't need solutions,
-  because they would need to be tested against a full working project.
-  Please check our contributing guidelines to learn more.
-*/
-```
+How many rows and columns our dataframe has.
+
+---
+
+How many rows the source data had before loading.
+
+---
+
+How many columns the source data had before loading.
+
+## --video-solution--
+
+2
