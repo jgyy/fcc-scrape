@@ -1,9 +1,9 @@
 ---
-id: 5e9a093a74c4063ca6f7c15f
-title: Data Cleaning Duplicates
+id: 5e9a093a74c4063ca6f7c15d
+title: Data Cleaning Introduction
 challengeType: 11
-videoId: kj7QqjXhH6A
-dashedName: data-cleaning-duplicates
+videoId: ovYNhnltVxY
+dashedName: data-cleaning-introduction
 ---
 
 # --description--
@@ -19,20 +19,39 @@ More resources:
 
 ## --text--
 
-The Python method `.duplicated()` returns a boolean Series for your DataFrame. `True` is the return value for rows that:
+What will the following code print out?
+
+```py
+import pandas as pd
+import numpy as np
+
+s = pd.Series(['a', 3, np.nan, 1, np.nan])
+
+print(s.notnull().sum())
+```
 
 ## --answers--
 
-contain a duplicate, where the value for the row contains the first occurrence of that value.
+3
 
 ---
 
-contain a duplicate, where the value for the row is at least the second occurrence of that value.
+<pre>0     True
+1     True
+2    False
+3     True
+4    False
+dtype: bool</pre>
 
 ---
 
-contain a duplicate, where the value for the row contains either the first or second occurrence.
+<pre>0    False
+1    False
+2     True
+3    False
+4     True
+dtype: bool</pre>
 
 ## --video-solution--
 
-2
+1
