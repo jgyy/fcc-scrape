@@ -1,9 +1,9 @@
 ---
-id: 5e9a093a74c4063ca6f7c160
-title: Data Cleaning and Visualizations
+id: 5e9a093a74c4063ca6f7c15f
+title: Data Cleaning Duplicates
 challengeType: 11
-videoId: mHjxzFS5_Z0
-dashedName: data-cleaning-and-visualizations
+videoId: kj7QqjXhH6A
+dashedName: data-cleaning-duplicates
 ---
 
 # --description--
@@ -19,24 +19,20 @@ More resources:
 
 ## --text--
 
-When using Matplotlib's global API, what does the order of numbers mean here?
-
-```py
-plt.subplot(1, 2, 1)
-```
+The Python method `.duplicated()` returns a boolean Series for your DataFrame. `True` is the return value for rows that:
 
 ## --answers--
 
-My figure will have one column, two rows, and I am going to start drawing in the first (left) plot.
+contain a duplicate, where the value for the row contains the first occurrence of that value.
 
 ---
 
-I am going to start drawing in the first (left) plot, my figure will have two rows, and my figure will have one column.
+contain a duplicate, where the value for the row is at least the second occurrence of that value.
 
 ---
 
-My figure will have one row, two columns, and I am going to start drawing in the first (left) plot.
+contain a duplicate, where the value for the row contains either the first or second occurrence.
 
 ## --video-solution--
 
-3
+2
