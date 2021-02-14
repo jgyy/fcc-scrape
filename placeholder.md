@@ -1,9 +1,9 @@
 ---
-id: 5e9a093a74c4063ca6f7c162
-title: Reading Data CSV and TXT
+id: 5e9a093a74c4063ca6f7c163
+title: Reading Data from Databases
 challengeType: 11
-videoId: ViGEv0zOzUk
-dashedName: reading-data-csv-and-txt
+videoId: MtgXS1MofRw
+dashedName: reading-data-from-databases
 ---
 
 # --description--
@@ -19,36 +19,20 @@ More resources:
 
 ## --text--
 
-How would you import the CSV file `data.csv` and store it in a DataFrame using the Pandas module?
+What method does a `Cursor` instance have and what does it allow?
 
 ## --answers--
 
-```python
-import pandas as pd
-df = pd.csv("data.csv")
-```
+The `Cursor` instance has a `.run()` method which allows you to run SQL queries.
 
 ---
 
-```python
-import pandas as pd
-df = pd.read_csv("data.csv")
-```
+The `Cursor` instance has a `.select()` method which allows you to select records.
 
 ---
 
-```python
-import pandas as pd
-pd.read_csv("data.csv")
-```
-
----
-
-```python
-import pandas as pd
-df = pd.csv_reader("data.csv")
-```
+The `Cursor` instance has an `.execute()` method which will receive SQL parameters to run against the database.
 
 ## --video-solution--
 
-2
+3
