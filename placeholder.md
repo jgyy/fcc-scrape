@@ -1,9 +1,9 @@
 ---
-id: 5e9a093a74c4063ca6f7c167
-title: Python Iteration and Modules
+id: 5e9a093a74c4063ca6f7c162
+title: Reading Data CSV and TXT
 challengeType: 11
-videoId: XzosGWLafrY
-dashedName: python-iteration-and-modules
+videoId: ViGEv0zOzUk
+dashedName: reading-data-csv-and-txt
 ---
 
 # --description--
@@ -12,44 +12,43 @@ dashedName: python-iteration-and-modules
 
 More resources:
 
--   [Notebooks on GitHub](https://github.com/ine-rmotr-curriculum/ds-content-python-under-10-minutes)
+-   [Notebooks on GitHub](https://github.com/ine-rmotr-curriculum/RDP-Reading-Data-with-Python-and-Pandas)
 -   [How to open Notebooks from GitHub using Google Colab.](https://colab.research.google.com/github/googlecolab/colabtools/blob/master/notebooks/colab-github-demo.ipynb)
 
 # --question--
 
 ## --text--
 
-How would you iterate over and print the keys and values of a dictionary named `user`?
+How would you import the CSV file `data.csv` and store it in a DataFrame using the Pandas module?
 
 ## --answers--
 
 ```python
-for key in user.items():
-    print(key)
+import pandas as pd
+df = pd.csv("data.csv")
 ```
 
 ---
 
 ```python
-for key, value in user.all():
-    print(key, value)
-    print(value)
+import pandas as pd
+df = pd.read_csv("data.csv")
 ```
 
 ---
 
 ```python
-for key, value in user.items():
-    print(key, value)
+import pandas as pd
+pd.read_csv("data.csv")
 ```
 
 ---
 
 ```python
-for key, value in user
-    print(key, value)
+import pandas as pd
+df = pd.csv_reader("data.csv")
 ```
 
 ## --video-solution--
 
-3
+2
