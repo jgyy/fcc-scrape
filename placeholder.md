@@ -1,9 +1,9 @@
 ---
-id: 5e9a093a74c4063ca6f7c15e
-title: Data Cleaning with DataFrames
+id: 5e9a093a74c4063ca6f7c14f
+title: How to use Jupyter Notebooks Intro
 challengeType: 11
-videoId: sTMN_pdI6S0
-dashedName: data-cleaning-with-dataframes
+videoId: h8caJq2Bb9w
+dashedName: how-to-use-jupyter-notebooks-intro
 ---
 
 # --description--
@@ -12,58 +12,28 @@ dashedName: data-cleaning-with-dataframes
 
 More resources:
 
--   [Notebooks on GitHub](https://github.com/ine-rmotr-curriculum/data-cleaning-rmotr-freecodecamp)
+-   [Notebooks on GitHub](https://github.com/ine-rmotr-curriculum/ds-content-interactive-jupyterlab-tutorial)
 -   [How to open Notebooks from GitHub using Google Colab.](https://colab.research.google.com/github/googlecolab/colabtools/blob/master/notebooks/colab-github-demo.ipynb)
+-   [Twitter Cheat Sheet](https://twitter.com/rmotr_com/status/1122176794696847361)
 
 # --question--
 
 ## --text--
 
-What will the following code print out?
-
-```py
-import pandas as pd
-import numpy as np
-
-s = pd.Series([np.nan, 1, 2, np.nan, 3])
-s = s.fillna(method='ffill')
-
-print(s)
-```
+What is **not** allowed in a Jupyter Notebook's cell?
 
 ## --answers--
 
-<pre>
-0    1.0
-1    1.0
-2    2.0
-3    3.0
-4    3.0
-dtype: float64
-</pre>
+Markdown
 
 ---
 
-<pre>
-0    NaN
-1    1.0
-2    2.0
-3    2.0
-4    3.0
-dtype: float64
-</pre>
+Python code
 
 ---
 
-<pre>
-0    NaN
-1    1.0
-2    2.0
-3    NaN
-4    3.0
-dtype: float64
-</pre>
+An Excel sheet
 
 ## --video-solution--
 
-2
+3
