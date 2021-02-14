@@ -1,9 +1,9 @@
 ---
-id: 5e9a093a74c4063ca6f7c156
-title: Numpy Boolean Arrays
+id: 5e9a093a74c4063ca6f7c152
+title: Numpy Introduction A
 challengeType: 11
-videoId: N1ttsMmcVMM
-dashedName: numpy-boolean-arrays
+videoId: P-JjV6GBCmk
+dashedName: numpy-introduction-a
 ---
 
 # --description--
@@ -19,38 +19,20 @@ More resources:
 
 ## --text--
 
-What will the following code print out?
-
-```py
-a = np.arange(5)
-
-print(a <= 3)
-```
+Why is Numpy an important, but unpopular Python library?
 
 ## --answers--
 
-```python
-[False, False, False, False, True]
-```
+Often you won't work directly with Numpy.
 
 ---
 
-```python
-[5]
-```
+It is extremely slow.
 
 ---
 
-```python
-[0, 1, 2, 3]
-```
-
----
-
-```python
-[True, True, True, True, False]
-```
+Working with Numpy is difficult.
 
 ## --video-solution--
 
-4
+1
