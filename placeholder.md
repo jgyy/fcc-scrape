@@ -1,9 +1,9 @@
 ---
-id: 5e9a093a74c4063ca6f7c15a
-title: Pandas DataFrames
+id: 5e9a093a74c4063ca6f7c159
+title: Pandas Indexing and Conditional Selection
 challengeType: 11
-videoId: 7SgFBYXaiH0
-dashedName: pandas-dataframes
+videoId: '-ZOrgV_aA9A'
+dashedName: pandas-indexing-and-conditional-selection
 ---
 
 # --description--
@@ -24,40 +24,39 @@ What will the following code print out?
 ```py
 import pandas as pd
 
-certificates_earned = pd.DataFrame({
-    'Certificates': [8, 2, 5, 6],
-    'Time (in months)': [16, 5, 9, 12]
-})
+certificates_earned = pd.Series(
+    [8, 2, 5, 6],
+    index=['Tom', 'Kris', 'Ahmad', 'Beau']
+)
 
-certificates_earned.index = ['Tom', 'Kris', 'Ahmad', 'Beau']
-
-print(certificates_earned.iloc[2])
+print(certificates_earned[certificates_earned > 5])
 ```
 
 ## --answers--
 
 <pre>
-Tom      16
-Kris      5
-Ahmad     9
-Beau     12
-Name: Time (in months), dtype: int64
+Tom      True
+Kris     False
+Ahmad    False
+Beau     True
+dtype: int64
 </pre>
 
 ---
 
 <pre>
-Certificates         6
-Time (in months)    12
-Name: Beau, dtype: int64
+Tom      8
+Ahmad    5
+Beau     6
+dtype: int64
 </pre>
 
 ---
 
 <pre>
-Certificates        5
-Time (in months)    9
-Name: Ahmad, dtype: int64
+Tom      8
+Beau     6
+dtype: int64
 </pre>
 
 ## --video-solution--
