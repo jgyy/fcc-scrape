@@ -1,9 +1,9 @@
 ---
-id: 5e9a093a74c4063ca6f7c155
-title: Numpy Operations
+id: 5e9a093a74c4063ca6f7c15b
+title: Pandas Conditional Selection and Modifying DataFrames
 challengeType: 11
-videoId: eqSVcJbaPdk
-dashedName: numpy-operations
+videoId: BFlH0fN5xRQ
+dashedName: pandas-conditional-selection-and-modifying-dataframes
 ---
 
 # --description--
@@ -12,37 +12,60 @@ dashedName: numpy-operations
 
 More resources:
 
--   [Notebooks on GitHub](https://github.com/ine-rmotr-curriculum/freecodecamp-intro-to-numpy)
+-   [Notebooks on GitHub](https://github.com/ine-rmotr-curriculum/freecodecamp-intro-to-pandas)
 -   [How to open Notebooks from GitHub using Google Colab.](https://colab.research.google.com/github/googlecolab/colabtools/blob/master/notebooks/colab-github-demo.ipynb)
 
 # --question--
 
 ## --text--
 
-What is the value of `a` after you run the following code?
+What will the following code print out?
 
 ```py
-a = np.arange(5)
-a + 20
+import pandas as pd
+
+certificates_earned = pd.DataFrame({
+    'Certificates': [8, 2, 5, 6],
+    'Time (in months)': [16, 5, 9, 12]
+})
+names = ['Tom', 'Kris', 'Ahmad', 'Beau']
+
+certificates_earned.index = names
+longest_streak = pd.Series([13, 11, 9, 7], index=names)
+certificates_earned['Longest streak'] = longest_streak
+
+print(certificates_earned)
 ```
 
 ## --answers--
 
-```python
-[20, 21, 22, 24, 24]
-```
+<pre>
+Tom      13
+Kris     11
+Ahmad     9
+Beau      7
+Name: Longest streak, dtype: int64
+</pre>
 
 ---
 
-```python
-[0, 1, 2, 3, 4]
-```
+<pre>
+      Certificates  Time (in months)  Longest streak
+Tom               8                16              13
+Kris              2                 5              11
+Ahmad             5                 9               9
+Beau              6                12               7
+</pre>
 
 ---
 
-```python
-[25, 26, 27, 28, 29]
-```
+<pre>
+      Certificates   Longest streak
+Tom               8               13
+Kris              2               11
+Ahmad             5                9
+Beau              6                7
+</pre>
 
 ## --video-solution--
 
