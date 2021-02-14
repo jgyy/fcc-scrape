@@ -1,39 +1,39 @@
 ---
-id: 5e9a093a74c4063ca6f7c14f
-title: How to use Jupyter Notebooks Intro
+id: 5e9a093a74c4063ca6f7c14c
+title: Introduction to Data Analysis
 challengeType: 11
-videoId: h8caJq2Bb9w
-dashedName: how-to-use-jupyter-notebooks-intro
+videoId: VJrP2FUzKP0
+dashedName: introduction-to-data-analysis
 ---
 
 # --description--
 
-*Instead of using notebooks.ai like it shows in the video, you can use Google Colab instead.*
-
 More resources:
 
--   [Notebooks on GitHub](https://github.com/ine-rmotr-curriculum/ds-content-interactive-jupyterlab-tutorial)
--   [How to open Notebooks from GitHub using Google Colab.](https://colab.research.google.com/github/googlecolab/colabtools/blob/master/notebooks/colab-github-demo.ipynb)
--   [Twitter Cheat Sheet](https://twitter.com/rmotr_com/status/1122176794696847361)
+\- [Slides](https://docs.google.com/presentation/d/1fDpjlyMiOMJyuc7_jMekcYLPP2XlSl1eWw9F7yE7byk)
 
 # --question--
 
 ## --text--
 
-What is **not** allowed in a Jupyter Notebook's cell?
+Why should you choose R over Python for data analysis?
 
 ## --answers--
 
-Markdown
+It's simple to learn.
 
 ---
 
-Python code
+It's better at dealing with advanced statistical methods.
 
 ---
 
-An Excel sheet
+There are many powerful libraries that support R.
+
+---
+
+It's free and open source.
 
 ## --video-solution--
 
-3
+2
