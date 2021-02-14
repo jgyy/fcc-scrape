@@ -1,9 +1,9 @@
 ---
-id: 5e9a093a74c4063ca6f7c15c
-title: Pandas Creating Columns
+id: 5e9a093a74c4063ca6f7c15a
+title: Pandas DataFrames
 challengeType: 11
-videoId: _sSo2XZoB3E
-dashedName: pandas-creating-columns
+videoId: 7SgFBYXaiH0
+dashedName: pandas-dataframes
 ---
 
 # --description--
@@ -19,38 +19,46 @@ More resources:
 
 ## --text--
 
-What code would add a "Certificates per month" column to the `certificates_earned` DataFrame like the one below?
+What will the following code print out?
 
-<pre>      Certificates  Time (in months)  Certificates per month
-Tom               8                16                    0.50
-Kris              2                 5                    0.40
-Ahmad             5                 9                    0.56
-Beau              6                12                    0.50</pre>
+```py
+import pandas as pd
+
+certificates_earned = pd.DataFrame({
+    'Certificates': [8, 2, 5, 6],
+    'Time (in months)': [16, 5, 9, 12]
+})
+
+certificates_earned.index = ['Tom', 'Kris', 'Ahmad', 'Beau']
+
+print(certificates_earned.iloc[2])
+```
 
 ## --answers--
 
-```py
-certificates_earned['Certificates'] /
-certificates_earned['Time (in months)']
-```
+<pre>
+Tom      16
+Kris      5
+Ahmad     9
+Beau     12
+Name: Time (in months), dtype: int64
+</pre>
 
 ---
 
-```py
-certificates_earned['Certificates per month'] = round(
-    certificates_earned['Certificates'] /
-    certificates_earned['Time (in months)']
-)
-```
+<pre>
+Certificates         6
+Time (in months)    12
+Name: Beau, dtype: int64
+</pre>
 
 ---
 
-```py
-certificates_earned['Certificates per month'] = round(
-    certificates_earned['Certificates'] /
-    certificates_earned['Time (in months)'], 2
-)
-```
+<pre>
+Certificates        5
+Time (in months)    9
+Name: Ahmad, dtype: int64
+</pre>
 
 ## --video-solution--
 
