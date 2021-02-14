@@ -1,9 +1,9 @@
 ---
-id: 5e9a093a74c4063ca6f7c150
-title: Jupyter Notebooks Cells
+id: 5e9a093a74c4063ca6f7c151
+title: Jupyter Notebooks Importing and Exporting Data
 challengeType: 11
-videoId: 5PPegAs9aLA
-dashedName: jupyter-notebooks-cells
+videoId: k1msxD3JIxE
+dashedName: jupyter-notebooks-importing-and-exporting-data
 ---
 
 # --description--
@@ -20,20 +20,28 @@ More resources:
 
 ## --text--
 
-What are the three main types of Jupyter Notebook Cell?
+What kind of data can you import and work with in a Jupyter Notebook?
 
 ## --answers--
 
-Code, Markdown, and Python
+Excel files.
 
 ---
 
-Code, Markdown, and Raw
+CSV files.
 
 ---
 
-Markdown, Python, and Raw
+XML files.
+
+---
+
+Data from an API.
+
+---
+
+All of the above.
 
 ## --video-solution--
 
-2
+5
