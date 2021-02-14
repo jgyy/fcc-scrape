@@ -1,9 +1,9 @@
 ---
-id: 5e9a093a74c4063ca6f7c14e
-title: Data Analysis Example B
+id: 5e9a093a74c4063ca6f7c160
+title: Data Cleaning and Visualizations
 challengeType: 11
-videoId: 0kJz0q0pvgQ
-dashedName: data-analysis-example-b
+videoId: mHjxzFS5_Z0
+dashedName: data-cleaning-and-visualizations
 ---
 
 # --description--
@@ -12,27 +12,31 @@ dashedName: data-analysis-example-b
 
 More resources:
 
--   [Notebooks on GitHub](https://github.com/ine-rmotr-curriculum/FreeCodeCamp-Pandas-Real-Life-Example)
+-   [Notebooks on GitHub](https://github.com/ine-rmotr-curriculum/data-cleaning-rmotr-freecodecamp)
 -   [How to open Notebooks from GitHub using Google Colab.](https://colab.research.google.com/github/googlecolab/colabtools/blob/master/notebooks/colab-github-demo.ipynb)
 
 # --question--
 
 ## --text--
 
-What does the `loc` method allow you to do?
+When using Matplotlib's global API, what does the order of numbers mean here?
+
+```py
+plt.subplot(1, 2, 1)
+```
 
 ## --answers--
 
-Retrieve a subset of rows and columns by supplying integer-location arguments.
+My figure will have one column, two rows, and I am going to start drawing in the first (left) plot.
 
 ---
 
-Access a group of rows and columns by supplying label(s) arguments.
+I am going to start drawing in the first (left) plot, my figure will have two rows, and my figure will have one column.
 
 ---
 
-Returns the first `n` rows based on the integer argument supplied.
+My figure will have one row, two columns, and I am going to start drawing in the first (left) plot.
 
 ## --video-solution--
 
-2
+3
