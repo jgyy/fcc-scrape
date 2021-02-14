@@ -1,9 +1,9 @@
 ---
-id: 5e9a093a74c4063ca6f7c154
-title: Numpy Arrays
+id: 5e9a093a74c4063ca6f7c156
+title: Numpy Boolean Arrays
 challengeType: 11
-videoId: VDYVFHBL1AM
-dashedName: numpy-arrays
+videoId: N1ttsMmcVMM
+dashedName: numpy-boolean-arrays
 ---
 
 # --description--
@@ -22,37 +22,35 @@ More resources:
 What will the following code print out?
 
 ```py
-A = np.array([
-    ['a', 'b', 'c'],
-    ['d', 'e', 'f'],
-    ['g', 'h', 'i']
-])
+a = np.arange(5)
 
-print(A[:, :2])
+print(a <= 3)
 ```
 
 ## --answers--
 
-```py
-[['a' 'b']]
+```python
+[False, False, False, False, True]
 ```
 
 ---
 
-```py
-[['b' 'c']
-['e' 'f']
-['h' 'i']]
+```python
+[5]
 ```
 
 ---
 
-```py
-[['a' 'b']
-['d' 'e']
-['g' 'h']]
+```python
+[0, 1, 2, 3]
+```
+
+---
+
+```python
+[True, True, True, True, False]
 ```
 
 ## --video-solution--
 
-3
+4
