@@ -1,9 +1,9 @@
 ---
-id: 5e9a093a74c4063ca6f7c157
-title: Numpy Algebra and Size
+id: 5e9a093a74c4063ca6f7c154
+title: Numpy Arrays
 challengeType: 11
-videoId: XAT97YLOKD8
-dashedName: numpy-algebra-and-size
+videoId: VDYVFHBL1AM
+dashedName: numpy-arrays
 ---
 
 # --description--
@@ -19,24 +19,40 @@ More resources:
 
 ## --text--
 
-What is the relationship between size of objects (such as lists and datatypes) in memory in Python's standard library and the NumPy library? Knowing this, what are the implications for performance?
+What will the following code print out?
+
+```py
+A = np.array([
+    ['a', 'b', 'c'],
+    ['d', 'e', 'f'],
+    ['g', 'h', 'i']
+])
+
+print(A[:, :2])
+```
 
 ## --answers--
 
-Standard Python objects take up much more memory to store than NumPy objects; operations on comparable standard Python and NumPy objects complete in roughly the same time.
+```py
+[['a' 'b']]
+```
 
 ---
 
-NumPy objects take up much more memory than standard Python objects; operations on NumPy objects complete very quickly compared to comparable objects in standard Python.
+```py
+[['b' 'c']
+['e' 'f']
+['h' 'i']]
+```
 
 ---
 
-NumPy objects take up much less memory than Standard Python objects; operations on Standard Python objects complete very quickly compared to comparable objects on NumPy Object.
-
----
-
-Standard Python objects take up more memory than NumPy objects; operations on NumPy objects complete very quickly compared to comparable objects in standard Python.
+```py
+[['a' 'b']
+['d' 'e']
+['g' 'h']]
+```
 
 ## --video-solution--
 
-4
+3
