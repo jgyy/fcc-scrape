@@ -1,9 +1,9 @@
 ---
-id: 5e9a093a74c4063ca6f7c166
-title: Python Functions and Collections
+id: 5e9a093a74c4063ca6f7c165
+title: Python Introduction
 challengeType: 11
-videoId: NzpU17ZVlUw
-dashedName: python-functions-and-collections
+videoId: PrQV9JkLhb4
+dashedName: python-introduction
 ---
 
 # --description--
@@ -19,20 +19,24 @@ More resources:
 
 ## --text--
 
-What is the main difference between lists and tuples in Python?
+How do we define blocks of code in the body of functions in Python?
 
 ## --answers--
 
-Tuples are immutable.
+We use a set of curly braces, one on either side of each new block of our code.
 
 ---
 
-Lists are ordered.
+We use indentation, usually right-aligned 4 spaces.
 
 ---
 
-Tuples are unordered.
+We do not denote blocks of code.
+
+---
+
+We could use curly braces or indentation to denote blocks of code.
 
 ## --video-solution--
 
-1
+2
