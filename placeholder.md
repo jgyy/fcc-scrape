@@ -1,9 +1,9 @@
 ---
-id: 5e9a093a74c4063ca6f7c153
-title: Numpy Introduction B
+id: 5e9a093a74c4063ca6f7c155
+title: Numpy Operations
 challengeType: 11
-videoId: YIqgrNLAZkA
-dashedName: numpy-introduction-b
+videoId: eqSVcJbaPdk
+dashedName: numpy-operations
 ---
 
 # --description--
@@ -19,23 +19,30 @@ More resources:
 
 ## --text--
 
-About how much memory does the integer `5` consume in plain Python?
+What is the value of `a` after you run the following code?
+
+```py
+a = np.arange(5)
+a + 20
+```
 
 ## --answers--
 
-32 bits
+```python
+[20, 21, 22, 24, 24]
+```
 
 ---
 
-20 bytes
+```python
+[0, 1, 2, 3, 4]
+```
 
 ---
 
-16 bytes
-
----
-
-8 bits
+```python
+[25, 26, 27, 28, 29]
+```
 
 ## --video-solution--
 
