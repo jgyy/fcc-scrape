@@ -1,9 +1,9 @@
 ---
-id: 5e9a093a74c4063ca6f7c152
-title: Numpy Introduction A
+id: 5e9a093a74c4063ca6f7c153
+title: Numpy Introduction B
 challengeType: 11
-videoId: P-JjV6GBCmk
-dashedName: numpy-introduction-a
+videoId: YIqgrNLAZkA
+dashedName: numpy-introduction-b
 ---
 
 # --description--
@@ -19,20 +19,24 @@ More resources:
 
 ## --text--
 
-Why is Numpy an important, but unpopular Python library?
+About how much memory does the integer `5` consume in plain Python?
 
 ## --answers--
 
-Often you won't work directly with Numpy.
+32 bits
 
 ---
 
-It is extremely slow.
+20 bytes
 
 ---
 
-Working with Numpy is difficult.
+16 bytes
+
+---
+
+8 bits
 
 ## --video-solution--
 
-1
+2
