@@ -1,9 +1,9 @@
 ---
-id: 5e9a093a74c4063ca6f7c165
-title: Python Introduction
+id: 5e9a093a74c4063ca6f7c167
+title: Python Iteration and Modules
 challengeType: 11
-videoId: PrQV9JkLhb4
-dashedName: python-introduction
+videoId: XzosGWLafrY
+dashedName: python-iteration-and-modules
 ---
 
 # --description--
@@ -19,24 +19,37 @@ More resources:
 
 ## --text--
 
-How do we define blocks of code in the body of functions in Python?
+How would you iterate over and print the keys and values of a dictionary named `user`?
 
 ## --answers--
 
-We use a set of curly braces, one on either side of each new block of our code.
+```python
+for key in user.items():
+    print(key)
+```
 
 ---
 
-We use indentation, usually right-aligned 4 spaces.
+```python
+for key, value in user.all():
+    print(key, value)
+    print(value)
+```
 
 ---
 
-We do not denote blocks of code.
+```python
+for key, value in user.items():
+    print(key, value)
+```
 
 ---
 
-We could use curly braces or indentation to denote blocks of code.
+```python
+for key, value in user
+    print(key, value)
+```
 
 ## --video-solution--
 
-2
+3
