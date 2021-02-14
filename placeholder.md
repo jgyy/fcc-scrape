@@ -1,9 +1,9 @@
 ---
-id: 5e9a093a74c4063ca6f7c163
-title: Reading Data from Databases
+id: 5e9a093a74c4063ca6f7c161
+title: Reading Data Introduction
 challengeType: 11
-videoId: MtgXS1MofRw
-dashedName: reading-data-from-databases
+videoId: cDnt02BcHng
+dashedName: reading-data-introduction
 ---
 
 # --description--
@@ -19,20 +19,53 @@ More resources:
 
 ## --text--
 
-What method does a `Cursor` instance have and what does it allow?
+Given a file named `certificates.csv` with these contents:
+
+<pre>
+Name$Certificates$Time (in months)
+Tom$8$16
+Kris$2$5
+Ahmad$5$9
+Beau$6$12
+</pre>
+
+Fill in the blanks for the missing arguments below:
+
+```py
+import csv
+
+with open(__A__, 'r') as fp:
+    reader = csv.reader(fp, delimiter=__B__)
+    next(reader)
+    for index, values in enumerate(reader):
+        name, certs_num, months_num = values
+        print(f"{name} earned {__C__} certificates in {months_num} months")
+```
 
 ## --answers--
 
-The `Cursor` instance has a `.run()` method which allows you to run SQL queries.
+A: `'certificates.csv'`
+
+B: `'-'`
+
+C: `values`
 
 ---
 
-The `Cursor` instance has a `.select()` method which allows you to select records.
+A: `'certificates.csv'`
+
+B: `'$'`
+
+C: `certs_num`
 
 ---
 
-The `Cursor` instance has an `.execute()` method which will receive SQL parameters to run against the database.
+A: `'certificates'`
+
+B: `'$'`
+
+C: `certs_num`
 
 ## --video-solution--
 
-3
+2
