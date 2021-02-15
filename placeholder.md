@@ -1,71 +1,32 @@
 ---
-id: 5e9a093a74c4063ca6f7c161
-title: Reading Data Introduction
-challengeType: 11
-videoId: cDnt02BcHng
-dashedName: reading-data-introduction
+id: 5e46f7e5ac417301a38fb929
+title: Demographic Data Analyzer
+challengeType: 10
+dashedName: demographic-data-analyzer
 ---
 
 # --description--
 
-*Instead of using notebooks.ai like it shows in the video, you can use Google Colab instead.*
+In this challenge you must analyze demographic data using Pandas. You are given a dataset of demographic data that was extracted from the 1994 Census database.
 
-More resources:
+You can access [the full project description and starter code on Repl.it](https://repl.it/github/freeCodeCamp/boilerplate-demographic-data-analyzer).
 
--   [Notebooks on GitHub](https://github.com/ine-rmotr-curriculum/RDP-Reading-Data-with-Python-and-Pandas)
--   [How to open Notebooks from GitHub using Google Colab.](https://colab.research.google.com/github/googlecolab/colabtools/blob/master/notebooks/colab-github-demo.ipynb)
+After going to that link, fork the project. Once you complete the project based on the instructions in 'README.md', submit your project link below.
 
-# --question--
+We are still developing the interactive instructional part of the data analysis with Python curriculum. For now, you will have to use other resources to learn how to pass this challenge.
 
-## --text--
+# --hints--
 
-Given a file named `certificates.csv` with these contents:
+It should pass all Python tests.
 
-<pre>
-Name$Certificates$Time (in months)
-Tom$8$16
-Kris$2$5
-Ahmad$5$9
-Beau$6$12
-</pre>
+```js
 
-Fill in the blanks for the missing arguments below:
-
-```py
-import csv
-
-with open(__A__, 'r') as fp:
-    reader = csv.reader(fp, delimiter=__B__)
-    next(reader)
-    for index, values in enumerate(reader):
-        name, certs_num, months_num = values
-        print(f"{name} earned {__C__} certificates in {months_num} months")
 ```
 
-## --answers--
+# --solutions--
 
-A: `'certificates.csv'`
-
-B: `'-'`
-
-C: `values`
-
----
-
-A: `'certificates.csv'`
-
-B: `'$'`
-
-C: `certs_num`
-
----
-
-A: `'certificates'`
-
-B: `'$'`
-
-C: `certs_num`
-
-## --video-solution--
-
-2
+```py
+  # Python challenges don't need solutions,
+  # because they would need to be tested against a full working project.
+  # Please check our contributing guidelines to learn more.
+```
