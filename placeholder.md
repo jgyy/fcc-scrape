@@ -1,15 +1,15 @@
 ---
-id: 5e46f802ac417301a38fb92b
-title: Page View Time Series Visualizer
+id: 5e4f5c4b570f7e3a4949899f
+title: Sea Level Predictor
 challengeType: 10
-dashedName: page-view-time-series-visualizer
+dashedName: sea-level-predictor
 ---
 
 # --description--
 
-For this project you will visualize time series data using a line chart, bar chart, and box plots. You will use Pandas, matplotlib, and seaborn to visualize a dataset containing the number of page views each day on the freeCodeCamp.org forum from 2016-05-09 to 2019-12-03. The data visualizations will help you understand the patterns in visits and identify yearly and monthly growth.
+In this project, you will analyze a dataset of the global average sea level change since 1880. You will use the data to predict the sea level change through year 2050.
 
-You can access [the full project description and starter code on Repl.it](https://repl.it/github/freeCodeCamp/boilerplate-page-view-time-series-visualizer).
+You can access [the full project description and starter code on Repl.it](https://repl.it/github/freeCodeCamp/boilerplate-sea-level-predictor).
 
 After going to that link, fork the project. Once you complete the project based on the instructions in 'README.md', submit your project link below.
 
