@@ -1,41 +1,58 @@
 ---
-id: 5e9a0a8e09c5df3cc3600ed7
-title: Copying Arrays Warning
+id: 5e9a0a8e09c5df3cc3600ed6
+title: Initialize Array Problem
 challengeType: 11
-videoId: iIoQ0_L0GvA
-dashedName: copying-arrays-warning
+videoId: 0jGfH8BPfOk
+dashedName: initialize-array-problem
 ---
 
 # --question--
 
 ## --text--
 
-What is the value of `a` after running the following code?
+What is another way to produce the following array?
 
 ```py
-import numpy as np
-
-a = np.array([1, 2, 3, 4, 5])
-b = a
-b[2] = 20
+[[0. 0. 0. 0. 0. 0. 0.]
+[0. 1. 1. 1. 1. 1. 0.]
+[0. 1. 1. 1. 1. 1. 0.]
+[0. 1. 1. 5. 1. 1. 0.]
+[0. 1. 1. 1. 1. 1. 0.]
+[0. 1. 1. 1. 1. 1. 0.]
+[0. 0. 0. 0. 0. 0. 0.]]
 ```
 
 ## --answers--
 
-```python
-[1 2 3 4 5]
+```py
+output = np.ones((7, 7))
+
+z = np.zeros((5, 5))
+z[2, 2] = 5
+
+output[1:1, -1:-1] = z
 ```
 
 ---
 
-```python
-[1 2 20 4 5]
+```py
+output = np.zeros((7,7))
+
+z = np.ones((5, 5))
+z[2, 2] = 5
+
+output[1:-1, 1:-1] = z
 ```
 
 ---
 
-```python
-[1 20 3 4 5]
+```py
+output = np.ones((7, 7))
+
+z = np.zeros((5, 5))
+z[3, 3] = 5
+
+output[1:-1, 1:-1] = z
 ```
 
 ## --video-solution--
