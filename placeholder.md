@@ -1,43 +1,55 @@
 ---
-id: 5e9a0a8e09c5df3cc3600ed5
-title: Initializing Different Arrays
+id: 5e9a0a8e09c5df3cc3600eda
+title: Loading Data and Advanced Indexing
 challengeType: 11
-videoId: CEykdsKT4U4
-dashedName: initializing-different-arrays
+videoId: tUdBZ7pF8Jg
+dashedName: loading-data-and-advanced-indexing
 ---
 
 # --question--
 
 ## --text--
 
-What will the following code print?
+Given a file named `data.txt` with these contents:
+
+<pre>
+29,97,32,100,45
+15,88,5,75,22
+</pre>
+
+What code would produce the following array?
 
 ```py
-a = np.array([[1, 2, 3, 4, 5], [6, 7, 8, 9, 10]])
-
-print(np.full_like(a, 100))
+[29. 32. 45. 15.  5. 22.]
 ```
 
 ## --answers--
 
 ```py
-[[100 100 100 100 100]]
+filedata = np.genfromtxt('data.txt', delimiter=',')
+output = np.any(filedata < 50)
+
+print(output)
 ```
 
 ---
 
 ```py
-[[100 100 100 100 100]
-[100 100 100 100 100]]
+filedata = np.genfromtxt('data.txt', delimiter=',')
+output = np.all(filedata < 50, axis=1)
+
+print(output)
 ```
 
 ---
 
 ```py
-[[ 1  2  3  4  5]
-[ 6  7 20  9 10]]
+filedata = np.genfromtxt('data.txt', delimiter=',')
+output = filedata[filedata < 50]
+
+print(output)
 ```
 
 ## --video-solution--
 
-2
+3
