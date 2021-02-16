@@ -1,58 +1,41 @@
 ---
-id: 5e9a0a8e09c5df3cc3600ed6
-title: Initialize Array Problem
+id: 5e9a0a8e09c5df3cc3600ed5
+title: Initializing Different Arrays
 challengeType: 11
-videoId: 0jGfH8BPfOk
-dashedName: initialize-array-problem
+videoId: CEykdsKT4U4
+dashedName: initializing-different-arrays
 ---
 
 # --question--
 
 ## --text--
 
-What is another way to produce the following array?
+What will the following code print?
 
 ```py
-[[0. 0. 0. 0. 0. 0. 0.]
-[0. 1. 1. 1. 1. 1. 0.]
-[0. 1. 1. 1. 1. 1. 0.]
-[0. 1. 1. 5. 1. 1. 0.]
-[0. 1. 1. 1. 1. 1. 0.]
-[0. 1. 1. 1. 1. 1. 0.]
-[0. 0. 0. 0. 0. 0. 0.]]
+a = np.array([[1, 2, 3, 4, 5], [6, 7, 8, 9, 10]])
+
+print(np.full_like(a, 100))
 ```
 
 ## --answers--
 
 ```py
-output = np.ones((7, 7))
-
-z = np.zeros((5, 5))
-z[2, 2] = 5
-
-output[1:1, -1:-1] = z
+[[100 100 100 100 100]]
 ```
 
 ---
 
 ```py
-output = np.zeros((7,7))
-
-z = np.ones((5, 5))
-z[2, 2] = 5
-
-output[1:-1, 1:-1] = z
+[[100 100 100 100 100]
+[100 100 100 100 100]]
 ```
 
 ---
 
 ```py
-output = np.ones((7, 7))
-
-z = np.zeros((5, 5))
-z[3, 3] = 5
-
-output[1:-1, 1:-1] = z
+[[ 1  2  3  4  5]
+[ 6  7 20  9 10]]
 ```
 
 ## --video-solution--
