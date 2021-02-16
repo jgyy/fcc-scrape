@@ -1,49 +1,44 @@
 ---
-id: 5e9a0a8e09c5df3cc3600ed4
-title: 'Accessing and Changing Elements, Rows, Columns'
+id: 5e9a0a8e09c5df3cc3600ed3
+title: Basics of Numpy
 challengeType: 11
-videoId: v-7Y7koJ_N0
-dashedName: accessing-and-changing-elements-rows-columns
+videoId: f9QrZrKQMLI
+dashedName: basics-of-numpy
 ---
 
 # --question--
 
 ## --text--
 
-What code would change the values in the 3rd column of both of the following Numpy arrays to 20?
+What will the following code print?
 
-```py
-a = np.array([[1, 2, 3, 4, 5], [6, 7, 8, 9, 10]])
-
-# Output:
-# [[ 1  2  20  4  5]
-# [ 6  7 20  9 10]]
+```python
+b = np.array([[1.0,2.0,3.0],[3.0,4.0,5.0]])
+print(b)
 ```
 
 ## --answers--
 
 ```python
-a[:, 3] = 20
+[[1.0 2.0 3.0]
+[3.0 4.0 5.0]]
 ```
 
 ---
 
 ```python
-a[2, :] = 20
+[[1. 2. 3.]
+[3. 4. 5.]]
 ```
 
 ---
 
 ```python
-a[:, 2] = 20
-```
-
----
-
-```python
-a[1, 2] = 20
+[[1. 3.]
+[2. 4.]
+[3. 5.]
 ```
 
 ## --video-solution--
 
-3
+2
