@@ -1,55 +1,48 @@
 ---
-id: 5e9a0a8e09c5df3cc3600eda
-title: Loading Data and Advanced Indexing
+id: 5e9a0a8e09c5df3cc3600ed8
+title: Mathematics
 challengeType: 11
-videoId: tUdBZ7pF8Jg
-dashedName: loading-data-and-advanced-indexing
+videoId: 7txegvyhtVk
+dashedName: mathematics
 ---
 
 # --question--
 
 ## --text--
 
-Given a file named `data.txt` with these contents:
-
-<pre>
-29,97,32,100,45
-15,88,5,75,22
-</pre>
-
-What code would produce the following array?
+What is the value of `b` after running the following code?
 
 ```py
-[29. 32. 45. 15.  5. 22.]
+import numpy as np
+
+a = np.array(([1, 2, 3, 4, 5], [6, 7, 8, 9, 10]))
+b = np.max(a, axis=1).sum()
 ```
 
 ## --answers--
 
 ```py
-filedata = np.genfromtxt('data.txt', delimiter=',')
-output = np.any(filedata < 50)
-
-print(output)
+10
 ```
 
 ---
 
 ```py
-filedata = np.genfromtxt('data.txt', delimiter=',')
-output = np.all(filedata < 50, axis=1)
-
-print(output)
+7
 ```
 
 ---
 
 ```py
-filedata = np.genfromtxt('data.txt', delimiter=',')
-output = filedata[filedata < 50]
+5
+```
 
-print(output)
+---
+
+```py
+15
 ```
 
 ## --video-solution--
 
-3
+4
