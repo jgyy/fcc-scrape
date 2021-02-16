@@ -1,32 +1,49 @@
 ---
-id: 5e4f5c4b570f7e3a4949899f
-title: Sea Level Predictor
-challengeType: 10
-dashedName: sea-level-predictor
+id: 5e9a0a8e09c5df3cc3600ed4
+title: 'Accessing and Changing Elements, Rows, Columns'
+challengeType: 11
+videoId: v-7Y7koJ_N0
+dashedName: accessing-and-changing-elements-rows-columns
 ---
 
-# --description--
+# --question--
 
-In this project, you will analyze a dataset of the global average sea level change since 1880. You will use the data to predict the sea level change through year 2050.
+## --text--
 
-You can access [the full project description and starter code on Repl.it](https://repl.it/github/freeCodeCamp/boilerplate-sea-level-predictor).
-
-After going to that link, fork the project. Once you complete the project based on the instructions in 'README.md', submit your project link below.
-
-We are still developing the interactive instructional part of the data analysis with Python curriculum. For now, you will have to use other resources to learn how to pass this challenge.
-
-# --hints--
-
-It should pass all Python tests.
-
-```js
-
-```
-
-# --solutions--
+What code would change the values in the 3rd column of both of the following Numpy arrays to 20?
 
 ```py
-  # Python challenges don't need solutions,
-  # because they would need to be tested against a full working project.
-  # Please check our contributing guidelines to learn more.
+a = np.array([[1, 2, 3, 4, 5], [6, 7, 8, 9, 10]])
+
+# Output:
+# [[ 1  2  20  4  5]
+# [ 6  7 20  9 10]]
 ```
+
+## --answers--
+
+```python
+a[:, 3] = 20
+```
+
+---
+
+```python
+a[2, :] = 20
+```
+
+---
+
+```python
+a[:, 2] = 20
+```
+
+---
+
+```python
+a[1, 2] = 20
+```
+
+## --video-solution--
+
+3
