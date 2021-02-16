@@ -1,42 +1,41 @@
 ---
-id: 5e9a0a8e09c5df3cc3600ed3
-title: Basics of Numpy
+id: 5e9a0a8e09c5df3cc3600ed7
+title: Copying Arrays Warning
 challengeType: 11
-videoId: f9QrZrKQMLI
-dashedName: basics-of-numpy
+videoId: iIoQ0_L0GvA
+dashedName: copying-arrays-warning
 ---
 
 # --question--
 
 ## --text--
 
-What will the following code print?
+What is the value of `a` after running the following code?
 
-```python
-b = np.array([[1.0,2.0,3.0],[3.0,4.0,5.0]])
-print(b)
+```py
+import numpy as np
+
+a = np.array([1, 2, 3, 4, 5])
+b = a
+b[2] = 20
 ```
 
 ## --answers--
 
 ```python
-[[1.0 2.0 3.0]
-[3.0 4.0 5.0]]
+[1 2 3 4 5]
 ```
 
 ---
 
 ```python
-[[1. 2. 3.]
-[3. 4. 5.]]
+[1 2 20 4 5]
 ```
 
 ---
 
 ```python
-[[1. 3.]
-[2. 4.]
-[3. 5.]
+[1 20 3 4 5]
 ```
 
 ## --video-solution--
