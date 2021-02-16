@@ -1,48 +1,48 @@
 ---
-id: 5e9a0a8e09c5df3cc3600ed8
-title: Mathematics
+id: 5e9a0a8e09c5df3cc3600ed9
+title: Reorganizing Arrays
 challengeType: 11
-videoId: 7txegvyhtVk
-dashedName: mathematics
+videoId: VNWAQbEM-C8
+dashedName: reorganizing-arrays
 ---
 
 # --question--
 
 ## --text--
 
-What is the value of `b` after running the following code?
+What code would produce the following array?
 
 ```py
-import numpy as np
-
-a = np.array(([1, 2, 3, 4, 5], [6, 7, 8, 9, 10]))
-b = np.max(a, axis=1).sum()
+[[1. 1.]
+[1. 1.]
+[1. 1.]
+[1. 1.]]
 ```
 
 ## --answers--
 
 ```py
-10
+a = np.ones((2, 4))
+b = a.reshape((4, 2))
+print(b)
 ```
 
 ---
 
 ```py
-7
+a = np.ones((2, 4))
+b = a.reshape((2, 4))
+print(b)
 ```
 
 ---
 
 ```py
-5
-```
-
----
-
-```py
-15
+a = np.ones((2, 4))
+b = a.reshape((8, 1))
+print(b)
 ```
 
 ## --video-solution--
 
-4
+1
