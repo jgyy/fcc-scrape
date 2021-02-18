@@ -1,34 +1,31 @@
 ---
-id: 587d8249367417b2b2512c3e
-title: Disable Client-Side Caching with helmet.noCache()
+id: 587d8248367417b2b2512c3d
+title: Disable DNS Prefetching with helmet.dnsPrefetchControl()
 challengeType: 2
-forumTopicId: 301576
-dashedName: disable-client-side-caching-with-helmet-nocache
+forumTopicId: 301577
+dashedName: disable-dns-prefetching-with-helmet-dnsprefetchcontrol
 ---
 
 # --description--
 
 As a reminder, this project is being built upon the following starter project on [Repl.it](https://repl.it/github/freeCodeCamp/boilerplate-infosec), or cloned from [GitHub](https://github.com/freeCodeCamp/boilerplate-infosec/).
 
-If you are releasing an update for your website, and you want the users to always download the newer version, you can (try to) disable caching on client’s browser. It can be useful in development too. Caching has performance benefits, which you will lose, so only use this option when there is a real need.
+To improve performance, most browsers prefetch DNS records for the links in a page. In that way the destination ip is already known when the user clicks on a link. This may lead to over-use of the DNS service (if you own a big website, visited by millions people…), privacy issues (one eavesdropper could infer that you are on a certain page), or page statistics alteration (some links may appear visited even if they are not). If you have high security needs you can disable DNS prefetching, at the cost of a performance penalty.
 
 # --instructions--
 
-Use the `helmet.noCache()` method on your server.
+Use the `helmet.dnsPrefetchControl()` method on your server.
 
 # --hints--
 
-helmet.noCache() middleware should be mounted correctly
+helmet.dnsPrefetchControl() middleware should be mounted correctly
 
 ```js
 (getUserInput) =>
   $.get(getUserInput('url') + '/_api/app-info').then(
     (data) => {
-      assert.include(data.appStack, 'nocache');
-      assert.equal(
-        data.headers['cache-control'],
-        'no-store, no-cache, must-revalidate, proxy-revalidate'
-      );
+      assert.include(data.appStack, 'dnsPrefetchControl');
+      assert.equal(data.headers['x-dns-prefetch-control'], 'off');
     },
     (xhr) => {
       throw new Error(xhr.responseText);
