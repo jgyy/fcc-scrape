@@ -1,42 +1,39 @@
 ---
-id: 587d8249367417b2b2512c40
-title: Configure Helmet Using the ‘parent’ helmet() Middleware
+id: 587d8249367417b2b2512c3e
+title: Disable Client-Side Caching with helmet.noCache()
 challengeType: 2
-forumTopicId: 301575
-dashedName: configure-helmet-using-the-parent-helmet-middleware
+forumTopicId: 301576
+dashedName: disable-client-side-caching-with-helmet-nocache
 ---
 
 # --description--
 
 As a reminder, this project is being built upon the following starter project on [Repl.it](https://repl.it/github/freeCodeCamp/boilerplate-infosec), or cloned from [GitHub](https://github.com/freeCodeCamp/boilerplate-infosec/).
 
-`app.use(helmet())` will automatically include all the middleware introduced above, except `noCache()`, and `contentSecurityPolicy()`, but these can be enabled if necessary. You can also disable or configure any other middleware individually, using a configuration object.
+If you are releasing an update for your website, and you want the users to always download the newer version, you can (try to) disable caching on client’s browser. It can be useful in development too. Caching has performance benefits, which you will lose, so only use this option when there is a real need.
 
-**Example:**
+# --instructions--
 
-```js
-app.use(helmet({
-  frameguard: {         // configure
-    action: 'deny'
-  },
-  contentSecurityPolicy: {    // enable and configure
-    directives: {
-      defaultSrc: ["self"],
-      styleSrc: ['style.com'],
-    }
-  },
-  dnsPrefetchControl: false     // disable
-}))
-```
-
-We introduced each middleware separately for teaching purposes and for ease of testing. Using the ‘parent’ `helmet()` middleware is easy to implement in a real project.
+Use the `helmet.noCache()` method on your server.
 
 # --hints--
 
-no tests - it's a descriptive challenge
+helmet.noCache() middleware should be mounted correctly
 
 ```js
-assert(true);
+(getUserInput) =>
+  $.get(getUserInput('url') + '/_api/app-info').then(
+    (data) => {
+      assert.include(data.appStack, 'nocache');
+      assert.equal(
+        data.headers['cache-control'],
+        'no-store, no-cache, must-revalidate, proxy-revalidate'
+      );
+    },
+    (xhr) => {
+      throw new Error(xhr.responseText);
+    }
+  );
 ```
 
 # --solutions--
