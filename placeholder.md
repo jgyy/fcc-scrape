@@ -1,34 +1,42 @@
 ---
-id: 587d8248367417b2b2512c3a
-title: Avoid Inferring the Response MIME Type with helmet.noSniff()
+id: 587d8249367417b2b2512c40
+title: Configure Helmet Using the ‘parent’ helmet() Middleware
 challengeType: 2
-forumTopicId: 301574
-dashedName: avoid-inferring-the-response-mime-type-with-helmet-nosniff
+forumTopicId: 301575
+dashedName: configure-helmet-using-the-parent-helmet-middleware
 ---
 
 # --description--
 
-As a reminder, this project is being built upon the following starter project on [Repl.it](https://repl.it/github/freeCodeCamp/boilerplate-infosec), or cloned from [GitHub](https://github.com/freeCodeCamp/boilerplate-infosec/). Browsers can use content or MIME sniffing to override response `Content-Type` headers to guess and process the data using an implicit content type. While this can be convenient in some scenarios, it can also lead to some dangerous attacks. This middleware sets the X-Content-Type-Options header to `nosniff`, instructing the browser to not bypass the provided `Content-Type`.
+As a reminder, this project is being built upon the following starter project on [Repl.it](https://repl.it/github/freeCodeCamp/boilerplate-infosec), or cloned from [GitHub](https://github.com/freeCodeCamp/boilerplate-infosec/).
 
-# --instructions--
+`app.use(helmet())` will automatically include all the middleware introduced above, except `noCache()`, and `contentSecurityPolicy()`, but these can be enabled if necessary. You can also disable or configure any other middleware individually, using a configuration object.
 
-Use the `helmet.noSniff()` method on your server.
+**Example:**
+
+```js
+app.use(helmet({
+  frameguard: {         // configure
+    action: 'deny'
+  },
+  contentSecurityPolicy: {    // enable and configure
+    directives: {
+      defaultSrc: ["self"],
+      styleSrc: ['style.com'],
+    }
+  },
+  dnsPrefetchControl: false     // disable
+}))
+```
+
+We introduced each middleware separately for teaching purposes and for ease of testing. Using the ‘parent’ `helmet()` middleware is easy to implement in a real project.
 
 # --hints--
 
-helmet.noSniff() middleware should be mounted correctly
+no tests - it's a descriptive challenge
 
 ```js
-(getUserInput) =>
-  $.get(getUserInput('url') + '/_api/app-info').then(
-    (data) => {
-      assert.include(data.appStack, 'nosniff');
-      assert.equal(data.headers['x-content-type-options'], 'nosniff');
-    },
-    (xhr) => {
-      throw new Error(xhr.responseText);
-    }
-  );
+assert(true);
 ```
 
 # --solutions--
