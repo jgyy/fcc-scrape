@@ -1,40 +1,51 @@
 ---
-id: 587d8247367417b2b2512c36
-title: Install and Require Helmet
+id: 587d8247367417b2b2512c38
+title: Mitigate the Risk of Clickjacking with helmet.frameguard()
 challengeType: 2
-forumTopicId: 301581
-dashedName: install-and-require-helmet
+forumTopicId: 301582
+dashedName: mitigate-the-risk-of-clickjacking-with-helmet-frameguard
 ---
 
 # --description--
 
-Working on these challenges will involve you writing your code using one of the following methods:
+As a reminder, this project is being built upon the following starter project on [Repl.it](https://repl.it/github/freeCodeCamp/boilerplate-infosec), or cloned from [GitHub](https://github.com/freeCodeCamp/boilerplate-infosec/).
 
-- Clone [this GitHub repo](https://github.com/freeCodeCamp/boilerplate-infosec/) and complete these challenges locally.
-- Use [our Repl.it starter project](https://repl.it/github/freeCodeCamp/boilerplate-infosec) to complete these challenges.
-- Use a site builder of your choice to complete the project. Be sure to incorporate all the files from our GitHub repo.
+Your page could be put in a `<frame>` or `<iframe>` without your consent. This can result in clickjacking attacks, among other things. Clickjacking is a technique of tricking a user into interacting with a page different from what the user thinks it is. This can be obtained executing your page in a malicious context, by mean of iframing. In that context a hacker can put a hidden layer over your page. Hidden buttons can be used to run bad scripts. This middleware sets the X-Frame-Options header. It restricts who can put your site in a frame. It has three modes: DENY, SAMEORIGIN, and ALLOW-FROM.
 
-When you are done, make sure a working demo of your project is hosted somewhere public. Then submit the URL to it in the `Solution Link` field.
-
-Helmet helps you secure your Express apps by setting various HTTP headers.
+We don’t need our app to be framed.
 
 # --instructions--
 
-All your code for these lessons goes in the `myApp.js` file between the lines of code we have started you off with. Do not change or delete the code we have added for you.
-
-Install Helmet version `3.21.3`, then require it. You can install a specific version of a package with `npm install --save-exact package@version`, or by adding it to your `package.json` directly.
+Use `helmet.frameguard()` passing with the configuration object `{action: 'deny'}`.
 
 # --hints--
 
-`helmet` version `3.21.3` should be in `package.json`
+helmet.frameguard() middleware should be mounted correctly
 
 ```js
 (getUserInput) =>
-  $.get(getUserInput('url') + '/_api/package.json').then(
+  $.get(getUserInput('url') + '/_api/app-info').then(
     (data) => {
-      const packJson = JSON.parse(data);
-      const helmet = packJson.dependencies.helmet;
-      assert(helmet === '3.21.3' || helmet === '^3.21.3');
+      assert.include(
+        data.appStack,
+        'frameguard',
+        'helmet.frameguard() middleware is not mounted correctly'
+      );
+    },
+    (xhr) => {
+      throw new Error(xhr.responseText);
+    }
+  );
+```
+
+helmet.frameguard() 'action' should be set to 'DENY'
+
+```js
+(getUserInput) =>
+  $.get(getUserInput('url') + '/_api/app-info').then(
+    (data) => {
+      assert.property(data.headers, 'x-frame-options');
+      assert.equal(data.headers['x-frame-options'], 'DENY');
     },
     (xhr) => {
       throw new Error(xhr.responseText);
