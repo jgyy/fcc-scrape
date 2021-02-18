@@ -1,31 +1,58 @@
 ---
-id: 587d8248367417b2b2512c3b
-title: Prevent IE from Opening Untrusted HTML with helmet.ieNoOpen()
+id: 587d8249367417b2b2512c3f
+title: Set a Content Security Policy with helmet.contentSecurityPolicy()
 challengeType: 2
-forumTopicId: 301584
-dashedName: prevent-ie-from-opening-untrusted-html-with-helmet-ienoopen
+forumTopicId: 301585
+dashedName: set-a-content-security-policy-with-helmet-contentsecuritypolicy
 ---
 
 # --description--
 
 As a reminder, this project is being built upon the following starter project on [Repl.it](https://repl.it/github/freeCodeCamp/boilerplate-infosec), or cloned from [GitHub](https://github.com/freeCodeCamp/boilerplate-infosec/).
 
-Some web applications will serve untrusted HTML for download. Some versions of Internet Explorer by default open those HTML files in the context of your site. This means that an untrusted HTML page could start doing bad things in the context of your pages. This middleware sets the X-Download-Options header to noopen. This will prevent IE users from executing downloads in the trusted site’s context.
+This challenge highlights one promising new defense that can significantly reduce the risk and impact of many type of attacks in modern browsers. By setting and configuring a Content Security Policy you can prevent the injection of anything unintended into your page. This will protect your app from XSS vulnerabilities, undesired tracking, malicious frames, and much more. CSP works by defining an allowed list of content sources which are trusted. You can configure them for each kind of resource a web page may need (scripts, stylesheets, fonts, frames, media, and so on…). There are multiple directives available, so a website owner can have a granular control. See HTML 5 Rocks, KeyCDN for more details. Unfortunately CSP is unsupported by older browser.
+
+By default, directives are wide open, so it’s important to set the defaultSrc directive as a fallback. Helmet supports both defaultSrc and default-src naming styles. The fallback applies for most of the unspecified directives.
 
 # --instructions--
 
-Use the `helmet.ieNoOpen()` method on your server.
+In this exercise, use `helmet.contentSecurityPolicy()`. Configure it by adding a `directives` object. In the object, set the `defaultSrc` to `["'self'"]` (the list of allowed sources must be in an array), in order to trust only your website address by default. Also set the `scriptSrc` directive so that you only allow scripts to be downloaded from your website (`'self'`), and from the domain `'trusted-cdn.com'`.
+
+Hint: in the `'self'` keyword, the single quotes are part of the keyword itself, so it needs to be enclosed in double quotes to be working.
 
 # --hints--
 
-helmet.ieNoOpen() middleware should be mounted correctly
+helmet.contentSecurityPolicy() middleware should be mounted correctly
 
 ```js
 (getUserInput) =>
   $.get(getUserInput('url') + '/_api/app-info').then(
     (data) => {
-      assert.include(data.appStack, 'ienoopen');
-      assert.equal(data.headers['x-download-options'], 'noopen');
+      assert.include(data.appStack, 'csp');
+    },
+    (xhr) => {
+      throw new Error(xhr.responseText);
+    }
+  );
+```
+
+Your csp config is not correct. defaultSrc should be ["'self'"] and scriptSrc should be ["'self'", 'trusted-cdn.com']
+
+```js
+(getUserInput) =>
+  $.get(getUserInput('url') + '/_api/app-info').then(
+    (data) => {
+      var cspHeader = Object.keys(data.headers).filter(function (k) {
+        return (
+          k === 'content-security-policy' ||
+          k === 'x-webkit-csp' ||
+          k === 'x-content-security-policy'
+        );
+      })[0];
+      assert.equal(
+        data.headers[cspHeader],
+        "default-src 'self'; script-src 'self' trusted-cdn.com"
+      );
     },
     (xhr) => {
       throw new Error(xhr.responseText);
@@ -37,8 +64,8 @@ helmet.ieNoOpen() middleware should be mounted correctly
 
 ```js
 /**
-  Backend challenges don't need solutions, 
-  because they would need to be tested against a full working project. 
+  Backend challenges don't need solutions,
+  because they would need to be tested against a full working project.
   Please check our contributing guidelines to learn more.
 */
 ```
