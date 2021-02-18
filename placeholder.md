@@ -1,34 +1,71 @@
 ---
-id: 587d8248367417b2b2512c3d
-title: Disable DNS Prefetching with helmet.dnsPrefetchControl()
+id: 58a25bcff9fc0f352b528e7d
+title: Hash and Compare Passwords Asynchronously
 challengeType: 2
-forumTopicId: 301577
-dashedName: disable-dns-prefetching-with-helmet-dnsprefetchcontrol
+forumTopicId: 301578
+dashedName: hash-and-compare-passwords-asynchronously
 ---
 
 # --description--
 
-As a reminder, this project is being built upon the following starter project on [Repl.it](https://repl.it/github/freeCodeCamp/boilerplate-infosec), or cloned from [GitHub](https://github.com/freeCodeCamp/boilerplate-infosec/).
+As a reminder, this project is being built upon the following starter project on [Repl.it](https://repl.it/github/freeCodeCamp/boilerplate-bcrypt), or cloned from [GitHub](https://github.com/freeCodeCamp/boilerplate-bcrypt/).
 
-To improve performance, most browsers prefetch DNS records for the links in a page. In that way the destination ip is already known when the user clicks on a link. This may lead to over-use of the DNS service (if you own a big website, visited by millions people…), privacy issues (one eavesdropper could infer that you are on a certain page), or page statistics alteration (some links may appear visited even if they are not). If you have high security needs you can disable DNS prefetching, at the cost of a performance penalty.
+As hashing is designed to be computationally intensive, it is recommended to do so asynchronously on your server as to avoid blocking incoming connections while you hash. All you have to do to hash a password asynchronous is call
+
+```js
+bcrypt.hash(myPlaintextPassword, saltRounds, (err, hash) => {
+  /*Store hash in your db*/
+});
+```
 
 # --instructions--
 
-Use the `helmet.dnsPrefetchControl()` method on your server.
+Add this hashing function to your server(we've already defined the variables used in the function for you to use) and log it to the console for you to see! At this point you would normally save the hash to your database.
+
+Now when you need to figure out if a new input is the same data as the hash you would just use the compare function.
+
+```js
+bcrypt.compare(myPlaintextPassword, hash, (err, res) => {
+  /*res == true or false*/
+});
+```
+
+Add this into your existing hash function(since you need to wait for the hash to complete before calling the compare function) after you log the completed hash and log 'res' to the console within the compare. You should see in the console a hash then 'true' is printed! If you change 'myPlaintextPassword' in the compare function to 'someOtherPlaintextPassword' then it should say false.
+
+```js
+bcrypt.hash('passw0rd!', 13, (err, hash) => {
+  console.log(hash);
+  //$2a$12$Y.PHPE15wR25qrrtgGkiYe2sXo98cjuMCG1YwSI5rJW1DSJp0gEYS
+  bcrypt.compare('passw0rd!', hash, (err, res) => {
+    console.log(res); //true
+  });
+});
+
+```
+
+Submit your page when you think you've got it right.
 
 # --hints--
 
-helmet.dnsPrefetchControl() middleware should be mounted correctly
+Async hash should be generated and correctly compared.
 
 ```js
 (getUserInput) =>
-  $.get(getUserInput('url') + '/_api/app-info').then(
+  $.get(getUserInput('url') + '/_api/server.js').then(
     (data) => {
-      assert.include(data.appStack, 'dnsPrefetchControl');
-      assert.equal(data.headers['x-dns-prefetch-control'], 'off');
+      assert.match(
+        data,
+        /START_ASYNC[^]*bcrypt.hash.*myPlaintextPassword( |),( |)saltRounds( |),( |).*err( |),( |)hash[^]*END_ASYNC/gi,
+        'You should call bcrypt.hash on myPlaintextPassword and saltRounds and handle err and hash as a result in the callback'
+      );
+      assert.match(
+        data,
+        /START_ASYNC[^]*bcrypt.hash[^]*bcrypt.compare.*myPlaintextPassword( |),( |)hash( |),( |).*err( |),( |)res[^]*}[^]*}[^]*END_ASYNC/gi,
+        'Nested within the hash function should be the compare function comparing myPlaintextPassword to hash'
+      );
     },
     (xhr) => {
-      throw new Error(xhr.responseText);
+      throw new Error(xhr.statusText);
     }
   );
 ```
