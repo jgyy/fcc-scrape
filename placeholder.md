@@ -1,56 +1,30 @@
 ---
-id: 58a25bcff9fc0f352b528e7e
-title: Hash and Compare Passwords Synchronously
+id: 587d8247367417b2b2512c37
+title: Hide Potentially Dangerous Information Using helmet.hidePoweredBy()
 challengeType: 2
-forumTopicId: 301579
-dashedName: hash-and-compare-passwords-synchronously
+forumTopicId: 301580
+dashedName: hide-potentially-dangerous-information-using-helmet-hidepoweredby
 ---
 
 # --description--
 
-As a reminder, this project is being built upon the following starter project on [Repl.it](https://repl.it/github/freeCodeCamp/boilerplate-bcrypt), or cloned from [GitHub](https://github.com/freeCodeCamp/boilerplate-bcrypt/).
+As a reminder, this project is being built upon the following starter project on [Repl.it](https://repl.it/github/freeCodeCamp/boilerplate-infosec), or cloned from [GitHub](https://github.com/freeCodeCamp/boilerplate-infosec/).
 
-Hashing synchronously is just as easy to do but can cause lag if using it server side with a high cost or with hashing done very often. Hashing with this method is as easy as calling
-
-```js
-var hash = bcrypt.hashSync(myPlaintextPassword, saltRounds);
-```
-
-Add this method of hashing to your code and then log the result to the console. Again, the variables used are already defined in the server so you won't need to adjust them. You may notice even though you are hashing the same password as in the async function, the result in the console is different- this is due to the salt being randomly generated each time as seen by the first 22 characters in the third string of the hash. Now to compare a password input with the new sync hash, you would use the compareSync method:
-
-```js
-var result = bcrypt.compareSync(myPlaintextPassword, hash);
-```
-
-with the result being a boolean true or false.
-
-# --instructions--
-
-Add the function in and log the result to the console to see it working.
-
-Submit your page when you think you've got it right.
+Hackers can exploit known vulnerabilities in Express/Node if they see that your site is powered by Express. `X-Powered-By: Express` is sent in every request coming from Express by default. Use the `helmet.hidePoweredBy()` middleware to remove the X-Powered-By header.
 
 # --hints--
 
-Sync hash should be generated and correctly compared.
+helmet.hidePoweredBy() middleware should be mounted correctly
 
 ```js
 (getUserInput) =>
-  $.get(getUserInput('url') + '/_api/server.js').then(
+  $.get(getUserInput('url') + '/_api/app-info').then(
     (data) => {
-      assert.match(
-        data,
-        /START_SYNC[^]*hash.*=.*bcrypt.hashSync.*myPlaintextPassword( |),( |)saltRounds[^]*END_SYNC/gi,
-        'You should call bcrypt.hashSync on myPlaintextPassword with saltRounds'
-      );
-      assert.match(
-        data,
-        /START_SYNC[^]*result.*=.*bcrypt.compareSync.*myPlaintextPassword( |),( |)hash[^]*END_SYNC/gi,
-        'You should call bcrypt.compareSync on myPlaintextPassword with the hash generated in the last line'
-      );
+      assert.include(data.appStack, 'hidePoweredBy');
+      assert.notEqual(data.headers['x-powered-by'], 'Express');
     },
     (xhr) => {
-      throw new Error(xhr.statusText);
+      throw new Error(xhr.responseText);
     }
   );
 ```
