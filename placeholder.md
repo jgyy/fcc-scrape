@@ -1,134 +1,228 @@
 ---
-id: 587d8259367417b2b2512c85
-title: Implement Selection Sort
-challengeType: 1
-forumTopicId: 301616
-dashedName: implement-selection-sort
+id: a56138aff60341a09ed6c480
+title: Inventory Update
+challengeType: 5
+forumTopicId: 16019
+dashedName: inventory-update
 ---
 
 # --description--
 
-Here we will implement selection sort. Selection sort works by selecting the minimum value in a list and swapping it with the first value in the list. It then starts at the second position, selects the smallest value in the remaining list, and swaps it with the second element. It continues iterating through the list and swapping elements until it reaches the end of the list. Now the list is sorted. Selection sort has quadratic time complexity in all cases.
-
-**Instructions**: Write a function `selectionSort` which takes an array of integers as input and returns an array of these integers in sorted order from least to greatest.
+Compare and update the inventory stored in a 2D array against a second 2D array of a fresh delivery. Update the current existing inventory item quantities (in `arr1`). If an item cannot be found, add the new item and quantity into the inventory array. The returned inventory array should be in alphabetical order by item.
 
 # --hints--
 
-`selectionSort` should be a function.
+The function `updateInventory` should return an array.
 
 ```js
-assert(typeof selectionSort == 'function');
-```
-
-`selectionSort` should return a sorted array (least to greatest).
-
-```js
-assert(
-  isSorted(
-    selectionSort([
-      1,
-      4,
-      2,
-      8,
-      345,
-      123,
-      43,
-      32,
-      5643,
-      63,
-      123,
-      43,
-      2,
-      55,
-      1,
-      234,
-      92
-    ])
+assert.isArray(
+  updateInventory(
+    [
+      [21, 'Bowling Ball'],
+      [2, 'Dirty Sock'],
+      [1, 'Hair Pin'],
+      [5, 'Microphone']
+    ],
+    [
+      [2, 'Hair Pin'],
+      [3, 'Half-Eaten Apple'],
+      [67, 'Bowling Ball'],
+      [7, 'Toothpaste']
+    ]
   )
 );
 ```
 
-`selectionSort` should return an array that is unchanged except for order.
+`updateInventory([[21, "Bowling Ball"], [2, "Dirty Sock"], [1, "Hair Pin"], [5, "Microphone"]], [[2, "Hair Pin"], [3, "Half-Eaten Apple"], [67, "Bowling Ball"], [7, "Toothpaste"]])` should return an array with a length of 6.
 
 ```js
-assert.sameMembers(
-  selectionSort([
-    1,
-    4,
-    2,
-    8,
-    345,
-    123,
-    43,
-    32,
-    5643,
-    63,
-    123,
-    43,
-    2,
-    55,
-    1,
-    234,
-    92
-  ]),
-  [1, 4, 2, 8, 345, 123, 43, 32, 5643, 63, 123, 43, 2, 55, 1, 234, 92]
+assert.equal(
+  updateInventory(
+    [
+      [21, 'Bowling Ball'],
+      [2, 'Dirty Sock'],
+      [1, 'Hair Pin'],
+      [5, 'Microphone']
+    ],
+    [
+      [2, 'Hair Pin'],
+      [3, 'Half-Eaten Apple'],
+      [67, 'Bowling Ball'],
+      [7, 'Toothpaste']
+    ]
+  ).length,
+  6
 );
 ```
 
-`selectionSort` should not use the built-in `.sort()` method.
+`updateInventory([[21, "Bowling Ball"], [2, "Dirty Sock"], [1, "Hair Pin"], [5, "Microphone"]], [[2, "Hair Pin"], [3, "Half-Eaten Apple"], [67, "Bowling Ball"], [7, "Toothpaste"]])` should return `[[88, "Bowling Ball"], [2, "Dirty Sock"], [3, "Hair Pin"], [3, "Half-Eaten Apple"], [5, "Microphone"], [7, "Toothpaste"]]`.
 
 ```js
-assert(isBuiltInSortUsed());
+assert.deepEqual(
+  updateInventory(
+    [
+      [21, 'Bowling Ball'],
+      [2, 'Dirty Sock'],
+      [1, 'Hair Pin'],
+      [5, 'Microphone']
+    ],
+    [
+      [2, 'Hair Pin'],
+      [3, 'Half-Eaten Apple'],
+      [67, 'Bowling Ball'],
+      [7, 'Toothpaste']
+    ]
+  ),
+  [
+    [88, 'Bowling Ball'],
+    [2, 'Dirty Sock'],
+    [3, 'Hair Pin'],
+    [3, 'Half-Eaten Apple'],
+    [5, 'Microphone'],
+    [7, 'Toothpaste']
+  ]
+);
+```
+
+`updateInventory([[21, "Bowling Ball"], [2, "Dirty Sock"], [1, "Hair Pin"], [5, "Microphone"]], [])` should return `[[21, "Bowling Ball"], [2, "Dirty Sock"], [1, "Hair Pin"], [5, "Microphone"]]`.
+
+```js
+assert.deepEqual(
+  updateInventory(
+    [
+      [21, 'Bowling Ball'],
+      [2, 'Dirty Sock'],
+      [1, 'Hair Pin'],
+      [5, 'Microphone']
+    ],
+    []
+  ),
+  [
+    [21, 'Bowling Ball'],
+    [2, 'Dirty Sock'],
+    [1, 'Hair Pin'],
+    [5, 'Microphone']
+  ]
+);
+```
+
+`updateInventory([], [[2, "Hair Pin"], [3, "Half-Eaten Apple"], [67, "Bowling Ball"], [7, "Toothpaste"]])` should return `[[67, "Bowling Ball"], [2, "Hair Pin"], [3, "Half-Eaten Apple"], [7, "Toothpaste"]]`.
+
+```js
+assert.deepEqual(
+  updateInventory(
+    [],
+    [
+      [2, 'Hair Pin'],
+      [3, 'Half-Eaten Apple'],
+      [67, 'Bowling Ball'],
+      [7, 'Toothpaste']
+    ]
+  ),
+  [
+    [67, 'Bowling Ball'],
+    [2, 'Hair Pin'],
+    [3, 'Half-Eaten Apple'],
+    [7, 'Toothpaste']
+  ]
+);
+```
+
+`updateInventory([[0, "Bowling Ball"], [0, "Dirty Sock"], [0, "Hair Pin"], [0, "Microphone"]], [[1, "Hair Pin"], [1, "Half-Eaten Apple"], [1, "Bowling Ball"], [1, "Toothpaste"]])` should return `[[1, "Bowling Ball"], [0, "Dirty Sock"], [1, "Hair Pin"], [1, "Half-Eaten Apple"], [0, "Microphone"], [1, "Toothpaste"]]`.
+
+```js
+assert.deepEqual(
+  updateInventory(
+    [
+      [0, 'Bowling Ball'],
+      [0, 'Dirty Sock'],
+      [0, 'Hair Pin'],
+      [0, 'Microphone']
+    ],
+    [
+      [1, 'Hair Pin'],
+      [1, 'Half-Eaten Apple'],
+      [1, 'Bowling Ball'],
+      [1, 'Toothpaste']
+    ]
+  ),
+  [
+    [1, 'Bowling Ball'],
+    [0, 'Dirty Sock'],
+    [1, 'Hair Pin'],
+    [1, 'Half-Eaten Apple'],
+    [0, 'Microphone'],
+    [1, 'Toothpaste']
+  ]
+);
 ```
 
 # --seed--
 
-## --after-user-code--
-
-```js
-function isSorted(a){
-  for(let i = 0; i < a.length - 1; i++)
-    if(a[i] > a[i + 1])
-      return false;
-  return true;
-}
-
-function isBuiltInSortUsed(){
-  let sortUsed = false;
-  Array.prototype.sort = () => sortUsed = true;
-  selectionSort([0, 1]);
-  return !sortUsed;
-}
-```
-
 ## --seed-contents--
 
 ```js
-function selectionSort(array) {
-  // Only change code below this line
-  return array;
-  // Only change code above this line
+function updateInventory(arr1, arr2) {
+    return arr1;
 }
 
+// Example inventory lists
+var curInv = [
+    [21, "Bowling Ball"],
+    [2, "Dirty Sock"],
+    [1, "Hair Pin"],
+    [5, "Microphone"]
+];
 
-selectionSort([1, 4, 2, 8, 345, 123, 43, 32, 5643, 63, 123, 43, 2, 55, 1, 234, 92]);
+var newInv = [
+    [2, "Hair Pin"],
+    [3, "Half-Eaten Apple"],
+    [67, "Bowling Ball"],
+    [7, "Toothpaste"]
+];
+
+updateInventory(curInv, newInv);
 ```
 
 # --solutions--
 
 ```js
-function selectionSort(array) {
-  for (let i = 0; i < array.length-1; i++) {
-    let minimumIndex = i;
-    for (let j = i+1; j < array.length; j++){
-      if (array[j] < array[minimumIndex]) {
-        minimumIndex = j;
-      }
-    }
-    let value = array[minimumIndex];
-    array[minimumIndex] = array[i];
-    array[i] = value;
-  }
-    return array;
+function updateInventory(arr1, arr2) {
+  arr2.forEach(function(item) {
+    createOrUpdate(arr1, item);
+  });
+  // All inventory must be accounted for or you're fired!
+  return arr1;
 }
+
+function createOrUpdate(arr1, item) {
+  var index = -1;
+  while (++index < arr1.length) {
+    if (arr1[index][1] === item[1]) {
+      arr1[index][0] += item[0];
+      return;
+    }
+    if (arr1[index][1] > item[1]) {
+      break;
+    }
+  }
+  arr1.splice(index, 0, item);
+}
+
+// Example inventory lists
+var curInv = [
+    [21, 'Bowling Ball'],
+    [2, 'Dirty Sock'],
+    [1, 'Hair Pin'],
+    [5, 'Microphone']
+];
+
+var newInv = [
+    [2, 'Hair Pin'],
+    [3, 'Half-Eaten Apple'],
+    [67, 'Bowling Ball'],
+    [7, 'Toothpaste']
+];
+
+updateInventory(curInv, newInv);
 ```
