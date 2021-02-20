@@ -1,29 +1,42 @@
 ---
-id: 5ea9997bbec2e9bc47e94db0
-title: Creating a TCP Client
+id: 5ea9997bbec2e9bc47e94db3
+title: Developing a Banner Grabber
 challengeType: 11
-videoId: ugYfJNTawks
-dashedName: creating-a-tcp-client
+videoId: CeGW761BIsA
+dashedName: developing-a-banner-grabber
 ---
 
 # --question--
 
 ## --text--
 
-Which socket object method lets you set the maximum amount of data your client accepts at once?
+Fill in the blanks to complete the `banner` function below:
+
+```py
+def banner(ip, port):
+    s = socket.socket()
+    s.__A__((ip, __B__))
+    print(s.recv(1024))
+```
 
 ## --answers--
 
-`.recv(1024)`
+A: `connect`
+
+B: `port`
 
 ---
 
-`.decode('ascii')`
+A: `getsockname`
+
+B: `'1-1024'`
 
 ---
 
-`.connect(host, port)`
+A: `connect`
+
+B: `int(port)`
 
 ## --video-solution--
 
-1
+3
