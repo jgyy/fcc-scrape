@@ -1,150 +1,140 @@
 ---
-id: a3f503de51cf954ede28891d
-title: Find the Symmetric Difference
-challengeType: 5
-forumTopicId: 301611
-dashedName: find-the-symmetric-difference
+id: 8d5123c8c441eddfaeb5bdef
+title: Implement Bubble Sort
+challengeType: 1
+forumTopicId: 301612
+dashedName: implement-bubble-sort
 ---
 
 # --description--
 
-The mathematical term <dfn>symmetric difference</dfn> (`△` or `⊕`) of two sets is the set of elements which are in either of the two sets but not in both. For example, for sets `A = {1, 2, 3}` and `B = {2, 3, 4}`, `A △ B = {1, 4}`.
+This is the first of several challenges on sorting algorithms. Given an array of unsorted items, we want to be able to return a sorted array. We will see several different methods to do this and learn some tradeoffs between these different approaches. While most modern languages have built-in sorting methods for operations like this, it is still important to understand some of the common basic approaches and learn how they can be implemented.
 
-Symmetric difference is a binary operation, which means it operates on only two elements. So to evaluate an expression involving symmetric differences among *three* elements (`A △ B △ C`), you must complete one operation at a time. Thus, for sets `A` and `B` above, and `C = {2, 3}`, `A △ B △ C = (A △ B) △ C = {1, 4} △ {2, 3} = {1, 2, 3, 4}`.
+Here we will see bubble sort. The bubble sort method starts at the beginning of an unsorted array and 'bubbles up' unsorted values towards the end, iterating through the array until it is completely sorted. It does this by comparing adjacent items and swapping them if they are out of order. The method continues looping through the array until no swaps occur at which point the array is sorted.
 
-# --instructions--
+This method requires multiple iterations through the array and for average and worst cases has quadratic time complexity. While simple, it is usually impractical in most situations.
 
-Create a function that takes two or more arrays and returns an array of their symmetric difference. The returned array must contain only unique values (*no duplicates*).
+**Instructions:** Write a function `bubbleSort` which takes an array of integers as input and returns an array of these integers in sorted order from least to greatest.
 
 # --hints--
 
-`sym([1, 2, 3], [5, 2, 1, 4])` should return `[3, 4, 5]`.
+`bubbleSort` should be a function.
 
 ```js
-assert.sameMembers(sym([1, 2, 3], [5, 2, 1, 4]), [3, 4, 5]);
+assert(typeof bubbleSort == 'function');
 ```
 
-`sym([1, 2, 3], [5, 2, 1, 4])` should contain only three elements.
+`bubbleSort` should return a sorted array (least to greatest).
 
 ```js
-assert.equal(sym([1, 2, 3], [5, 2, 1, 4]).length, 3);
+assert(
+  isSorted(
+    bubbleSort([
+      1,
+      4,
+      2,
+      8,
+      345,
+      123,
+      43,
+      32,
+      5643,
+      63,
+      123,
+      43,
+      2,
+      55,
+      1,
+      234,
+      92
+    ])
+  )
+);
 ```
 
-`sym([1, 2, 3, 3], [5, 2, 1, 4])` should return `[3, 4, 5]`.
-
-```js
-assert.sameMembers(sym([1, 2, 3, 3], [5, 2, 1, 4]), [3, 4, 5]);
-```
-
-`sym([1, 2, 3, 3], [5, 2, 1, 4])` should contain only three elements.
-
-```js
-assert.equal(sym([1, 2, 3, 3], [5, 2, 1, 4]).length, 3);
-```
-
-`sym([1, 2, 3], [5, 2, 1, 4, 5])` should return `[3, 4, 5]`.
-
-```js
-assert.sameMembers(sym([1, 2, 3], [5, 2, 1, 4, 5]), [3, 4, 5]);
-```
-
-`sym([1, 2, 3], [5, 2, 1, 4, 5])` should contain only three elements.
-
-```js
-assert.equal(sym([1, 2, 3], [5, 2, 1, 4, 5]).length, 3);
-```
-
-`sym([1, 2, 5], [2, 3, 5], [3, 4, 5])` should return `[1, 4, 5]`
-
-```js
-assert.sameMembers(sym([1, 2, 5], [2, 3, 5], [3, 4, 5]), [1, 4, 5]);
-```
-
-`sym([1, 2, 5], [2, 3, 5], [3, 4, 5])` should contain only three elements.
-
-```js
-assert.equal(sym([1, 2, 5], [2, 3, 5], [3, 4, 5]).length, 3);
-```
-
-`sym([1, 1, 2, 5], [2, 2, 3, 5], [3, 4, 5, 5])` should return `[1, 4, 5]`.
-
-```js
-assert.sameMembers(sym([1, 1, 2, 5], [2, 2, 3, 5], [3, 4, 5, 5]), [1, 4, 5]);
-```
-
-`sym([1, 1, 2, 5], [2, 2, 3, 5], [3, 4, 5, 5])` should contain only three elements.
-
-```js
-assert.equal(sym([1, 1, 2, 5], [2, 2, 3, 5], [3, 4, 5, 5]).length, 3);
-```
-
-`sym([3, 3, 3, 2, 5], [2, 1, 5, 7], [3, 4, 6, 6], [1, 2, 3])` should return `[2, 3, 4, 6, 7]`.
+`bubbleSort` should return an array that is unchanged except for order.
 
 ```js
 assert.sameMembers(
-  sym([3, 3, 3, 2, 5], [2, 1, 5, 7], [3, 4, 6, 6], [1, 2, 3]),
-  [2, 3, 4, 6, 7]
+  bubbleSort([
+    1,
+    4,
+    2,
+    8,
+    345,
+    123,
+    43,
+    32,
+    5643,
+    63,
+    123,
+    43,
+    2,
+    55,
+    1,
+    234,
+    92
+  ]),
+  [1, 4, 2, 8, 345, 123, 43, 32, 5643, 63, 123, 43, 2, 55, 1, 234, 92]
 );
 ```
 
-`sym([3, 3, 3, 2, 5], [2, 1, 5, 7], [3, 4, 6, 6], [1, 2, 3])` should contain only five elements.
+`bubbleSort` should not use the built-in `.sort()` method.
 
 ```js
-assert.equal(
-  sym([3, 3, 3, 2, 5], [2, 1, 5, 7], [3, 4, 6, 6], [1, 2, 3]).length,
-  5
-);
-```
-
-`sym([3, 3, 3, 2, 5], [2, 1, 5, 7], [3, 4, 6, 6], [1, 2, 3], [5, 3, 9, 8], [1])` should return `[1, 2, 4, 5, 6, 7, 8, 9]`.
-
-```js
-assert.sameMembers(
-  sym(
-    [3, 3, 3, 2, 5],
-    [2, 1, 5, 7],
-    [3, 4, 6, 6],
-    [1, 2, 3],
-    [5, 3, 9, 8],
-    [1]
-  ),
-  [1, 2, 4, 5, 6, 7, 8, 9]
-);
-```
-
-`sym([3, 3, 3, 2, 5], [2, 1, 5, 7], [3, 4, 6, 6], [1, 2, 3], [5, 3, 9, 8], [1])` should contain only eight elements.
-
-```js
-assert.equal(
-  sym([3, 3, 3, 2, 5], [2, 1, 5, 7], [3, 4, 6, 6], [1, 2, 3], [5, 3, 9, 8], [1])
-    .length,
-  8
-);
+assert(isBuiltInSortUsed());
 ```
 
 # --seed--
 
+## --after-user-code--
+
+```js
+function isSorted(a){
+  for(let i = 0; i < a.length - 1; i++)
+    if(a[i] > a[i + 1])
+      return false;
+  return true;
+}
+
+function isBuiltInSortUsed(){
+  let sortUsed = false;
+  Array.prototype.sort = () => sortUsed = true;
+  bubbleSort([0, 1]);
+  return !sortUsed;
+}
+```
+
 ## --seed-contents--
 
 ```js
-function sym(args) {
-  return args;
+function bubbleSort(array) {
+  // Only change code below this line
+  return array;
+  // Only change code above this line
 }
 
-sym([1, 2, 3], [5, 2, 1, 4]);
+bubbleSort([1, 4, 2, 8, 345, 123, 43, 32, 5643, 63, 123, 43, 2, 55, 1, 234, 92]);
 ```
 
 # --solutions--
 
 ```js
-function sym() {
-  var arrays = [].slice.call(arguments);
-  return arrays.reduce(function (symDiff, arr) {
-    return symDiff.concat(arr).filter(function (val, idx, theArr) {
-      return theArr.indexOf(val) === idx
-        && (symDiff.indexOf(val) === -1 || arr.indexOf(val) === -1);
-    });
-  });
+function bubbleSort(array) {
+  for (let i = 0; i < array.length; i++) {
+    let swapped = false;
+    for (let j = 1; j < array.length; j++) {
+      if (array[j - 1] > array[j]) {
+        let temp = array[j-1];
+        array[j-1] =  array[j];
+        array[j] = temp;
+        swapped = true;
+      }
+    }
+    if (swapped === false) {
+      break;
+    }
+  }
+  return array;
 }
-sym([1, 2, 3], [5, 2, 1, 4]);
 ```
