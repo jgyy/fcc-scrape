@@ -1,29 +1,29 @@
 ---
-id: 5ea9997bbec2e9bc47e94dae
-title: Introduction and Setup
+id: 5ea9997bbec2e9bc47e94daf
+title: Understanding Sockets and Creating a TCP Server
 challengeType: 11
-videoId: XeQ7ZKtb998
-dashedName: introduction-and-setup
+videoId: F1QI9tNuDQg
+dashedName: understanding-sockets-and-creating-a-tcp-server
 ---
 
 # --question--
 
 ## --text--
 
-What code editor and extension does the instructor recommend for developing penetration testing tools in Python?
+Which of the following functions creates a socket object?
 
 ## --answers--
 
-Atom and the atom-python-run extension.
+`socket.bind((host, port))`
 
 ---
 
-VSCode and Microsoft's Python extension.
+`socket.gethostbyname()`
 
 ---
 
-Sublime Text and the Anaconda package.
+`socket.socket(socket.AF_INET, socket.SOCK_STREAM)`
 
 ## --video-solution--
 
-2
+3
