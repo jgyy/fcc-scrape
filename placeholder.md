@@ -1,41 +1,28 @@
 ---
-id: 5ea9997bbec2e9bc47e94db3
-title: Developing a Banner Grabber
+id: 5ea9997bbec2e9bc47e94db4
+title: Developing a Port Scanner
 challengeType: 11
-videoId: CeGW761BIsA
-dashedName: developing-a-banner-grabber
+videoId: z_qkqZS7KZ4
+dashedName: developing-a-port-scanner
 ---
 
 # --question--
 
 ## --text--
 
-Fill in the blanks to complete the `banner` function below:
-
-```py
-def banner(ip, port):
-    s = socket.socket()
-    s.__A__((ip, __B__))
-    print(s.recv(1024))
-```
+What is the main difference between the `.connect()` and `.connect_ex()` methods?
 
 ## --answers--
 
-A: `connect`
-
-B: `port`
+There is no difference between the two methods.
 
 ---
 
-A: `getsockname`
-
-B: `'1-1024'`
+If there is an error or if no host is found, `.connect()` returns an error code while `.connect_ex()` raises an exception.
 
 ---
 
-A: `connect`
-
-B: `int(port)`
+If there is an error or if no host is found, `.connect()` raises an exception while `.connect_ex()` returns an error code.
 
 ## --video-solution--
 
