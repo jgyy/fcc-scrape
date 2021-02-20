@@ -1,29 +1,29 @@
 ---
-id: 5ea9997bbec2e9bc47e94db2
-title: Developing an Nmap Scanner part 2
+id: 5ea9997bbec2e9bc47e94dae
+title: Introduction and Setup
 challengeType: 11
-videoId: a98PscnUsTg
-dashedName: developing-an-nmap-scanner-part-2
+videoId: XeQ7ZKtb998
+dashedName: introduction-and-setup
 ---
 
 # --question--
 
 ## --text--
 
-Which of the following allows you to scan for UDP ports between 21 to 443?
+What code editor and extension does the instructor recommend for developing penetration testing tools in Python?
 
 ## --answers--
 
-`.scan(ip_addr, '21-443', '-v -sU')`
+Atom and the atom-python-run extension.
 
 ---
 
-`.scan(ip_addr, '1-1024', '-v -sS')`
+VSCode and Microsoft's Python extension.
 
 ---
 
-`.scan(ip_addr, '21-443', '-v -sS')`
+Sublime Text and the Anaconda package.
 
 ## --video-solution--
 
-1
+2
