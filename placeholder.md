@@ -1,28 +1,28 @@
 ---
-id: 5ea9997bbec2e9bc47e94db4
-title: Developing a Port Scanner
+id: 5ea9997bbec2e9bc47e94db1
+title: Developing an Nmap Scanner part 1
 challengeType: 11
-videoId: z_qkqZS7KZ4
-dashedName: developing-a-port-scanner
+videoId: jYk9XaGoAnk
+dashedName: developing-an-nmap-scanner-part-1
 ---
 
 # --question--
 
 ## --text--
 
-What is the main difference between the `.connect()` and `.connect_ex()` methods?
+What is the correct command to install the Python 3 version of the `python-nmap` library?
 
 ## --answers--
 
-There is no difference between the two methods.
+`sudo apt install python-nmap`
 
 ---
 
-If there is an error or if no host is found, `.connect()` returns an error code while `.connect_ex()` raises an exception.
+`pip install python-nmap`
 
 ---
 
-If there is an error or if no host is found, `.connect()` raises an exception while `.connect_ex()` returns an error code.
+`pip3 install python-nmap`
 
 ## --video-solution--
 
