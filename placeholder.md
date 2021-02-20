@@ -1,39 +1,33 @@
 ---
-id: 587d825c367417b2b2512c8f
-title: Implement Merge Sort
+id: 587d825a367417b2b2512c89
+title: Implement Quick Sort
 challengeType: 1
-forumTopicId: 301614
-dashedName: implement-merge-sort
+forumTopicId: 301615
+dashedName: implement-quick-sort
 ---
 
 # --description--
 
-Another common intermediate sorting algorithm is merge sort. Like quick sort, merge sort also uses a divide-and-conquer, recursive methodology to sort an array. It takes advantage of the fact that it is relatively easy to sort two arrays as long as each is sorted in the first place. But we'll start with only one array as input, so how do we get to two sorted arrays from that? Well, we can recursively divide the original input in two until we reach the base case of an array with one item. A single-item array is naturally sorted, so then we can start combining. This combination will unwind the recursive calls that split the original array, eventually producing a final sorted array of all the elements. The steps of merge sort, then, are:
+Here we will move on to an intermediate sorting algorithm: quick sort. Quick sort is an efficient, recursive divide-and-conquer approach to sorting an array. In this method, a pivot value is chosen in the original array. The array is then partitioned into two subarrays of values less than and greater than the pivot value. We then combine the result of recursively calling the quick sort algorithm on both sub-arrays. This continues until the base case of an empty or single-item array is reached, which we return. The unwinding of the recursive calls return us the sorted array.
 
-**1)** Recursively split the input array in half until a sub-array with only one element is produced.
+Quick sort is a very efficient sorting method, providing *O(nlog(n))* performance on average. It is also relatively easy to implement. These attributes make it a popular and useful sorting method.
 
-**2)** Merge each sorted sub-array together to produce the final sorted array.
-
-Merge sort is an efficient sorting method, with time complexity of *O(nlog(n))*. This algorithm is popular because it is performant and relatively easy to implement.
-
-As an aside, this will be the last sorting algorithm we cover here. However, later in the section on tree data structures we will describe heap sort, another efficient sorting method that requires a binary heap in its implementation.
-
-**Instructions:** Write a function `mergeSort` which takes an array of integers as input and returns an array of these integers in sorted order from least to greatest. A good way to implement this is to write one function, for instance `merge`, which is responsible for merging two sorted arrays, and another function, for instance `mergeSort`, which is responsible for the recursion that produces single-item arrays to feed into merge. Good luck!
+**Instructions:** Write a function `quickSort` which takes an array of integers as input and returns an array of these integers in sorted order from least to greatest. While the choice of the pivot value is important, any pivot will do for our purposes here. For simplicity, the first or last element could be used.
 
 # --hints--
 
-`mergeSort` should be a function.
+`quickSort` should be a function.
 
 ```js
-assert(typeof mergeSort == 'function');
+assert(typeof quickSort == 'function');
 ```
 
-`mergeSort` should return a sorted array (least to greatest).
+`quickSort` should return a sorted array (least to greatest).
 
 ```js
 assert(
   isSorted(
-    mergeSort([
+    quickSort([
       1,
       4,
       2,
@@ -56,11 +50,11 @@ assert(
 );
 ```
 
-`mergeSort` should return an array that is unchanged except for order.
+`quickSort([1,4,2,8,345,123,43,32,5643,63,123,43,2,55,1,234,92])` should return an array that is unchanged except for order.
 
 ```js
 assert.sameMembers(
-  mergeSort([
+  quickSort([
     1,
     4,
     2,
@@ -83,7 +77,7 @@ assert.sameMembers(
 );
 ```
 
-`mergeSort` should not use the built-in `.sort()` method.
+`quickSort` should not use the built-in `.sort()` method.
 
 ```js
 assert(isBuiltInSortUsed());
@@ -104,7 +98,7 @@ function isSorted(a){
 function isBuiltInSortUsed(){
   let sortUsed = false;
   Array.prototype.sort = () => sortUsed = true;
-  mergeSort([0, 1]);
+  quickSort([0, 1]);
   return !sortUsed;
 }
 ```
@@ -112,47 +106,37 @@ function isBuiltInSortUsed(){
 ## --seed-contents--
 
 ```js
-function mergeSort(array) {
+function quickSort(array) {
   // Only change code below this line
   return array;
   // Only change code above this line
 }
-
-mergeSort([1, 4, 2, 8, 345, 123, 43, 32, 5643, 63, 123, 43, 2, 55, 1, 234, 92]);
 ```
 
 # --solutions--
 
 ```js
-function mergeSort(array) {
-  if (array.length === 1) {
-    return array;
+function quickSort(array) {
+  if (array.length === 0) {
+    return [];
   } else {
-    const splitIndex = Math.floor(array.length / 2);
-    return merge(
-      mergeSort(array.slice(0, splitIndex)),
-      mergeSort(array.slice(splitIndex))
-    );
-  }
+    const pivotValue = array[0];
 
-  // Merge two sorted arrays
-  function merge(array1, array2) {
-    let merged = [];
-    while (array1.length && array2.length) {
-      if (array1[0] < array2[0]) {
-        merged.push(array1.shift());
-      } else if (array1[0] > array2[0]) {
-        merged.push(array2.shift());
+    // Sort elements into three piles
+    let lesser = [];
+    let equal = [];
+    let greater = [];
+    for (let e of array) {
+      if (e < pivotValue) {
+        lesser.push(e);
+      } else if (e > pivotValue) {
+        greater.push(e);
       } else {
-        merged.push(array1.shift(), array2.shift());
+        equal.push(e);
       }
     }
 
-    // After looping ends, one array is empty, and other array contains only
-    // values greater than all values in `merged`
-    return [...merged, ...array1, ...array2];
+    return [...quickSort(lesser), ...equal, ...quickSort(greater)];
   }
 }
-
-mergeSort([1, 4, 2, 8, 345, 123, 43, 32, 5643, 63, 123, 43, 2, 55, 1, 234, 92]);
 ```
