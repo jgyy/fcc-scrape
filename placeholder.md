@@ -1,160 +1,77 @@
 ---
-id: a56138aff60341a09ed6c480
-title: Inventory Update
+id: a7bf700cd123b9a54eef01d5
+title: No Repeats Please
 challengeType: 5
-forumTopicId: 16019
-dashedName: inventory-update
+forumTopicId: 16037
+dashedName: no-repeats-please
 ---
 
 # --description--
 
-Compare and update the inventory stored in a 2D array against a second 2D array of a fresh delivery. Update the current existing inventory item quantities (in `arr1`). If an item cannot be found, add the new item and quantity into the inventory array. The returned inventory array should be in alphabetical order by item.
+Return the number of total permutations of the provided string that don't have repeated consecutive letters. Assume that all characters in the provided string are each unique.
+
+For example, `aab` should return 2 because it has 6 total permutations (`aab`, `aab`, `aba`, `aba`, `baa`, `baa`), but only 2 of them (`aba` and `aba`) don't have the same letter (in this case `a`) repeating.
 
 # --hints--
 
-The function `updateInventory` should return an array.
+`permAlone("aab")` should return a number.
 
 ```js
-assert.isArray(
-  updateInventory(
-    [
-      [21, 'Bowling Ball'],
-      [2, 'Dirty Sock'],
-      [1, 'Hair Pin'],
-      [5, 'Microphone']
-    ],
-    [
-      [2, 'Hair Pin'],
-      [3, 'Half-Eaten Apple'],
-      [67, 'Bowling Ball'],
-      [7, 'Toothpaste']
-    ]
-  )
-);
+assert.isNumber(permAlone('aab'));
 ```
 
-`updateInventory([[21, "Bowling Ball"], [2, "Dirty Sock"], [1, "Hair Pin"], [5, "Microphone"]], [[2, "Hair Pin"], [3, "Half-Eaten Apple"], [67, "Bowling Ball"], [7, "Toothpaste"]])` should return an array with a length of 6.
+`permAlone("aab")` should return 2.
 
 ```js
-assert.equal(
-  updateInventory(
-    [
-      [21, 'Bowling Ball'],
-      [2, 'Dirty Sock'],
-      [1, 'Hair Pin'],
-      [5, 'Microphone']
-    ],
-    [
-      [2, 'Hair Pin'],
-      [3, 'Half-Eaten Apple'],
-      [67, 'Bowling Ball'],
-      [7, 'Toothpaste']
-    ]
-  ).length,
-  6
-);
+assert.strictEqual(permAlone('aab'), 2);
 ```
 
-`updateInventory([[21, "Bowling Ball"], [2, "Dirty Sock"], [1, "Hair Pin"], [5, "Microphone"]], [[2, "Hair Pin"], [3, "Half-Eaten Apple"], [67, "Bowling Ball"], [7, "Toothpaste"]])` should return `[[88, "Bowling Ball"], [2, "Dirty Sock"], [3, "Hair Pin"], [3, "Half-Eaten Apple"], [5, "Microphone"], [7, "Toothpaste"]]`.
+`permAlone("aaa")` should return 0.
 
 ```js
-assert.deepEqual(
-  updateInventory(
-    [
-      [21, 'Bowling Ball'],
-      [2, 'Dirty Sock'],
-      [1, 'Hair Pin'],
-      [5, 'Microphone']
-    ],
-    [
-      [2, 'Hair Pin'],
-      [3, 'Half-Eaten Apple'],
-      [67, 'Bowling Ball'],
-      [7, 'Toothpaste']
-    ]
-  ),
-  [
-    [88, 'Bowling Ball'],
-    [2, 'Dirty Sock'],
-    [3, 'Hair Pin'],
-    [3, 'Half-Eaten Apple'],
-    [5, 'Microphone'],
-    [7, 'Toothpaste']
-  ]
-);
+assert.strictEqual(permAlone('aaa'), 0);
 ```
 
-`updateInventory([[21, "Bowling Ball"], [2, "Dirty Sock"], [1, "Hair Pin"], [5, "Microphone"]], [])` should return `[[21, "Bowling Ball"], [2, "Dirty Sock"], [1, "Hair Pin"], [5, "Microphone"]]`.
+`permAlone("aabb")` should return 8.
 
 ```js
-assert.deepEqual(
-  updateInventory(
-    [
-      [21, 'Bowling Ball'],
-      [2, 'Dirty Sock'],
-      [1, 'Hair Pin'],
-      [5, 'Microphone']
-    ],
-    []
-  ),
-  [
-    [21, 'Bowling Ball'],
-    [2, 'Dirty Sock'],
-    [1, 'Hair Pin'],
-    [5, 'Microphone']
-  ]
-);
+assert.strictEqual(permAlone('aabb'), 8);
 ```
 
-`updateInventory([], [[2, "Hair Pin"], [3, "Half-Eaten Apple"], [67, "Bowling Ball"], [7, "Toothpaste"]])` should return `[[67, "Bowling Ball"], [2, "Hair Pin"], [3, "Half-Eaten Apple"], [7, "Toothpaste"]]`.
+`permAlone("abcdefa")` should return 3600.
 
 ```js
-assert.deepEqual(
-  updateInventory(
-    [],
-    [
-      [2, 'Hair Pin'],
-      [3, 'Half-Eaten Apple'],
-      [67, 'Bowling Ball'],
-      [7, 'Toothpaste']
-    ]
-  ),
-  [
-    [67, 'Bowling Ball'],
-    [2, 'Hair Pin'],
-    [3, 'Half-Eaten Apple'],
-    [7, 'Toothpaste']
-  ]
-);
+assert.strictEqual(permAlone('abcdefa'), 3600);
 ```
 
-`updateInventory([[0, "Bowling Ball"], [0, "Dirty Sock"], [0, "Hair Pin"], [0, "Microphone"]], [[1, "Hair Pin"], [1, "Half-Eaten Apple"], [1, "Bowling Ball"], [1, "Toothpaste"]])` should return `[[1, "Bowling Ball"], [0, "Dirty Sock"], [1, "Hair Pin"], [1, "Half-Eaten Apple"], [0, "Microphone"], [1, "Toothpaste"]]`.
+`permAlone("abfdefa")` should return 2640.
 
 ```js
-assert.deepEqual(
-  updateInventory(
-    [
-      [0, 'Bowling Ball'],
-      [0, 'Dirty Sock'],
-      [0, 'Hair Pin'],
-      [0, 'Microphone']
-    ],
-    [
-      [1, 'Hair Pin'],
-      [1, 'Half-Eaten Apple'],
-      [1, 'Bowling Ball'],
-      [1, 'Toothpaste']
-    ]
-  ),
-  [
-    [1, 'Bowling Ball'],
-    [0, 'Dirty Sock'],
-    [1, 'Hair Pin'],
-    [1, 'Half-Eaten Apple'],
-    [0, 'Microphone'],
-    [1, 'Toothpaste']
-  ]
-);
+assert.strictEqual(permAlone('abfdefa'), 2640);
+```
+
+`permAlone("zzzzzzzz")` should return 0.
+
+```js
+assert.strictEqual(permAlone('zzzzzzzz'), 0);
+```
+
+`permAlone("a")` should return 1.
+
+```js
+assert.strictEqual(permAlone('a'), 1);
+```
+
+`permAlone("aaab")` should return 0.
+
+```js
+assert.strictEqual(permAlone('aaab'), 0);
+```
+
+`permAlone("aaabb")` should return 12.
+
+```js
+assert.strictEqual(permAlone('aaabb'), 12);
 ```
 
 # --seed--
@@ -162,67 +79,48 @@ assert.deepEqual(
 ## --seed-contents--
 
 ```js
-function updateInventory(arr1, arr2) {
-    return arr1;
+function permAlone(str) {
+  return str;
 }
 
-// Example inventory lists
-var curInv = [
-    [21, "Bowling Ball"],
-    [2, "Dirty Sock"],
-    [1, "Hair Pin"],
-    [5, "Microphone"]
-];
-
-var newInv = [
-    [2, "Hair Pin"],
-    [3, "Half-Eaten Apple"],
-    [67, "Bowling Ball"],
-    [7, "Toothpaste"]
-];
-
-updateInventory(curInv, newInv);
+permAlone('aab');
 ```
 
 # --solutions--
 
 ```js
-function updateInventory(arr1, arr2) {
-  arr2.forEach(function(item) {
-    createOrUpdate(arr1, item);
-  });
-  // All inventory must be accounted for or you're fired!
-  return arr1;
+function permAlone(str) {
+  return permuter(str).filter(function(perm) {
+    return !perm.match(/(.)\1/g);
+  }).length;
 }
 
-function createOrUpdate(arr1, item) {
-  var index = -1;
-  while (++index < arr1.length) {
-    if (arr1[index][1] === item[1]) {
-      arr1[index][0] += item[0];
-      return;
-    }
-    if (arr1[index][1] > item[1]) {
-      break;
+function permuter(str) {
+  // http://staff.roguecc.edu/JMiller/JavaScript/permute.html
+  //permArr: Global array which holds the list of permutations
+  //usedChars: Global utility array which holds a list of "currently-in-use" characters
+  var permArr = [], usedChars = [];
+  function permute(input) {
+    //convert input into a char array (one element for each character)
+    var i, ch, chars = input.split("");
+    for (i = 0; i < chars.length; i++) {
+      //get and remove character at index "i" from char array
+      ch = chars.splice(i, 1);
+      //add removed character to the end of used characters
+      usedChars.push(ch);
+      //when there are no more characters left in char array to add, add used chars to list of permutations
+      if (chars.length === 0) permArr[permArr.length] = usedChars.join("");
+      //send characters (minus the removed one from above) from char array to be permuted
+      permute(chars.join(""));
+      //add removed character back into char array in original position
+      chars.splice(i, 0, ch);
+      //remove the last character used off the end of used characters array
+      usedChars.pop();
     }
   }
-  arr1.splice(index, 0, item);
+  permute(str);
+  return permArr;
 }
 
-// Example inventory lists
-var curInv = [
-    [21, 'Bowling Ball'],
-    [2, 'Dirty Sock'],
-    [1, 'Hair Pin'],
-    [5, 'Microphone']
-];
-
-var newInv = [
-    [2, 'Hair Pin'],
-    [3, 'Half-Eaten Apple'],
-    [67, 'Bowling Ball'],
-    [7, 'Toothpaste']
-];
-
-updateInventory(curInv, newInv);
+permAlone('aab');
 ```
