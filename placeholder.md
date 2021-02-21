@@ -1,399 +1,208 @@
 ---
-id: 587d8258367417b2b2512c82
-title: Delete a Node with Two Children in a Binary Search Tree
+id: 587d825d367417b2b2512c96
+title: Depth-First Search
 challengeType: 1
-forumTopicId: 301639
-dashedName: delete-a-node-with-two-children-in-a-binary-search-tree
+forumTopicId: 301640
+dashedName: depth-first-search
 ---
 
 # --description--
 
-Removing nodes that have two children is the hardest case to implement. Removing a node like this produces two subtrees that are no longer connected to the original tree structure. How can we reconnect them? One method is to find the smallest value in the right subtree of the target node and replace the target node with this value. Selecting the replacement in this way ensures that it is greater than every node in the left subtree it becomes the new parent of but also less than every node in the right subtree it becomes the new parent of. Once this replacement is made the replacement node must be removed from the right subtree. Even this operation is tricky because the replacement may be a leaf or it may itself be the parent of a right subtree. If it is a leaf we must remove its parent's reference to it. Otherwise, it must be the right child of the target. In this case, we must replace the target value with the replacement value and make the target reference the replacement's right child.
+Similar to <dfn>breadth-first search</dfn>, here we will learn about another graph traversal algorithm called <dfn>depth-first search</dfn>.
+
+Whereas the breadth-first search searches incremental edge lengths away from the source node, <dfn>depth-first search</dfn> first goes down a path of edges as far as it can.
+
+Once it reaches one end of a path, the search will backtrack to the last node with an un-visited edge path and continue searching.
+
+The animation below shows how the algorithm works. The algorithm starts with the top node and visits the nodes in the numbered order.
+
+<img class='img-responsive' src='https://camo.githubusercontent.com/aaad9e39961daf34d967c616edeb50abf3bf1235/68747470733a2f2f75706c6f61642e77696b696d656469612e6f72672f77696b6970656469612f636f6d6d6f6e732f372f37662f44657074682d46697273742d5365617263682e676966'>
+
+Notice how, unlike breadth-first search, every time a node is visited, it doesn't visit all of its neighbors. Instead, it first visits one of its neighbors and continues down that path until there are no more nodes to be visited on that path.
+
+To implement this algorithm, you'll want to use a stack. A stack is an array where the last element added is the first to be removed. This is also known as a <dfn>Last-In-First-Out</dfn> data structure. A stack is helpful in depth-first search algorithms because, as we add neighbors to the stack, we want to visit the most recently added neighbors first and remove them from the stack.
+
+A simple output of this algorithm is a list of nodes which are reachable from a given node. Therefore, you'll also want to keep track of the nodes you visit.
 
 # --instructions--
 
-Let's finish our `remove` method by handling the third case. We've provided some code again for the first two cases. Add some code now to handle target nodes with two children. Any edge cases to be aware of? What if the tree has only three nodes? Once you are finished this will complete our deletion operation for binary search trees. Nice job, this is a pretty hard problem!
+Write a function `dfs()` that takes an undirected, adjacency matrix `graph` and a node label `root` as parameters. The node label will just be the numeric value of the node between `0` and `n - 1`, where `n` is the total number of nodes in the graph.
+
+Your function should output an array of all nodes reachable from `root`.
 
 # --hints--
 
-The `BinarySearchTree` data structure should exist.
+The input graph `[[0, 1, 0, 0], [1, 0, 1, 0], [0, 1, 0, 1], [0, 0, 1, 0]]` with a start node of `1` should return an array with `0`, `1`, `2`, and `3`.
 
 ```js
-assert(
+assert.sameMembers(
   (function () {
-    var test = false;
-    if (typeof BinarySearchTree !== 'undefined') {
-      test = new BinarySearchTree();
-    }
-    return typeof test == 'object';
-  })()
+    var graph = [
+      [0, 1, 0, 0],
+      [1, 0, 1, 0],
+      [0, 1, 0, 1],
+      [0, 0, 1, 0]
+    ];
+    return dfs(graph, 1);
+  })(),
+  [0, 1, 2, 3]
 );
 ```
 
-The binary search tree should have a method called `remove`.
+The input graph `[[0, 1, 0, 0], [1, 0, 1, 0], [0, 1, 0, 1], [0, 0, 1, 0]]` with a start node of `1` should return an array with four elements.
 
 ```js
 assert(
   (function () {
-    var test = false;
-    if (typeof BinarySearchTree !== 'undefined') {
-      test = new BinarySearchTree();
-    } else {
-      return false;
-    }
-    return typeof test.remove == 'function';
-  })()
+    var graph = [
+      [0, 1, 0, 0],
+      [1, 0, 1, 0],
+      [0, 1, 0, 1],
+      [0, 0, 1, 0]
+    ];
+    return dfs(graph, 1);
+  })().length === 4
 );
 ```
 
-Trying to remove an element that does not exist should return `null`.
+The input graph `[[0, 1, 0, 0], [1, 0, 1, 0], [0, 1, 0, 0], [0, 0, 0, 0]]` with a start node of `3` should return an array with `3`.
 
 ```js
-assert(
+assert.sameMembers(
   (function () {
-    var test = false;
-    if (typeof BinarySearchTree !== 'undefined') {
-      test = new BinarySearchTree();
-    } else {
-      return false;
-    }
-    return typeof test.remove == 'function' ? test.remove(100) == null : false;
-  })()
+    var graph = [
+      [0, 1, 0, 0],
+      [1, 0, 1, 0],
+      [0, 1, 0, 0],
+      [0, 0, 0, 0]
+    ];
+    return dfs(graph, 3);
+  })(),
+  [3]
 );
 ```
 
-If the root node has no children, deleting it should set the root to `null`.
+The input graph `[[0, 1, 0, 0], [1, 0, 1, 0], [0, 1, 0, 0], [0, 0, 0, 0]]` with a start node of `3` should return an array with one element.
 
 ```js
 assert(
   (function () {
-    var test = false;
-    if (typeof BinarySearchTree !== 'undefined') {
-      test = new BinarySearchTree();
-    } else {
-      return false;
-    }
-    test.add(500);
-    test.remove(500);
-    return typeof test.remove == 'function' ? test.inorder() == null : false;
-  })()
+    var graph = [
+      [0, 1, 0, 0],
+      [1, 0, 1, 0],
+      [0, 1, 0, 0],
+      [0, 0, 0, 0]
+    ];
+    return dfs(graph, 3);
+  })().length === 1
 );
 ```
 
-The `remove` method should remove leaf nodes from the tree.
+The input graph `[[0, 1, 0, 0], [1, 0, 0, 0], [0, 0, 0, 1], [0, 0, 1, 0]]` with a start node of `3` should return an array with `2` and `3`.
 
 ```js
-assert(
+assert.sameMembers(
   (function () {
-    var test = false;
-    if (typeof BinarySearchTree !== 'undefined') {
-      test = new BinarySearchTree();
-    } else {
-      return false;
-    }
-    test.add(5);
-    test.add(3);
-    test.add(7);
-    test.add(6);
-    test.add(10);
-    test.add(12);
-    test.remove(3);
-    test.remove(12);
-    test.remove(10);
-    return typeof test.remove == 'function'
-      ? test.inorder().join('') == '567'
-      : false;
-  })()
+    var graph = [
+      [0, 1, 0, 0],
+      [1, 0, 0, 0],
+      [0, 0, 0, 1],
+      [0, 0, 1, 0]
+    ];
+    return dfs(graph, 3);
+  })(),
+  [2, 3]
 );
 ```
 
-The `remove` method should remove nodes with one child.
+The input graph `[[0, 1, 0, 0], [1, 0, 0, 0], [0, 0, 0, 1], [0, 0, 1, 0]]` with a start node of `3` should return an array with two elements.
 
 ```js
 assert(
   (function () {
-    var test = false;
-    if (typeof BinarySearchTree !== 'undefined') {
-      test = new BinarySearchTree();
-    } else {
-      return false;
-    }
-    if (typeof test.remove !== 'function') {
-      return false;
-    }
-    test.add(-1);
-    test.add(3);
-    test.add(7);
-    test.add(16);
-    test.remove(16);
-    test.remove(7);
-    test.remove(3);
-    return test.inorder().join('') == '-1';
-  })()
+    var graph = [
+      [0, 1, 0, 0],
+      [1, 0, 0, 0],
+      [0, 0, 0, 1],
+      [0, 0, 1, 0]
+    ];
+    return dfs(graph, 3);
+  })().length === 2
 );
 ```
 
-Removing the root in a tree with two nodes should set the second to be the root.
+The input graph `[[0, 1, 0, 0], [1, 0, 0, 0], [0, 0, 0, 1], [0, 0, 1, 0]]` with a start node of `0` should return an array with `0` and `1`.
 
 ```js
-assert(
+assert.sameMembers(
   (function () {
-    var test = false;
-    if (typeof BinarySearchTree !== 'undefined') {
-      test = new BinarySearchTree();
-    } else {
-      return false;
-    }
-    if (typeof test.remove !== 'function') {
-      return false;
-    }
-    test.add(15);
-    test.add(27);
-    test.remove(15);
-    return test.inorder().join('') == '27';
-  })()
+    var graph = [
+      [0, 1, 0, 0],
+      [1, 0, 0, 0],
+      [0, 0, 0, 1],
+      [0, 0, 1, 0]
+    ];
+    return dfs(graph, 0);
+  })(),
+  [0, 1]
 );
 ```
 
-The `remove` method should remove nodes with two children while maintaining the binary search tree structure.
+The input graph `[[0, 1, 0, 0], [1, 0, 0, 0], [0, 0, 0, 1], [0, 0, 1, 0]]` with a start node of `0` should return an array with two elements.
 
 ```js
 assert(
   (function () {
-    var test = false;
-    if (typeof BinarySearchTree !== 'undefined') {
-      test = new BinarySearchTree();
-    } else {
-      return false;
-    }
-    if (typeof test.remove !== 'function') {
-      return false;
-    }
-    test.add(1);
-    test.add(4);
-    test.add(3);
-    test.add(7);
-    test.add(9);
-    test.add(11);
-    test.add(14);
-    test.add(15);
-    test.add(19);
-    test.add(50);
-    test.remove(9);
-    if (!test.isBinarySearchTree()) {
-      return false;
-    }
-    test.remove(11);
-    if (!test.isBinarySearchTree()) {
-      return false;
-    }
-    test.remove(14);
-    if (!test.isBinarySearchTree()) {
-      return false;
-    }
-    test.remove(19);
-    if (!test.isBinarySearchTree()) {
-      return false;
-    }
-    test.remove(3);
-    if (!test.isBinarySearchTree()) {
-      return false;
-    }
-    test.remove(50);
-    if (!test.isBinarySearchTree()) {
-      return false;
-    }
-    test.remove(15);
-    if (!test.isBinarySearchTree()) {
-      return false;
-    }
-    return test.inorder().join('') == '147';
-  })()
-);
-```
-
-The root should be removable on a tree of three nodes.
-
-```js
-assert(
-  (function () {
-    var test = false;
-    if (typeof BinarySearchTree !== 'undefined') {
-      test = new BinarySearchTree();
-    } else {
-      return false;
-    }
-    if (typeof test.remove !== 'function') {
-      return false;
-    }
-    test.add(100);
-    test.add(50);
-    test.add(300);
-    test.remove(100);
-    return test.inorder().join('') == 50300;
-  })()
+    var graph = [
+      [0, 1, 0, 0],
+      [1, 0, 0, 0],
+      [0, 0, 0, 1],
+      [0, 0, 1, 0]
+    ];
+    return dfs(graph, 0);
+  })().length === 2
 );
 ```
 
 # --seed--
 
-## --after-user-code--
-
-```js
-BinarySearchTree.prototype = Object.assign(
-  BinarySearchTree.prototype,
-  {
-    add: function(value) {
-      var node = this.root;
-      if (node == null) {
-        this.root = new Node(value);
-        return;
-      } else {
-        function searchTree(node) {
-          if (value < node.value) {
-            if (node.left == null) {
-              node.left = new Node(value);
-              return;
-            } else if (node.left != null) {
-              return searchTree(node.left);
-            }
-          } else if (value > node.value) {
-            if (node.right == null) {
-              node.right = new Node(value);
-              return;
-            } else if (node.right != null) {
-              return searchTree(node.right);
-            }
-          } else {
-            return null;
-          }
-        }
-        return searchTree(node);
-      }
-    },
-    inorder: function() {
-      if (this.root == null) {
-        return null;
-      } else {
-        var result = new Array();
-        function traverseInOrder(node) {
-          if (node.left != null) {
-            traverseInOrder(node.left);
-          }
-          result.push(node.value);
-          if (node.right != null) {
-            traverseInOrder(node.right);
-          }
-        }
-        traverseInOrder(this.root);
-        return result;
-      }
-    },
-    isBinarySearchTree() {
-      if (this.root == null) {
-        return null;
-      } else {
-        var check = true;
-        function checkTree(node) {
-          if (node.left != null) {
-            var left = node.left;
-            if (left.value > node.value) {
-              check = false;
-            } else {
-              checkTree(left);
-            }
-          }
-          if (node.right != null) {
-            var right = node.right;
-            if (right.value < node.value) {
-              check = false;
-            } else {
-              checkTree(right);
-            }
-          }
-        }
-        checkTree(this.root);
-        return check;
-      }
-    }
-  }
-);
-```
-
 ## --seed-contents--
 
 ```js
-var displayTree = tree => console.log(JSON.stringify(tree, null, 2));
-function Node(value) {
-  this.value = value;
-  this.left = null;
-  this.right = null;
+function dfs(graph, root) {
+
 }
 
-function BinarySearchTree() {
-  this.root = null;
-  this.remove = function(value) {
-    if (this.root === null) {
-      return null;
-    }
-    var target;
-    var parent = null;
-    // Find the target value and its parent
-    (function findValue(node = this.root) {
-      if (value == node.value) {
-        target = node;
-      } else if (value < node.value && node.left !== null) {
-        parent = node;
-        return findValue(node.left);
-      } else if (value < node.value && node.left === null) {
-        return null;
-      } else if (value > node.value && node.right !== null) {
-        parent = node;
-        return findValue(node.right);
-      } else {
-        return null;
-      }
-    }.bind(this)());
-    if (target === null) {
-      return null;
-    }
-    // Count the children of the target to delete
-    var children =
-      (target.left !== null ? 1 : 0) + (target.right !== null ? 1 : 0);
-    // Case 1: Target has no children
-    if (children === 0) {
-      if (target == this.root) {
-        this.root = null;
-      } else {
-        if (parent.left == target) {
-          parent.left = null;
-        } else {
-          parent.right = null;
-        }
-      }
-    }
-    // Case 2: Target has one child
-    else if (children == 1) {
-      var newChild = target.left !== null ? target.left : target.right;
-      if (parent === null) {
-        target.value = newChild.value;
-        target.left = null;
-        target.right = null;
-      } else if (newChild.value < parent.value) {
-        parent.left = newChild;
-      } else {
-        parent.right = newChild;
-      }
-      target = null;
-    }
-    // Case 3: Target has two children
-    // Only change code below this line
-  };
-}
+var exDFSGraph = [
+  [0, 1, 0, 0],
+  [1, 0, 1, 0],
+  [0, 1, 0, 1],
+  [0, 0, 1, 0]
+];
+console.log(dfs(exDFSGraph, 3));
 ```
 
 # --solutions--
 
 ```js
-// solution required
+function dfs(graph, root) {
+    var stack = [];
+    var tempV;
+    var visited = [];
+    var tempVNeighbors = [];
+    stack.push(root);
+    while (stack.length > 0) {
+        tempV = stack.pop();
+        if (visited.indexOf(tempV) == -1) {
+            visited.push(tempV);
+            tempVNeighbors = graph[tempV];
+            for (var i = 0; i < tempVNeighbors.length; i++) {
+                if (tempVNeighbors[i] == 1) {
+                    stack.push(i);
+                }
+            }
+        }
+    }
+    return visited;
+}
 ```
