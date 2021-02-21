@@ -1,110 +1,135 @@
 ---
-id: 587d825b367417b2b2512c8b
-title: Remove an Element from a Max Heap
+id: 587d8251367417b2b2512c65
+title: Remove Elements from a Linked List by Index
 challengeType: 1
-forumTopicId: 301710
-dashedName: remove-an-element-from-a-max-heap
+forumTopicId: 301711
+dashedName: remove-elements-from-a-linked-list-by-index
 ---
 
 # --description--
 
-Now that we can add elements to our heap let's see how we can remove elements. Removing and inserting elements both require similar logic. In a max heap you will usually want to remove the greatest value, so this involves simply extracting it from the root of our tree. This will break the heap property of our tree, so we must reestablish it in some way. Typically, for a max heap this is done in the following way:
+Before we move on to another data structure, let's get a couple of last bits of practice with linked lists.
 
-<ol>
-  <li>Move the last element in the heap into the root position.</li>
-  <li>If either child of the root is greater than it, swap the root with the child of greater value.</li>
-  <li>Continue swapping until the parent is greater than both children or you reach the last level in the tree.</li>
-</ol>
+Let's write a `removeAt` method that removes the `element` at a given `index`. The method should be called `removeAt(index)`. To remove an `element` at a certain `index`, we'll need to keep a running count of each node as we move along the linked list.
+
+A common technique used to iterate through the elements of a linked list involves a <dfn>'runner'</dfn>, or sentinel, that 'points' at the nodes that your code is comparing. In our case, starting at the `head` of our list, we start with a `currentIndex` variable that starts at `0`. The `currentIndex` should increment by one for each node we pass.
+
+Just like our `remove(element)` method, which [we covered in a previous lesson](/learn/coding-interview-prep/data-structures/remove-elements-from-a-linked-list), we need to be careful not to orphan the rest of our list when we remove the node in our `removeAt(index)` method. We keep our nodes contiguous by making sure that the node that has reference to the removed node has a reference to the next node.
 
 # --instructions--
 
-Instructions: Add a method to our max heap called `remove`. This method should return the greatest value that has been added to our max heap and remove it from the heap. It should also reorder the heap so the heap property is maintained. After removing an element, the next greatest element remaining in the heap should become the root.
+Write a `removeAt(index)` method that removes and returns a node at a given `index`. The method should return `null` if the given `index` is either negative, or greater than or equal to the `length` of the linked list.
+
+**Note:** Remember to keep count of the `currentIndex`.
 
 # --hints--
 
-The MaxHeap data structure should exist.
+Your `LinkedList` class should have a `removeAt` method.
 
 ```js
 assert(
   (function () {
-    var test = false;
-    if (typeof MaxHeap !== 'undefined') {
-      test = new MaxHeap();
-    }
-    return typeof test == 'object';
+    var test = new LinkedList();
+    return typeof test.removeAt === 'function';
   })()
 );
 ```
 
-MaxHeap should have a method called print.
+Your `removeAt` method should reduce the `length` of the linked list by one.
 
 ```js
 assert(
   (function () {
-    var test = false;
-    if (typeof MaxHeap !== 'undefined') {
-      test = new MaxHeap();
-    } else {
-      return false;
-    }
-    return typeof test.print == 'function';
+    var test = new LinkedList();
+    test.add('cat');
+    test.add('dog');
+    test.add('kitten');
+    test.removeAt(1);
+    return test.size() === 2;
   })()
 );
 ```
 
-MaxHeap should have a method called insert.
+Your `removeAt` method should remove the element at the specified index from the linked list.
 
 ```js
 assert(
   (function () {
-    var test = false;
-    if (typeof MaxHeap !== 'undefined') {
-      test = new MaxHeap();
-    } else {
-      return false;
-    }
-    return typeof test.insert == 'function';
+    var test = new LinkedList();
+    test.add('cat');
+    test.add('dog');
+    test.add('kitten');
+    test.add('bird');
+    test.removeAt(1);
+    return (
+      JSON.stringify(test.head()) ===
+      '{"element":"cat","next":{"element":"kitten","next":{"element":"bird","next":null}}}'
+    );
   })()
 );
 ```
 
-MaxHeap should have a method called remove.
+When only one element is present in the linked list, your `removeAt` method should remove and return the element at specified index, and reduce the length of the linked list.
 
 ```js
 assert(
   (function () {
-    var test = false;
-    if (typeof MaxHeap !== 'undefined') {
-      test = new MaxHeap();
-    } else {
-      return false;
-    }
-    return typeof test.remove == 'function';
+    var test = new LinkedList();
+    test.add('cat');
+    var removedItem = test.removeAt(0);
+    return test.head() === null && test.size() === 0 && removedItem === 'cat';
   })()
 );
 ```
 
-The remove method should remove the greatest element from the max heap while maintaining the max heap property.
+Your `removeAt` method should return the element of the removed node.
 
 ```js
 assert(
   (function () {
-    var test = false;
-    if (typeof MaxHeap !== 'undefined') {
-      test = new MaxHeap();
-    } else {
-      return false;
-    }
-    test.insert(30);
-    test.insert(300);
-    test.insert(500);
-    test.insert(10);
-    let result = [];
-    result.push(test.remove());
-    result.push(test.remove());
-    result.push(test.remove());
-    result.push(test.remove());
-    return result.join('') == '5003003010';
+    var test = new LinkedList();
+    test.add('cat');
+    test.add('dog');
+    test.add('kitten');
+    return test.removeAt(1) === 'dog';
+  })()
+);
+```
+
+Your `removeAt` method should return `null` and the linked list should not change if the given index is less than `0`.
+
+```js
+assert(
+  (function () {
+    var test = new LinkedList();
+    test.add('cat');
+    test.add('dog');
+    test.add('kitten');
+    var removedItem = test.removeAt(-1);
+    return (
+      removedItem === null &&
+      JSON.stringify(test.head()) ===
+        '{"element":"cat","next":{"element":"dog","next":{"element":"kitten","next":null}}}'
+    );
+  })()
+);
+```
+
+Your `removeAt` method should return `null` and the linked list should not change if the given index is greater than or equal to the `length` of the list.
+
+```js
+assert(
+  (function () {
+    var test = new LinkedList();
+    test.add('cat');
+    test.add('dog');
+    test.add('kitten');
+    var removedItem = test.removeAt(3);
+    return (
+      removedItem === null &&
+      JSON.stringify(test.head()) ===
+        '{"element":"cat","next":{"element":"dog","next":{"element":"kitten","next":null}}}'
+    );
   })()
 );
 ```
@@ -114,30 +139,104 @@ assert(
 ## --seed-contents--
 
 ```js
-var MaxHeap = function() {
-  this.heap = [null];
-  this.insert = (ele) => {
-    var index = this.heap.length;
-    var arr = [...this.heap];
-    arr.push(ele);
-    while (ele > arr[Math.floor(index / 2)] && index > 1) {
-      arr[index] = arr[Math.floor(index / 2)];
-      arr[Math.floor(index / 2)] = ele;
-      index = arr[Math.floor(index / 2)];
+function LinkedList() {
+  var length = 0;
+  var head = null;
+
+  var Node = function(element){
+    this.element = element;
+    this.next = null;
+  };
+
+  this.size = function(){
+    return length;
+  };
+
+  this.head = function(){
+    return head;
+  };
+
+  this.add = function(element){
+    var node = new Node(element);
+    if(head === null){
+      head = node;
+    } else {
+      var currentNode = head;
+
+      while(currentNode.next){
+        currentNode  = currentNode.next;
+      }
+
+      currentNode.next = node;
     }
-    this.heap = arr;
-  }
-  this.print = () => {
-    return this.heap.slice(1);
-  }
+
+    length++;
+  };
+
   // Only change code below this line
 
   // Only change code above this line
-};
+}
 ```
 
 # --solutions--
 
 ```js
-// solution required
+function LinkedList() {
+  var length = 0;
+  var head = null;
+
+  var Node = function (element) {
+    this.element = element;
+    this.next = null;
+  };
+
+  this.size = function () {
+    return length;
+  };
+
+  this.head = function () {
+    return head;
+  };
+
+  this.add = function (element) {
+    var node = new Node(element);
+    if (head === null) {
+      head = node;
+    } else {
+      var currentNode = head;
+
+      while (currentNode.next) {
+        currentNode = currentNode.next;
+      }
+
+      currentNode.next = node;
+    }
+
+    length++;
+  };
+
+  this.removeAt = function (index) {
+    var currentNode = head;
+    var previous = head;
+    var count = 0;
+    if (index >= length || index < 0) {
+      return null;
+    }
+    if (index === 0) {
+      var removed = head.element;
+      head = currentNode.next;
+    } else {
+      while (count < index) {
+        previous = currentNode;
+        currentNode = currentNode.next;
+        count++;
+      }
+      var removed = previous.next.element;
+      previous.next = currentNode.next;
+    }
+    length--;
+    return removed;
+  };
+}
 ```
