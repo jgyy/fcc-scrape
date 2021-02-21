@@ -1,205 +1,293 @@
 ---
-id: 587d825a367417b2b2512c88
-title: Reverse a Doubly Linked List
+id: 587d8251367417b2b2512c64
+title: Search within a Linked List
 challengeType: 1
-forumTopicId: 301714
-dashedName: reverse-a-doubly-linked-list
+forumTopicId: 301715
+dashedName: search-within-a-linked-list
 ---
 
 # --description--
 
-Let's create one more method for our doubly linked list called reverse which reverses the list in place. Once the method is executed the head should point to the previous tail and the tail should point to the previous head. Now, if we traverse the list from head to tail we should meet the nodes in a reverse order compared to the original list. Trying to reverse an empty list should return null.
+Let's add a few more useful methods to our linked list class. Wouldn't it be useful if we could tell if our list was empty or not, as with our `Stack` and `Queue` classes?
+
+We should also be able to find specific elements in our linked list. Traversing through data structures is something you'll want to get a lot of practice with! Let's create an `indexOf` method that takes an `element` as an argument, and returns that element's `index` in the linked list. If the element is not found in the linked list, return `-1`.
+
+Let's also implement a method that does the opposite: an `elementAt` method that takes an `index` as an argument and returns the `element` at the given `index`. If no `element` is found, return `undefined`.
+
+# --instructions--
+
+Write an `isEmpty` method that checks if the linked list is empty, an `indexOf` method that returns the `index` of a given element, and an `elementAt` that returns an `element` at a given `index.`
 
 # --hints--
 
-The DoublyLinkedList data structure should exist.
+Your `LinkedList` class should have an `isEmpty` method.
 
 ```js
 assert(
   (function () {
-    var test = false;
-    if (typeof DoublyLinkedList !== 'undefined') {
-      test = new DoublyLinkedList();
-    }
-    return typeof test == 'object';
+    var test = new LinkedList();
+    return typeof test.isEmpty === 'function';
   })()
 );
 ```
 
-The DoublyLinkedList should have a method called reverse.
+Your `isEmpty` method should return `false` when there is at least one element in linked list.
 
 ```js
 assert(
   (function () {
-    var test = false;
-    if (typeof DoublyLinkedList !== 'undefined') {
-      test = new DoublyLinkedList();
-    }
-    if (test.reverse == undefined) {
-      return false;
-    }
-    return typeof test.reverse == 'function';
+    var test = new LinkedList();
+    test.add('cat');
+    test.add('dog');
+    test.add('kitten');
+    return test.isEmpty() === false;
   })()
 );
 ```
 
-Reversing an empty list should return null.
+Your `isEmpty` method should return `true` when there are no elements in linked list.
 
 ```js
 assert(
   (function () {
-    var test = false;
-    if (typeof DoublyLinkedList !== 'undefined') {
-      test = new DoublyLinkedList();
-    }
-    return test.reverse() == null;
+    var test = new LinkedList();
+    return test.isEmpty() === true;
   })()
 );
 ```
 
-The reverse method should reverse the list.
+Your `LinkedList` class should have an `indexOf` method.
 
 ```js
 assert(
   (function () {
-    var test = false;
-    if (typeof DoublyLinkedList !== 'undefined') {
-      test = new DoublyLinkedList();
-    }
-    test.add(58);
-    test.add(61);
-    test.add(32);
-    test.add(95);
-    test.add(41);
-    test.reverse();
-    return test.print().join('') == '4195326158';
+    var test = new LinkedList();
+    return typeof test.indexOf === 'function';
   })()
 );
 ```
 
-The next and previous references should be correctly maintained when a list is reversed.
+Your `indexOf` method should return the index of a given element found in linked list.
 
 ```js
 assert(
   (function () {
-    var test = false;
-    if (typeof DoublyLinkedList !== 'undefined') {
-      test = new DoublyLinkedList();
-    }
-    test.add(11);
-    test.add(22);
-    test.add(33);
-    test.add(44);
-    test.add(55);
-    test.reverse();
-    return test.printReverse().join('') == '1122334455';
+    var test = new LinkedList();
+    test.add('cat');
+    test.add('dog');
+    test.add('kitten');
+    return test.indexOf('cat') === 0;
+  })()
+);
+```
+
+Your `indexOf` method should return `-1` if the given element is not found in linked list
+
+```js
+assert(
+  (function () {
+    var test = new LinkedList();
+    test.add('cat');
+    test.add('dog');
+    test.add('kitten');
+    return test.indexOf('pony') === -1;
+  })()
+);
+```
+
+Your `LinkedList` class should have an `elementAt` method.
+
+```js
+assert(
+  (function () {
+    var test = new LinkedList();
+    return typeof test.elementAt === 'function';
+  })()
+);
+```
+
+Your `elementAt` method should return the element found at a given index in linked list.
+
+```js
+assert(
+  (function () {
+    var test = new LinkedList();
+    test.add('cat');
+    test.add('dog');
+    test.add('kitten');
+    return test.elementAt(1) === 'dog';
+  })()
+);
+```
+
+Your `elementAt` method should return `undefined` if the given element is not found at a given index in linked list.
+
+```js
+assert(
+  (function () {
+    var test = new LinkedList();
+    test.add('cat');
+    test.add('dog');
+    test.add('kitten');
+    return test.elementAt(5) === undefined;
   })()
 );
 ```
 
 # --seed--
 
-## --after-user-code--
-
-```js
-DoublyLinkedList.prototype = Object.assign(
-  DoublyLinkedList.prototype,
-  {
-    add(data) {
-      if (this.head == null) {
-        this.head = new Node(data, null);
-        this.tail = this.head;
-      } else {
-        var node = this.head;
-        var prev = null;
-        while (node.next != null) {
-          prev = node;
-          node = node.next;
-        };
-        var newNode = new Node(data, node);
-        node.next = newNode;
-        this.tail = newNode;
-      };
-    },
-    print() {
-      if (this.head == null) {
-        return null;
-      } else {
-        var result = new Array();
-        var node = this.head;
-        while (node.next != null) {
-          result.push(node.data);
-          node = node.next;
-        };
-        result.push(node.data);
-        return result;
-      };
-    },
-    printReverse() {
-      if (this.tail == null) {
-        return null;
-      } else {
-        var result = new Array();
-        var node = this.tail;
-        while (node.prev != null) {
-          result.push(node.data);
-          node = node.prev;
-        };
-        result.push(node.data);
-        return result;
-      };
-    }
-  }
-);
-```
-
 ## --seed-contents--
 
 ```js
-var Node = function(data, prev) {
-  this.data = data;
-  this.prev = prev;
-  this.next = null;
-};
-var DoublyLinkedList = function() {
-  this.head = null;
-  this.tail = null;
+function LinkedList() {
+  var length = 0;
+  var head = null;
+
+  var Node = function(element){
+    this.element = element;
+    this.next = null;
+  };
+
+  this.size = function() {
+    return length;
+  };
+
+  this.head = function(){
+    return head;
+  };
+
+  this.add = function(element){
+    var node = new Node(element);
+    if(head === null){
+        head = node;
+    } else {
+      var currentNode = head;
+
+      while(currentNode.next){
+        currentNode = currentNode.next;
+      }
+
+      currentNode.next = node;
+    }
+
+    length++;
+  };
+
+  this.remove = function(element){
+    var currentNode = head;
+    var previousNode;
+    if(currentNode.element === element){
+      head = currentNode.next;
+    } else {
+      while(currentNode.element !== element) {
+        previousNode = currentNode;
+        currentNode = currentNode.next;
+      }
+
+      previousNode.next = currentNode.next;
+    }
+
+    length --;
+  };
+
   // Only change code below this line
-  
+
   // Only change code above this line
-};
+}
 ```
 
 # --solutions--
 
 ```js
-  var Node = function(data, prev) {
-    this.data = data;
-    this.prev = prev;
+function LinkedList() {
+  var length = 0;
+  var head = null;
+
+  var Node = function(element){
+    this.element = element;
     this.next = null;
   };
-  var DoublyLinkedList = function() {
-    this.head = null;
-    this.tail = null;
 
-    this.reverse = function() {
-      if (!this.head || !this.head.next) {
-        return this.head
-      }
-
-      let tail;
-      let temp;
-      let current = this.head;
-      while(current !== null) {
-        if(!tail) tail = current;
-        temp = current.prev;
-        current.prev = current.next;
-        current.next = temp;
-        current = current.prev;
-      }
-
-      this.head = temp.prev;
-      this.tail = tail
-    }
+  this.size = function() {
+    return length;
   };
+
+  this.head = function(){
+    return head;
+  };
+
+  this.add = function(element){
+    var node = new Node(element);
+    if(head === null){
+        head = node;
+    } else {
+        var currentNode = head;
+
+        while(currentNode.next){
+            currentNode  = currentNode.next;
+        }
+
+        currentNode.next = node;
+    }
+
+    length++;
+  };
+
+  this.remove = function(element){
+    var currentNode = head;
+    var previousNode;
+    if(currentNode.element === element){
+        head = currentNode.next;
+    } else {
+        while(currentNode.element !== element) {
+            previousNode = currentNode;
+            currentNode = currentNode.next;
+        }
+
+        previousNode.next = currentNode.next;
+    }
+
+    length --;
+  };
+
+  this.indexOf = function(element) {
+    if (head === null) return -1
+
+    let current = head;
+    let index = 0;
+
+    while (current.element !== element && current.next !== null) {
+      current = current.next;
+      index++
+    }
+
+    if (current.element !== element && current.next === null) {
+      return -1
+    }
+
+    return index;
+  }
+
+  this.elementAt = function(index) {
+    if (head === null) return undefined;
+
+    let current = head;
+    let currentIndex = 0;
+
+    while (currentIndex !== index && current.next !== null) {
+      current = current.next;
+      currentIndex++
+    }
+
+    if (currentIndex !== index && current.next === null) {
+      return undefined;
+    }
+
+    return current.element;
+  }
+
+  this.isEmpty = function() {
+    return length === 0;
+  }
+}
 ```
