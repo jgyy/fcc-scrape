@@ -1,208 +1,194 @@
 ---
-id: 587d825a367417b2b2512c87
-title: Create a Doubly Linked List
+id: 587d825b367417b2b2512c8e
+title: Create a Hash Table
 challengeType: 1
-forumTopicId: 301626
-dashedName: create-a-doubly-linked-list
+forumTopicId: 301627
+dashedName: create-a-hash-table
 ---
 
 # --description--
 
-All of the linked lists we've created so far are singly linked lists. Here, we'll create a <dfn>doubly linked list</dfn>. As the name implies, nodes in a doubly linked list have references to the next and previous node in the list.
+In this challenge we will learn about hash tables. A Hash table is used to implement associative arrays, or mappings of key-value pairs, like the objects and Maps we have just been studying. A JavaScript object could be implemented as a hash table, for instance (its actual implementation will depend on the environment it's running in). The way a hash table works is that it takes a key input and hashes this key in a deterministic way to some numerical value. This numerical value is then used as the actual key the associated value is stored by. Then, if you try to access the same key again, the hashing function will process the key, return the same numerical result, which will then be used to look up the associated value. This provides very efficient O(1) lookup time on average.
 
-This allows us to traverse the list in both directions but it also requires more memory to be used because every node must contain an additional reference to the previous node in the list.
+Hash tables can be implemented as arrays with hash functions producing array indices within a specified range. In this method, the choice of the array size is important, as is the hashing function. For instance, what if the hashing function produces the same value for two different keys? This is called a collision. One way to handle collisions is to just store both key-value pairs at that index. Then, upon lookup of either, you would have to iterate through the bucket of items to find the key you are looking for. A good hashing function will minimize collisions to maintain efficient search time.
+
+Here, we won't be concerned with the details of hashing or hash table implementation, we will just try to get a general sense of how they work.
 
 # --instructions--
 
-We've provided a `Node` object and started our `DoublyLinkedList`. Let's add two methods to our doubly linked list called `add` and `remove`. The `add` method should add the given element to the list while the `remove` method should remove all occurrences of a given element in the list.
+Let's create the basic functionality of a hash table. We've created a naive hashing function for you to use. You can pass a string value to the function `hash` and it will return a hashed value you can use as a key for storage. Store items based on this hashed value in the `this.collection` object. Create these three methods: `add`, `remove`, and `lookup`. The first should accept a key value pair to add to the hash table. The second should remove a key-value pair when passed a key. The third should accept a key and return the associated value or `null` if the key is not present.
 
-Be careful to handle any possible edge cases when writing these methods, such as deletions for the first or last element. Also, removing any item on an empty list should return `null`.
+Be sure to write your code to account for collisions!
 
 # --hints--
 
-The DoublyLinkedList data structure should exist.
+The HashTable data structure should exist.
 
 ```js
 assert(
   (function () {
     var test = false;
-    if (typeof DoublyLinkedList !== 'undefined') {
-      test = new DoublyLinkedList();
+    if (typeof HashTable !== 'undefined') {
+      test = new HashTable();
     }
-    return typeof test == 'object';
+    return typeof test === 'object';
   })()
 );
 ```
 
-The DoublyLinkedList should have a method called add.
+The HashTable should have an add method.
 
 ```js
 assert(
   (function () {
     var test = false;
-    if (typeof DoublyLinkedList !== 'undefined') {
-      test = new DoublyLinkedList();
+    if (typeof HashTable !== 'undefined') {
+      test = new HashTable();
     }
-    if (test.add == undefined) {
-      return false;
-    }
-    return typeof test.add == 'function';
+    return typeof test.add === 'function';
   })()
 );
 ```
 
-The DoublyLinkedList should have a method called remove.
+The HashTable should have a remove method.
 
 ```js
 assert(
   (function () {
     var test = false;
-    if (typeof DoublyLinkedList !== 'undefined') {
-      test = new DoublyLinkedList();
+    if (typeof HashTable !== 'undefined') {
+      test = new HashTable();
     }
-    if (test.remove == undefined) {
-      return false;
-    }
-    return typeof test.remove == 'function';
+    return typeof test.remove === 'function';
   })()
 );
 ```
 
-Removing an item from an empty list should return null.
+The HashTable should have a lookup method.
 
 ```js
 assert(
   (function () {
     var test = false;
-    if (typeof DoublyLinkedList !== 'undefined') {
-      test = new DoublyLinkedList();
+    if (typeof HashTable !== 'undefined') {
+      test = new HashTable();
     }
-    return test.remove(100) == null;
+    return typeof test.lookup === 'function';
   })()
 );
 ```
 
-The add method should add items to the list.
+The add method should add key value pairs and the lookup method should return the values associated with a given key.
 
 ```js
 assert(
   (function () {
     var test = false;
-    if (typeof DoublyLinkedList !== 'undefined') {
-      test = new DoublyLinkedList();
+    if (typeof HashTable !== 'undefined') {
+      test = new HashTable();
     }
-    test.add(5);
-    test.add(6);
-    test.add(723);
-    return test.print().join('') == '56723';
+    test.add('key', 'value');
+    return test.lookup('key') === 'value';
   })()
 );
 ```
 
-Each node should keep track of the previous node.
+The remove method should accept a key as input and should remove the associated key value pair.
 
 ```js
 assert(
   (function () {
     var test = false;
-    if (typeof DoublyLinkedList !== 'undefined') {
-      test = new DoublyLinkedList();
+    var hashValue = hash('key');
+    if (typeof HashTable !== 'undefined') {
+      test = new HashTable();
     }
-    test.add(50);
-    test.add(68);
-    test.add(73);
-    return test.printReverse().join('') == '736850';
+    test.add = addMethodSolution;
+    test.add('key', 'value');
+    test.remove('key');
+    return !test.collection.hasOwnProperty(hashValue);
   })()
 );
 ```
 
-The first item should be removable from the list.
+Items should be added using the hash function.
 
 ```js
 assert(
   (function () {
     var test = false;
-    if (typeof DoublyLinkedList !== 'undefined') {
-      test = new DoublyLinkedList();
+    if (typeof HashTable !== 'undefined') {
+      test = new HashTable();
     }
-    test.add(25);
-    test.add(35);
-    test.add(60);
-    test.remove(25);
-    return test.print().join('') == '3560';
+    called = 0;
+    test.add('key1', 'value1');
+    test.add('key2', 'value2');
+    test.add('key3', 'value3');
+    return called >= 3 && called % 3 === 0;
   })()
 );
 ```
 
-The last item should be removable from the list.
+The hash table should handle collisions.
 
 ```js
 assert(
   (function () {
     var test = false;
-    if (typeof DoublyLinkedList !== 'undefined') {
-      test = new DoublyLinkedList();
+    if (typeof HashTable !== 'undefined') {
+      test = new HashTable();
     }
-    test.add(25);
-    test.add(35);
-    test.add(60);
-    test.remove(60);
-    return test.print().join('') == '2535';
+    called = 0;
+    test.add('key1', 'value1');
+    test.add('1key', 'value2');
+    test.add('ke1y', 'value3');
+    return (
+      test.lookup('key1') === 'value1' &&
+      test.lookup('1key') == 'value2' &&
+      test.lookup('ke1y') == 'value3'
+    );
   })()
 );
 ```
 
 # --seed--
 
-## --after-user-code--
+## --before-user-code--
 
 ```js
-DoublyLinkedList.prototype = Object.assign(
-  DoublyLinkedList.prototype,
-  {
-  
-  print() {
-    if (this.head == null) {
-      return null;
-    } else {
-      var result = new Array();
-      var node = this.head;
-      while (node.next != null) {
-        result.push(node.data);
-        node = node.next;
-      };
-      result.push(node.data);
-      return result;
-    };
-  },
-  printReverse() {
-    if (this.tail == null) {
-      return null;
-    } else {
-      var result = new Array();
-      var node = this.tail;
-      while (node.prev != null) {
-        result.push(node.data);
-        node = node.prev;
-      };
-      result.push(node.data);
-      return result;
-    };
+var called = 0;
+var hash = string => {
+  called++;
+  var hash = 0;
+  for (var i = 0; i < string.length; i++) {
+    hash += string.charCodeAt(i);
   }
-});
+  return hash;
+};
+
+var addMethodSolution = function(key, val) {
+    var theHash = hash(key);
+    if (!this.collection.hasOwnProperty(theHash)) {
+      this.collection[theHash] = {};
+    }
+    this.collection[theHash][key] = val;
+}
 ```
 
 ## --seed-contents--
 
 ```js
-var Node = function(data, prev) {
-  this.data = data;
-  this.prev = prev;
-  this.next = null;
+var called = 0;
+var hash = string => {
+  called++;
+  var hashed = 0;
+  for (var i = 0; i < string.length; i++) {
+    hashed += string.charCodeAt(i);
+  }
+  return hashed;
 };
-var DoublyLinkedList = function() {
-  this.head = null;
-  this.tail = null;
+var HashTable = function() {
+  this.collection = {};
   // Only change code below this line
   
   // Only change code above this line
@@ -212,5 +198,43 @@ var DoublyLinkedList = function() {
 # --solutions--
 
 ```js
-// solution required
+var called = 0;
+var hash = (string) => {
+  called++;
+  var hash = 0;
+  for (var i = 0; i < string.length; i++) { hash += string.charCodeAt(i); }
+  return hash;
+};
+var HashTable = function() {
+  this.collection = {};
+  // Only change code below this line
+
+  this.add = function(key, val) {
+    var theHash = hash(key);
+    if (!this.collection.hasOwnProperty(theHash)) {
+      this.collection[theHash] = {};
+    }
+    this.collection[theHash][key] = val;
+  }
+
+  this.remove = function(key) {
+    var theHash = hash(key);
+    var hashedObj = this.collection[theHash];
+    if (hashedObj.hasOwnProperty(key)) {
+      delete hashedObj[key];
+    }
+    if (!Object.keys(hashedObj).length) {
+      delete this.collection[theHash];
+    }
+  }
+
+  this.lookup = function(key) {
+    var theHash = hash(key);
+    if (this.collection.hasOwnProperty(theHash)) {
+      return this.collection[theHash][key];
+    }
+    return null
+  }
+  // Only change code above this line
+};
 ```
