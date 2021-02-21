@@ -1,18 +1,18 @@
 ---
-id: 587d8258367417b2b2512c80
-title: Delete a Leaf Node in a Binary Search Tree
+id: 587d8258367417b2b2512c81
+title: Delete a Node with One Child in a Binary Search Tree
 challengeType: 1
-forumTopicId: 301637
-dashedName: delete-a-leaf-node-in-a-binary-search-tree
+forumTopicId: 301638
+dashedName: delete-a-node-with-one-child-in-a-binary-search-tree
 ---
 
 # --description--
 
-This is the first of three challenges where we will implement a more difficult operation in binary search trees: deletion. Deletion is difficult because removing nodes breaks links in the tree. These links must be carefully reestablished to ensure the binary tree structure is maintained. For some deletions, this means the tree must be rearranged. In general, you will encounter one of three cases when trying to delete a node: Leaf Node: The target to delete has zero children. One Child: The target to delete only has one child. Two Children: The target to delete has two child nodes. Removing a leaf node is easy, we simply remove it. Deleting a node with one child is also relatively easy, we simply remove it and link its parent to child of the node we deleted. Removing a node with two children is more difficult, however, because this creates two child nodes that need to be reconnected to the parent tree. We'll see how to deal with this case in the third challenge. Additionally, you need to be mindful of some edge cases when handling deletion. What if the tree is empty? What if the node to delete is the root node? What if there are only two elements in the tree? For now, let's handle the first case where we delete a leaf node.
+Now that we can delete leaf nodes let's move on to the second case: deleting a node with one child. For this case, say we have a tree with the following nodes 1 — 2 — 3 where 1 is the root. To delete 2, we simply need to make the right reference in 1 point to 3. More generally to delete a node with only one child, we make that node's parent reference the next node in the tree.
 
 # --instructions--
 
-Create a method on our binary tree called `remove`. We'll build the logic for our deletion operation in here. First, you'll want to create a function within remove that finds the node we are trying to delete in the current tree. If the node is not present in the tree, `remove` should return `null`. Now, if the target node is a leaf node with no children, then the parent reference to it should be set to `null`. This effectively deletes the node from the tree. To do this, you will have to keep track of the parent of the node we are trying to delete as well. It will also be useful to create a way to track the number of children the target node has, as this will determine which case our deletion falls under. We will handle the second and third cases in the next challenges. Good luck!
+We've provided some code in our `remove` method that accomplishes the tasks from the last challenge. We find the target to delete and its parent and define the number of children the target node has. Let's add the next case here for target nodes with only one child. Here, we'll have to determine if the single child is a left or right branch in the tree and then set the correct reference in the parent to point to this node. In addition, let's account for the case where the target is the root node (this means the parent node will be `null`). Feel free to replace all the starter code with your own as long as it passes the tests.
 
 # --hints--
 
@@ -114,6 +114,54 @@ assert(
 );
 ```
 
+The `remove` method should remove nodes with one child.
+
+```js
+assert(
+  (function () {
+    var test = false;
+    if (typeof BinarySearchTree !== 'undefined') {
+      test = new BinarySearchTree();
+    } else {
+      return false;
+    }
+    if (typeof test.remove !== 'function') {
+      return false;
+    }
+    test.add(-1);
+    test.add(3);
+    test.add(7);
+    test.add(16);
+    test.remove(16);
+    test.remove(7);
+    test.remove(3);
+    return test.inorder().join('') == '-1';
+  })()
+);
+```
+
+Removing the root in a tree with two nodes should set the second to be the root.
+
+```js
+assert(
+  (function () {
+    var test = false;
+    if (typeof BinarySearchTree !== 'undefined') {
+      test = new BinarySearchTree();
+    } else {
+      return false;
+    }
+    if (typeof test.remove !== 'function') {
+      return false;
+    }
+    test.add(15);
+    test.add(27);
+    test.remove(15);
+    return test.inorder().join('') == '27';
+  })()
+);
+```
+
 # --seed--
 
 ## --after-user-code--
@@ -184,7 +232,49 @@ function Node(value) {
 
 function BinarySearchTree() {
   this.root = null;
-  // Only change code below this line
+  this.remove = function(value) {
+    if (this.root === null) {
+      return null;
+    }
+    var target;
+    var parent = null;
+    // Find the target value and its parent
+    (function findValue(node = this.root) {
+      if (value == node.value) {
+        target = node;
+      } else if (value < node.value && node.left !== null) {
+        parent = node;
+        return findValue(node.left);
+      } else if (value < node.value && node.left === null) {
+        return null;
+      } else if (value > node.value && node.right !== null) {
+        parent = node;
+        return findValue(node.right);
+      } else {
+        return null;
+      }
+    }.bind(this)());
+    if (target === null) {
+      return null;
+    }
+    // Count the children of the target to delete
+    var children =
+      (target.left !== null ? 1 : 0) + (target.right !== null ? 1 : 0);
+    // Case 1: Target has no children
+    if (children === 0) {
+      if (target == this.root) {
+        this.root = null;
+      } else {
+        if (parent.left == target) {
+          parent.left = null;
+        } else {
+          parent.right = null;
+        }
+      }
+    }
+    // Case 2: Target has one child
+    // Only change code below this line
+  };
 }
 ```
 
