@@ -1,74 +1,90 @@
 ---
-id: 587d8256367417b2b2512c77
-title: Adjacency List
+id: 587d8256367417b2b2512c78
+title: Adjacency Matrix
 challengeType: 1
-forumTopicId: 301620
-dashedName: adjacency-list
+forumTopicId: 301621
+dashedName: adjacency-matrix
 ---
 
 # --description--
 
-Graphs can be represented in different ways. Here we describe one way, which is called an <dfn>adjacency list</dfn>. An adjacency list is essentially a bulleted list where the left side is the node and the right side lists all the other nodes it's connected to. Below is a representation of an adjacency list.
+Another way to represent a graph is to put it in an <dfn>adjacency matrix</dfn>. An <dfn>adjacency matrix</dfn> is a two-dimensional (2D) array where each nested array has the same number of elements as the outer array. In other words, it is a matrix or grid of numbers, where the numbers represent the edges.
 
-<blockquote>Node1: Node2, Node3<br>Node2: Node1<br>Node3: Node1</blockquote>
+**Note**: The numbers to the top and left of the matrix are just labels for the nodes. Inside the matrix, ones mean there exists an edge between the vertices (nodes) representing the row and column. Finally, zeros mean there is no edge or relationship.
 
-Above is an undirected graph because `Node1` is connected to `Node2` and `Node3`, and that information is consistent with the connections `Node2` and `Node3` show. An adjacency list for a directed graph would mean each row of the list shows direction. If the above was directed, then `Node2: Node1` would mean there the directed edge is pointing from `Node2` towards `Node1`. We can represent the undirected graph above as an adjacency list by putting it within a JavaScript object.
+<pre>
+    1 2 3
+  \------
+1 | 0 1 1
+2 | 1 0 0
+3 | 1 0 0
+</pre>
 
-```js
-var undirectedG = {
-  Node1: ["Node2", "Node3"],
-  Node2: ["Node1"],
-  Node3: ["Node1"]
-};
-```
-
-This can also be more simply represented as an array where the nodes just have numbers rather than string labels.
+Above is a very simple, undirected graph where you have three nodes, where the first node is connected to the second and third node. Below is a JavaScript implementation of the same thing.
 
 ```js
-var undirectedGArr = [
-  [1, 2], // Node1
-  [0],    // Node2
-  [0]     // Node3
+var adjMat = [
+  [0, 1, 1],
+  [1, 0, 0],
+  [1, 0, 0]
 ];
 ```
 
+Unlike an adjacency list, each "row" of the matrix has to have the same number of elements as nodes in the graph. Here we have a three by three matrix, which means we have three nodes in our graph. A directed graph would look similar. Below is a graph where the first node has an edge pointing toward the second node, and then the second node has an edge pointing to the third node.
+
+```js
+var adjMatDirected = [
+  [0, 1, 0],
+  [0, 0, 1],
+  [0, 0, 0]
+];
+```
+
+Graphs can also have <dfn>weights</dfn> on their edges. So far, we have <dfn>unweighted</dfn> edges where just the presence and lack of edge is binary (`0` or `1`). You can have different weights depending on your application.
+
 # --instructions--
 
-Create a social network as an undirected graph with 4 nodes/people named `James`, `Jill`, `Jenny`, and `Jeff`. There are edges/relationships between James and Jeff, Jill and Jenny, and Jeff and Jenny.
+Create an adjacency matrix of an undirected graph with five nodes. This matrix should be in a multi-dimensional array. These five nodes have relationships between the first and fourth node, the first and third node, the third and fifth node, and the fourth and fifth node. All edge weights are one.
 
 # --hints--
 
-`undirectedAdjList` should only contain four nodes.
-
-```js
-assert(Object.keys(undirectedAdjList).length === 4);
-```
-
-There should be an edge between `Jeff` and `James`.
+`undirectedAdjList` should only contain five nodes.
 
 ```js
 assert(
-  undirectedAdjList.James.indexOf('Jeff') !== -1 &&
-    undirectedAdjList.Jeff.indexOf('James') !== -1
+  adjMatUndirected.length === 5 &&
+    adjMatUndirected
+      .map(function (x) {
+        return x.length === 5;
+      })
+      .reduce(function (a, b) {
+        return a && b;
+      })
 );
 ```
 
-There should be an edge between `Jill` and `Jenny`.
+There should be an edge between the first and fourth node.
 
 ```js
-assert(
-  undirectedAdjList.Jill.indexOf('Jenny') !== -1 &&
-    undirectedAdjList.Jill.indexOf('Jenny') !== -1
-);
+assert(adjMatUndirected[0][3] === 1 && adjMatUndirected[3][0] === 1);
 ```
 
-There should be an edge between `Jeff` and `Jenny`.
+There should be an edge between the first and third node.
 
 ```js
-assert(
-  undirectedAdjList.Jeff.indexOf('Jenny') !== -1 &&
-    undirectedAdjList.Jenny.indexOf('Jeff') !== -1
-);
+assert(adjMatUndirected[0][2] === 1 && adjMatUndirected[2][0] === 1);
+```
+
+There should be an edge between the third and fifth node.
+
+```js
+assert(adjMatUndirected[2][4] === 1 && adjMatUndirected[4][2] === 1);
+```
+
+There should be an edge between the fourth and fifth node.
+
+```js
+assert(adjMatUndirected[3][4] === 1 && adjMatUndirected[4][3] === 1);
 ```
 
 # --seed--
@@ -76,16 +92,17 @@ assert(
 ## --seed-contents--
 
 ```js
-var undirectedAdjList = {};
+var adjMatUndirected = [];
 ```
 
 # --solutions--
 
 ```js
-var undirectedAdjList = {
-  James: ['Jeff'],
-  Jill: ['Jenny'],
-  Jenny: ['Jill', 'Jeff'],
-  Jeff: ['James', 'Jenny']
-};
+var adjMatUndirected = [
+  [0, 0, 1, 1, 0],
+  [0, 0, 0, 0, 0],
+  [1, 0, 0, 0, 1],
+  [1, 0, 0, 0, 1],
+  [0, 0, 1, 1, 0]
+];
 ```
