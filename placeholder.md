@@ -1,96 +1,115 @@
 ---
-id: 587d8256367417b2b2512c79
-title: Incidence Matrix
+id: 587d825a367417b2b2512c8a
+title: Insert an Element into a Max Heap
 challengeType: 1
-forumTopicId: 301644
-dashedName: incidence-matrix
+forumTopicId: 301703
+dashedName: insert-an-element-into-a-max-heap
 ---
 
 # --description--
 
-Yet another way to represent a graph is to put it in an <dfn>incidence matrix.</dfn>
+Now we will move on to another tree data structure, the binary heap. A binary heap is a partially ordered binary tree which satisfies the heap property. The heap property specifies a relationship between parent and child nodes. You may have a max heap, in which all parent nodes are greater than or equal to their child nodes, or a min heap, in which the reverse is true. Binary heaps are also complete binary trees. This means that all levels of the tree are fully filled and if the last level is partially filled it is filled from left to right.
 
-An <dfn>incidence matrix</dfn> is a two-dimensional (2D) array. Generally speaking, an incidence matrix relates two different classes of objects between its two dimensions. This kind of matrix is similar to an adjacency matrix. However, the rows and columns mean something else here.
+While binary heaps may be implemented as tree structures with nodes that contain left and right references, the partial ordering according to the heap property allows us to represent the heap with an array. The parent-children relationship is what we're interested in and with simple arithmetic we can compute the children of any parent and the parent of any child node.
 
-In graphs, we have edges and nodes. These will be our "two different classes of objects". This matrix will have the rows be the nodes and columns be the edges. This means that we can have an uneven number of rows and columns.
+For instance, consider this array representation of a binary min heap:
 
-Each column will represent a unique edge. Also, each edge connects two nodes. To show that there is an edge between two nodes, you will put a 1 in the two rows of a particular column. Below is a 3 node graph with one edge between node 1 and node 3.
+`[ 6, 22, 30, 37, 63, 48, 42, 76 ]`
 
-<blockquote>    1<br>   ---<br>1 | 1<br>2 | 0<br>3 | 1</blockquote>
+The root node is the first element, `6`. Its children are `22` and `30`. If we look at the relationship between the array indices of these values, for index `i` the children are `2 * i + 1` and `2 * i + 2`. Similarly, the element at index `0` is the parent of these two children at indices `1` and `2`. More generally, we can find the parent of a node at any index with the following: `Math.floor((i - 1) / 2)`. These patterns will hold true as the binary tree grows to any size. Finally, we can make a slight adjustment to make this arithmetic even easier by skipping the first element in the array. Doing this creates the following relationship for any element at a given index `i`:
 
-Here is an example of an `incidence matrix` with 4 edges and 4 nodes. Remember, the columns are the edges and rows are the nodes themselves.
+Example array representation:
 
-<blockquote>    1 2 3 4<br>   --------<br>1 | 0 1 1 1<br>2 | 1 1 0 0<br>3 | 1 0 0 1<br>4 | 0 0 1 0</blockquote>
+`[ null, 6, 22, 30, 37, 63, 48, 42, 76 ]`
 
-Below is a JavaScript implementation of the same thing.
+An element's left child: `i * 2`
 
-```js
-var incMat = [
-  [0, 1, 1, 1],
-  [1, 1, 0, 0],
-  [1, 0, 0, 1],
-  [0, 0, 1, 0]
-];
-```
+An element's right child: `i * 2 + 1`
 
-To make a directed graph, use `-1` for an edge leaving a particular node and `1` for an edge entering a node.
+An element's parent: `Math.floor(i / 2)`
 
-```js
-var incMatDirected = [
-  [ 0, -1,  1, -1],
-  [-1,  1,  0,  0],
-  [ 1,  0,  0,  1],
-  [ 0,  0, -1,  0]
-];
-```
-
-Graphs can also have <dfn>weights</dfn> on their edges. So far, we have <dfn>unweighted</dfn> edges where just the presence and lack of edge is binary (`0` or `1`). You can have different weights depending on your application. A different weight is represented as numbers greater than 1.
+Once you wrap your head around the math, using an array representation is very useful because node locations can be quickly determined with this arithmetic and memory usage is diminished because you don't need to maintain references to child nodes.
 
 # --instructions--
 
-Create an incidence matrix of an undirected graph with five nodes and four edges. This matrix should be in a multi-dimensional array.
+Instructions: Here we will create a max heap. Start by just creating an `insert` method which adds elements to our heap. During insertion, it is important to always maintain the heap property. For a max heap this means the root element should always have the greatest value in the tree and all parent nodes should be greater than their children. For an array implementation of a heap, this is typically accomplished in three steps:
 
-These five nodes have the following relationships. The first edge is between the first and second node. The second edge is between the second and third node. The third edge is between the third and fifth node. The fourth edge is between the fourth and second node. All edge weights are one and the edge order matters.
+<ol>
+  <li>Add the new element to the end of the array.</li>
+  <li>If the element is larger than its parent, switch them.</li>
+  <li>Continue switching until the new element is either smaller than its parent or you reach the root of the tree.</li>
+</ol>
+
+Finally, add a `print` method which returns an array of all the items that have been added to the heap.
 
 # --hints--
 
-`incMatUndirected` should only contain five nodes.
+The MaxHeap data structure should exist.
 
 ```js
 assert(
-  incMatUndirected.length === 5 &&
-    incMatUndirected
-      .map(function (x) {
-        return x.length === 4;
-      })
-      .reduce(function (a, b) {
-        return a && b;
-      })
+  (function () {
+    var test = false;
+    if (typeof MaxHeap !== 'undefined') {
+      test = new MaxHeap();
+    }
+    return typeof test == 'object';
+  })()
 );
 ```
 
-There should be a first edge between the first and second node.
+MaxHeap should have a method called insert.
 
 ```js
-assert(incMatUndirected[0][0] === 1 && incMatUndirected[1][0] === 1);
+assert(
+  (function () {
+    var test = false;
+    if (typeof MaxHeap !== 'undefined') {
+      test = new MaxHeap();
+    } else {
+      return false;
+    }
+    return typeof test.insert == 'function';
+  })()
+);
 ```
 
-There should be a second edge between the second and third node.
+MaxHeap should have a method called print.
 
 ```js
-assert(incMatUndirected[1][1] === 1 && incMatUndirected[2][1] === 1);
+assert(
+  (function () {
+    var test = false;
+    if (typeof MaxHeap !== 'undefined') {
+      test = new MaxHeap();
+    } else {
+      return false;
+    }
+    return typeof test.print == 'function';
+  })()
+);
 ```
 
-There should be a third edge between the third and fifth node.
+The insert method should add elements according to the max heap property.
 
 ```js
-assert(incMatUndirected[2][2] === 1 && incMatUndirected[4][2] === 1);
-```
-
-There should be a fourth edge between the second and fourth node.
-
-```js
-assert(incMatUndirected[1][3] === 1 && incMatUndirected[3][3] === 1);
+assert(
+  (function () {
+    var test = false;
+    if (typeof MaxHeap !== 'undefined') {
+      test = new MaxHeap();
+    } else {
+      return false;
+    }
+    test.insert(50);
+    test.insert(100);
+    test.insert(700);
+    test.insert(32);
+    test.insert(51);
+    let result = test.print();
+    return result.length == 5 ? result[0] == 700 : result[1] == 700;
+  })()
+);
 ```
 
 # --seed--
@@ -98,13 +117,33 @@ assert(incMatUndirected[1][3] === 1 && incMatUndirected[3][3] === 1);
 ## --seed-contents--
 
 ```js
-var incMatUndirected = [
-
-];
+var MaxHeap = function() {
+  // Only change code below this line
+    
+  // Only change code above this line
+};
 ```
 
 # --solutions--
 
 ```js
-var incMatUndirected = [[1, 0, 0, 0],[1, 1, 0, 1],[0, 1, 1, 0],[0, 0, 0, 1],[0, 0, 1, 0]];
+var MaxHeap = function() {
+    // Only change code below this line
+    this.heap = [null];
+    this.insert = (ele) => {
+        var index = this.heap.length;
+        var arr = [...this.heap];
+        arr.push(ele);
+        while (ele > arr[Math.floor(index / 2)] && index > 1) {
+            arr[index] = arr[Math.floor(index / 2)];
+            arr[Math.floor(index / 2)] = ele;
+            index = arr[Math.floor(index / 2)];
+        }
+        this.heap = arr;
+    }
+    this.print = () => {
+        return this.heap.slice(1);
+    }
+    // Only change code above this line
+};
 ```
