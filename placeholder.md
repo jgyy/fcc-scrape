@@ -1,31 +1,31 @@
 ---
-id: 587d8253367417b2b2512c6c
-title: Perform a Union on Two Sets
+id: 587d8253367417b2b2512c6d
+title: Perform an Intersection on Two Sets of Data
 challengeType: 1
-forumTopicId: 301708
-dashedName: perform-a-union-on-two-sets
+forumTopicId: 301709
+dashedName: perform-an-intersection-on-two-sets-of-data
 ---
 
 # --description--
 
-In this exercise we are going to perform a union on two sets of data. We will create a method on our `Set` data structure called `union`. This method should take another `Set` as an argument and return the `union` of the two sets, excluding any duplicate values.
+In this exercise we are going to perform an intersection on 2 sets of data. We will create a method on our `Set` data structure called `intersection`. An intersection of sets represents all values that are common to two or more sets. This method should take another `Set` as an argument and return the `intersection` of the two sets.
 
-For example, if `setA = ['a','b','c']` and `setB = ['a','b','d','e']`, then the union of setA and setB is: `setA.union(setB) = ['a', 'b', 'c', 'd', 'e']`.
+For example, if `setA = ['a','b','c']` and `setB = ['a','b','d','e']`, then the intersection of setA and setB is: `setA.intersection(setB) = ['a', 'b']`.
 
 # --hints--
 
-Your `Set` class should have a `union` method.
+Your `Set` class should have a `intersection` method.
 
 ```js
 assert(
   (function () {
     var test = new Set();
-    return typeof test.union === 'function';
+    return typeof test.intersection === 'function';
   })()
 );
 ```
 
-The union of a Set containing values ["a", "b", "c"] and a Set containing values ["c", "d"] should return a new Set containing values ["a", "b", "c", "d"].
+The proper collection should be returned.
 
 ```js
 assert(
@@ -37,14 +37,9 @@ assert(
     setA.add('c');
     setB.add('c');
     setB.add('d');
-    var unionSetAB = setA.union(setB);
-    var final = unionSetAB.values();
+    var intersectionSetAB = setA.intersection(setB);
     return (
-      final.indexOf('a') !== -1 &&
-      final.indexOf('b') !== -1 &&
-      final.indexOf('c') !== -1 &&
-      final.indexOf('d') !== -1 &&
-      final.length === 4
+      intersectionSetAB.size() === 1 && intersectionSetAB.values()[0] === 'c'
     );
   })()
 );
@@ -67,12 +62,12 @@ class Set {
   }
   // This method will return all the values in the set
   values() {
-    return Object.values(this.dictionary);
+    return Object.keys(this.dictionary);
   }
   // This method will add an element to the set
   add(element) {
     if (!this.has(element)) {
-      this.dictionary[element] = element;
+      this.dictionary[element] = true;
       this.length++;
       return true;
     }
@@ -93,8 +88,20 @@ class Set {
   size() {
     return this.length;
   }
-  // Only change code below this line
+  // This is our union method 
+  union(set) {
+    const newSet = new Set();
+    this.values().forEach(value => {
+      newSet.add(value);
+    })
+    set.values().forEach(value => {
+      newSet.add(value);
+    })
 
+    return newSet;
+  }
+  // Only change code below this line
+  
   // Only change code above this line
 }
 ```
@@ -113,12 +120,12 @@ class Set {
   }
 
   values() {
-    return Object.values(this.dictionary);
+    return Object.keys(this.dictionary);
   }
 
   add(element) {
     if (!this.has(element)) {
-      this.dictionary[element] = element;
+      this.dictionary[element] = true;
       this.length++;
       return true;
     }
@@ -147,6 +154,28 @@ class Set {
     })
     set.values().forEach(value => {
       newSet.add(value);
+    })
+
+    return newSet;
+  }
+
+  intersection(set) {
+    const newSet = new Set();
+
+    let largeSet;
+    let smallSet;
+    if (this.dictionary.length > set.length) {
+      largeSet = this;
+      smallSet = set;
+    } else {
+      largeSet = set;
+      smallSet = this;
+    }
+
+    smallSet.values().forEach(value => {
+      if (largeSet.dictionary[value]) {
+        newSet.add(value);
+      }
     })
 
     return newSet;
