@@ -1,62 +1,205 @@
 ---
-id: 587d8254367417b2b2512c71
-title: Remove items from a set in ES6
+id: 587d825a367417b2b2512c88
+title: Reverse a Doubly Linked List
 challengeType: 1
-forumTopicId: 301713
-dashedName: remove-items-from-a-set-in-es6
+forumTopicId: 301714
+dashedName: reverse-a-doubly-linked-list
 ---
 
 # --description--
 
-Let's practice removing items from an ES6 Set using the `delete` method.
-
-First, create an ES6 Set:
-
-`var set = new Set([1,2,3]);`
-
-Now remove an item from your Set with the `delete` method.
-
-```js
-set.delete(1);
-console.log([...set]) // should return [ 2, 3 ]
-```
-
-# --instructions--
-
-Now, create a set with the integers 1, 2, 3, 4, & 5.
-
-Remove the values 2 and 5, and then return the set.
+Let's create one more method for our doubly linked list called reverse which reverses the list in place. Once the method is executed the head should point to the previous tail and the tail should point to the previous head. Now, if we traverse the list from head to tail we should meet the nodes in a reverse order compared to the original list. Trying to reverse an empty list should return null.
 
 # --hints--
 
-Your Set should contain the values 1, 3, & 4
+The DoublyLinkedList data structure should exist.
 
 ```js
 assert(
   (function () {
-    var test = checkSet();
-    return test.has(1) && test.has(3) && test.has(4) && test.size === 3;
+    var test = false;
+    if (typeof DoublyLinkedList !== 'undefined') {
+      test = new DoublyLinkedList();
+    }
+    return typeof test == 'object';
+  })()
+);
+```
+
+The DoublyLinkedList should have a method called reverse.
+
+```js
+assert(
+  (function () {
+    var test = false;
+    if (typeof DoublyLinkedList !== 'undefined') {
+      test = new DoublyLinkedList();
+    }
+    if (test.reverse == undefined) {
+      return false;
+    }
+    return typeof test.reverse == 'function';
+  })()
+);
+```
+
+Reversing an empty list should return null.
+
+```js
+assert(
+  (function () {
+    var test = false;
+    if (typeof DoublyLinkedList !== 'undefined') {
+      test = new DoublyLinkedList();
+    }
+    return test.reverse() == null;
+  })()
+);
+```
+
+The reverse method should reverse the list.
+
+```js
+assert(
+  (function () {
+    var test = false;
+    if (typeof DoublyLinkedList !== 'undefined') {
+      test = new DoublyLinkedList();
+    }
+    test.add(58);
+    test.add(61);
+    test.add(32);
+    test.add(95);
+    test.add(41);
+    test.reverse();
+    return test.print().join('') == '4195326158';
+  })()
+);
+```
+
+The next and previous references should be correctly maintained when a list is reversed.
+
+```js
+assert(
+  (function () {
+    var test = false;
+    if (typeof DoublyLinkedList !== 'undefined') {
+      test = new DoublyLinkedList();
+    }
+    test.add(11);
+    test.add(22);
+    test.add(33);
+    test.add(44);
+    test.add(55);
+    test.reverse();
+    return test.printReverse().join('') == '1122334455';
   })()
 );
 ```
 
 # --seed--
 
+## --after-user-code--
+
+```js
+DoublyLinkedList.prototype = Object.assign(
+  DoublyLinkedList.prototype,
+  {
+    add(data) {
+      if (this.head == null) {
+        this.head = new Node(data, null);
+        this.tail = this.head;
+      } else {
+        var node = this.head;
+        var prev = null;
+        while (node.next != null) {
+          prev = node;
+          node = node.next;
+        };
+        var newNode = new Node(data, node);
+        node.next = newNode;
+        this.tail = newNode;
+      };
+    },
+    print() {
+      if (this.head == null) {
+        return null;
+      } else {
+        var result = new Array();
+        var node = this.head;
+        while (node.next != null) {
+          result.push(node.data);
+          node = node.next;
+        };
+        result.push(node.data);
+        return result;
+      };
+    },
+    printReverse() {
+      if (this.tail == null) {
+        return null;
+      } else {
+        var result = new Array();
+        var node = this.tail;
+        while (node.prev != null) {
+          result.push(node.data);
+          node = node.prev;
+        };
+        result.push(node.data);
+        return result;
+      };
+    }
+  }
+);
+```
+
 ## --seed-contents--
 
 ```js
-function checkSet(){
-   var set = null;
-   return set;
-}
+var Node = function(data, prev) {
+  this.data = data;
+  this.prev = prev;
+  this.next = null;
+};
+var DoublyLinkedList = function() {
+  this.head = null;
+  this.tail = null;
+  // Only change code below this line
+  
+  // Only change code above this line
+};
 ```
 
 # --solutions--
 
 ```js
-function checkSet(){
-var set = new Set([1,2,3,4,5]);
-set.delete(2);
-set.delete(5);
-return set;}
+  var Node = function(data, prev) {
+    this.data = data;
+    this.prev = prev;
+    this.next = null;
+  };
+  var DoublyLinkedList = function() {
+    this.head = null;
+    this.tail = null;
+
+    this.reverse = function() {
+      if (!this.head || !this.head.next) {
+        return this.head
+      }
+
+      let tail;
+      let temp;
+      let current = this.head;
+      while(current !== null) {
+        if(!tail) tail = current;
+        temp = current.prev;
+        current.prev = current.next;
+        current.next = temp;
+        current = current.prev;
+      }
+
+      this.head = temp.prev;
+      this.tail = tail
+    }
+  };
 ```
