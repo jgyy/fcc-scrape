@@ -1,47 +1,47 @@
 ---
-id: 5900f36e1000cf542c50fe80
-title: 'Problem 1: Multiples of 3 and 5'
+id: 5900f3761000cf542c50fe89
+title: 'Problem 10: Summation of primes'
 challengeType: 5
-forumTopicId: 301722
-dashedName: problem-1-multiples-of-3-and-5
+forumTopicId: 301723
+dashedName: problem-10-summation-of-primes
 ---
 
 # --description--
 
-If we list all the natural numbers below 10 that are multiples of 3 or 5, we get 3, 5, 6 and 9. The sum of these multiples is 23.
+The sum of the primes below 10 is 2 + 3 + 5 + 7 = 17.
 
-Find the sum of all the multiples of 3 or 5 below the provided parameter value `number`.
+Find the sum of all the primes below `n`.
 
 # --hints--
 
-`multiplesOf3and5(10)` should return a number.
+`primeSummation(17)` should return a number.
 
 ```js
-assert(typeof multiplesOf3and5(10) === 'number');
+assert(typeof primeSummation(17) === 'number');
 ```
 
-`multiplesOf3and5(49)` should return 543.
+`primeSummation(17)` should return 41.
 
 ```js
-assert.strictEqual(multiplesOf3and5(49), 543);
+assert.strictEqual(primeSummation(17), 41);
 ```
 
-`multiplesOf3and5(1000)` should return 233168.
+`primeSummation(2001)` should return 277050.
 
 ```js
-assert.strictEqual(multiplesOf3and5(1000), 233168);
+assert.strictEqual(primeSummation(2001), 277050);
 ```
 
-`multiplesOf3and5(8456)` should return 16687353.
+`primeSummation(140759)` should return 873608362.
 
 ```js
-assert.strictEqual(multiplesOf3and5(8456), 16687353);
+assert.strictEqual(primeSummation(140759), 873608362);
 ```
 
-`multiplesOf3and5(19564)` should return 89301183.
+`primeSummation(2000000)` should return 142913828922.
 
 ```js
-assert.strictEqual(multiplesOf3and5(19564), 89301183);
+assert.strictEqual(primeSummation(2000000), 142913828922);
 ```
 
 # --seed--
@@ -49,25 +49,33 @@ assert.strictEqual(multiplesOf3and5(19564), 89301183);
 ## --seed-contents--
 
 ```js
-function multiplesOf3and5(number) {
+function primeSummation(n) {
 
   return true;
 }
 
-multiplesOf3and5(1000);
+primeSummation(2000000);
 ```
 
 # --solutions--
 
 ```js
-const multiplesOf3and5 = (number) => {
-  var total = 0;
-
-  for(var i = 0; i < number; i++) {
-    if(i % 3 == 0 || i % 5 == 0) {
-      total += i;
+function primeSummation(n) {
+  if (n < 3) { return 0 };
+  let nums = [0, 0, 2];
+  for (let i = 3; i < n; i += 2){
+    nums.push(i);
+    nums.push(0);
+  }
+  let sum = 2;
+  for (let i = 3; i < n; i += 2){
+    if (nums[i] !== 0){
+      sum += nums[i];
+      for (let j = i*i; j < n; j += i){
+        nums[j] = 0;
+      }
     }
   }
-  return total;
-};
+  return sum;
+}
 ```
