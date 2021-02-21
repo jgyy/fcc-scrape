@@ -1,46 +1,110 @@
 ---
-id: 587d8253367417b2b2512c6d
-title: Perform an Intersection on Two Sets of Data
+id: 587d825b367417b2b2512c8b
+title: Remove an Element from a Max Heap
 challengeType: 1
-forumTopicId: 301709
-dashedName: perform-an-intersection-on-two-sets-of-data
+forumTopicId: 301710
+dashedName: remove-an-element-from-a-max-heap
 ---
 
 # --description--
 
-In this exercise we are going to perform an intersection on 2 sets of data. We will create a method on our `Set` data structure called `intersection`. An intersection of sets represents all values that are common to two or more sets. This method should take another `Set` as an argument and return the `intersection` of the two sets.
+Now that we can add elements to our heap let's see how we can remove elements. Removing and inserting elements both require similar logic. In a max heap you will usually want to remove the greatest value, so this involves simply extracting it from the root of our tree. This will break the heap property of our tree, so we must reestablish it in some way. Typically, for a max heap this is done in the following way:
 
-For example, if `setA = ['a','b','c']` and `setB = ['a','b','d','e']`, then the intersection of setA and setB is: `setA.intersection(setB) = ['a', 'b']`.
+<ol>
+  <li>Move the last element in the heap into the root position.</li>
+  <li>If either child of the root is greater than it, swap the root with the child of greater value.</li>
+  <li>Continue swapping until the parent is greater than both children or you reach the last level in the tree.</li>
+</ol>
+
+# --instructions--
+
+Instructions: Add a method to our max heap called `remove`. This method should return the greatest value that has been added to our max heap and remove it from the heap. It should also reorder the heap so the heap property is maintained. After removing an element, the next greatest element remaining in the heap should become the root.
 
 # --hints--
 
-Your `Set` class should have a `intersection` method.
+The MaxHeap data structure should exist.
 
 ```js
 assert(
   (function () {
-    var test = new Set();
-    return typeof test.intersection === 'function';
+    var test = false;
+    if (typeof MaxHeap !== 'undefined') {
+      test = new MaxHeap();
+    }
+    return typeof test == 'object';
   })()
 );
 ```
 
-The proper collection should be returned.
+MaxHeap should have a method called print.
 
 ```js
 assert(
   (function () {
-    var setA = new Set();
-    var setB = new Set();
-    setA.add('a');
-    setA.add('b');
-    setA.add('c');
-    setB.add('c');
-    setB.add('d');
-    var intersectionSetAB = setA.intersection(setB);
-    return (
-      intersectionSetAB.size() === 1 && intersectionSetAB.values()[0] === 'c'
-    );
+    var test = false;
+    if (typeof MaxHeap !== 'undefined') {
+      test = new MaxHeap();
+    } else {
+      return false;
+    }
+    return typeof test.print == 'function';
+  })()
+);
+```
+
+MaxHeap should have a method called insert.
+
+```js
+assert(
+  (function () {
+    var test = false;
+    if (typeof MaxHeap !== 'undefined') {
+      test = new MaxHeap();
+    } else {
+      return false;
+    }
+    return typeof test.insert == 'function';
+  })()
+);
+```
+
+MaxHeap should have a method called remove.
+
+```js
+assert(
+  (function () {
+    var test = false;
+    if (typeof MaxHeap !== 'undefined') {
+      test = new MaxHeap();
+    } else {
+      return false;
+    }
+    return typeof test.remove == 'function';
+  })()
+);
+```
+
+The remove method should remove the greatest element from the max heap while maintaining the max heap property.
+
+```js
+assert(
+  (function () {
+    var test = false;
+    if (typeof MaxHeap !== 'undefined') {
+      test = new MaxHeap();
+    } else {
+      return false;
+    }
+    test.insert(30);
+    test.insert(300);
+    test.insert(500);
+    test.insert(10);
+    let result = [];
+    result.push(test.remove());
+    result.push(test.remove());
+    result.push(test.remove());
+    result.push(test.remove());
+    return result.join('') == '5003003010';
   })()
 );
 ```
@@ -50,135 +114,30 @@ assert(
 ## --seed-contents--
 
 ```js
-class Set {
-  constructor() {
-    // This will hold the set
-    this.dictionary = {};
-    this.length = 0;
-  }
-  // This method will check for the presence of an element and return true or false
-  has(element) {
-    return this.dictionary[element] !== undefined;
-  }
-  // This method will return all the values in the set
-  values() {
-    return Object.keys(this.dictionary);
-  }
-  // This method will add an element to the set
-  add(element) {
-    if (!this.has(element)) {
-      this.dictionary[element] = true;
-      this.length++;
-      return true;
+var MaxHeap = function() {
+  this.heap = [null];
+  this.insert = (ele) => {
+    var index = this.heap.length;
+    var arr = [...this.heap];
+    arr.push(ele);
+    while (ele > arr[Math.floor(index / 2)] && index > 1) {
+      arr[index] = arr[Math.floor(index / 2)];
+      arr[Math.floor(index / 2)] = ele;
+      index = arr[Math.floor(index / 2)];
     }
-
-    return false;
+    this.heap = arr;
   }
-  // This method will remove an element from a set
-  remove(element) {
-    if (this.has(element)) {
-      delete this.dictionary[element];
-      this.length--;
-      return true;
-    }
-
-    return false;
-  }
-  // This method will return the size of the set
-  size() {
-    return this.length;
-  }
-  // This is our union method 
-  union(set) {
-    const newSet = new Set();
-    this.values().forEach(value => {
-      newSet.add(value);
-    })
-    set.values().forEach(value => {
-      newSet.add(value);
-    })
-
-    return newSet;
+  this.print = () => {
+    return this.heap.slice(1);
   }
   // Only change code below this line
-  
+
   // Only change code above this line
-}
+};
 ```
 
 # --solutions--
 
 ```js
-class Set {
-  constructor() {
-    this.dictionary = {};
-    this.length = 0;
-  }
-
-  has(element) {
-    return this.dictionary[element] !== undefined;
-  }
-
-  values() {
-    return Object.keys(this.dictionary);
-  }
-
-  add(element) {
-    if (!this.has(element)) {
-      this.dictionary[element] = true;
-      this.length++;
-      return true;
-    }
-
-    return false;
-  }
-
-  remove(element) {
-    if (this.has(element)) {
-      delete this.dictionary[element];
-      this.length--;
-      return true;
-    }
-
-    return false;
-  }
-
-  size() {
-    return this.length;
-  }
-
-  union(set) {
-    const newSet = new Set();
-    this.values().forEach(value => {
-      newSet.add(value);
-    })
-    set.values().forEach(value => {
-      newSet.add(value);
-    })
-
-    return newSet;
-  }
-
-  intersection(set) {
-    const newSet = new Set();
-
-    let largeSet;
-    let smallSet;
-    if (this.dictionary.length > set.length) {
-      largeSet = this;
-      smallSet = set;
-    } else {
-      largeSet = set;
-      smallSet = this;
-    }
-
-    smallSet.values().forEach(value => {
-      if (largeSet.dictionary[value]) {
-        newSet.add(value);
-      }
-    })
-
-    return newSet;
-  }
-}
+// solution required
 ```
