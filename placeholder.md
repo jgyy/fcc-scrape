@@ -1,99 +1,94 @@
 ---
-id: 587d825c367417b2b2512c90
-title: Breadth-First Search
+id: 587d8257367417b2b2512c7c
+title: Check if an Element is Present in a Binary Search Tree
 challengeType: 1
-forumTopicId: 301622
-dashedName: breadth-first-search
+forumTopicId: 301623
+dashedName: check-if-an-element-is-present-in-a-binary-search-tree
 ---
 
 # --description--
 
-So far, we've learned different ways of creating representations of graphs. What now? One natural question to have is what are the distances between any two nodes in the graph? Enter <dfn>graph traversal algorithms</dfn>.
-
-<dfn>Traversal algorithms</dfn> are algorithms to traverse or visit nodes in a graph. One type of traversal algorithm is the breadth-first search algorithm.
-
-This algorithm starts at one node and visits all its neighbors that are one edge away. It then goes on to visit each of their neighbors and so on until all nodes have been reached.
-
-An important data structure that will help implement the breadth-first search algorithm is the queue. This is an array where you can add elements to one end and remove elements from the other end. This is also known as a <dfn>FIFO</dfn> or <dfn>First-In-First-Out</dfn> data structure.
-
-Visually, this is what the algorithm is doing. ![Breadth first search algorithm moving through a tree](https://camo.githubusercontent.com/2f57e6239884a1a03402912f13c49555dec76d06/68747470733a2f2f75706c6f61642e77696b696d656469612e6f72672f77696b6970656469612f636f6d6d6f6e732f342f34362f416e696d617465645f4246532e676966)
-
-The grey shading represents a node getting added into the queue and the black shading represents a node getting removed from the queue. See how every time a node gets removed from the queue (node turns black), all their neighbors get added into the queue (node turns grey).
-
-To implement this algorithm, you'll need to input a graph structure and a node you want to start at.
-
-First, you'll want to be aware of the distances from, or number of edges away from, the start node. You'll want to start all your distances with some large number, like `Infinity`. This prevents counting issues for when a node may not be reachable from your start node. Next, you'll want to go from the start node to its neighbors. These neighbors are one edge away and at this point you should add one unit of distance to the distances you're keeping track of.
+Now that we have a general sense of what a binary search tree is let's talk about it in a little more detail. Binary search trees provide logarithmic time for the common operations of lookup, insertion, and deletion in the average case, and linear time in the worst case. Why is this? Each of those basic operations requires us to find an item in the tree (or in the case of insertion to find where it should go) and because of the tree structure at each parent node we are branching left or right and effectively excluding half the size of the remaining tree. This makes the search proportional to the logarithm of the number of nodes in the tree, which creates logarithmic time for these operations in the average case. Ok, but what about the worst case? Well, consider constructing a tree from the following values, adding them left to right: `10`, `12`, `17`, `25`. Following our rules for a binary search tree, we will add `12` to the right of `10`, `17` to the right of this, and `25` to the right of this. Now our tree resembles a linked list and traversing it to find `25` would require us to traverse all the items in linear fashion. Hence, linear time in the worst case. The problem here is that the tree is unbalanced. We'll look a little more into what this means in the following challenges.
 
 # --instructions--
 
-Write a function `bfs()` that takes an adjacency matrix graph (a two-dimensional array) and a node label root as parameters. The node label will just be the integer value of the node between `0` and `n - 1`, where `n` is the total number of nodes in the graph.
-
-Your function will output a JavaScript object key-value pairs with the node and its distance from the root. If the node could not be reached, it should have a distance of `Infinity`.
+In this challenge, we will create a utility for our tree. Write a method `isPresent` which takes an integer value as input and returns a boolean value for the presence or absence of that value in the binary search tree.
 
 # --hints--
 
-The input graph `[[0, 1, 0, 0], [1, 0, 1, 0], [0, 1, 0, 1], [0, 0, 1, 0]]` with a start node of `1` should return `{0: 1, 1: 0, 2: 1, 3: 2}`
+The `BinarySearchTree` data structure should exist.
 
 ```js
 assert(
   (function () {
-    var graph = [
-      [0, 1, 0, 0],
-      [1, 0, 1, 0],
-      [0, 1, 0, 1],
-      [0, 0, 1, 0]
-    ];
-    var results = bfs(graph, 1);
-    return isEquivalent(results, { 0: 1, 1: 0, 2: 1, 3: 2 });
+    var test = false;
+    if (typeof BinarySearchTree !== 'undefined') {
+      test = new BinarySearchTree();
+    }
+    return typeof test == 'object';
   })()
 );
 ```
 
-The input graph `[[0, 1, 0, 0], [1, 0, 1, 0], [0, 1, 0, 0], [0, 0, 0, 0]]` with a start node of `1` should return `{0: 1, 1: 0, 2: 1, 3: Infinity}`
+The binary search tree should have a method called `isPresent`.
 
 ```js
 assert(
   (function () {
-    var graph = [
-      [0, 1, 0, 0],
-      [1, 0, 1, 0],
-      [0, 1, 0, 0],
-      [0, 0, 0, 0]
-    ];
-    var results = bfs(graph, 1);
-    return isEquivalent(results, { 0: 1, 1: 0, 2: 1, 3: Infinity });
+    var test = false;
+    if (typeof BinarySearchTree !== 'undefined') {
+      test = new BinarySearchTree();
+    } else {
+      return false;
+    }
+    return typeof test.isPresent == 'function';
   })()
 );
 ```
 
-The input graph `[[0, 1, 0, 0], [1, 0, 1, 0], [0, 1, 0, 1], [0, 0, 1, 0]]` with a start node of `0` should return `{0: 0, 1: 1, 2: 2, 3: 3}`
+The `isPresent` method should correctly check for the presence or absence of elements added to the tree.
 
 ```js
 assert(
   (function () {
-    var graph = [
-      [0, 1, 0, 0],
-      [1, 0, 1, 0],
-      [0, 1, 0, 1],
-      [0, 0, 1, 0]
-    ];
-    var results = bfs(graph, 0);
-    return isEquivalent(results, { 0: 0, 1: 1, 2: 2, 3: 3 });
+    var test = false;
+    if (typeof BinarySearchTree !== 'undefined') {
+      test = new BinarySearchTree();
+    } else {
+      return false;
+    }
+    if (typeof test.isPresent !== 'function') {
+      return false;
+    }
+    test.add(4);
+    test.add(7);
+    test.add(411);
+    test.add(452);
+    return (
+      test.isPresent(452) &&
+      test.isPresent(411) &&
+      test.isPresent(7) &&
+      !test.isPresent(100)
+    );
   })()
 );
 ```
 
-The input graph `[[0, 1], [1, 0]]` with a start node of `0` should return `{0: 0, 1: 1}`
+`isPresent` should handle cases where the tree is empty.
 
 ```js
 assert(
   (function () {
-    var graph = [
-      [0, 1],
-      [1, 0]
-    ];
-    var results = bfs(graph, 0);
-    return isEquivalent(results, { 0: 0, 1: 1 });
+    var test = false;
+    if (typeof BinarySearchTree !== 'undefined') {
+      test = new BinarySearchTree();
+    } else {
+      return false;
+    }
+    if (typeof test.isPresent !== 'function') {
+      return false;
+    }
+    return test.isPresent(5) == false;
   })()
 );
 ```
@@ -103,80 +98,78 @@ assert(
 ## --after-user-code--
 
 ```js
-// Source: http://adripofjavascript.com/blog/drips/object-equality-in-javascript.html
-function isEquivalent(a, b) {
-    // Create arrays of property names
-    var aProps = Object.getOwnPropertyNames(a);
-    var bProps = Object.getOwnPropertyNames(b);
-    // If number of properties is different,
-    // objects are not equivalent
-    if (aProps.length != bProps.length) {
-        return false;
-    }
-    for (var i = 0; i < aProps.length; i++) {
-        var propName = aProps[i];
-        // If values of same property are not equal,
-        // objects are not equivalent
-        if (a[propName] !== b[propName]) {
-            return false;
+BinarySearchTree.prototype = Object.assign(
+  BinarySearchTree.prototype,
+  {
+    add: function(value) {
+      var node = this.root;
+      if (node == null) {
+        this.root = new Node(value);
+        return;
+      } else {
+        function searchTree(node) {
+          if (value < node.value) {
+            if (node.left == null) {
+              node.left = new Node(value);
+              return;
+            } else if (node.left != null) {
+              return searchTree(node.left);
+            }
+          } else if (value > node.value) {
+            if (node.right == null) {
+              node.right = new Node(value);
+              return;
+            } else if (node.right != null) {
+              return searchTree(node.right);
+            }
+          } else {
+            return null;
+          }
         }
+        return searchTree(node);
+      }
     }
-    // If we made it this far, objects
-    // are considered equivalent
-    return true;
-}
+  }
+);
 ```
 
 ## --seed-contents--
 
 ```js
-function bfs(graph, root) {
-  var nodesLen = {};
-
-  return nodesLen;
-};
-
-var exBFSGraph = [
-  [0, 1, 0, 0],
-  [1, 0, 1, 0],
-  [0, 1, 0, 1],
-  [0, 0, 1, 0]
-];
-console.log(bfs(exBFSGraph, 3));
+var displayTree = tree => console.log(JSON.stringify(tree, null, 2));
+function Node(value) {
+  this.value = value;
+  this.left = null;
+  this.right = null;
+}
+function BinarySearchTree() {
+  this.root = null;
+  // Only change code below this line
+  
+  // Only change code above this line
+}
 ```
 
 # --solutions--
 
 ```js
-function bfs(graph, root) {
-  var nodesLen = {};
-  // Set all distances to infinity
-  for (var i = 0; i < graph.length; i++) {
-    nodesLen[i] = Infinity;
-  }
-  nodesLen[root] = 0; // ...except root node
-  var queue = [root]; // Keep track of nodes to visit
-  var current; // Current node traversing
-  // Keep on going until no more nodes to traverse
-  while (queue.length !== 0) {
-    current = queue.shift();
-    // Get adjacent nodes from current node
-    var curConnected = graph[current]; // Get layer of edges from current
-    var neighborIdx = []; // List of nodes with edges
-    var idx = curConnected.indexOf(1); // Get first edge connection
-    while (idx !== -1) {
-      neighborIdx.push(idx); // Add to list of neighbors
-      idx = curConnected.indexOf(1, idx + 1); // Keep on searching
-    }
-    // Loop through neighbors and get lengths
-    for (var j = 0; j < neighborIdx.length; j++) {
-      // Increment distance for nodes traversed
-      if (nodesLen[neighborIdx[j]] === Infinity) {
-        nodesLen[neighborIdx[j]] = nodesLen[current] + 1;
-        queue.push(neighborIdx[j]); // Add new neighbors to queue
+var displayTree = (tree) => console.log(JSON.stringify(tree, null, 2));
+function Node(value) {
+  this.value = value;
+  this.left = null;
+  this.right = null;
+}
+function BinarySearchTree() {
+  this.root = null;
+  this.isPresent = function (value) {
+    var current = this.root
+    while (current) {
+      if (value === current.value) {
+        return true;
       }
+      current = value < current.value ? current.left : current.right;
     }
+    return false;
   }
-  return nodesLen;
 }
 ```
