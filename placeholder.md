@@ -1,208 +1,346 @@
 ---
-id: 587d825d367417b2b2512c96
-title: Depth-First Search
+id: 587d8257367417b2b2512c7d
+title: Find the Minimum and Maximum Height of a Binary Search Tree
 challengeType: 1
-forumTopicId: 301640
-dashedName: depth-first-search
+forumTopicId: 301641
+dashedName: find-the-minimum-and-maximum-height-of-a-binary-search-tree
 ---
 
 # --description--
 
-Similar to <dfn>breadth-first search</dfn>, here we will learn about another graph traversal algorithm called <dfn>depth-first search</dfn>.
+In the last challenge we described a scenario in which a tree could become unbalanced. To understand the concept of balance, let's take a look at another tree property: height. Height in a tree represents the distance from the root node to any given leaf node. Different paths in a highly branched tree structure may have different heights, but for a given tree there will be a minimum and maximum height. If the tree is balanced, these values will differ at most by one. This means that in a balanced tree, all the leaf nodes exist within the same level, or if they are not within the same level they are at most one level apart.
 
-Whereas the breadth-first search searches incremental edge lengths away from the source node, <dfn>depth-first search</dfn> first goes down a path of edges as far as it can.
+The property of balance is important for trees because it is what determines the efficiency of tree operations. As we explained in the last challenge, we face worst case time complexity for heavily unbalanced trees. Self-balancing trees are commonly used to account for this issue in trees with dynamic data sets. Common examples of these include AVL trees, red-black trees, and B-trees. These trees all contain additional internal logic which re-balance the tree when insertions or deletions create a state of imbalance.
 
-Once it reaches one end of a path, the search will backtrack to the last node with an un-visited edge path and continue searching.
-
-The animation below shows how the algorithm works. The algorithm starts with the top node and visits the nodes in the numbered order.
-
-<img class='img-responsive' src='https://camo.githubusercontent.com/aaad9e39961daf34d967c616edeb50abf3bf1235/68747470733a2f2f75706c6f61642e77696b696d656469612e6f72672f77696b6970656469612f636f6d6d6f6e732f372f37662f44657074682d46697273742d5365617263682e676966'>
-
-Notice how, unlike breadth-first search, every time a node is visited, it doesn't visit all of its neighbors. Instead, it first visits one of its neighbors and continues down that path until there are no more nodes to be visited on that path.
-
-To implement this algorithm, you'll want to use a stack. A stack is an array where the last element added is the first to be removed. This is also known as a <dfn>Last-In-First-Out</dfn> data structure. A stack is helpful in depth-first search algorithms because, as we add neighbors to the stack, we want to visit the most recently added neighbors first and remove them from the stack.
-
-A simple output of this algorithm is a list of nodes which are reachable from a given node. Therefore, you'll also want to keep track of the nodes you visit.
+**Note:** A similar property to height is depth, which refers to how far a given node is from the root node.
 
 # --instructions--
 
-Write a function `dfs()` that takes an undirected, adjacency matrix `graph` and a node label `root` as parameters. The node label will just be the numeric value of the node between `0` and `n - 1`, where `n` is the total number of nodes in the graph.
-
-Your function should output an array of all nodes reachable from `root`.
+Write two methods for our binary tree: `findMinHeight` and `findMaxHeight`. These methods should return an integer value for the minimum and maximum height within a given binary tree, respectively. If the node is empty let's assign it a height of `-1` (that's the base case). Finally, add a third method `isBalanced` which returns `true` or `false` depending on whether the tree is balanced or not. You can use the first two methods you just wrote to determine this.
 
 # --hints--
 
-The input graph `[[0, 1, 0, 0], [1, 0, 1, 0], [0, 1, 0, 1], [0, 0, 1, 0]]` with a start node of `1` should return an array with `0`, `1`, `2`, and `3`.
-
-```js
-assert.sameMembers(
-  (function () {
-    var graph = [
-      [0, 1, 0, 0],
-      [1, 0, 1, 0],
-      [0, 1, 0, 1],
-      [0, 0, 1, 0]
-    ];
-    return dfs(graph, 1);
-  })(),
-  [0, 1, 2, 3]
-);
-```
-
-The input graph `[[0, 1, 0, 0], [1, 0, 1, 0], [0, 1, 0, 1], [0, 0, 1, 0]]` with a start node of `1` should return an array with four elements.
+The `BinarySearchTree` data structure should exist.
 
 ```js
 assert(
   (function () {
-    var graph = [
-      [0, 1, 0, 0],
-      [1, 0, 1, 0],
-      [0, 1, 0, 1],
-      [0, 0, 1, 0]
-    ];
-    return dfs(graph, 1);
-  })().length === 4
+    var test = false;
+    if (typeof BinarySearchTree !== 'undefined') {
+      test = new BinarySearchTree();
+    }
+    return typeof test == 'object';
+  })()
 );
 ```
 
-The input graph `[[0, 1, 0, 0], [1, 0, 1, 0], [0, 1, 0, 0], [0, 0, 0, 0]]` with a start node of `3` should return an array with `3`.
-
-```js
-assert.sameMembers(
-  (function () {
-    var graph = [
-      [0, 1, 0, 0],
-      [1, 0, 1, 0],
-      [0, 1, 0, 0],
-      [0, 0, 0, 0]
-    ];
-    return dfs(graph, 3);
-  })(),
-  [3]
-);
-```
-
-The input graph `[[0, 1, 0, 0], [1, 0, 1, 0], [0, 1, 0, 0], [0, 0, 0, 0]]` with a start node of `3` should return an array with one element.
+The binary search tree should have a method called `findMinHeight`.
 
 ```js
 assert(
   (function () {
-    var graph = [
-      [0, 1, 0, 0],
-      [1, 0, 1, 0],
-      [0, 1, 0, 0],
-      [0, 0, 0, 0]
-    ];
-    return dfs(graph, 3);
-  })().length === 1
+    var test = false;
+    if (typeof BinarySearchTree !== 'undefined') {
+      test = new BinarySearchTree();
+    } else {
+      return false;
+    }
+    return typeof test.findMinHeight == 'function';
+  })()
 );
 ```
 
-The input graph `[[0, 1, 0, 0], [1, 0, 0, 0], [0, 0, 0, 1], [0, 0, 1, 0]]` with a start node of `3` should return an array with `2` and `3`.
-
-```js
-assert.sameMembers(
-  (function () {
-    var graph = [
-      [0, 1, 0, 0],
-      [1, 0, 0, 0],
-      [0, 0, 0, 1],
-      [0, 0, 1, 0]
-    ];
-    return dfs(graph, 3);
-  })(),
-  [2, 3]
-);
-```
-
-The input graph `[[0, 1, 0, 0], [1, 0, 0, 0], [0, 0, 0, 1], [0, 0, 1, 0]]` with a start node of `3` should return an array with two elements.
+The binary search tree should have a method called `findMaxHeight`.
 
 ```js
 assert(
   (function () {
-    var graph = [
-      [0, 1, 0, 0],
-      [1, 0, 0, 0],
-      [0, 0, 0, 1],
-      [0, 0, 1, 0]
-    ];
-    return dfs(graph, 3);
-  })().length === 2
+    var test = false;
+    if (typeof BinarySearchTree !== 'undefined') {
+      test = new BinarySearchTree();
+    } else {
+      return false;
+    }
+    return typeof test.findMaxHeight == 'function';
+  })()
 );
 ```
 
-The input graph `[[0, 1, 0, 0], [1, 0, 0, 0], [0, 0, 0, 1], [0, 0, 1, 0]]` with a start node of `0` should return an array with `0` and `1`.
-
-```js
-assert.sameMembers(
-  (function () {
-    var graph = [
-      [0, 1, 0, 0],
-      [1, 0, 0, 0],
-      [0, 0, 0, 1],
-      [0, 0, 1, 0]
-    ];
-    return dfs(graph, 0);
-  })(),
-  [0, 1]
-);
-```
-
-The input graph `[[0, 1, 0, 0], [1, 0, 0, 0], [0, 0, 0, 1], [0, 0, 1, 0]]` with a start node of `0` should return an array with two elements.
+The binary search tree should have a method called `isBalanced`.
 
 ```js
 assert(
   (function () {
-    var graph = [
-      [0, 1, 0, 0],
-      [1, 0, 0, 0],
-      [0, 0, 0, 1],
-      [0, 0, 1, 0]
-    ];
-    return dfs(graph, 0);
-  })().length === 2
+    var test = false;
+    if (typeof BinarySearchTree !== 'undefined') {
+      test = new BinarySearchTree();
+    } else {
+      return false;
+    }
+    return typeof test.isBalanced == 'function';
+  })()
+);
+```
+
+The `findMinHeight` method should return the minimum height of the tree.
+
+```js
+assert(
+  (function () {
+    var test = false;
+    if (typeof BinarySearchTree !== 'undefined') {
+      test = new BinarySearchTree();
+    } else {
+      return false;
+    }
+    if (typeof test.findMinHeight !== 'function') {
+      return false;
+    }
+    test.add(4);
+    test.add(1);
+    test.add(7);
+    test.add(87);
+    test.add(34);
+    test.add(45);
+    test.add(73);
+    test.add(8);
+    return test.findMinHeight() == 1;
+  })()
+);
+```
+
+The `findMaxHeight` method should return the maximum height of the tree.
+
+```js
+assert(
+  (function () {
+    var test = false;
+    if (typeof BinarySearchTree !== 'undefined') {
+      test = new BinarySearchTree();
+    } else {
+      return false;
+    }
+    if (typeof test.findMaxHeight !== 'function') {
+      return false;
+    }
+    test.add(4);
+    test.add(1);
+    test.add(7);
+    test.add(87);
+    test.add(34);
+    test.add(45);
+    test.add(73);
+    test.add(8);
+    return test.findMaxHeight() == 5;
+  })()
+);
+```
+
+An empty tree should return a height of `-1`.
+
+```js
+assert(
+  (function () {
+    var test = false;
+    if (typeof BinarySearchTree !== 'undefined') {
+      test = new BinarySearchTree();
+    } else {
+      return false;
+    }
+    if (typeof test.findMaxHeight !== 'function') {
+      return false;
+    }
+    return test.findMaxHeight() == -1;
+  })()
+);
+```
+
+The `isBalanced` method should return `false` if the tree is an unbalanced binary search tree.
+
+```js
+assert(
+  (function () {
+    var test = false;
+    if (typeof BinarySearchTree !== 'undefined') {
+      test = new BinarySearchTree();
+    } else {
+      return false;
+    }
+    if (typeof test.isBalanced !== 'function') {
+      return false;
+    }
+    test.add(4);
+    test.add(1);
+    test.add(7);
+    test.add(87);
+    test.add(34);
+    test.add(45);
+    test.add(73);
+    test.add(8);
+    return test.isBalanced() === false;
+  })()
+);
+```
+
+The `isBalanced` method should return `true` if the tree is a balanced binary search tree.
+
+```js
+assert(
+  (function () {
+    var test = false;
+    if (typeof BinarySearchTree !== 'undefined') {
+      test = new BinarySearchTree();
+    } else {
+      return false;
+    }
+    if (typeof test.isBalanced !== 'function') {
+      return false;
+    }
+    test.add(10);
+    test.add(3);
+    test.add(22);
+    test.add(1);
+    test.add(4);
+    test.add(17);
+    test.add(32);
+    return test.isBalanced() === true;
+  })()
 );
 ```
 
 # --seed--
 
+## --after-user-code--
+
+```js
+BinarySearchTree.prototype = Object.assign(
+  BinarySearchTree.prototype,
+  {
+    add: function(value) {
+      function searchTree(node) {
+        if (value < node.value) {
+          if (node.left == null) {
+            node.left = new Node(value);
+            return;
+          } else if (node.left != null) {
+            return searchTree(node.left);
+          }
+        } else if (value > node.value) {
+          if (node.right == null) {
+            node.right = new Node(value);
+            return;
+          } else if (node.right != null) {
+            return searchTree(node.right);
+          }
+        } else {
+          return null;
+        }
+      }
+
+      var node = this.root;
+      if (node == null) {
+        this.root = new Node(value);
+        return;
+      } else {
+        return searchTree(node);
+      }
+    }
+  }
+);
+```
+
 ## --seed-contents--
 
 ```js
-function dfs(graph, root) {
-
+var displayTree = tree => console.log(JSON.stringify(tree, null, 2));
+function Node(value) {
+  this.value = value;
+  this.left = null;
+  this.right = null;
 }
-
-var exDFSGraph = [
-  [0, 1, 0, 0],
-  [1, 0, 1, 0],
-  [0, 1, 0, 1],
-  [0, 0, 1, 0]
-];
-console.log(dfs(exDFSGraph, 3));
+function BinarySearchTree() {
+  this.root = null;
+  // Only change code below this line
+  
+  // Only change code above this line
+}
 ```
 
 # --solutions--
 
 ```js
-function dfs(graph, root) {
-    var stack = [];
-    var tempV;
-    var visited = [];
-    var tempVNeighbors = [];
-    stack.push(root);
-    while (stack.length > 0) {
-        tempV = stack.pop();
-        if (visited.indexOf(tempV) == -1) {
-            visited.push(tempV);
-            tempVNeighbors = graph[tempV];
-            for (var i = 0; i < tempVNeighbors.length; i++) {
-                if (tempVNeighbors[i] == 1) {
-                    stack.push(i);
-                }
-            }
-        }
+var displayTree = tree => console.log(JSON.stringify(tree, null, 2));
+function Node(value) {
+  this.value = value;
+  this.left = null;
+  this.right = null;
+}
+function BinarySearchTree() {
+  this.root = null;
+  // Only change code below this line
+  
+  // Only change code above this line
+  this.findMinHeight = function(root = this.root) {
+    // empty tree.
+    if (root === null) {
+      return -1;
     }
-    return visited;
+    // leaf node.
+    if (root.left === null && root.right === null) {
+      return 0;
+    }
+    if (root.left === null) {
+      return this.findMinHeight(root.right) + 1;
+    }
+    if (root.right === null) {
+      return this.findMinHeight(root.left) + 1;
+    }
+    const lHeight = this.findMinHeight(root.left);
+    const rHeight = this.findMinHeight(root.right);
+    return Math.min(lHeight, rHeight) + 1;
+  };
+  this.findMaxHeight = function(root = this.root) {
+    // empty tree.
+    if (root === null) {
+      return -1;
+    }
+    // leaf node.
+    if (root.left === null && root.right === null) {
+      return 0;
+    }
+    if (root.left === null) {
+      return this.findMaxHeight(root.right) + 1;
+    }
+    if (root.right === null) {
+      return this.findMaxHeight(root.left) + 1;
+    }
+    const lHeight = this.findMaxHeight(root.left);
+    const rHeight = this.findMaxHeight(root.right);
+    return Math.max(lHeight, rHeight) + 1;
+  };
+  this.isBalanced = function(root = this.root) {
+    if (root === null) {
+      return true;
+    }
+
+    if (root.left === null && root.right === null) {
+      return true;
+    }
+
+    if (root.left === null) {
+      return this.findMaxHeight(root.right) <= 0;
+    }
+
+    if (root.right === null) {
+      return this.findMaxHeight(root.left) <= 0;
+    }
+
+    const lHeight = this.findMaxHeight(root.left);
+    const rHeight = this.findMaxHeight(root.right);
+    if (Math.abs(lHeight - rHeight) > 1) {
+      return false;
+    }
+    return this.isBalanced(root.left) && this.isBalanced(root.right);
+  };
 }
 ```
