@@ -1,235 +1,216 @@
 ---
-id: 587d8255367417b2b2512c75
-title: Create a Circular Queue
+id: 587d825a367417b2b2512c87
+title: Create a Doubly Linked List
 challengeType: 1
-forumTopicId: 301625
-dashedName: create-a-circular-queue
+forumTopicId: 301626
+dashedName: create-a-doubly-linked-list
 ---
 
 # --description--
 
-In this challenge you will be creating a Circular Queue. A circular queue is a queue that writes to the end of a collection then begins overwriting itself at the beginning of the collection. This type of data structure is useful in certain situations. For example, a circular queue can be used for streaming media. Once the queue is full, new media data will overwrite old data.
+All of the linked lists we've created so far are singly linked lists. Here, we'll create a <dfn>doubly linked list</dfn>. As the name implies, nodes in a doubly linked list have references to the next and previous node in the list.
 
-A good way to illustrate this concept is with an array of length `5`:
-
-```js
-[null, null, null, null, null]
- ^Read @ 0
- ^Write @ 0
-```
-
-Here the read and write are both at position `0`. Now the queue gets 3 new records `a`, `b`, and `c`. Our queue now looks like:
-
-```js
-[a, b, c, null, null]
- ^Read @ 0
-          ^Write @ 3
-```
-
-As the read head reads, it can remove values or keep them:
-
-```js
-[null, null, null, null, null]
-                   ^Read @ 3
-                   ^Write @ 3
-```
-
-Now we write the values `d`, `e`, and `f` to the queue. Once the write reaches the end of the array it loops back to the beginning:
-
-```js
-[f, null, null, d, e]
-                ^Read @ 3
-    ^Write @ 1
-```
-
-This approach requires a constant amount of memory but allows files of a much larger size to be processed.
+This allows us to traverse the list in both directions but it also requires more memory to be used because every node must contain an additional reference to the previous node in the list.
 
 # --instructions--
 
-In this challenge we will implement a circular queue. The circular queue should provide `enqueue` and `dequeue` methods which allow you to read from and write to the queue. The class itself should also accept an integer argument which you can use to specify the size of the queue when created. We've written the starting version of this class for you in the code editor.
+We've provided a `Node` object and started our `DoublyLinkedList`. Let's add two methods to our doubly linked list called `add` and `remove`. The `add` method should add the given element to the list while the `remove` method should remove all occurrences of a given element in the list.
 
-When you enqueue items to the queue, the write pointer should advance forward and loop back to the beginning once it reaches the end of the queue. The `enqueue` method should return the item you enqueued if it is successful; otherwise it will return `null`.
-
-Likewise, the read pointer should advance forward as you dequeue items. When you dequeue an item, that item should be returned. If you cannot dequeue an item, you should return `null`.
-
-The write pointer should not be allowed to move past the read pointer (our class won't let you overwrite data you haven't read yet) and the read pointer should not be able to advance past data you have written.
+Be careful to handle any possible edge cases when writing these methods, such as deletions for the first or last element. Also, removing any item on an empty list should return `null`.
 
 # --hints--
 
-The `enqueue` method should add items to the circular queue.
+The DoublyLinkedList data structure should exist.
 
 ```js
 assert(
   (function () {
-    var test = new CircularQueue(3);
-    test.enqueue(17);
-    test.enqueue(32);
-    test.enqueue(591);
-    var print = test.print();
-    return print[0] === 17 && print[1] === 32 && print[2] === 591;
+    var test = false;
+    if (typeof DoublyLinkedList !== 'undefined') {
+      test = new DoublyLinkedList();
+    }
+    return typeof test == 'object';
   })()
 );
 ```
 
-You should not enqueue items past the read pointer.
+The DoublyLinkedList should have a method called add.
 
 ```js
 assert(
   (function () {
-    var test = new CircularQueue(3);
-    test.enqueue(17);
-    test.enqueue(32);
-    test.enqueue(591);
-    test.enqueue(13);
-    test.enqueue(25);
-    test.enqueue(59);
-    var print = test.print();
-    return print[0] === 17 && print[1] === 32 && print[2] === 591;
+    var test = false;
+    if (typeof DoublyLinkedList !== 'undefined') {
+      test = new DoublyLinkedList();
+    }
+    if (test.add == undefined) {
+      return false;
+    }
+    return typeof test.add == 'function';
   })()
 );
 ```
 
-The `dequeue` method should dequeue items from the queue.
+The DoublyLinkedList should have a method called remove.
 
 ```js
 assert(
   (function () {
-    var test = new CircularQueue(3);
-    test.enqueue(17);
-    test.enqueue(32);
-    test.enqueue(591);
-    return (
-      test.dequeue() === 17 && test.dequeue() === 32 && test.dequeue() === 591
-    );
+    var test = false;
+    if (typeof DoublyLinkedList !== 'undefined') {
+      test = new DoublyLinkedList();
+    }
+    if (test.remove == undefined) {
+      return false;
+    }
+    return typeof test.remove == 'function';
   })()
 );
 ```
 
-After an item is dequeued, its position in the queue should be reset to `null`.
+Removing an item from an empty list should return null.
 
 ```js
 assert(
   (function () {
-    var test = new CircularQueue(3);
-    test.enqueue(17);
-    test.enqueue(32);
-    test.enqueue(672);
-    test.dequeue();
-    test.dequeue();
-    var print = test.print();
-    return print[0] === null && print[1] === null && print[2] === 672;
+    var test = false;
+    if (typeof DoublyLinkedList !== 'undefined') {
+      test = new DoublyLinkedList();
+    }
+    return test.remove(100) == null;
   })()
 );
 ```
 
-Trying to dequeue past the write pointer should return `null` and does not advance the write pointer.
+The add method should add items to the list.
 
 ```js
 assert(
   (function () {
-    var test = new CircularQueue(3);
-    test.enqueue(17);
-    test.enqueue(32);
-    test.enqueue(591);
-    return (
-      test.dequeue() === 17 &&
-      test.dequeue() === 32 &&
-      test.dequeue() === 591 &&
-      test.dequeue() === null &&
-      test.dequeue() === null &&
-      test.dequeue() === null &&
-      test.dequeue() === null &&
-      test.enqueue(100) === 100 &&
-      test.dequeue() === 100
-    );
+    var test = false;
+    if (typeof DoublyLinkedList !== 'undefined') {
+      test = new DoublyLinkedList();
+    }
+    test.add(5);
+    test.add(6);
+    test.add(723);
+    return test.print().join('') == '56723';
+  })()
+);
+```
+
+Each node should keep track of the previous node.
+
+```js
+assert(
+  (function () {
+    var test = false;
+    if (typeof DoublyLinkedList !== 'undefined') {
+      test = new DoublyLinkedList();
+    }
+    test.add(50);
+    test.add(68);
+    test.add(73);
+    return test.printReverse().join('') == '736850';
+  })()
+);
+```
+
+The first item should be removable from the list.
+
+```js
+assert(
+  (function () {
+    var test = false;
+    if (typeof DoublyLinkedList !== 'undefined') {
+      test = new DoublyLinkedList();
+    }
+    test.add(25);
+    test.add(35);
+    test.add(60);
+    test.remove(25);
+    return test.print().join('') == '3560';
+  })()
+);
+```
+
+The last item should be removable from the list.
+
+```js
+assert(
+  (function () {
+    var test = false;
+    if (typeof DoublyLinkedList !== 'undefined') {
+      test = new DoublyLinkedList();
+    }
+    test.add(25);
+    test.add(35);
+    test.add(60);
+    test.remove(60);
+    return test.print().join('') == '2535';
   })()
 );
 ```
 
 # --seed--
 
+## --after-user-code--
+
+```js
+DoublyLinkedList.prototype = Object.assign(
+  DoublyLinkedList.prototype,
+  {
+  
+  print() {
+    if (this.head == null) {
+      return null;
+    } else {
+      var result = new Array();
+      var node = this.head;
+      while (node.next != null) {
+        result.push(node.data);
+        node = node.next;
+      };
+      result.push(node.data);
+      return result;
+    };
+  },
+  printReverse() {
+    if (this.tail == null) {
+      return null;
+    } else {
+      var result = new Array();
+      var node = this.tail;
+      while (node.prev != null) {
+        result.push(node.data);
+        node = node.prev;
+      };
+      result.push(node.data);
+      return result;
+    };
+  }
+});
+```
+
 ## --seed-contents--
 
 ```js
-class CircularQueue {
-  constructor(size) {
-
-    this.queue = [];
-    this.read = 0;
-    this.write = 0;
-    this.max = size - 1;
-
-    while (size > 0) {
-      this.queue.push(null);
-      size--;
-    }
-  }
-
-  print() {
-    return this.queue;
-  }
-
-  enqueue(item) {
-    // Only change code below this line
-
-    // Only change code above this line
-  }
-
-  dequeue() {
-    // Only change code below this line
-
-    // Only change code above this line
-  }
-}
+var Node = function(data, prev) {
+  this.data = data;
+  this.prev = prev;
+  this.next = null;
+};
+var DoublyLinkedList = function() {
+  this.head = null;
+  this.tail = null;
+  // Only change code below this line
+  
+  // Only change code above this line
+};
 ```
 
 # --solutions--
 
 ```js
-class CircularQueue {
-  constructor(size) {
-    this.queue = [];
-    this.read = 0;
-    this.write = 0;
-    this.max = size - 1;
-
-    while (size > 0) {
-      this.queue.push(null);
-      size--;
-    }
-  }
-
-  print() {
-    return this.queue;
-  }
-
-  enqueue(item) {
-    // Only change code below this line
-    console.log(this.write, this.max);
-    if (this.queue[this.write] === null) {
-      this.queue[this.write++] = item;
-
-      if (this.write > this.max) {
-        this.write = 0;
-      }
-      return item;
-    }
-    return null;
-    // Only change code above this line
-  }
-
-  dequeue() {
-    // Only change code below this line
-    if (this.queue[this.read] !== null) {
-      let item = this.queue[this.read];
-      this.queue[this.read++] = null;
-      if (this.read > this.max) {
-        this.read = 0;
-      }
-      return item;
-    }
-    return null;
-    // Only change code above this line
-  }
-}
+// solution required
 ```
