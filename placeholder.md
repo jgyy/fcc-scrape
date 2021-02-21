@@ -1,9 +1,9 @@
 ---
-id: 5900f3d61000cf542c50fee8
-title: 'Problem 105: Special subset sums: testing'
+id: 5900f3d71000cf542c50fee9
+title: 'Problem 106: Special subset sums: meta-testing'
 challengeType: 5
-forumTopicId: 301729
-dashedName: problem-105-special-subset-sums-testing
+forumTopicId: 301730
+dashedName: problem-106-special-subset-sums-meta-testing
 ---
 
 # --description--
@@ -14,18 +14,20 @@ S(B) ≠ S(C); that is, sums of subsets cannot be equal.
 
 If B contains more elements than C then S(B) > S(C).
 
-For example, {81, 88, 75, 42, 87, 84, 86, 65} is not a special sum set because 65 + 87 + 88 = 75 + 81 + 84, whereas {157, 150, 164, 119, 79, 159, 161, 139, 158} satisfies both rules for all possible subset pair combinations and S(A) = 1286.
+For this problem we shall assume that a given set contains n strictly increasing elements and it already satisfies the second rule.
 
-Using sets.txt (right click and "Save Link/Target As..."), a 4K text file with one-hundred sets containing seven to twelve elements (the two examples given above are the first two sets in the file), identify all the special sum sets, A1, A2, ..., Ak, and find the value of S(A1) + S(A2) + ... + S(Ak).
+Surprisingly, out of the 25 possible subset pairs that can be obtained from a set for which n = 4, only 1 of these pairs need to be tested for equality (first rule). Similarly, when n = 7, only 70 out of the 966 subset pairs need to be tested.
 
-NOTE: This problem is related to Problem 103 and Problem 106.
+For n = 12, how many of the 261625 subset pairs that can be obtained need to be tested for equality?
+
+NOTE: This problem is related to Problem 103 and Problem 105.
 
 # --hints--
 
-`euler105()` should return 73702.
+`euler106()` should return 21384.
 
 ```js
-assert.strictEqual(euler105(), 73702);
+assert.strictEqual(euler106(), 21384);
 ```
 
 # --seed--
@@ -33,12 +35,12 @@ assert.strictEqual(euler105(), 73702);
 ## --seed-contents--
 
 ```js
-function euler105() {
+function euler106() {
 
   return true;
 }
 
-euler105();
+euler106();
 ```
 
 # --solutions--
