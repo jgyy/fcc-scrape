@@ -1,18 +1,18 @@
 ---
-id: 587d8258367417b2b2512c81
-title: Delete a Node with One Child in a Binary Search Tree
+id: 587d8258367417b2b2512c82
+title: Delete a Node with Two Children in a Binary Search Tree
 challengeType: 1
-forumTopicId: 301638
-dashedName: delete-a-node-with-one-child-in-a-binary-search-tree
+forumTopicId: 301639
+dashedName: delete-a-node-with-two-children-in-a-binary-search-tree
 ---
 
 # --description--
 
-Now that we can delete leaf nodes let's move on to the second case: deleting a node with one child. For this case, say we have a tree with the following nodes 1 — 2 — 3 where 1 is the root. To delete 2, we simply need to make the right reference in 1 point to 3. More generally to delete a node with only one child, we make that node's parent reference the next node in the tree.
+Removing nodes that have two children is the hardest case to implement. Removing a node like this produces two subtrees that are no longer connected to the original tree structure. How can we reconnect them? One method is to find the smallest value in the right subtree of the target node and replace the target node with this value. Selecting the replacement in this way ensures that it is greater than every node in the left subtree it becomes the new parent of but also less than every node in the right subtree it becomes the new parent of. Once this replacement is made the replacement node must be removed from the right subtree. Even this operation is tricky because the replacement may be a leaf or it may itself be the parent of a right subtree. If it is a leaf we must remove its parent's reference to it. Otherwise, it must be the right child of the target. In this case, we must replace the target value with the replacement value and make the target reference the replacement's right child.
 
 # --instructions--
 
-We've provided some code in our `remove` method that accomplishes the tasks from the last challenge. We find the target to delete and its parent and define the number of children the target node has. Let's add the next case here for target nodes with only one child. Here, we'll have to determine if the single child is a left or right branch in the tree and then set the correct reference in the parent to point to this node. In addition, let's account for the case where the target is the root node (this means the parent node will be `null`). Feel free to replace all the starter code with your own as long as it passes the tests.
+Let's finish our `remove` method by handling the third case. We've provided some code again for the first two cases. Add some code now to handle target nodes with two children. Any edge cases to be aware of? What if the tree has only three nodes? Once you are finished this will complete our deletion operation for binary search trees. Nice job, this is a pretty hard problem!
 
 # --hints--
 
@@ -57,10 +57,7 @@ assert(
     } else {
       return false;
     }
-    if (typeof test.remove !== 'function') {
-      return false;
-    }
-    return test.remove(100) == null;
+    return typeof test.remove == 'function' ? test.remove(100) == null : false;
   })()
 );
 ```
@@ -76,12 +73,9 @@ assert(
     } else {
       return false;
     }
-    if (typeof test.remove !== 'function') {
-      return false;
-    }
     test.add(500);
     test.remove(500);
-    return test.inorder() == null;
+    return typeof test.remove == 'function' ? test.inorder() == null : false;
   })()
 );
 ```
@@ -97,9 +91,6 @@ assert(
     } else {
       return false;
     }
-    if (typeof test.remove !== 'function') {
-      return false;
-    }
     test.add(5);
     test.add(3);
     test.add(7);
@@ -109,7 +100,9 @@ assert(
     test.remove(3);
     test.remove(12);
     test.remove(10);
-    return test.inorder().join('') == '567';
+    return typeof test.remove == 'function'
+      ? test.inorder().join('') == '567'
+      : false;
   })()
 );
 ```
@@ -158,6 +151,86 @@ assert(
     test.add(27);
     test.remove(15);
     return test.inorder().join('') == '27';
+  })()
+);
+```
+
+The `remove` method should remove nodes with two children while maintaining the binary search tree structure.
+
+```js
+assert(
+  (function () {
+    var test = false;
+    if (typeof BinarySearchTree !== 'undefined') {
+      test = new BinarySearchTree();
+    } else {
+      return false;
+    }
+    if (typeof test.remove !== 'function') {
+      return false;
+    }
+    test.add(1);
+    test.add(4);
+    test.add(3);
+    test.add(7);
+    test.add(9);
+    test.add(11);
+    test.add(14);
+    test.add(15);
+    test.add(19);
+    test.add(50);
+    test.remove(9);
+    if (!test.isBinarySearchTree()) {
+      return false;
+    }
+    test.remove(11);
+    if (!test.isBinarySearchTree()) {
+      return false;
+    }
+    test.remove(14);
+    if (!test.isBinarySearchTree()) {
+      return false;
+    }
+    test.remove(19);
+    if (!test.isBinarySearchTree()) {
+      return false;
+    }
+    test.remove(3);
+    if (!test.isBinarySearchTree()) {
+      return false;
+    }
+    test.remove(50);
+    if (!test.isBinarySearchTree()) {
+      return false;
+    }
+    test.remove(15);
+    if (!test.isBinarySearchTree()) {
+      return false;
+    }
+    return test.inorder().join('') == '147';
+  })()
+);
+```
+
+The root should be removable on a tree of three nodes.
+
+```js
+assert(
+  (function () {
+    var test = false;
+    if (typeof BinarySearchTree !== 'undefined') {
+      test = new BinarySearchTree();
+    } else {
+      return false;
+    }
+    if (typeof test.remove !== 'function') {
+      return false;
+    }
+    test.add(100);
+    test.add(50);
+    test.add(300);
+    test.remove(100);
+    return test.inorder().join('') == 50300;
   })()
 );
 ```
@@ -214,6 +287,33 @@ BinarySearchTree.prototype = Object.assign(
         }
         traverseInOrder(this.root);
         return result;
+      }
+    },
+    isBinarySearchTree() {
+      if (this.root == null) {
+        return null;
+      } else {
+        var check = true;
+        function checkTree(node) {
+          if (node.left != null) {
+            var left = node.left;
+            if (left.value > node.value) {
+              check = false;
+            } else {
+              checkTree(left);
+            }
+          }
+          if (node.right != null) {
+            var right = node.right;
+            if (right.value < node.value) {
+              check = false;
+            } else {
+              checkTree(right);
+            }
+          }
+        }
+        checkTree(this.root);
+        return check;
       }
     }
   }
@@ -273,6 +373,20 @@ function BinarySearchTree() {
       }
     }
     // Case 2: Target has one child
+    else if (children == 1) {
+      var newChild = target.left !== null ? target.left : target.right;
+      if (parent === null) {
+        target.value = newChild.value;
+        target.left = null;
+        target.right = null;
+      } else if (newChild.value < parent.value) {
+        parent.left = newChild;
+      } else {
+        parent.right = newChild;
+      }
+      target = null;
+    }
+    // Case 3: Target has two children
     // Only change code below this line
   };
 }
