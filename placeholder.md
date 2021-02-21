@@ -1,149 +1,192 @@
 ---
-id: 587d825a367417b2b2512c8a
-title: Insert an Element into a Max Heap
+id: 587d8259367417b2b2512c83
+title: Invert a Binary Tree
 challengeType: 1
-forumTopicId: 301703
-dashedName: insert-an-element-into-a-max-heap
+forumTopicId: 301704
+dashedName: invert-a-binary-tree
 ---
 
 # --description--
 
-Now we will move on to another tree data structure, the binary heap. A binary heap is a partially ordered binary tree which satisfies the heap property. The heap property specifies a relationship between parent and child nodes. You may have a max heap, in which all parent nodes are greater than or equal to their child nodes, or a min heap, in which the reverse is true. Binary heaps are also complete binary trees. This means that all levels of the tree are fully filled and if the last level is partially filled it is filled from left to right.
-
-While binary heaps may be implemented as tree structures with nodes that contain left and right references, the partial ordering according to the heap property allows us to represent the heap with an array. The parent-children relationship is what we're interested in and with simple arithmetic we can compute the children of any parent and the parent of any child node.
-
-For instance, consider this array representation of a binary min heap:
-
-`[ 6, 22, 30, 37, 63, 48, 42, 76 ]`
-
-The root node is the first element, `6`. Its children are `22` and `30`. If we look at the relationship between the array indices of these values, for index `i` the children are `2 * i + 1` and `2 * i + 2`. Similarly, the element at index `0` is the parent of these two children at indices `1` and `2`. More generally, we can find the parent of a node at any index with the following: `Math.floor((i - 1) / 2)`. These patterns will hold true as the binary tree grows to any size. Finally, we can make a slight adjustment to make this arithmetic even easier by skipping the first element in the array. Doing this creates the following relationship for any element at a given index `i`:
-
-Example array representation:
-
-`[ null, 6, 22, 30, 37, 63, 48, 42, 76 ]`
-
-An element's left child: `i * 2`
-
-An element's right child: `i * 2 + 1`
-
-An element's parent: `Math.floor(i / 2)`
-
-Once you wrap your head around the math, using an array representation is very useful because node locations can be quickly determined with this arithmetic and memory usage is diminished because you don't need to maintain references to child nodes.
-
-# --instructions--
-
-Instructions: Here we will create a max heap. Start by just creating an `insert` method which adds elements to our heap. During insertion, it is important to always maintain the heap property. For a max heap this means the root element should always have the greatest value in the tree and all parent nodes should be greater than their children. For an array implementation of a heap, this is typically accomplished in three steps:
-
-<ol>
-  <li>Add the new element to the end of the array.</li>
-  <li>If the element is larger than its parent, switch them.</li>
-  <li>Continue switching until the new element is either smaller than its parent or you reach the root of the tree.</li>
-</ol>
-
-Finally, add a `print` method which returns an array of all the items that have been added to the heap.
+Here will we create a function to invert a binary tree. Given a binary tree, we want to produce a new tree that is equivalently the mirror image of this tree. Running an inorder traversal on an inverted tree will explore the nodes in reverse order when compared to the inorder traversal of the original tree. Write a method to do this called `invert` on our binary tree. Calling this method should invert the current tree structure. Ideally, we would like to do this in-place in linear time. That is, we only visit each node once and we modify the existing tree structure as we go, without using any additional memory. Good luck!
 
 # --hints--
 
-The MaxHeap data structure should exist.
+The `BinarySearchTree` data structure should exist.
 
 ```js
 assert(
   (function () {
     var test = false;
-    if (typeof MaxHeap !== 'undefined') {
-      test = new MaxHeap();
+    if (typeof BinarySearchTree !== 'undefined') {
+      test = new BinarySearchTree();
     }
     return typeof test == 'object';
   })()
 );
 ```
 
-MaxHeap should have a method called insert.
+The binary search tree should have a method called `invert`.
 
 ```js
 assert(
   (function () {
     var test = false;
-    if (typeof MaxHeap !== 'undefined') {
-      test = new MaxHeap();
+    if (typeof BinarySearchTree !== 'undefined') {
+      test = new BinarySearchTree();
     } else {
       return false;
     }
-    return typeof test.insert == 'function';
+    return typeof test.invert == 'function';
   })()
 );
 ```
 
-MaxHeap should have a method called print.
+The `invert` method should correctly invert the tree structure.
 
 ```js
 assert(
   (function () {
     var test = false;
-    if (typeof MaxHeap !== 'undefined') {
-      test = new MaxHeap();
+    if (typeof BinarySearchTree !== 'undefined') {
+      test = new BinarySearchTree();
     } else {
       return false;
     }
-    return typeof test.print == 'function';
+    if (typeof test.invert !== 'function') {
+      return false;
+    }
+    test.add(4);
+    test.add(1);
+    test.add(7);
+    test.add(87);
+    test.add(34);
+    test.add(45);
+    test.add(73);
+    test.add(8);
+    test.invert();
+    return test.inorder().join('') == '877345348741';
   })()
 );
 ```
 
-The insert method should add elements according to the max heap property.
+Inverting an empty tree should return `null`.
 
 ```js
 assert(
   (function () {
     var test = false;
-    if (typeof MaxHeap !== 'undefined') {
-      test = new MaxHeap();
+    if (typeof BinarySearchTree !== 'undefined') {
+      test = new BinarySearchTree();
     } else {
       return false;
     }
-    test.insert(50);
-    test.insert(100);
-    test.insert(700);
-    test.insert(32);
-    test.insert(51);
-    let result = test.print();
-    return result.length == 5 ? result[0] == 700 : result[1] == 700;
+    if (typeof test.invert !== 'function') {
+      return false;
+    }
+    return test.invert() == null;
   })()
 );
 ```
 
 # --seed--
 
+## --after-user-code--
+
+```js
+BinarySearchTree.prototype = Object.assign(
+  BinarySearchTree.prototype,
+  {
+    add: function(value) {
+      function searchTree(node) {
+        if (value < node.value) {
+          if (node.left == null) {
+            node.left = new Node(value);
+            return;
+          } else if (node.left != null) {
+            return searchTree(node.left)
+          };
+        } else if (value > node.value) {
+          if (node.right == null) {
+            node.right = new Node(value);
+            return;
+          } else if (node.right != null) {
+            return searchTree(node.right);
+          };
+        } else {
+          return null;
+        };
+      }
+
+      var node = this.root;
+      if (node == null) {
+        this.root = new Node(value);
+        return;
+      } else {
+        return searchTree(node);
+      };
+    },
+    inorder: function() {
+      if (this.root == null) {
+        return null;
+      } else {
+        var result = new Array();
+        function traverseInOrder(node) {
+          if (node.left != null) {
+            traverseInOrder(node.left);
+          };
+          result.push(node.value);
+          if (node.right != null) {
+            traverseInOrder(node.right);
+          };
+        }
+        traverseInOrder(this.root);
+        return result;
+      };
+    }
+  }
+);
+```
+
 ## --seed-contents--
 
 ```js
-var MaxHeap = function() {
+var displayTree = (tree) => console.log(JSON.stringify(tree, null, 2));
+function Node(value) {
+  this.value = value;
+  this.left = null;
+  this.right = null;
+}
+function BinarySearchTree() {
+  this.root = null;
   // Only change code below this line
-    
+  
   // Only change code above this line
-};
+}
 ```
 
 # --solutions--
 
 ```js
-var MaxHeap = function() {
-    // Only change code below this line
-    this.heap = [null];
-    this.insert = (ele) => {
-        var index = this.heap.length;
-        var arr = [...this.heap];
-        arr.push(ele);
-        while (ele > arr[Math.floor(index / 2)] && index > 1) {
-            arr[index] = arr[Math.floor(index / 2)];
-            arr[Math.floor(index / 2)] = ele;
-            index = arr[Math.floor(index / 2)];
-        }
-        this.heap = arr;
+var displayTree = (tree) => console.log(JSON.stringify(tree, null, 2));
+function Node(value) {
+  this.value = value;
+  this.left = null;
+  this.right = null;
+}
+function BinarySearchTree() {
+  this.root = null;
+  // Only change code below this line
+  this.invert = function(node = this.root) {
+    if (node) {
+      const temp = node.left;
+      node.left = node.right;
+      node.right = temp;
+      this.invert(node.left);
+      this.invert(node.right);
     }
-    this.print = () => {
-        return this.heap.slice(1);
-    }
+    return node;
+  }
     // Only change code above this line
-};
+}
 ```
