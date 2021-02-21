@@ -1,68 +1,31 @@
 ---
-id: 587d8254367417b2b2512c6f
-title: Perform a Subset Check on Two Sets of Data
+id: 587d8253367417b2b2512c6c
+title: Perform a Union on Two Sets
 challengeType: 1
-forumTopicId: 301707
-dashedName: perform-a-subset-check-on-two-sets-of-data
+forumTopicId: 301708
+dashedName: perform-a-union-on-two-sets
 ---
 
 # --description--
 
-In this exercise, we are going to perform a subset test on 2 sets of data. We will create a method on our `Set` data structure called `isSubsetOf`. This will compare the first set against the second, and if the first set is fully contained within the second, it will return `true`.
+In this exercise we are going to perform a union on two sets of data. We will create a method on our `Set` data structure called `union`. This method should take another `Set` as an argument and return the `union` of the two sets, excluding any duplicate values.
 
-For example, if `setA = ['a','b']` and `setB = ['a','b','c','d']`, then `setA` is a subset of `setB`, so `setA.isSubsetOf(setB)` should return `true`.
+For example, if `setA = ['a','b','c']` and `setB = ['a','b','d','e']`, then the union of setA and setB is: `setA.union(setB) = ['a', 'b', 'c', 'd', 'e']`.
 
 # --hints--
 
-Your `Set` class should have a `isSubsetOf` method.
+Your `Set` class should have a `union` method.
 
 ```js
 assert(
   (function () {
     var test = new Set();
-    return typeof test.isSubsetOf === 'function';
+    return typeof test.union === 'function';
   })()
 );
 ```
 
-The first Set() should be contained in the second Set
-
-```js
-assert(
-  (function () {
-    var setA = new Set();
-    var setB = new Set();
-    setA.add('a');
-    setB.add('b');
-    setB.add('c');
-    setB.add('a');
-    setB.add('d');
-    var aIsSubsetOfB = setA.isSubsetOf(setB);
-    return aIsSubsetOfB === true;
-  })()
-);
-```
-
-`['a', 'b'].isSubsetOf(['a', 'b', 'c', 'd'])` should return `true`
-
-```js
-assert(
-  (function () {
-    var setA = new Set();
-    var setB = new Set();
-    setA.add('a');
-    setA.add('b');
-    setB.add('a');
-    setB.add('b');
-    setB.add('c');
-    setB.add('d');
-    var aIsSubsetOfB = setA.isSubsetOf(setB);
-    return aIsSubsetOfB === true;
-  })()
-);
-```
-
-`['a', 'b', 'c'].isSubsetOf(['a', 'b'])` should return `false`
+The union of a Set containing values ["a", "b", "c"] and a Set containing values ["c", "d"] should return a new Set containing values ["a", "b", "c", "d"].
 
 ```js
 assert(
@@ -72,40 +35,17 @@ assert(
     setA.add('a');
     setA.add('b');
     setA.add('c');
-    setB.add('a');
-    setB.add('b');
-    var aIsSubsetOfB = setA.isSubsetOf(setB);
-    return aIsSubsetOfB === false;
-  })()
-);
-```
-
-`[].isSubsetOf([])` should return `true`
-
-```js
-assert(
-  (function () {
-    var setA = new Set();
-    var setB = new Set();
-    var aIsSubsetOfB = setA.isSubsetOf(setB);
-    return aIsSubsetOfB === true;
-  })()
-);
-```
-
-`['a', 'b'].isSubsetOf(['c', 'd'])` should return `false`
-
-```js
-assert(
-  (function () {
-    var setA = new Set();
-    var setB = new Set();
-    setA.add('a');
-    setA.add('b');
     setB.add('c');
     setB.add('d');
-    var aIsSubsetOfB = setA.isSubsetOf(setB);
-    return aIsSubsetOfB === false;
+    var unionSetAB = setA.union(setB);
+    var final = unionSetAB.values();
+    return (
+      final.indexOf('a') !== -1 &&
+      final.indexOf('b') !== -1 &&
+      final.indexOf('c') !== -1 &&
+      final.indexOf('d') !== -1 &&
+      final.length === 4
+    );
   })()
 );
 ```
@@ -127,12 +67,12 @@ class Set {
   }
   // This method will return all the values in the set
   values() {
-    return Object.keys(this.dictionary);
+    return Object.values(this.dictionary);
   }
   // This method will add an element to the set
   add(element) {
     if (!this.has(element)) {
-      this.dictionary[element] = true;
+      this.dictionary[element] = element;
       this.length++;
       return true;
     }
@@ -153,54 +93,8 @@ class Set {
   size() {
     return this.length;
   }
-  // This is our union method 
-  union(set) {
-    const newSet = new Set();
-    this.values().forEach(value => {
-      newSet.add(value);
-    })
-    set.values().forEach(value => {
-      newSet.add(value);
-    })
-
-    return newSet;
-  }
-  // This is our intersection method
-  intersection(set) {
-    const newSet = new Set();
-
-    let largeSet;
-    let smallSet;
-    if (this.dictionary.length > set.length) {
-      largeSet = this;
-      smallSet = set;
-    } else {
-      largeSet = set;
-      smallSet = this;
-    }
-
-    smallSet.values().forEach(value => {
-      if (largeSet.dictionary[value]) {
-        newSet.add(value);
-      }
-    })
-
-    return newSet;
-  }
-
-  difference(set) {
-    const newSet = new Set();
-
-    this.values().forEach(value => {
-      if (!set.dictionary[value]) {
-        newSet.add(value);
-      }
-    })
-
-    return newSet;
-  }
   // Only change code below this line
-  
+
   // Only change code above this line
 }
 ```
@@ -219,12 +113,12 @@ class Set {
   }
 
   values() {
-    return Object.keys(this.dictionary);
+    return Object.values(this.dictionary);
   }
 
   add(element) {
     if (!this.has(element)) {
-      this.dictionary[element] = true;
+      this.dictionary[element] = element;
       this.length++;
       return true;
     }
@@ -256,47 +150,6 @@ class Set {
     })
 
     return newSet;
-  }
-
-  intersection(set) {
-    const newSet = new Set();
-
-    let largeSet;
-    let smallSet;
-    if (this.dictionary.length > set.length) {
-      largeSet = this;
-      smallSet = set;
-    } else {
-      largeSet = set;
-      smallSet = this;
-    }
-
-    smallSet.values().forEach(value => {
-      if (largeSet.dictionary[value]) {
-        newSet.add(value);
-      }
-    })
-
-    return newSet;
-  }  
-
-  difference(set) {
-    const newSet = new Set();
-
-    this.values().forEach(value => {
-      if (!set.dictionary[value]) {
-        newSet.add(value);
-      }
-    })
-
-    return newSet;
-  }
-
-  isSubsetOf(set) {
-    for(const value of this.values()){
-      if(!set.dictionary[value]) return false;
-    }
-    return true
   }
 }
 ```
