@@ -1,31 +1,68 @@
 ---
-id: 587d8254367417b2b2512c6e
-title: Perform a Difference on Two Sets of Data
+id: 587d8254367417b2b2512c6f
+title: Perform a Subset Check on Two Sets of Data
 challengeType: 1
-forumTopicId: 301706
-dashedName: perform-a-difference-on-two-sets-of-data
+forumTopicId: 301707
+dashedName: perform-a-subset-check-on-two-sets-of-data
 ---
 
 # --description--
 
-In this exercise we are going to perform a difference on 2 sets of data. We will create a method on our `Set` data structure called `difference`. A difference of sets should compare two sets and return the items present in the first set that are absent in the second. This method should take another `Set` as an argument and return the `difference` of the two sets.
+In this exercise, we are going to perform a subset test on 2 sets of data. We will create a method on our `Set` data structure called `isSubsetOf`. This will compare the first set against the second, and if the first set is fully contained within the second, it will return `true`.
 
-For example, if `setA = ['a','b','c']` and `setB = ['a','b','d','e']`, then the difference of setA and setB is: `setA.difference(setB) = ['c']`.
+For example, if `setA = ['a','b']` and `setB = ['a','b','c','d']`, then `setA` is a subset of `setB`, so `setA.isSubsetOf(setB)` should return `true`.
 
 # --hints--
 
-Your `Set` class should have a `difference` method.
+Your `Set` class should have a `isSubsetOf` method.
 
 ```js
 assert(
   (function () {
     var test = new Set();
-    return typeof test.difference === 'function';
+    return typeof test.isSubsetOf === 'function';
   })()
 );
 ```
 
-Your `difference` method should return the proper collection.
+The first Set() should be contained in the second Set
+
+```js
+assert(
+  (function () {
+    var setA = new Set();
+    var setB = new Set();
+    setA.add('a');
+    setB.add('b');
+    setB.add('c');
+    setB.add('a');
+    setB.add('d');
+    var aIsSubsetOfB = setA.isSubsetOf(setB);
+    return aIsSubsetOfB === true;
+  })()
+);
+```
+
+`['a', 'b'].isSubsetOf(['a', 'b', 'c', 'd'])` should return `true`
+
+```js
+assert(
+  (function () {
+    var setA = new Set();
+    var setB = new Set();
+    setA.add('a');
+    setA.add('b');
+    setB.add('a');
+    setB.add('b');
+    setB.add('c');
+    setB.add('d');
+    var aIsSubsetOfB = setA.isSubsetOf(setB);
+    return aIsSubsetOfB === true;
+  })()
+);
+```
+
+`['a', 'b', 'c'].isSubsetOf(['a', 'b'])` should return `false`
 
 ```js
 assert(
@@ -35,13 +72,40 @@ assert(
     setA.add('a');
     setA.add('b');
     setA.add('c');
+    setB.add('a');
+    setB.add('b');
+    var aIsSubsetOfB = setA.isSubsetOf(setB);
+    return aIsSubsetOfB === false;
+  })()
+);
+```
+
+`[].isSubsetOf([])` should return `true`
+
+```js
+assert(
+  (function () {
+    var setA = new Set();
+    var setB = new Set();
+    var aIsSubsetOfB = setA.isSubsetOf(setB);
+    return aIsSubsetOfB === true;
+  })()
+);
+```
+
+`['a', 'b'].isSubsetOf(['c', 'd'])` should return `false`
+
+```js
+assert(
+  (function () {
+    var setA = new Set();
+    var setB = new Set();
+    setA.add('a');
+    setA.add('b');
     setB.add('c');
     setB.add('d');
-    var differenceSetAB = setA.difference(setB);
-    return (
-      differenceSetAB.size() === 2 &&
-      DeepEqual(differenceSetAB.values(), ['a', 'b'])
-    );
+    var aIsSubsetOfB = setA.isSubsetOf(setB);
+    return aIsSubsetOfB === false;
   })()
 );
 ```
@@ -117,6 +181,18 @@ class Set {
 
     smallSet.values().forEach(value => {
       if (largeSet.dictionary[value]) {
+        newSet.add(value);
+      }
+    })
+
+    return newSet;
+  }
+
+  difference(set) {
+    const newSet = new Set();
+
+    this.values().forEach(value => {
+      if (!set.dictionary[value]) {
         newSet.add(value);
       }
     })
@@ -202,7 +278,7 @@ class Set {
     })
 
     return newSet;
-  }
+  }  
 
   difference(set) {
     const newSet = new Set();
@@ -214,6 +290,13 @@ class Set {
     })
 
     return newSet;
+  }
+
+  isSubsetOf(set) {
+    for(const value of this.values()){
+      if(!set.dictionary[value]) return false;
+    }
+    return true
   }
 }
 ```
