@@ -1,192 +1,71 @@
 ---
-id: 587d8259367417b2b2512c83
-title: Invert a Binary Tree
+id: 587d8250367417b2b2512c5e
+title: Learn how a Stack Works
 challengeType: 1
-forumTopicId: 301704
-dashedName: invert-a-binary-tree
+forumTopicId: 301705
+dashedName: learn-how-a-stack-works
 ---
 
 # --description--
 
-Here will we create a function to invert a binary tree. Given a binary tree, we want to produce a new tree that is equivalently the mirror image of this tree. Running an inorder traversal on an inverted tree will explore the nodes in reverse order when compared to the inorder traversal of the original tree. Write a method to do this called `invert` on our binary tree. Calling this method should invert the current tree structure. Ideally, we would like to do this in-place in linear time. That is, we only visit each node once and we modify the existing tree structure as we go, without using any additional memory. Good luck!
+You are probably familiar with stack of books on your table. You have likely used the undo feature of a text editor. You are also probably used to hitting the back button on your phone to go back to the previous view in your app.
+
+You know what they all have in common? They all store the data in a way so that you can traverse backwards.
+
+The topmost book in the stack was the one that was put there last. If you remove that book from your stack's top, you would expose the book that was put there before the last book and so on.
+
+If you think about it, in all the above examples, you are getting <dfn>Last-In-First-Out</dfn> type of service. We will try to mimic this with our code.
+
+This data storage scheme is called a <dfn>Stack</dfn>. In particular, we would have to implement the `push()` method that pushes JavaScript objects at the top of the stack; and `pop()` method, that removes the JavaScript object that's at the top of the stack at the current moment.
+
+# --instructions--
+
+Here we have a stack of homework assignments represented as an array: `"BIO12"` is at the base, and `"PSY44"` is at the top of the stack.
+
+Modify the given array and treat it like a `stack` using the JavaScript methods mentioned above. Remove the top element `"PSY44"` from the stack. Then add `"CS50"` to be the new top element of the stack.
 
 # --hints--
 
-The `BinarySearchTree` data structure should exist.
+`homeworkStack` should only contain 4 elements.
 
 ```js
-assert(
-  (function () {
-    var test = false;
-    if (typeof BinarySearchTree !== 'undefined') {
-      test = new BinarySearchTree();
-    }
-    return typeof test == 'object';
-  })()
-);
+assert(homeworkStack.length === 4);
 ```
 
-The binary search tree should have a method called `invert`.
+The last element in `homeworkStack` should be `"CS50"`.
 
 ```js
-assert(
-  (function () {
-    var test = false;
-    if (typeof BinarySearchTree !== 'undefined') {
-      test = new BinarySearchTree();
-    } else {
-      return false;
-    }
-    return typeof test.invert == 'function';
-  })()
-);
+assert(homeworkStack[3] === 'CS50');
 ```
 
-The `invert` method should correctly invert the tree structure.
+`homeworkStack` should not contain `"PSY44"`.
 
 ```js
-assert(
-  (function () {
-    var test = false;
-    if (typeof BinarySearchTree !== 'undefined') {
-      test = new BinarySearchTree();
-    } else {
-      return false;
-    }
-    if (typeof test.invert !== 'function') {
-      return false;
-    }
-    test.add(4);
-    test.add(1);
-    test.add(7);
-    test.add(87);
-    test.add(34);
-    test.add(45);
-    test.add(73);
-    test.add(8);
-    test.invert();
-    return test.inorder().join('') == '877345348741';
-  })()
-);
+assert(homeworkStack.indexOf('PSY44') === -1);
 ```
 
-Inverting an empty tree should return `null`.
+The initial declaration of the `homeworkStack` should not be changed.
 
 ```js
 assert(
-  (function () {
-    var test = false;
-    if (typeof BinarySearchTree !== 'undefined') {
-      test = new BinarySearchTree();
-    } else {
-      return false;
-    }
-    if (typeof test.invert !== 'function') {
-      return false;
-    }
-    return test.invert() == null;
-  })()
+  code.match(/=/g).length === 1 &&
+    /homeworkStack\s*=\s*\["BIO12"\s*,\s*"HIS80"\s*,\s*"MAT122"\s*,\s*"PSY44"\]/.test(
+      code
+    )
 );
 ```
 
 # --seed--
 
-## --after-user-code--
-
-```js
-BinarySearchTree.prototype = Object.assign(
-  BinarySearchTree.prototype,
-  {
-    add: function(value) {
-      function searchTree(node) {
-        if (value < node.value) {
-          if (node.left == null) {
-            node.left = new Node(value);
-            return;
-          } else if (node.left != null) {
-            return searchTree(node.left)
-          };
-        } else if (value > node.value) {
-          if (node.right == null) {
-            node.right = new Node(value);
-            return;
-          } else if (node.right != null) {
-            return searchTree(node.right);
-          };
-        } else {
-          return null;
-        };
-      }
-
-      var node = this.root;
-      if (node == null) {
-        this.root = new Node(value);
-        return;
-      } else {
-        return searchTree(node);
-      };
-    },
-    inorder: function() {
-      if (this.root == null) {
-        return null;
-      } else {
-        var result = new Array();
-        function traverseInOrder(node) {
-          if (node.left != null) {
-            traverseInOrder(node.left);
-          };
-          result.push(node.value);
-          if (node.right != null) {
-            traverseInOrder(node.right);
-          };
-        }
-        traverseInOrder(this.root);
-        return result;
-      };
-    }
-  }
-);
-```
-
 ## --seed-contents--
 
 ```js
-var displayTree = (tree) => console.log(JSON.stringify(tree, null, 2));
-function Node(value) {
-  this.value = value;
-  this.left = null;
-  this.right = null;
-}
-function BinarySearchTree() {
-  this.root = null;
-  // Only change code below this line
-  
-  // Only change code above this line
-}
+var homeworkStack = ["BIO12","HIS80","MAT122","PSY44"];
+// Only change code below this line
 ```
 
 # --solutions--
 
 ```js
-var displayTree = (tree) => console.log(JSON.stringify(tree, null, 2));
-function Node(value) {
-  this.value = value;
-  this.left = null;
-  this.right = null;
-}
-function BinarySearchTree() {
-  this.root = null;
-  // Only change code below this line
-  this.invert = function(node = this.root) {
-    if (node) {
-      const temp = node.left;
-      node.left = node.right;
-      node.right = temp;
-      this.invert(node.left);
-      this.invert(node.right);
-    }
-    return node;
-  }
-    // Only change code above this line
-}
+// solution required
 ```
