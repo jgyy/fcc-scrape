@@ -1,57 +1,48 @@
 ---
-id: 587d8250367417b2b2512c5e
-title: Learn how a Stack Works
+id: 587d8254367417b2b2512c6e
+title: Perform a Difference on Two Sets of Data
 challengeType: 1
-forumTopicId: 301705
-dashedName: learn-how-a-stack-works
+forumTopicId: 301706
+dashedName: perform-a-difference-on-two-sets-of-data
 ---
 
 # --description--
 
-You are probably familiar with stack of books on your table. You have likely used the undo feature of a text editor. You are also probably used to hitting the back button on your phone to go back to the previous view in your app.
+In this exercise we are going to perform a difference on 2 sets of data. We will create a method on our `Set` data structure called `difference`. A difference of sets should compare two sets and return the items present in the first set that are absent in the second. This method should take another `Set` as an argument and return the `difference` of the two sets.
 
-You know what they all have in common? They all store the data in a way so that you can traverse backwards.
-
-The topmost book in the stack was the one that was put there last. If you remove that book from your stack's top, you would expose the book that was put there before the last book and so on.
-
-If you think about it, in all the above examples, you are getting <dfn>Last-In-First-Out</dfn> type of service. We will try to mimic this with our code.
-
-This data storage scheme is called a <dfn>Stack</dfn>. In particular, we would have to implement the `push()` method that pushes JavaScript objects at the top of the stack; and `pop()` method, that removes the JavaScript object that's at the top of the stack at the current moment.
-
-# --instructions--
-
-Here we have a stack of homework assignments represented as an array: `"BIO12"` is at the base, and `"PSY44"` is at the top of the stack.
-
-Modify the given array and treat it like a `stack` using the JavaScript methods mentioned above. Remove the top element `"PSY44"` from the stack. Then add `"CS50"` to be the new top element of the stack.
+For example, if `setA = ['a','b','c']` and `setB = ['a','b','d','e']`, then the difference of setA and setB is: `setA.difference(setB) = ['c']`.
 
 # --hints--
 
-`homeworkStack` should only contain 4 elements.
-
-```js
-assert(homeworkStack.length === 4);
-```
-
-The last element in `homeworkStack` should be `"CS50"`.
-
-```js
-assert(homeworkStack[3] === 'CS50');
-```
-
-`homeworkStack` should not contain `"PSY44"`.
-
-```js
-assert(homeworkStack.indexOf('PSY44') === -1);
-```
-
-The initial declaration of the `homeworkStack` should not be changed.
+Your `Set` class should have a `difference` method.
 
 ```js
 assert(
-  code.match(/=/g).length === 1 &&
-    /homeworkStack\s*=\s*\["BIO12"\s*,\s*"HIS80"\s*,\s*"MAT122"\s*,\s*"PSY44"\]/.test(
-      code
-    )
+  (function () {
+    var test = new Set();
+    return typeof test.difference === 'function';
+  })()
+);
+```
+
+Your `difference` method should return the proper collection.
+
+```js
+assert(
+  (function () {
+    var setA = new Set();
+    var setB = new Set();
+    setA.add('a');
+    setA.add('b');
+    setA.add('c');
+    setB.add('c');
+    setB.add('d');
+    var differenceSetAB = setA.difference(setB);
+    return (
+      differenceSetAB.size() === 2 &&
+      DeepEqual(differenceSetAB.values(), ['a', 'b'])
+    );
+  })()
 );
 ```
 
@@ -60,12 +51,169 @@ assert(
 ## --seed-contents--
 
 ```js
-var homeworkStack = ["BIO12","HIS80","MAT122","PSY44"];
-// Only change code below this line
+class Set {
+  constructor() {
+    // This will hold the set
+    this.dictionary = {};
+    this.length = 0;
+  }
+  // This method will check for the presence of an element and return true or false
+  has(element) {
+    return this.dictionary[element] !== undefined;
+  }
+  // This method will return all the values in the set
+  values() {
+    return Object.keys(this.dictionary);
+  }
+  // This method will add an element to the set
+  add(element) {
+    if (!this.has(element)) {
+      this.dictionary[element] = true;
+      this.length++;
+      return true;
+    }
+
+    return false;
+  }
+  // This method will remove an element from a set
+  remove(element) {
+    if (this.has(element)) {
+      delete this.dictionary[element];
+      this.length--;
+      return true;
+    }
+
+    return false;
+  }
+  // This method will return the size of the set
+  size() {
+    return this.length;
+  }
+  // This is our union method 
+  union(set) {
+    const newSet = new Set();
+    this.values().forEach(value => {
+      newSet.add(value);
+    })
+    set.values().forEach(value => {
+      newSet.add(value);
+    })
+
+    return newSet;
+  }
+  // This is our intersection method
+  intersection(set) {
+    const newSet = new Set();
+
+    let largeSet;
+    let smallSet;
+    if (this.dictionary.length > set.length) {
+      largeSet = this;
+      smallSet = set;
+    } else {
+      largeSet = set;
+      smallSet = this;
+    }
+
+    smallSet.values().forEach(value => {
+      if (largeSet.dictionary[value]) {
+        newSet.add(value);
+      }
+    })
+
+    return newSet;
+  }
+  // Only change code below this line
+  
+  // Only change code above this line
+}
 ```
 
 # --solutions--
 
 ```js
-// solution required
+class Set {
+  constructor() {
+    this.dictionary = {};
+    this.length = 0;
+  }
+
+  has(element) {
+    return this.dictionary[element] !== undefined;
+  }
+
+  values() {
+    return Object.keys(this.dictionary);
+  }
+
+  add(element) {
+    if (!this.has(element)) {
+      this.dictionary[element] = true;
+      this.length++;
+      return true;
+    }
+
+    return false;
+  }
+
+  remove(element) {
+    if (this.has(element)) {
+      delete this.dictionary[element];
+      this.length--;
+      return true;
+    }
+
+    return false;
+  }
+
+  size() {
+    return this.length;
+  }
+
+  union(set) {
+    const newSet = new Set();
+    this.values().forEach(value => {
+      newSet.add(value);
+    })
+    set.values().forEach(value => {
+      newSet.add(value);
+    })
+
+    return newSet;
+  }
+
+  intersection(set) {
+    const newSet = new Set();
+
+    let largeSet;
+    let smallSet;
+    if (this.dictionary.length > set.length) {
+      largeSet = this;
+      smallSet = set;
+    } else {
+      largeSet = set;
+      smallSet = this;
+    }
+
+    smallSet.values().forEach(value => {
+      if (largeSet.dictionary[value]) {
+        newSet.add(value);
+      }
+    })
+
+    return newSet;
+  }
+
+  difference(set) {
+    const newSet = new Set();
+
+    this.values().forEach(value => {
+      if (!set.dictionary[value]) {
+        newSet.add(value);
+      }
+    })
+
+    return newSet;
+  }
+}
 ```
