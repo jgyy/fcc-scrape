@@ -1,59 +1,73 @@
 ---
-id: 587d8252367417b2b2512c67
-title: Add Elements at a Specific Index in a Linked List
+id: 587d8256367417b2b2512c77
+title: Adjacency List
 challengeType: 1
-forumTopicId: 301619
-dashedName: add-elements-at-a-specific-index-in-a-linked-list
+forumTopicId: 301620
+dashedName: adjacency-list
 ---
 
 # --description--
 
-Let's create a addAt(index,element) method that adds an element at a given index. Just like how we remove elements at a given index, we need to keep track of the currentIndex as we traverse the linked list. When the currentIndex matches the given index, we would need to reassign the previous node's next property to reference the new added node. And the new node should reference the next node in the currentIndex. Returning to the conga line example, a new person wants to join the line, but he wants to join in the middle. You are in the middle of the line, so you take your hands off of the person ahead of you. The new person walks over and puts his hands on the person you once had hands on, and you now have your hands on the new person.
+Graphs can be represented in different ways. Here we describe one way, which is called an <dfn>adjacency list</dfn>. An adjacency list is essentially a bulleted list where the left side is the node and the right side lists all the other nodes it's connected to. Below is a representation of an adjacency list.
+
+<blockquote>Node1: Node2, Node3<br>Node2: Node1<br>Node3: Node1</blockquote>
+
+Above is an undirected graph because `Node1` is connected to `Node2` and `Node3`, and that information is consistent with the connections `Node2` and `Node3` show. An adjacency list for a directed graph would mean each row of the list shows direction. If the above was directed, then `Node2: Node1` would mean there the directed edge is pointing from `Node2` towards `Node1`. We can represent the undirected graph above as an adjacency list by putting it within a JavaScript object.
+
+```js
+var undirectedG = {
+  Node1: ["Node2", "Node3"],
+  Node2: ["Node1"],
+  Node3: ["Node1"]
+};
+```
+
+This can also be more simply represented as an array where the nodes just have numbers rather than string labels.
+
+```js
+var undirectedGArr = [
+  [1, 2], // Node1
+  [0],    // Node2
+  [0]     // Node3
+];
+```
 
 # --instructions--
 
-Create an `addAt(index,element)` method that adds an element at a given index. Return false if an element could not be added. **Note:** Remember to check if the given index is a negative or is longer than the length of the linked list.
+Create a social network as an undirected graph with 4 nodes/people named `James`, `Jill`, `Jenny`, and `Jeff`. There are edges/relationships between James and Jeff, Jill and Jenny, and Jeff and Jenny.
 
 # --hints--
 
-Your `addAt` method should reassign `head` to the new node when the given index is 0.
+`undirectedAdjList` should only contain four nodes.
+
+```js
+assert(Object.keys(undirectedAdjList).length === 4);
+```
+
+There should be an edge between `Jeff` and `James`.
 
 ```js
 assert(
-  (function () {
-    var test = new LinkedList();
-    test.add('cat');
-    test.add('dog');
-    test.addAt(0, 'cat');
-    return test.head().element === 'cat';
-  })()
+  undirectedAdjList.James.indexOf('Jeff') !== -1 &&
+    undirectedAdjList.Jeff.indexOf('James') !== -1
 );
 ```
 
-Your `addAt` method should increase the length of the linked list by one for each new node added to the linked list.
+There should be an edge between `Jill` and `Jenny`.
 
 ```js
 assert(
-  (function () {
-    var test = new LinkedList();
-    test.add('cat');
-    test.add('dog');
-    test.addAt(0, 'cat');
-    return test.size() === 3;
-  })()
+  undirectedAdjList.Jill.indexOf('Jenny') !== -1 &&
+    undirectedAdjList.Jill.indexOf('Jenny') !== -1
 );
 ```
 
-Your `addAt` method should return `false` if a node was unable to be added.
+There should be an edge between `Jeff` and `Jenny`.
 
 ```js
 assert(
-  (function () {
-    var test = new LinkedList();
-    test.add('cat');
-    test.add('dog');
-    return test.addAt(4, 'cat') === false;
-  })()
+  undirectedAdjList.Jeff.indexOf('Jenny') !== -1 &&
+    undirectedAdjList.Jenny.indexOf('Jeff') !== -1
 );
 ```
 
@@ -62,100 +76,16 @@ assert(
 ## --seed-contents--
 
 ```js
-function LinkedList() {
-  var length = 0;
-  var head = null;
-
-  var Node = function(element) {
-    this.element = element;
-    this.next = null;
-  };
-
-  this.size = function() {
-    return length;
-  };
-
-  this.head = function() {
-    return head;
-  };
-
-  this.add = function(element) {
-    var node = new Node(element);
-    if (head === null) {
-      head = node;
-    } else {
-      var currentNode = head;
-
-      while (currentNode.next) {
-        currentNode = currentNode.next;
-      }
-
-      currentNode.next = node;
-    }
-    length++;
-  };
-
-  // Only change code below this line
-
-  // Only change code above this line
-}
+var undirectedAdjList = {};
 ```
 
 # --solutions--
 
 ```js
-function LinkedList() {
-  var length = 0;
-  var head = null;
-
-  var Node = function(element){
-    this.element = element;
-    this.next = null;
-  };
-
-  this.size = function(){
-    return length;
-  };
-
-  this.head = function(){
-    return head;
-  };
-
-  this.add = function(element){
-    var node = new Node(element);
-    if (head === null){
-        head = node;
-    } else {
-      var currentNode = head;
-
-      while (currentNode.next) {
-        currentNode = currentNode.next;
-      }
-
-      currentNode.next = node;
-    }
-    length++;
-  };
-  this.addAt = function (index, element) {
-    if (index > length || index < 0) {
-      return false;
-    }
-    var newNode = new Node(element);
-    var currentNode = head;
-    if (index === 0) {
-      head = newNode;
-    } else {
-      var previousNode = null;
-      var i = 0;
-      while (currentNode && i < index) {
-        previousNode = currentNode;
-        currentNode = currentNode.next;
-        i++;
-      }
-      previousNode.next = newNode;
-    }
-    newNode.next = currentNode;
-    length++;
-  }
-}
+var undirectedAdjList = {
+  James: ['Jeff'],
+  Jill: ['Jenny'],
+  Jenny: ['Jill', 'Jeff'],
+  Jeff: ['James', 'Jenny']
+};
 ```
