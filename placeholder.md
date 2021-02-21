@@ -1,25 +1,31 @@
 ---
-id: 5900f3d91000cf542c50feea
-title: 'Problem 107: Minimal network'
+id: 5900f3d91000cf542c50feeb
+title: 'Problem 108: Diophantine Reciprocals I'
 challengeType: 5
-forumTopicId: 301731
-dashedName: problem-107-minimal-network
+forumTopicId: 301732
+dashedName: problem-108-diophantine-reciprocals-i
 ---
 
 # --description--
 
-The following undirected network consists of seven vertices and twelve edges with a total weight of 243.
+In the following equation x, y, and n are positive integers.
 
-The same network can be represented by the matrix below. ABCDEFG A-161221--- B16--1720-- C12--28-31- D211728-181923 E-20-18--11 F--3119--27 G---231127- However, it is possible to optimise the network by removing some edges and still ensure that all points on the network remain connected. The network which achieves the maximum saving is shown below. It has a weight of 93, representing a saving of 243 − 93 = 150 from the original network.
+1/`x` + 1/`y` = 1/`n`
 
-Using network.txt (right click and 'Save Link/Target As...'), a 6K text file containing a network with forty vertices, and given in matrix form, find the maximum saving which can be achieved by removing redundant edges whilst ensuring that the network remains connected.
+For `n` = 4 there are exactly three distinct solutions:
+
+1/5 + 1/20 = 1/4  
+1/6 + 1/12 = 1/4  
+1/8 + 1/8 = 1/4
+
+What is the least value of `n` for which the number of distinct solutions exceeds one-thousand?
 
 # --hints--
 
-`euler107()` should return 259679.
+`diophantineOne()` should return 180180.
 
 ```js
-assert.strictEqual(euler107(), 259679);
+assert.strictEqual(diophantineOne(), 180180);
 ```
 
 # --seed--
@@ -27,12 +33,12 @@ assert.strictEqual(euler107(), 259679);
 ## --seed-contents--
 
 ```js
-function euler107() {
+function diophantineOne() {
 
   return true;
 }
 
-euler107();
+diophantineOne();
 ```
 
 # --solutions--
