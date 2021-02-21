@@ -1,137 +1,78 @@
 ---
-id: 587d8251367417b2b2512c64
-title: Search within a Linked List
+id: 587d8253367417b2b2512c6a
+title: Typed Arrays
 challengeType: 1
-forumTopicId: 301715
-dashedName: search-within-a-linked-list
+forumTopicId: 301716
+dashedName: typed-arrays
 ---
 
 # --description--
 
-Let's add a few more useful methods to our linked list class. Wouldn't it be useful if we could tell if our list was empty or not, as with our `Stack` and `Queue` classes?
+Arrays are JavaScript objects that can hold a lot of different elements.
 
-We should also be able to find specific elements in our linked list. Traversing through data structures is something you'll want to get a lot of practice with! Let's create an `indexOf` method that takes an `element` as an argument, and returns that element's `index` in the linked list. If the element is not found in the linked list, return `-1`.
+`var complexArr = [1, 5, "2", "Word", {"name": "James"}];`
 
-Let's also implement a method that does the opposite: an `elementAt` method that takes an `index` as an argument and returns the `element` at the given `index`. If no `element` is found, return `undefined`.
+Basically what happens in the background is that your browser will automatically give the right amount of memory space for that array. It will also change as needed if you add or remove data.
+
+However, in the world of high performance and different element types, sometimes you need to be more specific on how much memory is given to an array.
+
+<dfn>Typed arrays</dfn> are the answer to this problem. You are now able to say how much memory you want to give an array. Below is a basic overview of the different types of arrays available and the size in bytes for each element in that array.
+
+<table class='table table-striped'><tbody><tr><th>Type</th><th>Each element size in bytes</th></tr><tr><td><code>Int8Array</code></td><td>1</td></tr><tr><td><code>Uint8Array</code></td><td>1</td></tr><tr><td><code>Uint8ClampedArray</code></td><td>1</td></tr><tr><td><code>Int16Array</code></td><td>2</td></tr><tr><td><code>Uint16Array</code></td><td>2</td></tr><tr><td><code>Int32Array</code></td><td>4</td></tr><tr><td><code>Uint32Array</code></td><td>4</td></tr><tr><td><code>Float32Array</code></td><td>4</td></tr><tr><td><code>Float64Array</code></td><td>8</td></tr></tbody></table>
+
+There are two ways in creating these kind of arrays. One way is to create it directly. Below is how to create a 3 length `Int16Array`.
+
+```js
+var i8 = new Int16Array(3);
+console.log(i8);
+// Returns [0, 0, 0]
+```
+
+You can also create a <dfn>buffer</dfn> to assign how much data (in bytes) you want the array to take up. **Note**  
+To create typed arrays using buffers, you need to assign the number of bytes to be a multiple of the bytes listed above.
+
+```js
+// Create same Int16Array array differently
+var byteSize = 6; // Needs to be multiple of 2
+var buffer = new ArrayBuffer(byteSize);
+var i8View = new Int16Array(buffer);
+buffer.byteLength; // Returns 6
+i8View.byteLength; // Returns 6
+console.log(i8View); // Returns [0, 0, 0]
+```
+
+<dfn>Buffers</dfn> are general purpose objects that just carry data. You cannot access them normally. To access them, you need to first create a <dfn>view</dfn>.
+
+```js
+i8View[0] = 42;
+console.log(i8View); // Returns [42, 0, 0]
+```
+
+**Note**  
+Typed arrays do not have some of the methods traditional arrays have such as `.pop()` or `.push()`. Typed arrays also fail `Array.isArray()` that checks if something is an array. Although simpler, this can be an advantage for less-sophisticated JavaScript engines to implement them.
 
 # --instructions--
 
-Write an `isEmpty` method that checks if the linked list is empty, an `indexOf` method that returns the `index` of a given element, and an `elementAt` that returns an `element` at a given `index.`
+First create a `buffer` that is 64-bytes. Then create a `Int32Array` typed array with a view of it called `i32View`.
 
 # --hints--
 
-Your `LinkedList` class should have an `isEmpty` method.
+Your `buffer` should be 64 bytes large.
 
 ```js
-assert(
-  (function () {
-    var test = new LinkedList();
-    return typeof test.isEmpty === 'function';
-  })()
-);
+assert(buffer.byteLength === 64);
 ```
 
-Your `isEmpty` method should return `false` when there is at least one element in linked list.
+Your `i32View` view of your buffer should be 64 bytes large.
 
 ```js
-assert(
-  (function () {
-    var test = new LinkedList();
-    test.add('cat');
-    test.add('dog');
-    test.add('kitten');
-    return test.isEmpty() === false;
-  })()
-);
+assert(i32View.byteLength === 64);
 ```
 
-Your `isEmpty` method should return `true` when there are no elements in linked list.
+Your `i32View` view of your buffer should be 16 elements long.
 
 ```js
-assert(
-  (function () {
-    var test = new LinkedList();
-    return test.isEmpty() === true;
-  })()
-);
-```
-
-Your `LinkedList` class should have an `indexOf` method.
-
-```js
-assert(
-  (function () {
-    var test = new LinkedList();
-    return typeof test.indexOf === 'function';
-  })()
-);
-```
-
-Your `indexOf` method should return the index of a given element found in linked list.
-
-```js
-assert(
-  (function () {
-    var test = new LinkedList();
-    test.add('cat');
-    test.add('dog');
-    test.add('kitten');
-    return test.indexOf('cat') === 0;
-  })()
-);
-```
-
-Your `indexOf` method should return `-1` if the given element is not found in linked list
-
-```js
-assert(
-  (function () {
-    var test = new LinkedList();
-    test.add('cat');
-    test.add('dog');
-    test.add('kitten');
-    return test.indexOf('pony') === -1;
-  })()
-);
-```
-
-Your `LinkedList` class should have an `elementAt` method.
-
-```js
-assert(
-  (function () {
-    var test = new LinkedList();
-    return typeof test.elementAt === 'function';
-  })()
-);
-```
-
-Your `elementAt` method should return the element found at a given index in linked list.
-
-```js
-assert(
-  (function () {
-    var test = new LinkedList();
-    test.add('cat');
-    test.add('dog');
-    test.add('kitten');
-    return test.elementAt(1) === 'dog';
-  })()
-);
-```
-
-Your `elementAt` method should return `undefined` if the given element is not found at a given index in linked list.
-
-```js
-assert(
-  (function () {
-    var test = new LinkedList();
-    test.add('cat');
-    test.add('dog');
-    test.add('kitten');
-    return test.elementAt(5) === undefined;
-  })()
-);
+assert(i32View.length === 16);
 ```
 
 # --seed--
@@ -139,155 +80,13 @@ assert(
 ## --seed-contents--
 
 ```js
-function LinkedList() {
-  var length = 0;
-  var head = null;
-
-  var Node = function(element){
-    this.element = element;
-    this.next = null;
-  };
-
-  this.size = function() {
-    return length;
-  };
-
-  this.head = function(){
-    return head;
-  };
-
-  this.add = function(element){
-    var node = new Node(element);
-    if(head === null){
-        head = node;
-    } else {
-      var currentNode = head;
-
-      while(currentNode.next){
-        currentNode = currentNode.next;
-      }
-
-      currentNode.next = node;
-    }
-
-    length++;
-  };
-
-  this.remove = function(element){
-    var currentNode = head;
-    var previousNode;
-    if(currentNode.element === element){
-      head = currentNode.next;
-    } else {
-      while(currentNode.element !== element) {
-        previousNode = currentNode;
-        currentNode = currentNode.next;
-      }
-
-      previousNode.next = currentNode.next;
-    }
-
-    length --;
-  };
-
-  // Only change code below this line
-
-  // Only change code above this line
-}
+var buffer;
+var i32View;
 ```
 
 # --solutions--
 
 ```js
-function LinkedList() {
-  var length = 0;
-  var head = null;
-
-  var Node = function(element){
-    this.element = element;
-    this.next = null;
-  };
-
-  this.size = function() {
-    return length;
-  };
-
-  this.head = function(){
-    return head;
-  };
-
-  this.add = function(element){
-    var node = new Node(element);
-    if(head === null){
-        head = node;
-    } else {
-        var currentNode = head;
-
-        while(currentNode.next){
-            currentNode  = currentNode.next;
-        }
-
-        currentNode.next = node;
-    }
-
-    length++;
-  };
-
-  this.remove = function(element){
-    var currentNode = head;
-    var previousNode;
-    if(currentNode.element === element){
-        head = currentNode.next;
-    } else {
-        while(currentNode.element !== element) {
-            previousNode = currentNode;
-            currentNode = currentNode.next;
-        }
-
-        previousNode.next = currentNode.next;
-    }
-
-    length --;
-  };
-
-  this.indexOf = function(element) {
-    if (head === null) return -1
-
-    let current = head;
-    let index = 0;
-
-    while (current.element !== element && current.next !== null) {
-      current = current.next;
-      index++
-    }
-
-    if (current.element !== element && current.next === null) {
-      return -1
-    }
-
-    return index;
-  }
-
-  this.elementAt = function(index) {
-    if (head === null) return undefined;
-
-    let current = head;
-    let currentIndex = 0;
-
-    while (currentIndex !== index && current.next !== null) {
-      current = current.next;
-      currentIndex++
-    }
-
-    if (currentIndex !== index && current.next === null) {
-      return undefined;
-    }
-
-    return current.element;
-  }
-
-  this.isEmpty = function() {
-    return length === 0;
-  }
-}
+var buffer = new ArrayBuffer(64);
+var i32View = new Int32Array(buffer);
 ```
