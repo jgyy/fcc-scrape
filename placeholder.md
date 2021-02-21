@@ -1,240 +1,145 @@
 ---
-id: 587d825b367417b2b2512c8e
-title: Create a Hash Table
+id: 587d8251367417b2b2512c62
+title: Create a Linked List Class
 challengeType: 1
-forumTopicId: 301627
-dashedName: create-a-hash-table
+forumTopicId: 301628
+dashedName: create-a-linked-list-class
 ---
 
 # --description--
 
-In this challenge we will learn about hash tables. A Hash table is used to implement associative arrays, or mappings of key-value pairs, like the objects and Maps we have just been studying. A JavaScript object could be implemented as a hash table, for instance (its actual implementation will depend on the environment it's running in). The way a hash table works is that it takes a key input and hashes this key in a deterministic way to some numerical value. This numerical value is then used as the actual key the associated value is stored by. Then, if you try to access the same key again, the hashing function will process the key, return the same numerical result, which will then be used to look up the associated value. This provides very efficient O(1) lookup time on average.
+Let's create a `linked list` class. Every linked list should start out with a few basic properties: a `head` (the first item in your list) and a `length` (number of items in your list). Sometimes you'll see implementations of linked lists that incorporate a `tail` for the last element of the list, but for now we'll just stick with these two. Whenever we add an element to the linked list, our `length` property should be incremented by one.
 
-Hash tables can be implemented as arrays with hash functions producing array indices within a specified range. In this method, the choice of the array size is important, as is the hashing function. For instance, what if the hashing function produces the same value for two different keys? This is called a collision. One way to handle collisions is to just store both key-value pairs at that index. Then, upon lookup of either, you would have to iterate through the bucket of items to find the key you are looking for. A good hashing function will minimize collisions to maintain efficient search time.
+We'll want to have a way to add items to our linked list, so the first method we'll want to create is the `add` method.
 
-Here, we won't be concerned with the details of hashing or hash table implementation, we will just try to get a general sense of how they work.
+If our list is empty, adding an element to our linked list is straightforward enough: we just wrap that element in a `Node` class, and we assign that node to the `head` of our linked list.
+
+But what if our list already has one or more members? How do we add an element to the list? Recall that each node in a linked list has a `next` property. To add a node to the list, find the last node in the list, and point that last node's `next` property at our new node. (Hint: you know you've reached the end of a linked list when a node's `next` property is `null`.)
 
 # --instructions--
 
-Let's create the basic functionality of a hash table. We've created a naive hashing function for you to use. You can pass a string value to the function `hash` and it will return a hashed value you can use as a key for storage. Store items based on this hashed value in the `this.collection` object. Create these three methods: `add`, `remove`, and `lookup`. The first should accept a key value pair to add to the hash table. The second should remove a key-value pair when passed a key. The third should accept a key and return the associated value or `null` if the key is not present.
+Write an add method that assigns the first node you push to the linked list to the `head`; after that, whenever adding a node, every node should be referenced by the previous node's `next` property.
 
-Be sure to write your code to account for collisions!
+Note
+
+Your list's `length` should increase by one every time an element is added to the linked list.
 
 # --hints--
 
-The HashTable data structure should exist.
+Your `LinkedList` class should have a `add` method.
 
 ```js
 assert(
   (function () {
-    var test = false;
-    if (typeof HashTable !== 'undefined') {
-      test = new HashTable();
-    }
-    return typeof test === 'object';
-  })()
-);
-```
-
-The HashTable should have an add method.
-
-```js
-assert(
-  (function () {
-    var test = false;
-    if (typeof HashTable !== 'undefined') {
-      test = new HashTable();
-    }
+    var test = new LinkedList();
     return typeof test.add === 'function';
   })()
 );
 ```
 
-The HashTable should have a remove method.
+Your `LinkedList` class should assign `head` to the first node added.
 
 ```js
 assert(
   (function () {
-    var test = false;
-    if (typeof HashTable !== 'undefined') {
-      test = new HashTable();
-    }
-    return typeof test.remove === 'function';
+    var test = new LinkedList();
+    test.add('cat');
+    return test.head().element === 'cat';
   })()
 );
 ```
 
-The HashTable should have a lookup method.
+The previous `node` in your `LinkedList` class should have reference to the newest node created.
 
 ```js
 assert(
   (function () {
-    var test = false;
-    if (typeof HashTable !== 'undefined') {
-      test = new HashTable();
-    }
-    return typeof test.lookup === 'function';
+    var test = new LinkedList();
+    test.add('cat');
+    test.add('dog');
+    return test.head().next.element === 'dog';
   })()
 );
 ```
 
-The add method should add key value pairs and the lookup method should return the values associated with a given key.
+The  `size` of your `LinkedList` class should equal the amount of nodes in the linked list.
 
 ```js
 assert(
   (function () {
-    var test = false;
-    if (typeof HashTable !== 'undefined') {
-      test = new HashTable();
-    }
-    test.add('key', 'value');
-    return test.lookup('key') === 'value';
-  })()
-);
-```
-
-The remove method should accept a key as input and should remove the associated key value pair.
-
-```js
-assert(
-  (function () {
-    var test = false;
-    var hashValue = hash('key');
-    if (typeof HashTable !== 'undefined') {
-      test = new HashTable();
-    }
-    test.add = addMethodSolution;
-    test.add('key', 'value');
-    test.remove('key');
-    return !test.collection.hasOwnProperty(hashValue);
-  })()
-);
-```
-
-Items should be added using the hash function.
-
-```js
-assert(
-  (function () {
-    var test = false;
-    if (typeof HashTable !== 'undefined') {
-      test = new HashTable();
-    }
-    called = 0;
-    test.add('key1', 'value1');
-    test.add('key2', 'value2');
-    test.add('key3', 'value3');
-    return called >= 3 && called % 3 === 0;
-  })()
-);
-```
-
-The hash table should handle collisions.
-
-```js
-assert(
-  (function () {
-    var test = false;
-    if (typeof HashTable !== 'undefined') {
-      test = new HashTable();
-    }
-    called = 0;
-    test.add('key1', 'value1');
-    test.add('1key', 'value2');
-    test.add('ke1y', 'value3');
-    return (
-      test.lookup('key1') === 'value1' &&
-      test.lookup('1key') == 'value2' &&
-      test.lookup('ke1y') == 'value3'
-    );
+    var test = new LinkedList();
+    test.add('cat');
+    test.add('dog');
+    return test.size() === 2;
   })()
 );
 ```
 
 # --seed--
 
-## --before-user-code--
-
-```js
-var called = 0;
-var hash = string => {
-  called++;
-  var hash = 0;
-  for (var i = 0; i < string.length; i++) {
-    hash += string.charCodeAt(i);
-  }
-  return hash;
-};
-
-var addMethodSolution = function(key, val) {
-    var theHash = hash(key);
-    if (!this.collection.hasOwnProperty(theHash)) {
-      this.collection[theHash] = {};
-    }
-    this.collection[theHash][key] = val;
-}
-```
-
 ## --seed-contents--
 
 ```js
-var called = 0;
-var hash = string => {
-  called++;
-  var hashed = 0;
-  for (var i = 0; i < string.length; i++) {
-    hashed += string.charCodeAt(i);
-  }
-  return hashed;
-};
-var HashTable = function() {
-  this.collection = {};
-  // Only change code below this line
-  
-  // Only change code above this line
-};
+function LinkedList() {
+  var length = 0;
+  var head = null;
+
+  var Node = function(element){
+    this.element = element;
+    this.next = null;
+  };
+
+  this.head = function(){
+    return head;
+  };
+
+  this.size = function(){
+    return length;
+  };
+
+  this.add = function(element){
+    // Only change code below this line
+
+    // Only change code above this line
+  };
+}
 ```
 
 # --solutions--
 
 ```js
-var called = 0;
-var hash = (string) => {
-  called++;
-  var hash = 0;
-  for (var i = 0; i < string.length; i++) { hash += string.charCodeAt(i); }
-  return hash;
-};
-var HashTable = function() {
-  this.collection = {};
-  // Only change code below this line
+function LinkedList() { 
+  var length = 0; 
+  var head = null; 
 
-  this.add = function(key, val) {
-    var theHash = hash(key);
-    if (!this.collection.hasOwnProperty(theHash)) {
-      this.collection[theHash] = {};
-    }
-    this.collection[theHash][key] = val;
-  }
+  var Node = function(element){
+    this.element = element; 
+    this.next = null; 
+  }; 
 
-  this.remove = function(key) {
-    var theHash = hash(key);
-    var hashedObj = this.collection[theHash];
-    if (hashedObj.hasOwnProperty(key)) {
-      delete hashedObj[key];
-    }
-    if (!Object.keys(hashedObj).length) {
-      delete this.collection[theHash];
-    }
-  }
+  this.head = function(){
+    return head;
+  };
 
-  this.lookup = function(key) {
-    var theHash = hash(key);
-    if (this.collection.hasOwnProperty(theHash)) {
-      return this.collection[theHash][key];
+  this.size = function(){
+    return length;
+  };
+
+  this.add = function(element){
+    // Only change code below this line
+    if (head == null) {
+      head = new Node(element);
+    } 
+    else {
+      let currentNode = head;
+      while (currentNode.next != null) {
+        // currentNode.next will be last node of linked list after loop
+        currentNode = currentNode.next;
+      }
+      currentNode.next = new Node(element);
     }
-    return null
-  }
-  // Only change code above this line
-};
+    length++;
+    // Only change code above this line
+  };
+}
 ```
