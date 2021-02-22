@@ -1,25 +1,41 @@
 ---
-id: 5900f44f1000cf542c50ff61
-title: 'Problem 227: The Chase'
+id: 5900f4511000cf542c50ff63
+title: 'Problem 228: Minkowski Sums'
 challengeType: 5
-forumTopicId: 301870
-dashedName: problem-227-the-chase
+forumTopicId: 301871
+dashedName: problem-228-minkowski-sums
 ---
 
 # --description--
 
-"The Chase" is a game played with two dice and an even number of players.
+<!-- TODO Use MathJax and re-write from projecteuler.net -->
 
-The players sit around a table; the game begins with two opposite players having one die each. On each turn, the two players with a die roll it. If a player rolls a 1, he passes the die to his neighbour on the left; if he rolls a 6, he passes the die to his neighbour on the right; otherwise, he keeps the die for the next turn. The game ends when one player has both dice after they have been rolled and passed; that player has then lost.
+Let Sn be the regular n-sided polygon – or shape – whose vertices
 
-In a game with 100 players, what is the expected number of turns the game lasts? Give your answer rounded to ten significant digits.
+vk (k = 1,2,…,n) have coordinates:
+
+xk = cos( 2k-1/n ×180° )
+
+yk = sin( 2k-1/n ×180° )
+
+Each Sn is to be interpreted as a filled shape consisting of all points on the perimeter and in the interior.
+
+The Minkowski sum, S+T, of two shapes S and T is the result of
+
+adding every point in S to every point in T, where point addition is performed coordinate-wise:
+
+(u, v) + (x, y) = (u+x, v+y).
+
+For example, the sum of S3 and S4 is the six-sided shape shown in pink below:
+
+How many sides does S1864 + S1865 + … + S1909 have?
 
 # --hints--
 
-`euler227()` should return 3780.618622.
+`euler228()` should return 86226.
 
 ```js
-assert.strictEqual(euler227(), 3780.618622);
+assert.strictEqual(euler228(), 86226);
 ```
 
 # --seed--
@@ -27,12 +43,12 @@ assert.strictEqual(euler227(), 3780.618622);
 ## --seed-contents--
 
 ```js
-function euler227() {
+function euler228() {
 
   return true;
 }
 
-euler227();
+euler228();
 ```
 
 # --solutions--
