@@ -1,25 +1,39 @@
 ---
-id: 5900f4331000cf542c50ff45
-title: 'Problem 198: Ambiguous Numbers'
+id: 5900f4341000cf542c50ff46
+title: 'Problem 199: Iterative Circle Packing'
 challengeType: 5
-forumTopicId: 301836
-dashedName: problem-198-ambiguous-numbers
+forumTopicId: 301837
+dashedName: problem-199-iterative-circle-packing
 ---
 
 # --description--
 
-A best approximation to a real number x for the denominator bound d is a rational number r/s (in reduced form) with s ≤ d, so that any rational number p/q which is closer to x than r/s has q > d.
+Three circles of equal radius are placed inside a larger circle such that each pair of circles is tangent to one another and the inner circles do not overlap. There are four uncovered "gaps" which are to be filled iteratively with more tangent circles.
 
-Usually the best approximation to a real number is uniquely determined for all denominator bounds. However, there are some exceptions, e.g. 9/40 has the two best approximations 1/4 and 1/5 for the denominator bound 6. We shall call a real number x ambiguous, if there is at least one denominator bound for which x possesses two best approximations. Clearly, an ambiguous number is necessarily rational.
+<img class="img-responsive center-block" alt="a diagram of non-overlapping concentric circles" src="https://cdn-media-1.freecodecamp.org/project-euler/199-circles-in-circles.gif" style="background-color: white; padding: 10px;">
 
-How many ambiguous numbers x = p/q, 0 &lt; x &lt; 1/100, are there whose denominator q does not exceed 108?
+At each iteration, a maximally sized circle is placed in each gap, which creates more gaps for the next iteration. After 3 iterations (pictured), there are 108 gaps and the fraction of the area which is not covered by circles is 0.06790342, rounded to eight decimal places.
+
+What fraction of the area is not covered by circles after `n` iterations? Give your answer rounded to eight decimal places using the format x.xxxxxxxx .
 
 # --hints--
 
-`euler198()` should return 52374425.
+`iterativeCirclePacking(10)` should return a number.
 
 ```js
-assert.strictEqual(euler198(), 52374425);
+assert(typeof iterativeCirclePacking(10) === 'number');
+```
+
+`iterativeCirclePacking(10)` should return 0.00396087.
+
+```js
+assert.strictEqual(iterativeCirclePacking(10), 0.00396087);
+```
+
+`iterativeCirclePacking(3)` should return 0.06790342.
+
+```js
+assert.strictEqual(iterativeCirclePacking(3), 0.06790342);
 ```
 
 # --seed--
@@ -27,16 +41,35 @@ assert.strictEqual(euler198(), 52374425);
 ## --seed-contents--
 
 ```js
-function euler198() {
+function iterativeCirclePacking(n) {
 
   return true;
 }
 
-euler198();
+iterativeCirclePacking(10);
 ```
 
 # --solutions--
 
 ```js
-// solution required
+function iterativeCirclePacking(n) {
+  let k1 = 1;
+  let k0 = k1 * (3 - 2 * Math.sqrt(3));
+  let a0 = 1 / (k0 * k0);
+  let a1 = 3 / (k1 * k1);
+  a1 += 3 * getArea(k0, k1, k1, n);
+  a1 += getArea(k1, k1, k1, n);
+  let final = ((a0 - a1) / a0).toFixed(8);
+  
+  return parseFloat(final);
+  function getArea(k1, k2, k3, depth) {
+      if (depth == 0) return 0.0;
+      let k4 = k1 + k2 + k3 + 2 * Math.sqrt(k1 * k2 + k2 * k3 + k3 * k1);
+      let a = 1 / (k4 * k4);
+      a += getArea(k1, k2, k4, depth - 1);
+      a += getArea(k2, k3, k4, depth - 1);
+      a += getArea(k3, k1, k4, depth - 1);
+      return a;
+  }
+}
 ```
