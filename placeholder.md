@@ -1,23 +1,29 @@
 ---
-id: 5900f4621000cf542c50ff74
-title: 'Problem 245: Coresilience'
+id: 5900f4621000cf542c50ff75
+title: 'Problem 246: Tangents to an ellipse'
 challengeType: 5
-forumTopicId: 301892
-dashedName: problem-245-coresilience
+forumTopicId: 301893
+dashedName: problem-246-tangents-to-an-ellipse
 ---
 
 # --description--
 
-We shall call a fraction that cannot be cancelled down a resilient fraction. Furthermore we shall define the resilience of a denominator, R(d), to be the ratio of its proper fractions that are resilient; for example, R(12) = 4⁄11.
+A definition for an ellipse is:
 
-The resilience of a number d > 1 is then φ(d)d − 1 , where φ is Euler's totient function. We further define the coresilience of a number n > 1 as C(n)= n − φ(n)n − 1. The coresilience of a prime p is C(p) = 1p − 1. Find the sum of all composite integers 1 &lt; n ≤ 2×1011, for which C(n) is a unit fraction.
+Given a circle c with centre M and radius r and a point G such that d(G,M)
+
+The construction of the points of the ellipse is shown below.
+
+Given are the points M(-2000,1500) and G(8000,1500). Given is also the circle c with centre M and radius 15000. The locus of the points that are equidistant from G and c form an ellipse e. From a point P outside e the two tangents t1 and t2 to the ellipse are drawn. Let the points where t1 and t2 touch the ellipse be R and S.
+
+For how many lattice points P is angle RPS greater than 45 degrees?
 
 # --hints--
 
-`euler245()` should return 288084712410001.
+`euler246()` should return 810834388.
 
 ```js
-assert.strictEqual(euler245(), 288084712410001);
+assert.strictEqual(euler246(), 810834388);
 ```
 
 # --seed--
@@ -25,12 +31,12 @@ assert.strictEqual(euler245(), 288084712410001);
 ## --seed-contents--
 
 ```js
-function euler245() {
+function euler246() {
 
   return true;
 }
 
-euler245();
+euler246();
 ```
 
 # --solutions--
