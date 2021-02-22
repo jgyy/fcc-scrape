@@ -1,25 +1,25 @@
 ---
-id: 5900f4311000cf542c50ff44
-title: 'Problem 197: Investigating the behaviour of a recursively defined sequence'
+id: 5900f4331000cf542c50ff45
+title: 'Problem 198: Ambiguous Numbers'
 challengeType: 5
-forumTopicId: 301835
-dashedName: problem-197-investigating-the-behaviour-of-a-recursively-defined-sequence
+forumTopicId: 301836
+dashedName: problem-198-ambiguous-numbers
 ---
 
 # --description--
 
-Given is the function f(x) = ⌊230.403243784-x2⌋ × 10-9 ( ⌊ ⌋ is the floor-function),
+A best approximation to a real number x for the denominator bound d is a rational number r/s (in reduced form) with s ≤ d, so that any rational number p/q which is closer to x than r/s has q > d.
 
-the sequence un is defined by u0 = -1 and un+1 = f(un).
+Usually the best approximation to a real number is uniquely determined for all denominator bounds. However, there are some exceptions, e.g. 9/40 has the two best approximations 1/4 and 1/5 for the denominator bound 6. We shall call a real number x ambiguous, if there is at least one denominator bound for which x possesses two best approximations. Clearly, an ambiguous number is necessarily rational.
 
-Find un + un+1 for n = 1012. Give your answer with 9 digits after the decimal point.
+How many ambiguous numbers x = p/q, 0 &lt; x &lt; 1/100, are there whose denominator q does not exceed 108?
 
 # --hints--
 
-`euler197()` should return 1.710637717.
+`euler198()` should return 52374425.
 
 ```js
-assert.strictEqual(euler197(), 1.710637717);
+assert.strictEqual(euler198(), 52374425);
 ```
 
 # --seed--
@@ -27,12 +27,12 @@ assert.strictEqual(euler197(), 1.710637717);
 ## --seed-contents--
 
 ```js
-function euler197() {
+function euler198() {
 
   return true;
 }
 
-euler197();
+euler198();
 ```
 
 # --solutions--
