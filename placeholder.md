@@ -1,25 +1,29 @@
 ---
-id: 5900f42b1000cf542c50ff3d
-title: 'Problem 190: Maximising a weighted product'
+id: 5900f42b1000cf542c50ff3e
+title: 'Problem 191: Prize Strings'
 challengeType: 5
-forumTopicId: 301828
-dashedName: problem-190-maximising-a-weighted-product
+forumTopicId: 301829
+dashedName: problem-191-prize-strings
 ---
 
 # --description--
 
-Let Sm = (x1, x2, ... , xm) be the m-tuple of positive real numbers with x1 + x2 + ... + xm = m for which Pm = x1 \* x22 \* ... \* xmm is maximised.
+A particular school offers cash rewards to children with good attendance and punctuality. If they are absent for three consecutive days or late on more than one occasion then they forfeit their prize.
 
-For example, it can be verified that \[P10] = 4112 (\[ ] is the integer part function).
+During an n-day period a trinary string is formed for each child consisting of L's (late), O's (on time), and A's (absent).
 
-Find Σ\[Pm] for 2 ≤ m ≤ 15.
+Although there are eighty-one trinary strings for a 4-day period that can be formed, exactly forty-three strings would lead to a prize:
+
+OOOO OOOA OOOL OOAO OOAA OOAL OOLO OOLA OAOO OAOA OAOL OAAO OAAL OALO OALA OLOO OLOA OLAO OLAA AOOO AOOA AOOL AOAO AOAA AOAL AOLO AOLA AAOO AAOA AAOL AALO AALA ALOO ALOA ALAO ALAA LOOO LOOA LOAO LOAA LAOO LAOA LAAO
+
+How many "prize" strings exist over a 30-day period?
 
 # --hints--
 
-`euler190()` should return 371048281.
+`euler191()` should return 1918080160.
 
 ```js
-assert.strictEqual(euler190(), 371048281);
+assert.strictEqual(euler191(), 1918080160);
 ```
 
 # --seed--
@@ -27,12 +31,12 @@ assert.strictEqual(euler190(), 371048281);
 ## --seed-contents--
 
 ```js
-function euler190() {
+function euler191() {
 
   return true;
 }
 
-euler190();
+euler191();
 ```
 
 # --solutions--
