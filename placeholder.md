@@ -1,65 +1,38 @@
 ---
-id: 5900f4091000cf542c50ff1c
-title: 'Problem 157: Solving the diophantine equation'
+id: 5900f40a1000cf542c50ff1d
+title: >-
+  Problem 158: Exploring strings for which only one character comes
+  lexicographically after its neighbour to the left
 challengeType: 5
-forumTopicId: 301788
-dashedName: problem-157-solving-the-diophantine-equation
+forumTopicId: 301789
+dashedName: >-
+  problem-158-exploring-strings-for-which-only-one-character-comes-lexicographically-after-its-neighbour-to-the-left
 ---
 
 # --description--
 
-Consider the diophantine equation 1/a+1/b= p/10n with a, b, p, n positive integers and a ≤ b.
+Taking three different letters from the 26 letters of the alphabet, character strings of length three can be formed.
 
-For n=1 this equation has 20 solutions that are listed below:
+Examples are 'abc', 'hat' and 'zyx'.
 
-1/1+1/1=20/10
+When we study these three examples we see that for 'abc' two characters come lexicographically after its neighbour to the left.
 
-1/1+1/2=15/10
+For 'hat' there is exactly one character that comes lexicographically after its neighbour to the left. For 'zyx' there are zero characters that come lexicographically after its neighbour to the left.
 
-1/1+1/5=12/10
+In all there are 10400 strings of length 3 for which exactly one character comes lexicographically after its neighbour to the left.
 
-1/1+1/10=11/10
+We now consider strings of n ≤ 26 different characters from the alphabet.
 
-1/2+1/2=10/10
+For every n, p(n) is the number of strings of length n for which exactly one character comes lexicographically after its neighbour to the left.
 
-1/2+1/5=7/10
-
-1/2+1/10=6/10
-
-1/3+1/6=5/10
-
-1/3+1/15=4/10
-
-1/4+1/4=5/10
-
-1/4+1/20=3/10
-
-1/5+1/5=4/10
-
-1/5+1/10=3/10
-
-1/6+1/30=2/10
-
-1/10+1/10=2/10
-
-1/11+1/110=1/10
-
-1/12+1/60=1/10
-
-1/14+1/35=1/10
-
-1/15+1/30=1/10
-
-1/20+1/20=1/10
-
-How many solutions has this equation for 1 ≤ n ≤ 9?
+What is the maximum value of p(n)?
 
 # --hints--
 
-`euler157()` should return 53490.
+`euler158()` should return 409511334375.
 
 ```js
-assert.strictEqual(euler157(), 53490);
+assert.strictEqual(euler158(), 409511334375);
 ```
 
 # --seed--
@@ -67,12 +40,12 @@ assert.strictEqual(euler157(), 53490);
 ## --seed-contents--
 
 ```js
-function euler157() {
+function euler158() {
 
   return true;
 }
 
-euler157();
+euler158();
 ```
 
 # --solutions--
