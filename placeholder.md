@@ -1,27 +1,37 @@
 ---
-id: 5900f4601000cf542c50ff73
-title: 'Problem 243: Resilience'
+id: 5900f4601000cf542c50ff72
+title: 'Problem 244: Sliders'
 challengeType: 5
-forumTopicId: 301890
-dashedName: problem-243-resilience
+forumTopicId: 301891
+dashedName: problem-244-sliders
 ---
 
 # --description--
 
-A positive fraction whose numerator is less than its denominator is called a proper fraction.
+You probably know the game Fifteen Puzzle. Here, instead of numbered tiles, we have seven red tiles and eight blue tiles.
 
-For any denominator, d, there will be d−1 proper fractions; for example, with d = 12:1/12 , 2/12 , 3/12 , 4/12 , 5/12 , 6/12 , 7/12 , 8/12 , 9/12 , 10/12 , 11/12 .
+A move is denoted by the uppercase initial of the direction (Left, Right, Up, Down) in which the tile is slid, e.g. starting from configuration (S), by the sequence LULUR we reach the configuration (E):
 
-We shall call a fraction that cannot be cancelled down a resilient fraction. Furthermore we shall define the resilience of a denominator, R(d), to be the ratio of its proper fractions that are resilient; for example, R(12) = 4/11 . In fact, d = 12 is the smallest denominator having a resilience R(d) &lt; 4/10 .
+(S), (E)
 
-Find the smallest denominator d, having a resilience R(d) &lt; 15499/94744 .
+For each path, its checksum is calculated by (pseudocode):
+
+checksum = 0 checksum = (checksum × 243 + m1) mod 100 000 007 checksum = (checksum × 243 + m2) mod 100 000 007 … checksum = (checksum × 243 + mn) mod 100 000 007 where mk is the ASCII value of the kth letter in the move sequence and the ASCII values for the moves are:
+
+L76R82U85D68
+
+For the sequence LULUR given above, the checksum would be 19761398. Now, starting from configuration (S), find all shortest ways to reach configuration (T).
+
+(S), (T)
+
+What is the sum of all checksums for the paths having the minimal length?
 
 # --hints--
 
-`euler243()` should return 892371480.
+`euler244()` should return 96356848.
 
 ```js
-assert.strictEqual(euler243(), 892371480);
+assert.strictEqual(euler244(), 96356848);
 ```
 
 # --seed--
@@ -29,12 +39,12 @@ assert.strictEqual(euler243(), 892371480);
 ## --seed-contents--
 
 ```js
-function euler243() {
+function euler244() {
 
   return true;
 }
 
-euler243();
+euler244();
 ```
 
 # --solutions--
