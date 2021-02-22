@@ -1,32 +1,31 @@
 ---
-id: 5900f4351000cf542c50ff47
-title: >-
-  Problem 200: Find the 200th prime-proof sqube containing the contiguous
-  sub-string "200"
+id: 5900f4361000cf542c50ff48
+title: 'Problem 201: Subsets with a unique sum'
 challengeType: 5
-forumTopicId: 301840
-dashedName: >-
-  problem-200-find-the-200th-prime-proof-sqube-containing-the-contiguous-sub-string-200
+forumTopicId: 301841
+dashedName: problem-201-subsets-with-a-unique-sum
 ---
 
 # --description--
 
-We shall define a sqube to be a number of the form, p2q3, where p and q are distinct primes.
+For any set A of numbers, let sum(A) be the sum of the elements of A.
 
-For example, 200 = 5223 or 120072949 = 232613.
+Consider the set B = {1,3,6,8,10,11}. There are 20 subsets of B containing three elements, and their sums are:
 
-The first five squbes are 72, 108, 200, 392, and 500.
+sum({1,3,6}) = 10, sum({1,3,8}) = 12, sum({1,3,10}) = 14, sum({1,3,11}) = 15, sum({1,6,8}) = 15, sum({1,6,10}) = 17, sum({1,6,11}) = 18, sum({1,8,10}) = 19, sum({1,8,11}) = 20, sum({1,10,11}) = 22, sum({3,6,8}) = 17, sum({3,6,10}) = 19, sum({3,6,11}) = 20, sum({3,8,10}) = 21, sum({3,8,11}) = 22, sum({3,10,11}) = 24, sum({6,8,10}) = 24, sum({6,8,11}) = 25, sum({6,10,11}) = 27, sum({8,10,11}) = 29.
 
-Interestingly, 200 is also the first number for which you cannot change any single digit to make a prime; we shall call such numbers, prime-proof. The next prime-proof sqube which contains the contiguous sub-string "200" is 1992008.
+Some of these sums occur more than once, others are unique. For a set A, let U(A,k) be the set of unique sums of k-element subsets of A, in our example we find U(B,3) = {10,12,14,18,21,25,27,29} and sum(U(B,3)) = 156.
 
-Find the 200th prime-proof sqube containing the contiguous sub-string "200".
+Now consider the 100-element set S = {12, 22, ... , 1002}. S has 100891344545564193334812497256 50-element subsets.
+
+Determine the sum of all integers which are the sum of exactly one of the 50-element subsets of S, i.e. find sum(U(S,50)).
 
 # --hints--
 
-`euler200()` should return 229161792008.
+`euler201()` should return 115039000.
 
 ```js
-assert.strictEqual(euler200(), 229161792008);
+assert.strictEqual(euler201(), 115039000);
 ```
 
 # --seed--
@@ -34,12 +33,12 @@ assert.strictEqual(euler200(), 229161792008);
 ## --seed-contents--
 
 ```js
-function euler200() {
+function euler201() {
 
   return true;
 }
 
-euler200();
+euler201();
 ```
 
 # --solutions--
