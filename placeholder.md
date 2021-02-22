@@ -1,29 +1,29 @@
 ---
-id: 5900f3fa1000cf542c50ff0c
-title: 'Problem 140: Modified Fibonacci golden nuggets'
+id: 5900f3f91000cf542c50ff0b
+title: 'Problem 141: Investigating progressive numbers, n, which are also square'
 challengeType: 5
-forumTopicId: 301769
-dashedName: problem-140-modified-fibonacci-golden-nuggets
+forumTopicId: 301770
+dashedName: problem-141-investigating-progressive-numbers-n-which-are-also-square
 ---
 
 # --description--
 
-Consider the infinite polynomial series AG(x) = xG1 + x2G2 + x3G3 + ..., where Gk is the kth term of the second order recurrence relation Gk = Gk−1 + Gk−2, G1 = 1 and G2 = 4; that is, 1, 4, 5, 9, 14, 23, ... .
+A positive integer, n, is divided by d and the quotient and remainder are q and r respectively. In addition d, q, and r are consecutive positive integer terms in a geometric sequence, but not necessarily in that order.
 
-For this problem we shall be concerned with values of x for which AG(x) is a positive integer.
+For example, 58 divided by 6 has quotient 9 and remainder 4. It can also be seen that 4, 6, 9 are consecutive terms in a geometric sequence (common ratio 3/2).
 
-The corresponding values of x for the first five natural numbers are shown below.
+We will call such numbers, n, progressive.
 
-xAG(x) (√5−1)/41 2/52 (√22−2)/63 (√137−5)/144 1/25
+Some progressive numbers, such as 9 and 10404 = 1022, happen to also be perfect squares. The sum of all progressive perfect squares below one hundred thousand is 124657.
 
-We shall call AG(x) a golden nugget if x is rational, because they become increasingly rarer; for example, the 20th golden nugget is 211345365. Find the sum of the first thirty golden nuggets.
+Find the sum of all progressive perfect squares below one trillion (1012).
 
 # --hints--
 
-`euler140()` should return 5673835352990.
+`euler141()` should return 878454337159.
 
 ```js
-assert.strictEqual(euler140(), 5673835352990);
+assert.strictEqual(euler141(), 878454337159);
 ```
 
 # --seed--
@@ -31,12 +31,12 @@ assert.strictEqual(euler140(), 5673835352990);
 ## --seed-contents--
 
 ```js
-function euler140() {
+function euler141() {
 
   return true;
 }
 
-euler140();
+euler141();
 ```
 
 # --solutions--
