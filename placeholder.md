@@ -1,43 +1,32 @@
 ---
-id: 5900f37d1000cf542c50fe90
-title: 'Problem 17: Number letter counts'
+id: 5900f4161000cf542c50ff29
+title: >-
+  Problem 170: Find the largest 0 to 9 pandigital that can be formed by
+  concatenating products
 challengeType: 5
-forumTopicId: 301804
-dashedName: problem-17-number-letter-counts
+forumTopicId: 301805
+dashedName: >-
+  problem-170-find-the-largest-0-to-9-pandigital-that-can-be-formed-by-concatenating-products
 ---
 
 # --description--
 
-If the numbers 1 to 5 are written out in words: one, two, three, four, five, then there are 3 + 3 + 5 + 4 + 4 = 19 letters used in total.
+Take the number 6 and multiply it by each of 1273 and 9854:
 
-If all the numbers from 1 to given `limit` inclusive were written out in words, how many letters would be used?
+6 × 1273 = 7638 6 × 9854 = 59124
 
-**Note:** Do not count spaces or hyphens. For example, 342 (three hundred and forty-two) contains 23 letters and 115 (one hundred and fifteen) contains 20 letters. The use of "and" when writing out numbers is in compliance with British usage.
+By concatenating these products we get the 1 to 9 pandigital 763859124. We will call 763859124 the "concatenated product of 6 and (1273,9854)". Notice too, that the concatenation of the input numbers, 612739854, is also 1 to 9 pandigital.
+
+The same can be done for 0 to 9 pandigital numbers.
+
+What is the largest 0 to 9 pandigital 10-digit concatenated product of an integer with two or more other integers, such that the concatenation of the input numbers is also a 0 to 9 pandigital 10-digit number?
 
 # --hints--
 
-`numberLetterCounts(5)` should return a number.
+`euler170()` should return 9857164023.
 
 ```js
-assert(typeof numberLetterCounts(5) === 'number');
-```
-
-`numberLetterCounts(5)` should return 19.
-
-```js
-assert.strictEqual(numberLetterCounts(5), 19);
-```
-
-`numberLetterCounts(150)` should return 1903.
-
-```js
-assert.strictEqual(numberLetterCounts(150), 1903);
-```
-
-`numberLetterCounts(1000)` should return 21124.
-
-```js
-assert.strictEqual(numberLetterCounts(1000), 21124);
+assert.strictEqual(euler170(), 9857164023);
 ```
 
 # --seed--
@@ -45,86 +34,16 @@ assert.strictEqual(numberLetterCounts(1000), 21124);
 ## --seed-contents--
 
 ```js
-function numberLetterCounts(limit) {
+function euler170() {
 
   return true;
 }
 
-numberLetterCounts(5);
+euler170();
 ```
 
 # --solutions--
 
 ```js
-function numberLetterCounts(limit) {
-  const dictionary = {
-    0: '',
-    1: 'one',
-    2: 'two',
-    3: 'three',
-    4: 'four',
-    5: 'five',
-    6: 'six',
-    7: 'seven',
-    8: 'eight',
-    9: 'nine',
-    10: 'ten',
-    11: 'eleven',
-    12: 'twelve',
-    13: 'thirteen',
-    14: 'fourteen',
-    15: 'fifteen',
-    16: 'sixteen',
-    17: 'seventeen',
-    18: 'eighteen',
-    19: 'nineteen',
-    20: 'twenty',
-    30: 'thirty',
-    40: 'forty',
-    50: 'fifty',
-    60: 'sixty',
-    70: 'seventy',
-    80: 'eighty',
-    90: 'ninety',
-    1000: 'onethousand'
-  };
-
-  let numString = '';
-
-  function convertToString(num) {
-    // check dictionary for number
-    if (dictionary[num]) {
-      return dictionary[num];
-    } else {
-      const hundreds = Math.floor(num / 100);
-      const tens =  Math.floor((num / 10) % 10) * 10;
-      const remainder = num % 10;
-
-      let tempStr = '';
-
-      if (hundreds === 0) {
-        tempStr += dictionary[tens] + dictionary[remainder];
-      } else {
-        tempStr += dictionary[hundreds] + 'hundred';
-
-        if (tens !== 0 || remainder !== 0) {
-          tempStr += 'and';
-        }
-
-        if (tens < 20) {
-          const lessThanTwenty = tens + remainder;
-          tempStr += dictionary[lessThanTwenty];
-        } else {
-          tempStr += dictionary[tens] + dictionary[remainder];
-        }
-      }
-      return tempStr;
-    }
-  }
-
-  for (let i = 1; i <= limit; i++) {
-    numString += convertToString(i);
-  }
-  return numString.length;
-}
+// solution required
 ```
