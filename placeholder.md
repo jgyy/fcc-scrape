@@ -1,29 +1,25 @@
 ---
-id: 5900f43e1000cf542c50ff50
-title: 'Problem 210: Obtuse Angled Triangles'
+id: 5900f43f1000cf542c50ff52
+title: 'Problem 211: Divisor Square Sum'
 challengeType: 5
-forumTopicId: 301852
-dashedName: problem-210-obtuse-angled-triangles
+forumTopicId: 301853
+dashedName: problem-211-divisor-square-sum
 ---
 
 # --description--
 
-Consider the set S(r) of points (x,y) with integer coordinates satisfying |x| + |y| ≤ r.
+For a positive integer n, let σ2(n) be the sum of the squares of its divisors. For example,
 
-Let O be the point (0,0) and C the point (r/4,r/4).
+σ2(10) = 1 + 4 + 25 + 100 = 130.
 
-Let N(r) be the number of points B in S(r), so that the triangle OBC has an obtuse angle, i.e. the largest angle α satisfies 90°&lt;α&lt;180°.
-
-So, for example, N(4)=24 and N(8)=100.
-
-What is N(1,000,000,000)?
+Find the sum of all n, 0 &lt; n &lt; 64,000,000 such that σ2(n) is a perfect square.
 
 # --hints--
 
-`euler210()` should return 1598174770174689500.
+`euler211()` should return 1922364685.
 
 ```js
-assert.strictEqual(euler210(), 1598174770174689500);
+assert.strictEqual(euler211(), 1922364685);
 ```
 
 # --seed--
@@ -31,12 +27,12 @@ assert.strictEqual(euler210(), 1598174770174689500);
 ## --seed-contents--
 
 ```js
-function euler210() {
+function euler211() {
 
   return true;
 }
 
-euler210();
+euler211();
 ```
 
 # --solutions--
