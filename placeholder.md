@@ -1,27 +1,51 @@
 ---
-id: 5900f43e1000cf542c50ff4f
-title: 'Problem 209: Circular Logic'
+id: 5900f3811000cf542c50fe94
+title: 'Problem 21: Amicable numbers'
 challengeType: 5
-forumTopicId: 301850
-dashedName: problem-209-circular-logic
+forumTopicId: 301851
+dashedName: problem-21-amicable-numbers
 ---
 
 # --description--
 
-A k-input binary truth table is a map from k input bits
+Let d(`n`) be defined as the sum of proper divisors of `n` (numbers less than `n` which divide evenly into `n`).
 
-(binary digits, 0 \[false] or 1 \[true]) to 1 output bit. For example, the 2-input binary truth tables for the logical AND and XOR functions are:
+If d(`a`) = `b` and d(`b`) = `a`, where `a` ≠ `b`, then `a` and `b` are an amicable pair and each of `a` and `b` are called amicable numbers.
 
-x y x AND y000010100111x y x XOR y000011101110How many 6-input binary truth tables, τ, satisfy the formula
+For example, the proper divisors of 220 are 1, 2, 4, 5, 10, 11, 20, 22, 44, 55 and 110; therefore d(220) = 284. The proper divisors of 284 are 1, 2, 4, 71 and 142; so d(284) = 220.
 
-τ(a, b, c, d, e, f) AND τ(b, c, d, e, f, a XOR (b AND c)) = 0 for all 6-bit inputs (a, b, c, d, e, f)?
+Evaluate the sum of all the amicable numbers under `n`.
 
 # --hints--
 
-`euler209()` should return 15964587728784.
+`sumAmicableNum(1000)` should return a number.
 
 ```js
-assert.strictEqual(euler209(), 15964587728784);
+assert(typeof sumAmicableNum(1000) === 'number');
+```
+
+`sumAmicableNum(1000)` should return 504.
+
+```js
+assert.strictEqual(sumAmicableNum(1000), 504);
+```
+
+`sumAmicableNum(2000)` should return 2898.
+
+```js
+assert.strictEqual(sumAmicableNum(2000), 2898);
+```
+
+`sumAmicableNum(5000)` should return 8442.
+
+```js
+assert.strictEqual(sumAmicableNum(5000), 8442);
+```
+
+`sumAmicableNum(10000)` should return 31626.
+
+```js
+assert.strictEqual(sumAmicableNum(10000), 31626);
 ```
 
 # --seed--
@@ -29,16 +53,32 @@ assert.strictEqual(euler209(), 15964587728784);
 ## --seed-contents--
 
 ```js
-function euler209() {
+function sumAmicableNum(n) {
 
-  return true;
+  return n;
 }
 
-euler209();
+sumAmicableNum(10000);
 ```
 
 # --solutions--
 
 ```js
-// solution required
+const sumAmicableNum = (n) => {
+  const fsum = (n) => {
+    let sum = 1;
+    for (let i = 2; i <= Math.floor(Math.sqrt(n)); i++)
+      if (Math.floor(n % i) === 0)
+        sum += i + Math.floor(n / i);
+    return sum;
+  };
+  let d = [];
+  let amicableSum = 0;
+  for (let i=2; i<n; i++) d[i] = fsum(i);
+  for (let i=2; i<n; i++) {
+    let dsum = d[i];
+    if (d[dsum]===i && i!==dsum) amicableSum += i+dsum;
+  }
+  return amicableSum/2;
+};
 ```
