@@ -1,23 +1,29 @@
 ---
-id: 5900f41e1000cf542c50ff30
-title: 'Problem 177: Integer angled Quadrilaterals'
+id: 5900f41e1000cf542c50ff31
+title: 'Problem 178: Step Numbers'
 challengeType: 5
-forumTopicId: 301812
-dashedName: problem-177-integer-angled-quadrilaterals
+forumTopicId: 301813
+dashedName: problem-178-step-numbers
 ---
 
 # --description--
 
-Let ABCD be a convex quadrilateral, with diagonals AC and BD. At each vertex the diagonal makes an angle with each of the two sides, creating eight corner angles.
+Consider the number 45656.
 
-For example, at vertex A, the two angles are CAD, CAB. We call such a quadrilateral for which all eight corner angles have integer values when measured in degrees an "integer angled quadrilateral". An example of an integer angled quadrilateral is a square, where all eight corner angles are 45°. Another example is given by DAC = 20°, BAC = 60°, ABD = 50°, CBD = 30°, BCA = 40°, DCA = 30°, CDB = 80°, ADB = 50°. What is the total number of non-similar integer angled quadrilaterals? Note: In your calculations you may assume that a calculated angle is integral if it is within a tolerance of 10-9 of an integer value.
+It can be seen that each pair of consecutive digits of 45656 has a difference of one.
+
+A number for which every pair of consecutive digits has a difference of one is called a step number.
+
+A pandigital number contains every decimal digit from 0 to 9 at least once.
+
+How many pandigital step numbers less than 1040 are there?
 
 # --hints--
 
-`euler177()` should return 129325.
+`euler178()` should return 126461847755.
 
 ```js
-assert.strictEqual(euler177(), 129325);
+assert.strictEqual(euler178(), 126461847755);
 ```
 
 # --seed--
@@ -25,12 +31,12 @@ assert.strictEqual(euler177(), 129325);
 ## --seed-contents--
 
 ```js
-function euler177() {
+function euler178() {
 
   return true;
 }
 
-euler177();
+euler178();
 ```
 
 # --solutions--
