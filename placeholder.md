@@ -1,27 +1,27 @@
 ---
-id: 5900f44e1000cf542c50ff60
-title: 'Problem 225: Tribonacci non-divisors'
+id: 5900f4511000cf542c50ff62
+title: 'Problem 226: A Scoop of Blancmange'
 challengeType: 5
-forumTopicId: 301868
-dashedName: problem-225-tribonacci-non-divisors
+forumTopicId: 301869
+dashedName: problem-226-a-scoop-of-blancmange
 ---
 
 # --description--
 
-The sequence 1, 1, 1, 3, 5, 9, 17, 31, 57, 105, 193, 355, 653, 1201 ...
+The blancmange curve is the set of points (x,y) such that 0 ≤ x ≤ 1 and ,where s(x) = the distance from x to the nearest integer.
 
-is defined by T1 = T2 = T3 = 1 and Tn = Tn-1 + Tn-2 + Tn-3.
+The area under the blancmange curve is equal to ½, shown in pink in the diagram below.
 
-It can be shown that 27 does not divide any terms of this sequence.In fact, 27 is the first odd number with this property.
+Let C be the circle with centre (¼,½) and radius ¼, shown in black in the diagram.
 
-Find the 124th odd number that does not divide any terms of the above sequence.
+What area under the blancmange curve is enclosed by C?Give your answer rounded to eight decimal places in the form 0.abcdefgh
 
 # --hints--
 
-`euler225()` should return 2009.
+`euler226()` should return 0.11316017.
 
 ```js
-assert.strictEqual(euler225(), 2009);
+assert.strictEqual(euler226(), 0.11316017);
 ```
 
 # --seed--
@@ -29,12 +29,12 @@ assert.strictEqual(euler225(), 2009);
 ## --seed-contents--
 
 ```js
-function euler225() {
+function euler226() {
 
   return true;
 }
 
-euler225();
+euler226();
 ```
 
 # --solutions--
