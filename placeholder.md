@@ -1,27 +1,29 @@
 ---
-id: 5900f4431000cf542c50ff56
-title: 'Problem 215: Crack-free Walls'
+id: 5900f4451000cf542c50ff57
+title: 'Problem 216: Investigating the primality of numbers of the form 2n2-1'
 challengeType: 5
-forumTopicId: 301857
-dashedName: problem-215-crack-free-walls
+forumTopicId: 301858
+dashedName: problem-216-investigating-the-primality-of-numbers-of-the-form-2n2-1
 ---
 
 # --description--
 
-Consider the problem of building a wall out of 2×1 and 3×1 bricks (horizontal×vertical dimensions) such that, for extra strength, the gaps between horizontally-adjacent bricks never line up in consecutive layers, i.e. never form a "running crack".
+Consider numbers t(n) of the form t(n) = 2n2-1 with n > 1.
 
-For example, the following 9×3 wall is not acceptable due to the running crack shown in red:
+The first such numbers are 7, 17, 31, 49, 71, 97, 127 and 161.
 
-There are eight ways of forming a crack-free 9×3 wall, written W(9,3) = 8.
+It turns out that only 49 = 7\*7 and 161 = 7\*23 are not prime.
 
-Calculate W(32,10).
+For n ≤ 10000 there are 2202 numbers t(n) that are prime.
+
+How many numbers t(n) are prime for n ≤ 50,000,000 ?
 
 # --hints--
 
-`euler215()` should return 806844323190414.
+`euler216()` should return 5437849.
 
 ```js
-assert.strictEqual(euler215(), 806844323190414);
+assert.strictEqual(euler216(), 5437849);
 ```
 
 # --seed--
@@ -29,12 +31,12 @@ assert.strictEqual(euler215(), 806844323190414);
 ## --seed-contents--
 
 ```js
-function euler215() {
+function euler216() {
 
   return true;
 }
 
-euler215();
+euler216();
 ```
 
 # --solutions--
