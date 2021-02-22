@@ -1,25 +1,27 @@
 ---
-id: 5900f4291000cf542c50ff3a
-title: 'Problem 187: Semiprimes'
+id: 5900f4291000cf542c50ff3b
+title: 'Problem 188: The hyperexponentiation of a number'
 challengeType: 5
-forumTopicId: 301823
-dashedName: problem-187-semiprimes
+forumTopicId: 301824
+dashedName: problem-188-the-hyperexponentiation-of-a-number
 ---
 
 # --description--
 
-A composite is a number containing at least two prime factors. For example, 15 = 3 × 5; 9 = 3 × 3; 12 = 2 × 2 × 3.
+The hyperexponentiation or tetration of a number a by a positive integer b, denoted by a↑↑b or ba, is recursively defined by:
 
-There are ten composites below thirty containing precisely two, not necessarily distinct, prime factors: 4, 6, 9, 10, 14, 15, 21, 22, 25, 26.
+a↑↑1 = a,
 
-How many composite integers, n &lt; 108, have precisely two, not necessarily distinct, prime factors?
+a↑↑(k+1) = a(a↑↑k).
+
+Thus we have e.g. 3↑↑2 = 33 = 27, hence 3↑↑3 = 327 = 7625597484987 and 3↑↑4 is roughly 103.6383346400240996\*10^12. Find the last 8 digits of 1777↑↑1855.
 
 # --hints--
 
-`euler187()` should return 17427258.
+`euler188()` should return 95962097.
 
 ```js
-assert.strictEqual(euler187(), 17427258);
+assert.strictEqual(euler188(), 95962097);
 ```
 
 # --seed--
@@ -27,12 +29,12 @@ assert.strictEqual(euler187(), 17427258);
 ## --seed-contents--
 
 ```js
-function euler187() {
+function euler188() {
 
   return true;
 }
 
-euler187();
+euler188();
 ```
 
 # --solutions--
