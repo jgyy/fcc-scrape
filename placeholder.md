@@ -1,25 +1,27 @@
 ---
-id: 5900f3f21000cf542c50ff05
-title: 'Problem 134: Prime pair connection'
+id: 5900f3f31000cf542c50ff06
+title: 'Problem 135: Same differences'
 challengeType: 5
-forumTopicId: 301762
-dashedName: problem-134-prime-pair-connection
+forumTopicId: 301763
+dashedName: problem-135-same-differences
 ---
 
 # --description--
 
-Consider the consecutive primes p1 = 19 and p2 = 23. It can be verified that 1219 is the smallest number such that the last digits are formed by p1 whilst also being divisible by p2.
+Given the positive integers, x, y, and z, are consecutive terms of an arithmetic progression, the least value of the positive integer, n, for which the equation, x2 − y2 − z2 = n, has exactly two solutions is n = 27:
 
-In fact, with the exception of p1 = 3 and p2 = 5, for every pair of consecutive primes, p2 > p1, there exist values of n for which the last digits are formed by p1 and n is divisible by p2. Let S be the smallest of these values of n.
+342 − 272 − 202 = 122 − 92 − 62 = 27
 
-Find ∑ S for every pair of consecutive primes with 5 ≤ p1 ≤ 1000000.
+It turns out that n = 1155 is the least value which has exactly ten solutions.
+
+How many values of n less than one million have exactly ten distinct solutions?
 
 # --hints--
 
-`euler134()` should return 18613426663617120.
+`euler135()` should return 4989.
 
 ```js
-assert.strictEqual(euler134(), 18613426663617120);
+assert.strictEqual(euler135(), 4989);
 ```
 
 # --seed--
@@ -27,12 +29,12 @@ assert.strictEqual(euler134(), 18613426663617120);
 ## --seed-contents--
 
 ```js
-function euler134() {
+function euler135() {
 
   return true;
 }
 
-euler134();
+euler135();
 ```
 
 # --solutions--
