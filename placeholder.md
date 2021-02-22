@@ -1,28 +1,28 @@
 ---
-id: 5900f41a1000cf542c50ff2d
+id: 5900f41c1000cf542c50ff2e
 title: >-
-  Problem 174: Counting the number of "hollow" square laminae that can form one,
-  two, three, ... distinct arrangements
+  Problem 175: Fractions involving the number of different ways a number can be
+  expressed as a sum of powers of 2
 challengeType: 5
-forumTopicId: 301809
+forumTopicId: 301810
 dashedName: >-
-  problem-174-counting-the-number-of-hollow-square-laminae-that-can-form-one-two-three-----distinct-arrangements
+  problem-175-fractions-involving-the-number-of-different-ways-a-number-can-be-expressed-as-a-sum-of-powers-of-2
 ---
 
 # --description--
 
-We shall define a square lamina to be a square outline with a square "hole" so that the shape possesses vertical and horizontal symmetry.
+Define f(0)=1 and f(n) to be the number of ways to write n as a sum of powers of 2 where no power occurs more than twice.
 
-Given eight tiles it is possible to form a lamina in only one way: 3x3 square with a 1x1 hole in the middle. However, using thirty-two tiles it is possible to form two distinct laminae.
+For example, f(10)=5 since there are five different ways to express 10:10 = 8+2 = 8+1+1 = 4+4+2 = 4+2+2+1+1 = 4+4+1+1
 
-If t represents the number of tiles used, we shall say that t = 8 is type L(1) and t = 32 is type L(2). Let N(n) be the number of t ≤ 1000000 such that t is type L(n); for example, N(15) = 832. What is ∑ N(n) for 1 ≤ n ≤ 10?
+It can be shown that for every fraction p/q (p>0, q>0) there exists at least one integer n such that f(n)/f(n-1)=p/q. For instance, the smallest n for which f(n)/f(n-1)=13/17 is 241. The binary expansion of 241 is 11110001. Reading this binary number from the most significant bit to the least significant bit there are 4 one's, 3 zeroes and 1 one. We shall call the string 4,3,1 the Shortened Binary Expansion of 241. Find the Shortened Binary Expansion of the smallest n for which f(n)/f(n-1)=123456789/987654321. Give your answer as comma separated integers, without any whitespaces.
 
 # --hints--
 
-`euler174()` should return 209566.
+`euler175()` should return 1, 13717420, 8.
 
 ```js
-assert.strictEqual(euler174(), 209566);
+assert.strictEqual(euler175(), 1, 13717420, 8);
 ```
 
 # --seed--
@@ -30,12 +30,12 @@ assert.strictEqual(euler174(), 209566);
 ## --seed-contents--
 
 ```js
-function euler174() {
+function euler175() {
 
   return true;
 }
 
-euler174();
+euler175();
 ```
 
 # --solutions--
