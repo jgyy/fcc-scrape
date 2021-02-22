@@ -1,49 +1,25 @@
 ---
-id: 5900f3e81000cf542c50fefb
-title: 'Problem 124: Ordered radicals'
+id: 5900f3e91000cf542c50fefc
+title: 'Problem 125: Palindromic sums'
 challengeType: 5
-forumTopicId: 301751
-dashedName: problem-124-ordered-radicals
+forumTopicId: 301752
+dashedName: problem-125-palindromic-sums
 ---
 
 # --description--
 
-The radical of n, rad(n), is the product of the distinct prime factors of n. For example, 504 = 23 × 32 × 7, so rad(504) = 2 × 3 × 7 = 42.
+The palindromic number 595 is interesting because it can be written as the sum of consecutive squares: 62 + 72 + 82 + 92 + 102 + 112 + 122.
 
-If we calculate rad(n) for 1 ≤ n ≤ 10, then sort them on rad(n), and sorting on n if the radical values are equal, we get:
+There are exactly eleven palindromes below one-thousand that can be written as consecutive square sums, and the sum of these palindromes is 4164. Note that 1 = 02 + 12 has not been included as this problem is concerned with the squares of positive integers.
 
-Unsorted
-
-Sorted n rad(n)
-
-n rad(n) k 11
-
-111 22
-
-222 33
-
-423 42
-
-824 55
-
-335 66
-
-936 77
-
-557 82
-
-668 93
-
-779 1010
-
-101010 Let E(k) be the kth element in the sorted n column; for example, E(4) = 8 and E(6) = 9. If rad(n) is sorted for 1 ≤ n ≤ 100000, find E(10000).
+Find the sum of all the numbers less than 108 that are both palindromic and can be written as the sum of consecutive squares.
 
 # --hints--
 
-`euler124()` should return 21417.
+`euler125()` should return 2906969179.
 
 ```js
-assert.strictEqual(euler124(), 21417);
+assert.strictEqual(euler125(), 2906969179);
 ```
 
 # --seed--
@@ -51,12 +27,12 @@ assert.strictEqual(euler124(), 21417);
 ## --seed-contents--
 
 ```js
-function euler124() {
+function euler125() {
 
   return true;
 }
 
-euler124();
+euler125();
 ```
 
 # --solutions--
