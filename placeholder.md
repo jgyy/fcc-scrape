@@ -1,27 +1,29 @@
 ---
-id: 5900f3fc1000cf542c50ff0e
-title: 'Problem 143: Investigating the Torricelli point of a triangle'
+id: 5900f3fc1000cf542c50ff0f
+title: 'Problem 144: Investigating multiple reflections of a laser beam'
 challengeType: 5
-forumTopicId: 301772
-dashedName: problem-143-investigating-the-torricelli-point-of-a-triangle
+forumTopicId: 301773
+dashedName: problem-144-investigating-multiple-reflections-of-a-laser-beam
 ---
 
 # --description--
 
-Let ABC be a triangle with all interior angles being less than 120 degrees. Let X be any point inside the triangle and let XA = p, XC = q, and XB = r.
+In laser physics, a "white cell" is a mirror system that acts as a delay line for the laser beam. The beam enters the cell, bounces around on the mirrors, and eventually works its way back out.
 
-Fermat challenged Torricelli to find the position of X such that p + q + r was minimised.
+The specific white cell we will be considering is an ellipse with the equation 4x2 + y2 = 100
 
-Torricelli was able to prove that if equilateral triangles AOB, BNC and AMC are constructed on each side of triangle ABC, the circumscribed circles of AOB, BNC, and AMC will intersect at a single point, T, inside the triangle. Moreover he proved that T, called the Torricelli/Fermat point, minimises p + q + r. Even more remarkable, it can be shown that when the sum is minimised, AN = BM = CO = p + q + r and that AN, BM and CO also intersect at T.
+The section corresponding to −0.01 ≤ x ≤ +0.01 at the top is missing, allowing the light to enter and exit through the hole.
 
-If the sum is minimised and a, b, c, p, q and r are all positive integers we shall call triangle ABC a Torricelli triangle. For example, a = 399, b = 455, c = 511 is an example of a Torricelli triangle, with p + q + r = 784. Find the sum of all distinct values of p + q + r ≤ 120000 for Torricelli triangles.
+The light beam in this problem starts at the point (0.0,10.1) just outside the white cell, and the beam first impacts the mirror at (1.4,-9.6). Each time the laser beam hits the surface of the ellipse, it follows the usual law of reflection "angle of incidence equals angle of reflection." That is, both the incident and reflected beams make the same angle with the normal line at the point of incidence. In the figure on the left, the red line shows the first two points of contact between the laser beam and the wall of the white cell; the blue line shows the line tangent to the ellipse at the point of incidence of the first bounce.The slope m of the tangent line at any point (x,y) of the given ellipse is: m = −4x/yThe normal line is perpendicular to this tangent line at the point of incidence. The animation on the right shows the first 10 reflections of the beam.
+
+How many times does the beam hit the internal surface of the white cell before exiting?
 
 # --hints--
 
-`euler143()` should return 30758397.
+`euler144()` should return 354.
 
 ```js
-assert.strictEqual(euler143(), 30758397);
+assert.strictEqual(euler144(), 354);
 ```
 
 # --seed--
@@ -29,12 +31,12 @@ assert.strictEqual(euler143(), 30758397);
 ## --seed-contents--
 
 ```js
-function euler143() {
+function euler144() {
 
   return true;
 }
 
-euler143();
+euler144();
 ```
 
 # --solutions--
