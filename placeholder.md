@@ -1,35 +1,43 @@
 ---
-id: 5900f4021000cf542c50ff13
-title: 'Problem 149: Searching for a maximum-sum subsequence'
+id: 5900f37b1000cf542c50fe8e
+title: 'Problem 15: Lattice paths'
 challengeType: 5
-forumTopicId: 301778
-dashedName: problem-149-searching-for-a-maximum-sum-subsequence
+forumTopicId: 301780
+dashedName: problem-15-lattice-paths
 ---
 
 # --description--
 
-Looking at the table below, it is easy to verify that the maximum possible sum of adjacent numbers in any direction (horizontal, vertical, diagonal or anti-diagonal) is 16 (= 8 + 7 + 1).
+Starting in the top left corner of a 2×2 grid, and only being able to move to the right and down, there are exactly 6 routes to the bottom right corner.
 
-−25329−6513273−18−4 8
+<img class="img-responsive center-block" alt="a diagram of 6 2 by 2 grids showing all the routes to the bottom right corner" src="https://cdn-media-1.freecodecamp.org/project-euler/1Atixoj.gif" style="background-color: white; padding: 10px;">
 
-Now, let us repeat the search, but on a much larger scale:
-
-First, generate four million pseudo-random numbers using a specific form of what is known as a "Lagged Fibonacci Generator":
-
-For 1 ≤ k ≤ 55, sk = \[100003 − 200003k + 300007k3] (modulo 1000000) − 500000. For 56 ≤ k ≤ 4000000, sk = \[sk−24 + sk−55 + 1000000] (modulo 1000000) − 500000.
-
-Thus, s10 = −393027 and s100 = 86613.
-
-The terms of s are then arranged in a 2000×2000 table, using the first 2000 numbers to fill the first row (sequentially), the next 2000 numbers to fill the second row, and so on.
-
-Finally, find the greatest sum of (any number of) adjacent entries in any direction (horizontal, vertical, diagonal or anti-diagonal).
+How many such routes are there through a given `gridSize`?
 
 # --hints--
 
-`euler149()` should return 52852124.
+`latticePaths(4)` should return a number.
 
 ```js
-assert.strictEqual(euler149(), 52852124);
+assert(typeof latticePaths(4) === 'number');
+```
+
+`latticePaths(4)` should return 70.
+
+```js
+assert.strictEqual(latticePaths(4), 70);
+```
+
+`latticePaths(9)` should return 48620.
+
+```js
+assert.strictEqual(latticePaths(9), 48620);
+```
+
+`latticePaths(20)` should return 137846528820.
+
+```js
+assert.strictEqual(latticePaths(20), 137846528820);
 ```
 
 # --seed--
@@ -37,16 +45,24 @@ assert.strictEqual(euler149(), 52852124);
 ## --seed-contents--
 
 ```js
-function euler149() {
+function latticePaths(gridSize) {
 
   return true;
 }
 
-euler149();
+latticePaths(4);
 ```
 
 # --solutions--
 
 ```js
-// solution required
+function latticePaths(gridSize) {
+  let paths = 1;
+
+  for (let i = 0; i < gridSize; i++) {
+    paths *= (2 * gridSize) - i;
+    paths /= i + 1;
+  }
+  return paths;
+}
 ```
