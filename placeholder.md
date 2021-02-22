@@ -1,27 +1,49 @@
 ---
-id: 5900f3e71000cf542c50fefa
-title: 'Problem 123: Prime square remainders'
+id: 5900f3e81000cf542c50fefb
+title: 'Problem 124: Ordered radicals'
 challengeType: 5
-forumTopicId: 301750
-dashedName: problem-123-prime-square-remainders
+forumTopicId: 301751
+dashedName: problem-124-ordered-radicals
 ---
 
 # --description--
 
-Let pn be the nth prime: 2, 3, 5, 7, 11, ..., and let r be the remainder when (pn−1)n + (pn+1)n is divided by pn2.
+The radical of n, rad(n), is the product of the distinct prime factors of n. For example, 504 = 23 × 32 × 7, so rad(504) = 2 × 3 × 7 = 42.
 
-For example, when n = 3, p3 = 5, and 43 + 63 = 280 ≡ 5 mod 25.
+If we calculate rad(n) for 1 ≤ n ≤ 10, then sort them on rad(n), and sorting on n if the radical values are equal, we get:
 
-The least value of n for which the remainder first exceeds 109 is 7037.
+Unsorted
 
-Find the least value of n for which the remainder first exceeds 1010.
+Sorted n rad(n)
+
+n rad(n) k 11
+
+111 22
+
+222 33
+
+423 42
+
+824 55
+
+335 66
+
+936 77
+
+557 82
+
+668 93
+
+779 1010
+
+101010 Let E(k) be the kth element in the sorted n column; for example, E(4) = 8 and E(6) = 9. If rad(n) is sorted for 1 ≤ n ≤ 100000, find E(10000).
 
 # --hints--
 
-`euler123()` should return 21035.
+`euler124()` should return 21417.
 
 ```js
-assert.strictEqual(euler123(), 21035);
+assert.strictEqual(euler124(), 21417);
 ```
 
 # --seed--
@@ -29,12 +51,12 @@ assert.strictEqual(euler123(), 21035);
 ## --seed-contents--
 
 ```js
-function euler123() {
+function euler124() {
 
   return true;
 }
 
-euler123();
+euler124();
 ```
 
 # --solutions--
