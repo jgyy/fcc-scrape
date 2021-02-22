@@ -1,23 +1,27 @@
 ---
-id: 5900f3e21000cf542c50fef5
-title: 'Problem 118: Pandigital prime sets'
+id: 5900f3e41000cf542c50fef6
+title: 'Problem 119: Digit power sum'
 challengeType: 5
-forumTopicId: 301744
-dashedName: problem-118-pandigital-prime-sets
+forumTopicId: 301745
+dashedName: problem-119-digit-power-sum
 ---
 
 # --description--
 
-Using all of the digits 1 through 9 and concatenating them freely to form decimal integers, different sets can be formed. Interestingly with the set {2,5,47,89,631}, all of the elements belonging to it are prime.
+The number 512 is interesting because it is equal to the sum of its digits raised to some power: 5 + 1 + 2 = 8, and 83 = 512. Another example of a number with this property is 614656 = 284.
 
-How many distinct sets containing each of the digits one through nine exactly once contain only prime elements?
+We shall define an to be the nth term of this sequence and insist that a number must contain at least two digits to have a sum.
+
+You are given that a2 = 512 and a10 = 614656.
+
+Find a30.
 
 # --hints--
 
-`euler118()` should return 44680.
+`euler119()` should return 248155780267521.
 
 ```js
-assert.strictEqual(euler118(), 44680);
+assert.strictEqual(euler119(), 248155780267521);
 ```
 
 # --seed--
@@ -25,12 +29,12 @@ assert.strictEqual(euler118(), 44680);
 ## --seed-contents--
 
 ```js
-function euler118() {
+function euler119() {
 
   return true;
 }
 
-euler118();
+euler119();
 ```
 
 # --solutions--
