@@ -1,33 +1,41 @@
 ---
-id: 5900f4591000cf542c50ff6c
-title: 'Problem 237: Tours on a 4 x n playing board'
+id: 5900f45b1000cf542c50ff6d
+title: 'Problem 238: Infinite string tour'
 challengeType: 5
-forumTopicId: 301882
-dashedName: problem-237-tours-on-a-4-x-n-playing-board
+forumTopicId: 301883
+dashedName: problem-238-infinite-string-tour
 ---
 
 # --description--
 
-Let T(n) be the number of tours over a 4 × n playing board such that:
+Create a sequence of numbers using the "Blum Blum Shub" pseudo-random number generator:
 
-The tour starts in the top left corner.
+s0 = 14025256 sn+1 = sn2 mod 20300713
 
-The tour consists of moves that are up, down, left, or right one square.
+Concatenate these numbers s0s1s2… to create a string w of infinite length. Then, w = 14025256741014958470038053646…
 
-The tour visits each square exactly once.
+For a positive integer k, if no substring of w exists with a sum of digits equal to k, p(k) is defined to be zero. If at least one substring of w exists with a sum of digits equal to k, we define p(k) = z, where z is the starting position of the earliest such substring.
 
-The tour ends in the bottom left corner.
+For instance:
 
-The diagram shows one tour over a 4 × 10 board:
+The substrings 1, 14, 1402, … with respective sums of digits equal to 1, 5, 7, … start at position 1, hence p(1) = p(5) = p(7) = … = 1.
 
-T(10) is 2329. What is T(1012) modulo 108?
+The substrings 4, 402, 4025, … with respective sums of digits equal to 4, 6, 11, … start at position 2, hence p(4) = p(6) = p(11) = … = 2.
+
+The substrings 02, 0252, … with respective sums of digits equal to 2, 9, … start at position 3, hence p(2) = p(9) = … = 3.
+
+Note that substring 025 starting at position 3, has a sum of digits equal to 7, but there was an earlier substring (starting at position 1) with a sum of digits equal to 7, so p(7) = 1, not 3.
+
+We can verify that, for 0 &lt; k ≤ 103, ∑ p(k) = 4742.
+
+Find ∑ p(k), for 0 &lt; k ≤ 2·1015.
 
 # --hints--
 
-`euler237()` should return 15836928.
+`euler238()` should return 9922545104535660.
 
 ```js
-assert.strictEqual(euler237(), 15836928);
+assert.strictEqual(euler238(), 9922545104535660);
 ```
 
 # --seed--
@@ -35,12 +43,12 @@ assert.strictEqual(euler237(), 15836928);
 ## --seed-contents--
 
 ```js
-function euler237() {
+function euler238() {
 
   return true;
 }
 
-euler237();
+euler238();
 ```
 
 # --solutions--
