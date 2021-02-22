@@ -1,37 +1,25 @@
 ---
-id: 5900f4301000cf542c50ff42
-title: 'Problem 196: Prime triplets'
+id: 5900f4311000cf542c50ff44
+title: 'Problem 197: Investigating the behaviour of a recursively defined sequence'
 challengeType: 5
-forumTopicId: 301834
-dashedName: problem-196-prime-triplets
+forumTopicId: 301835
+dashedName: problem-197-investigating-the-behaviour-of-a-recursively-defined-sequence
 ---
 
 # --description--
 
-Build a triangle from all positive integers in the following way:
+Given is the function f(x) = ⌊230.403243784-x2⌋ × 10-9 ( ⌊ ⌋ is the floor-function),
 
-1 2 3 4 5 6 7 8 9 1011 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 2829 30 31 32 33 34 35 3637 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 . . .
+the sequence un is defined by u0 = -1 and un+1 = f(un).
 
-Each positive integer has up to eight neighbours in the triangle.
-
-A set of three primes is called a prime triplet if one of the three primes has the other two as neighbours in the triangle.
-
-For example, in the second row, the prime numbers 2 and 3 are elements of some prime triplet.
-
-If row 8 is considered, it contains two primes which are elements of some prime triplet, i.e. 29 and 31. If row 9 is considered, it contains only one prime which is an element of some prime triplet: 37.
-
-Define S(n) as the sum of the primes in row n which are elements of any prime triplet. Then S(8)=60 and S(9)=37.
-
-You are given that S(10000)=950007619.
-
-Find S(5678027) + S(7208785).
+Find un + un+1 for n = 1012. Give your answer with 9 digits after the decimal point.
 
 # --hints--
 
-`euler196()` should return 322303240771079940.
+`euler197()` should return 1.710637717.
 
 ```js
-assert.strictEqual(euler196(), 322303240771079940);
+assert.strictEqual(euler197(), 1.710637717);
 ```
 
 # --seed--
@@ -39,12 +27,12 @@ assert.strictEqual(euler196(), 322303240771079940);
 ## --seed-contents--
 
 ```js
-function euler196() {
+function euler197() {
 
   return true;
 }
 
-euler196();
+euler197();
 ```
 
 # --solutions--
