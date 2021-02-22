@@ -1,31 +1,31 @@
 ---
-id: 5900f4251000cf542c50ff38
-title: 'Problem 185: Number Mind'
+id: 5900f4281000cf542c50ff39
+title: 'Problem 186: Connectedness of a network'
 challengeType: 5
-forumTopicId: 301821
-dashedName: problem-185-number-mind
+forumTopicId: 301822
+dashedName: problem-186-connectedness-of-a-network
 ---
 
 # --description--
 
-The game Number Mind is a variant of the well known game Master Mind.
+Here are the records from a busy telephone system with one million users:
 
-Instead of coloured pegs, you have to guess a secret sequence of digits. After each guess you're only told in how many places you've guessed the correct digit. So, if the sequence was 1234 and you guessed 2036, you'd be told that you have one correct digit; however, you would NOT be told that you also have another digit in the wrong place.
+RecNrCallerCalled120000710005326001835004393600863701497......... The telephone number of the caller and the called number in record n are Caller(n) = S2n-1 and Called(n) = S2n where S1,2,3,... come from the "Lagged Fibonacci Generator":
 
-For instance, given the following guesses for a 5-digit secret sequence, 90342 ;2 correct 70794 ;0 correct 39458 ;2 correct 34109 ;1 correct 51545 ;2 correct 12531 ;1 correct The correct sequence 39542 is unique.
+For 1 ≤ k ≤ 55, Sk = \[100003 - 200003k + 300007k3] (modulo 1000000) For 56 ≤ k, Sk = \[Sk-24 + Sk-55] (modulo 1000000)
 
-Based on the following guesses,
+If Caller(n) = Called(n) then the user is assumed to have misdialled and the call fails; otherwise the call is successful.
 
-5616185650518293 ;2 correct 3847439647293047 ;1 correct 5855462940810587 ;3 correct 9742855507068353 ;3 correct 4296849643607543 ;3 correct 3174248439465858 ;1 correct 4513559094146117 ;2 correct 7890971548908067 ;3 correct 8157356344118483 ;1 correct 2615250744386899 ;2 correct 8690095851526254 ;3 correct 6375711915077050 ;1 correct 6913859173121360 ;1 correct 6442889055042768 ;2 correct 2321386104303845 ;0 correct 2326509471271448 ;2 correct 5251583379644322 ;2 correct 1748270476758276 ;3 correct 4895722652190306 ;1 correct 3041631117224635 ;3 correct 1841236454324589 ;3 correct 2659862637316867 ;2 correct
+From the start of the records, we say that any pair of users X and Y are friends if X calls Y or vice-versa. Similarly, X is a friend of a friend of Z if X is a friend of Y and Y is a friend of Z; and so on for longer chains.
 
-Find the unique 16-digit secret sequence.
+The Prime Minister's phone number is 524287. After how many successful calls, not counting misdials, will 99% of the users (including the PM) be a friend, or a friend of a friend etc., of the Prime Minister?
 
 # --hints--
 
-`euler185()` should return 4640261571849533.
+`euler186()` should return 2325629.
 
 ```js
-assert.strictEqual(euler185(), 4640261571849533);
+assert.strictEqual(euler186(), 2325629);
 ```
 
 # --seed--
@@ -33,12 +33,12 @@ assert.strictEqual(euler185(), 4640261571849533);
 ## --seed-contents--
 
 ```js
-function euler185() {
+function euler186() {
 
   return true;
 }
 
-euler185();
+euler186();
 ```
 
 # --solutions--
