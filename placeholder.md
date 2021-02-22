@@ -1,31 +1,27 @@
 ---
-id: 5900f4421000cf542c50ff55
-title: 'Problem 214: Totient Chains'
+id: 5900f4431000cf542c50ff56
+title: 'Problem 215: Crack-free Walls'
 challengeType: 5
-forumTopicId: 301856
-dashedName: problem-214-totient-chains
+forumTopicId: 301857
+dashedName: problem-215-crack-free-walls
 ---
 
 # --description--
 
-Let φ be Euler's totient function, i.e. for a natural number n,
+Consider the problem of building a wall out of 2×1 and 3×1 bricks (horizontal×vertical dimensions) such that, for extra strength, the gaps between horizontally-adjacent bricks never line up in consecutive layers, i.e. never form a "running crack".
 
-φ(n) is the number of k, 1 ≤ k ≤ n, for which gcd(k,n) = 1.
+For example, the following 9×3 wall is not acceptable due to the running crack shown in red:
 
-By iterating φ, each positive integer generates a decreasing chain of numbers ending in 1. E.g. if we start with 5 the sequence 5,4,2,1 is generated. Here is a listing of all chains with length 4:
+There are eight ways of forming a crack-free 9×3 wall, written W(9,3) = 8.
 
-5,4,2,1 7,6,2,1 8,4,2,1 9,6,2,1 10,4,2,1 12,4,2,1 14,6,2,1 18,6,2,1
-
-Only two of these chains start with a prime, their sum is 12.
-
-What is the sum of all primes less than 40000000 which generate a chain of length 25?
+Calculate W(32,10).
 
 # --hints--
 
-`euler214()` should return 1677366278943.
+`euler215()` should return 806844323190414.
 
 ```js
-assert.strictEqual(euler214(), 1677366278943);
+assert.strictEqual(euler215(), 806844323190414);
 ```
 
 # --seed--
@@ -33,12 +29,12 @@ assert.strictEqual(euler214(), 1677366278943);
 ## --seed-contents--
 
 ```js
-function euler214() {
+function euler215() {
 
   return true;
 }
 
-euler214();
+euler215();
 ```
 
 # --solutions--
