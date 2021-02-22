@@ -1,35 +1,23 @@
 ---
-id: 5900f40e1000cf542c50ff21
-title: 'Problem 162: Hexadecimal numbers'
+id: 5900f40f1000cf542c50ff22
+title: 'Problem 163: Cross-hatched triangles'
 challengeType: 5
-forumTopicId: 301796
-dashedName: problem-162-hexadecimal-numbers
+forumTopicId: 301797
+dashedName: problem-163-cross-hatched-triangles
 ---
 
 # --description--
 
-In the hexadecimal number system numbers are represented using 16 different digits:
+Consider an equilateral triangle in which straight lines are drawn from each vertex to the middle of the opposite side, such as in the size 1 triangle in the sketch below.
 
-0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F
-
-The hexadecimal number AF when written in the decimal number system equals 10x16+15=175.
-
-In the 3-digit hexadecimal numbers 10A, 1A0, A10, and A01 the digits 0,1 and A are all present.
-
-Like numbers written in base ten we write hexadecimal numbers without leading zeroes.
-
-How many hexadecimal numbers containing at most sixteen hexadecimal digits exist with all of the digits 0,1, and A present at least once?
-
-Give your answer as a hexadecimal number.
-
-(A,B,C,D,E and F in upper case, without any leading or trailing code that marks the number as hexadecimal and without leading zeroes , e.g. 1A3F and not: 1a3f and not 0x1a3f and not $1A3F and not #1A3F and not 0000001A3F)
+Sixteen triangles of either different shape or size or orientation or location can now be observed in that triangle. Using size 1 triangles as building blocks, larger triangles can be formed, such as the size 2 triangle in the above sketch. One-hundred and four triangles of either different shape or size or orientation or location can now be observed in that size 2 triangle. It can be observed that the size 2 triangle contains 4 size 1 triangle building blocks. A size 3 triangle would contain 9 size 1 triangle building blocks and a size n triangle would thus contain n2 size 1 triangle building blocks. If we denote T(n) as the number of triangles present in a triangle of size n, then T(1) = 16 T(2) = 104 Find T(36).
 
 # --hints--
 
-`euler162()` should return 3D58725572C62302.
+`euler163()` should return 343047.
 
 ```js
-assert.strictEqual(euler162(), '3D58725572C62302');
+assert.strictEqual(euler163(), 343047);
 ```
 
 # --seed--
@@ -37,12 +25,12 @@ assert.strictEqual(euler162(), '3D58725572C62302');
 ## --seed-contents--
 
 ```js
-function euler162() {
+function euler163() {
 
   return true;
 }
 
-euler162();
+euler163();
 ```
 
 # --solutions--
