@@ -1,31 +1,25 @@
 ---
-id: 5900f43c1000cf542c50ff4e
-title: 'Problem 207: Integer partition equations'
+id: 5900f43f1000cf542c50ff51
+title: 'Problem 208: Robot Walks'
 challengeType: 5
-forumTopicId: 301848
-dashedName: problem-207-integer-partition-equations
+forumTopicId: 301849
+dashedName: problem-208-robot-walks
 ---
 
 # --description--
 
-For some positive integers k, there exists an integer partition of the form 4t = 2t + k,
+A robot moves in a series of one-fifth circular arcs (72°), with a free choice of a clockwise or an anticlockwise arc for each step, but no turning on the spot.
 
-where 4t, 2t, and k are all positive integers and t is a real number.
+One of 70932 possible closed paths of 25 arcs starting northward is
 
-The first two such partitions are 41 = 21 + 2 and 41.5849625... = 21.5849625... + 6.
-
-Partitions where t is also an integer are called perfect. For any m ≥ 1 let P(m) be the proportion of such partitions that are perfect with k ≤ m. Thus P(6) = 1/2.
-
-In the following table are listed some values of P(m) P(5) = 1/1 P(10) = 1/2 P(15) = 2/3 P(20) = 1/2 P(25) = 1/2 P(30) = 2/5 ... P(180) = 1/4 P(185) = 3/13
-
-Find the smallest m for which P(m) &lt; 1/12345
+Given that the robot starts facing North, how many journeys of 70 arcs in length can it take that return it, after the final arc, to its starting position? (Any arc may be traversed multiple times.)
 
 # --hints--
 
-`euler207()` should return 44043947822.
+`euler208()` should return 331951449665644800.
 
 ```js
-assert.strictEqual(euler207(), 44043947822);
+assert.strictEqual(euler208(), 331951449665644800);
 ```
 
 # --seed--
@@ -33,12 +27,12 @@ assert.strictEqual(euler207(), 44043947822);
 ## --seed-contents--
 
 ```js
-function euler207() {
+function euler208() {
 
   return true;
 }
 
-euler207();
+euler208();
 ```
 
 # --solutions--
