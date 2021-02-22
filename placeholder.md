@@ -1,23 +1,23 @@
 ---
-id: 5900f44b1000cf542c50ff5d
-title: 'Problem 222: Sphere Packing'
+id: 5900f44b1000cf542c50ff5e
+title: 'Problem 223: Almost right-angled triangles I'
 challengeType: 5
-forumTopicId: 301865
-dashedName: problem-222-sphere-packing
+forumTopicId: 301866
+dashedName: problem-223-almost-right-angled-triangles-i
 ---
 
 # --description--
 
-What is the length of the shortest pipe, of internal radius 50mm, that can fully contain 21 balls of radii 30mm, 31mm, ..., 50mm?
+Let us call an integer sided triangle with sides a ≤ b ≤ c barely acute if the sides satisfy a2 + b2 = c2 + 1.
 
-Give your answer in micrometres (10-6 m) rounded to the nearest integer.
+How many barely acute triangles are there with perimeter ≤ 25,000,000?
 
 # --hints--
 
-`euler222()` should return 1590933.
+`euler223()` should return 61614848.
 
 ```js
-assert.strictEqual(euler222(), 1590933);
+assert.strictEqual(euler223(), 61614848);
 ```
 
 # --seed--
@@ -25,12 +25,12 @@ assert.strictEqual(euler222(), 1590933);
 ## --seed-contents--
 
 ```js
-function euler222() {
+function euler223() {
 
   return true;
 }
 
-euler222();
+euler223();
 ```
 
 # --solutions--
