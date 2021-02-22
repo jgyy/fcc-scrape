@@ -1,31 +1,25 @@
 ---
-id: 5900f45d1000cf542c50ff6f
-title: 'Problem 240: Top Dice'
+id: 5900f45d1000cf542c50ff70
+title: 'Problem 241: Perfection Quotients'
 challengeType: 5
-forumTopicId: 301887
-dashedName: problem-240-top-dice
+forumTopicId: 301888
+dashedName: problem-241-perfection-quotients
 ---
 
 # --description--
 
-There are 1111 ways in which five 6-sided dice (sides numbered 1 to 6) can be rolled so that the top three sum to 15. Some examples are:
+For a positive integer n, let σ(n) be the sum of all divisors of n, so e.g. σ(6) = 1 + 2 + 3 + 6 = 12.
 
-D1,D2,D3,D4,D5 = 4,3,6,3,5
+A perfect number, as you probably know, is a number with σ(n) = 2n.
 
-D1,D2,D3,D4,D5 = 4,3,3,5,6
-
-D1,D2,D3,D4,D5 = 3,3,3,6,6
-
-D1,D2,D3,D4,D5 = 6,6,3,3,3
-
-In how many ways can twenty 12-sided dice (sides numbered 1 to 12) be rolled so that the top ten sum to 70?
+Let us define the perfection quotient of a positive integer asp(n)= σ(n)n . Find the sum of all positive integers n ≤ 1018 for which p(n) has the form k + 1⁄2, where k is an integer.
 
 # --hints--
 
-`euler240()` should return 7448717393364182000.
+`euler241()` should return 482316491800641150.
 
 ```js
-assert.strictEqual(euler240(), 7448717393364182000);
+assert.strictEqual(euler241(), 482316491800641150);
 ```
 
 # --seed--
@@ -33,12 +27,12 @@ assert.strictEqual(euler240(), 7448717393364182000);
 ## --seed-contents--
 
 ```js
-function euler240() {
+function euler241() {
 
   return true;
 }
 
-euler240();
+euler241();
 ```
 
 # --solutions--
