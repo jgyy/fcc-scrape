@@ -1,27 +1,37 @@
 ---
-id: 5900f3f51000cf542c50ff07
-title: 'Problem 136: Singleton difference'
+id: 5900f3f51000cf542c50ff08
+title: 'Problem 137: Fibonacci golden nuggets'
 challengeType: 5
-forumTopicId: 301764
-dashedName: problem-136-singleton-difference
+forumTopicId: 301765
+dashedName: problem-137-fibonacci-golden-nuggets
 ---
 
 # --description--
 
-The positive integers, x, y, and z, are consecutive terms of an arithmetic progression. Given that n is a positive integer, the equation, x2 − y2 − z2 = n, has exactly one solution when n = 20:
+Consider the infinite polynomial series AF(x) = xF1 + x2F2 + x3F3 + ..., where Fk is the kth term in the Fibonacci sequence: 1, 1, 2, 3, 5, 8, ... ; that is, Fk = Fk−1 + Fk−2, F1 = 1 and F2 = 1.
 
-132 − 102 − 72 = 20
+For this problem we shall be interested in values of x for which AF(x) is a positive integer.
 
-In fact there are twenty-five values of n below one hundred for which the equation has a unique solution.
+Surprisingly AF(1/2)
 
-How many values of n less than fifty million have exactly one solution?
+=
+
+(1/2).1 + (1/2)2.1 + (1/2)3.2 + (1/2)4.3 + (1/2)5.5 + ...
+
+= 1/2 + 1/4 + 2/8 + 3/16 + 5/32 + ...
+
+= 2 The corresponding values of x for the first five natural numbers are shown below.
+
+xAF(x) √2−11 1/22 (√13−2)/33 (√89−5)/84 (√34−3)/55
+
+We shall call AF(x) a golden nugget if x is rational, because they become increasingly rarer; for example, the 10th golden nugget is 74049690. Find the 15th golden nugget.
 
 # --hints--
 
-`euler136()` should return 2544559.
+`euler137()` should return 1120149658760.
 
 ```js
-assert.strictEqual(euler136(), 2544559);
+assert.strictEqual(euler137(), 1120149658760);
 ```
 
 # --seed--
@@ -29,12 +39,12 @@ assert.strictEqual(euler136(), 2544559);
 ## --seed-contents--
 
 ```js
-function euler136() {
+function euler137() {
 
   return true;
 }
 
-euler136();
+euler137();
 ```
 
 # --solutions--
