@@ -1,37 +1,35 @@
 ---
-id: 5900f4021000cf542c50ff14
-title: 'Problem 148: Exploring Pascal''s triangle'
+id: 5900f4021000cf542c50ff13
+title: 'Problem 149: Searching for a maximum-sum subsequence'
 challengeType: 5
-forumTopicId: 301777
-dashedName: problem-148-exploring-pascals-triangle
+forumTopicId: 301778
+dashedName: problem-149-searching-for-a-maximum-sum-subsequence
 ---
 
 # --description--
 
-We can easily verify that none of the entries in the first seven rows of Pascal's triangle are divisible by 7:
+Looking at the table below, it is easy to verify that the maximum possible sum of adjacent numbers in any direction (horizontal, vertical, diagonal or anti-diagonal) is 16 (= 8 + 7 + 1).
 
-<pre>
-            1
-          1   1
-        1   2   1
-      1   3   3   1
-    1   4   6   4   1
-  1   5   10  10  5   1
-1   6   15  20  15  6   1
-</pre>
+−25329−6513273−18−4 8
 
-However, if we check the first one hundred rows, we will find that only 2361 of the 5050 entries are not divisible by 7.
+Now, let us repeat the search, but on a much larger scale:
 
-# --instructions--
+First, generate four million pseudo-random numbers using a specific form of what is known as a "Lagged Fibonacci Generator":
 
-Find the number of entries which are not divisible by 7 in the first one billion (10<sup>9</sup>) rows of Pascal's triangle.
+For 1 ≤ k ≤ 55, sk = \[100003 − 200003k + 300007k3] (modulo 1000000) − 500000. For 56 ≤ k ≤ 4000000, sk = \[sk−24 + sk−55 + 1000000] (modulo 1000000) − 500000.
+
+Thus, s10 = −393027 and s100 = 86613.
+
+The terms of s are then arranged in a 2000×2000 table, using the first 2000 numbers to fill the first row (sequentially), the next 2000 numbers to fill the second row, and so on.
+
+Finally, find the greatest sum of (any number of) adjacent entries in any direction (horizontal, vertical, diagonal or anti-diagonal).
 
 # --hints--
 
-`euler148()` should return 2129970655314432.
+`euler149()` should return 52852124.
 
 ```js
-assert.strictEqual(euler148(), 2129970655314432);
+assert.strictEqual(euler149(), 52852124);
 ```
 
 # --seed--
@@ -39,12 +37,12 @@ assert.strictEqual(euler148(), 2129970655314432);
 ## --seed-contents--
 
 ```js
-function euler148() {
+function euler149() {
 
   return true;
 }
 
-euler148();
+euler149();
 ```
 
 # --solutions--
