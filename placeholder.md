@@ -1,29 +1,29 @@
 ---
-id: 5900f4451000cf542c50ff57
-title: 'Problem 216: Investigating the primality of numbers of the form 2n2-1'
+id: 5900f4461000cf542c50ff58
+title: 'Problem 217: Balanced Numbers'
 challengeType: 5
-forumTopicId: 301858
-dashedName: problem-216-investigating-the-primality-of-numbers-of-the-form-2n2-1
+forumTopicId: 301859
+dashedName: problem-217-balanced-numbers
 ---
 
 # --description--
 
-Consider numbers t(n) of the form t(n) = 2n2-1 with n > 1.
+A positive integer with k (decimal) digits is called balanced if its first ⌈k/2⌉ digits sum to the same value as its last ⌈k/2⌉ digits, where ⌈x⌉, pronounced ceiling of x, is the smallest integer ≥ x, thus ⌈π⌉ = 4 and ⌈5⌉ = 5.
 
-The first such numbers are 7, 17, 31, 49, 71, 97, 127 and 161.
+So, for example, all palindromes are balanced, as is 13722.
 
-It turns out that only 49 = 7\*7 and 161 = 7\*23 are not prime.
+Let T(n) be the sum of all balanced numbers less than 10n.
 
-For n ≤ 10000 there are 2202 numbers t(n) that are prime.
+Thus: T(1) = 45, T(2) = 540 and T(5) = 334795890.
 
-How many numbers t(n) are prime for n ≤ 50,000,000 ?
+Find T(47) mod 315
 
 # --hints--
 
-`euler216()` should return 5437849.
+`euler217()` should return 6273134.
 
 ```js
-assert.strictEqual(euler216(), 5437849);
+assert.strictEqual(euler217(), 6273134);
 ```
 
 # --seed--
@@ -31,12 +31,12 @@ assert.strictEqual(euler216(), 5437849);
 ## --seed-contents--
 
 ```js
-function euler216() {
+function euler217() {
 
   return true;
 }
 
-euler216();
+euler217();
 ```
 
 # --solutions--
