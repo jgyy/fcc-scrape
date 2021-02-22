@@ -1,23 +1,23 @@
 ---
-id: 5900f3e21000cf542c50fef4
-title: 'Problem 117: Red, green, and blue tiles'
+id: 5900f3e21000cf542c50fef5
+title: 'Problem 118: Pandigital prime sets'
 challengeType: 5
-forumTopicId: 301743
-dashedName: problem-117-red-green-and-blue-tiles
+forumTopicId: 301744
+dashedName: problem-118-pandigital-prime-sets
 ---
 
 # --description--
 
-Using a combination of black square tiles and oblong tiles chosen from: red tiles measuring two units, green tiles measuring three units, and blue tiles measuring four units, it is possible to tile a row measuring five units in length in exactly fifteen different ways.
+Using all of the digits 1 through 9 and concatenating them freely to form decimal integers, different sets can be formed. Interestingly with the set {2,5,47,89,631}, all of the elements belonging to it are prime.
 
-How many ways can a row measuring fifty units in length be tiled? NOTE: This is related to Problem 116.
+How many distinct sets containing each of the digits one through nine exactly once contain only prime elements?
 
 # --hints--
 
-`euler117()` should return 100808458960497.
+`euler118()` should return 44680.
 
 ```js
-assert.strictEqual(euler117(), 100808458960497);
+assert.strictEqual(euler118(), 44680);
 ```
 
 # --seed--
@@ -25,12 +25,12 @@ assert.strictEqual(euler117(), 100808458960497);
 ## --seed-contents--
 
 ```js
-function euler117() {
+function euler118() {
 
   return true;
 }
 
-euler117();
+euler118();
 ```
 
 # --solutions--
