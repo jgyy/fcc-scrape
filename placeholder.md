@@ -1,25 +1,31 @@
 ---
-id: 5900f4411000cf542c50ff54
-title: 'Problem 213: Flea Circus'
+id: 5900f4421000cf542c50ff55
+title: 'Problem 214: Totient Chains'
 challengeType: 5
-forumTopicId: 301855
-dashedName: problem-213-flea-circus
+forumTopicId: 301856
+dashedName: problem-214-totient-chains
 ---
 
 # --description--
 
-A 30×30 grid of squares contains 900 fleas, initially one flea per square.
+Let φ be Euler's totient function, i.e. for a natural number n,
 
-When a bell is rung, each flea jumps to an adjacent square at random (usually 4 possibilities, except for fleas on the edge of the grid or at the corners).
+φ(n) is the number of k, 1 ≤ k ≤ n, for which gcd(k,n) = 1.
 
-What is the expected number of unoccupied squares after 50 rings of the bell? Give your answer rounded to six decimal places.
+By iterating φ, each positive integer generates a decreasing chain of numbers ending in 1. E.g. if we start with 5 the sequence 5,4,2,1 is generated. Here is a listing of all chains with length 4:
+
+5,4,2,1 7,6,2,1 8,4,2,1 9,6,2,1 10,4,2,1 12,4,2,1 14,6,2,1 18,6,2,1
+
+Only two of these chains start with a prime, their sum is 12.
+
+What is the sum of all primes less than 40000000 which generate a chain of length 25?
 
 # --hints--
 
-`euler213()` should return 330.721154.
+`euler214()` should return 1677366278943.
 
 ```js
-assert.strictEqual(euler213(), 330.721154);
+assert.strictEqual(euler214(), 1677366278943);
 ```
 
 # --seed--
@@ -27,12 +33,12 @@ assert.strictEqual(euler213(), 330.721154);
 ## --seed-contents--
 
 ```js
-function euler213() {
+function euler214() {
 
   return true;
 }
 
-euler213();
+euler214();
 ```
 
 # --solutions--
