@@ -1,23 +1,27 @@
 ---
-id: 5900f44e1000cf542c50ff5f
-title: 'Problem 224: Almost right-angled triangles II'
+id: 5900f44e1000cf542c50ff60
+title: 'Problem 225: Tribonacci non-divisors'
 challengeType: 5
-forumTopicId: 301867
-dashedName: problem-224-almost-right-angled-triangles-ii
+forumTopicId: 301868
+dashedName: problem-225-tribonacci-non-divisors
 ---
 
 # --description--
 
-Let us call an integer sided triangle with sides a ≤ b ≤ c barely obtuse if the sides satisfy a2 + b2 = c2 - 1.
+The sequence 1, 1, 1, 3, 5, 9, 17, 31, 57, 105, 193, 355, 653, 1201 ...
 
-How many barely obtuse triangles are there with perimeter ≤ 75,000,000?
+is defined by T1 = T2 = T3 = 1 and Tn = Tn-1 + Tn-2 + Tn-3.
+
+It can be shown that 27 does not divide any terms of this sequence.In fact, 27 is the first odd number with this property.
+
+Find the 124th odd number that does not divide any terms of the above sequence.
 
 # --hints--
 
-`euler224()` should return 4137330.
+`euler225()` should return 2009.
 
 ```js
-assert.strictEqual(euler224(), 4137330);
+assert.strictEqual(euler225(), 2009);
 ```
 
 # --seed--
@@ -25,12 +29,12 @@ assert.strictEqual(euler224(), 4137330);
 ## --seed-contents--
 
 ```js
-function euler224() {
+function euler225() {
 
   return true;
 }
 
-euler224();
+euler225();
 ```
 
 # --solutions--
