@@ -1,29 +1,21 @@
 ---
-id: 5900f3f91000cf542c50ff0b
-title: 'Problem 141: Investigating progressive numbers, n, which are also square'
+id: 5900f3fa1000cf542c50ff0d
+title: 'Problem 142: Perfect Square Collection'
 challengeType: 5
-forumTopicId: 301770
-dashedName: problem-141-investigating-progressive-numbers-n-which-are-also-square
+forumTopicId: 301771
+dashedName: problem-142-perfect-square-collection
 ---
 
 # --description--
 
-A positive integer, n, is divided by d and the quotient and remainder are q and r respectively. In addition d, q, and r are consecutive positive integer terms in a geometric sequence, but not necessarily in that order.
-
-For example, 58 divided by 6 has quotient 9 and remainder 4. It can also be seen that 4, 6, 9 are consecutive terms in a geometric sequence (common ratio 3/2).
-
-We will call such numbers, n, progressive.
-
-Some progressive numbers, such as 9 and 10404 = 1022, happen to also be perfect squares. The sum of all progressive perfect squares below one hundred thousand is 124657.
-
-Find the sum of all progressive perfect squares below one trillion (1012).
+Find the smallest x + y + z with integers x > y > z > 0 such that x + y, x − y, x + z, x − z, y + z, y − z are all perfect squares.
 
 # --hints--
 
-`euler141()` should return 878454337159.
+`euler142()` should return 1006193.
 
 ```js
-assert.strictEqual(euler141(), 878454337159);
+assert.strictEqual(euler142(), 1006193);
 ```
 
 # --seed--
@@ -31,12 +23,12 @@ assert.strictEqual(euler141(), 878454337159);
 ## --seed-contents--
 
 ```js
-function euler141() {
+function euler142() {
 
   return true;
 }
 
-euler141();
+euler142();
 ```
 
 # --solutions--
