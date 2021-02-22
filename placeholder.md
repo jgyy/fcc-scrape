@@ -1,56 +1,32 @@
 ---
-id: 5900f3801000cf542c50fe93
-title: 'Problem 20: Factorial digit sum'
+id: 5900f4351000cf542c50ff47
+title: >-
+  Problem 200: Find the 200th prime-proof sqube containing the contiguous
+  sub-string "200"
 challengeType: 5
-forumTopicId: 301839
-dashedName: problem-20-factorial-digit-sum
+forumTopicId: 301840
+dashedName: >-
+  problem-200-find-the-200th-prime-proof-sqube-containing-the-contiguous-sub-string-200
 ---
 
 # --description--
 
-`n`! means `n` × (`n` − 1) × ... × 3 × 2 × 1
+We shall define a sqube to be a number of the form, p2q3, where p and q are distinct primes.
 
-For example, 10! = 10 × 9 × ... × 3 × 2 × 1 = 3628800,  
-and the sum of the digits in the number 10! is 3 + 6 + 2 + 8 + 8 + 0 + 0 = 27.
+For example, 200 = 5223 or 120072949 = 232613.
 
-Find the sum of the digits `n`!
+The first five squbes are 72, 108, 200, 392, and 500.
+
+Interestingly, 200 is also the first number for which you cannot change any single digit to make a prime; we shall call such numbers, prime-proof. The next prime-proof sqube which contains the contiguous sub-string "200" is 1992008.
+
+Find the 200th prime-proof sqube containing the contiguous sub-string "200".
 
 # --hints--
 
-`sumFactorialDigits(10)` should return a number.
+`euler200()` should return 229161792008.
 
 ```js
-assert(typeof sumFactorialDigits(10) === 'number');
-```
-
-`sumFactorialDigits(10)` should return 27.
-
-```js
-assert.strictEqual(sumFactorialDigits(10), 27);
-```
-
-`sumFactorialDigits(25)` should return 72.
-
-```js
-assert.strictEqual(sumFactorialDigits(25), 72);
-```
-
-`sumFactorialDigits(50)` should return 216.
-
-```js
-assert.strictEqual(sumFactorialDigits(50), 216);
-```
-
-`sumFactorialDigits(75)` should return 432.
-
-```js
-assert.strictEqual(sumFactorialDigits(75), 432);
-```
-
-`sumFactorialDigits(100)` should return 648.
-
-```js
-assert.strictEqual(sumFactorialDigits(100), 648);
+assert.strictEqual(euler200(), 229161792008);
 ```
 
 # --seed--
@@ -58,22 +34,16 @@ assert.strictEqual(sumFactorialDigits(100), 648);
 ## --seed-contents--
 
 ```js
-function sumFactorialDigits(n) {
+function euler200() {
 
-  return n;
+  return true;
 }
 
-sumFactorialDigits(100);
+euler200();
 ```
 
 # --solutions--
 
 ```js
-let factorial = (n) => n <= 1 ? BigInt(n) : BigInt(n) * BigInt(factorial(--n));
-
-let sumDigits = n => n.toString().split('').map(x => parseInt(x)).reduce((a,b) => a + b);
-
-function sumFactorialDigits(n) {
-  return sumDigits(factorial(n));
-}
+// solution required
 ```
