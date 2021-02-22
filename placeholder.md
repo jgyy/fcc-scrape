@@ -1,31 +1,33 @@
 ---
-id: 5900f4591000cf542c50ff6b
-title: 'Problem 236: Luxury Hampers'
+id: 5900f4591000cf542c50ff6c
+title: 'Problem 237: Tours on a 4 x n playing board'
 challengeType: 5
-forumTopicId: 301881
-dashedName: problem-236-luxury-hampers
+forumTopicId: 301882
+dashedName: problem-237-tours-on-a-4-x-n-playing-board
 ---
 
 # --description--
 
-Suppliers 'A' and 'B' provided the following numbers of products for the luxury hamper market:
+Let T(n) be the number of tours over a 4 × n playing board such that:
 
-Product'A''B'Beluga Caviar5248640Christmas Cake13121888Gammon Joint26243776Vintage Port57603776Champagne Truffles39365664
+The tour starts in the top left corner.
 
-Although the suppliers try very hard to ship their goods in perfect condition, there is inevitably some spoilage - i.e. products gone bad.
+The tour consists of moves that are up, down, left, or right one square.
 
-The suppliers compare their performance using two types of statistic:The five per-product spoilage rates for each supplier are equal to the number of products gone bad divided by the number of products supplied, for each of the five products in turn. The overall spoilage rate for each supplier is equal to the total number of products gone bad divided by the total number of products provided by that supplier.To their surprise, the suppliers found that each of the five per-product spoilage rates was worse (higher) for 'B' than for 'A' by the same factor (ratio of spoilage rates), m>1; and yet, paradoxically, the overall spoilage rate was worse for 'A' than for 'B', also by a factor of m.
+The tour visits each square exactly once.
 
-There are thirty-five m>1 for which this surprising result could have occurred, the smallest of which is 1476/1475.
+The tour ends in the bottom left corner.
 
-What's the largest possible value of m? Give your answer as a fraction reduced to its lowest terms, in the form u/v.
+The diagram shows one tour over a 4 × 10 board:
+
+T(10) is 2329. What is T(1012) modulo 108?
 
 # --hints--
 
-`euler236()` should return 123 / 59.
+`euler237()` should return 15836928.
 
 ```js
-assert.strictEqual(euler236(), 123 / 59);
+assert.strictEqual(euler237(), 15836928);
 ```
 
 # --seed--
@@ -33,12 +35,12 @@ assert.strictEqual(euler236(), 123 / 59);
 ## --seed-contents--
 
 ```js
-function euler236() {
+function euler237() {
 
   return true;
 }
 
-euler236();
+euler237();
 ```
 
 # --solutions--
