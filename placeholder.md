@@ -1,25 +1,27 @@
 ---
-id: 5900f3f11000cf542c50ff03
-title: 'Problem 132: Large repunit factors'
+id: 5900f3f21000cf542c50ff04
+title: 'Problem 133: Repunit nonfactors'
 challengeType: 5
-forumTopicId: 301760
-dashedName: problem-132-large-repunit-factors
+forumTopicId: 301761
+dashedName: problem-133-repunit-nonfactors
 ---
 
 # --description--
 
-A number consisting entirely of ones is called a repunit. We shall define R(k) to be a repunit of length k.
+A number consisting entirely of ones is called a repunit. We shall define R(k) to be a repunit of length k; for example, R(6) = 111111.
 
-For example, R(10) = 1111111111 = 11×41×271×9091, and the sum of these prime factors is 9414.
+Let us consider repunits of the form R(10n).
 
-Find the sum of the first forty prime factors of R(109).
+Although R(10), R(100), or R(1000) are not divisible by 17, R(10000) is divisible by 17. Yet there is no value of n for which R(10n) will divide by 19. In fact, it is remarkable that 11, 17, 41, and 73 are the only four primes below one-hundred that can be a factor of R(10n).
+
+Find the sum of all the primes below one-hundred thousand that will never be a factor of R(10n).
 
 # --hints--
 
-`euler132()` should return 843296.
+`euler133()` should return 453647705.
 
 ```js
-assert.strictEqual(euler132(), 843296);
+assert.strictEqual(euler133(), 453647705);
 ```
 
 # --seed--
@@ -27,12 +29,12 @@ assert.strictEqual(euler132(), 843296);
 ## --seed-contents--
 
 ```js
-function euler132() {
+function euler133() {
 
   return true;
 }
 
-euler132();
+euler133();
 ```
 
 # --solutions--
