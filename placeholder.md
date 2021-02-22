@@ -1,27 +1,25 @@
 ---
-id: 5900f4511000cf542c50ff62
-title: 'Problem 226: A Scoop of Blancmange'
+id: 5900f44f1000cf542c50ff61
+title: 'Problem 227: The Chase'
 challengeType: 5
-forumTopicId: 301869
-dashedName: problem-226-a-scoop-of-blancmange
+forumTopicId: 301870
+dashedName: problem-227-the-chase
 ---
 
 # --description--
 
-The blancmange curve is the set of points (x,y) such that 0 ≤ x ≤ 1 and ,where s(x) = the distance from x to the nearest integer.
+"The Chase" is a game played with two dice and an even number of players.
 
-The area under the blancmange curve is equal to ½, shown in pink in the diagram below.
+The players sit around a table; the game begins with two opposite players having one die each. On each turn, the two players with a die roll it. If a player rolls a 1, he passes the die to his neighbour on the left; if he rolls a 6, he passes the die to his neighbour on the right; otherwise, he keeps the die for the next turn. The game ends when one player has both dice after they have been rolled and passed; that player has then lost.
 
-Let C be the circle with centre (¼,½) and radius ¼, shown in black in the diagram.
-
-What area under the blancmange curve is enclosed by C?Give your answer rounded to eight decimal places in the form 0.abcdefgh
+In a game with 100 players, what is the expected number of turns the game lasts? Give your answer rounded to ten significant digits.
 
 # --hints--
 
-`euler226()` should return 0.11316017.
+`euler227()` should return 3780.618622.
 
 ```js
-assert.strictEqual(euler226(), 0.11316017);
+assert.strictEqual(euler227(), 3780.618622);
 ```
 
 # --seed--
@@ -29,12 +27,12 @@ assert.strictEqual(euler226(), 0.11316017);
 ## --seed-contents--
 
 ```js
-function euler226() {
+function euler227() {
 
   return true;
 }
 
-euler226();
+euler227();
 ```
 
 # --solutions--
