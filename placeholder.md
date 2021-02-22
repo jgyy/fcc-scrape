@@ -1,29 +1,25 @@
 ---
-id: 5900f3fc1000cf542c50ff0f
-title: 'Problem 144: Investigating multiple reflections of a laser beam'
+id: 5900f3fd1000cf542c50ff10
+title: 'Problem 145: How many reversible numbers are there below one-billion?'
 challengeType: 5
-forumTopicId: 301773
-dashedName: problem-144-investigating-multiple-reflections-of-a-laser-beam
+forumTopicId: 301774
+dashedName: problem-145-how-many-reversible-numbers-are-there-below-one-billion
 ---
 
 # --description--
 
-In laser physics, a "white cell" is a mirror system that acts as a delay line for the laser beam. The beam enters the cell, bounces around on the mirrors, and eventually works its way back out.
+Some positive integers n have the property that the sum \[ n + reverse(n) ] consists entirely of odd (decimal) digits. For instance, 36 + 63 = 99 and 409 + 904 = 1313. We will call such numbers reversible; so 36, 63, 409, and 904 are reversible. Leading zeroes are not allowed in either n or reverse(n).
 
-The specific white cell we will be considering is an ellipse with the equation 4x2 + y2 = 100
+There are 120 reversible numbers below one-thousand.
 
-The section corresponding to −0.01 ≤ x ≤ +0.01 at the top is missing, allowing the light to enter and exit through the hole.
-
-The light beam in this problem starts at the point (0.0,10.1) just outside the white cell, and the beam first impacts the mirror at (1.4,-9.6). Each time the laser beam hits the surface of the ellipse, it follows the usual law of reflection "angle of incidence equals angle of reflection." That is, both the incident and reflected beams make the same angle with the normal line at the point of incidence. In the figure on the left, the red line shows the first two points of contact between the laser beam and the wall of the white cell; the blue line shows the line tangent to the ellipse at the point of incidence of the first bounce.The slope m of the tangent line at any point (x,y) of the given ellipse is: m = −4x/yThe normal line is perpendicular to this tangent line at the point of incidence. The animation on the right shows the first 10 reflections of the beam.
-
-How many times does the beam hit the internal surface of the white cell before exiting?
+How many reversible numbers are there below one-billion (109)?
 
 # --hints--
 
-`euler144()` should return 354.
+`euler145()` should return 608720.
 
 ```js
-assert.strictEqual(euler144(), 354);
+assert.strictEqual(euler145(), 608720);
 ```
 
 # --seed--
@@ -31,12 +27,12 @@ assert.strictEqual(euler144(), 354);
 ## --seed-contents--
 
 ```js
-function euler144() {
+function euler145() {
 
   return true;
 }
 
-euler144();
+euler145();
 ```
 
 # --solutions--
