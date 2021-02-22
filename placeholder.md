@@ -1,41 +1,35 @@
 ---
-id: 5900f4511000cf542c50ff63
-title: 'Problem 228: Minkowski Sums'
+id: 5900f4521000cf542c50ff64
+title: 'Problem 229: Four Representations using Squares'
 challengeType: 5
-forumTopicId: 301871
-dashedName: problem-228-minkowski-sums
+forumTopicId: 301872
+dashedName: problem-229-four-representations-using-squares
 ---
 
 # --description--
 
-<!-- TODO Use MathJax and re-write from projecteuler.net -->
+Consider the number 3600. It is very special, because
 
-Let Sn be the regular n-sided polygon – or shape – whose vertices
+3600 = 482 + 362 3600 = 202 + 2×402 3600 = 302 + 3×302 3600 = 452 + 7×152
 
-vk (k = 1,2,…,n) have coordinates:
+Similarly, we find that 88201 = 992 + 2802 = 2872 + 2×542 = 2832 + 3×522 = 1972 + 7×842.
 
-xk = cos( 2k-1/n ×180° )
+In 1747, Euler proved which numbers are representable as a sum of two squares. We are interested in the numbers n which admit representations of all of the following four types:
 
-yk = sin( 2k-1/n ×180° )
+n = a12 + b12n = a22 + 2 b22n = a32 + 3 b32n = a72 + 7 b72,
 
-Each Sn is to be interpreted as a filled shape consisting of all points on the perimeter and in the interior.
+where the ak and bk are positive integers.
 
-The Minkowski sum, S+T, of two shapes S and T is the result of
+There are 75373 such numbers that do not exceed 107.
 
-adding every point in S to every point in T, where point addition is performed coordinate-wise:
-
-(u, v) + (x, y) = (u+x, v+y).
-
-For example, the sum of S3 and S4 is the six-sided shape shown in pink below:
-
-How many sides does S1864 + S1865 + … + S1909 have?
+How many such numbers are there that do not exceed 2×109?
 
 # --hints--
 
-`euler228()` should return 86226.
+`euler229()` should return 11325263.
 
 ```js
-assert.strictEqual(euler228(), 86226);
+assert.strictEqual(euler229(), 11325263);
 ```
 
 # --seed--
@@ -43,12 +37,12 @@ assert.strictEqual(euler228(), 86226);
 ## --seed-contents--
 
 ```js
-function euler228() {
+function euler229() {
 
   return true;
 }
 
-euler228();
+euler229();
 ```
 
 # --solutions--
