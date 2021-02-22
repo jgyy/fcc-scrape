@@ -1,37 +1,23 @@
 ---
-id: 5900f3f51000cf542c50ff08
-title: 'Problem 137: Fibonacci golden nuggets'
+id: 5900f3f61000cf542c50ff09
+title: 'Problem 138: Special isosceles triangles'
 challengeType: 5
-forumTopicId: 301765
-dashedName: problem-137-fibonacci-golden-nuggets
+forumTopicId: 301766
+dashedName: problem-138-special-isosceles-triangles
 ---
 
 # --description--
 
-Consider the infinite polynomial series AF(x) = xF1 + x2F2 + x3F3 + ..., where Fk is the kth term in the Fibonacci sequence: 1, 1, 2, 3, 5, 8, ... ; that is, Fk = Fk−1 + Fk−2, F1 = 1 and F2 = 1.
+Consider the isosceles triangle with base length, b = 16, and legs, L = 17.
 
-For this problem we shall be interested in values of x for which AF(x) is a positive integer.
-
-Surprisingly AF(1/2)
-
-=
-
-(1/2).1 + (1/2)2.1 + (1/2)3.2 + (1/2)4.3 + (1/2)5.5 + ...
-
-= 1/2 + 1/4 + 2/8 + 3/16 + 5/32 + ...
-
-= 2 The corresponding values of x for the first five natural numbers are shown below.
-
-xAF(x) √2−11 1/22 (√13−2)/33 (√89−5)/84 (√34−3)/55
-
-We shall call AF(x) a golden nugget if x is rational, because they become increasingly rarer; for example, the 10th golden nugget is 74049690. Find the 15th golden nugget.
+By using the Pythagorean theorem it can be seen that the height of the triangle, h = √(172 − 82) = 15, which is one less than the base length. With b = 272 and L = 305, we get h = 273, which is one more than the base length, and this is the second smallest isosceles triangle with the property that h = b ± 1. Find ∑ L for the twelve smallest isosceles triangles for which h = b ± 1 and b, L are positive integers.
 
 # --hints--
 
-`euler137()` should return 1120149658760.
+`euler138()` should return 1118049290473932.
 
 ```js
-assert.strictEqual(euler137(), 1120149658760);
+assert.strictEqual(euler138(), 1118049290473932);
 ```
 
 # --seed--
@@ -39,12 +25,12 @@ assert.strictEqual(euler137(), 1120149658760);
 ## --seed-contents--
 
 ```js
-function euler137() {
+function euler138() {
 
   return true;
 }
 
-euler137();
+euler138();
 ```
 
 # --solutions--
