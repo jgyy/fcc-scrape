@@ -1,25 +1,23 @@
 ---
-id: 5900f3e91000cf542c50fefc
-title: 'Problem 125: Palindromic sums'
+id: 5900f3ea1000cf542c50fefd
+title: 'Problem 126: Cuboid layers'
 challengeType: 5
-forumTopicId: 301752
-dashedName: problem-125-palindromic-sums
+forumTopicId: 301753
+dashedName: problem-126-cuboid-layers
 ---
 
 # --description--
 
-The palindromic number 595 is interesting because it can be written as the sum of consecutive squares: 62 + 72 + 82 + 92 + 102 + 112 + 122.
+The minimum number of cubes to cover every visible face on a cuboid measuring 3 x 2 x 1 is twenty-two.
 
-There are exactly eleven palindromes below one-thousand that can be written as consecutive square sums, and the sum of these palindromes is 4164. Note that 1 = 02 + 12 has not been included as this problem is concerned with the squares of positive integers.
-
-Find the sum of all the numbers less than 108 that are both palindromic and can be written as the sum of consecutive squares.
+If we then add a second layer to this solid it would require forty-six cubes to cover every visible face, the third layer would require seventy-eight cubes, and the fourth layer would require one-hundred and eighteen cubes to cover every visible face. However, the first layer on a cuboid measuring 5 x 1 x 1 also requires twenty-two cubes; similarly the first layer on cuboids measuring 5 x 3 x 1, 7 x 2 x 1, and 11 x 1 x 1 all contain forty-six cubes. We shall define C(n) to represent the number of cuboids that contain n cubes in one of its layers. So C(22) = 2, C(46) = 4, C(78) = 5, and C(118) = 8. It turns out that 154 is the least value of n for which C(n) = 10. Find the least value of n for which C(n) = 1000.
 
 # --hints--
 
-`euler125()` should return 2906969179.
+`euler126()` should return 18522.
 
 ```js
-assert.strictEqual(euler125(), 2906969179);
+assert.strictEqual(euler126(), 18522);
 ```
 
 # --seed--
@@ -27,12 +25,12 @@ assert.strictEqual(euler125(), 2906969179);
 ## --seed-contents--
 
 ```js
-function euler125() {
+function euler126() {
 
   return true;
 }
 
-euler125();
+euler126();
 ```
 
 # --solutions--
