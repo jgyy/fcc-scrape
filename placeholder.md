@@ -1,71 +1,29 @@
 ---
-id: 5900f37a1000cf542c50fe8d
-title: 'Problem 14: Longest Collatz sequence'
+id: 5900f3fa1000cf542c50ff0c
+title: 'Problem 140: Modified Fibonacci golden nuggets'
 challengeType: 5
-forumTopicId: 301768
-dashedName: problem-14-longest-collatz-sequence
+forumTopicId: 301769
+dashedName: problem-140-modified-fibonacci-golden-nuggets
 ---
 
 # --description--
 
-The following iterative sequence is defined for the set of positive integers:
+Consider the infinite polynomial series AG(x) = xG1 + x2G2 + x3G3 + ..., where Gk is the kth term of the second order recurrence relation Gk = Gk−1 + Gk−2, G1 = 1 and G2 = 4; that is, 1, 4, 5, 9, 14, 23, ... .
 
-<div style='padding-left: 4em;'><var>n</var> → <var>n</var>/2 (<var>n</var> is even)</div>
+For this problem we shall be concerned with values of x for which AG(x) is a positive integer.
 
-<div style='padding-left: 4em;'><var>n</var> → 3<var>n</var> + 1 (<var>n</var> is odd)</div>
+The corresponding values of x for the first five natural numbers are shown below.
 
-Using the rule above and starting with 13, we generate the following sequence:
+xAG(x) (√5−1)/41 2/52 (√22−2)/63 (√137−5)/144 1/25
 
-<div style='text-align: center;'>13 → 40 → 20 → 10 → 5 → 16 → 8 → 4 → 2 → 1</div>
-
-It can be seen that this sequence (starting at 13 and finishing at 1) contains 10 terms. Although it has not been proved yet (Collatz Problem), it is thought that all starting numbers finish at 1.
-
-Which starting number, under the given `limit`, produces the longest chain?
-
-**Note:** Once the chain starts the terms are allowed to go above one million.
+We shall call AG(x) a golden nugget if x is rational, because they become increasingly rarer; for example, the 20th golden nugget is 211345365. Find the sum of the first thirty golden nuggets.
 
 # --hints--
 
-`longestCollatzSequence(14)` should return a number.
+`euler140()` should return 5673835352990.
 
 ```js
-assert(typeof longestCollatzSequence(14) === 'number');
-```
-
-`longestCollatzSequence(14)` should return 9.
-
-```js
-assert.strictEqual(longestCollatzSequence(14), 9);
-```
-
-`longestCollatzSequence(5847)` should return 3711.
-
-```js
-assert.strictEqual(longestCollatzSequence(5847), 3711);
-```
-
-`longestCollatzSequence(46500)` should return 35655.
-
-```js
-assert.strictEqual(longestCollatzSequence(46500), 35655);
-```
-
-`longestCollatzSequence(54512)` should return 52527.
-
-```js
-assert.strictEqual(longestCollatzSequence(54512), 52527);
-```
-
-`longestCollatzSequence(100000)` should return 77031.
-
-```js
-assert.strictEqual(longestCollatzSequence(100000), 77031);
-```
-
-`longestCollatzSequence(1000000)` should return 837799.
-
-```js
-assert.strictEqual(longestCollatzSequence(1000000), 837799);
+assert.strictEqual(euler140(), 5673835352990);
 ```
 
 # --seed--
@@ -73,39 +31,16 @@ assert.strictEqual(longestCollatzSequence(1000000), 837799);
 ## --seed-contents--
 
 ```js
-function longestCollatzSequence(limit) {
+function euler140() {
 
   return true;
 }
 
-longestCollatzSequence(14);
+euler140();
 ```
 
 # --solutions--
 
 ```js
-function longestCollatzSequence(limit) {
-  let longest = 1;
-  let maxLength = 1;
-  for (let i = Math.floor(limit / 2); i < limit; i++) {
-    let len = colLen(i);
-    if (len > maxLength) {
-      longest = i;
-      maxLength = len;
-    }
-  }
-  return longest;
-}
-
-const knownSequence = { '1': 1 };
-
-function colLen(n) {
-  if (knownSequence[n]) {
-    return knownSequence[n];
-  } else {
-    const len = n % 2 === 0 ? colLen(n / 2) + 1 : colLen((3 * n + 1) / 2) + 2;
-    knownSequence[n] = len;
-    return len;
-  }
-}
+// solution required
 ```
