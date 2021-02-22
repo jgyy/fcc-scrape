@@ -1,29 +1,23 @@
 ---
-id: 5900f3dd1000cf542c50fef0
-title: 'Problem 113: Non-bouncy numbers'
+id: 5900f3e01000cf542c50fef2
+title: 'Problem 114: Counting block combinations I'
 challengeType: 5
-forumTopicId: 301739
-dashedName: problem-113-non-bouncy-numbers
+forumTopicId: 301740
+dashedName: problem-114-counting-block-combinations-i
 ---
 
 # --description--
 
-Working from left-to-right if no digit is exceeded by the digit to its left it is called an increasing number; for example, 134468.
+A row measuring seven units in length has red blocks with a minimum length of three units placed on it, such that any two red blocks (which are allowed to be different lengths) are separated by at least one black square. There are exactly seventeen ways of doing this.
 
-Similarly if no digit is exceeded by the digit to its right it is called a decreasing number; for example, 66420.
-
-We shall call a positive integer that is neither increasing nor decreasing a "bouncy" number; for example, 155349.
-
-As n increases, the proportion of bouncy numbers below n increases such that there are only 12951 numbers below one-million that are not bouncy and only 277032 non-bouncy numbers below 1010.
-
-How many numbers below a googol (10100) are not bouncy?
+How many ways can a row measuring fifty units in length be filled? NOTE: Although the example above does not lend itself to the possibility, in general it is permitted to mix block sizes. For example, on a row measuring eight units in length you could use red (3), black (1), and red (4).
 
 # --hints--
 
-`euler113()` should return 51161058134250.
+`euler114()` should return 16475640049.
 
 ```js
-assert.strictEqual(euler113(), 51161058134250);
+assert.strictEqual(euler114(), 16475640049);
 ```
 
 # --seed--
@@ -31,12 +25,12 @@ assert.strictEqual(euler113(), 51161058134250);
 ## --seed-contents--
 
 ```js
-function euler113() {
+function euler114() {
 
   return true;
 }
 
-euler113();
+euler114();
 ```
 
 # --solutions--
