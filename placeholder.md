@@ -1,27 +1,25 @@
 ---
-id: 5900f3ef1000cf542c50ff02
-title: 'Problem 131: Prime cube partnership'
+id: 5900f3f11000cf542c50ff03
+title: 'Problem 132: Large repunit factors'
 challengeType: 5
-forumTopicId: 301759
-dashedName: problem-131-prime-cube-partnership
+forumTopicId: 301760
+dashedName: problem-132-large-repunit-factors
 ---
 
 # --description--
 
-There are some prime values, p, for which there exists a positive integer, n, such that the expression n3 + n2p is a perfect cube.
+A number consisting entirely of ones is called a repunit. We shall define R(k) to be a repunit of length k.
 
-For example, when p = 19, 83 + 82×19 = 123.
+For example, R(10) = 1111111111 = 11×41×271×9091, and the sum of these prime factors is 9414.
 
-What is perhaps most surprising is that for each prime with this property the value of n is unique, and there are only four such primes below one-hundred.
-
-How many primes below one million have this remarkable property?
+Find the sum of the first forty prime factors of R(109).
 
 # --hints--
 
-`euler131()` should return 173.
+`euler132()` should return 843296.
 
 ```js
-assert.strictEqual(euler131(), 173);
+assert.strictEqual(euler132(), 843296);
 ```
 
 # --seed--
@@ -29,12 +27,12 @@ assert.strictEqual(euler131(), 173);
 ## --seed-contents--
 
 ```js
-function euler131() {
+function euler132() {
 
   return true;
 }
 
-euler131();
+euler132();
 ```
 
 # --solutions--
