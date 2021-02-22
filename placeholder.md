@@ -1,37 +1,27 @@
 ---
-id: 5900f4231000cf542c50ff36
-title: 'Problem 183: Maximum product of parts'
+id: 5900f4241000cf542c50ff37
+title: 'Problem 184: Triangles containing the origin'
 challengeType: 5
-forumTopicId: 301819
-dashedName: problem-183-maximum-product-of-parts
+forumTopicId: 301820
+dashedName: problem-184-triangles-containing-the-origin
 ---
 
 # --description--
 
-Let N be a positive integer and let N be split into k equal parts, r = N/k, so that N = r + r + ... + r.
+Consider the set Ir of points (x,y) with integer coordinates in the interior of the circle with radius r, centered at the origin, i.e. x2 + y2 &lt; r2.
 
-Let P be the product of these parts, P = r × r × ... × r = rk.
+For a radius of 2, I2 contains the nine points (0,0), (1,0), (1,1), (0,1), (-1,1), (-1,0), (-1,-1), (0,-1) and (1,-1). There are eight triangles having all three vertices in I2 which contain the origin in the interior. Two of them are shown below, the others are obtained from these by rotation.
 
-For example, if 11 is split into five equal parts, 11 = 2.2 + 2.2 + 2.2 + 2.2 + 2.2, then P = 2.25 = 51.53632.
+For a radius of 3, there are 360 triangles containing the origin in the interior and having all vertices in I3 and for I5 the number is 10600.
 
-Let M(N) = Pmax for a given value of N.
-
-It turns out that the maximum for N = 11 is found by splitting eleven into four equal parts which leads to Pmax = (11/4)4; that is, M(11) = 14641/256 = 57.19140625, which is a terminating decimal.
-
-However, for N = 8 the maximum is achieved by splitting it into three equal parts, so M(8) = 512/27, which is a non-terminating decimal.
-
-Let D(N) = N if M(N) is a non-terminating decimal and D(N) = -N if M(N) is a terminating decimal.
-
-For example, ΣD(N) for 5 ≤ N ≤ 100 is 2438.
-
-Find ΣD(N) for 5 ≤ N ≤ 10000.
+How many triangles are there containing the origin in the interior and having all three vertices in I105?
 
 # --hints--
 
-`euler183()` should return 48861552.
+`euler184()` should return 1725323624056.
 
 ```js
-assert.strictEqual(euler183(), 48861552);
+assert.strictEqual(euler184(), 1725323624056);
 ```
 
 # --seed--
@@ -39,12 +29,12 @@ assert.strictEqual(euler183(), 48861552);
 ## --seed-contents--
 
 ```js
-function euler183() {
+function euler184() {
 
   return true;
 }
 
-euler183();
+euler184();
 ```
 
 # --solutions--
