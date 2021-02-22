@@ -1,27 +1,36 @@
 ---
-id: 5900f4151000cf542c50ff27
-title: 'Problem 168: Number Rotations'
+id: 5900f4151000cf542c50ff28
+title: >-
+  Problem 169: Exploring the number of different ways a number can be expressed
+  as a sum of powers of 2
 challengeType: 5
-forumTopicId: 301802
-dashedName: problem-168-number-rotations
+forumTopicId: 301803
+dashedName: >-
+  problem-169-exploring-the-number-of-different-ways-a-number-can-be-expressed-as-a-sum-of-powers-of-2
 ---
 
 # --description--
 
-Consider the number 142857. We can right-rotate this number by moving the last digit (7) to the front of it, giving us 714285.
+Define f(0)=1 and f(n) to be the number of different ways n can be expressed as a sum of integer powers of 2 using each power no more than twice.
 
-It can be verified that 714285=5×142857.
+For example, f(10)=5 since there are five different ways to express 10:
 
-This demonstrates an unusual property of 142857: it is a divisor of its right-rotation.
+1 + 1 + 8
 
-Find the last 5 digits of the sum of all integers n, 10 &lt; n &lt; 10100, that have this property.
+1 + 1 + 4 + 41 + 1 + 2 + 2 + 4
+
+2 + 4 + 4
+
+2 + 8
+
+What is f(1025)?
 
 # --hints--
 
-`euler168()` should return 59206.
+`euler169()` should return 178653872807.
 
 ```js
-assert.strictEqual(euler168(), 59206);
+assert.strictEqual(euler169(), 178653872807);
 ```
 
 # --seed--
@@ -29,12 +38,12 @@ assert.strictEqual(euler168(), 59206);
 ## --seed-contents--
 
 ```js
-function euler168() {
+function euler169() {
 
   return true;
 }
 
-euler168();
+euler169();
 ```
 
 # --solutions--
