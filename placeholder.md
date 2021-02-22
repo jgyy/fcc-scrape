@@ -1,29 +1,29 @@
 ---
-id: 5900f42b1000cf542c50ff3e
-title: 'Problem 191: Prize Strings'
+id: 5900f42c1000cf542c50ff3f
+title: 'Problem 192: Best Approximations'
 challengeType: 5
-forumTopicId: 301829
-dashedName: problem-191-prize-strings
+forumTopicId: 301830
+dashedName: problem-192-best-approximations
 ---
 
 # --description--
 
-A particular school offers cash rewards to children with good attendance and punctuality. If they are absent for three consecutive days or late on more than one occasion then they forfeit their prize.
+Let x be a real number.
 
-During an n-day period a trinary string is formed for each child consisting of L's (late), O's (on time), and A's (absent).
+A best approximation to x for the denominator bound d is a rational number r/s in reduced form, with s ≤ d, such that any rational number which is closer to x than r/s has a denominator larger than d:
 
-Although there are eighty-one trinary strings for a 4-day period that can be formed, exactly forty-three strings would lead to a prize:
+|p/q-x| &lt; |r/s-x| ⇒ q > d
 
-OOOO OOOA OOOL OOAO OOAA OOAL OOLO OOLA OAOO OAOA OAOL OAAO OAAL OALO OALA OLOO OLOA OLAO OLAA AOOO AOOA AOOL AOAO AOAA AOAL AOLO AOLA AAOO AAOA AAOL AALO AALA ALOO ALOA ALAO ALAA LOOO LOOA LOAO LOAA LAOO LAOA LAAO
+For example, the best approximation to √13 for the denominator bound 20 is 18/5 and the best approximation to √13 for the denominator bound 30 is 101/28.
 
-How many "prize" strings exist over a 30-day period?
+Find the sum of all denominators of the best approximations to √n for the denominator bound 1012, where n is not a perfect square and 1 &lt; n ≤ 100000.
 
 # --hints--
 
-`euler191()` should return 1918080160.
+`euler192()` should return 57060635927998344.
 
 ```js
-assert.strictEqual(euler191(), 1918080160);
+assert.strictEqual(euler192(), 57060635927998344);
 ```
 
 # --seed--
@@ -31,12 +31,12 @@ assert.strictEqual(euler191(), 1918080160);
 ## --seed-contents--
 
 ```js
-function euler191() {
+function euler192() {
 
   return true;
 }
 
-euler191();
+euler192();
 ```
 
 # --solutions--
