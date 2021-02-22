@@ -1,31 +1,29 @@
 ---
-id: 5900f40d1000cf542c50ff1f
-title: 'Problem 160: Factorial trailing digits'
+id: 5900f40d1000cf542c50ff20
+title: 'Problem 161: Triominoes'
 challengeType: 5
-forumTopicId: 301794
-dashedName: problem-160-factorial-trailing-digits
+forumTopicId: 301795
+dashedName: problem-161-triominoes
 ---
 
 # --description--
 
-For any N, let f(N) be the last five digits before the trailing zeroes in N!.
+A triomino is a shape consisting of three squares joined via the edges.
 
-For example,
+There are two basic forms:
 
-9! = 362880 so f(9)=36288
+If all possible orientations are taken into account there are six:
 
-10! = 3628800 so f(10)=36288
+Any n by m grid for which nxm is divisible by 3 can be tiled with triominoes. If we consider tilings that can be obtained by reflection or rotation from another tiling as different there are 41 ways a 2 by 9 grid can be tiled with triominoes:
 
-20! = 2432902008176640000 so f(20)=17664
-
-Find f(1,000,000,000,000)
+In how many ways can a 9 by 12 grid be tiled in this way by triominoes?
 
 # --hints--
 
-`euler160()` should return 16576.
+`euler161()` should return 20574308184277972.
 
 ```js
-assert.strictEqual(euler160(), 16576);
+assert.strictEqual(euler161(), 20574308184277972);
 ```
 
 # --seed--
@@ -33,12 +31,12 @@ assert.strictEqual(euler160(), 16576);
 ## --seed-contents--
 
 ```js
-function euler160() {
+function euler161() {
 
   return true;
 }
 
-euler160();
+euler161();
 ```
 
 # --solutions--
