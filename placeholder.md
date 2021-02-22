@@ -1,29 +1,29 @@
 ---
-id: 5900f4381000cf542c50ff4a
-title: 'Problem 203: Squarefree Binomial Coefficients'
+id: 5900f4381000cf542c50ff4b
+title: 'Problem 204: Generalised Hamming Numbers'
 challengeType: 5
-forumTopicId: 301844
-dashedName: problem-203-squarefree-binomial-coefficients
+forumTopicId: 301845
+dashedName: problem-204-generalised-hamming-numbers
 ---
 
 # --description--
 
-The binomial coefficients nCk can be arranged in triangular form, Pascal's triangle, like this:
+A Hamming number is a positive number which has no prime factor larger than 5.
 
-111121133114641151010511615201561172135352171 .........
+So the first few Hamming numbers are 1, 2, 3, 4, 5, 6, 8, 9, 10, 12, 15.
 
-It can be seen that the first eight rows of Pascal's triangle contain twelve distinct numbers: 1, 2, 3, 4, 5, 6, 7, 10, 15, 20, 21 and 35.
+There are 1105 Hamming numbers not exceeding 108.
 
-A positive integer n is called squarefree if no square of a prime divides n. Of the twelve distinct numbers in the first eight rows of Pascal's triangle, all except 4 and 20 are squarefree. The sum of the distinct squarefree numbers in the first eight rows is 105.
+We will call a positive number a generalised Hamming number of type n, if it has no prime factor larger than n. Hence the Hamming numbers are the generalised Hamming numbers of type 5.
 
-Find the sum of the distinct squarefree numbers in the first 51 rows of Pascal's triangle.
+How many generalised Hamming numbers of type 100 are there which don't exceed 109?
 
 # --hints--
 
-`euler203()` should return 34029210557338.
+`euler204()` should return 2944730.
 
 ```js
-assert.strictEqual(euler203(), 34029210557338);
+assert.strictEqual(euler204(), 2944730);
 ```
 
 # --seed--
@@ -31,12 +31,12 @@ assert.strictEqual(euler203(), 34029210557338);
 ## --seed-contents--
 
 ```js
-function euler203() {
+function euler204() {
 
   return true;
 }
 
-euler203();
+euler204();
 ```
 
 # --solutions--
