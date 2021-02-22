@@ -1,25 +1,49 @@
 ---
-id: 5900f45c1000cf542c50ff6e
-title: 'Problem 239: Twenty-two Foolish Primes'
+id: 5900f3841000cf542c50fe97
+title: 'Problem 24: Lexicographic permutations'
 challengeType: 5
-forumTopicId: 301884
-dashedName: problem-239-twenty-two-foolish-primes
+forumTopicId: 301885
+dashedName: problem-24-lexicographic-permutations
 ---
 
 # --description--
 
-A set of disks numbered 1 through 100 are placed in a line in random order.
+A permutation is an ordered arrangement of objects. For example, 3124 is one possible permutation of the digits 1, 2, 3 and 4. If all of the permutations are listed numerically or alphabetically, we call it lexicographic order. The lexicographic permutations of 0, 1 and 2 are:
 
-What is the probability that we have a partial derangement such that exactly 22 prime number discs are found away from their natural positions? (Any number of non-prime disks may also be found in or out of their natural positions.)
+<div style='text-align: center;'>012   021   102   120   201   210</div>
 
-Give your answer rounded to 12 places behind the decimal point in the form 0.abcdefghijkl.
+What is the `n`th lexicographic permutation of the digits 0, 1, 2, 3, 4, 5, 6, 7, 8 and 9?
 
 # --hints--
 
-`euler239()` should return 0.001887854841.
+`lexicographicPermutations(699999)` should return a number.
 
 ```js
-assert.strictEqual(euler239(), 0.001887854841);
+assert(typeof lexicographicPermutations(699999) === 'number');
+```
+
+`lexicographicPermutations(699999)` should return 1938246570.
+
+```js
+assert(lexicographicPermutations(699999) == 1938246570);
+```
+
+`lexicographicPermutations(899999)` should return 2536987410.
+
+```js
+assert(lexicographicPermutations(899999) == 2536987410);
+```
+
+`lexicographicPermutations(900000)` should return 2537014689.
+
+```js
+assert(lexicographicPermutations(900000) == 2537014689);
+```
+
+`lexicographicPermutations(999999)` should return 2783915460.
+
+```js
+assert(lexicographicPermutations(999999) == 2783915460);
 ```
 
 # --seed--
@@ -27,12 +51,12 @@ assert.strictEqual(euler239(), 0.001887854841);
 ## --seed-contents--
 
 ```js
-function euler239() {
+function lexicographicPermutations(n) {
 
-  return true;
+  return n;
 }
 
-euler239();
+lexicographicPermutations(999999);
 ```
 
 # --solutions--
