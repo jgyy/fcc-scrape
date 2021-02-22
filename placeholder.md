@@ -1,32 +1,32 @@
 ---
-id: 5900f4161000cf542c50ff29
+id: 5900f4181000cf542c50ff2a
 title: >-
-  Problem 170: Find the largest 0 to 9 pandigital that can be formed by
-  concatenating products
+  Problem 171: Finding numbers for which the sum of the squares of the digits is
+  a square
 challengeType: 5
-forumTopicId: 301805
+forumTopicId: 301806
 dashedName: >-
-  problem-170-find-the-largest-0-to-9-pandigital-that-can-be-formed-by-concatenating-products
+  problem-171-finding-numbers-for-which-the-sum-of-the-squares-of-the-digits-is-a-square
 ---
 
 # --description--
 
-Take the number 6 and multiply it by each of 1273 and 9854:
+For a positive integer n, let f(n) be the sum of the squares of the digits (in base 10) of n, e.g.
 
-6 × 1273 = 7638 6 × 9854 = 59124
+f(3) = 32 = 9,
 
-By concatenating these products we get the 1 to 9 pandigital 763859124. We will call 763859124 the "concatenated product of 6 and (1273,9854)". Notice too, that the concatenation of the input numbers, 612739854, is also 1 to 9 pandigital.
+f(25) = 22 + 52 = 4 + 25 = 29,
 
-The same can be done for 0 to 9 pandigital numbers.
+f(442) = 42 + 42 + 22 = 16 + 16 + 4 = 36
 
-What is the largest 0 to 9 pandigital 10-digit concatenated product of an integer with two or more other integers, such that the concatenation of the input numbers is also a 0 to 9 pandigital 10-digit number?
+Find the last nine digits of the sum of all n, 0 &lt; n &lt; 1020, such that f(n) is a perfect square.
 
 # --hints--
 
-`euler170()` should return 9857164023.
+`euler171()` should return 142989277.
 
 ```js
-assert.strictEqual(euler170(), 9857164023);
+assert.strictEqual(euler171(), 142989277);
 ```
 
 # --seed--
@@ -34,12 +34,12 @@ assert.strictEqual(euler170(), 9857164023);
 ## --seed-contents--
 
 ```js
-function euler170() {
+function euler171() {
 
   return true;
 }
 
-euler170();
+euler171();
 ```
 
 # --solutions--
