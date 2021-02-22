@@ -1,27 +1,23 @@
 ---
-id: 5900f4641000cf542c50ff76
-title: 'Problem 247: Squares under a hyperbola'
+id: 5900f4651000cf542c50ff77
+title: 'Problem 248: Numbers for which Euler’s totient function equals 13!'
 challengeType: 5
-forumTopicId: 301894
-dashedName: problem-247-squares-under-a-hyperbola
+forumTopicId: 301895
+dashedName: problem-248-numbers-for-which-eulers-totient-function-equals-13
 ---
 
 # --description--
 
-Consider the region constrained by 1 ≤ x and 0 ≤ y ≤ 1/x.
+The first number n for which φ(n)=13! is 6227180929.
 
-Let S1 be the largest square that can fit under the curve. Let S2 be the largest square that fits in the remaining area, and so on. Let the index of Sn be the pair (left, below) indicating the number of squares to the left of Sn and the number of squares below Sn.
-
-The diagram shows some such squares labelled by number. S2 has one square to its left and none below, so the index of S2 is (1,0). It can be seen that the index of S32 is (1,1) as is the index of S50. 50 is the largest n for which the index of Sn is (1,1).
-
-What is the largest n for which the index of Sn is (3,3)?
+Find the 150,000th such number.
 
 # --hints--
 
-`euler247()` should return 782252.
+`euler248()` should return 23507044290.
 
 ```js
-assert.strictEqual(euler247(), 782252);
+assert.strictEqual(euler248(), 23507044290);
 ```
 
 # --seed--
@@ -29,12 +25,12 @@ assert.strictEqual(euler247(), 782252);
 ## --seed-contents--
 
 ```js
-function euler247() {
+function euler248() {
 
   return true;
 }
 
-euler247();
+euler248();
 ```
 
 # --solutions--
