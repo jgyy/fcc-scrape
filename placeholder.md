@@ -1,41 +1,29 @@
 ---
-id: 5900f4031000cf542c50ff15
-title: >-
-  Problem 150: Searching a triangular array for a sub-triangle having
-  minimum-sum
+id: 5900f4031000cf542c50ff16
+title: 'Problem 151: Paper sheets of standard sizes: an expected-value problem'
 challengeType: 5
-forumTopicId: 301781
-dashedName: problem-150-searching-a-triangular-array-for-a-sub-triangle-having-minimum-sum
+forumTopicId: 301782
+dashedName: problem-151-paper-sheets-of-standard-sizes-an-expected-value-problem
 ---
 
 # --description--
 
-In a triangular array of positive and negative integers, we wish to find a sub-triangle such that the sum of the numbers it contains is the smallest possible.
+A printing shop runs 16 batches (jobs) every week and each batch requires a sheet of special colour-proofing paper of size A5.
 
-In the example below, it can be easily verified that the marked triangle satisfies this condition having a sum of −42.
+Every Monday morning, the foreman opens a new envelope, containing a large sheet of the special paper with size A1.
 
-We wish to make such a triangular array with one thousand rows, so we generate 500500 pseudo-random numbers sk in the range ±219, using a type of random number generator (known as a Linear Congruential Generator) as follows: t := 0
+He proceeds to cut it in half, thus getting two sheets of size A2. Then he cuts one of them in half to get two sheets of size A3 and so on until he obtains the A5-size sheet needed for the first batch of the week.
 
-for k = 1 up to k = 500500:
+All the unused sheets are placed back in the envelope.
 
-t := (615949\*t + 797807) modulo 220 sk := t−219 Thus: s1 = 273519, s2 = −153582, s3 = 450905 etc Our triangular array is then formed using the pseudo-random numbers thus:
-
-s1 s2 s3 s4 s5 s6
-
-s7 s8 s9 s10 ...
-
-Sub-triangles can start at any element of the array and extend down as far as we like (taking-in the two elements directly below it from the next row, the three elements directly below from the row after that, and so on).
-
-The "sum of a sub-triangle" is defined as the sum of all the elements it contains.
-
-Find the smallest possible sub-triangle sum.
+At the beginning of each subsequent batch, he takes from the envelope one sheet of paper at random. If it is of size A5, he uses it. If it is larger, he repeats the 'cut-in-half' procedure until he has what he needs and any remaining sheets are always placed back in the envelope. Excluding the first and last batch of the week, find the expected number of times (during each week) that the foreman finds a single sheet of paper in the envelope. Give your answer rounded to six decimal places using the format x.xxxxxx .
 
 # --hints--
 
-`euler150()` should return -271248680.
+`euler151()` should return 0.464399.
 
 ```js
-assert.strictEqual(euler150(), -271248680);
+assert.strictEqual(euler151(), 0.464399);
 ```
 
 # --seed--
@@ -43,12 +31,12 @@ assert.strictEqual(euler150(), -271248680);
 ## --seed-contents--
 
 ```js
-function euler150() {
+function euler151() {
 
   return true;
 }
 
-euler150();
+euler151();
 ```
 
 # --solutions--
