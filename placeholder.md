@@ -1,27 +1,23 @@
 ---
-id: 5900f4491000cf542c50ff5c
-title: 'Problem 221: Alexandrian Integers'
+id: 5900f44b1000cf542c50ff5d
+title: 'Problem 222: Sphere Packing'
 challengeType: 5
-forumTopicId: 301864
-dashedName: problem-221-alexandrian-integers
+forumTopicId: 301865
+dashedName: problem-222-sphere-packing
 ---
 
 # --description--
 
-We shall call a positive integer A an "Alexandrian integer", if there exist integers p, q, r such that: A = p · q · r and 1/A = 1/p + 1/q + 1/r
+What is the length of the shortest pipe, of internal radius 50mm, that can fully contain 21 balls of radii 30mm, 31mm, ..., 50mm?
 
-<!-- TODO Use MathJax -->
-
-For example, 630 is an Alexandrian integer (p = 5, q = −7, r = −18). In fact, 630 is the 6th Alexandrian integer, the first 6 Alexandrian integers being: 6, 42, 120, 156, 420 and 630.
-
-Find the 150000th Alexandrian integer.
+Give your answer in micrometres (10-6 m) rounded to the nearest integer.
 
 # --hints--
 
-`euler221()` should return 1884161251122450.
+`euler222()` should return 1590933.
 
 ```js
-assert.strictEqual(euler221(), 1884161251122450);
+assert.strictEqual(euler222(), 1590933);
 ```
 
 # --seed--
@@ -29,12 +25,12 @@ assert.strictEqual(euler221(), 1884161251122450);
 ## --seed-contents--
 
 ```js
-function euler221() {
+function euler222() {
 
   return true;
 }
 
-euler221();
+euler222();
 ```
 
 # --solutions--
