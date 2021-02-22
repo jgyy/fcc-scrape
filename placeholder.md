@@ -1,30 +1,25 @@
 ---
-id: 5900f4231000cf542c50ff34
-title: >-
-  Problem 181: Investigating in how many ways objects of two different colours
-  can be grouped
+id: 5900f4231000cf542c50ff35
+title: 'Problem 182: RSA encryption'
 challengeType: 5
-forumTopicId: 301817
-dashedName: >-
-  problem-181-investigating-in-how-many-ways-objects-of-two-different-colours-can-be-grouped
+forumTopicId: 301818
+dashedName: problem-182-rsa-encryption
 ---
 
 # --description--
 
-Having three black objects B and one white object W they can be grouped in 7 ways like this:
+The RSA encryption is based on the following procedure:
 
-(BBBW)(B,BBW)(B,B,BW)(B,B,B,W)
+Generate two distinct primes p and q.Compute n=pq and φ=(p-1)(q-1).
 
-(B,BB,W)(BBB,W)(BB,BW)
-
-In how many ways can sixty black objects B and forty white objects W be thus grouped?
+Find an integer e, 1&lt;e&lt;φ, such='' that='' gcd(e,φ)='1.' a='' message='' in='' this='' system='' is='' number='' the='' interval='' \[0,n-1].='' text='' to='' be='' encrypted='' then='' somehow='' converted='' messages='' (numbers='' \[0,n-1]).='' encrypt='' text,='' for='' each='' message,='' m,='' c='me' mod='' n='' calculated.='' decrypt='' following='' procedure='' needed:='' calculate='' d='' ed='1' φ,='' c,='' m='cd' n.='' there='' exist='' values='' of='' e='' and='' me='' call='' which='' unconcealed='' messages.='' an='' issue='' when='' choosing='' should='' not='' too='' many='' instance,='' let='' p='19' q='37.' φ='18\*36=648.' if='' we='' choose='' then,='' although='' gcd(181,648)='1' it='' turns='' out='' all='' possible='' messagesm='' (0≤m≤n-1)='' are='' calculating='' any='' valid='' choice='' some='' it's='' important='' at='' minimum.='' find='' sum='' e,='' 1&lt;e&lt;φ(1009,3643)='' so='' value='' &lt;='' section=''>&lt;/e&lt;φ,>
 
 # --hints--
 
-`euler181()` should return 83735848679360670.
+`euler182()` should return 399788195976.
 
 ```js
-assert.strictEqual(euler181(), 83735848679360670);
+assert.strictEqual(euler182(), 399788195976);
 ```
 
 # --seed--
@@ -32,12 +27,12 @@ assert.strictEqual(euler181(), 83735848679360670);
 ## --seed-contents--
 
 ```js
-function euler181() {
+function euler182() {
 
   return true;
 }
 
-euler181();
+euler182();
 ```
 
 # --solutions--
