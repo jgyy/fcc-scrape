@@ -1,23 +1,23 @@
 ---
-id: 5900f41c1000cf542c50ff2f
-title: 'Problem 176: Right-angled triangles that share a cathetus'
+id: 5900f41e1000cf542c50ff30
+title: 'Problem 177: Integer angled Quadrilaterals'
 challengeType: 5
-forumTopicId: 301811
-dashedName: problem-176-right-angled-triangles-that-share-a-cathetus
+forumTopicId: 301812
+dashedName: problem-177-integer-angled-quadrilaterals
 ---
 
 # --description--
 
-The four right-angled triangles with sides (9,12,15), (12,16,20), (5,12,13) and (12,35,37) all have one of the shorter sides (catheti) equal to 12. It can be shown that no other integer sided right-angled triangle exists with one of the catheti equal to 12.
+Let ABCD be a convex quadrilateral, with diagonals AC and BD. At each vertex the diagonal makes an angle with each of the two sides, creating eight corner angles.
 
-Find the smallest integer that can be the length of a cathetus of exactly 47547 different integer sided right-angled triangles.
+For example, at vertex A, the two angles are CAD, CAB. We call such a quadrilateral for which all eight corner angles have integer values when measured in degrees an "integer angled quadrilateral". An example of an integer angled quadrilateral is a square, where all eight corner angles are 45°. Another example is given by DAC = 20°, BAC = 60°, ABD = 50°, CBD = 30°, BCA = 40°, DCA = 30°, CDB = 80°, ADB = 50°. What is the total number of non-similar integer angled quadrilaterals? Note: In your calculations you may assume that a calculated angle is integral if it is within a tolerance of 10-9 of an integer value.
 
 # --hints--
 
-`euler176()` should return 96818198400000.
+`euler177()` should return 129325.
 
 ```js
-assert.strictEqual(euler176(), 96818198400000);
+assert.strictEqual(euler177(), 129325);
 ```
 
 # --seed--
@@ -25,12 +25,12 @@ assert.strictEqual(euler176(), 96818198400000);
 ## --seed-contents--
 
 ```js
-function euler176() {
+function euler177() {
 
   return true;
 }
 
-euler176();
+euler177();
 ```
 
 # --solutions--
