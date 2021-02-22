@@ -1,27 +1,35 @@
 ---
-id: 5900f3e51000cf542c50fef8
-title: 'Problem 121: Disc game prize fund'
+id: 5900f3e61000cf542c50fef9
+title: 'Problem 122: Efficient exponentiation'
 challengeType: 5
-forumTopicId: 301748
-dashedName: problem-121-disc-game-prize-fund
+forumTopicId: 301749
+dashedName: problem-122-efficient-exponentiation
 ---
 
 # --description--
 
-A bag contains one red disc and one blue disc. In a game of chance a player takes a disc at random and its colour is noted. After each turn the disc is returned to the bag, an extra red disc is added, and another disc is taken at random.
+The most naive way of computing n15 requires fourteen multiplications:
 
-The player pays £1 to play and wins if they have taken more blue discs than red discs at the end of the game.
+n × n × ... × n = n15
 
-If the game is played for four turns, the probability of a player winning is exactly 11/120, and so the maximum prize fund the banker should allocate for winning in this game would be £10 before they would expect to incur a loss. Note that any payout will be a whole number of pounds and also includes the original £1 paid to play the game, so in the example given the player actually wins £9.
+But using a "binary" method you can compute it in six multiplications:
 
-Find the maximum prize fund that should be allocated to a single game in which fifteen turns are played.
+n × n = n2n2 × n2 = n4n4 × n4 = n8n8 × n4 = n12n12 × n2 = n14n14 × n = n15
+
+However it is yet possible to compute it in only five multiplications:
+
+n × n = n2n2 × n = n3n3 × n3 = n6n6 × n6 = n12n12 × n3 = n15
+
+We shall define m(k) to be the minimum number of multiplications to compute nk; for example m(15) = 5.
+
+For 1 ≤ k ≤ 200, find ∑ m(k).
 
 # --hints--
 
-`euler121()` should return 2269.
+`euler122()` should return 1582.
 
 ```js
-assert.strictEqual(euler121(), 2269);
+assert.strictEqual(euler122(), 1582);
 ```
 
 # --seed--
@@ -29,12 +37,12 @@ assert.strictEqual(euler121(), 2269);
 ## --seed-contents--
 
 ```js
-function euler121() {
+function euler122() {
 
   return true;
 }
 
-euler121();
+euler122();
 ```
 
 # --solutions--
