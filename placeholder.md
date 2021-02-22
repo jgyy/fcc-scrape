@@ -1,29 +1,27 @@
 ---
-id: 5900f4571000cf542c50ff69
-title: 'Problem 234: Semidivisible numbers'
+id: 5900f4571000cf542c50ff6a
+title: 'Problem 235: An Arithmetic Geometric sequence'
 challengeType: 5
-forumTopicId: 301878
-dashedName: problem-234-semidivisible-numbers
+forumTopicId: 301879
+dashedName: problem-235-an-arithmetic-geometric-sequence
 ---
 
 # --description--
 
-For an integer n ≥ 4, we define the lower prime square root of n, denoted by lps(n), as the largest prime ≤ √n and the upper prime square root of n, ups(n), as the smallest prime ≥ √n.
+Given is the arithmetic-geometric sequence u(k) = (900-3k)rk-1.
 
-So, for example, lps(4) = 2 = ups(4), lps(1000) = 31, ups(1000) = 37.
+Let s(n) = Σk=1...nu(k).
 
-Let us call an integer n ≥ 4 semidivisible, if one of lps(n) and ups(n) divides n, but not both.
+Find the value of r for which s(5000) = -600,000,000,000.
 
-The sum of the semidivisible numbers not exceeding 15 is 30, the numbers are 8, 10 and 12. 15 is not semidivisible because it is a multiple of both lps(15) = 3 and ups(15) = 5. As a further example, the sum of the 92 semidivisible numbers up to 1000 is 34825.
-
-What is the sum of all semidivisible numbers not exceeding 999966663333 ?
+Give your answer rounded to 12 places behind the decimal point.
 
 # --hints--
 
-`euler234()` should return 1259187438574927000.
+`euler235()` should return 1.002322108633.
 
 ```js
-assert.strictEqual(euler234(), 1259187438574927000);
+assert.strictEqual(euler235(), 1.002322108633);
 ```
 
 # --seed--
@@ -31,12 +29,12 @@ assert.strictEqual(euler234(), 1259187438574927000);
 ## --seed-contents--
 
 ```js
-function euler234() {
+function euler235() {
 
   return true;
 }
 
-euler234();
+euler235();
 ```
 
 # --solutions--
