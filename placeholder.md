@@ -1,27 +1,29 @@
 ---
-id: 5900f4291000cf542c50ff3b
-title: 'Problem 188: The hyperexponentiation of a number'
+id: 5900f4291000cf542c50ff3c
+title: 'Problem 189: Tri-colouring a triangular grid'
 challengeType: 5
-forumTopicId: 301824
-dashedName: problem-188-the-hyperexponentiation-of-a-number
+forumTopicId: 301825
+dashedName: problem-189-tri-colouring-a-triangular-grid
 ---
 
 # --description--
 
-The hyperexponentiation or tetration of a number a by a positive integer b, denoted by a↑↑b or ba, is recursively defined by:
+Consider the following configuration of 64 triangles:
 
-a↑↑1 = a,
+We wish to colour the interior of each triangle with one of three colours: red, green or blue, so that no two neighbouring triangles have the same colour. Such a colouring shall be called valid. Here, two triangles are said to be neighbouring if they share an edge. Note: if they only share a vertex, then they are not neighbours.
 
-a↑↑(k+1) = a(a↑↑k).
+For example, here is a valid colouring of the above grid:
 
-Thus we have e.g. 3↑↑2 = 33 = 27, hence 3↑↑3 = 327 = 7625597484987 and 3↑↑4 is roughly 103.6383346400240996\*10^12. Find the last 8 digits of 1777↑↑1855.
+A colouring C' which is obtained from a colouring C by rotation or reflection is considered distinct from C unless the two are identical.
+
+How many distinct valid colourings are there for the above configuration?
 
 # --hints--
 
-`euler188()` should return 95962097.
+`euler189()` should return 10834893628237824.
 
 ```js
-assert.strictEqual(euler188(), 95962097);
+assert.strictEqual(euler189(), 10834893628237824);
 ```
 
 # --seed--
@@ -29,12 +31,12 @@ assert.strictEqual(euler188(), 95962097);
 ## --seed-contents--
 
 ```js
-function euler188() {
+function euler189() {
 
   return true;
 }
 
-euler188();
+euler189();
 ```
 
 # --solutions--
