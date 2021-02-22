@@ -1,27 +1,41 @@
 ---
-id: 5900f40c1000cf542c50ff1e
-title: 'Problem 159: Digital root sums of factorisations'
+id: 5900f37d1000cf542c50fe8f
+title: 'Problem 16: Power digit sum'
 challengeType: 5
-forumTopicId: 301790
-dashedName: problem-159-digital-root-sums-of-factorisations
+forumTopicId: 301791
+dashedName: problem-16-power-digit-sum
 ---
 
 # --description--
 
-A composite number can be factored many different ways.
+2<sup>15</sup> = 32768 and the sum of its digits is 3 + 2 + 7 + 6 + 8 = 26.
 
-For instance, not including multiplication by one, 24 can be factored in 7 distinct ways:
-
-24 = 2x2x2x3 24 = 2x3x4 24 = 2x2x6 24 = 4x6 24 = 3x8 24 = 2x12 24 = 24
-
-Recall that the digital root of a number, in base 10, is found by adding together the digits of that number, and repeating that process until a number is arrived at that is less than 10. Thus the digital root of 467 is 8. We shall call a Digital Root Sum (DRS) the sum of the digital roots of the individual factors of our number. The chart below demonstrates all of the DRS values for 24. FactorisationDigital Root Sum2x2x2x3 92x3x4 92x2x6 104x6 103x8 112x12 524 6The maximum Digital Root Sum of 24 is 11. The function mdrs(n) gives the maximum Digital Root Sum of n. So mdrs(24)=11. Find ∑mdrs(n) for 1 &lt; n &lt; 1,000,000.
+What is the sum of the digits of the number 2<sup><code>exponent</code></sup>?
 
 # --hints--
 
-`euler159()` should return 14489159.
+`powerDigitSum(15)` should return a number.
 
 ```js
-assert.strictEqual(euler159(), 14489159);
+assert(typeof powerDigitSum(15) === 'number');
+```
+
+`powerDigitSum(15)` should return 26.
+
+```js
+assert.strictEqual(powerDigitSum(15), 26);
+```
+
+`powerDigitSum(128)` should return 166.
+
+```js
+assert.strictEqual(powerDigitSum(128), 166);
+```
+
+`powerDigitSum(1000)` should return 1366.
+
+```js
+assert.strictEqual(powerDigitSum(1000), 1366);
 ```
 
 # --seed--
@@ -29,16 +43,43 @@ assert.strictEqual(euler159(), 14489159);
 ## --seed-contents--
 
 ```js
-function euler159() {
+function powerDigitSum(exponent) {
 
   return true;
 }
 
-euler159();
+powerDigitSum(15);
 ```
 
 # --solutions--
 
 ```js
-// solution required
+function powerDigitSum(exponent) {
+  const bigNum = [1];
+  let sum = 0;
+
+  for (let i = 1; i <= exponent; i++) {
+    let count = bigNum.length + 1;
+    let overflow = 0;
+    for (let j = 0; j < count; j++) {
+      let digit = bigNum[j] || 0;
+      digit = 2 * digit + overflow;
+
+      if (digit > 9) {
+        digit -= 10;
+        overflow = 1;
+      } else {
+        overflow = 0;
+      }
+
+      bigNum[j] = digit;
+    }
+  }
+
+  bigNum.forEach(function(num) {
+    return sum += num;
+  });
+
+  return sum;
+}
 ```
