@@ -1,27 +1,37 @@
 ---
-id: 5900f3ff1000cf542c50ff12
-title: 'Problem 147: Rectangles in cross-hatched grids'
+id: 5900f4021000cf542c50ff14
+title: 'Problem 148: Exploring Pascal''s triangle'
 challengeType: 5
-forumTopicId: 301776
-dashedName: problem-147-rectangles-in-cross-hatched-grids
+forumTopicId: 301777
+dashedName: problem-148-exploring-pascals-triangle
 ---
 
 # --description--
 
-In a 3x2 cross-hatched grid, a total of 37 different rectangles could be situated within that grid as indicated in the sketch.
+We can easily verify that none of the entries in the first seven rows of Pascal's triangle are divisible by 7:
 
-There are 5 grids smaller than 3x2, vertical and horizontal dimensions being important, i.e. 1x1, 2x1, 3x1, 1x2 and 2x2. If each of them is cross-hatched, the following number of different rectangles could be situated within those smaller grids: 1x1: 1 2x1: 4 3x1: 8 1x2: 4 2x2: 18
+<pre>
+            1
+          1   1
+        1   2   1
+      1   3   3   1
+    1   4   6   4   1
+  1   5   10  10  5   1
+1   6   15  20  15  6   1
+</pre>
 
-Adding those to the 37 of the 3x2 grid, a total of 72 different rectangles could be situated within 3x2 and smaller grids.
+However, if we check the first one hundred rows, we will find that only 2361 of the 5050 entries are not divisible by 7.
 
-How many different rectangles could be situated within 47x43 and smaller grids?
+# --instructions--
+
+Find the number of entries which are not divisible by 7 in the first one billion (10<sup>9</sup>) rows of Pascal's triangle.
 
 # --hints--
 
-`euler147()` should return 846910284.
+`euler148()` should return 2129970655314432.
 
 ```js
-assert.strictEqual(euler147(), 846910284);
+assert.strictEqual(euler148(), 2129970655314432);
 ```
 
 # --seed--
@@ -29,12 +39,12 @@ assert.strictEqual(euler147(), 846910284);
 ## --seed-contents--
 
 ```js
-function euler147() {
+function euler148() {
 
   return true;
 }
 
-euler147();
+euler148();
 ```
 
 # --solutions--
