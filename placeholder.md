@@ -1,25 +1,71 @@
 ---
-id: 5900f3f71000cf542c50ff0a
-title: 'Problem 139: Pythagorean tiles'
+id: 5900f37a1000cf542c50fe8d
+title: 'Problem 14: Longest Collatz sequence'
 challengeType: 5
-forumTopicId: 301767
-dashedName: problem-139-pythagorean-tiles
+forumTopicId: 301768
+dashedName: problem-14-longest-collatz-sequence
 ---
 
 # --description--
 
-Let (a, b, c) represent the three sides of a right angle triangle with integral length sides. It is possible to place four such triangles together to form a square with length c.
+The following iterative sequence is defined for the set of positive integers:
 
-For example, (3, 4, 5) triangles can be placed together to form a 5 by 5 square with a 1 by 1 hole in the middle and it can be seen that the 5 by 5 square can be tiled with twenty-five 1 by 1 squares.
+<div style='padding-left: 4em;'><var>n</var> → <var>n</var>/2 (<var>n</var> is even)</div>
 
-However, if (5, 12, 13) triangles were used then the hole would measure 7 by 7 and these could not be used to tile the 13 by 13 square. Given that the perimeter of the right triangle is less than one-hundred million, how many Pythagorean triangles would allow such a tiling to take place?
+<div style='padding-left: 4em;'><var>n</var> → 3<var>n</var> + 1 (<var>n</var> is odd)</div>
+
+Using the rule above and starting with 13, we generate the following sequence:
+
+<div style='text-align: center;'>13 → 40 → 20 → 10 → 5 → 16 → 8 → 4 → 2 → 1</div>
+
+It can be seen that this sequence (starting at 13 and finishing at 1) contains 10 terms. Although it has not been proved yet (Collatz Problem), it is thought that all starting numbers finish at 1.
+
+Which starting number, under the given `limit`, produces the longest chain?
+
+**Note:** Once the chain starts the terms are allowed to go above one million.
 
 # --hints--
 
-`euler139()` should return 10057761.
+`longestCollatzSequence(14)` should return a number.
 
 ```js
-assert.strictEqual(euler139(), 10057761);
+assert(typeof longestCollatzSequence(14) === 'number');
+```
+
+`longestCollatzSequence(14)` should return 9.
+
+```js
+assert.strictEqual(longestCollatzSequence(14), 9);
+```
+
+`longestCollatzSequence(5847)` should return 3711.
+
+```js
+assert.strictEqual(longestCollatzSequence(5847), 3711);
+```
+
+`longestCollatzSequence(46500)` should return 35655.
+
+```js
+assert.strictEqual(longestCollatzSequence(46500), 35655);
+```
+
+`longestCollatzSequence(54512)` should return 52527.
+
+```js
+assert.strictEqual(longestCollatzSequence(54512), 52527);
+```
+
+`longestCollatzSequence(100000)` should return 77031.
+
+```js
+assert.strictEqual(longestCollatzSequence(100000), 77031);
+```
+
+`longestCollatzSequence(1000000)` should return 837799.
+
+```js
+assert.strictEqual(longestCollatzSequence(1000000), 837799);
 ```
 
 # --seed--
@@ -27,16 +73,39 @@ assert.strictEqual(euler139(), 10057761);
 ## --seed-contents--
 
 ```js
-function euler139() {
+function longestCollatzSequence(limit) {
 
   return true;
 }
 
-euler139();
+longestCollatzSequence(14);
 ```
 
 # --solutions--
 
 ```js
-// solution required
+function longestCollatzSequence(limit) {
+  let longest = 1;
+  let maxLength = 1;
+  for (let i = Math.floor(limit / 2); i < limit; i++) {
+    let len = colLen(i);
+    if (len > maxLength) {
+      longest = i;
+      maxLength = len;
+    }
+  }
+  return longest;
+}
+
+const knownSequence = { '1': 1 };
+
+function colLen(n) {
+  if (knownSequence[n]) {
+    return knownSequence[n];
+  } else {
+    const len = n % 2 === 0 ? colLen(n / 2) + 1 : colLen((3 * n + 1) / 2) + 2;
+    knownSequence[n] = len;
+    return len;
+  }
+}
 ```
