@@ -1,29 +1,33 @@
 ---
-id: 5900f4461000cf542c50ff58
-title: 'Problem 217: Balanced Numbers'
+id: 5900f4461000cf542c50ff59
+title: 'Problem 218: Perfect right-angled triangles'
 challengeType: 5
-forumTopicId: 301859
-dashedName: problem-217-balanced-numbers
+forumTopicId: 301860
+dashedName: problem-218-perfect-right-angled-triangles
 ---
 
 # --description--
 
-A positive integer with k (decimal) digits is called balanced if its first ⌈k/2⌉ digits sum to the same value as its last ⌈k/2⌉ digits, where ⌈x⌉, pronounced ceiling of x, is the smallest integer ≥ x, thus ⌈π⌉ = 4 and ⌈5⌉ = 5.
+Consider the right angled triangle with sides a=7, b=24 and c=25.
 
-So, for example, all palindromes are balanced, as is 13722.
+The area of this triangle is 84, which is divisible by the perfect numbers 6 and 28.
 
-Let T(n) be the sum of all balanced numbers less than 10n.
+Moreover it is a primitive right angled triangle as gcd(a,b)=1 and gcd(b,c)=1.
 
-Thus: T(1) = 45, T(2) = 540 and T(5) = 334795890.
+Also c is a perfect square.
 
-Find T(47) mod 315
+We will call a right angled triangle perfect if -it is a primitive right angled triangle -its hypotenuse is a perfect square
+
+We will call a right angled triangle super-perfect if -it is a perfect right angled triangle and -its area is a multiple of the perfect numbers 6 and 28.
+
+How many perfect right-angled triangles with c≤1016 exist that are not super-perfect?
 
 # --hints--
 
-`euler217()` should return 6273134.
+`euler218()` should return 0.
 
 ```js
-assert.strictEqual(euler217(), 6273134);
+assert.strictEqual(euler218(), 0);
 ```
 
 # --seed--
@@ -31,12 +35,12 @@ assert.strictEqual(euler217(), 6273134);
 ## --seed-contents--
 
 ```js
-function euler217() {
+function euler218() {
 
   return true;
 }
 
-euler217();
+euler218();
 ```
 
 # --solutions--
