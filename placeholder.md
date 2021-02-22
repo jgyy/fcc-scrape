@@ -1,27 +1,25 @@
 ---
-id: 5900f4551000cf542c50ff67
-title: 'Problem 232: The Race'
+id: 5900f4551000cf542c50ff68
+title: 'Problem 233: Lattice points on a circle'
 challengeType: 5
-forumTopicId: 301876
-dashedName: problem-232-the-race
+forumTopicId: 301877
+dashedName: problem-233-lattice-points-on-a-circle
 ---
 
 # --description--
 
-Two players share an unbiased coin and take it in turns to play "The Race". On Player 1's turn, he tosses the coin once: if it comes up Heads, he scores one point; if it comes up Tails, he scores nothing. On Player 2's turn, she chooses a positive integer T and tosses the coin T times: if it comes up all Heads, she scores 2T-1 points; otherwise, she scores nothing. Player 1 goes first. The winner is the first to 100 or more points.
+Let f(N) be the number of points with integer coordinates that are on a circle passing through (0,0), (N,0),(0,N), and (N,N).
 
-On each turn Player 2 selects the number, T, of coin tosses that maximises the probability of her winning.
+It can be shown that f(10000) = 36.
 
-What is the probability that Player 2 wins?
-
-Give your answer rounded to eight decimal places in the form 0.abcdefgh .
+What is the sum of all positive integers N ≤ 1011 such that f(N) = 420 ?
 
 # --hints--
 
-`euler232()` should return 0.83648556.
+`euler233()` should return 271204031455541300.
 
 ```js
-assert.strictEqual(euler232(), 0.83648556);
+assert.strictEqual(euler233(), 271204031455541300);
 ```
 
 # --seed--
@@ -29,12 +27,12 @@ assert.strictEqual(euler232(), 0.83648556);
 ## --seed-contents--
 
 ```js
-function euler232() {
+function euler233() {
 
   return true;
 }
 
-euler232();
+euler233();
 ```
 
 # --solutions--
