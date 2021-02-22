@@ -1,41 +1,31 @@
 ---
-id: 5900f37d1000cf542c50fe8f
-title: 'Problem 16: Power digit sum'
+id: 5900f40d1000cf542c50ff1f
+title: 'Problem 160: Factorial trailing digits'
 challengeType: 5
-forumTopicId: 301791
-dashedName: problem-16-power-digit-sum
+forumTopicId: 301794
+dashedName: problem-160-factorial-trailing-digits
 ---
 
 # --description--
 
-2<sup>15</sup> = 32768 and the sum of its digits is 3 + 2 + 7 + 6 + 8 = 26.
+For any N, let f(N) be the last five digits before the trailing zeroes in N!.
 
-What is the sum of the digits of the number 2<sup><code>exponent</code></sup>?
+For example,
+
+9! = 362880 so f(9)=36288
+
+10! = 3628800 so f(10)=36288
+
+20! = 2432902008176640000 so f(20)=17664
+
+Find f(1,000,000,000,000)
 
 # --hints--
 
-`powerDigitSum(15)` should return a number.
+`euler160()` should return 16576.
 
 ```js
-assert(typeof powerDigitSum(15) === 'number');
-```
-
-`powerDigitSum(15)` should return 26.
-
-```js
-assert.strictEqual(powerDigitSum(15), 26);
-```
-
-`powerDigitSum(128)` should return 166.
-
-```js
-assert.strictEqual(powerDigitSum(128), 166);
-```
-
-`powerDigitSum(1000)` should return 1366.
-
-```js
-assert.strictEqual(powerDigitSum(1000), 1366);
+assert.strictEqual(euler160(), 16576);
 ```
 
 # --seed--
@@ -43,43 +33,16 @@ assert.strictEqual(powerDigitSum(1000), 1366);
 ## --seed-contents--
 
 ```js
-function powerDigitSum(exponent) {
+function euler160() {
 
   return true;
 }
 
-powerDigitSum(15);
+euler160();
 ```
 
 # --solutions--
 
 ```js
-function powerDigitSum(exponent) {
-  const bigNum = [1];
-  let sum = 0;
-
-  for (let i = 1; i <= exponent; i++) {
-    let count = bigNum.length + 1;
-    let overflow = 0;
-    for (let j = 0; j < count; j++) {
-      let digit = bigNum[j] || 0;
-      digit = 2 * digit + overflow;
-
-      if (digit > 9) {
-        digit -= 10;
-        overflow = 1;
-      } else {
-        overflow = 0;
-      }
-
-      bigNum[j] = digit;
-    }
-  }
-
-  bigNum.forEach(function(num) {
-    return sum += num;
-  });
-
-  return sum;
-}
+// solution required
 ```
