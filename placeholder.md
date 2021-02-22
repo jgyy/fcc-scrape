@@ -1,37 +1,30 @@
 ---
-id: 5900f4201000cf542c50ff33
-title: 'Problem 180: Rational zeros of a function of three variables'
+id: 5900f4231000cf542c50ff34
+title: >-
+  Problem 181: Investigating in how many ways objects of two different colours
+  can be grouped
 challengeType: 5
-forumTopicId: 301816
-dashedName: problem-180-rational-zeros-of-a-function-of-three-variables
+forumTopicId: 301817
+dashedName: >-
+  problem-181-investigating-in-how-many-ways-objects-of-two-different-colours-can-be-grouped
 ---
 
 # --description--
 
-For any integer n, consider the three functions
+Having three black objects B and one white object W they can be grouped in 7 ways like this:
 
-f1,n(x,y,z) = xn+1 + yn+1 − zn+1f2,n(x,y,z) = (xy + yz + zx)\*(xn-1 + yn-1 − zn-1)f3,n(x,y,z) = xyz\*(xn-2 + yn-2 − zn-2)
+(BBBW)(B,BBW)(B,B,BW)(B,B,B,W)
 
-and their combination
+(B,BB,W)(BBB,W)(BB,BW)
 
-fn(x,y,z) = f1,n(x,y,z) + f2,n(x,y,z) − f3,n(x,y,z)
-
-We call (x,y,z) a golden triple of order k if x, y, and z are all rational numbers of the form a / b with
-
-0 &lt; a &lt; b ≤ k and there is (at least) one integer n, so that fn(x,y,z) = 0.
-
-Let s(x,y,z) = x + y + z.
-
-Let t = u / v be the sum of all distinct s(x,y,z) for all golden triples (x,y,z) of order 35. All the s(x,y,z) and t must be in reduced form.
-
-Find u + v.
+In how many ways can sixty black objects B and forty white objects W be thus grouped?
 
 # --hints--
 
-`euler180()` should return 285196020571078980.
+`euler181()` should return 83735848679360670.
 
 ```js
-assert.strictEqual(euler180(), 285196020571078980);
+assert.strictEqual(euler181(), 83735848679360670);
 ```
 
 # --seed--
@@ -39,12 +32,12 @@ assert.strictEqual(euler180(), 285196020571078980);
 ## --seed-contents--
 
 ```js
-function euler180() {
+function euler181() {
 
   return true;
 }
 
-euler180();
+euler181();
 ```
 
 # --solutions--
