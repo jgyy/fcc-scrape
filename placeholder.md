@@ -1,53 +1,23 @@
 ---
-id: 5900f4051000cf542c50ff18
-title: 'Problem 153: Investigating Gaussian Integers'
+id: 5900f4071000cf542c50ff19
+title: 'Problem 154: Exploring Pascal''s pyramid'
 challengeType: 5
-forumTopicId: 301784
-dashedName: problem-153-investigating-gaussian-integers
+forumTopicId: 301785
+dashedName: problem-154-exploring-pascals-pyramid
 ---
 
 # --description--
 
-As we all know the equation x2=-1 has no solutions for real x.
+A triangular pyramid is constructed using spherical balls so that each ball rests on exactly three balls of the next lower level.
 
-If we however introduce the imaginary number i this equation has two solutions: x=i and x=-i.
-
-If we go a step further the equation (x-3)2=-4 has two complex solutions: x=3+2i and x=3-2i. x=3+2i and x=3-2i are called each others' complex conjugate.
-
-Numbers of the form a+bi are called complex numbers.
-
-In general a+bi and a−bi are each other's complex conjugate. A Gaussian Integer is a complex number a+bi such that both a and b are integers.
-
-The regular integers are also Gaussian integers (with b=0).
-
-To distinguish them from Gaussian integers with b ≠ 0 we call such integers "rational integers."
-
-A Gaussian integer is called a divisor of a rational integer n if the result is also a Gaussian integer.
-
-If for example we divide 5 by 1+2i we can simplify in the following manner:
-
-Multiply numerator and denominator by the complex conjugate of 1+2i: 1−2i.
-
-The result is .
-
-So 1+2i is a divisor of 5.
-
-Note that 1+i is not a divisor of 5 because .
-
-Note also that if the Gaussian Integer (a+bi) is a divisor of a rational integer n, then its complex conjugate (a−bi) is also a divisor of n. In fact, 5 has six divisors such that the real part is positive: {1, 1 + 2i, 1 − 2i, 2 + i, 2 − i, 5}.
-
-The following is a table of all of the divisors for the first five positive rational integers:
-
-n Gaussian integer divisors with positive real partSum s(n) of these
-
-divisors111 21, 1+i, 1-i, 25 31, 34 41, 1+i, 1-i, 2, 2+2i, 2-2i,413 51, 1+2i, 1-2i, 2+i, 2-i, 512 For divisors with positive real parts, then, we have: . For 1 ≤ n ≤ 105, ∑ s(n)=17924657155. What is ∑ s(n) for 1 ≤ n ≤ 108?
+Then, we calculate the number of paths leading from the apex to each position: A path starts at the apex and progresses downwards to any of the three spheres directly below the current position. Consequently, the number of paths to reach a certain position is the sum of the numbers immediately above it (depending on the position, there are up to three numbers above it). The result is Pascal's pyramid and the numbers at each level n are the coefficients of the trinomial expansion (x + y + z)n. How many coefficients in the expansion of (x + y + z)200000 are multiples of 1012?
 
 # --hints--
 
-`euler153()` should return 17971254122360636.
+`euler154()` should return 479742450.
 
 ```js
-assert.strictEqual(euler153(), 17971254122360636);
+assert.strictEqual(euler154(), 479742450);
 ```
 
 # --seed--
@@ -55,12 +25,12 @@ assert.strictEqual(euler153(), 17971254122360636);
 ## --seed-contents--
 
 ```js
-function euler153() {
+function euler154() {
 
   return true;
 }
 
-euler153();
+euler154();
 ```
 
 # --solutions--
