@@ -1,31 +1,27 @@
 ---
-id: 5900f4141000cf542c50ff26
-title: 'Problem 167: Investigating Ulam sequences'
+id: 5900f4151000cf542c50ff27
+title: 'Problem 168: Number Rotations'
 challengeType: 5
-forumTopicId: 301801
-dashedName: problem-167-investigating-ulam-sequences
+forumTopicId: 301802
+dashedName: problem-168-number-rotations
 ---
 
 # --description--
 
-For two positive integers a and b, the Ulam sequence U(a,b) is defined by U(a,b)1 = a, U(a,b)2 = b and for k > 2,
+Consider the number 142857. We can right-rotate this number by moving the last digit (7) to the front of it, giving us 714285.
 
-U(a,b)k is the smallest integer greater than U(a,b)(k-1) which can be written in exactly one way as the sum of two distinct previous members of U(a,b).
+It can be verified that 714285=5×142857.
 
-For example, the sequence U(1,2) begins with
+This demonstrates an unusual property of 142857: it is a divisor of its right-rotation.
 
-1, 2, 3 = 1 + 2, 4 = 1 + 3, 6 = 2 + 4, 8 = 2 + 6, 11 = 3 + 8;
-
-5 does not belong to it because 5 = 1 + 4 = 2 + 3 has two representations as the sum of two previous members, likewise 7 = 1 + 6 = 3 + 4.
-
-Find ∑U(2,2n+1)k for 2 ≤ n ≤10, where k = 1011.
+Find the last 5 digits of the sum of all integers n, 10 &lt; n &lt; 10100, that have this property.
 
 # --hints--
 
-`euler167()` should return 3916160068885.
+`euler168()` should return 59206.
 
 ```js
-assert.strictEqual(euler167(), 3916160068885);
+assert.strictEqual(euler168(), 59206);
 ```
 
 # --seed--
@@ -33,12 +29,12 @@ assert.strictEqual(euler167(), 3916160068885);
 ## --seed-contents--
 
 ```js
-function euler167() {
+function euler168() {
 
   return true;
 }
 
-euler167();
+euler168();
 ```
 
 # --solutions--
