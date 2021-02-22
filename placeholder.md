@@ -1,31 +1,31 @@
 ---
-id: 5900f42f1000cf542c50ff40
-title: 'Problem 194: Coloured Configurations'
+id: 5900f4311000cf542c50ff43
+title: 'Problem 195: Inscribed circles of triangles with one angle of 60 degrees'
 challengeType: 5
-forumTopicId: 301832
-dashedName: problem-194-coloured-configurations
+forumTopicId: 301833
+dashedName: problem-195-inscribed-circles-of-triangles-with-one-angle-of-60-degrees
 ---
 
 # --description--
 
-Consider graphs built with the units A:
+Let's call an integer sided triangle with exactly one angle of 60 degrees a 60-degree triangle.
 
-and B: , where the units are glued along
+Let r be the radius of the inscribed circle of such a 60-degree triangle.
 
-the vertical edges as in the graph .
+There are 1234 60-degree triangles for which r ≤ 100.
 
-A configuration of type (a,b,c) is a graph thus built of a units A and b units B, where the graph's vertices are coloured using up to c colours, so that no two adjacent vertices have the same colour. The compound graph above is an example of a configuration of type (2,2,6), in fact of type (2,2,c) for all c ≥ 4.
+Let T(n) be the number of 60-degree triangles for which r ≤ n, so
 
-Let N(a,b,c) be the number of configurations of type (a,b,c). For example, N(1,0,3) = 24, N(0,2,4) = 92928 and N(2,2,3) = 20736.
+T(100) = 1234, T(1000) = 22767, and T(10000) = 359912.
 
-Find the last 8 digits of N(25,75,1984).
+Find T(1053779).
 
 # --hints--
 
-`euler194()` should return 61190912.
+`euler195()` should return 75085391.
 
 ```js
-assert.strictEqual(euler194(), 61190912);
+assert.strictEqual(euler195(), 75085391);
 ```
 
 # --seed--
@@ -33,12 +33,12 @@ assert.strictEqual(euler194(), 61190912);
 ## --seed-contents--
 
 ```js
-function euler194() {
+function euler195() {
 
   return true;
 }
 
-euler194();
+euler195();
 ```
 
 # --solutions--
