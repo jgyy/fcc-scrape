@@ -1,23 +1,25 @@
 ---
-id: 5900f4651000cf542c50ff77
-title: 'Problem 248: Numbers for which Euler’s totient function equals 13!'
+id: 5900f4671000cf542c50ff79
+title: 'Problem 249: Prime Subset Sums'
 challengeType: 5
-forumTopicId: 301895
-dashedName: problem-248-numbers-for-which-eulers-totient-function-equals-13
+forumTopicId: 301896
+dashedName: problem-249-prime-subset-sums
 ---
 
 # --description--
 
-The first number n for which φ(n)=13! is 6227180929.
+Let S = {2, 3, 5, ..., 4999} be the set of prime numbers less than 5000.
 
-Find the 150,000th such number.
+Find the number of subsets of S, the sum of whose elements is a prime number.
+
+Enter the rightmost 16 digits as your answer.
 
 # --hints--
 
-`euler248()` should return 23507044290.
+`euler249()` should return 9275262564250418.
 
 ```js
-assert.strictEqual(euler248(), 23507044290);
+assert.strictEqual(euler249(), 9275262564250418);
 ```
 
 # --seed--
@@ -25,12 +27,12 @@ assert.strictEqual(euler248(), 23507044290);
 ## --seed-contents--
 
 ```js
-function euler248() {
+function euler249() {
 
   return true;
 }
 
-euler248();
+euler249();
 ```
 
 # --solutions--
