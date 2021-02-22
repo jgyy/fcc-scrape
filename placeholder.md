@@ -1,27 +1,29 @@
 ---
-id: 5900f4371000cf542c50ff49
-title: 'Problem 202: Laserbeam'
+id: 5900f4381000cf542c50ff4a
+title: 'Problem 203: Squarefree Binomial Coefficients'
 challengeType: 5
-forumTopicId: 301843
-dashedName: problem-202-laserbeam
+forumTopicId: 301844
+dashedName: problem-203-squarefree-binomial-coefficients
 ---
 
 # --description--
 
-Three mirrors are arranged in the shape of an equilateral triangle, with their reflective surfaces pointing inwards. There is an infinitesimal gap at each vertex of the triangle through which a laser beam may pass.
+The binomial coefficients nCk can be arranged in triangular form, Pascal's triangle, like this:
 
-Label the vertices A, B and C. There are 2 ways in which a laser beam may enter vertex C, bounce off 11 surfaces, then exit through the same vertex: one way is shown below; the other is the reverse of that.
+111121133114641151010511615201561172135352171 .........
 
-There are 80840 ways in which a laser beam may enter vertex C, bounce off 1000001 surfaces, then exit through the same vertex.
+It can be seen that the first eight rows of Pascal's triangle contain twelve distinct numbers: 1, 2, 3, 4, 5, 6, 7, 10, 15, 20, 21 and 35.
 
-In how many ways can a laser beam enter at vertex C, bounce off 12017639147 surfaces, then exit through the same vertex?
+A positive integer n is called squarefree if no square of a prime divides n. Of the twelve distinct numbers in the first eight rows of Pascal's triangle, all except 4 and 20 are squarefree. The sum of the distinct squarefree numbers in the first eight rows is 105.
+
+Find the sum of the distinct squarefree numbers in the first 51 rows of Pascal's triangle.
 
 # --hints--
 
-`euler202()` should return 1209002624.
+`euler203()` should return 34029210557338.
 
 ```js
-assert.strictEqual(euler202(), 1209002624);
+assert.strictEqual(euler203(), 34029210557338);
 ```
 
 # --seed--
@@ -29,12 +31,12 @@ assert.strictEqual(euler202(), 1209002624);
 ## --seed-contents--
 
 ```js
-function euler202() {
+function euler203() {
 
   return true;
 }
 
-euler202();
+euler203();
 ```
 
 # --solutions--
