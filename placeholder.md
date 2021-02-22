@@ -1,37 +1,23 @@
 ---
-id: 5900f4601000cf542c50ff72
-title: 'Problem 244: Sliders'
+id: 5900f4621000cf542c50ff74
+title: 'Problem 245: Coresilience'
 challengeType: 5
-forumTopicId: 301891
-dashedName: problem-244-sliders
+forumTopicId: 301892
+dashedName: problem-245-coresilience
 ---
 
 # --description--
 
-You probably know the game Fifteen Puzzle. Here, instead of numbered tiles, we have seven red tiles and eight blue tiles.
+We shall call a fraction that cannot be cancelled down a resilient fraction. Furthermore we shall define the resilience of a denominator, R(d), to be the ratio of its proper fractions that are resilient; for example, R(12) = 4⁄11.
 
-A move is denoted by the uppercase initial of the direction (Left, Right, Up, Down) in which the tile is slid, e.g. starting from configuration (S), by the sequence LULUR we reach the configuration (E):
-
-(S), (E)
-
-For each path, its checksum is calculated by (pseudocode):
-
-checksum = 0 checksum = (checksum × 243 + m1) mod 100 000 007 checksum = (checksum × 243 + m2) mod 100 000 007 … checksum = (checksum × 243 + mn) mod 100 000 007 where mk is the ASCII value of the kth letter in the move sequence and the ASCII values for the moves are:
-
-L76R82U85D68
-
-For the sequence LULUR given above, the checksum would be 19761398. Now, starting from configuration (S), find all shortest ways to reach configuration (T).
-
-(S), (T)
-
-What is the sum of all checksums for the paths having the minimal length?
+The resilience of a number d > 1 is then φ(d)d − 1 , where φ is Euler's totient function. We further define the coresilience of a number n > 1 as C(n)= n − φ(n)n − 1. The coresilience of a prime p is C(p) = 1p − 1. Find the sum of all composite integers 1 &lt; n ≤ 2×1011, for which C(n) is a unit fraction.
 
 # --hints--
 
-`euler244()` should return 96356848.
+`euler245()` should return 288084712410001.
 
 ```js
-assert.strictEqual(euler244(), 96356848);
+assert.strictEqual(euler245(), 288084712410001);
 ```
 
 # --seed--
@@ -39,12 +25,12 @@ assert.strictEqual(euler244(), 96356848);
 ## --seed-contents--
 
 ```js
-function euler244() {
+function euler245() {
 
   return true;
 }
 
-euler244();
+euler245();
 ```
 
 # --solutions--
