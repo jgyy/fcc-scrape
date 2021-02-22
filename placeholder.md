@@ -1,25 +1,23 @@
 ---
-id: 5900f3fd1000cf542c50ff10
-title: 'Problem 145: How many reversible numbers are there below one-billion?'
+id: 5900f3fe1000cf542c50ff11
+title: 'Problem 146: Investigating a Prime Pattern'
 challengeType: 5
-forumTopicId: 301774
-dashedName: problem-145-how-many-reversible-numbers-are-there-below-one-billion
+forumTopicId: 301775
+dashedName: problem-146-investigating-a-prime-pattern
 ---
 
 # --description--
 
-Some positive integers n have the property that the sum \[ n + reverse(n) ] consists entirely of odd (decimal) digits. For instance, 36 + 63 = 99 and 409 + 904 = 1313. We will call such numbers reversible; so 36, 63, 409, and 904 are reversible. Leading zeroes are not allowed in either n or reverse(n).
+The smallest positive integer n for which the numbers n2+1, n2+3, n2+7, n2+9, n2+13, and n2+27 are consecutive primes is 10. The sum of all such integers n below one-million is 1242490.
 
-There are 120 reversible numbers below one-thousand.
-
-How many reversible numbers are there below one-billion (109)?
+What is the sum of all such integers n below 150 million?
 
 # --hints--
 
-`euler145()` should return 608720.
+`euler146()` should return 676333270.
 
 ```js
-assert.strictEqual(euler145(), 608720);
+assert.strictEqual(euler146(), 676333270);
 ```
 
 # --seed--
@@ -27,12 +25,12 @@ assert.strictEqual(euler145(), 608720);
 ## --seed-contents--
 
 ```js
-function euler145() {
+function euler146() {
 
   return true;
 }
 
-euler145();
+euler146();
 ```
 
 # --solutions--
