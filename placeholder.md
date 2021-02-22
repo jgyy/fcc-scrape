@@ -1,33 +1,33 @@
 ---
-id: 5900f4461000cf542c50ff59
-title: 'Problem 218: Perfect right-angled triangles'
+id: 5900f4481000cf542c50ff5a
+title: 'Problem 219: Skew-cost coding'
 challengeType: 5
-forumTopicId: 301860
-dashedName: problem-218-perfect-right-angled-triangles
+forumTopicId: 301861
+dashedName: problem-219-skew-cost-coding
 ---
 
 # --description--
 
-Consider the right angled triangle with sides a=7, b=24 and c=25.
+Let A and B be bit strings (sequences of 0's and 1's).
 
-The area of this triangle is 84, which is divisible by the perfect numbers 6 and 28.
+If A is equal to the leftmost length(A) bits of B, then A is said to be a prefix of B.
 
-Moreover it is a primitive right angled triangle as gcd(a,b)=1 and gcd(b,c)=1.
+For example, 00110 is a prefix of 001101001, but not of 00111 or 100110.
 
-Also c is a perfect square.
+A prefix-free code of size n is a collection of n distinct bit strings such that no string is a prefix of any other. For example, this is a prefix-free code of size 6:
 
-We will call a right angled triangle perfect if -it is a primitive right angled triangle -its hypotenuse is a perfect square
+0000, 0001, 001, 01, 10, 11
 
-We will call a right angled triangle super-perfect if -it is a perfect right angled triangle and -its area is a multiple of the perfect numbers 6 and 28.
+Now suppose that it costs one penny to transmit a '0' bit, but four pence to transmit a '1'. Then the total cost of the prefix-free code shown above is 35 pence, which happens to be the cheapest possible for the skewed pricing scheme in question. In short, we write Cost(6) = 35.
 
-How many perfect right-angled triangles with c≤1016 exist that are not super-perfect?
+What is Cost(109) ?
 
 # --hints--
 
-`euler218()` should return 0.
+`euler219()` should return 64564225042.
 
 ```js
-assert.strictEqual(euler218(), 0);
+assert.strictEqual(euler219(), 64564225042);
 ```
 
 # --seed--
@@ -35,12 +35,12 @@ assert.strictEqual(euler218(), 0);
 ## --seed-contents--
 
 ```js
-function euler218() {
+function euler219() {
 
   return true;
 }
 
-euler218();
+euler219();
 ```
 
 # --solutions--
