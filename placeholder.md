@@ -1,23 +1,23 @@
 ---
-id: 5900f44b1000cf542c50ff5e
-title: 'Problem 223: Almost right-angled triangles I'
+id: 5900f44e1000cf542c50ff5f
+title: 'Problem 224: Almost right-angled triangles II'
 challengeType: 5
-forumTopicId: 301866
-dashedName: problem-223-almost-right-angled-triangles-i
+forumTopicId: 301867
+dashedName: problem-224-almost-right-angled-triangles-ii
 ---
 
 # --description--
 
-Let us call an integer sided triangle with sides a ≤ b ≤ c barely acute if the sides satisfy a2 + b2 = c2 + 1.
+Let us call an integer sided triangle with sides a ≤ b ≤ c barely obtuse if the sides satisfy a2 + b2 = c2 - 1.
 
-How many barely acute triangles are there with perimeter ≤ 25,000,000?
+How many barely obtuse triangles are there with perimeter ≤ 75,000,000?
 
 # --hints--
 
-`euler223()` should return 61614848.
+`euler224()` should return 4137330.
 
 ```js
-assert.strictEqual(euler223(), 61614848);
+assert.strictEqual(euler224(), 4137330);
 ```
 
 # --seed--
@@ -25,12 +25,12 @@ assert.strictEqual(euler223(), 61614848);
 ## --seed-contents--
 
 ```js
-function euler223() {
+function euler224() {
 
   return true;
 }
 
-euler223();
+euler224();
 ```
 
 # --solutions--
