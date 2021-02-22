@@ -1,27 +1,35 @@
 ---
-id: 5900f4081000cf542c50ff1a
-title: 'Problem 155: Counting Capacitor Circuits'
+id: 5900f4091000cf542c50ff1b
+title: 'Problem 156: Counting Digits'
 challengeType: 5
-forumTopicId: 301786
-dashedName: problem-155-counting-capacitor-circuits
+forumTopicId: 301787
+dashedName: problem-156-counting-digits
 ---
 
 # --description--
 
-An electric circuit uses exclusively identical capacitors of the same value C.
+Starting from zero the natural numbers are written down in base 10 like this:
 
-The capacitors can be connected in series or in parallel to form sub-units, which can then be connected in series or in parallel with other capacitors or other sub-units to form larger sub-units, and so on up to a final circuit. Using this simple procedure and up to n identical capacitors, we can make circuits having a range of different total capacitances. For example, using up to n=3 capacitors of 60 F each, we can obtain the following 7 distinct total capacitance values:
+0 1 2 3 4 5 6 7 8 9 10 11 12....
 
-If we denote by D(n) the number of distinct total capacitance values we can obtain when using up to n equal-valued capacitors and the simple procedure described above, we have: D(1)=1, D(2)=3, D(3)=7 ... Find D(18). Reminder : When connecting capacitors C1, C2 etc in parallel, the total capacitance is CT = C1 + C2 +...,
+Consider the digit d=1. After we write down each number n, we will update the number of ones that have occurred and call this number f(n,1). The first values for f(n,1), then, are as follows:
 
-whereas when connecting them in series, the overall capacitance is given by:
+nf(n,1) 00 11 21 31 41 51 61 71 81 91 102 114 125
+
+Note that f(n,1) never equals 3.
+
+So the first two solutions of the equation f(n,1)=n are n=0 and n=1. The next solution is n=199981. In the same manner the function f(n,d) gives the total number of digits d that have been written down after the number n has been written.
+
+In fact, for every digit d ≠ 0, 0 is the first solution of the equation f(n,d)=n. Let s(d) be the sum of all the solutions for which f(n,d)=n.
+
+You are given that s(1)=22786974071. Find ∑ s(d) for 1 ≤ d ≤ 9. Note: if, for some n, f(n,d)=n for more than one value of d this value of n is counted again for every value of d for which f(n,d)=n.
 
 # --hints--
 
-`euler155()` should return 3857447.
+`euler156()` should return 21295121502550.
 
 ```js
-assert.strictEqual(euler155(), 3857447);
+assert.strictEqual(euler156(), 21295121502550);
 ```
 
 # --seed--
@@ -29,12 +37,12 @@ assert.strictEqual(euler155(), 3857447);
 ## --seed-contents--
 
 ```js
-function euler155() {
+function euler156() {
 
   return true;
 }
 
-euler155();
+euler156();
 ```
 
 # --solutions--
