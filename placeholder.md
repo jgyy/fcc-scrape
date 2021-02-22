@@ -1,29 +1,31 @@
 ---
-id: 5900f4131000cf542c50ff25
-title: 'Problem 166: Criss Cross'
+id: 5900f4141000cf542c50ff26
+title: 'Problem 167: Investigating Ulam sequences'
 challengeType: 5
-forumTopicId: 301800
-dashedName: problem-166-criss-cross
+forumTopicId: 301801
+dashedName: problem-167-investigating-ulam-sequences
 ---
 
 # --description--
 
-A 4x4 grid is filled with digits d, 0 ≤ d ≤ 9.
+For two positive integers a and b, the Ulam sequence U(a,b) is defined by U(a,b)1 = a, U(a,b)2 = b and for k > 2,
 
-It can be seen that in the grid
+U(a,b)k is the smallest integer greater than U(a,b)(k-1) which can be written in exactly one way as the sum of two distinct previous members of U(a,b).
 
-6 3 3 0 5 0 4 3 0 7 1 4 1 2 4 5
+For example, the sequence U(1,2) begins with
 
-the sum of each row and each column has the value 12. Moreover the sum of each diagonal is also 12.
+1, 2, 3 = 1 + 2, 4 = 1 + 3, 6 = 2 + 4, 8 = 2 + 6, 11 = 3 + 8;
 
-In how many ways can you fill a 4x4 grid with the digits d, 0 ≤ d ≤ 9 so that each row, each column, and both diagonals have the same sum?
+5 does not belong to it because 5 = 1 + 4 = 2 + 3 has two representations as the sum of two previous members, likewise 7 = 1 + 6 = 3 + 4.
+
+Find ∑U(2,2n+1)k for 2 ≤ n ≤10, where k = 1011.
 
 # --hints--
 
-`euler166()` should return 7130034.
+`euler167()` should return 3916160068885.
 
 ```js
-assert.strictEqual(euler166(), 7130034);
+assert.strictEqual(euler167(), 3916160068885);
 ```
 
 # --seed--
@@ -31,12 +33,12 @@ assert.strictEqual(euler166(), 7130034);
 ## --seed-contents--
 
 ```js
-function euler166() {
+function euler167() {
 
   return true;
 }
 
-euler166();
+euler167();
 ```
 
 # --solutions--
