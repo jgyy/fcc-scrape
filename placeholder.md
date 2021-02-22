@@ -1,49 +1,31 @@
 ---
-id: 5900f3841000cf542c50fe97
-title: 'Problem 24: Lexicographic permutations'
+id: 5900f45d1000cf542c50ff6f
+title: 'Problem 240: Top Dice'
 challengeType: 5
-forumTopicId: 301885
-dashedName: problem-24-lexicographic-permutations
+forumTopicId: 301887
+dashedName: problem-240-top-dice
 ---
 
 # --description--
 
-A permutation is an ordered arrangement of objects. For example, 3124 is one possible permutation of the digits 1, 2, 3 and 4. If all of the permutations are listed numerically or alphabetically, we call it lexicographic order. The lexicographic permutations of 0, 1 and 2 are:
+There are 1111 ways in which five 6-sided dice (sides numbered 1 to 6) can be rolled so that the top three sum to 15. Some examples are:
 
-<div style='text-align: center;'>012   021   102   120   201   210</div>
+D1,D2,D3,D4,D5 = 4,3,6,3,5
 
-What is the `n`th lexicographic permutation of the digits 0, 1, 2, 3, 4, 5, 6, 7, 8 and 9?
+D1,D2,D3,D4,D5 = 4,3,3,5,6
+
+D1,D2,D3,D4,D5 = 3,3,3,6,6
+
+D1,D2,D3,D4,D5 = 6,6,3,3,3
+
+In how many ways can twenty 12-sided dice (sides numbered 1 to 12) be rolled so that the top ten sum to 70?
 
 # --hints--
 
-`lexicographicPermutations(699999)` should return a number.
+`euler240()` should return 7448717393364182000.
 
 ```js
-assert(typeof lexicographicPermutations(699999) === 'number');
-```
-
-`lexicographicPermutations(699999)` should return 1938246570.
-
-```js
-assert(lexicographicPermutations(699999) == 1938246570);
-```
-
-`lexicographicPermutations(899999)` should return 2536987410.
-
-```js
-assert(lexicographicPermutations(899999) == 2536987410);
-```
-
-`lexicographicPermutations(900000)` should return 2537014689.
-
-```js
-assert(lexicographicPermutations(900000) == 2537014689);
-```
-
-`lexicographicPermutations(999999)` should return 2783915460.
-
-```js
-assert(lexicographicPermutations(999999) == 2783915460);
+assert.strictEqual(euler240(), 7448717393364182000);
 ```
 
 # --seed--
@@ -51,12 +33,12 @@ assert(lexicographicPermutations(999999) == 2783915460);
 ## --seed-contents--
 
 ```js
-function lexicographicPermutations(n) {
+function euler240() {
 
-  return n;
+  return true;
 }
 
-lexicographicPermutations(999999);
+euler240();
 ```
 
 # --solutions--
