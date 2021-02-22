@@ -1,31 +1,27 @@
 ---
-id: 5900f4361000cf542c50ff48
-title: 'Problem 201: Subsets with a unique sum'
+id: 5900f4371000cf542c50ff49
+title: 'Problem 202: Laserbeam'
 challengeType: 5
-forumTopicId: 301841
-dashedName: problem-201-subsets-with-a-unique-sum
+forumTopicId: 301843
+dashedName: problem-202-laserbeam
 ---
 
 # --description--
 
-For any set A of numbers, let sum(A) be the sum of the elements of A.
+Three mirrors are arranged in the shape of an equilateral triangle, with their reflective surfaces pointing inwards. There is an infinitesimal gap at each vertex of the triangle through which a laser beam may pass.
 
-Consider the set B = {1,3,6,8,10,11}. There are 20 subsets of B containing three elements, and their sums are:
+Label the vertices A, B and C. There are 2 ways in which a laser beam may enter vertex C, bounce off 11 surfaces, then exit through the same vertex: one way is shown below; the other is the reverse of that.
 
-sum({1,3,6}) = 10, sum({1,3,8}) = 12, sum({1,3,10}) = 14, sum({1,3,11}) = 15, sum({1,6,8}) = 15, sum({1,6,10}) = 17, sum({1,6,11}) = 18, sum({1,8,10}) = 19, sum({1,8,11}) = 20, sum({1,10,11}) = 22, sum({3,6,8}) = 17, sum({3,6,10}) = 19, sum({3,6,11}) = 20, sum({3,8,10}) = 21, sum({3,8,11}) = 22, sum({3,10,11}) = 24, sum({6,8,10}) = 24, sum({6,8,11}) = 25, sum({6,10,11}) = 27, sum({8,10,11}) = 29.
+There are 80840 ways in which a laser beam may enter vertex C, bounce off 1000001 surfaces, then exit through the same vertex.
 
-Some of these sums occur more than once, others are unique. For a set A, let U(A,k) be the set of unique sums of k-element subsets of A, in our example we find U(B,3) = {10,12,14,18,21,25,27,29} and sum(U(B,3)) = 156.
-
-Now consider the 100-element set S = {12, 22, ... , 1002}. S has 100891344545564193334812497256 50-element subsets.
-
-Determine the sum of all integers which are the sum of exactly one of the 50-element subsets of S, i.e. find sum(U(S,50)).
+In how many ways can a laser beam enter at vertex C, bounce off 12017639147 surfaces, then exit through the same vertex?
 
 # --hints--
 
-`euler201()` should return 115039000.
+`euler202()` should return 1209002624.
 
 ```js
-assert.strictEqual(euler201(), 115039000);
+assert.strictEqual(euler202(), 1209002624);
 ```
 
 # --seed--
@@ -33,12 +29,12 @@ assert.strictEqual(euler201(), 115039000);
 ## --seed-contents--
 
 ```js
-function euler201() {
+function euler202() {
 
   return true;
 }
 
-euler201();
+euler202();
 ```
 
 # --solutions--
