@@ -1,27 +1,21 @@
 ---
-id: 5900f4391000cf542c50ff4c
-title: 'Problem 205: Dice Game'
+id: 5900f43a1000cf542c50ff4d
+title: 'Problem 206: Concealed Square'
 challengeType: 5
-forumTopicId: 301846
-dashedName: problem-205-dice-game
+forumTopicId: 301847
+dashedName: problem-206-concealed-square
 ---
 
 # --description--
 
-Peter has nine four-sided (pyramidal) dice, each with faces numbered 1, 2, 3, 4.
-
-Colin has six six-sided (cubic) dice, each with faces numbered 1, 2, 3, 4, 5, 6.
-
-Peter and Colin roll their dice and compare totals: the highest total wins. The result is a draw if the totals are equal.
-
-What is the probability that Pyramidal Pete beats Cubic Colin? Give your answer rounded to seven decimal places in the form 0.abcdefg
+Find the unique positive integer whose square has the form 1_2_3_4_5_6_7_8_9_0, where each “\_” is a single digit.
 
 # --hints--
 
-`euler205()` should return 0.5731441.
+`euler206()` should return 1389019170.
 
 ```js
-assert.strictEqual(euler205(), 0.5731441);
+assert.strictEqual(euler206(), 1389019170);
 ```
 
 # --seed--
@@ -29,12 +23,12 @@ assert.strictEqual(euler205(), 0.5731441);
 ## --seed-contents--
 
 ```js
-function euler205() {
+function euler206() {
 
   return true;
 }
 
-euler205();
+euler206();
 ```
 
 # --solutions--
