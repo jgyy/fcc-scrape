@@ -1,29 +1,25 @@
 ---
-id: 5900f4031000cf542c50ff16
-title: 'Problem 151: Paper sheets of standard sizes: an expected-value problem'
+id: 5900f4041000cf542c50ff17
+title: 'Problem 152: Writing one half as a sum of inverse squares'
 challengeType: 5
-forumTopicId: 301782
-dashedName: problem-151-paper-sheets-of-standard-sizes-an-expected-value-problem
+forumTopicId: 301783
+dashedName: problem-152-writing-one-half-as-a-sum-of-inverse-squares
 ---
 
 # --description--
 
-A printing shop runs 16 batches (jobs) every week and each batch requires a sheet of special colour-proofing paper of size A5.
+There are several ways to write the number 1/2 as a sum of inverse squares using distinct integers.
 
-Every Monday morning, the foreman opens a new envelope, containing a large sheet of the special paper with size A1.
+For instance, the numbers {2,3,4,5,7,12,15,20,28,35} can be used:
 
-He proceeds to cut it in half, thus getting two sheets of size A2. Then he cuts one of them in half to get two sheets of size A3 and so on until he obtains the A5-size sheet needed for the first batch of the week.
-
-All the unused sheets are placed back in the envelope.
-
-At the beginning of each subsequent batch, he takes from the envelope one sheet of paper at random. If it is of size A5, he uses it. If it is larger, he repeats the 'cut-in-half' procedure until he has what he needs and any remaining sheets are always placed back in the envelope. Excluding the first and last batch of the week, find the expected number of times (during each week) that the foreman finds a single sheet of paper in the envelope. Give your answer rounded to six decimal places using the format x.xxxxxx .
+In fact, only using integers between 2 and 45 inclusive, there are exactly three ways to do it, the remaining two being: {2,3,4,6,7,9,10,20,28,35,36,45} and {2,3,4,6,7,9,12,15,28,30,35,36,45}. How many ways are there to write the number 1/2 as a sum of inverse squares using distinct integers between 2 and 80 inclusive?
 
 # --hints--
 
-`euler151()` should return 0.464399.
+`euler152()` should return 301.
 
 ```js
-assert.strictEqual(euler151(), 0.464399);
+assert.strictEqual(euler152(), 301);
 ```
 
 # --seed--
@@ -31,12 +27,12 @@ assert.strictEqual(euler151(), 0.464399);
 ## --seed-contents--
 
 ```js
-function euler151() {
+function euler152() {
 
   return true;
 }
 
-euler151();
+euler152();
 ```
 
 # --solutions--
