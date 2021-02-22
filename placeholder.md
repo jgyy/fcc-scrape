@@ -1,23 +1,25 @@
 ---
-id: 5900f3f61000cf542c50ff09
-title: 'Problem 138: Special isosceles triangles'
+id: 5900f3f71000cf542c50ff0a
+title: 'Problem 139: Pythagorean tiles'
 challengeType: 5
-forumTopicId: 301766
-dashedName: problem-138-special-isosceles-triangles
+forumTopicId: 301767
+dashedName: problem-139-pythagorean-tiles
 ---
 
 # --description--
 
-Consider the isosceles triangle with base length, b = 16, and legs, L = 17.
+Let (a, b, c) represent the three sides of a right angle triangle with integral length sides. It is possible to place four such triangles together to form a square with length c.
 
-By using the Pythagorean theorem it can be seen that the height of the triangle, h = √(172 − 82) = 15, which is one less than the base length. With b = 272 and L = 305, we get h = 273, which is one more than the base length, and this is the second smallest isosceles triangle with the property that h = b ± 1. Find ∑ L for the twelve smallest isosceles triangles for which h = b ± 1 and b, L are positive integers.
+For example, (3, 4, 5) triangles can be placed together to form a 5 by 5 square with a 1 by 1 hole in the middle and it can be seen that the 5 by 5 square can be tiled with twenty-five 1 by 1 squares.
+
+However, if (5, 12, 13) triangles were used then the hole would measure 7 by 7 and these could not be used to tile the 13 by 13 square. Given that the perimeter of the right triangle is less than one-hundred million, how many Pythagorean triangles would allow such a tiling to take place?
 
 # --hints--
 
-`euler138()` should return 1118049290473932.
+`euler139()` should return 10057761.
 
 ```js
-assert.strictEqual(euler138(), 1118049290473932);
+assert.strictEqual(euler139(), 10057761);
 ```
 
 # --seed--
@@ -25,12 +27,12 @@ assert.strictEqual(euler138(), 1118049290473932);
 ## --seed-contents--
 
 ```js
-function euler138() {
+function euler139() {
 
   return true;
 }
 
-euler138();
+euler139();
 ```
 
 # --solutions--
