@@ -1,29 +1,27 @@
 ---
-id: 5900f4621000cf542c50ff75
-title: 'Problem 246: Tangents to an ellipse'
+id: 5900f4641000cf542c50ff76
+title: 'Problem 247: Squares under a hyperbola'
 challengeType: 5
-forumTopicId: 301893
-dashedName: problem-246-tangents-to-an-ellipse
+forumTopicId: 301894
+dashedName: problem-247-squares-under-a-hyperbola
 ---
 
 # --description--
 
-A definition for an ellipse is:
+Consider the region constrained by 1 ≤ x and 0 ≤ y ≤ 1/x.
 
-Given a circle c with centre M and radius r and a point G such that d(G,M)
+Let S1 be the largest square that can fit under the curve. Let S2 be the largest square that fits in the remaining area, and so on. Let the index of Sn be the pair (left, below) indicating the number of squares to the left of Sn and the number of squares below Sn.
 
-The construction of the points of the ellipse is shown below.
+The diagram shows some such squares labelled by number. S2 has one square to its left and none below, so the index of S2 is (1,0). It can be seen that the index of S32 is (1,1) as is the index of S50. 50 is the largest n for which the index of Sn is (1,1).
 
-Given are the points M(-2000,1500) and G(8000,1500). Given is also the circle c with centre M and radius 15000. The locus of the points that are equidistant from G and c form an ellipse e. From a point P outside e the two tangents t1 and t2 to the ellipse are drawn. Let the points where t1 and t2 touch the ellipse be R and S.
-
-For how many lattice points P is angle RPS greater than 45 degrees?
+What is the largest n for which the index of Sn is (3,3)?
 
 # --hints--
 
-`euler246()` should return 810834388.
+`euler247()` should return 782252.
 
 ```js
-assert.strictEqual(euler246(), 810834388);
+assert.strictEqual(euler247(), 782252);
 ```
 
 # --seed--
@@ -31,12 +29,12 @@ assert.strictEqual(euler246(), 810834388);
 ## --seed-contents--
 
 ```js
-function euler246() {
+function euler247() {
 
   return true;
 }
 
-euler246();
+euler247();
 ```
 
 # --solutions--
