@@ -1,23 +1,31 @@
 ---
-id: 5900f42f1000cf542c50ff41
-title: 'Problem 193: Squarefree Numbers'
+id: 5900f42f1000cf542c50ff40
+title: 'Problem 194: Coloured Configurations'
 challengeType: 5
-forumTopicId: 301831
-dashedName: problem-193-squarefree-numbers
+forumTopicId: 301832
+dashedName: problem-194-coloured-configurations
 ---
 
 # --description--
 
-A positive integer n is called squarefree, if no square of a prime divides n, thus 1, 2, 3, 5, 6, 7, 10, 11 are squarefree, but not 4, 8, 9, 12.
+Consider graphs built with the units A:
 
-How many squarefree numbers are there below 250?
+and B: , where the units are glued along
+
+the vertical edges as in the graph .
+
+A configuration of type (a,b,c) is a graph thus built of a units A and b units B, where the graph's vertices are coloured using up to c colours, so that no two adjacent vertices have the same colour. The compound graph above is an example of a configuration of type (2,2,6), in fact of type (2,2,c) for all c ≥ 4.
+
+Let N(a,b,c) be the number of configurations of type (a,b,c). For example, N(1,0,3) = 24, N(0,2,4) = 92928 and N(2,2,3) = 20736.
+
+Find the last 8 digits of N(25,75,1984).
 
 # --hints--
 
-`euler193()` should return 684465067343069.
+`euler194()` should return 61190912.
 
 ```js
-assert.strictEqual(euler193(), 684465067343069);
+assert.strictEqual(euler194(), 61190912);
 ```
 
 # --seed--
@@ -25,12 +33,12 @@ assert.strictEqual(euler193(), 684465067343069);
 ## --seed-contents--
 
 ```js
-function euler193() {
+function euler194() {
 
   return true;
 }
 
-euler193();
+euler194();
 ```
 
 # --solutions--
