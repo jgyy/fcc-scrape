@@ -1,33 +1,29 @@
 ---
-id: 5900f3df1000cf542c50fef1
-title: 'Problem 115: Counting block combinations II'
+id: 5900f3e01000cf542c50fef3
+title: 'Problem 116: Red, green or blue tiles'
 challengeType: 5
-forumTopicId: 301741
-dashedName: problem-115-counting-block-combinations-ii
+forumTopicId: 301742
+dashedName: problem-116-red-green-or-blue-tiles
 ---
 
 # --description--
 
-NOTE: This is a more difficult version of Problem 114.
+A row of five black square tiles is to have a number of its tiles replaced with coloured oblong tiles chosen from red (length two), green (length three), or blue (length four).
 
-A row measuring n units in length has red blocks with a minimum length of m units placed on it, such that any two red blocks (which are allowed to be different lengths) are separated by at least one black square.
+If red tiles are chosen there are exactly seven ways this can be done.
 
-Let the fill-count function, F(m, n), represent the number of ways that a row can be filled.
+If green tiles are chosen there are three ways.
 
-For example, F(3, 29) = 673135 and F(3, 30) = 1089155.
+And if blue tiles are chosen there are two ways.
 
-That is, for m = 3, it can be seen that n = 30 is the smallest value for which the fill-count function first exceeds one million.
-
-In the same way, for m = 10, it can be verified that F(10, 56) = 880711 and F(10, 57) = 1148904, so n = 57 is the least value for which the fill-count function first exceeds one million.
-
-For m = 50, find the least value of n for which the fill-count function first exceeds one million.
+Assuming that colours cannot be mixed there are 7 + 3 + 2 = 12 ways of replacing the black tiles in a row measuring five units in length. How many different ways can the black tiles in a row measuring fifty units in length be replaced if colours cannot be mixed and at least one coloured tile must be used? NOTE: This is related to Problem 117.
 
 # --hints--
 
-`euler115()` should return 168.
+`euler116()` should return 20492570929.
 
 ```js
-assert.strictEqual(euler115(), 168);
+assert.strictEqual(euler116(), 20492570929);
 ```
 
 # --seed--
@@ -35,12 +31,12 @@ assert.strictEqual(euler115(), 168);
 ## --seed-contents--
 
 ```js
-function euler115() {
+function euler116() {
 
   return true;
 }
 
-euler115();
+euler116();
 ```
 
 # --solutions--
