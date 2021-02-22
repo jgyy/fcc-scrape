@@ -1,35 +1,65 @@
 ---
-id: 5900f4091000cf542c50ff1b
-title: 'Problem 156: Counting Digits'
+id: 5900f4091000cf542c50ff1c
+title: 'Problem 157: Solving the diophantine equation'
 challengeType: 5
-forumTopicId: 301787
-dashedName: problem-156-counting-digits
+forumTopicId: 301788
+dashedName: problem-157-solving-the-diophantine-equation
 ---
 
 # --description--
 
-Starting from zero the natural numbers are written down in base 10 like this:
+Consider the diophantine equation 1/a+1/b= p/10n with a, b, p, n positive integers and a ≤ b.
 
-0 1 2 3 4 5 6 7 8 9 10 11 12....
+For n=1 this equation has 20 solutions that are listed below:
 
-Consider the digit d=1. After we write down each number n, we will update the number of ones that have occurred and call this number f(n,1). The first values for f(n,1), then, are as follows:
+1/1+1/1=20/10
 
-nf(n,1) 00 11 21 31 41 51 61 71 81 91 102 114 125
+1/1+1/2=15/10
 
-Note that f(n,1) never equals 3.
+1/1+1/5=12/10
 
-So the first two solutions of the equation f(n,1)=n are n=0 and n=1. The next solution is n=199981. In the same manner the function f(n,d) gives the total number of digits d that have been written down after the number n has been written.
+1/1+1/10=11/10
 
-In fact, for every digit d ≠ 0, 0 is the first solution of the equation f(n,d)=n. Let s(d) be the sum of all the solutions for which f(n,d)=n.
+1/2+1/2=10/10
 
-You are given that s(1)=22786974071. Find ∑ s(d) for 1 ≤ d ≤ 9. Note: if, for some n, f(n,d)=n for more than one value of d this value of n is counted again for every value of d for which f(n,d)=n.
+1/2+1/5=7/10
+
+1/2+1/10=6/10
+
+1/3+1/6=5/10
+
+1/3+1/15=4/10
+
+1/4+1/4=5/10
+
+1/4+1/20=3/10
+
+1/5+1/5=4/10
+
+1/5+1/10=3/10
+
+1/6+1/30=2/10
+
+1/10+1/10=2/10
+
+1/11+1/110=1/10
+
+1/12+1/60=1/10
+
+1/14+1/35=1/10
+
+1/15+1/30=1/10
+
+1/20+1/20=1/10
+
+How many solutions has this equation for 1 ≤ n ≤ 9?
 
 # --hints--
 
-`euler156()` should return 21295121502550.
+`euler157()` should return 53490.
 
 ```js
-assert.strictEqual(euler156(), 21295121502550);
+assert.strictEqual(euler157(), 53490);
 ```
 
 # --seed--
@@ -37,12 +67,12 @@ assert.strictEqual(euler156(), 21295121502550);
 ## --seed-contents--
 
 ```js
-function euler156() {
+function euler157() {
 
   return true;
 }
 
-euler156();
+euler157();
 ```
 
 # --solutions--
