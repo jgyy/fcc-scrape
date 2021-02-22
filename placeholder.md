@@ -1,9 +1,9 @@
 ---
-id: 5900f3dd1000cf542c50feef
-title: 'Problem 112: Bouncy numbers'
+id: 5900f3dd1000cf542c50fef0
+title: 'Problem 113: Non-bouncy numbers'
 challengeType: 5
-forumTopicId: 301738
-dashedName: problem-112-bouncy-numbers
+forumTopicId: 301739
+dashedName: problem-113-non-bouncy-numbers
 ---
 
 # --description--
@@ -14,18 +14,16 @@ Similarly if no digit is exceeded by the digit to its right it is called a decre
 
 We shall call a positive integer that is neither increasing nor decreasing a "bouncy" number; for example, 155349.
 
-Clearly there cannot be any bouncy numbers below one-hundred, but just over half of the numbers below one-thousand (525) are bouncy. In fact, the least number for which the proportion of bouncy numbers first reaches 50% is 538.
+As n increases, the proportion of bouncy numbers below n increases such that there are only 12951 numbers below one-million that are not bouncy and only 277032 non-bouncy numbers below 1010.
 
-Surprisingly, bouncy numbers become more and more common and by the time we reach 21780 the proportion of bouncy numbers is equal to 90%.
-
-Find the least number for which the proportion of bouncy numbers is exactly 99%.
+How many numbers below a googol (10100) are not bouncy?
 
 # --hints--
 
-`euler112()` should return 1587000.
+`euler113()` should return 51161058134250.
 
 ```js
-assert.strictEqual(euler112(), 1587000);
+assert.strictEqual(euler113(), 51161058134250);
 ```
 
 # --seed--
@@ -33,12 +31,12 @@ assert.strictEqual(euler112(), 1587000);
 ## --seed-contents--
 
 ```js
-function euler112() {
+function euler113() {
 
   return true;
 }
 
-euler112();
+euler113();
 ```
 
 # --solutions--
