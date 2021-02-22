@@ -1,27 +1,25 @@
 ---
-id: 5900f3f21000cf542c50ff04
-title: 'Problem 133: Repunit nonfactors'
+id: 5900f3f21000cf542c50ff05
+title: 'Problem 134: Prime pair connection'
 challengeType: 5
-forumTopicId: 301761
-dashedName: problem-133-repunit-nonfactors
+forumTopicId: 301762
+dashedName: problem-134-prime-pair-connection
 ---
 
 # --description--
 
-A number consisting entirely of ones is called a repunit. We shall define R(k) to be a repunit of length k; for example, R(6) = 111111.
+Consider the consecutive primes p1 = 19 and p2 = 23. It can be verified that 1219 is the smallest number such that the last digits are formed by p1 whilst also being divisible by p2.
 
-Let us consider repunits of the form R(10n).
+In fact, with the exception of p1 = 3 and p2 = 5, for every pair of consecutive primes, p2 > p1, there exist values of n for which the last digits are formed by p1 and n is divisible by p2. Let S be the smallest of these values of n.
 
-Although R(10), R(100), or R(1000) are not divisible by 17, R(10000) is divisible by 17. Yet there is no value of n for which R(10n) will divide by 19. In fact, it is remarkable that 11, 17, 41, and 73 are the only four primes below one-hundred that can be a factor of R(10n).
-
-Find the sum of all the primes below one-hundred thousand that will never be a factor of R(10n).
+Find ∑ S for every pair of consecutive primes with 5 ≤ p1 ≤ 1000000.
 
 # --hints--
 
-`euler133()` should return 453647705.
+`euler134()` should return 18613426663617120.
 
 ```js
-assert.strictEqual(euler133(), 453647705);
+assert.strictEqual(euler134(), 18613426663617120);
 ```
 
 # --seed--
@@ -29,12 +27,12 @@ assert.strictEqual(euler133(), 453647705);
 ## --seed-contents--
 
 ```js
-function euler133() {
+function euler134() {
 
   return true;
 }
 
-euler133();
+euler134();
 ```
 
 # --solutions--
