@@ -1,27 +1,27 @@
 ---
-id: 5900f3f31000cf542c50ff06
-title: 'Problem 135: Same differences'
+id: 5900f3f51000cf542c50ff07
+title: 'Problem 136: Singleton difference'
 challengeType: 5
-forumTopicId: 301763
-dashedName: problem-135-same-differences
+forumTopicId: 301764
+dashedName: problem-136-singleton-difference
 ---
 
 # --description--
 
-Given the positive integers, x, y, and z, are consecutive terms of an arithmetic progression, the least value of the positive integer, n, for which the equation, x2 − y2 − z2 = n, has exactly two solutions is n = 27:
+The positive integers, x, y, and z, are consecutive terms of an arithmetic progression. Given that n is a positive integer, the equation, x2 − y2 − z2 = n, has exactly one solution when n = 20:
 
-342 − 272 − 202 = 122 − 92 − 62 = 27
+132 − 102 − 72 = 20
 
-It turns out that n = 1155 is the least value which has exactly ten solutions.
+In fact there are twenty-five values of n below one hundred for which the equation has a unique solution.
 
-How many values of n less than one million have exactly ten distinct solutions?
+How many values of n less than fifty million have exactly one solution?
 
 # --hints--
 
-`euler135()` should return 4989.
+`euler136()` should return 2544559.
 
 ```js
-assert.strictEqual(euler135(), 4989);
+assert.strictEqual(euler136(), 2544559);
 ```
 
 # --seed--
@@ -29,12 +29,12 @@ assert.strictEqual(euler135(), 4989);
 ## --seed-contents--
 
 ```js
-function euler135() {
+function euler136() {
 
   return true;
 }
 
-euler135();
+euler136();
 ```
 
 # --solutions--
