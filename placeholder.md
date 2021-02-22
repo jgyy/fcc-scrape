@@ -1,25 +1,37 @@
 ---
-id: 5900f4231000cf542c50ff35
-title: 'Problem 182: RSA encryption'
+id: 5900f4231000cf542c50ff36
+title: 'Problem 183: Maximum product of parts'
 challengeType: 5
-forumTopicId: 301818
-dashedName: problem-182-rsa-encryption
+forumTopicId: 301819
+dashedName: problem-183-maximum-product-of-parts
 ---
 
 # --description--
 
-The RSA encryption is based on the following procedure:
+Let N be a positive integer and let N be split into k equal parts, r = N/k, so that N = r + r + ... + r.
 
-Generate two distinct primes p and q.Compute n=pq and φ=(p-1)(q-1).
+Let P be the product of these parts, P = r × r × ... × r = rk.
 
-Find an integer e, 1&lt;e&lt;φ, such='' that='' gcd(e,φ)='1.' a='' message='' in='' this='' system='' is='' number='' the='' interval='' \[0,n-1].='' text='' to='' be='' encrypted='' then='' somehow='' converted='' messages='' (numbers='' \[0,n-1]).='' encrypt='' text,='' for='' each='' message,='' m,='' c='me' mod='' n='' calculated.='' decrypt='' following='' procedure='' needed:='' calculate='' d='' ed='1' φ,='' c,='' m='cd' n.='' there='' exist='' values='' of='' e='' and='' me='' call='' which='' unconcealed='' messages.='' an='' issue='' when='' choosing='' should='' not='' too='' many='' instance,='' let='' p='19' q='37.' φ='18\*36=648.' if='' we='' choose='' then,='' although='' gcd(181,648)='1' it='' turns='' out='' all='' possible='' messagesm='' (0≤m≤n-1)='' are='' calculating='' any='' valid='' choice='' some='' it's='' important='' at='' minimum.='' find='' sum='' e,='' 1&lt;e&lt;φ(1009,3643)='' so='' value='' &lt;='' section=''>&lt;/e&lt;φ,>
+For example, if 11 is split into five equal parts, 11 = 2.2 + 2.2 + 2.2 + 2.2 + 2.2, then P = 2.25 = 51.53632.
+
+Let M(N) = Pmax for a given value of N.
+
+It turns out that the maximum for N = 11 is found by splitting eleven into four equal parts which leads to Pmax = (11/4)4; that is, M(11) = 14641/256 = 57.19140625, which is a terminating decimal.
+
+However, for N = 8 the maximum is achieved by splitting it into three equal parts, so M(8) = 512/27, which is a non-terminating decimal.
+
+Let D(N) = N if M(N) is a non-terminating decimal and D(N) = -N if M(N) is a terminating decimal.
+
+For example, ΣD(N) for 5 ≤ N ≤ 100 is 2438.
+
+Find ΣD(N) for 5 ≤ N ≤ 10000.
 
 # --hints--
 
-`euler182()` should return 399788195976.
+`euler183()` should return 48861552.
 
 ```js
-assert.strictEqual(euler182(), 399788195976);
+assert.strictEqual(euler183(), 48861552);
 ```
 
 # --seed--
@@ -27,12 +39,12 @@ assert.strictEqual(euler182(), 399788195976);
 ## --seed-contents--
 
 ```js
-function euler182() {
+function euler183() {
 
   return true;
 }
 
-euler182();
+euler183();
 ```
 
 # --solutions--
