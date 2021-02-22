@@ -1,25 +1,27 @@
 ---
-id: 5900f43f1000cf542c50ff51
-title: 'Problem 208: Robot Walks'
+id: 5900f43e1000cf542c50ff4f
+title: 'Problem 209: Circular Logic'
 challengeType: 5
-forumTopicId: 301849
-dashedName: problem-208-robot-walks
+forumTopicId: 301850
+dashedName: problem-209-circular-logic
 ---
 
 # --description--
 
-A robot moves in a series of one-fifth circular arcs (72°), with a free choice of a clockwise or an anticlockwise arc for each step, but no turning on the spot.
+A k-input binary truth table is a map from k input bits
 
-One of 70932 possible closed paths of 25 arcs starting northward is
+(binary digits, 0 \[false] or 1 \[true]) to 1 output bit. For example, the 2-input binary truth tables for the logical AND and XOR functions are:
 
-Given that the robot starts facing North, how many journeys of 70 arcs in length can it take that return it, after the final arc, to its starting position? (Any arc may be traversed multiple times.)
+x y x AND y000010100111x y x XOR y000011101110How many 6-input binary truth tables, τ, satisfy the formula
+
+τ(a, b, c, d, e, f) AND τ(b, c, d, e, f, a XOR (b AND c)) = 0 for all 6-bit inputs (a, b, c, d, e, f)?
 
 # --hints--
 
-`euler208()` should return 331951449665644800.
+`euler209()` should return 15964587728784.
 
 ```js
-assert.strictEqual(euler208(), 331951449665644800);
+assert.strictEqual(euler209(), 15964587728784);
 ```
 
 # --seed--
@@ -27,12 +29,12 @@ assert.strictEqual(euler208(), 331951449665644800);
 ## --seed-contents--
 
 ```js
-function euler208() {
+function euler209() {
 
   return true;
 }
 
-euler208();
+euler209();
 ```
 
 # --solutions--
