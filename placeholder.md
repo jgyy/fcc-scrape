@@ -1,29 +1,47 @@
 ---
-id: 5900f4291000cf542c50ff3c
-title: 'Problem 189: Tri-colouring a triangular grid'
+id: 5900f37f1000cf542c50fe92
+title: 'Problem 19: Counting Sundays'
 challengeType: 5
-forumTopicId: 301825
-dashedName: problem-189-tri-colouring-a-triangular-grid
+forumTopicId: 301827
+dashedName: problem-19-counting-sundays
 ---
 
 # --description--
 
-Consider the following configuration of 64 triangles:
+You are given the following information, but you may prefer to do some research for yourself.
 
-We wish to colour the interior of each triangle with one of three colours: red, green or blue, so that no two neighbouring triangles have the same colour. Such a colouring shall be called valid. Here, two triangles are said to be neighbouring if they share an edge. Note: if they only share a vertex, then they are not neighbours.
+<ul>
+  <li>1 Jan 1900 was a Monday.</li>
+  <li>Thirty days has September,<br>April, June and November.<br>All the rest have thirty-one,<br>Saving February alone,<br>Which has twenty-eight, rain or shine.<br>And on leap years, twenty-nine.</li>
+  <li>A leap year occurs on any year evenly divisible by 4, but not on a century unless it is divisible by 400.</li>
+</ul>
 
-For example, here is a valid colouring of the above grid:
-
-A colouring C' which is obtained from a colouring C by rotation or reflection is considered distinct from C unless the two are identical.
-
-How many distinct valid colourings are there for the above configuration?
+How many Sundays fell on the first of the month during the twentieth century (1 Jan 1901 to 31 Dec 2000)?
 
 # --hints--
 
-`euler189()` should return 10834893628237824.
+`countingSundays(1943, 1946)` should return a number.
 
 ```js
-assert.strictEqual(euler189(), 10834893628237824);
+assert(typeof countingSundays(1943, 1946) === 'number');
+```
+
+`countingSundays(1943, 1946)` should return 6.
+
+```js
+assert.strictEqual(countingSundays(1943, 1946), 6);
+```
+
+`countingSundays(1995, 2000)` should return 10.
+
+```js
+assert.strictEqual(countingSundays(1995, 2000), 10);
+```
+
+`countingSundays(1901, 2000)` should return 171.
+
+```js
+assert.strictEqual(countingSundays(1901, 2000), 171);
 ```
 
 # --seed--
@@ -31,16 +49,28 @@ assert.strictEqual(euler189(), 10834893628237824);
 ## --seed-contents--
 
 ```js
-function euler189() {
+function countingSundays(firstYear, lastYear) {
 
   return true;
 }
 
-euler189();
+countingSundays(1943, 1946);
 ```
 
 # --solutions--
 
 ```js
-// solution required
+function countingSundays(firstYear, lastYear) {
+  let sundays = 0;
+
+  for (let year = firstYear; year <= lastYear; year++) {
+    for (let month = 0; month <= 11; month++) {
+      const thisDate = new Date(year, month, 1);
+      if (thisDate.getDay() === 0) {
+        sundays++;
+      }
+    }
+  }
+  return sundays;
+}
 ```
