@@ -1,23 +1,27 @@
 ---
-id: 5900f4071000cf542c50ff19
-title: 'Problem 154: Exploring Pascal''s pyramid'
+id: 5900f4081000cf542c50ff1a
+title: 'Problem 155: Counting Capacitor Circuits'
 challengeType: 5
-forumTopicId: 301785
-dashedName: problem-154-exploring-pascals-pyramid
+forumTopicId: 301786
+dashedName: problem-155-counting-capacitor-circuits
 ---
 
 # --description--
 
-A triangular pyramid is constructed using spherical balls so that each ball rests on exactly three balls of the next lower level.
+An electric circuit uses exclusively identical capacitors of the same value C.
 
-Then, we calculate the number of paths leading from the apex to each position: A path starts at the apex and progresses downwards to any of the three spheres directly below the current position. Consequently, the number of paths to reach a certain position is the sum of the numbers immediately above it (depending on the position, there are up to three numbers above it). The result is Pascal's pyramid and the numbers at each level n are the coefficients of the trinomial expansion (x + y + z)n. How many coefficients in the expansion of (x + y + z)200000 are multiples of 1012?
+The capacitors can be connected in series or in parallel to form sub-units, which can then be connected in series or in parallel with other capacitors or other sub-units to form larger sub-units, and so on up to a final circuit. Using this simple procedure and up to n identical capacitors, we can make circuits having a range of different total capacitances. For example, using up to n=3 capacitors of 60 F each, we can obtain the following 7 distinct total capacitance values:
+
+If we denote by D(n) the number of distinct total capacitance values we can obtain when using up to n equal-valued capacitors and the simple procedure described above, we have: D(1)=1, D(2)=3, D(3)=7 ... Find D(18). Reminder : When connecting capacitors C1, C2 etc in parallel, the total capacitance is CT = C1 + C2 +...,
+
+whereas when connecting them in series, the overall capacitance is given by:
 
 # --hints--
 
-`euler154()` should return 479742450.
+`euler155()` should return 3857447.
 
 ```js
-assert.strictEqual(euler154(), 479742450);
+assert.strictEqual(euler155(), 3857447);
 ```
 
 # --seed--
@@ -25,12 +29,12 @@ assert.strictEqual(euler154(), 479742450);
 ## --seed-contents--
 
 ```js
-function euler154() {
+function euler155() {
 
   return true;
 }
 
-euler154();
+euler155();
 ```
 
 # --solutions--
