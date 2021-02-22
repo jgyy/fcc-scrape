@@ -1,31 +1,27 @@
 ---
-id: 5900f4481000cf542c50ff5b
-title: 'Problem 220: Heighway Dragon'
+id: 5900f4491000cf542c50ff5c
+title: 'Problem 221: Alexandrian Integers'
 challengeType: 5
-forumTopicId: 301863
-dashedName: problem-220-heighway-dragon
+forumTopicId: 301864
+dashedName: problem-221-alexandrian-integers
 ---
 
 # --description--
 
-Let D0 be the two-letter string "Fa". For n≥1, derive Dn from Dn-1 by the string-rewriting rules:
+We shall call a positive integer A an "Alexandrian integer", if there exist integers p, q, r such that: A = p · q · r and 1/A = 1/p + 1/q + 1/r
 
-"a" → "aRbFR" "b" → "LFaLb"
+<!-- TODO Use MathJax -->
 
-Thus, D0 = "Fa", D1 = "FaRbFR", D2 = "FaRbFRRLFaLbFR", and so on.
+For example, 630 is an Alexandrian integer (p = 5, q = −7, r = −18). In fact, 630 is the 6th Alexandrian integer, the first 6 Alexandrian integers being: 6, 42, 120, 156, 420 and 630.
 
-These strings can be interpreted as instructions to a computer graphics program, with "F" meaning "draw forward one unit", "L" meaning "turn left 90 degrees", "R" meaning "turn right 90 degrees", and "a" and "b" being ignored. The initial position of the computer cursor is (0,0), pointing up towards (0,1).
-
-Then Dn is an exotic drawing known as the Heighway Dragon of order n. For example, D10 is shown below; counting each "F" as one step, the highlighted spot at (18,16) is the position reached after 500 steps.
-
-What is the position of the cursor after 1012 steps in D50 ? Give your answer in the form x,y with no spaces.
+Find the 150000th Alexandrian integer.
 
 # --hints--
 
-`euler220()` should return 139776, 963904.
+`euler221()` should return 1884161251122450.
 
 ```js
-assert.strictEqual(euler220(), 139776, 963904);
+assert.strictEqual(euler221(), 1884161251122450);
 ```
 
 # --seed--
@@ -33,12 +29,12 @@ assert.strictEqual(euler220(), 139776, 963904);
 ## --seed-contents--
 
 ```js
-function euler220() {
+function euler221() {
 
   return true;
 }
 
-euler220();
+euler221();
 ```
 
 # --solutions--
