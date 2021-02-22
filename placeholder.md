@@ -1,25 +1,29 @@
 ---
-id: 5900f4551000cf542c50ff68
-title: 'Problem 233: Lattice points on a circle'
+id: 5900f4571000cf542c50ff69
+title: 'Problem 234: Semidivisible numbers'
 challengeType: 5
-forumTopicId: 301877
-dashedName: problem-233-lattice-points-on-a-circle
+forumTopicId: 301878
+dashedName: problem-234-semidivisible-numbers
 ---
 
 # --description--
 
-Let f(N) be the number of points with integer coordinates that are on a circle passing through (0,0), (N,0),(0,N), and (N,N).
+For an integer n ≥ 4, we define the lower prime square root of n, denoted by lps(n), as the largest prime ≤ √n and the upper prime square root of n, ups(n), as the smallest prime ≥ √n.
 
-It can be shown that f(10000) = 36.
+So, for example, lps(4) = 2 = ups(4), lps(1000) = 31, ups(1000) = 37.
 
-What is the sum of all positive integers N ≤ 1011 such that f(N) = 420 ?
+Let us call an integer n ≥ 4 semidivisible, if one of lps(n) and ups(n) divides n, but not both.
+
+The sum of the semidivisible numbers not exceeding 15 is 30, the numbers are 8, 10 and 12. 15 is not semidivisible because it is a multiple of both lps(15) = 3 and ups(15) = 5. As a further example, the sum of the 92 semidivisible numbers up to 1000 is 34825.
+
+What is the sum of all semidivisible numbers not exceeding 999966663333 ?
 
 # --hints--
 
-`euler233()` should return 271204031455541300.
+`euler234()` should return 1259187438574927000.
 
 ```js
-assert.strictEqual(euler233(), 271204031455541300);
+assert.strictEqual(euler234(), 1259187438574927000);
 ```
 
 # --seed--
@@ -27,12 +31,12 @@ assert.strictEqual(euler233(), 271204031455541300);
 ## --seed-contents--
 
 ```js
-function euler233() {
+function euler234() {
 
   return true;
 }
 
-euler233();
+euler234();
 ```
 
 # --solutions--
