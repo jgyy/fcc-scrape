@@ -1,29 +1,27 @@
 ---
-id: 5900f4381000cf542c50ff4b
-title: 'Problem 204: Generalised Hamming Numbers'
+id: 5900f4391000cf542c50ff4c
+title: 'Problem 205: Dice Game'
 challengeType: 5
-forumTopicId: 301845
-dashedName: problem-204-generalised-hamming-numbers
+forumTopicId: 301846
+dashedName: problem-205-dice-game
 ---
 
 # --description--
 
-A Hamming number is a positive number which has no prime factor larger than 5.
+Peter has nine four-sided (pyramidal) dice, each with faces numbered 1, 2, 3, 4.
 
-So the first few Hamming numbers are 1, 2, 3, 4, 5, 6, 8, 9, 10, 12, 15.
+Colin has six six-sided (cubic) dice, each with faces numbered 1, 2, 3, 4, 5, 6.
 
-There are 1105 Hamming numbers not exceeding 108.
+Peter and Colin roll their dice and compare totals: the highest total wins. The result is a draw if the totals are equal.
 
-We will call a positive number a generalised Hamming number of type n, if it has no prime factor larger than n. Hence the Hamming numbers are the generalised Hamming numbers of type 5.
-
-How many generalised Hamming numbers of type 100 are there which don't exceed 109?
+What is the probability that Pyramidal Pete beats Cubic Colin? Give your answer rounded to seven decimal places in the form 0.abcdefg
 
 # --hints--
 
-`euler204()` should return 2944730.
+`euler205()` should return 0.5731441.
 
 ```js
-assert.strictEqual(euler204(), 2944730);
+assert.strictEqual(euler205(), 0.5731441);
 ```
 
 # --seed--
@@ -31,12 +29,12 @@ assert.strictEqual(euler204(), 2944730);
 ## --seed-contents--
 
 ```js
-function euler204() {
+function euler205() {
 
   return true;
 }
 
-euler204();
+euler205();
 ```
 
 # --solutions--
